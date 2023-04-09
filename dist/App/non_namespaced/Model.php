@@ -48,26 +48,6 @@ class Model
         }
     }
 
-    // $result must be a mysqli result or null
-    // use this method to fill the data from database to
-    // class variables
-    protected function fillVars($result = null)
-    {
-        throw new NotImplementedException('fillVars not implemented');
-    }
-
-    // override this method to implement your sql insert statement
-    protected function insert()
-    {
-        throw new NotImplementedException('insert not implemented');
-    }
-
-    // override this method to implement your sql update statement
-    protected function update()
-    {
-        throw new NotImplementedException('update not implemented');
-    }
-
     // override this method to implement your sql delete statement
     public function delete()
     {
@@ -180,5 +160,25 @@ class Model
             return true;
         }
         return false;
+    }
+
+    // $result must be a mysqli result or null
+    // use this method to fill the data from database to
+    // class variables
+    protected function fillVars($result = null)
+    {
+        throw new NotImplementedException('fillVars not implemented');
+    }
+
+    // override this method to implement your sql insert statement
+    protected function insert()
+    {
+        throw new NotImplementedException('insert not implemented');
+    }
+
+    // override this method to implement your sql update statement
+    protected function update()
+    {
+        throw new NotImplementedException('update not implemented');
     }
 }

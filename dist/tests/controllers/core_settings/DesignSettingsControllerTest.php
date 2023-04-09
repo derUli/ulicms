@@ -35,17 +35,6 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    private function cleanUpFiles()
-    {
-        $filesToDelete = [
-            'ULICMS_GENERATED/design_variables.scss'
-        ];
-        foreach ($filesToDelete as $file) {
-            $file = Path::resolve($file);
-            File::deleteIfExists($file);
-        }
-    }
-
     public function test_generateSCSS()
     {
         $controller = ControllerRegistry::get(DesignSettingsController::class);
@@ -143,5 +132,16 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
         $sizes = $controller->getFontSizes();
         $this->assertCount(75, $sizes);
         $this->assertContains('14px', $sizes);
+    }
+
+    private function cleanUpFiles()
+    {
+        $filesToDelete = [
+            'ULICMS_GENERATED/design_variables.scss'
+        ];
+        foreach ($filesToDelete as $file) {
+            $file = Path::resolve($file);
+            File::deleteIfExists($file);
+        }
     }
 }

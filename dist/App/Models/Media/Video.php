@@ -19,6 +19,8 @@ use Path;
 // UliCMS allows *.mp4, *.ogv and *.webm file uploads for video
 class Video extends Model
 {
+    public const VIDEO_DIR = 'content/videos/';
+
     private $name = null;
 
     private $mp4_file = null;
@@ -38,8 +40,6 @@ class Video extends Model
     private $width = null;
 
     private $height = null;
-
-    public const VIDEO_DIR = 'content/videos/';
 
     public function __construct($id = null)
     {
@@ -72,80 +72,6 @@ class Video extends Model
             $result = null;
         }
         $this->fillVars($result);
-    }
-
-    protected function fillVars($result = null): void
-    {
-        if ($result) {
-            $result = Database::fetchSingle($result);
-            $this->setID((int) $result->id);
-            $this->setName($result->name);
-            $this->mp4_file = $result->mp4_file;
-            $this->ogg_file = $result->ogg_file;
-            $this->webm_file = $result->webm_file;
-            $this->setCategoryId($result->category_id ?
-                            (int) $result->category_id : null);
-            $this->created = (int)$result->created;
-            $this->updated = (int)$result->updated;
-            $this->width = (int)$result->width;
-            $this->height = (int)$result->height;
-        } else {
-            $this->setID(null);
-            $this->setName(null);
-            $this->mp4_file = null;
-            $this->ogg_file = null;
-            $this->webm_file = null;
-            $this->setCategoryId(null);
-            $this->created = null;
-            $this->updated = null;
-            $this->width = null;
-            $this->height = null;
-        }
-    }
-
-    protected function insert(): void
-    {
-        $this->created = time();
-        $this->updated = $this->created;
-        $args = [
-            $this->name,
-            $this->mp4_file,
-            $this->ogg_file,
-            $this->webm_file,
-            $this->category_id,
-            $this->created,
-            $this->updated,
-            $this->width,
-            $this->height
-        ];
-        $sql = 'insert into `{prefix}videos`
-				(name, mp4_file, ogg_file, webm_file,
-                                category_id, created, updated, width, height)
-				values (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        Database::pQuery($sql, $args, true);
-        $this->setID(Database::getLastInsertID());
-    }
-
-    protected function update(): void
-    {
-        $this->updated = time();
-        $args = [
-            $this->name,
-            $this->mp4_file,
-            $this->ogg_file,
-            $this->webm_file,
-            $this->category_id,
-            $this->updated,
-            $this->width,
-            $this->height,
-            $this->getID()
-        ];
-        $sql = 'update `{prefix}videos` set
-				name = ?, mp4_file = ?, ogg_file = ?,
-                                webm_file = ?, category_id = ?, updated = ?,
-                                width = ?, height = ?
-				where id = ?';
-        Database::pQuery($sql, $args, true);
     }
 
     public function getName(): ?string
@@ -259,11 +185,6 @@ class Video extends Model
         }
     }
 
-    protected function getVideoDir(): string
-    {
-        return self::VIDEO_DIR;
-    }
-
     // render HTML5 <video> tag
     public function render(): string
     {
@@ -316,5 +237,84 @@ class Video extends Model
     public function setHeight(?int $val): void
     {
         $this->height = $val;
+    }
+
+    protected function fillVars($result = null): void
+    {
+        if ($result) {
+            $result = Database::fetchSingle($result);
+            $this->setID((int) $result->id);
+            $this->setName($result->name);
+            $this->mp4_file = $result->mp4_file;
+            $this->ogg_file = $result->ogg_file;
+            $this->webm_file = $result->webm_file;
+            $this->setCategoryId($result->category_id ?
+                            (int) $result->category_id : null);
+            $this->created = (int)$result->created;
+            $this->updated = (int)$result->updated;
+            $this->width = (int)$result->width;
+            $this->height = (int)$result->height;
+        } else {
+            $this->setID(null);
+            $this->setName(null);
+            $this->mp4_file = null;
+            $this->ogg_file = null;
+            $this->webm_file = null;
+            $this->setCategoryId(null);
+            $this->created = null;
+            $this->updated = null;
+            $this->width = null;
+            $this->height = null;
+        }
+    }
+
+    protected function insert(): void
+    {
+        $this->created = time();
+        $this->updated = $this->created;
+        $args = [
+            $this->name,
+            $this->mp4_file,
+            $this->ogg_file,
+            $this->webm_file,
+            $this->category_id,
+            $this->created,
+            $this->updated,
+            $this->width,
+            $this->height
+        ];
+        $sql = 'insert into `{prefix}videos`
+				(name, mp4_file, ogg_file, webm_file,
+                                category_id, created, updated, width, height)
+				values (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        Database::pQuery($sql, $args, true);
+        $this->setID(Database::getLastInsertID());
+    }
+
+    protected function update(): void
+    {
+        $this->updated = time();
+        $args = [
+            $this->name,
+            $this->mp4_file,
+            $this->ogg_file,
+            $this->webm_file,
+            $this->category_id,
+            $this->updated,
+            $this->width,
+            $this->height,
+            $this->getID()
+        ];
+        $sql = 'update `{prefix}videos` set
+				name = ?, mp4_file = ?, ogg_file = ?,
+                                webm_file = ?, category_id = ?, updated = ?,
+                                width = ?, height = ?
+				where id = ?';
+        Database::pQuery($sql, $args, true);
+    }
+
+    protected function getVideoDir(): string
+    {
+        return self::VIDEO_DIR;
     }
 }

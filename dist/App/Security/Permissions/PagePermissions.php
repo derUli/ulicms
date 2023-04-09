@@ -12,13 +12,6 @@ use Database;
 // think of it as ACL like write permissions
 class PagePermissions
 {
-    public function __construct($objects = [])
-    {
-        foreach ($objects as $object => $restriction) {
-            $this->setEditRestriction($object, $restriction);
-        }
-    }
-
     private $only_admins_can_edit = false;
 
     private $only_group_can_edit = false;
@@ -26,6 +19,13 @@ class PagePermissions
     private $only_owner_can_edit = false;
 
     private $only_others_can_edit = false;
+
+    public function __construct($objects = [])
+    {
+        foreach ($objects as $object => $restriction) {
+            $this->setEditRestriction($object, $restriction);
+        }
+    }
 
     public function getEditRestriction(string $object): ?bool
     {

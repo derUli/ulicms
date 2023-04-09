@@ -134,236 +134,6 @@ class PageController extends Controller
         return ! $model->hasChanges();
     }
 
-    // TODO: This method is too long
-    // Split this in multiple methods
-    protected function _fillAndSaveModel(
-        $model,
-        PermissionChecker $permissionChecker,
-        ?int $userId = null,
-        ?int $groupId = null
-    ): void {
-        $this->validateInput();
-
-        $model->slug = Request::getVar('slug', '', 'str');
-        $model->title = Request::getVar('title');
-        $model->alternate_title = Request::getVar('alternate_title');
-
-        $model->author_id = $userId ?: get_user_id();
-
-        // if the user is not permitted to change page status
-        // then select2 is disabled which causes the "active" value
-        // to not be submitted
-        // In this case set active to false on create page
-        // and don't change it's value on update
-        if (! $model->isPersistent()) {
-            $model->active = Request::hasVar('active') ?
-                    Request::getVar('active', true, 'bool') : false;
-            $model->approved = Request::hasVar('active');
-        } elseif (Request::hasVar('active')) {
-            $model->active = Request::getVar('active', true, 'bool');
-            if ($model->active) {
-                $model->approved = true;
-            }
-        }
-
-        $model->hidden = Request::getVar('hidden', false, 'bool');
-        $model->content = Request::getVar('content');
-
-        $user = User::fromSessionData();
-        $groupCollection = $user->getGroupCollection();
-
-        // get allowed tags of all groups assigned to the current user
-        $allowedTags = $groupCollection ?
-                $groupCollection->getAllowableTags() : Constants\DefaultValues::ALLOWED_TAGS;
-
-        // remove all html tags except the explicitly allowed tags
-        if (! empty($allowedTags)) {
-            $model->content = XSSProtection::stripTags($model->content, $allowedTags);
-        }
-
-        $model->category_id = Request::getVar('category_id', 1, 'int');
-        $model->link_url = Request::getVar('link_url', null, 'str');
-        $model->menu = Request::getVar('menu', 'not_in_menu', 'str');
-        $model->position = Request::getVar('position', 0, 'int');
-
-        $model->menu_image = Request::getVar('menu_image', null, 'str');
-        $model->custom_data = json_decode(
-            Request::getVar('custom_data', '{}', 'str'),
-            false
-        );
-
-        $model->theme = Request::getVar('theme', null, 'str');
-
-        if ($model instanceof Node) {
-            $model->link_url = '#';
-        }
-
-        $model->cache_control = Request::getVar('cache_control', 'auto', 'str');
-
-        $parent_id = Request::getVar('parent_id', null, 'str');
-        $model->parent_id = (int)$parent_id > 0 ? (int)$parent_id : null;
-
-        if (Request::hasVar('access')) {
-            $model->access = implode(',', Request::getVar('access'));
-        }
-
-        $model->target = Request::getVar(
-            'target',
-            LinkTarget::TARGET_SELF,
-            'str'
-        );
-
-        // Open Graph
-        $model->og_title = Request::getVar('og_title');
-        $model->og_description = Request::getVar('og_description');
-        $model->og_image = Request::getVar('og_image');
-
-        $model->meta_description = Request::getVar('meta_description');
-        $model->meta_keywords = Request::getVar('meta_keywords');
-        $model->robots = Request::getVar('robots', null, 'str');
-
-        $model->language = Request::getVar('language');
-
-        if ($model instanceof Module_Page) {
-            $model->module = Request::getVar('module', null, 'str');
-        }
-
-        if ($model instanceof Video_Page) {
-            $model->video = Request::getVar('video', null, 'int');
-        }
-        if ($model instanceof Audio_Page) {
-            $model->audio = Request::getVar('audio', null, 'int');
-        }
-
-        $model->text_position = Request::getVar(
-            'text_position',
-            'before',
-            'str'
-        );
-
-        if ($model instanceof Image_Page) {
-            $model->image_url = Request::getVar('image_url', null, 'str');
-        }
-
-
-        if ($model instanceof Article) {
-            $model->article_author_name = Request::getVar(
-                'article_author_name'
-            );
-            $model->article_author_email = Request::getVar(
-                'article_author_email'
-            );
-            $model->article_image = Request::getVar(
-                'article_image'
-            );
-            $model->article_date = Request::getVar('article_date') ?
-                    strtotime(Request::getVar('article_date')) : null;
-
-            $model->excerpt = Request::getVar('excerpt');
-        }
-
-
-        $permissionObjects = ['admins', 'group', 'owner', 'others'];
-        foreach ($permissionObjects as $object) {
-            $permission = Request::getVar(
-                "only_{$object}_can_edit",
-                false,
-                'bool'
-            );
-            $model->getPermissions()->setEditRestriction(
-                $object,
-                (bool)$permission
-            );
-        }
-
-        $model->link_to_language = Request::getVar('link_to_language', null, 'int');
-        $model->comments_enabled = Request::getVar(
-            'comments_enabled'
-        ) !== 'null' ?
-                Request::getVar('comments_enabled', false, 'bool') : null;
-
-        $model->show_headline = Request::getVar('show_headline', 1, 'bool');
-        $model->group_id = $groupId ?: get_group_id();
-
-        do_event('before_create_page');
-
-        $model->save();
-
-        $user_id = get_user_id();
-        $content_id = $model->getId();
-
-        if ($model instanceof Content_List) {
-            $list_language = Request::getVar('list_language', '', 'str');
-            if (empty($list_language)) {
-                $list_language = null;
-            }
-
-            $list_category = Request::getVar('list_category', '', 'str');
-            if (empty($list_category)) {
-                $list_category = null;
-            }
-
-            $list_menu = Request::getVar('list_menu', '', 'str');
-            if (empty($list_menu)) {
-                $list_menu = null;
-            }
-
-            $list_parent = Request::getVar('list_parent', '', 'str');
-            if (empty($list_parent)) {
-                $list_parent = null;
-            }
-
-            $list_order_by = Database::escapeValue(
-                Request::getVar('list_order_by', 'id', 'str')
-            );
-
-            $list_order_direction = Request::getVar(
-                'list_order_direction',
-                'asc',
-                'str'
-            );
-            $list_order_direction = Database::escapeValue($list_order_direction);
-
-            $list_use_pagination = Request::getVar('list_use_pagination', 0, 'int');
-
-            $limit = Request::getVar('limit', 0, 'int');
-            $list_type = Request::getVar('list_type', 'null', 'str');
-
-            if (empty($list_type) || $list_type == 'null') {
-                $list_type = null;
-            }
-
-            $list = new List_Data($content_id);
-            $list->language = $list_language;
-            $list->category_id = $list_category;
-            $list->menu = $list_menu;
-            $list->parent_id = $list_parent;
-            $list->order_by = $list_order_by;
-            $list->order_direction = $list_order_direction;
-            $list->limit = $limit;
-            $list->use_pagination = $list_use_pagination;
-            $list->type = $list_type;
-            $list->save();
-        }
-        $content = $model->content;
-        VCS::createRevision(
-            (int)$content_id,
-            $content,
-            (int)$user_id
-        );
-
-        $type = DefaultContentTypes::get($model->type);
-        foreach ($type->customFields as $field) {
-            $field->name = "{$_POST['type']}_{$field->name}";
-            $value = null;
-            if (isset($_POST[$field->name])) {
-                $value = $_POST[$field->name];
-            }
-
-            CustomFields::set($field->name, $value, $content_id, false);
-        }
-    }
-
     public function undeletePost(): void
     {
         $id = Request::getVar('id', null, 'int');
@@ -727,14 +497,6 @@ class PageController extends Controller
         return $data;
     }
 
-    protected function validateInput(): void
-    {
-        $validationErrors = $this->_validateInput();
-        if ($validationErrors) {
-            ExceptionResult($validationErrors, HttpStatusCode::UNPROCESSABLE_ENTITY);
-        }
-    }
-
     public function _validateInput(): ?string
     {
         $validator = new Validator();
@@ -794,17 +556,6 @@ class PageController extends Controller
             Settings::set($settingsName, '1');
             return true;
 
-    }
-
-    protected function _getGroupAssignedLanguages(): array
-    {
-        $permissionChecker = new PermissionChecker(get_user_id());
-        return array_map(
-            function ($lang) {
-                return $lang->getLanguageCode();
-            },
-            $permissionChecker->getLanguages()
-        );
     }
 
     public function _getLanguageSelection(): array
@@ -971,5 +722,254 @@ class PageController extends Controller
             new ListItem('1', get_translation('yes')),
             new ListItem('0', get_translation('no'))
         ];
+    }
+
+    // TODO: This method is too long
+    // Split this in multiple methods
+    protected function _fillAndSaveModel(
+        $model,
+        PermissionChecker $permissionChecker,
+        ?int $userId = null,
+        ?int $groupId = null
+    ): void {
+        $this->validateInput();
+
+        $model->slug = Request::getVar('slug', '', 'str');
+        $model->title = Request::getVar('title');
+        $model->alternate_title = Request::getVar('alternate_title');
+
+        $model->author_id = $userId ?: get_user_id();
+
+        // if the user is not permitted to change page status
+        // then select2 is disabled which causes the "active" value
+        // to not be submitted
+        // In this case set active to false on create page
+        // and don't change it's value on update
+        if (! $model->isPersistent()) {
+            $model->active = Request::hasVar('active') ?
+                    Request::getVar('active', true, 'bool') : false;
+            $model->approved = Request::hasVar('active');
+        } elseif (Request::hasVar('active')) {
+            $model->active = Request::getVar('active', true, 'bool');
+            if ($model->active) {
+                $model->approved = true;
+            }
+        }
+
+        $model->hidden = Request::getVar('hidden', false, 'bool');
+        $model->content = Request::getVar('content');
+
+        $user = User::fromSessionData();
+        $groupCollection = $user->getGroupCollection();
+
+        // get allowed tags of all groups assigned to the current user
+        $allowedTags = $groupCollection ?
+                $groupCollection->getAllowableTags() : Constants\DefaultValues::ALLOWED_TAGS;
+
+        // remove all html tags except the explicitly allowed tags
+        if (! empty($allowedTags)) {
+            $model->content = XSSProtection::stripTags($model->content, $allowedTags);
+        }
+
+        $model->category_id = Request::getVar('category_id', 1, 'int');
+        $model->link_url = Request::getVar('link_url', null, 'str');
+        $model->menu = Request::getVar('menu', 'not_in_menu', 'str');
+        $model->position = Request::getVar('position', 0, 'int');
+
+        $model->menu_image = Request::getVar('menu_image', null, 'str');
+        $model->custom_data = json_decode(
+            Request::getVar('custom_data', '{}', 'str'),
+            false
+        );
+
+        $model->theme = Request::getVar('theme', null, 'str');
+
+        if ($model instanceof Node) {
+            $model->link_url = '#';
+        }
+
+        $model->cache_control = Request::getVar('cache_control', 'auto', 'str');
+
+        $parent_id = Request::getVar('parent_id', null, 'str');
+        $model->parent_id = (int)$parent_id > 0 ? (int)$parent_id : null;
+
+        if (Request::hasVar('access')) {
+            $model->access = implode(',', Request::getVar('access'));
+        }
+
+        $model->target = Request::getVar(
+            'target',
+            LinkTarget::TARGET_SELF,
+            'str'
+        );
+
+        // Open Graph
+        $model->og_title = Request::getVar('og_title');
+        $model->og_description = Request::getVar('og_description');
+        $model->og_image = Request::getVar('og_image');
+
+        $model->meta_description = Request::getVar('meta_description');
+        $model->meta_keywords = Request::getVar('meta_keywords');
+        $model->robots = Request::getVar('robots', null, 'str');
+
+        $model->language = Request::getVar('language');
+
+        if ($model instanceof Module_Page) {
+            $model->module = Request::getVar('module', null, 'str');
+        }
+
+        if ($model instanceof Video_Page) {
+            $model->video = Request::getVar('video', null, 'int');
+        }
+        if ($model instanceof Audio_Page) {
+            $model->audio = Request::getVar('audio', null, 'int');
+        }
+
+        $model->text_position = Request::getVar(
+            'text_position',
+            'before',
+            'str'
+        );
+
+        if ($model instanceof Image_Page) {
+            $model->image_url = Request::getVar('image_url', null, 'str');
+        }
+
+
+        if ($model instanceof Article) {
+            $model->article_author_name = Request::getVar(
+                'article_author_name'
+            );
+            $model->article_author_email = Request::getVar(
+                'article_author_email'
+            );
+            $model->article_image = Request::getVar(
+                'article_image'
+            );
+            $model->article_date = Request::getVar('article_date') ?
+                    strtotime(Request::getVar('article_date')) : null;
+
+            $model->excerpt = Request::getVar('excerpt');
+        }
+
+
+        $permissionObjects = ['admins', 'group', 'owner', 'others'];
+        foreach ($permissionObjects as $object) {
+            $permission = Request::getVar(
+                "only_{$object}_can_edit",
+                false,
+                'bool'
+            );
+            $model->getPermissions()->setEditRestriction(
+                $object,
+                (bool)$permission
+            );
+        }
+
+        $model->link_to_language = Request::getVar('link_to_language', null, 'int');
+        $model->comments_enabled = Request::getVar(
+            'comments_enabled'
+        ) !== 'null' ?
+                Request::getVar('comments_enabled', false, 'bool') : null;
+
+        $model->show_headline = Request::getVar('show_headline', 1, 'bool');
+        $model->group_id = $groupId ?: get_group_id();
+
+        do_event('before_create_page');
+
+        $model->save();
+
+        $user_id = get_user_id();
+        $content_id = $model->getId();
+
+        if ($model instanceof Content_List) {
+            $list_language = Request::getVar('list_language', '', 'str');
+            if (empty($list_language)) {
+                $list_language = null;
+            }
+
+            $list_category = Request::getVar('list_category', '', 'str');
+            if (empty($list_category)) {
+                $list_category = null;
+            }
+
+            $list_menu = Request::getVar('list_menu', '', 'str');
+            if (empty($list_menu)) {
+                $list_menu = null;
+            }
+
+            $list_parent = Request::getVar('list_parent', '', 'str');
+            if (empty($list_parent)) {
+                $list_parent = null;
+            }
+
+            $list_order_by = Database::escapeValue(
+                Request::getVar('list_order_by', 'id', 'str')
+            );
+
+            $list_order_direction = Request::getVar(
+                'list_order_direction',
+                'asc',
+                'str'
+            );
+            $list_order_direction = Database::escapeValue($list_order_direction);
+
+            $list_use_pagination = Request::getVar('list_use_pagination', 0, 'int');
+
+            $limit = Request::getVar('limit', 0, 'int');
+            $list_type = Request::getVar('list_type', 'null', 'str');
+
+            if (empty($list_type) || $list_type == 'null') {
+                $list_type = null;
+            }
+
+            $list = new List_Data($content_id);
+            $list->language = $list_language;
+            $list->category_id = $list_category;
+            $list->menu = $list_menu;
+            $list->parent_id = $list_parent;
+            $list->order_by = $list_order_by;
+            $list->order_direction = $list_order_direction;
+            $list->limit = $limit;
+            $list->use_pagination = $list_use_pagination;
+            $list->type = $list_type;
+            $list->save();
+        }
+        $content = $model->content;
+        VCS::createRevision(
+            (int)$content_id,
+            $content,
+            (int)$user_id
+        );
+
+        $type = DefaultContentTypes::get($model->type);
+        foreach ($type->customFields as $field) {
+            $field->name = "{$_POST['type']}_{$field->name}";
+            $value = null;
+            if (isset($_POST[$field->name])) {
+                $value = $_POST[$field->name];
+            }
+
+            CustomFields::set($field->name, $value, $content_id, false);
+        }
+    }
+
+    protected function validateInput(): void
+    {
+        $validationErrors = $this->_validateInput();
+        if ($validationErrors) {
+            ExceptionResult($validationErrors, HttpStatusCode::UNPROCESSABLE_ENTITY);
+        }
+    }
+
+    protected function _getGroupAssignedLanguages(): array
+    {
+        $permissionChecker = new PermissionChecker(get_user_id());
+        return array_map(
+            function ($lang) {
+                return $lang->getLanguageCode();
+            },
+            $permissionChecker->getLanguages()
+        );
     }
 }

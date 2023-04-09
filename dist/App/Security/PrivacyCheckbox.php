@@ -17,9 +17,9 @@ use ViewBag;
  */
 class PrivacyCheckbox
 {
-    private $language;
-
     public const CHECKBOX_NAME = 'accept_privacy_policy';
+
+    private $language;
 
     /**
      * Constructor

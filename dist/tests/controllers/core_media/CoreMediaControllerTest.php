@@ -28,6 +28,13 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertMatchesHtmlSnapshot($actual);
     }
 
+    public function testReplaceLinksWithEmpty()
+    {
+        $controller = new CoreMediaController();
+        $output = $controller->_replaceLinks('');
+        $this->assertEmpty($output);
+    }
+
     private function getExampleHtml()
     {
         $urls = [
@@ -55,12 +62,5 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
         );
 
         return $html;
-    }
-
-    public function testReplaceLinksWithEmpty()
-    {
-        $controller = new CoreMediaController();
-        $output = $controller->_replaceLinks('');
-        $this->assertEmpty($output);
     }
 }

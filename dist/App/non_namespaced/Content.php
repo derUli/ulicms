@@ -6,8 +6,6 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 abstract class Content extends Model
 {
-    abstract protected function loadBySlugAndLanguage($name, $language);
-
     /**
      * Get if the headline is shown
      * @return bool
@@ -81,4 +79,6 @@ abstract class Content extends Model
     {
         return 'far fa-file-alt';
     }
+
+    abstract protected function loadBySlugAndLanguage($name, $language);
 }

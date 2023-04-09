@@ -101,27 +101,6 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         ]));
     }
 
-    protected function setUpPhpMailer(): PHPMailer
-    {
-        Settings::set('smtp_auth', '1');
-        Settings::set('smtp_no_verify_certificate', '1');
-        Settings::set('smtp_host', 'smtp.foo.bar');
-        Settings::set('smtp_user', 'mailuser');
-        Settings::set('smtp_password', 'secret');
-        Settings::set('smtp_port', '993');
-
-        $mailer = Mailer::getPHPMailer(EmailModes::PHPMAILER);
-        $this->assertInstanceOf(PHPMailer::class, $mailer);
-        $this->assertTrue(in_array($mailer->SMTPSecure, [
-            '',
-            'tls',
-            'ssl'
-        ]));
-
-        $mailer->SMTPDebug = SMTP::DEBUG_LOWLEVEL;
-        return $mailer;
-    }
-
     public function testEmailModes()
     {
         $this->assertEquals('internal', EmailModes::INTERNAL);
@@ -145,5 +124,26 @@ class MailerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertIsCallable($logFunction);
         $logFunction('Hallo Welt', SMTP::DEBUG_CONNECTION);
+    }
+
+    protected function setUpPhpMailer(): PHPMailer
+    {
+        Settings::set('smtp_auth', '1');
+        Settings::set('smtp_no_verify_certificate', '1');
+        Settings::set('smtp_host', 'smtp.foo.bar');
+        Settings::set('smtp_user', 'mailuser');
+        Settings::set('smtp_password', 'secret');
+        Settings::set('smtp_port', '993');
+
+        $mailer = Mailer::getPHPMailer(EmailModes::PHPMAILER);
+        $this->assertInstanceOf(PHPMailer::class, $mailer);
+        $this->assertTrue(in_array($mailer->SMTPSecure, [
+            '',
+            'tls',
+            'ssl'
+        ]));
+
+        $mailer->SMTPDebug = SMTP::DEBUG_LOWLEVEL;
+        return $mailer;
     }
 }

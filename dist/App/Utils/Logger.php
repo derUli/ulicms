@@ -42,17 +42,6 @@ class Logger
         return $this->path;
     }
 
-    protected function FixLogPermissions(CMSConfig $cfg)
-    {
-        // Option fix_log_permissions
-        if (isset($cfg->fix_log_permissions) && $cfg->fix_log_permissions) {
-            $files = glob($this->path . '/*.log');
-            foreach ($files as $file) {
-                chmod($file, 0777);
-            }
-        }
-    }
-
     public function debug($message): void
     {
         if ($this->logger) {
@@ -71,6 +60,17 @@ class Logger
     {
         if ($this->logger) {
             $this->logger->info($message);
+        }
+    }
+
+    protected function FixLogPermissions(CMSConfig $cfg)
+    {
+        // Option fix_log_permissions
+        if (isset($cfg->fix_log_permissions) && $cfg->fix_log_permissions) {
+            $files = glob($this->path . '/*.log');
+            foreach ($files as $file) {
+                chmod($file, 0777);
+            }
         }
     }
 }

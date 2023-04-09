@@ -107,31 +107,6 @@ class Request
                 );
     }
 
-    private static function getProxyHeaders(): array
-    {
-        return [
-            'CLIENT_IP',
-            'FORWARDED',
-            'FORWARDED_FOR',
-            'FORWARDED_FOR_IP',
-            'HTTP_CLIENT_IP',
-            'HTTP_FORWARDED',
-            'HTTP_FORWARDED_FOR',
-            'HTTP_FORWARDED_FOR_IP',
-            'HTTP_PC_REMOTE_ADDR',
-            'HTTP_PROXY_CONNECTION',
-            'HTTP_VIA',
-            'HTTP_X_FORWARDED',
-            'HTTP_X_FORWARDED_FOR',
-            'HTTP_X_FORWARDED_FOR_IP',
-            'HTTP_X_IMFORWARDS',
-            'HTTP_XROXY_CONNECTION',
-            'VIA',
-            'X_FORWARDED',
-            'X_FORWARDED_FOR'
-        ];
-    }
-
     public static function getIp(): ?string
     {
         $proxy_headers = self::getProxyHeaders();
@@ -192,5 +167,30 @@ class Request
     public static function getRequestUri(): ?string
     {
         return $_SERVER['REQUEST_URI'] ?? null;
+    }
+
+    private static function getProxyHeaders(): array
+    {
+        return [
+            'CLIENT_IP',
+            'FORWARDED',
+            'FORWARDED_FOR',
+            'FORWARDED_FOR_IP',
+            'HTTP_CLIENT_IP',
+            'HTTP_FORWARDED',
+            'HTTP_FORWARDED_FOR',
+            'HTTP_FORWARDED_FOR_IP',
+            'HTTP_PC_REMOTE_ADDR',
+            'HTTP_PROXY_CONNECTION',
+            'HTTP_VIA',
+            'HTTP_X_FORWARDED',
+            'HTTP_X_FORWARDED_FOR',
+            'HTTP_X_FORWARDED_FOR_IP',
+            'HTTP_X_IMFORWARDS',
+            'HTTP_XROXY_CONNECTION',
+            'VIA',
+            'X_FORWARDED',
+            'X_FORWARDED_FOR'
+        ];
     }
 }

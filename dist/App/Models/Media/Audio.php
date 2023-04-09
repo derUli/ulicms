@@ -21,6 +21,8 @@ use Path;
 // a *.mp3 codec due legal reasons
 class Audio extends Model
 {
+    public const AUDIO_DIR = 'content/audio/';
+
     private $name = null;
 
     private $mp3_file = null;
@@ -34,8 +36,6 @@ class Audio extends Model
     private $created;
 
     private $updated;
-
-    public const AUDIO_DIR = 'content/audio/';
 
     public function __construct($id = null)
     {
@@ -68,69 +68,6 @@ class Audio extends Model
             $result = null;
         }
         $this->fillVars($result);
-    }
-
-    protected function fillVars($result = null)
-    {
-        if ($result) {
-            $result = Database::fetchSingle($result);
-            $this->setID($result->id);
-            $this->setName($result->name);
-            $this->setMP3File($result->mp3_file);
-            $this->setOGGFile($result->ogg_file);
-            $this->setCategoryId(
-                $result->category_id ? (int)$result->category_id : null
-            );
-            $this->created = $result->created ?
-                    (int)$result->created : null;
-            $this->updated = $result->updated ? (int)$result->updated : null;
-        } else {
-            $this->setID(null);
-            $this->setName(null);
-            $this->setMP3File(null);
-            $this->setOGGFile(null);
-            $this->setCategoryId(null);
-            $this->created = null;
-            $this->updated = null;
-        }
-    }
-
-    protected function insert(): void
-    {
-        $this->created = time();
-        $this->updated = $this->created;
-        $args = [
-            $this->name,
-            $this->mp3_file,
-            $this->ogg_file,
-            $this->category_id,
-            $this->created,
-            $this->updated
-        ];
-        $sql = 'insert into `{prefix}audio`
-				(name, mp3_file, ogg_file, category_id,
-                                created, updated)
-				values (?, ?, ?, ?, ?, ?)';
-        Database::pQuery($sql, $args, true);
-        $this->setID(Database::getLastInsertID());
-    }
-
-    protected function update(): void
-    {
-        $this->updated = time();
-        $args = [
-            $this->name,
-            $this->mp3_file,
-            $this->ogg_file,
-            $this->category_id,
-            $this->updated,
-            $this->getID()
-        ];
-        $sql = 'update `{prefix}audio` set
-				name = ?, mp3_file = ?, ogg_file = ?,
-                                category_id = ?, updated = ?
-				where id = ?';
-        Database::pQuery($sql, $args, true);
     }
 
     public function getName(): ?string
@@ -224,11 +161,6 @@ class Audio extends Model
         }
     }
 
-    protected function getAudioDir(): string
-    {
-        return self::AUDIO_DIR;
-    }
-
     // render HTML5 <audio> tag
     public function render(): string
     {
@@ -256,5 +188,73 @@ class Audio extends Model
 
         $html .= '</audio>';
         return $html;
+    }
+
+    protected function fillVars($result = null)
+    {
+        if ($result) {
+            $result = Database::fetchSingle($result);
+            $this->setID($result->id);
+            $this->setName($result->name);
+            $this->setMP3File($result->mp3_file);
+            $this->setOGGFile($result->ogg_file);
+            $this->setCategoryId(
+                $result->category_id ? (int)$result->category_id : null
+            );
+            $this->created = $result->created ?
+                    (int)$result->created : null;
+            $this->updated = $result->updated ? (int)$result->updated : null;
+        } else {
+            $this->setID(null);
+            $this->setName(null);
+            $this->setMP3File(null);
+            $this->setOGGFile(null);
+            $this->setCategoryId(null);
+            $this->created = null;
+            $this->updated = null;
+        }
+    }
+
+    protected function insert(): void
+    {
+        $this->created = time();
+        $this->updated = $this->created;
+        $args = [
+            $this->name,
+            $this->mp3_file,
+            $this->ogg_file,
+            $this->category_id,
+            $this->created,
+            $this->updated
+        ];
+        $sql = 'insert into `{prefix}audio`
+				(name, mp3_file, ogg_file, category_id,
+                                created, updated)
+				values (?, ?, ?, ?, ?, ?)';
+        Database::pQuery($sql, $args, true);
+        $this->setID(Database::getLastInsertID());
+    }
+
+    protected function update(): void
+    {
+        $this->updated = time();
+        $args = [
+            $this->name,
+            $this->mp3_file,
+            $this->ogg_file,
+            $this->category_id,
+            $this->updated,
+            $this->getID()
+        ];
+        $sql = 'update `{prefix}audio` set
+				name = ?, mp3_file = ?, ogg_file = ?,
+                                category_id = ?, updated = ?
+				where id = ?';
+        Database::pQuery($sql, $args, true);
+    }
+
+    protected function getAudioDir(): string
+    {
+        return self::AUDIO_DIR;
     }
 }

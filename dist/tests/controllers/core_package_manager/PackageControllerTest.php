@@ -162,18 +162,6 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($success);
     }
 
-    protected function installTheme2017()
-    {
-        $packageFile = Path::resolve(
-            'ULICMS_ROOT/tests/fixtures/packages/theme-2017-1.1.1.tar.gz'
-        );
-
-        $installer = new PackageManager();
-        $installer->installPackage($packageFile);
-
-        $this->assertContains('2017', getAllThemes());
-    }
-
     public function testUninstallModuleReturnsTrue()
     {
         $this->installHelloWorld();
@@ -191,6 +179,18 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new PackageController();
         $success = $controller->_uninstallModule('augenkrebs');
         $this->assertFalse($success);
+    }
+
+    protected function installTheme2017()
+    {
+        $packageFile = Path::resolve(
+            'ULICMS_ROOT/tests/fixtures/packages/theme-2017-1.1.1.tar.gz'
+        );
+
+        $installer = new PackageManager();
+        $installer->installPackage($packageFile);
+
+        $this->assertContains('2017', getAllThemes());
     }
 
     protected function installHelloWorld()

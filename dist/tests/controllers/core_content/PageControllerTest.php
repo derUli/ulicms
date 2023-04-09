@@ -317,56 +317,6 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(0, $deleted);
     }
 
-    protected function createTestPages(): array
-    {
-        $pages = [];
-        $slugs = ['unit-test', 'unit-test-2', 'unit-test-3'];
-
-        foreach ($slugs as $slug) {
-            $page = new Page();
-            $page->title = 'Unit Test ' . time();
-            $page->slug = $slug;
-            $page->language = 'de';
-            $page->content = 'Some Text';
-            $page->comments_enabled = true;
-            $page->author_id = 1;
-            $page->group_id = 1;
-            $page->save();
-            $pages[] = $page;
-        }
-
-        $parentPage = ContentFactory::getBySlugAndLanguage('google', 'en');
-        $page = new Page();
-        $page->title = 'Unit Test ' . time();
-        $page->slug = 'unit-test-4';
-        $page->parent_id = $parentPage->getId();
-        $page->language = 'en';
-        $page->content = 'Some Text';
-        $page->comments_enabled = true;
-        $page->author_id = 1;
-        $page->group_id = 1;
-        $page->save();
-
-        $pages[] = $page;
-        return $pages;
-    }
-
-    protected function createDeletedPage(): Page
-    {
-        $page = new Page();
-        $page->title = 'Unit Test ' . time();
-        $page->slug = 'unit-test-' . time();
-        $page->language = 'de';
-        $page->content = 'Some Text';
-        $page->comments_enabled = true;
-        $page->author_id = 1;
-        $page->group_id = 1;
-        $page->save();
-        $page->delete();
-
-        return $page;
-    }
-
     public function testDiffContents()
     {
         $testDiff = $this->createTestDiff();
@@ -382,30 +332,6 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(19, strlen($diff->old_version_date));
         $this->assertGreaterThanOrEqual(1, $diff->content_id);
         $this->assertGreaterThanOrEqual(1, $diff->history_id);
-    }
-
-    protected function createTestDiff(): object
-    {
-        $page = new Page();
-        $page->title = 'Unit Test ' . time();
-        $page->slug = 'unit-test-' . time();
-        $page->language = 'de';
-        $page->content = 'Old Text 1';
-        $page->author_id = 1;
-        $page->group_id = 1;
-        $page->save();
-
-        $manager = new UserManager();
-
-        $user = $manager->getAllUsers()[0];
-        VCS::createRevision($page->getID(), 'New Text', $user->getId());
-        $historyId = Database::getLastInsertID();
-
-        $result = new stdClass();
-        $result->content_id = $page->getID();
-        $result->history_id = $historyId;
-
-        return $result;
     }
 
     public function testValidateInputReturnsErrors()
@@ -690,5 +616,79 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $this->expectException(DatasetNotFoundException::class);
         $controller = new PageController();
         $controller->_getParentPageId(PHP_INT_MAX);
+    }
+
+    protected function createTestPages(): array
+    {
+        $pages = [];
+        $slugs = ['unit-test', 'unit-test-2', 'unit-test-3'];
+
+        foreach ($slugs as $slug) {
+            $page = new Page();
+            $page->title = 'Unit Test ' . time();
+            $page->slug = $slug;
+            $page->language = 'de';
+            $page->content = 'Some Text';
+            $page->comments_enabled = true;
+            $page->author_id = 1;
+            $page->group_id = 1;
+            $page->save();
+            $pages[] = $page;
+        }
+
+        $parentPage = ContentFactory::getBySlugAndLanguage('google', 'en');
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-4';
+        $page->parent_id = $parentPage->getId();
+        $page->language = 'en';
+        $page->content = 'Some Text';
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+
+        $pages[] = $page;
+        return $pages;
+    }
+
+    protected function createDeletedPage(): Page
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = 'Some Text';
+        $page->comments_enabled = true;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+        $page->delete();
+
+        return $page;
+    }
+
+    protected function createTestDiff(): object
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->slug = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = 'Old Text 1';
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->save();
+
+        $manager = new UserManager();
+
+        $user = $manager->getAllUsers()[0];
+        VCS::createRevision($page->getID(), 'New Text', $user->getId());
+        $historyId = Database::getLastInsertID();
+
+        $result = new stdClass();
+        $result->content_id = $page->getID();
+        $result->history_id = $historyId;
+
+        return $result;
     }
 }

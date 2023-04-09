@@ -164,14 +164,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(str_contains($baseMetas, $expected));
     }
 
-    private function setSiteSlogan()
-    {
-        Settings::set('site_slogan', 'SiteSlogan General');
-        Settings::set('site_slogan_de', 'SiteSlogan Deutsch');
-        Settings::set('site_slogan_en', 'SiteSlogan English');
-        Settings::delete('site_slogan_fr');
-    }
-
     public function testGetSiteSloganWithoutLanguage()
     {
         $_SESSION['language'] = 'de';
@@ -707,35 +699,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertEmpty(ob_get_clean());
     }
 
-    private function getPageWithCommentsEnabled()
-    {
-        $manager = new UserManager();
-        $users = $manager->getAllUsers();
-        $user = $users[0];
-        $user_id = $user->getId();
-
-        $page = new Page();
-        $page->title = 'Test Page ' . time();
-        $page->slug = 'test-page-' . time();
-        $page->language = 'de';
-        $page->menu = 'not_in_menu';
-        $page->content = '<p>Wir schreiben das Jahr [year] des fliegenden ' .
-                'Spaghettimonsters</p>';
-
-        $user_id = $user->getId();
-        $groups = Group::getAll();
-        $group = $groups[0];
-        $group_id = $group->getId();
-
-        $page->author_id = $user_id;
-        $page->group_id = $group_id;
-        $page->comments_enabled = 1;
-
-        $page->save();
-
-        return $page;
-    }
-
     public function testGetCommentsReturnsHtml()
     {
         $page = $this->getPageWithCommentsEnabled();
@@ -799,5 +762,42 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         });
 
         $this->assertEmpty($actual);
+    }
+
+    private function setSiteSlogan()
+    {
+        Settings::set('site_slogan', 'SiteSlogan General');
+        Settings::set('site_slogan_de', 'SiteSlogan Deutsch');
+        Settings::set('site_slogan_en', 'SiteSlogan English');
+        Settings::delete('site_slogan_fr');
+    }
+
+    private function getPageWithCommentsEnabled()
+    {
+        $manager = new UserManager();
+        $users = $manager->getAllUsers();
+        $user = $users[0];
+        $user_id = $user->getId();
+
+        $page = new Page();
+        $page->title = 'Test Page ' . time();
+        $page->slug = 'test-page-' . time();
+        $page->language = 'de';
+        $page->menu = 'not_in_menu';
+        $page->content = '<p>Wir schreiben das Jahr [year] des fliegenden ' .
+                'Spaghettimonsters</p>';
+
+        $user_id = $user->getId();
+        $groups = Group::getAll();
+        $group = $groups[0];
+        $group_id = $group->getId();
+
+        $page->author_id = $user_id;
+        $page->group_id = $group_id;
+        $page->comments_enabled = 1;
+
+        $page->save();
+
+        return $page;
     }
 }

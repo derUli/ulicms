@@ -12,12 +12,6 @@ class Node extends Link
 
     public $link_url = '#';
 
-    protected function fillVars($result = null)
-    {
-        parent::fillVars($result);
-        $this->link_url = '#';
-    }
-
      /**
       * Get css classes for Font Awesome icon
       * @return string
@@ -25,5 +19,11 @@ class Node extends Link
     public function getIcon(): string
     {
         return 'far fa-folder';
+    }
+
+    protected function fillVars($result = null)
+    {
+        parent::fillVars($result);
+        $this->link_url = '#';
     }
 }

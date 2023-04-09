@@ -11,16 +11,6 @@ class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    protected function getFixturePath(): string
-    {
-        return Path::resolve('ULICMS_ROOT/tests/fixtures/huge-image.jpg');
-    }
-
-    protected function getProcessedPath(): string
-    {
-        return Path::resolve('ULICMS_TMP/scaled-image.jpg');
-    }
-
     public function testGetMaxImageDimensions()
     {
         $this->assertEquals(
@@ -48,5 +38,15 @@ class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase
         $size = $image->getSize();
         $this->assertEquals(1667, $size->getWidth());
         $this->assertEquals(1667, $size->getHeight());
+    }
+
+    protected function getFixturePath(): string
+    {
+        return Path::resolve('ULICMS_ROOT/tests/fixtures/huge-image.jpg');
+    }
+
+    protected function getProcessedPath(): string
+    {
+        return Path::resolve('ULICMS_TMP/scaled-image.jpg');
     }
 }

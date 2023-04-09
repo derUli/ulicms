@@ -124,12 +124,6 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    protected function getSQLLogger(): Logger
-    {
-        $path = Path::resolve('ULICMS_LOG/sql_exception');
-        return new Logger($path);
-    }
-
     public function testGetError()
     {
         LoggerRegistry::register('sql_log', $this->getSQLLogger());
@@ -589,22 +583,6 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         $this->reconnect();
     }
 
-    private function reconnect($db_strict_mode = null)
-    {
-        $config = new CMSConfig();
-        $db_socket = $config->db_socket ?? ini_get('mysqli.default_socket');
-
-        $db_port = $config->db_port ?? ini_get('mysqli.default_port');
-
-        if ($db_strict_mode === null) {
-            $db_strict_mode = isset($config->db_strict_mode) && $config->db_strict_mode;
-        }
-
-        Database::connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket, $db_strict_mode);
-
-        Database::select($config->db_database);
-    }
-
     public function testMultiQuery()
     {
         Database::setEchoQueries(true);
@@ -629,5 +607,27 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(3, $queries);
         LoggerRegistry::unregister('sql_log');
         ob_end_clean();
+    }
+
+    protected function getSQLLogger(): Logger
+    {
+        $path = Path::resolve('ULICMS_LOG/sql_exception');
+        return new Logger($path);
+    }
+
+    private function reconnect($db_strict_mode = null)
+    {
+        $config = new CMSConfig();
+        $db_socket = $config->db_socket ?? ini_get('mysqli.default_socket');
+
+        $db_port = $config->db_port ?? ini_get('mysqli.default_port');
+
+        if ($db_strict_mode === null) {
+            $db_strict_mode = isset($config->db_strict_mode) && $config->db_strict_mode;
+        }
+
+        Database::connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket, $db_strict_mode);
+
+        Database::select($config->db_database);
     }
 }

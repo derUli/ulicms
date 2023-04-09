@@ -46,18 +46,6 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
         unset($_REQUEST['action']);
     }
 
-    private function constructMenuEntryWithoutChildren(): MenuEntry
-    {
-        return new MenuEntry(
-            'Say Hello',
-            'https://www.hello-world.com/',
-            'say_hello',
-            ['info', 'dashboard'],
-            [],
-            true
-        );
-    }
-
     public function testConstructor()
     {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
@@ -232,5 +220,17 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
 
         $menuEntry->setIsAjax(false);
         $this->assertFalse($menuEntry->getIsAjax());
+    }
+
+    private function constructMenuEntryWithoutChildren(): MenuEntry
+    {
+        return new MenuEntry(
+            'Say Hello',
+            'https://www.hello-world.com/',
+            'say_hello',
+            ['info', 'dashboard'],
+            [],
+            true
+        );
     }
 }

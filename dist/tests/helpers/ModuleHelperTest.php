@@ -19,22 +19,6 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         Database::deleteFrom('content', "title like 'Unit Test%'");
     }
 
-    private function getPageWithShortcode(): Page
-    {
-        $page = new Page();
-        $page->title = 'Unit Test ' . uniqid();
-        $page->slug = 'unit-test-' . uniqid();
-        $page->menu = 'none';
-        $page->language = 'de';
-        $page->article_date = 1413821696;
-        $page->author_id = 1;
-        $page->group_id = 1;
-        $page->content = '[module=foo]';
-        $page->save();
-
-        return $page;
-    }
-
     public function testUnderscoreToCamel()
     {
         $this->assertEquals(
@@ -246,5 +230,21 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
             'admin/?action=foobar&hello=world',
             ModuleHelper::buildActionURL('foobar', 'hello=world', true)
         );
+    }
+
+    private function getPageWithShortcode(): Page
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . uniqid();
+        $page->slug = 'unit-test-' . uniqid();
+        $page->menu = 'none';
+        $page->language = 'de';
+        $page->article_date = 1413821696;
+        $page->author_id = 1;
+        $page->group_id = 1;
+        $page->content = '[module=foo]';
+        $page->save();
+
+        return $page;
     }
 }

@@ -36,20 +36,6 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(1, $banner->getId());
     }
 
-    protected function setPostVars()
-    {
-        $_POST['banner_name'] = 'Nervige Werbung';
-        $_POST['image_url'] = '';
-        $_POST['link_url'] = '';
-        $_POST['category_id'] = 1;
-        $_POST['type'] = 'html';
-        $_POST['language'] = 'de';
-        $_POST['enabled'] = 1;
-        $_POST['html'] = 'Foo Bar';
-        $_POST['date_from'] = '';
-        $_POST['date_to'] = '';
-    }
-
     public function testUpdateReturnsModel()
     {
         $this->setPostVars();
@@ -86,5 +72,19 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new BannerController();
         $success = $controller->_deletePost(PHP_INT_MAX);
         $this->assertFalse($success);
+    }
+
+    protected function setPostVars()
+    {
+        $_POST['banner_name'] = 'Nervige Werbung';
+        $_POST['image_url'] = '';
+        $_POST['link_url'] = '';
+        $_POST['category_id'] = 1;
+        $_POST['type'] = 'html';
+        $_POST['language'] = 'de';
+        $_POST['enabled'] = 1;
+        $_POST['html'] = 'Foo Bar';
+        $_POST['date_from'] = '';
+        $_POST['date_to'] = '';
     }
 }

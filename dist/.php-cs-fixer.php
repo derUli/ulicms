@@ -55,10 +55,6 @@ $tmpRules = [
     'no_unset_cast' => true,
     // Properties should be set to `null` instead of using `unset`.
     'no_unset_on_property' => true,
-    // Orders the elements of classes/interfaces/traits.
-    'ordered_class_elements' => ['order'=>['use_trait','constant_public','constant_protected','constant_private','property_public','property_protected','property_private','construct','destruct','magic','phpunit','method_public','method_protected','method_private']],
-    // Orders the interfaces in an `implements` or `interface extends` clause.
-    'ordered_interfaces' => true,
     // Converts `protected` variables and methods to `private` where possible.
     'protected_to_private' => true,
     // Classes must be in a path that matches their namespace, be at least one namespace deep and the class name should match the file name.
@@ -277,6 +273,10 @@ $config
     'compact_nullable_typehint' => true,
     // Forbid multi-line whitespace before the closing semicolon or move the semicolon to the new line for chained calls.
     'multiline_whitespace_before_semicolons' => true,
+     // Orders the elements of classes/interfaces/traits.
+     'ordered_class_elements' => ['order'=>['use_trait','constant_public','constant_protected','constant_private','property_public','property_protected','property_private','construct','destruct','magic','phpunit','method_public','method_protected','method_private']],
+     // Orders the interfaces in an `implements` or `interface extends` clause.
+     'ordered_interfaces' => true,
     ]);
 
 return $config->setFinder(

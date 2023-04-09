@@ -204,6 +204,11 @@ class Response
     ];
 
     /**
+     * @var  array
+     */
+    public $headers;
+
+    /**
      * @var  string
      */
     protected $content;
@@ -217,11 +222,6 @@ class Response
      * @var  string
      */
     protected $statusText;
-
-    /**
-     * @var  array
-     */
-    public $headers;
 
     /**
      * @var string
@@ -244,23 +244,6 @@ class Response
     }
 
     /**
-     * Set the content on the response.
-     *
-     * @param  mixed  $content
-     * @return $this
-     */
-    public function setContent($content)
-    {
-        if ($content instanceof ArrayObject || is_array($content)) {
-            $this->headers['Content-Type'] = ['application/json'];
-
-            $content = json_encode($content);
-        }
-
-        $this->content = $content;
-    }
-
-    /**
      * Returns the Response as an HTTP string.
      *
      * The string representation of the Response is the same as the
@@ -277,6 +260,23 @@ class Response
             sprintf('HTTP/%s %s %s', $this->version, $this->statusCode, $this->statusText)."\r\n".
             $this->headers."\r\n".
             $this->getContent();
+    }
+
+    /**
+     * Set the content on the response.
+     *
+     * @param  mixed  $content
+     * @return $this
+     */
+    public function setContent($content)
+    {
+        if ($content instanceof ArrayObject || is_array($content)) {
+            $this->headers['Content-Type'] = ['application/json'];
+
+            $content = json_encode($content);
+        }
+
+        $this->content = $content;
     }
 
     /**

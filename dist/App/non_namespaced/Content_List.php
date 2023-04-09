@@ -16,12 +16,6 @@ class Content_List extends Page
         $this->listData = new List_Data();
     }
 
-    protected function fillVars($result = null): void
-    {
-        parent::fillVars($result);
-        $this->listData = new List_Data($this->id);
-    }
-
      /**
       * Get css classes for Font Awesome icon
       * @return string
@@ -29,5 +23,11 @@ class Content_List extends Page
     public function getIcon(): string
     {
         return 'fas fa-list-ul';
+    }
+
+    protected function fillVars($result = null): void
+    {
+        parent::fillVars($result);
+        $this->listData = new List_Data($this->id);
     }
 }

@@ -26,6 +26,11 @@ class Language extends Model
         }
     }
 
+    public function __toString(): string
+    {
+        return $this->getLanguageCode();
+    }
+
     public function fillVars($result = null)
     {
         if ($result && Database::getNumRows($result) > 0) {
@@ -89,30 +94,6 @@ class Language extends Model
         }
     }
 
-    protected function insert()
-    {
-        $sql = 'INSERT INTO `{prefix}languages` (name, language_code) '
-                . 'values (?,?)';
-        $args = [
-            $this->name,
-            $this->language_code
-        ];
-        Database::pQuery($sql, $args, true);
-        $this->id = Database::getLastInsertID();
-    }
-
-    protected function update()
-    {
-        $sql = 'UPDATE `{prefix}languages` set name = ?, language_code = ? '
-                . 'where id = ?';
-        $args = [
-            $this->name,
-            $this->language_code,
-            $this->id
-        ];
-        Database::pQuery($sql, $args, true);
-    }
-
     public function delete()
     {
         if ($this->id !== null) {
@@ -160,11 +141,6 @@ class Language extends Model
         return $datasets;
     }
 
-    public function __toString(): string
-    {
-        return $this->getLanguageCode();
-    }
-
     // returns a link to view the website in this language
     public function getLanguageLink(): string
     {
@@ -175,5 +151,29 @@ class Language extends Model
             $url = './?language=' . $this->language_code;
         }
         return $url;
+    }
+
+    protected function insert()
+    {
+        $sql = 'INSERT INTO `{prefix}languages` (name, language_code) '
+                . 'values (?,?)';
+        $args = [
+            $this->name,
+            $this->language_code
+        ];
+        Database::pQuery($sql, $args, true);
+        $this->id = Database::getLastInsertID();
+    }
+
+    protected function update()
+    {
+        $sql = 'UPDATE `{prefix}languages` set name = ?, language_code = ? '
+                . 'where id = ?';
+        $args = [
+            $this->name,
+            $this->language_code,
+            $this->id
+        ];
+        Database::pQuery($sql, $args, true);
     }
 }

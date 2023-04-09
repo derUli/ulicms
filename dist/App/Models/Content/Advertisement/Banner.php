@@ -57,21 +57,6 @@ class Banner extends Model
         }
     }
 
-    protected function fillVars($result = null)
-    {
-        $this->id = (int)$result->id;
-        $this->name = $result->name;
-        $this->link_url = $result->link_url;
-        $this->image_url = $result->image_url;
-        $this->category_id = (int)$result->category_id;
-        $this->type = $result->type;
-        $this->html = $result->html;
-        $this->language = $result->language;
-        $this->enabled = (bool)$result->enabled;
-        $this->date_from = $result->date_from;
-        $this->date_to = $result->date_to;
-    }
-
     public function save()
     {
         $retval = false;
@@ -374,5 +359,20 @@ class Banner extends Model
         }
 
         return $html;
+    }
+
+    protected function fillVars($result = null)
+    {
+        $this->id = (int)$result->id;
+        $this->name = $result->name;
+        $this->link_url = $result->link_url;
+        $this->image_url = $result->image_url;
+        $this->category_id = (int)$result->category_id;
+        $this->type = $result->type;
+        $this->html = $result->html;
+        $this->language = $result->language;
+        $this->enabled = (bool)$result->enabled;
+        $this->date_from = $result->date_from;
+        $this->date_to = $result->date_to;
     }
 }

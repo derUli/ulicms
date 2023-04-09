@@ -14,13 +14,6 @@ class Image_Page extends Page
 
     public $text_position = 'after';
 
-    protected function fillVars($result = null)
-    {
-        parent::fillVars($result);
-        $this->image_url = $result->image_url;
-        $this->text_position = $result->text_position;
-    }
-
     public function save()
     {
         $retval = null;
@@ -59,5 +52,12 @@ class Image_Page extends Page
     public function getIcon(): string
     {
         return 'far fa-images';
+    }
+
+    protected function fillVars($result = null)
+    {
+        parent::fillVars($result);
+        $this->image_url = $result->image_url;
+        $this->text_position = $result->text_position;
     }
 }

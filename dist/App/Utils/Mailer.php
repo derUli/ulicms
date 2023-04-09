@@ -89,43 +89,6 @@ class Mailer
     }
 
     /**
-     * Apply attributes to PHPMailer
-     * @param PHPMailer $mailer
-     * @return PHPMailer
-     */
-    protected static function setPHPMailerAttributes(PHPMailer $mailer): PHPMailer
-    {
-        $mailer->SMTPSecure = Settings::get('smtp_encryption');
-
-        // Disable verification of ssl certificates
-        // this option makes the mail transfer insecure
-        // use this only if it's unavoidable
-        if (Settings::get('smtp_no_verify_certificate')) {
-            $mailer->SMTPOptions = [
-                'ssl' => [
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
-                    'allow_self_signed' => true
-                ]
-            ];
-        }
-
-        if (Settings::get('smtp_host')) {
-            $mailer->isSMTP();
-            $mailer->Host = Settings::get('smtp_host');
-            $mailer->SMTPAuth = (Settings::get('smtp_auth') === 'auth');
-            if (Settings::get('smtp_user')) {
-                $mailer->Username = Settings::get('smtp_user');
-            }
-            if (Settings::get('smtp_password')) {
-                $mailer->Password = Settings::get('smtp_password');
-            }
-            $mailer->Port = Settings::get('smtp_port', 'int');
-        }
-        return $mailer;
-    }
-
-    /**
      * Initiate PHPMailer
      * @param string $mode
      * @return PHPMailer|null
@@ -196,5 +159,42 @@ class Mailer
 
         $mailer = apply_filter($mailer, 'php_mailer_send');
         return $mailer->send();
+    }
+
+    /**
+     * Apply attributes to PHPMailer
+     * @param PHPMailer $mailer
+     * @return PHPMailer
+     */
+    protected static function setPHPMailerAttributes(PHPMailer $mailer): PHPMailer
+    {
+        $mailer->SMTPSecure = Settings::get('smtp_encryption');
+
+        // Disable verification of ssl certificates
+        // this option makes the mail transfer insecure
+        // use this only if it's unavoidable
+        if (Settings::get('smtp_no_verify_certificate')) {
+            $mailer->SMTPOptions = [
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                ]
+            ];
+        }
+
+        if (Settings::get('smtp_host')) {
+            $mailer->isSMTP();
+            $mailer->Host = Settings::get('smtp_host');
+            $mailer->SMTPAuth = (Settings::get('smtp_auth') === 'auth');
+            if (Settings::get('smtp_user')) {
+                $mailer->Username = Settings::get('smtp_user');
+            }
+            if (Settings::get('smtp_password')) {
+                $mailer->Password = Settings::get('smtp_password');
+            }
+            $mailer->Port = Settings::get('smtp_port', 'int');
+        }
+        return $mailer;
     }
 }

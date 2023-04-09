@@ -41,11 +41,6 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    protected function getFixturePath(): string
-    {
-        return Path::Resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
-    }
-
     public function testDeleteLogo()
     {
         $controller = new LogoController();
@@ -93,5 +88,10 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase
             '/content/images/94f7fbd93d43a9f6b026f4b712d48be7.jpg',
             $filePath
         );
+    }
+
+    protected function getFixturePath(): string
+    {
+        return Path::Resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
     }
 }

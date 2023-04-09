@@ -49,29 +49,6 @@ class ContentFactory
                         . "$name and $language");
     }
 
-    private static function getContentObjectByID(object $row): ?Content
-    {
-        $retval = null;
-        $type = $row->type;
-        $mappings = TypeMapper::getMappings();
-        if (isset($mappings[$type]) && ! empty($mappings[$type]) && class_exists($mappings[$type])) {
-            $retval = new $mappings[$type]();
-            $retval->loadByID((int) $row->id);
-        } else {
-            $message = "Content with id={$row->id} has unknown content type "
-                    . "\"{$type}\"";
-            $logger = LoggerRegistry::get('exception_log');
-            if ($logger) {
-                $logger->error($message);
-            }
-            throw new UnknownContentTypeException(
-                $message
-            );
-        }
-
-        return $retval;
-    }
-
     public static function getAll(string $order = 'id'): array
     {
         $datasets = [];
@@ -311,5 +288,28 @@ class ContentFactory
             }
         }
         return $result;
+    }
+
+    private static function getContentObjectByID(object $row): ?Content
+    {
+        $retval = null;
+        $type = $row->type;
+        $mappings = TypeMapper::getMappings();
+        if (isset($mappings[$type]) && ! empty($mappings[$type]) && class_exists($mappings[$type])) {
+            $retval = new $mappings[$type]();
+            $retval->loadByID((int) $row->id);
+        } else {
+            $message = "Content with id={$row->id} has unknown content type "
+                    . "\"{$type}\"";
+            $logger = LoggerRegistry::get('exception_log');
+            if ($logger) {
+                $logger->error($message);
+            }
+            throw new UnknownContentTypeException(
+                $message
+            );
+        }
+
+        return $retval;
     }
 }

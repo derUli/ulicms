@@ -16,13 +16,6 @@ class SystemRequirementsTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    private function getMySQLVersion()
-    {
-        $version = Database::getServerVersion();
-        $version = preg_replace('/[^0-9.].*/', '', $version);
-        return $version;
-    }
-
     public function testPhpModuleMySqli()
     {
         $this->assertTrue(extension_loaded('mysqli'));
@@ -81,5 +74,12 @@ class SystemRequirementsTest extends \PHPUnit\Framework\TestCase
     public function testIsRunningPHPUnit()
     {
         $this->assertTrue(TestHelper::isRunningPHPUnit());
+    }
+
+    private function getMySQLVersion()
+    {
+        $version = Database::getServerVersion();
+        $version = preg_replace('/[^0-9.].*/', '', $version);
+        return $version;
     }
 }

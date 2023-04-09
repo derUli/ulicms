@@ -5,13 +5,13 @@ use App\Models\Content\Advertisement\Banner;
 
 class TemplatingTest extends \PHPUnit\Framework\TestCase
 {
+    public const HTML_TEXT1 = 'My first Banner HTML';
+
     private $homepageOwner;
 
     private $initialMobileTheme;
 
     private $initialDomainToLanguage;
-
-    public const HTML_TEXT1 = 'My first Banner HTML';
 
     protected function setUp(): void
     {
@@ -55,17 +55,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         Database::pQuery('DELETE FROM `{prefix}banner` where html like ?', [
             self::HTML_TEXT1 . '%',
         ], true);
-    }
-
-    private function cleanUp()
-    {
-        Vars::delete('title');
-        Vars::delete('headline');
-        Vars::delete('page');
-        Vars::delete('type');
-        Vars::delete('cache_control');
-
-        Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%'", true);
     }
 
     public function testGetSlugWithSlugSet()
@@ -392,18 +381,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('John Doe', ob_get_clean());
     }
 
-    private function createTestBanners()
-    {
-        for ($i = 1; $i < 20; $i++) {
-            $banner = new Banner();
-            $banner->setType('html');
-            $banner->setHtml(
-                self::HTML_TEXT1 . ' ' . uniqid()
-            );
-            $banner->save();
-        }
-    }
-
     public function testRandomBanner()
     {
         $this->createTestBanners();
@@ -721,32 +698,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Bla Bla usw.', ob_get_clean());
     }
 
-    private function getArticleWithMetaData(): Article
-    {
-        $article = new Article();
-        $article->title = 'Unit Test Article';
-        $article->slug = 'unit-test-' . uniqid();
-        $article->menu = 'none';
-        $article->language = 'de';
-        $article->article_date = 1413821696;
-        $article->author_id = 1;
-        $article->group_id = 1;
-        $article->category_id = null;
-
-        $article->meta_description = 'Bla Bla usw.';
-        $article->meta_keywords = 'word 1, word 2, word 3';
-
-        $article->excerpt = 'Das ist der Ausschnitt';
-
-        $all = ContentFactory::getAllByLanguage($article->language);
-        $first = $all[0];
-
-        $article->parent_id = $first->getId();
-        $article->theme = '2020';
-        $article->save();
-        return $article;
-    }
-
     public function testGetParentReturnsId()
     {
         $article = $this->getArticleWithMetaData();
@@ -826,5 +777,54 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(
             parent_item_contains_current_page(null)
         );
+    }
+
+    private function cleanUp()
+    {
+        Vars::delete('title');
+        Vars::delete('headline');
+        Vars::delete('page');
+        Vars::delete('type');
+        Vars::delete('cache_control');
+
+        Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%'", true);
+    }
+
+    private function createTestBanners()
+    {
+        for ($i = 1; $i < 20; $i++) {
+            $banner = new Banner();
+            $banner->setType('html');
+            $banner->setHtml(
+                self::HTML_TEXT1 . ' ' . uniqid()
+            );
+            $banner->save();
+        }
+    }
+
+    private function getArticleWithMetaData(): Article
+    {
+        $article = new Article();
+        $article->title = 'Unit Test Article';
+        $article->slug = 'unit-test-' . uniqid();
+        $article->menu = 'none';
+        $article->language = 'de';
+        $article->article_date = 1413821696;
+        $article->author_id = 1;
+        $article->group_id = 1;
+        $article->category_id = null;
+
+        $article->meta_description = 'Bla Bla usw.';
+        $article->meta_keywords = 'word 1, word 2, word 3';
+
+        $article->excerpt = 'Das ist der Ausschnitt';
+
+        $all = ContentFactory::getAllByLanguage($article->language);
+        $first = $all[0];
+
+        $article->parent_id = $first->getId();
+        $article->theme = '2020';
+        $article->save();
+        return $article;
     }
 }

@@ -9,20 +9,6 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
         Database::deleteFrom('content', "slug like 'unit_test_%'");
     }
 
-    private function getGermanLanguage()
-    {
-        $language = new Language();
-        $language->loadByLanguageCode('de');
-        return $language;
-    }
-
-    private function getEnglishLanguage()
-    {
-        $language = new Language();
-        $language->loadByLanguageCode('en');
-        return $language;
-    }
-
     public function testCreateUpdateAndDeleteLink()
     {
         $link = new Language_Link();
@@ -104,5 +90,19 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
 
         $link->setLinkedLanguage(null);
         $this->assertNull($link->getLinkedLanguage());
+    }
+
+    private function getGermanLanguage()
+    {
+        $language = new Language();
+        $language->loadByLanguageCode('de');
+        return $language;
+    }
+
+    private function getEnglishLanguage()
+    {
+        $language = new Language();
+        $language->loadByLanguageCode('en');
+        return $language;
     }
 }

@@ -9,15 +9,6 @@ class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase
         require_once getLanguageFilePath('en');
     }
 
-    private function getSinPackageInstaller($file)
-    {
-        return new SinPackageInstaller(
-            Path::resolve(
-                "ULICMS_ROOT/tests/fixtures/packages/{$file}"
-            )
-        );
-    }
-
     public function testIsInstallableReturnsTrue()
     {
         $installer = $this->getSinPackageInstaller('is_proxy-1.0.sin');
@@ -100,5 +91,14 @@ class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase
         $this->assertArrayHasKey('license', $data);
         $this->assertArrayHasKey('checksum', $data);
         $this->assertArrayHasKey('data', $data);
+    }
+
+    private function getSinPackageInstaller($file)
+    {
+        return new SinPackageInstaller(
+            Path::resolve(
+                "ULICMS_ROOT/tests/fixtures/packages/{$file}"
+            )
+        );
     }
 }

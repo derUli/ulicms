@@ -23,12 +23,6 @@ class Language_Link extends Page
         return $retval;
     }
 
-    protected function fillVars($result = null)
-    {
-        parent::fillVars($result);
-        $this->link_to_language = $result->link_to_language;
-    }
-
     public function update()
     {
         $result = null;
@@ -74,5 +68,11 @@ class Language_Link extends Page
     public function getIcon(): string
     {
         return 'fas fa-language';
+    }
+
+    protected function fillVars($result = null)
+    {
+        parent::fillVars($result);
+        $this->link_to_language = $result->link_to_language;
     }
 }

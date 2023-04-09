@@ -14,14 +14,6 @@ class Snippet extends Page
 
     public $hidden = true;
 
-    protected function fillVars($result = null)
-    {
-        parent::fillVars($result);
-        $this->type = 'snippet';
-        $this->menu = 'not_in_menu';
-        $this->hidden = true;
-    }
-
      /**
       * Get css classes for Font Awesome icon
       * @return string
@@ -29,5 +21,13 @@ class Snippet extends Page
     public function getIcon(): string
     {
         return 'fas fa-sticky-note';
+    }
+
+    protected function fillVars($result = null)
+    {
+        parent::fillVars($result);
+        $this->type = 'snippet';
+        $this->menu = 'not_in_menu';
+        $this->hidden = true;
     }
 }

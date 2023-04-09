@@ -49,19 +49,6 @@ class PermissionChecker
         return false;
     }
 
-    private function getUserGroups(User $user): array
-    {
-        // Collect primary group and secondary groups of the user
-        $groups = [];
-        if ($user->getPrimaryGroup()) {
-            $groups[] = $user->getPrimaryGroup();
-        }
-
-        $secondaryGroups = $user->getSecondaryGroups();
-        $groups = array_merge($groups, $secondaryGroups);
-        return $groups;
-    }
-
     public function getLanguages(): array
     {
         $user = new User($this->user_id);
@@ -84,5 +71,18 @@ class PermissionChecker
     public function setUserId(?int $val): void
     {
         $this->user_id = is_numeric($val) ? (int)$val : null;
+    }
+
+    private function getUserGroups(User $user): array
+    {
+        // Collect primary group and secondary groups of the user
+        $groups = [];
+        if ($user->getPrimaryGroup()) {
+            $groups[] = $user->getPrimaryGroup();
+        }
+
+        $secondaryGroups = $user->getSecondaryGroups();
+        $groups = array_merge($groups, $secondaryGroups);
+        return $groups;
     }
 }

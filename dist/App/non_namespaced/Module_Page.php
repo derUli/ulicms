@@ -13,13 +13,6 @@ class Module_Page extends Page
 
     public $text_position = 'after';
 
-    protected function fillVars($result = null)
-    {
-        parent::fillVars($result);
-        $this->module = $result->module;
-        $this->text_position = $result->text_position;
-    }
-
     public function save()
     {
         $retval = null;
@@ -82,5 +75,12 @@ class Module_Page extends Page
     public function getIcon(): string
     {
         return 'fas fa-puzzle-piece';
+    }
+
+    protected function fillVars($result = null)
+    {
+        parent::fillVars($result);
+        $this->module = $result->module;
+        $this->text_position = $result->text_position;
     }
 }

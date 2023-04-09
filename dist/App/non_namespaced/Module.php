@@ -52,30 +52,6 @@ class Module
         }
     }
 
-    protected function insert(): bool
-    {
-        $sql = 'INSERT INTO {prefix}modules (name, version, enabled) '
-                . 'values(?, ?, ?)';
-        $args = [
-            $this->name,
-            $this->version,
-            $this->enabled
-        ];
-        return Database::pQuery($sql, $args, true);
-    }
-
-    protected function update(): bool
-    {
-        $sql = 'update {prefix}modules set version = ?, enabled = ? '
-                . 'where name = ?';
-        $args = [
-            $this->version,
-            $this->enabled,
-            $this->name
-        ];
-        return Database::pQuery($sql, $args, true);
-    }
-
     public function getVersion(): ?string
     {
         return $this->version;
@@ -230,5 +206,29 @@ class Module
     public function uninstall(): bool
     {
         return uninstall_module($this->getName(), 'module');
+    }
+
+    protected function insert(): bool
+    {
+        $sql = 'INSERT INTO {prefix}modules (name, version, enabled) '
+                . 'values(?, ?, ?)';
+        $args = [
+            $this->name,
+            $this->version,
+            $this->enabled
+        ];
+        return Database::pQuery($sql, $args, true);
+    }
+
+    protected function update(): bool
+    {
+        $sql = 'update {prefix}modules set version = ?, enabled = ? '
+                . 'where name = ?';
+        $args = [
+            $this->version,
+            $this->enabled,
+            $this->name
+        ];
+        return Database::pQuery($sql, $args, true);
     }
 }

@@ -32,23 +32,6 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($success);
     }
 
-    protected function createTestForm(): int
-    {
-        $page = ContentFactory::getAllRegular()[0];
-        Forms::createForm(
-            'Unit Test 2',
-            'max@muster.de',
-            'Subject 1',
-            1,
-            'message=>Message',
-            'message',
-            'email',
-            $page->getId(),
-            true
-        );
-        return Database::getInsertID();
-    }
-
     public function testCreatePostReturnsId()
     {
         $this->setPostVars();
@@ -56,21 +39,6 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase
         $id = $controller->_createPost();
         $this->assertIsNumeric($id);
         $this->assertGreaterThanOrEqual(1, $id);
-    }
-
-    protected function setPostVars()
-    {
-        $page = ContentFactory::getAllRegular()[0];
-
-        $_POST['name'] = 'Unit Test ' . time();
-        $_POST['enabled'] = '1';
-        $_POST['email_to'] = 'foo@example.invalid';
-        $_POST['subject'] = 'My Subject';
-        $_POST['category_id'] = '1';
-        $_POST['fields'] = 'foo=>bar';
-        $_POST['required_fields'] = 'foo';
-        $_POST['mail_from_field'] = 'foo';
-        $_POST['target_page_id'] = (string)$page->getId();
     }
 
     public function testUpdatePostReturnsTrue()
@@ -97,5 +65,37 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase
         $success = $controller->_updatePost();
 
         $this->assertFalse($success);
+    }
+
+    protected function createTestForm(): int
+    {
+        $page = ContentFactory::getAllRegular()[0];
+        Forms::createForm(
+            'Unit Test 2',
+            'max@muster.de',
+            'Subject 1',
+            1,
+            'message=>Message',
+            'message',
+            'email',
+            $page->getId(),
+            true
+        );
+        return Database::getInsertID();
+    }
+
+    protected function setPostVars()
+    {
+        $page = ContentFactory::getAllRegular()[0];
+
+        $_POST['name'] = 'Unit Test ' . time();
+        $_POST['enabled'] = '1';
+        $_POST['email_to'] = 'foo@example.invalid';
+        $_POST['subject'] = 'My Subject';
+        $_POST['category_id'] = '1';
+        $_POST['fields'] = 'foo=>bar';
+        $_POST['required_fields'] = 'foo';
+        $_POST['mail_from_field'] = 'foo';
+        $_POST['target_page_id'] = (string)$page->getId();
     }
 }

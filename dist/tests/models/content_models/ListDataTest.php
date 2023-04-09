@@ -227,6 +227,14 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('asc', $loaded->order_direction);
     }
 
+    public function testSaveWithoutContentId()
+    {
+        $this->expectException(DatabaseException::class);
+
+        $listData = new List_Data();
+        $listData->save();
+    }
+
     private function getEmptyListData($contentId)
     {
         $listData = new List_Data($contentId);
@@ -270,13 +278,5 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $listData->save();
 
         return $listData;
-    }
-
-    public function testSaveWithoutContentId()
-    {
-        $this->expectException(DatabaseException::class);
-
-        $listData = new List_Data();
-        $listData->save();
     }
 }

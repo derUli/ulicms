@@ -33,6 +33,15 @@ class ListItem
     }
 
     /**
+     * ListItem to string
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getHtml();
+    }
+
+    /**
      * Get option as HTML
      * @return string
      */
@@ -44,15 +53,6 @@ class ListItem
         }
         return '<option value="' . Template::getEscape($this->value) . '">' .
                 Template::getEscape($this->text) . '</option>';
-    }
-
-    /**
-     * ListItem to string
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return $this->getHtml();
     }
 
     /**

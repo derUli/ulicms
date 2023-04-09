@@ -28,11 +28,6 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         unset($_SERVER['REQUEST_URI']);
     }
 
-    private function cleanUp()
-    {
-        Database::truncateTable('password_reset');
-    }
-
     public function testAddToken()
     {
         $passwordReset = new PasswordReset();
@@ -135,5 +130,10 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
 
         $passwordReset->deleteToken($token);
         $this->assertNull($passwordReset->getTokenByTokenString($token));
+    }
+
+    private function cleanUp()
+    {
+        Database::truncateTable('password_reset');
     }
 }

@@ -282,6 +282,24 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+    public function testAllCombinedHtml()
+    {
+        $this->enqeueStuff();
+
+        ob_start();
+        all_combined_html();
+        $html = ob_get_clean();
+
+        $this->assertStringContainsString(
+            '<script src="content/cache/legacy/scripts/',
+            $html
+        );
+        $this->assertStringContainsString(
+            '<link rel="stylesheet" href="content/cache/legacy/stylesheets/',
+            $html
+        );
+    }
+
     private function enqeueStuff()
     {
         $files = [
@@ -302,23 +320,5 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         foreach ($files as $file) {
             enqueueStylesheet($file);
         }
-    }
-
-    public function testAllCombinedHtml()
-    {
-        $this->enqeueStuff();
-
-        ob_start();
-        all_combined_html();
-        $html = ob_get_clean();
-
-        $this->assertStringContainsString(
-            '<script src="content/cache/legacy/scripts/',
-            $html
-        );
-        $this->assertStringContainsString(
-            '<link rel="stylesheet" href="content/cache/legacy/stylesheets/',
-            $html
-        );
     }
 }

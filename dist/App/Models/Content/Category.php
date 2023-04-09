@@ -57,30 +57,6 @@ class Category
         }
     }
 
-    protected function insert(): void
-    {
-        $sql = 'INSERT INTO `{prefix}categories` (name, description) '
-                . 'values (?, ?)';
-        $args = [
-            $this->getName(),
-            $this->getDescription()
-        ];
-        Database::pQuery($sql, $args, true);
-        $this->id = Database::getLastInsertID();
-    }
-
-    protected function update(): void
-    {
-        $sql = 'update `{prefix}categories` set name = ?, '
-                . 'description = ? where id = ?';
-        $args = [
-            $this->getName(),
-            $this->getDescription(),
-            $this->id
-        ];
-        Database::pQuery($sql, $args, true);
-    }
-
     public function delete(): void
     {
         if ($this->id) {
@@ -132,5 +108,29 @@ class Category
     public function setDescription(?string $val): void
     {
         $this->description = $val !== null ? (string)$val : null;
+    }
+
+    protected function insert(): void
+    {
+        $sql = 'INSERT INTO `{prefix}categories` (name, description) '
+                . 'values (?, ?)';
+        $args = [
+            $this->getName(),
+            $this->getDescription()
+        ];
+        Database::pQuery($sql, $args, true);
+        $this->id = Database::getLastInsertID();
+    }
+
+    protected function update(): void
+    {
+        $sql = 'update `{prefix}categories` set name = ?, '
+                . 'description = ? where id = ?';
+        $args = [
+            $this->getName(),
+            $this->getDescription(),
+            $this->id
+        ];
+        Database::pQuery($sql, $args, true);
     }
 }

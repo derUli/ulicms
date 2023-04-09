@@ -29,19 +29,6 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    protected function getPost(): array
-    {
-        return [
-            'homepage_owner' => 'Jane Doe',
-            'language' => 'en',
-            'visitors_can_register' => '1',
-            'maintenance_mode' => '1',
-            'email' => 'foobar@example.org',
-            'timezone' => 'Asia/Tokyo',
-            'robots' => 'index, nofollow',
-        ];
-    }
-
     public function testSavePostAllSet(): void
     {
         $_POST = $this->getPost();
@@ -151,5 +138,18 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(422, substr_count($timezones, '<option'));
         $this->assertEquals(10, substr_count($timezones, '<optgroup'));
+    }
+
+    protected function getPost(): array
+    {
+        return [
+            'homepage_owner' => 'Jane Doe',
+            'language' => 'en',
+            'visitors_can_register' => '1',
+            'maintenance_mode' => '1',
+            'email' => 'foobar@example.org',
+            'timezone' => 'Asia/Tokyo',
+            'robots' => 'index, nofollow',
+        ];
     }
 }

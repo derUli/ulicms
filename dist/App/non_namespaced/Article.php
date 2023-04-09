@@ -18,18 +18,6 @@ class Article extends Page
 
     public $type = 'article';
 
-    protected function fillVars($result = null)
-    {
-        parent::fillVars($result);
-
-        // article metadata
-        $this->article_author_email = $result->article_author_email;
-        $this->article_author_name = $result->article_author_name;
-        $this->article_image = $result->article_image;
-        $this->article_date = $result->article_date ? strtotime($result->article_date) : null;
-        $this->excerpt = $result->excerpt;
-    }
-
     public function save()
     {
         $retval = null;
@@ -79,5 +67,17 @@ excerpt = ? where id = ?';
     public function getIcon(): string
     {
         return 'far fa-newspaper';
+    }
+
+    protected function fillVars($result = null)
+    {
+        parent::fillVars($result);
+
+        // article metadata
+        $this->article_author_email = $result->article_author_email;
+        $this->article_author_name = $result->article_author_name;
+        $this->article_image = $result->article_image;
+        $this->article_date = $result->article_date ? strtotime($result->article_date) : null;
+        $this->excerpt = $result->excerpt;
     }
 }

@@ -24,6 +24,32 @@ class RoboDbMigratorTest extends RoboTestBase
         $this->migrateDown();
     }
 
+    public function testMigrateFails()
+    {
+        $dir = Path::resolve('ULICMS_ROOT/tests/fixtures/failed_migrations');
+        $this->migrateUpFails($dir);
+        $this->migrateDownFails($dir);
+        $this->resetDbTrack($dir);
+    }
+
+    public function testDbMigratorReset()
+    {
+        $config = new CMSConfig();
+        if (! $this->shouldDropDbOnShutdown()) {
+            $this->markTestSkipped();
+        }
+
+        $output = $this->runRoboCommand(['dbmigrator:reset']);
+        $this->assertStringContainsString('TRUNCATE TABLE', $output);
+
+        $this->assertEquals(
+            0,
+            Database::getNumRows(
+                Database::selectAll('dbtrack')
+            )
+        );
+    }
+
     protected function migrateUp()
     {
         $dir = Path::resolve('ULICMS_ROOT/tests/fixtures/migrations');
@@ -58,14 +84,6 @@ class RoboDbMigratorTest extends RoboTestBase
         $this->assertFalse(Database::tableExists('employees'));
     }
 
-    public function testMigrateFails()
-    {
-        $dir = Path::resolve('ULICMS_ROOT/tests/fixtures/failed_migrations');
-        $this->migrateUpFails($dir);
-        $this->migrateDownFails($dir);
-        $this->resetDbTrack($dir);
-    }
-
     protected function migrateUpFails(string $dir)
     {
         $output = $this->runRoboCommand(['dbmigrator:up', 'robo_test', $dir]);
@@ -91,23 +109,5 @@ class RoboDbMigratorTest extends RoboTestBase
         $output = $this->runRoboCommand(['dbmigrator:reset', 'robo_test']);
         $this->assertStringContainsString('DELETE FROM', $output);
         $this->assertStringContainsString("where component = 'robo_test'", $output);
-    }
-
-    public function testDbMigratorReset()
-    {
-        $config = new CMSConfig();
-        if (! $this->shouldDropDbOnShutdown()) {
-            $this->markTestSkipped();
-        }
-
-        $output = $this->runRoboCommand(['dbmigrator:reset']);
-        $this->assertStringContainsString('TRUNCATE TABLE', $output);
-
-        $this->assertEquals(
-            0,
-            Database::getNumRows(
-                Database::selectAll('dbtrack')
-            )
-        );
     }
 }

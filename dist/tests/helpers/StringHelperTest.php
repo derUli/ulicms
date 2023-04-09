@@ -4,11 +4,6 @@ use App\Helpers\StringHelper;
 
 class StringHelperTest extends \PHPUnit\Framework\TestCase
 {
-    private function getTestFilePath()
-    {
-        return Path::resolve('ULICMS_ROOT/tests/fixtures/lines.txt');
-    }
-
     public function testRemoveEmptyLineFromString()
     {
         $input = file_get_contents(
@@ -139,5 +134,10 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
                 100
             )
         );
+    }
+
+    private function getTestFilePath()
+    {
+        return Path::resolve('ULICMS_ROOT/tests/fixtures/lines.txt');
     }
 }

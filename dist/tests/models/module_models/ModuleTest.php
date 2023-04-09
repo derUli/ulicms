@@ -24,27 +24,6 @@ class ModuleTest extends \PHPUnit\Framework\TestCase
         $module->enable();
     }
 
-    protected function backupFortune2(): void
-    {
-        $src = getModulePath('fortune2', true);
-        $dst = getModulePath('.fortune2.bak', true);
-        if (is_dir($src) && ! is_dir($dst)) {
-            recurse_copy($src, $dst);
-        }
-        Settings::delete('fortune2_uninstalled_at');
-    }
-
-    protected function restoreFortune2(): void
-    {
-        $src = getModulePath('.fortune2.bak', true);
-        $dst = getModulePath('fortune2', true);
-
-        if (is_dir($src) && ! is_dir($dst)) {
-            recurse_copy($src, $dst);
-            sureRemoveDir($src, true);
-        }
-    }
-
     public function testHasAdminPageReturnsTrue()
     {
         $module = new Module('fortune2');
@@ -187,5 +166,26 @@ class ModuleTest extends \PHPUnit\Framework\TestCase
         );
 
         $this->assertGreaterThanOrEqual(time() - 10, $fortune2_uninstalled_at);
+    }
+
+    protected function backupFortune2(): void
+    {
+        $src = getModulePath('fortune2', true);
+        $dst = getModulePath('.fortune2.bak', true);
+        if (is_dir($src) && ! is_dir($dst)) {
+            recurse_copy($src, $dst);
+        }
+        Settings::delete('fortune2_uninstalled_at');
+    }
+
+    protected function restoreFortune2(): void
+    {
+        $src = getModulePath('.fortune2.bak', true);
+        $dst = getModulePath('fortune2', true);
+
+        if (is_dir($src) && ! is_dir($dst)) {
+            recurse_copy($src, $dst);
+            sureRemoveDir($src, true);
+        }
     }
 }

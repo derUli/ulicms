@@ -22,12 +22,6 @@ class Link extends Page
         return $retval;
     }
 
-    protected function fillVars($result = null)
-    {
-        parent::fillVars($result);
-        $this->link_url = $result->link_url;
-    }
-
     public function update()
     {
         $result = null;
@@ -63,5 +57,11 @@ class Link extends Page
     public function getIcon(): string
     {
         return 'fas fa-link';
+    }
+
+    protected function fillVars($result = null)
+    {
+        parent::fillVars($result);
+        $this->link_url = $result->link_url;
     }
 }

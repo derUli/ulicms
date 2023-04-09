@@ -45,36 +45,6 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase
         $this->testGroup->delete();
     }
 
-    private function getMenuEntries()
-    {
-        return [
-            new MenuEntry(
-                'Say Hello',
-                'https://www.hello-world.com/',
-                'say_hello',
-                ['info', 'dashboard'],
-                [],
-                true
-            ),
-            new MenuEntry(
-                'Google',
-                'https://google.de',
-                'google',
-                ['google'],
-                [],
-                false
-            ),
-            new MenuEntry(
-                'UliCMS',
-                'https://ulicms.de',
-                'ulicms',
-                [],
-                [],
-                false
-            )
-        ];
-    }
-
     public function testGetChildren()
     {
         $menu = new AdminMenu($this->getMenuEntries());
@@ -138,5 +108,35 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase
         $this->limitedUser->registerSession(false);
 
         $this->assertEquals($inputExpected, $menu->render());
+    }
+
+    private function getMenuEntries()
+    {
+        return [
+            new MenuEntry(
+                'Say Hello',
+                'https://www.hello-world.com/',
+                'say_hello',
+                ['info', 'dashboard'],
+                [],
+                true
+            ),
+            new MenuEntry(
+                'Google',
+                'https://google.de',
+                'google',
+                ['google'],
+                [],
+                false
+            ),
+            new MenuEntry(
+                'UliCMS',
+                'https://ulicms.de',
+                'ulicms',
+                [],
+                [],
+                false
+            )
+        ];
     }
 }

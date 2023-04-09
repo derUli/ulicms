@@ -22,6 +22,25 @@ class CoreMediaController extends MainClass
         return $input;
     }
 
+    // This method replaces links to media services like youtube with embedded media
+    public function _replaceLinks(string $input): string
+    {
+        if (empty($input)) {
+            return $input;
+        }
+
+        $content = mb_convert_encoding($input, 'HTML-ENTITIES', 'UTF-8');
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($content);
+
+        $linksToReplace = $this->collectLinks($dom);
+        foreach ($linksToReplace as $link) {
+            $link->oldNode->parentNode->replaceChild($link->newNode, $link->oldNode);
+        }
+        return $this->getBodyContent($dom->saveHTML());
+    }
+
     protected function _addLazyload($input)
     {
         if (empty($input)) {
@@ -61,25 +80,6 @@ class CoreMediaController extends MainClass
             ''
         ], $dom->saveHTML()));
         return $newHtml;
-    }
-
-    // This method replaces links to media services like youtube with embedded media
-    public function _replaceLinks(string $input): string
-    {
-        if (empty($input)) {
-            return $input;
-        }
-
-        $content = mb_convert_encoding($input, 'HTML-ENTITIES', 'UTF-8');
-
-        $dom = new DOMDocument();
-        @$dom->loadHTML($content);
-
-        $linksToReplace = $this->collectLinks($dom);
-        foreach ($linksToReplace as $link) {
-            $link->oldNode->parentNode->replaceChild($link->newNode, $link->oldNode);
-        }
-        return $this->getBodyContent($dom->saveHTML());
     }
 
     // this method collect all embedable links and return it including

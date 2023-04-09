@@ -13,11 +13,6 @@ class FTPClient
     {
     }
 
-    private function logMessage($message)
-    {
-        $this->messageArray[] = $message;
-    }
-
     public function getMessages()
     {
         return $this->messageArray;
@@ -79,5 +74,10 @@ class FTPClient
         $contentsArray = ftp_rawlist($this->connectionId, $parameters . '  ' . $directory);
         echo error_get_last();
         return $contentsArray;
+    }
+
+    private function logMessage($message)
+    {
+        $this->messageArray[] = $message;
     }
 }

@@ -127,59 +127,6 @@ class Group
         $this->insert();
     }
 
-    protected function saveLanguages(): void
-    {
-        $sql = 'delete from `{prefix}group_languages` where `group_id` = ?';
-        $args = [
-            $this->getId()
-        ];
-
-        Database::pQuery($sql, $args, true);
-        foreach ($this->languages as $lang) {
-            $sql = 'insert into `{prefix}group_languages` (`group_id`,
- `language_id`) values(?, ?)';
-            $args = [
-                $this->getId(),
-                $lang->getID()
-            ];
-            Database::pQuery($sql, $args, true);
-        }
-    }
-
-    protected function insert(): void
-    {
-        $sql = 'insert into `{prefix}groups` '
-                . '(name, permissions, allowable_tags) values (?,?,?)';
-        $args = [
-            $this->getName(),
-            json_encode(
-                $this->getPermissions(),
-                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
-            ),
-            $this->getAllowableTags()
-        ];
-        $result = Database::pQuery($sql, $args, true);
-        if ($result) {
-            $id = Database::getInsertID();
-            $this->id = $id;
-            $this->saveLanguages();
-        }
-    }
-
-    protected function update(): void
-    {
-        $sql = 'update `{prefix}groups`set name = ?, permissions = ?, '
-                . 'allowable_tags = ? where id = ?';
-        $args = [
-            $this->getName(),
-            json_encode($this->getPermissions()),
-            $this->getAllowableTags(),
-            $this->id
-        ];
-        Database::pQuery($sql, $args, true);
-        $this->saveLanguages();
-    }
-
     public function delete(): void
     {
         if ($this->id === null) {
@@ -335,5 +282,58 @@ class Group
     {
         $manager = new UserManager();
         return $manager->getUsersByGroupId($this->getId(), $order);
+    }
+
+    protected function saveLanguages(): void
+    {
+        $sql = 'delete from `{prefix}group_languages` where `group_id` = ?';
+        $args = [
+            $this->getId()
+        ];
+
+        Database::pQuery($sql, $args, true);
+        foreach ($this->languages as $lang) {
+            $sql = 'insert into `{prefix}group_languages` (`group_id`,
+ `language_id`) values(?, ?)';
+            $args = [
+                $this->getId(),
+                $lang->getID()
+            ];
+            Database::pQuery($sql, $args, true);
+        }
+    }
+
+    protected function insert(): void
+    {
+        $sql = 'insert into `{prefix}groups` '
+                . '(name, permissions, allowable_tags) values (?,?,?)';
+        $args = [
+            $this->getName(),
+            json_encode(
+                $this->getPermissions(),
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+            ),
+            $this->getAllowableTags()
+        ];
+        $result = Database::pQuery($sql, $args, true);
+        if ($result) {
+            $id = Database::getInsertID();
+            $this->id = $id;
+            $this->saveLanguages();
+        }
+    }
+
+    protected function update(): void
+    {
+        $sql = 'update `{prefix}groups`set name = ?, permissions = ?, '
+                . 'allowable_tags = ? where id = ?';
+        $args = [
+            $this->getName(),
+            json_encode($this->getPermissions()),
+            $this->getAllowableTags(),
+            $this->id
+        ];
+        Database::pQuery($sql, $args, true);
+        $this->saveLanguages();
     }
 }

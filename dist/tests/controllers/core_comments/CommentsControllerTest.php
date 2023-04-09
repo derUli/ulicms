@@ -113,29 +113,6 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($commentText);
     }
 
-    protected function getTestComment(): Comment
-    {
-        $content = ContentFactory::getAll();
-        $first = $content[0];
-        $comment = new Comment();
-        $comment->setContentId($first->id);
-        $comment->setAuthorName('John Doe');
-        $comment->setAuthorEmail('john@doe.de');
-        $comment->setAuthorUrl('http://john-doe.de');
-        $comment->setIp('123.123.123.123');
-        $comment->setStatus(CommentStatus::PUBLISHED);
-        $comment->setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36');
-        $comment->setText("Unit Test 1\nhttps://google.com");
-        $comment->setRead(true);
-
-        $time = time();
-        $comment->setDate($time);
-
-        $comment->save();
-
-        return $comment;
-    }
-
     public function testFilterComments()
     {
         $page = $this->getTestComment();
@@ -233,5 +210,28 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $updatedComment = $controller->_doAction($comment, 'delete');
 
         $this->assertFalse($updatedComment->isPersistent());
+    }
+
+    protected function getTestComment(): Comment
+    {
+        $content = ContentFactory::getAll();
+        $first = $content[0];
+        $comment = new Comment();
+        $comment->setContentId($first->id);
+        $comment->setAuthorName('John Doe');
+        $comment->setAuthorEmail('john@doe.de');
+        $comment->setAuthorUrl('http://john-doe.de');
+        $comment->setIp('123.123.123.123');
+        $comment->setStatus(CommentStatus::PUBLISHED);
+        $comment->setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36');
+        $comment->setText("Unit Test 1\nhttps://google.com");
+        $comment->setRead(true);
+
+        $time = time();
+        $comment->setDate($time);
+
+        $comment->save();
+
+        return $comment;
     }
 }

@@ -18,14 +18,14 @@ use User;
 
 class PageTableRenderer
 {
+    public const MODULE_NAME = 'core_content';
+
     private $user;
 
     public function __construct($user = null)
     {
         $this->user = ! $user ? User::fromSessionData() : $user;
     }
-
-    public const MODULE_NAME = 'core_content';
 
     // get paginated data for DataTables
     // returns an array with can be returned to client

@@ -58,23 +58,6 @@ class ActionRegistry
         self::loadActionPermissions();
     }
 
-    // load backend action page permission of modules
-    private static function loadActionPermissions(): void
-    {
-        $moduleManager = new ModuleManager();
-        $modules = $moduleManager->getEnabledModuleNames();
-
-        foreach ($modules as $module) {
-            $action_permissions = getModuleMeta($module, 'action_permissions');
-            if (! $action_permissions) {
-                continue;
-            }
-            foreach ($action_permissions as $action => $permission) {
-                self::$actionPermissions[$action] = $permission;
-            }
-        }
-    }
-
     public static function getActionPermission(string $action): ?string
     {
         $permission = null;
@@ -136,5 +119,22 @@ class ActionRegistry
     public static function getAction(string $action): ?string
     {
         return self::$actions[$action] ?? null;
+    }
+
+    // load backend action page permission of modules
+    private static function loadActionPermissions(): void
+    {
+        $moduleManager = new ModuleManager();
+        $modules = $moduleManager->getEnabledModuleNames();
+
+        foreach ($modules as $module) {
+            $action_permissions = getModuleMeta($module, 'action_permissions');
+            if (! $action_permissions) {
+                continue;
+            }
+            foreach ($action_permissions as $action => $permission) {
+                self::$actionPermissions[$action] = $permission;
+            }
+        }
     }
 }

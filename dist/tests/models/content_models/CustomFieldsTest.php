@@ -19,12 +19,6 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase
         $_POST = [];
     }
 
-    private function getFirstPage()
-    {
-        $pages = ContentFactory::getAll();
-        return $pages[0];
-    }
-
     public function testSetAndGetField()
     {
         $id = $this->getFirstPage()->id;
@@ -109,5 +103,11 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase
 
         $all = CustomFields::getAll();
         $this->assertEquals('bar', $all['foo']);
+    }
+
+    private function getFirstPage()
+    {
+        $pages = ContentFactory::getAll();
+        return $pages[0];
     }
 }

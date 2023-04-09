@@ -266,72 +266,6 @@ class User extends Model
     }
 
     /**
-     * Insert user
-     * @return void
-     */
-    protected function insert(): void
-    {
-        $sql = 'insert into {prefix}users (username, lastname, firstname,
-                email, password, about_me, group_id, html_editor,
-                require_password_change, admin,
-                password_changed, locked, last_login,
-                homepage, default_language) values
-                (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-        $args = [
-            $this->username,
-            $this->lastname,
-            $this->firstname,
-            $this->email,
-            $this->password,
-            $this->about_me,
-            $this->group_id,
-            $this->html_editor,
-            $this->require_password_change,
-            $this->admin,
-            $this->password_changed,
-            $this->locked,
-            $this->last_login,
-            $this->homepage,
-            $this->default_language
-        ];
-        Database::pQuery($sql, $args, true);
-        $this->id = Database::getLastInsertID();
-    }
-
-    /**
-     * Update user
-     * @return void
-     */
-    protected function update(): void
-    {
-        $sql = 'update {prefix}users set username = ?, lastname = ?,
-            firstname = ?, email = ?, password = ?, about_me = ?,
-            group_id = ?, html_editor = ?,
-            require_password_change = ?, admin = ?, password_changed = ?,
-            locked = ?, last_login = ?,
-            homepage = ?, default_language = ? where id = ?';
-        $args = [
-            $this->username,
-            $this->lastname,
-            $this->firstname,
-            $this->email,
-            $this->password,
-            $this->about_me,
-            $this->group_id,
-            $this->html_editor,
-            $this->require_password_change,
-            $this->admin,
-            $this->password_changed,
-            $this->locked,
-            $this->last_login,
-            $this->homepage,
-            $this->default_language,
-            $this->id
-        ];
-        Database::pQuery($sql, $args, true);
-    }
-
-    /**
      * Get id
      * @return int|null
      */
@@ -886,33 +820,6 @@ class User extends Model
     }
 
     /**
-     * Generates an avatar based on the the capitals of the users
-     * firstname and lastname.
-     *  The file is cached for performance reasons
-     * @param string $avatarImageFile
-     * @return string
-     */
-    protected function generateAvatar(string $avatarImageFile): string
-    {
-        if (! is_file($avatarImageFile)) {
-            $avatar = new InitialAvatar();
-            $image = $avatar->name($this->getDisplayName())->
-                            rounded()->smooth()->
-                            autoFont()->fontSize(0.35)->
-                            size(40)->generate();
-            $image->save($avatarImageFile);
-        }
-
-        $url = ! is_admin_dir() ?
-                'content/avatars/' . md5($this->getDisplayName()) . '.png' :
-                '../content/avatars/' . md5($this->getDisplayName()) . '.png';
-
-        $avatarUrl = $url;
-
-        return $avatarUrl;
-    }
-
-    /**
      * Set avatar
      * @param type $file
      * @return void
@@ -1010,54 +917,6 @@ class User extends Model
     }
 
     /**
-     * Load groups secondary groups of this user
-     * @param type $user_id
-     * @return void
-     */
-    protected function loadGroups($user_id): void
-    {
-        $groups = [];
-
-        $sql = 'select `group_id` from `{prefix}user_groups` where user_id = ?';
-        $args = [
-            (int) $user_id
-        ];
-        $result = Database::pQuery($sql, $args, true);
-        while ($row = Database::fetchObject($result)) {
-            $groups[] = new Group($row->group_id);
-        }
-        $this->setSecondaryGroups($groups);
-    }
-
-    /**
-     * Save secondary groups of this user
-     * @return void
-     */
-    protected function saveGroups(): void
-    {
-        Database::pQuery(
-            'delete from {prefix}user_groups where user_id = ?',
-            [
-                $this->getId()
-            ],
-            true
-        );
-        foreach ($this->secondary_groups as $group) {
-            Database::pQuery(
-                'insert into {prefix}user_groups
-                              (user_id, group_id)
-                              VALUES
-                              (?,?)',
-                [
-                    $this->getID(),
-                    $group->getID()
-                ],
-                true
-            );
-        }
-    }
-
-    /**
      * Change avatar image from upload
      * @param array $upload
      * @return bool
@@ -1093,18 +952,6 @@ class User extends Model
         $imagine->open($inputFile)
                 ->thumbnail($size, $mode)
                 ->save($generatedAvatar);
-    }
-
-    /**
-     * Get path of processed avatar
-     * @return string|null
-     */
-    protected function getProcessedAvatarPath(): ?string
-    {
-        return $this->isPersistent() ? Path::resolve(
-            'ULICMS_ROOT/content/avatars/user-' .
-            $this->getId() . '.png'
-        ) : null;
     }
 
     /**
@@ -1173,5 +1020,158 @@ class User extends Model
             $users[] = new self($row->id);
         }
         return $users;
+    }
+
+    /**
+     * Insert user
+     * @return void
+     */
+    protected function insert(): void
+    {
+        $sql = 'insert into {prefix}users (username, lastname, firstname,
+                email, password, about_me, group_id, html_editor,
+                require_password_change, admin,
+                password_changed, locked, last_login,
+                homepage, default_language) values
+                (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+        $args = [
+            $this->username,
+            $this->lastname,
+            $this->firstname,
+            $this->email,
+            $this->password,
+            $this->about_me,
+            $this->group_id,
+            $this->html_editor,
+            $this->require_password_change,
+            $this->admin,
+            $this->password_changed,
+            $this->locked,
+            $this->last_login,
+            $this->homepage,
+            $this->default_language
+        ];
+        Database::pQuery($sql, $args, true);
+        $this->id = Database::getLastInsertID();
+    }
+
+    /**
+     * Update user
+     * @return void
+     */
+    protected function update(): void
+    {
+        $sql = 'update {prefix}users set username = ?, lastname = ?,
+            firstname = ?, email = ?, password = ?, about_me = ?,
+            group_id = ?, html_editor = ?,
+            require_password_change = ?, admin = ?, password_changed = ?,
+            locked = ?, last_login = ?,
+            homepage = ?, default_language = ? where id = ?';
+        $args = [
+            $this->username,
+            $this->lastname,
+            $this->firstname,
+            $this->email,
+            $this->password,
+            $this->about_me,
+            $this->group_id,
+            $this->html_editor,
+            $this->require_password_change,
+            $this->admin,
+            $this->password_changed,
+            $this->locked,
+            $this->last_login,
+            $this->homepage,
+            $this->default_language,
+            $this->id
+        ];
+        Database::pQuery($sql, $args, true);
+    }
+
+    /**
+     * Generates an avatar based on the the capitals of the users
+     * firstname and lastname.
+     *  The file is cached for performance reasons
+     * @param string $avatarImageFile
+     * @return string
+     */
+    protected function generateAvatar(string $avatarImageFile): string
+    {
+        if (! is_file($avatarImageFile)) {
+            $avatar = new InitialAvatar();
+            $image = $avatar->name($this->getDisplayName())->
+                            rounded()->smooth()->
+                            autoFont()->fontSize(0.35)->
+                            size(40)->generate();
+            $image->save($avatarImageFile);
+        }
+
+        $url = ! is_admin_dir() ?
+                'content/avatars/' . md5($this->getDisplayName()) . '.png' :
+                '../content/avatars/' . md5($this->getDisplayName()) . '.png';
+
+        $avatarUrl = $url;
+
+        return $avatarUrl;
+    }
+
+    /**
+     * Load groups secondary groups of this user
+     * @param type $user_id
+     * @return void
+     */
+    protected function loadGroups($user_id): void
+    {
+        $groups = [];
+
+        $sql = 'select `group_id` from `{prefix}user_groups` where user_id = ?';
+        $args = [
+            (int) $user_id
+        ];
+        $result = Database::pQuery($sql, $args, true);
+        while ($row = Database::fetchObject($result)) {
+            $groups[] = new Group($row->group_id);
+        }
+        $this->setSecondaryGroups($groups);
+    }
+
+    /**
+     * Save secondary groups of this user
+     * @return void
+     */
+    protected function saveGroups(): void
+    {
+        Database::pQuery(
+            'delete from {prefix}user_groups where user_id = ?',
+            [
+                $this->getId()
+            ],
+            true
+        );
+        foreach ($this->secondary_groups as $group) {
+            Database::pQuery(
+                'insert into {prefix}user_groups
+                              (user_id, group_id)
+                              VALUES
+                              (?,?)',
+                [
+                    $this->getID(),
+                    $group->getID()
+                ],
+                true
+            );
+        }
+    }
+
+    /**
+     * Get path of processed avatar
+     * @return string|null
+     */
+    protected function getProcessedAvatarPath(): ?string
+    {
+        return $this->isPersistent() ? Path::resolve(
+            'ULICMS_ROOT/content/avatars/user-' .
+            $this->getId() . '.png'
+        ) : null;
     }
 }

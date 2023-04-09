@@ -57,8 +57,6 @@ class Page extends Content
 
     public $meta_keywords = null;
 
-    private $deleted_at = null;
-
     public $theme = null;
 
     public $robots = null;
@@ -77,9 +75,11 @@ class Page extends Content
 
     public $comments_enabled = null;
 
-    private $permissions;
-
     public $show_headline = true;
+
+    private $deleted_at = null;
+
+    private $permissions;
 
     public function __construct($id = null)
     {
@@ -90,58 +90,6 @@ class Page extends Content
         $this->permissions = new PagePermissions();
         if ($id) {
             $this->loadByID($id);
-        }
-    }
-
-    protected function fillVars($result = null)
-    {
-        $this->id = (int) $result->id;
-        $this->slug = $result->slug;
-        $this->title = $result->title;
-        $this->alternate_title = $result->alternate_title;
-        $this->target = $result->target;
-        $this->category_id = $result->category_id;
-        $this->content = $result->content;
-        $this->language = $result->language;
-        $this->menu_image = $result->menu_image;
-        $this->active = $result->active;
-        $this->approved = $result->approved;
-        $this->created = $result->created;
-        $this->lastmodified = $result->lastmodified;
-        $this->author_id = $result->author_id;
-        $this->group_id = $result->group_id;
-        $this->lastchangeby = $result->lastchangeby;
-        $this->views = $result->views;
-        $this->menu = $result->menu;
-        $this->position = $result->position;
-        $this->parent_id = $result->parent_id;
-        $this->access = $result->access;
-        $this->meta_description = $result->meta_description;
-        $this->meta_keywords = $result->meta_keywords;
-        $this->deleted_at = $result->deleted_at;
-        $this->theme = $result->theme;
-        $this->robots = $result->robots;
-
-        $this->custom_data = $this->custom_data ?? [];
-        $this->custom_data = json_decode($result->custom_data, false);
-
-        $this->type = $result->type;
-        $this->og_image = $result->og_image;
-        $this->og_description = $result->og_description;
-        $this->cache_control = $result->cache_control;
-        $this->hidden = $result->hidden;
-        $this->show_headline = (bool) $result->show_headline;
-        $this->comments_enabled = $result->comments_enabled !== null ?
-                (bool) $result->comments_enabled : null;
-
-        // fill page permissions object
-        $resultArray = (array) $result;
-        foreach ($resultArray as $key => $value) {
-            preg_match('/only_([a-z]+)_can_edit/', $key, $matches);
-            if (count($matches) >= 2) {
-                $object = $matches[1];
-                $this->permissions->setEditRestriction($object, (bool)$value);
-            }
         }
     }
 
@@ -606,5 +554,57 @@ class Page extends Content
             $enabled ? $this->getID() : null,
             $this->language
         );
+    }
+
+    protected function fillVars($result = null)
+    {
+        $this->id = (int) $result->id;
+        $this->slug = $result->slug;
+        $this->title = $result->title;
+        $this->alternate_title = $result->alternate_title;
+        $this->target = $result->target;
+        $this->category_id = $result->category_id;
+        $this->content = $result->content;
+        $this->language = $result->language;
+        $this->menu_image = $result->menu_image;
+        $this->active = $result->active;
+        $this->approved = $result->approved;
+        $this->created = $result->created;
+        $this->lastmodified = $result->lastmodified;
+        $this->author_id = $result->author_id;
+        $this->group_id = $result->group_id;
+        $this->lastchangeby = $result->lastchangeby;
+        $this->views = $result->views;
+        $this->menu = $result->menu;
+        $this->position = $result->position;
+        $this->parent_id = $result->parent_id;
+        $this->access = $result->access;
+        $this->meta_description = $result->meta_description;
+        $this->meta_keywords = $result->meta_keywords;
+        $this->deleted_at = $result->deleted_at;
+        $this->theme = $result->theme;
+        $this->robots = $result->robots;
+
+        $this->custom_data = $this->custom_data ?? [];
+        $this->custom_data = json_decode($result->custom_data, false);
+
+        $this->type = $result->type;
+        $this->og_image = $result->og_image;
+        $this->og_description = $result->og_description;
+        $this->cache_control = $result->cache_control;
+        $this->hidden = $result->hidden;
+        $this->show_headline = (bool) $result->show_headline;
+        $this->comments_enabled = $result->comments_enabled !== null ?
+                (bool) $result->comments_enabled : null;
+
+        // fill page permissions object
+        $resultArray = (array) $result;
+        foreach ($resultArray as $key => $value) {
+            preg_match('/only_([a-z]+)_can_edit/', $key, $matches);
+            if (count($matches) >= 2) {
+                $object = $matches[1];
+                $this->permissions->setEditRestriction($object, (bool)$value);
+            }
+        }
     }
 }

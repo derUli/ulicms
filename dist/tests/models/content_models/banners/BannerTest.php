@@ -299,16 +299,6 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($banner->isPersistent());
     }
 
-    private function createTestBanners()
-    {
-        for ($i = 1; $i < 20; $i++) {
-            $banner = new Banner();
-            $banner->setType('html');
-            $banner->setHtml(self::HTML_TEXT1);
-            $banner->save();
-        }
-    }
-
     public function testCreateWithAllEmpty()
     {
         $banner = new Banner();
@@ -333,5 +323,15 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($banner->isPersistent());
 
         $banner->delete();
+    }
+
+    private function createTestBanners()
+    {
+        for ($i = 1; $i < 20; $i++) {
+            $banner = new Banner();
+            $banner->setType('html');
+            $banner->setHtml(self::HTML_TEXT1);
+            $banner->save();
+        }
     }
 }

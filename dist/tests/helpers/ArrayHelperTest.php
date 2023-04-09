@@ -86,33 +86,6 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
         ArrayHelper::insertAfter($input, PHP_INT_MAX, 'gibts_nicht');
     }
 
-    private function getNestesdArray()
-    {
-        return [
-            'foo',
-            'bar',
-            [
-                'hello',
-                'world',
-                [
-                    'apache',
-                    'php',
-                    'mysql',
-                    'linux']
-            ]
-        ];
-    }
-
-    private function getArrayTestData(): array
-    {
-        return [
-            'foo' => 'bar',
-            'hello' => 'world',
-            'fire' => 'water',
-            'metal' => 'rock'
-        ];
-    }
-
     public function testArrayHasMultipleKeysReturnsTrue()
     {
         $this->assertTrue(
@@ -149,5 +122,32 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
                 ]
             )
         );
+    }
+
+    private function getNestesdArray()
+    {
+        return [
+            'foo',
+            'bar',
+            [
+                'hello',
+                'world',
+                [
+                    'apache',
+                    'php',
+                    'mysql',
+                    'linux']
+            ]
+        ];
+    }
+
+    private function getArrayTestData(): array
+    {
+        return [
+            'foo' => 'bar',
+            'hello' => 'world',
+            'fire' => 'water',
+            'metal' => 'rock'
+        ];
     }
 }

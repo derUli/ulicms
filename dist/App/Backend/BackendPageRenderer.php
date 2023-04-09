@@ -109,6 +109,36 @@ class BackendPageRenderer
     }
 
     /**
+     * Outputs minified HTML
+     * @return void
+     */
+    public function outputMinified(): void
+    {
+        $generatedHtml = ob_get_clean();
+        $options = [
+            'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
+        ];
+        $HTMLMinify = new HTMLMinify($generatedHtml, $options);
+        $generatedHtml = $HTMLMinify->process();
+        $generatedHtml = StringHelper::removeEmptyLinesFromString(
+            $generatedHtml
+        );
+
+        echo $generatedHtml;
+    }
+
+    /**
+     * Run cron events of modules
+     * @return void
+     */
+    public function doCronEvents(): void
+    {
+        do_event('before_admin_cron');
+        do_event('admin_cron');
+        do_event('after_admin_cron');
+    }
+
+    /**
      * This method handles access to the features that are
      * accesible for non authenticated users
      * @param bool $onlyContent
@@ -185,35 +215,5 @@ class BackendPageRenderer
         } else {
             translate('action_not_found');
         }
-    }
-
-    /**
-     * Outputs minified HTML
-     * @return void
-     */
-    public function outputMinified(): void
-    {
-        $generatedHtml = ob_get_clean();
-        $options = [
-            'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
-        ];
-        $HTMLMinify = new HTMLMinify($generatedHtml, $options);
-        $generatedHtml = $HTMLMinify->process();
-        $generatedHtml = StringHelper::removeEmptyLinesFromString(
-            $generatedHtml
-        );
-
-        echo $generatedHtml;
-    }
-
-    /**
-     * Run cron events of modules
-     * @return void
-     */
-    public function doCronEvents(): void
-    {
-        do_event('before_admin_cron');
-        do_event('admin_cron');
-        do_event('after_admin_cron');
     }
 }

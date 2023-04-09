@@ -71,32 +71,6 @@ class CacheUtil
     }
 
     /**
-     * Get best matching supported Phpfastcache driver
-     * @return string
-     */
-    protected static function getBestMatchingDriver(): string
-    {
-        $driver = 'Devnull';
-
-        $drivers = [
-            'Memstatic' => TestHelper::isRunningPHPUnit(),
-            // TODO: Prüfen, ob die Performance mit Apcu besser als mit Files ist
-            // 'Apcu' => extension_loaded('apcu') && ini_get('apc.enabled'),
-            'Files' => true,
-            // 'Files' => CORE_COMPONENT !== CORE_COMPONENT_PHPUNIT
-        ];
-
-        foreach ($drivers as $name => $driverAvailable) {
-            if ($driverAvailable) {
-                $driver = $name;
-                break;
-            }
-        }
-
-        return $driver;
-    }
-
-    /**
      *  Resets cache adapter
      */
     public static function resetAdapater()
@@ -187,5 +161,31 @@ class CacheUtil
     {
         $path = Path::resolve('ULICMS_CONTENT/avatars');
         File::sureRemoveDir($path, $removeDir);
+    }
+
+    /**
+     * Get best matching supported Phpfastcache driver
+     * @return string
+     */
+    protected static function getBestMatchingDriver(): string
+    {
+        $driver = 'Devnull';
+
+        $drivers = [
+            'Memstatic' => TestHelper::isRunningPHPUnit(),
+            // TODO: Prüfen, ob die Performance mit Apcu besser als mit Files ist
+            // 'Apcu' => extension_loaded('apcu') && ini_get('apc.enabled'),
+            'Files' => true,
+            // 'Files' => CORE_COMPONENT !== CORE_COMPONENT_PHPUNIT
+        ];
+
+        foreach ($drivers as $name => $driverAvailable) {
+            if ($driverAvailable) {
+                $driver = $name;
+                break;
+            }
+        }
+
+        return $driver;
     }
 }

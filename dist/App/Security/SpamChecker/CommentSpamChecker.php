@@ -17,6 +17,8 @@ class CommentSpamChecker implements ISpamChecker
 
     private $spamFilterConfiguration;
 
+    private $errors = [];
+
     // Constructor takes the Comment to check and
     // the SpamFilterFonuration
     public function __construct(
@@ -26,8 +28,6 @@ class CommentSpamChecker implements ISpamChecker
         $this->comment = $comment;
         $this->spamFilterConfiguration = $spamFilterConfiguration;
     }
-
-    private $errors = [];
 
     public function clearErrors(): void
     {

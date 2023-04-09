@@ -21,6 +21,8 @@ use ModuleHelper;
 // Users can post comments to content types were comments are enabled
 class Comment extends Model
 {
+    public const TABLE_NAME = 'comments';
+
     private $content_id;
 
     private $author_name;
@@ -40,8 +42,6 @@ class Comment extends Model
     private $useragent;
 
     private $read = false;
-
-    public const TABLE_NAME = 'comments';
 
     public function loadByID($id)
     {
@@ -67,75 +67,6 @@ class Comment extends Model
         $this->setIp($data->ip);
         $this->setUserAgent($data->useragent);
         $this->setRead((bool) $data->read);
-    }
-
-    protected function insert()
-    {
-        if (! $this->getDate()) {
-            $this->date = time();
-        }
-        Database::pQuery('INSERT INTO `{prefix}comments`
-            (`content_id`,
-             `author_name`,
-             `author_email`,
-             `author_url`,
-             `date`,
-             `text`,
-             `status`,
-             `ip`,
-             `useragent`,
-             `read`
-             )
-VALUES      ( ?,
-              ?,
-              ?,
-              ?,
-              FROM_UNIXTIME(?),
-              ?,
-              ?,
-              ?,
-              ?,
-              ?) ', [
-            $this->getContentId(),
-            $this->getAuthorName(),
-            $this->getAuthorEmail(),
-            $this->getAuthorUrl(),
-            $this->getDate(),
-            $this->getText(),
-            $this->getStatus(),
-            $this->getIp(),
-            $this->getUseragent(),
-            $this->isRead()
-        ], true);
-        $this->setID(Database::getLastInsertID());
-    }
-
-    protected function update()
-    {
-        Database::pQuery('UPDATE `{prefix}comments` set
-                         `content_id` = ?,
-                         `author_name` = ?,
-                         `author_email` = ?,
-                         `author_url` = ?,
-                         `date` = FROM_UNIXTIME(?),
-                         `text` = ?,
-                         `status` = ?,
-                         `ip` = ?,
-                         `useragent` = ?,
-                         `read` = ?
-                          where id = ?', [
-            $this->getContentId(),
-            $this->getAuthorName(),
-            $this->getAuthorEmail(),
-            $this->getAuthorUrl(),
-            $this->getDate(),
-            $this->getText(),
-            $this->getStatus(),
-            $this->getIp(),
-            $this->getUseragent(),
-            $this->isRead(),
-            $this->getID()
-        ], true);
     }
 
     public function delete()
@@ -392,5 +323,74 @@ VALUES      ( ?,
     public function setRead(?bool $val): void
     {
         $this->read = (bool) $val;
+    }
+
+    protected function insert()
+    {
+        if (! $this->getDate()) {
+            $this->date = time();
+        }
+        Database::pQuery('INSERT INTO `{prefix}comments`
+            (`content_id`,
+             `author_name`,
+             `author_email`,
+             `author_url`,
+             `date`,
+             `text`,
+             `status`,
+             `ip`,
+             `useragent`,
+             `read`
+             )
+VALUES      ( ?,
+              ?,
+              ?,
+              ?,
+              FROM_UNIXTIME(?),
+              ?,
+              ?,
+              ?,
+              ?,
+              ?) ', [
+            $this->getContentId(),
+            $this->getAuthorName(),
+            $this->getAuthorEmail(),
+            $this->getAuthorUrl(),
+            $this->getDate(),
+            $this->getText(),
+            $this->getStatus(),
+            $this->getIp(),
+            $this->getUseragent(),
+            $this->isRead()
+        ], true);
+        $this->setID(Database::getLastInsertID());
+    }
+
+    protected function update()
+    {
+        Database::pQuery('UPDATE `{prefix}comments` set
+                         `content_id` = ?,
+                         `author_name` = ?,
+                         `author_email` = ?,
+                         `author_url` = ?,
+                         `date` = FROM_UNIXTIME(?),
+                         `text` = ?,
+                         `status` = ?,
+                         `ip` = ?,
+                         `useragent` = ?,
+                         `read` = ?
+                          where id = ?', [
+            $this->getContentId(),
+            $this->getAuthorName(),
+            $this->getAuthorEmail(),
+            $this->getAuthorUrl(),
+            $this->getDate(),
+            $this->getText(),
+            $this->getStatus(),
+            $this->getIp(),
+            $this->getUseragent(),
+            $this->isRead(),
+            $this->getID()
+        ], true);
     }
 }

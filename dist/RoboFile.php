@@ -28,28 +28,6 @@ class RoboFile extends Tasks
         $this->initUliCMS();
     }
 
-    protected function initUliCMS()
-    {
-        try {
-            $this->initCore();
-        } catch (SqlException $e) {
-            $this->showException($e);
-        }
-    }
-
-    protected function showException(Exception $e)
-    {
-        $this->writeln($e->getMessage());
-    }
-
-    protected function initCore()
-    {
-        if (! defined('ULICMS_ROOT')) {
-            require dirname(__FILE__) . '/init.php';
-            require_once getLanguageFilePath('en');
-        }
-    }
-
     /**
      * shows the UliCMS release version
      */
@@ -162,26 +140,6 @@ class RoboFile extends Tasks
         $this->showPageKeys($json);
     }
 
-    private function showPageKeys($json)
-    {
-        $skipAttributes = [
-            'data',
-            'screenshot'
-        ];
-
-        foreach ($json as $key => $value) {
-            if (in_array($key, $skipAttributes)) {
-                continue;
-            }
-            if (is_array($value)) {
-                $processedValue = implode(', ', $value);
-            } else {
-                $processedValue = $value;
-            }
-            $this->writeln("$key: $processedValue");
-        }
-    }
-
     /**
      * list all installed packages
      */
@@ -245,20 +203,6 @@ class RoboFile extends Tasks
         }
     }
 
-    private function getModuleInfo(string $name): string
-    {
-        $version = getModuleMeta($name, 'version');
-        $line = $name;
-
-        if ($version !== null) {
-            $line .= " $version";
-        }
-        $module = new Module($name);
-        $status = $module->isEnabled() ? 'enabled' : 'disabled';
-        $line .= " ($status)";
-        return $line;
-    }
-
     /**
      * toggles one or more modules
      * @param array $modules one or more modules
@@ -273,37 +217,6 @@ class RoboFile extends Tasks
             $module->toggleEnabled();
             $this->writeln($this->getModuleInfo($name));
         }
-    }
-
-    private function replaceModulePlaceholders(array $modules): array
-    {
-        $manager = new ModuleManager();
-        $manager->sync();
-        $outModules = [];
-
-        foreach ($modules as $name) {
-            if (strtolower($name) == '[all]') {
-                $outModules = array_merge(
-                    $outModules,
-                    $manager->getAllModuleNames()
-                );
-            } elseif (strtolower($name) == '[core]') {
-                $outModules = array_merge(
-                    $outModules,
-                    $manager->getAllModuleNames('core')
-                );
-            } elseif (strtolower($name) == '[extend]') {
-                $outModules = array_merge($outModules, $manager->getAllModuleNames('extend'));
-            } elseif (strtolower($name) == '[pkgsrc]') {
-                $outModules = array_merge(
-                    $outModules,
-                    $manager->getAllModuleNames('pkgsrc')
-                );
-            } else {
-                $outModules[] = $name;
-            }
-        }
-        return $outModules;
     }
 
     /**
@@ -597,5 +510,92 @@ class RoboFile extends Tasks
         $formatedCurrentTime = $formatter->format(time());
 
         $this->writeln('finished cron at ' . $formatedCurrentTime);
+    }
+
+    protected function initUliCMS()
+    {
+        try {
+            $this->initCore();
+        } catch (SqlException $e) {
+            $this->showException($e);
+        }
+    }
+
+    protected function showException(Exception $e)
+    {
+        $this->writeln($e->getMessage());
+    }
+
+    protected function initCore()
+    {
+        if (! defined('ULICMS_ROOT')) {
+            require dirname(__FILE__) . '/init.php';
+            require_once getLanguageFilePath('en');
+        }
+    }
+
+    private function showPageKeys($json)
+    {
+        $skipAttributes = [
+            'data',
+            'screenshot'
+        ];
+
+        foreach ($json as $key => $value) {
+            if (in_array($key, $skipAttributes)) {
+                continue;
+            }
+            if (is_array($value)) {
+                $processedValue = implode(', ', $value);
+            } else {
+                $processedValue = $value;
+            }
+            $this->writeln("$key: $processedValue");
+        }
+    }
+
+    private function getModuleInfo(string $name): string
+    {
+        $version = getModuleMeta($name, 'version');
+        $line = $name;
+
+        if ($version !== null) {
+            $line .= " $version";
+        }
+        $module = new Module($name);
+        $status = $module->isEnabled() ? 'enabled' : 'disabled';
+        $line .= " ($status)";
+        return $line;
+    }
+
+    private function replaceModulePlaceholders(array $modules): array
+    {
+        $manager = new ModuleManager();
+        $manager->sync();
+        $outModules = [];
+
+        foreach ($modules as $name) {
+            if (strtolower($name) == '[all]') {
+                $outModules = array_merge(
+                    $outModules,
+                    $manager->getAllModuleNames()
+                );
+            } elseif (strtolower($name) == '[core]') {
+                $outModules = array_merge(
+                    $outModules,
+                    $manager->getAllModuleNames('core')
+                );
+            } elseif (strtolower($name) == '[extend]') {
+                $outModules = array_merge($outModules, $manager->getAllModuleNames('extend'));
+            } elseif (strtolower($name) == '[pkgsrc]') {
+                $outModules = array_merge(
+                    $outModules,
+                    $manager->getAllModuleNames('pkgsrc')
+                );
+            } else {
+                $outModules[] = $name;
+            }
+        }
+        return $outModules;
     }
 }
