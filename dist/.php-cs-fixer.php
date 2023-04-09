@@ -274,7 +274,7 @@ $config
     // There must be a comment when fall-through is intentional in a non-empty case body.
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
     // Write conditions in Yoda style (`true`), non-Yoda style (`['equal' => false, 'identical' => false, 'less_and_greater' => false]`) or ignore those conditions (`null`) based on configuration.
-    'yoda_style' => null,
+    'yoda_style' => false,
     ]);
 
 return $config->setFinder(
