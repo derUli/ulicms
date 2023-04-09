@@ -6,13 +6,13 @@ $config = include 'config/config.php';
 
 if (USE_ACCESS_KEYS == true) {
     if (! isset($_GET['akey'], $config['access_keys']) || empty($config['access_keys'])) {
-        die('Access Denied!');
+        exit('Access Denied!');
     }
 
     $_GET['akey'] = strip_tags(preg_replace("/[^a-zA-Z0-9\._-]/", '', $_GET['akey']));
 
     if (! in_array($_GET['akey'], $config['access_keys'])) {
-        die('Access Denied!');
+        exit('Access Denied!');
     }
 }
 
@@ -761,7 +761,7 @@ if ($ftp) {
         echo 'Error: ';
         echo $e->getMessage();
         echo '<br/>Please check configurations';
-        die();
+        exit();
     }
 } else {
     $files = scandir($config['current_path'] . $rfm_subfolder . $subdir);

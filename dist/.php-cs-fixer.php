@@ -63,12 +63,8 @@ $tmpRules = [
     'native_function_type_declaration_casing' => true,
     // All instances created with new keyword must be followed by braces.
     'new_with_braces' => true,
-    // Master functions shall be used instead of aliases.
-
-    'no_alias_language_construct_call' => true,
     // Replace control structure alternative syntax to use braces.
     'no_alternative_syntax' => true,
-    
     // There must be a comment when fall-through is intentional in a non-empty case body.
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
     // Either language construct `print` or `echo` should be used.
@@ -157,6 +153,8 @@ $config
     'combine_consecutive_issets' => true,    
     // Master language constructs shall be used instead of aliases.
     'no_alias_functions' => true,
+    // Master functions shall be used instead of aliases.
+    'no_alias_language_construct_call' => true,
     // There must be no `sprintf` calls with only the first argument.
     'no_useless_sprintf' => true,
     // Unused `use` statements must be removed.
