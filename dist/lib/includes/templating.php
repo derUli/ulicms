@@ -45,11 +45,11 @@ function get_og_tags(?string $slug = null): string
 
         // Falls kein og_title für die Seite gesetzt ist,
         // Standardtitel bzw. Headline verwenden
-        if (is_null($og_title) || empty($og_title)) {
+        if (null === $og_title || empty($og_title)) {
             $og_title = get_headline();
         }
 
-        if (is_null($og_image) || empty($og_image)) {
+        if (null === $og_image || empty($og_image)) {
             $og_image = Settings::get("og_image");
         }
 
@@ -64,7 +64,7 @@ function get_og_tags(?string $slug = null): string
         if (!empty($og_image) && !str_starts_with($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, '/');
         }
-        if (is_null($og_description) || empty($og_description)) {
+        if (null === $og_description || empty($og_description)) {
             $og_description = get_meta_description();
         }
 
@@ -327,7 +327,7 @@ function get_redirection(?string $page = null): ?string
     $redirection = null;
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
-        if (!empty($dataset->link_url) && !is_null($dataset->link_url)) {
+        if (!empty($dataset->link_url) && null !== $dataset->link_url) {
             $redirection = $dataset->link_url;
         }
     }
@@ -759,7 +759,7 @@ function get_menu(
             }
 
             $redirection = $row->link_url;
-            if ($row->type == "language_link" && !is_null($row->link_to_language)) {
+            if ($row->type == "language_link" && null !== $row->link_to_language) {
                 $language = new Language($row->link_to_language);
                 $redirection = $language->getLanguageLink();
             }
@@ -772,7 +772,7 @@ function get_menu(
             } else {
                 $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";
             }
-            if (!is_null($row->menu_image) && !empty($row->menu_image)) {
+            if (null !== $row->menu_image && !empty($row->menu_image)) {
                 $html .= '<img src="' . $row->menu_image . '" alt="' . _esc($title) . '"/>';
             } else {
                 $html .= _esc($title);
@@ -937,7 +937,7 @@ function check_status(): string
     }
 
     $test = isset($_GET["slug"]) ? get_page($_GET["slug"]) : null;
-    if (!$test || !is_null($test["deleted_at"])) {
+    if (!$test || null !== $test["deleted_at"]) {
         Vars::setNoCache(false);
         return "404 Not Found";
     }
