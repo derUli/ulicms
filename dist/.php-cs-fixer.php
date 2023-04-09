@@ -90,8 +90,6 @@ $tmpRules = [
     'no_unneeded_curly_braces' => true,
     // A `final` class must not have `final` methods and `private` methods must not be `final`.
     'no_unneeded_final_method' => true,
-    // In function arguments there must not be arguments with default values before non-default ones.
-    'no_unreachable_default_argument_value' => true,
     // Variables must be set `null` instead of using `(unset)` casting.
     'no_unset_cast' => true,
     // Properties should be set to `null` instead of using `unset`.
@@ -280,6 +278,8 @@ $config
     'nullable_type_declaration_for_default_null_value' => true,
     // Trait `use` statements must be sorted alphabetically.
     'ordered_traits' => true,
+    // In function arguments there must not be arguments with default values before non-default ones.
+    'no_unreachable_default_argument_value' => true,
     ]);
 
 return $config->setFinder(
