@@ -98,8 +98,6 @@ $tmpRules = [
     'no_unset_cast' => true,
     // Properties should be set to `null` instead of using `unset`.
     'no_unset_on_property' => true,
-    // Array index should always be written by using square braces.
-    'normalize_index_brace' => true,
     // Adds or removes `?` before type declarations for parameters with a default `null` value.
     'nullable_type_declaration_for_default_null_value' => true,
     // Orders the elements of classes/interfaces/traits.
@@ -278,6 +276,8 @@ $config
     'magic_constant_casing' => true,
     // Magic method definitions and calls must be using the correct casing.
     'magic_method_casing' => true,
+    // Array index should always be written by using square braces.
+    'normalize_index_brace' => true,
     ]);
 
 return $config->setFinder(
