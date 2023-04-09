@@ -274,7 +274,7 @@ $config
     // Concatenation should be spaced according configuration.
     'concat_space' => ['spacing'=>'one'],
     // Equal sign in declare statement should be surrounded by spaces or not following configuration.
-    'declare_equal_normalize' => ['space'=>'single'],
+    'declare_equal_normalize' => ['space'=>'none'],
     ]);
 
 return $config->setFinder(
