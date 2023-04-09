@@ -108,7 +108,7 @@ if (isset($_GET['action'])) {
             if ($ftp) {
                 $temp = tempnam('/tmp', 'RF');
                 unlink($temp);
-                $temp .='.'.substr(strrchr($_POST['url'], '.'), 1);
+                $temp .= '.'.substr(strrchr($_POST['url'], '.'), 1);
                 file_put_contents($temp, $image_data);
 
                 $ftp->put($config['ftp_base_folder'].$config['upload_dir'] . $_POST['path'] . $_POST['name'], $temp, FTP_BINARY);
@@ -407,8 +407,8 @@ if (isset($_GET['action'])) {
             if ($ftp) {
                 $path = $config['ftp_base_url'] . $config['upload_dir'] . $_POST['path'];
                 if (
-                    ($_POST['folder']==1 && $config['chmod_dirs'] === false)
-                    || ($_POST['folder']==0 && $config['chmod_files'] === false)
+                    ($_POST['folder'] == 1 && $config['chmod_dirs'] === false)
+                    || ($_POST['folder'] == 0 && $config['chmod_files'] === false)
                     || (is_function_callable('chmod') === false)) {
                     response(sprintf(trans('File_Permission_Not_Allowed'), (is_dir($path) ? trans('Folders') : trans('Files')), 403).AddErrorLocation())->send();
                     exit;
@@ -465,21 +465,21 @@ if (isset($_GET['action'])) {
                     <tbody>
                         <tr>
                             <td>'.trans('User').'</td>
-                            <td><input id="u_4" type="checkbox" data-value="4" data-group="user" '.(substr($info, 1, 1)=='r' ? ' checked' : '').'></td>
-                            <td><input id="u_2" type="checkbox" data-value="2" data-group="user" '.(substr($info, 2, 1)=='w' ? ' checked' : '').'></td>
-                            <td><input id="u_1" type="checkbox" data-value="1" data-group="user" '.(substr($info, 3, 1)=='x' ? ' checked' : '').'></td>
+                            <td><input id="u_4" type="checkbox" data-value="4" data-group="user" '.(substr($info, 1, 1) == 'r' ? ' checked' : '').'></td>
+                            <td><input id="u_2" type="checkbox" data-value="2" data-group="user" '.(substr($info, 2, 1) == 'w' ? ' checked' : '').'></td>
+                            <td><input id="u_1" type="checkbox" data-value="1" data-group="user" '.(substr($info, 3, 1) == 'x' ? ' checked' : '').'></td>
                         </tr>
                         <tr>
                             <td>'.trans('Group').'</td>
-                            <td><input id="g_4" type="checkbox" data-value="4" data-group="group" '.(substr($info, 4, 1)=='r' ? ' checked' : '').'></td>
-                            <td><input id="g_2" type="checkbox" data-value="2" data-group="group" '.(substr($info, 5, 1)=='w' ? ' checked' : '').'></td>
-                            <td><input id="g_1" type="checkbox" data-value="1" data-group="group" '.(substr($info, 6, 1)=='x' ? ' checked' : '').'></td>
+                            <td><input id="g_4" type="checkbox" data-value="4" data-group="group" '.(substr($info, 4, 1) == 'r' ? ' checked' : '').'></td>
+                            <td><input id="g_2" type="checkbox" data-value="2" data-group="group" '.(substr($info, 5, 1) == 'w' ? ' checked' : '').'></td>
+                            <td><input id="g_1" type="checkbox" data-value="1" data-group="group" '.(substr($info, 6, 1) == 'x' ? ' checked' : '').'></td>
                         </tr>
                         <tr>
                             <td>'.trans('All').'</td>
-                            <td><input id="a_4" type="checkbox" data-value="4" data-group="all" '.(substr($info, 7, 1)=='r' ? ' checked' : '').'></td>
-                            <td><input id="a_2" type="checkbox" data-value="2" data-group="all" '.(substr($info, 8, 1)=='w' ? ' checked' : '').'></td>
-                            <td><input id="a_1" type="checkbox" data-value="1" data-group="all" '.(substr($info, 9, 1)=='x' ? ' checked' : '').'></td>
+                            <td><input id="a_4" type="checkbox" data-value="4" data-group="all" '.(substr($info, 7, 1) == 'r' ? ' checked' : '').'></td>
+                            <td><input id="a_2" type="checkbox" data-value="2" data-group="all" '.(substr($info, 8, 1) == 'w' ? ' checked' : '').'></td>
+                            <td><input id="a_1" type="checkbox" data-value="1" data-group="all" '.(substr($info, 9, 1) == 'x' ? ' checked' : '').'></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -599,7 +599,7 @@ if (isset($_GET['action'])) {
             }
 
             if (! isset($info['extension'])) {
-                $info['extension']='';
+                $info['extension'] = '';
             }
             if (! in_array($info['extension'], $allowed_file_exts)
                 || ! isset($is_allowed)

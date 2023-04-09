@@ -163,11 +163,11 @@ function deleteFile($path, $path_thumb, $config)
             }
         }
 
-        $info=pathinfo($path);
+        $info = pathinfo($path);
         if (! $ftp && $config['relative_image_creation']) {
-            foreach ($config['relative_path_from_current_pos'] as $k=>$path) {
-                if ($path!='' && $path[strlen($path)-1]!='/') {
-                    $path.='/';
+            foreach ($config['relative_path_from_current_pos'] as $k => $path) {
+                if ($path != '' && $path[strlen($path) - 1] != '/') {
+                    $path .= '/';
                 }
 
                 if (file_exists($info['dirname'].'/'.$path.$config['relative_image_creation_name_to_prepend'][$k].$info['filename'].$config['relative_image_creation_name_to_append'][$k].'.'.$info['extension'])) {
@@ -177,12 +177,12 @@ function deleteFile($path, $path_thumb, $config)
         }
 
         if (! $ftp && $config['fixed_image_creation']) {
-            foreach ($config['fixed_path_from_filemanager'] as $k=>$path) {
-                if ($path!='' && $path[strlen($path)-1] != '/') {
-                    $path.='/';
+            foreach ($config['fixed_path_from_filemanager'] as $k => $path) {
+                if ($path != '' && $path[strlen($path) - 1] != '/') {
+                    $path .= '/';
                 }
 
-                $base_dir=$path.substr_replace($info['dirname'].'/', '', 0, strlen($config['current_path']));
+                $base_dir = $path.substr_replace($info['dirname'].'/', '', 0, strlen($config['current_path']));
                 if (file_exists($base_dir.$config['fixed_image_creation_name_to_prepend'][$k].$info['filename'].$config['fixed_image_creation_to_append'][$k].'.'.$info['extension'])) {
                     unlink($base_dir.$config['fixed_image_creation_name_to_prepend'][$k].$info['filename'].$config['fixed_image_creation_to_append'][$k].'.'.$info['extension']);
                 }
@@ -305,7 +305,7 @@ function url_exists($url)
 
 function tempdir()
 {
-    $tempfile=tempnam(sys_get_temp_dir(), '');
+    $tempfile = tempnam(sys_get_temp_dir(), '');
     if (file_exists($tempfile)) {
         unlink($tempfile);
     }
@@ -393,17 +393,17 @@ function create_img($imgfile, $imgthumb, $newwidth, $newheight = null, $option =
         if (url_exists($imgfile)) {
             $temp = tempnam('/tmp', 'RF');
             unlink($temp);
-            $temp .='.'.substr(strrchr($imgfile, '.'), 1);
+            $temp .= '.'.substr(strrchr($imgfile, '.'), 1);
             $handle = fopen($temp, 'w');
             fwrite($handle, file_get_contents($imgfile));
             fclose($handle);
-            $imgfile= $temp;
+            $imgfile = $temp;
             $save_ftp = $imgthumb;
             $imgthumb = $temp;
         }
     }
-    if (file_exists($imgfile) || strpos($imgfile, 'http')===0) {
-        if (strpos($imgfile, 'http')===0 || image_check_memory_usage($imgfile, $newwidth, $newheight)) {
+    if (file_exists($imgfile) || strpos($imgfile, 'http') === 0) {
+        if (strpos($imgfile, 'http') === 0 || image_check_memory_usage($imgfile, $newwidth, $newheight)) {
             require_once('php_image_magician.php');
             try {
                 $magicianObj = new imageLib($imgfile);
@@ -449,7 +449,7 @@ function makeSize($size)
  *
  * @return  int
  */
-function folder_info($path, $count_hidden=true)
+function folder_info($path, $count_hidden = true)
 {
     global $config;
     $total_size = 0;
@@ -483,7 +483,7 @@ function folder_info($path, $count_hidden=true)
  *
  * @return  int
  */
-function filescount($path, $count_hidden=true)
+function filescount($path, $count_hidden = true)
 {
     global $config;
     $total_count = 0;
@@ -942,10 +942,10 @@ function new_thumbnails_creation($targetPath, $targetFile, $name, $current_path,
 function get_file_by_url($url)
 {
     if (ini_get('allow_url_fopen')) {
-        $arrContextOptions=[
-            'ssl'=>[
-                'verify_peer'=>false,
-                'verify_peer_name'=>false,
+        $arrContextOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
             ],
         ];
         return file_get_contents($url, false, stream_context_create($arrContextOptions));
@@ -1225,7 +1225,7 @@ function is_php($version = '5.0.0')
 function AddErrorLocation()
 {
     if (defined('DEBUG_ERROR_MESSAGE') && DEBUG_ERROR_MESSAGE) {
-        $pile=debug_backtrace();
+        $pile = debug_backtrace();
         return ' (@'.$pile[0]['file'].'#'.$pile[0]['line'].')';
     }
     return '';

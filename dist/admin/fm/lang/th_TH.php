@@ -52,7 +52,7 @@ return [
     'Upload_base_help' => 'สามารถอัพโหลดไฟล์แบบลากวางได้ หรือคลิกที่ปุ่มด้านบนเพื่อเพิ่มไฟล์และคลิกอัพโหลด เมื่อการอัปโหลดเสร็จสมบูรณ์คลิกปุ่ม "กลับสู่หน้ารายการ"',
     'Upload_add_files' => 'เลือกไฟล์ (สามารเลือกได้หลายไฟล์)',
     'Upload_start' => 'อัพโหลด',
-    'Upload_error_messages' =>[
+    'Upload_error_messages' => [
         1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
         2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
         3 => 'The uploaded file was only partially uploaded',

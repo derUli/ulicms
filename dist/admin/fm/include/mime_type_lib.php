@@ -176,7 +176,7 @@ if (! function_exists('get_extension_from_mime')) {
     function get_extension_from_mime($mime)
     {
         global $mime_types;
-        if (strpos($mime, ';')!==false) {
+        if (strpos($mime, ';') !== false) {
             $mime = substr($mime, 0, strpos($mime, ';'));
         }
         if (isset($mime_types[$mime])) {

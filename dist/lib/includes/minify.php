@@ -29,7 +29,7 @@ function optimizeHtml(
     string $html,
     int $level = HTMLMinify::OPTIMIZATION_SIMPLE
 ): string {
-    if (Database::isConnected() &&  Settings::get('minify_html')) {
+    if (Database::isConnected() && Settings::get('minify_html')) {
         $options = [
             'optimizationLevel' => $level
         ];

@@ -173,15 +173,15 @@ class imageLib
     private $imageSize;
     private $fileExtension;
 
-    private $debug      = true;
+    private $debug = true;
     private $errorArray = [];
 
-    private $forceStretch        = true;
+    private $forceStretch = true;
     private $aggresiveSharpening = false;
 
     private $transparentArray = [ '.png', '.gif' ];
     private $keepTransparency = true;
-    private $fillColorArray   = [ 'r' => 255, 'g' => 255, 'b' => 255 ];
+    private $fillColorArray = [ 'r' => 255, 'g' => 255, 'b' => 255 ];
 
     private $sharpenArray = [ 'jpg' ];
 

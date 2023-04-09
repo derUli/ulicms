@@ -44,7 +44,7 @@ return [
     'Upload_base_help' => "Arrastrar y soltar archivos(Drag & Drop Navegadores modernos) o haz click en el botón superior para Añadir los archivos y click en Empezar subida. Cuando la subida se haya completado, haz click en el botón 'Regresar a la lista de archivos'",
     'Upload_add_files' => 'Añadir archivos',
     'Upload_start' => 'Empezar subida',
-    'Upload_error_messages' =>[
+    'Upload_error_messages' => [
         1 => 'El archivo subido excede la directiva upload_max_filesize en php.ini',
         2 => 'El archivo subido excede la directiva MAX_FILE_SIZE especificada en el formulario HTML',
         3 => 'El archivo subido solo fue subido parcialmente',

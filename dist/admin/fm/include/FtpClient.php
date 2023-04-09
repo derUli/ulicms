@@ -281,7 +281,7 @@ class FtpClient implements Countable
             throw new FtpException('Unable to list directory');
         }
 
-        $result  = [];
+        $result = [];
         $dir_len = strlen($directory);
 
         // if it's the current
@@ -330,7 +330,7 @@ class FtpClient implements Countable
 
             if ($this->isDir($file)) {
                 $result[] = $file;
-                $items    = $flatten($this->nlist($file, true, $filter));
+                $items = $flatten($this->nlist($file, true, $filter));
 
                 foreach ($items as $item) {
                     $result[] = $item;
@@ -366,8 +366,8 @@ class FtpClient implements Countable
         }
 
         $result = false;
-        $pwd    = $this->ftp->pwd();
-        $parts  = explode('/', $directory);
+        $pwd = $this->ftp->pwd();
+        $parts = explode('/', $directory);
 
         foreach ($parts as $part) {
             if (! @$this->ftp->chdir($part)) {
@@ -518,7 +518,7 @@ class FtpClient implements Countable
     public function dirSize($directory = '.', $recursive = true)
     {
         $items = $this->scanDir($directory, $recursive);
-        $size  = 0;
+        $size = 0;
 
         foreach ($items as $item) {
             $size += (int) $item['size'];
@@ -537,7 +537,7 @@ class FtpClient implements Countable
      */
     public function count($directory = '.', $type = null, $recursive = true)
     {
-        $items  = (null === $type ? $this->nlist($directory, $recursive)
+        $items = (null === $type ? $this->nlist($directory, $recursive)
             : $this->scanDir($directory, $recursive));
 
         $count = 0;
@@ -582,7 +582,7 @@ class FtpClient implements Countable
     public function putFromPath($local_file)
     {
         $remote_file = basename($local_file);
-        $handle      = fopen($local_file, 'r');
+        $handle = fopen($local_file, 'r');
 
         if ($this->ftp->fput($remote_file, $handle, FTP_BINARY)) {
             rewind($handle);
@@ -654,7 +654,7 @@ class FtpClient implements Countable
             throw new FtpException('"'.$directory.'" is not a directory.');
         }
 
-        $list  = $this->ftp->rawlist($directory);
+        $list = $this->ftp->rawlist($directory);
         $items = [];
 
         if (! $list) {
@@ -699,10 +699,10 @@ class FtpClient implements Countable
             if (! $len
 
             // "."
-            || ($item[$len-1] == '.' && $item[$len-2] == ' '
+            || ($item[$len - 1] == '.' && $item[$len - 2] == ' '
 
             // '..'
-            || $item[$len-1] == '.' && $item[$len-2] == '.' && $item[$len-3] == ' ')
+            || $item[$len - 1] == '.' && $item[$len - 2] == '.' && $item[$len - 3] == ' ')
             ) {
                 continue;
             }
@@ -754,7 +754,7 @@ class FtpClient implements Countable
     public function parseRawList(array $rawlist)
     {
         $items = [];
-        $path  = '';
+        $path = '';
 
         foreach ($rawlist as $key => $child) {
             $chunks = preg_split("/\s+/", $child);
@@ -766,7 +766,7 @@ class FtpClient implements Countable
             if (count($chunks) === 1) {
                 $len = strlen($chunks[0]);
 
-                if ($len && $chunks[0][$len-1] == ':') {
+                if ($len && $chunks[0][$len - 1] == ':') {
                     $path = substr($chunks[0], 0, -1);
                 }
 
@@ -775,15 +775,15 @@ class FtpClient implements Countable
 
             $item = [
                 'permissions' => $chunks[0],
-                'number'      => $chunks[1],
-                'owner'       => $chunks[2],
-                'group'       => $chunks[3],
-                'size'        => $chunks[4],
-                'month'       => $chunks[5],
-                'day'         => $chunks[6],
-                'time'        => $chunks[7],
-                'name'        => $chunks[8],
-                'type'        => $this->rawToType($chunks[0]),
+                'number' => $chunks[1],
+                'owner' => $chunks[2],
+                'group' => $chunks[3],
+                'size' => $chunks[4],
+                'month' => $chunks[5],
+                'day' => $chunks[6],
+                'time' => $chunks[7],
+                'name' => $chunks[8],
+                'type' => $this->rawToType($chunks[0]),
             ];
 
             unset($chunks[0]);

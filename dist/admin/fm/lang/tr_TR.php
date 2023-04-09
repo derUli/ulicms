@@ -44,7 +44,7 @@ return [
     'Upload_base_help' => "Dosyaları sürükleyip bırakın (modern tarayıcılar) veya dosya ekleye tıklayarak dosyaları ekleyin ve Yüklemeyi başlat'a tıklayın. Yükleme tamamlandığında, 'Dosya listesine dön' düğmesini tıklayın.",
     'Upload_add_files' => 'Dosya(ları) Ekle',
     'Upload_start' => 'Yüklemeyi Başlat',
-    'Upload_error_messages' =>[
+    'Upload_error_messages' => [
         1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
         2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
         3 => 'The uploaded file was only partially uploaded',

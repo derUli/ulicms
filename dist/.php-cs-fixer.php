@@ -5,8 +5,6 @@ $config = new PhpCsFixer\Config();
 $tmpRules = [
     // Each element of an array must be indented exactly once.
     'array_indentation' => true,
-    // Binary operators should be surrounded by space as configured.
-    'binary_operator_spaces' => true,
     // There MUST be one blank line after the namespace declaration.
     'blank_line_after_namespace' => true,
     // Ensure there is no code on the same line as the PHP open tag and it is followed by a blank line.
@@ -275,6 +273,8 @@ $config
     // Converts backtick operators to `shell_exec` calls.
     'backtick_to_shell_exec' => true,
     'lowercase_keywords' => true,
+    // Binary operators should be surrounded by space as configured.
+    'binary_operator_spaces' => true,
     // Class static references `self`, `static` and `parent` MUST be in lower case.
     ]);
 

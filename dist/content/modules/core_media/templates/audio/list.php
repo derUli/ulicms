@@ -14,7 +14,7 @@ if (! isset($_SESSION['filter_category'])) {
 }
 
 if (isset($_GET['filter_category'])) {
-    $_SESSION['filter_category'] =  (int)$_GET['filter_category'];
+    $_SESSION['filter_category'] = (int)$_GET['filter_category'];
 }
 
 $sql = 'SELECT id, name, mp3_file, ogg_file FROM ' . tbname('audio') . ' ';

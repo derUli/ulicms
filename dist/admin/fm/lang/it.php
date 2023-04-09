@@ -44,7 +44,7 @@ return [
     'Upload_add_files' => 'Aggiungi file',
     'Upload_start' => "Esegui l'upload",
     'Upload_base_help' => "Trascina i file nell'area superiore (per i moderni browser) o clicca sul bottone \"Aggiungi file\" e clicca sul bottone \"Esegui l'upload\".  Quando il caricamento dei file è terminato clicca sul bottone di ritorno in alto.",
-    'Upload_error_messages' =>[
+    'Upload_error_messages' => [
         1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
         2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
         3 => 'The uploaded file was only partially uploaded',

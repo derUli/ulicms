@@ -45,7 +45,7 @@ return [
     'Upload_base_help' => "Drag & Drop bestanden (moderne browsers) of klik op de bovenste knop om het bestand (en) toe te voegen en klik op Begin uploaden. Wanneer het uploaden is voltooid, klikt u op de knop 'Terug naar bestanden'.",
     'Upload_add_files' => 'Voeg bestanden toe',
     'Upload_start' => 'Begin uploaden',
-    'Upload_error_messages' =>[
+    'Upload_error_messages' => [
         1 => 'Bestandsgrootte is te groot.',
         2 => 'Bestandsgrootte is te groot.',
         3 => 'Bestand is slechts gedeeltelijk geupload.',

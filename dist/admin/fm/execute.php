@@ -127,12 +127,12 @@ if (isset($_GET['action'])) {
                     if (is_dir($path)) {
                         deleteDir($path, null, $config);
                         if ($config['fixed_image_creation']) {
-                            foreach ($config['fixed_path_from_filemanager'] as $k=>$paths) {
-                                if ($paths!='' && $paths[strlen($paths)-1] != '/') {
-                                    $paths.='/';
+                            foreach ($config['fixed_path_from_filemanager'] as $k => $paths) {
+                                if ($paths != '' && $paths[strlen($paths) - 1] != '/') {
+                                    $paths .= '/';
                                 }
 
-                                $base_dir=$paths.substr_replace($path, '', 0, strlen($config['current_path']));
+                                $base_dir = $paths.substr_replace($path, '', 0, strlen($config['current_path']));
                                 if (is_dir($base_dir)) {
                                     deleteDir($base_dir, null, $config);
                                 }

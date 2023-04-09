@@ -44,7 +44,7 @@ return [
     'Upload_base_help' => 'Adaugă fișiere (drag & drop - browsere moderne) sau click pe butonul Adaugă fișier(e), de mai sus apoi pe butonul Start upload. După ce upload-ul este finalizat, apăsați pe butonul Înapoi la lista de fișiere.',
     'Upload_add_files' => 'Adaugă fișier(e)',
     'Upload_start' => 'Start upload',
-    'Upload_error_messages' =>[
+    'Upload_error_messages' => [
         1 => 'Dimensiunea fișierului uploadat depășește valoarea din directiva upload_max_filesize din fișierul php.ini',
         2 => 'Dimensiunea fișierului uploadat depășește valoarea din directiva MAX_FILE_SIZE specificată în formularul HTML',
         3 => 'Fișierul uploadat a fost încărcat parțial ',

@@ -44,7 +44,7 @@ return [
     'Upload_base_help' => 'Glisser-Déposer des fichiers (navigateurs récents) ou cliquer sur le bontons en haut pour ajouter des fichiers. Cliquer sur "Envoyer les fichiers". Lorsque le chargement est complet, cliquer sur "Revenir à la liste des fichiers".',
     'Upload_add_files' => 'Ajouter des fichiers',
     'Upload_start' => 'Envoyer les fichiers',
-    'Upload_error_messages' =>[
+    'Upload_error_messages' => [
         1 => 'La taille du fichier dépasse la limite fixée par le paramètre upload_max_filesize dans php.ini',
         2 => 'La taille du fichier dépasse la limite fixée par le paramètre MAX_FILE_SIZE du formulaire',
         3 => 'Le fichier n\'a pas été correctement téléchargé',
