@@ -5,8 +5,6 @@ $config = new PhpCsFixer\Config();
 $tmpRules = [
     // Each element of an array must be indented exactly once.
     'array_indentation' => true,
-    // Converts backtick operators to `shell_exec` calls.
-    'backtick_to_shell_exec' => true,
     // Binary operators should be surrounded by space as configured.
     'binary_operator_spaces' => true,
     // There MUST be one blank line after the namespace declaration.
@@ -276,6 +274,8 @@ $config
     'no_trailing_whitespace' => true,
     // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
     'align_multiline_comment' => ['comment_type'=>'all_multiline'],
+    // Converts backtick operators to `shell_exec` calls.
+    'backtick_to_shell_exec' => true,
     ]);
 
 return $config->setFinder(
