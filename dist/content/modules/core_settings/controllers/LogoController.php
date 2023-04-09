@@ -61,7 +61,7 @@ class LogoController extends Controller
     public function _deleteLogo(): bool
     {
         $logoImage = Settings::get('logo_image');
-        $path = ULICMS_ROOT . "/content/images/${logoImage}";
+        $path = ULICMS_ROOT . "/content/images/{$logoImage}";
 
         if (empty($logoImage) || ! is_file($path)) {
             return false;
