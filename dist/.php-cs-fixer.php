@@ -170,8 +170,6 @@ $tmpRules = [
     'switch_case_semicolon_to_colon' => true,
     // Removes extra spaces between colon and case value.
     'switch_case_space' => true,
-    // Switch case must not be ended with `continue` but with `break`.
-    'switch_continue_to_break' => true,
     // Unary operators should be placed adjacent to their operands.
     'unary_operator_spaces' => true,
     // Visibility MUST be declared on all properties and methods; `abstract` and `final` MUST be declared before the visibility; `static` MUST be declared after the visibility.
@@ -278,6 +276,8 @@ $config
     'ternary_to_null_coalescing' => true,
     // Use the Elvis operator `?:` where possible.
     'ternary_to_elvis_operator' => true,
+    // Switch case must not be ended with `continue` but with `break`.
+    'switch_continue_to_break' => true,
     ]);
 
 return $config->setFinder(
