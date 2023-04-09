@@ -73,8 +73,6 @@ $tmpRules = [
     'linebreak_after_opening_tag' => true,
     'lowercase_cast' => true,
     // PHP keywords MUST be in lower case.
-    'lowercase_keywords' => true,
-    // Class static references `self`, `static` and `parent` MUST be in lower case.
     'lowercase_static_reference' => true,
     // Magic constants should be referred to using the correct casing.
     'magic_constant_casing' => true,
@@ -276,6 +274,8 @@ $config
     'align_multiline_comment' => ['comment_type'=>'all_multiline'],
     // Converts backtick operators to `shell_exec` calls.
     'backtick_to_shell_exec' => true,
+    'lowercase_keywords' => true,
+    // Class static references `self`, `static` and `parent` MUST be in lower case.
     ]);
 
 return $config->setFinder(
