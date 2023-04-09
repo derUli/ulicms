@@ -11,8 +11,6 @@ $tmpRules = [
     'no_alternative_syntax' => true,
     // There must be a comment when fall-through is intentional in a non-empty case body.
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
-    // There should be one or no space before colon, and one space after it in return type declarations, according to configuration.
-    'return_type_declaration' => ['space_before'=>'one'],
     // A return statement wishing to return `void` should not return `null`.
     'simplified_null_return' => true,
     // Lambdas not (indirect) referencing `$this` must be declared `static`.
@@ -275,6 +273,8 @@ $config
     'visibility_required' => true,
     // Add `void` return type to functions with missing or empty return statements, but priority is given to `@return` annotations. Requires PHP >= 7.1.
     'void_return' => false,
+    // There should be one or no space before colon, and one space after it in return type declarations, according to configuration.
+    'return_type_declaration' => ['space_before'=>'none'],
     ]);
 
 return $config->setFinder(
