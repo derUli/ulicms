@@ -7,8 +7,6 @@ $tmpRules = [
     'blank_line_before_statement' => ['statements'=>['break','case','continue','declare','default','exit','do','exit','for','foreach','goto','if','return','switch','throw','try','while','yield']],
     // A single space or none should be between cast and variable.
     'cast_spaces' => ['space'=>'none'],
-    // Class, trait and interface elements must be separated with one or none blank line.
-    'class_attributes_separation' => true,
     // Calling `unset` on multiple items should be done in one call.
     'combine_consecutive_unsets' => true,
     // Replace multiple nested calls of `dirname` by only one call with second `$level` parameter. Requires PHP >= 7.0.
@@ -278,6 +276,8 @@ $config
     'class_definition' => true,
     // Namespace must not contain spacing, comments or PHPDoc.
     'clean_namespace' => true,
+    // Class, trait and interface elements must be separated with one or none blank line.
+    'class_attributes_separation' => true,
     ]);
 
 return $config->setFinder(
