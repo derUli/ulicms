@@ -162,8 +162,6 @@ $tmpRules = [
     'static_lambda' => true,
     // All multi-line strings must use correct line ending.
     'string_line_ending' => true,
-    // A case should be followed by a colon and not a semicolon.
-    'switch_case_semicolon_to_colon' => true,
     // Removes extra spaces between colon and case value.
     'switch_case_space' => true,
     // Unary operators should be placed adjacent to their operands.
@@ -278,6 +276,8 @@ $config
     'no_closing_tag' => true,
     // Replace all `<>` with `!=`.
     'standardize_not_equals' => true,
+    // A case should be followed by a colon and not a semicolon.
+    'switch_case_semicolon_to_colon' => true,
     ]);
 
 return $config->setFinder(
