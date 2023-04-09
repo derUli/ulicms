@@ -153,7 +153,7 @@ class Model
     public function hasChanges(): bool
     {
         $hasChanges = false;
-        $className = get_class($this);
+        $className = static::class;
         $originalDataset = new $className($this->getID());
 
         $reflection = new ReflectionClass($this);

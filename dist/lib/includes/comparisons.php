@@ -112,7 +112,7 @@ function is_tablet(): bool
  */
 function is_cli(): bool
 {
-    return php_sapi_name() == 'cli';
+    return PHP_SAPI == 'cli';
 }
 
 /**

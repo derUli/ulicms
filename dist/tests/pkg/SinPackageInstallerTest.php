@@ -63,7 +63,7 @@ class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase
         $errors = $installer->getErrors();
         $this->assertIsArray($errors);
         $this->assertCount(2, $errors);
-        $phpversion = phpversion();
+        $phpversion = PHP_VERSION;
         $this->assertEquals("The PHP version {$phpversion} is not supported.", $errors[0]);
         $this->assertEquals('The package is not compatible with your UliCMS Version.', $errors[1]);
     }

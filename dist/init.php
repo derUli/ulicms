@@ -80,7 +80,7 @@ if (is_file($path_to_config)) {
     throw new Exception('Can\'t require CMSConfig.php. Starting installer failed, too.');
 }
 
-if (php_sapi_name() != 'cli') {
+if (PHP_SAPI != 'cli') {
     set_exception_handler('exception_handler');
 }
 

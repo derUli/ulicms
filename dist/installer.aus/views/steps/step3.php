@@ -3,7 +3,7 @@ use App\Utils\VersionComparison;
 
 $minPhpRequired = '8.1.0';
 
-$phpVersion = phpversion();
+$phpVersion = PHP_VERSION;
 
 $phpVersionCompatible = VersionComparison::compare(
     $phpVersion,

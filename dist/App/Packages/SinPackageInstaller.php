@@ -170,17 +170,17 @@ class SinPackageInstaller
         $phpVersionSupported = true;
 
         // if package requires a specific php version check it
-        if (isset($data['min_php_version']) && ! empty($data['min_php_version']) && ! VersionComparison::compare(phpversion(), $data['min_php_version'], '>=')) {
+        if (isset($data['min_php_version']) && ! empty($data['min_php_version']) && ! VersionComparison::compare(PHP_VERSION, $data['min_php_version'], '>=')) {
             $phpVersionSupported = false;
         }
 
-        if (isset($data['max_php_version']) && ! empty($data['max_php_version']) && ! VersionComparison::compare(phpversion(), $data['max_php_version'], '<=')) {
+        if (isset($data['max_php_version']) && ! empty($data['max_php_version']) && ! VersionComparison::compare(PHP_VERSION, $data['max_php_version'], '<=')) {
             $phpVersionSupported = false;
         }
 
         if (! $phpVersionSupported) {
             $this->errors[] = get_translation('php_version_x_not_supported', [
-                '%version%' => phpversion()
+                '%version%' => PHP_VERSION
             ]);
         }
 
