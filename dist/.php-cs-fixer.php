@@ -13,10 +13,6 @@ $tmpRules = [
     'concat_space' => ['spacing'=>'one'],
     // Equal sign in declare statement should be surrounded by spaces or not following configuration.
     'declare_equal_normalize' => ['space'=>'single'],
-    // Add curly braces to indirect variables to make them clear to understand. Requires PHP >= 7.0.
-    'explicit_indirect_variable' => true,
-    // Converts implicit variables into explicit ones in double-quoted strings or heredoc syntax.
-    'explicit_string_variable' => true,
     // Spaces should be properly placed in a function declaration.
     'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
     // Ensure single space between function's argument and its typehint.
@@ -277,6 +273,10 @@ $config
     'ereg_to_preg' => true,
     // The keyword `elseif` should be used instead of `else if` so that all control keywords look like single words.
     'elseif' => true,
+    // Add curly braces to indirect variables to make them clear to understand. Requires PHP >= 7.0.
+    'explicit_indirect_variable' => true,
+    // Converts implicit variables into explicit ones in double-quoted strings or heredoc syntax.
+    'explicit_string_variable' => true,
     ]);
 
 return $config->setFinder(

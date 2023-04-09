@@ -26,7 +26,7 @@ class NumberFormatHelper extends Helper
      */
     public static function formatSizeUnits(float $bytes): string
     {
-        $size = new FileSize("$bytes Bytes");
+        $size = new FileSize("{$bytes} Bytes");
         return $size->asAuto();
     }
 

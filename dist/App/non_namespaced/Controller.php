@@ -81,7 +81,7 @@ abstract class Controller
                     $sClass,
                     $sMethodWithRequestType
                 )) {
-                    $this->$sMethodWithRequestType();
+                    $this->{$sMethodWithRequestType}();
                 } else {
                     throw new AccessDeniedException(
                         get_translation('forbidden')
@@ -90,7 +90,7 @@ abstract class Controller
             } elseif (method_exists($this, $sMethod) && ! str_starts_with($sMethod, '_')
                     && $reflection && $reflection->isPublic()) {
                 if (ControllerRegistry::userCanCall($sClass, $sMethod)) {
-                    $this->$sMethod();
+                    $this->{$sMethod}();
                 } else {
                     throw new AccessDeniedException(
                         get_translation('forbidden')

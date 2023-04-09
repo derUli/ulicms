@@ -61,22 +61,22 @@ function getAllPages(
     if (! $lang) {
         if (! $menu) {
             $result = db_query('SELECT * FROM `' . tbname('content') .
-                    "` WHERE `deleted_at` IS NULL ORDER BY $order");
+                    "` WHERE `deleted_at` IS NULL ORDER BY {$order}");
         } else {
             $result = db_query('SELECT * FROM `' . tbname('content') .
                     "` WHERE `deleted_at` IS NULL and menu = '" .
-                    Database::escapeValue($menu) . "' ORDER BY $order");
+                    Database::escapeValue($menu) . "' ORDER BY {$order}");
         }
     } else {
         if (! $menu) {
             $result = db_query('SELECT * FROM `' . tbname('content') .
                     "` WHERE `deleted_at` IS NULL AND language ='" .
-                    db_escape($lang) . "' ORDER BY $order");
+                    db_escape($lang) . "' ORDER BY {$order}");
         } else {
             $result = db_query('SELECT * FROM `' . tbname('content') .
                     "` WHERE `deleted_at` IS NULL AND language ='" .
                     db_escape($lang) . "' and menu = '" .
-                    Database::escapeValue($menu) . "' ORDER BY $order");
+                    Database::escapeValue($menu) . "' ORDER BY {$order}");
         }
     }
     $returnvalues = [];

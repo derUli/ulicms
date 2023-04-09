@@ -50,7 +50,7 @@ class Audio extends Model
     public static function getAll(string $order = 'id'): array
     {
         $datasets = [];
-        $sql = "SELECT id FROM {prefix}audio ORDER BY $order";
+        $sql = "SELECT id FROM {prefix}audio ORDER BY {$order}";
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
             $datasets[] = new self((int)$row->id);

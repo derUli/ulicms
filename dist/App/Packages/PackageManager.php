@@ -165,6 +165,6 @@ class PackageManager
         } elseif ($type === 'themes' || $type === 'theme') {
             return $this->getInstalledThemes();
         }
-        throw new BadMethodCallException("No such package type: $type");
+        throw new BadMethodCallException("No such package type: {$type}");
     }
 }

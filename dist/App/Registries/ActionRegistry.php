@@ -48,7 +48,7 @@ class ActionRegistry
                 foreach ($cActions as $key => $value) {
                     $path = getModulePath($module, true) .
                             trim($value, '/');
-                    $path = str_ends_with($path, '.php') ? $path : "$path.php";
+                    $path = str_ends_with($path, '.php') ? $path : "{$path}.php";
 
                     self::$actions[$key] = $path;
                 }

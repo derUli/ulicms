@@ -53,7 +53,7 @@ class SessionManager extends Controller
         $id = $_SESSION['login_id'];
 
         // set user state to offline
-        db_query('UPDATE ' . tbname('users') . " SET last_action = 0 WHERE id = $id");
+        db_query('UPDATE ' . tbname('users') . " SET last_action = 0 WHERE id = {$id}");
         $url = apply_filter('index.php', 'logout_url');
         // throw the session to /dev/null
         App\Utils\Session\sessionDestroy();

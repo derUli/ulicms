@@ -27,7 +27,7 @@ class RoboSettingsTest extends RoboTestBase
             }
 
             $this->assertStringContainsString(
-                "$setting->name: $setting->value",
+                "{$setting->name}: {$setting->value}",
                 $output
             );
         }

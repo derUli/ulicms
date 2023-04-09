@@ -23,7 +23,7 @@ if ($permissionChecker->hasPermission('pages')) {
 
     // FIXME: Die SQL Statements in einen Controller bzw. Model auslagern.
     $page = (int)$_GET['page'];
-    $result = db_query('SELECT * FROM ' . tbname('content') . " WHERE id='$page'");
+    $result = db_query('SELECT * FROM ' . tbname('content') . " WHERE id='{$page}'");
 
     $allThemes = getAllThemes();
 

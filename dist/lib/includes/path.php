@@ -32,7 +32,7 @@ function getModulePath($module, $abspath = false): string
 {
     if ($abspath) {
         return Path::resolve(
-            "ULICMS_ROOT/content/modules/$module"
+            "ULICMS_ROOT/content/modules/{$module}"
         ) . '/';
     }
 

@@ -250,13 +250,13 @@ class Database
         }
 
         $table = self::escapeName($table);
-        return self::query("DROP TABLE IF EXISTS $table");
+        return self::query("DROP TABLE IF EXISTS {$table}");
     }
 
     public static function dropSchema(string $schema): bool
     {
         $schema = self::escapeName($schema);
-        return self::query("DROP SCHEMA IF EXISTS $schema ");
+        return self::query("DROP SCHEMA IF EXISTS {$schema} ");
     }
 
     public static function selectMin(
@@ -271,9 +271,9 @@ class Database
 
         $table = self::escapeName($table);
         $column = self::escapeName($column);
-        $sql = "select min($column) as val from $table";
+        $sql = "select min({$column}) as val from {$table}";
         if (! empty($where)) {
-            $sql .= " where $where";
+            $sql .= " where {$where}";
         }
 
         $result = Database::query($sql);
@@ -295,9 +295,9 @@ class Database
 
         $table = self::escapeName($table);
         $column = self::escapeName($column);
-        $sql = "select max($column) as val from $table";
+        $sql = "select max({$column}) as val from {$table}";
         if (! empty($where)) {
-            $sql .= " where $where";
+            $sql .= " where {$where}";
         }
 
         $result = Database::query($sql);
@@ -319,9 +319,9 @@ class Database
 
         $table = self::escapeName($table);
         $column = self::escapeName($column);
-        $sql = "select avg($column) as val from $table";
+        $sql = "select avg({$column}) as val from {$table}";
         if (! empty($where)) {
-            $sql .= " where $where";
+            $sql .= " where {$where}";
         }
 
         $result = Database::query($sql);
@@ -341,10 +341,10 @@ class Database
         }
         $table = self::escapeName($table);
 
-        $sql = "DELETE FROM $table";
+        $sql = "DELETE FROM {$table}";
 
         if (! empty($where)) {
-            $sql .= " where $where";
+            $sql .= " where {$where}";
         }
         $result = Database::query($sql);
         return $result;
@@ -359,7 +359,7 @@ class Database
         }
 
         $table = self::escapeName($table);
-        return self::query("TRUNCATE TABLE $table");
+        return self::query("TRUNCATE TABLE {$table}");
     }
 
     public static function dropColumn(
@@ -373,7 +373,7 @@ class Database
 
         $column = self::escapeName($column);
         $table = self::escapeName($table);
-        return self::query("ALTER TABLE $table DROP COLUMN $column");
+        return self::query("ALTER TABLE {$table} DROP COLUMN {$column}");
     }
 
     public static function selectAll(
@@ -395,14 +395,14 @@ class Database
 
         $columns_sql = implode(', ', $columns);
 
-        $sql = "select $columns_sql from $table";
+        $sql = "select {$columns_sql} from {$table}";
 
         if (! empty($where)) {
-            $sql .= " where $where ";
+            $sql .= " where {$where} ";
         }
 
         if (! empty($order)) {
-            $sql .= " order by $order";
+            $sql .= " order by {$order}";
         }
         return self::pQuery($sql, $args, $replacePrefix);
     }
@@ -580,7 +580,7 @@ class Database
         if ($prefix) {
             $table = tbname($table);
         }
-        $result = Database::query("SELECT * FROM $table limit 1");
+        $result = Database::query("SELECT * FROM {$table} limit 1");
         $fields_num = self::getNumFieldCount();
         if ($fields_num > 0) {
             for ($i = 0; $i < $fields_num; $i++) {

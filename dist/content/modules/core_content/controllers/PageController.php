@@ -380,7 +380,7 @@ class PageController extends Controller
         )) {
             $counter = 2;
             while (true) {
-                $slug = "{$originalSlug}-$counter";
+                $slug = "{$originalSlug}-{$counter}";
                 if ($this->_checkIfSlugIsFree($slug, $language, $id)) {
                     break;
                 }
@@ -405,9 +405,9 @@ class PageController extends Controller
         $language = Database::escapeValue($language);
 
         $sql = 'SELECT id FROM ' . tbname('content') .
-                " where slug='$slug' and language = '$language' ";
+                " where slug='{$slug}' and language = '{$language}' ";
         if ($id > 0) {
-            $sql .= "and id <> $id";
+            $sql .= "and id <> {$id}";
         }
         $result = Database::query($sql);
         return Database::getNumRows($result) <= 0;

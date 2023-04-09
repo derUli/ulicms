@@ -17,7 +17,7 @@ class CoreUpgradeController extends Controller
     {
         $version = cms_version();
         $channel = Settings::get('oneclick_upgrade_channel');
-        return "https://channels.ulicms.de/$version/$channel.json";
+        return "https://channels.ulicms.de/{$version}/{$channel}.json";
     }
 
     public function setCheckURL(string $url): void
@@ -65,7 +65,7 @@ class CoreUpgradeController extends Controller
         }
 
         $tmpDir = Path::resolve('ULICMS_TMP/upgrade');
-        $tmpArchive = Path::resolve("$tmpDir/upgrade.zip");
+        $tmpArchive = Path::resolve("{$tmpDir}/upgrade.zip");
 
         if (is_dir($tmpDir)) {
             sureRemoveDir($tmpDir, true);
@@ -87,7 +87,7 @@ class CoreUpgradeController extends Controller
                 $zip->close();
             }
 
-            $upgradeCodeDir = Path::resolve("$tmpDir/dist");
+            $upgradeCodeDir = Path::resolve("{$tmpDir}/dist");
 
             if (is_dir($upgradeCodeDir)) {
                 recurse_copy($upgradeCodeDir, ULICMS_ROOT);

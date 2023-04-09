@@ -238,7 +238,7 @@ class Input
 
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        $html = "<select $attribHTML>";
+        $html = "<select {$attribHTML}>";
         foreach ($options as $option) {
             if ($value == $option->getValue()) {
                 $option->setSelected(true);
@@ -274,7 +274,7 @@ class Input
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        $html = "<select $attribHTML multiple>";
+        $html = "<select {$attribHTML} multiple>";
         foreach ($options as $option) {
             if (is_array($value) && in_array($option->getValue(), $value)) {
                 $option->setSelected(true);

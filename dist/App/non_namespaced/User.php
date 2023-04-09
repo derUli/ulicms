@@ -248,8 +248,8 @@ class User extends Model
         if (Database::any($result)) {
             $result = Database::fetchAssoc($result);
             foreach ($result as $key => $value) {
-                if (isset($this->$key) || property_exists($this, $key)) {
-                    $this->$key = $value;
+                if (isset($this->{$key}) || property_exists($this, $key)) {
+                    $this->{$key} = $value;
                 }
             }
             if ($this->group_id !== null) {
@@ -586,7 +586,7 @@ class User extends Model
         ];
 
         if (! in_array($editor, $allowedEditors)) {
-            throw new InvalidArgumentException("Value $editor not allowed");
+            throw new InvalidArgumentException("Value {$editor} not allowed");
         }
 
         $this->html_editor = $editor;
@@ -800,10 +800,10 @@ class User extends Model
         // If there is a display name (Firstname Lastname
         if (is_dir($userAvatarDirectory) && $this->getDisplayName()) {
             // Custom avatar
-            $avatarImageFile1 = Path::Resolve("$userAvatarDirectory/user-" .
+            $avatarImageFile1 = Path::Resolve("{$userAvatarDirectory}/user-" .
                             $this->getId() . '.png');
             // Auto generated avatar based on the name of the user
-            $avatarImageFile2 = Path::Resolve("$userAvatarDirectory/" .
+            $avatarImageFile2 = Path::Resolve("{$userAvatarDirectory}/" .
                             md5($this->getDisplayName()) . '.png');
 
             // relative URL to file
@@ -925,7 +925,7 @@ class User extends Model
     {
         $extension = pathinfo($upload['name'], PATHINFO_EXTENSION);
         $tmpFile = uniqid() . '.' . $extension;
-        $tmpFile = Path::resolve("ULICMS_TMP/$tmpFile");
+        $tmpFile = Path::resolve("ULICMS_TMP/{$tmpFile}");
 
         if (move_uploaded_file($upload['tmp_name'], $tmpFile)) {
             $this->processAvatar($tmpFile);

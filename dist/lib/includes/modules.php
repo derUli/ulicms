@@ -49,7 +49,7 @@ function do_event(
         ob_start();
         $escapedName = ModuleHelper::underscoreToCamel($name);
         if ($controller && method_exists($controller, $escapedName)) {
-            echo $controller->$escapedName();
+            echo $controller->{$escapedName}();
         } elseif (is_file($file1)) {
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
                 require $file1;
@@ -116,7 +116,7 @@ function replaceShortcodesWithModules(
         } elseif (function_exists($module . '_render')) {
             $html_output = call_user_func($module . '_render');
         } else {
-            throw new BadMethodCallException("Module $module "
+            throw new BadMethodCallException("Module {$module} "
                             . 'has no render() method');
         }
 

@@ -47,7 +47,7 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase
                         $ulicmsVersion,
                         '='
                     ),
-                    "$module has a bad version $moduleVersion"
+                    "{$module} has a bad version {$moduleVersion}"
                 );
             }
         }
@@ -68,9 +68,9 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase
                         $installedVersion,
                         '>='
                     ),
-                    "$module $availableVersion in the package source "
+                    "{$module} {$availableVersion} in the package source "
                     . 'is not at least equal to '
-                    . "the installed version $module $installedVersion"
+                    . "the installed version {$module} {$installedVersion}"
                 );
             }
         }

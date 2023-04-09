@@ -17,7 +17,7 @@ class CoreSecurityController extends MainClass
             $x_frame_options,
             $allowedOptions
         )) {
-            @send_header("X-Frame-Options: $x_frame_options");
+            @send_header("X-Frame-Options: {$x_frame_options}");
         }
         $x_xss_protection = Settings::get('x_xss_protection');
         $header = $x_xss_protection === 'block' ?
@@ -33,7 +33,7 @@ class CoreSecurityController extends MainClass
         $referrer_policy = Settings::get('referrer_policy');
 
         if ($referrer_policy) {
-            @send_header("Referrer-Policy: $referrer_policy");
+            @send_header("Referrer-Policy: {$referrer_policy}");
         }
 
         $expect_ct = Settings::get('expect_ct');

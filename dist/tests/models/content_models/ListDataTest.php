@@ -32,7 +32,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         for ($i = 1; $i <= 20; $i++) {
             $page = new Page();
             $page->category_id = $category->getId();
-            $page->title = "Unit Test $i";
+            $page->title = "Unit Test {$i}";
             $page->slug = uniqid();
             $page->menu = 'top';
             $page->language = 'de';

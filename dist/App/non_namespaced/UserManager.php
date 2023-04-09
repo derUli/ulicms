@@ -9,7 +9,7 @@ class UserManager
     public function getUsersByGroupId(?int $gid, ?string $order = 'id'): array
     {
         $users = [];
-        $sql = "select id from {prefix}users where `group_id` = ? order by $order";
+        $sql = "select id from {prefix}users where `group_id` = ? order by {$order}";
         $args = [
             $gid
         ];
@@ -23,7 +23,7 @@ class UserManager
     public function getAllUsers(string $order = 'id'): array
     {
         $users = [];
-        $sql = "select id from {prefix}users order by $order";
+        $sql = "select id from {prefix}users order by {$order}";
         $result = Database::Query($sql, true);
         while ($row = Database::fetchObject($result)) {
             $users[] = new User($row->id);
@@ -37,7 +37,7 @@ class UserManager
     ): array {
         $users = [];
         $sql = 'select id from {prefix}users where `locked` = ? '
-                . "order by $order";
+                . "order by {$order}";
         $args = [
             (int)$locked
         ];

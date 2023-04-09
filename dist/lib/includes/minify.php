@@ -189,7 +189,7 @@ function compileSCSS(string $stylesheet): string
     try {
         $scssOutput = $scss->compileString($scssInput)->getCSS();
     } catch (Exception $e) {
-        throw new SCSSCompileException("Compilation of $stylesheet failed: "
+        throw new SCSSCompileException("Compilation of {$stylesheet} failed: "
                         . "{$e->getMessage()}");
     }
     return $scssOutput;

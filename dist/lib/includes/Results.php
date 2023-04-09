@@ -77,10 +77,10 @@ function Result(string $data, int $status = 200, ?string $type = null): void
     $size = getStringLengthInBytes($data);
 
     if ($type) {
-        send_header("Content-Type: $type");
+        send_header("Content-Type: {$type}");
     }
 
-    send_header("Content-length: $size");
+    send_header("Content-length: {$size}");
     exit($data);
 }
 
@@ -111,7 +111,7 @@ function ExceptionResult(string $message, int $status = 500): void
         send_header($_SERVER['SERVER_PROTOCOL'] . ' '
                 . Response::getStatusCodeByNumber((int)$status));
         send_header('Content-Type: text/html; charset=UTF-8');
-        send_header("Content-length: $size");
+        send_header("Content-length: {$size}");
     }
 
     echo $content;

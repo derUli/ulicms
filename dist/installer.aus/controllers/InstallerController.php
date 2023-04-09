@@ -256,9 +256,9 @@ class InstallerController
         );
 
         mysqli_query($connection, "INSERT INTO {$prefix
-                }dbtrack (component, name) values ('core', '$sqlFileName')");
+                }dbtrack (component, name) values ('core', '{$sqlFileName}')");
 
-        echo "<progress value='$currentStep' max='$allSteps'>";
+        echo "<progress value='{$currentStep}' max='{$allSteps}'>";
         $_SESSION['install_index'] += 1;
     }
 

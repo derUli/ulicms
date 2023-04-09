@@ -48,12 +48,12 @@ class Banner extends Model
     {
         $id = (int)$id;
         $result = Database::query('SELECT * FROM `' . tbname('banner') .
-                        "` where id = $id");
+                        "` where id = {$id}");
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
             $this->fillVars($result);
         } else {
-            throw new DatasetNotFoundException("No banner with id $id");
+            throw new DatasetNotFoundException("No banner with id {$id}");
         }
     }
 
@@ -348,9 +348,9 @@ class Banner extends Model
                 $title = Template::getEscape($this->getName());
                 $link_url = Template::getEscape($this->getLinkUrl());
                 $image_url = Template::getEscape($this->getImageUrl());
-                $html = "<a href=\"$link_url\" target=\"_blank\">"
-                        . "<img src=\"$image_url\" title=\"$title\" "
-                        . "alt=\"$title\" border=\"0\"></a>";
+                $html = "<a href=\"{$link_url}\" target=\"_blank\">"
+                        . "<img src=\"{$image_url}\" title=\"{$title}\" "
+                        . "alt=\"{$title}\" border=\"0\"></a>";
                 break;
             case 'html':
                 $html = $this->getHtml();

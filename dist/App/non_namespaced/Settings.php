@@ -53,7 +53,7 @@ class Settings
         $value = null;
         $key = db_escape($key);
         $result = db_query('SELECT name, value FROM ' . tbname('settings') .
-                " WHERE name='$key'");
+                " WHERE name='{$key}'");
         if (db_num_rows($result) > 0) {
             while ($row = db_fetch_object($result)) {
                 self::storeInCache($row->name, $row->value);
@@ -117,13 +117,13 @@ class Settings
         $originalValue = self::convertVar($value, $type);
         $value = db_escape($originalValue);
         $result = db_query('SELECT id FROM ' . tbname('settings') .
-                " WHERE name='$key'");
+                " WHERE name='{$key}'");
         if (db_num_rows($result) > 0) {
-            db_query('UPDATE ' . tbname('settings') . " SET value='$value' "
-                    . "WHERE name='$key'");
+            db_query('UPDATE ' . tbname('settings') . " SET value='{$value}' "
+                    . "WHERE name='{$key}'");
         } else {
             db_query('INSERT INTO ' . tbname('settings') . ' (name, value) '
-                    . "VALUES('$key', '$value')");
+                    . "VALUES('{$key}', '{$value}')");
         }
     }
 
@@ -132,7 +132,7 @@ class Settings
     {
         self::deleteInCache($key);
         $key = db_escape($key);
-        db_query('DELETE FROM ' . tbname('settings') . " WHERE name='$key'");
+        db_query('DELETE FROM ' . tbname('settings') . " WHERE name='{$key}'");
         return Database::getAffectedRows() > 0;
     }
 
@@ -166,7 +166,7 @@ class Settings
     {
         $datasets = [];
         $result = Database::query('SELECT * FROM `{prefix}settings` '
-                        . "order by $order", true);
+                        . "order by {$order}", true);
         while ($dataset = Database::fetchObject($result)) {
             $datasets[] = $dataset;
 

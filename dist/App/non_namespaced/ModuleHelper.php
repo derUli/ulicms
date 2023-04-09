@@ -102,10 +102,10 @@ class ModuleHelper extends Helper
         $modules = getAllModules();
         foreach ($modules as $module) {
             $noembedfile1 = Path::Resolve(
-                "ULICMS_ROOT/content/modules/$module/.noembed"
+                "ULICMS_ROOT/content/modules/{$module}/.noembed"
             );
             $noembedfile2 = Path::Resolve(
-                "ULICMS_ROOT/content/modules/$module/noembed.txt"
+                "ULICMS_ROOT/content/modules/{$module}/noembed.txt"
             );
 
             $embed_attrib = true;
@@ -144,10 +144,10 @@ class ModuleHelper extends Helper
     {
         $retval = true;
         $noembedfile1 = Path::Resolve(
-            "ULICMS_ROOT/content/modules/$module/.noembed"
+            "ULICMS_ROOT/content/modules/{$module}/.noembed"
         );
         $noembedfile2 = Path::Resolve(
-            "ULICMS_ROOT/content/modules/$module/noembed.txt"
+            "ULICMS_ROOT/content/modules/{$module}/noembed.txt"
         );
 
         $embed_attrib = true;

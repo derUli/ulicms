@@ -109,8 +109,8 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString('Site online since', $output);
         $this->assertStringContainsString('Count of pages', $output);
         $this->assertStringContainsString('Amount of Users', $output);
-        $this->assertStringContainsString("<td>$usersCount</td>", $output);
-        $this->assertStringContainsString("<td>$pagesCount</td>", $output);
+        $this->assertStringContainsString("<td>{$usersCount}</td>", $output);
+        $this->assertStringContainsString("<td>{$pagesCount}</td>", $output);
     }
 
     protected function createTestUsers()

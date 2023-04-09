@@ -86,10 +86,10 @@ class VideoController extends Controller
                 db_query('INSERT INTO ' . tbname('videos') .
                         ' (name, ogg_file, webm_file, mp4_file, width, '
                         . 'height, created, category_id, `updated`) '
-                        . "VALUES ('$name', '$ogg_file_value', "
-                        . "'$webm_file_value',  '$mp4_file_value', "
-                        . "$width, $height, $timestamp, $category_id, "
-                        . "$timestamp);");
+                        . "VALUES ('{$name}', '{$ogg_file_value}', "
+                        . "'{$webm_file_value}',  '{$mp4_file_value}', "
+                        . "{$width}, {$height}, {$timestamp}, {$category_id}, "
+                        . "{$timestamp});");
             }
         }
         Response::redirect(ModuleHelper::buildActionURL('videos'));
@@ -106,11 +106,11 @@ class VideoController extends Controller
         $height = (int)$_POST['height'];
         $updated = time();
         $category_id = (int)$_POST['category_id'];
-        db_query('UPDATE ' . tbname('videos') . " SET name='$name', "
-                . "ogg_file='$ogg_file', mp4_file='$mp4_file', "
-                . "webm_file='$webm_file', width=$width, height=$height, "
-                . "category_id = $category_id, `updated` = $updated "
-                . "where id = $id");
+        db_query('UPDATE ' . tbname('videos') . " SET name='{$name}', "
+                . "ogg_file='{$ogg_file}', mp4_file='{$mp4_file}', "
+                . "webm_file='{$webm_file}', width={$width}, height={$height}, "
+                . "category_id = {$category_id}, `updated` = {$updated} "
+                . "where id = {$id}");
         return Database::getAffectedRows() > 0;
     }
 

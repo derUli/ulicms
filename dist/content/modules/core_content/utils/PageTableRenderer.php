@@ -106,7 +106,7 @@ class PageTableRenderer
 
         // get total pages count for this user
         $countSql = 'select count(id) as count from {prefix}content '
-                . "where $where";
+                . "where {$where}";
         $countResult = Database::query($countSql, true);
         $countData = Database::fetchObject($countResult);
         $totalCount = $countData->count;
@@ -119,18 +119,18 @@ class PageTableRenderer
         }
 
         $where = $this->buildFilterSQL($where, $filters);
-        $where .= " order by $sortColumn $sortDirection";
+        $where .= " order by {$sortColumn} {$sortDirection}";
 
         // get filtered pages count
         $countSql = 'select id as count from {prefix}content'
-                . " where $where  ";
+                . " where {$where}  ";
 
         $countResult = Database::query($countSql, true);
         $filteredCount = Database::getNumRows($countResult);
 
         // query only datasets for the current page
         // to have a good performance
-        $where .= " limit $length offset $start";
+        $where .= " limit {$length} offset {$start}";
 
         $resultsForPage = Database::selectAll(
             'content',

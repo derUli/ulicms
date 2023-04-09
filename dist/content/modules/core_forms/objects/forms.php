@@ -43,10 +43,10 @@ class Forms
                             `required_fields`, mail_from_field, target_page_id,
                             `created`, `updated`, `enabled`)
                                      values
-                                    ('$name', '$email_to', '$subject', "
-                . "$category_id, '$fields', '$required_fields', "
-                . "'$mail_from_field', $target_page_id, $created, "
-                . "$updated, $enabled)";
+                                    ('{$name}', '{$email_to}', '{$subject}', "
+                . "{$category_id}, '{$fields}', '{$required_fields}', "
+                . "'{$mail_from_field}', {$target_page_id}, {$created}, "
+                . "{$updated}, {$enabled})";
 
         return Database::query($sql, true);
     }
@@ -66,14 +66,14 @@ class Forms
         $id = (int)$id;
 
         return db_query(
-            'UPDATE `' . tbname('forms') . "` set name='$name', "
-            . "email_to = '$email_to', subject = '$subject', "
-            . "category_id = $category_id, fields = '$fields', "
-            . "required_fields = '$required_fields', "
-            . "mail_from_field = '$mail_from_field', "
-            . "target_page_id = $target_page_id, "
-            . "`updated` = $updated, "
-            . "enabled = $enabled WHERE id = $id"
+            'UPDATE `' . tbname('forms') . "` set name='{$name}', "
+            . "email_to = '{$email_to}', subject = '{$subject}', "
+            . "category_id = {$category_id}, fields = '{$fields}', "
+            . "required_fields = '{$required_fields}', "
+            . "mail_from_field = '{$mail_from_field}', "
+            . "target_page_id = {$target_page_id}, "
+            . "`updated` = {$updated}, "
+            . "enabled = {$enabled} WHERE id = {$id}"
         );
     }
 
@@ -181,6 +181,6 @@ class Forms
     public static function deleteForm($id)
     {
         $id = (int)$id;
-        return db_query('DELETE FROM ' . tbname('forms') . " WHERE id = $id");
+        return db_query('DELETE FROM ' . tbname('forms') . " WHERE id = {$id}");
     }
 }

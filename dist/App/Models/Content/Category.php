@@ -72,7 +72,7 @@ class Category
     public static function getAll(string $order = 'id'): array
     {
         $datasets = [];
-        $sql = "select id from `{prefix}categories` order by $order";
+        $sql = "select id from `{prefix}categories` order by {$order}";
         $result = Database::query($sql, true);
         while ($row = Database::fetchobject($result)) {
             $datasets[] = new Category((int)$row->id);

@@ -73,13 +73,13 @@ class Model
             $method = 'set' . ucfirst($camelCaseVar);
             // if a setter method exists, call it
             if (method_exists($this, $method)) {
-                $this->$method($value);
+                $this->{$method}($value);
             // if there is a class property in snake_case set it
-            } elseif (isset($this->$value)) {
+            } elseif (isset($this->{$value})) {
                 $this->value = $value;
             // if there is a class property in camelcase set it
-            } elseif (isset($this->$camelCaseVar)) {
-                $this->$camelCaseVar = $value;
+            } elseif (isset($this->{$camelCaseVar})) {
+                $this->{$camelCaseVar} = $value;
             }
         }
     }
@@ -146,7 +146,7 @@ class Model
             $method = 'get' . ucfirst($camelCaseVar);
 
             if (method_exists($this, $method)
-                    && $this->$method() != $originalDataset->$method()) {
+                    && $this->{$method}() != $originalDataset->{$method}()) {
                 $hasChanges = true;
             }
         }

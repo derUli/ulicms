@@ -21,7 +21,7 @@ class InfoController extends MainClass
             } elseif (str_starts_with($line, '=') && str_ends_with($line, '=')) {
                 $line = '<h3>' . trim(trim($line, '=')) . '</h3>';
             } elseif (str_ends_with($line, ':')) {
-                $line = "<strong>$line</strong>";
+                $line = "<strong>{$line}</strong>";
             }
             if (! str_contains($line, '<h')) {
                 $line .= "\n";

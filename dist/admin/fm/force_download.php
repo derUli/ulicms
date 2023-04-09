@@ -89,8 +89,8 @@ if ($ftp) {
 
         $new_length = $range_end - $range + 1;
         header('HTTP/1.1 206 Partial Content');
-        header("Content-Length: $new_length");
-        header("Content-Range: bytes $range-$range_end/$size");
+        header("Content-Length: {$new_length}");
+        header("Content-Range: bytes {$range}-{$range_end}/{$size}");
     } else {
         $new_length = $size;
         header('Content-Length: ' . $size);

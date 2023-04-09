@@ -26,6 +26,6 @@ class DataTablesHelper extends Helper
         if (is_file($file)) {
             return $file;
         }
-        return "$baseUrl/en.lang";
+        return "{$baseUrl}/en.lang";
     }
 }

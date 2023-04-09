@@ -68,9 +68,9 @@ class FileTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_dir($dirs));
 
         $testFiles = [
-            "$baseDir/1",
-            "$baseDir/2",
-            "$baseDir/bar/1"];
+            "{$baseDir}/1",
+            "{$baseDir}/2",
+            "{$baseDir}/bar/1"];
 
         foreach ($testFiles as $file) {
             $this->assertFalse(is_file($file));
@@ -102,9 +102,9 @@ class FileTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_dir($dirs));
 
         $testFiles = [
-            "$baseDir/1",
-            "$baseDir/2",
-            "$baseDir/bar/1"];
+            "{$baseDir}/1",
+            "{$baseDir}/2",
+            "{$baseDir}/bar/1"];
 
         foreach ($testFiles as $file) {
             $this->assertFalse(is_file($file));
@@ -130,9 +130,9 @@ class FileTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_dir($dirs));
 
         $testFiles = [
-            "$baseDir/1",
-            "$baseDir/2",
-            "$baseDir/bar/1"];
+            "{$baseDir}/1",
+            "{$baseDir}/2",
+            "{$baseDir}/bar/1"];
 
         foreach ($testFiles as $file) {
             $this->assertFalse(is_file($file));
@@ -144,7 +144,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue(is_dir($baseDir));
 
-        $this->assertCount(0, glob("$baseDir/*"));
+        $this->assertCount(0, glob("{$baseDir}/*"));
 
         sureRemoveDir($baseDir, true);
     }

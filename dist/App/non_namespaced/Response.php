@@ -51,7 +51,7 @@ if (! defined('RESPONSIVE_FM')) {
             string $url = 'http://www.ulicms.de'
         ): void {
             echo '<script>'
-            . "location.replace(\"$url\");</script>";
+            . "location.replace(\"{$url}\");</script>";
             echo '<noscript><p>' . get_translation('jsredirect_noscript', [
                 '%url%' => Template::getEscape($url)
             ]) . '</p></noscript>';

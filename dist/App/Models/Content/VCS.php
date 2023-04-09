@@ -53,8 +53,8 @@ class VCS
             $lastmodified = time();
             $content = db_escape($row->content);
             return db_query('UPDATE ' . tbname('content') .
-                    " SET content='$content', lastmodified = $lastmodified "
-                    . "where id = $content_id");
+                    " SET content='{$content}', lastmodified = {$lastmodified} "
+                    . "where id = {$content_id}");
         }
         return false;
     }

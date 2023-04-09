@@ -30,10 +30,10 @@ class PagePermissions
     public function getEditRestriction(string $object): ?bool
     {
         $varName = "only_{$object}_can_edit";
-        if (! isset($this->$varName)) {
+        if (! isset($this->{$varName})) {
             return null;
         }
-        return $this->$varName;
+        return $this->{$varName};
     }
 
     public function setEditRestriction(
@@ -41,11 +41,11 @@ class PagePermissions
         bool $restricted = false
     ): void {
         $varName = "only_{$object}_can_edit";
-        if (! isset($this->$varName)) {
+        if (! isset($this->{$varName})) {
             return;
         }
 
-        $this->$varName = $restricted;
+        $this->{$varName} = $restricted;
     }
 
     public function getAll(): array

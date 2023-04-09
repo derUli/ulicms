@@ -94,7 +94,7 @@ class BackendHelper extends Helper
         $folders = File::findAllDirs($dir);
 
         foreach ($folders as $folder) {
-            $cssFile = "$folder/editor.css";
+            $cssFile = "{$folder}/editor.css";
             if (is_file($cssFile)) {
                 $skins[] = basename($folder);
             }

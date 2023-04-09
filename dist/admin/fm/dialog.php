@@ -1836,7 +1836,7 @@ if ($config['tui_active']) { ?>
         var tuiTheme = {
             <?php foreach ($config['tui_defaults_config'] as $aopt_key => $aopt_val) {
                 if (! empty($aopt_val)) {
-                    echo "'$aopt_key':" . json_encode($aopt_val) . ',';
+                    echo "'{$aopt_key}':" . json_encode($aopt_val) . ',';
                 }
             } ?>
         };

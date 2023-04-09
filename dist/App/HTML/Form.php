@@ -117,7 +117,7 @@ class Form
         $attribHtml = '';
 
         if (! empty($htmlAttributes)) {
-            $attribHtml .= " $htmlAttributesString";
+            $attribHtml .= " {$htmlAttributesString}";
         }
 
         $html .= '<form action="' . _esc($url) . '" method="' .

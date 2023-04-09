@@ -15,7 +15,7 @@ class PkgInfoController extends Controller
             Response::redirect(
                 ModuleHelper::buildActionURL(
                     'sin_package_install_ok',
-                    "file=$file"
+                    "file={$file}"
                 )
             );
         }
@@ -23,7 +23,7 @@ class PkgInfoController extends Controller
 
     public function _installPost($file): bool
     {
-        $path = Path::resolve("ULICMS_TMP/$file");
+        $path = Path::resolve("ULICMS_TMP/{$file}");
         $pkg = new SinPackageInstaller($path);
         if (is_file($path)) {
             return $pkg->installPackage();

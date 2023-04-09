@@ -80,10 +80,10 @@ class ACL
 
         if ($move_users_to === null) {
             $updateUsers = 'UPDATE ' . tbname('users') .
-                    " SET `group_id`=NULL where `group_id`=$id";
+                    " SET `group_id`=NULL where `group_id`={$id}";
         } else {
             $updateUsers = 'UPDATE ' . tbname('users') .
-                    ' SET `group_id`=' . $move_users_to . " where `group_id`=$id";
+                    ' SET `group_id`=' . $move_users_to . " where `group_id`={$id}";
         }
 
         db_query($updateUsers);

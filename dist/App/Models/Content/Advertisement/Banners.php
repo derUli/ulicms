@@ -16,7 +16,7 @@ class Banners
     public static function getAll(string $order = 'id'): array
     {
         $datasets = [];
-        $sql = 'SELECT id FROM ' . tbname('banner') . " ORDER BY $order";
+        $sql = 'SELECT id FROM ' . tbname('banner') . " ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
             $banner = new Banner();
@@ -33,7 +33,7 @@ class Banners
         $datasets = [];
         $language = Database::escapeValue($language);
         $sql = 'SELECT id FROM ' . tbname('banner') .
-                " WHERE language = '$language' ORDER BY $order";
+                " WHERE language = '{$language}' ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
             $banner = new Banner();
@@ -50,7 +50,7 @@ class Banners
         $category_id = (int)$category_id;
         $datasets = [];
         $sql = 'SELECT id FROM ' . tbname('banner') .
-                " WHERE `category_id` = $category_id ORDER BY $order";
+                " WHERE `category_id` = {$category_id} ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
             $banner = new Banner();
@@ -67,7 +67,7 @@ class Banners
         $type = Database::escapeValue($type);
         $datasets = [];
         $sql = 'SELECT id FROM ' . tbname('banner') .
-                " WHERE `type` = '$type' ORDER BY $order";
+                " WHERE `type` = '{$type}' ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
             $banner = new Banner();

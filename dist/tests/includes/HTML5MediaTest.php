@@ -44,20 +44,20 @@ class HTML5MediaTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "Foo [audio id={$intMax}] Bar",
             replaceAudioTags(
-                "Foo [audio id=$intMax] Bar"
+                "Foo [audio id={$intMax}] Bar"
             )
         );
 
         $this->assertEquals(
             "Foo [audio id=\"{$intMax}\"] Bar",
             replaceAudioTags(
-                "Foo [audio id=\"$intMax\"] Bar"
+                "Foo [audio id=\"{$intMax}\"] Bar"
             )
         );
         $this->assertEquals(
             "Foo [audio id=&quot;{$intMax}]&quot; Bar",
             replaceAudioTags(
-                "Foo [audio id=&quot;$intMax]&quot; Bar"
+                "Foo [audio id=&quot;{$intMax}]&quot; Bar"
             )
         );
     }
@@ -114,20 +114,20 @@ class HTML5MediaTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             "Foo [video id={$intMax}] Bar",
             replaceVideoTags(
-                "Foo [video id=$intMax] Bar"
+                "Foo [video id={$intMax}] Bar"
             )
         );
 
         $this->assertEquals(
             "Foo [video id=\"{$intMax}\"] Bar",
             replaceVideoTags(
-                "Foo [video id=\"$intMax\"] Bar"
+                "Foo [video id=\"{$intMax}\"] Bar"
             )
         );
         $this->assertEquals(
             "Foo [video id=&quot;{$intMax}]&quot; Bar",
             replaceVideoTags(
-                "Foo [video id=&quot;$intMax]&quot; Bar"
+                "Foo [video id=&quot;{$intMax}]&quot; Bar"
             )
         );
     }

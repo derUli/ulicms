@@ -61,9 +61,9 @@ class AudioController extends Controller
         if (! empty($ogg_file_value) || ! empty($mp3_file_value)) {
             db_query('INSERT INTO ' . tbname('audio') .
                     ' (name, ogg_file, mp3_file, created, category_id, '
-                    . "`updated`) VALUES ('$name', '$ogg_file_value', "
-                    . "'$mp3_file_value', $timestamp, $category_id, "
-                    . "$timestamp);");
+                    . "`updated`) VALUES ('{$name}', '{$ogg_file_value}', "
+                    . "'{$mp3_file_value}', {$timestamp}, {$category_id}, "
+                    . "{$timestamp});");
         }
         Response::redirect(ModuleHelper::buildActionURL('audio'));
     }
@@ -76,10 +76,10 @@ class AudioController extends Controller
         $mp3_file = db_escape(basename($_POST['mp3_file']));
         $updated = time();
         $category_id = (int)$_POST['category_id'];
-        db_query('UPDATE ' . tbname('audio') . " SET name='$name', "
-                . "ogg_file='$ogg_file', mp3_file='$mp3_file', "
-                . "category_id = $category_id, `updated` = $updated "
-                . "where id = $id");
+        db_query('UPDATE ' . tbname('audio') . " SET name='{$name}', "
+                . "ogg_file='{$ogg_file}', mp3_file='{$mp3_file}', "
+                . "category_id = {$category_id}, `updated` = {$updated} "
+                . "where id = {$id}");
 
         return Database::getAffectedRows() > 0;
     }

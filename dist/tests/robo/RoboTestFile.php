@@ -11,6 +11,6 @@ class RoboTestFile extends RoboFile
 
     public function writeln($text)
     {
-        $this->write("$text\n");
+        $this->write("{$text}\n");
     }
 }

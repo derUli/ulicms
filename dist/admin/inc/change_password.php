@@ -3,7 +3,7 @@ if (isset($_POST['change_password'])) {
     if (! empty($_POST['password']) && $_POST['password'] === $_POST['password_repeat']) {
         $uid = get_user_id();
         changePassword($_POST['password'], $uid);
-        db_query('UPDATE ' . tbname('users') . " SET `require_password_change` = 0 where id = $uid");
+        db_query('UPDATE ' . tbname('users') . " SET `require_password_change` = 0 where id = {$uid}");
         $_SESSION['require_password_change'] = 0;
     } else {
         ?>

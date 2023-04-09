@@ -165,7 +165,7 @@ if (! $permissionChecker->hasPermission('design')) {
 
         echo '<optgroup>';
 
-        echo "<option value=\"$value\" $selected>$key</option>";
+        echo "<option value=\"{$value}\" {$selected}>{$key}</option>";
         echo '</optgroup>';
 
         $i++;

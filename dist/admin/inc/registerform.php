@@ -38,7 +38,7 @@ if (Settings::get('visitors_can_register') == 'off' || ! Settings::get('visitors
             } else {
                 $go = 'index.php';
             }
-            echo "<p><a href='$go'>" . get_translation('continue_here') . '</a></p>';
+            echo "<p><a href='{$go}'>" . get_translation('continue_here') . '</a></p>';
         }
     }
     ?>

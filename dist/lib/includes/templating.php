@@ -425,7 +425,7 @@ function get_meta_description(?string $ipage = null): string
 {
     $ipage = isset($_GET['slug']) ? db_escape($_GET['slug']) : '';
     $result = db_query('SELECT meta_description FROM ' . tbname('content') .
-            " WHERE slug='$ipage' AND language='" .
+            " WHERE slug='{$ipage}' AND language='" .
             db_escape(getFrontendLanguage()) . "'");
 
     if (db_num_rows($result) > 0) {
@@ -498,7 +498,7 @@ function get_title(?string $slug = null, bool $headline = false): string
 
     $slug = isset($_GET['slug']) ? db_escape($_GET['slug']) : '';
     $result = db_query('SELECT alternate_title, title FROM ' .
-            tbname('content') . " WHERE slug='$slug' AND language='" .
+            tbname('content') . " WHERE slug='{$slug}' AND language='" .
             db_escape(getFrontendLanguage()) . "'");
 
     if (db_num_rows($result) > 0) {
@@ -555,7 +555,7 @@ function apply_filter($text, string $type)
         }
         $escapedName = ModuleHelper::underscoreToCamel($type . '_filter');
         if ($controller && method_exists($controller, $escapedName)) {
-            $text = $controller->$escapedName($text);
+            $text = $controller->{$escapedName}($text);
         } elseif (is_file($module_content_filter_file1)) {
             require_once $module_content_filter_file1;
             if (function_exists($modules[$i] . '_' . $type . '_filter')) {
@@ -679,7 +679,7 @@ function parent_item_contains_current_page(?int $id): bool
     }
     $id = (int) $id;
     $language = $_SESSION['language'];
-    $sql = 'SELECT id, slug, parent_id FROM ' . tbname('content') . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
+    $sql = 'SELECT id, slug, parent_id FROM ' . tbname('content') . " WHERE language = '{$language}' AND active = 1 AND `deleted_at` IS NULL";
     $r = db_query($sql);
 
     $data = [];
@@ -706,7 +706,7 @@ function get_menu(
     $name = db_escape($name);
     $language = $_SESSION['language'];
     $sql = 'SELECT id, slug, access, link_url, title, '
-            . 'alternate_title, menu_image, target, type, link_to_language, position FROM ' . tbname('content') . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent_id ";
+            . 'alternate_title, menu_image, target, type, link_to_language, position FROM ' . tbname('content') . " WHERE menu='{$name}' AND language = '{$language}' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent_id ";
 
     if ($parent_id === null) {
         $sql .= ' IS NULL ';

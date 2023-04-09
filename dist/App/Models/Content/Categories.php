@@ -43,7 +43,7 @@ class Categories
         string $name = 'category_id'
     ): string {
         $lst = self::getAllCategories('name');
-        $html = "<select name='" . $name . "' id='$name' size='1' class='form-control'>";
+        $html = "<select name='" . $name . "' id='{$name}' size='1' class='form-control'>";
         if ($allowNull) {
             if (! $default) {
                 $html .= "<option value='0' selected='selected'>[" .

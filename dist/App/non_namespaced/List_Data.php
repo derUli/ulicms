@@ -83,7 +83,7 @@ class List_Data extends Model
     {
         $id = (int)$id;
         $result = Database::query('select * from ' . tbname('lists')
-                        . " WHERE content_id = $id");
+                        . " WHERE content_id = {$id}");
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
             $this->fillVars($dataset);
@@ -99,7 +99,7 @@ class List_Data extends Model
         }
         $id = (int) ($this->content_id);
         $result = Database::query('select * from ' . tbname('lists')
-                        . " WHERE content_id = $id");
+                        . " WHERE content_id = {$id}");
         if (Database::getNumRows($result) > 0) {
             $this->update();
         } else {
@@ -179,9 +179,9 @@ class List_Data extends Model
         $sql = 'INSERT INTO ' . tbname('lists') .
                 ' (content_id, language, category_id, menu, parent_id, '
                 . '`order_by`, `order_direction`, `limit`, `use_pagination`, '
-                . "`type`) values ($content_id, $language,
-		$category_id, $menu, $parent_id, $order_by, "
-                . "'$order_direction', $limit, $use_pagination, $type)";
+                . "`type`) values ({$content_id}, {$language},
+		{$category_id}, {$menu}, {$parent_id}, {$order_by}, "
+                . "'{$order_direction}', {$limit}, {$use_pagination}, {$type})";
         Database::query($sql);
     }
 
@@ -238,12 +238,12 @@ class List_Data extends Model
 
         $use_pagination = (int) ($this->use_pagination);
 
-        $sql = 'UPDATE ' . tbname('lists') . " set language = $language,
-		category_id = $category_id, menu = $menu,"
-                . "parent_id = $parent_id, `order_by` = $order_by,"
-                . "`order_direction` = '$order_direction', `limit` = $limit,"
-                . "`use_pagination` = $use_pagination, `type` = $type"
-                . " where content_id = $content_id ";
+        $sql = 'UPDATE ' . tbname('lists') . " set language = {$language},
+		category_id = {$category_id}, menu = {$menu},"
+                . "parent_id = {$parent_id}, `order_by` = {$order_by},"
+                . "`order_direction` = '{$order_direction}', `limit` = {$limit},"
+                . "`use_pagination` = {$use_pagination}, `type` = {$type}"
+                . " where content_id = {$content_id} ";
         Database::query($sql);
     }
 }

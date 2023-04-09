@@ -34,7 +34,7 @@ class Link
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        return "<a $attribHTML>" . $text . '</a>';
+        return "<a {$attribHTML}>" . $text . '</a>';
     }
 
     /**

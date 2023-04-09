@@ -81,7 +81,7 @@ class AudioTest extends \PHPUnit\Framework\TestCase
 
         for ($i = 1; $i <= 10; $i++) {
             $audio = new Audio();
-            $audio->setName("My Name $i");
+            $audio->setName("My Name {$i}");
             $audio->setMP3File('music.mp3');
             $audio->setOGGFile('music.ogg');
             $audio->setCategoryId(1);

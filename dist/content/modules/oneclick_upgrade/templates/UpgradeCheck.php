@@ -11,7 +11,7 @@ if ($permissionChecker->hasPermission('update_system')) {
     if (isset($json->release_notes)) {
         $release_notes = $json->release_notes;
         $lang = getSystemLanguage();
-        $release_notes = $release_notes->$lang ?? $release_notes->en;
+        $release_notes = $release_notes->{$lang} ?? $release_notes->en;
         $release_notes = nl2br(_esc($release_notes));
     }
     ?>

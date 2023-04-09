@@ -222,7 +222,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
         for ($i = 1; $i <= 7; $i++) {
             $page = new Page();
             $page->title = 'Unit Test ' . time();
-            $page->slug = 'unit-test-' . time() . "-$i";
+            $page->slug = 'unit-test-' . time() . "-{$i}";
             $page->language = 'de';
             $page->content = 'Some Text';
             $page->comments_enabled = true;
@@ -236,7 +236,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
         for ($i = 1; $i <= 3; $i++) {
             $page = new Page();
             $page->title = 'Unit Test ' . time();
-            $page->slug = 'unit-test-' . time() . "-$i-zwei";
+            $page->slug = 'unit-test-' . time() . "-{$i}-zwei";
             $page->language = 'de';
             $page->content = 'Some Text';
             $page->comments_enabled = true;
@@ -277,7 +277,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
         for ($i = 1; $i <= 8; $i++) {
             $page = new Page();
             $page->title = 'Unit Test ' . time();
-            $page->slug = 'unit-test-' . time() . "-$i";
+            $page->slug = 'unit-test-' . time() . "-{$i}";
             $page->language = 'de';
             $page->content = 'Some Text';
             $page->comments_enabled = true;
@@ -291,7 +291,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
         for ($i = 1; $i <= 4; $i++) {
             $page = new Page();
             $page->title = 'Unit Test ' . time();
-            $page->slug = 'unit-test-' . time() . "-$i-zwei";
+            $page->slug = 'unit-test-' . time() . "-{$i}-zwei";
             $page->language = 'de';
             $page->content = 'Some Text';
             $page->comments_enabled = true;
@@ -332,7 +332,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
         for ($i = 1; $i <= 5; $i++) {
             $page = new Page();
             $page->title = 'Unit Test ' . time();
-            $page->slug = 'unit-test-' . time() . "-$i";
+            $page->slug = 'unit-test-' . time() . "-{$i}";
             $page->language = 'de';
             $page->content = 'Some Text';
             $page->comments_enabled = true;
@@ -347,7 +347,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
         for ($i = 1; $i <= 3; $i++) {
             $page = new Page();
             $page->title = 'Unit Test ' . time();
-            $page->slug = 'unit-test-' . time() . "-$i-zwei";
+            $page->slug = 'unit-test-' . time() . "-{$i}-zwei";
             $page->language = 'de';
             $page->content = 'Some Text';
             $page->comments_enabled = true;

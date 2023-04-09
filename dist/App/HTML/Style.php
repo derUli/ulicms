@@ -70,6 +70,6 @@ class Style
             $attribHTML = ' ' . $attribHTML;
         }
 
-        return "<style$attribHTML>" . $code . '</style>';
+        return "<style{$attribHTML}>" . $code . '</style>';
     }
 }

@@ -120,7 +120,7 @@ if ($permissionChecker->hasPermission('users')) {
                                 echo '<td class="hide-on-mobile">';
                                 $id = $user->getPrimaryGroupId();
                                 if ($id && $permissionChecker->hasPermission('groups_edit')) {
-                                    $url = ModuleHelper::buildActionURL('groups', "edit=$id");
+                                    $url = ModuleHelper::buildActionURL('groups', "edit={$id}");
                                     echo '<a href="' . Template::getEscape($url) . '" class="is-not-ajax">';
                                 }
                                 esc($group);

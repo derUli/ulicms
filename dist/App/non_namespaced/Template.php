@@ -248,7 +248,7 @@ class Template
             return str_replace('%title%', get_title(null, true), $format);
         }
         $sql = 'SELECT show_headline FROM ' . tbname('content') .
-                " where id = $id";
+                " where id = {$id}";
         $result = Database::query($sql);
         $dataset = Database::fetchObject($result);
 
@@ -274,7 +274,7 @@ class Template
     public static function getOgHTMLPrefix(): string
     {
         $language = getCurrentLanguage();
-        return "<html prefix=\"og: http://ogp.me/ns#\" lang=\"$language\">";
+        return "<html prefix=\"og: http://ogp.me/ns#\" lang=\"{$language}\">";
     }
 
     public static function renderPartial(
@@ -398,10 +398,10 @@ class Template
             );
             if (is_file($min_style_file_realpath)) {
                 echo '<link rel="stylesheet" type="text/css" '
-                . "href=\"$min_style_file\"/>";
+                . "href=\"{$min_style_file}\"/>";
             } elseif (is_file($style_file_realpath)) {
                 echo '<link rel="stylesheet" type="text/css" '
-                . "href=\"$style_file\"/>";
+                . "href=\"{$style_file}\"/>";
             }
         }
 

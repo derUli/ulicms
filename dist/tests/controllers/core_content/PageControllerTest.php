@@ -544,7 +544,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
             $controller = new PageController();
             $success = $controller->_editPost();
 
-            $this->assertTrue($success, "saving content of type $type failed");
+            $this->assertTrue($success, "saving content of type {$type} failed");
         }
     }
 

@@ -97,7 +97,7 @@ class VideoTest extends \PHPUnit\Framework\TestCase
         $savedVideos = [];
         for ($i = 1; $i <= 10; $i++) {
             $video = new Video();
-            $video->setName("My Name $i");
+            $video->setName("My Name {$i}");
             $video->setMP4File('video.mp4');
             $video->setOGGFile('video.ogv');
             $video->setWebmFile('video.webm');

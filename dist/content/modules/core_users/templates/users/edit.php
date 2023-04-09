@@ -12,7 +12,7 @@ $permissionChecker = new ACL();
 if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermission('users_edit')) || ($_GET['id'] == $_SESSION['login_id'])) {
     $id = (int)$_GET['id'];
     $languages = getAvailableBackendLanguages();
-    $result = db_query('SELECT * FROM ' . tbname('users') . " WHERE id='$id'");
+    $result = db_query('SELECT * FROM ' . tbname('users') . " WHERE id='{$id}'");
     $user = new User($id);
     $secondaryGroups = $user->getSecondaryGroups();
     $secondaryGroupIds = [];

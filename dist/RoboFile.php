@@ -159,7 +159,7 @@ class RoboFile extends Tasks
     public function packageInstall($file): void
     {
         if (! is_file($file)) {
-            $this->writeln("Can't open $file. File doesn't exists.");
+            $this->writeln("Can't open {$file}. File doesn't exists.");
             return;
         }
 
@@ -260,9 +260,9 @@ class RoboFile extends Tasks
     {
         foreach ($modules as $module) {
             if (uninstall_module($module, 'module')) {
-                $this->writeln("Package $module removed.");
+                $this->writeln("Package {$module} removed.");
             } else {
-                $this->writeln("Removing $module failed.");
+                $this->writeln("Removing {$module} failed.");
             }
         }
     }
@@ -299,7 +299,7 @@ class RoboFile extends Tasks
                 $version = getThemeMeta($theme[$i], 'version');
                 $line = $theme[$i];
                 if ($version !== null) {
-                    $line .= " $version";
+                    $line .= " {$version}";
                 }
                 $this->writeln($line);
             }
@@ -314,9 +314,9 @@ class RoboFile extends Tasks
     {
         foreach ($themes as $theme) {
             if (uninstall_module($theme, 'theme')) {
-                $this->writeln("Package $theme removed.");
+                $this->writeln("Package {$theme} removed.");
             } else {
-                $this->writeln("Removing $theme failed.");
+                $this->writeln("Removing {$theme} failed.");
             }
         }
     }
@@ -396,7 +396,7 @@ class RoboFile extends Tasks
         $where = $component ? "component='" .
                 Database::escapeValue($component) . "'" : '1=1';
         $result = Database::query('Select component, name, date from {prefix}dbtrack '
-                        . "where $where order by component, date", true);
+                        . "where {$where} order by component, date", true);
         while ($row = Database::fetchObject($result)) {
             $this->writeln("{$row->component} | {$row->name} | {$row->date}");
         }
@@ -422,7 +422,7 @@ class RoboFile extends Tasks
             $command = str_replace('/', '\\', $command);
         }
 
-        system("$command $testFile");
+        system("{$command} {$testFile}");
     }
 
     /**
@@ -436,7 +436,7 @@ class RoboFile extends Tasks
             $command = str_replace('/', '\\', $command);
         }
 
-        system("$command $testFile");
+        system("{$command} {$testFile}");
     }
 
     /**
@@ -550,7 +550,7 @@ class RoboFile extends Tasks
             } else {
                 $processedValue = $value;
             }
-            $this->writeln("$key: $processedValue");
+            $this->writeln("{$key}: {$processedValue}");
         }
     }
 
@@ -560,11 +560,11 @@ class RoboFile extends Tasks
         $line = $name;
 
         if ($version !== null) {
-            $line .= " $version";
+            $line .= " {$version}";
         }
         $module = new Module($name);
         $status = $module->isEnabled() ? 'enabled' : 'disabled';
-        $line .= " ($status)";
+        $line .= " ({$status})";
         return $line;
     }
 

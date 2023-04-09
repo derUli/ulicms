@@ -74,7 +74,7 @@ function file_get_contents_wrapper(
         md5($content) !== strtolower($checksum)
     ) {
         throw new CorruptDownloadException(
-            "Download of $url - Checksum validation failed"
+            "Download of {$url} - Checksum validation failed"
         );
     }
 

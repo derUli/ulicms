@@ -103,7 +103,7 @@ class Page extends Content
             $result = Database::fetchObject($result);
             $this->fillVars($result);
         } else {
-            throw new DatasetNotFoundException("No content with id $id");
+            throw new DatasetNotFoundException("No content with id {$id}");
         }
     }
 
@@ -112,8 +112,8 @@ class Page extends Content
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
         $result = Database::query('SELECT * FROM `' . tbname('content') .
-                        "` where `slug` = '$name' and "
-                        . "`language` = '$language'");
+                        "` where `slug` = '{$name}' and "
+                        . "`language` = '{$language}'");
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
             $this->fillVars($dataset);

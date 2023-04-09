@@ -128,9 +128,9 @@ class File
             if ($value === '.' || $value === '..') {
                 continue;
             }
-            if (is_dir("$dir/$value")) {
-                $result[] = str_replace('\\', '/', "$dir/$value");
-                $result = array_merge($result, self::findAllDirs("$dir/$value"));
+            if (is_dir("{$dir}/{$value}")) {
+                $result[] = str_replace('\\', '/', "{$dir}/{$value}");
+                $result = array_merge($result, self::findAllDirs("{$dir}/{$value}"));
                 continue;
             }
         }
@@ -152,12 +152,12 @@ class File
                 continue;
             }
 
-            if (is_file("$dir/$value")) {
-                $result[] = str_replace('\\', '/', "$dir/$value");
+            if (is_file("{$dir}/{$value}")) {
+                $result[] = str_replace('\\', '/', "{$dir}/{$value}");
                 continue;
             }
 
-            foreach (self::findAllFiles("$dir/$value") as $value) {
+            foreach (self::findAllFiles("{$dir}/{$value}") as $value) {
                 $value = str_replace('\\', '/', $value);
                 $result[] = $value;
             }

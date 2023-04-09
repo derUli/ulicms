@@ -133,7 +133,7 @@ class Language extends Model
     public static function getAllLanguages(string $order = 'id'): array
     {
         $datasets = [];
-        $sql = "select id from `{prefix}languages` order by $order";
+        $sql = "select id from `{prefix}languages` order by {$order}";
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
             $datasets[] = new Language($row->id);

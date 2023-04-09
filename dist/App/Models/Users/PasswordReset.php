@@ -63,7 +63,7 @@ class PasswordReset
         $message = Template::executeDefaultOrOwnTemplate('email/password_reset');
         $subject = get_translation('reset_password_subject');
         $from = Settings::get('email');
-        $headers = "From: $from\r\n";
+        $headers = "From: {$from}\r\n";
         $headers .= "Mime-Version: 1.0\r\n";
         $headers .= 'Content-type: text/plain; charset=utf-8';
         Mailer::send($to, $subject, $message, $headers);
@@ -86,7 +86,7 @@ class PasswordReset
         $url .= '/' . ModuleHelper::buildMethodCallUrl(
             SessionManager::class,
             'resetPassword',
-            "token=$token"
+            "token={$token}"
         );
         return $url;
     }

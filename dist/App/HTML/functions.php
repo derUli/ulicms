@@ -38,7 +38,7 @@ function buttonLink(
     if (! isset($htmlAttributes['class'])) {
         $htmlAttributes['class'] = $type;
     } else {
-        $htmlAttributes['class'] = "$type {$htmlAttributes['class']}";
+        $htmlAttributes['class'] = "{$type} {$htmlAttributes['class']}";
     }
     return link($url, $text, $allowHtml, $target, $htmlAttributes);
 }
@@ -72,11 +72,11 @@ function icon(string $classes, array $htmlAttributes = []): string
     if (! isset($htmlAttributes['class'])) {
         $htmlAttributes['class'] = $classes;
     } else {
-        $htmlAttributes['class'] = "$classes {$htmlAttributes['class']}";
+        $htmlAttributes['class'] = "{$classes} {$htmlAttributes['class']}";
     }
 
     $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
-    return "<i $attribHTML></i>";
+    return "<i {$attribHTML}></i>";
 }
 
 // embed an image as base64 data URI
