@@ -119,7 +119,7 @@ return [
     'File_Save_OK' => 'Il file è stato salvato con successo.',
     'File_Save_Error' => "C'è stato un errore nel salvataggio del file.",
     'New_File' => 'Nuovo file',
-    'No_Extension',"Non hai inserito l'estensione del file.",
+    'No_Extension', "Non hai inserito l'estensione del file.",
     'Valid_Extensions' => 'Estensioni valide: %s', // %s = txt,log etc.
     'Upload_message' => "Trascina qui i file per l'upload",
 

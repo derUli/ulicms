@@ -248,8 +248,6 @@ $tmpRules = [
     'visibility_required' => true,
     // Add `void` return type to functions with missing or empty return statements, but priority is given to `@return` annotations. Requires PHP >= 7.1.
     'void_return' => false,
-    // In array declaration, there MUST be a whitespace after each comma.
-    'whitespace_after_comma_in_array' => true,
     // Write conditions in Yoda style (`true`), non-Yoda style (`['equal' => false, 'identical' => false, 'less_and_greater' => false]`) or ignore those conditions (`null`) based on configuration.
     'yoda_style' => true,
     ];
@@ -275,7 +273,9 @@ $config
      // Short cast `bool` using double exclamation mark should not be used.
     'no_short_bool_cast' => true,
     // List (`array` destructuring) assignment should be declared using the configured syntax. Requires PHP >= 7.1.
-    'list_syntax' => ['syntax'=>'short'],
+    'list_syntax' => ['syntax'=>'short'],    
+    // In array declaration, there MUST be a whitespace after each comma.
+    'whitespace_after_comma_in_array' => true,
     ]);
 
 return $config->setFinder(

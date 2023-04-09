@@ -474,7 +474,7 @@ function folder_info($path, $count_hidden=true)
         }
     }
 
-    return [$total_size,$files_count,$folders_count];
+    return [$total_size, $files_count, $folders_count];
 }
 /**
 * Get number of files in a directory
