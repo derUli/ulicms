@@ -15,8 +15,6 @@ $tmpRules = [
     'declare_equal_normalize' => ['space'=>'single'],
     // The keyword `elseif` should be used instead of `else if` so that all control keywords look like single words.
     'elseif' => true,
-    // Replace deprecated `ereg` regular expression functions with `preg`.
-    'ereg_to_preg' => true,
     // Add curly braces to indirect variables to make them clear to understand. Requires PHP >= 7.0.
     'explicit_indirect_variable' => true,
     // Converts implicit variables into explicit ones in double-quoted strings or heredoc syntax.
@@ -277,6 +275,8 @@ $config
     'dir_constant' => false,
     // Replace multiple nested calls of `dirname` by only one call with second `$level` parameter. Requires PHP >= 7.0.
     'combine_nested_dirname' => true,
+    // Replace deprecated `ereg` regular expression functions with `preg`.
+    'ereg_to_preg' => true,
     ]);
 
 return $config->setFinder(
