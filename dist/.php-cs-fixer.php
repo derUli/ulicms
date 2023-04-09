@@ -9,8 +9,6 @@ $tmpRules = [
     'native_function_invocation' => ['include'=>['@all','trans']],
     // There must be a comment when fall-through is intentional in a non-empty case body.
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
-    // A return statement wishing to return `void` should not return `null`.
-    'simplified_null_return' => true,
     // Write conditions in Yoda style (`true`), non-Yoda style (`['equal' => false, 'identical' => false, 'less_and_greater' => false]`) or ignore those conditions (`null`) based on configuration.
     'yoda_style' => true,
     ];
@@ -275,6 +273,8 @@ $config
     'static_lambda' => true,
     // Replace control structure alternative syntax to use braces.
     'no_alternative_syntax' => true,
+    // A return statement wishing to return `void` should not return `null`.
+    'simplified_null_return' => true
     ]);
 
 return $config->setFinder(
