@@ -135,7 +135,6 @@ class ActionRegistry
      */
     public static function getAction(string $action): ?string
     {
-        return isset(self::$actions[$action]) ?
-                self::$actions[$action] : null;
+        return self::$actions[$action] ?? null;
     }
 }

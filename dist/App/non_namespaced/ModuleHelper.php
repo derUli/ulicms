@@ -230,8 +230,7 @@ class ModuleHelper extends Helper
         // Replace backslashes with slashes (Windows)
         $dirname = str_replace('\\', '/', $dirname);
 
-        $currentLanguage = isset($_SESSION['language']) ?
-                $_SESSION['language'] : Settings::get('default_language');
+        $currentLanguage = $_SESSION['language'] ?? Settings::get('default_language');
 
         // Todo: Too much if's refactor this code
         if ($domain) {

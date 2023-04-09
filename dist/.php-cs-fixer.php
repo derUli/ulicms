@@ -174,8 +174,7 @@ $tmpRules = [
     'switch_continue_to_break' => true,
     // Use the Elvis operator `?:` where possible.
     'ternary_to_elvis_operator' => true,
-    // Use `null` coalescing operator `??` where possible. Requires PHP >= 7.0.
-    'ternary_to_null_coalescing' => true,
+ 
     // Unary operators should be placed adjacent to their operands.
     'unary_operator_spaces' => true,
     // Visibility MUST be declared on all properties and methods; `abstract` and `final` MUST be declared before the visibility; `static` MUST be declared after the visibility.
@@ -278,6 +277,8 @@ $config
     'encoding' => true,    
     // Standardize spaces around ternary operator.
     'ternary_operator_spaces' => true,
+    // Use `null` coalescing operator `??` where possible. Requires PHP >= 7.0.
+    'ternary_to_null_coalescing' => true,
     ]);
 
 return $config->setFinder(

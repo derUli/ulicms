@@ -143,7 +143,7 @@ class Request
                 return $_SERVER[$proxy_header];
             }
         }
-        return isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
+        return $_SERVER['REMOTE_ADDR'] ?? null;
     }
 
     public static function isHeaderSent(string $header, ?array $headers = null): bool
@@ -171,8 +171,7 @@ class Request
 
     public static function getDomain(): ?string
     {
-        return isset($_SERVER['HTTP_HOST']) ?
-                $_SERVER['HTTP_HOST'] :
+        return $_SERVER['HTTP_HOST'] ??
                 null;
     }
 
@@ -187,13 +186,11 @@ class Request
 
     public static function getUserAgent(): ?string
     {
-        return isset($_SERVER['HTTP_USER_AGENT']) ?
-                $_SERVER['HTTP_USER_AGENT'] : null;
+        return $_SERVER['HTTP_USER_AGENT'] ?? null;
     }
 
     public static function getRequestUri(): ?string
     {
-        return isset($_SERVER['REQUEST_URI']) ?
-                $_SERVER['REQUEST_URI'] : null;
+        return $_SERVER['REQUEST_URI'] ?? null;
     }
 }

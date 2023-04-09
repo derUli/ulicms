@@ -234,7 +234,7 @@ class UploadHandler
         return
                 ($https ? 'https://' : 'http://') .
                 (! empty($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER'] . '@' : '') .
-                (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ($_SERVER['SERVER_NAME'] .
+                ($_SERVER['HTTP_HOST'] ?? ($_SERVER['SERVER_NAME'] .
                 ($https && $_SERVER['SERVER_PORT'] === 443 ||
                 $_SERVER['SERVER_PORT'] === 80 ? '' : ':' . $_SERVER['SERVER_PORT']))) .
                 substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/'));
@@ -390,8 +390,7 @@ class UploadHandler
 
     protected function get_error_message($error)
     {
-        return isset($this->error_messages[$error]) ?
-                $this->error_messages[$error] : $error;
+        return $this->error_messages[$error] ?? $error;
     }
 
     public function get_config_bytes($val)
@@ -499,7 +498,7 @@ class UploadHandler
     protected function upcount_name_callback($matches)
     {
         $index = isset($matches[1]) ? ((int) $matches[1]) + 1 : 1;
-        $ext = isset($matches[2]) ? $matches[2] : '';
+        $ext = $matches[2] ?? '';
         return ' (' . $index . ')' . $ext;
     }
 
@@ -801,8 +800,7 @@ class UploadHandler
             case 'jpeg':
                 $src_func = 'imagecreatefromjpeg';
                 $write_func = 'imagejpeg';
-                $image_quality = isset($options['jpeg_quality']) ?
-                        $options['jpeg_quality'] : 75;
+                $image_quality = $options['jpeg_quality'] ?? 75;
                 break;
             case 'gif':
                 $src_func = 'imagecreatefromgif';
@@ -812,14 +810,12 @@ class UploadHandler
             case 'png':
                 $src_func = 'imagecreatefrompng';
                 $write_func = 'imagepng';
-                $image_quality = isset($options['png_quality']) ?
-                        $options['png_quality'] : 9;
+                $image_quality = $options['png_quality'] ?? 9;
                 break;
             case 'webp':
                 $src_func = 'imagecreatefromwebp';
                 $write_func = 'imagewebp';
-                $image_quality = isset($options['webp_quality']) ?
-                        $options['webp_quality'] : 75;
+                $image_quality = $options['webp_quality'] ?? 75;
                 break;
             default:
                 return false;
@@ -1004,7 +1000,7 @@ class UploadHandler
             $new_height = $max_height = $options['max_height'];
         }
 
-        $image_strip = (isset($options['strip']) ? $options['strip'] : false);
+        $image_strip = ($options['strip'] ?? false);
 
         if (! $image_oriented && ($max_width >= $img_width) && ($max_height >= $img_height) && ! $image_strip && empty($options['jpeg_quality'])) {
             if ($file_path !== $new_file_path) {
@@ -1012,7 +1008,7 @@ class UploadHandler
             }
             return true;
         }
-        $crop = (isset($options['crop']) ? $options['crop'] : false);
+        $crop = ($options['crop'] ?? false);
 
         if ($crop) {
             $x = 0;
@@ -1028,8 +1024,8 @@ class UploadHandler
         $success = $image->resizeImage(
             $new_width,
             $new_height,
-            isset($options['filter']) ? $options['filter'] : \imagick::FILTER_LANCZOS,
-            isset($options['blur']) ? $options['blur'] : 1,
+            $options['filter'] ?? \imagick::FILTER_LANCZOS,
+            $options['blur'] ?? 1,
             $new_width && $new_height // fit image into constraints if not to be cropped
         );
         if ($success && $crop) {
@@ -1464,8 +1460,7 @@ class UploadHandler
             }
             $this->head();
             if ($this->get_server_var('HTTP_CONTENT_RANGE')) {
-                $files = isset($content[$this->options['param_name']]) ?
-                        $content[$this->options['param_name']] : null;
+                $files = $content[$this->options['param_name']] ?? null;
                 if ($files && is_array($files) && is_object($files[0]) && $files[0]->size) {
                     $this->header('Range: 0-' . (
                         $this->fix_integer_overflow((int) $files[0]->size) - 1
@@ -1553,14 +1548,11 @@ class UploadHandler
                 // param_name is a single object identifier like "file",
                 // $upload is a one-dimensional array:
                 $files[] = $this->handle_file_upload(
-                    isset($upload['tmp_name']) ? $upload['tmp_name'] : null,
-                    $file_name ? $file_name : (isset($upload['name']) ?
-                    $upload['name'] : null),
-                    $size ? $size : (isset($upload['size']) ?
-                    $upload['size'] : $this->get_server_var('CONTENT_LENGTH')),
-                    isset($upload['type']) ?
-                    $upload['type'] : $this->get_server_var('CONTENT_TYPE'),
-                    isset($upload['error']) ? $upload['error'] : null,
+                    $upload['tmp_name'] ?? null,
+                    $file_name ? $file_name : ($upload['name'] ?? null),
+                    $size ? $size : ($upload['size'] ?? $this->get_server_var('CONTENT_LENGTH')),
+                    $upload['type'] ?? $this->get_server_var('CONTENT_TYPE'),
+                    $upload['error'] ?? null,
                     null,
                     $content_range
                 );

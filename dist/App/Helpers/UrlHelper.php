@@ -25,7 +25,7 @@ class UrlHelper extends Helper
             $hostWithPort .= ':' . $parsedUri['port'];
         }
 
-        $path = isset($parsedUri['path']) ? $parsedUri['path'] : '';
+        $path = $parsedUri['path'] ?? '';
         return $parsedUri['scheme'] . '://' . $hostWithPort
                 . $path;
     }
