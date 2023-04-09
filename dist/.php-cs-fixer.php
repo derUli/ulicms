@@ -17,8 +17,6 @@ $tmpRules = [
     'simplified_null_return' => true,
     // Lambdas not (indirect) referencing `$this` must be declared `static`.
     'static_lambda' => true,
-    // Add `void` return type to functions with missing or empty return statements, but priority is given to `@return` annotations. Requires PHP >= 7.1.
-    'void_return' => false,
     // Write conditions in Yoda style (`true`), non-Yoda style (`['equal' => false, 'identical' => false, 'less_and_greater' => false]`) or ignore those conditions (`null`) based on configuration.
     'yoda_style' => true,
     ];
@@ -275,6 +273,8 @@ $config
     'declare_equal_normalize' => ['space'=>'none'],
     // Visibility MUST be declared on all properties and methods; `abstract` and `final` MUST be declared before the visibility; `static` MUST be declared after the visibility.
     'visibility_required' => true,
+    // Add `void` return type to functions with missing or empty return statements, but priority is given to `@return` annotations. Requires PHP >= 7.1.
+    'void_return' => false,
     ]);
 
 return $config->setFinder(
