@@ -11,8 +11,7 @@ $tmpRules = [
     'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
     // Ensure single space between function's argument and its typehint.
     'function_typehint_space' => true,
-    // Code MUST use configured indentation type.
-    'indentation_type' => true,
+
     // In method arguments and method call, there MUST NOT be a space before each comma and there MUST be one space after each comma. Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line.
     'method_argument_space' => true,
     // Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.
@@ -38,8 +37,8 @@ $tmpRules = [
     ];
 
 $config
+    ->setIndent("    ")
     ->setRiskyAllowed(true)
-    //->setIndent("  ")
     ->setRules([
     // Replaces `intval`, `floatval`, `doubleval`, `strval` and `boolval` function calls with according type casting operator.
     'modernize_types_casting' => true,
