@@ -59,8 +59,6 @@ $tmpRules = [
     'native_function_casing' => true,
     // Add leading `\` before function invocation to speed up resolving.
     'native_function_invocation' => ['include'=>['@all','trans']],
-    // Native type hints for functions should use the correct case.
-    'native_function_type_declaration_casing' => true,
     // Replace control structure alternative syntax to use braces.
     'no_alternative_syntax' => true,
     // There must be a comment when fall-through is intentional in a non-empty case body.
@@ -277,6 +275,8 @@ $config
     'simplified_if_return' => true,
     // Instructions must be terminated with a semicolon.
     'semicolon_after_instruction' => true,
+    // Native type hints for functions should use the correct case.
+    'native_function_type_declaration_casing' => true,
     ]);
 
 return $config->setFinder(
