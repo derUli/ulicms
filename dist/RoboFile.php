@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
+use App\Constants\DefaultValues;
+use App\Database\DBMigrator;
+use App\Exceptions\SqlException;
+use App\Helpers\DateTimeHelper;
 use App\Packages\PackageManager;
+use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
 use App\Utils\CacheUtil;
 use Robo\Tasks;
-use App\Exceptions\SqlException;
-use App\Constants\DefaultValues;
-use App\Database\DBMigrator;
-use App\Helpers\DateTimeHelper;
-use App\Packages\SinPackageInstaller;
 
 /**
  * This is project's console commands configuration for Robo task runner.

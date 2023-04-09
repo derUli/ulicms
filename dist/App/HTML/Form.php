@@ -6,9 +6,9 @@ namespace App\HTML;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
+use App\Constants\RequestMethod;
 use ModuleHelper;
 use Template;
-use App\Constants\RequestMethod;
 
 /**
  * This class contains method to build <form> tags

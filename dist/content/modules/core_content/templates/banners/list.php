@@ -1,8 +1,8 @@
 <?php
 
+use App\HTML\Alert;
 use App\Models\Content\Advertisement\Banners;
 use App\Models\Content\Categories;
-use App\HTML\Alert;
 use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();

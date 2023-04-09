@@ -6,11 +6,11 @@ namespace App\Packages;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use App\Utils\File;
-use Path;
-use Database;
-use App\Utils\VersionComparison;
 use App\Backend\UliCMSVersion;
+use App\Utils\File;
+use App\Utils\VersionComparison;
+use Database;
+use Path;
 
 /**
  * Util to install Simple Install packages.

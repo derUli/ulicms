@@ -1,12 +1,12 @@
 <?php
 
-use App\Constants\RequestMethod;
 use App\Constants\HtmlEditor;
-use App\HTML\Input;
+use App\Constants\RequestMethod;
 use App\Helpers\DateTimeHelper;
-use App\Translations\JSTranslation;
-
 use function App\HTML\imageTag;
+use App\HTML\Input;
+
+use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
 if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermission('users_edit')) || ($_GET['id'] == $_SESSION['login_id'])) {

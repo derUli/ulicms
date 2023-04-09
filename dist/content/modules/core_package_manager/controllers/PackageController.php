@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Services\Connectors\PackageSourceConnector;
-use zz\Html\HTMLMinify;
-
 use function App\HTML\text;
+use App\Services\Connectors\PackageSourceConnector;
+
+use zz\Html\HTMLMinify;
 
 class PackageController extends MainClass
 {

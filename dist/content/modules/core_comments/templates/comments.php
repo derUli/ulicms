@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Content\Comment;
 use App\Constants\CommentStatus;
 use App\Helpers\DateTimeHelper;
+use App\Models\Content\Comment;
 
 $comments = Comment::getAllByStatus(
     CommentStatus::PUBLISHED,

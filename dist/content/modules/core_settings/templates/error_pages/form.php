@@ -1,8 +1,8 @@
 <?php
 
+use App\Constants\RequestMethod;
 use App\HTML\Input;
 use App\HTML\ListItem;
-use App\Constants\RequestMethod;
 use App\Translations\JSTranslation;
 
 $languages = getAllLanguages();

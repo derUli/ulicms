@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Content\Comment;
 use App\Helpers\DataTablesHelper;
+use App\Models\Content\Comment;
 
 $admin_logo = Settings::get('admin_logo');
 if (! $admin_logo) {

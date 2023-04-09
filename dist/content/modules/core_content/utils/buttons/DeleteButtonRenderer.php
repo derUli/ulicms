@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\CoreContent\Partials;
 
-use Template;
-use ViewBag;
-use User;
-use ModuleHelper;
-use PageController;
-use App\Security\ContentPermissionChecker;
-
 use function App\HTML\icon;
 use function App\HTML\Link;
+use App\Security\ContentPermissionChecker;
+use ModuleHelper;
+use PageController;
+use Template;
+
+use User;
+use ViewBag;
 
 class DeleteButtonRenderer
 {

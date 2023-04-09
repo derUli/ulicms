@@ -8,11 +8,11 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Utils\Mailer;
 use Database;
-use ViewBag;
-use Template;
 use ModuleHelper;
-use Settings;
 use SessionManager;
+use Settings;
+use Template;
+use ViewBag;
 
 /**
  * Reset admin user password

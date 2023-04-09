@@ -4,10 +4,10 @@
 
 declare(strict_types=1);
 
-use zz\Html\HTMLMinify;
 use App\Backend\BackendPageRenderer;
 use App\Helpers\TestHelper;
 use Nette\Utils\Json;
+use zz\Html\HTMLMinify;
 
 /**
  * Serialize $data as JSON, output it to the client and exit script

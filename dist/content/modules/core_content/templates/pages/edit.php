@@ -3,20 +3,20 @@
 // TODO: Rewrite this view, move logic to PageController
 // Join new and edit views to one form
 
+use App\CoreContent\UIUtils;
+use App\Helpers\NumberFormatHelper;
+use function App\HTML\icon;
+use App\HTML\Input;
+use App\Models\Content\Categories;
+use App\Models\Content\Comment;
+use App\Models\Content\Language;
 use App\Models\Content\TypeMapper;
+use App\Models\Content\Types\DefaultContentTypes;
+use App\Models\Content\VCS;
 use App\Security\ContentPermissionChecker;
 use App\Security\PermissionChecker;
-use App\Models\Content\Comment;
-use App\Models\Content\VCS;
-use App\Models\Content\Categories;
-use App\Models\Content\Language;
-use App\Models\Content\Types\DefaultContentTypes;
-use App\Helpers\NumberFormatHelper;
-use App\HTML\Input;
-use App\CoreContent\UIUtils;
-use App\Translations\JSTranslation;
 
-use function App\HTML\icon;
+use App\Translations\JSTranslation;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission('pages')) {

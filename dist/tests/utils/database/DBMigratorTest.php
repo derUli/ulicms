@@ -1,7 +1,7 @@
 <?php
 
-use App\Exceptions\SqlException;
 use App\Database\DBMigrator;
+use App\Exceptions\SqlException;
 
 class DBMigratorTest extends \PHPUnit\Framework\TestCase
 {

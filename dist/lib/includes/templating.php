@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use App\Models\Content\Language;
-use App\Models\Content\Categories;
-use App\Utils\File;
-use App\Exceptions\DatasetNotFoundException;
 use App\Backend\UliCMSVersion;
+use App\Exceptions\DatasetNotFoundException;
+use App\Models\Content\Categories;
+use App\Models\Content\Language;
+use App\Utils\File;
 
 function html5_doctype(): void
 {

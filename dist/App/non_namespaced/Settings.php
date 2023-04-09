@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
+use App\Constants\DefaultValues;
+use App\Security\Hash;
 use Phpfastcache\Config\ConfigurationOption;
 use Phpfastcache\Helper\Psr16Adapter;
-use App\Security\Hash;
-use App\Constants\DefaultValues;
 
 // class for handling system settings
 class Settings

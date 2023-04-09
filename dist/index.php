@@ -4,10 +4,10 @@ const CORE_COMPONENT = 'frontend';
 
 require_once dirname(__FILE__) . '/init.php';
 
-use App\Models\Content\Language;
-use App\Utils\CacheUtil;
 use App\Helpers\DateTimeHelper;
+use App\Models\Content\Language;
 use App\Translations\Translation;
+use App\Utils\CacheUtil;
 
 global $connection;
 

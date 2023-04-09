@@ -1,11 +1,11 @@
 <?php
 
 use App\Exceptions\FileNotFoundException;
-use App\Utils\File;
 use App\Helpers\TestHelper;
+use function App\HTML\stringContainsHtml;
 use App\Translations\Translation;
 
-use function App\HTML\stringContainsHtml;
+use App\Utils\File;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase
 {

@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Media\Video;
 use App\Models\Media\Audio;
+use App\Models\Media\Video;
 
 class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase
 {

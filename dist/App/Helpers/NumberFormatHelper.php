@@ -6,9 +6,9 @@ namespace App\Helpers;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Westsworld\TimeAgo;
-use DateTime;
 use ChrisUllyott\FileSize;
+use DateTime;
+use Westsworld\TimeAgo;
 
 /**
  * Utils to deal with number values such as size units and timestamps

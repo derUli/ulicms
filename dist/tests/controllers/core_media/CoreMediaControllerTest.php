@@ -1,9 +1,9 @@
 <?php
 
-use App\HTML\Link;
-use Spatie\Snapshots\MatchesSnapshots;
-
 use function App\HTML\imageTag;
+use App\HTML\Link;
+
+use Spatie\Snapshots\MatchesSnapshots;
 
 class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
 {

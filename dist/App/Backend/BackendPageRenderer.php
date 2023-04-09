@@ -6,14 +6,14 @@ namespace App\Backend;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
+use App\Helpers\StringHelper;
+use App\Registries\ActionRegistry;
+use App\Security\PermissionChecker;
+use Request;
+use Settings;
 use Template;
 use Vars;
-use Request;
-use App\Helpers\StringHelper;
-use Settings;
 use zz\Html\HTMLMinify;
-use App\Security\PermissionChecker;
-use App\Registries\ActionRegistry;
 
 /**
  * This class renders a backend page

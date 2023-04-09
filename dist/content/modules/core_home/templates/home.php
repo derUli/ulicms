@@ -1,7 +1,7 @@
 <?php
 
-use App\HTML\Alert;
 use App\Constants\DefaultValues;
+use App\HTML\Alert;
 use App\Security\XSSProtection;
 
 $permissionChecker = new ACL();

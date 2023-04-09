@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use LasseRafn\InitialAvatarGenerator\InitialAvatar;
-use App\Security\PermissionChecker;
-use App\Security\Hash;
-use App\Models\Users\GroupCollection;
 use App\Constants\HtmlEditor;
-use App\Utils\Mailer;
 use App\Helpers\ImagineHelper;
+use App\Models\Users\GroupCollection;
 use App\Models\Users\PasswordReset;
+use App\Security\Hash;
+use App\Security\PermissionChecker;
+use App\Utils\Mailer;
+use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 
 /**
  * User model

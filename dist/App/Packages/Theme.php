@@ -6,8 +6,8 @@ namespace App\Packages;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use function getThemeMeta;
 use function getTemplateDirPath;
+use function getThemeMeta;
 
 /**
  * This class represents a installed theme

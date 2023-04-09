@@ -1,9 +1,9 @@
 <?php
 
 use App\Backend\BackendPageRenderer;
+use App\Constants\CommentStatus;
 use App\HTML\Input;
 use App\HTML\ListItem;
-use App\Constants\CommentStatus;
 
 $controller = ModuleHelper::getMainController('core_comments');
 $defaultStatus = $controller->_getDefaultStatus();

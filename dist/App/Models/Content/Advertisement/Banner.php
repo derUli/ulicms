@@ -6,11 +6,11 @@ namespace App\Models\Content\Advertisement;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Template;
-use Database;
-use Model;
-use InvalidArgumentException;
 use App\Exceptions\DatasetNotFoundException;
+use Database;
+use InvalidArgumentException;
+use Model;
+use Template;
 
 // advertisement banners can be html codes or classic gif banners
 class Banner extends Model

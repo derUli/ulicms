@@ -6,10 +6,10 @@ namespace App\Services\Connectors;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Settings;
-
 use function cms_version;
+
 use function file_get_contents_wrapper;
+use Settings;
 
 class PackageSourceConnector
 {

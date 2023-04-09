@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Content\Advertisement\Banner;
 use App\Constants\HtmlEditor;
+use App\Models\Content\Advertisement\Banner;
 
 class TemplatingTest extends \PHPUnit\Framework\TestCase
 {

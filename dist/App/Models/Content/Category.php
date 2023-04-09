@@ -6,8 +6,8 @@ namespace App\Models\Content;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use mysqli_result;
 use Database;
+use mysqli_result;
 
 class Category
 {

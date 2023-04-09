@@ -2,10 +2,10 @@
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use App\Security\Permissions\PagePermissions;
+use App\Exceptions\DatasetNotFoundException;
 use App\Models\Content\Comment;
 use App\Models\Content\VCS;
-use App\Exceptions\DatasetNotFoundException;
+use App\Security\Permissions\PagePermissions;
 
 class Page extends Content
 {

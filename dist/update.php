@@ -4,8 +4,8 @@ const CORE_COMPONENT = 'update';
 
 require_once dirname(__FILE__) . '/init.php';
 
-use App\Database\DBMigrator;
 use App\Backend\UliCMSVersion;
+use App\Database\DBMigrator;
 
 // Enable maintenance mode
 Settings::set('maintenance_mode', '1');

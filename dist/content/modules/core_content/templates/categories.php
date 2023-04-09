@@ -1,8 +1,8 @@
 <?php
 
 // TODO: refactor this file into multiple files
-use App\Models\Content\Categories;
 use App\HTML\Alert;
+use App\Models\Content\Categories;
 use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();

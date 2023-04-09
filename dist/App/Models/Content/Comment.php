@@ -6,14 +6,14 @@ namespace App\Models\Content;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Database;
-use ContentFactory;
 use App\Constants\CommentStatus;
+use App\Exceptions\DatasetNotFoundException;
+use App\Security\SpamChecker\CommentSpamChecker;
+use App\Security\SpamChecker\SpamFilterConfiguration;
+use ContentFactory;
+use Database;
 use InvalidArgumentException;
 use Model;
-use App\Exceptions\DatasetNotFoundException;
-use App\Security\SpamChecker\SpamFilterConfiguration;
-use App\Security\SpamChecker\CommentSpamChecker;
 use ModuleHelper;
 
 // TODO: Comment public static functions

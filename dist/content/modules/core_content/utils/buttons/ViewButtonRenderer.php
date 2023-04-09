@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\CoreContent\Partials;
 
-use ContentFactory;
-use Template;
-use ViewBag;
-use User;
-use App\Security\ContentPermissionChecker;
-
 use function App\HTML\icon;
 use function App\HTML\Link;
+use App\Security\ContentPermissionChecker;
+use ContentFactory;
+use Template;
+
+use User;
+use ViewBag;
 
 class ViewButtonRenderer
 {

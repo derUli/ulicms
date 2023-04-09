@@ -6,9 +6,9 @@ namespace App\Helpers;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Settings;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
+use Settings;
 
 /**
  * Utils to scale down image uploads

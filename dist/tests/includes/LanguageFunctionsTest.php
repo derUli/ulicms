@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Content\Language;
 use App\Constants\HtmlEditor;
+use App\Models\Content\Language;
 
 class LanguageFunctionsTest extends \PHPUnit\Framework\TestCase
 {

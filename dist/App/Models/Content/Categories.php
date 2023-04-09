@@ -7,8 +7,8 @@ namespace App\Models\Content;
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 
-use function get_translation;
 use function db_escape;
+use function get_translation;
 
 // methods for manipulating categories
 class Categories

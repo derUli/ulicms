@@ -6,8 +6,8 @@ namespace App\Helpers;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Imagine\Image\AbstractImagine;
 use Imagine\Gd\Imagine;
+use Imagine\Image\AbstractImagine;
 
 /**
  * Helper methods for Imagine

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\HTML;
 
 use App\Exceptions\FileNotFoundException;
-use ModuleHelper;
 use App\Utils\File;
+use ModuleHelper;
 
 // use this to output a string as html
 // html specialchars are encoded, line breaks are replaced with

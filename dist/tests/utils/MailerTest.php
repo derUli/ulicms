@@ -1,11 +1,11 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
 use App\Constants\EmailModes;
-use PHPMailer\PHPMailer\SMTP;
 use App\Registries\LoggerRegistry;
-use App\Utils\Mailer;
 use App\Utils\Logger;
+use App\Utils\Mailer;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 class MailerTest extends \PHPUnit\Framework\TestCase
 {

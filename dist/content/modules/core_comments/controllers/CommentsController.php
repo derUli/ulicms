@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use App\Models\Content\Comment;
-use App\Exceptions\DatasetNotFoundException;
-use App\HTML as HTML;
-use App\Exceptions\NotImplementedException;
 use App\Constants\CommentStatus;
+use App\Exceptions\DatasetNotFoundException;
+use App\Exceptions\NotImplementedException;
+use App\HTML as HTML;
+use App\Models\Content\Comment;
+use App\Security\PrivacyCheckbox;
 use App\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
-use App\Security\PrivacyCheckbox;
 
 class CommentsController extends MainClass
 {

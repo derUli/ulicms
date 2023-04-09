@@ -1,9 +1,9 @@
 <?php
 
 use App\HTML\Alert;
-use App\Translations\JSTranslation;
-
 use function App\HTML\imageTag;
+
+use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('users')) {

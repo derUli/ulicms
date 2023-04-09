@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use App\HTML\Style;
-use App\HTML\Script;
 use App\Exceptions\SCSSCompileException;
+use App\HTML\Script;
+use App\HTML\Style;
+use App\Security\Hash;
+use MatthiasMullie\Minify;
 use ScssPhp\ScssPhp\Compiler;
 use zz\Html\HTMLMinify;
-use MatthiasMullie\Minify;
-use App\Security\Hash;
 
 /**
  * Clears the Javascript queue

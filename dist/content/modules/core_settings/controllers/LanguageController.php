@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use App\Utils\CacheUtil;
-use App\Models\Content\Language;
-use Rakit\Validation\Validator;
-
 use function App\HTML\stringContainsHtml;
+use App\Models\Content\Language;
+use App\Utils\CacheUtil;
+
+use Rakit\Validation\Validator;
 
 class LanguageController extends Controller
 {

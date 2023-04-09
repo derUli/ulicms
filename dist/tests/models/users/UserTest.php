@@ -1,10 +1,10 @@
 <?php
 
+use App\Constants\HtmlEditor;
+use App\Models\Users\GroupCollection;
+use App\Models\Users\PasswordReset;
 use App\Security\Hash;
 use App\Utils\CacheUtil;
-use App\Models\Users\GroupCollection;
-use App\Constants\HtmlEditor;
-use App\Models\Users\PasswordReset;
 
 class UserTest extends \PHPUnit\Framework\TestCase
 {

@@ -1,10 +1,10 @@
 <?php
 
-use App\Utils\File;
-use App\Translations\JSTranslation;
 use App\Helpers\ImagineHelper;
-
 use function App\HTML\imageTag;
+use App\Translations\JSTranslation;
+
+use App\Utils\File;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('favicon')) {

@@ -6,9 +6,9 @@ namespace App\Registries;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use ModuleManager;
-use ControllerRegistry;
 use Controller;
+use ControllerRegistry;
+use ModuleManager;
 
 class ActionRegistry
 {

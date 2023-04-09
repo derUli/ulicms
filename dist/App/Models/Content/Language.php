@@ -4,12 +4,12 @@ namespace App\Models\Content;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Model;
 use Database;
-use Request;
-use Settings;
-
 use function getDomainByLanguage;
+use Model;
+use Request;
+
+use Settings;
 
 class Language extends Model
 {

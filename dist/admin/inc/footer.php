@@ -1,8 +1,8 @@
 <?php
 
-use App\Translations\JSTranslation;
+use function App\HTML\icon;
 
-use  function App\HTML\icon;
+use  App\Translations\JSTranslation;
 
 $menuTranslation = new JSTranslation(
     [

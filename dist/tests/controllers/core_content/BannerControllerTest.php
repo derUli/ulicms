@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Content\Advertisement\Banner;
 use App\Exceptions\DatasetNotFoundException;
+use App\Models\Content\Advertisement\Banner;
 
 class BannerControllerTest extends \PHPUnit\Framework\TestCase
 {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
-use Settings;
 use Request;
+use Settings;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 

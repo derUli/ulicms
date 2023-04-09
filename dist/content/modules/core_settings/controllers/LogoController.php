@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Utils\CacheUtil;
 use App\Helpers\ImageScaleHelper;
+use App\Utils\CacheUtil;
 use App\Utils\File;
 
 class LogoController extends Controller

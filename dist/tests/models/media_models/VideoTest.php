@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Media\Video;
 use App\Models\Content\Category;
+use App\Models\Media\Video;
 
 class VideoTest extends \PHPUnit\Framework\TestCase
 {

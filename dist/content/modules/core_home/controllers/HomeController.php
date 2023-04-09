@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use zz\Html\HTMLMinify;
 use App\Helpers\StringHelper;
+use zz\Html\HTMLMinify;
 
 class HomeController extends Controller
 {

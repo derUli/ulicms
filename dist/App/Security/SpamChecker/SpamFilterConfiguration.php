@@ -7,8 +7,8 @@ namespace App\Security\SpamChecker;
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Helpers\AntiSpamHelper;
-use Settings;
 use InvalidArgumentException;
+use Settings;
 
 class SpamFilterConfiguration
 {

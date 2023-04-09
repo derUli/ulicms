@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use App\Utils\File;
-use App\Exceptions\FileNotFoundException;
 use App\Exceptions\DatasetNotFoundException;
+use App\Exceptions\FileNotFoundException;
 use App\HTML\Script;
-use App\Security\PermissionChecker;
 use App\Models\Content\Advertisement\Banners;
+use App\Security\PermissionChecker;
+use App\Utils\File;
 
 class Template
 {

@@ -1,8 +1,8 @@
 <?php
 
-use App\Security\PermissionChecker;
 use App\Constants\RequestMethod;
 use App\Packages\Theme;
+use App\Security\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 

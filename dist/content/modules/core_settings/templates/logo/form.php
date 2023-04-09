@@ -1,8 +1,8 @@
 <?php
 use App\Helpers\ImagineHelper;
-use App\Translations\JSTranslation;
-
 use function App\HTML\imageTag;
+
+use App\Translations\JSTranslation;
 
 $controller = new LogoController();
 

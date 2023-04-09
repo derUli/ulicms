@@ -152,8 +152,6 @@ $tmpRules = [
     'object_operator_without_whitespace' => true,
     // Orders the elements of classes/interfaces/traits.
     'ordered_class_elements' => ['order'=>['use_trait','constant_public','constant_protected','constant_private','property_public','property_protected','property_private','construct','destruct','magic','phpunit','method_public','method_protected','method_private']],
-    // Ordering `use` statements.
-    'ordered_imports' => true,
     // Orders the interfaces in an `implements` or `interface extends` clause.
     'ordered_interfaces' => true,
     // Trait `use` statements must be sorted alphabetically.
@@ -280,6 +278,8 @@ $config
     'no_whitespace_in_blank_line' => true,
     // There should not be an empty `return` statement at the end of a function.
     'no_useless_return' => true,
+    // Ordering `use` statements.
+    'ordered_imports' => true,
     ]);
 
 return $config->setFinder(

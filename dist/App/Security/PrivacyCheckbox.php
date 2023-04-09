@@ -7,10 +7,10 @@ namespace App\Security;
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\HTML\Input;
-use Settings;
 use Request;
-use ViewBag;
+use Settings;
 use Template;
+use ViewBag;
 
 /**
  * Handling GDPR / DSGVO privacy checkbox

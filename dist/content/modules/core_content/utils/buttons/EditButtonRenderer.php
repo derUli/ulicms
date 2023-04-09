@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\CoreContent\Partials;
 
-use Template;
-use User;
-use ViewBag;
-use ModuleHelper;
-use App\Security\ContentPermissionChecker;
-
 use function App\HTML\icon;
 use function App\HTML\Link;
+use App\Security\ContentPermissionChecker;
+use ModuleHelper;
+use Template;
+
+use User;
+use ViewBag;
 
 class EditButtonRenderer
 {

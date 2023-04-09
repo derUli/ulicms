@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use Detection\MobileDetect;
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use Nette\Utils\Json;
 use Nette\Utils\JsonException;
 

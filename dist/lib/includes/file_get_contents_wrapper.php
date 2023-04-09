@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Utils\CacheUtil;
 use App\Exceptions\CorruptDownloadException;
 use App\Security\Hash;
+use App\Utils\CacheUtil;
 
 // die Funktionalität von file_get_contents
 // mit dem Curl-Modul umgesetzt

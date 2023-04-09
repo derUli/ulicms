@@ -1,6 +1,6 @@
 <?php
-use App\Translations\JSTranslation;
 use App\Models\Content\Language;
+use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('languages')) {

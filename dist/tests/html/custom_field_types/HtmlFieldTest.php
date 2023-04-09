@@ -1,7 +1,7 @@
 <?php
 
-use Spatie\Snapshots\MatchesSnapshots;
 use App\Constants\HtmlEditor;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class HtmlFieldTest extends \PHPUnit\Framework\TestCase
 {

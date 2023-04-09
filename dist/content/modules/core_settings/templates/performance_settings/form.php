@@ -1,10 +1,10 @@
 <?php
 $canIuseLazyLoadingUrl = 'https://caniuse.com/#feat=loading-lazy-attr';
 
-use App\Security\PermissionChecker;
 use App\Constants\RequestMethod;
 use App\HTML\Input;
 use App\HTML\ListItem;
+use App\Security\PermissionChecker;
 use App\Translations\JSTranslation;
 
 $lazy_loading = [];

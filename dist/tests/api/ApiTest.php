@@ -1,7 +1,7 @@
 <?php
 
-use App\Utils\CacheUtil;
 use App\Constants\HtmlEditor;
+use App\Utils\CacheUtil;
 
 class ApiTest extends \PHPUnit\Framework\TestCase
 {

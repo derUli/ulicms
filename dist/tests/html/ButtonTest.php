@@ -1,7 +1,7 @@
 <?php
 
-use App\HTML\Button;
 use App\Constants\ButtonType;
+use App\HTML\Button;
 
 class ButtonTest extends \PHPUnit\Framework\TestCase
 {

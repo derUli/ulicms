@@ -7,8 +7,8 @@ namespace App\Database;
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Exceptions\SqlException;
-use Database;
 use CMSConfig;
+use Database;
 use Exception;
 
 /**

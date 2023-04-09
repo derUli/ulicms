@@ -6,14 +6,14 @@ namespace App\Models\Media;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use App\Utils\File;
+use function _esc;
 use App\Models\Content\Category;
+use App\Utils\File;
 use Database;
+use function get_translation;
+
 use Model;
 use Path;
-
-use function _esc;
-use function get_translation;
 
 // html5 format support of browser are different
 // UliCMS allows *.mp4, *.ogv and *.webm file uploads for video

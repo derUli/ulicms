@@ -6,10 +6,10 @@ namespace App\Registries;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use ModuleManager;
-
 use function getModuleMeta;
+
 use function getModulePath;
+use ModuleManager;
 use function str_ends_with;
 
 // loads model files of modules

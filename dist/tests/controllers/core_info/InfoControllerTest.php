@@ -1,7 +1,7 @@
 <?php
 
-use App\Utils\CacheUtil;
 use App\Translations\Translation;
+use App\Utils\CacheUtil;
 
 class InfoControllerTest extends \PHPUnit\Framework\TestCase
 {

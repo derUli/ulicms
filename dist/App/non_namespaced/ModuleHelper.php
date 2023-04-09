@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use App\Models\Content\Language;
-use App\HTML\Form;
 use App\Constants\RequestMethod;
 use App\Helpers\Helper;
+use App\HTML\Form;
+use App\Models\Content\Language;
 
 class ModuleHelper extends Helper
 {

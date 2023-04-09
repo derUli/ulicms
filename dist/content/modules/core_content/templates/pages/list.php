@@ -2,11 +2,11 @@
 
 // TODO: This is old code before the switch to MVC architecture
 // This should be rewritten with MVC pattern and using partial views
-use App\Security\PermissionChecker;
 use App\HTML\Alert;
-use App\Translations\JSTranslation;
-
 use function App\HTML\icon;
+use App\Security\PermissionChecker;
+
+use App\Translations\JSTranslation;
 
 $controller = ControllerRegistry::get(PageController::class);
 

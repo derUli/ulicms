@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Content\Category;
 use App\Models\Content\Categories;
+use App\Models\Content\Category;
 
 class CategoryControllerTest extends \PHPUnit\Framework\TestCase
 {

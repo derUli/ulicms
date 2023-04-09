@@ -7,8 +7,8 @@ namespace App\Security;
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use ContentFactory;
-use User;
 use Group;
+use User;
 
 // permission checks for read, write and delete content permissions
 class ContentPermissionChecker implements IDatasetPermissionChecker

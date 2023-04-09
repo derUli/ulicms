@@ -2,16 +2,16 @@
 
 // TODO: Rewrite this view, move logic to PageController
 // Join new and edit views to one form
-use App\Models\Content\TypeMapper;
+use App\CoreContent\UIUtils;
+use App\Helpers\NumberFormatHelper;
+use function App\HTML\icon;
+use App\HTML\Input;
 use App\Models\Content\Categories;
 use App\Models\Content\Language;
+use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
-use App\Helpers\NumberFormatHelper;
-use App\CoreContent\UIUtils;
-use App\HTML\Input;
-use App\Translations\JSTranslation;
 
-use function App\HTML\icon;
+use App\Translations\JSTranslation;
 
 $parent_id = Request::getVar('parent_id', null, 'int');
 

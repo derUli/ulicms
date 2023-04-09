@@ -6,14 +6,14 @@ namespace App\Packages;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use App\Services\Connectors\PackageSourceConnector;
 use App\Constants\PackageTypes;
+use App\Services\Connectors\PackageSourceConnector;
 use App\Utils\CacheUtil;
 use App\Utils\File;
+use BadMethodCallException;
+use Module;
 use Path;
 use PharData;
-use Module;
-use BadMethodCallException;
 use UnexpectedValueException ;
 
 /**

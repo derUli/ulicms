@@ -1,17 +1,17 @@
 <?php
 
-use App\Constants\LinkTarget;
 use App\Constants\ButtonType;
+use App\Constants\LinkTarget;
 use App\Exceptions\FileNotFoundException;
-use Spatie\Snapshots\MatchesSnapshots;
+use function App\HTML\buttonLink;
 
-use function App\HTML\link;
-use function App\HTML\text;
+use function App\HTML\icon;
 use function App\HTML\imageTag;
 use function App\HTML\imageTagInline;
-use function App\HTML\icon;
-use function App\HTML\buttonLink;
+use function App\HTML\link;
 use function App\HTML\stringContainsHtml;
+use function App\HTML\text;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
 {

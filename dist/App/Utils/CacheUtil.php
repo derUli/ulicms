@@ -6,24 +6,24 @@ namespace App\Utils;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Path;
-use Settings;
-use Phpfastcache\Helper\Psr16Adapter;
-use Phpfastcache\CacheManager;
-use Phpfastcache\Config\ConfigurationOption;
-use ModuleManager;
+use App\Helpers\TestHelper;
 use ControllerRegistry;
 use DesignSettingsController;
-use App\Helpers\TestHelper;
-
 use function do_event;
-use function sureRemoveDir;
 use function get_request_uri;
 use function getCurrentLanguage;
-use function strbool;
-use function is_mobile;
 use function is_crawler;
+use function is_mobile;
 use function is_tablet;
+
+use ModuleManager;
+use Path;
+use Phpfastcache\CacheManager;
+use Phpfastcache\Config\ConfigurationOption;
+use Phpfastcache\Helper\Psr16Adapter;
+use Settings;
+use function strbool;
+use function sureRemoveDir;
 
 class CacheUtil
 {

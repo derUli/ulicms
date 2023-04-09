@@ -8,8 +8,8 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Helpers\AntiSpamHelper;
 
-use Request;
 use App\Models\Content\Comment;
+use Request;
 
 class CommentSpamChecker implements ISpamChecker
 {

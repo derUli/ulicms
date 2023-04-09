@@ -1,8 +1,8 @@
 <?php
 
 use App\Constants\CommentStatus;
-use App\Models\Content\Comment;
 use App\Exceptions\NotImplementedException;
+use App\Models\Content\Comment;
 
 class CommentsControllerTest extends \PHPUnit\Framework\TestCase
 {

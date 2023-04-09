@@ -1,8 +1,8 @@
 <?php
 
-use App\Security\SpamChecker\SpamFilterConfiguration;
 use App\Models\Content\Comment;
 use App\Security\SpamChecker\CommentSpamChecker;
+use App\Security\SpamChecker\SpamFilterConfiguration;
 
 class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
 {

@@ -1,10 +1,10 @@
 <?php
 
 use App\Constants\RequestMethod;
-use App\Models\Content\Advertisement\Banner;
-use App\HTML\Alert;
-use App\Models\Content\Categories;
 use App\Exceptions\DatasetNotFoundException;
+use App\HTML\Alert;
+use App\Models\Content\Advertisement\Banner;
+use App\Models\Content\Categories;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('banners')

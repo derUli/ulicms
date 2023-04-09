@@ -6,8 +6,8 @@ namespace App\Security;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Settings;
 use PHPGangsta_GoogleAuthenticator;
+use Settings;
 
 // two factor authentication based by Google Authenticator
 // and PHPGangstas implementation of Google Authenticator in PHP

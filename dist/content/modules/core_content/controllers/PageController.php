@@ -1,25 +1,25 @@
 <?php
 declare(strict_types=1);
 
-use App\Exceptions\DatasetNotFoundException;
+use App\Constants;
+use App\Constants\LinkTarget;
 use App\CoreContent\Models\ViewModels\DiffViewModel;
 use App\CoreContent\PageTableRenderer;
-use App\Models\Content\VCS;
+use App\Exceptions\DatasetNotFoundException;
+use App\HTML\ListItem;
+use function App\HTML\stringContainsHtml;
+use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
-use Rakit\Validation\Validator;
+use App\Models\Content\VCS;
 use App\Security\PermissionChecker;
 use App\Security\XSSProtection;
-use App\Models\Content\TypeMapper;
-use App\Constants\LinkTarget;
 use App\Utils\CacheUtil;
-use zz\Html\HTMLMinify;
-use App\Constants;
-use App\HTML\ListItem;
 use Jfcherng\Diff\Differ;
 use Jfcherng\Diff\DiffHelper;
 use Jfcherng\Diff\Renderer\RendererConstant;
+use Rakit\Validation\Validator;
 
-use function App\HTML\stringContainsHtml;
+use zz\Html\HTMLMinify;
 
 class PageController extends Controller
 {

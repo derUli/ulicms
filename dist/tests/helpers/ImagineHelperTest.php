@@ -1,7 +1,7 @@
 <?php
 
-use Imagine\Image\AbstractImagine;
 use App\Helpers\ImagineHelper;
+use Imagine\Image\AbstractImagine;
 
 class ImagineHelperTest extends \PHPUnit\Framework\TestCase
 {

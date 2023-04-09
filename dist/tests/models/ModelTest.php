@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Content\Language;
 use App\Exceptions\NotImplementedException;
+use App\Models\Content\Language;
 
 class ModelTest extends \PHPUnit\Framework\TestCase
 {
