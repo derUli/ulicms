@@ -144,8 +144,6 @@ $tmpRules = [
     'no_useless_else' => true,
     // There should not be an empty `return` statement at the end of a function.
     'no_useless_return' => true,
-    // There must be no `sprintf` calls with only the first argument.
-    'no_useless_sprintf' => true,
     // In array declaration, there MUST NOT be a whitespace before each comma.
     'no_whitespace_before_comma_in_array' => true,
     // Remove trailing whitespace at the end of blank lines.
@@ -280,6 +278,8 @@ $config
     'combine_consecutive_issets' => true,    
     // Master language constructs shall be used instead of aliases.
     'no_alias_functions' => true,
+    // There must be no `sprintf` calls with only the first argument.
+    'no_useless_sprintf' => true,
     ]);
 
 return $config->setFinder(

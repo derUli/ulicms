@@ -140,7 +140,7 @@ class Input
         if (is_string($accept)) {
             $attributes['accept'] = Template::getEscape($accept);
         } elseif (is_array($accept)) {
-            $accept = join(', ', $accept);
+            $accept = implode(', ', $accept);
             $attributes['accept'] = Template::getEscape($accept);
         }
         if ($multiple) {

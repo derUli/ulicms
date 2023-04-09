@@ -23,7 +23,7 @@ class CustomFields
 
         // use two nullbytes as seperator for arrays
         if (is_array($value)) {
-            $value = join("\0\0", $value);
+            $value = implode("\0\0", $value);
         } elseif (is_bool($value)) {
             $value = (string)(int)$value;
         } elseif ($value !== null) {
