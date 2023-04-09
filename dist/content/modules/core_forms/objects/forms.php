@@ -102,7 +102,7 @@ class Forms
                 $form['required_fields']
             );
             foreach ($required_fields as $field) {
-                $fieldName = isset($fields[$field]) ? $fields[$field] : $field;
+                $fieldName = $fields[$field] ?? $field;
                 if (! (isset($_POST[$field]) && ! empty($_POST[$field]))) {
                     ViewBag::set('exception', get_translation(
                         'please_fill_all_required_fields',

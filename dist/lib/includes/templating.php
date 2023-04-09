@@ -110,7 +110,7 @@ function get_og_tags(?string $slug = null): string
 function get_og_data($slug = ''): ?array
 {
     if (empty($slug)) {
-        $slug = isset($_GET['slug']) ? $_GET['slug'] : get_frontpage();
+        $slug = $_GET['slug'] ?? get_frontpage();
     }
 
     $data = null;
@@ -840,7 +840,7 @@ function get_html_head(): string
 function get_page(?string $slug = ''): ?array
 {
     if (empty($slug)) {
-        $slug = isset($_GET['slug']) ? $_GET['slug'] : '';
+        $slug = $_GET['slug'] ?? '';
     }
     if (empty($slug)) {
         $slug = get_frontpage();

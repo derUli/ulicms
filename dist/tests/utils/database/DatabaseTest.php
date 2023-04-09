@@ -578,8 +578,8 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         Database::close();
 
         $config = new CMSConfig();
-        $db_socket = isset($config->db_socket) ? $config->db_socket : ini_get('mysqli.default_socket');
-        $db_port = isset($config->db_port) ? $config->db_port : ini_get('mysqli.default_port');
+        $db_socket = $config->db_socket ?? ini_get('mysqli.default_socket');
+        $db_port = $config->db_port ?? ini_get('mysqli.default_port');
 
         $db_strict_mode = isset($config->db_strict_mode) && $config->db_strict_mode;
 
@@ -592,9 +592,9 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
     private function reconnect($db_strict_mode = null)
     {
         $config = new CMSConfig();
-        $db_socket = isset($config->db_socket) ? $config->db_socket : ini_get('mysqli.default_socket');
+        $db_socket = $config->db_socket ?? ini_get('mysqli.default_socket');
 
-        $db_port = isset($config->db_port) ? $config->db_port : ini_get('mysqli.default_port');
+        $db_port = $config->db_port ?? ini_get('mysqli.default_port');
 
         if ($db_strict_mode === null) {
             $db_strict_mode = isset($config->db_strict_mode) && $config->db_strict_mode;
