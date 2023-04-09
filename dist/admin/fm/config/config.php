@@ -28,6 +28,7 @@ foreach ($permissions as $permission) {
 $language = getSystemLanguage();
 
 $languageFile = dirname(__FILE__ . "/../lang/{$language}.php");
+
 if (! is_file($languageFile)) {
     $language = 'en_EN';
 }
