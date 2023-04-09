@@ -3,8 +3,6 @@
 $config = new PhpCsFixer\Config();
 
 $tmpRules = [
-    // An empty line feed must precede any configured statement.
-    'blank_line_before_statement' => ['statements'=>['break','case','continue','declare','default','exit','do','exit','for','foreach','goto','if','return','switch','throw','try','while','yield']],
     // A single space or none should be between cast and variable.
     'cast_spaces' => ['space'=>'none'],
     // Concatenation should be spaced according configuration.
@@ -276,7 +274,9 @@ $config
     // Include/Require and file path should be divided with a single space. File path should not be placed under brackets.
     'include' => true,
     // All PHP files must use same line ending.
-    'line_ending' => true,   
+    'line_ending' => true,
+    // An empty line feed must precede any configured statement.
+    'blank_line_before_statement' => ['statements'=>[]],
     ]);
 
 return $config->setFinder(
