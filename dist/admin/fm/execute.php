@@ -244,7 +244,7 @@ if (isset($_GET['action'])) {
                     }
                     response(trans('File_Save_OK'))->send();
                     exit;
-                
+
             }
 
             break;
@@ -490,7 +490,7 @@ if (isset($_GET['action'])) {
                 }  
                     response(trans('File_Save_OK'))->send();
                     exit;
-                
+
             }
 
             break;

@@ -746,7 +746,7 @@ function fix_strtoupper($str)
         return mb_strtoupper($str);
     }  
         return strtoupper($str);
-    
+
 }
 
 /**
@@ -762,7 +762,7 @@ function fix_strtolower($str)
         return mb_strtolower($str);
     }  
         return strtolower($str);
-    
+
 }
 
 function fix_path($path, $config)
@@ -774,7 +774,7 @@ function fix_path($path, $config)
         return $tmp_path . DIRECTORY_SEPARATOR . $str;
     }  
         return $str;
-    
+
 }
 
 /**

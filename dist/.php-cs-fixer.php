@@ -144,8 +144,6 @@ $tmpRules = [
     'no_useless_return' => true,
     // In array declaration, there MUST NOT be a whitespace before each comma.
     'no_whitespace_before_comma_in_array' => true,
-    // Remove trailing whitespace at the end of blank lines.
-    'no_whitespace_in_blank_line' => true,
     // Remove Zero-width space (ZWSP), Non-breaking space (NBSP) and other invisible unicode symbols.
     'non_printable_character' => ['use_escape_sequences_in_strings'=>true],
     // Array index should always be written by using square braces.
@@ -280,6 +278,8 @@ $config
     'no_useless_sprintf' => true,
     // Unused `use` statements must be removed.
     'no_useless_else' => true,
+    // Remove trailing whitespace at the end of blank lines.
+    'no_whitespace_in_blank_line' => true,
     ]);
 
 return $config->setFinder(

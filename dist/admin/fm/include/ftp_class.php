@@ -41,7 +41,7 @@ class FTPClient
             $this->logMessage('Connected to ' . $server . ', for user ' . $ftpUser);
             $this->loginOk = true;
             return true;
-        
+
     }
     public function makeDir($directory)
     {
@@ -53,7 +53,7 @@ class FTPClient
             // *** ...Else, FAIL.
             $this->logMessage('Failed creating directory "' . $directory . '"');
             return false;
-        
+
     }
 
     public function changeDir($directory)
@@ -64,7 +64,7 @@ class FTPClient
         }  
             $this->logMessage('Couldn\'t change directory');
             return false;
-        
+
     }
 
     public function getDirListing($directory = '.', $parameters = '-la')

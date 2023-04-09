@@ -538,7 +538,7 @@ if (isset($_GET['action'])) {
                     exit;
                 }  
                     $_SESSION['RF']['language'] = $choosen_lang;
-                
+
             }
 
             break;
