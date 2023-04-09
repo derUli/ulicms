@@ -1797,9 +1797,9 @@ if ($config['show_language_selection']) { ?>
 
 <script>
     var files_prevent_duplicate = [];
-    <?php foreach ($files_prevent_duplicate as $key => $value): ?>
+    <?php foreach ($files_prevent_duplicate as $key => $value) { ?>
     files_prevent_duplicate[<?php echo $key;?>] = '<?php echo $value;?>';
-    <?php endforeach;?>
+    <?php }?>
 </script>
 
 <!-- loading div start -->

@@ -290,7 +290,7 @@ if (isset($_GET['action'])) {
 				</div>
 				</div>
 			</div>
-			<?php if (in_array(strtolower($info['extension']), $config['ext_music'])): ?>
+			<?php if (in_array(strtolower($info['extension']), $config['ext_music'])) { ?>
 
             <script>
                 $(document).ready(function () {
@@ -314,7 +314,7 @@ if (isset($_GET['action'])) {
                 });
             </script>
 
-            <?php elseif (in_array(strtolower($info['extension']), $config['ext_video'])):	?>
+            <?php } elseif (in_array(strtolower($info['extension']), $config['ext_video'])){	?>
 
             <script>
                 $(document).ready(function () {
@@ -338,7 +338,7 @@ if (isset($_GET['action'])) {
                 });
             </script>
 
-            <?php endif;
+            <?php }
 
             $content = ob_get_clean();
 

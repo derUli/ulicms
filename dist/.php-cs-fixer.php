@@ -7,8 +7,6 @@ $tmpRules = [
     'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
     // Add leading `\` before function invocation to speed up resolving.
     'native_function_invocation' => ['include'=>['@all','trans']],
-    // Replace control structure alternative syntax to use braces.
-    'no_alternative_syntax' => true,
     // There must be a comment when fall-through is intentional in a non-empty case body.
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
     // A return statement wishing to return `void` should not return `null`.
@@ -275,6 +273,8 @@ $config
     'return_type_declaration' => ['space_before'=>'none'],
     // Lambdas not (indirect) referencing `$this` must be declared `static`.
     'static_lambda' => true,
+    // Replace control structure alternative syntax to use braces.
+    'no_alternative_syntax' => true,
     ]);
 
 return $config->setFinder(
