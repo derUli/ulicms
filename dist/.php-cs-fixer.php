@@ -21,8 +21,7 @@ $tmpRules = [
     'class_definition' => true,
     // Namespace must not contain spacing, comments or PHPDoc.
     'clean_namespace' => true,
-    // Using `isset($var) &&` multiple times should be done in one call.
-    'combine_consecutive_issets' => true,
+
     // Calling `unset` on multiple items should be done in one call.
     'combine_consecutive_unsets' => true,
     // Replace multiple nested calls of `dirname` by only one call with second `$level` parameter. Requires PHP >= 7.0.
@@ -278,6 +277,8 @@ $config
     'backtick_to_shell_exec' => true,
     // Binary operators should be surrounded by space as configured.
     'binary_operator_spaces' => true,
+    // Using `isset($var) &&` multiple times should be done in one call.
+    'combine_consecutive_issets' => true,
     ]);
 
 return $config->setFinder(
