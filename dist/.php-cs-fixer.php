@@ -89,8 +89,6 @@ $tmpRules = [
     'return_type_declaration' => ['space_before'=>'one'],
     // Instructions must be terminated with a semicolon.
     'semicolon_after_instruction' => true,
-    // Simplify `if` control structures that return the boolean result of their condition.
-    'simplified_if_return' => true,
     // A return statement wishing to return `void` should not return `null`.
     'simplified_null_return' => true,
     // Lambdas not (indirect) referencing `$this` must be declared `static`.
@@ -277,6 +275,8 @@ $config
     'new_with_braces' => true,
     // Converts explicit variables in double-quoted strings and heredoc syntax from simple to complex format (`${` to `{$`).
     'simple_to_complex_string_variable' => true,
+    // Simplify `if` control structures that return the boolean result of their condition.
+    'simplified_if_return' => true,
     ]);
 
 return $config->setFinder(
