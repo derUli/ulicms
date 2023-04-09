@@ -59,7 +59,7 @@ if (Settings::get('visitors_can_register') == 'off' || ! Settings::get('visitors
         if (! empty($_REQUEST['go'])) {
             ?>
             <input type="hidden" name="go"
-                   value='<?php esc($_REQUEST['go']) ?>'>
+                   value='<?php esc($_REQUEST['go']); ?>'>
                <?php }
         ?>
         <div class="field">
@@ -71,7 +71,7 @@ if (Settings::get('visitors_can_register') == 'off' || ! Settings::get('visitors
         </div>
         <div class="field">
             <strong class="field-label">
-                <?php translate('lastname') ?>
+                <?php translate('lastname'); ?>
             </strong>
             <input type="text" required="required"
                    name="lastname" value="">

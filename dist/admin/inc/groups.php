@@ -103,7 +103,7 @@ if (! $permissionChecker->hasPermission('groups')) {
     if ($removed) {
         ?>
         <div class="alert alert-success">
-            <?php translate('group_was_deleted') ?>
+            <?php translate('group_was_deleted'); ?>
         </div>
     <?php }
     ?>

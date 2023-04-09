@@ -87,8 +87,6 @@ $tmpRules = [
     'psr_autoloading' => false,
     // There should be one or no space before colon, and one space after it in return type declarations, according to configuration.
     'return_type_declaration' => ['space_before'=>'one'],
-    // Instructions must be terminated with a semicolon.
-    'semicolon_after_instruction' => true,
     // A return statement wishing to return `void` should not return `null`.
     'simplified_null_return' => true,
     // Lambdas not (indirect) referencing `$this` must be declared `static`.
@@ -277,6 +275,8 @@ $config
     'simple_to_complex_string_variable' => true,
     // Simplify `if` control structures that return the boolean result of their condition.
     'simplified_if_return' => true,
+    // Instructions must be terminated with a semicolon.
+    'semicolon_after_instruction' => true,
     ]);
 
 return $config->setFinder(

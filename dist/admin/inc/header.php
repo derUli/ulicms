@@ -19,7 +19,7 @@ if (! is_file($select2TranslationFile)) {
 $permissionChecker = new App\Security\PermissionChecker(get_user_id());
 ?>
 <!DOCTYPE html>
-<html data-select2-language="<?php esc($select2Language) ?>">
+<html data-select2-language="<?php esc($select2Language); ?>">
     <head>
         <meta name="viewport"
               content="width=device-width, user-scalable=yes, initial-scale=1" />
@@ -165,7 +165,7 @@ if (get_action()) {
                                             <?php
                                 if ($count) {
                                     ?>
-                                                <div class="count" data-count="<?php echo $count ?>">
+                                                <div class="count" data-count="<?php echo $count; ?>">
                                                     <?php echo $count; ?>
                                                 </div>
                                             <?php }
