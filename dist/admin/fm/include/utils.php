@@ -586,7 +586,6 @@ function check_files_extensions_on_path($path, $ext)
  * @param  string  $extension
  * @param  array   $config
  */
-
 function check_file_extension($extension, $config)
 {
     $check = false;

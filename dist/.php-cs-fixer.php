@@ -68,8 +68,7 @@ $tmpRules = [
     'no_alias_language_construct_call' => true,
     // Replace control structure alternative syntax to use braces.
     'no_alternative_syntax' => true,
-    // There should not be blank lines between docblock and the documented element.
-    'no_blank_lines_after_phpdoc' => true,
+    
     // There must be a comment when fall-through is intentional in a non-empty case body.
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
     // Replace accidental usage of homoglyphs (non ascii characters) in names.
@@ -278,6 +277,8 @@ $config
     'magic_method_casing' => true,
     // Array index should always be written by using square braces.
     'normalize_index_brace' => true,
+    // There should not be blank lines between docblock and the documented element.
+    'no_blank_lines_after_phpdoc' => true,
     ]);
 
 return $config->setFinder(
