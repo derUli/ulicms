@@ -3,8 +3,6 @@
 $config = new PhpCsFixer\Config();
 
 $tmpRules = [
-    // Concatenation should be spaced according configuration.
-    'concat_space' => ['spacing'=>'one'],
     // Equal sign in declare statement should be surrounded by spaces or not following configuration.
     'declare_equal_normalize' => ['space'=>'single'],
     // Spaces should be properly placed in a function declaration.
@@ -275,6 +273,8 @@ $config
     'function_typehint_space' => true,
     // Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.
     'method_chaining_indentation' => true,
+    // Concatenation should be spaced according configuration.
+    'concat_space' => ['spacing'=>'one'],
     ]);
 
 return $config->setFinder(

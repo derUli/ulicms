@@ -68,7 +68,7 @@ if (! function_exists('trans')) {
         if (array_key_exists($_SESSION['RF']['language'], $languages)) {
             $lang = $_SESSION['RF']['language'];
         } else {
-            response('Lang_Not_Found'.AddErrorLocation())->send();
+            response('Lang_Not_Found' . AddErrorLocation())->send();
             exit;
         }
     }
@@ -143,8 +143,8 @@ function deleteFile($path, $path_thumb, $config)
         $ftp = ftp_con($config);
         if ($ftp) {
             try {
-                $ftp->delete('/'.$path);
-                @$ftp->delete('/'.$path_thumb);
+                $ftp->delete('/' . $path);
+                @$ftp->delete('/' . $path_thumb);
             } catch (FtpClient\FtpException $e) {
                 return;
             }
@@ -164,8 +164,8 @@ function deleteFile($path, $path_thumb, $config)
                     $path .= '/';
                 }
 
-                if (file_exists($info['dirname'].'/'.$path.$config['relative_image_creation_name_to_prepend'][$k].$info['filename'].$config['relative_image_creation_name_to_append'][$k].'.'.$info['extension'])) {
-                    unlink($info['dirname'].'/'.$path.$config['relative_image_creation_name_to_prepend'][$k].$info['filename'].$config['relative_image_creation_name_to_append'][$k].'.'.$info['extension']);
+                if (file_exists($info['dirname'] . '/' . $path . $config['relative_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['relative_image_creation_name_to_append'][$k] . '.' . $info['extension'])) {
+                    unlink($info['dirname'] . '/' . $path . $config['relative_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['relative_image_creation_name_to_append'][$k] . '.' . $info['extension']);
                 }
             }
         }
@@ -176,9 +176,9 @@ function deleteFile($path, $path_thumb, $config)
                     $path .= '/';
                 }
 
-                $base_dir = $path.substr_replace($info['dirname'].'/', '', 0, strlen($config['current_path']));
-                if (file_exists($base_dir.$config['fixed_image_creation_name_to_prepend'][$k].$info['filename'].$config['fixed_image_creation_to_append'][$k].'.'.$info['extension'])) {
-                    unlink($base_dir.$config['fixed_image_creation_name_to_prepend'][$k].$info['filename'].$config['fixed_image_creation_to_append'][$k].'.'.$info['extension']);
+                $base_dir = $path . substr_replace($info['dirname'] . '/', '', 0, strlen($config['current_path']));
+                if (file_exists($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . '.' . $info['extension'])) {
+                    unlink($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . '.' . $info['extension']);
                 }
             }
         }
@@ -235,9 +235,9 @@ function duplicate_file($old_path, $name, $ftp = null, $config = null)
     $new_path = $info['dirname'] . '/' . $name . '.' . $info['extension'];
     if ($ftp) {
         try {
-            $tmp = time().$name . '.' . $info['extension'];
-            $ftp->get($tmp, '/'.$old_path, FTP_BINARY);
-            $ftp->put('/'.$new_path, $tmp, FTP_BINARY);
+            $tmp = time() . $name . '.' . $info['extension'];
+            $ftp->get($tmp, '/' . $old_path, FTP_BINARY);
+            $ftp->put('/' . $new_path, $tmp, FTP_BINARY);
             unlink($tmp);
             return true;
         } catch (FtpClient\FtpException $e) {
@@ -271,7 +271,7 @@ function rename_file($old_path, $name, $ftp = null, $config = null)
     $new_path = $info['dirname'] . '/' . $name . '.' . $info['extension'];
     if ($ftp) {
         try {
-            return $ftp->rename('/'.$old_path, '/'.$new_path);
+            return $ftp->rename('/' . $old_path, '/' . $new_path);
         } catch (FtpClient\FtpException $e) {
             return false;
         }
@@ -321,11 +321,11 @@ function rename_folder($old_path, $name, $ftp = null, $config = null)
     $name = fix_filename($name, $config, true);
     $new_path = fix_dirname($old_path) . '/' . $name;
     if ($ftp) {
-        if ($ftp->chdir('/'.$old_path)) {
+        if ($ftp->chdir('/' . $old_path)) {
             if (@$ftp->chdir($new_path)) {
                 return false;
             }
-            return $ftp->rename('/'.$old_path, '/'.$new_path);
+            return $ftp->rename('/' . $old_path, '/' . $new_path);
         }
     } else {
         if (file_exists($old_path) && is_dir($old_path) && ! isUploadDir($old_path, $config)) {
@@ -384,7 +384,7 @@ function create_img($imgfile, $imgthumb, $newwidth, $newheight = null, $option =
         if (url_exists($imgfile)) {
             $temp = tempnam('/tmp', 'RF');
             unlink($temp);
-            $temp .= '.'.substr(strrchr($imgfile, '.'), 1);
+            $temp .= '.' . substr(strrchr($imgfile, '.'), 1);
             $handle = fopen($temp, 'w');
             fwrite($handle, file_get_contents($imgfile));
             fclose($handle);
@@ -1213,7 +1213,7 @@ function AddErrorLocation()
 {
     if (defined('DEBUG_ERROR_MESSAGE') && DEBUG_ERROR_MESSAGE) {
         $pile = debug_backtrace();
-        return ' (@'.$pile[0]['file'].'#'.$pile[0]['line'].')';
+        return ' (@' . $pile[0]['file'] . '#' . $pile[0]['line'] . ')';
     }
     return '';
 }

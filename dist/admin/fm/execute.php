@@ -72,7 +72,7 @@ if (isset($_POST['paths'])) {
     $paths = $paths_thumb = $names = [];
     foreach ($_POST['paths'] as $key => $path) {
         if (! checkRelativePath($path)) {
-            response(trans('wrong path').AddErrorLocation())->send();
+            response(trans('wrong path') . AddErrorLocation())->send();
             exit;
         }
         $name = null;
@@ -132,7 +132,7 @@ if (isset($_GET['action'])) {
                                     $paths .= '/';
                                 }
 
-                                $base_dir = $paths.substr_replace($path, '', 0, strlen($config['current_path']));
+                                $base_dir = $paths . substr_replace($path, '', 0, strlen($config['current_path']));
                                 if (is_dir($base_dir)) {
                                     deleteDir($base_dir, null, $config);
                                 }
@@ -149,14 +149,14 @@ if (isset($_GET['action'])) {
                 $path_thumb .= $name;
                 $res = create_folder(fix_path($path, $config), fix_path($path_thumb, $config), $ftp, $config);
                 if (! $res) {
-                    response(trans('Rename_existing_folder').AddErrorLocation())->send();
+                    response(trans('Rename_existing_folder') . AddErrorLocation())->send();
                 }
             }
             break;
         case 'rename_folder':
             if ($config['rename_folders']) {
                 if (! is_dir($path)) {
-                    response(trans('wrong path').AddErrorLocation())->send();
+                    response(trans('wrong path') . AddErrorLocation())->send();
                     exit;
                 }
                 $name = fix_filename($name, $config);

@@ -67,7 +67,7 @@ class FTPClient
 
     public function getDirListing($directory = '.', $parameters = '-la')
     {
-        echo shell_exec('whoami').' is who i am </br>';
+        echo shell_exec('whoami') . ' is who i am </br>';
         echo 'Current directory is now: ' . ftp_pwd($this->connectionId) . '</br>';
 
         // get contents of the current directory

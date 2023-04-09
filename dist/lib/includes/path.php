@@ -65,7 +65,7 @@ function getModuleMainFilePath($module): string
 
 function getModuleMainFilePath2($module): string
 {
-    return getModulePath($module, true) .'main.php';
+    return getModulePath($module, true) . 'main.php';
 }
 
 function getModuleUninstallScriptPath(

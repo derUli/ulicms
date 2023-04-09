@@ -141,7 +141,7 @@ class InstallerController
             $_SESSION['install_index'] = 0;
         }
         $files = [];
-        foreach (glob(ULICMS_ROOT .'/lib/migrations/up/*.sql') as $file) {
+        foreach (glob(ULICMS_ROOT . '/lib/migrations/up/*.sql') as $file) {
             $files[] = $file;
         }
         if (! empty($_SESSION['install_demodata'])) {
@@ -292,7 +292,7 @@ class InstallerController
             $content
         );
 
-        copy(ULICMS_ROOT . '/lib/CMSConfigSample.php', ULICMS_ROOT.'/CMSConfig.php');
+        copy(ULICMS_ROOT . '/lib/CMSConfigSample.php', ULICMS_ROOT . '/CMSConfig.php');
 
         $defaultConfigFile = ULICMS_ROOT . '/content/configurations/default.php';
 
