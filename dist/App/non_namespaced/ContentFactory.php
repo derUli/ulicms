@@ -234,7 +234,7 @@ class ContentFactory
             $sql .= ' offset ' . $offset;
         }
 
-        $result = Database::query($sql) || die(Database::error());
+        $result = Database::query($sql);
 
         while ($row = Database::fetchObject($result)) {
             $datasets[] = self::getContentObjectByID($row);
