@@ -11,8 +11,7 @@ $tmpRules = [
     'combine_consecutive_unsets' => true,
     // Replace multiple nested calls of `dirname` by only one call with second `$level` parameter. Requires PHP >= 7.0.
     'combine_nested_dirname' => true,
-    // Comments with annotation should be docblock when used on structural elements.
-    'comment_to_phpdoc' => true,
+
     // Concatenation should be spaced according configuration.
     'concat_space' => ['spacing'=>'one'],
     // Equal sign in declare statement should be surrounded by spaces or not following configuration.
@@ -31,8 +30,6 @@ $tmpRules = [
     'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
     // Ensure single space between function's argument and its typehint.
     'function_typehint_space' => true,
-    // Renames PHPDoc tags.
-    'general_phpdoc_tag_rename' => true,
     // Include/Require and file path should be divided with a single space. File path should not be placed under brackets.
     'include' => true,
     // Code MUST use configured indentation type.
@@ -277,6 +274,10 @@ $config
      'ordered_class_elements' => ['order'=>['use_trait','constant_public','constant_protected','constant_private','property_public','property_protected','property_private','construct','destruct','magic','phpunit','method_public','method_protected','method_private']],
      // Orders the interfaces in an `implements` or `interface extends` clause.
      'ordered_interfaces' => true,
+    // Comments with annotation should be docblock when used on structural elements.
+    'comment_to_phpdoc' => true,
+    // Renames PHPDoc tags.
+    'general_phpdoc_tag_rename' => true,
     ]);
 
 return $config->setFinder(
