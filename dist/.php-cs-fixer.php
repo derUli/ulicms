@@ -83,8 +83,7 @@ $tmpRules = [
     'no_multiline_whitespace_around_double_arrow' => true,
     // There MUST NOT be a space after the opening parenthesis. There MUST NOT be a space before the closing parenthesis.
     'no_spaces_inside_parenthesis' => true,
-    // Removes `@param`, `@return` and `@var` tags that don't provide any useful information.
-    'no_superfluous_phpdoc_tags' => true,
+
     // Removes unneeded parentheses around control statements.
     'no_unneeded_control_parentheses' => true,
     // Removes unneeded curly braces that are superfluous and aren't part of a control structure's body.
@@ -279,6 +278,8 @@ $config
     'normalize_index_brace' => true,
     // There should not be blank lines between docblock and the documented element.
     'no_blank_lines_after_phpdoc' => true,
+    // Removes `@param`, `@return` and `@var` tags that don't provide any useful information.
+    'no_superfluous_phpdoc_tags' => false,
     ]);
 
 return $config->setFinder(
