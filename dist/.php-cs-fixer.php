@@ -33,8 +33,6 @@ $tmpRules = [
     'fopen_flag_order' => true,
     // Spaces should be properly placed in a function declaration.
     'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
-    // Replace core functions calls returning constants with the constants.
-    'function_to_constant' => true,
     // Ensure single space between function's argument and its typehint.
     'function_typehint_space' => true,
     // Renames PHPDoc tags.
@@ -277,6 +275,8 @@ $config
     'implode_call' => true,
     // PHP code must use the long `<?php` tags or short-echo `<?=` tags and not other tag variations.
     'full_opening_tag' => true,
+    // Replace core functions calls returning constants with the constants.
+    'function_to_constant' => true,
     ]);
 
 return $config->setFinder(
