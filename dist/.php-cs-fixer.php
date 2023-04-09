@@ -211,7 +211,7 @@ $config
         // Converts `protected` variables and methods to `private` where possible.
         'protected_to_private' => true,
         // Classes must be in a path that matches their namespace, be at least one namespace deep and the class name should match the file name.
-        'psr_autoloading' => true,
+        'psr_autoloading' => false,
         // There should be one or no space before colon, and one space after it in return type declarations, according to configuration.
         'return_type_declaration' => ['space_before'=>'one'],
         // Instructions must be terminated with a semicolon.
@@ -267,7 +267,7 @@ $config
         // Visibility MUST be declared on all properties and methods; `abstract` and `final` MUST be declared before the visibility; `static` MUST be declared after the visibility.
         'visibility_required' => true,
         // Add `void` return type to functions with missing or empty return statements, but priority is given to `@return` annotations. Requires PHP >= 7.1.
-        'void_return' => true,
+        'void_return' => false,
         // In array declaration, there MUST be a whitespace after each comma.
         'whitespace_after_comma_in_array' => true,
         // Write conditions in Yoda style (`true`), non-Yoda style (`['equal' => false, 'identical' => false, 'less_and_greater' => false]`) or ignore those conditions (`null`) based on configuration.
