@@ -172,8 +172,6 @@ $tmpRules = [
     'switch_case_space' => true,
     // Switch case must not be ended with `continue` but with `break`.
     'switch_continue_to_break' => true,
-    // Standardize spaces around ternary operator.
-    'ternary_operator_spaces' => true,
     // Use the Elvis operator `?:` where possible.
     'ternary_to_elvis_operator' => true,
     // Use `null` coalescing operator `??` where possible. Requires PHP >= 7.0.
@@ -277,7 +275,9 @@ $config
     // The PHP constants `true`, `false`, and `null` MUST be written using the correct casing.
     'constant_case' => true,
     // PHP code MUST use only UTF-8 without BOM (remove BOM).
-    'encoding' => true,
+    'encoding' => true,    
+    // Standardize spaces around ternary operator.
+    'ternary_operator_spaces' => true,
     ]);
 
 return $config->setFinder(
