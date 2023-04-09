@@ -130,8 +130,6 @@ $tmpRules = [
     'no_php4_constructor' => true,
     // Short cast `bool` using double exclamation mark should not be used.
     'no_short_bool_cast' => true,
-    // When making a method or function call, there MUST NOT be a space between the method or function name and the opening parenthesis.
-    'no_spaces_after_function_name' => true,
     // There MUST NOT be a space after the opening parenthesis. There MUST NOT be a space before the closing parenthesis.
     'no_spaces_inside_parenthesis' => true,
     // Removes `@param`, `@return` and `@var` tags that don't provide any useful information.
@@ -276,6 +274,8 @@ $config
     'list_syntax' => ['syntax'=>'short'],    
     // In array declaration, there MUST be a whitespace after each comma.
     'whitespace_after_comma_in_array' => true,
+    // When making a method or function call, there MUST NOT be a space between the method or function name and the opening parenthesis.
+    'no_spaces_after_function_name' => true,
     ]);
 
 return $config->setFinder(
