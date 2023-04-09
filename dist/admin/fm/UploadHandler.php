@@ -456,7 +456,7 @@ class UploadHandler
         $min_width = @$this->options['min_width'];
         $min_height = @$this->options['min_height'];
         if (($max_width || $max_height || $min_width || $min_height) && $this->is_valid_image_file($uploaded_file)) {
-            list($img_width, $img_height) = $this->get_image_size($uploaded_file);
+            [$img_width, $img_height] = $this->get_image_size($uploaded_file);
             // If we are auto rotating the image by default, do the checks on
             // the correct orientation
             if (
@@ -790,7 +790,7 @@ class UploadHandler
             error_log('Function not found: imagecreatetruecolor');
             return false;
         }
-        list($file_path, $new_file_path) = $this->get_scaled_image_file_paths($file_name, $version);
+        [$file_path, $new_file_path] = $this->get_scaled_image_file_paths($file_name, $version);
         $type = strtolower(substr(strrchr($file_name, '.'), 1));
         switch ($type) {
             case 'jpg':
@@ -967,7 +967,7 @@ class UploadHandler
 
     protected function imagick_create_scaled_image($file_name, $version, $options)
     {
-        list($file_path, $new_file_path) = $this->get_scaled_image_file_paths($file_name, $version);
+        [$file_path, $new_file_path] = $this->get_scaled_image_file_paths($file_name, $version);
         $image = $this->imagick_get_image_object(
             $file_path,
             !empty($options['crop']) || !empty($options['no_cache'])
@@ -1057,7 +1057,7 @@ class UploadHandler
 
     protected function imagemagick_create_scaled_image($file_name, $version, $options)
     {
-        list($file_path, $new_file_path) = $this->get_scaled_image_file_paths($file_name, $version);
+        [$file_path, $new_file_path] = $this->get_scaled_image_file_paths($file_name, $version);
         $resize = @$options['max_width']
                 . (empty($options['max_height']) ? '' : 'X' . $options['max_height']);
         if (!$resize && empty($options['auto_orient'])) {

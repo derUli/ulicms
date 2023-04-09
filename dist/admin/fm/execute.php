@@ -79,7 +79,7 @@ if (isset($_POST['paths'])) {
         if (isset($_POST['names'][$key])) {
             $name = $_POST['names'][$key];
         }
-        list($path, $path_thumb, $name) = returnPaths($path, $name, $config);
+        [$path, $path_thumb, $name] = returnPaths($path, $name, $config);
         $paths[] = $path;
         $paths_thumb[] = $path_thumb;
         $names = $name;
@@ -89,7 +89,7 @@ if (isset($_POST['paths'])) {
     if (isset($_POST['name'])) {
         $name = $_POST['name'];
     }
-    list($path, $path_thumb, $name) = returnPaths($_POST['path'], $name, $config);
+    [$path, $path_thumb, $name] = returnPaths($_POST['path'], $name, $config);
 }
 
 $info = pathinfo($path);
@@ -394,7 +394,7 @@ if (isset($_GET['action'])) {
                     exit;
                 }
                 if ($action == 'copy') {
-                    list($sizeFolderToCopy, $fileNum, $foldersCount) = folder_info($path, false);
+                    [$sizeFolderToCopy, $fileNum, $foldersCount] = folder_info($path, false);
                     if (!checkresultingsize($sizeFolderToCopy)) {
                         response(sprintf(trans('max_size_reached'), $config['MaxSizeTotal']) . AddErrorLocation())->send();
                         exit;

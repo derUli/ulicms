@@ -77,9 +77,9 @@ if ($ftp) {
     header('Accept-Ranges: bytes');
 
     if (isset($_SERVER['HTTP_RANGE'])) {
-        list($a, $range) = explode('=', $_SERVER['HTTP_RANGE'], 2);
-        list($range) = explode(',', $range, 2);
-        list($range, $range_end) = explode('-', $range);
+        [$a, $range] = explode('=', $_SERVER['HTTP_RANGE'], 2);
+        [$range] = explode(',', $range, 2);
+        [$range, $range_end] = explode('-', $range);
         $range = (int) $range;
         if (!$range_end) {
             $range_end = $size - 1;

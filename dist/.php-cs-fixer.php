@@ -75,8 +75,6 @@ $tmpRules = [
     'line_ending' => true,
     // Ensure there is no code on the same line as the PHP open tag.
     'linebreak_after_opening_tag' => true,
-    // List (`array` destructuring) assignment should be declared using the configured syntax. Requires PHP >= 7.1.
-    'list_syntax' => ['syntax'=>'short'],
     'lowercase_cast' => true,
     // PHP keywords MUST be in lower case.
     'lowercase_keywords' => true,
@@ -276,6 +274,8 @@ $config
      'no_unused_imports' => true,
      // Short cast `bool` using double exclamation mark should not be used.
     'no_short_bool_cast' => true,
+    // List (`array` destructuring) assignment should be declared using the configured syntax. Requires PHP >= 7.1.
+    'list_syntax' => ['syntax'=>'short'],
     ]);
 
 return $config->setFinder(

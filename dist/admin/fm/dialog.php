@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
 } else {
     $available_languages = include 'lang/languages.php';
 
-    list($preferred_language) = array_values(
+    [$preferred_language] = array_values(
         array_filter(
             [
                 isset($_GET['lang']) ? $_GET['lang'] : null,
@@ -84,7 +84,7 @@ if (count($config['hidden_folders'])) {
 }
 
 if ($config['show_total_size']) {
-    list($sizeCurrentFolder, $fileCurrentNum, $foldersCurrentCount) = folder_info($config['current_path'], false);
+    [$sizeCurrentFolder, $fileCurrentNum, $foldersCurrentCount] = folder_info($config['current_path'], false);
 }
 
 /***
@@ -820,7 +820,7 @@ foreach ($files as $k => $file) {
                     $current_folders_number++;
                 }
                 if ($config['show_folder_size']) {
-                    list($size, $nfiles, $nfolders) = folder_info(
+                    [$size, $nfiles, $nfolders] = folder_info(
                         $config['current_path'] . $rfm_subfolder . $subdir . $file,
                         false
                     );
@@ -1524,7 +1524,7 @@ if ($config['show_language_selection']) { ?>
                                 }
                             }
                             //check if is smaller than thumb
-                            list($img_width, $img_height, $img_type, $attr) = @getimagesize($file_path);
+                            [$img_width, $img_height, $img_type, $attr] = @getimagesize($file_path);
                             if ($img_width < 122 && $img_height < 91) {
                                 $src_thumb = $file_path;
                                 $show_original = true;

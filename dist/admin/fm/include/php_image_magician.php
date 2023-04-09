@@ -482,7 +482,7 @@ class imageLib
             $pos = str_replace(' ', '', $pos);
 
             $xyArray = explode('x', $pos);
-            list($cropStartX, $cropStartY) = $xyArray;
+            [$cropStartX, $cropStartY] = $xyArray;
         } else {
             switch ($pos) {
                 case 'tl':
@@ -1152,7 +1152,7 @@ class imageLib
         $numColors = imageColorsTotal($this->imageResized);
 
         for ($x = 0; $x < $numColors; $x++) {
-            list($r, $g, $b) = array_values(imageColorsForIndex($this->imageResized, $x));
+            [$r, $g, $b] = array_values(imageColorsForIndex($this->imageResized, $x));
 
             // calculate grayscale in percent
             $grayscale = ($r + $g + $b) / 3 / 0xff;
@@ -2272,7 +2272,7 @@ class imageLib
             $pos = str_replace(' ', '', $pos);
 
             $xyArray = explode('x', $pos);
-            list($width, $height) = $xyArray;
+            [$width, $height] = $xyArray;
         } else {
             switch ($pos) {
                 case 'tl':

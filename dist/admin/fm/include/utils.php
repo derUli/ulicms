@@ -462,7 +462,7 @@ function folder_info($path, $count_hidden=true)
             if ($count_hidden || !(in_array($t, $config['hidden_folders']) || in_array($t, $config['hidden_files']))) {
                 $currentFile = $cleanPath . $t;
                 if (is_dir($currentFile)) {
-                    list($size, $tmp, $tmp1) = folder_info($currentFile);
+                    [$size, $tmp, $tmp1] = folder_info($currentFile);
                     $total_size += $size;
                     $folders_count ++;
                 } else {
@@ -518,7 +518,7 @@ function checkresultingsize($sizeAdded)
     global $config;
 
     if ($config['MaxSizeTotal'] !== false && is_int($config['MaxSizeTotal'])) {
-        list($sizeCurrentFolder, $fileCurrentNum, $foldersCurrentCount) = folder_info($config['current_path'], false);
+        [$sizeCurrentFolder, $fileCurrentNum, $foldersCurrentCount] = folder_info($config['current_path'], false);
         // overall size over limit
         if (($config['MaxSizeTotal'] * 1024 * 1024) < ($sizeCurrentFolder + $sizeAdded)) {
             return false;

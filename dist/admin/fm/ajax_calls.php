@@ -367,7 +367,7 @@ if (isset($_GET['action'])) {
                     exit;
                 }
 
-                list($sizeFolderToCopy, $fileNum, $foldersCount) = folder_info($path, false);
+                [$sizeFolderToCopy, $fileNum, $foldersCount] = folder_info($path, false);
                 // size over limit
                 if ($config['copy_cut_max_size'] !== false && is_int($config['copy_cut_max_size'])) {
                     if (($config['copy_cut_max_size'] * 1024 * 1024) < $sizeFolderToCopy) {
