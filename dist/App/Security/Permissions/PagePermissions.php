@@ -78,6 +78,6 @@ class PagePermissions
 
         $args[] = (int) $id;
         $sql .= ' where id = ?';
-        Database::pQuery($sql, $args, true) || die(Database::getError());
+        Database::pQuery($sql, $args, true) || exit(Database::getError());
     }
 }

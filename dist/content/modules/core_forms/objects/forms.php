@@ -172,7 +172,7 @@ class Forms
                 $retval = true;
             } else {
                 translate('error_send_mail_form_failed');
-                die();
+                exit();
             }
         }
         return $retval;

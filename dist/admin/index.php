@@ -42,7 +42,7 @@ do_event('after_set_locale_by_language');
 $cfg = new CMSConfig();
 if (isset($cfg->ip_whitelist) && is_array($cfg->ip_whitelist) && count($cfg->ip_whitelist) > 0 && ! in_array(get_ip(), $cfg->ip_whitelist)) {
     ExceptionResult(get_translation('login_from_ip_not_allowed'));
-    die();
+    exit();
 }
 
 // if the user is logged in then update the time of

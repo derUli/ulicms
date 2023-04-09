@@ -98,7 +98,7 @@ class InstallerController
             $_POST['passwort']
         );
         if ($connection == false) {
-            die(TRANSLATION_DB_CONNECTION_FAILED);
+            exit(TRANSLATION_DB_CONNECTION_FAILED);
         }
 
         // Check if database is present else try to create it.
@@ -123,7 +123,7 @@ class InstallerController
         @$select = mysqli_select_db($connection, $_POST['datenbank']);
 
         if ($select == false) {
-            die(TRANSLATION_CANT_OPEN_SCHEMA);
+            exit(TRANSLATION_CANT_OPEN_SCHEMA);
         }
 
         $_SESSION['mysql_host'] = $_POST['servername'];
@@ -162,12 +162,12 @@ class InstallerController
             $_SESSION['mysql_host'],
             $_SESSION['mysql_user'],
             $_SESSION['mysql_password']
-        ) || die(TRANSLATION_DB_CONNECTION_FAILED);
+        ) || exit(TRANSLATION_DB_CONNECTION_FAILED);
 
         $select = mysqli_select_db($connection, $_SESSION['mysql_database']);
 
         mysqli_query($connection, "SET NAMES 'utf8mb4'")
-                || die(mysqli_error($connection));
+                || exit(mysqli_error($connection));
 
         // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
         mysqli_query($connection, "SET SESSION sql_mode = '';");

@@ -1,7 +1,7 @@
 <?php
 
 if (! isset($_SESSION['RF']) || $_SESSION['RF']['verify'] != 'RESPONSIVEfilemanager') {
-    die('forbiden');
+    exit('forbiden');
 }
 require dirname(__FILE__) . '/Response.php';
 
@@ -367,7 +367,7 @@ function ftp_con($config)
             $tmp = $e->getTrace();
             echo $tmp[0]['args'][0];
             echo '<br/>Please check configurations';
-            die();
+            exit();
         }
     } else {
         return false;
@@ -551,7 +551,7 @@ function create_folder($path = null, $path_thumbs = null, $ftp = null, $config =
             mkdir($path, $permission, true);
         } // or even 01777 so you get the sticky bit set
         if ($path_thumbs) {
-            mkdir($path_thumbs, $permission, true) || die("$path_thumbs cannot be found");
+            mkdir($path_thumbs, $permission, true) || exit("$path_thumbs cannot be found");
         } // or even 01777 so you get the sticky bit set
         umask($oldumask);
         return true;

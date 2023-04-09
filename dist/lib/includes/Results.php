@@ -81,7 +81,7 @@ function Result(string $data, int $status = 200, ?string $type = null): void
     }
 
     send_header("Content-length: $size");
-    die($data);
+    exit($data);
 }
 
 /**

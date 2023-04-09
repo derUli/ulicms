@@ -48,7 +48,7 @@ do_event('custom_lang_' . $_SESSION['language']);
 
 if (Request::isPost()) {
     if (! check_csrf_token()) {
-        die('This is probably a CSRF attack!');
+        exit('This is probably a CSRF attack!');
     }
     if (Settings::get('min_time_to_fill_form', 'int') > 0) {
         check_form_timestamp();
@@ -108,10 +108,10 @@ if (is_maintenance_mode()) {
     if (is_file(getTemplateDirPath($theme) . 'maintenance.php')) {
         require_once getTemplateDirPath($theme) . 'maintenance.php';
     } else {
-        die(get_translation('UNDER_MAINTENANCE'));
+        exit(get_translation('UNDER_MAINTENANCE'));
     }
     do_event('after_maintenance_message');
-    die();
+    exit();
 }
 
 setSCSSImportPaths([ULICMS_GENERATED]);
@@ -209,13 +209,13 @@ if ($cacheAdapter && $cacheAdapter->get($uid)) {
     echo $cacheAdapter->get($uid);
 
     if (Settings::get('no_auto_cron')) {
-        die();
+        exit();
     }
 
     do_event('before_cron');
     @require 'lib/cron.php';
     do_event('after_cron');
-    die();
+    exit();
 }
 
 if ($cacheAdapter || Settings::get('minify_html')) {

@@ -7,5 +7,5 @@ if (isset($_REQUEST['ajax_cmd']) && $_REQUEST['ajax_cmd'] == 'anyUpdateAvailable
     } else {
         echo 'no';
     }
-    die();
+    exit();
 }
