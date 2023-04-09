@@ -29,8 +29,6 @@ $tmpRules = [
     'explicit_indirect_variable' => true,
     // Converts implicit variables into explicit ones in double-quoted strings or heredoc syntax.
     'explicit_string_variable' => true,
-    // Order the flags in `fopen` calls, `b` and `t` must be last.
-    'fopen_flag_order' => true,
     // Spaces should be properly placed in a function declaration.
     'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
     // Ensure single space between function's argument and its typehint.
@@ -277,6 +275,8 @@ $config
     'full_opening_tag' => true,
     // Replace core functions calls returning constants with the constants.
     'function_to_constant' => true,
+    // Order the flags in `fopen` calls, `b` and `t` must be last.
+    'fopen_flag_order' => true,
     ]);
 
 return $config->setFinder(
