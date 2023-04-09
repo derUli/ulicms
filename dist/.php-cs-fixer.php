@@ -43,8 +43,6 @@ $tmpRules = [
     'method_argument_space' => true,
     // Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.
     'method_chaining_indentation' => true,
-    // Forbid multi-line whitespace before the closing semicolon or move the semicolon to the new line for chained calls.
-    'multiline_whitespace_before_semicolons' => true,
     // Add leading `\` before function invocation to speed up resolving.
     'native_function_invocation' => ['include'=>['@all','trans']],
     // Replace control structure alternative syntax to use braces.
@@ -277,6 +275,8 @@ $config
     'no_spaces_inside_parenthesis' => true,
     // Remove extra spaces in a nullable typehint.
     'compact_nullable_typehint' => true,
+    // Forbid multi-line whitespace before the closing semicolon or move the semicolon to the new line for chained calls.
+    'multiline_whitespace_before_semicolons' => true,
     ]);
 
 return $config->setFinder(
