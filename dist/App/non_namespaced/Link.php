@@ -56,9 +56,9 @@ class Link extends Page
     }
 
      /**
-     * Get css classes for Font Awesome icon
-     * @return string
-     */
+      * Get css classes for Font Awesome icon
+      * @return string
+      */
     public function getIcon(): string
     {
         return 'fas fa-link';

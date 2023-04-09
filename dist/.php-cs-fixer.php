@@ -3,8 +3,6 @@
 $config = new PhpCsFixer\Config();
 
 $tmpRules = [
-    // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
-    'align_multiline_comment' => ['comment_type'=>'all_multiline'],
     // Each element of an array must be indented exactly once.
     'array_indentation' => true,
     // Converts backtick operators to `shell_exec` calls.
@@ -276,6 +274,8 @@ $config
     'set_type_to_cast' => true,    
     // Remove trailing whitespace at the end of non-blank lines.
     'no_trailing_whitespace' => true,
+    // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
+    'align_multiline_comment' => ['comment_type'=>'all_multiline'],
     ]);
 
 return $config->setFinder(

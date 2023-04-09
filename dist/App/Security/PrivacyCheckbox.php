@@ -94,8 +94,8 @@ class PrivacyCheckbox
 
     /**
      * Render the GDPR checkbox input
-    // The GDPR accept text can be written in a html editor.
-    // This method replaces the [checkbox] placeholder with the checkbox input
+     * // The GDPR accept text can be written in a html editor.
+     * // This method replaces the [checkbox] placeholder with the checkbox input
      * @return string
      */
     public function render(): string

@@ -74,9 +74,9 @@ abstract class Content extends Model
     }
 
      /**
-     * Get css classes for Font Awesome icon
-     * @return string
-     */
+      * Get css classes for Font Awesome icon
+      * @return string
+      */
     public function getIcon(): string
     {
         return 'far fa-file-alt';
