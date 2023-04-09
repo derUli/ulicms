@@ -179,7 +179,7 @@ function getCurrentLanguage($current = false): string
         return basename($_SESSION['language']);
     }  
         return basename(Settings::get('default_language'));
-    
+
 }
 
 // Sprachcodes abfragen und als Array zurück geben

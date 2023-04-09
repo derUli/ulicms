@@ -140,8 +140,6 @@ $tmpRules = [
     'no_unset_cast' => true,
     // Properties should be set to `null` instead of using `unset`.
     'no_unset_on_property' => true,
-    // There should not be an empty `return` statement at the end of a function.
-    'no_useless_return' => true,
     // In array declaration, there MUST NOT be a whitespace before each comma.
     'no_whitespace_before_comma_in_array' => true,
     // Remove Zero-width space (ZWSP), Non-breaking space (NBSP) and other invisible unicode symbols.
@@ -280,6 +278,8 @@ $config
     'no_useless_else' => true,
     // Remove trailing whitespace at the end of blank lines.
     'no_whitespace_in_blank_line' => true,
+    // There should not be an empty `return` statement at the end of a function.
+    'no_useless_return' => true,
     ]);
 
 return $config->setFinder(

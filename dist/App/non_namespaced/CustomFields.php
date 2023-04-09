@@ -56,7 +56,7 @@ class CustomFields
                 $sql = 'UPDATE {prefix}custom_fields set value = ? '
                         . 'where name = ? and content_id = ?';
                 return Database::pQuery($sql, $args, true);
-            
+
         } elseif ($value !== null) {
             $args = [
                 $content_id,

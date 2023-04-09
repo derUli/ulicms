@@ -583,7 +583,7 @@ class PageController extends Controller
         }  
             Settings::set($settingsName, '1');
             return true;
-        
+
     }
 
     public function nextFreeSlug(): void
@@ -793,7 +793,7 @@ class PageController extends Controller
         }  
             Settings::set($settingsName, '1');
             return true;
-        
+
     }
 
     protected function _getGroupAssignedLanguages(): array

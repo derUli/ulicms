@@ -221,7 +221,7 @@ class RoboFile extends Tasks
         }  
             $this->writeln('Installation of package '
                     . basename($file) . ' failed.');
-        
+
         if ($pkg instanceof SinPackageInstaller) {
             foreach ($pkg->getErrors() as $error) {
                 $this->writeln($error);

@@ -64,7 +64,7 @@ class InstallerController
         }  
             $_SESSION['language'] = 'en';
             return 'en';
-        
+
     }
 
     public static function getTitle()

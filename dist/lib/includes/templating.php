@@ -856,7 +856,7 @@ function get_page(?string $slug = ''): ?array
     }  
         Vars::set('page_' . $slug, null);
         return null;
-    
+
 }
 
 function content(): void

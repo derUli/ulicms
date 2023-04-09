@@ -228,7 +228,7 @@ if (isset($_SESSION['session_begin'])) {
         exit();
     }  
         $_SESSION['session_begin'] = time();
-    
+
 }
 
 register_shutdown_function(

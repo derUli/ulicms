@@ -550,7 +550,7 @@ class Database
                 return (int) $value;
             }  
                 return mysqli_real_escape_string(self::$connection, $value);
-            
+
         }  
             if ($type === DB_TYPE_INT) {
                 return (int)$value;
@@ -565,8 +565,8 @@ class Database
                 return (int)$value;
             }  
                 return $value;
-            
-        
+
+
     }
 
     // returns a list of all tables of a table

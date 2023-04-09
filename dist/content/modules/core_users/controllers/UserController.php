@@ -88,7 +88,7 @@ class UserController extends Controller
             if (! $user->getId() == $id) {
                 ExceptionResult(get_translation('not_found'), HttpStatusCode::NOT_FOUND);
             }
-            
+
             $user->setLastname($lastname);
             $user->setFirstname($firstname);
 

@@ -97,9 +97,9 @@ class CoreUpgradeController extends Controller
                 return true;
             }  
                 return false;
-            
+
         }  
             return false;
-        
+
     }
 }
