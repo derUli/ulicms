@@ -49,10 +49,6 @@ $tmpRules = [
     'indentation_type' => true,
     // All PHP files must use same line ending.
     'line_ending' => true,   
-    // Magic constants should be referred to using the correct casing.
-    'magic_constant_casing' => true,
-    // Magic method definitions and calls must be using the correct casing.
-    'magic_method_casing' => true,
     // In method arguments and method call, there MUST NOT be a space before each comma and there MUST be one space after each comma. Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line.
     'method_argument_space' => true,
     // Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.
@@ -278,6 +274,10 @@ $config
     'single_line_comment_style' => true,
     // Convert double quotes to single quotes for simple strings.
     'single_trait_insert_per_statement' => true,
+    // Magic constants should be referred to using the correct casing.
+    'magic_constant_casing' => true,
+    // Magic method definitions and calls must be using the correct casing.
+    'magic_method_casing' => true,
     ]);
 
 return $config->setFinder(
