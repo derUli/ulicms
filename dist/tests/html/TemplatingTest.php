@@ -52,7 +52,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         Database::deleteFrom('content', "slug like 'unit-test%'");
         Database::pQuery('DELETE FROM `{prefix}banner` where html like ?', [
             self::HTML_TEXT1 . '%',
-                ], true);
+        ], true);
     }
 
     private function cleanUp()

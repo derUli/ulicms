@@ -93,9 +93,9 @@ if ($permissionChecker->hasPermission('pages')) {
                        echo ModuleHelper::buildMethodCallButton('PageController', 'delete', '<i class="fas fa-trash"></i> ' . get_translation('delete'), [
                            'class' => 'btn btn-danger',
                            'type' => 'submit'
-                               ], [
+                       ], [
                            'page' => $row->id
-                               ], [
+                       ], [
                            'class' => 'pull-right delete-form page-delete-form'
                        ]);
             ?>

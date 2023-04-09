@@ -72,7 +72,7 @@ if ($permissionChecker->hasPermission('languages')) {
                                            'setDefaultLanguage',
                                            ModuleHelper::buildQueryString(
                                                ['default' => $language->getLanguageCode()
-                                                  ]
+                                               ]
                                            )
                                        );
                                     ?>"
@@ -120,8 +120,8 @@ if ($permissionChecker->hasPermission('languages')) {
 
 $translation = new JSTranslation(
     [
-    'ask_for_delete',
-    'REALLY_MAKE_DEFAULT_LANGUAGE'
-       ]
+        'ask_for_delete',
+        'REALLY_MAKE_DEFAULT_LANGUAGE'
+    ]
 );
 $translation->render();

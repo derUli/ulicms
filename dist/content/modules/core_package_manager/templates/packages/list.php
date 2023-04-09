@@ -93,7 +93,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                 $canToggleModule = (getModuleMeta($module->getName(), 'source') != 'core' && $permissionChecker->hasPermission('enable_disable_module'));
                     echo ModuleHelper::buildMethodCallForm(PackageController::class, 'toggleModule', [
                         'name' => $module->getName()
-                            ], RequestMethod::POST, [
+                    ], RequestMethod::POST, [
                         'class' => 'inline-block toggle-module-form',
                         'data-confirm-message' => get_translation('uninstall_module_x', [
                             '%name%' => $module->getName()
@@ -123,7 +123,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                     if ($permissionChecker->hasPermission('remove_packages') && getModuleMeta($module->getName(), 'source') != 'core') {
                         echo ModuleHelper::buildMethodCallForm(PackageController::class, 'uninstallModule', [
                             'name' => $module->getName()
-                                ], RequestMethod::POST, [
+                        ], RequestMethod::POST, [
                             'class' => 'inline-block uninstall-form',
                             'data-confirm-message' => get_translation('uninstall_module_x', [
                                 '%name%' => $module->getName()
@@ -244,7 +244,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                 if ($permissionChecker->hasPermission('remove_packages') && getModuleMeta($module->getName(), 'source') != 'core') {
                                     echo ModuleHelper::buildMethodCallForm(PackageController::class, 'uninstallTheme', [
                                         'name' => $theme
-                                            ], RequestMethod::POST, [
+                                    ], RequestMethod::POST, [
                                         'class' => 'inline-block uninstall-form',
                                         'data-confirm-message' => get_translation('uninstall_theme_x', [
                                             '%name%' => $theme

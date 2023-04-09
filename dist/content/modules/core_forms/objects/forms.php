@@ -158,10 +158,10 @@ class Forms
                 $mail_from_field
             ) ?
                     [
-                $_POST[$mail_from_field]
+                        $_POST[$mail_from_field]
                     ] : [
-                Settings::get('email')
-            ];
+                        Settings::get('email')
+                    ];
             sanitize($mail_from);
 
             $headers = 'From: ' . $mail_from[0] . "\n";

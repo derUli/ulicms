@@ -114,7 +114,7 @@ class Page extends Content
     {
         $result = Database::pQuery('SELECT * FROM `{prefix}content` '
                         . 'where id = ?', [
-                    (int) $id
+                            (int) $id
                         ], true);
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);

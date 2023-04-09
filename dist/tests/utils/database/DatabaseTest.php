@@ -230,8 +230,8 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         $this->assertNotNull($lastInsertId);
 
         $result = Database::selectAll('settings', [
-                    'id'
-                        ], "name = 'foo2'");
+            'id'
+        ], "name = 'foo2'");
         $dataset = Database::fetchObject($result);
         $this->assertEquals($dataset->id, $lastInsertId);
 
@@ -248,8 +248,8 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         $this->assertNotNull($lastInsertId);
 
         $result = Database::selectAll('settings', [
-                    'id'
-                        ], "name = 'foo2'");
+            'id'
+        ], "name = 'foo2'");
         $dataset = Database::fetchObject($result);
         $this->assertEquals($dataset->id, $lastInsertId);
 

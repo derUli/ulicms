@@ -326,9 +326,9 @@ class ModuleHelper extends Helper
         string $sMethod,
         string $buttonText,
         array $buttonAttributes = [
-                'class' => 'btn btn-default',
-                'type' => 'submit'
-            ],
+            'class' => 'btn btn-default',
+            'type' => 'submit'
+        ],
         array $otherVars = [],
         array $formAttributes = [],
         string $requestMethod = RequestMethod::POST

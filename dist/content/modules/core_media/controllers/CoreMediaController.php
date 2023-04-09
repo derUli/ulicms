@@ -54,12 +54,12 @@ class CoreMediaController extends MainClass
             '</html>',
             '<body>',
             '</body>'
-                        ], [
+        ], [
             '',
             '',
             '',
             ''
-                        ], $dom->saveHTML()));
+        ], $dom->saveHTML()));
         return $newHtml;
     }
 
@@ -116,12 +116,12 @@ class CoreMediaController extends MainClass
             '</html>',
             '<body>',
             '</body>'
-                        ], [
+        ], [
             '',
             '',
             '',
             ''
-                        ], $html));
+        ], $html));
     }
 
     // This method retrieves the embed code for an URL

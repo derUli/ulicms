@@ -43,8 +43,8 @@ if (Vars::get('comments_enabled')) {
             [],
             'post',
             [
-                                                'autocomplete' => 'off'
-                                            ]
+                'autocomplete' => 'off'
+            ]
         );
     ?>
         <?php
@@ -64,9 +64,9 @@ if (Vars::get('comments_enabled')) {
                 '',
                 'text',
                 [
-                                                                                    'class' => 'form-control',
-                                                                                    'required' => 'required'
-                                                                                ]
+                    'class' => 'form-control',
+                    'required' => 'required'
+                ]
             );
     ?>
             </div>
@@ -90,7 +90,7 @@ if (Vars::get('comments_enabled')) {
         <div>
             <?php
             echo App\HTML\Input::textBox('author_url', '', 'url', [
-    'class' => 'form-control'
+                'class' => 'form-control'
             ]);
     ?>
         </div>

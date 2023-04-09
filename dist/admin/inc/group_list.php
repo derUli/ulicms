@@ -12,9 +12,9 @@ $groups = $permissionChecker->getAllGroups();
 $default_acl_group = (int)Settings::get('default_acl_group');
 
 if (isset($_REQUEST['sort']) && in_array($_REQUEST['sort'], [
-            'id',
-            'name'
-        ])) {
+    'id',
+    'name'
+])) {
     $_SESSION['grp_sort'] = $_REQUEST['sort'];
 }
 ?>
@@ -110,7 +110,7 @@ if (count($groups) > 0) {
 
 $translation = new JSTranslation(
     [
-    'ask_for_delete'
-        ]
+        'ask_for_delete'
+    ]
 );
 $translation->render();

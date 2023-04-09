@@ -73,9 +73,9 @@ class CommentSpamChecker implements ISpamChecker
                     $message = get_translation(
                         'comment_contains_badword',
                         [
-                                '%field%' => get_translation($field),
-                                '%word%' => $badword
-                            ]
+                            '%field%' => get_translation($field),
+                            '%word%' => $badword
+                        ]
                     );
                     $this->errors[] = new SpamDetectionResult(
                         get_translation($field),
@@ -95,8 +95,8 @@ class CommentSpamChecker implements ISpamChecker
                 $this->errors[] = new SpamDetectionResult(
                     get_translation('useragent'),
                     get_translation('bots_are_not_allowed', [
-                            '%useragent%' => $useragent
-                        ])
+                        '%useragent%' => $useragent
+                    ])
                 );
             }
         }
@@ -122,8 +122,8 @@ class CommentSpamChecker implements ISpamChecker
                         $message = get_translation(
                             'chinese_chars_not_allowed',
                             [
-                                    '%field%' => get_translation($field)
-                                ]
+                                '%field%' => get_translation($field)
+                            ]
                         );
                         $this->errors[] = new SpamDetectionResult(
                             get_translation($field),
@@ -141,8 +141,8 @@ class CommentSpamChecker implements ISpamChecker
                         $message = get_translation(
                             'cyrillic_chars_not_allowed',
                             [
-                                    '%field%' => get_translation($field)
-                                ]
+                                '%field%' => get_translation($field)
+                            ]
                         );
                         $this->errors[] = new SpamDetectionResult(
                             get_translation($field),
@@ -161,8 +161,8 @@ class CommentSpamChecker implements ISpamChecker
                         $this->errors[] = new SpamDetectionResult(
                             get_translation($field),
                             get_translation('rtl_chars_not_allowed', [
-                                    '%field%' => get_translation($field)
-                                ])
+                                '%field%' => get_translation($field)
+                            ])
                         );
                     }
                 }
@@ -178,8 +178,8 @@ class CommentSpamChecker implements ISpamChecker
             $message = get_translation(
                 'your_country_is_blocked',
                 [
-                        '%hostname%' => $hostname
-                    ]
+                    '%hostname%' => $hostname
+                ]
             );
             $this->errors[] = new SpamDetectionResult(
                 get_translation('ip_address'),

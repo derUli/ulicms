@@ -20,9 +20,9 @@ $entries[] = new MenuEntry(
     '?action=contents',
     'contents',
     [
-    'pages',
-    'forms',
-    'banners'
+        'pages',
+        'forms',
+        'banners'
     ],
     [],
     false,
@@ -34,9 +34,9 @@ $entries[] = new MenuEntry(
     '?action=media',
     'media',
     [
-    'files',
-    'videos',
-    'audio'
+        'files',
+        'videos',
+        'audio'
     ],
     [],
     false,
@@ -74,15 +74,15 @@ $entries[] = new MenuEntry(
     '?action=settings_categories',
     'settings_categories',
     [
-    'settings_simple',
-    'design',
-    'spam_filter',
-    'cache',
-    'motd',
-    'logo',
-    'languages',
-    'other',
-    'expert_settings'
+        'settings_simple',
+        'design',
+        'spam_filter',
+        'cache',
+        'motd',
+        'logo',
+        'languages',
+        'other',
+        'expert_settings'
     ],
     [],
     false,

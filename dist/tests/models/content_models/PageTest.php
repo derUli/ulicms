@@ -1070,8 +1070,8 @@ class PageTest extends \PHPUnit\Framework\TestCase
     {
         $permissions = new PagePermissions(
             [
-            'group' => true,
-            'owner' => true
+                'group' => true,
+                'owner' => true
             ]
         );
 

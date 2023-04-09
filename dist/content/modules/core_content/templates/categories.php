@@ -10,12 +10,12 @@ if (! $permissionChecker->hasPermission('categories')) {
     noPerms();
 } else {
     if (isset($_GET['order']) && in_array($_GET['order'], [
-                'id',
-                'name',
-                'description',
-                'created',
-                'updated'
-            ])) {
+        'id',
+        'name',
+        'description',
+        'created',
+        'updated'
+    ])) {
         $order = db_escape($_GET['order']);
     } else {
         $order = 'id';
@@ -237,7 +237,7 @@ if (! $permissionChecker->hasPermission('categories')) {
 }
 $translation = new JSTranslation(
     [
-    'ask_for_delete'
+        'ask_for_delete'
     ]
 );
 $translation->render();

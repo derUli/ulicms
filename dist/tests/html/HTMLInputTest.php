@@ -8,28 +8,28 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
     public function testTextBox()
     {
         $this->assertEquals('<input type="text" name="my_field" value="Hello World" required="required">', Input::textBox('my_field', 'Hello World', 'text', [
-                    'required' => 'required'
+            'required' => 'required'
         ]));
     }
 
     public function testTextArea()
     {
         $this->assertEquals('<textarea name="my_field" rows="25" cols="80" required="required">&lt;h2&gt;Hello World!&lt;/h2&gt;</textarea>', Input::textArea('my_field', '<h2>Hello World!</h2>', 25, 80, [
-                    'required' => 'required'
+            'required' => 'required'
         ]));
     }
 
     public function testPassword()
     {
         $this->assertEquals('<input type="password" name="my_field" value="Hello World" required="required">', Input::password('my_field', 'Hello World', [
-                    'required' => 'required'
+            'required' => 'required'
         ]));
     }
 
     public function testHidden()
     {
         $this->assertEquals('<input type="hidden" name="my_field" value="Hello World" required="required">', Input::hidden('my_field', 'Hello World', [
-                    'required' => 'required'
+            'required' => 'required'
         ]));
     }
 
@@ -138,8 +138,8 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
     public function testFileWithAcceptAsArray()
     {
         $this->assertEquals('<input type="file" name="my_file" value="" accept="image/jpeg, image/png">', Input::file('my_file', false, [
-                    'image/jpeg',
-                    'image/png'
+            'image/jpeg',
+            'image/png'
         ]));
     }
 

@@ -97,7 +97,7 @@ VALUES      ( ?,
             $this->getIp(),
             $this->getUseragent(),
             $this->isRead()
-                ], true);
+        ], true);
         $this->setID(Database::getLastInsertID());
     }
 
@@ -126,7 +126,7 @@ VALUES      ( ?,
             $this->getUseragent(),
             $this->isRead(),
             $this->getID()
-                ], true);
+        ], true);
     }
 
     public function delete()

@@ -145,7 +145,7 @@ class DBMigrator
     {
         return Database::pQuery('DELETE FROM {prefix}dbtrack '
                         . 'where component = ?', [
-                    $this->component
+                            $this->component
                         ], true);
     }
 

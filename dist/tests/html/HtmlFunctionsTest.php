@@ -106,8 +106,8 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             '<a id="mylink" class="btn btn-primary" href="https://www.google.de" target="_self"><strong>Google</strong></a>',
             link('https://www.google.de', '<strong>Google</strong>', true, LinkTarget::TARGET_SELF, [
-            'id' => 'mylink',
-            'class' => 'btn btn-primary'
+                'id' => 'mylink',
+                'class' => 'btn btn-primary'
             ])
         );
     }

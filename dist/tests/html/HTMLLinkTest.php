@@ -22,7 +22,7 @@ class HTMLLinkTest extends \PHPUnit\Framework\TestCase
     public function testLinkWithAdditionalAttribute()
     {
         $this->assertEquals('<a href="https://www.google.com" target="_blank">Google</a>', Link::link('https://www.google.com', 'Google', [
-                    'target' => '_blank'
+            'target' => '_blank'
         ]));
     }
 
@@ -39,8 +39,8 @@ class HTMLLinkTest extends \PHPUnit\Framework\TestCase
     public function testLinkWithAdditionalAttributes()
     {
         $this->assertEquals('<a href="?action=pages" target="_blank" class="btn btn-primary">Pages</a>', Link::actionLink('pages', 'Pages', null, [
-                    'target' => '_blank',
-                    'class' => 'btn btn-primary'
+            'target' => '_blank',
+            'class' => 'btn btn-primary'
         ]));
     }
 }

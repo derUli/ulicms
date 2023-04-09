@@ -39,10 +39,10 @@ class AvailablePackageVersionMatcher
             if (ArrayHelper::hasMultipleKeys(
                 $version,
                 [
-                                'version',
-                                'compatible_with',
-                                'file'
-                            ]
+                    'version',
+                    'compatible_with',
+                    'file'
+                ]
             ) &&
                     is_version_number($version['version']) &&
                     is_version_number($version['compatible_with'])

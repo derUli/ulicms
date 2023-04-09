@@ -3,8 +3,6 @@
 $config = new PhpCsFixer\Config();
 
 $tmpRules = [
-    // Each element of an array must be indented exactly once.
-    'array_indentation' => true,
     // There MUST be one blank line after the namespace declaration.
     'blank_line_after_namespace' => true,
     // Ensure there is no code on the same line as the PHP open tag and it is followed by a blank line.
@@ -279,6 +277,8 @@ $config
     'no_whitespace_before_comma_in_array' => true,
     // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
     'align_multiline_comment' => ['comment_type'=>'all_multiline'],
+    // Each element of an array must be indented exactly once.
+    'array_indentation' => true,
     ]);
 
 return $config->setFinder(

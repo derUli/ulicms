@@ -28,8 +28,8 @@ class Logger
                 $this->path,
                 \Psr\Log\LogLevel::DEBUG,
                 [
-                'extension' => 'log',
-                'prefix' => "{$environment}_"
+                    'extension' => 'log',
+                    'prefix' => "{$environment}_"
                 ]
             );
             $this->fixLogPermissions($cfg);

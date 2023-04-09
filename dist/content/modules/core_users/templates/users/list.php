@@ -152,7 +152,7 @@ if ($permissionChecker->hasPermission('users')) {
 
 $translation = new JSTranslation(
     [
-    'ask_for_delete'
+        'ask_for_delete'
     ]
 );
 $translation->render();

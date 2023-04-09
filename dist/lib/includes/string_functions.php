@@ -14,7 +14,7 @@ if (! defined('RESPONSIVE_FM')) {
                 "\n",
                 '%0a',
                 '%0d'
-                    ], '', stripslashes($data));
+            ], '', stripslashes($data));
         }
     }
 }

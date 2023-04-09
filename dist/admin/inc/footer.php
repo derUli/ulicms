@@ -6,9 +6,9 @@ use  App\Translations\JSTranslation;
 
 $menuTranslation = new JSTranslation(
     [
-    'logout',
-    'on',
-    'off'
+        'logout',
+        'on',
+        'off'
     ],
     'MenuTranslation'
 );
@@ -16,9 +16,9 @@ $menuTranslation->render();
 
 $globalTranslation = new JSTranslation(
     [
-    'all',
-    'copied_to_clipboard_success',
-    'copied_to_clipboard_failed'
+        'all',
+        'copied_to_clipboard_success',
+        'copied_to_clipboard_failed'
     ],
     'GlobalTranslation'
 );
@@ -26,12 +26,12 @@ $globalTranslation->render();
 
 $passwordSecurityTranslation = new JSTranslation(
     [
-    'short_pass',
-    'bad_pass',
-    'good_pass',
-    'strong_pass',
-    'contains_username',
-    'enter_pass',
+        'short_pass',
+        'bad_pass',
+        'good_pass',
+        'strong_pass',
+        'contains_username',
+        'enter_pass',
     ],
     'PasswordSecurityTranslation'
 );

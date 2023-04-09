@@ -20,10 +20,10 @@ if ($permissionChecker->hasPermission('pages')) {
         translate(
             'COMPARE_VERSION_FROM_TO',
             [
-                                                '%current%' =>
-                                                $diff->current_version_date,
-                                                '%old_version%' => $diff->old_version_date
-                                            ]
+                '%current%' =>
+                $diff->current_version_date,
+                '%old_version%' => $diff->old_version_date
+            ]
         );
     ?></p>
 

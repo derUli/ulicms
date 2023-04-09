@@ -10,7 +10,7 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase
             "{$type}_foo",
             "{$type}_hello",
             (int)$id
-                ], true);
+        ], true);
 
         Vars::delete('id');
 

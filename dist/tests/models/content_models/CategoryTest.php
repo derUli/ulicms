@@ -15,7 +15,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 							where name = ? or name = ?', [
             self::name1,
             self::name2
-                ], true);
+        ], true);
     }
 
     protected function tearDown(): void

@@ -19,7 +19,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
             'banana',
             'pineapple',
             'cucumber'
-                ], ArrayHelper::insertBefore($input, 3, 'pineapple'));
+        ], ArrayHelper::insertBefore($input, 3, 'pineapple'));
 
         $this->assertEquals([
             'pineapple',
@@ -27,7 +27,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
             'tomato',
             'banana',
             'cucumber'
-                ], ArrayHelper::insertBefore($input, 0, 'pineapple'));
+        ], ArrayHelper::insertBefore($input, 0, 'pineapple'));
     }
 
     public function testInsertBeforeReturnsThrowsException()
@@ -60,7 +60,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
             'tomato',
             'banana',
             'cucumber'
-                ], ArrayHelper::insertAfter($input, 0, 'pineapple'));
+        ], ArrayHelper::insertAfter($input, 0, 'pineapple'));
 
         $this->assertEquals([
             'apple',
@@ -68,7 +68,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
             'banana',
             'cucumber',
             'pineapple'
-                ], ArrayHelper::insertAfter($input, 3, 'pineapple'));
+        ], ArrayHelper::insertAfter($input, 3, 'pineapple'));
     }
 
     public function testInsertAfterReturnsThrowsException()

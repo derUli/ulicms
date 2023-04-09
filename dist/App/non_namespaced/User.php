@@ -122,7 +122,7 @@ class User extends Model
             'group_id' => $this->getPrimaryGroupId(),
             'logged_in' => true,
             'session_begin' => time()
-                ] : null;
+        ] : null;
     }
 
     /**

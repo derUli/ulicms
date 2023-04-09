@@ -13,7 +13,7 @@ class PreparedStatementsTest extends \PHPUnit\Framework\TestCase
                 '2014-11-22 13:23:44.657',
                 true,
                 false
-        ]
+            ]
         );
         $dataset = Database::fetchObject($result);
         $this->assertEquals(123, $dataset->wert1);

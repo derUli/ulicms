@@ -56,7 +56,7 @@ class Audio extends Model
     {
         $result = Database::pQuery('select * from `{prefix}audio` '
                         . 'where id = ?', [
-                    (int)$id
+                            (int)$id
                         ], true);
         if (! Database::any($result)) {
             $result = null;
@@ -213,7 +213,7 @@ class Audio extends Model
             }
             Database::pQuery('delete from `{prefix}audio` where id = ?', [
                 $this->getID()
-                    ], true);
+            ], true);
             $this->fillVars(null);
         }
     }

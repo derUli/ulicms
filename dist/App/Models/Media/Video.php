@@ -57,7 +57,7 @@ class Video extends Model
     {
         $result = Database::pQuery('select * from `{prefix}videos` '
                         . 'where id = ?', [
-                    (int) $id
+                            (int) $id
                         ], true);
         if (! Database::any($result)) {
             $result = null;
