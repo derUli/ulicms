@@ -43,7 +43,7 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
             'https://soundcloud.com/atbense/ritscheratsche-cyber-cyber-mix'
         ];
 
-        $links = array_map(static function ($url) {
+        $links = array_map(static function($url) {
             return Link::link($url, $url);
         }, $urls);
 

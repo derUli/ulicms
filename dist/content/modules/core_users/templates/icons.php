@@ -8,7 +8,7 @@ $icons = [
     'groups' => 'fa fa-users'
 ];
 
-$icons = array_filter($icons, static function ($cssClass, $action) {
+$icons = array_filter($icons, static function($cssClass, $action) {
     $permissions = [
         'admins' => 'users',
         'groups' => 'groups'

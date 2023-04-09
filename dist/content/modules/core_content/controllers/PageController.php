@@ -649,7 +649,7 @@ class PageController extends Controller
 
         $groupLanguages = $this->_getGroupAssignedLanguages();
         if (count($groupLanguages)) {
-            $groupLanguages = array_map(static function ($lang) {
+            $groupLanguages = array_map(static function($lang) {
                 return "'" . Database::escapeValue($lang) . "'";
             }, $groupLanguages);
             $where .= ' and language in (' . implode(',', $groupLanguages) . ')';
@@ -966,7 +966,7 @@ class PageController extends Controller
     {
         $permissionChecker = new PermissionChecker(get_user_id());
         return array_map(
-            static function ($lang) {
+            static function($lang) {
                 return $lang->getLanguageCode();
             },
             $permissionChecker->getLanguages()

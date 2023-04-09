@@ -80,7 +80,7 @@ class Mailer
      */
     public static function getMailLogger(): Closure
     {
-        return static function ($str, $level) {
+        return static function($str, $level) {
             $logger = LoggerRegistry::get('phpmailer_log');
             if ($logger) {
                 $logger->debug($str);

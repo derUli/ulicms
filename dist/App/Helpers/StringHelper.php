@@ -82,7 +82,7 @@ class StringHelper extends Helper
             $lines = array_filter($lines, 'strlen');
         }
         if ($removeComments) {
-            $lines = array_filter($lines, static function ($line) {
+            $lines = array_filter($lines, static function($line) {
                 return ! str_starts_with($line, '#');
             });
         }

@@ -3,8 +3,6 @@
 $config = new PhpCsFixer\Config();
 
 $tmpRules = [
-    // Spaces should be properly placed in a function declaration.
-    'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
     // Add leading `\` before function invocation to speed up resolving.
     'native_function_invocation' => ['include'=>['@all','trans']],
     // There must be a comment when fall-through is intentional in a non-empty case body.
@@ -274,7 +272,9 @@ $config
     // Replace control structure alternative syntax to use braces.
     'no_alternative_syntax' => true,
     // A return statement wishing to return `void` should not return `null`.
-    'simplified_null_return' => false
+    'simplified_null_return' => false,
+    // Spaces should be properly placed in a function declaration.
+    'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
     ]);
 
 return $config->setFinder(

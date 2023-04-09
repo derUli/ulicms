@@ -8,7 +8,7 @@ $icons = [
     'videos' => 'fa fa-file-video',
     'audio' => 'fa fa-file-audio'
 ];
-$icons = array_filter($icons, static function ($cssClass, $action) {
+$icons = array_filter($icons, static function($cssClass, $action) {
     $permissionChecker = new PermissionChecker(get_user_id());
     return $permissionChecker->hasPermission($action);
 }, ARRAY_FILTER_USE_BOTH);

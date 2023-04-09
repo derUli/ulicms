@@ -13,7 +13,7 @@ class InfoController extends MainClass
         $lines = array_map('_esc', $lines);
         $lines = array_map('make_links_clickable', $lines);
 
-        $lines = array_map(static function ($line) {
+        $lines = array_map(static function($line) {
             if (str_starts_with($line, '+') || str_starts_with($line, '*') ||
                     str_starts_with($line, '-') || str_starts_with($line, '# ') ||
                     str_starts_with($line, '*')) {

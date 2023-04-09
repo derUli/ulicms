@@ -49,7 +49,7 @@ if (is_file($composerAutoloadFile)) {
 }
 
 // Autoloader
-spl_autoload_register(function ($className) {
+spl_autoload_register(function($className) {
     // Interim solution for not yet namespaced classes
     if (! str_contains($className, '\\')) {
         $className = "App\\non_namespaced\\{$className}";
@@ -231,7 +231,7 @@ if (isset($_SESSION['session_begin'])) {
 }
 
 register_shutdown_function(
-    static function () {
+    static function() {
         do_event('shutdown');
 
         $cfg = new CMSConfig();

@@ -28,7 +28,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
     public function getPostVars(): array
     {
         $groups = Group::getAll();
-        $groupIds = array_map(static function ($value) {
+        $groupIds = array_map(static function($value) {
             return $value->getId();
         }, $groups);
         return [
@@ -48,7 +48,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
     public function testCreate()
     {
         $groups = Group::getAll();
-        $groupIds = array_map(static function ($value) {
+        $groupIds = array_map(static function($value) {
             return $value->getId();
         }, $groups);
 
@@ -75,7 +75,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
     public function testCreateWithMail()
     {
         $groups = Group::getAll();
-        $groupIds = array_map(static function ($value) {
+        $groupIds = array_map(static function($value) {
             return $value->getId();
         }, $groups);
 

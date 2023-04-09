@@ -72,7 +72,7 @@ class GroupCollection
     private function joinTags(array $tags): string
     {
         $tags = array_map(
-            static function ($tag) {
+            static function($tag) {
                 return "<{$tag}>";
             },
             $tags

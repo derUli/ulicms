@@ -306,7 +306,7 @@ class FtpClient implements Countable
         }
 
         // utils for recursion
-        $flatten = static function (array $arr) use (&$flatten) {
+        $flatten = static function(array $arr) use (&$flatten) {
             $flat = [];
 
             foreach ($arr as $k => $v) {

@@ -47,7 +47,7 @@ class ResponseTest extends \PHPUnit\Framework\TestCase
             Path::resolve('tests/fixtures/javascriptRedirect.expected.txt')
         );
 
-        $actual = TestHelper::getOutput(static function () {
+        $actual = TestHelper::getOutput(static function() {
             Response::javascriptRedirect('https://google.de');
         });
 
