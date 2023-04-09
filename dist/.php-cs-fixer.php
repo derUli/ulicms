@@ -134,8 +134,6 @@ $tmpRules = [
     'no_spaces_inside_parenthesis' => true,
     // Removes `@param`, `@return` and `@var` tags that don't provide any useful information.
     'no_superfluous_phpdoc_tags' => true,
-    // Remove trailing whitespace at the end of non-blank lines.
-    'no_trailing_whitespace' => true,
     // There MUST be no trailing spaces inside comment or PHPDoc.
     'no_trailing_whitespace_in_comment' => true,
     // Removes unneeded parentheses around control statements.
@@ -275,7 +273,9 @@ $config
     // Logical NOT operators (`!`) should have one trailing whitespace.
     'not_operator_with_successor_space' => true,
     // Cast shall be used, not `settype`.
-    'set_type_to_cast' => true,
+    'set_type_to_cast' => true,    
+    // Remove trailing whitespace at the end of non-blank lines.
+    'no_trailing_whitespace' => true,
     ]);
 
 return $config->setFinder(
