@@ -26,8 +26,8 @@ class TestHelper extends Helper
     /**
      * Executes a closure and captures it's output
      * @param Closure $method
-     * @return string
      * @throws Exception
+     * @return string
      */
     public static function getOutput(Closure $method): string
     {

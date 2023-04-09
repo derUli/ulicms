@@ -50,8 +50,8 @@ class DBMigrator
     /**
      * Execute a Sql file
      * @param string $file SQL file
-     * @return void
      * @throws SqlException
+     * @return void
      */
     public function executeSqlScript(string $file): void
     {
@@ -93,8 +93,8 @@ class DBMigrator
     /**
      * Rollback migrations
      * @param string|null $stop Ston on this migration, null means rollback all
-     * @return void
      * @throws SqlException
+     * @return void
      */
     public function rollback(?string $stop = null): void
     {

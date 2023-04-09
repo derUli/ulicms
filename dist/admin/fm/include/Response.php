@@ -288,9 +288,9 @@ class Response
      * If the status text is null it will be automatically populated for the known
      * status codes and left empty otherwise.
      *
+     * @throws \InvalidArgumentException When the HTTP status code is not valid
      * @return Response
      *
-     * @throws \InvalidArgumentException When the HTTP status code is not valid
      *
      * @api
      */

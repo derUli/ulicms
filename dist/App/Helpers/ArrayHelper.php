@@ -18,8 +18,8 @@ class ArrayHelper extends Helper
      * @param array $input
      * @param int $index
      * @param type $element
-     * @return array
      * @throws Exception
+     * @return array
      */
     public static function insertBefore(
         array $input,
@@ -48,8 +48,8 @@ class ArrayHelper extends Helper
      * @param array $input
      * @param int $index
      * @param type $element
-     * @return array
      * @throws Exception
+     * @return array
      */
     public static function insertAfter(
         array $input,

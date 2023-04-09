@@ -112,16 +112,6 @@ $tmpRules = [
     'ordered_interfaces' => true,
     // Trait `use` statements must be sorted alphabetically.
     'ordered_traits' => true,
-    // Classy that does not inherit must not have `@inheritdoc` tags.
-    'phpdoc_no_useless_inheritdoc' => true,
-    // Annotations in PHPDoc should be ordered so that `@param` annotations come first, then `@throws` annotations, then `@return` annotations.
-    'phpdoc_order' => true,
-    // The type of `@return` annotations of methods returning a reference to itself must the configured one.
-    'phpdoc_return_self_reference' => true,
-    // Scalar types should always be written in the same form. `int` not `integer`, `bool` not `boolean`, `float` not `real` or `double`.
-    'phpdoc_scalar' => true,
-    // Fixes casing of PHPDoc tags.
-    'phpdoc_tag_casing' => true,
     // Converts `protected` variables and methods to `private` where possible.
     'protected_to_private' => true,
     // Classes must be in a path that matches their namespace, be at least one namespace deep and the class name should match the file name.
@@ -278,6 +268,16 @@ $config
      'single_blank_line_at_eof' => true,
      // There should be exactly one blank line before a namespace declaration.
      'single_blank_line_before_namespace' => true,
+    // Classy that does not inherit must not have `@inheritdoc` tags.
+    'phpdoc_no_useless_inheritdoc' => true,
+    // Annotations in PHPDoc should be ordered so that `@param` annotations come first, then `@throws` annotations, then `@return` annotations.
+    'phpdoc_order' => true,
+    // The type of `@return` annotations of methods returning a reference to itself must the configured one.
+    'phpdoc_return_self_reference' => true,
+    // Scalar types should always be written in the same form. `int` not `integer`, `bool` not `boolean`, `float` not `real` or `double`.
+    'phpdoc_scalar' => true,
+    // Fixes casing of PHPDoc tags.
+    'phpdoc_tag_casing' => true,
     ]);
 
 return $config->setFinder(

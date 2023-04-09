@@ -104,7 +104,7 @@ function checkRelativePathPartial($path)
  *
  * @param  string  $path
  *
- * @return boolean is it correct?
+ * @return bool is it correct?
  */
 function checkRelativePath($path)
 {
@@ -122,7 +122,7 @@ function checkRelativePath($path)
  * @param  string  $path
  * @param  array $config
  *
- * @return boolean is it an upload dir?
+ * @return bool is it an upload dir?
  */
 function isUploadDir($path, $config)
 {
@@ -383,8 +383,8 @@ function ftp_con($config)
  * @param  int     $newheight  Optional thumbnail height
  * @param  string  $option     Type of resize
  *
- * @return bool
  * @throws \Exception
+ * @return bool
  */
 function create_img($imgfile, $imgthumb, $newwidth, $newheight = null, $option = 'crop', $config = [])
 {
