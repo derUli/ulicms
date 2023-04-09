@@ -1127,10 +1127,10 @@ class User extends Model
      */
     public function hasProcessedAvatar(): bool
     {
-        return (
+        return
             $this->getProcessedAvatarPath() &&
             is_file($this->getProcessedAvatarPath())
-        );
+        ;
     }
 
     /**

@@ -153,8 +153,8 @@ class InstallerController
         $allSteps = count($files);
         $currentStep = (int)$_SESSION['install_index'];
 
-        echo($currentStep >= $allSteps - 1 ?
-                '<!--finish-->' : ' <!--ok-->');
+        echo $currentStep >= $allSteps - 1 ?
+                '<!--finish-->' : ' <!--ok-->';
 
         $sql_file = $files[$currentStep];
 

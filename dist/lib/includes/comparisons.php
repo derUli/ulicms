@@ -143,5 +143,5 @@ function var_is_type($var, $type, $required = false): bool
  */
 function is_version_number(?string $input): bool
 {
-    return ($input && version_compare($input, '0.0.1', '>='));
+    return $input && version_compare($input, '0.0.1', '>=');
 }

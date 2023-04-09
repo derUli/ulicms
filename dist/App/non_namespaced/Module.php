@@ -123,20 +123,20 @@ class Module
 
     public function isMissingDependencies(): bool
     {
-        return (count($this->getMissingDependencies()) > 0);
+        return count($this->getMissingDependencies()) > 0;
     }
 
     public function hasAdminPage(): bool
     {
         $controller = ModuleHelper::getMainController($this->name);
-        return (
+        return
             is_file(getModuleAdminFilePath($this->name)) ||
             is_file(getModuleAdminFilePath2($this->name)) ||
             ($controller && method_exists($controller, 'settings')) ||
             (
                 getModuleMeta($this->name, 'main_class')
             ) &&
-            getModuleMeta($this->name, 'admin_permission'));
+            getModuleMeta($this->name, 'admin_permission');
     }
 
     public function isEmbedModule(): bool
@@ -166,7 +166,7 @@ class Module
 
     public function hasDependentModules(): bool
     {
-        return (count($this->getDependentModules()) > 0);
+        return count($this->getDependentModules()) > 0;
     }
 
     public function disable(): void
@@ -204,11 +204,11 @@ class Module
 
         // Uninstall Script ausführen, sofern vorhanden
         $mainController = ModuleHelper::getMainController($name);
-        return (($mainController &&
+        return ($mainController &&
                 method_exists($mainController, 'uninstall')) ||
                 is_file($uninstallScript1) ||
                 is_file($uninstallScript2)
-        );
+        ;
     }
 
     public function delete(): ?bool

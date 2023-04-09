@@ -61,7 +61,7 @@ class Request
 
     public static function hasVar(string $name): bool
     {
-        return (isset($_POST[$name]) || isset($_GET[$name]));
+        return isset($_POST[$name]) || isset($_GET[$name]);
     }
 
     public static function getMethod(): ?string
@@ -163,10 +163,10 @@ class Request
 
     public static function isAjaxRequest(): bool
     {
-        return (! empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+        return ! empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
                 strtolower(
                     $_SERVER['HTTP_X_REQUESTED_WITH']
-                ) == 'xmlhttprequest');
+                ) == 'xmlhttprequest';
     }
 
     public static function getDomain(): ?string

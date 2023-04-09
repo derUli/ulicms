@@ -439,7 +439,7 @@ function makeSize($size)
         $u++;
     }
 
-    return (number_format($size, 0) . ' ' . trans($units[ $u ]));
+    return number_format($size, 0) . ' ' . trans($units[ $u ]);
 }
 
 /**

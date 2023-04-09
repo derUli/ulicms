@@ -640,7 +640,7 @@ class PageController extends Controller
             $sql .= "and id <> $id";
         }
         $result = Database::query($sql);
-        return (Database::getNumRows($result) <= 0);
+        return Database::getNumRows($result) <= 0;
     }
 
     public function filterParentPages(): void

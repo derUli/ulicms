@@ -130,7 +130,7 @@ function bool2YesNo(
     if (! $noString) {
         $noString = get_translation('no');
     }
-    return ($value ? $yesString : $noString);
+    return $value ? $yesString : $noString;
 }
 
 /**

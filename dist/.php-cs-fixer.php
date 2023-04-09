@@ -83,11 +83,6 @@ $tmpRules = [
     'no_multiline_whitespace_around_double_arrow' => true,
     // There MUST NOT be a space after the opening parenthesis. There MUST NOT be a space before the closing parenthesis.
     'no_spaces_inside_parenthesis' => true,
-
-    // Removes unneeded parentheses around control statements.
-    'no_unneeded_control_parentheses' => true,
-    // Removes unneeded curly braces that are superfluous and aren't part of a control structure's body.
-    'no_unneeded_curly_braces' => true,
     // A `final` class must not have `final` methods and `private` methods must not be `final`.
     'no_unneeded_final_method' => true,
     // Variables must be set `null` instead of using `(unset)` casting.
@@ -280,6 +275,10 @@ $config
     'ordered_traits' => true,
     // In function arguments there must not be arguments with default values before non-default ones.
     'no_unreachable_default_argument_value' => true,
+    // Removes unneeded parentheses around control statements.
+    'no_unneeded_control_parentheses' => true,
+    // Removes unneeded curly braces that are superfluous and aren't part of a control structure's body.
+    'no_unneeded_curly_braces' => true,    
     ]);
 
 return $config->setFinder(

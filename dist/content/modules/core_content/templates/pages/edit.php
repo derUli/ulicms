@@ -916,8 +916,8 @@ if ($permissionChecker->hasPermission('pages')) {
                         </div>
                     </div>
                     <div style="<?php
-            echo(! $permissionChecker->hasPermission('pages_edit_permissions') ?
-                    'display:none' : '')
+            echo ! $permissionChecker->hasPermission('pages_edit_permissions') ?
+                    'display:none' : ''
             ?>"
                          >
                         <h2 class="accordion-header"><?php translate('permissions'); ?></h2>

@@ -515,7 +515,7 @@ echo trans('Folders'); ?>"/>
 <input type="hidden" id="lang_files_on_clipboard" value="<?php
 echo trans('Files_ON_Clipboard'); ?>"/>
 <input type="hidden" id="clipboard" value="<?php
-echo((isset($_SESSION['RF']['clipboard']['path']) && trim($_SESSION['RF']['clipboard']['path']) != null) ? 1 : 0); ?>"/>
+echo (isset($_SESSION['RF']['clipboard']['path']) && trim($_SESSION['RF']['clipboard']['path']) != null) ? 1 : 0; ?>"/>
 <input type="hidden" id="lang_clear_clipboard_confirm" value="<?php
 echo trans('Clear_Clipboard_Confirm'); ?>"/>
 <input type="hidden" id="lang_file_permission" value="<?php
@@ -1085,7 +1085,7 @@ $files = $sorted;
                                 <?php
                                 } ?>
                                 <input accesskey="f" type="text" class="filter-input <?php
-                                echo(($_GET['type'] != 1 && $_GET['type'] != 3) ? '' : 'filter-input-notype'); ?>"
+                                echo ($_GET['type'] != 1 && $_GET['type'] != 3) ? '' : 'filter-input-notype'; ?>"
                                        id="filter-input" name="filter" placeholder="<?php
                                 echo fix_strtolower(trans('Text_filter')); ?>..." value="<?php
                                 echo $filter; ?>"/><?php

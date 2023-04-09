@@ -248,6 +248,6 @@ class SinPackageInstaller
             $this->errors[] = get_translation('sha1_checksum_not_equal');
         }
 
-        return (count($this->errors) <= 0);
+        return count($this->errors) <= 0;
     }
 }

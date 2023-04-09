@@ -648,7 +648,7 @@ class Database
     // returns true if the database result contains at least one row
     public static function any(mysqli_result $result): bool
     {
-        return (Database::getNumRows($result) > 0);
+        return Database::getNumRows($result) > 0;
     }
 
     // used for multi queries

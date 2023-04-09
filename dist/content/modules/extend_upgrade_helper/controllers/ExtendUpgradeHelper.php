@@ -45,9 +45,9 @@ class ExtendUpgradeHelper extends Controller
         $versionMatcher = new AvailablePackageVersionMatcher($data['data']);
         $available = $versionMatcher->getCompatibleVersions();
 
-        return (
+        return
             count($available) &&
             \App\Utils\VersionComparison::compare($available[0]['version'], $version, '>')
-        );
+        ;
     }
 }
