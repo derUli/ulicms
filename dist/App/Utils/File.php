@@ -129,7 +129,7 @@ class File
                 continue;
             }
             if (is_dir("$dir/$value")) {
-                $result[] = str_Replace('\\', '/', "$dir/$value");
+                $result[] = str_replace('\\', '/', "$dir/$value");
                 $result = array_merge($result, self::findAllDirs("$dir/$value"));
                 continue;
             }
@@ -153,7 +153,7 @@ class File
             }
 
             if (is_file("$dir/$value")) {
-                $result[] = str_Replace('\\', '/', "$dir/$value");
+                $result[] = str_replace('\\', '/', "$dir/$value");
                 continue;
             }
 

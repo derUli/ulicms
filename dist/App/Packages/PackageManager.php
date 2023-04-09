@@ -136,7 +136,7 @@ class PackageManager
             'ULICMS_ROOT/content/templates'
         ) . '/';
 
-        $folders = scanDir($templateDir);
+        $folders = scandir($templateDir);
         natcasesort($folders);
 
         $foldersCount = count($folders);
