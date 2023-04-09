@@ -31,8 +31,6 @@ $tmpRules = [
     'explicit_string_variable' => true,
     // Order the flags in `fopen` calls, `b` and `t` must be last.
     'fopen_flag_order' => true,
-    // PHP code must use the long `<?php` tags or short-echo `<?=` tags and not other tag variations.
-    'full_opening_tag' => true,
     // Spaces should be properly placed in a function declaration.
     'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
     // Replace core functions calls returning constants with the constants.
@@ -277,6 +275,8 @@ $config
     'no_multiline_whitespace_around_double_arrow' => true,
     // Function `implode` must be called with 2 arguments in the documented order.
     'implode_call' => true,
+    // PHP code must use the long `<?php` tags or short-echo `<?=` tags and not other tag variations.
+    'full_opening_tag' => true,
     ]);
 
 return $config->setFinder(
