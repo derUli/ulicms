@@ -61,8 +61,6 @@ $tmpRules = [
     'native_function_invocation' => ['include'=>['@all','trans']],
     // Native type hints for functions should use the correct case.
     'native_function_type_declaration_casing' => true,
-    // All instances created with new keyword must be followed by braces.
-    'new_with_braces' => true,
     // Replace control structure alternative syntax to use braces.
     'no_alternative_syntax' => true,
     // There must be a comment when fall-through is intentional in a non-empty case body.
@@ -277,6 +275,8 @@ $config
      'no_leading_namespace_whitespace' => true,
      // Replace accidental usage of homoglyphs (non ascii characters) in names.
     'no_homoglyph_names' => true,
+    // All instances created with new keyword must be followed by braces.
+    'new_with_braces' => true,
     ]);
 
 return $config->setFinder(
