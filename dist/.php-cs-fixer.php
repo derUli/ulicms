@@ -158,8 +158,6 @@ $tmpRules = [
     'single_line_comment_style' => true,
     // Convert double quotes to single quotes for simple strings.
     'single_trait_insert_per_statement' => true,
-    // Replace all `<>` with `!=`.
-    'standardize_not_equals' => true,
     // Lambdas not (indirect) referencing `$this` must be declared `static`.
     'static_lambda' => true,
     // All multi-line strings must use correct line ending.
@@ -278,6 +276,8 @@ $config
     'switch_continue_to_break' => true,
     // The closing `? >` tag MUST be omitted from files containing only PHP.
     'no_closing_tag' => true,
+    // Replace all `<>` with `!=`.
+    'standardize_not_equals' => true,
     ]);
 
 return $config->setFinder(
