@@ -3,8 +3,6 @@
 $config = new PhpCsFixer\Config();
 
 $tmpRules = [
-    // Ensure there is no code on the same line as the PHP open tag and it is followed by a blank line.
-    'blank_line_after_opening_tag' => true,
     // An empty line feed must precede any configured statement.
     'blank_line_before_statement' => ['statements'=>['break','case','continue','declare','default','exit','do','exit','for','foreach','goto','if','return','switch','throw','try','while','yield']],
     // A single space or none should be between cast and variable.
@@ -279,6 +277,8 @@ $config
     'array_indentation' => true,
     // There MUST be one blank line after the namespace declaration.
     'blank_line_after_namespace' => true,
+    // Ensure there is no code on the same line as the PHP open tag and it is followed by a blank line.
+    'blank_line_after_opening_tag' => true,
     ]);
 
 return $config->setFinder(
