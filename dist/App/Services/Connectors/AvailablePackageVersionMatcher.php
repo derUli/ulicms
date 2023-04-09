@@ -55,14 +55,14 @@ class AvailablePackageVersionMatcher
     {
         $releases = $this->versionData;
 
-        usort($releases, function ($a, $b) {
+        usort($releases, static function ($a, $b) {
             return \App\Utils\VersionComparison::compare(
                 $a['version'],
                 $b['version'],
                 '<'
             ) ? 1 : 0;
         });
-        usort($releases, function ($a, $b) {
+        usort($releases, static function ($a, $b) {
             return \App\Utils\VersionComparison::compare(
                 $a['compatible_with'],
                 $b['compatible_with'],

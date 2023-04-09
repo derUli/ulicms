@@ -11,7 +11,7 @@ $icons = [
     'categories' => 'fa fa-list-alt'
 ];
 
-$icons = array_filter($icons, function ($cssClass, $action) {
+$icons = array_filter($icons, static function ($cssClass, $action) {
     $permissions = [
         'pages' => 'pages',
         'comments_manage' => 'comments_manage',

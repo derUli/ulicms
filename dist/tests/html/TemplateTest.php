@@ -756,7 +756,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testLogoDisabled()
     {
-        $actual = TestHelper::getOutput(function () {
+        $actual = TestHelper::getOutput(static function () {
             Settings::set('logo_disabled', 'yes');
             Template::logo();
         });

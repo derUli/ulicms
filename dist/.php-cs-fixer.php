@@ -13,8 +13,6 @@ $tmpRules = [
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
     // A return statement wishing to return `void` should not return `null`.
     'simplified_null_return' => true,
-    // Lambdas not (indirect) referencing `$this` must be declared `static`.
-    'static_lambda' => true,
     // Write conditions in Yoda style (`true`), non-Yoda style (`['equal' => false, 'identical' => false, 'less_and_greater' => false]`) or ignore those conditions (`null`) based on configuration.
     'yoda_style' => true,
     ];
@@ -275,6 +273,8 @@ $config
     'void_return' => false,
     // There should be one or no space before colon, and one space after it in return type declarations, according to configuration.
     'return_type_declaration' => ['space_before'=>'none'],
+    // Lambdas not (indirect) referencing `$this` must be declared `static`.
+    'static_lambda' => true,
     ]);
 
 return $config->setFinder(

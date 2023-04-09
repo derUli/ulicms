@@ -40,7 +40,7 @@ class BackendPageRendererTest extends \PHPUnit\Framework\TestCase
 
     public function testOutputMininified()
     {
-        $output = TestHelper::getOutput(function () {
+        $output = TestHelper::getOutput(static function () {
             $renderer = new BackendPageRenderer('foo');
             ob_start();
             echo '<div     class="hello"> Hello    World</div>  ';

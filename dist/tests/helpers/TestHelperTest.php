@@ -11,7 +11,7 @@ class TestHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testGetOutput()
     {
-        $output = TestHelper::getOutput(function () {
+        $output = TestHelper::getOutput(static function () {
             echo 'Hello World!';
         });
 
@@ -23,7 +23,7 @@ class TestHelperTest extends \PHPUnit\Framework\TestCase
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage('Fehler!');
 
-        $output = TestHelper::getOutput(function () {
+        $output = TestHelper::getOutput(static function () {
             throw new BadMethodCallException('Fehler!');
         });
 

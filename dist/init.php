@@ -231,7 +231,7 @@ if (isset($_SESSION['session_begin'])) {
 }
 
 register_shutdown_function(
-    function () {
+    static function () {
         do_event('shutdown');
 
         $cfg = new CMSConfig();
