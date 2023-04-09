@@ -9,8 +9,6 @@ $tmpRules = [
     'cast_spaces' => ['space'=>'none'],
     // Calling `unset` on multiple items should be done in one call.
     'combine_consecutive_unsets' => true,
-    // Replace multiple nested calls of `dirname` by only one call with second `$level` parameter. Requires PHP >= 7.0.
-    'combine_nested_dirname' => true,
     // Concatenation should be spaced according configuration.
     'concat_space' => ['spacing'=>'one'],
     // Equal sign in declare statement should be surrounded by spaces or not following configuration.
@@ -277,6 +275,8 @@ $config
     'psr_autoloading' => false,
     // Replaces `dirname(__FILE__)` expression with equivalent `__DIR__` constant.
     'dir_constant' => false,
+    // Replace multiple nested calls of `dirname` by only one call with second `$level` parameter. Requires PHP >= 7.0.
+    'combine_nested_dirname' => true,
     ]);
 
 return $config->setFinder(
