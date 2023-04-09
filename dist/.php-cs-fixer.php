@@ -17,8 +17,6 @@ $tmpRules = [
     'compact_nullable_typehint' => true,
     // Concatenation should be spaced according configuration.
     'concat_space' => ['spacing'=>'one'],
-    // The PHP constants `true`, `false`, and `null` MUST be written using the correct casing.
-    'constant_case' => true,
     // Equal sign in declare statement should be surrounded by spaces or not following configuration.
     'declare_equal_normalize' => ['space'=>'single'],
     // Replaces `dirname(__FILE__)` expression with equivalent `__DIR__` constant.
@@ -278,6 +276,8 @@ $config
     'clean_namespace' => true,
     // Class, trait and interface elements must be separated with one or none blank line.
     'class_attributes_separation' => true,
+    // The PHP constants `true`, `false`, and `null` MUST be written using the correct casing.
+    'constant_case' => true,
     ]);
 
 return $config->setFinder(
