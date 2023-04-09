@@ -274,7 +274,7 @@ $config
     // Replace control structure alternative syntax to use braces.
     'no_alternative_syntax' => true,
     // A return statement wishing to return `void` should not return `null`.
-    'simplified_null_return' => true
+    'simplified_null_return' => false
     ]);
 
 return $config->setFinder(
