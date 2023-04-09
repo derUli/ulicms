@@ -113,10 +113,6 @@ $tmpRules = [
     'no_mixed_echo_print' => true,
     // Operator `=>` should not be surrounded by multi-line whitespaces.
     'no_multiline_whitespace_around_double_arrow' => true,
-    // Convert PHP4-style constructors to `__construct`.
-    'no_php4_constructor' => true,
-    // Short cast `bool` using double exclamation mark should not be used.
-    'no_short_bool_cast' => true,
     // There MUST NOT be a space after the opening parenthesis. There MUST NOT be a space before the closing parenthesis.
     'no_spaces_inside_parenthesis' => true,
     // Removes `@param`, `@return` and `@var` tags that don't provide any useful information.
@@ -279,6 +275,10 @@ $config
     'non_printable_character' => ['use_escape_sequences_in_strings'=>true],
     // Ensure there is no code on the same line as the PHP open tag.
     'linebreak_after_opening_tag' => true,
+    // Convert PHP4-style constructors to `__construct`.
+    'no_php4_constructor' => true,
+    // Short cast `bool` using double exclamation mark should not be used.
+    'no_short_bool_cast' => true,
     ]);
 
 return $config->setFinder(
