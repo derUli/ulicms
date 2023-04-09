@@ -284,6 +284,8 @@ $config
     'array_push' => true,
     // PHP arrays should be declared using the configured syntax.
     'array_syntax' => ['syntax'=>'short'],
+    // Replaces `is_null($var)` expression with `null === $var`.
+    'is_null' => true,
     ]);
 
 return $config->setFinder(
