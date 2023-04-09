@@ -67,10 +67,7 @@ $tmpRules = [
     // Code MUST use configured indentation type.
     'indentation_type' => true,
     // All PHP files must use same line ending.
-    'line_ending' => true,
-    // Ensure there is no code on the same line as the PHP open tag.
-    'linebreak_after_opening_tag' => true,
-   
+    'line_ending' => true,   
     // Magic constants should be referred to using the correct casing.
     'magic_constant_casing' => true,
     // Magic method definitions and calls must be using the correct casing.
@@ -280,6 +277,8 @@ $config
     'object_operator_without_whitespace' => true,
     // Remove Zero-width space (ZWSP), Non-breaking space (NBSP) and other invisible unicode symbols.
     'non_printable_character' => ['use_escape_sequences_in_strings'=>true],
+    // Ensure there is no code on the same line as the PHP open tag.
+    'linebreak_after_opening_tag' => true,
     ]);
 
 return $config->setFinder(
