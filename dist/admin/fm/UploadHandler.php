@@ -338,10 +338,10 @@ class UploadHandler
     protected function is_valid_file_object($file_name)
     {
         $file_path = $this->get_upload_path($file_name);
-        if (is_file($file_path) && $file_name[0] !== '.') {
-            return true;
-        }
-        return false;
+        return (bool) (is_file($file_path) && $file_name[0] !== '.')
+
+
+         ;
     }
 
     protected function get_file_object($file_name)

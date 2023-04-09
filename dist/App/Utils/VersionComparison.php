@@ -52,11 +52,11 @@ class VersionComparison
             return true;
         }
 
-        if ($operator === '<=' && $splitted1 <= $splitted2) {
-            return true;
-        }
+        return (bool) ($operator === '<=' && $splitted1 <= $splitted2)
 
-        return false;
+
+
+         ;
     }
 
     /**

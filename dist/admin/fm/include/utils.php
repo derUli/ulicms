@@ -86,17 +86,17 @@ if (! function_exists('trans')) {
 
 function checkRelativePathPartial($path)
 {
-    if (strpos($path, '../') !== false
+    return ! (strpos($path, '../') !== false
         || strpos($path, './') !== false
         || strpos($path, '/..') !== false
         || strpos($path, '..\\') !== false
         || strpos($path, '\\..') !== false
         || strpos($path, '.\\') !== false
         || $path === '..'
-    ) {
-        return false;
-    }
-    return true;
+    )
+
+
+     ;
 }
 
 /**
@@ -128,10 +128,10 @@ function isUploadDir($path, $config)
 {
     $upload_dir = $config['current_path'];
     $thumbs_dir = $config['thumbs_base_path'];
-    if (realpath($path) === realpath($upload_dir) || realpath($path) === realpath($thumbs_dir)) {
-        return true;
-    }
-    return false;
+    return (bool) (realpath($path) === realpath($upload_dir) || realpath($path) === realpath($thumbs_dir))
+
+
+     ;
 }
 
 /**
@@ -296,10 +296,10 @@ function rename_file($old_path, $name, $ftp = null, $config = null)
 
 function url_exists($url)
 {
-    if (! $fp = curl_init($url)) {
-        return false;
-    }
-    return true;
+    return ! (! $fp = curl_init($url))
+
+
+     ;
 }
 
 
@@ -655,10 +655,10 @@ function fix_get_params($str)
 function check_extension($extension, $config)
 {
     $extension = fix_strtolower($extension);
-    if ((! $config['ext_blacklist'] && ! in_array($extension, $config['ext'])) || ($config['ext_blacklist'] && in_array($extension, $config['ext_blacklist']))) {
-        return false;
-    }
-    return true;
+    return ! ((! $config['ext_blacklist'] && ! in_array($extension, $config['ext'])) || ($config['ext_blacklist'] && in_array($extension, $config['ext_blacklist'])))
+
+
+     ;
 }
 
 
