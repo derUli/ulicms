@@ -46,7 +46,7 @@ class PerformanceSettingsController extends Controller
 
     public function clearCache(): void
     {
-        if (!is_logged_in()) {
+        if (! is_logged_in()) {
             Response::redirect('index.php');
         }
 

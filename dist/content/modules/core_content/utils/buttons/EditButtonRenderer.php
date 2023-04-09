@@ -24,7 +24,7 @@ class EditButtonRenderer
         // check edit permissions
         $pagePermissionChecker = new ContentPermissionChecker($user->getId());
 
-        if (!$pagePermissionChecker->canWrite($pageId)) {
+        if (! $pagePermissionChecker->canWrite($pageId)) {
             $permitted = false;
         }
 

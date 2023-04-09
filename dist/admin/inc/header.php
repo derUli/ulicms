@@ -4,14 +4,14 @@ use App\Models\Content\Comment;
 use App\Helpers\DataTablesHelper;
 
 $admin_logo = Settings::get('admin_logo');
-if (!$admin_logo) {
+if (! $admin_logo) {
     $admin_logo = 'gfx/logo.png';
 }
 
 // translation for select2 dropdown boxes
 $select2TranslationFile = '../node_modules/select2/dist/js/i18n/' . getSystemLanguage() . '.js';
 $select2Language = getSystemLanguage();
-if (!is_file($select2TranslationFile)) {
+if (! is_file($select2TranslationFile)) {
     $select2TranslationFile = '../node_modules/select2/dist/js/i18n/en.js';
     $select2Language = 'en';
 }

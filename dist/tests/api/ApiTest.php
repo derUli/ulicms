@@ -24,7 +24,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         CacheUtil::clearCache();
 
         $avatarsDirectory = Path::resolve('ULICMS_ROOT/content/avatars/');
-        if (!is_dir($avatarsDirectory)) {
+        if (! is_dir($avatarsDirectory)) {
             mkdir($avatarsDirectory, 0777, true);
         }
 

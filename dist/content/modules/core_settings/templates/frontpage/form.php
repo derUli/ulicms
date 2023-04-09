@@ -11,7 +11,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
         $lang = $languages[$i];
         $frontpages[$lang] = Settings::get('frontpage_' . $lang);
 
-        if (!$frontpages[$lang]) {
+        if (! $frontpages[$lang]) {
             $frontpages[$lang] = Settings::get('frontpage');
         }
     }

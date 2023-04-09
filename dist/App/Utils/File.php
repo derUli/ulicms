@@ -41,7 +41,7 @@ class File
     // Delete a file or a directory if it exist
     public static function deleteIfExists(string $file): bool
     {
-        if(!file_exists($file)) {
+        if(! file_exists($file)) {
             return false;
         }
 
@@ -94,7 +94,7 @@ class File
     ): void {
         FileSystem::delete($dir);
 
-        if(!$deleteMe) {
+        if(! $deleteMe) {
             FileSystem::createDir($dir);
         }
     }

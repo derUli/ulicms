@@ -17,11 +17,11 @@ if (isset($_SESSION['language']) && in_array($_SESSION['language'], $languages))
 }
 
 $admin_logo = Settings::get('admin_logo');
-if (!$admin_logo) {
+if (! $admin_logo) {
     $admin_logo = 'gfx/logo.png';
 }
 
-$error = (isset($_REQUEST['error']) && !empty($_REQUEST['error'])) ? $_REQUEST['error'] : null;
+$error = (isset($_REQUEST['error']) && ! empty($_REQUEST['error'])) ? $_REQUEST['error'] : null;
 
 $login_welcome_text = Settings::getLang('login_welcome_text', $default_language);
 ?>
@@ -52,7 +52,7 @@ echo ModuleHelper::buildMethodCallForm(
 csrf_token_html();
 ?>
 <?php
-if (!empty($_REQUEST['go'])) {
+if (! empty($_REQUEST['go'])) {
     ?>
     <input type="hidden" name="go"
            value='<?php esc($_REQUEST['go']) ?>'>
@@ -117,7 +117,7 @@ if (Settings::get('visitors_can_register') === 'on' || Settings::get('visitors_c
     ?>
     <a
         href="?register=register&<?php
-        if (!empty($_REQUEST['go'])) {
+        if (! empty($_REQUEST['go'])) {
             echo 'go=' . _esc($_REQUEST['go']);
         }
     ?>"
@@ -126,7 +126,7 @@ if (Settings::get('visitors_can_register') === 'on' || Settings::get('visitors_c
 }
 ?>
     <?php
-if (!Settings::get('disable_password_reset')) {
+if (! Settings::get('disable_password_reset')) {
     ?>
     <a href="?reset_password" class="btn btn-default pull-right voffset2"><i
             class="fa fa-lock"></i> <?php translate('reset_password'); ?></a>

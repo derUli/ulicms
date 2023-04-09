@@ -22,14 +22,14 @@ setLanguageByDomain();
 
 $languages = getAllLanguages();
 
-if (!empty($_GET['language']) && in_array($_GET['language'], $languages)) {
+if (! empty($_GET['language']) && in_array($_GET['language'], $languages)) {
     $_SESSION['language'] = Database::escapeValue(
         $_GET['language'],
         DB_TYPE_STRING
     );
 }
 
-if (!isset($_SESSION['language'])) {
+if (! isset($_SESSION['language'])) {
     $_SESSION['language'] = Settings::get('default_language');
 }
 
@@ -47,7 +47,7 @@ Translation::loadCurrentThemeLanguageFiles($_SESSION['language']);
 do_event('custom_lang_' . $_SESSION['language']);
 
 if (Request::isPost()) {
-    if (!check_csrf_token()) {
+    if (! check_csrf_token()) {
         die('This is probably a CSRF attack!');
     }
     if (Settings::get('min_time_to_fill_form', 'int') > 0) {
@@ -129,7 +129,7 @@ if (get_ID()) {
         $page = ContentFactory::getByID(get_ID());
         if ($page->id !== null && $page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
-            if ($language->getID() !== null && !empty(
+            if ($language->getID() !== null && ! empty(
                 $language->getLanguageLink()
             )
             ) {
@@ -163,7 +163,7 @@ if (count(getAllThemes()) === 0) {
     throw new Exception('Keine Themes vorhanden!');
 }
 
-if (!is_dir(getTemplateDirPath($theme, true))) {
+if (! is_dir(getTemplateDirPath($theme, true))) {
     throw new Exception("The selected theme doesn't exists!");
 }
 
@@ -201,7 +201,7 @@ if (is_logged_in() && get_cache_control() == 'auto') {
 do_event('before_html');
 
 $cacheAdapter = null;
-if (CacheUtil::isCacheEnabled() && Request::isGet() && !Vars::getNoCache()) {
+if (CacheUtil::isCacheEnabled() && Request::isGet() && ! Vars::getNoCache()) {
     $cacheAdapter = CacheUtil::getAdapter();
 }
 $uid = CacheUtil::getCurrentUid();
@@ -244,7 +244,7 @@ if ($text_position == 'after') {
 
 $disable_functions = getThemeMeta(get_theme(), 'disable_functions');
 
-if (!(is_array($disable_functions) && in_array('output_content', $disable_functions))) {
+if (! (is_array($disable_functions) && in_array('output_content', $disable_functions))) {
     content();
 }
 
@@ -256,7 +256,7 @@ do_event('after_content');
 
 do_event('before_edit_button');
 
-if (!(is_array($disable_functions) && in_array('edit_button', $disable_functions))) {
+if (! (is_array($disable_functions) && in_array('edit_button', $disable_functions))) {
     Template::editButton();
 }
 
@@ -285,14 +285,14 @@ if ($cacheAdapter || Settings::get('minify_html')) {
 
     echo $generatedHtml;
 
-    if ($cacheAdapter && !defined('EXCEPTION_OCCURRED')) {
+    if ($cacheAdapter && ! defined('EXCEPTION_OCCURRED')) {
         $cacheAdapter->set($uid, $generatedHtml, CacheUtil::getCachePeriod());
     }
 }
 
 // Wenn no_auto_cron gesetzt ist, dann muss cron.php
 // manuell ausgeführt bzw. aufgerufen werden
-if (!Settings::get('no_auto_cron')) {
+if (! Settings::get('no_auto_cron')) {
     do_event('before_cron');
     require 'lib/cron.php';
     do_event('after_cron');

@@ -24,7 +24,7 @@ class PermissionChecker
     public function hasPermission(string $permission): bool
     {
         // If the user is not logged in he has no permissions on anything
-        if (!$this->user_id) {
+        if (! $this->user_id) {
             return false;
         }
         $user = new User($this->user_id);

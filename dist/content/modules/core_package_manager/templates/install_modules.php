@@ -5,7 +5,7 @@ use App\Packages\PackageManager;
 // TODO: Refactor this, move business logic to controller
 $permissionChecker = new ACL();
 $pkg = new PackageManager();
-if (!$permissionChecker->hasPermission('install_packages')) {
+if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();
 } else {
     $pkg_src = Settings::get('pkg_src');
@@ -18,7 +18,7 @@ if (!$permissionChecker->hasPermission('install_packages')) {
     </p>
     <h1><?php translate('install'); ?></h1>
     <?php
-    if (!$pkg_src) {
+    if (! $pkg_src) {
         ?>
         <p>
             <strong><?php translation('error'); ?></strong> <br />
@@ -47,16 +47,16 @@ if (!$permissionChecker->hasPermission('install_packages')) {
         } else {
             $packageCount = count($packagesToInstall);
             for ($i = 0; $i < $packageCount; $i++) {
-                if (!empty($packagesToInstall [$i])) {
+                if (! empty($packagesToInstall [$i])) {
                     $pkgURL = $packageArchiveFolder . basename($packagesToInstall [$i]) . '.tar.gz';
                     $pkgContent = @file_get_contents_wrapper($pkgURL);
 
                     // Wenn Paket nicht runtergeladen werden konnte
-                    if (!$pkgContent || strlen($pkgContent) < 1) {
+                    if (! $pkgContent || strlen($pkgContent) < 1) {
                         echo "<p style='color:red;'>" . str_ireplace('%pkg%', $packagesToInstall [$i], get_translation('download_failed')) . '</p>';
                     } else {
                         $tmpdir = '../content/tmp/';
-                        if (!is_dir($tmpdir)) {
+                        if (! is_dir($tmpdir)) {
                             mkdir($tmpdir, 0777);
                         }
 

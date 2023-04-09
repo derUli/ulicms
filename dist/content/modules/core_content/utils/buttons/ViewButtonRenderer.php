@@ -22,14 +22,14 @@ class ViewButtonRenderer
         $permitted = true;
 
         $content = ContentFactory::getByID($pageId);
-        if (!$content->isRegular()) {
+        if (! $content->isRegular()) {
             return '';
         }
 
         // check permissions for this specific content
         $pagePermissionChecker = new ContentPermissionChecker($user->getId());
 
-        if (!$pagePermissionChecker->canRead($pageId)) {
+        if (! $pagePermissionChecker->canRead($pageId)) {
             $permitted = false;
         }
 

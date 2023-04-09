@@ -12,7 +12,7 @@ class HtmlField extends CustomField
     {
         $htmlEditor = get_html_editor();
 
-        if (!isset($this->htmlAttributes['class'])) {
+        if (! isset($this->htmlAttributes['class'])) {
             $this->htmlAttributes['class'] = $htmlEditor;
         }
 

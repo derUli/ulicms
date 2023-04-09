@@ -3,7 +3,7 @@
 use App\Models\Content\Categories;
 
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission('forms') || !$permissionChecker->hasPermission('forms_edit')) {
+if (! $permissionChecker->hasPermission('forms') || ! $permissionChecker->hasPermission('forms_edit')) {
     noPerms();
 } else {
     $forms = Forms::getAllForms();
@@ -49,7 +49,7 @@ if (!$permissionChecker->hasPermission('forms') || !$permissionChecker->hasPermi
                 </option>
                 <option value="0"
                 <?php
-        if (!$form['enabled']) {
+        if (! $form['enabled']) {
             echo 'selected';
         }
         ?>>

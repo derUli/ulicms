@@ -90,7 +90,7 @@ class AvailablePackageVersionMatcher
                 $suitableReleases[] = $release;
             }
         }
-        if (!count($suitableReleases)) {
+        if (! count($suitableReleases)) {
             $suitableReleases = $allReleases;
         }
 

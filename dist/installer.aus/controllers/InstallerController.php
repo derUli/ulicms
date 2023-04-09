@@ -7,7 +7,7 @@ class InstallerController
     public static function getStep()
     {
         $step = 1;
-        if (isset($_REQUEST['step']) && !empty($_REQUEST['step'])) {
+        if (isset($_REQUEST['step']) && ! empty($_REQUEST['step'])) {
             $step = (int)$_REQUEST['step'];
         }
         if ($step > 10) {
@@ -34,7 +34,7 @@ class InstallerController
             'install_demodata'
         ];
         foreach ($vars as $var) {
-            if (!isset($_SESSION[$var])) {
+            if (! isset($_SESSION[$var])) {
                 $_SESSION[$var] = '';
                 switch ($var) {
                     case 'install_demodata':
@@ -59,7 +59,7 @@ class InstallerController
 
     public static function getLanguage()
     {
-        if (isset($_SESSION['language']) && !empty($_SESSION['language'])) {
+        if (isset($_SESSION['language']) && ! empty($_SESSION['language'])) {
             return basename($_SESSION['language']);
         } else {
             $_SESSION['language'] = 'en';
@@ -108,7 +108,7 @@ class InstallerController
             $databases[] = $row[0];
         }
 
-        if (!in_array($_POST['datenbank'], $databases)) {
+        if (! in_array($_POST['datenbank'], $databases)) {
             // Try to create database if it not exists
             mysqli_query(
                 $connection,
@@ -137,14 +137,14 @@ class InstallerController
     {
         @set_time_limit(60 * 10); // 10 Minuten
 
-        if (!isset($_SESSION['install_index'])) {
+        if (! isset($_SESSION['install_index'])) {
             $_SESSION['install_index'] = 0;
         }
         $files = [];
         foreach (glob(ULICMS_ROOT .'/lib/migrations/up/*.sql') as $file) {
             $files[] = $file;
         }
-        if (!empty($_SESSION['install_demodata'])) {
+        if (! empty($_SESSION['install_demodata'])) {
             $files[] = ULICMS_ROOT . '/lib/migrations/up/opt/democontent.full.sql';
         } else {
             $files[] = ULICMS_ROOT . '/lib/migrations/up/opt/democontent.min.sql';
@@ -172,18 +172,18 @@ class InstallerController
         // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
         mysqli_query($connection, "SET SESSION sql_mode = '';");
 
-        if (!isset($_SESSION['salt'])) {
+        if (! isset($_SESSION['salt'])) {
             $salt = uniqid();
             $_SESSION['salt'] = $salt;
         }
 
-        if (!isset($_SESSION['ga_secret'])) {
+        if (! isset($_SESSION['ga_secret'])) {
             $ga = new PHPGangsta_GoogleAuthenticator();
             $ga_secret = $ga->createSecret();
             $_SESSION['ga_secret'] = $ga_secret;
         }
 
-        if (!isset($_SESSION['encrypted_password'])) {
+        if (! isset($_SESSION['encrypted_password'])) {
             $_SESSION['encrypted_password'] = hash(
                 'sha512',
                 $_SESSION['salt'] . $_SESSION['admin_password']
@@ -297,7 +297,7 @@ class InstallerController
         $defaultConfigFile = ULICMS_ROOT . '/content/configurations/default.php';
 
         $configurationDir = dirname($defaultConfigFile);
-        if (!is_dir($configurationDir)) {
+        if (! is_dir($configurationDir)) {
             mkdir($configurationDir);
         }
 
@@ -323,14 +323,14 @@ class InstallerController
 
     public static function SureRemoveDir($dir, $DeleteMe)
     {
-        if (!$dh = @opendir($dir)) {
+        if (! $dh = @opendir($dir)) {
             return;
         }
         while (false !== ($obj = readdir($dh))) {
             if ($obj == '.' || $obj == '..') {
                 continue;
             }
-            if (!@unlink($dir . '/' . $obj)) {
+            if (! @unlink($dir . '/' . $obj)) {
                 sureRemoveDir($dir . '/' . $obj, true);
             }
         }

@@ -64,7 +64,7 @@ class PrivacyCheckbox
             '',
             'str'
         );
-        return !empty($value);
+        return ! empty($value);
     }
 
     /**
@@ -112,7 +112,7 @@ class PrivacyCheckbox
         $fullHtml = Settings::get(
             "privacy_policy_checkbox_text_{$this->language}"
         );
-        if (!$this->isEnabled() ||
+        if (! $this->isEnabled() ||
                 empty($fullHtml)
         ) {
             return '';

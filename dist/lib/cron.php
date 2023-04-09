@@ -5,23 +5,23 @@ use App\Translations\Translation;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-if (!defined('LOADED_LANGUAGE_FILE')) {
+if (! defined('LOADED_LANGUAGE_FILE')) {
     setLanguageByDomain();
 
     $languages = getAllLanguages();
 
-    if (!isset($_SESSION)) {
+    if (! isset($_SESSION)) {
         $_SESSION = [];
     }
 
-    if (!empty($_GET['language']) && in_array($_GET['language'], $languages)) {
+    if (! empty($_GET['language']) && in_array($_GET['language'], $languages)) {
         $_SESSION['language'] = Database::escapeValue(
             $_GET['language'],
             DB_TYPE_STRING
         );
     }
 
-    if (!isset($_SESSION['language'])) {
+    if (! isset($_SESSION['language'])) {
         $_SESSION['language'] = Settings::get('default_language');
     }
 

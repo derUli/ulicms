@@ -11,7 +11,7 @@ class MultiSelectField extends CustomField
 
     public function render($value = null): string
     {
-        if (!isset($this->htmlAttributes['multiple'])) {
+        if (! isset($this->htmlAttributes['multiple'])) {
             $this->htmlAttributes['multiple'] = '';
         }
         ViewBag::set('field', $this);

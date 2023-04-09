@@ -79,7 +79,7 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
             $content = ContentFactory::getById($page['id']);
             $this->assertInstanceOf(Content::class, $content);
             $this->assertIsNumeric($content->getId());
-            if (!$content->isRegular()) {
+            if (! $content->isRegular()) {
                 $hasHashhLinks = true;
             }
         }

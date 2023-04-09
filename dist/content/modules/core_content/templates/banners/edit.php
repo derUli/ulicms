@@ -127,7 +127,7 @@ if ($permissionChecker->hasPermission('banners')
                     <?php translate('yes'); ?></option>
                 <option value="0"
                 <?php
-        if (!$row->getEnabled()) {
+        if (! $row->getEnabled()) {
             echo 'selected';
         }
         ?>>

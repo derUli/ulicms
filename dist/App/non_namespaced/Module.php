@@ -91,7 +91,7 @@ class Module
 
     public function enable(): void
     {
-        if (!$this->isMissingDependencies()) {
+        if (! $this->isMissingDependencies()) {
             $this->enabled = 1;
             $this->save();
         }
@@ -104,7 +104,7 @@ class Module
         $dependencies = $manager->getDependencies($this->name);
         $enabledMods = $manager->getEnabledModuleNames();
         foreach ($dependencies as $dependency) {
-            if (!in_array($dependency, $enabledMods)) {
+            if (! in_array($dependency, $enabledMods)) {
                 $result [] = $dependency;
             }
         }
@@ -113,7 +113,7 @@ class Module
 
     public function isInstalled(): bool
     {
-        if (!$this->getName()) {
+        if (! $this->getName()) {
             return false;
         }
         return getModuleMeta($this->getName()) !== null;
@@ -169,7 +169,7 @@ class Module
 
     public function disable(): void
     {
-        if (!$this->hasDependentModules()) {
+        if (! $this->hasDependentModules()) {
             $this->enabled = 0;
             $this->save();
         }

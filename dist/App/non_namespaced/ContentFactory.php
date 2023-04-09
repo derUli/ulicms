@@ -54,7 +54,7 @@ class ContentFactory
         $retval = null;
         $type = $row->type;
         $mappings = TypeMapper::getMappings();
-        if (isset($mappings[$type]) && !empty($mappings[$type]) && class_exists($mappings[$type])) {
+        if (isset($mappings[$type]) && ! empty($mappings[$type]) && class_exists($mappings[$type])) {
             $retval = new $mappings[$type]();
             $retval->loadByID((int) $row->id);
         } else {

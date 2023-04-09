@@ -177,7 +177,7 @@ class Mailer
         if (isset($headersLower['x-mailer'])) {
             $mailer->XMailer = $headersLower['x-mailer'];
         }
-        $from = isset($headers['From']) && !empty($headers['From']) ?
+        $from = isset($headers['From']) && ! empty($headers['From']) ?
                 $headers['From'] : Settings::get('email');
         $mailer->setFrom($from);
 

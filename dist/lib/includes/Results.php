@@ -18,7 +18,7 @@ use Nette\Utils\Json;
  */
 function JSONResult($data, int $status = 200, $compact = true): void
 {
-    $json = Json::encode($data, !$compact);
+    $json = Json::encode($data, ! $compact);
 
     RawJSONResult($json, $status);
 }
@@ -107,7 +107,7 @@ function ExceptionResult(string $message, int $status = 500): void
     $content = Template::executeDefaultOrOwnTemplate('exception.php');
 
     $size = getStringLengthInBytes($content);
-    if (!TestHelper::isRunningPHPUnit()) {
+    if (! TestHelper::isRunningPHPUnit()) {
         send_header($_SERVER['SERVER_PROTOCOL'] . ' '
                 . Response::getStatusCodeByNumber((int)$status));
         send_header('Content-Type: text/html; charset=UTF-8');
@@ -115,7 +115,7 @@ function ExceptionResult(string $message, int $status = 500): void
     }
 
     echo $content;
-    if (!TestHelper::isRunningPHPUnit()) {
+    if (! TestHelper::isRunningPHPUnit()) {
         exit();
     }
 }

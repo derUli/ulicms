@@ -14,7 +14,7 @@ function getThemeMeta(string $theme, string $attrib = null)
     $metadata_file = getTemplateDirPath($theme, true) . 'metadata.json';
 
     if (is_file($metadata_file)) {
-        $data = !Vars::get("theme_{$theme}_meta") ?
+        $data = ! Vars::get("theme_{$theme}_meta") ?
                 file_get_contents($metadata_file) : Vars::get("theme_{$theme}_meta");
 
         if (is_string($data)) {

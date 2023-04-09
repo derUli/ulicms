@@ -8,7 +8,7 @@ $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = Settings::get('ga_secret');
 $qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation('ULICMS_LOGIN_AT') . ' ' . get_domain(), $ga_secret);
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission('other')) {
+if (! $permissionChecker->hasPermission('other')) {
     noPerms();
 } else {
     $email_mode = Settings::get('email_mode');
@@ -21,21 +21,21 @@ if (!$permissionChecker->hasPermission('other')) {
     $smtp_no_verify_certificate = Settings::get('smtp_no_verify_certificate');
 
     $smtp_host = Settings::get('smtp_host');
-    if (!$smtp_host) {
+    if (! $smtp_host) {
         $smtp_host = '127.0.0.1';
     }
 
     $smtp_port = Settings::get('smtp_port');
-    if (!$smtp_port) {
+    if (! $smtp_port) {
         $smtp_port = '25';
     }
 
     $smtp_user = Settings::get('smtp_user');
-    if (!$smtp_user) {
+    if (! $smtp_user) {
         $smtp_user = null;
     }
     $smtp_password = Settings::get('smtp_password');
-    if (!$smtp_password) {
+    if (! $smtp_password) {
         $smtp_password = null;
     }
 

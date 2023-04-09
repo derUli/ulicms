@@ -22,7 +22,7 @@ class PageTableRenderer
 
     public function __construct($user = null)
     {
-        $this->user = !$user ? User::fromSessionData() : $user;
+        $this->user = ! $user ? User::fromSessionData() : $user;
     }
 
     public const MODULE_NAME = 'core_content';
@@ -159,7 +159,7 @@ class PageTableRenderer
 
     protected function buildFilterSQL($where, $filters): string
     {
-        if (isset($filters['type']) && !empty($filters['type'])) {
+        if (isset($filters['type']) && ! empty($filters['type'])) {
             $where .= " and type ='" .
                     Database::escapeValue($filters['type']) .
                     "'";
@@ -188,14 +188,14 @@ class PageTableRenderer
         }
 
         if (isset($filters['language']) &&
-                !empty($filters['language'])) {
+                ! empty($filters['language'])) {
             $where .= " and language ='" .
                     Database::escapeValue($filters['language']) .
                     "'";
         }
 
         if (isset($filters['menu']) &&
-                !empty($filters['menu'])) {
+                ! empty($filters['menu'])) {
             $where .= " and menu ='";
             $where .= Database::escapeValue($filters['menu']) . "'";
         }
@@ -266,7 +266,7 @@ class PageTableRenderer
             bool2YesNo((bool)$dataset->active),
             $viewButton,
             $editButton,
-            !$dataset->deleted_at ? $deleteButton : $undeleteButton
+            ! $dataset->deleted_at ? $deleteButton : $undeleteButton
         ];
     }
 }

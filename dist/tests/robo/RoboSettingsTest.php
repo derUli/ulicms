@@ -22,7 +22,7 @@ class RoboSettingsTest extends RoboTestBase
         $this->assertGreaterThanOrEqual(60, substr_count($output, "\n"));
         $allSettings = Settings::getAll();
         foreach ($allSettings as $setting) {
-            if (!$setting->name) {
+            if (! $setting->name) {
                 continue;
             }
 

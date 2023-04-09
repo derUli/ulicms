@@ -194,7 +194,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
         $pages = Contentfactory::getAllByMenuAndLanguage('top', 'en');
         foreach ($pages as $page) {
-            if (!$page->isFrontPage() && $page->isRegular() && !$page->getParent()) {
+            if (! $page->isFrontPage() && $page->isRegular() && ! $page->getParent()) {
                 $this->assertStringContainsString($page->slug, $html);
                 $this->assertStringContainsString($page->title, $html);
             }
@@ -220,7 +220,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
         $pages = Contentfactory::getAllByMenuAndLanguage('top', 'en');
         foreach ($pages as $page) {
-            if (!$page->isFrontPage() && $page->isRegular() && !$page->getParent()) {
+            if (! $page->isFrontPage() && $page->isRegular() && ! $page->getParent()) {
                 $this->assertStringContainsString($page->slug, $html);
                 $this->assertStringContainsString($page->title, $html);
             }

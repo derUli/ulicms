@@ -91,7 +91,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
                        class="js-switch"
 
                        <?php
-    if (!isset($settings['disable_password_reset'])) {
+    if (! isset($settings['disable_password_reset'])) {
         echo ' checked';
     }
     ?>>

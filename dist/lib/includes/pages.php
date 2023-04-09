@@ -58,8 +58,8 @@ function getAllPages(
     bool $exclude_hash_links = true,
     string $menu = null
 ): array {
-    if (!$lang) {
-        if (!$menu) {
+    if (! $lang) {
+        if (! $menu) {
             $result = db_query('SELECT * FROM `' . tbname('content') .
                     "` WHERE `deleted_at` IS NULL ORDER BY $order");
         } else {
@@ -68,7 +68,7 @@ function getAllPages(
                     Database::escapeValue($menu) . "' ORDER BY $order");
         }
     } else {
-        if (!$menu) {
+        if (! $menu) {
             $result = db_query('SELECT * FROM `' . tbname('content') .
                     "` WHERE `deleted_at` IS NULL AND language ='" .
                     db_escape($lang) . "' ORDER BY $order");
@@ -81,7 +81,7 @@ function getAllPages(
     }
     $returnvalues = [];
     while ($row = db_fetch_assoc($result)) {
-        if (!$exclude_hash_links || ($exclude_hash_links
+        if (! $exclude_hash_links || ($exclude_hash_links
                 && $row['type'] != 'link' && $row['type'] != 'node'
                 && $row['type'] != 'language_link')) {
             $returnvalues[] = $row;
@@ -96,7 +96,7 @@ function getAllSlugs(string $lang = null): array
 {
     $slugs = [];
 
-    if (!$lang) {
+    if (! $lang) {
         $result = db_query('SELECT slug,id FROM `' . tbname('content') .
                 '` WHERE `deleted_at` IS NULL AND link_url '
                 . "NOT LIKE '#%' ORDER BY slug");

@@ -45,7 +45,7 @@ function getAllThemes(): array
 function uninstall_module(string $name, string $type = 'module'): bool
 {
     $acl = new ACL();
-    if (!$acl->hasPermission('install_packages') && !is_cli()) {
+    if (! $acl->hasPermission('install_packages') && ! is_cli()) {
         return false;
     }
 
@@ -77,7 +77,7 @@ function uninstall_module(string $name, string $type = 'module'): bool
                 }
                 sureRemoveDir($moduleDir, true);
                 CacheUtil::clearCache();
-                return !is_dir($moduleDir);
+                return ! is_dir($moduleDir);
             }
             break;
         case 'theme':
@@ -88,7 +88,7 @@ function uninstall_module(string $name, string $type = 'module'): bool
                 $theme_path = getTemplateDirPath($name, true);
                 sureRemoveDir($theme_path, true);
                 CacheUtil::clearCache();
-                return !is_dir($theme_path);
+                return ! is_dir($theme_path);
             }
             break;
     }

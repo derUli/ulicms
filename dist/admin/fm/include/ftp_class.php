@@ -33,7 +33,7 @@ class FTPClient
         ftp_pasv($this->connectionId, $isPassive);
 
         // *** Check connection
-        if ((!$this->connectionId) || (!$loginResult)) {
+        if ((! $this->connectionId) || (! $loginResult)) {
             $this->logMessage('FTP connection has failed!');
             $this->logMessage('Attempted to connect to ' . $server . ' for user ' . $ftpUser, true);
             return false;

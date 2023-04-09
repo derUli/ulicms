@@ -44,7 +44,7 @@ class Group
             $acl = new ACL();
             $allPermissions = $acl->getDefaultACLAsJSON(false, true);
             foreach ($allPermissions as $name => $value) {
-                if (!isset($this->permissions[$name])) {
+                if (! isset($this->permissions[$name])) {
                     $this->addPermission($name, $value);
                 }
             }
@@ -320,7 +320,7 @@ class Group
      */
     public function setAllowableTags(?string $val): void
     {
-        $this->allowable_tags = !empty($val) ?
+        $this->allowable_tags = ! empty($val) ?
                 (string) $val : null;
     }
 

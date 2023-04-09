@@ -11,7 +11,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
         $lang = $languages[$i];
         $homepage_titles[$lang] = Settings::get('homepage_title_' . $lang);
 
-        if (!$homepage_titles[$lang]) {
+        if (! $homepage_titles[$lang]) {
             $homepage_titles[$lang] = Settings::get('homepage_title');
         }
     }

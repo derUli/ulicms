@@ -416,7 +416,7 @@ class Page extends Content
             $matchesCount = count($match[1]);
             for ($i = 0; $i < $matchesCount; $i++) {
                 $id = _unesc($match[1][$i]);
-                if (!in_array($id, $result)) {
+                if (! in_array($id, $result)) {
                     $result[] = $id;
                 }
             }
@@ -427,7 +427,7 @@ class Page extends Content
     // returns the parent page
     public function getParent(): ?Content
     {
-        if (!$this->parent_id) {
+        if (! $this->parent_id) {
             return null;
         }
         return ContentFactory::getByID($this->parent_id);
@@ -436,7 +436,7 @@ class Page extends Content
     // returns the change history of this page
     public function getHistory(string $order = 'date DESC'): array
     {
-        if (!$this->getID()) {
+        if (! $this->getID()) {
             return [];
         }
         return VCS::getRevisionsByContentID($this->getID(), $order);
@@ -470,7 +470,7 @@ class Page extends Content
                     $commentable_content_types
                 );
 
-                if (count($commentable_content_types) > 0 && !in_array(
+                if (count($commentable_content_types) > 0 && ! in_array(
                     $this->type,
                     $commentable_content_types
                 )) {

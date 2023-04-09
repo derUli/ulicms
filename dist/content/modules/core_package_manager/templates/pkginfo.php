@@ -5,10 +5,10 @@ use App\Helpers\DateTimeHelper;
 use App\Packages\SinPackageInstaller;
 
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission('install_packages')) {
+if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();
 } else {
-    if (!empty($_REQUEST['file']) && str_ends_with($_REQUEST['file'], '.sin')) {
+    if (! empty($_REQUEST['file']) && str_ends_with($_REQUEST['file'], '.sin')) {
         $tempfile = Path::resolve('ULICMS_TMP/' . basename($_REQUEST['file']));
         if (is_file($tempfile)) {
             $pkg = new SinPackageInstaller($tempfile);
@@ -172,7 +172,7 @@ if (!$permissionChecker->hasPermission('install_packages')) {
                 <div class="license-agreement"><?php echo nl2br(Template::getEscape($license)) ?></div>
             <?php } ?>
             <?php
-            if (!$installable) {
+            if (! $installable) {
                 ?>
                 <h2><?php translate('errors'); ?></h2>
                 <?php

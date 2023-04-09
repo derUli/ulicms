@@ -17,7 +17,7 @@ $model = $controller->getModel();
     <?php
     foreach ($model->lastModfiedPages as $row) {
         $domain = getDomainByLanguage($row->language);
-        if (!$domain) {
+        if (! $domain) {
             $url = '../' . $row->slug;
         } else {
             $url = 'http://' . $domain . '/' . $row->slug;
@@ -28,7 +28,7 @@ $model = $controller->getModel();
             <td><?php echo DateTimeHelper::timestampToFormattedDateTime($row->lastmodified) ?></td>
             <td><?php
                 $autorName = $model->admins[$row->lastchangeby];
-        if (!empty($autorName)) {
+        if (! empty($autorName)) {
         } else {
             $autorName = $model->admins[$row->author_id];
         }

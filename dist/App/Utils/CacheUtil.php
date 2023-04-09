@@ -34,7 +34,7 @@ class CacheUtil
     // else returns null
     public static function getAdapter(bool $force = false): ?Psr16Adapter
     {
-        if (!self::isCacheEnabled() && !$force) {
+        if (! self::isCacheEnabled() && ! $force) {
             return null;
         }
 
@@ -112,7 +112,7 @@ class CacheUtil
      */
     public static function isCacheEnabled(): bool
     {
-        return !Settings::get('cache_disabled') && !is_logged_in();
+        return ! Settings::get('cache_disabled') && ! is_logged_in();
     }
 
     /**

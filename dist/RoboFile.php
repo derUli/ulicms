@@ -21,7 +21,7 @@ class RoboFile extends Tasks
 {
     public function __construct()
     {
-        if (!defined('CORE_COMPONENT')) {
+        if (! defined('CORE_COMPONENT')) {
             define('CORE_COMPONENT', 'robo');
         }
 
@@ -44,7 +44,7 @@ class RoboFile extends Tasks
 
     protected function initCore()
     {
-        if (!defined('ULICMS_ROOT')) {
+        if (! defined('ULICMS_ROOT')) {
             require dirname(__FILE__) . '/init.php';
             require_once getLanguageFilePath('en');
         }
@@ -152,7 +152,7 @@ class RoboFile extends Tasks
      */
     public function packageExamine(string $file)
     {
-        if (!is_file($file)) {
+        if (! is_file($file)) {
             $this->writeln('File ' . basename($file) . ' not found!');
             return;
         }
@@ -200,7 +200,7 @@ class RoboFile extends Tasks
      */
     public function packageInstall($file): void
     {
-        if (!is_file($file)) {
+        if (! is_file($file)) {
             $this->writeln("Can't open $file. File doesn't exists.");
             return;
         }

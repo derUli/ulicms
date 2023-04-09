@@ -19,7 +19,7 @@ function replaceAudioTags(string $txt): ?string
     $contains = strpos($txt, '[audio id=') !== false;
 
     // If there is no [audio=XXX] in page return
-    if (!$contains) {
+    if (! $contains) {
         return $txt;
     }
 
@@ -53,7 +53,7 @@ function replaceVideoTags(string $txt): string
     $contains = strpos($txt, '[video id=') !== false;
 
     // If there is no [video=XXX] in page return
-    if (!$contains) {
+    if (! $contains) {
         return $txt;
     }
 

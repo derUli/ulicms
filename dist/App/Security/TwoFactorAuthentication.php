@@ -15,7 +15,7 @@ class TwoFactorAuthentication
 {
     public function __construct()
     {
-        if (!$this->getSecret()) {
+        if (! $this->getSecret()) {
             $this->generateSecret();
         }
     }

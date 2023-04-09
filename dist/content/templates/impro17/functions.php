@@ -69,7 +69,7 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
                 $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";
             }
 
-            if (!empty($row->menu_image)) {
+            if (! empty($row->menu_image)) {
                 $html .= '<img src="' . $row->menu_image . '" alt="' . _esc($title) . '"/>';
             } else {
                 $html .= _esc($title);

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-if (!defined('RESPONSIVE_FM')) {
+if (! defined('RESPONSIVE_FM')) {
     class Response
     {
         public static function sendHttpStatusCodeResultIfAjax(
@@ -72,7 +72,7 @@ if (!defined('RESPONSIVE_FM')) {
                 ];
             }
             $host = parse_url($url, PHP_URL_HOST);
-            if (!in_array($host, $safeHosts)) {
+            if (! in_array($host, $safeHosts)) {
                 try {
                     $page = ContentFactory::getBySlugAndLanguage(
                         Settings::getLanguageSetting(

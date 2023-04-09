@@ -5,14 +5,14 @@ use App\Utils\CacheUtil;
 
 // if opcache is not installed, define dummy function to
 // have full code coverage
-if (!function_exists('opcache_reset')) {
+if (! function_exists('opcache_reset')) {
     function opcache_reset()
     {
     }
 }
 // if apc is not installed, define dummy function to
 // have full code coverage
-if (!function_exists('apc_clear_cache')) {
+if (! function_exists('apc_clear_cache')) {
     function apc_clear_cache()
     {
     }

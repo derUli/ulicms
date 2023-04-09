@@ -12,7 +12,7 @@ $model = $controller->getModel();
     <?php
     foreach ($model->topPages as $row) {
         $domain = getDomainByLanguage($row->language);
-        if (!$domain) {
+        if (! $domain) {
             $url = '../' . $row->slug;
         } else {
             $url = 'http://' . $domain . '/' . $row->slug;

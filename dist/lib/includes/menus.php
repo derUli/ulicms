@@ -50,7 +50,7 @@ function get_all_menus(
         $themeMenus = getThemeMeta($theme, 'menus');
         if ($themeMenus && is_array($themeMenus)) {
             foreach ($themeMenus as $m) {
-                if (!in_array($m, $allThemeMenus)) {
+                if (! in_array($m, $allThemeMenus)) {
                     $allThemeMenus[] = $m;
                 }
             }
@@ -61,7 +61,7 @@ function get_all_menus(
         $menus = $allThemeMenus;
     }
 
-    if (!in_array('not_in_menu', $menus)) {
+    if (! in_array('not_in_menu', $menus)) {
         $menus[] = 'not_in_menu';
     }
 

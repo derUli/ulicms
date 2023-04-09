@@ -121,7 +121,7 @@ class Template
         $ownTemplatePath = getTemplateDirPath(get_theme(), true) . $module
                 . '/' . $template;
 
-        if (!str_ends_with($template, '.php')) {
+        if (! str_ends_with($template, '.php')) {
             $originalTemplatePath .= '.php';
             $ownTemplatePath .= '.php';
         }
@@ -188,7 +188,7 @@ class Template
         $site_slogan = Settings::get('site_slogan_' . getFrontendLanguage());
 
         // Ansonsten Standard Motto
-        if (!$site_slogan) {
+        if (! $site_slogan) {
             $site_slogan = Settings::get('site_slogan');
         }
         return _esc($site_slogan);
@@ -216,7 +216,7 @@ class Template
         $originalTemplatePath = ULICMS_ROOT . '/default/' . $template;
         $ownTemplatePath = getTemplateDirPath(get_theme()) . '/' . $template;
 
-        if (!str_ends_with($template, '.php')) {
+        if (! str_ends_with($template, '.php')) {
             $originalTemplatePath .= '.php';
             $ownTemplatePath .= '.php';
         }
@@ -244,7 +244,7 @@ class Template
     public static function getHeadline($format = '<h1>%title%</h1>'): ?string
     {
         $id = get_ID();
-        if (!$id) {
+        if (! $id) {
             return str_replace('%title%', get_title(null, true), $format);
         }
         $sql = 'SELECT show_headline FROM ' . tbname('content') .
@@ -281,13 +281,13 @@ class Template
         string $template,
         ?string $theme = null
     ): string {
-        if (!$theme) {
+        if (! $theme) {
             $theme = get_theme();
         }
 
         $file = getTemplateDirPath($theme, true) . "partials/{$template}";
-        $file = !str_ends_with($file, '.php') ? $file . '.php' : $file;
-        if (!is_file($file)) {
+        $file = ! str_ends_with($file, '.php') ? $file . '.php' : $file;
+        if (! is_file($file)) {
             throw new FileNotFoundException("Partial Template {$template} "
                             . "of Theme {$theme} not found.");
         }
@@ -333,7 +333,7 @@ class Template
         echo '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>';
         echo '<meta charset="utf-8"/>';
 
-        if (!Settings::get('disable_no_format_detection')) {
+        if (! Settings::get('disable_no_format_detection')) {
             echo '<meta name="format-detection" content="telephone=no"/>';
         }
 
@@ -363,21 +363,21 @@ class Template
 
         output_favicon_code();
 
-        if (!Settings::get('hide_shortlink') && (is_200() || is_403())) {
+        if (! Settings::get('hide_shortlink') && (is_200() || is_403())) {
             $shortlink = get_shortlink();
             if ($shortlink) {
                 echo '<link rel="shortlink" href="' . $shortlink . '"/>';
             }
         }
 
-        if (!Settings::get('hide_canonical') && (is_200() || is_403())) {
+        if (! Settings::get('hide_canonical') && (is_200() || is_403())) {
             $canonical = get_canonical();
             if ($canonical) {
                 echo '<link rel="canonical"  href="' . $canonical . '"/>';
             }
         }
 
-        if (!Settings::get('no_autoembed_core_css')) {
+        if (! Settings::get('no_autoembed_core_css')) {
             enqueueStylesheet('lib/css/core.scss');
         }
 
@@ -455,7 +455,7 @@ class Template
                 getCurrentLanguage()
             );
 
-            if (!is_logged_in()) {
+            if (! is_logged_in()) {
                 db_query('UPDATE ' . tbname('content') .
                         " SET views = views + 1 WHERE slug='" .
                         Database::escapeValue(get_slug()) .
@@ -489,7 +489,7 @@ class Template
         $data = CustomData::get();
         // it's possible to disable shortcodes for a page
         // define "disable_shortcodes in custom data / json
-        if (!(isset($data['disable_shortcodes']) && $data['disable_shortcodes'])) {
+        if (! (isset($data['disable_shortcodes']) && $data['disable_shortcodes'])) {
             $htmlContent = replaceShortcodesWithModules($htmlContent);
             $htmlContent = replaceOtherShortCodes($htmlContent);
         }
@@ -524,7 +524,7 @@ class Template
 
     public static function getComments(): string
     {
-        if (!is_200()) {
+        if (! is_200()) {
             return '';
         }
 
@@ -542,7 +542,7 @@ class Template
     public static function getEditButton(): string
     {
         $html = '';
-        if (!is_logged_in()) {
+        if (! is_logged_in()) {
             return $html;
         }
 

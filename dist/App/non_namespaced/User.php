@@ -135,10 +135,10 @@ class User extends Model
     {
         $sessionData = $this->toSessionData();
 
-        if (!is_array($sessionData)) {
+        if (! is_array($sessionData)) {
             throw new BadMethodCallException();
         }
-        if (!session_id()) {
+        if (! session_id()) {
             App\Utils\Session\sessionStart();
         }
 
@@ -151,7 +151,7 @@ class User extends Model
         $this->setLastLogin(time());
         $this->save();
 
-        if (!$redirect || is_cli()) {
+        if (! $redirect || is_cli()) {
             return;
         }
         $login_url = apply_filter('index.php', 'login_url');
@@ -500,7 +500,7 @@ class User extends Model
      */
     public function getDisplayName(): string
     {
-        $name = !empty($this->getFullName()) ? $this->getFullName() : $this->getUsername();
+        $name = ! empty($this->getFullName()) ? $this->getFullName() : $this->getUsername();
         return $name ?? '';
     }
 
@@ -634,7 +634,7 @@ class User extends Model
             HtmlEditor::CODEMIRROR,
         ];
 
-        if (!in_array($editor, $allowedEditors)) {
+        if (! in_array($editor, $allowedEditors)) {
             throw new InvalidArgumentException("Value $editor not allowed");
         }
 
@@ -822,7 +822,7 @@ class User extends Model
      */
     public function setDefaultLanguage(?string $val): void
     {
-        $this->default_language = !empty($val) ? (string) $val : null;
+        $this->default_language = ! empty($val) ? (string) $val : null;
     }
 
     /**
@@ -834,7 +834,7 @@ class User extends Model
     {
         // Fallback "No Avatar" picture
         $avatarUrl = ModuleHelper::getBaseUrl(
-            !is_admin_dir() ?
+            ! is_admin_dir() ?
             '/admin/gfx/no_avatar.png' : '/gfx/no_avatar.png'
         );
 
@@ -842,7 +842,7 @@ class User extends Model
         $userAvatarDirectory = Path::resolve('ULICMS_CONTENT/avatars');
 
         // Create avatar directory if not exists
-        if (!is_dir($userAvatarDirectory)) {
+        if (! is_dir($userAvatarDirectory)) {
             mkdir($userAvatarDirectory, 0777, true);
         }
 
@@ -856,7 +856,7 @@ class User extends Model
                             md5($this->getDisplayName()) . '.png');
 
             // relative URL to file
-            $url = !is_admin_dir() ?
+            $url = ! is_admin_dir() ?
                     'content/avatars/user-' . $this->getId() . '.png' :
                     '../content/avatars/user-' . $this->getId() . '.png';
 
@@ -877,7 +877,7 @@ class User extends Model
      */
     protected function generateAvatar(string $avatarImageFile): string
     {
-        if (!is_file($avatarImageFile)) {
+        if (! is_file($avatarImageFile)) {
             $avatar = new InitialAvatar();
             $image = $avatar->name($this->getDisplayName())->
                             rounded()->smooth()->
@@ -886,7 +886,7 @@ class User extends Model
             $image->save($avatarImageFile);
         }
 
-        $url = !is_admin_dir() ?
+        $url = ! is_admin_dir() ?
                 'content/avatars/' . md5($this->getDisplayName()) . '.png' :
                 '../content/avatars/' . md5($this->getDisplayName()) . '.png';
 

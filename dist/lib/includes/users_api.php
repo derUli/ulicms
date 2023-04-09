@@ -43,7 +43,7 @@ function getUsersOnline(): array
 function changePassword(string $password, ?int $userId)
 {
     $user = new User($userId);
-    if (!$user->isPersistent()) {
+    if (! $user->isPersistent()) {
         return false;
     }
     $user->setPassword($password);
@@ -144,12 +144,12 @@ function validate_login(
         return null;
     }
 
-    if (!$user->isPersistent()) {
+    if (! $user->isPersistent()) {
         $_REQUEST['error'] = get_translation('USER_OR_PASSWORD_INCORRECT');
         return null;
     }
 
-    if (!$user->checkPassword($password)) {
+    if (! $user->checkPassword($password)) {
         $_REQUEST['error'] = get_translation('USER_OR_PASSWORD_INCORRECT');
 
         // Limit Login Attampts
@@ -167,7 +167,7 @@ function validate_login(
         return null;
     }
 
-    if (TwoFactorAuthentication::isEnabled() && !$auth->checkCode($token)) {
+    if (TwoFactorAuthentication::isEnabled() && ! $auth->checkCode($token)) {
         $_REQUEST['error'] = get_translation('confirmation_code_wrong');
         return null;
     }

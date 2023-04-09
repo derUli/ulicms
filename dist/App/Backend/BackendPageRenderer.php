@@ -85,17 +85,17 @@ class BackendPageRenderer
 
         $onlyContent = (bool) Request::getVar('only_content', false, 'bool');
 
-        if (!$onlyContent) {
+        if (! $onlyContent) {
             require 'inc/header.php';
         }
 
-        if (!is_logged_in()) {
+        if (! is_logged_in()) {
             $this->handleNotLoggedIn($onlyContent);
         } else {
             $this->handleLoggedIn($onlyContent);
         }
 
-        if (!$onlyContent) {
+        if (! $onlyContent) {
             do_event('admin_footer');
             require 'inc/footer.php';
         }
@@ -154,7 +154,7 @@ class BackendPageRenderer
     {
         $permissionChecker = new PermissionChecker(get_user_id());
 
-        if (!$onlyContent) {
+        if (! $onlyContent) {
             require 'inc/adminmenu.php';
         }
 
@@ -169,7 +169,7 @@ class BackendPageRenderer
             $requiredPermission = ActionRegistry::getActionPermission(
                 $this->getAction()
             );
-            if (!$requiredPermission
+            if (! $requiredPermission
                     || (
                         $requiredPermission
                         && $permissionChecker->hasPermission($requiredPermission))

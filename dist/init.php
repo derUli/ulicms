@@ -4,7 +4,7 @@
 // of the page load procedure to measure site performance
 define('START_TIME', microtime(true));
 
-if (!defined('CORE_COMPONENT')) {
+if (! defined('CORE_COMPONENT')) {
     throw new Exception('Core Component is not defined');
 }
 
@@ -51,14 +51,14 @@ if (is_file($composerAutoloadFile)) {
 // Autoloader
 spl_autoload_register(function ($className) {
     // Interim solution for not yet namespaced classes
-    if (!str_contains($className, '\\')) {
+    if (! str_contains($className, '\\')) {
         $className = "App\\non_namespaced\\{$className}";
     }
 
     $basePath = ULICMS_ROOT . "/{$className}.php";
     $basePath = str_replace('\\', '/', $basePath);
 
-    if (!is_file($basePath)) {
+    if (! is_file($basePath)) {
         return;
     }
 
@@ -95,25 +95,25 @@ if (isset($config->debug) && $config->debug) {
     error_reporting(0);
 }
 
-if (!is_dir(ULICMS_TMP)) {
+if (! is_dir(ULICMS_TMP)) {
     mkdir(ULICMS_TMP);
 }
 
-if (!is_dir(ULICMS_CACHE_BASE)) {
+if (! is_dir(ULICMS_CACHE_BASE)) {
     mkdir(ULICMS_CACHE_BASE);
 }
 
-if (!is_dir(ULICMS_LOG)) {
+if (! is_dir(ULICMS_LOG)) {
     mkdir(ULICMS_LOG);
 }
 
-if (!is_dir(ULICMS_GENERATED)) {
+if (! is_dir(ULICMS_GENERATED)) {
     mkdir(ULICMS_GENERATED);
 }
 
 $htaccessForLogFolderSource = ULICMS_ROOT . '/lib/htaccess-deny-all.txt';
 $htaccessLogFolderTarget = ULICMS_LOG . '/.htaccess';
-if (!is_file($htaccessLogFolderTarget)) {
+if (! is_file($htaccessLogFolderTarget)) {
     copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
 }
 
@@ -150,7 +150,7 @@ $db_strict_mode = $config->db_strict_mode ?? false;
     $db_strict_mode
 );
 
-if (!$connection) {
+if (! $connection) {
     throw new ConnectionFailedException('Can\'t connect to Database.');
 }
 
@@ -172,7 +172,7 @@ if (isset($config->dbmigrator_auto_migrate) && $config->dbmigrator_auto_migrate)
 
 Database::setEchoQueries(false);
 
-if (!$select) {
+if (! $select) {
     throw new SqlException('<h1>Database '
                     . $config->db_database . ' doesn\'t exist.</h1>');
 }
@@ -180,7 +180,7 @@ if (!$select) {
 // Preload all settings
 Settings::getAll();
 
-if (!Settings::get('session_name')) {
+if (! Settings::get('session_name')) {
     Settings::set('session_name', uniqid() . '_SESSION');
 }
 
@@ -236,7 +236,7 @@ register_shutdown_function(
         do_event('shutdown');
 
         $cfg = new CMSConfig();
-        if (isset($cfg->show_render_time) && $cfg->show_render_time && !Request::isAjaxRequest()) {
+        if (isset($cfg->show_render_time) && $cfg->show_render_time && ! Request::isAjaxRequest()) {
             echo '\n\n<!--' . (microtime(true) - START_TIME) . '-->';
         }
         if (isset($cfg->dbmigrator_drop_database_on_shutdown) && $cfg->dbmigrator_drop_database_on_shutdown) {
@@ -249,17 +249,17 @@ register_shutdown_function(
     }
 );
 
-$defaultMenu = isset($config->default_menu) && !empty($config->default_menu) ?
+$defaultMenu = isset($config->default_menu) && ! empty($config->default_menu) ?
         $config->default_menu : 'not_in_menu';
 define('DEFAULT_MENU', $defaultMenu);
 
-$defaultContentType = isset($config->default_content_type) && !empty($config->default_menu) ?
+$defaultContentType = isset($config->default_content_type) && ! empty($config->default_menu) ?
         $config->default_content_type : 'page';
 define('DEFAULT_CONTENT_TYPE', $defaultContentType);
 
 $enforce_https = Settings::get('enforce_https');
 
-if (!is_ssl() && $enforce_https) {
+if (! is_ssl() && $enforce_https) {
     send_header('Location: https://' . $_SERVER['HTTP_HOST'] .
             $_SERVER['REQUEST_URI']);
     exit();

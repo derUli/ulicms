@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_SESSION['RF']) || $_SESSION['RF']['verify'] != 'RESPONSIVEfilemanager') {
+if (! isset($_SESSION['RF']) || $_SESSION['RF']['verify'] != 'RESPONSIVEfilemanager') {
     die('forbiden');
 }
 require dirname(__FILE__) . '/Response.php';
@@ -164,7 +164,7 @@ function deleteFile($path, $path_thumb, $config)
         }
 
         $info=pathinfo($path);
-        if (!$ftp && $config['relative_image_creation']) {
+        if (! $ftp && $config['relative_image_creation']) {
             foreach ($config['relative_path_from_current_pos'] as $k=>$path) {
                 if ($path!='' && $path[strlen($path)-1]!='/') {
                     $path.='/';
@@ -176,7 +176,7 @@ function deleteFile($path, $path_thumb, $config)
             }
         }
 
-        if (!$ftp && $config['fixed_image_creation']) {
+        if (! $ftp && $config['fixed_image_creation']) {
             foreach ($config['fixed_path_from_filemanager'] as $k=>$path) {
                 if ($path!='' && $path[strlen($path)-1] != '/') {
                     $path.='/';
@@ -296,7 +296,7 @@ function rename_file($old_path, $name, $ftp = null, $config = null)
 
 function url_exists($url)
 {
-    if (!$fp = curl_init($url)) {
+    if (! $fp = curl_init($url)) {
         return false;
     }
     return true;
@@ -337,7 +337,7 @@ function rename_folder($old_path, $name, $ftp = null, $config = null)
             return $ftp->rename('/'.$old_path, '/'.$new_path);
         }
     } else {
-        if (file_exists($old_path) && is_dir($old_path) && !isUploadDir($old_path, $config)) {
+        if (file_exists($old_path) && is_dir($old_path) && ! isUploadDir($old_path, $config)) {
             if (file_exists($new_path) && $old_path == $new_path) {
                 return false;
             }
@@ -459,7 +459,7 @@ function folder_info($path, $count_hidden=true)
     $folders_count = 0;
     foreach ($files as $t) {
         if ($t != '.' && $t != '..') {
-            if ($count_hidden || !(in_array($t, $config['hidden_folders']) || in_array($t, $config['hidden_files']))) {
+            if ($count_hidden || ! (in_array($t, $config['hidden_folders']) || in_array($t, $config['hidden_files']))) {
                 $currentFile = $cleanPath . $t;
                 if (is_dir($currentFile)) {
                     [$size, $tmp, $tmp1] = folder_info($currentFile);
@@ -492,7 +492,7 @@ function filescount($path, $count_hidden=true)
 
     foreach ($files as $t) {
         if ($t != '.' && $t != '..') {
-            if ($count_hidden || !(in_array($t, $config['hidden_folders']) || in_array($t, $config['hidden_files']))) {
+            if ($count_hidden || ! (in_array($t, $config['hidden_folders']) || in_array($t, $config['hidden_files']))) {
                 $currentFile = $cleanPath . $t;
                 if (is_dir($currentFile)) {
                     $size = filescount($currentFile);
@@ -547,7 +547,7 @@ function create_folder($path = null, $path_thumbs = null, $ftp = null, $config =
         if (isset($config['folderPermission'])) {
             $permission = $config['folderPermission'];
         }
-        if ($path && !file_exists($path)) {
+        if ($path && ! file_exists($path)) {
             mkdir($path, $permission, true);
         } // or even 01777 so you get the sticky bit set
         if ($path_thumbs) {
@@ -590,12 +590,12 @@ function check_files_extensions_on_path($path, $ext)
 function check_file_extension($extension, $config)
 {
     $check = false;
-    if (!$config['ext_blacklist']) {
+    if (! $config['ext_blacklist']) {
         if (in_array(mb_strtolower($extension), $conf['ext'])) {
             $check = true;
         }
     } else {
-        if (!in_array(mb_strtolower($extension), $conf['ext_blacklist'])) {
+        if (! in_array(mb_strtolower($extension), $conf['ext_blacklist'])) {
             $check = true;
         }
     }
@@ -656,7 +656,7 @@ function fix_get_params($str)
 function check_extension($extension, $config)
 {
     $extension = fix_strtolower($extension);
-    if ((!$config['ext_blacklist'] && !in_array($extension, $config['ext'])) || ($config['ext_blacklist'] && in_array($extension, $config['ext_blacklist']))) {
+    if ((! $config['ext_blacklist'] && ! in_array($extension, $config['ext'])) || ($config['ext_blacklist'] && in_array($extension, $config['ext_blacklist']))) {
         return false;
     }
     return true;
@@ -696,7 +696,7 @@ function fix_filename($str, $config, $is_folder = false)
     }
 
     if ($config['transliteration']) {
-        if (!mb_detect_encoding($str, 'UTF-8', true)) {
+        if (! mb_detect_encoding($str, 'UTF-8', true)) {
             $str = utf8_encode($str);
         }
         if (function_exists('transliterator_transliterate')) {
@@ -714,7 +714,7 @@ function fix_filename($str, $config, $is_folder = false)
     // Empty or incorrectly transliterated filename.
     // Here is a point: a good file UNKNOWN_LANGUAGE.jpg could become .jpg in previous code.
     // So we add that default 'file' name to fix that issue.
-    if (!$config['empty_filename'] && strpos($str, '.') === 0 && $is_folder === false) {
+    if (! $config['empty_filename'] && strpos($str, '.') === 0 && $is_folder === false) {
         $str = 'file' . $str;
     }
 
@@ -857,7 +857,7 @@ function image_check_memory_usage($img, $max_breedte, $max_hoogte)
 *
 * @return  bool
 */
-if (!function_exists('ends_with')) {
+if (! function_exists('ends_with')) {
     function ends_with($haystack, $needle)
     {
         return $needle === '' || substr($haystack, -strlen($needle)) === $needle;

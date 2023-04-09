@@ -151,7 +151,7 @@ if (
                 <select name="language">
                     <?php
                     $languages = getAllLanguages(true);
-    if (!empty($_SESSION['filter_language'])) {
+    if (! empty($_SESSION['filter_language'])) {
         $default_language = $_SESSION['filter_language'];
     } else {
         $default_language = Settings::get('default_language');
@@ -220,7 +220,7 @@ if (
                     <select
                         name="parent_id" size=1>
                         <option <?php
-            if (!$parent_id) {
+            if (! $parent_id) {
                 echo 'selected';
             }
     ?> value="NULL">
@@ -267,7 +267,7 @@ if (
                 </strong>
                 <select name="active" size=1
                 <?php
-                if (!$pages_approve_own) {
+                if (! $pages_approve_own) {
                     echo 'disabled';
                 }
     ?>>
@@ -275,7 +275,7 @@ if (
     <?php translate('enabled'); ?>
                     </option>
                     <option value="0" <?php
-        if (!$pages_approve_own) {
+        if (! $pages_approve_own) {
             echo 'selected';
         }
     ?>>

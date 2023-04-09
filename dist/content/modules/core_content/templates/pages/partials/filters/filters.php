@@ -28,7 +28,7 @@ $show_filters = Settings::get('user/' . get_user_id() . '/show_filters');
     </div>
 
     <div class="filters"  style="<?php
-    if (!$show_filters) {
+    if (! $show_filters) {
         echo 'display:none';
     }
 ?>">

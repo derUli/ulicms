@@ -38,7 +38,7 @@ function get_shortlink($id = null): ?string
 function get_canonical(): string
 {
     $canonical = getBaseFolderURL() . '/';
-    if (!is_home()) {
+    if (! is_home()) {
         $canonical .= buildSEOUrl();
     }
 
@@ -97,7 +97,7 @@ function buildSEOUrl(
     if ($redirection) {
         return $redirection;
     }
-    if (!$page) {
+    if (! $page) {
         $page = get_slug();
     }
     if ($page === get_frontpage()) {

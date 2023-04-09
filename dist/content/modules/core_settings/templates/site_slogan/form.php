@@ -11,7 +11,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
         $lang = $languages[$i];
         $site_slogans[$lang] = Settings::get('site_slogan_' . $lang);
 
-        if (!$site_slogans[$lang]) {
+        if (! $site_slogans[$lang]) {
             $site_slogans[$lang] = Settings::get('site_slogan');
         }
     }

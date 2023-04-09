@@ -10,12 +10,12 @@ class CoreMediaController extends MainClass
     {
         $data = CustomData::get();
 
-        $mediaEmbedEnabled = !(
+        $mediaEmbedEnabled = ! (
             $data && isset($data['disable_media_embed']) &&
             $data['disable_media_embed']
         );
 
-        $input = $mediaEmbedEnabled && !empty($input) ?
+        $input = $mediaEmbedEnabled && ! empty($input) ?
                 $this->_replaceLinks($input) : $input;
         $input = $this->_addLazyLoad($input);
 
@@ -34,7 +34,7 @@ class CoreMediaController extends MainClass
 
         if (Settings::get('lazy_loading_img', 'bool')) {
             foreach ($dom->getElementsByTagName('img') as $node) {
-                if (!$node->getAttribute('loading')) {
+                if (! $node->getAttribute('loading')) {
                     $node->setAttribute('loading', 'lazy');
                 }
             }
@@ -42,7 +42,7 @@ class CoreMediaController extends MainClass
 
         if (Settings::get('lazy_loading_iframe', 'bool')) {
             foreach ($dom->getElementsByTagName('iframe') as $node) {
-                if (!$node->getAttribute('loading')) {
+                if (! $node->getAttribute('loading')) {
                     $node->setAttribute('loading', 'lazy');
                 }
             }

@@ -39,7 +39,7 @@ class TypeMapper
 
     public static function getModel($type): ?object
     {
-        if (!(isset(self::$mapping[$type]) && class_exists(self::$mapping[$type]))) {
+        if (! (isset(self::$mapping[$type]) && class_exists(self::$mapping[$type]))) {
             return null;
         }
         return new self::$mapping[$type]();
@@ -53,7 +53,7 @@ class TypeMapper
         foreach ($modules as $module) {
             $mappings = getModuleMeta($module, 'type_classes');
 
-            if (!$mappings) {
+            if (! $mappings) {
                 continue;
             }
 

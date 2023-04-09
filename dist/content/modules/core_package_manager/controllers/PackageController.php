@@ -21,7 +21,7 @@ class PackageController extends MainClass
     public function getModuleInfo(): void
     {
         $name = stringOrNull(Request::getVar('name', null, 'str'));
-        if (!$name) {
+        if (! $name) {
             TextResult(get_translation('not_found'));
             return;
         }
@@ -63,7 +63,7 @@ class PackageController extends MainClass
     public function getThemeInfo(): void
     {
         $name = stringOrNull(Request::getVar('name', null, 'str'));
-        if (!$name) {
+        if (! $name) {
             TextResult(get_translation('not_found'));
             return;
         }
@@ -203,13 +203,13 @@ class PackageController extends MainClass
     public function getPackageLicense(): void
     {
         $name = Request::getVar('name');
-        if (!$name) {
+        if (! $name) {
             HTTPStatusCodeResult(HttpStatusCode::UNPROCESSABLE_ENTITY);
         }
 
         $license = $this->_getPackageLicense($name);
 
-        if (!$license) {
+        if (! $license) {
             HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
         }
         HTMLResult($license);

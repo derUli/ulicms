@@ -59,7 +59,7 @@ class Video extends Model
                         . 'where id = ?', [
                     (int) $id
                         ], true);
-        if (!Database::any($result)) {
+        if (! Database::any($result)) {
             $result = null;
         }
         $this->fillVars($result);
@@ -197,7 +197,7 @@ class Video extends Model
 
     public function setName(?string $val): void
     {
-        $this->name = !empty($val) ?
+        $this->name = ! empty($val) ?
                 (string) $val : null;
     }
 
@@ -263,24 +263,24 @@ class Video extends Model
         $html = '<video width="' . $this->width . '" height="' .
                 $this->height . '" controls>';
 
-        if (!empty($this->mp4_file)) {
+        if (! empty($this->mp4_file)) {
             $html .= '<source src="' . $videoDir . _esc($this->mp4_file) . '" type="video/mp4">';
         }
 
-        if (!empty($this->ogg_file)) {
+        if (! empty($this->ogg_file)) {
             $html .= '<source src="' . $videoDir . _esc($this->ogg_file) .
                     '" type="video/ogg">';
         }
 
-        if (!empty($this->webm_file)) {
+        if (! empty($this->webm_file)) {
             $html .= '<source src="' . $videoDir . _esc($this->webm_file) .
                     '" type="video/webm">';
         }
 
         $html .= get_translation('no_html5');
-        if (!empty($this->mp4_file) || !empty($this->ogg_file) || !empty($this->webm_file)) {
-            $preferred = (!empty($this->mp4_file) ?
-                    $this->mp4_file : (!empty($this->ogg_file) ?
+        if (! empty($this->mp4_file) || ! empty($this->ogg_file) || ! empty($this->webm_file)) {
+            $preferred = (! empty($this->mp4_file) ?
+                    $this->mp4_file : (! empty($this->ogg_file) ?
                     $this->ogg_file : $this->webm_file));
             $html .= '<br/><a href="' . $videoDir . $preferred . '">' .
                     get_translation('DOWNLOAD_VIDEO_INSTEAD') . '</a>';

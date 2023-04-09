@@ -7,7 +7,7 @@ use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('banners')) {
-    if (!isset($_SESSION['filter_category'])) {
+    if (! isset($_SESSION['filter_category'])) {
         $_SESSION['filter_category'] = 0;
     }
 
@@ -87,7 +87,7 @@ if ($permissionChecker->hasPermission('banners')) {
                             Template::getEscape($banner->render()) .
                             '</td>';
                         }
-                        if (!$banner->getLanguage()) {
+                        if (! $banner->getLanguage()) {
                             echo '<td>' . get_translation('every') . '</td>';
                         } else {
                             echo '<td>' . getLanguageNameByCode($banner->getLanguage()) . '</td>';

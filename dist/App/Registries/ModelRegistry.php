@@ -26,13 +26,13 @@ class ModelRegistry
         foreach ($modules as $module) {
             $models = getModuleMeta($module, 'models') ?
                     getModuleMeta($module, 'models') : getModuleMeta($module, 'objects');
-            if (!$models) {
+            if (! $models) {
                 continue;
             }
 
             foreach ($models as $key => $value) {
                 $path = getModulePath($module, true) . trim($value, '/');
-                if (!str_ends_with($path, '.php')) {
+                if (! str_ends_with($path, '.php')) {
                     $path .= '.php';
                 }
 

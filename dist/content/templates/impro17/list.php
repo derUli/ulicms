@@ -42,7 +42,7 @@ if ($id !== null) {
                     $article_date = $entry->article_date ?? $entry->created;
                     $excerpt = strip_tags($meta->excerpt, '<img><iframe><embed><object>');
                     $excerpt = trim($excerpt);
-                    $excerpt = !empty($excerpt) ? $meta->excerpt : $entry->content;
+                    $excerpt = ! empty($excerpt) ? $meta->excerpt : $entry->content;
                     ?>
                     <div class="article-list-row">
                         <p>

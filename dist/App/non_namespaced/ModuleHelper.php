@@ -17,7 +17,7 @@ class ModuleHelper extends Helper
         ?string $suffix = null
     ): string {
         $url = '?action=module_settings&module=' . $module;
-        if ($suffix !== null && !empty($suffix)) {
+        if ($suffix !== null && ! empty($suffix)) {
             $url .= '&' . $suffix;
         }
         $url = rtrim($url, '&');
@@ -61,8 +61,8 @@ class ModuleHelper extends Helper
             $content = str_replace('&quot;', '"', $content);
 
             // TODO: refactor this if-hell
-            if (!empty($dataset->module) && $dataset->type == 'module') {
-                if (!$module || ($module && $dataset->module == $module)) {
+            if (! empty($dataset->module) && $dataset->type == 'module') {
+                if (! $module || ($module && $dataset->module == $module)) {
                     return $dataset;
                 }
             } elseif ($module) {
@@ -85,10 +85,10 @@ class ModuleHelper extends Helper
         bool $prependSuffixIfRequired = false
     ): string {
         $url = '?action=' . $action;
-        if ($suffix !== null && !empty($suffix)) {
+        if ($suffix !== null && ! empty($suffix)) {
             $url .= '&' . $suffix;
         }
-        if (!is_admin_dir() && $prependSuffixIfRequired) {
+        if (! is_admin_dir() && $prependSuffixIfRequired) {
             $url = 'admin/' . $url;
         }
         $url = rtrim($url, '&');
@@ -115,7 +115,7 @@ class ModuleHelper extends Helper
                 $embed_attrib = $meta_attr;
             }
 
-            if (!is_file($noembedfile1) && !is_file($noembedfile2) && $embed_attrib) {
+            if (! is_file($noembedfile1) && ! is_file($noembedfile2) && $embed_attrib) {
                 $retval[] = $module;
             }
         }
@@ -157,7 +157,7 @@ class ModuleHelper extends Helper
             $embed_attrib = $meta_attr;
         }
 
-        if (is_file($noembedfile1) || is_file($noembedfile2) || !$embed_attrib) {
+        if (is_file($noembedfile1) || is_file($noembedfile2) || ! $embed_attrib) {
             $retval = false;
         }
         return $retval;
@@ -190,11 +190,11 @@ class ModuleHelper extends Helper
         ?int $page_id = null,
         ?string $suffix = null
     ): ?string {
-        if (!$page_id) {
+        if (! $page_id) {
             $page_id = get_id();
         }
 
-        if (!$page_id) {
+        if (! $page_id) {
             return null;
         }
 
@@ -205,7 +205,7 @@ class ModuleHelper extends Helper
 
         if ($page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
-            if ($language->getID() !== null && !empty($language->getLanguageLink())) {
+            if ($language->getID() !== null && ! empty($language->getLanguageLink())) {
                 return $language->getLanguageLink();
             }
         }
@@ -219,11 +219,11 @@ class ModuleHelper extends Helper
             $dirname = dirname(dirname($dirname . '/..'));
         }
 
-        if (!str_starts_with($dirname, '/')) {
+        if (! str_starts_with($dirname, '/')) {
             $dirname = '/' . $dirname;
         }
 
-        if (!str_ends_with($dirname, '/')) {
+        if (! str_ends_with($dirname, '/')) {
             $dirname = $dirname . '/';
         }
 
@@ -276,7 +276,7 @@ class ModuleHelper extends Helper
         ?string $suffix = null
     ): string {
         $result = 'sClass=' . urlencode($sClass) . '&sMethod=' . urlencode($sMethod);
-        if (!empty($suffix)) {
+        if (! empty($suffix)) {
             $result .= '&' . trim($suffix);
         }
         return $result;

@@ -117,7 +117,7 @@ class Model
         }
 
         $isXyzFunction = 'is_' . $type;
-        if (function_exists($isXyzFunction) && !var_is_type($value, $type, $required)) {
+        if (function_exists($isXyzFunction) && ! var_is_type($value, $type, $required)) {
             throw new InvalidArgumentException("\"{$value}\" is not of type {$type}.");
         } elseif (class_exists($type) && $value instanceof $type) {
             $dumpedValue = var_dump_str($value);

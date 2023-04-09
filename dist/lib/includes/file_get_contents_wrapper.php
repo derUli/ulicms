@@ -54,13 +54,13 @@ function file_get_contents_wrapper(
 ): ?string {
     $content = null;
 
-    if (!is_url($url)) {
+    if (! is_url($url)) {
         return is_file($url) ? file_get_contents($url) : null;
     }
 
     $cacheItemId = Hash::hashCacheIdentifier($url);
 
-    $cacheAdapter = !$noCache ? CacheUtil::getAdapter(true) : null;
+    $cacheAdapter = ! $noCache ? CacheUtil::getAdapter(true) : null;
 
     if ($cacheAdapter && $cacheAdapter->has($cacheItemId)) {
         return $cacheAdapter->get($cacheItemId);
@@ -70,7 +70,7 @@ function file_get_contents_wrapper(
 
     if (
         $content &&
-        !empty($checksum) &&
+        ! empty($checksum) &&
         md5($content) !== strtolower($checksum)
     ) {
         throw new CorruptDownloadException(

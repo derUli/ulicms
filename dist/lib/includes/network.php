@@ -46,7 +46,7 @@ function get_host(): string
         ];
 
         foreach ($vars as $var) {
-            if (isset($_SERVER[$var]) && !empty($_SERVER[$var])) {
+            if (isset($_SERVER[$var]) && ! empty($_SERVER[$var])) {
                 $host = $_SERVER[$var];
                 break;
             }
@@ -100,10 +100,10 @@ function send_header(string $header): bool
 {
     $headers = Vars::get('http_headers');
 
-    if (!$headers) {
+    if (! $headers) {
         $headers = [];
     }
-    if (!in_array($header, $headers)) {
+    if (! in_array($header, $headers)) {
         $headers[] = $header;
     }
 

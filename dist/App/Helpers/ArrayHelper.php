@@ -26,7 +26,7 @@ class ArrayHelper extends Helper
         int $index,
         $element
     ): array {
-        if (!array_key_exists($index, $input)) {
+        if (! array_key_exists($index, $input)) {
             throw new Exception('Index not found');
         }
         $tmpArray = [];
@@ -56,7 +56,7 @@ class ArrayHelper extends Helper
         int $index,
         $element
     ): array {
-        if (!array_key_exists($index, $input)) {
+        if (! array_key_exists($index, $input)) {
             throw new Exception('Index not found');
         }
         $tmpArray = [];
@@ -81,14 +81,14 @@ class ArrayHelper extends Helper
      */
     public static function hasMultipleKeys(?array $input, array $keys): bool
     {
-        if (!$input) {
+        if (! $input) {
             return false;
         }
 
         $hasKeys = true;
 
         foreach ($keys as $key) {
-            if (!array_key_exists($key, $input)) {
+            if (! array_key_exists($key, $input)) {
                 $hasKeys = false;
             }
         }

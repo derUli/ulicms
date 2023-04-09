@@ -64,7 +64,7 @@ class Database
         ini_set('display_errors', $displayErrors);
 
         self::$connection = $connected ? $connected : null;
-        if (!self::$connection) {
+        if (! self::$connection) {
             return null;
         }
 
@@ -101,7 +101,7 @@ class Database
         array $otherScripts = []
     ): bool {
         $selected = self::select($schemaName);
-        if (!$selected) {
+        if (! $selected) {
             $success = self::createSchema($schemaName);
             if ($success) {
                 $selected = self::select($schemaName);
@@ -140,7 +140,7 @@ class Database
             echo $sql . "\n";
         }
         $result = mysqli_query(self::$connection, $sql);
-        if (!$result) {
+        if (! $result) {
             throw new SqlException(self::getError());
         }
         return $result;
@@ -243,7 +243,7 @@ class Database
             $table = tbname($table);
         }
 
-        if (!self::tableExists($table, false)) {
+        if (! self::tableExists($table, false)) {
             return true;
         }
 
@@ -270,7 +270,7 @@ class Database
         $table = self::escapeName($table);
         $column = self::escapeName($column);
         $sql = "select min($column) as val from $table";
-        if (!empty($where)) {
+        if (! empty($where)) {
             $sql .= " where $where";
         }
 
@@ -294,7 +294,7 @@ class Database
         $table = self::escapeName($table);
         $column = self::escapeName($column);
         $sql = "select max($column) as val from $table";
-        if (!empty($where)) {
+        if (! empty($where)) {
             $sql .= " where $where";
         }
 
@@ -318,7 +318,7 @@ class Database
         $table = self::escapeName($table);
         $column = self::escapeName($column);
         $sql = "select avg($column) as val from $table";
-        if (!empty($where)) {
+        if (! empty($where)) {
             $sql .= " where $where";
         }
 
@@ -341,7 +341,7 @@ class Database
 
         $sql = "DELETE FROM $table";
 
-        if (!empty($where)) {
+        if (! empty($where)) {
             $sql .= " where $where";
         }
         $result = Database::query($sql);
@@ -395,11 +395,11 @@ class Database
 
         $sql = "select $columns_sql from $table";
 
-        if (!empty($where)) {
+        if (! empty($where)) {
             $sql .= " where $where ";
         }
 
-        if (!empty($order)) {
+        if (! empty($order)) {
             $sql .= " order by $order";
         }
         return self::pQuery($sql, $args, $replacePrefix);

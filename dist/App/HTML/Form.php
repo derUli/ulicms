@@ -32,7 +32,7 @@ class Form
         array $htmlAttributes = []
     ): string {
         $html = '';
-        $attribhtml = !empty(
+        $attribhtml = ! empty(
             ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)
         ) ?
                 ' ' .
@@ -107,7 +107,7 @@ class Form
     ) {
         $html = '';
 
-        if (!isset($htmlAttributes['class'])) {
+        if (! isset($htmlAttributes['class'])) {
             $htmlAttributes['class'] = '';
         }
 
@@ -116,7 +116,7 @@ class Form
         $htmlAttributesString = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
         $attribHtml = '';
 
-        if (!empty($htmlAttributes)) {
+        if (! empty($htmlAttributes)) {
             $attribHtml .= " $htmlAttributesString";
         }
 

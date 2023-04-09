@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['change_password'])) {
-    if (!empty($_POST['password']) && $_POST['password'] === $_POST['password_repeat']) {
+    if (! empty($_POST['password']) && $_POST['password'] === $_POST['password_repeat']) {
         $uid = get_user_id();
         changePassword($_POST['password'], $uid);
         db_query('UPDATE ' . tbname('users') . " SET `require_password_change` = 0 where id = $uid");
@@ -11,7 +11,7 @@ if (isset($_POST['change_password'])) {
         <?php
     }
 }
-if (!$_SESSION['require_password_change']) {
+if (! $_SESSION['require_password_change']) {
     echo '<script>location.replace(window.location.href);</script>';
 } else {
     ?>

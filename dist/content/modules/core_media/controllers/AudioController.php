@@ -9,7 +9,7 @@ class AudioController extends Controller
         $mp3_file_value = '';
         $audio_folder = ULICMS_ROOT . '/content/audio';
         // mp3
-        if (!empty($_FILES ['mp3_file'] ['name'])) {
+        if (! empty($_FILES ['mp3_file'] ['name'])) {
             $mp3_file = time() . '-' . basename($_FILES ['mp3_file'] ['name']);
             $mp3_type = $_FILES ['mp3_file'] ['type'];
             $mp3_allowed_mime_type = [
@@ -33,7 +33,7 @@ class AudioController extends Controller
 
         $ogg_file_value = '';
         // ogg
-        if (!empty($_FILES ['ogg_file'] ['name'])) {
+        if (! empty($_FILES ['ogg_file'] ['name'])) {
             $ogg_file = time() . '-' . $_FILES ['ogg_file'] ['name'];
             $ogg_type = $_FILES ['ogg_file'] ['type'];
             $ogg_allowed_mime_type = [
@@ -58,7 +58,7 @@ class AudioController extends Controller
         $mp3_file_value = db_escape($mp3_file_value);
         $timestamp = time();
 
-        if (!empty($ogg_file_value) || !empty($mp3_file_value)) {
+        if (! empty($ogg_file_value) || ! empty($mp3_file_value)) {
             db_query('INSERT INTO ' . tbname('audio') .
                     ' (name, ogg_file, mp3_file, created, category_id, '
                     . "`updated`) VALUES ('$name', '$ogg_file_value', "
@@ -99,13 +99,13 @@ class AudioController extends Controller
             $dataset = db_fetch_object($result);
             $filepath = ULICMS_ROOT . '/content/audio/' .
                     basename($dataset->ogg_file);
-            if (!empty($dataset->ogg_file) && is_file($filepath)) {
+            if (! empty($dataset->ogg_file) && is_file($filepath)) {
                 @unlink($filepath);
             }
 
             $filepath = ULICMS_ROOT . '/content/audio/' .
                     basename($dataset->mp3_file);
-            if (!empty($dataset->mp3_file) && is_file($filepath)) {
+            if (! empty($dataset->mp3_file) && is_file($filepath)) {
                 @unlink($filepath);
             }
 

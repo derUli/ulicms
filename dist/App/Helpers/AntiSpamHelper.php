@@ -32,13 +32,13 @@ class AntiSpamHelper extends Helper
             $country_blacklist = array_filter($country_blacklist);
         }
 
-        if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+        if (! filter_var($ip, FILTER_VALIDATE_IP)) {
             return false;
         }
 
         @$hostname = gethostbyaddr($ip);
 
-        if (!$hostname || $hostname === $ip) {
+        if (! $hostname || $hostname === $ip) {
             return false;
         }
 
@@ -63,7 +63,7 @@ class AntiSpamHelper extends Helper
      */
     public static function isChinese(?string $str): bool
     {
-        if (!$str) {
+        if (! $str) {
             return false;
         }
 
@@ -77,7 +77,7 @@ class AntiSpamHelper extends Helper
      */
     public static function isCyrillic(?string $str): bool
     {
-        if (!$str) {
+        if (! $str) {
             return false;
         }
 
@@ -91,7 +91,7 @@ class AntiSpamHelper extends Helper
      */
     public static function isRtl(?string $str): bool
     {
-        if (!$str) {
+        if (! $str) {
             return false;
         }
 
@@ -109,7 +109,7 @@ class AntiSpamHelper extends Helper
         ?string $str,
         array $words_blacklist = null
     ) {
-        if (!$str) {
+        if (! $str) {
             return null;
         }
 
@@ -168,7 +168,7 @@ class AntiSpamHelper extends Helper
         $domain = remove_prefix($domain, '@');
         // In some cases getmxrr() would return a result for an invalid domain
         // if there is no additional dot at the end
-        $domain = !str_ends_with($domain, '.') ? $domain . '.' : $domain;
+        $domain = ! str_ends_with($domain, '.') ? $domain . '.' : $domain;
         $result = [];
 
         // sometimes getmxrr returns true even if the result is empty

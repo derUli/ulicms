@@ -17,7 +17,7 @@ class CoreFormsController extends Controller
     {
         if (Settings::get('spamfilter_enabled') == 'yes') {
             // check if honeypot field is filled
-            if (!empty($_POST['my_homepage_url'])) {
+            if (! empty($_POST['my_homepage_url'])) {
                 $this->_incSpamCount();
                 return get_translation('honeypot_is_not_empty');
             }
@@ -75,7 +75,7 @@ class CoreFormsController extends Controller
 
     public function beforeHttpHeader(): void
     {
-        if (!empty(
+        if (! empty(
             Request::getVar('submit-cms-form')
         ) && Request::isPost()) {
             // apply spam filter if enabled

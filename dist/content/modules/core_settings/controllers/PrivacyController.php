@@ -9,7 +9,7 @@ class PrivacyController extends Controller
     public function _savePost(): void
     {
         $language = basename(Request::getVar('language', null, 'str'));
-        $varName = !empty($language) ?
+        $varName = ! empty($language) ?
                 "privacy_policy_checkbox_enable_{$language}" :
                 'privacy_policy_checkbox_enable';
 
@@ -19,13 +19,13 @@ class PrivacyController extends Controller
             Settings::delete($varName);
         }
 
-        if (!isset($_POST['log_ip'])) {
+        if (! isset($_POST['log_ip'])) {
             Settings::delete('log_ip');
         } else {
             Settings::set('log_ip', 'log_ip');
         }
 
-        if (!isset($_POST['delete_ips_after_48_hours'])) {
+        if (! isset($_POST['delete_ips_after_48_hours'])) {
             Settings::delete('delete_ips_after_48_hours');
         } else {
             Settings::set(
@@ -40,7 +40,7 @@ class PrivacyController extends Controller
             Settings::delete('keep_spam_ips');
         }
 
-        $varName = !empty($language) ?
+        $varName = ! empty($language) ?
                 "privacy_policy_checkbox_text_{$language}" :
                 'privacy_policy_checkbox_text';
 

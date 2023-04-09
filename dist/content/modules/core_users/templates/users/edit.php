@@ -89,7 +89,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
             <input type="text" name="username"
                    value="<?php echo _esc($row->username); ?>" required disabled
                    <?php
-                   if (!$permissionChecker->hasPermission('users')) {
+                   if (! $permissionChecker->hasPermission('users')) {
                        ?>
                        readonly="readonly" <?php }
                    ?>>
@@ -210,7 +210,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
                 name="html_editor">
                 <option value="ckeditor"
                 <?php
-                if (!$row->html_editor || $row->html_editor == HtmlEditor::CKEDITOR) {
+                if (! $row->html_editor || $row->html_editor == HtmlEditor::CKEDITOR) {
                     echo 'selected';
                 }
         ?>>CKEditor</option>
@@ -276,7 +276,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
             </strong>
             <select name="default_language">
                 <option value="" <?php
-                if (!$row->default_language) {
+                if (! $row->default_language) {
                     echo ' selected';
                 }
         ?>>[<?php translate('standard'); ?>]</option>

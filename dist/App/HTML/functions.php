@@ -19,7 +19,7 @@ function text($str)
 // generates a html img tag
 function imageTag(string $file, array $htmlAttributes = []): string
 {
-    if (!isset($htmlAttributes['src'])) {
+    if (! isset($htmlAttributes['src'])) {
         $htmlAttributes['src'] = $file;
     }
     $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
@@ -35,7 +35,7 @@ function buttonLink(
     ?string $target = null,
     array $htmlAttributes = []
 ): string {
-    if (!isset($htmlAttributes['class'])) {
+    if (! isset($htmlAttributes['class'])) {
         $htmlAttributes['class'] = $type;
     } else {
         $htmlAttributes['class'] = "$type {$htmlAttributes['class']}";
@@ -56,7 +56,7 @@ function link(
         $htmlAttributes['target'] = $target;
     }
 
-    if (!$allowHtml) {
+    if (! $allowHtml) {
         $text = _esc($text);
     }
 
@@ -69,7 +69,7 @@ function link(
 // e.g. icon("fas fa-cog");
 function icon(string $classes, array $htmlAttributes = []): string
 {
-    if (!isset($htmlAttributes['class'])) {
+    if (! isset($htmlAttributes['class'])) {
         $htmlAttributes['class'] = $classes;
     } else {
         $htmlAttributes['class'] = "$classes {$htmlAttributes['class']}";
@@ -83,7 +83,7 @@ function icon(string $classes, array $htmlAttributes = []): string
 function imageTagInline(string $file, array $htmlAttributes = []): string
 {
     $url = File::toDataUri($file);
-    if (!$url) {
+    if (! $url) {
         throw new FileNotFoundException("Image {$file} not found");
     }
 

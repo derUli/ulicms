@@ -3,7 +3,7 @@
 use App\Models\Content\Categories;
 
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission('forms') || !$permissionChecker->hasPermission('forms_create')) {
+if (! $permissionChecker->hasPermission('forms') || ! $permissionChecker->hasPermission('forms_create')) {
     noPerms();
 } else {
     $forms = Forms::getAllForms();

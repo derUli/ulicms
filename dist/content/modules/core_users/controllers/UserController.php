@@ -18,7 +18,7 @@ class UserController extends Controller
         $firstname = $_POST['firstname'];
         $password = $_POST['password'];
         $email = $_POST['email'];
-        $default_language = !empty($_POST['default_language']) ? $_POST['default_language'] : null;
+        $default_language = ! empty($_POST['default_language']) ? $_POST['default_language'] : null;
         $sendMail = isset($_POST['send_mail']);
         $admin = isset($_POST['admin']);
         $locked = isset($_POST['locked']);
@@ -69,7 +69,7 @@ class UserController extends Controller
             $firstname = $_POST['firstname'];
             $password = $_POST['password'];
             $email = $_POST['email'];
-            $default_language = !empty($_POST['default_language']) ? $_POST['default_language'] : null;
+            $default_language = ! empty($_POST['default_language']) ? $_POST['default_language'] : null;
             $admin = isset($_POST['admin']);
             $locked = isset($_POST['locked']);
 
@@ -85,7 +85,7 @@ class UserController extends Controller
             $require_password_change = (int)isset($_POST['require_password_change']);
 
             $user = new User($id);
-            if (!$user->getId() == $id) {
+            if (! $user->getId() == $id) {
                 ExceptionResult(get_translation('not_found'), HttpStatusCode::NOT_FOUND);
             }
             
@@ -121,8 +121,8 @@ class UserController extends Controller
             $user->setHTMLEditor($html_editor);
             $user->save();
 
-            if (!empty($_FILES['avatar']['name'])) {
-                if (!$user->changeAvatar($_FILES['avatar'])) {
+            if (! empty($_FILES['avatar']['name'])) {
+                if (! $user->changeAvatar($_FILES['avatar'])) {
                     ExceptionResult(
                         get_translation('avatar_upload_failed')
                     );
@@ -134,7 +134,7 @@ class UserController extends Controller
             }
 
 
-            if (!$permissionChecker->hasPermission('users')) {
+            if (! $permissionChecker->hasPermission('users')) {
                 Response::redirect('index.php');
             } else {
                 Response::redirect(ModuleHelper::buildActionURL('admins'));
@@ -156,7 +156,7 @@ class UserController extends Controller
         do_event('before_admin_delete');
 
         $user = new User($id);
-        if (!$user->isPersistent()) {
+        if (! $user->isPersistent()) {
             return false;
         }
 

@@ -12,14 +12,14 @@ function getModuleMeta($module, $attrib = null)
         'metadata.json',
         true
     );
-    if (!is_file($metadata_file)) {
+    if (! is_file($metadata_file)) {
         return null;
     }
 
     $data = file_get_contents($metadata_file);
     $json = json_decode($data, true);
 
-    if ($attrib && !isset($json[$attrib])) {
+    if ($attrib && ! isset($json[$attrib])) {
         return null;
     }
     return $attrib ? $json[$attrib] : $json;
@@ -90,7 +90,7 @@ function replaceShortcodesWithModules(
     $disabledModules = Vars::get('disabledModules') ?? [];
 
     foreach ($allModules as $module) {
-        if (in_array($module, $disabledModules) || !stringContainsShortCodes($string, $module)) {
+        if (in_array($module, $disabledModules) || ! stringContainsShortCodes($string, $module)) {
             continue;
         }
         $stringToReplace1 = '[module="' . $module . '"]';
@@ -219,7 +219,7 @@ function containsModule(?string $page = null, ?string $module = null): bool
     $result = db_query('SELECT content, module, `type` FROM ' .
             tbname('content') . " WHERE slug = '" . db_escape($page) . "'");
 
-    if (!Database::any($result)) {
+    if (! Database::any($result)) {
         return $containsModule;
     }
 
@@ -228,8 +228,8 @@ function containsModule(?string $page = null, ?string $module = null): bool
     $content = str_replace('&quot;', '"', $content);
 
     // TODO: Refactor this
-    if ($dataset['module'] !== null && !empty($dataset['module']) && $dataset['type'] == 'module') {
-        if (!$module || ($module && $dataset['module'] == $module)) {
+    if ($dataset['module'] !== null && ! empty($dataset['module']) && $dataset['type'] == 'module') {
+        if (! $module || ($module && $dataset['module'] == $module)) {
             $containsModule = true;
         }
     } elseif (stringContainsShortCodes($content, $module)) {

@@ -51,7 +51,7 @@ if ($permissionChecker->hasPermission('dashboard')) {
         <?php }
     ?>
         <?php
-    if (!Settings::get('disable_ulicms_newsfeed')) {
+    if (! Settings::get('disable_ulicms_newsfeed')) {
         ?>
             <div class="has-ajax-content"
                  data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, 'newsfeed') ?>">

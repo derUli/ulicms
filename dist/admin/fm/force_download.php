@@ -10,7 +10,7 @@ if ($_SESSION['RF']['verify'] != 'RESPONSIVEfilemanager') {
     exit;
 }
 
-if (!checkRelativePath($_POST['path']) || strpos($_POST['path'], '/') === 0) {
+if (! checkRelativePath($_POST['path']) || strpos($_POST['path'], '/') === 0) {
     response(trans('wrong path') . AddErrorLocation(), 400)->send();
     exit;
 }
@@ -31,7 +31,7 @@ if ($ftp) {
 $name = $_POST['name'];
 $info = pathinfo($name);
 
-if (!check_extension($info['extension'], $config)) {
+if (! check_extension($info['extension'], $config)) {
     response(trans('wrong extension') . AddErrorLocation(), 400)->send();
     exit;
 }
@@ -48,7 +48,7 @@ if ($ftp) {
     header('Content-disposition: attachment; filename="' . $file_name . '"');
     readfile($file_path);
 } elseif (is_file($file_path) && is_readable($file_path)) {
-    if (!file_exists($path . $name)) {
+    if (! file_exists($path . $name)) {
         response(trans('File_Not_Found') . AddErrorLocation(), 404)->send();
         exit;
     }
@@ -81,7 +81,7 @@ if ($ftp) {
         [$range] = explode(',', $range, 2);
         [$range, $range_end] = explode('-', $range);
         $range = (int) $range;
-        if (!$range_end) {
+        if (! $range_end) {
             $range_end = $size - 1;
         } else {
             $range_end = (int) $range_end;
@@ -104,8 +104,8 @@ if ($ftp) {
             fseek($file, $range);
         }
 
-        while (!feof($file) &&
-            (!connection_aborted()) &&
+        while (! feof($file) &&
+            (! connection_aborted()) &&
             ($bytes_send < $new_length)
         ) {
             $buffer = fread($file, $chunksize);

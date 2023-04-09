@@ -4,7 +4,7 @@
 use App\Models\Content\Language;
 
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission('groups')) {
+if (! $permissionChecker->hasPermission('groups')) {
     noPerms();
 } else {
     $modified = false;
@@ -21,7 +21,7 @@ if (!$permissionChecker->hasPermission('groups')) {
         }
 
         $name = trim($_POST['name']);
-        if (!empty($name)) {
+        if (! empty($name)) {
             $id = $permissionChecker->createGroup($name, $all_permissions);
             $group = new Group($id);
             $languages = [];
@@ -31,7 +31,7 @@ if (!$permissionChecker->hasPermission('groups')) {
                 }
             }
             $group->setLanguages($languages);
-            $allowed_tags = !empty($_POST['allowable_tags']) ? $_POST['allowable_tags'] : null;
+            $allowed_tags = ! empty($_POST['allowable_tags']) ? $_POST['allowable_tags'] : null;
             $group->setAllowableTags($allowed_tags);
             $group->save();
             $created = true;
@@ -54,7 +54,7 @@ if (!$permissionChecker->hasPermission('groups')) {
 
         $group = new Group();
         $group->loadById($id);
-        $allowed_tags = !empty($_POST['allowable_tags']) ? $_POST['allowable_tags'] : null;
+        $allowed_tags = ! empty($_POST['allowable_tags']) ? $_POST['allowable_tags'] : null;
         $group->setAllowableTags($allowed_tags);
         $languages = [];
         if (isset($_POST['restrict_edit_access_language']) && count($_POST['restrict_edit_access_language']) > 0) {
@@ -72,7 +72,7 @@ if (!$permissionChecker->hasPermission('groups')) {
         }
 
         $name = trim($_POST['name']);
-        if (!empty($name)) {
+        if (! empty($name)) {
             $permissionChecker->updateGroup($id, $name, $all_permissions);
             $modified = true;
             $name = _esc($name);
@@ -108,7 +108,7 @@ if (!$permissionChecker->hasPermission('groups')) {
     <?php }
     ?>
     <?php
-    if (!isset($_GET['add']) && !isset($_GET['edit'])) {
+    if (! isset($_GET['add']) && ! isset($_GET['edit'])) {
         require 'inc/group_list.php';
     } elseif (isset($_GET['add'])) {
         if ($permissionChecker->hasPermission('groups_create')) {

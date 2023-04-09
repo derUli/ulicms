@@ -21,7 +21,7 @@ class UrlHelper extends Helper
     {
         $parsedUri = parse_url($url);
         $hostWithPort = $parsedUri['host'];
-        if (!empty($parsedUri['port'])) {
+        if (! empty($parsedUri['port'])) {
             $hostWithPort .= ':' . $parsedUri['port'];
         }
 

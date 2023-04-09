@@ -20,7 +20,7 @@ class XSSProtection
 
         // If <script> isn't allowed then remove also inline event handlers
         // such as onerror, onmouseover and onclik
-        if (!($allowed && str_contains(strtolower($allowed), '<script>'))) {
+        if (! ($allowed && str_contains(strtolower($allowed), '<script>'))) {
             $output = preg_replace('/\bon\w+=\S+(?=.*>)/i', '', $output);
         }
         return $output;

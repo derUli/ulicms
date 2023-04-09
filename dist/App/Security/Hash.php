@@ -24,7 +24,7 @@ class Hash
         $salt = Settings::get('password_salt');
 
         // if no salt is set, generate it
-        if (!$salt) {
+        if (! $salt) {
             $newSalt = uniqid();
             Settings::set('password_salt', $newSalt);
             $salt = $newSalt;

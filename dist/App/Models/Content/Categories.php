@@ -45,7 +45,7 @@ class Categories
         $lst = self::getAllCategories('name');
         $html = "<select name='" . $name . "' id='$name' size='1' class='form-control'>";
         if ($allowNull) {
-            if (!$default) {
+            if (! $default) {
                 $html .= "<option value='0' selected='selected'>[" .
                         get_translation('every') . ']</option>';
             } else {
@@ -72,7 +72,7 @@ class Categories
     {
         $category = new Category($id);
         $category->delete();
-        return !$category->getID();
+        return ! $category->getID();
     }
 
     public static function getCategoryDescriptionById(?int $id): ?string

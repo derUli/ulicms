@@ -12,7 +12,7 @@ class SessionManager extends Controller
         $user = new User();
         $user->loadByUsername($_POST['user']);
 
-        if (!empty($_POST['system_language'])) {
+        if (! empty($_POST['system_language'])) {
             $_SESSION['system_language'] = basename($_POST['system_language']);
         } else {
             $_SESSION['system_language'] = $user->getDefaultLanguage() ? $user->getDefaultLanguage() : Settings::get('system_language');
@@ -34,7 +34,7 @@ class SessionManager extends Controller
         // if login successful register session
         if ($sessionData) {
             // sync modules folder with database at first login
-            if (!Settings::get('sys_initialized')) {
+            if (! Settings::get('sys_initialized')) {
                 CacheUtil::clearCache();
                 Settings::set('sys_initialized', 'true');
             }
@@ -64,7 +64,7 @@ class SessionManager extends Controller
 
     public function resetPassword(): void
     {
-        if (!isset($_REQUEST['token'])) {
+        if (! isset($_REQUEST['token'])) {
             ExceptionResult('A token is required');
         }
         $reset = new PasswordReset();

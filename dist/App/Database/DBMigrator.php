@@ -63,7 +63,7 @@ class DBMigrator
             ];
             $result = Database::tableExists('dbtrack') ?
                     Database::pQuery($sql, $args, true) : false;
-            if (!$result || Database::getNumRows($result) == 0) {
+            if (! $result || Database::getNumRows($result) == 0) {
                 $path = $this->folder . '/' . $file;
                 $sql = file_get_contents($path);
                 $cfg = new CMSConfig();
@@ -168,7 +168,7 @@ class DBMigrator
             throw new Exception('folder is null or empty');
         }
 
-        if (!is_dir($this->folder)) {
+        if (! is_dir($this->folder)) {
             throw new Exception('folder not found ' . $this->folder);
         }
 

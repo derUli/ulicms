@@ -61,19 +61,19 @@ class LanguageController extends Controller
         do_event('before_delete_language');
 
         $language = new Language($id);
-        if (!$language->getName()) {
+        if (! $language->getName()) {
             return false;
         }
         $language->delete();
 
         do_event('after_delete_language');
         CacheUtil::clearPageCache();
-        return !$language->isPersistent();
+        return ! $language->isPersistent();
     }
 
     public function deletePost(): void
     {
-        if (!$this->_deletePost()) {
+        if (! $this->_deletePost()) {
             ExceptionResult(
                 get_translation('not_found'),
                 HttpStatusCode::NOT_FOUND

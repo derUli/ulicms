@@ -18,7 +18,7 @@ class PackageSourceConnector
 
     public function __construct(?string $packageSourceUrl = null)
     {
-        if (!$packageSourceUrl) {
+        if (! $packageSourceUrl) {
             $packageSourceUrl = Settings::get('pkg_src');
         }
 
@@ -38,7 +38,7 @@ class PackageSourceConnector
             $this->packageSourceUrl,
             $forceUpdate
         );
-        if (!$json) {
+        if (! $json) {
             return false;
         }
         $this->data = json_decode($json);
@@ -52,7 +52,7 @@ class PackageSourceConnector
 
     public function getAllAvailablePackages(): ?array
     {
-        if (!$this->data) {
+        if (! $this->data) {
             $this->fetch();
         }
         return $this->data;
@@ -60,7 +60,7 @@ class PackageSourceConnector
 
     public function getVersionOfPackage(string $name): ?string
     {
-        if (!$this->data) {
+        if (! $this->data) {
             $this->fetch();
         }
         foreach ($this->data as $package) {
@@ -73,7 +73,7 @@ class PackageSourceConnector
 
     public function getDataOfPackage(string $name): ?object
     {
-        if (!$this->data) {
+        if (! $this->data) {
             $this->fetch();
         }
         foreach ($this->data as $package) {
@@ -86,7 +86,7 @@ class PackageSourceConnector
 
     public function getLicenseOfPackage(string $name): ?string
     {
-        if (!$this->data) {
+        if (! $this->data) {
             $this->fetch();
         }
         foreach ($this->data as $package) {

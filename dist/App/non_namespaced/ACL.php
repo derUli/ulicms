@@ -106,7 +106,7 @@ class ACL
         } elseif (isset($_SESSION['group_id'])) {
             $group_id = $_SESSION['group_id'];
         }
-        if (!$group_id) {
+        if (! $group_id) {
             return null;
         }
 

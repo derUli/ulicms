@@ -7,7 +7,7 @@ use function App\HTML\imageTag;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('users')) {
-    if (!isset($_SESSION['admins_filter_group'])) {
+    if (! isset($_SESSION['admins_filter_group'])) {
         $_SESSION['admins_filter_group'] = 0;
     }
     if (Request::getVar('admins_filter_group') !== null) {

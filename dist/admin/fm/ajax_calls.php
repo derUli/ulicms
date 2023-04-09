@@ -24,13 +24,13 @@ if (isset($_SESSION['RF']['language']) && is_file('lang/' . basename($_SESSION['
 
 
 //check $_GET['file']
-if (isset($_GET['file']) && !checkRelativePath($_GET['file'])) {
+if (isset($_GET['file']) && ! checkRelativePath($_GET['file'])) {
     response(trans('wrong path').AddErrorLocation())->send();
     exit;
 }
 
 //check $_POST['file']
-if (isset($_POST['path']) && !checkRelativePath($_POST['path'])) {
+if (isset($_POST['path']) && ! checkRelativePath($_POST['path'])) {
     response(trans('wrong path').AddErrorLocation())->send();
     exit;
 }
@@ -101,7 +101,7 @@ if (isset($_GET['action'])) {
                 exit;
             }
 
-            if (!checkresultingsize(strlen($image_data))) {
+            if (! checkresultingsize(strlen($image_data))) {
                 response(sprintf(trans('max_size_reached'), $config['MaxSizeTotal']).AddErrorLocation())->send();
                 exit;
             }
@@ -132,7 +132,7 @@ if (isset($_GET['action'])) {
             break;
 
         case 'extract':
-            if (!$config['extract_files']) {
+            if (! $config['extract_files']) {
                 response(trans('wrong action').AddErrorLocation())->send();
             }
             if ($ftp) {
@@ -169,7 +169,7 @@ if (isset($_GET['action'])) {
                             $aStat = $zip->statIndex($i);
                             $sizeTotalFinal += $aStat['size'];
                         }
-                        if (!checkresultingsize($sizeTotalFinal)) {
+                        if (! checkresultingsize($sizeTotalFinal)) {
                             response(sprintf(trans('max_size_reached'), $config['MaxSizeTotal']).AddErrorLocation())->send();
                             exit;
                         }
@@ -384,7 +384,7 @@ if (isset($_GET['action'])) {
                     }
                 }
 
-                if (!checkresultingsize($sizeFolderToCopy)) {
+                if (! checkresultingsize($sizeFolderToCopy)) {
                     response(sprintf(trans('max_size_reached'), $config['MaxSizeTotal']).AddErrorLocation())->send();
                     exit;
                 }
@@ -488,7 +488,7 @@ if (isset($_GET['action'])) {
                     </tbody>
                 </table>';
 
-            if ((!$ftp && is_dir($path))) {
+            if ((! $ftp && is_dir($path))) {
                 $ret .= '<div class="hero-unit" style="padding:10px;">'.trans('File_Permission_Recursive').'<br/><br/>
                         <ul class="unstyled">
                             <li><label class="radio"><input value="none" name="apply_recursive" type="radio" checked> '.trans('No').'</label></li>
@@ -530,7 +530,7 @@ if (isset($_GET['action'])) {
 
             break;
         case 'change_lang':
-            $choosen_lang = (!empty($_POST['choosen_lang'])) ? $_POST['choosen_lang'] : 'en_EN';
+            $choosen_lang = (! empty($_POST['choosen_lang'])) ? $_POST['choosen_lang'] : 'en_EN';
 
             if (array_key_exists($choosen_lang, $languages)) {
                 if (! is_file('lang/' . $choosen_lang . '.php')) {
@@ -598,13 +598,13 @@ if (isset($_GET['action'])) {
                 $allowed_file_exts = [];
             }
 
-            if (!isset($info['extension'])) {
+            if (! isset($info['extension'])) {
                 $info['extension']='';
             }
             if (! in_array($info['extension'], $allowed_file_exts)
                 || ! isset($is_allowed)
                 || $is_allowed === false
-                || (!$ftp && ! is_readable($selected_file))
+                || (! $ftp && ! is_readable($selected_file))
             ) {
                 response(sprintf(trans('File_Open_Edit_Not_Allowed'), ($sub_action == 'preview' ? strtolower(trans('Open')) : strtolower(trans('Edit')))).AddErrorLocation())->send();
                 exit;

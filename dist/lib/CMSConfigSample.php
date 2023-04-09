@@ -14,7 +14,7 @@ $environment = basename(get_environment());
 $file = ULICMS_CONFIGURATIONS . "/{$environment}.php";
 
 // If there is no config file for the environment show an error
-if (!is_file($file)) {
+if (! is_file($file)) {
     header('HTTP/1.1 500 Internal Server Error');
     echo "Configuration file for environment {$environment} not found.";
     exit();

@@ -133,7 +133,7 @@ echo ModuleHelper::buildMethodCallForm(
                 ?>
                 <?php $content = $comment->getContent(); ?>
                 <tr class="<?php
-                if (!$comment->isRead()) {
+                if (! $comment->isRead()) {
                     echo 'unread';
                 }
                 ?>">

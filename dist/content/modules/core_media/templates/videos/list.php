@@ -6,11 +6,11 @@ use App\Translations\JSTranslation;
 $permissionChecker = new ACL();
 
 $video_folder = ULICMS_ROOT . '/content/videos';
-if (!is_dir($video_folder)) {
+if (! is_dir($video_folder)) {
     mkdir($video_folder);
 }
 
-if (!isset($_SESSION['filter_category'])) {
+if (! isset($_SESSION['filter_category'])) {
     $_SESSION['filter_category'] = 0;
 }
 

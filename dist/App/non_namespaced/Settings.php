@@ -25,7 +25,7 @@ class Settings
         ?string $type = 'str'
     ): bool {
         $success = false;
-        if (!self::get($key)) {
+        if (! self::get($key)) {
             self::set($key, $value, $type);
             $success = true;
         }

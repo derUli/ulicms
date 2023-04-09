@@ -57,7 +57,7 @@ abstract class Content extends Model
      */
     public function getChildren(string $order = 'id'): array
     {
-        if (!$this->getID()) {
+        if (! $this->getID()) {
             return [];
         }
 

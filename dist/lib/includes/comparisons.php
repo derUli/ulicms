@@ -14,7 +14,7 @@ use Nette\Utils\JsonException;
  */
 function is_decimal($val): bool
 {
-    return is_numeric($val) && !ctype_digit((string) $val);
+    return is_numeric($val) && ! ctype_digit((string) $val);
 }
 
 /**
@@ -47,7 +47,7 @@ function is_admin_dir(): bool
  */
 function is_desktop(): bool
 {
-    return !is_mobile();
+    return ! is_mobile();
 }
 
 /**
@@ -87,7 +87,7 @@ function is_mobile(): bool
  */
 function is_maintenance_mode(): bool
 {
-    if (!is_string(Settings::get('maintenance_mode'))) {
+    if (! is_string(Settings::get('maintenance_mode'))) {
         return false;
     }
 
@@ -127,7 +127,7 @@ function var_is_type($var, $type, $required = false): bool
     $methodName = "is_{$type}";
 
     if ($var === null || $var === '') {
-        return !$required;
+        return ! $required;
     }
 
     if (function_exists($methodName)) {

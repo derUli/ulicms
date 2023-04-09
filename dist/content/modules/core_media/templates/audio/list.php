@@ -5,11 +5,11 @@ use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
 $audio_folder = ULICMS_ROOT . '/content/audio';
-if (!is_dir($audio_folder)) {
+if (! is_dir($audio_folder)) {
     mkdir($audio_folder);
 }
 
-if (!isset($_SESSION['filter_category'])) {
+if (! isset($_SESSION['filter_category'])) {
     $_SESSION['filter_category'] = 0;
 }
 

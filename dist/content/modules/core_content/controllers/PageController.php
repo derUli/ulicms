@@ -111,7 +111,7 @@ class PageController extends Controller
     {
         $permissionChecker = new PermissionChecker(get_user_id());
         $model = TypeMapper::getModel(Request::getVar('type'));
-        if (!$model) {
+        if (! $model) {
             return false;
         }
         try {
@@ -131,7 +131,7 @@ class PageController extends Controller
 
         CacheUtil::clearPageCache();
 
-        return !$model->hasChanges();
+        return ! $model->hasChanges();
     }
 
     // TODO: This method is too long
@@ -155,7 +155,7 @@ class PageController extends Controller
         // to not be submitted
         // In this case set active to false on create page
         // and don't change it's value on update
-        if (!$model->isPersistent()) {
+        if (! $model->isPersistent()) {
             $model->active = Request::hasVar('active') ?
                     Request::getVar('active', true, 'bool') : false;
             $model->approved = Request::hasVar('active');
@@ -177,7 +177,7 @@ class PageController extends Controller
                 $groupCollection->getAllowableTags() : Constants\DefaultValues::ALLOWED_TAGS;
 
         // remove all html tags except the explicitly allowed tags
-        if (!empty($allowedTags)) {
+        if (! empty($allowedTags)) {
             $model->content = XSSProtection::stripTags($model->content, $allowedTags);
         }
 
@@ -369,7 +369,7 @@ class PageController extends Controller
         $id = Request::getVar('id', null, 'int');
         do_event('before_undelete_page');
 
-        if (!$id) {
+        if (! $id) {
             ExceptionResult(
                 get_translation('not_found'),
                 HttpStatusCode::UNPROCESSABLE_ENTITY
@@ -377,7 +377,7 @@ class PageController extends Controller
             return;
         }
 
-        if (!$this->_undeletePost($id)) {
+        if (! $this->_undeletePost($id)) {
             ExceptionResult(
                 get_translation('not_found'),
                 HttpStatusCode::NOT_FOUND
@@ -405,7 +405,7 @@ class PageController extends Controller
         do_event('after_undelete_page');
 
         CacheUtil::clearPageCache();
-        return !$content->isDeleted();
+        return ! $content->isDeleted();
     }
 
     public function deletePost(): void
@@ -413,7 +413,7 @@ class PageController extends Controller
         $id = Request::getVar('id', null, 'int');
         do_event('before_delete_page');
 
-        if (!$id) {
+        if (! $id) {
             ExceptionResult(
                 get_translation('not_found'),
                 HttpStatusCode::UNPROCESSABLE_ENTITY
@@ -421,7 +421,7 @@ class PageController extends Controller
             return;
         }
 
-        if (!$this->_deletePost($id)) {
+        if (! $this->_deletePost($id)) {
             ExceptionResult(
                 get_translation('not_found'),
                 HttpStatusCode::NOT_FOUND
@@ -603,7 +603,7 @@ class PageController extends Controller
         int $id
     ): string {
         $slug = $originalSlug;
-        if (!$this->_checkIfSlugIsFree(
+        if (! $this->_checkIfSlugIsFree(
             $slug,
             $language,
             $id
@@ -679,7 +679,7 @@ class PageController extends Controller
             ?>>
                     <?php echo esc($page['title']); ?>
 
-                <?php if (!Request::getVar('no_id')) {
+                <?php if (! Request::getVar('no_id')) {
                     ?>
                     (ID: <?php echo $page['id']; ?>)
                 <?php }
@@ -821,7 +821,7 @@ class PageController extends Controller
                 $language,
                 getLanguageNameByCode($language)
             );
-            if (count($userLanguages) && !in_array($language, $userLanguages)) {
+            if (count($userLanguages) && ! in_array($language, $userLanguages)) {
                 continue;
             }
 

@@ -9,7 +9,7 @@ if ($permissionChecker->hasPermission('update_system')) {
         require $postinstall;
         unlink($postinstall);
         ?>
-        <?php if (!is_file($postinstall)) { ?>
+        <?php if (! is_file($postinstall)) { ?>
             <p><?php translate('finished'); ?></p>
         <?php } ?>
         <?php

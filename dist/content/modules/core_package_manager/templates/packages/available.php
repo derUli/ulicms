@@ -4,7 +4,7 @@ use App\Security\PermissionChecker;
 use App\Translations\JSTranslation;
 
 $permissionChecker = new PermissionChecker(get_user_id());
-if (!$permissionChecker->hasPermission('install_packages')) {
+if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();
 } else {
     ?>

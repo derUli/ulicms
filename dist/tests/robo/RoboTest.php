@@ -14,7 +14,7 @@ class RoboTest extends RoboTestBase
 
     public function testTestsRun()
     {
-        if (!$this->shouldDropDbOnShutdown()) {
+        if (! $this->shouldDropDbOnShutdown()) {
             $this->markTestSkipped();
         }
 

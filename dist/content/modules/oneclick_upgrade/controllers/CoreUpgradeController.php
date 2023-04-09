@@ -28,7 +28,7 @@ class CoreUpgradeController extends Controller
     public function getJSON(): ?object
     {
         $data = file_get_contents_wrapper($this->getCheckURL(), true);
-        if (!$data) {
+        if (! $data) {
             return null;
         }
         $data = json_decode($data);
@@ -38,7 +38,7 @@ class CoreUpgradeController extends Controller
     public function checkForUpgrades(): ?string
     {
         $data = $this->getJSON();
-        if (!$data) {
+        if (! $data) {
             return null;
         }
         $version = $data->version;
@@ -55,12 +55,12 @@ class CoreUpgradeController extends Controller
         @set_time_limit(0);
         @ignore_user_abort(true);
         $acl = new ACL();
-        if ((!$skipPermissions && (!$acl->hasPermission('update_system')) || !$this->checkForUpgrades() || get_request_method() != 'post')) {
+        if ((! $skipPermissions && (! $acl->hasPermission('update_system')) || ! $this->checkForUpgrades() || get_request_method() != 'post')) {
             return false;
         }
 
         $jsonData = $this->getJSON();
-        if (!$jsonData) {
+        if (! $jsonData) {
             return null;
         }
 
@@ -71,7 +71,7 @@ class CoreUpgradeController extends Controller
             sureRemoveDir($tmpDir, true);
         }
 
-        if (!is_dir($tmpDir)) {
+        if (! is_dir($tmpDir)) {
             mkdir($tmpDir, 0777, true);
         }
         try {

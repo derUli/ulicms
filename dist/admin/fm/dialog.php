@@ -5,13 +5,13 @@ $time = time();
 $config = include 'config/config.php';
 
 if (USE_ACCESS_KEYS == true) {
-    if (!isset($_GET['akey'], $config['access_keys']) || empty($config['access_keys'])) {
+    if (! isset($_GET['akey'], $config['access_keys']) || empty($config['access_keys'])) {
         die('Access Denied!');
     }
 
     $_GET['akey'] = strip_tags(preg_replace("/[^a-zA-Z0-9\._-]/", '', $_GET['akey']));
 
-    if (!in_array($_GET['akey'], $config['access_keys'])) {
+    if (! in_array($_GET['akey'], $config['access_keys'])) {
         die('Access Denied!');
     }
 }
@@ -44,9 +44,9 @@ include 'include/utils.php';
 
 $subdir_path = '';
 
-if (isset($_GET['fldr']) && !empty($_GET['fldr'])) {
+if (isset($_GET['fldr']) && ! empty($_GET['fldr'])) {
     $subdir_path = rawurldecode(trim(strip_tags($_GET['fldr']), '/'));
-} elseif (isset($_SESSION['RF']['fldr']) && !empty($_SESSION['RF']['fldr'])) {
+} elseif (isset($_SESSION['RF']['fldr']) && ! empty($_SESSION['RF']['fldr'])) {
     $subdir_path = rawurldecode(trim(strip_tags($_SESSION['RF']['fldr']), '/'));
 }
 
@@ -59,7 +59,7 @@ if (checkRelativePath($subdir_path)) {
 }
 
 if ($subdir == '') {
-    if (!empty($_COOKIE['last_position']) && strpos($_COOKIE['last_position'], '.') === false) {
+    if (! empty($_COOKIE['last_position']) && strpos($_COOKIE['last_position'], '.') === false) {
         $subdir = trim($_COOKIE['last_position']);
     }
 }
@@ -90,12 +90,12 @@ if ($config['show_total_size']) {
 /***
  * SUB-DIR CODE
  ***/
-if (!isset($_SESSION['RF']['subfolder'])) {
+if (! isset($_SESSION['RF']['subfolder'])) {
     $_SESSION['RF']['subfolder'] = '';
 }
 $rfm_subfolder = '';
 
-if (!empty($_SESSION['RF']['subfolder'])
+if (! empty($_SESSION['RF']['subfolder'])
     && strpos($_SESSION['RF']['subfolder'], '/') !== 0
     && strpos($_SESSION['RF']['subfolder'], '.') === false
 ) {
@@ -108,9 +108,9 @@ if ($rfm_subfolder != '' && $rfm_subfolder[strlen($rfm_subfolder) - 1] != '/') {
 
 $ftp = ftp_con($config);
 
-if (($ftp && !$ftp->isDir(
+if (($ftp && ! $ftp->isDir(
     $config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir
-)) || (!$ftp && !file_exists($config['current_path'] . $rfm_subfolder . $subdir))) {
+)) || (! $ftp && ! file_exists($config['current_path'] . $rfm_subfolder . $subdir))) {
     $subdir = '';
     $rfm_subfolder = '';
 }
@@ -128,7 +128,7 @@ if ($ftp) {
     $parent = $config['ftp_base_folder'] . $parent;
 }
 
-if (!$ftp) {
+if (! $ftp) {
     $cycle = true;
     $max_cycles = 50;
     $i = 0;
@@ -164,7 +164,7 @@ if (!$ftp) {
         }
     }
 
-    if (!is_dir($thumbs_path)) {
+    if (! is_dir($thumbs_path)) {
         create_folder(false, $thumbs_path, $ftp, $config);
     }
 }
@@ -203,7 +203,7 @@ $crossdomain = isset($_GET['crossdomain']) ? strip_tags($_GET['crossdomain']) : 
 $crossdomain = (bool)$crossdomain;
 
 //view type
-if (!isset($_SESSION['RF']['view_type'])) {
+if (! isset($_SESSION['RF']['view_type'])) {
     $view = $config['default_view'];
     $_SESSION['RF']['view_type'] = $view;
 }
@@ -225,7 +225,7 @@ if (isset($_GET['filter'])) {
     $filter = fix_get_params($_GET['filter']);
 }
 
-if (!isset($_SESSION['RF']['sort_by'])) {
+if (! isset($_SESSION['RF']['sort_by'])) {
     $_SESSION['RF']['sort_by'] = 'name';
 }
 
@@ -235,7 +235,7 @@ if (isset($_GET['sort_by'])) {
     $sort_by = $_SESSION['RF']['sort_by'];
 }
 
-if (!isset($_SESSION['RF']['descending'])) {
+if (! isset($_SESSION['RF']['descending'])) {
     $_SESSION['RF']['descending'] = true;
 }
 
@@ -249,7 +249,7 @@ $boolarray = [false => 'false', true => 'true'];
 
 $return_relative_url = isset($_GET['relative_url']) && $_GET['relative_url'] == '1' ? true : false;
 
-if (!isset($_GET['type'])) {
+if (! isset($_GET['type'])) {
     $_GET['type'] = 0;
 }
 
@@ -288,7 +288,7 @@ if ($type_param == 1) {
     $apply_type = 'apply_img';
 } elseif ($type_param == 2) {
     $apply_type = 'apply_link';
-} elseif ($type_param == 0 && !$field_id) {
+} elseif ($type_param == 0 && ! $field_id) {
     $apply_type = 'apply_none';
 } elseif ($type_param == 3) {
     $apply_type = 'apply_video';
@@ -296,7 +296,7 @@ if ($type_param == 1) {
     $apply_type = 'apply';
 }
 
-if (!$apply) {
+if (! $apply) {
     $apply = $apply_type;
 }
 
@@ -751,7 +751,7 @@ $src = '';
 if ($ftp) {
     try {
         $files = $ftp->scanDir($config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir);
-        if (!$ftp->isDir($config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $rfm_subfolder . $subdir)) {
+        if (! $ftp->isDir($config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $rfm_subfolder . $subdir)) {
             create_folder(
                 false,
                 $config['ftp_base_folder'] . $config['ftp_thumbs_dir'] . $rfm_subfolder . $subdir,
@@ -804,7 +804,7 @@ foreach ($files as $k => $file) {
         if ($file != '.' && $file != '..') {
             if (is_dir($config['current_path'] . $rfm_subfolder . $subdir . $file)) {
                 $date = filemtime($config['current_path'] . $rfm_subfolder . $subdir . $file);
-                if (!($file == '.' || substr($file, 0, 1) == '.' ||
+                if (! ($file == '.' || substr($file, 0, 1) == '.' ||
                     (isset($file_array['extension']) && $file_array['extension'] == fix_strtolower(
                         trans('Type_dir')
                     )) ||
@@ -1127,7 +1127,7 @@ $files = $sorted;
             <?php
     $bc = explode('/', $subdir);
 $tmp_path = '';
-if (!empty($bc)) {
+if (! empty($bc)) {
     foreach ($bc as $k => $b) {
         $tmp_path .= $b . '/';
         if ($k == count($bc) - 2) {
@@ -1212,9 +1212,9 @@ if ($config['show_language_selection']) { ?>
     <!-- breadcrumb div end -->
     <div class="row-fluid ff-container">
         <div class="span12">
-            <?php if(($ftp && !$ftp->isDir(
+            <?php if(($ftp && ! $ftp->isDir(
                 $config['ftp_base_folder'] . $config['upload_dir'] . $rfm_subfolder . $subdir
-            )) || (!$ftp && @opendir($config['current_path'] . $rfm_subfolder . $subdir) === false)) { ?>
+            )) || (! $ftp && @opendir($config['current_path'] . $rfm_subfolder . $subdir) === false)) { ?>
             <br/>
             <div class="alert alert-error">There is an error! The upload folder there isn't. Check your config.php
                 file.
@@ -1292,7 +1292,7 @@ if ($config['show_language_selection']) { ?>
                     }
                     //add in thumbs folder if not exist
                     if ($file != '..') {
-                        if (!$ftp && !file_exists($thumbs_path . $file)) {
+                        if (! $ftp && ! file_exists($thumbs_path . $file)) {
                             create_folder(false, $thumbs_path . $file, $ftp, $config);
                         }
                     }
@@ -1317,7 +1317,7 @@ if ($config['show_language_selection']) { ?>
                     } else {
                         echo 'dir';
                     } ?> <?php
-                    if (!$config['multiple_selection']) { ?>no-selector<?php
+                    if (! $config['multiple_selection']) { ?>no-selector<?php
                     } ?>" <?php
                     if (($filter != '' && stripos($file, $filter) === false)) {
                         echo ' style="display:none;"';
@@ -1413,23 +1413,23 @@ if ($config['show_language_selection']) { ?>
                                 echo fix_strtolower(trans('Type_dir')); ?></div>
                             <figcaption>
                                 <a href="javascript:void('')" class="tip-left edit-button rename-file-paths <?php
-                                if ($config['rename_folders'] && !$file_prevent_rename) {
+                                if ($config['rename_folders'] && ! $file_prevent_rename) {
                                     echo 'rename-folder';
                                 } ?>" title="<?php
                                 echo trans('Rename') ?>" data-folder="1" data-permissions="<?php
                                 echo $file_array['permissions']; ?>">
                                     <i class="icon-pencil <?php
-                                    if (!$config['rename_folders'] || $file_prevent_rename) {
+                                    if (! $config['rename_folders'] || $file_prevent_rename) {
                                         echo 'icon-white';
                                     } ?>"></i></a>
                                 <a href="javascript:void('')" class="tip-left erase-button <?php
-                                if ($config['delete_folders'] && !$file_prevent_delete) {
+                                if ($config['delete_folders'] && ! $file_prevent_delete) {
                                     echo 'delete-folder';
                                 } ?>" title="<?php
                                 echo trans('Erase') ?>" data-confirm="<?php
                                 echo trans('Confirm_Folder_del'); ?>">
                                     <i class="icon-trash <?php
-                                    if (!$config['delete_folders'] || $file_prevent_delete) {
+                                    if (! $config['delete_folders'] || $file_prevent_delete) {
                                         echo 'icon-white';
                                     } ?>"></i>
                                 </a>
@@ -1450,7 +1450,7 @@ if ($config['show_language_selection']) { ?>
 
                     if ($file == '.' || $file == '..' || $file_array['extension'] == fix_strtolower(
                         trans('Type_dir')
-                    ) || !check_extension(
+                    ) || ! check_extension(
                         $file_array['extension'],
                         $config
                     ) || ($filter != '' && $n_files > $config['file_number_limit_js'] && stripos(
@@ -1468,7 +1468,7 @@ if ($config['show_language_selection']) { ?>
                     if (strlen($file_array['extension']) === 0) {
                         $filename = $file;
                     }
-                    if (!$ftp) {
+                    if (! $ftp) {
                         $file_path = $config['current_path'] . $rfm_subfolder . $subdir . $file;
                         //check if file have illegal caracter
 
@@ -1518,7 +1518,7 @@ if ($config['show_language_selection']) { ?>
                         } else {
                             $creation_thumb_path = $mini_src = $src_thumb = $thumbs_path . $file;
 
-                            if (!file_exists($src_thumb)) {
+                            if (! file_exists($src_thumb)) {
                                 if (create_img($file_path, $creation_thumb_path, 122, 91, 'crop', $config) !== true) {
                                     $src_thumb = $mini_src = '';
                                 }
@@ -1566,11 +1566,11 @@ if ($config['show_language_selection']) { ?>
                     } else {
                         $class_ext = 1;
                     }
-                    if ((!($_GET['type'] == 1 && !$is_img) && !(($_GET['type'] == 3 && !$is_video) && ($_GET['type'] == 3 && !$is_audio))) && $class_ext > 0) {
+                    if ((! ($_GET['type'] == 1 && ! $is_img) && ! (($_GET['type'] == 3 && ! $is_video) && ($_GET['type'] == 3 && ! $is_audio))) && $class_ext > 0) {
                         ?>
                 <li class="ff-item-type-<?php
                         echo $class_ext; ?> file <?php
-                        if (!$config['multiple_selection']) { ?>no-selector<?php
+                        if (! $config['multiple_selection']) { ?>no-selector<?php
                         } ?>" data-name="<?php
                         echo $file; ?>" <?php
                         if (($filter != '' && stripos($file, $filter) === false)) {
@@ -1638,7 +1638,7 @@ if ($config['show_language_selection']) { ?>
                                 )) {
                                     echo 'edit-text-file-allowed';
                                 } ?> <?php
-                                if (!$is_icon_thumb) {
+                                if (! $is_icon_thumb) {
                                     echo 'hide';
                                 } ?>"><?php
                                     echo $file_array['extension'] ?></div>
@@ -1699,7 +1699,7 @@ if ($config['show_language_selection']) { ?>
                                     echo "onclick=\"$('#form" . $nu . "').submit();\"";
                                 } ?>><i
                                             class="icon-download <?php
-                                            if (!$config['download_files']) {
+                                            if (! $config['download_files']) {
                                                 echo 'icon-white';
                                             } ?>"></i></a>
 
@@ -1760,24 +1760,24 @@ if ($config['show_language_selection']) { ?>
                                 <?php
                                 } ?>
                                 <a href="javascript:void('')" class="tip-left edit-button rename-file-paths <?php
-                                if ($config['rename_files'] && !$file_prevent_rename) {
+                                if ($config['rename_files'] && ! $file_prevent_rename) {
                                     echo 'rename-file';
                                 } ?>" title="<?php
                                 echo trans('Rename') ?>" data-folder="0" data-permissions="<?php
                                 echo $file_array['permissions']; ?>">
                                     <i class="icon-pencil <?php
-                                    if (!$config['rename_files'] || $file_prevent_rename) {
+                                    if (! $config['rename_files'] || $file_prevent_rename) {
                                         echo 'icon-white';
                                     } ?>"></i></a>
 
                                 <a href="javascript:void('')" class="tip-left erase-button <?php
-                                if ($config['delete_files'] && !$file_prevent_delete) {
+                                if ($config['delete_files'] && ! $file_prevent_delete) {
                                     echo 'delete-file';
                                 } ?>" title="<?php
                                 echo trans('Erase') ?>" data-confirm="<?php
                                 echo trans('Confirm_del'); ?>">
                                     <i class="icon-trash <?php
-                                    if (!$config['delete_files'] || $file_prevent_delete) {
+                                    if (! $config['delete_files'] || $file_prevent_delete) {
                                         echo 'icon-white';
                                     } ?>"></i>
                                 </a>
@@ -1837,7 +1837,7 @@ if ($config['tui_active']) { ?>
     <script>
         var tuiTheme = {
             <?php foreach ($config['tui_defaults_config'] as $aopt_key => $aopt_val) {
-                if (!empty($aopt_val)) {
+                if (! empty($aopt_val)) {
                     echo "'$aopt_key':" . json_encode($aopt_val) . ',';
                 }
             } ?>

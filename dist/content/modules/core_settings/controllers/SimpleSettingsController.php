@@ -21,7 +21,7 @@ class SimpleSettingsController extends Controller
         Settings::set('timezone', $_POST['timezone']);
         Settings::set('robots', $_POST['robots']);
 
-        if (!isset($_POST['disable_password_reset'])) {
+        if (! isset($_POST['disable_password_reset'])) {
             Settings::set('disable_password_reset', 'disable_password_reset');
         } else {
             Settings::delete('disable_password_reset');

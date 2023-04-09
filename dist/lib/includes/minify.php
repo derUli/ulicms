@@ -43,7 +43,7 @@ function optimizeHtml(
 
 function enqueueScriptFile($path): void
 {
-    if (!Vars::get('script_queue')) {
+    if (! Vars::get('script_queue')) {
         resetScriptQueue();
     }
     $script_queue = Vars::get('script_queue');
@@ -93,17 +93,17 @@ function minifyJs(): string
     $cacheId = Hash::hashCacheIdentifier((implode(';', $scripts)) . $lastmod);
     $jsDir = Path::resolve('ULICMS_CACHE/scripts');
 
-    if (!is_dir($jsDir)) {
+    if (! is_dir($jsDir)) {
         mkdir($jsDir, 0777, true);
     }
-    $jsUrl = !is_admin_dir() ?
+    $jsUrl = ! is_admin_dir() ?
             'content/cache/legacy/scripts' : '../content/cache/legacy/scripts';
 
     $bundleFile = "{$jsDir}/{$cacheId}.js";
     $bundleUrl = "{$jsUrl}/{$cacheId}.js";
 
     $output = '';
-    if (!is_file($bundleFile)) {
+    if (! is_file($bundleFile)) {
         foreach ($scripts as $script) {
             $script = ltrim($script, '/');
             if (is_file($script) &&
@@ -142,10 +142,10 @@ function minifyCSS(): string
 
     $cssDir = Path::resolve('ULICMS_CACHE/stylesheets');
 
-    if (!is_dir($cssDir)) {
+    if (! is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);
     }
-    $cssUrl = !is_admin_dir() ?
+    $cssUrl = ! is_admin_dir() ?
             'content/cache/legacy/stylesheets' : '../content/cache/legacy/stylesheets';
 
     $bundleFile = "{$cssDir}/{$cacheId}.css";
@@ -153,7 +153,7 @@ function minifyCSS(): string
 
     $output = '';
 
-    if (!is_file($bundleFile)) {
+    if (! is_file($bundleFile)) {
         foreach ($stylesheets as $stylesheet) {
             $stylesheet = ltrim($stylesheet, '/');
             $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
@@ -199,7 +199,7 @@ function compileSCSSToFile(string $stylesheet): string
 {
     $cssDir = Path::resolve('ULICMS_CACHE/stylesheets');
 
-    if (!is_dir($cssDir)) {
+    if (! is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);
     }
 
@@ -207,7 +207,7 @@ function compileSCSSToFile(string $stylesheet): string
 
     $cacheId = Hash::hashCacheIdentifier($stylesheet . filemtime($stylesheet));
 
-    $cssUrl = !is_admin_dir() ?
+    $cssUrl = ! is_admin_dir() ?
             'content/cache/legacy/stylesheets' : '../content/cache/legacy/stylesheets';
 
     $bundleFile = "{$cssDir}/{$cacheId}.css";
@@ -248,7 +248,7 @@ function resetStylesheetQueue(): void
 
 function enqueueStylesheet(string $path): void
 {
-    if (!Vars::get('stylesheet_queue')) {
+    if (! Vars::get('stylesheet_queue')) {
         resetStylesheetQueue();
     }
     $stylesheet_queue = Vars::get('stylesheet_queue');
@@ -262,7 +262,7 @@ function getCombinedStylesheetHTML(): ?string
     $html = '';
 
     $cfg = new CMSConfig();
-    if (!Vars::get('stylesheet_queue')) {
+    if (! Vars::get('stylesheet_queue')) {
         return null;
     }
     if (isset($cfg->no_minify) && ($cfg->no_minify)) {

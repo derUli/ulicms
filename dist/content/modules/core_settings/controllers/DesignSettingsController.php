@@ -17,7 +17,7 @@ class DesignSettingsController extends Controller
         $this->generatedSCSS = Path::resolve(
             'ULICMS_GENERATED/design_variables.scss'
         );
-        if (!is_file($this->generatedSCSS)) {
+        if (! is_file($this->generatedSCSS)) {
             $this->_generateSCSSToFile();
         }
     }
@@ -50,7 +50,7 @@ class DesignSettingsController extends Controller
         }
 
         if ($_REQUEST['default_font'] != Settings::get('default_font')) {
-            if (!empty($_REQUEST['custom-font'])) {
+            if (! empty($_REQUEST['custom-font'])) {
                 $font = $_REQUEST['custom-font'];
             } else {
                 $font = $_REQUEST['default_font'];
@@ -134,7 +134,7 @@ class DesignSettingsController extends Controller
     {
         $themeName = Request::getVar('theme', null, 'str');
 
-        if (!$themeName) {
+        if (! $themeName) {
             HTTPStatusCodeResult(HttpStatusCode::UNPROCESSABLE_ENTITY);
         }
 

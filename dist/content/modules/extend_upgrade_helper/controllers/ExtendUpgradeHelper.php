@@ -29,17 +29,17 @@ class ExtendUpgradeHelper extends Controller
 
     protected function checkForUpdates(string $name, ?string $version): bool
     {
-        if (!$version) {
+        if (! $version) {
             return false;
         }
 
         $url = "https://extend.ulicms.de/{$name}.json";
         $json = file_get_contents_wrapper($url, true);
-        if (!$json) {
+        if (! $json) {
             return false;
         }
         $data = json_decode($json, true);
-        if (!($data && isset($data['data']))) {
+        if (! ($data && isset($data['data']))) {
             return false;
         }
         $versionMatcher = new AvailablePackageVersionMatcher($data['data']);

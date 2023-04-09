@@ -26,7 +26,7 @@ function exception_handler(Throwable $exception): void
     $httpStatus = $exception instanceof AccessDeniedException ?
             HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
 
-    if (function_exists('HTMLResult') && class_exists('Template') && !headers_sent() && function_exists('get_theme')) {
+    if (function_exists('HTMLResult') && class_exists('Template') && ! headers_sent() && function_exists('get_theme')) {
         ViewBag::set('exception', nl2br(_esc($exception)));
         HTMLResult(Template::executeDefaultOrOwnTemplate('exception.php'), $httpStatus);
     }

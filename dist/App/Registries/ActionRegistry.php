@@ -64,7 +64,7 @@ class ActionRegistry
 
         foreach ($modules as $module) {
             $action_permissions = getModuleMeta($module, 'action_permissions');
-            if (!$action_permissions) {
+            if (! $action_permissions) {
                 continue;
             }
             foreach ($action_permissions as $action => $permission) {
@@ -89,7 +89,7 @@ class ActionRegistry
         $modules = getAllModules();
         foreach ($modules as $module) {
             $action_controllers = getModuleMeta($module, 'action_controllers');
-            if (!$action_controllers) {
+            if (! $action_controllers) {
                 continue;
             }
             foreach ($action_controllers as $key => $value) {

@@ -23,7 +23,7 @@ class InfoController extends MainClass
             } elseif (str_ends_with($line, ':')) {
                 $line = "<strong>$line</strong>";
             }
-            if (!str_contains($line, '<h')) {
+            if (! str_contains($line, '<h')) {
                 $line .= "\n";
             }
 

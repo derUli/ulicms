@@ -10,7 +10,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     for ($i = 0; $i < $languageCount; $i++) {
         $lang = $languages[$i];
         $meta_descriptions[$lang] = Settings::get('meta_description_' . $lang);
-        if (!$meta_descriptions[$lang]) {
+        if (! $meta_descriptions[$lang]) {
             $meta_descriptions[$lang] = Settings::get('meta_description');
         }
     }

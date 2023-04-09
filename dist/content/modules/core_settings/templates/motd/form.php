@@ -33,7 +33,7 @@ if ($permissionChecker->hasPermission('motd')) {
             name="language" id="language">
             <option value=""
             <?php
-            if (!Request::getVar('language')) {
+            if (! Request::getVar('language')) {
                 echo 'selected';
             }
     ?>>[<?php translate('no_language'); ?>]</option>

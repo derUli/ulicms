@@ -44,7 +44,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                         $adminPermission &&
                         $permissionChecker->hasPermission($adminPermission)
                     )
-                            || (!$adminPermission
+                            || (! $adminPermission
                             );
                     $btnClass = ($hasAdminPage && $userIsPermitted) ?
                             'btn btn-primary' :
@@ -55,13 +55,13 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                 href="<?php esc(ModuleHelper::buildAdminURL($module->getName())); ?>"
                                 class="<?php esc($btnClass); ?>"
                                 <?php
-                                if (!$hasAdminPage || !$isEnabled) {
+                                if (! $hasAdminPage || ! $isEnabled) {
                                     echo 'disabled';
                                 }
                     ?>
                                 data-btn-for="<?php esc($module->getName()); ?>"><i
                                     class="fas fa-tools"></i> <?php esc($module->getName()); ?> </a>
-                                <?php if (!$userIsPermitted && $hasAdminPage) { ?>
+                                <?php if (! $userIsPermitted && $hasAdminPage) { ?>
                                 <i class="fas fa-lock pull-right"
                                    title="<?php translate('no_permission'); ?>"></i>
                                <?php } ?>
@@ -101,16 +101,16 @@ if ($permissionChecker->hasPermission('list_packages')) {
                     ]);
                     ?>
                                 <button type="submit" <?php
-                                if (!$canToggleModule) {
+                                if (! $canToggleModule) {
                                     echo 'disabled';
                                 }
                     ?> class="btn btn-success bt-sm icon btn-disable" style="<?php
-                            if (!$module->isEnabled()) {
+                            if (! $module->isEnabled()) {
                                 echo 'display:none';
                             }
                     ?>" title="<?php translate('disable_module'); ?>"><?php translate('on'); ?></button>
                                 <button type="submit"  <?php
-                                if (!$canToggleModule) {
+                                if (! $canToggleModule) {
                                     echo 'disabled';
                                 }
                     ?> class="btn btn-danger bt-sm icon btn-enable" style="<?php

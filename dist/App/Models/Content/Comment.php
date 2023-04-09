@@ -37,7 +37,7 @@ class Comment extends Model
     public function loadByID($id)
     {
         $result = Database::selectAll('comments', [], 'id=' . (int) $id);
-        if ($result == null || !Database::any($result)) {
+        if ($result == null || ! Database::any($result)) {
             throw new DatasetNotFoundException('no comment with id ' .
                             (int) $id);
         }
@@ -62,7 +62,7 @@ class Comment extends Model
 
     protected function insert()
     {
-        if (!$this->getDate()) {
+        if (! $this->getDate()) {
             $this->date = time();
         }
         Database::pQuery('INSERT INTO `{prefix}comments`
@@ -168,7 +168,7 @@ VALUES      ( ?,
 
     public function setAuthorName(?string $val): void
     {
-        $this->author_name = !empty($val) ?
+        $this->author_name = ! empty($val) ?
                 (string) $val : null;
     }
 
@@ -179,7 +179,7 @@ VALUES      ( ?,
 
     public function setAuthorEmail(?string $val): void
     {
-        $this->author_email = !empty($val) ?
+        $this->author_email = ! empty($val) ?
                 (string) $val : null;
     }
 
@@ -209,7 +209,7 @@ VALUES      ( ?,
     {
         if (is_string($val)) {
             $val = strtotime($val);
-        } elseif (!is_numeric($val)) {
+        } elseif (! is_numeric($val)) {
             throw new InvalidArgumentException(
                 var_dump_str($val) . ' is not an integer timestamp'
             );
@@ -224,7 +224,7 @@ VALUES      ( ?,
 
     public function setText(?string $val): void
     {
-        $this->text = !empty($val) ?
+        $this->text = ! empty($val) ?
                 (string) $val : null;
     }
 
@@ -245,7 +245,7 @@ VALUES      ( ?,
 
     public function setIp(?string $val): void
     {
-        $this->ip = !empty($val) ?
+        $this->ip = ! empty($val) ?
                 (string) $val : null;
     }
 
@@ -256,14 +256,14 @@ VALUES      ( ?,
 
     public function setUserAgent(?string $val): void
     {
-        $this->useragent = !empty($val) ?
+        $this->useragent = ! empty($val) ?
                 (string) $val : null;
     }
 
     // returns the content where this comment is attached
     public function getContent()
     {
-        if (!$this->getContentId()) {
+        if (! $this->getContentId()) {
             return null;
         }
         return ContentFactory::getByID($this->getContentId());

@@ -40,7 +40,7 @@ class Script
             $attributes['defer'] = 'defer';
         }
 
-        if (!parse_url($file, PHP_URL_SCHEME) && is_file($file)) {
+        if (! parse_url($file, PHP_URL_SCHEME) && is_file($file)) {
             $attributes['src'] .= '?time=' . File::getLastChanged($file);
         }
 
@@ -50,7 +50,7 @@ class Script
 
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        if (!empty($attribHTML)) {
+        if (! empty($attribHTML)) {
             $attribHTML = ' ' . $attribHTML;
         }
 
@@ -83,7 +83,7 @@ class Script
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        if (!empty($attribHTML)) {
+        if (! empty($attribHTML)) {
             $attribHTML = ' ' . $attribHTML;
         }
 

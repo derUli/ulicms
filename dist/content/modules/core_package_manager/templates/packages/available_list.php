@@ -8,7 +8,7 @@ use App\Services\Connectors\PackageSourceConnector;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('install_packages')) {
-    if (!Settings::get('pkg_src')) {
+    if (! Settings::get('pkg_src')) {
         ?>
         <p>
             <strong><?php translate('error'); ?> </strong> <br />
@@ -20,7 +20,7 @@ if ($permissionChecker->hasPermission('install_packages')) {
         $fetch = $packageSource->fetch();
         $packages = $packageSource->getAllAvailablePackages();
 
-        if (!$fetch || count($packages) === 0) {
+        if (! $fetch || count($packages) === 0) {
             ?>
             <p>
                 <strong><?php translate('error'); ?> </strong> <br />
@@ -48,7 +48,7 @@ if ($permissionChecker->hasPermission('install_packages')) {
                                 <td><?php esc($package->name); ?></td>
                                 <td><?php esc($package->version); ?></td>
                                 <td><?php
-                                    echo !empty($package->description) ?
+                                    echo ! empty($package->description) ?
                                             nl2br($package->description) :
                                             get_translation('no_description_available');
                             ?>

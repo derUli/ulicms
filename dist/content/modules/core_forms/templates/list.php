@@ -2,7 +2,7 @@
 use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission('forms')) {
+if (! $permissionChecker->hasPermission('forms')) {
     noPerms();
 } else {
     $forms = Forms::getAllForms();

@@ -2,7 +2,7 @@
 
 use App\Helpers\DateTimeHelper;
 
-if (!Settings::get('disable_ulicms_newsfeed')) {
+if (! Settings::get('disable_ulicms_newsfeed')) {
     App\Utils\Session\sessionStart();
     $rss = new DOMDocument();
     $feeds = [];

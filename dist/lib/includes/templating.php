@@ -53,15 +53,15 @@ function get_og_tags(?string $slug = null): string
             $og_image = Settings::get('og_image');
         }
 
-        if (!empty($og_image) && !str_starts_with($og_image, 'http')) {
+        if (! empty($og_image) && ! str_starts_with($og_image, 'http')) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, '/');
         }
         $page = get_page($slug);
         if (empty($og_image) &&
-                !empty($page['article_image'])) {
+                ! empty($page['article_image'])) {
             $og_image = ltrim($page['article_image'], '/');
         }
-        if (!empty($og_image) && !str_starts_with($og_image, 'http')) {
+        if (! empty($og_image) && ! str_starts_with($og_image, 'http')) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, '/');
         }
         if (null === $og_description || empty($og_description)) {
@@ -185,11 +185,11 @@ function is_active(): bool
 
 function get_type(?string $slug = null, ?string $language = null): ?string
 {
-    if (!$slug) {
+    if (! $slug) {
         $slug = get_slug();
     }
 
-    if (!$language) {
+    if (! $language) {
         $language = getCurrentLanguage();
     }
     $varName = "type_{$slug}_{$language}";
@@ -213,7 +213,7 @@ function get_type(?string $slug = null, ?string $language = null): ?string
 
 function get_article_meta(?string $page = null): ?object
 {
-    if (!$page) {
+    if (! $page) {
         $page = get_slug();
     }
 
@@ -280,7 +280,7 @@ function get_text_position(): string
 
 function get_parent(string $page = null): ?int
 {
-    if (!$page) {
+    if (! $page) {
         $page = get_slug();
     }
     $parent_id = null;
@@ -298,7 +298,7 @@ function get_parent(string $page = null): ?int
 function get_access(?string $page = null): array
 {
     $access = [];
-    if (!$page) {
+    if (! $page) {
         $page = get_slug();
     }
 
@@ -316,7 +316,7 @@ function get_access(?string $page = null): array
 
 function get_redirection(?string $page = null): ?string
 {
-    if (!$page) {
+    if (! $page) {
         $page = get_slug();
     }
     $sql = 'SELECT `link_url` FROM ' . tbname('content') .
@@ -327,7 +327,7 @@ function get_redirection(?string $page = null): ?string
     $redirection = null;
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
-        if (!empty($dataset->link_url) && null !== $dataset->link_url) {
+        if (! empty($dataset->link_url) && null !== $dataset->link_url) {
             $redirection = $dataset->link_url;
         }
     }
@@ -336,7 +336,7 @@ function get_redirection(?string $page = null): ?string
 
 function get_theme(?string $page = null): ?string
 {
-    if (!$page) {
+    if (! $page) {
         $page = get_slug();
     }
 
@@ -374,7 +374,7 @@ function language_selection(): void
 function get_category(): string
 {
     $current_page = get_page();
-    if (!(isset($current_page['category_id']) && $current_page['category_id'])) {
+    if (! (isset($current_page['category_id']) && $current_page['category_id'])) {
         return '';
     }
 
@@ -410,7 +410,7 @@ function homepage_owner(): void
 function get_homepage_title(): string
 {
     $homepage_title = Settings::get('homepage_title_' . getFrontendLanguage());
-    if (!$homepage_title) {
+    if (! $homepage_title) {
         $homepage_title = Settings::get('homepage_title');
     }
     return _esc($homepage_title);
@@ -430,14 +430,14 @@ function get_meta_description(?string $ipage = null): string
 
     if (db_num_rows($result) > 0) {
         while ($row = db_fetch_object($result)) {
-            if (!empty($row->meta_description)) {
+            if (! empty($row->meta_description)) {
                 return $row->meta_description;
             }
         }
     }
     $meta_description = Settings::get('meta_description_' .
                     getFrontendLanguage());
-    if (!$meta_description) {
+    if (! $meta_description) {
         $meta_description = Settings::get('meta_description');
     }
 
@@ -503,7 +503,7 @@ function get_title(?string $slug = null, bool $headline = false): string
 
     if (db_num_rows($result) > 0) {
         while ($row = db_fetch_object($result)) {
-            if ($headline && isset($row->alternate_title) && !empty($row->alternate_title)) {
+            if ($headline && isset($row->alternate_title) && ! empty($row->alternate_title)) {
                 $title = $row->alternate_title;
             } else {
                 $title = $row->title;
@@ -608,14 +608,14 @@ function get_frontpage(): ?string
 
 function get_slug(): string
 {
-    return !empty($_GET['slug']) ? $_GET['slug'] : get_frontpage();
+    return ! empty($_GET['slug']) ? $_GET['slug'] : get_frontpage();
 }
 
 function set_requested_pagename(
     string $slug,
     ?string $language = null
 ): void {
-    if (!$language) {
+    if (! $language) {
         $language = getCurrentLanguage();
     }
     $_GET['slug'] = $slug;
@@ -674,7 +674,7 @@ function buildtree(
 function parent_item_contains_current_page(?int $id): bool
 {
     $retval = false;
-    if (!$id) {
+    if (! $id) {
         return $retval;
     }
     $id = (int) $id;
@@ -772,7 +772,7 @@ function get_menu(
             } else {
                 $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";
             }
-            if (null !== $row->menu_image && !empty($row->menu_image)) {
+            if (null !== $row->menu_image && ! empty($row->menu_image)) {
                 $html .= '<img src="' . $row->menu_image . '" alt="' . _esc($title) . '"/>';
             } else {
                 $html .= _esc($title);
@@ -878,11 +878,11 @@ function checkforAccessForDevice(string $access): bool
         $allowed = true;
     }
 
-    if (in_array('desktop', $access) && !is_mobile()) {
+    if (in_array('desktop', $access) && ! is_mobile()) {
         $allowed = true;
     }
 
-    if (!in_array('mobile', $access) && !in_array('desktop', $access)) {
+    if (! in_array('mobile', $access) && ! in_array('desktop', $access)) {
         $allowed = true;
     }
 
@@ -892,7 +892,7 @@ function checkforAccessForDevice(string $access): bool
 function checkAccess(string $access = ''): ?string
 {
     $access_for_device = checkforAccessForDevice($access);
-    if (!$access_for_device) {
+    if (! $access_for_device) {
         return null;
     }
     $access = explode(',', $access);
@@ -918,7 +918,7 @@ function checkAccess(string $access = ''): ?string
 function check_status(): string
 {
     $status = apply_filter('', 'status');
-    if (!empty($status)) {
+    if (! empty($status)) {
         return $status;
     }
 
@@ -928,16 +928,16 @@ function check_status(): string
     if (get_type() == 'snippet') {
         return '403 Forbidden';
     }
-    if (!(isset($_GET['slug']) && !empty($_GET['slug']))) {
+    if (! (isset($_GET['slug']) && ! empty($_GET['slug']))) {
         $_GET['slug'] = get_frontpage();
     }
 
-    if (!is_active() && !is_logged_in()) {
+    if (! is_active() && ! is_logged_in()) {
         return '403 Forbidden';
     }
 
     $test = isset($_GET['slug']) ? get_page($_GET['slug']) : null;
-    if (!$test || null !== $test['deleted_at']) {
+    if (! $test || null !== $test['deleted_at']) {
         Vars::setNoCache(false);
         return '404 Not Found';
     }

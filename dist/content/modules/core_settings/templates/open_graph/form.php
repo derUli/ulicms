@@ -7,7 +7,7 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('open_graph')) {
     $og_image = Settings::get('og_image');
     $og_url = '';
-    if (!empty($og_image) && !str_starts_with($og_image, 'http')) {
+    if (! empty($og_image) && ! str_starts_with($og_image, 'http')) {
         $og_url = "..${og_image}";
     }
     ?>
@@ -31,7 +31,7 @@ if ($permissionChecker->hasPermission('open_graph')) {
             <td><strong><?php translate('image'); ?></strong></td>
             <td>
                 <?php
-                if (!empty($og_url)) {
+                if (! empty($og_url)) {
                     ?>
                     <div>
                         <img class="small-preview-image"

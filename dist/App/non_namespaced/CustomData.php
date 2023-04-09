@@ -12,7 +12,7 @@ class CustomData
 
     public static function get(?string $page = null): array
     {
-        if (!$page) {
+        if (! $page) {
             $page = get_slug();
         }
 
@@ -32,7 +32,7 @@ class CustomData
 
     public static function set(string $var, $value, ?string $page = null): void
     {
-        if (!$page) {
+        if (! $page) {
             $page = get_slug();
         }
         $data = self::get($page);
@@ -51,12 +51,12 @@ class CustomData
         ?string $var = null,
         ?string $page = null
     ): void {
-        if (!$page) {
+        if (! $page) {
             $page = get_slug();
         }
 
         $data = self::get($page);
-        if ($data === null || !$var) {
+        if ($data === null || ! $var) {
             $data = [];
         }
         // Wenn $var gesetzt ist, nur $var aus custom_data löschen
@@ -89,7 +89,7 @@ class CustomData
 
     public static function getDefault(string $key)
     {
-        if (!isset(self::$defaults[$key])) {
+        if (! isset(self::$defaults[$key])) {
             return null;
         }
         return self::$defaults[$key];

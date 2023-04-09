@@ -1,5 +1,5 @@
 <?php $meta = get_article_meta(); ?>
-<?php if (!empty($meta->article_author_name)) { ?>
+<?php if (! empty($meta->article_author_name)) { ?>
     <p class="author-info"><?php
         if (empty($meta->article_author_email)) {
             translate('ARTICLE_WRITTEN_BY_X', [

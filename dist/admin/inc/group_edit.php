@@ -4,7 +4,7 @@ use App\Models\Content\Language;
 
 $permissionChecker = new ACL();
 
-if (!$permissionChecker->hasPermission('groups')) {
+if (! $permissionChecker->hasPermission('groups')) {
     noPerms();
 } else {
     $id = (int)$_REQUEST['edit'];
@@ -14,7 +14,7 @@ if (!$permissionChecker->hasPermission('groups')) {
     $all_permissions_all = $permissionChecker->getDefaultACL(false, true);
     $all_permissions = json_decode($all_permissions['permissions'], true);
     foreach ($all_permissions_all as $name => $value) {
-        if (!isset($all_permissions[$name])) {
+        if (! isset($all_permissions[$name])) {
             $all_permissions[$name] = $value;
         }
     }

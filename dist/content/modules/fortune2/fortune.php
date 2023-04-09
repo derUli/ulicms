@@ -46,7 +46,7 @@ class Fortune extends MainClass
             $lang = getCurrentLanguage(true);
         }
         $fortuneDir = getModulePath($this->moduleName) . 'cookies/' . $lang . '/';
-        if (!is_dir($fortuneDir)) {
+        if (! is_dir($fortuneDir)) {
             $fortuneDir = getModulePath($this->moduleName) . 'cookies/en/';
         }
         $fortuneFiles = scandir($fortuneDir);
@@ -54,7 +54,7 @@ class Fortune extends MainClass
             $file = array_rand($fortuneFiles, 1);
             $file = $fortuneFiles[$file];
             $file = $fortuneDir . $file;
-        } while (!is_file($file));
+        } while (! is_file($file));
 
         $fileContent = file_get_contents($file);
         $fileContent = trim($fileContent);

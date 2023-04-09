@@ -58,7 +58,7 @@ class Audio extends Model
                         . 'where id = ?', [
                     (int)$id
                         ], true);
-        if (!Database::any($result)) {
+        if (! Database::any($result)) {
             $result = null;
         }
         $this->fillVars($result);
@@ -164,19 +164,19 @@ class Audio extends Model
 
     public function setName(?string $val): void
     {
-        $this->name = !empty($val) ?
+        $this->name = ! empty($val) ?
                 (string)$val : null;
     }
 
     public function setMP3File(?string $val): void
     {
-        $this->mp3_file = !empty($val) ?
+        $this->mp3_file = ! empty($val) ?
                 (string)$val : null;
     }
 
     public function setOGGFile(?string $val): void
     {
-        $this->ogg_file = !empty($val) ?
+        $this->ogg_file = ! empty($val) ?
                 (string)$val : null;
     }
 
@@ -230,19 +230,19 @@ class Audio extends Model
 
         $html = '<audio controls>';
 
-        if (!empty($this->mp3_file)) {
+        if (! empty($this->mp3_file)) {
             $html .= '<source src="' . $audioDir . _esc($this->mp3_file) .
                     '" type="audio/mp3">';
         }
 
-        if (!empty($this->ogg_file)) {
+        if (! empty($this->ogg_file)) {
             $html .= '<source src="' . $audioDir . _esc($this->ogg_file) .
                     '" type="audio/ogg">';
         }
 
         $html .= get_translation('no_html5');
-        if (!empty($this->mp3_file) || !empty($this->ogg_file)) {
-            $preferred = !empty($this->mp3_file) ?
+        if (! empty($this->mp3_file) || ! empty($this->ogg_file)) {
+            $preferred = ! empty($this->mp3_file) ?
                     $this->mp3_file : $this->ogg_file;
             $html .= '<br/><a href="' . self::AUDIO_DIR . $preferred . '">' .
                     get_translation('DOWNLOAD_AUDIO_INSTEAD') . '</a>';

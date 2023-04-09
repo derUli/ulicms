@@ -107,7 +107,7 @@ class ModuleManager
         $dataBaseModules = $this->getAllModuleNames();
         // Nicht mehr vorhandene Module entfernen
         foreach ($dataBaseModules as $dbModule) {
-            if (!in_array($dbModule, $realModules)) {
+            if (! in_array($dbModule, $realModules)) {
                 $module = new Module($dbModule);
                 $module->delete();
             }
@@ -151,7 +151,7 @@ class ModuleManager
         $enabledModules = $this->getEnabledModuleNames();
         foreach ($enabledModules as $module) {
             $settings = getModuleMeta($module, 'settings');
-            if (!($settings && is_array($settings))) {
+            if (! ($settings && is_array($settings))) {
                 continue;
             }
             foreach ($settings as $key => $value) {

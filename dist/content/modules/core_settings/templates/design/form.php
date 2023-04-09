@@ -12,7 +12,7 @@ foreach ($skins as $skin) {
 
 $controller = ControllerRegistry::get();
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission('design')) {
+if (! $permissionChecker->hasPermission('design')) {
     noPerms();
 } else {
     $allThemes = getAllThemes();
@@ -87,7 +87,7 @@ if (!$permissionChecker->hasPermission('design')) {
                                 data-preview-target-element="#theme-mobile-preview">
                             <option value=""
                             <?php
-             if (!$mobile_theme) {
+             if (! $mobile_theme) {
                  echo ' selected';
              }
     ?>
@@ -159,7 +159,7 @@ if (!$permissionChecker->hasPermission('design')) {
             $selected = 'selected';
         }
 
-        if (!in_array($default_font, $fonts) && $i === $font_amount) {
+        if (! in_array($default_font, $fonts) && $i === $font_amount) {
             $selected = 'selected';
         }
 

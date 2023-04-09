@@ -38,9 +38,9 @@ $filteredPages = [];
 $slugs = ['frontpage'];
 foreach ($pages as $index => $page) {
     if ($page->isDeleted() || $page->language !== getCurrentLanguage() ||
-            !$page->isRegular() ||
-            (!$page->active && !is_logged_in()) ||
-            !$permissionChecker->canRead($page->id)) {
+            ! $page->isRegular() ||
+            (! $page->active && ! is_logged_in()) ||
+            ! $permissionChecker->canRead($page->id)) {
         continue;
     }
     $slugs[] = $page->slug;

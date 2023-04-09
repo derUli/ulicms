@@ -66,7 +66,7 @@ class CommentsController extends MainClass
                 CommentStatus::PENDING : CommentStatus::PUBLISHED;
 
         // show error if not all required fields are filled
-        if (!$comment->getAuthorName() || !$comment->getText()) {
+        if (! $comment->getAuthorName() || ! $comment->getText()) {
             ExceptionResult(get_translation('fill_all_fields'));
         }
 
@@ -80,7 +80,7 @@ class CommentsController extends MainClass
         // if ip login is disabled (which is a legal must in countries
         // of the european union)
         // unset the ip field
-        if (!Settings::get('log_ip')) {
+        if (! Settings::get('log_ip')) {
             $comment->setIp(null);
         }
 
@@ -183,7 +183,7 @@ class CommentsController extends MainClass
         $action = Request::getVar('action', null, 'str');
 
         // if we have comments and an action
-        if (is_array($commentIds) && !empty($action)) {
+        if (is_array($commentIds) && ! empty($action)) {
             // do the selected action for each comment
             $this->_doActions($commentIds, $action);
         }
@@ -194,8 +194,8 @@ class CommentsController extends MainClass
         // It's inpossible to append an anchor to the url on a http redirect
         // a javascript in fx.js performs the jump to the anchor
         $referrer = Request::getVar('referrer');
-        if (!str_contains($referrer, 'jumpto=comments')) {
-            if (!str_contains($referrer, '?')) {
+        if (! str_contains($referrer, 'jumpto=comments')) {
+            if (! str_contains($referrer, '?')) {
                 $referrer .= '?';
             } else {
                 $referrer .= '&';

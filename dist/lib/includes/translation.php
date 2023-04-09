@@ -72,7 +72,7 @@ function add_translation(string $key, string $value): void
 function register_translation(string $key, string $value): void
 {
     $key = strtoupper($key);
-    if (!str_starts_with($key, 'TRANSLATION_')) {
+    if (! str_starts_with($key, 'TRANSLATION_')) {
         $key = 'TRANSLATION_' . $key;
     }
 

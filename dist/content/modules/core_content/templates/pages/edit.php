@@ -64,7 +64,7 @@ if ($permissionChecker->hasPermission('pages')) {
             $canActivateThis = true;
         } elseif ($is_owner && $pages_approve_own) {
             $canActivateThis = true;
-        } elseif (!$is_owner && $pages_approve_others) {
+        } elseif (! $is_owner && $pages_approve_others) {
             $canActivateThis = true;
         }
 
@@ -74,11 +74,11 @@ if ($permissionChecker->hasPermission('pages')) {
         $can_edit_this = $checker->canWrite($row->id);
 
         $languageAssignment = getAllLanguages(true);
-        if (count($languageAssignment) > 0 && !in_array($row->language, $languageAssignment)) {
+        if (count($languageAssignment) > 0 && ! in_array($row->language, $languageAssignment)) {
             $can_edit_this = false;
         }
 
-        if (!$can_edit_this) {
+        if (! $can_edit_this) {
             noPerms();
         } else {
             ?>
@@ -310,7 +310,7 @@ if ($permissionChecker->hasPermission('pages')) {
                             <select
                                 name="active" size=1
                                 <?php
-                                if (!$canActivateThis) {
+                                if (! $canActivateThis) {
                                     echo 'disabled';
                                 }
             ?>>
@@ -508,7 +508,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                         name="article_date" type="text"
                                         class="datetimepicker"
                                         value="<?php
-                    if (!empty($row->article_date)) {
+                    if (! empty($row->article_date)) {
                         echo NumberFormatHelper::timestampToSqlDate(
                             strtotime($row->article_date)
                         );
@@ -556,7 +556,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                 </div>
                                 </a>
                                 <?php
-                                if (!empty($row->og_image)) {
+                                if (! empty($row->og_image)) {
                                     $og_url = get_protocol_and_domain() . $row->og_image;
                                     ?>
                                     <div style="margin-top: 15px;">
@@ -766,7 +766,7 @@ if ($permissionChecker->hasPermission('pages')) {
             ?>><?php translate('yes') ?></option>
                                     <option value="0"
                                     <?php
-            if (!$list_data->use_pagination) {
+            if (! $list_data->use_pagination) {
                 echo 'selected';
             }
             ?>><?php translate('no') ?></option>
@@ -916,7 +916,7 @@ if ($permissionChecker->hasPermission('pages')) {
                         </div>
                     </div>
                     <div style="<?php
-            echo(!$permissionChecker->hasPermission('pages_edit_permissions') ?
+            echo(! $permissionChecker->hasPermission('pages_edit_permissions') ?
                     'display:none' : '')
             ?>"
                          >
@@ -930,7 +930,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                 </strong>
                                 <select name="author_id"
                                 <?php
-                                if (!$pages_change_owner) {
+                                if (! $pages_change_owner) {
                                     echo 'disabled';
                                 }
             ?>>
@@ -955,7 +955,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                 </strong>
                                 <select name="group_id"
                                 <?php
-                                if (!$pages_change_owner) {
+                                if (! $pages_change_owner) {
                                     echo 'disabled';
                                 }
             ?>>

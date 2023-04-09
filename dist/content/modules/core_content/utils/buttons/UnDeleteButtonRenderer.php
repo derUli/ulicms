@@ -25,7 +25,7 @@ class UnDeleteButtonRenderer
         // check edit permissions
         $pagePermissionChecker = new ContentPermissionChecker($user->getId());
 
-        if (!$pagePermissionChecker->canDelete($pageId)) {
+        if (! $pagePermissionChecker->canDelete($pageId)) {
             $permitted = false;
         }
 

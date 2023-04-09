@@ -56,8 +56,8 @@ class Module_Page extends Page
         if (parent::containsModule($module)) {
             $retval = true;
         }
-        if ($this->module !== null && !empty($this->module)) {
-            if (($module && $this->module == $module) || !$module) {
+        if ($this->module !== null && ! empty($this->module)) {
+            if (($module && $this->module == $module) || ! $module) {
                 $retval = true;
             }
         }
@@ -67,7 +67,7 @@ class Module_Page extends Page
     public function getEmbeddedModules(): array
     {
         $result = parent::getEmbeddedModules();
-        if (!empty($this->module) && !in_array($this->module, $result)) {
+        if (! empty($this->module) && ! in_array($this->module, $result)) {
             $result[] = $this->module;
         }
         return $result;

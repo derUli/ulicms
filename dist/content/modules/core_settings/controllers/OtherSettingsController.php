@@ -38,7 +38,7 @@ class OtherSettingsController extends Controller
             Settings::delete('smtp_no_verify_certificate');
         }
 
-        if (!isset($_POST['twofactor_authentication'])) {
+        if (! isset($_POST['twofactor_authentication'])) {
             Settings::delete('twofactor_authentication');
         } else {
             Settings::set(
@@ -47,7 +47,7 @@ class OtherSettingsController extends Controller
             );
         }
 
-        if (!isset($_POST['no_auto_cron'])) {
+        if (! isset($_POST['no_auto_cron'])) {
             Settings::delete('no_auto_cron');
         } else {
             Settings::set('no_auto_cron', 'no_auto_cron');

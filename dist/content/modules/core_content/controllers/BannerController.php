@@ -103,6 +103,6 @@ class BannerController extends Controller
 
         CacheUtil::clearPageCache();
 
-        return !$banner->isPersistent();
+        return ! $banner->isPersistent();
     }
 }

@@ -164,8 +164,6 @@ $tmpRules = [
     'non_printable_character' => ['use_escape_sequences_in_strings'=>true],
     // Array index should always be written by using square braces.
     'normalize_index_brace' => true,
-    // Logical NOT operators (`!`) should have one trailing whitespace.
-    'not_operator_with_successor_space' => true,
     // Adds or removes `?` before type declarations for parameters with a default `null` value.
     'nullable_type_declaration_for_default_null_value' => true,
     // There should not be space before or after object operators `->` and `?->`.
@@ -276,6 +274,8 @@ $config
     'whitespace_after_comma_in_array' => true,
     // When making a method or function call, there MUST NOT be a space between the method or function name and the opening parenthesis.
     'no_spaces_after_function_name' => true,
+    // Logical NOT operators (`!`) should have one trailing whitespace.
+    'not_operator_with_successor_space' => true,
     ]);
 
 return $config->setFinder(

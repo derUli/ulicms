@@ -7,7 +7,7 @@ use App\Translations\JSTranslation;
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('privacy_settings')) {
     $currentLanguage = Request::getVar('language');
-    if (!$currentLanguage) {
+    if (! $currentLanguage) {
         $currentLanguage = Settings::get('default_language');
     }
     $privacy_policy_checkbox_enable = $currentLanguage ? Settings::get("privacy_policy_checkbox_enable_{$currentLanguage}") : Settings::get('privacy_policy_checkbox_enable');

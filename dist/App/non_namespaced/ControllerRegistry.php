@@ -26,7 +26,7 @@ class ControllerRegistry
                     $path = getModulePath($module, true) .
                             trim($value, '/');
 
-                    if (!str_ends_with($path, '.php')) {
+                    if (! str_ends_with($path, '.php')) {
                         $path .= '.php';
                     }
 
@@ -60,7 +60,7 @@ class ControllerRegistry
     public static function runMethods(): void
     {
         if (isset($_REQUEST['sClass'])
-                && !empty($_REQUEST['sClass'])) {
+                && ! empty($_REQUEST['sClass'])) {
             if (self::get($_REQUEST['sClass'])) {
                 $sClass = $_REQUEST['sClass'];
                 self::get($sClass)->runCommand();
@@ -96,14 +96,14 @@ class ControllerRegistry
 
         if (
             isset(self::$controller_function_permissions[$methodIdentifier]) &&
-            !empty(self::$controller_function_permissions[$methodIdentifier])
+            ! empty(self::$controller_function_permissions[$methodIdentifier])
         ) {
             $allowed = $acl->hasPermission(
                 self::$controller_function_permissions[$methodIdentifier]
             );
         } elseif (
             isset(self::$controller_function_permissions[$wildcardMethodIdentifier]) &&
-            !empty(self::$controller_function_permissions[$wildcardMethodIdentifier])) {
+            ! empty(self::$controller_function_permissions[$wildcardMethodIdentifier])) {
             $allowed = $acl->hasPermission(
                 self::$controller_function_permissions[$wildcardMethodIdentifier]
             );

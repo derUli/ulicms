@@ -7,7 +7,7 @@ use App\Packages\PackageManager;
 // don't use so much nested if-statements
 
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission('install_packages')) {
+if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();
 } else {
     ?>
@@ -19,7 +19,7 @@ if (!$permissionChecker->hasPermission('install_packages')) {
     </p>
     <?php
     $temp_folder = ULICMS_ROOT . DIRECTORY_SEPARATOR . 'content' . DIRECTORY_SEPARATOR . 'tmp';
-    if (!empty($_POST)) {
+    if (! empty($_POST)) {
         if (count($_FILES) > 0) {
             $file_in_tmp = $temp_folder . DIRECTORY_SEPARATOR . $_FILES['file']['name'];
             if (move_uploaded_file($_FILES['file']['tmp_name'], $file_in_tmp)) {

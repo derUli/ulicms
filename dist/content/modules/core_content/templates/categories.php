@@ -6,7 +6,7 @@ use App\HTML\Alert;
 use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission('categories')) {
+if (! $permissionChecker->hasPermission('categories')) {
     noPerms();
 } else {
     if (isset($_GET['order']) && in_array($_GET['order'], [
@@ -23,7 +23,7 @@ if (!$permissionChecker->hasPermission('categories')) {
     $categories = Categories::getAllCategories($order);
     ?>
     <?php
-    if (!isset($_GET['add']) && !isset($_GET['edit'])
+    if (! isset($_GET['add']) && ! isset($_GET['edit'])
             && $permissionChecker->hasPermission('categories_create')) {
         ?>
         <?php
@@ -48,7 +48,7 @@ if (!$permissionChecker->hasPermission('categories')) {
     <?php }
     ?>
     <?php
-    if (count($categories) > 0 && !isset($_GET['add']) && !isset($_GET['edit'])) {
+    if (count($categories) > 0 && ! isset($_GET['add']) && ! isset($_GET['edit'])) {
         ?>
         <div class="scroll">
             <table class="tablesorter">

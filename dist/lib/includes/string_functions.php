@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Helpers\StringHelper;
 use Nette\Utils\Random;
 
-if (!defined('RESPONSIVE_FM')) {
+if (! defined('RESPONSIVE_FM')) {
     function sanitize(array & $array): void
     {
         foreach ($array as & $data) {
@@ -78,7 +78,7 @@ function getExcerpt(
 
 function stringOrNull($val): ?string
 {
-    return is_string($val) && !empty($val) ? $val : null;
+    return is_string($val) && ! empty($val) ? $val : null;
 }
 
 // Aus einer Boolean einen String machen ("true" oder "false")
@@ -124,10 +124,10 @@ function bool2YesNo(
     ?string $yesString = null,
     ?string $noString = null
 ): string {
-    if (!$yesString) {
+    if (! $yesString) {
         $yesString = get_translation('yes');
     }
-    if (!$noString) {
+    if (! $noString) {
         $noString = get_translation('no');
     }
     return ($value ? $yesString : $noString);

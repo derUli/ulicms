@@ -88,7 +88,7 @@ class Input
         int $cols = 80,
         array $htmlAttributes = []
     ): string {
-        if (!isset($htmlAttributes['id'])) {
+        if (! isset($htmlAttributes['id'])) {
             $htmlAttributes['id'] = $name;
         }
         if (isset($htmlAttributes['class'])) {
@@ -99,7 +99,7 @@ class Input
 
         $htmlAttributes['class'] = trim($htmlAttributes['class']);
 
-        $htmlAttributes['data-mimetype'] = !isset($htmlAttributes['data-mimetype']) ?
+        $htmlAttributes['data-mimetype'] = ! isset($htmlAttributes['data-mimetype']) ?
                 'text/html' : $htmlAttributes['data-mimetype'];
 
         return self::textArea($name, $value, $rows, $cols, $htmlAttributes);
@@ -233,7 +233,7 @@ class Input
             $attributes[$key] = $val;
         }
 
-        if (!isset($attributes['id'])) {
+        if (! isset($attributes['id'])) {
             $attributes['id'] = $name;
         }
 

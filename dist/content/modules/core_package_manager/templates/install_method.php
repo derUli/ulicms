@@ -1,6 +1,6 @@
 <?php
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission('install_packages')) {
+if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();
 } else {
     ?>

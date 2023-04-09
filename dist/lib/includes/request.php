@@ -16,7 +16,7 @@ function _check_form_timestamp(): bool
 {
     $original_timestamp = Request::getVar('form_timestamp', 0, 'int');
     $min_time_to_fill_form = Settings::get('min_time_to_fill_form', 'int');
-    return !(time() - $original_timestamp < $min_time_to_fill_form);
+    return ! (time() - $original_timestamp < $min_time_to_fill_form);
 }
 
 /**
@@ -30,7 +30,7 @@ function check_form_timestamp(): void
         return;
     }
 
-    if (!_check_form_timestamp()) {
+    if (! _check_form_timestamp()) {
         Settings::set(
             'contact_form_refused_spam_mails',
             Settins::get('contact_form_refused_spam_mails') + 1

@@ -28,7 +28,7 @@ class LogoController extends Controller
     public function upload(): void
     {
         // Logo Upload
-        if (!empty($_FILES['logo_upload_file']['name'])) {
+        if (! empty($_FILES['logo_upload_file']['name'])) {
             $logo_upload = $_FILES['logo_upload_file'];
             $type = $logo_upload['type'];
 
@@ -63,7 +63,7 @@ class LogoController extends Controller
         $logoImage = Settings::get('logo_image');
         $path = ULICMS_ROOT . "/content/images/${logoImage}";
 
-        if (empty($logoImage) || !is_file($path)) {
+        if (empty($logoImage) || ! is_file($path)) {
             return false;
         }
 
@@ -90,7 +90,7 @@ class LogoController extends Controller
 
     public function _hasLogo(): bool
     {
-        return !empty(Settings::get('logo_image')) &&
+        return ! empty(Settings::get('logo_image')) &&
                 Settings::get('logo_disabled') !== 'yes';
     }
 }

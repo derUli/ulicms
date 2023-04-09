@@ -48,7 +48,7 @@ abstract class Controller
     public function runCommand(): void
     {
         $sClass = $_REQUEST['sClass'];
-        if (isset($_REQUEST['sMethod']) && !empty($_REQUEST['sMethod']) && !in_array(
+        if (isset($_REQUEST['sMethod']) && ! empty($_REQUEST['sMethod']) && ! in_array(
             $_REQUEST['sMethod'],
             $this->blacklist
         )
@@ -76,7 +76,7 @@ abstract class Controller
 
             // if there is a method, it is public and the user has the required
             // permissions, call it
-            if (method_exists($this, $sMethodWithRequestType) && !str_starts_with($sMethodWithRequestType, '_') && $reflectionWithRequestType && $reflectionWithRequestType->isPublic()) {
+            if (method_exists($this, $sMethodWithRequestType) && ! str_starts_with($sMethodWithRequestType, '_') && $reflectionWithRequestType && $reflectionWithRequestType->isPublic()) {
                 if (ControllerRegistry::userCanCall(
                     $sClass,
                     $sMethodWithRequestType
@@ -87,7 +87,7 @@ abstract class Controller
                         get_translation('forbidden')
                     );
                 }
-            } elseif (method_exists($this, $sMethod) && !str_starts_with($sMethod, '_')
+            } elseif (method_exists($this, $sMethod) && ! str_starts_with($sMethod, '_')
                     && $reflection && $reflection->isPublic()) {
                 if (ControllerRegistry::userCanCall($sClass, $sMethod)) {
                     $this->$sMethod();

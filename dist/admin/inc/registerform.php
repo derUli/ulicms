@@ -1,7 +1,7 @@
 <?php
 use App\Security\PrivacyCheckbox;
 
-if (Settings::get('visitors_can_register') == 'off' || !Settings::get('visitors_can_register')) {
+if (Settings::get('visitors_can_register') == 'off' || ! Settings::get('visitors_can_register')) {
     translate('FUNCTION_IS_DISABLED');
 } else {
     // TODO: Move logic to RegistrationController
@@ -10,7 +10,7 @@ if (Settings::get('visitors_can_register') == 'off' || !Settings::get('visitors_
 
     $errors = false;
     if (isset($_POST['register_user'])) {
-        if ($checkbox->isEnabled() && !$checkbox->isChecked()) {
+        if ($checkbox->isEnabled() && ! $checkbox->isChecked()) {
             echo "<p style='color:red;'>" . get_translation('please_accept_privacy_conditions') . '</p>';
         } elseif (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['firstname']) || empty($_POST['lastname'])) {
             echo "<p style='color:red;'>" . get_translation('FILL_ALL_FIELDS') . '</p>';
@@ -33,7 +33,7 @@ if (Settings::get('visitors_can_register') == 'off' || !Settings::get('visitors_
             do_event('after_user_registration');
 
             echo "<p style='color:green;'>" . get_translation('REGISTRATION_SUCCESSFUL') . '</p>';
-            if (!empty($_REQUEST['go'])) {
+            if (! empty($_REQUEST['go'])) {
                 $go = _esc($_REQUEST['go']);
             } else {
                 $go = 'index.php';
@@ -56,7 +56,7 @@ if (Settings::get('visitors_can_register') == 'off' || !Settings::get('visitors_
         <?php csrf_token_html(); ?>
         <input type="hidden" name="register_user" value="add_admin">
         <?php
-        if (!empty($_REQUEST['go'])) {
+        if (! empty($_REQUEST['go'])) {
             ?>
             <input type="hidden" name="go"
                    value='<?php esc($_REQUEST['go']) ?>'>

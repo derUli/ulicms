@@ -30,7 +30,7 @@ class Style
         if ($media) {
             $attributes['media'] = $media;
         }
-        if (!parse_url($href, PHP_URL_SCHEME) && is_file($href)) {
+        if (! parse_url($href, PHP_URL_SCHEME) && is_file($href)) {
             $attributes['href'] .= '?time=' . File::getLastChanged($href);
         }
         foreach ($htmlAttributes as $key => $value) {
@@ -38,7 +38,7 @@ class Style
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        if (!empty($attribHTML)) {
+        if (! empty($attribHTML)) {
             $attribHTML = ' ' . $attribHTML;
         }
 
@@ -66,7 +66,7 @@ class Style
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        if (!empty($attribHTML)) {
+        if (! empty($attribHTML)) {
             $attribHTML = ' ' . $attribHTML;
         }
 

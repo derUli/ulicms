@@ -79,7 +79,7 @@ class PasswordReset
         $url = getBaseFolderURL();
         $url = rtrim($url, '/');
 
-        if (!is_admin_dir()) {
+        if (! is_admin_dir()) {
             $url .= '/admin';
         }
 

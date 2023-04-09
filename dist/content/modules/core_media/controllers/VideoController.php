@@ -11,7 +11,7 @@ class VideoController extends Controller
         if (isset($_FILES)) {
             $mp4_file_value = '';
             // MP4
-            if (!empty($_FILES ['mp4_file'] ['name'])) {
+            if (! empty($_FILES ['mp4_file'] ['name'])) {
                 $mp4_file = time() . '-' .
                         basename($_FILES ['mp4_file'] ['name']);
                 $mp4_type = $_FILES ['mp4_file'] ['type'];
@@ -31,7 +31,7 @@ class VideoController extends Controller
 
             $ogg_file_value = '';
             // ogg
-            if (!empty($_FILES ['ogg_file'] ['name'])) {
+            if (! empty($_FILES ['ogg_file'] ['name'])) {
                 $ogg_file = time() . '-' . $_FILES ['ogg_file'] ['name'];
                 $ogg_type = $_FILES ['ogg_file'] ['type'];
                 $ogg_allowed_mime_type = [
@@ -53,7 +53,7 @@ class VideoController extends Controller
             // WebM
             $webm_file_value = '';
             // webm
-            if (!empty($_FILES ['webm_file'] ['name'])) {
+            if (! empty($_FILES ['webm_file'] ['name'])) {
                 $webm_file = time() . '-' . $_FILES ['webm_file'] ['name'];
                 $webm_type = $_FILES ['webm_file'] ['type'];
                 $webm_allowed_mime_type = [
@@ -82,7 +82,7 @@ class VideoController extends Controller
             $height = (int)$_POST['height'];
             $timestamp = time();
 
-            if (!empty($ogg_file_value) || !empty($mp4_file_value) || !empty($webm_file_value)) {
+            if (! empty($ogg_file_value) || ! empty($mp4_file_value) || ! empty($webm_file_value)) {
                 db_query('INSERT INTO ' . tbname('videos') .
                         ' (name, ogg_file, webm_file, mp4_file, width, '
                         . 'height, created, category_id, `updated`) '
@@ -129,21 +129,21 @@ class VideoController extends Controller
             $dataset = db_fetch_object($result);
             $filepath = ULICMS_ROOT . '/content/videos/' .
                     basename($dataset->ogg_file);
-            if (!empty($dataset->ogg_file) && is_file($filepath)) {
+            if (! empty($dataset->ogg_file) && is_file($filepath)) {
                 unlink($filepath);
             }
 
             // WebM
             $filepath = ULICMS_ROOT . '/content/videos/' .
                     basename($dataset->webm_file);
-            if (!empty($dataset->webm_file) && is_file($filepath)) {
+            if (! empty($dataset->webm_file) && is_file($filepath)) {
                 unlink($filepath);
             }
 
             // MP4
             $filepath = ULICMS_ROOT . '/content/videos/' .
                     basename($dataset->mp4_file);
-            if (!empty($dataset->mp4_file) && is_file($filepath)) {
+            if (! empty($dataset->mp4_file) && is_file($filepath)) {
                 @unlink($filepath);
             }
 

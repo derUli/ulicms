@@ -1,7 +1,7 @@
 <?php
 
 try {
-    if (!isset($config)) {
+    if (! isset($config)) {
         $config = include 'config/config.php';
     }
 
@@ -34,7 +34,7 @@ try {
 
     $fldr = rawurldecode(trim(strip_tags($_POST['fldr']), '/') . '/');
 
-    if (!checkRelativePath($fldr)) {
+    if (! checkRelativePath($fldr)) {
         response(trans('wrong path') . AddErrorLocation())->send();
         exit;
     }
@@ -118,15 +118,15 @@ try {
     }
     $_FILES['files']['name'][0] = fix_filename($filename, $config);
 
-    if (!$_FILES['files']['type'][0]) {
+    if (! $_FILES['files']['type'][0]) {
         $_FILES['files']['type'][0] = $mime_type;
     }
     // LowerCase
     if ($config['lower_case']) {
         $_FILES['files']['name'][0] = fix_strtolower($_FILES['files']['name'][0]);
     }
-    if (!checkresultingsize($_FILES['files']['size'][0])) {
-        if (!isset($upload_handler->response['files'][0])) {
+    if (! checkresultingsize($_FILES['files']['size'][0])) {
+        if (! isset($upload_handler->response['files'][0])) {
             // Avoid " Warning: Creating default object from empty value ... "
             $upload_handler->response['files'][0] = new stdClass();
         }
@@ -148,7 +148,7 @@ try {
         'print_response' => false
     ];
 
-    if (!$config['ext_blacklist']) {
+    if (! $config['ext_blacklist']) {
         $uploadConfig['accept_file_types'] = '/\.(' . implode('|', $config['ext']) . ')$/i';
 
         if ($config['files_without_extension']) {
@@ -163,11 +163,11 @@ try {
     }
 
     if ($ftp) {
-        if (!is_dir($config['ftp_temp_folder'])) {
+        if (! is_dir($config['ftp_temp_folder'])) {
             mkdir($config['ftp_temp_folder'], $config['folderPermission'], true);
         }
 
-        if (!is_dir($config['ftp_temp_folder'] . 'thumbs')) {
+        if (! is_dir($config['ftp_temp_folder'] . 'thumbs')) {
             mkdir($config['ftp_temp_folder'] . 'thumbs', $config['folderPermission'], true);
         }
 

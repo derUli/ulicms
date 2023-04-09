@@ -24,7 +24,7 @@ class Alert
         string $cssClasses = '',
         bool $allowHtml = false
     ): string {
-        if (!$allowHtml) {
+        if (! $allowHtml) {
             $text = _esc($text);
         }
         return "<div class=\"alert {$cssClasses}\">{$text}</div>";

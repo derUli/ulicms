@@ -9,7 +9,7 @@ class PkgInfoController extends Controller
     public function installPost(): void
     {
         // TODO: handle incomplete requests and errors
-        if (!empty($_REQUEST['file'])) {
+        if (! empty($_REQUEST['file'])) {
             $file = basename($_POST['file']);
             $this->_installPost($file);
             Response::redirect(

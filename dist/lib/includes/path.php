@@ -37,7 +37,7 @@ function getModulePath($module, $abspath = false): string
     }
 
     // Frontend Directory
-    if (!is_admin_dir()) {
+    if (! is_admin_dir()) {
         $module_folder = 'content/modules/';
     } // Backend Directory
     else {

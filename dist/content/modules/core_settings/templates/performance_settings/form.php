@@ -19,10 +19,10 @@ if (Settings::get('lazy_loading_iframe', 'bool')) {
 
 $permissionChecker = new PermissionChecker(get_user_id());
 
-if (!$permissionChecker->hasPermission('performance_settings')) {
+if (! $permissionChecker->hasPermission('performance_settings')) {
     noPerms();
 } else {
-    $cache_enabled = !Settings::get('cache_disabled');
+    $cache_enabled = ! Settings::get('cache_disabled');
     $cache_period = round(Settings::get('cache_period') / 60);
     ?>
     <?php

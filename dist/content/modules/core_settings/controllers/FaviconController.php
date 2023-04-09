@@ -44,8 +44,8 @@ class FaviconController extends Controller
     public function doUpload(): void
     {
         // Favicon Upload
-        if (!empty($_FILES['favicon_upload_file']['name'])) {
-            if (!is_dir('../content/images')) {
+        if (! empty($_FILES['favicon_upload_file']['name'])) {
+            if (! is_dir('../content/images')) {
                 @mkdir('../content/images');
                 @chmod('../content/images', 0777);
             }
@@ -113,7 +113,7 @@ class FaviconController extends Controller
                 @unlink($file);
             }
 
-            $success[] = !is_file($file);
+            $success[] = ! is_file($file);
         }
 
         return count(array_filter($success)) > 0;

@@ -17,7 +17,7 @@ class Request
     {
         $protocol = self::isSSL() ? 'https://' : 'http://';
 
-        if (!empty($suffix)) {
+        if (! empty($suffix)) {
             $protocol .= $suffix;
         }
         return $protocol;
@@ -100,7 +100,7 @@ class Request
     public static function isSSL(): bool
     {
         return (
-            !empty($_SERVER['HTTPS']) &&
+            ! empty($_SERVER['HTTPS']) &&
             $_SERVER['HTTPS'] !== 'off') ||
                 (
                     self::getPort() === 443
@@ -148,7 +148,7 @@ class Request
 
     public static function isHeaderSent(string $header, ?array $headers = null): bool
     {
-        $headers = !$headers ? headers_list() : $headers;
+        $headers = ! $headers ? headers_list() : $headers;
         $header = trim($header, ': ');
         $result = false;
 
@@ -163,7 +163,7 @@ class Request
 
     public static function isAjaxRequest(): bool
     {
-        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+        return (! empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
                 strtolower(
                     $_SERVER['HTTP_X_REQUESTED_WITH']
                 ) == 'xmlhttprequest');
