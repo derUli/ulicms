@@ -3,8 +3,11 @@
 class ModuleManagerTest extends \PHPUnit\Framework\TestCase
 {
     public const sampleName1 = 'mymodule1';
+
     public const sampleName2 = 'mymodule2';
+
     public const sampleVersion1 = '1.0';
+
     public const sampleVersion2 = '2.0';
 
     private $oneclick_upgrade_channel;

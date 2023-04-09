@@ -13,12 +13,19 @@ use Settings;
 class SpamFilterConfiguration
 {
     private $spamfilterEnabled = true;
+
     private $badwords = [];
+
     private $blockedCountries = [];
+
     private $disallowChineseChars = false;
+
     private $disallowCyrillicChars = false;
+
     private $disallowRtlChars = false;
+
     private $rejectRequestsFromBots = false;
+
     private $checkMxOfMailAddress = false;
 
     // load configuration from settings

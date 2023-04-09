@@ -8,13 +8,17 @@ use App\Security\Permissions\PagePermissions;
 class PageTest extends \PHPUnit\Framework\TestCase
 {
     private $user;
+
     private $commentsInitialEnabled;
+
     private $initialCommentablfeContentTypes;
+
     private $ipsum = 'Lorem ipsum dolor sit amet,
 		[module="fortune2"]
 		[module="test"]
 		[module=&quot;hello&quot;]
 		consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+
     private $savedSettings = [];
 
     protected function setUp(): void

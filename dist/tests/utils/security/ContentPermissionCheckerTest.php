@@ -5,9 +5,13 @@ use App\Security\ContentPermissionChecker;
 class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
 {
     private $testUser1;
+
     private $testUser2;
+
     private $testUser3;
+
     private $testGroup1;
+
     private $testGroup2;
 
     protected function setUp(): void

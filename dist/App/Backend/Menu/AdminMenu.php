@@ -26,7 +26,6 @@ class AdminMenu
      * Get children
      * @return array
      */
-
     public function getChildren(): array
     {
         return $this->children;
@@ -37,7 +36,6 @@ class AdminMenu
      * @param array $value
      * @return void
      */
-
     public function setChildren(array $value): void
     {
         $this->children = $value;

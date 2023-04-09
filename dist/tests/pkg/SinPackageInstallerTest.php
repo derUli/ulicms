@@ -68,7 +68,6 @@ class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('The package is not compatible with your UliCMS Version.', $errors[1]);
     }
 
-
     public function testGetErrorsReturnsErrors2()
     {
         $installer = $this->getSinPackageInstaller('hello_world-1.0.incompatible.sin');
@@ -91,7 +90,6 @@ class SinPackageInstallerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertStringContainsString('SHA1 checksums are not equal.', $errors[6]);
     }
-
 
     public function testLoadPackage()
     {

@@ -14,7 +14,9 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class CommentStatus
 {
     public const PENDING = 'pending';
+
     public const PUBLISHED = 'published';
+
     public const SPAM = 'spam';
 
     public const DEFAULT_STATUS = self::PENDING;

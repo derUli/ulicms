@@ -14,6 +14,7 @@ use Request;
 class CommentSpamChecker implements ISpamChecker
 {
     private $comment;
+
     private $spamFilterConfiguration;
 
     // Constructor takes the Comment to check and

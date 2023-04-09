@@ -5,6 +5,7 @@ use App\Services\Connectors\PackageSourceConnector;
 class PackageSourceConnectorTest extends \PHPUnit\Framework\TestCase
 {
     public const VALID_PACKAGE_SOURCE_URL = 'https://packages.ulicms.de/2019.2.6/';
+
     public const INVALID_PACKAGE_SOURCE_URL = 'https://gibts-nicht.de/';
 
     public function testFetchWithInvalidUrl()

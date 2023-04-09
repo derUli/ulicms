@@ -83,7 +83,6 @@ class BackendHelper extends Helper
         ));
     }
 
-
    /**
     * Get CKEditor Skin.
     * @return array

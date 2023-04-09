@@ -6,6 +6,7 @@ use App\Utils\CacheUtil;
 class ApiTest extends \PHPUnit\Framework\TestCase
 {
     private $initialUser;
+
     private $initialSettings = [];
 
     protected function setUp(): void

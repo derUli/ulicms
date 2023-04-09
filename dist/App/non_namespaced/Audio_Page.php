@@ -10,7 +10,9 @@ use App\Models\Media\Audio;
 class Audio_Page extends Page
 {
     public $audio = null;
+
     public $type = 'audio';
+
     public $text_position = 'after';
 
     protected function fillVars($result = null)
@@ -60,7 +62,6 @@ class Audio_Page extends Page
     {
         $this->audio = $audio ? $audio->getID() : null;
     }
-
 
      /**
       * Get css classes for Font Awesome icon

@@ -17,6 +17,7 @@ use Exception;
 class DBMigrator
 {
     private $component = null;
+
     private $folder = null;
 
     // component is an identifier for the module which executes the migrations

@@ -13,7 +13,9 @@ use App\Registries\LoggerRegistry;
 class Database
 {
     private static $connection = null;
+
     private static $echoQueries = false;
+
     private static $schema_selected = false;
 
     // this is used to show sql queries while running the unit tests

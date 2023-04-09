@@ -5,8 +5,11 @@ use App\Security\PrivacyCheckbox;
 class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
 {
     private $privacy_policy_checkbox_enable_de;
+
     private $privacy_policy_checkbox_enable_en;
+
     private $privacy_policy_checkbox_text_de;
+
     private $privacy_policy_checkbox_text_en;
 
     protected function setUp(): void

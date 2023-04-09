@@ -4,7 +4,9 @@ class FTPClient
 {
     // *** Class variables
     private $connectionId;
+
     private $loginOk = false;
+
     private $messageArray = [];
 
     public function __construct()
@@ -43,6 +45,7 @@ class FTPClient
             return true;
 
     }
+
     public function makeDir($directory)
     {
         // *** If creating a directory is successful...

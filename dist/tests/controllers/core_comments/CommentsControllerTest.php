@@ -7,6 +7,7 @@ use App\Models\Content\Comment;
 class CommentsControllerTest extends \PHPUnit\Framework\TestCase
 {
     private $initialCommentsMustBeApproved;
+
     private $initialCommentsDefaultLimit;
 
     protected function setUp(): void

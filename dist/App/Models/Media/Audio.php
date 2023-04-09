@@ -22,11 +22,17 @@ use Path;
 class Audio extends Model
 {
     private $name = null;
+
     private $mp3_file = null;
+
     private $ogg_file = null;
+
     private $category_id = null;
+
     private $category = null;
+
     private $created;
+
     private $updated;
 
     public const AUDIO_DIR = 'content/audio/';

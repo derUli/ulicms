@@ -6,8 +6,11 @@ use App\Exceptions\SqlException;
 class DBMigratorTest extends \PHPUnit\Framework\TestCase
 {
     public const DB_MIGRATOR_UP_DIR = 'ULICMS_ROOT/tests/fixtures/migrations/up';
+
     public const DB_MIGRATOR_DOWN_DIR = 'ULICMS_ROOT/tests/fixtures/migrations/down';
+
     public const DB_MIGRATOR_FAILED_UP_DIR = 'ULICMS_ROOT/tests/fixtures/failed_migrations/up';
+
     public const DB_MIGRATOR_FAILED_DOWN_DIR = 'ULICMS_ROOT/tests/fixtures/failed_migrations/down';
 
     protected function tearDown(): void

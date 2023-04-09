@@ -7,8 +7,11 @@ use App\Security\PermissionChecker;
 class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
 {
     private $testUser;
+
     private $testGroup1;
+
     private $testGroup2;
+
     private $testGroup3;
 
     protected function setUp(): void

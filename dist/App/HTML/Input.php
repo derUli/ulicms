@@ -40,7 +40,6 @@ class Input
         return "<input {$attribHTML}>";
     }
 
-
     /**
      * Generate textarea input
      * @param string $name

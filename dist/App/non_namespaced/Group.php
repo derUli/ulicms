@@ -9,9 +9,13 @@ use App\Models\Content\Language;
 class Group
 {
     private $id = null;
+
     private $name = '';
+
     private $permissions = [];
+
     private $languages = [];
+
     private $allowable_tags = null;
 
     /**
@@ -26,7 +30,6 @@ class Group
             $this->loadById((int) $id);
         }
     }
-
 
     public function loadById(int $id): void
     {

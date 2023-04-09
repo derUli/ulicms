@@ -18,7 +18,9 @@ use Path;
 class SinPackageInstaller
 {
     private $file = null;
+
     private $errors = [];
+
     private $packageData = null;
 
     /**

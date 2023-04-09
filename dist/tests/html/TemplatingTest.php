@@ -6,7 +6,9 @@ use App\Models\Content\Advertisement\Banner;
 class TemplatingTest extends \PHPUnit\Framework\TestCase
 {
     private $homepageOwner;
+
     private $initialMobileTheme;
+
     private $initialDomainToLanguage;
 
     public const HTML_TEXT1 = 'My first Banner HTML';

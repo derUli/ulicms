@@ -12,5 +12,6 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class LinkTarget
 {
     public const TARGET_BLANK = '_blank';
+
     public const TARGET_SELF = '_self';
 }

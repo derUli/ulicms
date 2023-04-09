@@ -7,6 +7,7 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class Content_List extends Page
 {
     public $listData = null;
+
     public $type = 'list';
 
     public function __construct($id = null)

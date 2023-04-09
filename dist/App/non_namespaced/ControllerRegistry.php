@@ -9,6 +9,7 @@ use App\Registries\ActionRegistry;
 class ControllerRegistry
 {
     private static $controllers = [];
+
     private static $controller_function_permissions = [];
 
     // load and initialize all module controllers

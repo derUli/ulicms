@@ -8,6 +8,7 @@ use App\Models\Content\Language;
 class Language_Link extends Page
 {
     public $link_to_language = null;
+
     public $type = 'language_link';
 
     public function save()
@@ -65,7 +66,6 @@ class Language_Link extends Page
     {
         return false;
     }
-
 
      /**
       * Get css classes for Font Awesome icon

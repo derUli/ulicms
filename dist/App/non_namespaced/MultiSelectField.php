@@ -7,6 +7,7 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class MultiSelectField extends CustomField
 {
     public $options = [];
+
     public $translateOptions = true;
 
     public function render($value = null): string

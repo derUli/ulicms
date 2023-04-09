@@ -5,6 +5,7 @@ use App\CoreContent\Partials\DeleteButtonRenderer;
 class DeleteButtonRendererTest extends \PHPUnit\Framework\TestCase
 {
     private $user;
+
     private $group;
 
     protected function setUp(): void

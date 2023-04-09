@@ -12,6 +12,7 @@ use CMSConfig;
 class Logger
 {
     private $path;
+
     private $logger;
 
     public function __construct(string $path, ?CMSConfig $cmsConfig = null)

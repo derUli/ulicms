@@ -6,12 +6,19 @@ use App\Models\Content\Advertisement\Banner;
 class BannerTest extends \PHPUnit\Framework\TestCase
 {
     public const HTML_TEXT1 = 'My first Banner HTML';
+
     public const HTML_TEXT2 = 'My second Banner HTML';
+
     public const NAME_TEXT1 = 'My first Gif Banner';
+
     public const NAME_TEXT2 = 'My second Gif Banner';
+
     public const IMAGE_URL_TEXT1 = 'http://firma.de/bild.gif';
+
     public const IMAGE_URL_TEXT2 = 'http://firma.de/bild2.gif';
+
     public const LINK_URL_TEXT1 = 'http://www.google.de';
+
     public const LINK_URL_TEXT2 = 'http://www.yahoo.com';
 
     protected function tearDown(): void

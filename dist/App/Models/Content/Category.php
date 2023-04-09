@@ -12,7 +12,9 @@ use mysqli_result;
 class Category
 {
     private $id = null;
+
     private $name = null;
+
     private $description = null;
 
     public function __construct(?int $id = null)

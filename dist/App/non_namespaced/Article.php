@@ -7,10 +7,15 @@ class Article extends Page
     // FIXME: Variablen alle private machen
     // und getter und setter implementieren
     public $article_author_name = '';
+
     public $article_author_email = '';
+
     public $article_date = null;
+
     public $article_image = '';
+
     public $excerpt = '';
+
     public $type = 'article';
 
     protected function fillVars($result = null)

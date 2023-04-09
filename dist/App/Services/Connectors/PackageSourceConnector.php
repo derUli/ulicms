@@ -14,6 +14,7 @@ use Settings;
 class PackageSourceConnector
 {
     private $packageSourceUrl = null;
+
     private $data = null;
 
     public function __construct(?string $packageSourceUrl = null)

@@ -8,6 +8,7 @@ use App\Utils\CacheUtil;
 class DesignSettingsController extends Controller
 {
     private $moduleName = 'core_settings';
+
     protected $generatedSCSS;
 
     public function __construct()

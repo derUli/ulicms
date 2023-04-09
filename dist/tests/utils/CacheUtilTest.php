@@ -21,6 +21,7 @@ if (! function_exists('apc_clear_cache')) {
 class CacheUtilTest extends \PHPUnit\Framework\TestCase
 {
     private $cacheDisabledOriginal;
+
     private $cachePeriodOriginal;
 
     protected function setUp(): void

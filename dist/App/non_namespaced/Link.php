@@ -7,6 +7,7 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class Link extends Page
 {
     public $link_url = '';
+
     public $type = 'link';
 
     public function save()

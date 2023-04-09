@@ -21,6 +21,7 @@ use zz\Html\HTMLMinify;
 class BackendPageRenderer
 {
     private $action;
+
     private static $model;
 
     /**

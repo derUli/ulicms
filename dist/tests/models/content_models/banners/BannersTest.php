@@ -7,6 +7,7 @@ use App\Models\Content\Category;
 class BannersTest extends \PHPUnit\Framework\TestCase
 {
     public const HTML_TEXT1 = 'My first Banner HTML';
+
     public const HTML_TEXT2 = 'My second Banner HTML';
 
     protected function tearDown(): void

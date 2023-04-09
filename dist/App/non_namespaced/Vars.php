@@ -7,6 +7,7 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class Vars
 {
     private static $vars = [];
+
     private static $noCache = false;
 
     public static function get(string $var)

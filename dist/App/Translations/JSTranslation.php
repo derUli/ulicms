@@ -12,6 +12,7 @@ use ModuleHelper;
 class JSTranslation
 {
     private $keys = [];
+
     private $varName = 'Translation';
 
     public function __construct(

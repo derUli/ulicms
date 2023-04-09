@@ -9,7 +9,9 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class Image_Page extends Page
 {
     public $type = 'image';
+
     public $image_url = null;
+
     public $text_position = 'after';
 
     protected function fillVars($result = null)

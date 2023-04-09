@@ -6,7 +6,9 @@ use App\Backend\Menu\MenuEntry;
 class AdminMenuTest extends \PHPUnit\Framework\TestCase
 {
     private $adminUser;
+
     private $limitedUser;
+
     private $testGroup;
 
     protected function setUp(): void

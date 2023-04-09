@@ -16,6 +16,7 @@ use Westsworld\TimeAgo;
 class NumberFormatHelper extends Helper
 {
     public const SQL_DATE_WITH_SECONDS = 'Y-m-d H:i:s';
+
     public const SQL_DATE_WITHOUT_SECONDS = 'Y-m-d H:i';
 
     /**

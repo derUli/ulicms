@@ -5,8 +5,11 @@ use App\Security\TwoFactorAuthentication;
 class UsersApiTest extends \PHPUnit\Framework\TestCase
 {
     private $testUser;
+
     private $testGroup;
+
     private $twoFactorEnabled = false;
+
     private $maxFailedLoginItems;
 
     protected function setUp(): void

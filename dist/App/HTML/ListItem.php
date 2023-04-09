@@ -14,7 +14,9 @@ use Template;
 class ListItem
 {
     private $value;
+
     private $text;
+
     private $selected;
 
     /**
@@ -62,7 +64,6 @@ class ListItem
         echo $this->getHtml();
     }
 
-
     /**
      * Get value
      * @return type
@@ -71,7 +72,6 @@ class ListItem
     {
         return $this->value;
     }
-
 
     /**
      * Get text

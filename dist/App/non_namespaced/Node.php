@@ -9,6 +9,7 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class Node extends Link
 {
     public $type = 'node';
+
     public $link_url = '#';
 
     protected function fillVars($result = null)

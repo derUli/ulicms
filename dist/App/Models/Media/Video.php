@@ -20,14 +20,23 @@ use Path;
 class Video extends Model
 {
     private $name = null;
+
     private $mp4_file = null;
+
     private $ogg_file = null;
+
     private $webm_file = null;
+
     private $category_id = null;
+
     private $category = null;
+
     private $created;
+
     private $updated;
+
     private $width = null;
+
     private $height = null;
 
     public const VIDEO_DIR = 'content/videos/';

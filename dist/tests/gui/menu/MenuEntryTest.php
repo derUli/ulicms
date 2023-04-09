@@ -5,7 +5,9 @@ use App\Backend\Menu\MenuEntry;
 class MenuEntryTest extends \PHPUnit\Framework\TestCase
 {
     private $permittedUser;
+
     private $notPermittedUser;
+
     private $testGroup;
 
     protected function setUp(): void

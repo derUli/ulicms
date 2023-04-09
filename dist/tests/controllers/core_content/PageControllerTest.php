@@ -10,6 +10,7 @@ use Spatie\Snapshots\MatchesSnapshots;
 class PageControllerTest extends \PHPUnit\Framework\TestCase
 {
     use MatchesSnapshots;
+
     protected function setUp(): void
     {
         $manager = new ModuleManager();

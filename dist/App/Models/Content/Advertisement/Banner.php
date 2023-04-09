@@ -16,15 +16,25 @@ use Template;
 class Banner extends Model
 {
     protected $id = null;
+
     private $name = null;
+
     private $link_url = null;
+
     private $image_url = null;
+
     private $category_id = 1;
+
     private $type = 'gif';
+
     private $html = null;
+
     private $language = null;
+
     private $enabled = true;
+
     private $date_from = null;
+
     private $date_to = null;
 
     public function __construct($id = null)

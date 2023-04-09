@@ -13,7 +13,9 @@ use ModuleManager;
 class ActionRegistry
 {
     private static $actions = [];
+
     private static $assignedControllers = [];
+
     private static $defaultCoreActions = [
         'module_settings' => 'inc/module_settings.php',
         'groups' => 'inc/groups.php'
@@ -125,7 +127,6 @@ class ActionRegistry
     {
         return self::$actions;
     }
-
 
     /**
      * Get action

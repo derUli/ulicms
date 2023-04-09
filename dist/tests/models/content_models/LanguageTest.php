@@ -5,6 +5,7 @@ use App\Models\Content\Language;
 class LanguageTest extends \PHPUnit\Framework\TestCase
 {
     private $initialDefaultLanguage;
+
     private $initialDomain2LanguageMapping = null;
 
     protected function setUp(): void

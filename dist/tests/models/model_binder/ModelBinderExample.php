@@ -3,9 +3,13 @@
 class ModelBinderExample extends Model
 {
     protected $field1;
+
     protected $field2;
+
     protected $my_field;
+
     protected $not_mapped;
+
     protected $notMappedTwo;
 
     public function setField1($value)
@@ -50,9 +54,11 @@ class ModelBinderExample extends Model
         'field1' => 123,
         'field2' => 'This is string'
     ];
+
     private $invalidValues1 = [
         'my_field' => 'This should be a number'
     ];
+
     private $invalidValues2 = [
         'not_mapped' => 'Not mapped'
     ];

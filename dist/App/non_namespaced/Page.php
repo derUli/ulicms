@@ -10,40 +10,75 @@ use App\Security\Permissions\PagePermissions;
 class Page extends Content
 {
     public $id = null;
+
     public $slug = '';
+
     public $title = '';
+
     public $alternate_title = '';
+
     public $target = '_self';
+
     public $category_id = 1;
+
     public $content = '';
+
     public $language = 'de';
+
     public $menu_image = null;
+
     public $active = 1;
+
     public $approved = 1;
+
     public $created = 0;
+
     public $lastmodified = 0;
+
     public $author_id = null;
+
     public $group_id = null;
+
     public $lastchangeby = 1;
+
     public $views = 0;
+
     public $menu = DEFAULT_MENU;
+
     public $position = 0;
+
     public $cache_control = 'auto';
+
     public $parent_id = null;
+
     public $access = 'all';
+
     public $meta_description = null;
+
     public $meta_keywords = null;
+
     private $deleted_at = null;
+
     public $theme = null;
+
     public $robots = null;
+
     public $custom_data = null;
+
     public $type = 'page';
+
     public $og_title = '';
+
     public $og_image = '';
+
     public $og_description = '';
+
     public $hidden = 0;
+
     public $comments_enabled = null;
+
     private $permissions;
+
     public $show_headline = true;
 
     public function __construct($id = null)

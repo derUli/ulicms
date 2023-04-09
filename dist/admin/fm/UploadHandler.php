@@ -14,6 +14,7 @@
 class UploadHandler
 {
     protected $options;
+
     // PHP File Upload error message codes:
     // http://php.net/manual/en/features.file-upload.errors.php
     protected $error_messages = [
@@ -38,8 +39,11 @@ class UploadHandler
     ];
 
     public const IMAGETYPE_GIF = 1;
+
     public const IMAGETYPE_JPEG = 2;
+
     public const IMAGETYPE_PNG = 3;
+
     public const IMAGETYPE_WEBP = 4;
 
     protected $image_objects = [];

@@ -6,9 +6,13 @@ use App\Utils\CacheUtil;
 class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase
 {
     public const EXAMPLE_URL_OK = 'https://www.ulicms.de/robots.txt';
+
     public const EXAMPLE_URL_INVALID = 'http://www.google.de';
+
     public const EXAMPLE_HASH = '485b2c1ec3bc6b6fd93297ed4b1140b5';
+
     public const UNIQID_URL = 'http://test.ulicms.de/uniqid.php';
+
     public const USER_AGENT_URL = 'http://test.ulicms.de/useragent.php';
 
     protected function setUp(): void

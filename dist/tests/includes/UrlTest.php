@@ -46,6 +46,7 @@ class UrlTest extends \PHPUnit\Framework\TestCase
             get_canonical()
         );
     }
+
      public function testGetBaseFolderUrlWithoutFilename()
      {
          $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';

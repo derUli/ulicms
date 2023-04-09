@@ -12,7 +12,6 @@ class AvailablePackageVersionMatcher
 {
     private $versionData = [];
 
-
     /**
      * Constructor
      * @param type $versionData

@@ -12,6 +12,7 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class SpamDetectionResult
 {
     public $field;
+
     public $message;
 
     /**

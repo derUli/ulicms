@@ -14,11 +14,17 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class MenuEntry
 {
     private $title;
+
     private $link;
+
     private $identifier;
+
     private $permissions;
+
     private $children = [];
+
     private $newWindow = false;
+
     private $isAjax = false;
 
     /**

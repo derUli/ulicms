@@ -22,14 +22,23 @@ use ModuleHelper;
 class Comment extends Model
 {
     private $content_id;
+
     private $author_name;
+
     private $author_email;
+
     private $author_url;
+
     private $date;
+
     private $text;
+
     private $status = CommentStatus::DEFAULT_STATUS;
+
     private $ip;
+
     private $useragent;
+
     private $read = false;
 
     public const TABLE_NAME = 'comments';

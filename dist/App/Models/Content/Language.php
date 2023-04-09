@@ -14,7 +14,9 @@ use Settings;
 class Language extends Model
 {
     protected $id = null;
+
     private $name = null;
+
     private $language_code = null;
 
     public function __construct($id = null)

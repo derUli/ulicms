@@ -3,6 +3,7 @@
 class CoreSecoreControllerTest extends \PHPUnit\Framework\TestCase
 {
     private $initialEnableHsts = false;
+
     private $initialExpectCt = false;
 
     protected function setUp(): void

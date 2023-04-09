@@ -19,22 +19,39 @@ use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 class User extends Model
 {
     protected $id = null;
+
     private $username = null;
+
     private $lastname = '';
+
     private $firstname = '';
+
     private $email = '';
+
     private $password = '';
+
     private $about_me = '';
+
     private $group_id = null;
+
     private $secondary_groups = [];
+
     private $group = null;
+
     private $html_editor = 'ckeditor';
+
     private $require_password_change = false;
+
     private $admin = false;
+
     private $password_changed = null;
+
     private $locked = false;
+
     private $last_login = null;
+
     private $homepage = '';
+
     private $default_language = null;
 
     /**

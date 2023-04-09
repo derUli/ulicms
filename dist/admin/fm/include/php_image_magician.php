@@ -164,28 +164,41 @@
 class imageLib
 {
     private $fileName;
+
     private $image;
+
     protected $imageResized;
+
     private $widthOriginal;     # Always be the original width
+
     private $heightOriginal;
+
     private $width;         # Current width (width after resize)
+
     private $height;
+
     private $imageSize;
+
     private $fileExtension;
 
     private $debug = true;
+
     private $errorArray = [];
 
     private $forceStretch = true;
+
     private $aggresiveSharpening = false;
 
     private $transparentArray = ['.png', '.gif'];
+
     private $keepTransparency = true;
+
     private $fillColorArray = ['r' => 255, 'g' => 255, 'b' => 255];
 
     private $sharpenArray = ['jpg'];
 
     private $psdReaderPath;
+
     private $filterOverlayPath;
 
     private $isInterlace;
@@ -268,7 +281,6 @@ class imageLib
     /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*-*-
   Resize
      *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
 
     public function resizeImage($newWidth, $newHeight, $option = 0, $sharpen = false, $autoRotate = false)
     # Author:     Jarrod Oberto
@@ -883,7 +895,6 @@ class imageLib
 # These are inteded to be applied to thumbnail images.
 #
 
-
     public function borderPreset($preset)
     {
         switch ($preset) {
@@ -1076,7 +1087,6 @@ class imageLib
     /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*-*-
   Presets By Marc Hibbins
      *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
 
     /** Apply 'Monopin' preset */
     public function gd_filter_monopin()

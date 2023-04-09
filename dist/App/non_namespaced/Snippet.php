@@ -9,7 +9,9 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class Snippet extends Page
 {
     public $type = 'snippet';
+
     public $menu = 'not_in_menu';
+
     public $hidden = true;
 
     protected function fillVars($result = null)

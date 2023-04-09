@@ -7,7 +7,9 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class Module
 {
     private $name = null;
+
     private $version = null;
+
     private $enabled = 0;
 
     public function __construct(?string $name = null)

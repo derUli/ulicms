@@ -5,6 +5,7 @@ use App\Models\Content\Language;
 class LanguageControllerTest extends \PHPUnit\Framework\TestCase
 {
     private $lang = null;
+
     private $initialSettings = [];
 
     protected function setUp(): void

@@ -12,14 +12,23 @@ use App\Exceptions\DatabaseException;
 class List_Data extends Model
 {
     public $content_id = null;
+
     public $language = null;
+
     public $category_id = null;
+
     public $menu = null;
+
     public $parent_id = null;
+
     public $order_by = 'title';
+
     public $order_direction = 'asc';
+
     public $limit = null;
+
     public $use_pagination = false;
+
     public $type = null;
 
     public function filter(?int $offset = null): array

@@ -13,7 +13,6 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertStringStartsNotWith('random_table', $tableName);
     }
 
-
     public function testDbFetchAssoc()
     {
         $datasets = Database::selectAll('settings');
