@@ -56,10 +56,10 @@ class ContentPermissionChecker implements IDatasetPermissionChecker
         }
 
         // page edit restrictions (booleans)
-        $adminsCanEdit = $permissions->getEditRestriction("admins");
-        $groupCanEdit = $permissions->getEditRestriction("group");
-        $ownerCanEdit = $permissions->getEditRestriction("owner");
-        $othersCanEdit = $permissions->getEditRestriction("others");
+        $adminsCanEdit = $permissions->getEditRestriction('admins');
+        $groupCanEdit = $permissions->getEditRestriction('group');
+        $ownerCanEdit = $permissions->getEditRestriction('owner');
+        $othersCanEdit = $permissions->getEditRestriction('others');
 
         $canEditThis = false;
 
@@ -69,15 +69,15 @@ class ContentPermissionChecker implements IDatasetPermissionChecker
                 $canEditThis = true;
             } elseif ($adminsCanEdit && $user->isAdmin()) {
                 $canEditThis = true;
-            } elseif ($ownerCanEdit && $isOwner && $permissionChecker->hasPermission("pages_edit_own")) {
+            } elseif ($ownerCanEdit && $isOwner && $permissionChecker->hasPermission('pages_edit_own')) {
                 $canEditThis = true;
             } elseif ($othersCanEdit && !in_array($contentGroup, $groupIds) && !$user->isAdmin() && !$isOwner) {
                 $canEditThis = true;
             }
         } else {
-            if (!$isOwner && $permissionChecker->hasPermission("pages_edit_others")) {
+            if (!$isOwner && $permissionChecker->hasPermission('pages_edit_others')) {
                 $canEditThis = true;
-            } elseif ($isOwner && $permissionChecker->hasPermission("pages_edit_own")) {
+            } elseif ($isOwner && $permissionChecker->hasPermission('pages_edit_own')) {
                 $canEditThis = true;
             }
         }

@@ -15,11 +15,11 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase
         $_POST = [];
 
         Database::pQuery(
-            "DELETE FROM `{prefix}banner` where html in (?) or "
-            . "name = ?",
+            'DELETE FROM `{prefix}banner` where html in (?) or '
+            . 'name = ?',
             [
-                "Werbung nervt",
-                "Nervige Werbung"
+                'Werbung nervt',
+                'Nervige Werbung'
             ],
             true
         );
@@ -38,16 +38,16 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase
 
     protected function setPostVars()
     {
-        $_POST["banner_name"] = "Nervige Werbung";
-        $_POST["image_url"] = '';
-        $_POST["link_url"] = '';
-        $_POST["category_id"] = 1;
-        $_POST["type"] = "html";
+        $_POST['banner_name'] = 'Nervige Werbung';
+        $_POST['image_url'] = '';
+        $_POST['link_url'] = '';
+        $_POST['category_id'] = 1;
+        $_POST['type'] = 'html';
         $_POST['language'] = 'de';
-        $_POST["enabled"] = 1;
-        $_POST["html"] = "Foo Bar";
-        $_POST["date_from"] = '';
-        $_POST["date_to"] = '';
+        $_POST['enabled'] = 1;
+        $_POST['html'] = 'Foo Bar';
+        $_POST['date_from'] = '';
+        $_POST['date_to'] = '';
     }
 
     public function testUpdateReturnsModel()
@@ -57,19 +57,19 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase
         $id = $controller->_createPost()->getId();
         $_POST['id'] = $id;
 
-        $_POST["link_url"] = "https://google.com";
+        $_POST['link_url'] = 'https://google.com';
         $banner = $controller->_updatePost();
 
         $this->assertInstanceOf(Banner::class, $banner);
         $this->assertGreaterThanOrEqual(1, $banner->getId());
-        $this->assertEquals("https://google.com", $banner->getLinkUrl());
+        $this->assertEquals('https://google.com', $banner->getLinkUrl());
     }
 
     public function testDeletePostReturnsTrue()
     {
         $banner = new Banner();
-        $banner->setType("html");
-        $banner->setHtml("Werbung nervt");
+        $banner->setType('html');
+        $banner->setHtml('Werbung nervt');
         $banner->save();
 
         $controller = new BannerController();

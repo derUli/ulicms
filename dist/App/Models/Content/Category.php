@@ -24,7 +24,7 @@ class Category
 
     public function loadByID(int $id): void
     {
-        $sql = "select * from {prefix}categories where id = ?";
+        $sql = 'select * from {prefix}categories where id = ?';
         $args = [
             (int)$id
         ];
@@ -57,8 +57,8 @@ class Category
 
     protected function insert(): void
     {
-        $sql = "INSERT INTO `{prefix}categories` (name, description) "
-                . "values (?, ?)";
+        $sql = 'INSERT INTO `{prefix}categories` (name, description) '
+                . 'values (?, ?)';
         $args = [
             $this->getName(),
             $this->getDescription()
@@ -69,8 +69,8 @@ class Category
 
     protected function update(): void
     {
-        $sql = "update `{prefix}categories` set name = ?, "
-                . "description = ? where id = ?";
+        $sql = 'update `{prefix}categories` set name = ?, '
+                . 'description = ? where id = ?';
         $args = [
             $this->getName(),
             $this->getDescription(),
@@ -82,7 +82,7 @@ class Category
     public function delete(): void
     {
         if ($this->id) {
-            $sql = "delete from {prefix}categories where id = ?";
+            $sql = 'delete from {prefix}categories where id = ?';
             $args = [
                 (int)$this->id
             ];

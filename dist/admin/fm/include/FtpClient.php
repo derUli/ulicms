@@ -609,7 +609,7 @@ class FtpClient implements Countable
         // do this for each file in the directory
         while ($file = $d->read()) {
             // to prevent an infinite loop
-            if ($file != "." && $file != '..') {
+            if ($file != '.' && $file != '..') {
                 // do the following if it is a directory
                 if (is_dir($source_directory.'/'.$file)) {
                     if (!$this->isDir($target_directory.'/'.$file)) {
@@ -806,7 +806,7 @@ class FtpClient implements Countable
 
                 $key = $item['type'].'#'
                     .($path ? $path.'/' : '')
-                    .implode(" ", $chunks);
+                    .implode(' ', $chunks);
 
                 if ($item['type'] == 'link') {
                     // get the first part of 'link#the-link.ext -> /path/of/the/source.ext'

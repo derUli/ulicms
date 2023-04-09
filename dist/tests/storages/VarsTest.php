@@ -4,9 +4,9 @@ class VarsTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        Vars::set("foo", "bar");
-        Vars::set("john", "doe");
-        Vars::set("hello", "world");
+        Vars::set('foo', 'bar');
+        Vars::set('john', 'doe');
+        Vars::set('hello', 'world');
     }
 
     protected function tearDown(): void
@@ -16,26 +16,26 @@ class VarsTest extends \PHPUnit\Framework\TestCase
 
     public function testSetAndGet()
     {
-        $this->assertEquals("bar", Vars::get("foo"));
-        $this->assertEquals("world", Vars::get("hello"));
+        $this->assertEquals('bar', Vars::get('foo'));
+        $this->assertEquals('world', Vars::get('hello'));
 
-        Vars::set("hello", "you");
-        $this->assertEquals("you", Vars::get("hello"));
+        Vars::set('hello', 'you');
+        $this->assertEquals('you', Vars::get('hello'));
     }
 
     public function testGetAllVars()
     {
         $vars = Vars::getAllVars();
-        $this->assertEquals("doe", $vars["john"]);
+        $this->assertEquals('doe', $vars['john']);
         $this->assertGreaterThanOrEqual(2, count($vars));
     }
 
     public function testDelete()
     {
-        $this->assertEquals("bar", Vars::get("foo"));
+        $this->assertEquals('bar', Vars::get('foo'));
 
-        Vars::delete("foo");
-        $this->assertNull(Vars::get("foo"));
+        Vars::delete('foo');
+        $this->assertNull(Vars::get('foo'));
     }
 
     public function testClear()

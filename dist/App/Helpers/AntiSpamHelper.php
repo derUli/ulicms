@@ -24,12 +24,12 @@ class AntiSpamHelper extends Helper
     ): bool {
         $ip = $ip ?? get_ip();
 
-        $country_blacklist = $country_blacklist ?? Settings::get("country_blacklist");
+        $country_blacklist = $country_blacklist ?? Settings::get('country_blacklist');
 
         if (is_string($country_blacklist)) {
             $country_blacklist = strtolower($country_blacklist);
-            $country_blacklist = explode(",", $country_blacklist);
-            $country_blacklist = array_map("trim", $country_blacklist);
+            $country_blacklist = explode(',', $country_blacklist);
+            $country_blacklist = array_map('trim', $country_blacklist);
             $country_blacklist = array_filter($country_blacklist);
         }
 
@@ -114,7 +114,7 @@ class AntiSpamHelper extends Helper
             return null;
         }
 
-        $words_blacklist = $words_blacklist ?? Settings::get("spamfilter_words_blacklist");
+        $words_blacklist = $words_blacklist ?? Settings::get('spamfilter_words_blacklist');
 
         if (is_string($words_blacklist)) {
             $words_blacklist = \App\Helpers\StringHelper::linesFromString(
@@ -142,7 +142,7 @@ class AntiSpamHelper extends Helper
      */
     public static function isSpamFilterEnabled(): bool
     {
-        return Settings::get("spamfilter_enabled") == "yes";
+        return Settings::get('spamfilter_enabled') == 'yes';
     }
 
     /**
@@ -166,7 +166,7 @@ class AntiSpamHelper extends Helper
     public static function checkMailDomain(string $email): bool
     {
         $domain = strstr($email, '@');
-        $domain = remove_prefix($domain, "@");
+        $domain = remove_prefix($domain, '@');
         // In some cases getmxrr() would return a result for an invalid domain
         // if there is no additional dot at the end
         $domain = !str_ends_with($domain, '.') ? $domain . '.' : $domain;

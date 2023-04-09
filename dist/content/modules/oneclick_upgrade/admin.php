@@ -4,17 +4,17 @@ use App\HTML\Alert;
 
 use function App\HTML\text;
 
-define("MODULE_ADMIN_HEADLINE", get_translation("oneclick_upgrade") . " " . get_translation("settings"));
+define('MODULE_ADMIN_HEADLINE', get_translation('oneclick_upgrade') . ' ' . get_translation('settings'));
 
 function oneclick_upgrade_admin()
 {
     if (Request::isPost()) {
-        Settings::set("oneclick_upgrade_channel", $_POST["oneclick_upgrade_channel"]);
+        Settings::set('oneclick_upgrade_channel', $_POST['oneclick_upgrade_channel']);
     }
-    $oneclick_upgrade_channel = Settings::get("oneclick_upgrade_channel");
+    $oneclick_upgrade_channel = Settings::get('oneclick_upgrade_channel');
     $channels = [
-        "fast",
-        "slow",
+        'fast',
+        'slow',
     ];
 
     $channelCount = count($channels);
@@ -25,7 +25,7 @@ function oneclick_upgrade_admin()
         ?>
         <div class="alert alert-success alert-dismissable fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <?php translate("changes_was_saved") ?>
+            <?php translate('changes_was_saved') ?>
         </div>
     <?php }
     ?>
@@ -33,7 +33,7 @@ function oneclick_upgrade_admin()
           method="post">
               <?php csrf_token_html(); ?>
         <div>
-            <label for="oneclick_upgrade_channel"><?php translate("channel") ?></label><br />
+            <label for="oneclick_upgrade_channel"><?php translate('channel') ?></label><br />
             <select
                 name="oneclick_upgrade_channel"
                 size=1
@@ -42,7 +42,7 @@ function oneclick_upgrade_admin()
                     <option value="<?php Template::escape($channels[$i]) ?>"
                     <?php
                     if ($oneclick_upgrade_channel == $channels[$i]) {
-                        echo " selected";
+                        echo ' selected';
                     }
                         ?>><?php Template::escape(get_translation($channels[$i])) ?></option>
                         <?php } ?>
@@ -51,21 +51,21 @@ function oneclick_upgrade_admin()
         </div>
         <div id="help-texts" class="voffset3 alert alert-info">
             <div data-channel="fast">
-                <?php echo text(get_translation("fast_description")); ?>
+                <?php echo text(get_translation('fast_description')); ?>
             </div>
 
             <div data-channel="slow">
-                <?php echo text(get_translation("slow_description")); ?>
+                <?php echo text(get_translation('slow_description')); ?>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">
-            <i class="fa fa-save"></i> <?php translate("save"); ?></button>
+            <i class="fa fa-save"></i> <?php translate('save'); ?></button>
     </form>
     <?php
     enqueueScriptFile(
         ModuleHelper::buildRessourcePath(
-            "oneclick_upgrade",
-            "js/settings.js"
+            'oneclick_upgrade',
+            'js/settings.js'
         )
     );
     combinedScriptHtml();

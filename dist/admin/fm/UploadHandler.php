@@ -1002,7 +1002,7 @@ class UploadHandler
 
         $image_strip = (isset($options['strip']) ? $options['strip'] : false);
 
-        if (!$image_oriented && ($max_width >= $img_width) && ($max_height >= $img_height) && !$image_strip && empty($options["jpeg_quality"])) {
+        if (!$image_oriented && ($max_width >= $img_width) && ($max_height >= $img_height) && !$image_strip && empty($options['jpeg_quality'])) {
             if ($file_path !== $new_file_path) {
                 return copy($file_path, $new_file_path);
             }
@@ -1601,7 +1601,7 @@ class UploadHandler
             }
         } else {
             $targetFile = $this->options['config']['ftp_temp_folder'] . $res['files'][0]->name;
-            $targetFileThumb = $this->options['config']['ftp_temp_folder'] . "thumbs/" . $res['files'][0]->name;
+            $targetFileThumb = $this->options['config']['ftp_temp_folder'] . 'thumbs/' . $res['files'][0]->name;
         }
 
         //check if image (and supported)
@@ -1626,13 +1626,13 @@ class UploadHandler
 
             if ($thumbResult !== true) {
                 if ($thumbResult === false) {
-                    $res['files'][0]->error = trans("Not enough Memory");
+                    $res['files'][0]->error = trans('Not enough Memory');
                 } else {
                     $res['files'][0]->error = $thumbResult;
                 }
             } else {
                 if (!$this->options['ftp'] && !new_thumbnails_creation($targetPath, $targetFile, $_FILES['files']['name'][0], $this->options['config']['current_path'], $this->options['config'])) {
-                    $res['files'][0]->error = trans("Not enough Memory");
+                    $res['files'][0]->error = trans('Not enough Memory');
                 } else {
                     $imginfo = getimagesize($targetFile);
                     $srcWidth = $imginfo[0];

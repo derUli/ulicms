@@ -7,7 +7,7 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class Link extends Page
 {
     public $link_url = '';
-    public $type = "link";
+    public $type = 'link';
 
     public function save()
     {
@@ -34,7 +34,7 @@ class Link extends Page
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set link_url = ? where id = ?";
+        $sql = 'update {prefix}content set link_url = ? where id = ?';
         $args = [
             $this->link_url,
             $this->id
@@ -61,6 +61,6 @@ class Link extends Page
      */
     public function getIcon(): string
     {
-        return "fas fa-link";
+        return 'fas fa-link';
     }
 }

@@ -24,16 +24,16 @@ class ModelRegistry
         $modules = $moduleManager->getEnabledModuleNames();
 
         foreach ($modules as $module) {
-            $models = getModuleMeta($module, "models") ?
-                    getModuleMeta($module, "models") : getModuleMeta($module, "objects");
+            $models = getModuleMeta($module, 'models') ?
+                    getModuleMeta($module, 'models') : getModuleMeta($module, 'objects');
             if (!$models) {
                 continue;
             }
 
             foreach ($models as $key => $value) {
                 $path = getModulePath($module, true) . trim($value, '/');
-                if (!str_ends_with($path, ".php")) {
-                    $path .= ".php";
+                if (!str_ends_with($path, '.php')) {
+                    $path .= '.php';
                 }
 
                 $modelRegistry[$key] = $path;

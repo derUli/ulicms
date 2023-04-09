@@ -21,10 +21,10 @@ class Translation
         $modules = getAllModules();
 
         foreach ($modules as $module) {
-            $currentLanguageFile = getModulePath($module, true) . "/lang/" .
-                    $lang . ".php";
+            $currentLanguageFile = getModulePath($module, true) . '/lang/' .
+                    $lang . '.php';
             $englishLanguageFile = getModulePath($module, true) .
-                    "/lang/en.php";
+                    '/lang/en.php';
 
             $files = [
                 $currentLanguageFile,
@@ -49,7 +49,7 @@ class Translation
     {
         $files = [
             getTemplateDirPath(get_theme(), true) . "/lang/{$lang}.php",
-            getTemplateDirPath(get_theme(), true) . "/lang/en.php"
+            getTemplateDirPath(get_theme(), true) . '/lang/en.php'
         ];
 
         foreach ($files as $file) {

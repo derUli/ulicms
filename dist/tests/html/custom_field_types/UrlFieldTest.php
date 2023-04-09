@@ -14,11 +14,11 @@ class UrlFieldTest extends \PHPUnit\Framework\TestCase
     public function testRender()
     {
         $field = new UrlField();
-        $field->name = "my_field";
-        $field->title = "username";
+        $field->name = 'my_field';
+        $field->title = 'username';
 
         $this->assertMatchesHtmlSnapshot(
-            $field->render("https://www.ulicms.de")
+            $field->render('https://www.ulicms.de')
         );
     }
 }

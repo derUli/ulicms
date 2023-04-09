@@ -451,7 +451,7 @@ class User extends Model
     public function setPassword(string $password): void
     {
         $this->password = Hash::hashPassword($password);
-        $this->password_changed = date("Y-m-d H:i:s");
+        $this->password_changed = date('Y-m-d H:i:s');
     }
 
     /**
@@ -501,7 +501,7 @@ class User extends Model
     public function getDisplayName(): string
     {
         $name = !empty($this->getFullName()) ? $this->getFullName() : $this->getUsername();
-        return $name ?? "";
+        return $name ?? '';
     }
 
     /**
@@ -835,11 +835,11 @@ class User extends Model
         // Fallback "No Avatar" picture
         $avatarUrl = ModuleHelper::getBaseUrl(
             !is_admin_dir() ?
-            "/admin/gfx/no_avatar.png" : "/gfx/no_avatar.png"
+            '/admin/gfx/no_avatar.png' : '/gfx/no_avatar.png'
         );
 
         // Avatar directory
-        $userAvatarDirectory = Path::resolve("ULICMS_CONTENT/avatars");
+        $userAvatarDirectory = Path::resolve('ULICMS_CONTENT/avatars');
 
         // Create avatar directory if not exists
         if (!is_dir($userAvatarDirectory)) {
@@ -850,15 +850,15 @@ class User extends Model
         if (is_dir($userAvatarDirectory) && $this->getDisplayName()) {
             // Custom avatar
             $avatarImageFile1 = Path::Resolve("$userAvatarDirectory/user-" .
-                            $this->getId() . ".png");
+                            $this->getId() . '.png');
             // Auto generated avatar based on the name of the user
             $avatarImageFile2 = Path::Resolve("$userAvatarDirectory/" .
-                            md5($this->getDisplayName()) . ".png");
+                            md5($this->getDisplayName()) . '.png');
 
             // relative URL to file
             $url = !is_admin_dir() ?
-                    "content/avatars/user-" . $this->getId() . ".png" :
-                    "../content/avatars/user-" . $this->getId() . ".png";
+                    'content/avatars/user-' . $this->getId() . '.png' :
+                    '../content/avatars/user-' . $this->getId() . '.png';
 
             // Generate initial letter avatar if it doesn't exist
             $avatarUrl = is_file($avatarImageFile1) ?
@@ -887,8 +887,8 @@ class User extends Model
         }
 
         $url = !is_admin_dir() ?
-                "content/avatars/" . md5($this->getDisplayName()) . ".png" :
-                "../content/avatars/" . md5($this->getDisplayName()) . ".png";
+                'content/avatars/' . md5($this->getDisplayName()) . '.png' :
+                '../content/avatars/' . md5($this->getDisplayName()) . '.png';
 
         $avatarUrl = $url;
 
@@ -1019,7 +1019,7 @@ class User extends Model
     protected function saveGroups(): void
     {
         Database::pQuery(
-            "delete from {prefix}user_groups where user_id = ?",
+            'delete from {prefix}user_groups where user_id = ?',
             [
                 $this->getId()
             ],
@@ -1086,8 +1086,8 @@ class User extends Model
     protected function getProcessedAvatarPath(): ?string
     {
         return $this->isPersistent() ? Path::resolve(
-            "ULICMS_ROOT/content/avatars/user-" .
-            $this->getId() . ".png"
+            'ULICMS_ROOT/content/avatars/user-' .
+            $this->getId() . '.png'
         ) : null;
     }
 
@@ -1148,9 +1148,9 @@ class User extends Model
     public static function getOnlineUsers(): array
     {
         $query = Database::selectAll(
-            "users",
+            'users',
             ['id'],
-            "last_action > " . (time() - 300) . " ORDER BY username"
+            'last_action > ' . (time() - 300) . ' ORDER BY username'
         );
 
         $users = [];

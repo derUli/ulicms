@@ -14,8 +14,8 @@ class CheckboxFieldTest extends \PHPUnit\Framework\TestCase
     public function testRender()
     {
         $field = new CheckboxField();
-        $field->name = "my_field";
-        $field->title = "enabld";
+        $field->name = 'my_field';
+        $field->title = 'enabld';
 
         $this->assertMatchesHtmlSnapshot($field->render(true));
     }

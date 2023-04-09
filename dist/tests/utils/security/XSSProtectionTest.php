@@ -22,7 +22,7 @@ class XSSProtectionTest extends \PHPUnit\Framework\TestCase
                 . '<script>hax0r!</script>';
         $expected = '<img  src="foo.jpg"> <p class="my-class" id="hello"   ' .
                 'Bar</p>moinhax0r!';
-        $this->assertEquals($expected, XSSProtection::stripTags($input, "<p><img>"));
+        $this->assertEquals($expected, XSSProtection::stripTags($input, '<p><img>'));
     }
 
     public function testStripTagsWithScriptsAllowed()
@@ -33,6 +33,6 @@ class XSSProtectionTest extends \PHPUnit\Framework\TestCase
                 . '<script>hax0r!</script>';
         $expected = '<img onerror="alert(document.cookie);" src="foo.jpg"> ' .
                 'Foo Barmoin<script>hax0r!</script>';
-        $this->assertEquals($expected, XSSProtection::stripTags($input, "<img><script>"));
+        $this->assertEquals($expected, XSSProtection::stripTags($input, '<img><script>'));
     }
 }

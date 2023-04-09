@@ -20,8 +20,8 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
     protected function tearDown(): void
     {
         $controller = new FaviconController();
-        $file1 = $controller->_getDestination1() . ".bak";
-        $file2 = $controller->_getDestination2() . ".bak";
+        $file1 = $controller->_getDestination1() . '.bak';
+        $file2 = $controller->_getDestination2() . '.bak';
 
         if (is_file($file1)) {
             rename($file1, $controller->_getDestination1());
@@ -56,7 +56,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new FaviconController();
 
         $this->assertStringEndsWith(
-            "/content/images/favicon.ico",
+            '/content/images/favicon.ico',
             $controller->_getDestination1()
         );
     }
@@ -66,18 +66,18 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new FaviconController();
 
         $this->assertStringEndsWith(
-            "/favicon.ico",
+            '/favicon.ico',
             $controller->_getDestination2()
         );
         $this->assertStringEndsNotWith(
-            "/content/images/favicon.ico",
+            '/content/images/favicon.ico',
             $controller->_getDestination2()
         );
     }
 
     public function testPutAndDeleteFiles()
     {
-        $source = Path::resolve("ULICMS_ROOT/tests/fixtures/cat.jpg");
+        $source = Path::resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
         $controller = new FaviconController();
         $this->assertTrue(
             $controller->_placeFiles($source, $controller->_getSizes())
@@ -86,11 +86,11 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($controller->_hasFavicon());
 
         $this->assertEquals(
-            "444aa40c763f942322f6b1d1a4ab18cc",
+            '444aa40c763f942322f6b1d1a4ab18cc',
             md5_file($controller->_getDestination1())
         );
         $this->assertEquals(
-            "444aa40c763f942322f6b1d1a4ab18cc",
+            '444aa40c763f942322f6b1d1a4ab18cc',
             md5_file($controller->_getDestination2())
         );
 
@@ -101,18 +101,18 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testPutAndDeleteFilesHQ()
     {
-        $source = Path::resolve("ULICMS_ROOT/tests/fixtures/cat.jpg");
+        $source = Path::resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
         $controller = new FaviconController();
         $this->assertTrue(
             $controller->_placeFiles($source, $controller->_getSizes(true))
         );
 
         $this->assertEquals(
-            "70aae2ed780bc052c1f4c91602528070",
+            '70aae2ed780bc052c1f4c91602528070',
             md5_file($controller->_getDestination1())
         );
         $this->assertEquals(
-            "70aae2ed780bc052c1f4c91602528070",
+            '70aae2ed780bc052c1f4c91602528070',
             md5_file($controller->_getDestination2())
         );
 

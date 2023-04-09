@@ -1,9 +1,9 @@
 <?php
 
-define("DB_TYPE_INT", 1);
-define("DB_TYPE_FLOAT", 2);
-define("DB_TYPE_STRING", 3);
-define("DB_TYPE_BOOL", 4);
+define('DB_TYPE_INT', 1);
+define('DB_TYPE_FLOAT', 2);
+define('DB_TYPE_STRING', 3);
+define('DB_TYPE_BOOL', 4);
 
 // database api functions
 // all functions in this file are deprecated you should

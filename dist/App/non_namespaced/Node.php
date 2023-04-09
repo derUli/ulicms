@@ -8,13 +8,13 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 // have no content attached
 class Node extends Link
 {
-    public $type = "node";
-    public $link_url = "#";
+    public $type = 'node';
+    public $link_url = '#';
 
     protected function fillVars($result = null)
     {
         parent::fillVars($result);
-        $this->link_url = "#";
+        $this->link_url = '#';
     }
 
      /**
@@ -23,6 +23,6 @@ class Node extends Link
      */
     public function getIcon(): string
     {
-        return "far fa-folder";
+        return 'far fa-folder';
     }
 }

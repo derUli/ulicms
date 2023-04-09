@@ -286,6 +286,8 @@ $config
     'array_syntax' => ['syntax'=>'short'],
     // Replaces `is_null($var)` expression with `null === $var`.
     'is_null' => true,
+    // Convert double quotes to single quotes for simple strings.
+    'single_quote' => true,
     ]);
 
 return $config->setFinder(

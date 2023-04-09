@@ -22,7 +22,7 @@ class DataTablesHelper extends Helper
      */
     public static function getLanguageFileURL(string $lang): string
     {
-        $baseUrl = "scripts/datatables/lang";
+        $baseUrl = 'scripts/datatables/lang';
         $file = "{$baseUrl}/{$lang}.lang";
         if (is_file($file)) {
             return $file;

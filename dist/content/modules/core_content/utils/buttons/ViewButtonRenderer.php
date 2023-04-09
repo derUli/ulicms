@@ -15,7 +15,7 @@ use function App\HTML\Link;
 
 class ViewButtonRenderer
 {
-    public const MODULE_NAME = "core_content";
+    public const MODULE_NAME = 'core_content';
 
     public function render(int $pageId, User $user)
     {
@@ -23,7 +23,7 @@ class ViewButtonRenderer
 
         $content = ContentFactory::getByID($pageId);
         if (!$content->isRegular()) {
-            return "";
+            return '';
         }
 
         // check permissions for this specific content
@@ -33,16 +33,16 @@ class ViewButtonRenderer
             $permitted = false;
         }
 
-        $icon = icon("fa fa-eye fa-2x");
+        $icon = icon('fa fa-eye fa-2x');
 
         $url = "../?goid={$pageId}";
         $link = link($url, $icon, true);
-        ViewBag::set("button", $link);
+        ViewBag::set('button', $link);
 
         $templateFile = Template::executeModuleTemplate(
             self::MODULE_NAME,
-            "pages/partials/view_button.php"
+            'pages/partials/view_button.php'
         );
-        return $permitted ? $templateFile : "";
+        return $permitted ? $templateFile : '';
     }
 }

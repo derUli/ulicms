@@ -45,9 +45,9 @@ class ACLTest extends \PHPUnit\Framework\TestCase
     {
         $acl = new ACL();
         $id = $acl->createGroup(
-            "Test-Gruppe " . uniqid(),
+            'Test-Gruppe ' . uniqid(),
             [
-                "foo" => true
+                'foo' => true
             ]
         );
         $this->assertGreaterThan(0, $id);
@@ -56,9 +56,9 @@ class ACLTest extends \PHPUnit\Framework\TestCase
             $id,
             $acl->updateGroup(
                 $id,
-                "Test-Gruppe " . uniqid() . " umbenannt",
+                'Test-Gruppe ' . uniqid() . ' umbenannt',
                 [
-                    "hello" => false
+                    'hello' => false
                 ]
             )
         );
@@ -69,24 +69,24 @@ class ACLTest extends \PHPUnit\Framework\TestCase
     {
         $acl = new ACL();
         $id = $acl->createGroup(
-            "Test-Gruppe " . uniqid(),
+            'Test-Gruppe ' . uniqid(),
             [
-                "foo" => true
+                'foo' => true
             ]
         );
 
         $otherGroupId = $acl->createGroup(
-            "Test-Gruppe 2 " . uniqid(),
+            'Test-Gruppe 2 ' . uniqid(),
             [
-                "foo" => true
+                'foo' => true
             ]
         );
 
         $user = new User();
-        $user->setUsername("testuser-1");
+        $user->setUsername('testuser-1');
         $user->setPassword(rand_string(23));
-        $user->setLastname("Beutlin");
-        $user->setFirstname("Bilbo");
+        $user->setLastname('Beutlin');
+        $user->setFirstname('Bilbo');
         $user->setHTMLEditor(HtmlEditor::CKEDITOR);
         $user->setPrimaryGroupId($id);
         $user->save();
@@ -120,7 +120,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
     public function testPermissionQueryResultWithGroupIdAsArgumentReturnsAssoc()
     {
         $group = new Group();
-        $group->setName("testgroup");
+        $group->setName('testgroup');
         $group->save();
         $acl = new ACL();
 
@@ -130,9 +130,9 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(4, count($groupData));
         $this->assertIsNumeric($groupData['id']);
         $this->assertNotEmpty($groupData['name']);
-        $this->assertTrue(is_json($groupData["permissions"]));
+        $this->assertTrue(is_json($groupData['permissions']));
         $this->assertArrayHasKey(
-            "allowable_tags",
+            'allowable_tags',
             $groupData
         );
 
@@ -142,7 +142,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
     public function testPermissionQueryResultWithGroupIdFromSessioneturnsAssoc()
     {
         $group = new Group();
-        $group->setName("testgroup");
+        $group->setName('testgroup');
         $group->save();
 
         $_SESSION['group_id'] = $group->getId();
@@ -154,9 +154,9 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(4, count($groupData));
         $this->assertIsNumeric($groupData['id']);
         $this->assertNotEmpty($groupData['name']);
-        $this->assertTrue(is_json($groupData["permissions"]));
+        $this->assertTrue(is_json($groupData['permissions']));
         $this->assertArrayHasKey(
-            "allowable_tags",
+            'allowable_tags',
             $groupData
         );
 

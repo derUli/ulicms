@@ -34,8 +34,8 @@ class ACL
     {
         $permissionData = $permissions === null ? $this->getDefaultACL() : json_encode($permissions);
 
-        $sql = "INSERT INTO `" . tbname('groups') .
-                "` (`name`, `permissions`) " .
+        $sql = 'INSERT INTO `' . tbname('groups') .
+                '` (`name`, `permissions`) ' .
                 "VALUES('" . db_escape($name) . "','" .
                 db_escape($permissionData) . "')";
 
@@ -60,7 +60,7 @@ class ACL
     ): int {
         $permissionData = $permissions === null ? $this->getDefaultACL() : json_encode($permissions);
 
-        $sql = "UPDATE `" . tbname('groups') . "` SET name='" .
+        $sql = 'UPDATE `' . tbname('groups') . "` SET name='" .
                 db_escape($name) . "', permissions='" . db_escape($permissionData) . "' WHERE id=" . $id;
 
         // Führe Query aus
@@ -79,17 +79,17 @@ class ACL
         $id = (int) $id;
 
         if ($move_users_to === null) {
-            $updateUsers = "UPDATE " . tbname('users') .
+            $updateUsers = 'UPDATE ' . tbname('users') .
                     " SET `group_id`=NULL where `group_id`=$id";
         } else {
-            $updateUsers = "UPDATE " . tbname('users') .
-                    " SET `group_id`=" . $move_users_to . " where `group_id`=$id";
+            $updateUsers = 'UPDATE ' . tbname('users') .
+                    ' SET `group_id`=' . $move_users_to . " where `group_id`=$id";
         }
 
         db_query($updateUsers);
 
-        $deleteGroupSQL = "DELETE FROM `" . tbname('groups') .
-                "` WHERE id=" . $id;
+        $deleteGroupSQL = 'DELETE FROM `' . tbname('groups') .
+                '` WHERE id=' . $id;
         db_query($deleteGroupSQL);
     }
 
@@ -110,8 +110,8 @@ class ACL
             return null;
         }
 
-        $sqlString = "SELECT * FROM `" . tbname('groups') .
-                "` WHERE id=" . $group_id;
+        $sqlString = 'SELECT * FROM `' . tbname('groups') .
+                '` WHERE id=' . $group_id;
         $result = db_query($sqlString);
 
         if (db_num_rows($result) == 0) {
@@ -131,7 +131,7 @@ class ACL
     public function getAllGroups(string $order = 'id DESC'): array
     {
         $list = [];
-        $sql = "SELECT id, name FROM `" . tbname('groups') . "` ORDER by " . $order;
+        $sql = 'SELECT id, name FROM `' . tbname('groups') . '` ORDER by ' . $order;
         $result = db_query($sql);
         while ($assoc = db_fetch_assoc($result)) {
             $list[$assoc['id']] = $assoc['name'];

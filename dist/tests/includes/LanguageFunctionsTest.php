@@ -9,7 +9,7 @@ class LanguageFunctionsTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
-        $this->initialSettingsLanguage = Settings::get("system_language");
+        $this->initialSettingsLanguage = Settings::get('system_language');
     }
 
     protected function tearDown(): void
@@ -33,30 +33,30 @@ class LanguageFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testGetPreferredLanguage()
     {
-        $acceptLanguageHeader1 = "Accept-Language: da, en - gb;
+        $acceptLanguageHeader1 = 'Accept-Language: da, en - gb;
         q = 0.8, en;
         q = 0.7, de;
-        q = 0.5";
+        q = 0.5';
         $this->assertEquals('en', get_prefered_language(['de', 'en'], $acceptLanguageHeader1));
 
-        $acceptLanguageHeader2 = "Accept-Language: da, en - gb;
+        $acceptLanguageHeader2 = 'Accept-Language: da, en - gb;
         q = 0.8, en;
         q = 0.7, de;
-        q = 0.9";
+        q = 0.9';
         $this->assertEquals('de', get_prefered_language(['de', 'en'], $acceptLanguageHeader2));
     }
 
     public function testGetLanguageNameByCodeReturnsName()
     {
-        $this->assertEquals("Deutsch", getLanguageNameByCode('de'));
-        $this->assertEquals("English", getLanguageNameByCode('en'));
+        $this->assertEquals('Deutsch', getLanguageNameByCode('de'));
+        $this->assertEquals('English', getLanguageNameByCode('en'));
     }
 
     public function testGetLanguageNameByCodeReturnsCode()
     {
         $this->assertEquals(
-            "gibts_nicht",
-            getLanguageNameByCode("gibts_nicht")
+            'gibts_nicht',
+            getLanguageNameByCode('gibts_nicht')
         );
     }
 
@@ -83,7 +83,7 @@ class LanguageFunctionsTest extends \PHPUnit\Framework\TestCase
         $language->loadByLanguageCode('en');
 
         $group = new Group();
-        $group->setName("Testgroup");
+        $group->setName('Testgroup');
         $group->setLanguages(
             [
                 $language
@@ -92,10 +92,10 @@ class LanguageFunctionsTest extends \PHPUnit\Framework\TestCase
         $group->save();
 
         $user = new User();
-        $user->setUsername("testuser-1");
+        $user->setUsername('testuser-1');
         $user->setPassword(rand_string(23));
-        $user->setLastname("Beutlin");
-        $user->setFirstname("Bilbo");
+        $user->setLastname('Beutlin');
+        $user->setFirstname('Bilbo');
         $user->setHTMLEditor(HtmlEditor::CKEDITOR);
         $user->setPrimaryGroup($group);
         $user->save();
@@ -122,20 +122,20 @@ class LanguageFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testGetSystemLanguageReturnsSystemLanguageFromSession()
     {
-        $_SESSION["system_language"] = 'de';
+        $_SESSION['system_language'] = 'de';
         $_SESSION['language'] = 'en';
         $this->assertEquals('de', getSystemLanguage());
     }
 
     public function testGetSystemLanguageReturnsSystemLanguageFromSetting()
     {
-        Settings::set("system_language", 'en');
+        Settings::set('system_language', 'en');
         $this->assertEquals('en', getSystemLanguage());
     }
 
     public function testGetSystemLanguageReturnsDe()
     {
-        Settings::delete("system_language");
+        Settings::delete('system_language');
 
         $this->assertEquals('de', getSystemLanguage());
     }

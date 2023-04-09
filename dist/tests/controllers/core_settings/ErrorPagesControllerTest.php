@@ -7,10 +7,10 @@ class ErrorPagesControllerTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $this->defaultSettings = [
-            "error_page_403_de" => Settings::get("error_page_403_de"),
-            "error_page_403_en" => Settings::get("error_page_403_en"),
-            "error_page_404_de" => Settings::get("error_page_404_de"),
-            "error_page_404_en" => Settings::get("error_page_404_en")
+            'error_page_403_de' => Settings::get('error_page_403_de'),
+            'error_page_403_en' => Settings::get('error_page_403_en'),
+            'error_page_404_de' => Settings::get('error_page_404_de'),
+            'error_page_404_en' => Settings::get('error_page_404_en')
         ];
     }
 
@@ -25,14 +25,14 @@ class ErrorPagesControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testSavePost(): void
     {
-        $_POST["error_page"] = [
-            "403" => [
-                'de' => "12",
-                'en' => "34"
+        $_POST['error_page'] = [
+            '403' => [
+                'de' => '12',
+                'en' => '34'
             ],
-            "404" => [
-                'de' => "56",
-                'en' => "78"
+            '404' => [
+                'de' => '56',
+                'en' => '78'
             ]
         ];
 
@@ -40,35 +40,35 @@ class ErrorPagesControllerTest extends \PHPUnit\Framework\TestCase
         $controller->_savePost();
 
         $this->assertEquals(
-            "12",
-            Settings::get("error_page_403_de")
+            '12',
+            Settings::get('error_page_403_de')
         );
 
         $this->assertEquals(
-            "34",
-            Settings::get("error_page_403_en")
+            '34',
+            Settings::get('error_page_403_en')
         );
 
         $this->assertEquals(
-            "56",
-            Settings::get("error_page_404_de")
+            '56',
+            Settings::get('error_page_404_de')
         );
 
         $this->assertEquals(
-            "78",
-            Settings::get("error_page_404_en")
+            '78',
+            Settings::get('error_page_404_en')
         );
     }
 
     public function testSavePostUnset(): void
     {
-        $_POST["error_page"] = [
-            "403" => [
-                'de' => "12",
+        $_POST['error_page'] = [
+            '403' => [
+                'de' => '12',
                 'en' => 0
             ],
-            "404" => [
-                'de' => "56",
+            '404' => [
+                'de' => '56',
                 'en' => 0
             ]
         ];
@@ -77,11 +77,11 @@ class ErrorPagesControllerTest extends \PHPUnit\Framework\TestCase
         $controller->_savePost();
 
         $this->assertEquals(
-            "12",
-            Settings::get("error_page_403_de")
+            '12',
+            Settings::get('error_page_403_de')
         );
-        $this->assertEquals("56", Settings::get("error_page_404_de"));
-        $this->assertNull(Settings::get("error_page_404_en"));
-        $this->assertNull(Settings::get("error_page_403_en"));
+        $this->assertEquals('56', Settings::get('error_page_404_de'));
+        $this->assertNull(Settings::get('error_page_404_en'));
+        $this->assertNull(Settings::get('error_page_403_en'));
     }
 }

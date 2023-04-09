@@ -31,7 +31,7 @@ class Theme
      */
     public function getVersion(): ?string
     {
-        return getThemeMeta($this->name, "version");
+        return getThemeMeta($this->name, 'version');
     }
 
     /**
@@ -42,9 +42,9 @@ class Theme
     {
         $screenshotFile = null;
         $screenshotFiles = [
-            "screenshot.jpg",
-            "screenshot.png",
-            "screenshot.gif"
+            'screenshot.jpg',
+            'screenshot.png',
+            'screenshot.gif'
         ];
         foreach ($screenshotFiles as $file) {
             $fullPath = getTemplateDirPath($this->name) . $file;

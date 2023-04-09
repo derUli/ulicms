@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><?php translate("error"); ?></title>
+        <title><?php translate('error'); ?></title>
         <style>
 <?php
-        readfile(Path::resolve("ULICMS_ROOT/lib/css/core.scss"));
-        readfile(Path::resolve("ULICMS_ROOT/admin/css/modern.scss"));
+        readfile(Path::resolve('ULICMS_ROOT/lib/css/core.scss'));
+        readfile(Path::resolve('ULICMS_ROOT/admin/css/modern.scss'));
         ?> body {
                 padding: 10px;
             }
@@ -14,9 +14,9 @@
     </head>
 
     <body>
-        <h1><?php translate("error"); ?></h1>
+        <h1><?php translate('error'); ?></h1>
         <blockquote>
-            <?php echo ViewBag::get("exception"); ?>
+            <?php echo ViewBag::get('exception'); ?>
         </blockquote>
     </body>
 </html>

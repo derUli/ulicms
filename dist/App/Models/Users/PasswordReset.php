@@ -65,7 +65,7 @@ class PasswordReset
         $from = Settings::get('email');
         $headers = "From: $from\r\n";
         $headers .= "Mime-Version: 1.0\r\n";
-        $headers .= "Content-type: text/plain; charset=utf-8";
+        $headers .= 'Content-type: text/plain; charset=utf-8';
         Mailer::send($to, $subject, $message, $headers);
     }
 

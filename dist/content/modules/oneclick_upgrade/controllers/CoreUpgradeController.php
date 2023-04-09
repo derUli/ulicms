@@ -16,7 +16,7 @@ class CoreUpgradeController extends Controller
     public function getCheckURL(): string
     {
         $version = cms_version();
-        $channel = Settings::get("oneclick_upgrade_channel");
+        $channel = Settings::get('oneclick_upgrade_channel');
         return "https://channels.ulicms.de/$version/$channel.json";
     }
 
@@ -44,7 +44,7 @@ class CoreUpgradeController extends Controller
         $version = $data->version;
         $cfg = new UliCMSVersion();
         $oldVersion = $cfg->getInternalVersionAsString();
-        if (\App\Utils\VersionComparison::compare($oldVersion, $data->version, "<")) {
+        if (\App\Utils\VersionComparison::compare($oldVersion, $data->version, '<')) {
             return $data->version;
         }
         return null;
@@ -55,7 +55,7 @@ class CoreUpgradeController extends Controller
         @set_time_limit(0);
         @ignore_user_abort(true);
         $acl = new ACL();
-        if ((!$skipPermissions && (!$acl->hasPermission("update_system")) || !$this->checkForUpgrades() || get_request_method() != "post")) {
+        if ((!$skipPermissions && (!$acl->hasPermission('update_system')) || !$this->checkForUpgrades() || get_request_method() != 'post')) {
             return false;
         }
 
@@ -64,7 +64,7 @@ class CoreUpgradeController extends Controller
             return null;
         }
 
-        $tmpDir = Path::resolve("ULICMS_TMP/upgrade");
+        $tmpDir = Path::resolve('ULICMS_TMP/upgrade');
         $tmpArchive = Path::resolve("$tmpDir/upgrade.zip");
 
         if (is_dir($tmpDir)) {
@@ -77,7 +77,7 @@ class CoreUpgradeController extends Controller
         try {
             $data = file_get_contents_wrapper($jsonData->file, false, $jsonData->hashsum);
         } catch (CorruptDownloadException $e) {
-            Response::redirect(ModuleHelper::buildActionURL("CorruptedDownloadError"));
+            Response::redirect(ModuleHelper::buildActionURL('CorruptedDownloadError'));
         }
         if ($data) {
             file_put_contents($tmpArchive, $data);
@@ -93,7 +93,7 @@ class CoreUpgradeController extends Controller
                 recurse_copy($upgradeCodeDir, ULICMS_ROOT);
                 sureRemoveDir($tmpDir, true);
 
-                response::redirect("../update.php");
+                response::redirect('../update.php');
                 return true;
             } else {
                 return false;

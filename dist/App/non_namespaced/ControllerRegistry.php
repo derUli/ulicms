@@ -20,14 +20,14 @@ class ControllerRegistry
         $modules = $moduleManager->getEnabledModuleNames();
 
         foreach ($modules as $module) {
-            $controllers = getModuleMeta($module, "controllers");
+            $controllers = getModuleMeta($module, 'controllers');
             if ($controllers) {
                 foreach ($controllers as $key => $value) {
                     $path = getModulePath($module, true) .
                             trim($value, '/');
 
-                    if (!str_ends_with($path, ".php")) {
-                        $path .= ".php";
+                    if (!str_ends_with($path, '.php')) {
+                        $path .= '.php';
                     }
 
                     $controllerRegistry[$key] = $path;
@@ -37,7 +37,7 @@ class ControllerRegistry
             // read controller function permissions from metadata files of modules
             $controller_function_permissions = getModuleMeta(
                 $module,
-                "controller_function_permissions"
+                'controller_function_permissions'
             );
             if ($controller_function_permissions) {
                 foreach ($controller_function_permissions as $key => $value) {
@@ -59,15 +59,15 @@ class ControllerRegistry
 
     public static function runMethods(): void
     {
-        if (isset($_REQUEST["sClass"])
-                && !empty($_REQUEST["sClass"])) {
-            if (self::get($_REQUEST["sClass"])) {
-                $sClass = $_REQUEST["sClass"];
+        if (isset($_REQUEST['sClass'])
+                && !empty($_REQUEST['sClass'])) {
+            if (self::get($_REQUEST['sClass'])) {
+                $sClass = $_REQUEST['sClass'];
                 self::get($sClass)->runCommand();
             } else {
-                $sClass = $_REQUEST["sClass"];
+                $sClass = $_REQUEST['sClass'];
                 throw new BadMethodCallException(
-                    "class " . _esc($sClass) . " not found"
+                    'class ' . _esc($sClass) . ' not found'
                 );
             }
         }
@@ -90,9 +90,9 @@ class ControllerRegistry
     {
         $allowed = true;
         $acl = new ACL();
-        $methodIdentifier = $sClass . "::" . $sMethod;
+        $methodIdentifier = $sClass . '::' . $sMethod;
 
-        $wildcardMethodIdentifier = $sClass . "::*";
+        $wildcardMethodIdentifier = $sClass . '::*';
 
         if (
             isset(self::$controller_function_permissions[$methodIdentifier]) &&

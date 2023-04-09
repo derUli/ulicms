@@ -51,7 +51,7 @@ if (is_file($composerAutoloadFile)) {
 // Autoloader
 spl_autoload_register(function ($className) {
     // Interim solution for not yet namespaced classes
-    if (!str_contains($className, "\\")) {
+    if (!str_contains($className, '\\')) {
         $className = "App\\non_namespaced\\{$className}";
     }
 

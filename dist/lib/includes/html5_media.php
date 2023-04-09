@@ -12,11 +12,11 @@ use App\Models\Media\Video;
  */
 function replaceAudioTags(string $txt): ?string
 {
-    $audio_dir = "content/audio/";
+    $audio_dir = 'content/audio/';
 
 
     // TODO: Use Regex
-    $contains = strpos($txt, "[audio id=") !== false;
+    $contains = strpos($txt, '[audio id=') !== false;
 
     // If there is no [audio=XXX] in page return
     if (!$contains) {
@@ -26,9 +26,9 @@ function replaceAudioTags(string $txt): ?string
     $audios = Audio::getAll();
 
     foreach ($audios as $audio) {
-        $code1 = "[audio id=\"" . $audio->getId() . "\"]";
-        $code2 = "[audio id=&quot;" . $audio->getId() . "&quot;]";
-        $code3 = "[audio id=" . $audio->getId() . "]";
+        $code1 = '[audio id="' . $audio->getId() . '"]';
+        $code2 = '[audio id=&quot;' . $audio->getId() . '&quot;]';
+        $code3 = '[audio id=' . $audio->getId() . ']';
 
         $html = $audio->render();
 
@@ -47,10 +47,10 @@ function replaceAudioTags(string $txt): ?string
  */
 function replaceVideoTags(string $txt): string
 {
-    $video_dir = "content/videos/";
+    $video_dir = 'content/videos/';
 
     // TODO: Use Regex
-    $contains = strpos($txt, "[video id=") !== false;
+    $contains = strpos($txt, '[video id=') !== false;
 
     // If there is no [video=XXX] in page return
     if (!$contains) {
@@ -60,9 +60,9 @@ function replaceVideoTags(string $txt): string
     $videos = Video::getAll();
 
     foreach ($videos as $video) {
-        $code1 = "[video id=\"" . $video->getId() . "\"]";
-        $code2 = "[video id=&quot;" . $video->getId() . "&quot;]";
-        $code3 = "[video id=" . $video->getId() . "]";
+        $code1 = '[video id="' . $video->getId() . '"]';
+        $code2 = '[video id=&quot;' . $video->getId() . '&quot;]';
+        $code3 = '[video id=' . $video->getId() . ']';
 
         $html = $video->render();
 

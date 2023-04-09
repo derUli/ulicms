@@ -5,15 +5,15 @@ declare(strict_types=1);
 use App\Helpers\StringHelper;
 use Nette\Utils\Random;
 
-if (!defined("RESPONSIVE_FM")) {
+if (!defined('RESPONSIVE_FM')) {
     function sanitize(array & $array): void
     {
         foreach ($array as & $data) {
             $data = str_ireplace([
                 "\r",
                 "\n",
-                "%0a",
-                "%0d"
+                '%0a',
+                '%0d'
                     ], '', stripslashes($data));
         }
     }
@@ -21,7 +21,7 @@ if (!defined("RESPONSIVE_FM")) {
 
 function _unesc(string $string): string
 {
-    return html_entity_decode($string, ENT_COMPAT, "UTF-8");
+    return html_entity_decode($string, ENT_COMPAT, 'UTF-8');
 }
 
 function unesc(string $string): void
@@ -125,10 +125,10 @@ function bool2YesNo(
     ?string $noString = null
 ): string {
     if (!$yesString) {
-        $yesString = get_translation("yes");
+        $yesString = get_translation('yes');
     }
     if (!$noString) {
-        $noString = get_translation("no");
+        $noString = get_translation('no');
     }
     return ($value ? $yesString : $noString);
 }
@@ -151,5 +151,5 @@ function getStringLengthInBytes(string $data): int
 
 function splitAndTrim(string $str): array
 {
-    return array_map('trim', explode(";", $str));
+    return array_map('trim', explode(';', $str));
 }

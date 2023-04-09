@@ -36,7 +36,7 @@ class Model
     // override this method to implement your sql select statement
     public function loadByID($id)
     {
-        throw new NotImplementedException("load not implemented");
+        throw new NotImplementedException('load not implemented');
     }
 
     public function save()
@@ -53,25 +53,25 @@ class Model
     // class variables
     protected function fillVars($result = null)
     {
-        throw new NotImplementedException("fillVars not implemented");
+        throw new NotImplementedException('fillVars not implemented');
     }
 
     // override this method to implement your sql insert statement
     protected function insert()
     {
-        throw new NotImplementedException("insert not implemented");
+        throw new NotImplementedException('insert not implemented');
     }
 
     // override this method to implement your sql update statement
     protected function update()
     {
-        throw new NotImplementedException("update not implemented");
+        throw new NotImplementedException('update not implemented');
     }
 
     // override this method to implement your sql delete statement
     public function delete()
     {
-        throw new NotImplementedException("delete not implemented");
+        throw new NotImplementedException('delete not implemented');
     }
 
     public function setID($id)
@@ -90,7 +90,7 @@ class Model
         $values = (array) $values;
         foreach ($values as $key => $value) {
             $camelCaseVar = ModuleHelper::underscoreToCamel($key);
-            $method = "set" . ucfirst($camelCaseVar);
+            $method = 'set' . ucfirst($camelCaseVar);
             // if a setter method exists, call it
             if (method_exists($this, $method)) {
                 $this->$method($value);
@@ -109,14 +109,14 @@ class Model
     {
         // if it's required and $value is null throw exception
         if ($required && $value === null) {
-            throw new InvalidArgumentException("Required field not filled");
+            throw new InvalidArgumentException('Required field not filled');
         }
         // if it's null and not required it's ok
         if ($type === null) {
             return true;
         }
 
-        $isXyzFunction = "is_" . $type;
+        $isXyzFunction = 'is_' . $type;
         if (function_exists($isXyzFunction) && !var_is_type($value, $type, $required)) {
             throw new InvalidArgumentException("\"{$value}\" is not of type {$type}.");
         } elseif (class_exists($type) && $value instanceof $type) {
@@ -129,12 +129,12 @@ class Model
     public static function getAllDatasets(
         $tableName,
         $modelClass,
-        $orderBy = "id",
+        $orderBy = 'id',
         $where = ''
     ): array {
         $datasets = [];
         $result = Database::selectAll($tableName, [
-                    "id"
+                    'id'
                         ], $where, [], true, $orderBy);
         while ($row = Database::fetchObject($result)) {
             $datasets[] = new $modelClass($row->id);
@@ -163,7 +163,7 @@ class Model
             $camelCaseVar = ModuleHelper::underscoreToCamel(
                 $property->getName()
             );
-            $method = "get" . ucfirst($camelCaseVar);
+            $method = 'get' . ucfirst($camelCaseVar);
 
             if (method_exists($this, $method)
                     && $this->$method() != $originalDataset->$method()) {

@@ -12,18 +12,18 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         LoggerRegistry::register(
-            "exception_log",
-            new Logger(Path::resolve("ULICMS_LOG/exception_log"))
+            'exception_log',
+            new Logger(Path::resolve('ULICMS_LOG/exception_log'))
         );
     }
 
     protected function tearDown(): void
     {
-        Database::deleteFrom("content", "type = 'gibts_nicht' or slug like 'unit-test-%'");
-        Database::deleteFrom("categories", "name like 'The Test%'");
-        Database::deleteFrom("users", "username like 'testuser%'");
+        Database::deleteFrom('content', "type = 'gibts_nicht' or slug like 'unit-test-%'");
+        Database::deleteFrom('categories', "name like 'The Test%'");
+        Database::deleteFrom('users', "username like 'testuser%'");
 
-        LoggerRegistry::unregister("exception_log");
+        LoggerRegistry::unregister('exception_log');
     }
 
     public function testGetAllbyType()
@@ -72,7 +72,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
 
         $page = new Page();
 
-        $page->type = "gibts_nicht";
+        $page->type = 'gibts_nicht';
         $page->position = 0;
         $page->language = 'de';
         $page->slug = 'test-123';
@@ -89,13 +89,13 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
             "Content with id={$page->getId()} has unknown content type \"{$page->type}\""
         );
 
-        ContentFactory::getBySlugAndLanguage("test-123", 'de');
+        ContentFactory::getBySlugAndLanguage('test-123', 'de');
     }
 
     public function testGetAllByParent()
     {
-        $result = Database::pQuery("select parent_id from {prefix}content where "
-                        . "parent_id is not null", [], true);
+        $result = Database::pQuery('select parent_id from {prefix}content where '
+                        . 'parent_id is not null', [], true);
         $dataset = Database::fetchObject($result);
 
         $pages = ContentFactory::getAllByParent($dataset->parent_id);
@@ -119,7 +119,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
     public function testGetAll()
     {
         $content = ContentFactory::getAll();
-        $result = Database::pQuery("select id from {prefix}content", [], true);
+        $result = Database::pQuery('select id from {prefix}content', [], true);
         $this->assertEquals(count($content), Database::getNumRows($result));
 
         foreach ($content as $page) {
@@ -183,7 +183,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
         $page->language = 'de';
-        $page->content = "Some Text";
+        $page->content = 'Some Text';
         $page->comments_enabled = true;
         $page->author_id = 1;
         $page->group_id = 1;
@@ -191,12 +191,12 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
 
         $comment = new Comment();
         $comment->setContentId($page->id);
-        $comment->setAuthorName("John Doe");
-        $comment->setAuthorEmail("john@doe.de");
-        $comment->setAuthorUrl("http://john-doe.de");
-        $comment->setIp("123.123.123.123");
-        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
-        $comment->setText("Unit Test 1");
+        $comment->setAuthorName('John Doe');
+        $comment->setAuthorEmail('john@doe.de');
+        $comment->setAuthorUrl('http://john-doe.de');
+        $comment->setIp('123.123.123.123');
+        $comment->setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36');
+        $comment->setText('Unit Test 1');
         $comment->setRead(true);
 
         $time = time();
@@ -210,11 +210,11 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
     public function testFilterByCategory()
     {
         $category1 = new Category();
-        $category1->setName("The Test 1 ");
+        $category1->setName('The Test 1 ');
         $category1->save();
 
         $category2 = new Category();
-        $category2->setName("The Test 2");
+        $category2->setName('The Test 2');
         $category2->save();
 
         $contentDatasets = [];
@@ -224,7 +224,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
             $page->title = 'Unit Test ' . time();
             $page->slug = 'unit-test-' . time() . "-$i";
             $page->language = 'de';
-            $page->content = "Some Text";
+            $page->content = 'Some Text';
             $page->comments_enabled = true;
             $page->author_id = 1;
             $page->group_id = 1;
@@ -238,7 +238,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
             $page->title = 'Unit Test ' . time();
             $page->slug = 'unit-test-' . time() . "-$i-zwei";
             $page->language = 'de';
-            $page->content = "Some Text";
+            $page->content = 'Some Text';
             $page->comments_enabled = true;
             $page->author_id = 1;
             $page->group_id = 1;
@@ -259,17 +259,17 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
     public function testFilterByAutor()
     {
         $testUser1 = new User();
-        $testUser1->setUsername("testuser1");
-        $testUser1->setLastname("Doe");
-        $testUser1->setFirstname("John");
-        $testUser1->setPassword("foobar");
+        $testUser1->setUsername('testuser1');
+        $testUser1->setLastname('Doe');
+        $testUser1->setFirstname('John');
+        $testUser1->setPassword('foobar');
         $testUser1->save();
 
         $testUser2 = new User();
-        $testUser2->setUsername("testuser2");
-        $testUser2->setLastname("Doe");
-        $testUser2->setFirstname("Jane");
-        $testUser2->setPassword("foobar");
+        $testUser2->setUsername('testuser2');
+        $testUser2->setLastname('Doe');
+        $testUser2->setFirstname('Jane');
+        $testUser2->setPassword('foobar');
         $testUser2->save();
 
         $contentDatasets = [];
@@ -279,7 +279,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
             $page->title = 'Unit Test ' . time();
             $page->slug = 'unit-test-' . time() . "-$i";
             $page->language = 'de';
-            $page->content = "Some Text";
+            $page->content = 'Some Text';
             $page->comments_enabled = true;
             $page->author_id = $testUser1->getId();
             $page->group_id = 1;
@@ -293,7 +293,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
             $page->title = 'Unit Test ' . time();
             $page->slug = 'unit-test-' . time() . "-$i-zwei";
             $page->language = 'de';
-            $page->content = "Some Text";
+            $page->content = 'Some Text';
             $page->comments_enabled = true;
             $page->author_id = $testUser2->getId();
             $page->group_id = 1;
@@ -314,17 +314,17 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
     public function testFilterByLastChangeBy()
     {
         $testUser1 = new User();
-        $testUser1->setUsername("testuser1");
-        $testUser1->setLastname("Doe");
-        $testUser1->setFirstname("John");
-        $testUser1->setPassword("foobar");
+        $testUser1->setUsername('testuser1');
+        $testUser1->setLastname('Doe');
+        $testUser1->setFirstname('John');
+        $testUser1->setPassword('foobar');
         $testUser1->save();
 
         $testUser2 = new User();
-        $testUser2->setUsername("testuser2");
-        $testUser2->setLastname("Doe");
-        $testUser2->setFirstname("Jane");
-        $testUser2->setPassword("foobar");
+        $testUser2->setUsername('testuser2');
+        $testUser2->setLastname('Doe');
+        $testUser2->setFirstname('Jane');
+        $testUser2->setPassword('foobar');
         $testUser2->save();
 
         $contentDatasets = [];
@@ -334,7 +334,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
             $page->title = 'Unit Test ' . time();
             $page->slug = 'unit-test-' . time() . "-$i";
             $page->language = 'de';
-            $page->content = "Some Text";
+            $page->content = 'Some Text';
             $page->comments_enabled = true;
             $page->author_id = $testUser1->getId();
             $page->lastchangeby = $testUser1->getId();
@@ -349,7 +349,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
             $page->title = 'Unit Test ' . time();
             $page->slug = 'unit-test-' . time() . "-$i-zwei";
             $page->language = 'de';
-            $page->content = "Some Text";
+            $page->content = 'Some Text';
             $page->comments_enabled = true;
             $page->author_id = $testUser2->getId();
             $page->lastchangeby = $testUser2->getId();
@@ -373,11 +373,11 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
         $contents = ContentFactory::getForFilter(
             'de',
             1,
-            "top",
+            'top',
             5,
-            "title",
-            "asc",
-            "module",
+            'title',
+            'asc',
+            'module',
             4
         );
 
@@ -386,7 +386,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
 
         foreach ($contents as $content) {
             $this->assertEquals('de', $content->language);
-            $this->assertEquals("top", $content->menu);
+            $this->assertEquals('top', $content->menu);
             $this->assertInstanceOf(Module_Page::class, $content);
         }
     }

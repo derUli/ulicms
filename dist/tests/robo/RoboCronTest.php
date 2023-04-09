@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . "/RoboTestFile.php";
-require_once __DIR__ . "/RoboTestBase.php";
+require_once __DIR__ . '/RoboTestFile.php';
+require_once __DIR__ . '/RoboTestBase.php';
 
 class RoboCronTest extends RoboTestBase
 {
@@ -9,7 +9,7 @@ class RoboCronTest extends RoboTestBase
     {
         $actual = $this->runRoboCommand(
             [
-                "cron"
+                'cron'
             ]
         );
         $this->assertStringContainsString('finished cron at', $actual);

@@ -56,7 +56,7 @@ class StringHelper extends Helper
         int $maxLength = 100
     ): string {
         $excerpt = $str;
-        $str = str_replace("&nbsp;", " ", $str);
+        $str = str_replace('&nbsp;', ' ', $str);
         if (strlen($str) > $maxLength) {
             $excerpt = substr($str, $startPos, $maxLength - 3);
             $lastSpace = strrpos($excerpt, ' ');
@@ -77,14 +77,14 @@ class StringHelper extends Helper
         $str = normalizeLN($str, "\n");
         $lines = explode("\n", $str);
         if ($trim) {
-            $lines = array_map("trim", $lines);
+            $lines = array_map('trim', $lines);
         }
         if ($removeEmpty) {
-            $lines = array_filter($lines, "strlen");
+            $lines = array_filter($lines, 'strlen');
         }
         if ($removeComments) {
             $lines = array_filter($lines, function ($line) {
-                return !str_starts_with($line, "#");
+                return !str_starts_with($line, '#');
             });
         }
         $lines = array_values($lines);

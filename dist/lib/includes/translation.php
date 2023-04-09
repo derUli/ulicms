@@ -6,7 +6,7 @@ function get_translation(string $name, array $placeholders = []): string
 {
     $iname = strtoupper($name);
     foreach (get_defined_constants() as $key => $value) {
-        if (str_starts_with($key, "TRANSLATION_") && $key === "TRANSLATION_" . $iname) {
+        if (str_starts_with($key, 'TRANSLATION_') && $key === 'TRANSLATION_' . $iname) {
             // Platzhalter ersetzen, diese können
             // als assoziatives Array als zweiter Parameter
             // dem Funktionsaufruf mitgegeben werden
@@ -33,8 +33,8 @@ function t(string $name, array $placeholders = []): void
 function singularOrPlural(int $count, string $singular, string $plural)
 {
     return $count === 1 ?
-            str_ireplace("%number%", (string) $count, (string) $singular) :
-            str_ireplace("%number%", (string) $count, (string) $plural);
+            str_ireplace('%number%', (string) $count, (string) $singular) :
+            str_ireplace('%number%', (string) $count, (string) $plural);
 }
 
 function translation(string $name, array $placeholders = []): void
@@ -72,8 +72,8 @@ function add_translation(string $key, string $value): void
 function register_translation(string $key, string $value): void
 {
     $key = strtoupper($key);
-    if (!str_starts_with($key, "TRANSLATION_")) {
-        $key = "TRANSLATION_" . $key;
+    if (!str_starts_with($key, 'TRANSLATION_')) {
+        $key = 'TRANSLATION_' . $key;
     }
 
     defined($key) || define($key, $value);

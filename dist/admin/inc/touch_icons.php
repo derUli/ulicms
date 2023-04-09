@@ -1,5 +1,5 @@
 <?php
-$controller = ControllerRegistry::get("FaviconController");
+$controller = ControllerRegistry::get('FaviconController');
 
 $hasFavicon = $controller && $controller->_hasFavicon();
 ?>

@@ -32,20 +32,20 @@ class AvailablePackageVersionMatcher
         $parsedVersionData = is_string($versionData) ?
                 json_decode($versionData, true) : $versionData;
 
-        $versions = is_array($parsedVersionData["versions"]) ?
-                $parsedVersionData["versions"] : [];
+        $versions = is_array($parsedVersionData['versions']) ?
+                $parsedVersionData['versions'] : [];
 
         foreach ($versions as $version) {
             if (ArrayHelper::hasMultipleKeys(
                 $version,
                 [
-                                "version",
-                                "compatible_with",
-                                "file"
+                                'version',
+                                'compatible_with',
+                                'file'
                             ]
             ) &&
-                    is_version_number($version["version"]) &&
-                    is_version_number($version["compatible_with"])
+                    is_version_number($version['version']) &&
+                    is_version_number($version['compatible_with'])
             ) {
                 $this->versionData[] = $version;
             }
@@ -58,16 +58,16 @@ class AvailablePackageVersionMatcher
 
         usort($releases, function ($a, $b) {
             return \App\Utils\VersionComparison::compare(
-                $a["version"],
-                $b["version"],
-                "<"
+                $a['version'],
+                $b['version'],
+                '<'
             ) ? 1 : 0;
         });
         usort($releases, function ($a, $b) {
             return \App\Utils\VersionComparison::compare(
-                $a["compatible_with"],
-                $b["compatible_with"],
-                "<"
+                $a['compatible_with'],
+                $b['compatible_with'],
+                '<'
             ) ? 1 : 0;
         });
 
@@ -81,9 +81,9 @@ class AvailablePackageVersionMatcher
 
         foreach ($allReleases as $release) {
             $compatible = \App\Utils\VersionComparison::compare(
-                $release["compatible_with"],
+                $release['compatible_with'],
                 $ulicmsVersion,
-                ">="
+                '>='
             );
 
             if ($compatible) {

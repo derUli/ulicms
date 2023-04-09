@@ -8,7 +8,7 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase
     protected function tearDown(): void
     {
         Database::query(
-            "delete from {prefix}categories "
+            'delete from {prefix}categories '
             . "where name like 'Test Category %' ",
             true
         );
@@ -16,12 +16,12 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase
 
     public function testAddUpdateAndDeleteCategory()
     {
-        $name = "Test Category " . uniqid();
+        $name = 'Test Category ' . uniqid();
         $description = uniqid();
         $id = Categories::addCategory($name, $description);
         $this->assertGreaterThanOrEqual(1, $id);
 
-        $newName = "Test Category " . uniqid();
+        $newName = 'Test Category ' . uniqid();
         $newDescription = uniqid();
 
         $this->assertEquals($name, Categories::getCategoryById($id));
@@ -40,20 +40,20 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase
 
     public function testGetAllCategories()
     {
-        $categories = Categories::getAllCategories("id");
+        $categories = Categories::getAllCategories('id');
         $this->assertGreaterThanOrEqual(0, count($categories));
         foreach ($categories as $category) {
             $this->assertInstanceOf(Category::class, $category);
         }
 
-        $this->assertEquals("Allgemein", $categories[0]->getName());
+        $this->assertEquals('Allgemein', $categories[0]->getName());
     }
 
     public function testGetHTMLSelectWithAllowNullWithoutDefault()
     {
         $this->assertStringContainsString(
             "<option value='0' selected='selected'>[" .
-            get_translation("every") . "]</option>",
+            get_translation('every') . ']</option>',
             Categories::getHTMLSelect(0, true)
         );
     }
@@ -61,8 +61,8 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase
     public function testGetHTMLSelectWithAllowNullWithDefault()
     {
         $this->assertStringContainsString(
-            "<option value='0'>[" . get_translation("every") .
-            "]</option>",
+            "<option value='0'>[" . get_translation('every') .
+            ']</option>',
             Categories::getHTMLSelect(1, true)
         );
     }
@@ -71,7 +71,7 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertStringContainsString(
             "<select name='my_field_name' id='my_field_name' size='1'",
-            Categories::getHTMLSelect(1, true, "my_field_name")
+            Categories::getHTMLSelect(1, true, 'my_field_name')
         );
     }
 

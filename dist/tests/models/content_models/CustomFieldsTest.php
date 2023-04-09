@@ -6,13 +6,13 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase
     {
         $id = $this->getFirstPage()->id;
         $type = $this->getFirstPage()->type;
-        Database::pQuery("delete from {prefix}custom_fields where name in (?, ?) and content_id = ?", [
+        Database::pQuery('delete from {prefix}custom_fields where name in (?, ?) and content_id = ?', [
             "{$type}_foo",
             "{$type}_hello",
             (int)$id
                 ], true);
 
-        Vars::delete("id");
+        Vars::delete('id');
 
         $_GET = [];
         $_REQUEST = [];
@@ -30,26 +30,26 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase
         $id = $this->getFirstPage()->id;
         $type = $this->getFirstPage()->type;
 
-        CustomFields::set("foo", "bar", $id, true);
-        $this->assertEquals("bar", CustomFields::get("foo", $id));
+        CustomFields::set('foo', 'bar', $id, true);
+        $this->assertEquals('bar', CustomFields::get('foo', $id));
 
-        CustomFields::set("hello", "world", $id, true);
-        $this->assertEquals("world", CustomFields::get("hello", $id));
+        CustomFields::set('hello', 'world', $id, true);
+        $this->assertEquals('world', CustomFields::get('hello', $id));
 
         $all = CustomFields::getAll($id);
         $this->assertGreaterThanOrEqual(2, count($all));
 
-        $this->assertEquals("world", $all["hello"]);
-        $this->assertEquals("bar", $all["foo"]);
+        $this->assertEquals('world', $all['hello']);
+        $this->assertEquals('bar', $all['foo']);
 
-        CustomFields::set("foo", "other_value", $id, true);
-        $this->assertEquals("other_value", CustomFields::get("foo", $id));
+        CustomFields::set('foo', 'other_value', $id, true);
+        $this->assertEquals('other_value', CustomFields::get('foo', $id));
 
-        CustomFields::set("foo", null, $id, true);
-        $this->assertNull(CustomFields::get("foo", $id));
+        CustomFields::set('foo', null, $id, true);
+        $this->assertNull(CustomFields::get('foo', $id));
 
-        CustomFields::set("hello", null, $id, true);
-        $this->assertNull(CustomFields::get("hello", $id));
+        CustomFields::set('hello', null, $id, true);
+        $this->assertNull(CustomFields::get('hello', $id));
 
         $all = CustomFields::getAll($id);
         $this->assertGreaterThanOrEqual(0, count($all));
@@ -85,10 +85,10 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase
     {
         $id = $this->getFirstPage()->id;
 
-        $value = ["foo", "bar"];
-        CustomFields::set("foo", $value, $id, true);
+        $value = ['foo', 'bar'];
+        CustomFields::set('foo', $value, $id, true);
 
-        $this->assertEquals($value, CustomFields::get("foo", $id));
+        $this->assertEquals($value, CustomFields::get('foo', $id));
     }
 
     public function testSetAndGetFieldArrayWithoutId()
@@ -96,8 +96,8 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase
         $page = $this->getFirstPage();
         set_requested_pagename($page->slug, $page->language);
 
-        CustomFields::set("foo", "bar", null, false);
-        $this->assertEquals("bar", CustomFields::get("foo", null, false));
+        CustomFields::set('foo', 'bar', null, false);
+        $this->assertEquals('bar', CustomFields::get('foo', null, false));
     }
 
     public function testSetAndGetAllBooleanToTrueWithoutId()
@@ -105,9 +105,9 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase
         $page = $this->getFirstPage();
         set_requested_pagename($page->slug, $page->language);
 
-        CustomFields::set("foo", "bar");
+        CustomFields::set('foo', 'bar');
 
         $all = CustomFields::getAll();
-        $this->assertEquals("bar", $all["foo"]);
+        $this->assertEquals('bar', $all['foo']);
     }
 }

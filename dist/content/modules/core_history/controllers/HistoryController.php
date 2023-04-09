@@ -9,8 +9,8 @@ class HistoryController extends Controller
 {
     public function doRestore(): void
     {
-        if (isset($_GET["version_id"])) {
-            $version_id = (int)$_GET["version_id"];
+        if (isset($_GET['version_id'])) {
+            $version_id = (int)$_GET['version_id'];
 
             $revision = $this->_doRestore($version_id);
 
@@ -19,19 +19,19 @@ class HistoryController extends Controller
 
                 Response::redirect(
                     ModuleHelper::buildActionURL(
-                        "pages_edit",
-                        "page=" . $revision->content_id
+                        'pages_edit',
+                        'page=' . $revision->content_id
                     )
                 );
             } else {
                 ExceptionResult(
-                    get_translation("not_found", HttpStatusCode::NOT_FOUND)
+                    get_translation('not_found', HttpStatusCode::NOT_FOUND)
                 );
             }
         } else {
             ExceptionResult(
                 get_translation(
-                    "UNPROCESSABLE_ENTITY",
+                    'UNPROCESSABLE_ENTITY',
                     HttpStatusCode::UNPROCESSABLE_ENTITY
                 )
             );

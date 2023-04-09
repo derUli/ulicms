@@ -36,7 +36,7 @@ class UserManager
         string $order = 'id'
     ): array {
         $users = [];
-        $sql = "select id from {prefix}users where `locked` = ? "
+        $sql = 'select id from {prefix}users where `locked` = ? '
                 . "order by $order";
         $args = [
             (int)$locked

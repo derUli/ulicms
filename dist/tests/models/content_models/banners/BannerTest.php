@@ -5,18 +5,18 @@ use App\Exceptions\DatasetNotFoundException;
 
 class BannerTest extends \PHPUnit\Framework\TestCase
 {
-    public const HTML_TEXT1 = "My first Banner HTML";
-    public const HTML_TEXT2 = "My second Banner HTML";
-    public const NAME_TEXT1 = "My first Gif Banner";
-    public const NAME_TEXT2 = "My second Gif Banner";
-    public const IMAGE_URL_TEXT1 = "http://firma.de/bild.gif";
-    public const IMAGE_URL_TEXT2 = "http://firma.de/bild2.gif";
-    public const LINK_URL_TEXT1 = "http://www.google.de";
-    public const LINK_URL_TEXT2 = "http://www.yahoo.com";
+    public const HTML_TEXT1 = 'My first Banner HTML';
+    public const HTML_TEXT2 = 'My second Banner HTML';
+    public const NAME_TEXT1 = 'My first Gif Banner';
+    public const NAME_TEXT2 = 'My second Gif Banner';
+    public const IMAGE_URL_TEXT1 = 'http://firma.de/bild.gif';
+    public const IMAGE_URL_TEXT2 = 'http://firma.de/bild2.gif';
+    public const LINK_URL_TEXT1 = 'http://www.google.de';
+    public const LINK_URL_TEXT2 = 'http://www.yahoo.com';
 
     protected function tearDown(): void
     {
-        Database::pQuery("DELETE FROM `{prefix}banner` where html in (? , ?)", [
+        Database::pQuery('DELETE FROM `{prefix}banner` where html in (? , ?)', [
             self::HTML_TEXT1,
             self::HTML_TEXT2
                 ], true);
@@ -25,7 +25,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     public function testHTMLBannerWithoutLanguage()
     {
         $banner = new Banner();
-        $banner->setType("html");
+        $banner->setType('html');
         $banner->setHtml(self::HTML_TEXT1);
         $banner->save();
 
@@ -34,7 +34,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
 
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
-        $this->assertEquals("html", $banner->getType());
+        $this->assertEquals('html', $banner->getType());
         $this->assertEquals(self::HTML_TEXT1, $banner->getHtml());
         $this->assertNull($banner->getLanguage());
         $banner->setHtml(self::HTML_TEXT2);
@@ -42,7 +42,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
 
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
-        $this->assertEquals("html", $banner->getType());
+        $this->assertEquals('html', $banner->getType());
         $this->assertTrue($banner->getEnabled());
         $this->assertEquals(self::HTML_TEXT2, $banner->getHtml());
         $this->assertNull($banner->getLanguage());
@@ -55,7 +55,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     public function testHTMLBannerDisabledWithoutLanguage()
     {
         $banner = new Banner();
-        $banner->setType("html");
+        $banner->setType('html');
         $banner->setHtml(self::HTML_TEXT1);
         $banner->setEnabled(false);
         $banner->save();
@@ -63,7 +63,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $id = (int)$banner->getId();
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
-        $this->assertEquals("html", $banner->getType());
+        $this->assertEquals('html', $banner->getType());
         $this->assertEquals(self::HTML_TEXT1, $banner->getHtml());
         $this->assertNull($banner->getLanguage());
         $banner->setHtml(self::HTML_TEXT2);
@@ -71,7 +71,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
 
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
-        $this->assertEquals("html", $banner->getType());
+        $this->assertEquals('html', $banner->getType());
         $this->assertFalse($banner->getEnabled());
         $this->assertEquals(self::HTML_TEXT2, $banner->getHtml());
         $this->assertNull($banner->getLanguage());
@@ -83,7 +83,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     public function testHTMLBannerWithLanguage()
     {
         $banner = new Banner();
-        $banner->setType("html");
+        $banner->setType('html');
         $banner->setHtml(self::HTML_TEXT1);
         $banner->setLanguage('de');
         $banner->save();
@@ -93,7 +93,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
 
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
-        $this->assertEquals("html", $banner->getType());
+        $this->assertEquals('html', $banner->getType());
         $this->assertEquals(self::HTML_TEXT1, $banner->getHtml());
         $this->assertEquals('de', $banner->getLanguage());
         $this->assertNull($banner->getDateFrom());
@@ -104,7 +104,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
 
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
-        $this->assertEquals("html", $banner->getType());
+        $this->assertEquals('html', $banner->getType());
         $this->assertEquals(self::HTML_TEXT2, $banner->getHtml());
 
         $this->assertEquals('en', $banner->getLanguage());
@@ -116,7 +116,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     public function testGifBannerWithoutLanguage()
     {
         $banner = new Banner();
-        $banner->setType("gif");
+        $banner->setType('gif');
         $banner->setName(self::NAME_TEXT1);
         $banner->setImageUrl(self::IMAGE_URL_TEXT1);
         $banner->setLinkUrl(self::LINK_URL_TEXT1);
@@ -125,7 +125,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $id = (int)$banner->getId();
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
-        $this->assertEquals("gif", $banner->getType());
+        $this->assertEquals('gif', $banner->getType());
         $this->assertEquals(self::NAME_TEXT1, $banner->getName());
         $this->assertEquals(self::IMAGE_URL_TEXT1, $banner->getImageUrl());
         $this->assertEquals(self::LINK_URL_TEXT1, $banner->getLinkUrl());
@@ -136,7 +136,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $banner->save();
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
-        $this->assertEquals("gif", $banner->getType());
+        $this->assertEquals('gif', $banner->getType());
         $this->assertEquals(self::NAME_TEXT2, $banner->getName());
         $this->assertEquals(self::IMAGE_URL_TEXT2, $banner->getImageUrl());
         $this->assertEquals(self::LINK_URL_TEXT2, $banner->getLinkUrl());
@@ -150,7 +150,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     public function testGifBannerWithLanguage()
     {
         $banner = new Banner();
-        $banner->setType("gif");
+        $banner->setType('gif');
         $banner->setLanguage('de');
         $banner->setName(self::NAME_TEXT1);
         $banner->setImageUrl(self::IMAGE_URL_TEXT1);
@@ -161,7 +161,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
 
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
-        $this->assertEquals("gif", $banner->getType());
+        $this->assertEquals('gif', $banner->getType());
         $this->assertEquals(self::NAME_TEXT1, $banner->getName());
         $this->assertEquals(self::IMAGE_URL_TEXT1, $banner->getImageUrl());
         $this->assertEquals(self::LINK_URL_TEXT1, $banner->getLinkUrl());
@@ -173,7 +173,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $banner->save();
         $banner = new Banner($id);
         $this->assertNotNull($banner->getId());
-        $this->assertEquals("gif", $banner->getType());
+        $this->assertEquals('gif', $banner->getType());
         $this->assertEquals(self::NAME_TEXT2, $banner->getName());
         $this->assertEquals(self::IMAGE_URL_TEXT2, $banner->getImageUrl());
         $this->assertEquals(self::LINK_URL_TEXT2, $banner->getLinkUrl());
@@ -186,28 +186,28 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     public function testGifBannerWithDateAsString()
     {
         $banner = new Banner();
-        $banner->setType("html");
+        $banner->setType('html');
         $banner->setHtml(self::HTML_TEXT1);
         $banner->setEnabled(false);
-        $banner->setDateFrom("1992-07-27");
-        $banner->setDateTo("2018-12-24");
+        $banner->setDateFrom('1992-07-27');
+        $banner->setDateTo('2018-12-24');
 
         $banner->save();
         $id = $banner->getId();
         $banner = new Banner($id);
 
-        $this->assertEquals("1992-07-27", $banner->getDateFrom());
-        $this->assertEquals("2018-12-24", $banner->getDateTo());
+        $this->assertEquals('1992-07-27', $banner->getDateFrom());
+        $this->assertEquals('2018-12-24', $banner->getDateTo());
 
-        $banner->setDateFrom("2007-04-01");
-        $banner->setDateTo("2018-05-01");
+        $banner->setDateFrom('2007-04-01');
+        $banner->setDateTo('2018-05-01');
 
         $banner->save();
 
         $banner = new Banner($id);
 
-        $this->assertEquals("2007-04-01", $banner->getDateFrom());
-        $this->assertEquals("2018-05-01", $banner->getDateTo());
+        $this->assertEquals('2007-04-01', $banner->getDateFrom());
+        $this->assertEquals('2018-05-01', $banner->getDateTo());
 
         $banner->delete();
     }
@@ -215,7 +215,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     public function testGifBannerWithDateAsInteger()
     {
         $banner = new Banner();
-        $banner->setType("html");
+        $banner->setType('html');
         $banner->setHtml(self::HTML_TEXT1);
         $banner->setEnabled(false);
         $banner->setDateFrom(1525348349);
@@ -225,8 +225,8 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $id = $banner->getId();
         $banner = new Banner($id);
 
-        $this->assertEquals("2018-05-03", $banner->getDateFrom());
-        $this->assertEquals("2018-12-29", $banner->getDateTo());
+        $this->assertEquals('2018-05-03', $banner->getDateFrom());
+        $this->assertEquals('2018-12-29', $banner->getDateTo());
 
         $banner->setDateFrom(1328183616);
         $banner->setDateTo(1460807642);
@@ -235,8 +235,8 @@ class BannerTest extends \PHPUnit\Framework\TestCase
 
         $banner = new Banner($id);
 
-        $this->assertEquals("2012-02-02", $banner->getDateFrom());
-        $this->assertEquals("2016-04-16", $banner->getDateTo());
+        $this->assertEquals('2012-02-02', $banner->getDateFrom());
+        $this->assertEquals('2016-04-16', $banner->getDateTo());
 
         $banner->delete();
     }
@@ -244,7 +244,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     public function testRenderHtmlBanner()
     {
         $banner = new Banner();
-        $banner->setType("html");
+        $banner->setType('html');
         $banner->setHtml(self::HTML_TEXT1);
         $this->assertEquals(self::HTML_TEXT1, $banner->render());
     }
@@ -252,7 +252,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     public function testRenderGifBanner()
     {
         $banner = new Banner();
-        $banner->setType("gif");
+        $banner->setType('gif');
         $banner->setName(self::NAME_TEXT1);
         $banner->setImageUrl(self::IMAGE_URL_TEXT1);
         $banner->setLinkUrl(self::LINK_URL_TEXT1);
@@ -269,7 +269,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     {
         $banner = new Banner();
 
-        $this->expectException("InvalidArgumentException");
+        $this->expectException('InvalidArgumentException');
         $banner->setDateFrom(new Page());
     }
 
@@ -277,7 +277,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     {
         $banner = new Banner();
 
-        $this->expectException("InvalidArgumentException");
+        $this->expectException('InvalidArgumentException');
         $banner->setDateTo(new Page());
     }
 
@@ -296,7 +296,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     {
         for ($i = 1; $i < 20; $i++) {
             $banner = new Banner();
-            $banner->setType("html");
+            $banner->setType('html');
             $banner->setHtml(self::HTML_TEXT1);
             $banner->save();
         }
@@ -317,7 +317,7 @@ class BannerTest extends \PHPUnit\Framework\TestCase
     public function testUpdateWithoutInsert()
     {
         $banner = new Banner();
-        $banner->setType("html");
+        $banner->setType('html');
 
         $banner->setHtml(self::HTML_TEXT1);
         $this->assertFalse($banner->isPersistent());

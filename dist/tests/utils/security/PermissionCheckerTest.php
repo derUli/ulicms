@@ -15,21 +15,21 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
     {
         $_SESSION = [];
         $group1 = new Group();
-        $group1->setName("TestGroup1");
-        $group1->addPermission("info", true);
+        $group1->setName('TestGroup1');
+        $group1->addPermission('info', true);
         $group1->save();
         $this->testGroup1 = $group1;
 
         $group2 = new Group();
-        $group2->setName("TestGroup2");
-        $group2->addPermission("pages", true);
-        $group2->addPermission("design", true);
+        $group2->setName('TestGroup2');
+        $group2->addPermission('pages', true);
+        $group2->addPermission('design', true);
         $group2->save();
         $this->testGroup2 = $group2;
 
         $group3 = new Group();
-        $group3->setName("TestGroup3");
-        $group3->addPermission("files", true);
+        $group3->setName('TestGroup3');
+        $group3->addPermission('files', true);
 
         $lang = new Language();
         $lang->loadByLanguageCode('en');
@@ -42,15 +42,15 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->testGroup3 = $group3;
 
         $user = new User();
-        $user->setUsername("max_muster");
-        $user->setFirstname("Max");
-        $user->setLastname("Muster");
-        $user->setPassword("password123");
-        $user->setEmail("max@muster.de");
-        $user->setHomepage("http://www.google.de");
-        $user->setDefaultLanguage("fr");
+        $user->setUsername('max_muster');
+        $user->setFirstname('Max');
+        $user->setLastname('Muster');
+        $user->setPassword('password123');
+        $user->setEmail('max@muster.de');
+        $user->setHomepage('http://www.google.de');
+        $user->setDefaultLanguage('fr');
         $user->setHTMLEditor(HtmlEditor::CKEDITOR);
-        $user->setAboutMe("hello world");
+        $user->setAboutMe('hello world');
         $lastLogin = time();
         $user->setLastLogin($lastLogin);
         $user->setPrimaryGroup($this->testGroup1);
@@ -87,26 +87,26 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
     public function testHasPermissionWithUserReturnsTrue()
     {
         $permissionChecker = new PermissionChecker($this->testUser->getId());
-        $this->assertTrue($permissionChecker->hasPermission("info"));
+        $this->assertTrue($permissionChecker->hasPermission('info'));
         $this->assertTrue($permissionChecker->hasPermission('pages'));
-        $this->assertTrue($permissionChecker->hasPermission("files"));
-        $this->assertTrue($permissionChecker->hasPermission("design"));
+        $this->assertTrue($permissionChecker->hasPermission('files'));
+        $this->assertTrue($permissionChecker->hasPermission('design'));
     }
 
     public function testUserHasPermissionWithUserReturnsTrue()
     {
-        $this->assertTrue($this->testUser->hasPermission("info"));
+        $this->assertTrue($this->testUser->hasPermission('info'));
         $this->assertTrue($this->testUser->hasPermission('pages'));
-        $this->assertTrue($this->testUser->hasPermission("files"));
-        $this->assertTrue($this->testUser->hasPermission("design"));
+        $this->assertTrue($this->testUser->hasPermission('files'));
+        $this->assertTrue($this->testUser->hasPermission('design'));
     }
 
     public function testUserHasPermissionWithUserReturnsFalse()
     {
-        $this->assertFalse($this->testUser->hasPermission("settings_simple"));
-        $this->assertFalse($this->testUser->hasPermission("other"));
-        $this->assertFalse($this->testUser->hasPermission("audio"));
-        $this->assertFalse($this->testUser->hasPermission("non_eixsting_permission"));
+        $this->assertFalse($this->testUser->hasPermission('settings_simple'));
+        $this->assertFalse($this->testUser->hasPermission('other'));
+        $this->assertFalse($this->testUser->hasPermission('audio'));
+        $this->assertFalse($this->testUser->hasPermission('non_eixsting_permission'));
     }
 
     public function testUserGetPermissionCheckerInstanceOfPermissionChecker()
@@ -119,10 +119,10 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
     public function testHasPermissionWithUserReturnsFalse()
     {
         $permissionChecker = new PermissionChecker($this->testUser->getId());
-        $this->assertFalse($permissionChecker->hasPermission("settings_simple"));
-        $this->assertFalse($permissionChecker->hasPermission("other"));
-        $this->assertFalse($permissionChecker->hasPermission("audio"));
-        $this->assertFalse($permissionChecker->hasPermission("non_eixsting_permission"));
+        $this->assertFalse($permissionChecker->hasPermission('settings_simple'));
+        $this->assertFalse($permissionChecker->hasPermission('other'));
+        $this->assertFalse($permissionChecker->hasPermission('audio'));
+        $this->assertFalse($permissionChecker->hasPermission('non_eixsting_permission'));
     }
 
     public function testGetLanguages()
@@ -138,13 +138,13 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
     public function testHasPermissionWithoutUser()
     {
         $checker = new PermissionChecker(null);
-        $this->assertFalse($checker->hasPermission("info"));
+        $this->assertFalse($checker->hasPermission('info'));
     }
 
     public function testHasPermissionWithNonExistingUser()
     {
         $checker = new PermissionChecker(PHP_INT_MAX);
-        $this->assertFalse($checker->hasPermission("info"));
+        $this->assertFalse($checker->hasPermission('info'));
     }
 
     public function testNoPerms()

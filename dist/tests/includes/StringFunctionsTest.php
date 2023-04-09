@@ -4,15 +4,15 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
 {
     public function testStrBoolTrue()
     {
-        $this->assertEquals("true", strbool(true));
-        $this->assertEquals("true", strbool(1));
+        $this->assertEquals('true', strbool(true));
+        $this->assertEquals('true', strbool(1));
     }
 
     public function testStrBoolFalse()
     {
-        $this->assertEquals("false", strbool(false));
-        $this->assertEquals("false", strbool(0));
-        $this->assertEquals("false", strbool(null));
+        $this->assertEquals('false', strbool(false));
+        $this->assertEquals('false', strbool(0));
+        $this->assertEquals('false', strbool(null));
     }
 
     public function testConvertLineEndingsToLN()
@@ -26,17 +26,17 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $input = [
             "My\r\nWorld\r",
-            " entferne%0adas",
-            " entferne%0adas",
-            "%0dlorem ipsum %0d"
+            ' entferne%0adas',
+            ' entferne%0adas',
+            '%0dlorem ipsum %0d'
         ];
 
         sanitize($input);
         $this->assertCount(4, $input);
-        $this->assertEquals("MyWorld", $input[0]);
-        $this->assertEquals(" entfernedas", $input[1]);
-        $this->assertEquals(" entfernedas", $input[2]);
-        $this->assertEquals("lorem ipsum ", $input[3]);
+        $this->assertEquals('MyWorld', $input[0]);
+        $this->assertEquals(' entfernedas', $input[1]);
+        $this->assertEquals(' entfernedas', $input[2]);
+        $this->assertEquals('lorem ipsum ', $input[3]);
     }
 
     public function testUnEsc()
@@ -65,18 +65,18 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testMbStrSplit()
     {
-        $input = "Dieser Hügel ist der höchste.";
+        $input = 'Dieser Hügel ist der höchste.';
         $result = mb_str_split($input);
         $this->assertCount(29, mb_str_split($input));
-        $this->assertEquals("ü", $result[8]);
-        $this->assertEquals("i", $result[1]);
-        $this->assertEquals("ö", $result[22]);
+        $this->assertEquals('ü', $result[8]);
+        $this->assertEquals('i', $result[1]);
+        $this->assertEquals('ö', $result[22]);
     }
 
     public function testStringOrNullExpectString()
     {
-        $this->assertEquals("foo", stringOrNull("foo"));
-        $this->assertEquals(" foo ", stringOrNull(" foo "));
+        $this->assertEquals('foo', stringOrNull('foo'));
+        $this->assertEquals(' foo ', stringOrNull(' foo '));
     }
 
     public function testStringOrNullExpectNull()
@@ -87,9 +87,9 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testMakeLinksClickable()
     {
-        $input = "Das hier ist ein Text.
+        $input = 'Das hier ist ein Text.
 http://www.google.de
-Noch mehr Text http://www.ulicms.de und so weiter.";
+Noch mehr Text http://www.ulicms.de und so weiter.';
 
         $expected = 'Das hier ist ein Text.
 <a href="http://www.google.de" rel="nofollow" target="_blank">http://www.google.de</a>
@@ -103,7 +103,7 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         ob_start();
         esc("<script>alert('xss')</script>");
         $this->assertEquals(
-            "&lt;script&gt;alert(&#039;xss&#039;)&lt;/script&gt;",
+            '&lt;script&gt;alert(&#039;xss&#039;)&lt;/script&gt;',
             ob_get_clean()
         );
     }
@@ -111,38 +111,38 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
     public function testGetExcerptReturnsShortedString()
     {
         $this->assertEquals(
-            "Lorem Ipsum...",
-            getExcerpt("Lorem Ipsum sit dor amet usw.", 0, 16)
+            'Lorem Ipsum...',
+            getExcerpt('Lorem Ipsum sit dor amet usw.', 0, 16)
         );
     }
 
     public function testRemovePrefix()
     {
-        $this->assertEquals("my_bar", remove_prefix("foo_my_bar", "foo_"));
-        $this->assertEquals("my_foo_bar", remove_prefix("foo_my_foo_bar", "foo_"));
+        $this->assertEquals('my_bar', remove_prefix('foo_my_bar', 'foo_'));
+        $this->assertEquals('my_foo_bar', remove_prefix('foo_my_foo_bar', 'foo_'));
     }
 
     public function testRemoveSuffix()
     {
-        $this->assertEquals("Hello", remove_suffix("Hello World!", " World!"));
-        $this->assertEquals("Foo", remove_suffix("FooBar", "Bar"));
-        $this->assertEquals("file", remove_suffix("file.txt", ".txt"));
-        $this->assertEquals("FooBar", remove_suffix("FooBar", "Foo"));
-        $this->assertEquals('', remove_suffix("Foo", "Foo"));
-        $this->assertEquals("Foo", remove_suffix("Foo", "Hello"));
+        $this->assertEquals('Hello', remove_suffix('Hello World!', ' World!'));
+        $this->assertEquals('Foo', remove_suffix('FooBar', 'Bar'));
+        $this->assertEquals('file', remove_suffix('file.txt', '.txt'));
+        $this->assertEquals('FooBar', remove_suffix('FooBar', 'Foo'));
+        $this->assertEquals('', remove_suffix('Foo', 'Foo'));
+        $this->assertEquals('Foo', remove_suffix('Foo', 'Hello'));
     }
 
     public function testBool2YesNo()
     {
-        $this->assertEquals(get_translation("yes"), bool2YesNo(1));
-        $this->assertEquals(get_translation("no"), bool2YesNo(0));
-        $this->assertEquals(get_translation("yes"), bool2YesNo(true));
-        $this->assertEquals(get_translation("no"), bool2YesNo(false));
+        $this->assertEquals(get_translation('yes'), bool2YesNo(1));
+        $this->assertEquals(get_translation('no'), bool2YesNo(0));
+        $this->assertEquals(get_translation('yes'), bool2YesNo(true));
+        $this->assertEquals(get_translation('no'), bool2YesNo(false));
 
-        $this->assertEquals("cool", bool2YesNo(1, "cool", "doof"));
-        $this->assertEquals("doof", bool2YesNo(0, "cool", "doof"));
-        $this->assertEquals("cool", bool2YesNo(true, "cool", "doof"));
-        $this->assertEquals("doof", bool2YesNo(false, "cool", "doof"));
+        $this->assertEquals('cool', bool2YesNo(1, 'cool', 'doof'));
+        $this->assertEquals('doof', bool2YesNo(0, 'cool', 'doof'));
+        $this->assertEquals('cool', bool2YesNo(true, 'cool', 'doof'));
+        $this->assertEquals('doof', bool2YesNo(false, 'cool', 'doof'));
     }
 
     public function testRandStr()
@@ -158,19 +158,19 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
 
             public function testGetStringLengthInBytes()
             {
-                $this->assertEquals(39, getStringLengthInBytes("Das ist die Lösung für die Änderung."));
+                $this->assertEquals(39, getStringLengthInBytes('Das ist die Lösung für die Änderung.'));
             }
 
     public function testSplitAndTrim()
     {
-        $input = "Max;
+        $input = 'Max;
         Muster;
         max@muster.de;
-        Musterstadt";
+        Musterstadt';
         $result = splitAndTrim($input);
-        $this->assertEquals("Max", $result[0]);
-        $this->assertEquals("Muster", $result[1]);
-        $this->assertEquals("max@muster.de", $result[2]);
-        $this->assertEquals("Musterstadt", $result[3]);
+        $this->assertEquals('Max', $result[0]);
+        $this->assertEquals('Muster', $result[1]);
+        $this->assertEquals('max@muster.de', $result[2]);
+        $this->assertEquals('Musterstadt', $result[3]);
     }
 }

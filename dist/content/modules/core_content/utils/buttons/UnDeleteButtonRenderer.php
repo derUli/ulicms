@@ -16,7 +16,7 @@ use function App\HTML\Link;
 
 class UnDeleteButtonRenderer
 {
-    public const MODULE_NAME = "core_content";
+    public const MODULE_NAME = 'core_content';
 
     public function render(int $pageId, User $user)
     {
@@ -29,32 +29,32 @@ class UnDeleteButtonRenderer
             $permitted = false;
         }
 
-        $icon = icon("fas fa-trash-restore fa-2x");
+        $icon = icon('fas fa-trash-restore fa-2x');
 
-        $url = "#";
+        $url = '#';
         $message = get_secure_translation(
-            "confirm_undelete_page",
+            'confirm_undelete_page',
             [
-                "%title%" => getPageTitleByID($pageId)
+                '%title%' => getPageTitleByID($pageId)
             ]
         );
         $actionUrl = ModuleHelper::buildMethodCallUrl(
             PageController::class,
-            "undelete",
+            'undelete',
             "id={$pageId}csrf_token=" . get_csrf_token()
         );
         $attributes = [
-            "data-confirm" => $message,
-            "data-url" => $actionUrl,
-            "class" => "delete-icon"
+            'data-confirm' => $message,
+            'data-url' => $actionUrl,
+            'class' => 'delete-icon'
         ];
 
         $link = link($url, $icon, true, null, $attributes);
-        ViewBag::set("button", $link);
+        ViewBag::set('button', $link);
 
         return $permitted ? Template::executeModuleTemplate(
             self::MODULE_NAME,
-            "pages/partials/delete_button.php"
-        ) : "";
+            'pages/partials/delete_button.php'
+        ) : '';
     }
 }

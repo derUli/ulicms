@@ -12,9 +12,9 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $this->testUserId = (int)$manager->getAllUsers()[0]->getId();
 
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
-        $_SERVER['SERVER_PORT'] = "80";
-        $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER['REQUEST_URI'] = "/foobar/";
+        $_SERVER['SERVER_PORT'] = '80';
+        $_SERVER['HTTP_HOST'] = 'example.org';
+        $_SERVER['REQUEST_URI'] = '/foobar/';
 
         $this->cleanUp();
     }
@@ -30,7 +30,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
 
     private function cleanUp()
     {
-        Database::truncateTable("password_reset");
+        Database::truncateTable('password_reset');
     }
 
     public function testAddToken()
@@ -49,7 +49,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
             $passwordReset->getAllTokensByUserId($this->testUserId)
         );
 
-        $passwordReset->sendMail($token, "john@doe.invalid", "123.123.123.123", "John", "Doe");
+        $passwordReset->sendMail($token, 'john@doe.invalid', '123.123.123.123', 'John', 'Doe');
 
         $this->cleanUp();
     }
@@ -60,7 +60,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $token = $passwordReset->addToken($this->testUserId);
 
         $this->assertEquals(
-            "http://example.org/foobar/admin/index.php?sClass=SessionManager" .
+            'http://example.org/foobar/admin/index.php?sClass=SessionManager' .
             "&sMethod=resetPassword&token={$token}",
             $passwordReset->getPasswordResetLink($token)
         );
@@ -82,7 +82,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
 
     public function testGetAllTokensReturnsEmptyArray()
     {
-        Database::truncateTable("password_reset");
+        Database::truncateTable('password_reset');
         $passwordReset = new PasswordReset();
         $this->assertCount(0, $passwordReset->getAllTokens());
     }

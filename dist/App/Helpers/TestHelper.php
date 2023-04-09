@@ -48,6 +48,6 @@ class TestHelper extends Helper
      */
     public static function isWindowsServer(): bool
     {
-        return defined("PHP_WINDOWS_VERSION_MAJOR");
+        return defined('PHP_WINDOWS_VERSION_MAJOR');
     }
 }

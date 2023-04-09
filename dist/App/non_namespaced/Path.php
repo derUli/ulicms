@@ -13,7 +13,7 @@ class Path
      */
     public static function normalize(string $path): string
     {
-        $path = str_replace("\\", DIRECTORY_SEPARATOR, $path);
+        $path = str_replace('\\', DIRECTORY_SEPARATOR, $path);
         $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
         return $path;
     }
@@ -25,23 +25,23 @@ class Path
      */
     public static function resolve(string $path): string
     {
-        $path = str_ireplace("ULICMS_ROOT", rtrim(ULICMS_ROOT, '/'), $path);
+        $path = str_ireplace('ULICMS_ROOT', rtrim(ULICMS_ROOT, '/'), $path);
 
         $path = str_ireplace(
-            "ULICMS_ROOT",
+            'ULICMS_ROOT',
             rtrim(
                 ULICMS_ROOT,
                 '/'
             ),
             $path
         );
-        $path = str_ireplace("ULICMS_CONFIGURATIONS", ULICMS_CONFIGURATIONS, $path);
+        $path = str_ireplace('ULICMS_CONFIGURATIONS', ULICMS_CONFIGURATIONS, $path);
 
-        $path = str_ireplace("ULICMS_TMP", rtrim(ULICMS_TMP, '/'), $path);
-        $path = str_ireplace("ULICMS_CACHE_BASE", rtrim(ULICMS_CACHE_BASE, '/'), $path);
-        $path = str_ireplace("ULICMS_CACHE", rtrim(ULICMS_CACHE, '/'), $path);
+        $path = str_ireplace('ULICMS_TMP', rtrim(ULICMS_TMP, '/'), $path);
+        $path = str_ireplace('ULICMS_CACHE_BASE', rtrim(ULICMS_CACHE_BASE, '/'), $path);
+        $path = str_ireplace('ULICMS_CACHE', rtrim(ULICMS_CACHE, '/'), $path);
         $path = str_ireplace(
-            "ULICMS_CONTENT",
+            'ULICMS_CONTENT',
             rtrim(
                 ULICMS_CONTENT,
                 '/'
@@ -49,15 +49,15 @@ class Path
             $path
         );
         $path = str_ireplace(
-            "ULICMS_GENERATED",
+            'ULICMS_GENERATED',
             rtrim(
                 ULICMS_GENERATED,
                 '/'
             ),
             $path
         );
-        $path = str_ireplace("ULICMS_LOG", rtrim(ULICMS_LOG, '/'), $path);
-        $path = str_ireplace("\\", '/', $path);
+        $path = str_ireplace('ULICMS_LOG', rtrim(ULICMS_LOG, '/'), $path);
+        $path = str_ireplace('\\', '/', $path);
         $path = rtrim($path, '/');
         return $path;
     }

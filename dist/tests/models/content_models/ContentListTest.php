@@ -11,9 +11,9 @@ class ContentListTest extends \PHPUnit\Framework\TestCase
     public function testCreateContentList()
     {
         $contentList = new Content_List();
-        $contentList->title = "Unit Test Article";
-        $contentList->slug = "unit test";
-        $contentList->menu = "none";
+        $contentList->title = 'Unit Test Article';
+        $contentList->slug = 'unit test';
+        $contentList->menu = 'none';
         $contentList->language = 'de';
         $contentList->article_date = 1413821696;
         $contentList->author_id = 1;

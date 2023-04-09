@@ -10,21 +10,21 @@ class HomeController extends Controller
     public function getModel(): HomeViewModel
     {
         $model = new HomeViewModel();
-        $result = Database::query("SELECT count(id) as amount FROM `{prefix}content`", true);
+        $result = Database::query('SELECT count(id) as amount FROM `{prefix}content`', true);
         $dataset = Database::fetchObject($result);
         $model->contentCount = $dataset->amount;
 
-        $topPages = Database::query("SELECT language, slug, title, `views` FROM " . tbname("content") . " WHERE deleted_at is null and type <> 'node' ORDER BY `views` DESC LIMIT 5", false);
+        $topPages = Database::query('SELECT language, slug, title, `views` FROM ' . tbname('content') . " WHERE deleted_at is null and type <> 'node' ORDER BY `views` DESC LIMIT 5", false);
         while ($row = Database::fetchObject($topPages)) {
             $model->topPages[] = $row;
         }
 
-        $lastModfiedPages = Database::query("SELECT language, slug, title, lastmodified, case when lastchangeby is not null and lastchangeby > 0 then lastchangeby else author_id end as lastchangeby FROM " . tbname("content") . "  WHERE deleted_at is null and type <> 'node'  ORDER BY lastmodified DESC LIMIT 5", false);
+        $lastModfiedPages = Database::query('SELECT language, slug, title, lastmodified, case when lastchangeby is not null and lastchangeby > 0 then lastchangeby else author_id end as lastchangeby FROM ' . tbname('content') . "  WHERE deleted_at is null and type <> 'node'  ORDER BY lastmodified DESC LIMIT 5", false);
         while ($row = Database::fetchObject($lastModfiedPages)) {
             $model->lastModfiedPages[] = $row;
         }
 
-        $adminsQuery = Database::query("SELECT id, username FROM " . tbname('users'));
+        $adminsQuery = Database::query('SELECT id, username FROM ' . tbname('users'));
         while ($row = Database::fetchObject($adminsQuery)) {
             $admins[$row->id] = $row->username;
         }
@@ -42,7 +42,7 @@ class HomeController extends Controller
 
     public function _newsfeed()
     {
-        $html = Template::executeModuleTemplate("core_home", "news.php");
+        $html = Template::executeModuleTemplate('core_home', 'news.php');
         $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
         ];
@@ -60,7 +60,7 @@ class HomeController extends Controller
 
     public function _statistics(): string
     {
-        $html = Template::executeModuleTemplate("core_home", "statistics.php");
+        $html = Template::executeModuleTemplate('core_home', 'statistics.php');
         $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
         ];
@@ -77,7 +77,7 @@ class HomeController extends Controller
 
     public function _topPages(): string
     {
-        $html = Template::executeModuleTemplate("core_home", "top_pages.php");
+        $html = Template::executeModuleTemplate('core_home', 'top_pages.php');
         $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
         ];
@@ -93,7 +93,7 @@ class HomeController extends Controller
 
     public function _lastUpdatedPages(): string
     {
-        $html = Template::executeModuleTemplate("core_home", "last_updated_pages.php");
+        $html = Template::executeModuleTemplate('core_home', 'last_updated_pages.php');
 
         $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
@@ -110,9 +110,9 @@ class HomeController extends Controller
 
     public function _onlineUsers(): string
     {
-        ViewBag::set("users", User::getOnlineUsers());
+        ViewBag::set('users', User::getOnlineUsers());
 
-        $html = Template::executeModuleTemplate("core_home", "online_users.php");
+        $html = Template::executeModuleTemplate('core_home', 'online_users.php');
         $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
         ];

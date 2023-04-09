@@ -21,15 +21,15 @@ class Hash
     public static function hashPassword(string $password): string
     {
         // TODO: Move password salt from database to CMSConfig
-        $salt = Settings::get("password_salt");
+        $salt = Settings::get('password_salt');
 
         // if no salt is set, generate it
         if (!$salt) {
             $newSalt = uniqid();
-            Settings::set("password_salt", $newSalt);
+            Settings::set('password_salt', $newSalt);
             $salt = $newSalt;
         }
-        return hash("sha512", $salt . $password);
+        return hash('sha512', $salt . $password);
     }
 
     /**

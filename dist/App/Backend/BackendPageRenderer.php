@@ -83,10 +83,10 @@ class BackendPageRenderer
             ob_start();
         }
 
-        $onlyContent = (bool) Request::getVar("only_content", false, 'bool');
+        $onlyContent = (bool) Request::getVar('only_content', false, 'bool');
 
         if (!$onlyContent) {
-            require "inc/header.php";
+            require 'inc/header.php';
         }
 
         if (!is_logged_in()) {
@@ -96,8 +96,8 @@ class BackendPageRenderer
         }
 
         if (!$onlyContent) {
-            do_event("admin_footer");
-            require "inc/footer.php";
+            do_event('admin_footer');
+            require 'inc/footer.php';
         }
         if (Settings::get('minify_html')) {
             $this->outputMinified();
@@ -122,26 +122,26 @@ class BackendPageRenderer
             $action_permission = ActionRegistry::getActionPermission(
                 $this->getAction()
             );
-            if ($action_permission && $action_permission === "*") {
-                Vars::set("action_filename", $actions[$this->getAction()]);
+            if ($action_permission && $action_permission === '*') {
+                Vars::set('action_filename', $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(
-                    "backend/container.php"
+                    'backend/container.php'
                 );
             }
         }
 
-        if (isset($_GET["register"])) {
-            do_event("before_register_form");
-            require "inc/registerform.php";
-            do_event("after_register_form");
-        } elseif (isset($_GET["reset_password"])) {
-            do_event("before_reset_password_form");
-            require "inc/reset_password.php";
-            do_event("before_after_password_form");
+        if (isset($_GET['register'])) {
+            do_event('before_register_form');
+            require 'inc/registerform.php';
+            do_event('after_register_form');
+        } elseif (isset($_GET['reset_password'])) {
+            do_event('before_reset_password_form');
+            require 'inc/reset_password.php';
+            do_event('before_after_password_form');
         } else {
-            do_event("before_login_form");
-            require "inc/loginform.php";
-            do_event("after_login_form");
+            do_event('before_login_form');
+            require 'inc/loginform.php';
+            do_event('after_login_form');
         }
     }
 
@@ -155,16 +155,16 @@ class BackendPageRenderer
         $permissionChecker = new PermissionChecker(get_user_id());
 
         if (!$onlyContent) {
-            require "inc/adminmenu.php";
+            require 'inc/adminmenu.php';
         }
 
         ActionRegistry::loadModuleActions();
         $actions = ActionRegistry::getActions();
 
-        do_event("register_actions");
+        do_event('register_actions');
 
-        if ($_SESSION["require_password_change"]) {
-            require "inc/change_password.php";
+        if ($_SESSION['require_password_change']) {
+            require 'inc/change_password.php';
         } elseif (isset($actions[$this->getAction()])) {
             $requiredPermission = ActionRegistry::getActionPermission(
                 $this->getAction()
@@ -174,15 +174,15 @@ class BackendPageRenderer
                         $requiredPermission
                         && $permissionChecker->hasPermission($requiredPermission))
             ) {
-                Vars::set("action_filename", $actions[$this->getAction()]);
+                Vars::set('action_filename', $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(
-                    "backend/container.php"
+                    'backend/container.php'
                 );
             } else {
                 noPerms();
             }
         } else {
-            translate("action_not_found");
+            translate('action_not_found');
         }
     }
 
@@ -211,8 +211,8 @@ class BackendPageRenderer
      */
     public function doCronEvents(): void
     {
-        do_event("before_admin_cron");
-        do_event("admin_cron");
-        do_event("after_admin_cron");
+        do_event('before_admin_cron');
+        do_event('admin_cron');
+        do_event('after_admin_cron');
     }
 }

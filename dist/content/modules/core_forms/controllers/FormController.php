@@ -12,20 +12,20 @@ class FormController extends Controller
     public function createPost(): void
     {
         $this->_createPost();
-        Response::redirect(ModuleHelper::buildActionURL("forms"));
+        Response::redirect(ModuleHelper::buildActionURL('forms'));
     }
 
     public function _createPost(): ?int
     {
         $name = $_POST['name'];
-        $enabled = $_POST["enabled"];
-        $email_to = $_POST["email_to"];
-        $subject = $_POST["subject"];
-        $category_id = $_POST["category_id"];
-        $fields = $_POST["fields"];
-        $required_fields = $_POST["required_fields"];
-        $mail_from_field = $_POST["mail_from_field"];
-        $target_page_id = $_POST["target_page_id"];
+        $enabled = $_POST['enabled'];
+        $email_to = $_POST['email_to'];
+        $subject = $_POST['subject'];
+        $category_id = $_POST['category_id'];
+        $fields = $_POST['fields'];
+        $required_fields = $_POST['required_fields'];
+        $mail_from_field = $_POST['mail_from_field'];
+        $target_page_id = $_POST['target_page_id'];
 
         $success = Forms::createForm(
             $name,
@@ -45,22 +45,22 @@ class FormController extends Controller
     public function updatePost(): void
     {
         $this->_updatePost();
-        Response::redirect(ModuleHelper::buildActionURL("forms"));
+        Response::redirect(ModuleHelper::buildActionURL('forms'));
     }
 
     public function _updatePost(): bool
     {
         $id = $_POST['id'];
         $name = $_POST['name'];
-        $enabled = $_POST["enabled"];
-        $email_to = $_POST["email_to"];
-        $subject = $_POST["subject"];
-        $category_id = $_POST["category_id"];
-        $fields = $_POST["fields"];
+        $enabled = $_POST['enabled'];
+        $email_to = $_POST['email_to'];
+        $subject = $_POST['subject'];
+        $category_id = $_POST['category_id'];
+        $fields = $_POST['fields'];
 
-        $required_fields = $_POST["required_fields"];
-        $mail_from_field = $_POST["mail_from_field"];
-        $target_page_id = $_POST["target_page_id"];
+        $required_fields = $_POST['required_fields'];
+        $mail_from_field = $_POST['mail_from_field'];
+        $target_page_id = $_POST['target_page_id'];
 
         Forms::editForm(
             $id,
@@ -81,9 +81,9 @@ class FormController extends Controller
 
     public function deletePost(): void
     {
-        $id = Request::getVar("del", 0, 'int');
+        $id = Request::getVar('del', 0, 'int');
         $this->_deletePost($id);
-        Response::redirect(ModuleHelper::buildActionURL("forms"));
+        Response::redirect(ModuleHelper::buildActionURL('forms'));
     }
 
     public function _deletePost(int $id): bool

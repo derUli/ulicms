@@ -2,25 +2,25 @@
 
 use App\Helpers\DateTimeHelper;
 
-$controller = ControllerRegistry::get("HomeController");
+$controller = ControllerRegistry::get('HomeController');
 $model = $controller->getModel();
 ?>
 <table cellpadding="2">
     <tr style="font-weight: bold;">
-        <td><?php translate("title"); ?>
+        <td><?php translate('title'); ?>
         </td>
-        <td><?php translate("date"); ?>
+        <td><?php translate('date'); ?>
         </td>
-        <td><?php translate("done_by"); ?>
+        <td><?php translate('done_by'); ?>
         </td>
     </tr>
     <?php
     foreach ($model->lastModfiedPages as $row) {
         $domain = getDomainByLanguage($row->language);
         if (!$domain) {
-            $url = "../" . $row->slug;
+            $url = '../' . $row->slug;
         } else {
-            $url = "http://" . $domain . '/' . $row->slug;
+            $url = 'http://' . $domain . '/' . $row->slug;
         }
         ?>
         <tr>

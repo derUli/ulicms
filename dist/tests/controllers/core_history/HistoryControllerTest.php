@@ -6,7 +6,7 @@ class HistoryControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected function tearDown(): void
     {
-        Database::deleteFrom("content", "slug like 'unit-test-%'");
+        Database::deleteFrom('content', "slug like 'unit-test-%'");
     }
 
     public function testDoRestoreReturnsRevision()
@@ -14,10 +14,10 @@ class HistoryControllerTest extends \PHPUnit\Framework\TestCase
         $testPage = $this->createTestPage();
         $this->createHistories($testPage);
 
-        $revisions = VCS::getRevisionsByContentID($testPage->getID(), "id desc");
+        $revisions = VCS::getRevisionsByContentID($testPage->getID(), 'id desc');
         $this->assertCount(3, $revisions);
         $testPage->reload();
-        $this->assertEquals($testPage->content, "Some Text 3");
+        $this->assertEquals($testPage->content, 'Some Text 3');
 
         $historyController = new HistoryController();
         $restoredRevision = $historyController->_doRestore($revisions[1]->id);
@@ -25,11 +25,11 @@ class HistoryControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($testPage->id, (int)$restoredRevision->content_id);
         $this->assertEquals($revisions[1]->id, (int)$restoredRevision->id);
         $this->assertGreaterThan(1590795228, strtotime($restoredRevision->date));
-        $this->assertEquals("Some Text 2", $restoredRevision->content);
+        $this->assertEquals('Some Text 2', $restoredRevision->content);
         $this->assertGreaterThanOrEqual(1, $restoredRevision->user_id);
 
         $testPage->reload();
-        $this->assertEquals($testPage->content, "Some Text 2");
+        $this->assertEquals($testPage->content, 'Some Text 2');
     }
 
     public function testDoRestoreReturnsNull()
@@ -42,7 +42,7 @@ class HistoryControllerTest extends \PHPUnit\Framework\TestCase
     public function getTestUser(): User
     {
         $manager = new UserManager();
-        $user = $manager->getAllUsers("admin desc")[0];
+        $user = $manager->getAllUsers('admin desc')[0];
         $user->save();
         return $user;
     }
@@ -53,7 +53,7 @@ class HistoryControllerTest extends \PHPUnit\Framework\TestCase
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
         $page->language = 'de';
-        $page->content = "Some Text 1";
+        $page->content = 'Some Text 1';
         $page->comments_enabled = true;
         $page->author_id = 1;
         $page->group_id = 1;
@@ -65,11 +65,11 @@ class HistoryControllerTest extends \PHPUnit\Framework\TestCase
     {
         $testUser = $this->getTestUser();
         VCS::createRevision($page->getID(), $page->content, $testUser->getId());
-        $page->content = "Some Text 2";
+        $page->content = 'Some Text 2';
         $page->save();
         VCS::createRevision($page->getID(), $page->content, $testUser->getId());
 
-        $page->content = "Some Text 3";
+        $page->content = 'Some Text 3';
         $page->save();
         VCS::createRevision($page->getID(), $page->content, $testUser->getId());
     }

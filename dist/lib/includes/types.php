@@ -6,8 +6,8 @@ use App\Models\Content\Types\DefaultContentTypes;
 
 function get_used_post_types(): array
 {
-    $result = Database::query("select `type` from {prefix}content "
-                    . "group by `type`", true);
+    $result = Database::query('select `type` from {prefix}content '
+                    . 'group by `type`', true);
     $types = get_available_post_types();
     $used_types = [];
     $return_types = [];

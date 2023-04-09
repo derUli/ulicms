@@ -32,50 +32,50 @@ class FaviconController extends Controller
     public function _getDestination1(): string
     {
         return ULICMS_ROOT
-                . "/content/images/favicon.ico";
+                . '/content/images/favicon.ico';
     }
 
     public function _getDestination2(): string
     {
         return ULICMS_ROOT
-                . "/favicon.ico";
+                . '/favicon.ico';
     }
 
     public function doUpload(): void
     {
         // Favicon Upload
         if (!empty($_FILES['favicon_upload_file']['name'])) {
-            if (!is_dir("../content/images")) {
-                @mkdir("../content/images");
-                @chmod("../content/images", 0777);
+            if (!is_dir('../content/images')) {
+                @mkdir('../content/images');
+                @chmod('../content/images', 0777);
             }
             $favicon_upload_file = $_FILES['favicon_upload_file'];
             $type = $favicon_upload_file['type'];
             $filename = $favicon_upload_file['name'];
             $extension = File::getExtension($filename);
 
-            if (str_starts_with($type, "image/")) {
+            if (str_starts_with($type, 'image/')) {
                 $destination1 = $this->_getDestination1();
                 $destination2 = $this->_getDestination2();
 
-                do_event("before_upload_favicon");
+                do_event('before_upload_favicon');
 
                 $source = $favicon_upload_file['tmp_name'];
-                $sizes = $this->_getSizes(isset($_POST["high_resolution"]));
+                $sizes = $this->_getSizes(isset($_POST['high_resolution']));
                 $this->_placeFiles($source, $sizes);
 
-                do_event("after_upload_favicon");
+                do_event('after_upload_favicon');
 
                 CacheUtil::clearPageCache();
 
-                Response::redirect(ModuleHelper::buildActionURL("favicon"));
+                Response::redirect(ModuleHelper::buildActionURL('favicon'));
             }
 
             // Show error if uploaded file is not an image
             Response::redirect(
                 ModuleHelper::buildActionURL(
-                    "favicon",
-                    "error=UPLOAD_WRONG_FILE_FORMAT"
+                    'favicon',
+                    'error=UPLOAD_WRONG_FILE_FORMAT'
                 )
             );
         }
@@ -126,7 +126,7 @@ class FaviconController extends Controller
             $success ?
                     HttpStatusCode::OK :
                     HttpStatusCode::INTERNAL_SERVER_ERROR,
-            ModuleHelper::buildActionURL("favicon")
+            ModuleHelper::buildActionURL('favicon')
         );
     }
 

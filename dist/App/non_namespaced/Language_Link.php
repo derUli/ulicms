@@ -8,7 +8,7 @@ use App\Models\Content\Language;
 class Language_Link extends Page
 {
     public $link_to_language = null;
-    public $type = "language_link";
+    public $type = 'language_link';
 
     public function save()
     {
@@ -35,7 +35,7 @@ class Language_Link extends Page
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set link_to_language = ? where id = ?";
+        $sql = 'update {prefix}content set link_to_language = ? where id = ?';
         $args = [
             $this->link_to_language,
             $this->id
@@ -73,6 +73,6 @@ class Language_Link extends Page
      */
     public function getIcon(): string
     {
-        return "fas fa-language";
+        return 'fas fa-language';
     }
 }

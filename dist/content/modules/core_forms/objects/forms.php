@@ -8,7 +8,7 @@ class Forms
     public static function getFormByID($id)
     {
         $retval = null;
-        $result = db_query("select * from `" . tbname("forms") . "` WHERE id = " . (int)$id);
+        $result = db_query('select * from `' . tbname('forms') . '` WHERE id = ' . (int)$id);
         if (db_num_rows($result) > 0) {
             $retval = db_fetch_assoc($result);
         }
@@ -66,7 +66,7 @@ class Forms
         $id = (int)$id;
 
         return db_query(
-            "UPDATE `" . tbname("forms") . "` set name='$name', "
+            'UPDATE `' . tbname('forms') . "` set name='$name', "
             . "email_to = '$email_to', subject = '$subject', "
             . "category_id = $category_id, fields = '$fields', "
             . "required_fields = '$required_fields', "
@@ -80,8 +80,8 @@ class Forms
     public static function getAllForms()
     {
         $retval = [];
-        $result = db_query("select * from `" . tbname("forms") .
-                "` ORDER BY id");
+        $result = db_query('select * from `' . tbname('forms') .
+                '` ORDER BY id');
         if (db_num_rows($result) > 0) {
             while ($row = db_fetch_assoc($result)) {
                 $retval[] = $row;
@@ -96,60 +96,60 @@ class Forms
         $retval = false;
         $form = self::getFormByID($id);
         if ($form) {
-            $fields = $form["fields"];
+            $fields = $form['fields'];
             $fields = Settings::mappingStringToArray($fields);
             $required_fields = \App\Helpers\StringHelper::linesFromString(
-                $form["required_fields"]
+                $form['required_fields']
             );
             foreach ($required_fields as $field) {
                 $fieldName = isset($fields[$field]) ? $fields[$field] : $field;
                 if (!(isset($_POST[$field]) && !empty($_POST[$field]))) {
-                    ViewBag::set("exception", get_translation(
-                        "please_fill_all_required_fields",
+                    ViewBag::set('exception', get_translation(
+                        'please_fill_all_required_fields',
                         [
-                            "%field%" => _esc($fieldName)
+                            '%field%' => _esc($fieldName)
                         ]
                     ));
                     $html = Template::executeDefaultOrOwnTemplate(
-                        "exception.php"
+                        'exception.php'
                     );
                     HTMLResult($html, HttpStatusCode::BAD_REQUEST);
                 }
             }
-            $html = "<!DOCTYPE html>";
-            $html .= "<html>";
-            $html .= "<head>";
+            $html = '<!DOCTYPE html>';
+            $html .= '<html>';
+            $html .= '<head>';
             $html .= '<meta http-equiv="content-type" content="text/html; '
                     . 'charset=utf-8">';
             $html .= '<meta charset="utf-8">';
-            $html .= "</head>";
-            $html .= "<body>";
-            $html .= "<table border=\"1\"";
+            $html .= '</head>';
+            $html .= '<body>';
+            $html .= '<table border="1"';
             foreach ($fields as $name => $label) {
-                $html .= "<tr>";
-                $html .= "<td><strong>" . _esc($label) . "</strong></td>";
-                $html .= "<td>" . nl2br(_esc($_POST[$name])) . "</td>";
-                $html .= "</tr>";
+                $html .= '<tr>';
+                $html .= '<td><strong>' . _esc($label) . '</strong></td>';
+                $html .= '<td>' . nl2br(_esc($_POST[$name])) . '</td>';
+                $html .= '</tr>';
             }
-            $html .= "</table>";
-            $html .= "</body>";
-            $html .= "</html>";
+            $html .= '</table>';
+            $html .= '</body>';
+            $html .= '</html>';
 
-            $email_to = $form["email_to"];
-            $subject = $form["subject"];
-            $target_page_id = $form["target_page_id"];
+            $email_to = $form['email_to'];
+            $subject = $form['subject'];
+            $target_page_id = $form['target_page_id'];
             $target_page_slug = getPageSlugByID($target_page_id);
             $redirect_url = buildSEOUrl($target_page_slug);
 
-            $mail_from_field = $form["mail_from_field"];
+            $mail_from_field = $form['mail_from_field'];
 
             $email_from = $_POST[$mail_from_field];
 
             // if dns mx check is enabled check the mail domain
             if (!empty($email_from) &&
-                    Settings::get("check_mx_of_mail_address") && !AntiSpamHelper::checkMailDomain($email_from)) {
+                    Settings::get('check_mx_of_mail_address') && !AntiSpamHelper::checkMailDomain($email_from)) {
                 ExceptionResult(
-                    get_translation("mail_address_has_invalid_mx_entry"),
+                    get_translation('mail_address_has_invalid_mx_entry'),
                     HttpStatusCode::BAD_REQUEST
                 );
             }
@@ -160,18 +160,18 @@ class Forms
                     [
                 $_POST[$mail_from_field]
                     ] : [
-                Settings::get("email")
+                Settings::get('email')
             ];
             sanitize($mail_from);
 
-            $headers = "From: " . $mail_from[0] . "\n";
-            $headers .= "Content-Type: text/html; charset=utf-8";
+            $headers = 'From: ' . $mail_from[0] . "\n";
+            $headers .= 'Content-Type: text/html; charset=utf-8';
 
             if (Mailer::send($email_to, $subject, $html, $headers)) {
                 Response::redirect($redirect_url);
                 $retval = true;
             } else {
-                translate("error_send_mail_form_failed");
+                translate('error_send_mail_form_failed');
                 die();
             }
         }
@@ -181,6 +181,6 @@ class Forms
     public static function deleteForm($id)
     {
         $id = (int)$id;
-        return db_query("DELETE FROM " . tbname("forms") . " WHERE id = $id");
+        return db_query('DELETE FROM ' . tbname('forms') . " WHERE id = $id");
     }
 }

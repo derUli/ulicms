@@ -11,16 +11,16 @@ $languages = Language::getAllLanguages();
     <?php csrf_token_html(); ?>
     <div class="field">
         <strong class="field-label">
-            <?php translate("name"); ?>*
+            <?php translate('name'); ?>*
         </strong>
         <input type="text" required="required" name="name" value="">
     </div>
-    <h3><?php translate("permissions"); ?></h3>
+    <h3><?php translate('permissions'); ?></h3>
     <fieldset>
         <div class="checkbox">
             <label>
                 <input id="checkall" type="checkbox" class="checkall">
-                <?php translate("select_all"); ?></label>
+                <?php translate('select_all'); ?></label>
         </div>
         <div class="voffset1">
             <?php
@@ -37,7 +37,7 @@ $languages = Language::getAllLanguages();
             ?>
         </div>
     </fieldset>
-    <h3><?php translate("languages"); ?></h3>
+    <h3><?php translate('languages'); ?></h3>
     <fieldset>
         <?php foreach ($languages as $lang) { ?>
             <div class="checkbox">
@@ -49,16 +49,16 @@ $languages = Language::getAllLanguages();
             </div>
         <?php } ?>
     </fieldset>
-    <h3><?php translate("allowable_tags"); ?></h3>
+    <h3><?php translate('allowable_tags'); ?></h3>
     <input type="text" name="allowable_tags"
-           value="<?php Template::escape(DefaultValues::ALLOWED_TAGS); ?>"> <small><?php translate("allowable_tags_help"); ?></small>
+           value="<?php Template::escape(DefaultValues::ALLOWED_TAGS); ?>"> <small><?php translate('allowable_tags_help'); ?></small>
     <div class="voffset2">
         <button name="add_group" type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i>
-            <?php translate("save"); ?>
+            <?php translate('save'); ?>
         </button>
     </div>
 </form>
 <?php
-enqueueScriptFile("scripts/group.js");
+enqueueScriptFile('scripts/group.js');
 combinedScriptHtml();

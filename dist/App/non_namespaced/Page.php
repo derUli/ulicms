@@ -13,7 +13,7 @@ class Page extends Content
     public $slug = '';
     public $title = '';
     public $alternate_title = '';
-    public $target = "_self";
+    public $target = '_self';
     public $category_id = 1;
     public $content = '';
     public $language = 'de';
@@ -28,16 +28,16 @@ class Page extends Content
     public $views = 0;
     public $menu = DEFAULT_MENU;
     public $position = 0;
-    public $cache_control = "auto";
+    public $cache_control = 'auto';
     public $parent_id = null;
-    public $access = "all";
+    public $access = 'all';
     public $meta_description = null;
     public $meta_keywords = null;
     private $deleted_at = null;
     public $theme = null;
     public $robots = null;
     public $custom_data = null;
-    public $type = "page";
+    public $type = 'page';
     public $og_title = '';
     public $og_image = '';
     public $og_description = '';
@@ -102,7 +102,7 @@ class Page extends Content
         // fill page permissions object
         $resultArray = (array) $result;
         foreach ($resultArray as $key => $value) {
-            preg_match("/only_([a-z]+)_can_edit/", $key, $matches);
+            preg_match('/only_([a-z]+)_can_edit/', $key, $matches);
             if (count($matches) >= 2) {
                 $object = $matches[1];
                 $this->permissions->setEditRestriction($object, (bool)$value);
@@ -112,8 +112,8 @@ class Page extends Content
 
     public function loadByID($id)
     {
-        $result = Database::pQuery("SELECT * FROM `{prefix}content` "
-                        . "where id = ?", [
+        $result = Database::pQuery('SELECT * FROM `{prefix}content` '
+                        . 'where id = ?', [
                     (int) $id
                         ], true);
         if (Database::getNumRows($result) > 0) {
@@ -128,7 +128,7 @@ class Page extends Content
     {
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
-        $result = Database::query("SELECT * FROM `" . tbname("content") .
+        $result = Database::query('SELECT * FROM `' . tbname('content') .
                         "` where `slug` = '$name' and "
                         . "`language` = '$language'");
         if (Database::getNumRows($result) > 0) {
@@ -136,7 +136,7 @@ class Page extends Content
             $this->fillVars($dataset);
             return;
         }
-        throw new DatasetNotFoundException("No such page");
+        throw new DatasetNotFoundException('No such page');
     }
 
     public function save()
@@ -152,7 +152,7 @@ class Page extends Content
 
     public function create()
     {
-        $sql = "INSERT INTO `" . tbname("content") . "` (slug, title,
+        $sql = 'INSERT INTO `' . tbname('content') . '` (slug, title,
             alternate_title, target, category_id,
 				content, language, menu_image, active,
                                 approved, created,
@@ -163,7 +163,7 @@ class Page extends Content
 				theme, robots,
                                 custom_data, `type`, og_title, og_image,
                                 og_description, cache_control, hidden,
-                                comments_enabled, show_headline) VALUES (";
+                                comments_enabled, show_headline) VALUES (';
 
         $sql .= "'" . Database::escapeValue($this->slug) . "',";
         $sql .= "'" . Database::escapeValue($this->title) . "',";
@@ -172,65 +172,65 @@ class Page extends Content
 
         $category_id = $this->category_id ? (int)$this->category_id : 'NULL';
 
-        $sql .= $category_id . ",";
+        $sql .= $category_id . ',';
         $sql .= "'" . Database::escapeValue($this->content) . "',";
         $sql .= "'" . Database::escapeValue($this->language) . "',";
 
         if ($this->menu_image === null) {
-            $sql .= " NULL ,";
+            $sql .= ' NULL ,';
         } else {
             $sql .= "'" . Database::escapeValue($this->menu_image) . "',";
         }
 
-        $sql .= (int)$this->active . ",";
-        $sql .= (int)$this->approved . ",";
+        $sql .= (int)$this->active . ',';
+        $sql .= (int)$this->approved . ',';
         $this->created = time();
         $this->lastmodified = $this->created;
-        $sql .= (int) $this->created . ",";
-        $sql .= (int)$this->lastmodified . ",";
-        $sql .= (int)$this->author_id . ",";
+        $sql .= (int) $this->created . ',';
+        $sql .= (int)$this->lastmodified . ',';
+        $sql .= (int)$this->author_id . ',';
 
-        $group_id = $this->group_id ? (int)$this->group_id : "null";
-        $sql .= $group_id . ",";
-        $sql .= (int)$this->lastchangeby . ",";
+        $group_id = $this->group_id ? (int)$this->group_id : 'null';
+        $sql .= $group_id . ',';
+        $sql .= (int)$this->lastchangeby . ',';
 
         // Views
-        $sql .= "0,";
+        $sql .= '0,';
 
         $sql .= "'" . Database::escapeValue($this->menu) . "',";
-        $sql .= (int)$this->position . ",";
+        $sql .= (int)$this->position . ',';
         if ($this->parent_id === null) {
-            $sql .= " NULL ,";
+            $sql .= ' NULL ,';
         } else {
-            $sql .= (int)$this->parent_id . ",";
+            $sql .= (int)$this->parent_id . ',';
         }
 
         $sql .= "'" . Database::escapeValue($this->access) . "',";
         if ($this->meta_description) {
             $sql .= "'" . Database::escapeValue($this->meta_description) . "',";
         } else {
-            $sql .= "NULL,";
+            $sql .= 'NULL,';
         }
 
         if ($this->meta_keywords) {
             $sql .= "'" . Database::escapeValue($this->meta_keywords) . "',";
         } else {
-            $sql .= "NULL,";
+            $sql .= 'NULL,';
         }
         if ($this->deleted_at === null) {
-            $sql .= " NULL,";
+            $sql .= ' NULL,';
         } else {
-            $sql .= (int)$this->deleted_at . ",";
+            $sql .= (int)$this->deleted_at . ',';
         }
 
         if ($this->theme === null) {
-            $sql .= " NULL ,";
+            $sql .= ' NULL ,';
         } else {
             $sql .= "'" . Database::escapeValue($this->theme) . "',";
         }
 
         if ($this->robots === null) {
-            $sql .= " NULL ,";
+            $sql .= ' NULL ,';
         } else {
             $sql .= "'" . Database::escapeValue($this->robots) . "',";
         }
@@ -252,10 +252,10 @@ class Page extends Content
         $sql .= "'" . Database::escapeValue($this->og_image) . "',";
         $sql .= "'" . Database::escapeValue($this->og_description) . "', ";
         $sql .= "'" . Database::escapeValue($this->cache_control) . "', ";
-        $sql .= Database::escapeValue($this->hidden) . ", ";
-        $sql .= Database::escapeValue($this->comments_enabled) . ",";
+        $sql .= Database::escapeValue($this->hidden) . ', ';
+        $sql .= Database::escapeValue($this->comments_enabled) . ',';
         $sql .= Database::escapeValue($this->show_headline);
-        $sql .= ")";
+        $sql .= ')';
 
         $result = Database::query($sql);
 
@@ -277,39 +277,39 @@ class Page extends Content
             $this->lastchangeby = get_user_id();
         }
 
-        $category_id = $this->category_id ? (int)$this->category_id : "null";
+        $category_id = $this->category_id ? (int)$this->category_id : 'null';
 
-        $sql = "UPDATE " . tbname("content") . " ";
+        $sql = 'UPDATE ' . tbname('content') . ' ';
 
         $sql .= "set slug='" . Database::escapeValue($this->slug) . "',";
         $sql .= "title='" . Database::escapeValue($this->title) . "',";
         $sql .= "alternate_title='" .
                 Database::escapeValue($this->alternate_title) . "',";
         $sql .= "target='" . Database::escapeValue($this->target) . "',";
-        $sql .= "category_id = " . $category_id . ",";
+        $sql .= 'category_id = ' . $category_id . ',';
         $sql .= "content='" . Database::escapeValue($this->content) . "',";
         $sql .= "language='" . Database::escapeValue($this->language) . "',";
 
         if ($this->menu_image === null) {
-            $sql .= "menu_image = NULL ,";
+            $sql .= 'menu_image = NULL ,';
         } else {
             $sql .= "menu_image =  '" .
                     Database::escapeValue($this->menu_image) . "',";
         }
 
-        $sql .= "active=" . (int)$this->active . ",";
-        $sql .= "approved=" . (int)$this->approved . ",";
-        $sql .= "lastmodified=" . (int)$this->lastmodified . ",";
-        $sql .= "author_id=" . (int)$this->author_id . ",";
-        $sql .= "`group_id`=" . (int)$this->group_id . ",";
-        $sql .= "lastchangeby=" . (int)$this->lastchangeby . ",";
+        $sql .= 'active=' . (int)$this->active . ',';
+        $sql .= 'approved=' . (int)$this->approved . ',';
+        $sql .= 'lastmodified=' . (int)$this->lastmodified . ',';
+        $sql .= 'author_id=' . (int)$this->author_id . ',';
+        $sql .= '`group_id`=' . (int)$this->group_id . ',';
+        $sql .= 'lastchangeby=' . (int)$this->lastchangeby . ',';
 
         $sql .= "menu='" . Database::escapeValue($this->menu) . "',";
-        $sql .= "position=" . (int)$this->position . ",";
+        $sql .= 'position=' . (int)$this->position . ',';
         if ($this->parent_id === null) {
-            $sql .= "parent_id = NULL ,";
+            $sql .= 'parent_id = NULL ,';
         } else {
-            $sql .= "parent_id=" . (int)$this->parent_id . ",";
+            $sql .= 'parent_id=' . (int)$this->parent_id . ',';
         }
 
         $sql .= "access='" . Database::escapeValue($this->access) . "',";
@@ -317,30 +317,30 @@ class Page extends Content
             $sql .= "meta_description='" .
                     Database::escapeValue($this->meta_description) . "',";
         } else {
-            $sql .= "meta_description = null,";
+            $sql .= 'meta_description = null,';
         }
 
         if ($this->meta_keywords) {
             $sql .= "meta_keywords='" .
                     Database::escapeValue($this->meta_keywords) . "',";
         } else {
-            $sql .= "meta_keywords = null,";
+            $sql .= 'meta_keywords = null,';
         }
 
         if ($this->deleted_at === null) {
-            $sql .= "deleted_at=NULL ,";
+            $sql .= 'deleted_at=NULL ,';
         } else {
-            $sql .= "deleted_at=" . (int)$this->deleted_at . ",";
+            $sql .= 'deleted_at=' . (int)$this->deleted_at . ',';
         }
 
         if ($this->theme === null) {
-            $sql .= "theme=NULL ,";
+            $sql .= 'theme=NULL ,';
         } else {
             $sql .= "theme='" . Database::escapeValue($this->theme) . "',";
         }
 
         if ($this->robots === null) {
-            $sql .= "robots=NULL ,";
+            $sql .= 'robots=NULL ,';
         } else {
             $sql .= "robots='" . Database::escapeValue($this->robots) . "',";
         }
@@ -364,15 +364,15 @@ class Page extends Content
             $this->og_description
         ) . "', ";
         $sql .= "hidden='" . Database::escapeValue($this->hidden) . "', ";
-        $sql .= "comments_enabled=" . Database::escapeValue(
+        $sql .= 'comments_enabled=' . Database::escapeValue(
             $this->comments_enabled
-        ) . ", ";
-        $sql .= "show_headline=" . Database::escapeValue($this->show_headline)
-                . ",";
+        ) . ', ';
+        $sql .= 'show_headline=' . Database::escapeValue($this->show_headline)
+                . ',';
         $sql .= "cache_control='" . Database::escapeValue($this->cache_control)
                 . "' ";
 
-        $sql .= " WHERE id = " . $this->id;
+        $sql .= ' WHERE id = ' . $this->id;
 
         $result = Database::query($sql);
 
@@ -399,7 +399,7 @@ class Page extends Content
     public function containsModule(?string $module = null): bool
     {
         $content = $this->content;
-        $content = str_replace("&quot;", "\"", $content);
+        $content = str_replace('&quot;', '"', $content);
         if ($module) {
             return stringContainsShortCodes($content, $module);
         }
@@ -410,7 +410,7 @@ class Page extends Content
     public function getEmbeddedModules(): array
     {
         $result = [];
-        $content = str_ireplace("&quot;", '"', $this->content);
+        $content = str_ireplace('&quot;', '"', $this->content);
         preg_match_all("/\[module=\"?([a-z_\-0-9]+)\"?]/i", $content, $match);
         if (count($match) > 0) {
             $matchesCount = count($match[1]);
@@ -434,7 +434,7 @@ class Page extends Content
     }
 
     // returns the change history of this page
-    public function getHistory(string $order = "date DESC"): array
+    public function getHistory(string $order = 'date DESC'): array
     {
         if (!$this->getID()) {
             return [];
@@ -460,10 +460,10 @@ class Page extends Content
     {
         $commentsEnabled = false;
         if ($this->comments_enabled === null) {
-            $commentsEnabled = (bool) Settings::get("comments_enabled");
+            $commentsEnabled = (bool) Settings::get('comments_enabled');
 
             $commentable_content_types = Settings::get(
-                "commentable_content_types"
+                'commentable_content_types'
             );
             if ($commentable_content_types) {
                 $commentable_content_types = splitAndTrim(
@@ -491,7 +491,7 @@ class Page extends Content
     }
 
     // this returns an array of all comments of this content
-    public function getComments($order_by = "date desc"): array
+    public function getComments($order_by = 'date desc'): array
     {
         return Comment::getAllByContentId($this->id, $order_by);
     }
@@ -510,14 +510,14 @@ class Page extends Content
     // set this page as frontpage
     public function makeFrontPage(): void
     {
-        Settings::setLanguageSetting("frontpage", $this->slug, $this->language);
+        Settings::setLanguageSetting('frontpage', $this->slug, $this->language);
     }
 
     // returns true if this page is the frontpage
     public function isFrontPage(): bool
     {
         $frontPage = Settings::getLang(
-            "frontpage",
+            'frontpage',
             $this->language
         );
         return $frontPage === $this->slug;
@@ -536,14 +536,14 @@ class Page extends Content
     // returns true if this page is configured as the 403 error page
     public function isErrorPage403(): bool
     {
-        $errorPage403 = (int)Settings::getLanguageSetting("error_page_403", $this->language);
+        $errorPage403 = (int)Settings::getLanguageSetting('error_page_403', $this->language);
         return $this->getID() && $this->getID() == $errorPage403;
     }
 
     // returns true if this page is configured as the 404 error page
     public function isErrorPage404(): bool
     {
-        $errorPage404 = (int)Settings::getLanguageSetting("error_page_404", $this->language);
+        $errorPage404 = (int)Settings::getLanguageSetting('error_page_404', $this->language);
         return $this->getID() && $this->getID() == $errorPage404;
     }
 
@@ -557,7 +557,7 @@ class Page extends Content
     public function makeErrorPage403(bool $enabled = true): void
     {
         Settings::setLanguageSetting(
-            "error_page_403",
+            'error_page_403',
             $enabled ? $this->getID() : null,
             $this->language
         );
@@ -567,7 +567,7 @@ class Page extends Content
     public function makeErrorPage404(bool $enabled = true): void
     {
         Settings::setLanguageSetting(
-            "error_page_404",
+            'error_page_404',
             $enabled ? $this->getID() : null,
             $this->language
         );

@@ -9,20 +9,20 @@ use App\Backend\Menu\MenuEntry;
 $entries = [];
 $entries[] = new MenuEntry(
     '<i class="fa fa-home" aria-hidden="true"></i> '
-    . get_translation("welcome"),
-    "?action=home",
-    "home",
-    "dashboard"
+    . get_translation('welcome'),
+    '?action=home',
+    'home',
+    'dashboard'
 );
 $entries[] = new MenuEntry(
     '<i class="fas fa-book"></i> '
-    . get_translation("contents"),
-    "?action=contents",
-    "contents",
+    . get_translation('contents'),
+    '?action=contents',
+    'contents',
     [
-    "pages",
-    "forms",
-    "banners"
+    'pages',
+    'forms',
+    'banners'
     ],
     [],
     false,
@@ -30,13 +30,13 @@ $entries[] = new MenuEntry(
 );
 $entries[] = new MenuEntry(
     '<i class="fa fa-file-image" aria-hidden="true"></i> '
-    . get_translation("media"),
-    "?action=media",
-    "media",
+    . get_translation('media'),
+    '?action=media',
+    'media',
     [
-    "files",
-    "videos",
-    "audio"
+    'files',
+    'videos',
+    'audio'
     ],
     [],
     false,
@@ -44,25 +44,25 @@ $entries[] = new MenuEntry(
 );
 $entries[] = new MenuEntry(
     '<i class="fa fa-user" aria-hidden="true"></i> '
-    . get_translation("users_and_groups"),
-    "?action=admins",
-    "admins",
-    "users"
+    . get_translation('users_and_groups'),
+    '?action=admins',
+    'admins',
+    'users'
 );
 $entries[] = new MenuEntry(
     '<i class="fas fa-box"></i> '
-    . get_translation("packages"),
-    ModuleHelper::buildActionURL("packages"),
-    "packages",
-    "list_packages"
+    . get_translation('packages'),
+    ModuleHelper::buildActionURL('packages'),
+    'packages',
+    'list_packages'
 );
-if (is_file(Path::resolve("ULICMS_ROOT/update.php"))) {
+if (is_file(Path::resolve('ULICMS_ROOT/update.php'))) {
     $entries[] = new MenuEntry(
         '<i class="fas fa-sync"></i> '
-        . get_translation("update"),
-        "?action=system_update",
-        "update_system",
-        "update_system",
+        . get_translation('update'),
+        '?action=system_update',
+        'update_system',
+        'update_system',
         [],
         false,
         true
@@ -70,19 +70,19 @@ if (is_file(Path::resolve("ULICMS_ROOT/update.php"))) {
 }
 $entries[] = new MenuEntry(
     '<i class="fas fa-tools"></i> '
-    . get_translation("settings"),
-    "?action=settings_categories",
-    "settings_categories",
+    . get_translation('settings'),
+    '?action=settings_categories',
+    'settings_categories',
     [
-    "settings_simple",
-    "design",
-    "spam_filter",
-    "cache",
-    "motd",
-    "logo",
-    "languages",
-    "other",
-    "expert_settings"
+    'settings_simple',
+    'design',
+    'spam_filter',
+    'cache',
+    'motd',
+    'logo',
+    'languages',
+    'other',
+    'expert_settings'
     ],
     [],
     false,
@@ -90,10 +90,10 @@ $entries[] = new MenuEntry(
 );
 $entries[] = new MenuEntry(
     '<i class="fa fa-info-circle" aria-hidden="true"></i> '
-    . get_translation("info"),
-    "?action=info",
-    "info",
-    "info",
+    . get_translation('info'),
+    '?action=info',
+    'info',
+    'info',
     [],
     false,
     true
@@ -104,11 +104,11 @@ $logoutUrl = ModuleHelper::buildMethodCallUrl(
 );
 $entries[] = new MenuEntry(
     '<i class="fa fa-sign-out-alt"></i> '
-    . get_translation("logout"),
+    . get_translation('logout'),
     $logoutUrl,
-    "logout"
+    'logout'
 );
-$entries = apply_filter($entries, "admin_menu_entries");
+$entries = apply_filter($entries, 'admin_menu_entries');
 $menu->setChildren($entries);
 echo $menu->render();
 ?>

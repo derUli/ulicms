@@ -24,8 +24,8 @@ abstract class Content extends Model
     public static function emptyTrash(): void
     {
         Database::deleteFrom(
-            "content",
-            "deleted_at IS NOT NULL"
+            'content',
+            'deleted_at IS NOT NULL'
         );
     }
 
@@ -79,6 +79,6 @@ abstract class Content extends Model
      */
     public function getIcon(): string
     {
-        return "far fa-file-alt";
+        return 'far fa-file-alt';
     }
 }

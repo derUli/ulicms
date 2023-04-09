@@ -10,54 +10,54 @@ use function App\HTML\icon;
 
 $controller = ControllerRegistry::get(PageController::class);
 
-$show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
+$show_filters = Settings::get('user/' . get_user_id() . '/show_filters');
 
 $permissionChecker = new PermissionChecker(get_user_id());
 
 if ($permissionChecker->hasPermission('pages')) {
-    echo Template::executeModuleTemplate("core_content", "icons.php");
+    echo Template::executeModuleTemplate('core_content', 'icons.php');
     ?>
     <h2><?php translate('pages'); ?></h2>
     <?php
     echo Alert::info(
-        get_translation("pages_infotext")
+        get_translation('pages_infotext')
     );
     ?>
 
     <?php
     echo Template::executeModuleTemplate(
-        "core_content",
-        "pages/partials/filters/filters.php"
+        'core_content',
+        'pages/partials/filters/filters.php'
     );
     ?>
     <div id="page-list">
-        <?php if ($controller->_getPagesListView() === "default") { ?>
+        <?php if ($controller->_getPagesListView() === 'default') { ?>
             <div class="row">
                 <div class="col-xs-6">
                     <a href="index.php?action=pages_new" class="btn btn-primary is-not-ajax"><i
-                            class="fa fa-plus"></i> <?php translate("create_page"); ?></a>
+                            class="fa fa-plus"></i> <?php translate('create_page'); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <a href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "recycleBin"); ?>" class="btn btn-default is-not-ajax"><i
-                            class="fa fa-trash"></i> <?php translate("recycle_bin"); ?></a>
+                    <a href="<?php echo ModuleHelper::buildMethodCallUrl('PageController', 'recycleBin'); ?>" class="btn btn-default is-not-ajax"><i
+                            class="fa fa-trash"></i> <?php translate('recycle_bin'); ?></a>
                 </div>
             </div>
-        <?php } elseif ($controller->_getPagesListView() === "recycle_bin") {
+        <?php } elseif ($controller->_getPagesListView() === 'recycle_bin') {
             ?>
             <div class="row">
                 <div class="col-xs-6">
                     <a href="<?php
                     echo ModuleHelper::buildMethodCallUrl(
                         PageController::class,
-                        "emptyTrash"
+                        'emptyTrash'
                     );
             ?>"
                        id="empty-trash"
                        class="btn btn-primary"><i
-                            class="fas fa-broom"></i> <?php translate("empty_recycle_bin"); ?></a>
+                            class="fas fa-broom"></i> <?php translate('empty_recycle_bin'); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <a href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "pages"); ?>" class="btn btn-default is-not-ajax"><i
+                    <a href="<?php echo ModuleHelper::buildMethodCallUrl('PageController', 'pages'); ?>" class="btn btn-default is-not-ajax"><i
                             class="fas fa-book"></i> <?php translate('pages'); ?></a>
                 </div>
             </div>
@@ -71,35 +71,35 @@ if ($permissionChecker->hasPermission('pages')) {
             data-url="<?php
             echo ModuleHelper::buildMethodCallUrl(
                 PageController::class,
-                "getParentPageId"
+                'getParentPageId'
             );
     ?>">
-                <?php echo icon("fas fa-arrow-up"); ?>
-                <?php translate("go_up"); ?>
+                <?php echo icon('fas fa-arrow-up'); ?>
+                <?php translate('go_up'); ?>
         </a>
         <div class="scroll voffset3">
             <table class="tablesorter dataset-list"
-                   data-url="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "getPages"); ?>">
+                   data-url="<?php echo ModuleHelper::buildMethodCallUrl('PageController', 'getPages'); ?>">
                 <thead>
                     <tr style="font-weight: bold;">
-                        <th><?php translate("title"); ?>
+                        <th><?php translate('title'); ?>
                         </th>
-                        <th><?php translate("menu"); ?>
+                        <th><?php translate('menu'); ?>
                         </th>
-                        <th><?php translate("position"); ?>
+                        <th><?php translate('position'); ?>
                         </th>
-                        <th><?php translate("parent_id"); ?>
+                        <th><?php translate('parent_id'); ?>
                         </th>
 
-                        <th><?php translate("activated"); ?>
+                        <th><?php translate('activated'); ?>
                         </th>
-                        <td class="no-sort text-center"><?php translate("view"); ?>
+                        <td class="no-sort text-center"><?php translate('view'); ?>
                         </td>
-                        <td class="no-sort text-center"><?php translate("edit"); ?>
+                        <td class="no-sort text-center"><?php translate('edit'); ?>
                         </td>
                         <td class="no-sort text-center"><?php
                     translate(
-                        $controller->_getPagesListView() === "default" ? "delete" : "restore"
+                        $controller->_getPagesListView() === 'default' ? 'delete' : 'restore'
                     );
     ?>
                         </td>
@@ -114,15 +114,15 @@ if ($permissionChecker->hasPermission('pages')) {
     <?php
     enqueueScriptFile(
         ModuleHelper::buildRessourcePath(
-            "core_content",
-            "js/pages/list.js"
+            'core_content',
+            'js/pages/list.js'
         )
     );
     combinedScriptHtml();
     $translation = new JSTranslation();
-    $translation->addKey("ask_for_delete");
-    $translation->addKey("wanna_empty_trash");
-    $translation->addKey("reset_filters");
+    $translation->addKey('ask_for_delete');
+    $translation->addKey('wanna_empty_trash');
+    $translation->addKey('reset_filters');
     $translation->renderJS();
 } else {
     noPerms();

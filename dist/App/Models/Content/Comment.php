@@ -32,13 +32,13 @@ class Comment extends Model
     private $useragent;
     private $read = false;
 
-    public const TABLE_NAME = "comments";
+    public const TABLE_NAME = 'comments';
 
     public function loadByID($id)
     {
-        $result = Database::selectAll("comments", [], "id=" . (int) $id);
+        $result = Database::selectAll('comments', [], 'id=' . (int) $id);
         if ($result == null || !Database::any($result)) {
-            throw new DatasetNotFoundException("no comment with id " .
+            throw new DatasetNotFoundException('no comment with id ' .
                             (int) $id);
         }
         $this->fillVars($result);
@@ -65,7 +65,7 @@ class Comment extends Model
         if (!$this->getDate()) {
             $this->date = time();
         }
-        Database::pQuery("INSERT INTO `{prefix}comments`
+        Database::pQuery('INSERT INTO `{prefix}comments`
             (`content_id`,
              `author_name`,
              `author_email`,
@@ -86,7 +86,7 @@ VALUES      ( ?,
               ?,
               ?,
               ?,
-              ?) ", [
+              ?) ', [
             $this->getContentId(),
             $this->getAuthorName(),
             $this->getAuthorEmail(),
@@ -103,7 +103,7 @@ VALUES      ( ?,
 
     protected function update()
     {
-        Database::pQuery("UPDATE `{prefix}comments` set
+        Database::pQuery('UPDATE `{prefix}comments` set
                          `content_id` = ?,
                          `author_name` = ?,
                          `author_email` = ?,
@@ -114,7 +114,7 @@ VALUES      ( ?,
                          `ip` = ?,
                          `useragent` = ?,
                          `read` = ?
-                          where id = ?", [
+                          where id = ?', [
             $this->getContentId(),
             $this->getAuthorName(),
             $this->getAuthorEmail(),
@@ -131,7 +131,7 @@ VALUES      ( ?,
 
     public function delete()
     {
-        Database::deleteFrom("comments", "id = " . $this->getID());
+        Database::deleteFrom('comments', 'id = ' . $this->getID());
         $this->setID(null);
     }
 
@@ -211,7 +211,7 @@ VALUES      ( ?,
             $val = strtotime($val);
         } elseif (!is_numeric($val)) {
             throw new InvalidArgumentException(
-                var_dump_str($val) . " is not an integer timestamp"
+                var_dump_str($val) . ' is not an integer timestamp'
             );
         }
         $this->date = (int) $val;
@@ -272,24 +272,24 @@ VALUES      ( ?,
     // returns all comments for a content by content_id
     public static function getAllByContentId(
         int $content_id,
-        string $order_by = "date desc"
+        string $order_by = 'date desc'
     ): array {
         return self::getAllDatasets(
             self::TABLE_NAME,
             self::class,
             $order_by,
-            "content_id = " . (int) $content_id
+            'content_id = ' . (int) $content_id
         );
     }
 
     public static function getAllByStatus(
         string $status,
         ?int $content_id = null,
-        string $order = "date desc"
+        string $order = 'date desc'
     ): array {
         $where = "status = '" . Database::escapeValue($status) . "'";
         if ($content_id) {
-            $where .= " and content_id = " . (int) $content_id;
+            $where .= ' and content_id = ' . (int) $content_id;
         }
         return self::getAllDatasets(
             self::TABLE_NAME,
@@ -299,7 +299,7 @@ VALUES      ( ?,
         );
     }
 
-    public static function getAll(string $order = "id desc"): array
+    public static function getAll(string $order = 'id desc'): array
     {
         return self::getAllDatasets(self::TABLE_NAME, self::class, $order);
     }
@@ -309,8 +309,8 @@ VALUES      ( ?,
     public static function getUnreadCount(): int
     {
         $result = Database::pQuery(
-            "select count(id) as amount from "
-            . "{prefix}comments where `read` = ?",
+            'select count(id) as amount from '
+            . '{prefix}comments where `read` = ?',
             [false],
             true
         );
@@ -322,8 +322,8 @@ VALUES      ( ?,
     public static function getReadCount(): ?int
     {
         $result = Database::pQuery(
-            "select count(id) as amount from "
-            . "{prefix}comments where `read` = ?",
+            'select count(id) as amount from '
+            . '{prefix}comments where `read` = ?',
             [true],
             true
         );
@@ -334,8 +334,8 @@ VALUES      ( ?,
     // returns the count of all comments
     public static function getAllCount(): ?int
     {
-        $result = Database::pQuery("select count(id) as amount from "
-                        . "{prefix}comments", [], true);
+        $result = Database::pQuery('select count(id) as amount from '
+                        . '{prefix}comments', [], true);
         $dataset = Database::fetchObject($result);
         return (int)$dataset->amount;
     }
@@ -347,9 +347,9 @@ VALUES      ( ?,
     // this method deletes ip addresses of comments after 48 hours
     public static function deleteIpsAfter48Hours(bool $keepSpamIps = false): int
     {
-        $sql = "update {prefix}comments set ip = null WHERE date < "
-                . "FROM_UNIXTIME(UNIX_TIMESTAMP(NOW() - INTERVAL 2 DAY)) "
-                . "and ip is not null";
+        $sql = 'update {prefix}comments set ip = null WHERE date < '
+                . 'FROM_UNIXTIME(UNIX_TIMESTAMP(NOW() - INTERVAL 2 DAY)) '
+                . 'and ip is not null';
         if ($keepSpamIps) {
             $sql .= " and status <> 'spam'";
         }
@@ -362,12 +362,12 @@ VALUES      ( ?,
         ?string $ip,
         string $status = CommentStatus::SPAM
     ): bool {
-        $sql = "select ip from {prefix}comments where ip = ?";
+        $sql = 'select ip from {prefix}comments where ip = ?';
         $args = [
             (string) $ip
         ];
         if ($status) {
-            $sql .= " and status = ?";
+            $sql .= ' and status = ?';
             $args[] = (string) $status;
         }
         $result = Database::pQuery($sql, $args, true);

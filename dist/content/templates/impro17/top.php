@@ -3,11 +3,11 @@ $site_slogan = get_site_slogan();
 $data = get_custom_data();
 $site_slogan = $data['site_slogan'] ?? get_site_slogan();
 
-$q = $_GET["q"] ?? '';
+$q = $_GET['q'] ?? '';
 
 $modules = getAllModules();
-$hasSearch = in_array("extended_search", $modules);
-$searchPage = ModuleHelper::getFirstPageWithModule("extended_search");
+$hasSearch = in_array('extended_search', $modules);
+$searchPage = ModuleHelper::getFirstPageWithModule('extended_search');
 
 html5_doctype();
 og_html_prefix();

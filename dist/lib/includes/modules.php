@@ -30,7 +30,7 @@ function do_event(
     string $runs = ModuleEventConstants::RUNS_ONCE
 ): void {
     $modules = getAllModules();
-    $disabledModules = Vars::get("disabledModules") ?? [];
+    $disabledModules = Vars::get('disabledModules') ?? [];
     $modulesCount = count($modules);
 
     for ($hook_i = 0; $hook_i < $modulesCount; $hook_i++) {
@@ -38,10 +38,10 @@ function do_event(
             continue;
         }
         $file1 = getModulePath($modules[$hook_i], true) .
-                $modules[$hook_i] . "_" . $name . ".php";
+                $modules[$hook_i] . '_' . $name . '.php';
         $file2 = getModulePath($modules[$hook_i], true) .
-                "hooks/" . $name . ".php";
-        $main_class = getModuleMeta($modules[$hook_i], "main_class");
+                'hooks/' . $name . '.php';
+        $main_class = getModuleMeta($modules[$hook_i], 'main_class');
         $controller = null;
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
@@ -87,7 +87,7 @@ function replaceShortcodesWithModules(
     $string = $replaceOther ? replaceOtherShortCodes($string) : $string;
 
     $allModules = ModuleHelper::getAllEmbedModules();
-    $disabledModules = Vars::get("disabledModules") ?? [];
+    $disabledModules = Vars::get('disabledModules') ?? [];
 
     foreach ($allModules as $module) {
         if (in_array($module, $disabledModules) || !stringContainsShortCodes($string, $module)) {
@@ -106,18 +106,18 @@ function replaceShortcodesWithModules(
             require_once $module_mainfile_path2;
         }
 
-        $main_class = getModuleMeta($module, "main_class");
+        $main_class = getModuleMeta($module, 'main_class');
         $controller = null;
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
         }
-        if ($controller && method_exists($controller, "render")) {
+        if ($controller && method_exists($controller, 'render')) {
             $html_output = $controller->render();
-        } elseif (function_exists($module . "_render")) {
-            $html_output = call_user_func($module . "_render");
+        } elseif (function_exists($module . '_render')) {
+            $html_output = call_user_func($module . '_render');
         } else {
             throw new BadMethodCallException("Module $module "
-                            . "has no render() method");
+                            . 'has no render() method');
         }
 
         $string = str_replace($stringToReplace1, $html_output, $string);
@@ -142,7 +142,7 @@ function replaceOtherShortCodes(string $string): string
     $language = getCurrentLanguage(true);
     $checkbox = new PrivacyCheckbox($language);
     $string = str_ireplace(
-        "[accept_privacy_policy]",
+        '[accept_privacy_policy]',
         $checkbox->render(),
         $string
     );
@@ -172,9 +172,9 @@ function replaceOtherShortCodes(string $string): string
         $string
     );
 
-    $string = str_ireplace("[year]", Template::getYear(), $string);
+    $string = str_ireplace('[year]', Template::getYear(), $string);
     $string = str_ireplace(
-        "[homepage_owner]",
+        '[homepage_owner]',
         Template::getHomepageOwner(),
         $string
     );
@@ -212,30 +212,30 @@ function containsModule(?string $page = null, ?string $module = null): bool
         $page = get_slug();
     }
 
-    if (Vars::get("page_" . $page . "_contains_" . $module) !== null) {
-        return Vars::get("page_" . $page . "_contains_" . $module);
+    if (Vars::get('page_' . $page . '_contains_' . $module) !== null) {
+        return Vars::get('page_' . $page . '_contains_' . $module);
     }
 
-    $result = db_query("SELECT content, module, `type` FROM " .
-            tbname("content") . " WHERE slug = '" . db_escape($page) . "'");
+    $result = db_query('SELECT content, module, `type` FROM ' .
+            tbname('content') . " WHERE slug = '" . db_escape($page) . "'");
 
     if (!Database::any($result)) {
         return $containsModule;
     }
 
     $dataset = db_fetch_assoc($result);
-    $content = $dataset["content"];
-    $content = str_replace("&quot;", "\"", $content);
+    $content = $dataset['content'];
+    $content = str_replace('&quot;', '"', $content);
 
     // TODO: Refactor this
-    if ($dataset["module"] !== null && !empty($dataset["module"]) && $dataset["type"] == "module") {
-        if (!$module || ($module && $dataset["module"] == $module)) {
+    if ($dataset['module'] !== null && !empty($dataset['module']) && $dataset['type'] == 'module') {
+        if (!$module || ($module && $dataset['module'] == $module)) {
             $containsModule = true;
         }
     } elseif (stringContainsShortCodes($content, $module)) {
         $containsModule = true;
     }
 
-    Vars::set("page_" . $page . "_contains_" . $module, $containsModule);
+    Vars::set('page_' . $page . '_contains_' . $module, $containsModule);
     return $containsModule;
 }

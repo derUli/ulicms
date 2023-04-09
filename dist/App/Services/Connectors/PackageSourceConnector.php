@@ -19,16 +19,16 @@ class PackageSourceConnector
     public function __construct(?string $packageSourceUrl = null)
     {
         if (!$packageSourceUrl) {
-            $packageSourceUrl = Settings::get("pkg_src");
+            $packageSourceUrl = Settings::get('pkg_src');
         }
 
         $packageSourceUrl = str_replace(
-            "{version}",
+            '{version}',
             cms_version(),
             $packageSourceUrl
         );
 
-        $packageSourceUrl .= "index.json";
+        $packageSourceUrl .= 'index.json';
         $this->packageSourceUrl = $packageSourceUrl;
     }
 

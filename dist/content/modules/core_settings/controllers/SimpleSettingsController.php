@@ -9,25 +9,25 @@ class SimpleSettingsController extends Controller
 {
     public function _savePost(): void
     {
-        do_event("before_safe_simple_settings");
-        Settings::set("homepage_owner", $_POST["homepage_owner"]);
+        do_event('before_safe_simple_settings');
+        Settings::set('homepage_owner', $_POST['homepage_owner']);
         Settings::set('language', $_POST['language']);
-        Settings::set("visitors_can_register", (int)isset($_POST["visitors_can_register"]));
+        Settings::set('visitors_can_register', (int)isset($_POST['visitors_can_register']));
         Settings::set(
             'maintenance_mode',
             (int)isset($_POST['maintenance_mode'])
         );
-        Settings::set("email", $_POST["email"]);
-        Settings::set("timezone", $_POST["timezone"]);
-        Settings::set("robots", $_POST["robots"]);
+        Settings::set('email', $_POST['email']);
+        Settings::set('timezone', $_POST['timezone']);
+        Settings::set('robots', $_POST['robots']);
 
-        if (!isset($_POST["disable_password_reset"])) {
-            Settings::set("disable_password_reset", "disable_password_reset");
+        if (!isset($_POST['disable_password_reset'])) {
+            Settings::set('disable_password_reset', 'disable_password_reset');
         } else {
-            Settings::delete("disable_password_reset");
+            Settings::delete('disable_password_reset');
         }
 
-        do_event("after_safe_simple_settings");
+        do_event('after_safe_simple_settings');
 
         CacheUtil::clearPageCache();
     }
@@ -38,7 +38,7 @@ class SimpleSettingsController extends Controller
 
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL("settings_simple")
+            ModuleHelper::buildActionURL('settings_simple')
         );
     }
 

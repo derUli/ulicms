@@ -11,8 +11,8 @@ if ($id !== null) {
             $start = 0;
             $limit = (int) ($list->limit);
             if ($limit > 0 && $use_pagination) {
-                if (isset($_GET["start"])) {
-                    $start = (int) ($_GET["start"]);
+                if (isset($_GET['start'])) {
+                    $start = (int) ($_GET['start']);
                 }
                 $entries = array_slice($entries, $start, $limit);
                 $entries_count = count($entries);
@@ -41,11 +41,11 @@ if ($id !== null) {
                 <div class="page_older_newer">
                     <?php if ($start > 0 && $use_pagination) { ?>
                         <span class="blog_pagination_newer"><a
-                                href="<?php Template::escape(buildSEOUrl()); ?>?start=<?php echo $previous_start; ?>"><?php Template::escape("<<"); ?></a></span>
+                                href="<?php Template::escape(buildSEOUrl()); ?>?start=<?php echo $previous_start; ?>"><?php Template::escape('<<'); ?></a></span>
                         <?php } ?>
                         <?php if ($start + $limit < $entries_count_total && $use_pagination) { ?>
                         <span class="blog_pagination_older"><a
-                                href="<?php Template::escape(buildSEOUrl()); ?>?start=<?php echo $next_start; ?>"><?php Template::escape(">>"); ?></a></span>
+                                href="<?php Template::escape(buildSEOUrl()); ?>?start=<?php echo $next_start; ?>"><?php Template::escape('>>'); ?></a></span>
 
                     <?php } ?>
                 </div>

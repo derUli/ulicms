@@ -8,7 +8,7 @@ use App\Database\DBMigrator;
 use App\Backend\UliCMSVersion;
 
 // Enable maintenance mode
-Settings::set('maintenance_mode', "1");
+Settings::set('maintenance_mode', '1');
 
 use App\Packages\PatchManager;
 use App\Utils\CacheUtil;
@@ -17,23 +17,23 @@ use App\Utils\CacheUtil;
 @set_time_limit(0);
 
 // Run SQL Migration Scripts
-$migrator = new DBMigrator("core", "lib/migrations/up");
+$migrator = new DBMigrator('core', 'lib/migrations/up');
 $migrator->migrate();
 
 $version = new UliCMSVersion();
 $versionNumber = $version->getInternalVersionAsString();
-Settings::set("db_schema_version", $versionNumber);
+Settings::set('db_schema_version', $versionNumber);
 
-Settings::set("maintenance_mode", "0");
+Settings::set('maintenance_mode', '0');
 
 // Clear Cache
 CacheUtil::clearCache();
 
 // Disable maintenance mode
-Settings::set('maintenance_mode', "0");
+Settings::set('maintenance_mode', '0');
 
 // The line below will be uncommented by the mk-upgrade-package.py deploy script
 // The script will delete itself after execution.
 // @unlink ("update.php");
 // Redirect to Admin backend after running the update script
-Response::redirect("admin/");
+Response::redirect('admin/');

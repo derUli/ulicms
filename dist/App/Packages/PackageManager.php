@@ -110,7 +110,7 @@ class PackageManager
     {
         $availableModules = [];
 
-        $moduleFolder = Path::resolve("ULICMS_ROOT/content/modules");
+        $moduleFolder = Path::resolve('ULICMS_ROOT/content/modules');
         $moduleDirectories = File::findAllDirs($moduleFolder);
 
         natcasesort($moduleDirectories);
@@ -133,7 +133,7 @@ class PackageManager
     {
         $themes = [];
         $templateDir = Path::resolve(
-            "ULICMS_ROOT/content/templates"
+            'ULICMS_ROOT/content/templates'
         ) . '/';
 
         $folders = scanDir($templateDir);

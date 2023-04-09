@@ -2,38 +2,38 @@
 
 class Fortune extends MainClass
 {
-    private $moduleName = "fortune2";
+    private $moduleName = 'fortune2';
 
     // Fortune cookie on "welcome" page of UliCMS dashboard
     public function accordionLayout()
     {
-        return Template::executeModuleTemplate($this->moduleName, "dashboard");
+        return Template::executeModuleTemplate($this->moduleName, 'dashboard');
     }
 
     // html for frontend output
     public function render()
     {
-        return Template::executeModuleTemplate($this->moduleName, "default");
+        return Template::executeModuleTemplate($this->moduleName, 'default');
     }
 
     // filter sample which replaces two placeholders
     public function contentFilter($text)
     {
-        $text = str_replace("[fortune]", $this->render(), $text);
-        $text = str_replace("[hello]", get_translation("hello_world"), $text);
+        $text = str_replace('[fortune]', $this->render(), $text);
+        $text = str_replace('[hello]', get_translation('hello_world'), $text);
         return $text;
     }
 
     // headline of settings page
     public function getSettingsHeadline()
     {
-        return get_translation("my_settings_page");
+        return get_translation('my_settings_page');
     }
 
     // settings page content below headline
     public function settings()
     {
-        return Template::executeModuleTemplate($this->moduleName, "admin");
+        return Template::executeModuleTemplate($this->moduleName, 'admin');
     }
 
     // get a random fortune cookie from files
@@ -45,9 +45,9 @@ class Fortune extends MainClass
         } else {
             $lang = getCurrentLanguage(true);
         }
-        $fortuneDir = getModulePath($this->moduleName) . "cookies/" . $lang . '/';
+        $fortuneDir = getModulePath($this->moduleName) . 'cookies/' . $lang . '/';
         if (!is_dir($fortuneDir)) {
-            $fortuneDir = getModulePath($this->moduleName) . "cookies/en/";
+            $fortuneDir = getModulePath($this->moduleName) . 'cookies/en/';
         }
         $fortuneFiles = scandir($fortuneDir);
         do {
@@ -68,33 +68,33 @@ class Fortune extends MainClass
 
     public function doSomething()
     {
-        ViewBag::set("sample_text", get_translation("unknown_request_type"));
+        ViewBag::set('sample_text', get_translation('unknown_request_type'));
     }
 
     public function doSomethingPost()
     {
-        ViewBag::set("sample_text", get_translation("post_request_type"));
+        ViewBag::set('sample_text', get_translation('post_request_type'));
     }
 
     public function doSomethingGet()
     {
-        ViewBag::set("sample_text", get_translation("get_request_type"));
+        ViewBag::set('sample_text', get_translation('get_request_type'));
     }
 
     public function showFortune()
     {
-        ActionResult("fortune", $this->getRandomFortune());
+        ActionResult('fortune', $this->getRandomFortune());
     }
 
     public function helloWorld()
     {
-        echo "Hello World!";
+        echo 'Hello World!';
     }
 
     // Thia is executed before uninstalling this module
     // Use this to clean up data (e.g. drop database tables, delete files)
     public function uninstall()
     {
-        Settings::set("fortune2_uninstalled_at", time());
+        Settings::set('fortune2_uninstalled_at', time());
     }
 }

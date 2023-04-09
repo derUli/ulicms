@@ -19,8 +19,8 @@ function text($str)
 // generates a html img tag
 function imageTag(string $file, array $htmlAttributes = []): string
 {
-    if (!isset($htmlAttributes["src"])) {
-        $htmlAttributes["src"] = $file;
+    if (!isset($htmlAttributes['src'])) {
+        $htmlAttributes['src'] = $file;
     }
     $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
     return "<img {$attribHTML}>";
@@ -35,10 +35,10 @@ function buttonLink(
     ?string $target = null,
     array $htmlAttributes = []
 ): string {
-    if (!isset($htmlAttributes["class"])) {
-        $htmlAttributes["class"] = $type;
+    if (!isset($htmlAttributes['class'])) {
+        $htmlAttributes['class'] = $type;
     } else {
-        $htmlAttributes["class"] = "$type {$htmlAttributes["class"]}";
+        $htmlAttributes['class'] = "$type {$htmlAttributes['class']}";
     }
     return link($url, $text, $allowHtml, $target, $htmlAttributes);
 }
@@ -53,7 +53,7 @@ function link(
 ): string {
     $htmlAttributes['href'] = $url;
     if ($target) {
-        $htmlAttributes["target"] = $target;
+        $htmlAttributes['target'] = $target;
     }
 
     if (!$allowHtml) {
@@ -69,10 +69,10 @@ function link(
 // e.g. icon("fas fa-cog");
 function icon(string $classes, array $htmlAttributes = []): string
 {
-    if (!isset($htmlAttributes["class"])) {
-        $htmlAttributes["class"] = $classes;
+    if (!isset($htmlAttributes['class'])) {
+        $htmlAttributes['class'] = $classes;
     } else {
-        $htmlAttributes["class"] = "$classes {$htmlAttributes["class"]}";
+        $htmlAttributes['class'] = "$classes {$htmlAttributes['class']}";
     }
 
     $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);

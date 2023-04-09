@@ -233,21 +233,21 @@ class MenuEntry
      */
     public function render(): string
     {
-        $html = "<li>";
-        $targetString = $this->getNewWindow() ? "_blank" : "_self";
+        $html = '<li>';
+        $targetString = $this->getNewWindow() ? '_blank' : '_self';
         $cssClasses = "backend-menu-item-{$this->getIdentifier()}";
         if (get_action() == $this->getIdentifier()) {
-            $cssClasses .= " active";
+            $cssClasses .= ' active';
         }
-        if ($this->getIdentifier() !== "logout") {
-            $cssClasses .= $this->getIsAjax() ? " is-ajax" : " is-not-ajax";
+        if ($this->getIdentifier() !== 'logout') {
+            $cssClasses .= $this->getIsAjax() ? ' is-ajax' : ' is-not-ajax';
         }
         // var_dump($cssClasses);
         $html .= "<a href=\"{$this->getLink()}\" "
                 . "target=\"{$targetString}\" class=\"{$cssClasses}\">";
         $html .= $this->getTitle();
-        $html .= "</a>";
-        $html .= "</li>";
+        $html .= '</a>';
+        $html .= '</li>';
         return $html;
     }
 }

@@ -7,16 +7,16 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase
 {
     protected function tearDown(): void
     {
-        Database::deleteFrom("content", "slug='audio_page_test' or slug='video_page_test'");
+        Database::deleteFrom('content', "slug='audio_page_test' or slug='video_page_test'");
     }
 
     public function testSetAndGetVideo()
     {
         $video = new Video();
-        $video->setName("My Name");
-        $video->setMP4File("video.mp4");
-        $video->setOGGFile("video.ogv");
-        $video->setWebmFile("video.webm");
+        $video->setName('My Name');
+        $video->setMP4File('video.mp4');
+        $video->setOGGFile('video.ogv');
+        $video->setWebmFile('video.webm');
         $video->setCategoryId(1);
         $video->setWidth(640);
         $video->setHeight(480);
@@ -27,8 +27,8 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase
         $groupId = Group::getAll()[0]->getId();
 
         $page = new Video_Page();
-        $page->slug = "video_page_test";
-        $page->title = "Video Page Test";
+        $page->slug = 'video_page_test';
+        $page->title = 'Video Page Test';
         $page->language = 'en';
         $page->author_id = $userId;
         $page->group_id = $groupId;
@@ -53,8 +53,8 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase
     public function testSetAndGetAudio()
     {
         $audio = new Audio();
-        $audio->setName("My Name");
-        $audio->setMP3File("audio.mp3");
+        $audio->setName('My Name');
+        $audio->setMP3File('audio.mp3');
         $audio->setCategoryId(1);
         $audio->save();
 
@@ -63,8 +63,8 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase
         $groupId = Group::getAll()[0]->getId();
 
         $page = new Audio_Page();
-        $page->slug = "audio_page_test";
-        $page->title = "Audio Page Test";
+        $page->slug = 'audio_page_test';
+        $page->title = 'Audio Page Test';
         $page->language = 'en';
         $page->author_id = $userId;
         $page->group_id = $groupId;

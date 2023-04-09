@@ -50,7 +50,7 @@ class PagePermissions
         $result = [];
         $classArray = (array) $this;
         foreach ($classArray as $key => $value) {
-            preg_match("/only_([a-z]+)_can_edit/", $key, $matches);
+            preg_match('/only_([a-z]+)_can_edit/', $key, $matches);
             if (count($matches) >= 2) {
                 $object = $matches[1];
                 $result[$object] = $value;
@@ -63,18 +63,18 @@ class PagePermissions
     {
         $all = $this->getAll();
 
-        $sql = "update `{prefix}content` set ";
+        $sql = 'update `{prefix}content` set ';
         $args = [];
         foreach ($all as $key => $value) {
             $sql .= " only_{$key}_can_edit = ?, ";
             $args[] = $value;
         }
 
-        $sql .= " id = id ";
+        $sql .= ' id = id ';
         $sql = trim($sql);
 
         $args[] = (int) $id;
-        $sql .= " where id = ?";
+        $sql .= ' where id = ?';
         Database::pQuery($sql, $args, true) || die(Database::getError());
     }
 }

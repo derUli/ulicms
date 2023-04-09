@@ -7,7 +7,7 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 class Content_List extends Page
 {
     public $listData = null;
-    public $type = "list";
+    public $type = 'list';
 
     public function __construct($id = null)
     {
@@ -27,6 +27,6 @@ class Content_List extends Page
      */
     public function getIcon(): string
     {
-        return "fas fa-list-ul";
+        return 'fas fa-list-ul';
     }
 }

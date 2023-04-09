@@ -14,8 +14,8 @@ class MultilineTextFieldTest extends \PHPUnit\Framework\TestCase
     public function testRender()
     {
         $field = new MultilineTextField();
-        $field->name = "my_field";
-        $field->title = "users";
+        $field->name = 'my_field';
+        $field->title = 'users';
         $this->assertMatchesHtmlSnapshot($field->render(123));
     }
 }

@@ -13,23 +13,23 @@ class UIUtils
         $robotsListItems = [];
         $robotsListItems[] = new ListItem(
             null,
-            "[" . get_translation("standard") . "]"
+            '[' . get_translation('standard') . ']'
         );
         $robotsListItems[] = new ListItem(
-            "index, follow",
-            "index, follow"
+            'index, follow',
+            'index, follow'
         );
         $robotsListItems[] = new ListItem(
-            "index, nofollow",
-            "index, nofollow"
+            'index, nofollow',
+            'index, nofollow'
         );
         $robotsListItems[] = new ListItem(
-            "noindex, follow",
-            "noindex, follow"
+            'noindex, follow',
+            'noindex, follow'
         );
         $robotsListItems[] = new ListItem(
-            "noindex, nofollow",
-            "noindex, nofollow"
+            'noindex, nofollow',
+            'noindex, nofollow'
         );
         return $robotsListItems;
     }

@@ -5,10 +5,10 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $manager = new UserManager();
-        $user = $manager->getAllUsers("admin desc")[0];
+        $user = $manager->getAllUsers('admin desc')[0];
 
         $_SESSION = [
-            "login_id" => $user->getId()
+            'login_id' => $user->getId()
         ];
 
         $_POST = [];
@@ -16,8 +16,8 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase
 
     protected function tearDown(): void
     {
-        Database::deleteFrom("users", "username = 'testuser-ist-admin'");
-        Database::deleteFrom("forms", "name like 'Unit Test%'");
+        Database::deleteFrom('users', "username = 'testuser-ist-admin'");
+        Database::deleteFrom('forms', "name like 'Unit Test%'");
 
         $_SESSION = [];
         $_POST = [];
@@ -36,13 +36,13 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase
     {
         $page = ContentFactory::getAllRegular()[0];
         Forms::createForm(
-            "Unit Test 2",
-            "max@muster.de",
-            "Subject 1",
+            'Unit Test 2',
+            'max@muster.de',
+            'Subject 1',
             1,
-            "message=>Message",
-            "message",
-            "email",
+            'message=>Message',
+            'message',
+            'email',
             $page->getId(),
             true
         );
@@ -62,15 +62,15 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase
     {
         $page = ContentFactory::getAllRegular()[0];
 
-        $_POST['name'] = "Unit Test " . time();
-        $_POST["enabled"] = "1";
-        $_POST["email_to"] = "foo@example.invalid";
-        $_POST["subject"] = "My Subject";
-        $_POST["category_id"] = "1";
-        $_POST["fields"] = "foo=>bar";
-        $_POST["required_fields"] = "foo";
-        $_POST["mail_from_field"] = "foo";
-        $_POST["target_page_id"] = (string)$page->getId();
+        $_POST['name'] = 'Unit Test ' . time();
+        $_POST['enabled'] = '1';
+        $_POST['email_to'] = 'foo@example.invalid';
+        $_POST['subject'] = 'My Subject';
+        $_POST['category_id'] = '1';
+        $_POST['fields'] = 'foo=>bar';
+        $_POST['required_fields'] = 'foo';
+        $_POST['mail_from_field'] = 'foo';
+        $_POST['target_page_id'] = (string)$page->getId();
     }
 
     public function testUpdatePostReturnsTrue()
@@ -81,7 +81,7 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase
         $id = $controller->_createPost();
 
         $_POST['id'] = $id;
-        $_POST['name'] = "Unit Test Updated";
+        $_POST['name'] = 'Unit Test Updated';
 
         $success = $controller->_updatePost();
         $this->assertTrue($success);

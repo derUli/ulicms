@@ -10,8 +10,8 @@ use App\Models\Media\Audio;
 class Audio_Page extends Page
 {
     public $audio = null;
-    public $type = "audio";
-    public $text_position = "after";
+    public $type = 'audio';
+    public $text_position = 'after';
 
     protected function fillVars($result = null)
     {
@@ -39,8 +39,8 @@ class Audio_Page extends Page
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set audio = ?, "
-                . "text_position = ? where id = ?";
+        $sql = 'update {prefix}content set audio = ?, '
+                . 'text_position = ? where id = ?';
         $args = [
             $this->audio,
             $this->text_position,
@@ -68,6 +68,6 @@ class Audio_Page extends Page
      */
     public function getIcon(): string
     {
-        return "fas fa-volume-up";
+        return 'fas fa-volume-up';
     }
 }

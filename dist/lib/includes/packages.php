@@ -12,8 +12,8 @@ use App\Packages\PackageManager;
 function getAllModules(): array
 {
     // Check if cached
-    if (Vars::get("allModules")) {
-        return Vars::get("allModules");
+    if (Vars::get('allModules')) {
+        return Vars::get('allModules');
     }
 
     // Fetch installed modules
@@ -21,7 +21,7 @@ function getAllModules(): array
     $modules = $pkg->getInstalledPackages('modules');
 
     // Save installed modules in cache
-    Vars::set("allModules", $modules);
+    Vars::set('allModules', $modules);
     return $modules;
 }
 
@@ -42,10 +42,10 @@ function getAllThemes(): array
  * @param string $type
  * @return bool
  */
-function uninstall_module(string $name, string $type = "module"): bool
+function uninstall_module(string $name, string $type = 'module'): bool
 {
     $acl = new ACL();
-    if (!$acl->hasPermission("install_packages") && !is_cli()) {
+    if (!$acl->hasPermission('install_packages') && !is_cli()) {
         return false;
     }
 
@@ -68,7 +68,7 @@ function uninstall_module(string $name, string $type = "module"): bool
                 // Uninstall Script ausführen, sofern vorhanden
                 $mainController = ModuleHelper::getMainController($name);
                 if ($mainController
-                        && method_exists($mainController, "uninstall")) {
+                        && method_exists($mainController, 'uninstall')) {
                     $mainController->uninstall();
                 } elseif (is_file($uninstall_script)) {
                     require $uninstall_script;

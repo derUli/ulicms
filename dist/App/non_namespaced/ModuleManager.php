@@ -9,7 +9,7 @@ class ModuleManager
     public function getAllModules(): array
     {
         $modules = [];
-        $sql = "select name from {prefix}modules";
+        $sql = 'select name from {prefix}modules';
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
             $modules [] = new Module($row->name);
@@ -20,7 +20,7 @@ class ModuleManager
     public function getEnabledModuleNames(): array
     {
         $modules = [];
-        $sql = "select name from {prefix}modules where enabled = 1";
+        $sql = 'select name from {prefix}modules where enabled = 1';
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
             $modules [] = $row->name;
@@ -31,7 +31,7 @@ class ModuleManager
     public function getDisabledModuleNames(): array
     {
         $modules = [];
-        $sql = "select name from {prefix}modules where enabled = 0";
+        $sql = 'select name from {prefix}modules where enabled = 0';
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
             $modules [] = $row->name;
@@ -42,10 +42,10 @@ class ModuleManager
     public function getAllModuleNames(?string $source = null): array
     {
         $modules = [];
-        $sql = "select name from {prefix}modules";
+        $sql = 'select name from {prefix}modules';
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
-            if ($source && getModuleMeta($row->name, "source") != $source) {
+            if ($source && getModuleMeta($row->name, 'source') != $source) {
                 continue;
             }
             $modules [] = $row->name;
@@ -57,7 +57,7 @@ class ModuleManager
         ?string $module,
         array $allDeps = []
     ): array {
-        $dependencies = getModuleMeta($module, "dependencies");
+        $dependencies = getModuleMeta($module, 'dependencies');
         if ($dependencies) {
             foreach ($dependencies as $dep) {
                 $allDeps [] = $dep;
@@ -74,7 +74,7 @@ class ModuleManager
     ): array {
         $allModules = $this->getEnabledModuleNames();
         foreach ($allModules as $mod) {
-            $dependencies = getModuleMeta($mod, "dependencies");
+            $dependencies = getModuleMeta($mod, 'dependencies');
             if ($dependencies && in_array($module, $dependencies)) {
                 $allDeps [] = $mod;
                 $allDeps = array_combine($allDeps, $this->getDependentModules($mod, $allDeps));
@@ -124,7 +124,7 @@ class ModuleManager
 
         // Settings aller aktiven Module auslesen und registrieren
         foreach ($realModules as $realModule) {
-            $version = getModuleMeta($realModule, "version");
+            $version = getModuleMeta($realModule, 'version');
             if (in_array($realModule, $dataBaseModules)) {
                 $this->updateModuleVersion($version, $realModule);
                 continue;
@@ -150,7 +150,7 @@ class ModuleManager
     {
         $enabledModules = $this->getEnabledModuleNames();
         foreach ($enabledModules as $module) {
-            $settings = getModuleMeta($module, "settings");
+            $settings = getModuleMeta($module, 'settings');
             if (!($settings && is_array($settings))) {
                 continue;
             }

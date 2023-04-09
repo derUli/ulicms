@@ -19,7 +19,7 @@ class Module
 
     public function loadByName(string $name): bool
     {
-        $sql = "select * from {prefix}modules where name = ?";
+        $sql = 'select * from {prefix}modules where name = ?';
         $args = [
             $name
         ];
@@ -37,7 +37,7 @@ class Module
 
     public function save(): void
     {
-        $sql = "select name from {prefix}modules where name = ?";
+        $sql = 'select name from {prefix}modules where name = ?';
         $args = [
             $this->name
         ];
@@ -52,8 +52,8 @@ class Module
 
     protected function insert(): bool
     {
-        $sql = "INSERT INTO {prefix}modules (name, version, enabled) "
-                . "values(?, ?, ?)";
+        $sql = 'INSERT INTO {prefix}modules (name, version, enabled) '
+                . 'values(?, ?, ?)';
         $args = [
             $this->name,
             $this->version,
@@ -64,8 +64,8 @@ class Module
 
     protected function update(): bool
     {
-        $sql = "update {prefix}modules set version = ?, enabled = ? "
-                . "where name = ?";
+        $sql = 'update {prefix}modules set version = ?, enabled = ? '
+                . 'where name = ?';
         $args = [
             $this->version,
             $this->enabled,
@@ -130,11 +130,11 @@ class Module
         return (
             is_file(getModuleAdminFilePath($this->name)) ||
             is_file(getModuleAdminFilePath2($this->name)) ||
-            ($controller && method_exists($controller, "settings")) ||
+            ($controller && method_exists($controller, 'settings')) ||
             (
-                getModuleMeta($this->name, "main_class")
+                getModuleMeta($this->name, 'main_class')
             ) &&
-            getModuleMeta($this->name, "admin_permission"));
+            getModuleMeta($this->name, 'admin_permission'));
     }
 
     public function isEmbedModule(): bool
@@ -203,7 +203,7 @@ class Module
         // Uninstall Script ausführen, sofern vorhanden
         $mainController = ModuleHelper::getMainController($name);
         return (($mainController &&
-                method_exists($mainController, "uninstall")) ||
+                method_exists($mainController, 'uninstall')) ||
                 is_file($uninstallScript1) ||
                 is_file($uninstallScript2)
         );
@@ -211,13 +211,13 @@ class Module
 
     public function delete(): ?bool
     {
-        $sql = "select name from {prefix}modules where name = ?";
+        $sql = 'select name from {prefix}modules where name = ?';
         $args = [
             $this->name
         ];
         $result = Database::pQuery($sql, $args, true);
         if (Database::any($result)) {
-            $sql = "delete from {prefix}modules where name = ?";
+            $sql = 'delete from {prefix}modules where name = ?';
             $args = [
                 $this->name
             ];
@@ -228,6 +228,6 @@ class Module
 
     public function uninstall(): bool
     {
-        return uninstall_module($this->getName(), "module");
+        return uninstall_module($this->getName(), 'module');
     }
 }

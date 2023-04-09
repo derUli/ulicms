@@ -16,13 +16,13 @@ class ModelBinderExample extends Model
 
     public function setField2($value)
     {
-        Model::checkValueType($value, "string");
+        Model::checkValueType($value, 'string');
         $this->field2 = $value;
     }
 
     public function setMyField($value)
     {
-        Model::checkValueType($value, "numeric");
+        Model::checkValueType($value, 'numeric');
         $this->field3 = $value;
     }
 
@@ -47,14 +47,14 @@ class ModelBinderExample extends Model
     }
 
     private $sampleValuesOK = [
-        "field1" => 123,
-        "field2" => "This is string"
+        'field1' => 123,
+        'field2' => 'This is string'
     ];
     private $invalidValues1 = [
-        "my_field" => "This should be a number"
+        'my_field' => 'This should be a number'
     ];
     private $invalidValues2 = [
-        "not_mapped" => "Not mapped"
+        'not_mapped' => 'Not mapped'
     ];
 
     public function fillVars($data = null)

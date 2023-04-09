@@ -7,7 +7,7 @@ try {
 
     include 'include/utils.php';
 
-    if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager") {
+    if ($_SESSION['RF']['verify'] != 'RESPONSIVEfilemanager') {
         response(trans('forbidden') . AddErrorLocation(), 403)->send();
         exit;
     }
@@ -24,10 +24,10 @@ try {
         $thumb_base = $config['thumbs_base_path'];
     }
 
-    if (isset($_POST["fldr"])) {
+    if (isset($_POST['fldr'])) {
         $_POST['fldr'] = str_replace('undefined', '', $_POST['fldr']);
-        $storeFolder = $source_base . $_POST["fldr"];
-        $storeFolderThumb = $thumb_base . $_POST["fldr"];
+        $storeFolder = $source_base . $_POST['fldr'];
+        $storeFolderThumb = $thumb_base . $_POST['fldr'];
     } else {
         return;
     }
@@ -60,8 +60,8 @@ try {
 
     require('UploadHandler.php');
     $messages = null;
-    if (trans("Upload_error_messages") !== "Upload_error_messages") {
-        $messages = trans("Upload_error_messages");
+    if (trans('Upload_error_messages') !== 'Upload_error_messages') {
+        $messages = trans('Upload_error_messages');
     }
 
     // make sure the length is limited to avoid DOS attacks
@@ -109,10 +109,10 @@ try {
         }
         $extension = get_extension_from_mime($mime_type);
 
-        if ($extension == 'so' || $extension == '' || $mime_type == "text/troff") {
+        if ($extension == 'so' || $extension == '' || $mime_type == 'text/troff') {
             $extension = $info['extension'];
         }
-        $filename = $info['filename'] . "." . $extension;
+        $filename = $info['filename'] . '.' . $extension;
     } else {
         $filename = $_FILES['files']['name'][0];
     }
@@ -167,8 +167,8 @@ try {
             mkdir($config['ftp_temp_folder'], $config['folderPermission'], true);
         }
 
-        if (!is_dir($config['ftp_temp_folder'] . "thumbs")) {
-            mkdir($config['ftp_temp_folder'] . "thumbs", $config['folderPermission'], true);
+        if (!is_dir($config['ftp_temp_folder'] . 'thumbs')) {
+            mkdir($config['ftp_temp_folder'] . 'thumbs', $config['folderPermission'], true);
         }
 
         $uploadConfig['upload_dir'] = $config['ftp_temp_folder'];
@@ -189,9 +189,9 @@ try {
             ];
         }
 
-        echo json_encode(["files" => $return]);
+        echo json_encode(['files' => $return]);
         return;
     }
 
-    echo json_encode(["error" => $e->getMessage()]);
+    echo json_encode(['error' => $e->getMessage()]);
 }

@@ -72,8 +72,8 @@ class Database
         // sql_mode auf leer setzen, da sich UliCMS nicht im
         // strict_mode betreiben lässt
         if ($db_strict_mode) {
-            self::pQuery("SET SESSION sql_mode = ?", [
-                implode(",", self::getSqlStrictModeFlags())
+            self::pQuery('SET SESSION sql_mode = ?', [
+                implode(',', self::getSqlStrictModeFlags())
             ]);
         } else {
             self::query("SET SESSION sql_mode = ''");
@@ -110,8 +110,8 @@ class Database
 
         if ($selected) {
             $migrator = new DBMigrator(
-                "core",
-                Path::resolve("ULICMS_ROOT/lib/migrations/up")
+                'core',
+                Path::resolve('ULICMS_ROOT/lib/migrations/up')
             );
             $migrator->migrate();
             foreach ($otherScripts as $script) {
@@ -130,9 +130,9 @@ class Database
     {
         $cfg = new CMSConfig();
         if ($replacePrefix) {
-            $sql = str_replace("{prefix}", $cfg->db_prefix, $sql);
+            $sql = str_replace('{prefix}', $cfg->db_prefix, $sql);
         }
-        $logger = LoggerRegistry::get("sql_log");
+        $logger = LoggerRegistry::get('sql_log');
         if ($logger) {
             $logger->info($sql);
         }
@@ -153,9 +153,9 @@ class Database
     ) {
         $cfg = new CMSConfig();
         if ($replacePrefix) {
-            $sql = str_replace("{prefix}", $cfg->db_prefix, $sql);
+            $sql = str_replace('{prefix}', $cfg->db_prefix, $sql);
         }
-        $logger = LoggerRegistry::get("sql_log");
+        $logger = LoggerRegistry::get('sql_log');
         if ($logger) {
             $logger->info($sql);
         }
@@ -198,18 +198,18 @@ class Database
         $chars = mb_str_split($sql);
         $i = 0;
         foreach ($chars as $char) {
-            if ($char != "?") {
+            if ($char != '?') {
                 $preparedQuery .= $char;
             } else {
                 $value = $args[$i];
                 if (is_float($value)) {
-                    $value = str_replace(",", '.', (string)(float)$value);
+                    $value = str_replace(',', '.', (string)(float)$value);
                 } elseif (is_int($value)) {
                     $value = (string)(int)$value;
                 } elseif (is_bool($value)) {
                     $value = (string)(int)$value;
                 } elseif ($value === null) {
-                    $value = "NULL";
+                    $value = 'NULL';
                 } else {
                     $value = "'" . self::escapeValue($value) . "'";
                 }
@@ -388,10 +388,10 @@ class Database
         $table = self::escapeName($table);
 
         if (count($columns) == 0) {
-            $columns[] = "*";
+            $columns[] = '*';
         }
 
-        $columns_sql = implode(", ", $columns);
+        $columns_sql = implode(', ', $columns);
 
         $sql = "select $columns_sql from $table";
 
@@ -407,9 +407,9 @@ class Database
 
     public static function escapeName(string $name): string
     {
-        $name = str_replace("'", "", $name);
-        $name = str_replace("\"", "", $name);
-        $name = "`" . db_escape($name) . "`";
+        $name = str_replace("'", '', $name);
+        $name = str_replace('"', '', $name);
+        $name = '`' . db_escape($name) . '`';
         return $name;
     }
 
@@ -515,7 +515,7 @@ class Database
     public static function getAllTables(): array
     {
         $tableList = [];
-        $res = mysqli_query(self::$connection, "SHOW TABLES");
+        $res = mysqli_query(self::$connection, 'SHOW TABLES');
         while ($cRow = mysqli_fetch_array($res)) {
             $tableList[] = $cRow[0];
         }
@@ -539,7 +539,7 @@ class Database
     public static function escapeValue($value, ?int $type = null)
     {
         if ($value === null) {
-            return "NULL";
+            return 'NULL';
         }
         if ($type === null) {
             if (is_float($value)) {

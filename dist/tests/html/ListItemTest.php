@@ -7,8 +7,8 @@ class ListItemTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetHtml()
     {
-        $item = new ListItem("hello_world", "Hello World!");
-        $itemSelected = new ListItem("bye_bye", "Bye Bye!", true);
+        $item = new ListItem('hello_world', 'Hello World!');
+        $itemSelected = new ListItem('bye_bye', 'Bye Bye!', true);
 
         $this->assertEquals(
             '<option value="hello_world">Hello World!</option>',
@@ -22,8 +22,8 @@ class ListItemTest extends \PHPUnit\Framework\TestCase
 
     public function testRender()
     {
-        $item = new ListItem("hello_world", "Hello World!");
-        $itemSelected = new ListItem("bye_bye", "Bye Bye!", true);
+        $item = new ListItem('hello_world', 'Hello World!');
+        $itemSelected = new ListItem('bye_bye', 'Bye Bye!', true);
 
         ob_start();
         $item->render();
@@ -42,7 +42,7 @@ class ListItemTest extends \PHPUnit\Framework\TestCase
 
     public function testToString()
     {
-        $item = new ListItem("hello_world", "Hello World!");
+        $item = new ListItem('hello_world', 'Hello World!');
 
         $this->assertEquals(
             '<option value="hello_world">Hello World!</option>',
@@ -52,35 +52,35 @@ class ListItemTest extends \PHPUnit\Framework\TestCase
 
     public function testGetSelectedReturnsTrue()
     {
-        $item = new ListItem("bye_bye", "Bye Bye!", true);
+        $item = new ListItem('bye_bye', 'Bye Bye!', true);
         $this->assertTrue($item->getSelected());
     }
 
     public function testGetSelectedReturnsFalse()
     {
-        $item = new ListItem("bye_bye", "Bye Bye!", false);
+        $item = new ListItem('bye_bye', 'Bye Bye!', false);
         $this->assertFalse($item->getSelected());
     }
 
     public function testSetAndGetText()
     {
-        $item = new ListItem("hello_world", "Hello World!");
-        $item->setText("Bye Bye");
+        $item = new ListItem('hello_world', 'Hello World!');
+        $item->setText('Bye Bye');
 
-        $this->assertEquals("Bye Bye", $item->getText());
+        $this->assertEquals('Bye Bye', $item->getText());
     }
 
     public function testSetAndGetValue()
     {
-        $item = new ListItem("hello_world", "Hello World!");
-        $item->setValue("bye_bye");
+        $item = new ListItem('hello_world', 'Hello World!');
+        $item->setValue('bye_bye');
 
-        $this->assertEquals("bye_bye", $item->getValue());
+        $this->assertEquals('bye_bye', $item->getValue());
     }
 
     public function testSetSelected()
     {
-        $item = new ListItem("bye_bye", "Bye Bye!", false);
+        $item = new ListItem('bye_bye', 'Bye Bye!', false);
         $item->setSelected(true);
 
         $this->assertTrue($item->getSelected());

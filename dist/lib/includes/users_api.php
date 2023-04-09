@@ -11,8 +11,8 @@ use App\Security\TwoFactorAuthentication;
 function getUsers(): array
 {
     $users = [];
-    $result = Database::query("SELECT id, username FROM " . tbname('users') .
-                    " ORDER by username");
+    $result = Database::query('SELECT id, username FROM ' . tbname('users') .
+                    ' ORDER by username');
     while ($row = db_fetch_assoc($result)) {
         $users[] = $row;
     }
@@ -26,7 +26,7 @@ function getUsers(): array
  */
 function getUsersOnline(): array
 {
-    $users_online = Database::query("SELECT username FROM " . tbname('users') . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
+    $users_online = Database::query('SELECT username FROM ' . tbname('users') . ' WHERE last_action > ' . (time() - 300) . ' ORDER BY username');
     $retval = [];
     while ($row = db_fetch_object($users_online)) {
         $retval[] = $row->username;
@@ -58,7 +58,7 @@ function changePassword(string $password, ?int $userId)
  */
 function getUserByName(string $name): ?array
 {
-    $result = Database::query("SELECT * FROM " . tbname('users') .
+    $result = Database::query('SELECT * FROM ' . tbname('users') .
                     " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
     if (db_num_rows($result) > 0) {
         return db_fetch_assoc($result);
@@ -73,8 +73,8 @@ function getUserByName(string $name): ?array
  */
 function getUserById($id): ?array
 {
-    $result = Database::query("SELECT * FROM " . tbname('users') .
-                    " WHERE id = " . (int)$id);
+    $result = Database::query('SELECT * FROM ' . tbname('users') .
+                    ' WHERE id = ' . (int)$id);
     if (db_num_rows($result) > 0) {
         return db_fetch_assoc($result);
     }
@@ -140,20 +140,20 @@ function validate_login(
     $auth = new TwoFactorAuthentication();
 
     if ($user->isLocked()) {
-        $_REQUEST["error"] = get_translation("YOUR_ACCOUNT_IS_LOCKED");
+        $_REQUEST['error'] = get_translation('YOUR_ACCOUNT_IS_LOCKED');
         return null;
     }
 
     if (!$user->isPersistent()) {
-        $_REQUEST["error"] = get_translation("USER_OR_PASSWORD_INCORRECT");
+        $_REQUEST['error'] = get_translation('USER_OR_PASSWORD_INCORRECT');
         return null;
     }
 
     if (!$user->checkPassword($password)) {
-        $_REQUEST["error"] = get_translation("USER_OR_PASSWORD_INCORRECT");
+        $_REQUEST['error'] = get_translation('USER_OR_PASSWORD_INCORRECT');
 
         // Limit Login Attampts
-        $max_failed_logins_items = (int)Settings::get("max_failed_logins_items");
+        $max_failed_logins_items = (int)Settings::get('max_failed_logins_items');
         $user->setFailedLogins($user->getFailedLogins() + 1);
         $user->save();
 
@@ -162,13 +162,13 @@ function validate_login(
             $user->setLocked($user->isLocked());
             $user->save();
 
-            $_REQUEST["error"] = get_translation("YOUR_ACCOUNT_IS_LOCKED");
+            $_REQUEST['error'] = get_translation('YOUR_ACCOUNT_IS_LOCKED');
         }
         return null;
     }
 
     if (TwoFactorAuthentication::isEnabled() && !$auth->checkCode($token)) {
-        $_REQUEST["error"] = get_translation("confirmation_code_wrong");
+        $_REQUEST['error'] = get_translation('confirmation_code_wrong');
         return null;
     }
 
@@ -184,7 +184,7 @@ function validate_login(
  */
 function is_logged_in(): bool
 {
-    return isset($_SESSION["logged_in"]);
+    return isset($_SESSION['logged_in']);
 }
 
 /**

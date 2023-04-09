@@ -29,9 +29,9 @@ class Mailer
         $lines = normalizeLN($headers, "\n");
         $lines = explode("\n", $lines);
         foreach ($lines as $line) {
-            $kv = explode(":", $line, 2);
-            $kv = array_map("trim", $kv);
-            $kv = array_filter($kv, "strlen");
+            $kv = explode(':', $line, 2);
+            $kv = array_map('trim', $kv);
+            $kv = array_filter($kv, 'strlen');
             if (count($kv) == 2) {
                 $header_array[trim($kv[0])] = trim($kv[1]);
             }
@@ -54,13 +54,13 @@ class Mailer
         string $headers = ''
     ): bool {
         // Use PHP Mail or SMTP
-        $mode = Settings::get("email_mode") ?
-                Settings::get("email_mode") : EmailModes::INTERNAL;
+        $mode = Settings::get('email_mode') ?
+                Settings::get('email_mode') : EmailModes::INTERNAL;
 
         // UliCMS speichert seit UliCMS 9.0.1 E-Mails, die das System versendet hat
         // in der Datenbank
         // TODO: Make a method for this sql statement
-        $insert_sql = "INSERT INTO " . tbname("mails") .
+        $insert_sql = 'INSERT INTO ' . tbname('mails') .
                 " (headers, `to`, subject, body) VALUES ('" .
                 db_escape($headers) . "', '" . db_escape($to) . "', '" .
                 db_escape($subject) . "', '" . db_escape($message) . "')";
@@ -82,7 +82,7 @@ class Mailer
     public static function getMailLogger(): Closure
     {
         return function ($str, $level) {
-            $logger = LoggerRegistry::get("phpmailer_log");
+            $logger = LoggerRegistry::get('phpmailer_log');
             if ($logger) {
                 $logger->debug($str);
             }
@@ -96,14 +96,14 @@ class Mailer
      */
     protected static function setPHPMailerAttributes(PHPMailer $mailer): PHPMailer
     {
-        $mailer->SMTPSecure = Settings::get("smtp_encryption");
+        $mailer->SMTPSecure = Settings::get('smtp_encryption');
 
         // Disable verification of ssl certificates
         // this option makes the mail transfer insecure
         // use this only if it's unavoidable
-        if (Settings::get("smtp_no_verify_certificate")) {
+        if (Settings::get('smtp_no_verify_certificate')) {
             $mailer->SMTPOptions = [
-                "ssl" => [
+                'ssl' => [
                     'verify_peer' => false,
                     'verify_peer_name' => false,
                     'allow_self_signed' => true
@@ -111,17 +111,17 @@ class Mailer
             ];
         }
 
-        if (Settings::get("smtp_host")) {
+        if (Settings::get('smtp_host')) {
             $mailer->isSMTP();
-            $mailer->Host = Settings::get("smtp_host");
-            $mailer->SMTPAuth = (Settings::get("smtp_auth") === "auth");
-            if (Settings::get("smtp_user")) {
-                $mailer->Username = Settings::get("smtp_user");
+            $mailer->Host = Settings::get('smtp_host');
+            $mailer->SMTPAuth = (Settings::get('smtp_auth') === 'auth');
+            if (Settings::get('smtp_user')) {
+                $mailer->Username = Settings::get('smtp_user');
             }
-            if (Settings::get("smtp_password")) {
-                $mailer->Password = Settings::get("smtp_password");
+            if (Settings::get('smtp_password')) {
+                $mailer->Password = Settings::get('smtp_password');
             }
-            $mailer->Port = Settings::get("smtp_port", 'int');
+            $mailer->Port = Settings::get('smtp_port', 'int');
         }
         return $mailer;
     }
@@ -145,11 +145,11 @@ class Mailer
             $mailer = self::setPHPMailerAttributes($mailer);
         }
 
-        $mailer->XMailer = Settings::get("show_meta_generator") ? "UliCMS" : "";
-        $mailer->CharSet = "UTF-8";
-        $mailer->Encoding = "quoted-printable";
+        $mailer->XMailer = Settings::get('show_meta_generator') ? 'UliCMS' : '';
+        $mailer->CharSet = 'UTF-8';
+        $mailer->Encoding = 'quoted-printable';
 
-        $mailer = apply_filter($mailer, "php_mailer_instance");
+        $mailer = apply_filter($mailer, 'php_mailer_instance');
         return $mailer;
     }
 
@@ -174,28 +174,28 @@ class Mailer
 
         $mailer = self::getPHPMailer($mode);
 
-        if (isset($headersLower["x-mailer"])) {
-            $mailer->XMailer = $headersLower["x-mailer"];
+        if (isset($headersLower['x-mailer'])) {
+            $mailer->XMailer = $headersLower['x-mailer'];
         }
-        $from = isset($headers["From"]) && !empty($headers["From"]) ?
-                $headers["From"] : Settings::get("email");
+        $from = isset($headers['From']) && !empty($headers['From']) ?
+                $headers['From'] : Settings::get('email');
         $mailer->setFrom($from);
 
-        if (isset($headersLower["reply-to"])) {
-            $mailer->addReplyTo($headersLower["reply-to"]);
+        if (isset($headersLower['reply-to'])) {
+            $mailer->addReplyTo($headersLower['reply-to']);
         }
         $mailer->addAddress($to);
         $mailer->Subject = $subject;
         $mailer->isHTML(
             isset(
-                $headersLower["content-type"]) && str_starts_with(
-                    $headersLower["content-type"],
-                    "text/html"
+                $headersLower['content-type']) && str_starts_with(
+                    $headersLower['content-type'],
+                    'text/html'
                 )
         );
         $mailer->Body = $message;
 
-        $mailer = apply_filter($mailer, "php_mailer_send");
+        $mailer = apply_filter($mailer, 'php_mailer_send');
         return $mailer->send();
     }
 }

@@ -12,8 +12,8 @@ use Negotiation\LanguageNegotiator;
 function getAllUsedLanguages(): array
 {
     $languages = [];
-    $sql = "select language from `{prefix}content` where active = 1 "
-            . "group by language order by language";
+    $sql = 'select language from `{prefix}content` where active = 1 '
+            . 'group by language order by language';
     $result = Database::query($sql, true);
     while ($row = Database::fetchobject($result)) {
         $languages[] = $row->language;
@@ -42,19 +42,19 @@ function get_prefered_language(
  */
 function getLanguageFilePath(string $lang = 'de'): string
 {
-    return ULICMS_ROOT . "/lang/" . $lang . ".php";
+    return ULICMS_ROOT . '/lang/' . $lang . '.php';
 }
 
 function getAvailableBackendLanguages(): array
 {
-    $langdir = ULICMS_ROOT . "/lang/";
+    $langdir = ULICMS_ROOT . '/lang/';
     $list = scandir($langdir);
     sort($list);
     $retval = [];
     $listCount = count($list);
     for ($i = 0; $i < $listCount; $i++) {
-        if (str_ends_with($list[$i], ".php")) {
-            $retval[] = basename($list[$i], ".php");
+        if (str_ends_with($list[$i], '.php')) {
+            $retval[] = basename($list[$i], '.php');
         }
     }
 
@@ -63,12 +63,12 @@ function getAvailableBackendLanguages(): array
 
 function getSystemLanguage(): string
 {
-    if (isset($_SESSION["system_language"])) {
-        $lang = $_SESSION["system_language"];
+    if (isset($_SESSION['system_language'])) {
+        $lang = $_SESSION['system_language'];
     } elseif (isset($_SESSION['language'])) {
         $lang = $_SESSION['language'];
-    } elseif (Settings::get("system_language")) {
-        $lang = Settings::get("system_language");
+    } elseif (Settings::get('system_language')) {
+        $lang = Settings::get('system_language');
     } else {
         $lang = 'de';
     }
@@ -80,7 +80,7 @@ function getSystemLanguage(): string
 
 function getDomainByLanguage($givenLanguage): ?string
 {
-    $domainMapping = Settings::get("domain_to_language");
+    $domainMapping = Settings::get('domain_to_language');
     $domainMapping = Settings::mappingStringToArray($domainMapping);
     foreach ($domainMapping as $domain => $language) {
         if ($givenLanguage == $language) {
@@ -92,7 +92,7 @@ function getDomainByLanguage($givenLanguage): ?string
 
 function getLanguageByDomain($givenDomain): ?string
 {
-    $domainMapping = Settings::get("domain_to_language");
+    $domainMapping = Settings::get('domain_to_language');
     $domainMapping = Settings::mappingStringToArray($domainMapping);
     foreach ($domainMapping as $domain => $language) {
         if ($givenDomain == $domain) {
@@ -104,7 +104,7 @@ function getLanguageByDomain($givenDomain): ?string
 
 function setLanguageByDomain(): bool
 {
-    $domainMapping = Settings::get("domain_to_language");
+    $domainMapping = Settings::get('domain_to_language');
     $domainMapping = Settings::mappingStringToArray($domainMapping);
 
     foreach ($domainMapping as $domain => $language) {
@@ -125,7 +125,7 @@ function setLanguageByDomain(): bool
 function getLanguageNameByCode(string $code): string
 {
     $result = db_query(
-        "SELECT name FROM `" . tbname("languages") .
+        'SELECT name FROM `' . tbname('languages') .
         "` WHERE language_code = '" . db_escape($code) . "'"
     );
     $retval = $code;
@@ -141,19 +141,19 @@ function setLocaleByLanguage(): array
 {
     $locale = [];
 
-    $var = (is_admin_dir() && isset($_SESSION["system_language"])) ?
-            "locale_" . $_SESSION["system_language"] :
-            "locale_" . getFrontendLanguage();
+    $var = (is_admin_dir() && isset($_SESSION['system_language'])) ?
+            'locale_' . $_SESSION['system_language'] :
+            'locale_' . getFrontendLanguage();
 
     $localeSetting = Settings::get($var) ?
-            Settings::get($var) : Settings::get("locale");
+            Settings::get($var) : Settings::get('locale');
 
     if ($localeSetting) {
         $locale = splitAndTrim($localeSetting);
         array_unshift($locale, LC_ALL);
     }
 
-    @call_user_func_array("setlocale", $locale);
+    @call_user_func_array('setlocale', $locale);
     return $locale;
 }
 
@@ -162,23 +162,23 @@ function setLocaleByLanguage(): array
 // else it returns $_SESSION['language'];
 function getCurrentLanguage($current = false): string
 {
-    if (Vars::get("current_language_" . strbool($current))) {
-        return Vars::get("current_language_" . strbool($current));
+    if (Vars::get('current_language_' . strbool($current))) {
+        return Vars::get('current_language_' . strbool($current));
     }
     if ($current) {
-        $result = db_query("SELECT language FROM " . tbname("content") .
+        $result = db_query('SELECT language FROM ' . tbname('content') .
                 " WHERE slug='" . get_slug() . "'");
         if (db_num_rows($result) > 0) {
             $dataset = db_fetch_object($result);
             $language = $dataset->language;
-            Vars::set("current_language_" . strbool($current), $language);
+            Vars::set('current_language_' . strbool($current), $language);
         }
     }
 
     if (isset($_SESSION['language'])) {
         return basename($_SESSION['language']);
     } else {
-        return basename(Settings::get("default_language"));
+        return basename(Settings::get('default_language'));
     }
 }
 
@@ -199,15 +199,15 @@ function getAllLanguages($filtered = false): array
         }
     }
 
-    if (Vars::get("all_languages") !== null) {
-        return Vars::get("all_languages");
+    if (Vars::get('all_languages') !== null) {
+        return Vars::get('all_languages');
     }
-    $result = db_query("SELECT language_code FROM `" . tbname("languages") .
-            "` ORDER BY language_code");
+    $result = db_query('SELECT language_code FROM `' . tbname('languages') .
+            '` ORDER BY language_code');
 
     while ($row = db_fetch_object($result)) {
         $languageCodes[] = $row->language_code;
     }
-    Vars::set("all_languages", $languageCodes);
+    Vars::set('all_languages', $languageCodes);
     return $languageCodes;
 }

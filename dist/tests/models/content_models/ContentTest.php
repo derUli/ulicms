@@ -15,19 +15,19 @@ class ContentTest extends \PHPUnit\Framework\TestCase
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
         $page->language = 'de';
-        $page->content = "Some Text";
+        $page->content = 'Some Text';
         $page->comments_enabled = true;
         $page->author_id = 1;
         $page->group_id = 1;
         $page->save();
         $page->delete();
 
-        $deleted = Content::getAllDatasets("content", "Page", "id", "deleted_at is not null");
+        $deleted = Content::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
         $this->assertGreaterThanOrEqual(1, count($deleted));
 
         Content::emptyTrash();
 
-        $deleted = Content::getAllDatasets("content", "Page", "id", "deleted_at is not null");
+        $deleted = Content::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
         $this->assertCount(0, $deleted);
     }
 
@@ -42,7 +42,7 @@ class ContentTest extends \PHPUnit\Framework\TestCase
         $types = TypeMapper::getMappings();
         foreach ($types as $type => $class) {
             $model = new $class();
-            $this->assertStringContainsString("fa", $model->getIcon());
+            $this->assertStringContainsString('fa', $model->getIcon());
         }
     }
 }

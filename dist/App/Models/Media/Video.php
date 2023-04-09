@@ -30,7 +30,7 @@ class Video extends Model
     private $width = null;
     private $height = null;
 
-    public const VIDEO_DIR = "content/videos/";
+    public const VIDEO_DIR = 'content/videos/';
 
     public function __construct($id = null)
     {
@@ -55,8 +55,8 @@ class Video extends Model
 
     public function loadById($id): void
     {
-        $result = Database::pQuery("select * from `{prefix}videos` "
-                        . "where id = ?", [
+        $result = Database::pQuery('select * from `{prefix}videos` '
+                        . 'where id = ?', [
                     (int) $id
                         ], true);
         if (!Database::any($result)) {
@@ -109,10 +109,10 @@ class Video extends Model
             $this->width,
             $this->height
         ];
-        $sql = "insert into `{prefix}videos`
+        $sql = 'insert into `{prefix}videos`
 				(name, mp4_file, ogg_file, webm_file,
                                 category_id, created, updated, width, height)
-				values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				values (?, ?, ?, ?, ?, ?, ?, ?, ?)';
         Database::pQuery($sql, $args, true);
         $this->setID(Database::getLastInsertID());
     }
@@ -131,11 +131,11 @@ class Video extends Model
             $this->height,
             $this->getID()
         ];
-        $sql = "update `{prefix}videos` set
+        $sql = 'update `{prefix}videos` set
 				name = ?, mp4_file = ?, ogg_file = ?,
                                 webm_file = ?, category_id = ?, updated = ?,
                                 width = ?, height = ?
-				where id = ?";
+				where id = ?';
         Database::pQuery($sql, $args, true);
     }
 
@@ -219,28 +219,28 @@ class Video extends Model
             if ($deletePhysical) {
                 if ($this->getMp4File()) {
                     $file = Path::resolve(
-                        "ULICMS_ROOT/content/videos/" .
+                        'ULICMS_ROOT/content/videos/' .
                         basename($this->getMP4File())
                     );
                     File::deleteIfExists($file);
                 }
                 if ($this->getOggFile()) {
                     $file = Path::resolve(
-                        "ULICMS_ROOT/content/videos/" .
+                        'ULICMS_ROOT/content/videos/' .
                         basename($this->getOggFile())
                     );
                     File::deleteIfExists($file);
                 }
                 if ($this->getWebmFile()) {
                     $file = Path::resolve(
-                        "ULICMS_ROOT/content/videos/" .
+                        'ULICMS_ROOT/content/videos/' .
                         basename($this->getWebmFile())
                     );
                     File::deleteIfExists($file);
                 }
             }
             Database::pQuery(
-                "delete from `{prefix}videos` where id = ?",
+                'delete from `{prefix}videos` where id = ?',
                 [
                     $this->getID()
                 ],
@@ -277,15 +277,15 @@ class Video extends Model
                     '" type="video/webm">';
         }
 
-        $html .= get_translation("no_html5");
+        $html .= get_translation('no_html5');
         if (!empty($this->mp4_file) || !empty($this->ogg_file) || !empty($this->webm_file)) {
             $preferred = (!empty($this->mp4_file) ?
                     $this->mp4_file : (!empty($this->ogg_file) ?
                     $this->ogg_file : $this->webm_file));
             $html .= '<br/><a href="' . $videoDir . $preferred . '">' .
-                    get_translation("DOWNLOAD_VIDEO_INSTEAD") . '</a>';
+                    get_translation('DOWNLOAD_VIDEO_INSTEAD') . '</a>';
         }
-        $html .= "</video>";
+        $html .= '</video>';
         return $html;
     }
 

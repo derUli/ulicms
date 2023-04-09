@@ -14,8 +14,8 @@ class FileImageTest extends \PHPUnit\Framework\TestCase
     public function testRender()
     {
         $field = new FileImage();
-        $field->name = "my_field";
-        $field->title = "file";
-        $this->assertMatchesHtmlSnapshot($field->render("/foo/bar/test.jpg"));
+        $field->name = 'my_field';
+        $field->title = 'file';
+        $this->assertMatchesHtmlSnapshot($field->render('/foo/bar/test.jpg'));
     }
 }

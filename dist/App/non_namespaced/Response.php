@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-if (!defined("RESPONSIVE_FM")) {
+if (!defined('RESPONSIVE_FM')) {
     class Response
     {
         public static function sendHttpStatusCodeResultIfAjax(
@@ -26,7 +26,7 @@ if (!defined("RESPONSIVE_FM")) {
             int $status = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
             self::sendStatusHeader($status);
-            send_header("Location: " . $url);
+            send_header('Location: ' . $url);
             exit();
         }
 
@@ -50,11 +50,11 @@ if (!defined("RESPONSIVE_FM")) {
         public static function javascriptRedirect(
             string $url = 'http://www.ulicms.de'
         ): void {
-            echo "<script>"
+            echo '<script>'
             . "location.replace(\"$url\");</script>";
-            echo "<noscript><p>" . get_translation("jsredirect_noscript", [
-                "%url%" => Template::getEscape($url)
-            ]) . "</p></noscript>";
+            echo '<noscript><p>' . get_translation('jsredirect_noscript', [
+                '%url%' => Template::getEscape($url)
+            ]) . '</p></noscript>';
         }
 
         public static function getSafeRedirectURL(
@@ -76,7 +76,7 @@ if (!defined("RESPONSIVE_FM")) {
                 try {
                     $page = ContentFactory::getBySlugAndLanguage(
                         Settings::getLanguageSetting(
-                            "frontpage",
+                            'frontpage',
                             getCurrentLanguage()
                         ),
                         getCurrentLanguage()
@@ -103,7 +103,7 @@ if (!defined("RESPONSIVE_FM")) {
             if (headers_sent()) {
                 return false;
             }
-            send_header($_SERVER['SERVER_PROTOCOL'] . " " .
+            send_header($_SERVER['SERVER_PROTOCOL'] . ' ' .
                     self::getStatusCodeByNumber($nr));
             return true;
         }
@@ -168,7 +168,7 @@ if (!defined("RESPONSIVE_FM")) {
                 509 => 'Bandwidth Limit Exceeded',
                 510 => 'Not Extended'
             ];
-            return $nr . " " . $http_codes[$nr];
+            return $nr . ' ' . $http_codes[$nr];
         }
 
         public static function sendHeader(string $header): bool

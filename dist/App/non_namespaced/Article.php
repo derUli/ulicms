@@ -11,7 +11,7 @@ class Article extends Page
     public $article_date = null;
     public $article_image = '';
     public $excerpt = '';
-    public $type = "article";
+    public $type = 'article';
 
     protected function fillVars($result = null)
     {
@@ -51,11 +51,11 @@ class Article extends Page
             $article_date = $this->article_date ? strtotime($this->article_date) : null;
         }
 
-        $sql = "update {prefix}content set article_author_email = ?,
+        $sql = 'update {prefix}content set article_author_email = ?,
 article_author_name = ?,
 article_image = ?,
 article_date = from_unixtime(?),
-excerpt = ? where id = ?";
+excerpt = ? where id = ?';
         $args = [
             $this->article_author_email,
             $this->article_author_name,
@@ -73,6 +73,6 @@ excerpt = ? where id = ?";
      */
     public function getIcon(): string
     {
-        return "far fa-newspaper";
+        return 'far fa-newspaper';
     }
 }

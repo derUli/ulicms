@@ -7,10 +7,10 @@ class FrontPageSettingsControllerTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $this->defaultSettings = [
-            "default_language" => Settings::get("default_language"),
-            "frontpage" => Settings::get("frontpage_de"),
-            "frontpage_en" => Settings::get("frontpage_en"),
-            "frontpag" => Settings::get("meta_description"),
+            'default_language' => Settings::get('default_language'),
+            'frontpage' => Settings::get('frontpage_de'),
+            'frontpage_en' => Settings::get('frontpage_en'),
+            'frontpag' => Settings::get('meta_description'),
         ];
     }
 
@@ -25,24 +25,24 @@ class FrontPageSettingsControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testSavePost(): void
     {
-        $_POST["frontpage_de"] = "willkommen";
-        $_POST["frontpage_en"] = "welcome";
-        Settings::set("default_language", 'en');
+        $_POST['frontpage_de'] = 'willkommen';
+        $_POST['frontpage_en'] = 'welcome';
+        Settings::set('default_language', 'en');
 
         $controller = new FrontPageSettingsController();
         $controller->_savePost();
 
         $this->assertEquals(
-            "willkommen",
+            'willkommen',
             Settings::get('frontpage_de')
         );
 
         $this->assertEquals(
-            "welcome",
+            'welcome',
             Settings::get('frontpage_en')
         );
         $this->assertEquals(
-            "welcome",
+            'welcome',
             Settings::get('frontpage')
         );
     }

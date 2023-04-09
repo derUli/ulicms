@@ -6,15 +6,15 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
 {
     private function getTestFilePath()
     {
-        return Path::resolve("ULICMS_ROOT/tests/fixtures/lines.txt");
+        return Path::resolve('ULICMS_ROOT/tests/fixtures/lines.txt');
     }
 
     public function testRemoveEmptyLineFromString()
     {
         $input = file_get_contents(
-            Path::resolve("ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.input.txt")
+            Path::resolve('ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.input.txt')
         );
-        $expected = normalizeLN(file_get_contents(Path::resolve("ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.expected.txt")), "\n");
+        $expected = normalizeLN(file_get_contents(Path::resolve('ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.expected.txt')), "\n");
 
         $this->assertEquals(
             $expected,
@@ -31,10 +31,10 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
             false
         );
         $this->assertCount(9, $lines);
-        $this->assertFalse(str_starts_with($lines[2], " "));
-        $this->assertTrue(str_ends_with($lines[2], " "));
-        $this->assertTrue(str_starts_with($lines[3], " "));
-        $this->assertTrue(str_ends_with($lines[3], " "));
+        $this->assertFalse(str_starts_with($lines[2], ' '));
+        $this->assertTrue(str_ends_with($lines[2], ' '));
+        $this->assertTrue(str_starts_with($lines[3], ' '));
+        $this->assertTrue(str_ends_with($lines[3], ' '));
         $this->assertEquals(17, strlen($lines[2]));
         $this->assertEquals(23, strlen($lines[3]));
     }
@@ -61,10 +61,10 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
     {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), true, false, false);
         $this->assertCount(9, $lines);
-        $this->assertFalse(str_starts_with($lines[2], " "));
-        $this->assertFalse(str_ends_with($lines[2], " "));
-        $this->assertFalse(str_starts_with($lines[3], " "));
-        $this->assertFalse(str_ends_with($lines[3], " "));
+        $this->assertFalse(str_starts_with($lines[2], ' '));
+        $this->assertFalse(str_ends_with($lines[2], ' '));
+        $this->assertFalse(str_starts_with($lines[3], ' '));
+        $this->assertFalse(str_ends_with($lines[3], ' '));
         $this->assertEquals(16, strlen($lines[2]));
         $this->assertEquals(21, strlen($lines[3]));
     }
@@ -73,10 +73,10 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
     {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), true, true, true);
         $this->assertCount(3, $lines);
-        $this->assertFalse(str_starts_with($lines[0], " "));
-        $this->assertFalse(str_ends_with($lines[0], " "));
-        $this->assertFalse(str_starts_with($lines[1], " "));
-        $this->assertFalse(str_ends_with($lines[1], " "));
+        $this->assertFalse(str_starts_with($lines[0], ' '));
+        $this->assertFalse(str_ends_with($lines[0], ' '));
+        $this->assertFalse(str_starts_with($lines[1], ' '));
+        $this->assertFalse(str_ends_with($lines[1], ' '));
 
         $this->assertEquals(16, strlen($lines[0]));
         $this->assertEquals(21, strlen($lines[1]));
@@ -84,14 +84,14 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testLinesFromFileNotFound()
     {
-        $lines = StringHelper::linesFromFile("path/this-is-not-a-file", true, true, true);
+        $lines = StringHelper::linesFromFile('path/this-is-not-a-file', true, true, true);
         $this->assertNull($lines);
     }
 
     public function testTrimLines()
     {
-        $inputFile = Path::resolve("ULICMS_ROOT/tests/fixtures/trimLines.input.txt");
-        $inputExpected = Path::resolve("ULICMS_ROOT/tests/fixtures/trimLines.expected.txt");
+        $inputFile = Path::resolve('ULICMS_ROOT/tests/fixtures/trimLines.input.txt');
+        $inputExpected = Path::resolve('ULICMS_ROOT/tests/fixtures/trimLines.expected.txt');
 
         $input = normalizeLN(file_get_contents($inputFile));
         $expected = normalizeLN(file_get_contents($inputExpected));
@@ -100,9 +100,9 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testMakeLinksClickable()
     {
-        $input = "Das hier ist ein Text.
+        $input = 'Das hier ist ein Text.
 http://www.google.de
-Noch mehr Text http://www.ulicms.de und so weiter.";
+Noch mehr Text http://www.ulicms.de und so weiter.';
 
         $expected = 'Das hier ist ein Text.
 <a href="http://www.google.de" rel="nofollow" target="_blank">http://www.google.de</a>
@@ -113,16 +113,16 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
 
     public function testCleanString()
     {
-        $this->assertEquals("hello-world", StringHelper::cleanString("Hello World"));
-        $this->assertEquals("das-ist-die-grossfraesmaschinenoeffnungstuer", StringHelper::cleanString("Das ist die Großfräsmaschinenöffnungstür."));
+        $this->assertEquals('hello-world', StringHelper::cleanString('Hello World'));
+        $this->assertEquals('das-ist-die-grossfraesmaschinenoeffnungstuer', StringHelper::cleanString('Das ist die Großfräsmaschinenöffnungstür.'));
     }
 
     public function testGetExcerptReturnsShortedString()
     {
         $this->assertEquals(
-            "Lorem Ipsum...",
+            'Lorem Ipsum...',
             StringHelper::getExcerpt(
-                "Lorem Ipsum sit dor amet usw.",
+                'Lorem Ipsum sit dor amet usw.',
                 0,
                 16
             )
@@ -132,9 +132,9 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
     public function testGetExcerptReturnsFullString()
     {
         $this->assertEquals(
-            "Lorem Ipsum sit dor amet usw.",
+            'Lorem Ipsum sit dor amet usw.',
             StringHelper::getExcerpt(
-                "Lorem Ipsum sit dor amet usw.",
+                'Lorem Ipsum sit dor amet usw.',
                 0,
                 100
             )

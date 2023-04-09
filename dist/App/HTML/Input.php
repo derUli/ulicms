@@ -25,13 +25,13 @@ class Input
     public static function textBox(
         string $name,
         $value,
-        string $type = "text",
+        string $type = 'text',
         array $htmlAttributes = []
     ): string {
         $attributes = [
-            "type" => $type,
-            "name" => $name,
-            "value" => $value
+            'type' => $type,
+            'name' => $name,
+            'value' => $value
         ];
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
@@ -58,9 +58,9 @@ class Input
         array $htmlAttributes = []
     ): string {
         $attributes = [
-            "name" => $name,
-            "rows" => $rows,
-            "cols" => $cols
+            'name' => $name,
+            'rows' => $rows,
+            'cols' => $cols
         ];
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
@@ -91,16 +91,16 @@ class Input
         if (!isset($htmlAttributes['id'])) {
             $htmlAttributes['id'] = $name;
         }
-        if (isset($htmlAttributes["class"])) {
-            $htmlAttributes["class"] .= " " . get_html_editor();
+        if (isset($htmlAttributes['class'])) {
+            $htmlAttributes['class'] .= ' ' . get_html_editor();
         } else {
-            $htmlAttributes["class"] = get_html_editor();
+            $htmlAttributes['class'] = get_html_editor();
         }
 
-        $htmlAttributes["class"] = trim($htmlAttributes["class"]);
+        $htmlAttributes['class'] = trim($htmlAttributes['class']);
 
-        $htmlAttributes["data-mimetype"] = !isset($htmlAttributes["data-mimetype"]) ?
-                "text/html" : $htmlAttributes["data-mimetype"];
+        $htmlAttributes['data-mimetype'] = !isset($htmlAttributes['data-mimetype']) ?
+                'text/html' : $htmlAttributes['data-mimetype'];
 
         return self::textArea($name, $value, $rows, $cols, $htmlAttributes);
     }
@@ -117,7 +117,7 @@ class Input
         $value,
         array $htmlAttributes = []
     ): string {
-        return self::textBox($name, $value, "password", $htmlAttributes);
+        return self::textBox($name, $value, 'password', $htmlAttributes);
     }
 
     /**
@@ -135,23 +135,23 @@ class Input
         array $htmlAttributes = []
     ): string {
         $attributes = [
-            "name" => $name
+            'name' => $name
         ];
         if (is_string($accept)) {
-            $attributes["accept"] = Template::getEscape($accept);
+            $attributes['accept'] = Template::getEscape($accept);
         } elseif (is_array($accept)) {
-            $accept = join(", ", $accept);
-            $attributes["accept"] = Template::getEscape($accept);
+            $accept = join(', ', $accept);
+            $attributes['accept'] = Template::getEscape($accept);
         }
         if ($multiple) {
-            $attributes["multiple"] = "multiple";
+            $attributes['multiple'] = 'multiple';
         }
 
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
 
-        return self::textBox($name, "", "file", $attributes);
+        return self::textBox($name, '', 'file', $attributes);
     }
 
     /**
@@ -166,7 +166,7 @@ class Input
         $value,
         array $htmlAttributes = []
     ): string {
-        return self::textBox($name, $value, "hidden", $htmlAttributes);
+        return self::textBox($name, $value, 'hidden', $htmlAttributes);
     }
 
     /**
@@ -180,13 +180,13 @@ class Input
     public static function checkBox(
         string $name,
         bool $checked = false,
-        $value = "1",
+        $value = '1',
         array $htmlAttributes = []
     ): string {
         if ($checked) {
-            $htmlAttributes["checked"] = "checked";
+            $htmlAttributes['checked'] = 'checked';
         }
-        return self::textBox($name, $value, "checkbox", $htmlAttributes);
+        return self::textBox($name, $value, 'checkbox', $htmlAttributes);
     }
 
     /**
@@ -200,13 +200,13 @@ class Input
     public static function radioButton(
         string $name,
         bool $checked = false,
-        $value = "1",
+        $value = '1',
         array $htmlAttributes = []
     ): string {
         if ($checked) {
-            $htmlAttributes["checked"] = "checked";
+            $htmlAttributes['checked'] = 'checked';
         }
-        return self::textBox($name, $value, "radio", $htmlAttributes);
+        return self::textBox($name, $value, 'radio', $htmlAttributes);
     }
 
     /**
@@ -226,8 +226,8 @@ class Input
         array $htmlAttributes = []
     ): string {
         $attributes = [
-            "name" => $name,
-            "size" => $size
+            'name' => $name,
+            'size' => $size
         ];
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
@@ -267,8 +267,8 @@ class Input
         array $htmlAttributes = []
     ): string {
         $attributes = [
-            "name" => $name,
-            "size" => $size
+            'name' => $name,
+            'size' => $size
         ];
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;

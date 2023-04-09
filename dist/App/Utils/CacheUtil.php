@@ -43,8 +43,8 @@ class CacheUtil
         }
 
         $cacheConfig = [
-            "path" => Path::resolve("ULICMS_CACHE_BASE"),
-            "defaultTtl" => self::getCachePeriod()
+            'path' => Path::resolve('ULICMS_CACHE_BASE'),
+            'defaultTtl' => self::getCachePeriod()
         ];
 
         // Auto Detect which caching driver to use
@@ -112,7 +112,7 @@ class CacheUtil
      */
     public static function isCacheEnabled(): bool
     {
-        return !Settings::get("cache_disabled") && !is_logged_in();
+        return !Settings::get('cache_disabled') && !is_logged_in();
     }
 
     /**
@@ -133,17 +133,17 @@ class CacheUtil
      */
     public static function clearCache(): void
     {
-        do_event("before_clear_cache");
+        do_event('before_clear_cache');
 
         // clear opcache if available
-        if (function_exists("opcache_reset")) {
+        if (function_exists('opcache_reset')) {
             opcache_reset();
         }
 
         self::clearPageCache();
 
-        sureRemoveDir(Path::resolve("ULICMS_CACHE"), false);
-        sureRemoveDir(Path::resolve("ULICMS_TMP"), false);
+        sureRemoveDir(Path::resolve('ULICMS_CACHE'), false);
+        sureRemoveDir(Path::resolve('ULICMS_TMP'), false);
 
         // Sync modules table in database with modules folder
         $moduleManager = new ModuleManager();
@@ -154,7 +154,7 @@ class CacheUtil
         );
         $designSettingsController->_generateSCSSToFile();
 
-        do_event("after_clear_cache");
+        do_event('after_clear_cache');
     }
 
     /**
@@ -163,7 +163,7 @@ class CacheUtil
      */
     public static function getCachePeriod(): int
     {
-        return (int) Settings::get("cache_period");
+        return (int) Settings::get('cache_period');
     }
 
     /**
@@ -173,7 +173,7 @@ class CacheUtil
      */
     public static function getCurrentUid(): string
     {
-        return "fullpage-cache-" . md5(get_request_uri()
+        return 'fullpage-cache-' . md5(get_request_uri()
                         . getCurrentLanguage() . strbool(is_mobile())
                         . strbool(is_crawler()) . strbool(is_tablet()));
     }
@@ -185,7 +185,7 @@ class CacheUtil
      */
     public static function clearAvatars(bool $removeDir = false): void
     {
-        $path = Path::resolve("ULICMS_CONTENT/avatars");
+        $path = Path::resolve('ULICMS_CONTENT/avatars');
         File::sureRemoveDir($path, $removeDir);
     }
 }

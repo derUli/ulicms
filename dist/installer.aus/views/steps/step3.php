@@ -42,8 +42,8 @@ sort($phpModules);
     <?php
     foreach ($phpModules as $module) {
         $check = extension_loaded($module);
-        echo "<li>";
-        echo htmlspecialchars($module) . " ";
+        echo '<li>';
+        echo htmlspecialchars($module) . ' ';
 
         if ($check) {
             echo '<i class="fa fa-check text-green" aria-hidden="true"></i>';
@@ -51,7 +51,7 @@ sort($phpModules);
             echo '<i class="fa fa-exclamation-triangle text-red" aria-hidden="true"></i>';
         }
 
-        echo "</li>";
+        echo '</li>';
     }
 ?>
 </ul>

@@ -11,11 +11,11 @@ class ExtendUpgradeHelper extends Controller
         $modulesFromExtend = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
-            if (getModuleMeta($module, "source") == "extend") {
+            if (getModuleMeta($module, 'source') == 'extend') {
                 $xtendModule = new ExtendModule();
                 $xtendModule->name = $module;
-                $xtendModule->version = getModuleMeta($module, "version");
-                $xtendModule->url = "https://extend.ulicms.de/" . $module . ".html";
+                $xtendModule->version = getModuleMeta($module, 'version');
+                $xtendModule->url = 'https://extend.ulicms.de/' . $module . '.html';
                 $xtendModule->updateAvailable = $this->checkForUpdates(
                     $xtendModule->name,
                     $xtendModule->version
@@ -39,15 +39,15 @@ class ExtendUpgradeHelper extends Controller
             return false;
         }
         $data = json_decode($json, true);
-        if (!($data && isset($data["data"]))) {
+        if (!($data && isset($data['data']))) {
             return false;
         }
-        $versionMatcher = new AvailablePackageVersionMatcher($data["data"]);
+        $versionMatcher = new AvailablePackageVersionMatcher($data['data']);
         $available = $versionMatcher->getCompatibleVersions();
 
         return (
             count($available) &&
-            \App\Utils\VersionComparison::compare($available[0]["version"], $version, ">")
+            \App\Utils\VersionComparison::compare($available[0]['version'], $version, '>')
         );
     }
 }

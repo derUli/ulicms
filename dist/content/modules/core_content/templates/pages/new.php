@@ -13,55 +13,55 @@ use App\Translations\JSTranslation;
 
 use function App\HTML\icon;
 
-$parent_id = Request::getVar("parent_id", null, 'int');
+$parent_id = Request::getVar('parent_id', null, 'int');
 
 $permissionChecker = new ACL();
-$groups = db_query("SELECT id, name from " . tbname('groups'));
+$groups = db_query('SELECT id, name from ' . tbname('groups'));
 if (
     $permissionChecker->hasPermission('pages') &&
-    $permissionChecker->hasPermission("pages_create")
+    $permissionChecker->hasPermission('pages_create')
 ) {
     $allThemes = getAllThemes();
-    $cols = Database::getColumnNames("content");
+    $cols = Database::getColumnNames('content');
 
     // FIXME: No SQL in Views
-    $sql = "SELECT id, name FROM " . tbname("videos");
+    $sql = 'SELECT id, name FROM ' . tbname('videos');
     $videos = Database::query($sql);
-    $sql = "SELECT id, name FROM " . tbname("audio");
+    $sql = 'SELECT id, name FROM ' . tbname('audio');
     $audios = Database::query($sql);
 
-    $pages_approve_own = $permissionChecker->hasPermission("pages_approve_own");
+    $pages_approve_own = $permissionChecker->hasPermission('pages_approve_own');
 
     $types = get_available_post_types();
     ?>
     <div class="loadspinner">
-        <?php require "inc/loadspinner.php"; ?>
+        <?php require 'inc/loadspinner.php'; ?>
     </div>
     <?php
     echo ModuleHelper::buildMethodCallForm(
-        "PageController",
-        "create",
+        'PageController',
+        'create',
         [],
-        "post",
+        'post',
         [
-            "name" => "newpageform",
-            "id" => "pageform",
-            "style" => "display:none",
-            "class" => "pageform main-form new-page-form",
-            "data-get-content-types-url" =>
+            'name' => 'newpageform',
+            'id' => 'pageform',
+            'style' => 'display:none',
+            'class' => 'pageform main-form new-page-form',
+            'data-get-content-types-url' =>
             ModuleHelper::buildMethodCallUrl(
                 PageController::class,
-                "getContentTypes"
+                'getContentTypes'
             ),
-            "data-slug-free-url" =>
+            'data-slug-free-url' =>
             ModuleHelper::buildMethodCallUrl(
                 PageController::class,
-                "nextFreeSlug"
+                'nextFreeSlug'
             ),
-            "data-parent-pages-url" =>
+            'data-parent-pages-url' =>
             ModuleHelper::buildMethodCallUrl(
                 PageController::class,
-                "filterParentPages"
+                'filterParentPages'
             )
         ]
     );
@@ -69,25 +69,25 @@ if (
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL('pages'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
-            <?php translate("back") ?></a>
+            <?php translate('back') ?></a>
     </p>
     <input type="hidden" name="add" value="add">
     <div id="accordion-container">
-        <h2 class="accordion-header"><?php translate("title_and_headline"); ?></h2>
+        <h2 class="accordion-header"><?php translate('title_and_headline'); ?></h2>
         <div class="accordion-content">
             <div class="field">
-                <strong class="field-label"><?php translate("permalink"); ?>*
+                <strong class="field-label"><?php translate('permalink'); ?>*
                 </strong>
                 <input type="text" name="slug" id="slug"
                        required="required" value="">
                 <small>
-                    <?php translate("auto_generated_from_title"); ?>
+                    <?php translate('auto_generated_from_title'); ?>
                 </small>
             </div>
 
             <div class="field">
                 <strong class="field-label">
-                    <?php translate("page_title"); ?>*
+                    <?php translate('page_title'); ?>*
                 </strong>
                 <input type="text" required="required"
                        name="title" value="" onkeyup="suggestSlug(this.value)">
@@ -95,25 +95,25 @@ if (
             <div class="typedep hide-on-snippet hide-on-non-regular">
                 <div class="field">
                     <strong class="field-label">
-                        <?php translate("alternate_title"); ?>
+                        <?php translate('alternate_title'); ?>
                     </strong>
                     <input type="text" name="alternate_title" value="">
                     <small>
-                        <?php translate("ALTERNATE_TITLE_INFO"); ?>
+                        <?php translate('ALTERNATE_TITLE_INFO'); ?>
                     </small>
                 </div>
                 <div class="field">
                     <strong class="field-label">
-                        <?php translate("show_headline"); ?>
+                        <?php translate('show_headline'); ?>
                     </strong>
                     <select name="show_headline">
-                        <option value="1" selected><?php translate("yes"); ?></option>
-                        <option value="0"><?php translate("no"); ?></option>
+                        <option value="1" selected><?php translate('yes'); ?></option>
+                        <option value="0"><?php translate('no'); ?></option>
                     </select>
                 </div>
             </div>
         </div>
-        <h2 class="accordion-header"><?php translate("page_type"); ?></h2>
+        <h2 class="accordion-header"><?php translate('page_type'); ?></h2>
         <div class="accordion-content">
             <?php
             foreach ($types as $type) {
@@ -124,7 +124,7 @@ if (
                            value="<?php echo $type; ?>"
                            <?php
                            if ($type == DEFAULT_CONTENT_TYPE) {
-                               echo "checked";
+                               echo 'checked';
                            }
                 ?>> 
 
@@ -133,7 +133,7 @@ if (
                             <?php
                  echo icon(
                      $model->getIcon(),
-                     ["class" => "type-icon"]
+                     ['class' => 'type-icon']
                  );
                 ?>
         <?php translate($type); ?>
@@ -142,19 +142,19 @@ if (
             <?php }
             ?>
         </div>
-        <h2 class="accordion-header"><?php translate("menu_entry"); ?></h2>
+        <h2 class="accordion-header"><?php translate('menu_entry'); ?></h2>
         <div class="accordion-content">
             <div class="field">
                 <strong class="field-label">
-    <?php translate("language"); ?>
+    <?php translate('language'); ?>
                 </strong>
                 <select name="language">
                     <?php
                     $languages = getAllLanguages(true);
-    if (!empty($_SESSION["filter_language"])) {
-        $default_language = $_SESSION["filter_language"];
+    if (!empty($_SESSION['filter_language'])) {
+        $default_language = $_SESSION['filter_language'];
     } else {
-        $default_language = Settings::get("default_language");
+        $default_language = Settings::get('default_language');
     }
 
 
@@ -162,20 +162,20 @@ if (
 
     for ($j = 0; $j < $languagesCount; $j++) {
         if ($languages[$j] === $default_language) {
-            echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
+            echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . '</option>';
         } else {
-            echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
+            echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . '</option>';
         }
     }
 
-    $pages = getAllPages($default_language, "title", false);
+    $pages = getAllPages($default_language, 'title', false);
     ?>
                 </select>
             </div>
             <div class="typedep menu-stuff">
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("menu"); ?>
+    <?php translate('menu'); ?>
                         <span class="has-help"
                               onclick="$('div#menu_help').slideToggle()"><i class="fa fa-question-circle text-info" aria-hidden="true"></i></span>
                     </strong>
@@ -187,7 +187,7 @@ if (
                             <option value="<?php echo $menu ?>"
                             <?php
                             if ($menu == DEFAULT_MENU) {
-                                echo "selected";
+                                echo 'selected';
                             }
                 ?>>
                             <?php translate($menu); ?></option>
@@ -197,11 +197,11 @@ if (
                 </div>
 
                 <div id="menu_help" class="help" style="display: none">
-    <?php echo nl2br(get_translation("help_menu")); ?>
+    <?php echo nl2br(get_translation('help_menu')); ?>
                 </div>
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("position"); ?>
+    <?php translate('position'); ?>
                         <span class="has-help"
                               onclick="$('div#position_help').slideToggle()">
                             <i class="fa fa-question-circle text-info" aria-hidden="true"></i></span>
@@ -210,22 +210,22 @@ if (
                         type="number" required="required" name="position" value="0" min="0"
                         step="1">
                     <div id="position_help" class="help" style="display: none">
-    <?php echo nl2br(get_translation("help_position")); ?>
+    <?php echo nl2br(get_translation('help_position')); ?>
                     </div>
                 </div>
                 <div id="parent-div" class="field">
                     <strong class="field-label">
-    <?php translate("parent_id"); ?>
+    <?php translate('parent_id'); ?>
                     </strong>
                     <select
                         name="parent_id" size=1>
                         <option <?php
             if (!$parent_id) {
-                echo "selected";
+                echo 'selected';
             }
     ?> value="NULL">
                             [
-    <?php translate("none"); ?>
+    <?php translate('none'); ?>
                             ]
                         </option>
                         <?php
@@ -234,10 +234,10 @@ if (
                             <option value="<?php echo $page['id']; ?>"
                             <?php
         if ($parent_id == $page['id']) {
-            echo "selected";
+            echo 'selected';
         }
         ?>>
-                                <?php esc($page["title"]); ?>
+                                <?php esc($page['title']); ?>
                                 (ID:
         <?php echo $page['id']; ?>
                                 )
@@ -249,65 +249,65 @@ if (
             </div>
             <div class="typedep" id="tab-target">
                 <div class="field">
-                    <strong class="field-label"><?php translate("open_in"); ?>
+                    <strong class="field-label"><?php translate('open_in'); ?>
                     </strong>
                     <select name="target" size=1>
                         <option value="_self">
-    <?php translate("target_self"); ?>
+    <?php translate('target_self'); ?>
                         </option>
                         <option value="_blank">
-    <?php translate("target_blank"); ?>
+    <?php translate('target_blank'); ?>
                         </option>
                     </select>
                 </div>
             </div>
             <div class="field">
                 <strong class="field-label">
-    <?php translate("activated"); ?>
+    <?php translate('activated'); ?>
                 </strong>
                 <select name="active" size=1
                 <?php
                 if (!$pages_approve_own) {
-                    echo "disabled";
+                    echo 'disabled';
                 }
     ?>>
                     <option value="1">
-    <?php translate("enabled"); ?>
+    <?php translate('enabled'); ?>
                     </option>
                     <option value="0" <?php
         if (!$pages_approve_own) {
-            echo "selected";
+            echo 'selected';
         }
     ?>>
-    <?php translate("disabled"); ?>
+    <?php translate('disabled'); ?>
                     </option>
                 </select>
             </div>
             <div class="typedep" id="hidden-attrib">
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("hidden"); ?>
+    <?php translate('hidden'); ?>
                     </strong>
                     <select name="hidden" size="1">
                         <option value="1">
-    <?php translate("yes"); ?>
+    <?php translate('yes'); ?>
                         </option>
                         <option value="0" selected>
-    <?php translate("no"); ?>
+    <?php translate('no'); ?>
                         </option>
                     </select>
                 </div>
             </div>
             <div class="field">
                 <strong class="field-label">
-                <?php translate("category"); ?>
+                <?php translate('category'); ?>
                 </strong>
     <?php echo Categories::getHTMLSelect(); ?>
             </div>
 
             <div id="menu_image_div" class="field">
                 <strong class="field-label">
-    <?php translate("menu_image"); ?>
+    <?php translate('menu_image'); ?>
                 </strong>
 
                 <input type="text" id="menu_image" name="menu_image"
@@ -315,30 +315,30 @@ if (
                        value="" style="cursor: pointer" /> <a href="#"
                        onclick="$('#menu_image').val('');return false;"
                        class="btn btn-default voffset2" class="btn btn-default"><i
-                        class="fa fa-eraser"></i> <?php translate("clear"); ?>
+                        class="fa fa-eraser"></i> <?php translate('clear'); ?>
                 </a>
             </div>
         </div>
         <div class="typedep" id="tab-link" style="display: none;">
             <div class="field">
-                <h2 class="accordion-header"><?php translate("link_url"); ?></h2>
+                <h2 class="accordion-header"><?php translate('link_url'); ?></h2>
                 <div class="accordion-content">
                     <strong class="field-label">
-    <?php translate("link_url"); ?>
+    <?php translate('link_url'); ?>
                     </strong>
                     <input type="text" name="link_url" value="">
                 </div>
             </div>
         </div>
         <div class="typedep" id="tab-language-link" style="display: none;">
-            <h2 class="accordion-header"><?php translate("language_link"); ?></h2>
+            <h2 class="accordion-header"><?php translate('language_link'); ?></h2>
             <div class="accordion-content">
                 <strong class="field-label">
-    <?php translate("language_link"); ?>
+    <?php translate('language_link'); ?>
                 </strong>
 
                 <select name="link_to_language">
-                    <option value="">[<?php translate("none"); ?>]</option>
+                    <option value="">[<?php translate('none'); ?>]</option>
                     <?php foreach (Language::getAllLanguages() as $language) { ?>
                         <option value="<?php Template::escape($language->getID()); ?>"><?php Template::escape($language->getName()); ?></option>
     <?php } ?>
@@ -346,28 +346,28 @@ if (
             </div>
         </div>
         <div class="typedep" id="tab-metadata">
-            <h2 class="accordion-header"><?php translate("metadata"); ?></h2>
+            <h2 class="accordion-header"><?php translate('metadata'); ?></h2>
             <div class="accordion-content">
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("meta_description"); ?>
+    <?php translate('meta_description'); ?>
                     </strong>
                     <input type="text" name="meta_description" value=''
                            maxlength="200">
                 </div>
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("meta_keywords"); ?>
+    <?php translate('meta_keywords'); ?>
                     </strong>
-                    <input type="text" name="meta_keywords" value='' maxlength="200" placeholder="<?php translate("comma_separated"); ?>">
+                    <input type="text" name="meta_keywords" value='' maxlength="200" placeholder="<?php translate('comma_separated'); ?>">
                 </div>
                 <div class="field">
                     <strong class="field-label">
-                    <?php translate("robots"); ?>
+                    <?php translate('robots'); ?>
                     </strong>
                     <?php
     echo Input::singleSelect(
-        "robots",
+        'robots',
         null,
         UIUtils::getRobotsListItems()
     );
@@ -377,21 +377,21 @@ if (
 
                     <div class="field">
                         <strong class="field-label">
-    <?php translate("author_name"); ?>
+    <?php translate('author_name'); ?>
                         </strong>
                         <input type="text" name="article_author_name" value="" maxlength="80">
                     </div>
 
                     <div class="field">
                         <strong class="field-label">
-    <?php translate("author_email"); ?>
+    <?php translate('author_email'); ?>
                         </strong>
                         <input type="email" name="article_author_email" value="" maxlength="80">
                     </div>
 
                     <div class="field">
                         <strong class="field-label">
-    <?php translate("article_date"); ?>
+    <?php translate('article_date'); ?>
                         </strong>
                         <input
                             name="article_date" type="text"
@@ -402,35 +402,35 @@ if (
 
                     <div class="field">
                         <strong class="field-label">
-    <?php translate("excerpt"); ?>
+    <?php translate('excerpt'); ?>
                         </strong>
                         <?php echo Input::editor('excerpt', '');?>
                     </div>
                 </div>
                 <div class="typedep" id="tab-og" style="display: none;">
-                    <h3><?php translate("open_graph"); ?></h3>
-                    <p><?php translate("og_help"); ?></p>
+                    <h3><?php translate('open_graph'); ?></h3>
+                    <p><?php translate('og_help'); ?></p>
                     <div class="field">
                         <strong class="field-label">
-    <?php translate("title"); ?>
+    <?php translate('title'); ?>
                         </strong>
                         <input type="text" name="og_title" value="">
                     </div>
                     <div class="field">
                         <strong class="field-label">
-    <?php translate("description"); ?>
+    <?php translate('description'); ?>
                         </strong>
                         <input type="text" name="og_description" value="">
                     </div>
                     <div class="field">
-                        <strong class="field-label"><?php translate("image"); ?></strong>
+                        <strong class="field-label"><?php translate('image'); ?></strong>
                         <input type="text" id="og_image" name="og_image" readonly="readonly"
                                class="fm"
                                value=""
                                style="cursor: pointer" /> <a href="#"
                                onclick="$('#og_image').val('');
                                            return false;"
-                               class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
+                               class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate('clear'); ?></a>
                     </div>
                 </div>
             </div>
@@ -459,19 +459,19 @@ if (
     ?>
         </div>
         <div class="typedep" id="tab-list" style="display: none">
-            <h2 class="accordion-header"><?php translate("list_properties"); ?></h2>
+            <h2 class="accordion-header"><?php translate('list_properties'); ?></h2>
             <div class="accordion-content">
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("type") ?>
+    <?php translate('type') ?>
                     </strong>
 
                     <select name="list_type">
-                        <option value="null" selected>[<?php translate("every") ?>]
+                        <option value="null" selected>[<?php translate('every') ?>]
                         </option>
                         <?php
                 foreach ($types as $type) {
-                    echo '<option value="' . $type . '">' . get_translation($type) . "</option>";
+                    echo '<option value="' . $type . '">' . get_translation($type) . '</option>';
                 }
     ?>
                     </select>
@@ -479,16 +479,16 @@ if (
 
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("language"); ?>
+    <?php translate('language'); ?>
                     </strong>
                     <select name="list_language">
-                        <option value="">[<?php translate("every"); ?>]</option>
+                        <option value="">[<?php translate('every'); ?>]</option>
                         <?php
     $languages = getAllLanguages();
     $languagesCount = count($languages);
 
     for ($j = 0; $j < $languagesCount; $j++) {
-        echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
+        echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . '</option>';
     }
     ?>
                     </select>
@@ -496,17 +496,17 @@ if (
 
                 <div class="field">
                     <strong class="field-label">
-                    <?php translate("category"); ?>
+                    <?php translate('category'); ?>
                     </strong>
-    <?php echo Categories::getHTMLSelect(-1, true, "list_category") ?>
+    <?php echo Categories::getHTMLSelect(-1, true, 'list_category') ?>
                 </div>
 
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("menu"); ?>
+    <?php translate('menu'); ?>
                     </strong>
                     <select name="list_menu" size="1">
-                        <option value="">[<?php translate("every"); ?>]</option>
+                        <option value="">[<?php translate('every'); ?>]</option>
                         <?php
     foreach (get_all_menus() as $menu) {
         ?>
@@ -519,19 +519,19 @@ if (
 
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("parent_id"); ?>
+    <?php translate('parent_id'); ?>
                     </strong>
                     <select name="list_parent" size=1>
                         <option selected="selected" value="">
                             [
-    <?php translate("every"); ?>
+    <?php translate('every'); ?>
                             ]
                         </option>
                         <?php
     foreach ($pages as $key => $page) {
         ?>
                             <option value="<?php echo $page['id']; ?>">
-                                <?php esc($page["title"]); ?>
+                                <?php esc($page['title']); ?>
                                 (ID:
         <?php echo $page['id']; ?>
                                 )
@@ -543,13 +543,13 @@ if (
 
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("order_by"); ?>
+    <?php translate('order_by'); ?>
                     </strong>
                     <select name="list_order_by">
                         <?php foreach ($cols as $col) { ?>
                             <option value="<?php echo $col; ?>"
                             <?php
-        if ($col == "title") {
+        if ($col == 'title') {
             echo 'selected';
         }
                             ?>><?php echo $col; ?></option>
@@ -559,44 +559,44 @@ if (
 
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("order_direction"); ?>
+    <?php translate('order_direction'); ?>
                     </strong>
                     <select name="list_order_direction">
-                        <option value="asc"><?php translate("asc"); ?></option>
-                        <option value="desc"><?php translate("desc"); ?></option>
+                        <option value="asc"><?php translate('asc'); ?></option>
+                        <option value="desc"><?php translate('desc'); ?></option>
                     </select>
                 </div>
 
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("entries_per_page"); ?>
+    <?php translate('entries_per_page'); ?>
                     </strong>
                     <input type="number" min="0" name="limit" step="1" value="0">
                 </div>
 
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("use_pagination"); ?>
+    <?php translate('use_pagination'); ?>
                     </strong>
 
                     <select
                         name="list_use_pagination">
-                        <option value="1"><?php translate("yes") ?></option>
-                        <option value="0" selected><?php translate("no") ?></option>
+                        <option value="1"><?php translate('yes') ?></option>
+                        <option value="0" selected><?php translate('no') ?></option>
                     </select>
                 </div>
             </div>
         </div>
         <div class="typedep" id="tab-module" style="display: none;">
-            <h2 class="accordion-header"><?php translate("module"); ?></h2>
+            <h2 class="accordion-header"><?php translate('module'); ?></h2>
             <div class="accordion-content">
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("module"); ?>
+    <?php translate('module'); ?>
                     </strong>
                     <select
                         name="module">
-                        <option value="null">[<?php translate("none"); ?>]</option>
+                        <option value="null">[<?php translate('none'); ?>]</option>
                         <?php foreach (ModuleHelper::getAllEmbedModules() as $module) { ?>
                             <option value="<?php echo $module; ?>"><?php echo $module; ?></option>
     <?php } ?>
@@ -605,15 +605,15 @@ if (
             </div>
         </div>
         <div class="typedep" id="tab-video" style="display: none;">
-            <h2 class="accordion-header"><?php translate("video"); ?></h2>
+            <h2 class="accordion-header"><?php translate('video'); ?></h2>
             <div class="accordion-content">
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("video"); ?>
+    <?php translate('video'); ?>
                     </strong>
                     <select
                         name="video">
-                        <option value="">[<?php translate("none"); ?>]</option>
+                        <option value="">[<?php translate('none'); ?>]</option>
                         <?php while ($row = Database::fetchObject($videos)) { ?>
                             <option value="<?php echo $row->id; ?>"><?php Template::escape($row->name); ?> (ID: <?php echo $row->id; ?>)</option>
     <?php } ?>
@@ -623,14 +623,14 @@ if (
         </div>
         <div class="typedep" id="tab-audio" style="display: none;">
             <div class="field">
-                <h2 class="accordion-header"><?php translate("audio"); ?></h2>
+                <h2 class="accordion-header"><?php translate('audio'); ?></h2>
                 <div class="accordion-content">
                     <strong class="field-label">
-    <?php translate("audio"); ?>
+    <?php translate('audio'); ?>
                     </strong>
                     <select
                         name="audio">
-                        <option value="">[<?php translate("none"); ?>]</option>
+                        <option value="">[<?php translate('none'); ?>]</option>
                         <?php while ($row = Database::fetchObject($audios)) { ?>
                             <option value="<?php echo $row->id; ?>"><?php Template::escape($row->name); ?> (ID: <?php echo $row->id; ?>)</option>
     <?php } ?>
@@ -639,36 +639,36 @@ if (
             </div>
         </div>
         <div class="typedep" id="tab-image" style="display: none;">
-            <h2 class="accordion-header"><?php translate("image"); ?></h2>
+            <h2 class="accordion-header"><?php translate('image'); ?></h2>
             <div class="accordion-content">
                 <input type="text" id="image_url" name="image_url"
                        readonly="readonly" class="fm"
                        value="" style="cursor: pointer" /> <a href="#"
                        onclick="$('#menu_image').val('');return false;"
-                       class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
+                       class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate('clear'); ?>
                 </a>
             </div>
         </div>
         <div class="typedep" id="tab-text-position" style="display: none">
-            <h2 class="accordion-header"><?php translate("position_of_description"); ?></h2>
+            <h2 class="accordion-header"><?php translate('position_of_description'); ?></h2>
             <div class="accordion-content">
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("position_of_description"); ?>
+    <?php translate('position_of_description'); ?>
                     </strong>
                     <select name="text_position">
-                        <option value="before"><?php translate("description_before_content") ?></option>
-                        <option value="after"><?php translate("description_after_content") ?></option>
+                        <option value="before"><?php translate('description_before_content') ?></option>
+                        <option value="after"><?php translate('description_after_content') ?></option>
                     </select>
                 </div>
             </div>
         </div>
         <div class="typedep" id="article-image">
-            <h2 class="accordion-header"><?php translate("article_image"); ?></h2>
+            <h2 class="accordion-header"><?php translate('article_image'); ?></h2>
             <div class="accordion-content">
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("article_image"); ?>
+    <?php translate('article_image'); ?>
                     </strong>
 
                     <input type="text" id="article_image" name="article_image"
@@ -676,39 +676,39 @@ if (
                            value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                            onclick="$('#article_image').val('');
                                        return false;"
-                           class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?></a>
+                           class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate('clear'); ?></a>
                 </div>
             </div>
         </div>
         <div class="typedep" id="tab-comments">
 
-            <h2 class="accordion-header"><?php translate("comments"); ?></h2>
+            <h2 class="accordion-header"><?php translate('comments'); ?></h2>
             <div class="accordion-content">
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("comments_enabled"); ?>
+    <?php translate('comments_enabled'); ?>
                     </strong>
                     <select
                         name="comments_enabled">
-                        <option value="null" selected>[<?php translate("standard"); ?>]</option>
-                        <option value="1"><?php translate("yes"); ?></option>
-                        <option value="0"><?php translate("no"); ?></option>
+                        <option value="null" selected>[<?php translate('standard'); ?>]</option>
+                        <option value="1"><?php translate('yes'); ?></option>
+                        <option value="0"><?php translate('no'); ?></option>
                     </select>
                 </div>
             </div>
         </div>
-        <h2 class="accordion-header"><?php translate("other"); ?></h2>
+        <h2 class="accordion-header"><?php translate('other'); ?></h2>
         <div class="accordion-content">
             <div class="typedep" id="tab-cache-control" style="display: none;">
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("cache_control"); ?>
+    <?php translate('cache_control'); ?>
                     </strong>
                     <select
                         name="cache_control">
-                        <option value="auto" selected><?php translate("auto"); ?></option>
-                        <option value="force"><?php translate("force"); ?></option>
-                        <option value="no_cache"><?php translate("no_cache"); ?></option>
+                        <option value="auto" selected><?php translate('auto'); ?></option>
+                        <option value="force"><?php translate('force'); ?></option>
+                        <option value="no_cache"><?php translate('no_cache'); ?></option>
                     </select>
                 </div>
             </div>
@@ -716,13 +716,13 @@ if (
 
                 <div class="field">
                     <strong class="field-label">
-    <?php translate("design"); ?>
+    <?php translate('design'); ?>
                     </strong>
                     <select
                         name="theme" size=1>
                         <option value="">
                             [
-    <?php translate("standard"); ?>
+    <?php translate('standard'); ?>
                             ]
                         </option>
                         <?php
@@ -737,17 +737,17 @@ if (
             </div>
             <div class="field">
                 <strong class="field-label">
-    <?php translate("visible_for"); ?>
+    <?php translate('visible_for'); ?>
                 </strong>
                 <select name="access[]" size=4 multiple>
                     <option value="all" selected>
-    <?php translate("everyone"); ?>
+    <?php translate('everyone'); ?>
                     </option>
                     <option value="registered">
-    <?php translate("registered_users"); ?>
+    <?php translate('registered_users'); ?>
                     </option>
-                    <option value="mobile"><?php translate("mobile_devices"); ?></option>
-                    <option value="desktop"><?php translate("desktop_computers"); ?></option>
+                    <option value="mobile"><?php translate('mobile_devices'); ?></option>
+                    <option value="desktop"><?php translate('desktop_computers'); ?></option>
                     <?php
                     while ($row = db_fetch_object($groups)) {
                         echo '<option value="' . $row->id . '">' . _esc($row->name) . '</option>';
@@ -756,9 +756,9 @@ if (
                 </select>
             </div>
             <div class="typedep" id="custom_data_json">
-    <?php do_event("before_custom_data_json"); ?>
+    <?php do_event('before_custom_data_json'); ?>
                 <div class="field">
-                    <strong class="field-label"><?php translate("custom_data_json"); ?></strong>
+                    <strong class="field-label"><?php translate('custom_data_json'); ?></strong>
                     <textarea name="custom_data" style="width: 100%; height: 200px;"
                               cols=80 rows=10
                               class="codemirror" data-mimetype="application/json" data-validate="json"><?php esc(CustomData::getDefaultJSON()); ?></textarea>
@@ -766,7 +766,7 @@ if (
             </div>
         </div>
     </div>
-    <?php do_event("page_option"); ?>
+    <?php do_event('page_option'); ?>
     <div class="typedep" id="content-editor">
         <div class="field">
             <?php echo Input::editor('content', '');?>
@@ -775,19 +775,19 @@ if (
     <div class="inPageMessage"></div>
     <input type="hidden" name="add_page" value="add_page">
     <button type="submit" class="btn btn-primary btn-new" id="btn-submit">
-        <i class="far fa-save"></i> <?php translate("save"); ?>
+        <i class="far fa-save"></i> <?php translate('save'); ?>
     </button>
     <?php
-    $translation = new JSTranslation([], "PageTranslation");
-    $translation->addKey("confirm_exit_without_save");
-    $translation->addKey("fill_all_required_fields");
+    $translation = new JSTranslation([], 'PageTranslation');
+    $translation->addKey('confirm_exit_without_save');
+    $translation->addKey('fill_all_required_fields');
     $translation->render();
 
-    enqueueScriptFile("../node_modules/slug/slug.js");
+    enqueueScriptFile('../node_modules/slug/slug.js');
 
     BackendHelper::enqueueEditorScripts();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/pages/form.js"));
+    enqueueScriptFile(ModuleHelper::buildRessourcePath('core_content', 'js/pages/form.js'));
 
     combinedScriptHtml();
 

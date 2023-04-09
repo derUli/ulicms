@@ -16,29 +16,29 @@ class BannerController extends Controller
     public function createPost(): void
     {
         $this->_createPost();
-        Response::redirect(ModuleHelper::buildActionURL("banner"));
+        Response::redirect(ModuleHelper::buildActionURL('banner'));
     }
 
     public function _createPost(): Banner
     {
-        do_event("before_create_banner");
+        do_event('before_create_banner');
 
         $banner = new Banner();
-        $banner->setName($_POST["banner_name"]);
-        $banner->setImageUrl($_POST["image_url"]);
-        $banner->setLinkUrl($_POST["link_url"]);
-        $banner->setCategoryId((int)$_POST["category_id"]);
-        $banner->setType($_POST["type"]);
-        $banner->setHtml($_POST["html"]);
+        $banner->setName($_POST['banner_name']);
+        $banner->setImageUrl($_POST['image_url']);
+        $banner->setLinkUrl($_POST['link_url']);
+        $banner->setCategoryId((int)$_POST['category_id']);
+        $banner->setType($_POST['type']);
+        $banner->setHtml($_POST['html']);
 
-        $banner->setDateFrom(stringOrNull($_POST["date_from"]));
-        $banner->setDateTo(stringOrNull($_POST["date_to"]));
+        $banner->setDateFrom(stringOrNull($_POST['date_from']));
+        $banner->setDateTo(stringOrNull($_POST['date_to']));
 
-        $banner->setEnabled((bool)$_POST["enabled"]);
-        $banner->setLanguage($_POST['language'] != "all" ? $_POST['language'] : null);
+        $banner->setEnabled((bool)$_POST['enabled']);
+        $banner->setLanguage($_POST['language'] != 'all' ? $_POST['language'] : null);
         $banner->save();
 
-        do_event("after_create_banner");
+        do_event('after_create_banner');
 
         CacheUtil::clearPageCache();
         return $banner;
@@ -48,31 +48,31 @@ class BannerController extends Controller
     {
         $this->_updatePost();
 
-        Response::redirect(ModuleHelper::buildActionURL("banner"));
+        Response::redirect(ModuleHelper::buildActionURL('banner'));
     }
 
     public function _updatePost(): Banner
     {
         $id = (int)$_POST['id'];
 
-        do_event("before_edit_banner");
+        do_event('before_edit_banner');
 
         $banner = new Banner($id);
-        $banner->setName($_POST["banner_name"]);
-        $banner->setImageUrl($_POST["image_url"]);
-        $banner->setLinkUrl($_POST["link_url"]);
-        $banner->setCategoryId((int)$_POST["category_id"]);
-        $banner->setType($_POST["type"]);
-        $banner->setHtml($_POST["html"]);
+        $banner->setName($_POST['banner_name']);
+        $banner->setImageUrl($_POST['image_url']);
+        $banner->setLinkUrl($_POST['link_url']);
+        $banner->setCategoryId((int)$_POST['category_id']);
+        $banner->setType($_POST['type']);
+        $banner->setHtml($_POST['html']);
 
-        $banner->setDateFrom(stringOrNull($_POST["date_from"]));
-        $banner->setDateTo(stringOrNull($_POST["date_to"]));
+        $banner->setDateFrom(stringOrNull($_POST['date_from']));
+        $banner->setDateTo(stringOrNull($_POST['date_to']));
 
-        $banner->setEnabled((bool)$_POST["enabled"]);
-        $banner->setLanguage($_POST['language'] != "all" ? $_POST['language'] : null);
+        $banner->setEnabled((bool)$_POST['enabled']);
+        $banner->setLanguage($_POST['language'] != 'all' ? $_POST['language'] : null);
         $banner->save();
 
-        do_event("after_edit_banner");
+        do_event('after_edit_banner');
 
         CacheUtil::clearPageCache();
 
@@ -81,11 +81,11 @@ class BannerController extends Controller
 
     public function deletePost(): void
     {
-        $id = Request::getVar("banner", 0, 'int');
+        $id = Request::getVar('banner', 0, 'int');
 
         $this->_deletePost($id);
         // Todo: handle errors
-        Response::redirect(ModuleHelper::buildActionURL("banner"));
+        Response::redirect(ModuleHelper::buildActionURL('banner'));
     }
 
     public function _deletePost(int $id): bool
@@ -96,10 +96,10 @@ class BannerController extends Controller
             return false;
         }
 
-        do_event("before_banner_delete");
+        do_event('before_banner_delete');
         $banner->delete();
 
-        do_event("after_banner_delete");
+        do_event('after_banner_delete');
 
         CacheUtil::clearPageCache();
 

@@ -7,27 +7,27 @@ use App\Translations\JSTranslation;
 
 $languages = getAllLanguages();
 $errorCodes = [
-    403 => get_translation("forbidden"),
-    404 => get_translation("not_found")
+    403 => get_translation('forbidden'),
+    404 => get_translation('not_found')
 ];
 ?>
 <p>
     <a
-        href="<?php echo ModuleHelper::buildActionURL("settings_simple"); ?>"
+        href="<?php echo ModuleHelper::buildActionURL('settings_simple'); ?>"
         class="btn btn-default btn-back is-not-ajax"><i class= "fa fa-arrow-left"></i>
-            <?php translate("back")
+            <?php translate('back')
 ?></a>
 </p>
 
-<h1><?php translate("error_pages"); ?></h1>
+<h1><?php translate('error_pages'); ?></h1>
 <?php
 echo ModuleHelper::buildMethodCallForm(
     ErrorPagesController::class,
-    "save",
+    'save',
     [],
     RequestMethod::POST,
     [
-        "id" => "error_pages_form"
+        'id' => 'error_pages_form'
     ]
 );
 ?>
@@ -38,20 +38,20 @@ echo ModuleHelper::buildMethodCallForm(
         <thead>
             <tr>
                 <th>
-                    <?php translate("language"); ?>
+                    <?php translate('language'); ?>
                 </th>
-                <th style="width: 50%"><?php translate("page"); ?></th>
+                <th style="width: 50%"><?php translate('page'); ?></th>
             </tr>
         </thead>
         <tbody>
             <?php
             foreach (getAllLanguages() as $language) {
-                $pages = getAllPages($language, "title", true);
-                $items = [new ListItem("-1", "[" . get_translation("standard") . "]")];
+                $pages = getAllPages($language, 'title', true);
+                $items = [new ListItem('-1', '[' . get_translation('standard') . ']')];
                 foreach ($pages as $page) {
                     $items[] = new ListItem(
                         $page['id'],
-                        $page["title"]
+                        $page['title']
                     );
                 }
                 ?>
@@ -78,14 +78,14 @@ echo ModuleHelper::buildMethodCallForm(
 ?>
 <button type="submit" class="btn btn-primary">
     <i class="fa fa-save"></i>
-    <?php translate("save"); ?>
+    <?php translate('save'); ?>
 </button>
 <?php
 echo ModuleHelper::endForm();
 
 $translation = new JSTranslation();
-$translation->addKey("changes_was_saved");
+$translation->addKey('changes_was_saved');
 $translation->render();
 
-enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/error_pages.js"));
+enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/error_pages.js'));
 combinedScriptHtml();

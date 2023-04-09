@@ -11,13 +11,13 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $group = new Group();
-        $group->addPermission("info", true);
+        $group->addPermission('info', true);
         $group->save();
 
         $permittedUser = new User();
-        $permittedUser->setUsername("testuser-admin");
-        $permittedUser->setLastname("Admin");
-        $permittedUser->setFirstname("Der");
+        $permittedUser->setUsername('testuser-admin');
+        $permittedUser->setLastname('Admin');
+        $permittedUser->setFirstname('Der');
         $permittedUser->setPassword(uniqid());
         $permittedUser->setPrimaryGroup($group);
         $permittedUser->save();
@@ -26,9 +26,9 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
         $this->testGroup = $group;
 
         $notPermittedUser = new User();
-        $notPermittedUser->setUsername("testuser-nichtadmin");
-        $notPermittedUser->setLastname("Admin");
-        $notPermittedUser->setFirstname("Nicht");
+        $notPermittedUser->setUsername('testuser-nichtadmin');
+        $notPermittedUser->setLastname('Admin');
+        $notPermittedUser->setFirstname('Nicht');
         $notPermittedUser->setPassword(uniqid());
         $notPermittedUser->save();
         $this->notPermittedUser = $notPermittedUser;
@@ -40,17 +40,17 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
         $this->notPermittedUser->delete();
         $this->testGroup->delete();
 
-        unset($_GET["action"]);
-        unset($_REQUEST["action"]);
+        unset($_GET['action']);
+        unset($_REQUEST['action']);
     }
 
     private function constructMenuEntryWithoutChildren(): MenuEntry
     {
         return new MenuEntry(
-            "Say Hello",
-            "https://www.hello-world.com/",
-            "say_hello",
-            ["info", "dashboard"],
+            'Say Hello',
+            'https://www.hello-world.com/',
+            'say_hello',
+            ['info', 'dashboard'],
             [],
             true
         );
@@ -59,14 +59,14 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
     public function testConstructor()
     {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
-        $this->assertEquals("Say Hello", $menuEntry->getTitle());
+        $this->assertEquals('Say Hello', $menuEntry->getTitle());
         $this->assertEquals(
-            "https://www.hello-world.com/",
+            'https://www.hello-world.com/',
             $menuEntry->getLink()
         );
-        $this->assertEquals("say_hello", $menuEntry->getIdentifier());
+        $this->assertEquals('say_hello', $menuEntry->getIdentifier());
         $this->assertEquals(
-            ["info", "dashboard"],
+            ['info', 'dashboard'],
             $menuEntry->getPermissions()
         );
         $this->assertCount(0, $menuEntry->getChildren());
@@ -93,29 +93,29 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
     public function testSetTitle()
     {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
-        $menuEntry->setTitle("Foobar");
-        $this->assertEquals("Foobar", $menuEntry->getTitle());
+        $menuEntry->setTitle('Foobar');
+        $this->assertEquals('Foobar', $menuEntry->getTitle());
     }
 
     public function testSetPermissions()
     {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
-        $menuEntry->setPermissions(["foo", "bar"]);
-        $this->assertEquals(["foo", "bar"], $menuEntry->getPermissions());
+        $menuEntry->setPermissions(['foo', 'bar']);
+        $this->assertEquals(['foo', 'bar'], $menuEntry->getPermissions());
     }
 
     public function testSetLink()
     {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
-        $menuEntry->setLink("https://www.ulicms.de");
-        $this->assertEquals("https://www.ulicms.de", $menuEntry->getLink());
+        $menuEntry->setLink('https://www.ulicms.de');
+        $this->assertEquals('https://www.ulicms.de', $menuEntry->getLink());
     }
 
     public function testSetIdentifier()
     {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
-        $menuEntry->setIdentifier("foobar");
-        $this->assertEquals("foobar", $menuEntry->getIdentifier());
+        $menuEntry->setIdentifier('foobar');
+        $this->assertEquals('foobar', $menuEntry->getIdentifier());
     }
 
     public function testSetChildren()
@@ -174,7 +174,7 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
     {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
 
-        $menuEntry->setPermissions("foobar");
+        $menuEntry->setPermissions('foobar');
         $this->notPermittedUser->registerSession(false);
         $this->assertFalse($menuEntry->userHasPermission());
     }
@@ -186,7 +186,7 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
 
         $inputExpected = file_get_contents(
             Path::resolve(
-                "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render.html"
+                'ULICMS_ROOT/tests/fixtures/menu/menu_entry/render.html'
             )
         );
         $this->assertEquals($inputExpected, $menuEntry->render());
@@ -199,7 +199,7 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
 
         $inputExpected = file_get_contents(
             Path::resolve(
-                "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_with_new_window.html"
+                'ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_with_new_window.html'
             )
         );
         $this->assertEquals($inputExpected, $menuEntry->render());
@@ -210,11 +210,11 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $menuEntry->setNewWindow(false);
 
-        BackendHelper::setAction("say_hello");
+        BackendHelper::setAction('say_hello');
 
         $inputExpected = file_get_contents(
             Path::resolve(
-                "ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_current_page.html"
+                'ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_current_page.html'
             )
         );
         $this->assertEquals($inputExpected, $menuEntry->render());

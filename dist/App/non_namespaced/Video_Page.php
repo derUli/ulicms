@@ -10,9 +10,9 @@ use App\Models\Media\Video;
 // video files are played with html5
 class Video_Page extends Page
 {
-    public $type = "video";
+    public $type = 'video';
     public $video = null;
-    public $text_position = "after";
+    public $text_position = 'after';
 
     protected function fillVars($result = null)
     {
@@ -40,8 +40,8 @@ class Video_Page extends Page
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set video = ?, text_position = ? "
-                . "where id = ?";
+        $sql = 'update {prefix}content set video = ?, text_position = ? '
+                . 'where id = ?';
         $args = [
             $this->video,
             $this->text_position,
@@ -68,6 +68,6 @@ class Video_Page extends Page
      */
     public function getIcon(): string
     {
-        return "fas fa-film";
+        return 'fas fa-film';
     }
 }

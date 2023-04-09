@@ -8,7 +8,7 @@ class FooterTextController extends Controller
 {
     public function _savePost(): void
     {
-        Settings::set("footer_text", Request::getVar("footer_text"));
+        Settings::set('footer_text', Request::getVar('footer_text'));
         CacheUtil::clearPageCache();
     }
 
@@ -17,7 +17,7 @@ class FooterTextController extends Controller
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL("design")
+            ModuleHelper::buildActionURL('design')
         );
     }
 }

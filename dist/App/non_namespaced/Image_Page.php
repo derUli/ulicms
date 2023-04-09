@@ -8,9 +8,9 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 // select an image file
 class Image_Page extends Page
 {
-    public $type = "image";
+    public $type = 'image';
     public $image_url = null;
-    public $text_position = "after";
+    public $text_position = 'after';
 
     protected function fillVars($result = null)
     {
@@ -38,8 +38,8 @@ class Image_Page extends Page
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set image_url = ?, text_position = ? "
-                . "where id = ?";
+        $sql = 'update {prefix}content set image_url = ?, text_position = ? '
+                . 'where id = ?';
         $args = [
             $this->image_url,
             $this->text_position,
@@ -56,6 +56,6 @@ class Image_Page extends Page
      */
     public function getIcon(): string
     {
-        return "far fa-images";
+        return 'far fa-images';
     }
 }

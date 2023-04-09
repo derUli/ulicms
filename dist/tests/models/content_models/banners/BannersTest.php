@@ -6,12 +6,12 @@ use App\Models\Content\Category;
 
 class BannersTest extends \PHPUnit\Framework\TestCase
 {
-    public const HTML_TEXT1 = "My first Banner HTML";
-    public const HTML_TEXT2 = "My second Banner HTML";
+    public const HTML_TEXT1 = 'My first Banner HTML';
+    public const HTML_TEXT2 = 'My second Banner HTML';
 
     protected function tearDown(): void
     {
-        Database::pQuery("DELETE FROM `{prefix}banner` where html in (? , ?)", [
+        Database::pQuery('DELETE FROM `{prefix}banner` where html in (? , ?)', [
             self::HTML_TEXT1,
             self::HTML_TEXT2
                 ], true);
@@ -29,27 +29,27 @@ class BannersTest extends \PHPUnit\Framework\TestCase
     public function testGetByCategoryExpectArrayOfBanners()
     {
         $category1 = new Category();
-        $category1->setName("Testkategorie " . uniqid());
+        $category1->setName('Testkategorie ' . uniqid());
         $category1->save();
 
         $category2 = new Category();
-        $category2->setName("Testkategorie " . uniqid());
+        $category2->setName('Testkategorie ' . uniqid());
         $category2->save();
 
         $banner1 = new Banner();
-        $banner1->setType("html");
+        $banner1->setType('html');
         $banner1->setHtml(self::HTML_TEXT1);
         $banner1->setCategoryId($category1->getID());
         $banner1->save();
 
         $banner2 = new Banner();
-        $banner2->setType("html");
+        $banner2->setType('html');
         $banner2->setHtml(self::HTML_TEXT1);
         $banner2->setCategoryId($category1->getID());
         $banner2->save();
 
         $banner3 = new Banner();
-        $banner3->setType("gif");
+        $banner3->setType('gif');
         $banner3->setHtml(self::HTML_TEXT1);
         $banner3->setCategoryId($category2->getID());
         $banner3->save();
@@ -71,40 +71,40 @@ class BannersTest extends \PHPUnit\Framework\TestCase
 
     public function testGetByTypeExpectArrayOfBanners()
     {
-        $gifBanners = Banners::getByType("gif");
+        $gifBanners = Banners::getByType('gif');
 
         $this->assertGreaterThanOrEqual(1, $gifBanners);
         foreach ($gifBanners as $banner) {
-            $this->assertEquals("gif", $banner->getType());
+            $this->assertEquals('gif', $banner->getType());
         }
 
-        $htmlBanners = Banners::getByType("html");
+        $htmlBanners = Banners::getByType('html');
         $this->assertGreaterThanOrEqual(1, $htmlBanners);
 
         foreach ($htmlBanners as $banner) {
-            $this->assertEquals("html", $banner->getType());
+            $this->assertEquals('html', $banner->getType());
         }
     }
 
     public function testGetByLanguageExpectArrayOfBanners()
     {
         $category1 = new Category();
-        $category1->setName("Testkategorie " . uniqid());
+        $category1->setName('Testkategorie ' . uniqid());
         $category1->save();
 
         $category2 = new Category();
-        $category2->setName("Testkategorie " . uniqid());
+        $category2->setName('Testkategorie ' . uniqid());
         $category2->save();
 
         $banner1 = new Banner();
-        $banner1->setType("html");
+        $banner1->setType('html');
         $banner1->setHtml(self::HTML_TEXT1);
         $banner1->setCategoryId($category1->getID());
         $banner1->setLanguage('en');
         $banner1->save();
 
         $banner2 = new Banner();
-        $banner2->setType("html");
+        $banner2->setType('html');
         $banner2->setHtml(self::HTML_TEXT1);
         $banner2->setCategoryId($category1->getID());
         $banner2->setLanguage('de');
@@ -142,7 +142,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase
 
         for ($i = 1; $i < 5; $i++) {
             $banner = new Banner();
-            $banner->setType("html");
+            $banner->setType('html');
             $banner->setHtml(self::HTML_TEXT1);
             $banner->save();
         }

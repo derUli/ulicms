@@ -72,7 +72,7 @@ function is_mobile(): bool
     $mobileDetect = new MobileDetect();
     $result = $mobileDetect->isMobile();
 
-    if (Settings::get("no_mobile_design_on_tablet") &&
+    if (Settings::get('no_mobile_design_on_tablet') &&
             $result &&
             $mobileDetect->isTablet()) {
         $result = false;

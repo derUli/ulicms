@@ -10,9 +10,9 @@ class ArticleTest extends \PHPUnit\Framework\TestCase
     public function testSetArticle()
     {
         $article = new Article();
-        $article->title = "Unit Test Article";
-        $article->slug = "unit test";
-        $article->menu = "none";
+        $article->title = 'Unit Test Article';
+        $article->slug = 'unit test';
+        $article->menu = 'none';
         $article->language = 'de';
         $article->article_date = 1413821696;
         $article->author_id = 1;
@@ -25,16 +25,16 @@ class ArticleTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(Article::class, $article);
         $this->assertEquals(1413821696, $article->article_date);
 
-        $article->title = "Unit Test Article 2";
+        $article->title = 'Unit Test Article 2';
         $article->save();
     }
 
     public function testSetArticleWithStringDate()
     {
         $article = new Article();
-        $article->title = "Unit Test Article";
-        $article->slug = "unit test";
-        $article->menu = "none";
+        $article->title = 'Unit Test Article';
+        $article->slug = 'unit test';
+        $article->menu = 'none';
         $article->language = 'de';
         $article->article_date = '2019-04-07';
         $article->author_id = 1;

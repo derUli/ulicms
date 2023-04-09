@@ -24,9 +24,9 @@ class ImageScaleHelper extends Helper
     public static function getMaxImageDimensions(): ?array
     {
         $dimensions = null;
-        $scale = strtolower(Settings::get("max_image_dimensions") ?? '');
+        $scale = strtolower(Settings::get('max_image_dimensions') ?? '');
 
-        $explodedScale = explode("x", $scale);
+        $explodedScale = explode('x', $scale);
 
         if (count($explodedScale) === 2) {
             if (!empty($explodedScale[0])) {

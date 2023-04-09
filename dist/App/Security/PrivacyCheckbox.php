@@ -19,7 +19,7 @@ class PrivacyCheckbox
 {
     private $language;
 
-    public const CHECKBOX_NAME = "accept_privacy_policy";
+    public const CHECKBOX_NAME = 'accept_privacy_policy';
 
     /**
      * Constructor
@@ -61,8 +61,8 @@ class PrivacyCheckbox
     {
         $value = Request::getVar(
             $this->getCheckboxName(),
-            "",
-            "str"
+            '',
+            'str'
         );
         return !empty($value);
     }
@@ -85,8 +85,8 @@ class PrivacyCheckbox
             if ($failed != null) {
                 $failed();
             } else {
-                ViewBag::set("exception", get_translation("please_accept_privacy_conditions"));
-                echo Template::executeDefaultOrOwnTemplate("exception.php");
+                ViewBag::set('exception', get_translation('please_accept_privacy_conditions'));
+                echo Template::executeDefaultOrOwnTemplate('exception.php');
                 exit();
             }
         }
@@ -103,10 +103,10 @@ class PrivacyCheckbox
         $checkboxHtml = Input::checkBox(
             $this->getCheckboxName(),
             false,
-            "✔",
+            '✔',
             [
-                "required" => "required",
-                "id" => $this->getCheckboxName()
+                'required' => 'required',
+                'id' => $this->getCheckboxName()
             ]
         );
         $fullHtml = Settings::get(
@@ -115,10 +115,10 @@ class PrivacyCheckbox
         if (!$this->isEnabled() ||
                 empty($fullHtml)
         ) {
-            return "";
+            return '';
         }
         $fullHtml = str_ireplace(
-            "[checkbox]",
+            '[checkbox]',
             $checkboxHtml,
             $fullHtml
         );

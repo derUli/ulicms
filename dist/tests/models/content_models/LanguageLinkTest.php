@@ -6,7 +6,7 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
 {
     protected function tearDown(): void
     {
-        Database::deleteFrom("content", "slug like 'unit_test_%'");
+        Database::deleteFrom('content', "slug like 'unit_test_%'");
     }
 
     private function getGermanLanguage()
@@ -26,9 +26,9 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
     public function testCreateUpdateAndDeleteLink()
     {
         $link = new Language_Link();
-        $link->title = "Unit Test Link";
-        $link->slug = "unit_test_" . uniqid();
-        $link->menu = "none";
+        $link->title = 'Unit Test Link';
+        $link->slug = 'unit_test_' . uniqid();
+        $link->menu = 'none';
         $link->language = 'de';
         $link->author_id = 1;
         $link->group_id = 1;
@@ -40,33 +40,33 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase
         $loadedLink = new Language_Link($id);
 
         $this->assertIsNumeric($loadedLink->getID());
-        $this->assertEquals("Unit Test Link", $loadedLink->title);
-        $this->assertStringStartsWith("unit_test_", $loadedLink->slug);
-        $this->assertEquals("none", $loadedLink->menu);
+        $this->assertEquals('Unit Test Link', $loadedLink->title);
+        $this->assertStringStartsWith('unit_test_', $loadedLink->slug);
+        $this->assertEquals('none', $loadedLink->menu);
         $this->assertEquals($this->getGermanLanguage()->getID(), $loadedLink->link_to_language);
         $this->assertEquals(
             $this->getGermanLanguage()->getID(),
             $loadedLink->link_to_language
         );
 
-        $this->assertEquals("language_link", $loadedLink->type);
+        $this->assertEquals('language_link', $loadedLink->type);
 
-        $loadedLink->title = "Unit Test Updated Link";
+        $loadedLink->title = 'Unit Test Updated Link';
         $loadedLink->link_to_language = $this->getEnglishLanguage()->getId();
         $loadedLink->save();
 
         $loadedLink = new Language_Link($id);
 
-        $this->assertEquals("Unit Test Updated Link", $loadedLink->title);
+        $this->assertEquals('Unit Test Updated Link', $loadedLink->title);
         $this->assertEquals($this->getEnglishLanguage()->getID(), $loadedLink->link_to_language);
     }
 
     public function testUpdateCreatesDataset()
     {
         $link = new Language_Link();
-        $link->title = "Unit Test Link";
-        $link->slug = "unit_test_" . uniqid();
-        $link->menu = "none";
+        $link->title = 'Unit Test Link';
+        $link->slug = 'unit_test_' . uniqid();
+        $link->menu = 'none';
         $link->language = 'de';
         $link->author_id = 1;
         $link->group_id = 1;

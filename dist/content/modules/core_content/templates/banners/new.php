@@ -4,25 +4,25 @@ use App\Constants\RequestMethod;
 use App\Models\Content\Categories;
 
 $permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("banners")
-        && $permissionChecker->hasPermission("banners_create")) {
+if ($permissionChecker->hasPermission('banners')
+        && $permissionChecker->hasPermission('banners_create')) {
     ?>
 
     <?php
     echo ModuleHelper::buildMethodCallForm(
-        "BannerController",
-        "create",
+        'BannerController',
+        'create',
         [],
         RequestMethod::POST,
         [
-            "autocomplete" => "off"
+            'autocomplete' => 'off'
         ]
     );
     ?>
     <div class="field">
-        <a href="<?php echo ModuleHelper::buildActionURL("banner"); ?>"
+        <a href="<?php echo ModuleHelper::buildActionURL('banner'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
-            <?php translate("back") ?></a>
+            <?php translate('back') ?></a>
     </div>
 
     <div class="field">
@@ -31,25 +31,25 @@ if ($permissionChecker->hasPermission("banners")
                onclick="$('#type_gif').slideDown();$('#type_html').slideUp();">
         <label
             for="radio_gif">
-                <?php translate("gif_banner"); ?>
+                <?php translate('gif_banner'); ?>
         </label>
     </div>
     <fieldset id="type_gif">
         <input type="hidden" name="add_banner" value="add_banner">
         <div class="field">
             <strong class="field-label">
-                <?php translate("bannertext"); ?>
+                <?php translate('bannertext'); ?>
             </strong>
             <input type="text" name="banner_name" value="">
         </div>
         <div class="field">
             <strong class="field-label">
-                <?php translate("IMAGE_URL"); ?></strong>
+                <?php translate('IMAGE_URL'); ?></strong>
             <input type="text" name="image_url" value="">
         </div>
         <div class="field">
             <strong class="field-label">
-                <?php translate("link_url"); ?>
+                <?php translate('link_url'); ?>
             </strong>
             <input type="text" name="link_url" value="">
         </div>
@@ -59,7 +59,7 @@ if ($permissionChecker->hasPermission("banners")
         <input type="radio" id="radio_html" name="type" value="html"
                onclick="$('#type_html').slideDown();$('#type_gif').slideUp();">
         <label
-            for="radio_html"><?php translate("html"); ?>
+            for="radio_html"><?php translate('html'); ?>
         </label>
     </div>
 
@@ -70,48 +70,48 @@ if ($permissionChecker->hasPermission("banners")
     </fieldset>
     <div class="field">
         <strong class="field-label">
-            <?php translate("enabled"); ?>
+            <?php translate('enabled'); ?>
         </strong>
         <select
             name="enabled">
-            <option value="1" selected><?php translate("yes"); ?></option>
-            <option value="0"><?php translate("no"); ?></option>
+            <option value="1" selected><?php translate('yes'); ?></option>
+            <option value="0"><?php translate('no'); ?></option>
         </select>
     </div>
     <div class="field">
         <strong class="field-label">
-            <?php translate("date_from"); ?>
+            <?php translate('date_from'); ?>
         </strong>
         <input
             type="text" class="datepicker" name="date_from" value="">
     </div>
     <div class="field">
         <strong class="field-label">
-            <?php translate("date_to"); ?>
+            <?php translate('date_to'); ?>
         </strong>
         <input type="text"
                class="datepicker" name="date_to" value="">
     </div>
     <div class="field">
         <strong class="field-label">
-            <?php translate("language"); ?>
+            <?php translate('language'); ?>
         </strong>
         <select name="language">
             <?php
             $languages = getAllLanguages();
 
     $languagesCount = count($languages);
-    echo "<option value='all'>" . get_translation("every") . "</option>";
+    echo "<option value='all'>" . get_translation('every') . '</option>';
     for ($j = 0; $j < $languagesCount; $j++) {
         echo "<option value='" . $languages[$j] . "'>" .
-        getLanguageNameByCode($languages[$j]) . "</option>";
+        getLanguageNameByCode($languages[$j]) . '</option>';
     }
     ?>
         </select>
     </div>
     <div class="field">
         <strong class="field-label">
-            <?php translate("category"); ?>
+            <?php translate('category'); ?>
         </strong>
         <?php echo Categories::getHTMLSelect() ?></div>
     </div>
@@ -119,7 +119,7 @@ if ($permissionChecker->hasPermission("banners")
     <div class="voffset2">
         <button type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i>
-            <?php translate("save"); ?></button>
+            <?php translate('save'); ?></button>
     </div>
     <?php
     echo ModuleHelper::endForm();

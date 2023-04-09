@@ -16,8 +16,8 @@ class List_Data extends Model
     public $category_id = null;
     public $menu = null;
     public $parent_id = null;
-    public $order_by = "title";
-    public $order_direction = "asc";
+    public $order_by = 'title';
+    public $order_direction = 'asc';
     public $limit = null;
     public $use_pagination = false;
     public $type = null;
@@ -73,7 +73,7 @@ class List_Data extends Model
     public function loadByID($id)
     {
         $id = (int)$id;
-        $result = Database::query("select * from " . tbname("lists")
+        $result = Database::query('select * from ' . tbname('lists')
                         . " WHERE content_id = $id");
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
@@ -100,10 +100,10 @@ class List_Data extends Model
     public function save()
     {
         if ($this->content_id === null) {
-            throw new DatabaseException("no content_id for list set");
+            throw new DatabaseException('no content_id for list set');
         }
         $id = (int) ($this->content_id);
-        $result = Database::query("select * from " . tbname("lists")
+        $result = Database::query('select * from ' . tbname('lists')
                         . " WHERE content_id = $id");
         if (Database::getNumRows($result) > 0) {
             $this->update();
@@ -117,54 +117,54 @@ class List_Data extends Model
         $content_id = (int) ($this->content_id);
 
         if ($this->language === null) {
-            $language = "null";
+            $language = 'null';
         } else {
             $language = "'" . Database::escapeValue($this->language) . "'";
         }
 
         if ($this->category_id === null || $this->category_id === 0) {
-            $category_id = "null";
+            $category_id = 'null';
         } else {
             $category_id = (int)$this->category_id;
         }
 
         if ($this->menu === null) {
-            $menu = "null";
+            $menu = 'null';
         } else {
             $menu = "'" . Database::escapeValue($this->menu) . "'";
         }
 
         if ($this->parent_id === null || $this->parent_id === 0) {
-            $parent_id = "null";
+            $parent_id = 'null';
         } else {
             $parent_id = (int) ($this->parent_id);
         }
         if ($this->order_by === null) {
-            $order_by = "null";
+            $order_by = 'null';
         } else {
             $order_by = "'" . Database::escapeValue($this->order_by) . "'";
         }
-        if ($this->order_direction === "desc") {
-            $order_direction = "desc";
+        if ($this->order_direction === 'desc') {
+            $order_direction = 'desc';
         } else {
-            $order_direction = "asc";
+            $order_direction = 'asc';
         }
 
         $use_pagination = (int) ($this->use_pagination);
 
-        if ($this->type === null || $this->type == "null") {
-            $type = "null";
+        if ($this->type === null || $this->type == 'null') {
+            $type = 'null';
         } else {
             $type = "'" . Database::escapeValue($this->type) . "'";
         }
 
-        $limit = "null";
+        $limit = 'null';
         if ((int) ($this->limit) > 0) {
             $limit = (int) ($this->limit);
         }
-        $sql = "INSERT INTO " . tbname("lists") .
-                " (content_id, language, category_id, menu, parent_id, "
-                . "`order_by`, `order_direction`, `limit`, `use_pagination`, "
+        $sql = 'INSERT INTO ' . tbname('lists') .
+                ' (content_id, language, category_id, menu, parent_id, '
+                . '`order_by`, `order_direction`, `limit`, `use_pagination`, '
                 . "`type`) values ($content_id, $language,
 		$category_id, $menu, $parent_id, $order_by, "
                 . "'$order_direction', $limit, $use_pagination, $type)";
@@ -176,55 +176,55 @@ class List_Data extends Model
         $content_id = (int)$this->content_id;
 
         if ($this->language === null) {
-            $language = "null";
+            $language = 'null';
         } else {
             $language = "'" . Database::escapeValue($this->language) . "'";
         }
 
         if ($this->category_id === null || $this->category_id === 0) {
-            $category_id = "null";
+            $category_id = 'null';
         } else {
             $category_id = (int)$this->category_id;
         }
 
         if ($this->menu === null) {
-            $menu = "null";
+            $menu = 'null';
         } else {
             $menu = "'" . Database::escapeValue($this->menu) . "'";
         }
 
         if ($this->parent_id === null || $this->parent_id === 0) {
-            $parent_id = "null";
+            $parent_id = 'null';
         } else {
             $parent_id = (int) ($this->parent_id);
         }
 
         if ($this->order_by === null) {
-            $order_by = "null";
+            $order_by = 'null';
         } else {
             $order_by = "'" . Database::escapeValue($this->order_by) . "'";
         }
 
-        if ($this->order_direction === "desc") {
-            $order_direction = "desc";
+        if ($this->order_direction === 'desc') {
+            $order_direction = 'desc';
         } else {
-            $order_direction = "asc";
+            $order_direction = 'asc';
         }
 
-        $limit = "null";
+        $limit = 'null';
         if ((int)$this->limit > 0) {
             $limit = (int)$this->limit;
         }
 
-        if ($this->type === null || $this->type == "null") {
-            $type = "null";
+        if ($this->type === null || $this->type == 'null') {
+            $type = 'null';
         } else {
             $type = "'" . Database::escapeValue($this->type) . "'";
         }
 
         $use_pagination = (int) ($this->use_pagination);
 
-        $sql = "UPDATE " . tbname("lists") . " set language = $language,
+        $sql = 'UPDATE ' . tbname('lists') . " set language = $language,
 		category_id = $category_id, menu = $menu,"
                 . "parent_id = $parent_id, `order_by` = $order_by,"
                 . "`order_direction` = '$order_direction', `limit` = $limit,"

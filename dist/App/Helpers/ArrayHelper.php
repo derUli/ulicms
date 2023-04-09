@@ -28,7 +28,7 @@ class ArrayHelper extends Helper
         $element
     ): array {
         if (!array_key_exists($index, $input)) {
-            throw new Exception("Index not found");
+            throw new Exception('Index not found');
         }
         $tmpArray = [];
         $originalIndex = 0;
@@ -58,7 +58,7 @@ class ArrayHelper extends Helper
         $element
     ): array {
         if (!array_key_exists($index, $input)) {
-            throw new Exception("Index not found");
+            throw new Exception('Index not found');
         }
         $tmpArray = [];
         $originalIndex = 0;

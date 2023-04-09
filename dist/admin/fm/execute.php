@@ -4,7 +4,7 @@ $config = include 'config/config.php';
 
 include 'include/utils.php';
 
-if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager") {
+if ($_SESSION['RF']['verify'] != 'RESPONSIVEfilemanager') {
     response(trans('forbidden') . AddErrorLocation())->send();
     exit;
 }
@@ -128,7 +128,7 @@ if (isset($_GET['action'])) {
                         deleteDir($path, null, $config);
                         if ($config['fixed_image_creation']) {
                             foreach ($config['fixed_path_from_filemanager'] as $k=>$paths) {
-                                if ($paths!="" && $paths[strlen($paths)-1] != '/') {
+                                if ($paths!='' && $paths[strlen($paths)-1] != '/') {
                                     $paths.='/';
                                 }
 
@@ -269,8 +269,8 @@ if (isset($_GET['action'])) {
                             }
 
                             $base_dir = $paths . substr_replace($info['dirname'] . '/', '', 0, strlen($config['current_path']));
-                            if (file_exists($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . "." . $info['extension'])) {
-                                rename_file($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . "." . $info['extension'], $config['fixed_image_creation_name_to_prepend'][$k] . $name . $config['fixed_image_creation_to_append'][$k], $ftp, $config);
+                            if (file_exists($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . '.' . $info['extension'])) {
+                                rename_file($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . '.' . $info['extension'], $config['fixed_image_creation_name_to_prepend'][$k] . $name . $config['fixed_image_creation_to_append'][$k], $ftp, $config);
                             }
                         }
                     }
@@ -305,8 +305,8 @@ if (isset($_GET['action'])) {
 
                             $base_dir = $paths . substr_replace($info['dirname'] . '/', '', 0, strlen($config['current_path']));
 
-                            if (file_exists($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . "." . $info['extension'])) {
-                                duplicate_file($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . "." . $info['extension'], $config['fixed_image_creation_name_to_prepend'][$k] . $name . $config['fixed_image_creation_to_append'][$k]);
+                            if (file_exists($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . '.' . $info['extension'])) {
+                                duplicate_file($base_dir . $config['fixed_image_creation_name_to_prepend'][$k] . $info['filename'] . $config['fixed_image_creation_to_append'][$k] . '.' . $info['extension'], $config['fixed_image_creation_name_to_prepend'][$k] . $name . $config['fixed_image_creation_to_append'][$k]);
                             }
                         }
                     }
@@ -431,13 +431,13 @@ if (isset($_GET['action'])) {
                 exit;
             }
             // check mode
-            if (!preg_match("/^[0-7]{3}$/", $mode)) {
+            if (!preg_match('/^[0-7]{3}$/', $mode)) {
                 response(trans('File_Permission_Wrong_Mode') . AddErrorLocation())->send();
                 exit;
             }
             // check recursive option
             if (!in_array($rec_option, $valid_options)) {
-                response(trans("wrong option") . AddErrorLocation())->send();
+                response(trans('wrong option') . AddErrorLocation())->send();
                 exit;
             }
             // check if server disabled chmod
@@ -446,7 +446,7 @@ if (isset($_GET['action'])) {
                 exit;
             }
 
-            $mode = "0" . $mode;
+            $mode = '0' . $mode;
             $mode = octdec($mode);
             if ($ftp) {
                 $ftp->chmod($mode, '/' . $path);

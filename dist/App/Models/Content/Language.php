@@ -43,7 +43,7 @@ class Language extends Model
         $args = [
             $id
         ];
-        $sql = "SELECT * FROM `{prefix}languages` where id = ?";
+        $sql = 'SELECT * FROM `{prefix}languages` where id = ?';
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
     }
@@ -53,7 +53,7 @@ class Language extends Model
         $args = [
             (string)$language_code
         ];
-        $sql = "SELECT * FROM `{prefix}languages` where language_code = ?";
+        $sql = 'SELECT * FROM `{prefix}languages` where language_code = ?';
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
     }
@@ -89,8 +89,8 @@ class Language extends Model
 
     protected function insert()
     {
-        $sql = "INSERT INTO `{prefix}languages` (name, language_code) "
-                . "values (?,?)";
+        $sql = 'INSERT INTO `{prefix}languages` (name, language_code) '
+                . 'values (?,?)';
         $args = [
             $this->name,
             $this->language_code
@@ -101,8 +101,8 @@ class Language extends Model
 
     protected function update()
     {
-        $sql = "UPDATE `{prefix}languages` set name = ?, language_code = ? "
-                . "where id = ?";
+        $sql = 'UPDATE `{prefix}languages` set name = ?, language_code = ? '
+                . 'where id = ?';
         $args = [
             $this->name,
             $this->language_code,
@@ -114,7 +114,7 @@ class Language extends Model
     public function delete()
     {
         if ($this->id !== null) {
-            $sql = "DELETE FROM `{prefix}languages` where id = ?";
+            $sql = 'DELETE FROM `{prefix}languages` where id = ?';
             $args = [
                 $this->id
             ];
@@ -128,14 +128,14 @@ class Language extends Model
     public function makeDefaultLanguage(): void
     {
         if ($this->language_code !== null) {
-            Settings::set("default_language", $this->language_code);
+            Settings::set('default_language', $this->language_code);
         }
     }
 
     // returns true if this language is the default language
     public function isDefaultLanguage(): bool
     {
-        return $this->language_code == Settings::get("default_language");
+        return $this->language_code == Settings::get('default_language');
     }
 
     // returns true if this is the user's current language
@@ -170,7 +170,7 @@ class Language extends Model
         if ($domain) {
             $url = Request::getProtocol($domain);
         } else {
-            $url = "./?language=" . $this->language_code;
+            $url = './?language=' . $this->language_code;
         }
         return $url;
     }

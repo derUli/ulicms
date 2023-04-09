@@ -2,18 +2,18 @@
 
 class ModuleManagerTest extends \PHPUnit\Framework\TestCase
 {
-    public const sampleName1 = "mymodule1";
-    public const sampleName2 = "mymodule2";
-    public const sampleVersion1 = "1.0";
-    public const sampleVersion2 = "2.0";
+    public const sampleName1 = 'mymodule1';
+    public const sampleName2 = 'mymodule2';
+    public const sampleVersion1 = '1.0';
+    public const sampleVersion2 = '2.0';
 
     private $oneclick_upgrade_channel;
 
     protected function setUp(): void
     {
-        $this->oneclick_upgrade_channel = Settings::get("oneclick_upgrade_channel");
+        $this->oneclick_upgrade_channel = Settings::get('oneclick_upgrade_channel');
 
-        Database::truncateTable("modules");
+        Database::truncateTable('modules');
     }
 
     protected function tearDown(): void
@@ -21,10 +21,10 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
-        $module = new Module("fortune2");
+        $module = new Module('fortune2');
         $module->enable();
 
-        Settings::set("oneclick_upgrade_channel", $this->oneclick_upgrade_channel);
+        Settings::set('oneclick_upgrade_channel', $this->oneclick_upgrade_channel);
     }
 
     public function testCreateAndEditModule1()
@@ -88,7 +88,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
     {
         $manager = new ModuleManager();
 
-        Database::query("truncate table {prefix}modules", true);
+        Database::query('truncate table {prefix}modules', true);
         $this->assertEquals(0, count($manager->getAllModules()));
         $manager->sync();
         $this->assertGreaterThanOrEqual(19, count($manager->getAllModules()));
@@ -100,16 +100,16 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
-        $module = new Module("fortune2");
+        $module = new Module('fortune2');
         $module->disable();
 
         $manager = new ModuleManager();
-        $this->assertContains("fortune2", $manager->getDisabledModuleNames());
+        $this->assertContains('fortune2', $manager->getDisabledModuleNames());
 
         $module->enable();
 
         $this->assertNotContains(
-            "fortune2",
+            'fortune2',
             $manager->getDisabledModuleNames()
         );
     }
@@ -120,14 +120,14 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
         $moduleManager->sync();
 
         $module = new Module();
-        $module->setName("wurde_geloescht");
-        $module->setVersion("1.0");
+        $module->setName('wurde_geloescht');
+        $module->setVersion('1.0');
         $module->save();
 
-        $this->assertContains("wurde_geloescht", $moduleManager->getAllModuleNames());
+        $this->assertContains('wurde_geloescht', $moduleManager->getAllModuleNames());
         $moduleManager->sync();
 
-        $this->assertNotContains("wurde_geloescht", $moduleManager->getAllModuleNames());
+        $this->assertNotContains('wurde_geloescht', $moduleManager->getAllModuleNames());
     }
 
     public function testUpdateModuleVersion()
@@ -135,28 +135,28 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
-        $module = new Module("bootstrap");
-        $module->setVersion("1.0");
+        $module = new Module('bootstrap');
+        $module->setVersion('1.0');
         $module->save();
 
-        $this->assertEquals("1.0", $module->getVersion());
+        $this->assertEquals('1.0', $module->getVersion());
 
         $moduleManager->sync();
 
-        $module = new Module("bootstrap");
-        $this->assertEquals("3.3.7", $module->getVersion());
+        $module = new Module('bootstrap');
+        $this->assertEquals('3.3.7', $module->getVersion());
     }
 
     public function testInitModulesDefaultSettings()
     {
-        Settings::delete("oneclick_upgrade_channel");
+        Settings::delete('oneclick_upgrade_channel');
 
-        $this->assertNull(Settings::get("oneclick_upgrade_channel"));
+        $this->assertNull(Settings::get('oneclick_upgrade_channel'));
 
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
-        $this->assertEquals("slow", Settings::get("oneclick_upgrade_channel"));
+        $this->assertEquals('slow', Settings::get('oneclick_upgrade_channel'));
     }
 
     public function testGetDependencies()
@@ -165,7 +165,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
         $moduleManager->sync();
 
         $this->assertContains(
-            "core_content",
+            'core_content',
             $moduleManager->getDependencies('core_comments')
         );
     }
@@ -177,7 +177,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertContains(
             'core_comments',
-            $moduleManager->getDependentModules("core_content")
+            $moduleManager->getDependentModules('core_content')
         );
     }
 }

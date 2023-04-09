@@ -54,20 +54,20 @@ class DBMigrator
      */
     public function executeSqlScript(string $file): void
     {
-        if (str_ends_with($file, ".sql")) {
-            $sql = "SELECT id from {prefix}dbtrack where component = ? "
-                    . "and name = ?";
+        if (str_ends_with($file, '.sql')) {
+            $sql = 'SELECT id from {prefix}dbtrack where component = ? '
+                    . 'and name = ?';
             $args = [
                 $this->component,
                 $file
             ];
-            $result = Database::tableExists("dbtrack") ?
+            $result = Database::tableExists('dbtrack') ?
                     Database::pQuery($sql, $args, true) : false;
             if (!$result || Database::getNumRows($result) == 0) {
                 $path = $this->folder . '/' . $file;
                 $sql = file_get_contents($path);
                 $cfg = new CMSConfig();
-                $sql = str_ireplace("{prefix}", $cfg->db_prefix, $sql);
+                $sql = str_ireplace('{prefix}', $cfg->db_prefix, $sql);
 
                 $success = Database::multiQuery($sql, true);
 
@@ -78,8 +78,8 @@ class DBMigrator
 
 
                 if ($success) {
-                    $sql = "INSERT INTO {prefix}dbtrack (component, name) "
-                            . "values (?,?)";
+                    $sql = 'INSERT INTO {prefix}dbtrack (component, name) '
+                            . 'values (?,?)';
                     Database::pQuery($sql, $args, true);
                 } else {
                     throw new SqlException("{$this->component} - {$file}: " .
@@ -102,9 +102,9 @@ class DBMigrator
         natcasesort($files);
         $files = array_reverse($files);
         foreach ($files as $file) {
-            if (str_ends_with($file, ".sql")) {
-                $sql = "SELECT id from {prefix}dbtrack where component = ? "
-                        . "and name = ?";
+            if (str_ends_with($file, '.sql')) {
+                $sql = 'SELECT id from {prefix}dbtrack where component = ? '
+                        . 'and name = ?';
                 $args = [
                     $this->component,
                     $file
@@ -114,14 +114,14 @@ class DBMigrator
                     $path = $this->folder . '/' . $file;
                     $sql = file_get_contents($path);
                     $cfg = new CMSConfig();
-                    $sql = str_ireplace("{prefix}", $cfg->db_prefix, $sql);
+                    $sql = str_ireplace('{prefix}', $cfg->db_prefix, $sql);
                     $success = Database::multiQuery($sql, true);
                     while (mysqli_more_results(Database::getConnection())) {
                         mysqli_next_result(Database::getConnection());
                     }
                     if ($success) {
-                        $sql = "DELETE FROM {prefix}dbtrack "
-                                . "where component = ? and name = ?";
+                        $sql = 'DELETE FROM {prefix}dbtrack '
+                                . 'where component = ? and name = ?';
                         Database::pQuery($sql, $args, true);
                     } else {
                         throw new SqlException(
@@ -143,8 +143,8 @@ class DBMigrator
      */
     public function resetDBTrack(): bool
     {
-        return Database::pQuery("DELETE FROM {prefix}dbtrack "
-                        . "where component = ?", [
+        return Database::pQuery('DELETE FROM {prefix}dbtrack '
+                        . 'where component = ?', [
                     $this->component
                         ], true);
     }
@@ -155,21 +155,21 @@ class DBMigrator
      */
     public function resetDBTrackAll(): void
     {
-        Database::truncateTable("dbtrack");
+        Database::truncateTable('dbtrack');
     }
 
     public function checkVars(): bool
     {
         if (empty($this->component)) {
-            throw new Exception("component is null or empty");
+            throw new Exception('component is null or empty');
         }
 
         if (empty($this->folder)) {
-            throw new Exception("folder is null or empty");
+            throw new Exception('folder is null or empty');
         }
 
         if (!is_dir($this->folder)) {
-            throw new Exception("folder not found " . $this->folder);
+            throw new Exception('folder not found ' . $this->folder);
         }
 
         return true;

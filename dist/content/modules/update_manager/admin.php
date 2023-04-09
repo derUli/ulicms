@@ -1,6 +1,6 @@
 <?php
-define("MODULE_ADMIN_HEADLINE", get_translation("update_manager"));
-define("MODULE_ADMIN_REQUIRED_PERMISSION", "install_packages");
+define('MODULE_ADMIN_HEADLINE', get_translation('update_manager'));
+define('MODULE_ADMIN_REQUIRED_PERMISSION', 'install_packages');
 
 function update_manager_admin()
 {
@@ -14,16 +14,16 @@ function update_manager_admin()
             ?>
             <p><?php
                 if (count($updates) == 1) {
-                    translate("UPDATES_AVAILABLE_SINGULAR");
+                    translate('UPDATES_AVAILABLE_SINGULAR');
                 } else {
-                    translate("UPDATES_AVAILABLE_MULTIPLE", [
-                        "%count%" => count($updates)
+                    translate('UPDATES_AVAILABLE_MULTIPLE', [
+                        '%count%' => count($updates)
                     ]);
                 }
             ?></p>
             <p>
                 <input id="checkall" type="checkbox" class="checkall" checked> <label
-                    for="checkall"><?php translate("select_all"); ?> </label>
+                    for="checkall"><?php translate('select_all'); ?> </label>
             </p>
             <?php
             foreach ($updates as $update) {
@@ -36,22 +36,22 @@ function update_manager_admin()
             <?php }
             ?>
             <p>
-                <button type="submit" class="btn btn-warning"><i class="fas fa-sync"></i> <?php translate("install_updates"); ?></button>
+                <button type="submit" class="btn btn-warning"><i class="fas fa-sync"></i> <?php translate('install_updates'); ?></button>
             </p>
             <?php
         } else {
             ?>
-            <p><?php translate("NO_UPDATES_AVAILABLE"); ?></p>
+            <p><?php translate('NO_UPDATES_AVAILABLE'); ?></p>
         <?php }
         ?>
         <span id="translation_please_select_packages"
-              data-translation="<?php translate("please_select_packages"); ?>"></span>
+              data-translation="<?php translate('please_select_packages'); ?>"></span>
     </form>
     <?php
     enqueueScriptFile(
         ModuleHelper::buildRessourcePath(
-            "update_manager",
-            "scripts/update_manager.js"
+            'update_manager',
+            'scripts/update_manager.js'
         )
     );
     combinedScriptHtml();

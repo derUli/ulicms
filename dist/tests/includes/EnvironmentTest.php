@@ -7,13 +7,13 @@ class EnvironmentTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertTrue(\App\Utils\VersionComparison::compare(
             cms_version(),
-            "2019.4",
-            ">"
+            '2019.4',
+            '>'
         ));
     }
 
     public function testGetEnvironment()
     {
-        $this->assertEquals("test", get_environment());
+        $this->assertEquals('test', get_environment());
     }
 }

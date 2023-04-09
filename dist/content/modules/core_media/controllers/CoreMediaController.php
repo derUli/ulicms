@@ -11,8 +11,8 @@ class CoreMediaController extends MainClass
         $data = CustomData::get();
 
         $mediaEmbedEnabled = !(
-            $data && isset($data["disable_media_embed"]) &&
-            $data["disable_media_embed"]
+            $data && isset($data['disable_media_embed']) &&
+            $data['disable_media_embed']
         );
 
         $input = $mediaEmbedEnabled && !empty($input) ?
@@ -28,7 +28,7 @@ class CoreMediaController extends MainClass
             return $input;
         }
 
-        $input = mb_convert_encoding($input, 'HTML-ENTITIES', "UTF-8");
+        $input = mb_convert_encoding($input, 'HTML-ENTITIES', 'UTF-8');
         $dom = new DOMDocument();
         @$dom->loadHTML($input);
 
@@ -70,7 +70,7 @@ class CoreMediaController extends MainClass
             return $input;
         }
 
-        $content = mb_convert_encoding($input, 'HTML-ENTITIES', "UTF-8");
+        $content = mb_convert_encoding($input, 'HTML-ENTITIES', 'UTF-8');
 
         $dom = new DOMDocument();
         @$dom->loadHTML($content);
@@ -86,7 +86,7 @@ class CoreMediaController extends MainClass
     // a replacement node containg the embed element
     protected function collectLinks(DOMDocument $dom): array
     {
-        $elements = $dom->getElementsByTagName("a");
+        $elements = $dom->getElementsByTagName('a');
         $linksToReplace = [];
 
         foreach ($elements as $oldNode) {
@@ -143,7 +143,7 @@ class CoreMediaController extends MainClass
         string $str,
         DOMDocument $dom
     ): DOMElement {
-        $element = $dom->createElement("span");
+        $element = $dom->createElement('span');
         $this->appendHTML($element, $str);
         return $element;
     }

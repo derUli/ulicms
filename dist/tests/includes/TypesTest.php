@@ -5,7 +5,7 @@ class TypesTest extends \PHPUnit\Framework\TestCase
     public function testGetUsedPostTypes()
     {
         $postTypes = get_used_post_types();
-        $this->assertContains("page", $postTypes);
+        $this->assertContains('page', $postTypes);
     }
 
     public function testGetAvailablePostTypes()
@@ -21,17 +21,17 @@ class TypesTest extends \PHPUnit\Framework\TestCase
     private function getBaseTypes()
     {
         $baseTypes = [
-            "page",
-            "article",
-            "snippet",
-            "list",
-            "link",
-            "language_link",
-            "node",
-            "image",
-            "module",
-            "video",
-            "audio"
+            'page',
+            'article',
+            'snippet',
+            'list',
+            'link',
+            'language_link',
+            'node',
+            'image',
+            'module',
+            'video',
+            'audio'
         ];
         return $baseTypes;
     }

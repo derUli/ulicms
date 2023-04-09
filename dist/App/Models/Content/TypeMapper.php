@@ -19,17 +19,17 @@ use function getModuleMeta;
 class TypeMapper
 {
     private static $mapping = [
-        "page" => "Page",
-        "snippet" => "Snippet",
-        "list" => "Content_List",
-        "node" => "Node",
-        "link" => "Link",
-        "module" => "Module_Page",
-        "video" => "Video_Page",
-        "audio" => "Audio_Page",
-        "image" => "Image_Page",
-        "article" => "Article",
-        "language_link" => "Language_Link"
+        'page' => 'Page',
+        'snippet' => 'Snippet',
+        'list' => 'Content_List',
+        'node' => 'Node',
+        'link' => 'Link',
+        'module' => 'Module_Page',
+        'video' => 'Video_Page',
+        'audio' => 'Audio_Page',
+        'image' => 'Image_Page',
+        'article' => 'Article',
+        'language_link' => 'Language_Link'
     ];
 
     public static function getMappings(): array
@@ -51,7 +51,7 @@ class TypeMapper
         $manager = new ModuleManager();
         $modules = $manager->getEnabledModuleNames();
         foreach ($modules as $module) {
-            $mappings = getModuleMeta($module, "type_classes");
+            $mappings = getModuleMeta($module, 'type_classes');
 
             if (!$mappings) {
                 continue;

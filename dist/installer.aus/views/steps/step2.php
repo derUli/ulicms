@@ -1,4 +1,4 @@
-<?php $license = htmlspecialchars(file_get_contents("license.txt")); ?>
+<?php $license = htmlspecialchars(file_get_contents('license.txt')); ?>
 <p>You have to read and accept the license conditions to use this
     software:</p>
 <p>

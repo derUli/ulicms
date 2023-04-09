@@ -7,21 +7,21 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase
         $this->tearDown();
         for ($i = 1; $i < 5; $i++) {
             $user = new User();
-            $user->setUsername("locked_user_" . $i);
-            $user->setFirstname("Max");
-            $user->setLastname("Muster");
+            $user->setUsername('locked_user_' . $i);
+            $user->setFirstname('Max');
+            $user->setLastname('Muster');
             $user->setPrimaryGroupId(1);
-            $user->setPassword("password123");
+            $user->setPassword('password123');
             $user->setLocked(1);
             $user->save();
         }
         for ($i = 1; $i <= 3; $i++) {
             $user = new User();
-            $user->setUsername("unlocked_user_" . $i);
-            $user->setFirstname("Max");
-            $user->setLastname("Muster");
+            $user->setUsername('unlocked_user_' . $i);
+            $user->setFirstname('Max');
+            $user->setLastname('Muster');
             $user->setPrimaryGroupId(1);
-            $user->setPassword("password123");
+            $user->setPassword('password123');
             $user->setLocked(0);
             $user->save();
         }
@@ -31,12 +31,12 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase
     {
         for ($i = 1; $i < 5; $i++) {
             $user = new User();
-            $user->loadByUsername("locked_user_" . $i);
+            $user->loadByUsername('locked_user_' . $i);
             $user->delete();
         }
         for ($i = 1; $i <= 3; $i++) {
             $user = new User();
-            $user->loadByUsername("unlocked_user_" . $i);
+            $user->loadByUsername('unlocked_user_' . $i);
             $user->delete();
         }
     }

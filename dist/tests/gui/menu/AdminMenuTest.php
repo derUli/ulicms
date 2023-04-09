@@ -12,23 +12,23 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $adminUser = new User();
-        $adminUser->setUsername("testuser-admin");
-        $adminUser->setLastname("Admin");
-        $adminUser->setFirstname("Der");
+        $adminUser->setUsername('testuser-admin');
+        $adminUser->setLastname('Admin');
+        $adminUser->setFirstname('Der');
         $adminUser->setPassword(uniqid());
         $adminUser->setAdmin(true);
         $adminUser->save();
         $this->adminUser = $adminUser;
 
         $group = new Group();
-        $group->addPermission("info", true);
+        $group->addPermission('info', true);
         $group->save();
         $this->testGroup = $group;
 
         $limitedUser = new User();
-        $limitedUser->setUsername("testuser-nichtadmin");
-        $limitedUser->setLastname("Admin");
-        $limitedUser->setFirstname("Nicht");
+        $limitedUser->setUsername('testuser-nichtadmin');
+        $limitedUser->setLastname('Admin');
+        $limitedUser->setFirstname('Nicht');
         $limitedUser->setPassword(uniqid());
         $limitedUser->setAdmin(false);
         $limitedUser->addSecondaryGroup($group);
@@ -47,25 +47,25 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase
     {
         return [
             new MenuEntry(
-                "Say Hello",
-                "https://www.hello-world.com/",
-                "say_hello",
-                ["info", "dashboard"],
+                'Say Hello',
+                'https://www.hello-world.com/',
+                'say_hello',
+                ['info', 'dashboard'],
                 [],
                 true
             ),
             new MenuEntry(
-                "Google",
-                "https://google.de",
-                "google",
-                ["google"],
+                'Google',
+                'https://google.de',
+                'google',
+                ['google'],
                 [],
                 false
             ),
             new MenuEntry(
-                "UliCMS",
-                "https://ulicms.de",
-                "ulicms",
+                'UliCMS',
+                'https://ulicms.de',
+                'ulicms',
                 [],
                 [],
                 false
@@ -86,9 +86,9 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase
         $menu->setChildren(
             [
                 new MenuEntry(
-                    "Foobar",
-                    "https://foobar.com",
-                    "foobar",
+                    'Foobar',
+                    'https://foobar.com',
+                    'foobar',
                     [],
                     [],
                     false
@@ -96,7 +96,7 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase
             ]
         );
         $this->assertCount(1, $menu->getChildren());
-        $this->assertEquals("foobar", $menu->getChildren()[0]->getIdentifier());
+        $this->assertEquals('foobar', $menu->getChildren()[0]->getIdentifier());
     }
 
     public function testHasChildrenReturnsTrue()
@@ -116,7 +116,7 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase
     {
         $inputExpected = file_get_contents(
             Path::resolve(
-                "ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_admin.html"
+                'ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_admin.html'
             )
         );
         $menu = new AdminMenu($this->getMenuEntries());
@@ -129,7 +129,7 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase
     {
         $inputExpected = file_get_contents(
             Path::resolve(
-                "ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_user.html"
+                'ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_user.html'
             )
         );
         $menu = new AdminMenu($this->getMenuEntries());

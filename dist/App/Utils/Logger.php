@@ -28,8 +28,8 @@ class Logger
                 $this->path,
                 \Psr\Log\LogLevel::DEBUG,
                 [
-                "extension" => "log",
-                "prefix" => "{$environment}_"
+                'extension' => 'log',
+                'prefix' => "{$environment}_"
                 ]
             );
             $this->fixLogPermissions($cfg);
@@ -45,7 +45,7 @@ class Logger
     {
         // Option fix_log_permissions
         if (isset($cfg->fix_log_permissions) && $cfg->fix_log_permissions) {
-            $files = glob($this->path . "/*.log");
+            $files = glob($this->path . '/*.log');
             foreach ($files as $file) {
                 chmod($file, 0777);
             }

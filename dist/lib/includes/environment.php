@@ -20,6 +20,6 @@ function cms_version(): string
  */
 function get_environment(): string
 {
-    return getenv("ULICMS_ENVIRONMENT") ?
-            getenv("ULICMS_ENVIRONMENT") : "default";
+    return getenv('ULICMS_ENVIRONMENT') ?
+            getenv('ULICMS_ENVIRONMENT') : 'default';
 }

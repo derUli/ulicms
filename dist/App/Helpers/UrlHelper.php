@@ -21,13 +21,13 @@ class UrlHelper extends Helper
     public static function getUrlWithoutGetParameters(string $url): string
     {
         $parsedUri = parse_url($url);
-        $hostWithPort = $parsedUri["host"];
-        if (!empty($parsedUri["port"])) {
-            $hostWithPort .= ":" . $parsedUri["port"];
+        $hostWithPort = $parsedUri['host'];
+        if (!empty($parsedUri['port'])) {
+            $hostWithPort .= ':' . $parsedUri['port'];
         }
 
-        $path = isset($parsedUri["path"]) ? $parsedUri["path"] : "";
-        return $parsedUri["scheme"] . "://" . $hostWithPort
+        $path = isset($parsedUri['path']) ? $parsedUri['path'] : '';
+        return $parsedUri['scheme'] . '://' . $hostWithPort
                 . $path;
     }
 }

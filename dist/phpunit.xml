@@ -6,7 +6,7 @@
     backupGlobals="true" 
     cacheResult="true" 
     colors="true" 
-    stopOnError="true"
+    stopOnError="false"
     stopOnFailure="true"
     stopOnIncomplete="true"
     stopOnSkipped="true"

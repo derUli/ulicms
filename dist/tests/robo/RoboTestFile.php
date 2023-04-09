@@ -1,6 +1,6 @@
 <?php
 
-require_once "RoboFile.php";
+require_once 'RoboFile.php';
 
 class RoboTestFile extends RoboFile
 {

@@ -23,15 +23,15 @@ class Style
         array $htmlAttributes = []
     ): string {
         $attributes = [
-            "rel" => "stylesheet",
+            'rel' => 'stylesheet',
             'href' => $href,
-            "type" => "text/css",
+            'type' => 'text/css',
         ];
         if ($media) {
-            $attributes["media"] = $media;
+            $attributes['media'] = $media;
         }
         if (!parse_url($href, PHP_URL_SCHEME) && is_file($href)) {
-            $attributes['href'] .= "?time=" . File::getLastChanged($href);
+            $attributes['href'] .= '?time=' . File::getLastChanged($href);
         }
         foreach ($htmlAttributes as $key => $value) {
             $attributes[$key] = $value;
@@ -39,7 +39,7 @@ class Style
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         if (!empty($attribHTML)) {
-            $attribHTML = " " . $attribHTML;
+            $attribHTML = ' ' . $attribHTML;
         }
 
         return "<link{$attribHTML}/>";
@@ -59,7 +59,7 @@ class Style
     ): string {
         $attributes = [];
         if ($media) {
-            $attributes["media"] = $media;
+            $attributes['media'] = $media;
         }
         foreach ($htmlAttributes as $key => $value) {
             $attributes[$key] = $value;
@@ -67,9 +67,9 @@ class Style
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         if (!empty($attribHTML)) {
-            $attribHTML = " " . $attribHTML;
+            $attribHTML = ' ' . $attribHTML;
         }
 
-        return "<style$attribHTML>" . $code . "</style>";
+        return "<style$attribHTML>" . $code . '</style>';
     }
 }

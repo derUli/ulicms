@@ -29,7 +29,7 @@ class Audio extends Model
     private $created;
     private $updated;
 
-    public const AUDIO_DIR = "content/audio/";
+    public const AUDIO_DIR = 'content/audio/';
 
     public function __construct($id = null)
     {
@@ -54,8 +54,8 @@ class Audio extends Model
 
     public function loadById($id)
     {
-        $result = Database::pQuery("select * from `{prefix}audio` "
-                        . "where id = ?", [
+        $result = Database::pQuery('select * from `{prefix}audio` '
+                        . 'where id = ?', [
                     (int)$id
                         ], true);
         if (!Database::any($result)) {
@@ -101,10 +101,10 @@ class Audio extends Model
             $this->created,
             $this->updated
         ];
-        $sql = "insert into `{prefix}audio`
+        $sql = 'insert into `{prefix}audio`
 				(name, mp3_file, ogg_file, category_id,
                                 created, updated)
-				values (?, ?, ?, ?, ?, ?)";
+				values (?, ?, ?, ?, ?, ?)';
         Database::pQuery($sql, $args, true);
         $this->setID(Database::getLastInsertID());
     }
@@ -120,10 +120,10 @@ class Audio extends Model
             $this->updated,
             $this->getID()
         ];
-        $sql = "update `{prefix}audio` set
+        $sql = 'update `{prefix}audio` set
 				name = ?, mp3_file = ?, ogg_file = ?,
                                 category_id = ?, updated = ?
-				where id = ?";
+				where id = ?';
         Database::pQuery($sql, $args, true);
     }
 
@@ -198,20 +198,20 @@ class Audio extends Model
             if ($deletePhysical) {
                 if ($this->getMP3File()) {
                     $file = Path::resolve(
-                        "ULICMS_ROOT/content/audio/" .
+                        'ULICMS_ROOT/content/audio/' .
                                     basename($this->getMP3File())
                     );
                     File::deleteIfExists($file);
                 }
                 if ($this->getOggFile()) {
                     $file = Path::resolve(
-                        "ULICMS_ROOT/content/audio/" .
+                        'ULICMS_ROOT/content/audio/' .
                                     basename($this->getOggFile())
                     );
                     File::deleteIfExists($file);
                 }
             }
-            Database::pQuery("delete from `{prefix}audio` where id = ?", [
+            Database::pQuery('delete from `{prefix}audio` where id = ?', [
                 $this->getID()
                     ], true);
             $this->fillVars(null);
@@ -240,12 +240,12 @@ class Audio extends Model
                     '" type="audio/ogg">';
         }
 
-        $html .= get_translation("no_html5");
+        $html .= get_translation('no_html5');
         if (!empty($this->mp3_file) || !empty($this->ogg_file)) {
             $preferred = !empty($this->mp3_file) ?
                     $this->mp3_file : $this->ogg_file;
             $html .= '<br/><a href="' . self::AUDIO_DIR . $preferred . '">' .
-                    get_translation("DOWNLOAD_AUDIO_INSTEAD") . '</a>';
+                    get_translation('DOWNLOAD_AUDIO_INSTEAD') . '</a>';
         }
 
         $html .= '</audio>';

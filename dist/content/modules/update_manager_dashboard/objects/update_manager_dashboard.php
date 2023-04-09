@@ -10,7 +10,7 @@ class UpdateManagerDashboard
         $modules = getAllModules();
         if (count($modules) > 0) {
             foreach ($modules as $module) {
-                $version = getModuleMeta($module, "version");
+                $version = getModuleMeta($module, 'version');
                 if ($version != null) {
                     $status = $pkg->checkForNewerVersionOfPackage($module);
                     if (\App\Utils\VersionComparison::compare($status, $version, '>')) {
@@ -23,9 +23,9 @@ class UpdateManagerDashboard
         $themes = getAllThemes();
         if (count($themes) > 0) {
             foreach ($themes as $theme) {
-                $version = getThemeMeta($theme, "version");
+                $version = getThemeMeta($theme, 'version');
                 if ($version != null) {
-                    $theme = "theme-" . $theme;
+                    $theme = 'theme-' . $theme;
                     $status = $pkg->checkForNewerVersionOfPackage($theme);
                     if (\App\Utils\VersionComparison::compare($status, $version, '>')) {
                         return true;

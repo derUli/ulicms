@@ -7,7 +7,7 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 // Page that has assigned a module
 class Module_Page extends Page
 {
-    public $type = "module";
+    public $type = 'module';
     public $module = null;
     public $text_position = 'after';
 
@@ -37,8 +37,8 @@ class Module_Page extends Page
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set module = ?, text_position = ? "
-                . "where id = ?";
+        $sql = 'update {prefix}content set module = ?, text_position = ? '
+                . 'where id = ?';
         $args = [
             $this->module,
             $this->text_position,
@@ -79,6 +79,6 @@ class Module_Page extends Page
      */
     public function getIcon(): string
     {
-        return "fas fa-puzzle-piece";
+        return 'fas fa-puzzle-piece';
     }
 }

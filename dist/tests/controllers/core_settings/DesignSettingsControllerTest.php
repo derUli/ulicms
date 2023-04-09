@@ -14,8 +14,8 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
         $this->cleanUpFiles();
 
         $settings = [
-            "mobile_theme",
-            "theme"
+            'mobile_theme',
+            'theme'
         ];
         foreach ($settings as $setting) {
             $this->initialSettings[$setting] = Settings::get($setting);
@@ -38,7 +38,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
     private function cleanUpFiles()
     {
         $filesToDelete = [
-            "ULICMS_GENERATED/design_variables.scss"
+            'ULICMS_GENERATED/design_variables.scss'
         ];
         foreach ($filesToDelete as $file) {
             $file = Path::resolve($file);
@@ -62,7 +62,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
         $controller = ControllerRegistry::get(DesignSettingsController::class);
         $file = $controller->_generateSCSSToFile();
         $this->assertStringEndsWith(
-            "/content/generated/design_variables.scss",
+            '/content/generated/design_variables.scss',
             $file
         );
         $this->assertFileExists($file);
@@ -79,7 +79,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
     {
         $this->cleanUpFiles();
 
-        $file = Path::resolve("ULICMS_GENERATED/design_variables.scss");
+        $file = Path::resolve('ULICMS_GENERATED/design_variables.scss');
         $this->assertFileDoesNotExist($file);
 
         $controller = new DesignSettingsController();
@@ -101,40 +101,40 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new DesignSettingsController();
         $this->assertEquals(
             'content/templates/impro17/screenshot.jpg',
-            $controller->_themePreview("impro17")
+            $controller->_themePreview('impro17')
         );
     }
 
     public function testThemePreviewReturnsNull()
     {
         $controller = new DesignSettingsController();
-        $this->assertNull($controller->_themePreview("nothing"));
+        $this->assertNull($controller->_themePreview('nothing'));
     }
 
     public function testSetDefaultTheme()
     {
         $controller = new DesignSettingsController();
-        $this->assertNotEquals("foobar", Settings::get('theme'));
+        $this->assertNotEquals('foobar', Settings::get('theme'));
 
-        $controller->_setDefaultTheme("foobar");
-        $this->assertEquals("foobar", Settings::get('theme'));
+        $controller->_setDefaultTheme('foobar');
+        $this->assertEquals('foobar', Settings::get('theme'));
     }
 
     public function testSetDefaultMobileThemeWithTheme()
     {
         $controller = new DesignSettingsController();
-        $this->assertNotEquals("foobar", Settings::get('theme'));
+        $this->assertNotEquals('foobar', Settings::get('theme'));
 
-        $controller->_setDefaultMobileTheme("foobar");
-        $this->assertEquals("foobar", Settings::get("mobile_theme"));
+        $controller->_setDefaultMobileTheme('foobar');
+        $this->assertEquals('foobar', Settings::get('mobile_theme'));
     }
 
     public function testSetDefaultMobileThemeWithNull()
     {
         $controller = new DesignSettingsController();
-        $controller->_setDefaultMobileTheme("foobar");
-        $controller->_setDefaultMobileTheme("foobar");
-        $this->assertNull(Settings::get("mobile_theme"));
+        $controller->_setDefaultMobileTheme('foobar');
+        $controller->_setDefaultMobileTheme('foobar');
+        $this->assertNull(Settings::get('mobile_theme'));
     }
 
     public function testGetFontSizes()
@@ -142,6 +142,6 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new DesignSettingsController();
         $sizes = $controller->getFontSizes();
         $this->assertCount(75, $sizes);
-        $this->assertContains("14px", $sizes);
+        $this->assertContains('14px', $sizes);
     }
 }

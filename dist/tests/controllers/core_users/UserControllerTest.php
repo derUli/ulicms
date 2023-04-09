@@ -5,20 +5,20 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $manager = new UserManager();
-        $user = $manager->getAllUsers("admin desc")[0];
+        $user = $manager->getAllUsers('admin desc')[0];
 
         $_SESSION = [
-            "login_id" => $user->getId()
+            'login_id' => $user->getId()
         ];
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
-        $_SERVER['SERVER_PORT'] = "80";
-        $_SERVER['HTTP_HOST'] = "example.org";
-        $_SERVER['REQUEST_URI'] = "/foobar/foo.html";
+        $_SERVER['SERVER_PORT'] = '80';
+        $_SERVER['HTTP_HOST'] = 'example.org';
+        $_SERVER['REQUEST_URI'] = '/foobar/foo.html';
     }
 
     protected function tearDown(): void
     {
-        Database::deleteFrom("users", "username like 'testuser-%'");
+        Database::deleteFrom('users', "username like 'testuser-%'");
 
         $_SESSION = [];
         $_POST = [];
@@ -32,16 +32,16 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
             return $value->getId();
         }, $groups);
         return [
-            "username" => "testuser-john",
-            "firstname" => "John",
-            "lastname" => "Doe",
-            "password" => "topsecret",
-            "email" => "johndoe@example.org",
-            "default_language" => 'en',
-            "locked" => "1",
-            "group_id" => $groups[0]->getId(),
-            "require_password_change" => "1",
-            "secondary_groups" => $groupIds
+            'username' => 'testuser-john',
+            'firstname' => 'John',
+            'lastname' => 'Doe',
+            'password' => 'topsecret',
+            'email' => 'johndoe@example.org',
+            'default_language' => 'en',
+            'locked' => '1',
+            'group_id' => $groups[0]->getId(),
+            'require_password_change' => '1',
+            'secondary_groups' => $groupIds
         ];
     }
 
@@ -60,11 +60,11 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(1, $user->getId());
 
         $user->reload();
-        $this->assertEquals("testuser-john", $user->getUsername());
-        $this->assertEquals("John", $user->getFirstname());
-        $this->assertEquals("Doe", $user->getLastname());
+        $this->assertEquals('testuser-john', $user->getUsername());
+        $this->assertEquals('John', $user->getFirstname());
+        $this->assertEquals('Doe', $user->getLastname());
         $this->assertGreaterThanOrEqual(128, strlen($user->getPassword()));
-        $this->assertEquals("johndoe@example.org", $user->getEmail());
+        $this->assertEquals('johndoe@example.org', $user->getEmail());
         $this->assertEquals('en', $user->getDefaultLanguage());
         $this->assertTrue($user->isLocked());
         $this->assertGreaterThanOrEqual(1, $user->getPrimaryGroupId());
@@ -80,7 +80,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
         }, $groups);
 
         $_POST = $this->getPostVars();
-        $_POST["send_mail"] = "1";
+        $_POST['send_mail'] = '1';
 
         $controller = new UserController();
         $user = $controller->_createPost();
@@ -88,11 +88,11 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(1, $user->getId());
 
         $user->reload();
-        $this->assertEquals("testuser-john", $user->getUsername());
-        $this->assertEquals("John", $user->getFirstname());
-        $this->assertEquals("Doe", $user->getLastname());
+        $this->assertEquals('testuser-john', $user->getUsername());
+        $this->assertEquals('John', $user->getFirstname());
+        $this->assertEquals('Doe', $user->getLastname());
         $this->assertGreaterThanOrEqual(128, strlen($user->getPassword()));
-        $this->assertEquals("johndoe@example.org", $user->getEmail());
+        $this->assertEquals('johndoe@example.org', $user->getEmail());
         $this->assertEquals('en', $user->getDefaultLanguage());
         $this->assertTrue($user->isLocked());
         $this->assertGreaterThanOrEqual(1, $user->getPrimaryGroupId());
@@ -108,7 +108,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($success);
 
         $testUser = new User();
-        $testUser->loadByUsername("testuser-ist-admin");
+        $testUser->loadByUsername('testuser-ist-admin');
         $this->assertFalse($testUser->isPersistent());
     }
 
@@ -122,9 +122,9 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase
     protected function getTestUser(): User
     {
         $user = new User();
-        $user->setUsername("testuser-ist-admin");
-        $user->setLastname("Admin");
-        $user->setFirstname("Ist");
+        $user->setUsername('testuser-ist-admin');
+        $user->setLastname('Admin');
+        $user->setFirstname('Ist');
         $user->setPassword(uniqid());
         $user->setAdmin(true);
         $user->save();

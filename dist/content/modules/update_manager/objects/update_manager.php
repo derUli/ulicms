@@ -12,26 +12,26 @@ class UpdateManager
         $retval = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
-            $version = getModuleMeta($module, "version");
+            $version = getModuleMeta($module, 'version');
             if ($version == null) {
                 continue;
             }
             $status = $pkg->checkForNewerVersionOfPackage($module);
             if ($status && \App\Utils\VersionComparison::compare($status, $version, '>')) {
-                $retval[] = $module . "-" . $status;
+                $retval[] = $module . '-' . $status;
             }
         }
 
         $themes = getAllThemes();
         foreach ($themes as $theme) {
-            $version = getThemeMeta($theme, "version");
+            $version = getThemeMeta($theme, 'version');
             if ($version == null) {
                 continue;
             }
-            $theme = "theme-" . $theme;
+            $theme = 'theme-' . $theme;
             $status = $pkg->checkForNewerVersionOfPackage($theme);
             if ($status && \App\Utils\VersionComparison::compare($status, $version, '>')) {
-                $retval[] = $theme . "-" . $status;
+                $retval[] = $theme . '-' . $status;
             }
         }
 

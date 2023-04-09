@@ -24,21 +24,21 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testImageTagWithoutAnything()
     {
-        $this->assertEquals('<img src="/foo/bar.png">', imageTag("/foo/bar.png"));
+        $this->assertEquals('<img src="/foo/bar.png">', imageTag('/foo/bar.png'));
     }
 
     public function testImageTagWithHtmlAttributes()
     {
         $this->assertEquals('<img class="my-awesome-image" title="Very awesome image" src="/foo/bar.png">', imageTag(
-            "/foo/bar.png",
-            ["class" => "my-awesome-image",
-                "title" => "Very awesome image"]
+            '/foo/bar.png',
+            ['class' => 'my-awesome-image',
+                'title' => 'Very awesome image']
         ));
     }
 
     public function testImageTagInlineWithoutAnything()
     {
-        $imagePath = Path::resolve("ULICMS_ROOT/admin/gfx/logo.png");
+        $imagePath = Path::resolve('ULICMS_ROOT/admin/gfx/logo.png');
 
         $this->assertMatchesHtmlSnapshot(imageTagInline($imagePath));
     }
@@ -46,19 +46,19 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
     public function testImageTagInlineThrowsFileNotFoundException()
     {
         $this->expectException(FileNotFoundException::class);
-        imageTagInline("gibts_echt_nicht.jpg");
+        imageTagInline('gibts_echt_nicht.jpg');
     }
 
     public function testImageTagInlineWithHtmlAttributes()
     {
-        $imagePath = Path::resolve("ULICMS_ROOT/admin/gfx/logo.png");
+        $imagePath = Path::resolve('ULICMS_ROOT/admin/gfx/logo.png');
 
         $this->assertMatchesHtmlSnapshot(
             imageTagInline(
                 $imagePath,
                 [
-                    "class" => "my-awesome-image",
-                    "title" => "Very awesome image"
+                    'class' => 'my-awesome-image',
+                    'title' => 'Very awesome image'
                 ]
             )
         );
@@ -66,14 +66,14 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testWithoutAdditionalAttributes()
     {
-        $this->assertEquals('<i class="fas fa-hamburger"></i>', icon("fas fa-hamburger"));
+        $this->assertEquals('<i class="fas fa-hamburger"></i>', icon('fas fa-hamburger'));
     }
 
     public function testWithAdditionalAttributes()
     {
-        $this->assertEquals('<i title="Hallo Welt" data-something="hello" class="fas fa-hamburger"></i>', icon("fas fa-hamburger", [
-            "title" => "Hallo Welt",
-            "data-something" => "hello"
+        $this->assertEquals('<i title="Hallo Welt" data-something="hello" class="fas fa-hamburger"></i>', icon('fas fa-hamburger', [
+            'title' => 'Hallo Welt',
+            'data-something' => 'hello'
         ]));
     }
 
@@ -81,7 +81,7 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<a href="https://www.google.de">&lt;strong&gt;Google&lt;/strong&gt;</a>',
-            link("https://www.google.de", "<strong>Google</strong>", false)
+            link('https://www.google.de', '<strong>Google</strong>', false)
         );
     }
 
@@ -89,7 +89,7 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<a href="https://www.google.de"><strong>Google</strong></a>',
-            link("https://www.google.de", "<strong>Google</strong>", true)
+            link('https://www.google.de', '<strong>Google</strong>', true)
         );
     }
 
@@ -97,7 +97,7 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<a href="https://www.google.de" target="_blank"><strong>Google</strong></a>',
-            link("https://www.google.de", "<strong>Google</strong>", true, LinkTarget::TARGET_BLANK)
+            link('https://www.google.de', '<strong>Google</strong>', true, LinkTarget::TARGET_BLANK)
         );
     }
 
@@ -105,9 +105,9 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<a id="mylink" class="btn btn-primary" href="https://www.google.de" target="_self"><strong>Google</strong></a>',
-            link("https://www.google.de", "<strong>Google</strong>", true, LinkTarget::TARGET_SELF, [
-            "id" => "mylink",
-            "class" => "btn btn-primary"
+            link('https://www.google.de', '<strong>Google</strong>', true, LinkTarget::TARGET_SELF, [
+            'id' => 'mylink',
+            'class' => 'btn btn-primary'
             ])
         );
     }
@@ -116,7 +116,7 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<a class="btn btn-info" href="https://www.google.de"><i class="fa fa fa-google"></i></a>',
-            buttonLink("https://www.google.de", icon("fa fa fa-google"), ButtonType::TYPE_INFO, true)
+            buttonLink('https://www.google.de', icon('fa fa fa-google'), ButtonType::TYPE_INFO, true)
         );
     }
 
@@ -125,13 +125,13 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             '<a data-hello="world" class="btn btn-info awesome-button" href="https://www.google.de"><i class="fa fa fa-google"></i></a>',
             buttonLink(
-                "https://www.google.de",
-                icon("fa fa fa-google"),
+                'https://www.google.de',
+                icon('fa fa fa-google'),
                 ButtonType::TYPE_INFO,
                 true,
                 null,
-                ["data-hello" => "world",
-                    "class" => "awesome-button"]
+                ['data-hello' => 'world',
+                    'class' => 'awesome-button']
             )
         );
     }
@@ -143,6 +143,6 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testStringContainsHtmlReturnsFalse()
     {
-        $this->assertFalse(stringContainsHtml("Hallo Welt"));
+        $this->assertFalse(stringContainsHtml('Hallo Welt'));
     }
 }

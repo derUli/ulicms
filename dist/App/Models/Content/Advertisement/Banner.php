@@ -20,7 +20,7 @@ class Banner extends Model
     private $link_url = null;
     private $image_url = null;
     private $category_id = 1;
-    private $type = "gif";
+    private $type = 'gif';
     private $html = null;
     private $language = null;
     private $enabled = true;
@@ -37,7 +37,7 @@ class Banner extends Model
     public function loadByID($id)
     {
         $id = (int)$id;
-        $result = Database::query("SELECT * FROM `" . tbname("banner") .
+        $result = Database::query('SELECT * FROM `' . tbname('banner') .
                         "` where id = $id");
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
@@ -83,26 +83,26 @@ class Banner extends Model
 
     public function insert()
     {
-        $sql = "INSERT INTO " . tbname("banner") . "(name, link_url, image_url, "
-                . "category_id, type, html, language, date_from, date_to, "
-                . "enabled) values (";
+        $sql = 'INSERT INTO ' . tbname('banner') . '(name, link_url, image_url, '
+                . 'category_id, type, html, language, date_from, date_to, '
+                . 'enabled) values (';
         if ($this->name === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->name) . "',";
         }
         if ($this->link_url === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->link_url) . "',";
         }
         if ($this->image_url === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->image_url) . "',";
         }
         if ($this->category_id === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . (int)$this->category_id . "',";
         }
@@ -110,31 +110,31 @@ class Banner extends Model
         $sql .= "'" . Database::escapeValue($this->type) . "',";
 
         if ($this->html === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->html) . "',";
         }
         if ($this->language === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->language) . "',";
         }
 
         if ($this->date_from === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->date_from) . "',";
         }
 
         if ($this->date_to === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->date_to) . "',";
         }
 
         $sql .= (int)$this->enabled;
 
-        $sql .= ")";
+        $sql .= ')';
 
         $result = Database::query($sql);
         $this->id = Database::getLastInsertID();
@@ -147,27 +147,27 @@ class Banner extends Model
         if ($this->id === null) {
             return $this->create();
         }
-        $sql = "UPDATE " . tbname("banner") . " set ";
+        $sql = 'UPDATE ' . tbname('banner') . ' set ';
 
         if ($this->name === null) {
-            $sql .= "name=NULL, ";
+            $sql .= 'name=NULL, ';
         } else {
             $sql .= "name='" . Database::escapeValue($this->name) . "',";
         }
         if ($this->link_url === null) {
-            $sql .= "link_url = NULL, ";
+            $sql .= 'link_url = NULL, ';
         } else {
             $sql .= "link_url='" . Database::escapeValue($this->link_url) .
                     "',";
         }
         if ($this->image_url === null) {
-            $sql .= "image_url=NULL, ";
+            $sql .= 'image_url=NULL, ';
         } else {
             $sql .= "image_url='" . Database::escapeValue($this->image_url) .
                     "',";
         }
         if ($this->category_id === null) {
-            $sql .= "category_id=NULL, ";
+            $sql .= 'category_id=NULL, ';
         } else {
             $sql .= "category_id='" . (int)$this->category_id . "',";
         }
@@ -175,33 +175,33 @@ class Banner extends Model
         $sql .= "`type`='" . Database::escapeValue($this->type) . "',";
 
         if ($this->html === null) {
-            $sql .= "html=NULL, ";
+            $sql .= 'html=NULL, ';
         } else {
             $sql .= "html='" . Database::escapeValue($this->html) . "',";
         }
         if ($this->language === null) {
-            $sql .= "language=NULL, ";
+            $sql .= 'language=NULL, ';
         } else {
             $sql .= "language='" . Database::escapeValue($this->language) .
                     "', ";
         }
 
         if ($this->date_from === null) {
-            $sql .= "date_from=NULL, ";
+            $sql .= 'date_from=NULL, ';
         } else {
             $sql .= "date_from='" . Database::escapeValue($this->date_from) .
                     "', ";
         }
         if ($this->date_to === null) {
-            $sql .= "date_to=NULL, ";
+            $sql .= 'date_to=NULL, ';
         } else {
             $sql .= "date_to='" . Database::escapeValue($this->date_to) .
                     "', ";
         }
 
-        $sql .= "enabled = " . (int)$this->enabled;
+        $sql .= 'enabled = ' . (int)$this->enabled;
 
-        $sql .= " where id = " . (int)$this->id;
+        $sql .= ' where id = ' . (int)$this->id;
         return Database::query($sql);
     }
 
@@ -215,10 +215,10 @@ class Banner extends Model
         if ($val === null || is_string($val)) {
             $this->date_from = $val;
         } elseif (is_numeric($val)) {
-            $this->date_from = date("Y-m-d", $val);
+            $this->date_from = date('Y-m-d', $val);
         } else {
             throw new InvalidArgumentException(
-                "not a date and not a timestamp"
+                'not a date and not a timestamp'
             );
         }
     }
@@ -228,10 +228,10 @@ class Banner extends Model
         if ($val === null || is_string($val)) {
             $this->date_to = $val;
         } elseif (is_numeric($val)) {
-            $this->date_to = date("Y-m-d", $val);
+            $this->date_to = date('Y-m-d', $val);
         } else {
             throw new InvalidArgumentException(
-                "not a date and not a timestamp"
+                'not a date and not a timestamp'
             );
         }
     }
@@ -239,8 +239,8 @@ class Banner extends Model
     public function setType(string $type): void
     {
         $allowedTypes = [
-            "gif",
-            "html"
+            'gif',
+            'html'
         ];
         if (in_array($type, $allowedTypes)) {
             $this->type = $type;
@@ -336,7 +336,7 @@ class Banner extends Model
     {
         $retval = false;
         if ($this->id !== null) {
-            $sql = "DELETE from " . tbname("banner") . " where id = " .
+            $sql = 'DELETE from ' . tbname('banner') . ' where id = ' .
                     $this->id;
             $retval = Database::Query($sql);
             $this->id = null;
@@ -349,7 +349,7 @@ class Banner extends Model
         $html = '';
 
         switch ($this->getType()) {
-            case "gif":
+            case 'gif':
                 $title = Template::getEscape($this->getName());
                 $link_url = Template::getEscape($this->getLinkUrl());
                 $image_url = Template::getEscape($this->getImageUrl());
@@ -357,7 +357,7 @@ class Banner extends Model
                         . "<img src=\"$image_url\" title=\"$title\" "
                         . "alt=\"$title\" border=\"0\"></a>";
                 break;
-            case "html":
+            case 'html':
                 $html = $this->getHtml();
 
                 break;

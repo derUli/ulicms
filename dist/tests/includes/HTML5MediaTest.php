@@ -8,9 +8,9 @@ class HTML5MediaTest extends \PHPUnit\Framework\TestCase
     public function testReplaceAudioTagsWithShortCode()
     {
         $audio = new Audio();
-        $audio->setName("New Name");
-        $audio->setMP3File("not-music.mp3");
-        $audio->setOGGFile("not-music.ogg");
+        $audio->setName('New Name');
+        $audio->setMP3File('not-music.mp3');
+        $audio->setOGGFile('not-music.ogg');
         $audio->setCategoryId(null);
         $audio->save();
 
@@ -65,9 +65,9 @@ class HTML5MediaTest extends \PHPUnit\Framework\TestCase
     public function testReplaceAudioTagsWithoutShortCode()
     {
         $this->assertEquals(
-            "Foo Hello World Bar",
+            'Foo Hello World Bar',
             replaceAudioTags(
-                "Foo Hello World Bar"
+                'Foo Hello World Bar'
             )
         );
     }
@@ -75,10 +75,10 @@ class HTML5MediaTest extends \PHPUnit\Framework\TestCase
     public function testReplaceVideoTagsWithShortCode()
     {
         $video = new Video();
-        $video->setName("My Name");
-        $video->setMP4File("video.mp4");
-        $video->setOGGFile("video.ogv");
-        $video->setWebmFile("video.webm");
+        $video->setName('My Name');
+        $video->setMP4File('video.mp4');
+        $video->setOGGFile('video.ogv');
+        $video->setWebmFile('video.webm');
         $video->setWidth(640);
         $video->setHeight(480);
         $video->setCategoryId(1);
@@ -135,9 +135,9 @@ class HTML5MediaTest extends \PHPUnit\Framework\TestCase
     public function testReplaceVideoTagsWithoutShortCode()
     {
         $this->assertEquals(
-            "Foo Hello World Bar",
+            'Foo Hello World Bar',
             replaceVideoTags(
-                "Foo Hello World Bar"
+                'Foo Hello World Bar'
             )
         );
     }

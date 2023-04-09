@@ -52,7 +52,7 @@ class Settings
 
         $value = null;
         $key = db_escape($key);
-        $result = db_query("SELECT name, value FROM " . tbname("settings") .
+        $result = db_query('SELECT name, value FROM ' . tbname('settings') .
                 " WHERE name='$key'");
         if (db_num_rows($result) > 0) {
             while ($row = db_fetch_object($result)) {
@@ -116,13 +116,13 @@ class Settings
         $key = db_escape($key);
         $originalValue = self::convertVar($value, $type);
         $value = db_escape($originalValue);
-        $result = db_query("SELECT id FROM " . tbname("settings") .
+        $result = db_query('SELECT id FROM ' . tbname('settings') .
                 " WHERE name='$key'");
         if (db_num_rows($result) > 0) {
-            db_query("UPDATE " . tbname("settings") . " SET value='$value' "
+            db_query('UPDATE ' . tbname('settings') . " SET value='$value' "
                     . "WHERE name='$key'");
         } else {
-            db_query("INSERT INTO " . tbname("settings") . " (name, value) "
+            db_query('INSERT INTO ' . tbname('settings') . ' (name, value) '
                     . "VALUES('$key', '$value')");
         }
     }
@@ -132,7 +132,7 @@ class Settings
     {
         self::deleteInCache($key);
         $key = db_escape($key);
-        db_query("DELETE FROM " . tbname("settings") . " WHERE name='$key'");
+        db_query('DELETE FROM ' . tbname('settings') . " WHERE name='$key'");
         return Database::getAffectedRows() > 0;
     }
 
@@ -162,10 +162,10 @@ class Settings
         return $value;
     }
 
-    public static function getAll(string $order = "name"): array
+    public static function getAll(string $order = 'name'): array
     {
         $datasets = [];
-        $result = Database::query("SELECT * FROM `{prefix}settings` "
+        $result = Database::query('SELECT * FROM `{prefix}settings` '
                         . "order by $order", true);
         while ($dataset = Database::fetchObject($result)) {
             $datasets[] = $dataset;
@@ -192,10 +192,10 @@ class Settings
         $result = [];
         foreach ($lines as $line) {
             // if a line starts with a hash skip it (comment)
-            if (str_starts_with($line, "#")) {
+            if (str_starts_with($line, '#')) {
                 continue;
             }
-            $splitted = explode("=>", $line);
+            $splitted = explode('=>', $line);
 
             if (count($splitted) < 2) {
                 continue;
@@ -267,7 +267,7 @@ class Settings
         }
 
         $cacheConfig = [
-            "defaultTtl" => ONE_DAY_IN_SECONDS
+            'defaultTtl' => ONE_DAY_IN_SECONDS
         ];
 
         // Use a Memstatic adapter, because persistent caching would worse

@@ -16,8 +16,8 @@ if ($id !== null) {
             $start = 0;
 
             if ($limit > 0 && $use_pagination) {
-                if (isset($_GET["start"])) {
-                    $start = (int) ($_GET["start"]);
+                if (isset($_GET['start'])) {
+                    $start = (int) ($_GET['start']);
                 }
                 $entries = array_slice($entries, $start, $limit);
                 $entries_count = count($entries);
@@ -36,7 +36,7 @@ if ($id !== null) {
             <div class="fluid-container">
                 <?php
                 foreach ($entries as $entry) {
-                    $article_image = getTemplateDirPath('impro17') . "images/nopic.jpg";
+                    $article_image = getTemplateDirPath('impro17') . 'images/nopic.jpg';
                     $meta = get_article_meta($entry->slug);
 
                     $article_date = $entry->article_date ?? $entry->created;

@@ -43,29 +43,29 @@ class Categories
         bool $allowNull = false,
         string $name = 'category_id'
     ): string {
-        $lst = self::getAllCategories("name");
+        $lst = self::getAllCategories('name');
         $html = "<select name='" . $name . "' id='$name' size='1' class='form-control'>";
         if ($allowNull) {
             if (!$default) {
                 $html .= "<option value='0' selected='selected'>[" .
-                        get_translation("every") . "]</option>";
+                        get_translation('every') . ']</option>';
             } else {
                 $html .= "<option value='0'>[" .
-                        get_translation("every") . "]</option>";
+                        get_translation('every') . ']</option>';
             }
         }
         foreach ($lst as $cat) {
             if ($cat->getId() == $default) {
                 $html .= "<option value='" . $cat->getId() .
                         "' selected='selected'>" .
-                        _esc($cat->getName()) . "</option>";
+                        _esc($cat->getName()) . '</option>';
             } else {
                 $html .= "<option value='" . $cat->getId() .
-                        "'>" . db_escape($cat->getName()) . "</option>";
+                        "'>" . db_escape($cat->getName()) . '</option>';
             }
         }
 
-        $html .= "</select>";
+        $html .= '</select>';
         return $html;
     }
 

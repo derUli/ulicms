@@ -15,7 +15,7 @@ class Request
 
     public static function getProtocol(?string $suffix = null): string
     {
-        $protocol = self::isSSL() ? "https://" : "http://";
+        $protocol = self::isSSL() ? 'https://' : 'http://';
 
         if (!empty($suffix)) {
             $protocol .= $suffix;

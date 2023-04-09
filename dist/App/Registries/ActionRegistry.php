@@ -15,8 +15,8 @@ class ActionRegistry
     private static $actions = [];
     private static $assignedControllers = [];
     private static $defaultCoreActions = [
-        "module_settings" => "inc/module_settings.php",
-        "groups" => "inc/groups.php"
+        'module_settings' => 'inc/module_settings.php',
+        'groups' => 'inc/groups.php'
     ];
 
     private static $actionPermissions = [];
@@ -40,7 +40,7 @@ class ActionRegistry
         $modules = $moduleManager->getEnabledModuleNames();
 
         foreach ($modules as $module) {
-            $cActions = getModuleMeta($module, "views") ?? getModuleMeta($module, "actions");
+            $cActions = getModuleMeta($module, 'views') ?? getModuleMeta($module, 'actions');
 
             if ($cActions) {
                 foreach ($cActions as $key => $value) {
@@ -63,7 +63,7 @@ class ActionRegistry
         $modules = $moduleManager->getEnabledModuleNames();
 
         foreach ($modules as $module) {
-            $action_permissions = getModuleMeta($module, "action_permissions");
+            $action_permissions = getModuleMeta($module, 'action_permissions');
             if (!$action_permissions) {
                 continue;
             }
@@ -88,7 +88,7 @@ class ActionRegistry
     {
         $modules = getAllModules();
         foreach ($modules as $module) {
-            $action_controllers = getModuleMeta($module, "action_controllers");
+            $action_controllers = getModuleMeta($module, 'action_controllers');
             if (!$action_controllers) {
                 continue;
             }

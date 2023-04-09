@@ -9,12 +9,12 @@ class EncodeTest extends \PHPUnit\Framework\TestCase
     public function testJsonReadableEncode()
     {
         $data = [
-            "foo" => "bar",
-            "hello" => "world",
-            "animals" => ["cat", "dog", "pig"],
-            "number" => 123,
-            "boolean" => true,
-            "null" => null
+            'foo' => 'bar',
+            'hello' => 'world',
+            'animals' => ['cat', 'dog', 'pig'],
+            'number' => 123,
+            'boolean' => true,
+            'null' => null
         ];
 
 

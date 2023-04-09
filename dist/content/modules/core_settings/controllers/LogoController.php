@@ -21,7 +21,7 @@ class LogoController extends Controller
         string $filename,
         string $originalName
     ): string {
-        return ULICMS_ROOT . "/content/images/" .
+        return ULICMS_ROOT . '/content/images/' .
                 $this->_buildFileName($filename, $originalName);
     }
 
@@ -32,35 +32,35 @@ class LogoController extends Controller
             $logo_upload = $_FILES['logo_upload_file'];
             $type = $logo_upload['type'];
 
-            if (str_starts_with($type, "image/")) {
+            if (str_starts_with($type, 'image/')) {
                 $originalName = $logo_upload['name'];
                 $newPath = $this->_buildFilePath(
                     $logo_upload['tmp_name'],
                     $originalName
                 );
 
-                do_event("before_upload_logo");
+                do_event('before_upload_logo');
                 move_uploaded_file($logo_upload['tmp_name'], $newPath);
 
                 ImageScaleHelper::scaleDown($newPath);
 
-                Settings::set("logo_image", basename($newPath));
-                Settings::set("logo_disabled", "no");
+                Settings::set('logo_image', basename($newPath));
+                Settings::set('logo_disabled', 'no');
 
                 CacheUtil::clearPageCache();
-                do_event("after_upload_logo_successful");
+                do_event('after_upload_logo_successful');
             }
 
-            do_event("after_upload_logo");
+            do_event('after_upload_logo');
         }
 
 
-        Response::redirect(ModuleHelper::buildActionURL("logo"));
+        Response::redirect(ModuleHelper::buildActionURL('logo'));
     }
 
     public function _deleteLogo(): bool
     {
-        $logoImage = Settings::get("logo_image");
+        $logoImage = Settings::get('logo_image');
         $path = ULICMS_ROOT . "/content/images/${logoImage}";
 
         if (empty($logoImage) || !is_file($path)) {
@@ -69,8 +69,8 @@ class LogoController extends Controller
 
         @unlink($path);
 
-        Settings::set("logo_image", "");
-        Settings::set("logo_disabled", "yes");
+        Settings::set('logo_image', '');
+        Settings::set('logo_disabled', 'yes');
         return true;
     }
 
@@ -84,13 +84,13 @@ class LogoController extends Controller
             $success ?
                     HttpStatusCode::OK :
                     HttpStatusCode::INTERNAL_SERVER_ERROR,
-            ModuleHelper::buildActionURL("logo")
+            ModuleHelper::buildActionURL('logo')
         );
     }
 
     public function _hasLogo(): bool
     {
-        return !empty(Settings::get("logo_image")) &&
-                Settings::get("logo_disabled") !== 'yes';
+        return !empty(Settings::get('logo_image')) &&
+                Settings::get('logo_disabled') !== 'yes';
     }
 }

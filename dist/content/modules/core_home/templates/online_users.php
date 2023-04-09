@@ -2,7 +2,7 @@
 
 use function App\HTML\imageTag;
 
-$users = ViewBag::get("users");
+$users = ViewBag::get('users');
 ?>
 <div class="online-users">
     <?php foreach ($users as $user) { ?>
@@ -10,7 +10,7 @@ $users = ViewBag::get("users");
             <?php
             echo imageTag(
                 $user->getAvatar(),
-                ["class" => "img-responsive"]
+                ['class' => 'img-responsive']
             );
         ?>
             <div class="username">

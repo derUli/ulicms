@@ -31,9 +31,9 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
     private function getExampleHtml()
     {
         $urls = [
-            "http://example.org/",
-            "https://youtu.be/7b-B1-xs6Og",
-            "https://soundcloud.com/atbense/ritscheratsche-cyber-cyber-mix"
+            'http://example.org/',
+            'https://youtu.be/7b-B1-xs6Og',
+            'https://soundcloud.com/atbense/ritscheratsche-cyber-cyber-mix'
         ];
 
         $links = array_map(function ($url) {
@@ -43,14 +43,14 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
         $html = implode("\n", $links);
 
         $html .= imageTag(
-            "foo.jpg",
-            ["class" => "foo"]
+            'foo.jpg',
+            ['class' => 'foo']
         );
         $html .= imageTag(
-            "foo.jpg",
+            'foo.jpg',
             [
-                "class" => "foo",
-                "loading" => "auto"
+                'class' => 'foo',
+                'loading' => 'auto'
             ]
         );
 

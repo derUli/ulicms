@@ -7,14 +7,14 @@ class ModelTest extends \PHPUnit\Framework\TestCase
 {
     protected function tearDown(): void
     {
-        Database::pQuery("delete from {prefix}languages where language_code = ?", ["it"], true);
+        Database::pQuery('delete from {prefix}languages where language_code = ?', ['it'], true);
     }
 
     public function testIsPersistent()
     {
         $language = new Language();
-        $language->setLanguageCode("it");
-        $language->setName("Italiano");
+        $language->setLanguageCode('it');
+        $language->setName('Italiano');
         $this->assertFalse($language->isPersistent());
 
         $language->save();
@@ -29,8 +29,8 @@ class ModelTest extends \PHPUnit\Framework\TestCase
         $language = new Language();
 
         $this->assertFalse($language->hasChanges());
-        $language->setLanguageCode("it");
-        $language->setName("Italiano");
+        $language->setLanguageCode('it');
+        $language->setName('Italiano');
 
         $this->assertTrue($language->hasChanges());
 
@@ -38,7 +38,7 @@ class ModelTest extends \PHPUnit\Framework\TestCase
 
         $this->assertFalse($language->hasChanges());
 
-        $language->setName("Venedig");
+        $language->setName('Venedig');
         $this->assertTrue($language->hasChanges());
 
         $language->save();
@@ -94,41 +94,41 @@ class ModelTest extends \PHPUnit\Framework\TestCase
 
     public function testCheckValueTypeWithRequiredNotFilled()
     {
-        $this->expectException("InvalidArgumentException");
-        Model::checkValueType(null, "str", true);
+        $this->expectException('InvalidArgumentException');
+        Model::checkValueType(null, 'str', true);
     }
 
     public function testCheckValueTypeWithoutType()
     {
         $this->assertTrue(
-            Model::checkValueType("foo", null, false)
+            Model::checkValueType('foo', null, false)
         );
     }
 
     public function testCheckValueWithString()
     {
         $this->assertTrue(
-            Model::checkValueType("ein-string", "string", true)
+            Model::checkValueType('ein-string', 'string', true)
         );
     }
 
     public function testCheckValueWithInt()
     {
-        $this->expectException("InvalidArgumentException");
-        Model::checkValueType(123, "string", true);
+        $this->expectException('InvalidArgumentException');
+        Model::checkValueType(123, 'string', true);
     }
 
     public function testCheckValueTypeWithNull()
     {
         $this->assertTrue(
-            Model::checkValueType(null, "str", false)
+            Model::checkValueType(null, 'str', false)
         );
     }
 
     public function testCheckValueTypeWithInvalidClass()
     {
-        $this->expectException("InvalidArgumentException");
-        Model::checkValueType(new Image_Page(), "Page", false);
+        $this->expectException('InvalidArgumentException');
+        Model::checkValueType(new Image_Page(), 'Page', false);
     }
 
     public function testReloadReturnsTrue()
@@ -136,11 +136,11 @@ class ModelTest extends \PHPUnit\Framework\TestCase
         $language = new Language();
         $language->loadByLanguageCode('de');
 
-        $language->setName("Germanisch");
-        $this->assertEquals("Germanisch", $language->getName());
+        $language->setName('Germanisch');
+        $this->assertEquals('Germanisch', $language->getName());
 
         $this->assertTrue($language->reload());
-        $this->assertNotEquals("Germanisch", $language->getName());
+        $this->assertNotEquals('Germanisch', $language->getName());
     }
 
     public function testReloadReturnsFalse()

@@ -7,13 +7,13 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected function tearDown(): void
     {
-        Database::deleteFrom("categories", "name like 'Unit Test%'");
+        Database::deleteFrom('categories', "name like 'Unit Test%'");
     }
 
     public function testCreateCategory()
     {
-        $name = "Unit Test " . time();
-        $description = "Description " . time();
+        $name = 'Unit Test ' . time();
+        $description = 'Description ' . time();
         $controller = new CategoryController();
         $id = $controller->_createPost($name, $description);
 
@@ -26,28 +26,28 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testUpdateCategory()
     {
-        $name = "Unit Test " . time();
-        $description = "Description " . time();
+        $name = 'Unit Test ' . time();
+        $description = 'Description ' . time();
         $createdId = Categories::addCategory($name, $description);
 
         $controller = new CategoryController();
         $updatedId = $controller->_updatePost(
             $createdId,
-            "Unit Test New Name",
-            "New Description"
+            'Unit Test New Name',
+            'New Description'
         );
 
         $this->assertGreaterThan(1, $updatedId);
 
         $banner = new Category($createdId);
-        $this->assertEquals("Unit Test New Name", $banner->getName());
-        $this->assertEquals("New Description", $banner->getDescription());
+        $this->assertEquals('Unit Test New Name', $banner->getName());
+        $this->assertEquals('New Description', $banner->getDescription());
     }
 
     public function testDeleteCategoryReturnsTrue()
     {
-        $name = "Unit Test " . time();
-        $description = "Description " . time();
+        $name = 'Unit Test ' . time();
+        $description = 'Description ' . time();
         $createdId = Categories::addCategory($name, $description);
 
         $controller = new CategoryController();

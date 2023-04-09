@@ -4,14 +4,14 @@ use App\Security\PermissionChecker;
 
 $currentAction = BackendHelper::getAction();
 $icons = [
-    "admins" => "fa fa-user",
-    "groups" => "fa fa-users"
+    'admins' => 'fa fa-user',
+    'groups' => 'fa fa-users'
 ];
 
 $icons = array_filter($icons, function ($cssClass, $action) {
     $permissions = [
-        "admins" => "users",
-        "groups" => "groups"
+        'admins' => 'users',
+        'groups' => 'groups'
     ];
 
     $permissionChecker = new PermissionChecker(get_user_id());
@@ -19,11 +19,11 @@ $icons = array_filter($icons, function ($cssClass, $action) {
 }, ARRAY_FILTER_USE_BOTH);
 
 $specialLabels = [
-    "admins" => get_translation("users")
+    'admins' => get_translation('users')
 ];
 
-$selectedButton = "btn btn-primary";
-$notSelectedButton = "btn btn-default"
+$selectedButton = 'btn btn-primary';
+$notSelectedButton = 'btn btn-default'
 ?>
 
 <div class="btn-toolbar" role="toolbar"

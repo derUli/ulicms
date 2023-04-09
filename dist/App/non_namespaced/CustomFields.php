@@ -35,8 +35,8 @@ class CustomFields
             $content_id,
             $name
         ];
-        $sql = "Select id from {prefix}custom_fields "
-                . "where content_id = ? and name = ?";
+        $sql = 'Select id from {prefix}custom_fields '
+                . 'where content_id = ? and name = ?';
         $result = Database::pQuery($sql, $args, true);
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
@@ -44,8 +44,8 @@ class CustomFields
                 $args = [
                     (int) $result->id
                 ];
-                $sql = "DELETE FROM {prefix}custom_fields "
-                        . "where id = ?";
+                $sql = 'DELETE FROM {prefix}custom_fields '
+                        . 'where id = ?';
                 return Database::pQuery($sql, $args, true);
             } else {
                 $args = [
@@ -53,8 +53,8 @@ class CustomFields
                     $name,
                     $content_id
                 ];
-                $sql = "UPDATE {prefix}custom_fields set value = ? "
-                        . "where name = ? and content_id = ?";
+                $sql = 'UPDATE {prefix}custom_fields set value = ? '
+                        . 'where name = ? and content_id = ?';
                 return Database::pQuery($sql, $args, true);
             }
         } elseif ($value !== null) {
@@ -63,8 +63,8 @@ class CustomFields
                 $name,
                 $value
             ];
-            $sql = "INSERT INTO {prefix}custom_fields "
-                    . "(content_id, name, value) VALUES(?, ?, ?)";
+            $sql = 'INSERT INTO {prefix}custom_fields '
+                    . '(content_id, name, value) VALUES(?, ?, ?)';
             return Database::pQuery($sql, $args, true);
         }
         return false;
@@ -83,8 +83,8 @@ class CustomFields
         $args = [
             $content_id
         ];
-        $sql = "Select name, value from {prefix}custom_fields "
-                . "where content_id = ?";
+        $sql = 'Select name, value from {prefix}custom_fields '
+                . 'where content_id = ?';
         $result = Database::pQuery($sql, $args, true);
 
         while ($row = Database::fetchObject($result)) {
@@ -121,8 +121,8 @@ class CustomFields
             $content_id,
             $name
         ];
-        $sql = "Select value from {prefix}custom_fields "
-                . "where content_id = ? and name = ?";
+        $sql = 'Select value from {prefix}custom_fields '
+                . 'where content_id = ? and name = ?';
         $result = Database::pQuery($sql, $args, true);
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);

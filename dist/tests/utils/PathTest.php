@@ -29,8 +29,8 @@ class PathTest extends \PHPUnit\Framework\TestCase
     public function testResolve()
     {
         $this->assertStringEndsWith(
-            "/content/log/exception_log/foo.log",
-            Path::resolve("ULICMS_LOG/exception_log/foo.log")
+            '/content/log/exception_log/foo.log',
+            Path::resolve('ULICMS_LOG/exception_log/foo.log')
         );
     }
 }

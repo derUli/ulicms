@@ -15,7 +15,7 @@ use function App\HTML\Link;
 
 class EditButtonRenderer
 {
-    public const MODULE_NAME = "core_content";
+    public const MODULE_NAME = 'core_content';
 
     public function render(int $pageId, User $user): string
     {
@@ -28,15 +28,15 @@ class EditButtonRenderer
             $permitted = false;
         }
 
-        $icon = icon("fas fa-pencil-alt fa-2x");
+        $icon = icon('fas fa-pencil-alt fa-2x');
 
-        $url = ModuleHelper::buildActionURL("pages_edit", "page={$pageId}");
+        $url = ModuleHelper::buildActionURL('pages_edit', "page={$pageId}");
         $link = link($url, $icon, true);
-        ViewBag::set("button", $link);
+        ViewBag::set('button', $link);
 
         return $permitted ? Template::executeModuleTemplate(
             self::MODULE_NAME,
-            "pages/partials/edit_button.php"
-        ) : "";
+            'pages/partials/edit_button.php'
+        ) : '';
     }
 }

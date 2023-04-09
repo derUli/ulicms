@@ -5,14 +5,14 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
     $html = '';
     $name = db_escape($name);
     $language = $_SESSION['language'];
-    $sql = "SELECT id, slug, access, link_url, title, alternate_title, menu_image, target, type, position FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent_id ";
+    $sql = 'SELECT id, slug, access, link_url, title, alternate_title, menu_image, target, type, position FROM ' . tbname('content') . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent_id ";
 
     if ($parent_id === null) {
-        $sql .= " IS NULL ";
+        $sql .= ' IS NULL ';
     } else {
-        $sql .= " = " . (int) $parent_id . " ";
+        $sql .= ' = ' . (int) $parent_id . ' ';
     }
-    $sql .= " ORDER by " . $order;
+    $sql .= ' ORDER by ' . $order;
 
     $result = db_query($sql);
 
@@ -25,10 +25,10 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
     } else {
         $containsCurrentItem = parent_item_contains_current_page($parent_id);
 
-        $classes = "sub_menu";
+        $classes = 'sub_menu';
 
         if ($containsCurrentItem) {
-            $classes .= " contains-current-page";
+            $classes .= ' contains-current-page';
         }
         $html .= "<ul class='" . $classes . "'>\n";
     }
@@ -37,9 +37,9 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
         if (checkAccess($row->access)) {
             $containsCurrentItem = parent_item_contains_current_page($row->id);
 
-            $additional_classes = " menu-link-to-" . $row->id . " ";
+            $additional_classes = ' menu-link-to-' . $row->id . ' ';
             if ($containsCurrentItem) {
-                $additional_classes .= "active ";
+                $additional_classes .= 'active ';
             }
 
             if (get_slug() != $row->slug) {
@@ -52,15 +52,15 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
             // Show page positions in menu if user has the "pages_show_positions" permission.
             if (is_logged_in()) {
                 $acl = new ACL();
-                $settingsName = "user/" . get_user_id() . "/show_positions";
+                $settingsName = 'user/' . get_user_id() . '/show_positions';
 
-                if ($acl->hasPermission("pages_show_positions") && Settings::get($settingsName)) {
+                if ($acl->hasPermission('pages_show_positions') && Settings::get($settingsName)) {
                     $title .= " ({$row->position})";
                 }
             }
 
             // if content has type link or node url is the target url else build seo url
-            $url = ($row->type == "link" || $row->type == "node") ? $row->link_url : buildSEOUrl($row->slug);
+            $url = ($row->type == 'link' || $row->type == 'node') ? $row->link_url : buildSEOUrl($row->slug);
             $url = Template::getEscape($url);
 
             if (get_slug() != $row->slug) {
@@ -80,9 +80,9 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
                 $html .= get_menu($name, $row->id, true, $order);
             }
 
-            $html .= "</li>";
+            $html .= '</li>';
         }
     }
-    $html .= "</ul>";
+    $html .= '</ul>';
     return $html;
 }

@@ -18,7 +18,7 @@ class CustomData
 
         $language = getCurrentLanguage();
 
-        $sql = "SELECT `custom_data` FROM " . tbname("content") .
+        $sql = 'SELECT `custom_data` FROM ' . tbname('content') .
                 " WHERE slug='" . Database::escapeValue($page) .
                 "' AND language='" .
                 Database::escapeValue($language) . "'";
@@ -39,7 +39,7 @@ class CustomData
         $data[$var] = $value;
 
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        Database::query("UPDATE " . tbname("content") .
+        Database::query('UPDATE ' . tbname('content') .
                         " SET custom_data = '" .
                         Database::escapeValue($json) .
                         "' WHERE slug='" . Database::escapeValue($page) . "'") .
@@ -66,7 +66,7 @@ class CustomData
 
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-        Database::query("UPDATE " . tbname("content") . " SET custom_data = '"
+        Database::query('UPDATE ' . tbname('content') . " SET custom_data = '"
                 . Database::escapeValue($json)
                 . "' WHERE slug='" . Database::escapeValue($page) . "' "
                 . "AND language='" .

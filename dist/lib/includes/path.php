@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 function getTemplateDirPath(
-    string $sub = "default",
+    string $sub = 'default',
     bool $abspath = false
 ): string {
     if ($abspath) {

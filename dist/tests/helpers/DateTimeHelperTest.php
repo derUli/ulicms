@@ -25,7 +25,7 @@ class DateTimeHelperTest extends \PHPUnit\Framework\TestCase
         $elevenSeconds = 11;
         $datetimeString = DateTimeHelper::timestampToFormattedDateTime($fourtyYears + $thirtyTwoMinutes + $elevenSeconds);
 
-        $this->assertStringStartsWith("22.12.2009", $datetimeString);
+        $this->assertStringStartsWith('22.12.2009', $datetimeString);
         $this->assertStringEndsWith(':32:11', $datetimeString);
     }
 }

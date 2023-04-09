@@ -23,12 +23,12 @@ class HelperRegistry
         $modules = $moduleManager->getEnabledModuleNames();
 
         foreach ($modules as $module) {
-            $helpers = getModuleMeta($module, "helpers");
+            $helpers = getModuleMeta($module, 'helpers');
             if ($helpers) {
                 foreach ($helpers as $key => $value) {
                     $path = getModulePath($module, true) .
                             trim($value, '/');
-                    $path = str_ends_with($path, ".php") ? $path : $path .'.php';
+                    $path = str_ends_with($path, '.php') ? $path : $path .'.php';
 
                     $helperRegistry[$key] = $path;
                 }
