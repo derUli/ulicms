@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
-
 use App\Exceptions\DatasetNotFoundException;
 use App\Exceptions\UnknownContentTypeException;
 use App\Models\Content\TypeMapper;
@@ -236,7 +234,7 @@ class ContentFactory
             $sql .= " offset " . $offset;
         }
 
-        $result = Database::query($sql) || die(Database::error());
+        $result = Database::query($sql) or die(Database::error());
 
         while ($row = Database::fetchObject($result)) {
             $datasets[] = self::getContentObjectByID($row);

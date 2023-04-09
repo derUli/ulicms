@@ -275,8 +275,15 @@ $config
     ->setRiskyAllowed(true)
     //->setIndent("  ")
     ->setRules([
-        'modernize_types_casting' => true,
-        'logical_operators' => true,
+        
+    // Replaces `intval`, `floatval`, `doubleval`, `strval` and `boolval` function calls with according type casting operator.
+    'modernize_types_casting' => true,
+    // Use `&&` and `||` logical operators instead of `and` and `or`.
+    'logical_operators' => true,
+    // Converts simple usages of `array_push($x, $y);` to `$x[] = $y;`.
+    'array_push' => true,
+    // PHP arrays should be declared using the configured syntax.
+    'array_syntax' => ['syntax'=>'short'],
     ]);
 
 return $config->setFinder(
