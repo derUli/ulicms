@@ -35,3 +35,4 @@ modules.aus
 .php-cs-fixer.cache
 .phpunit.result.cache
 .phpunit.cache
+.DS_STORE
