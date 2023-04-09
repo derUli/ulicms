@@ -214,8 +214,6 @@ $tmpRules = [
     'ternary_to_elvis_operator' => true,
     // Use `null` coalescing operator `??` where possible. Requires PHP >= 7.0.
     'ternary_to_null_coalescing' => true,
-    // Arrays should be formatted like function/method arguments, without leading or trailing single line space.
-    'trim_array_spaces' => true,
     // Unary operators should be placed adjacent to their operands.
     'unary_operator_spaces' => true,
     // Visibility MUST be declared on all properties and methods; `abstract` and `final` MUST be declared before the visibility; `static` MUST be declared after the visibility.
@@ -280,6 +278,8 @@ $config
     'no_useless_return' => true,
     // Ordering `use` statements.
     'ordered_imports' => true,
+    // Arrays should be formatted like function/method arguments, without leading or trailing single line space.
+    'trim_array_spaces' => true,
     ]);
 
 return $config->setFinder(

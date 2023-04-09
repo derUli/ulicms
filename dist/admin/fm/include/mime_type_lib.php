@@ -196,7 +196,7 @@ if (! function_exists('get_file_mime_type')) {
 
             if (! empty($mime_type)) {
                 if (true === $debug) {
-                    return [ 'mime_type' => $mime_type, 'method' => 'fileinfo' ];
+                    return ['mime_type' => $mime_type, 'method' => 'fileinfo'];
                 }
 
                 return $mime_type;
@@ -208,7 +208,7 @@ if (! function_exists('get_file_mime_type')) {
 
             if (! empty($mime_type)) {
                 if (true === $debug) {
-                    return [ 'mime_type' => $mime_type, 'method' => 'mime_content_type' ];
+                    return ['mime_type' => $mime_type, 'method' => 'mime_content_type'];
                 }
 
                 return $mime_type;
@@ -223,14 +223,14 @@ if (! function_exists('get_file_mime_type')) {
 
         if (! empty($mime_types[ $ext ])) {
             if (true === $debug) {
-                return [ 'mime_type' => $mime_types[ $ext ], 'method' => 'from_array' ];
+                return ['mime_type' => $mime_types[ $ext ], 'method' => 'from_array'];
             }
 
             return $mime_types[ $ext ];
         }
 
         if (true === $debug) {
-            return [ 'mime_type' => 'application/octet-stream', 'method' => 'last_resort' ];
+            return ['mime_type' => 'application/octet-stream', 'method' => 'last_resort'];
         }
 
         return 'application/octet-stream';

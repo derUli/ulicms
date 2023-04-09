@@ -432,7 +432,7 @@ function create_img($imgfile, $imgthumb, $newwidth, $newheight = null, $option =
  */
 function makeSize($size)
 {
-    $units = [ 'B', 'KB', 'MB', 'GB', 'TB' ];
+    $units = ['B', 'KB', 'MB', 'GB', 'TB'];
     $u = 0;
     while ((round($size / 1024) > 0) && ($u < 4)) {
         $size = $size / 1024;
@@ -708,7 +708,7 @@ function fix_filename($str, $config, $is_folder = false)
         $str = preg_replace("/[^a-zA-Z0-9\.\[\]_| -]/", '', $str);
     }
 
-    $str = str_replace([ '"', "'", '/', '\\' ], '', $str);
+    $str = str_replace(['"', "'", '/', '\\'], '', $str);
     $str = strip_tags($str);
 
     // Empty or incorrectly transliterated filename.
