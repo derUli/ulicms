@@ -14,9 +14,9 @@ class ResponseTest extends \PHPUnit\Framework\TestCase
 
     protected function tearDown(): void
     {
-        unset($_SERVER['HTTP_HOST']);
-        unset($_SERVER['REQUEST_URI']);
-        unset($_SESSION['language']);
+        unset($_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI'], $_SESSION['language']);
+
+
     }
 
     public function testGetStatusCodeByNumber()

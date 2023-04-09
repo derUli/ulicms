@@ -56,10 +56,10 @@ class UrlTest extends \PHPUnit\Framework\TestCase
 
          $this->assertEquals('http://example.org/foobar', getBaseFolderURL());
 
-         unset($_SERVER['SERVER_PROTOCOL']);
-         unset($_SERVER['HTTP_HOST']);
-         unset($_SERVER['SERVER_PORT']);
-         unset($_SERVER['REQUEST_URI']);
+         unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI']);
+
+
+
      }
 
     public function testGetCurrentURL()
@@ -72,17 +72,17 @@ class UrlTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('https://example.org:8080/foobar/foo?hello=world', getCurrentURL());
 
-        unset($_SERVER['SERVER_PROTOCOL']);
-        unset($_SERVER['HTTP_HOST']);
-        unset($_SERVER['SERVER_PORT']);
-        unset($_SERVER['REQUEST_URI']);
-        unset($_SERVER['HTTPS']);
+        unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI'], $_SERVER['HTTPS']);
+
+
+
+
     }
 
      public function testBuildSEOUrlWithoutAnythingNoPageSpecified()
      {
-         unset($_GET['slug']);
-         unset($_GET['html']);
+         unset($_GET['slug'], $_GET['html']);
+
 
          $this->assertEquals('./', buildSEOUrl());
      }

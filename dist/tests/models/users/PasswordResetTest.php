@@ -22,10 +22,10 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
     protected function tearDown(): void
     {
         $this->cleanUp();
-        unset($_SERVER['SERVER_PROTOCOL']);
-        unset($_SERVER['HTTP_HOST']);
-        unset($_SERVER['SERVER_PORT']);
-        unset($_SERVER['REQUEST_URI']);
+        unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI']);
+
+
+
     }
 
     public function testAddToken()

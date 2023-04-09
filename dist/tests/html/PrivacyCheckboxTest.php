@@ -35,8 +35,8 @@ class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
         Settings::set('privacy_policy_checkbox_text_de', $this->privacy_policy_checkbox_text_de);
         Settings::set('privacy_policy_checkbox_text_de', $this->privacy_policy_checkbox_text_en);
 
-        unset($_POST[PrivacyCheckbox::CHECKBOX_NAME]);
-        unset($_GET[PrivacyCheckbox::CHECKBOX_NAME]);
+        unset($_POST[PrivacyCheckbox::CHECKBOX_NAME], $_GET[PrivacyCheckbox::CHECKBOX_NAME]);
+
     }
 
     public function testIsEnabled()

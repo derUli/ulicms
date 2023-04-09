@@ -17,9 +17,9 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
     protected function tearDown(): void
     {
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
-        unset($_REQUEST['sClass']);
-        unset($_REQUEST['sMethod']);
-        unset($_SERVER['REQUEST_METHOD']);
+        unset($_REQUEST['sClass'], $_REQUEST['sMethod'], $_SERVER['REQUEST_METHOD']);
+
+
     }
 
     public function testGetWithClassNameReturnsController()

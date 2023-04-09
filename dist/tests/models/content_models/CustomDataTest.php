@@ -11,8 +11,8 @@ class CustomDataTest extends \PHPUnit\Framework\TestCase
     protected function tearDown(): void
     {
         CustomData::delete('my_value');
-        unset($_GET['slug']);
-        unset($_SESSION['language']);
+        unset($_GET['slug'], $_SESSION['language']);
+
     }
 
     public function testGetCustomDataOrSetting()

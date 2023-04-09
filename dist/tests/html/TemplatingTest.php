@@ -39,14 +39,14 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
         Settings::set('maintenance_mode', '0');
         Settings::set('domain_to_language', $this->initialDomainToLanguage);
 
-        unset($_SERVER['SERVER_PROTOCOL']);
-        unset($_SERVER['HTTP_HOST']);
-        unset($_SERVER['SERVER_PORT']);
-        unset($_SERVER['HTTPS']);
-        unset($_SERVER['REQUEST_URI']);
-        unset($_GET['slug']);
-        unset($_SESSION['login_id']);
-        unset($_SESSION['language']);
+        unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['HTTPS'], $_SERVER['REQUEST_URI'], $_GET['slug'], $_SESSION['login_id'], $_SESSION['language']);
+
+
+
+
+
+
+
 
         App\Utils\Session\sessionDestroy();
 

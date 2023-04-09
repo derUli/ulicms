@@ -187,8 +187,8 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         $_SERVER['HTTPS'] = 'on';
         $this->assertEquals('https://company.com/willkommen', ModuleHelper::getFullPageURLByID(1));
 
-        unset($_SERVER['HTTP_HOST']);
-        unset($_SERVER['HTTPS']);
+        unset($_SERVER['HTTP_HOST'], $_SERVER['HTTPS']);
+
     }
 
     public function testGetBaseUrl()

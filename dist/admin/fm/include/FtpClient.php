@@ -782,14 +782,14 @@ class FtpClient implements Countable
                 'type' => $this->rawToType($chunks[0]),
             ];
 
-            unset($chunks[0]);
-            unset($chunks[1]);
-            unset($chunks[2]);
-            unset($chunks[3]);
-            unset($chunks[4]);
-            unset($chunks[5]);
-            unset($chunks[6]);
-            unset($chunks[7]);
+            unset($chunks[0], $chunks[1], $chunks[2], $chunks[3], $chunks[4], $chunks[5], $chunks[6], $chunks[7]);
+
+
+
+
+
+
+
             $item['name'] = implode(' ', $chunks);
 
             if ($item['type'] == 'link') {

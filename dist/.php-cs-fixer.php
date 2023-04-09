@@ -7,8 +7,6 @@ $tmpRules = [
     'blank_line_before_statement' => ['statements'=>['break','case','continue','declare','default','exit','do','exit','for','foreach','goto','if','return','switch','throw','try','while','yield']],
     // A single space or none should be between cast and variable.
     'cast_spaces' => ['space'=>'none'],
-    // Calling `unset` on multiple items should be done in one call.
-    'combine_consecutive_unsets' => true,
     // Concatenation should be spaced according configuration.
     'concat_space' => ['spacing'=>'one'],
     // Equal sign in declare statement should be surrounded by spaces or not following configuration.
@@ -277,6 +275,8 @@ $config
     'explicit_indirect_variable' => true,
     // Converts implicit variables into explicit ones in double-quoted strings or heredoc syntax.
     'explicit_string_variable' => true,
+    // Calling `unset` on multiple items should be done in one call.
+    'combine_consecutive_unsets' => true,
     ]);
 
 return $config->setFinder(

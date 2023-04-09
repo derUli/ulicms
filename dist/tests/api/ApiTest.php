@@ -182,11 +182,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('https://example.org/foobar', getBaseFolderURL());
 
-        unset($_SERVER['SERVER_PROTOCOL']);
-        unset($_SERVER['HTTP_HOST']);
-        unset($_SERVER['SERVER_PORT']);
-        unset($_SERVER['REQUEST_URI']);
-        unset($_SERVER['HTTPS']);
+        unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI'], $_SERVER['HTTPS']);
+
+
+
+
     }
 
     public function testGetBaseFolderUrlWithFilenameInUrlAndHttpsAndAlternativePort()
@@ -199,11 +199,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('https://example.org:8080/foobar', getBaseFolderURL());
 
-        unset($_SERVER['SERVER_PROTOCOL']);
-        unset($_SERVER['HTTP_HOST']);
-        unset($_SERVER['SERVER_PORT']);
-        unset($_SERVER['REQUEST_URI']);
-        unset($_SERVER['HTTPS']);
+        unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI'], $_SERVER['HTTPS']);
+
+
+
+
     }
 
     public function testStringContainsShortCodeWithoutNameReturnsTrue()

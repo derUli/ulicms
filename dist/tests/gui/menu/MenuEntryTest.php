@@ -42,8 +42,8 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
         $this->notPermittedUser->delete();
         $this->testGroup->delete();
 
-        unset($_GET['action']);
-        unset($_REQUEST['action']);
+        unset($_GET['action'], $_REQUEST['action']);
+
     }
 
     public function testConstructor()

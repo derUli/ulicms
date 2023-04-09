@@ -12,8 +12,8 @@ class CustomDataFunctionsTest extends \PHPUnit\Framework\TestCase
     {
         Settings::delete('my_value');
         delete_custom_data('my_value');
-        unset($_GET['slug']);
-        unset($_SESSION['language']);
+        unset($_GET['slug'], $_SESSION['language']);
+
     }
 
     public function testSetAndGetCustomData()

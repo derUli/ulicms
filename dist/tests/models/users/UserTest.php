@@ -51,12 +51,12 @@ class UserTest extends \PHPUnit\Framework\TestCase
             ],
             true
         );
-        unset($_SERVER['REMOTE_ADDR']);
-        unset($_SERVER['REQUEST_URI']);
-        unset($_SERVER['SERVER_PROTOCOL']);
-        unset($_SERVER['HTTP_HOST']);
-        unset($_SERVER['SERVER_PORT']);
-        unset($_SERVER['HTTPS']);
+        unset($_SERVER['REMOTE_ADDR'], $_SERVER['REQUEST_URI'], $_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['HTTPS']);
+
+
+
+
+
 
         $user = $this->getFirstUser();
         $user->setLastAction(0);
