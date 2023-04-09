@@ -196,11 +196,11 @@ if (isset($_GET['callback'])) {
 
 $popup = isset($_GET['popup']) ? strip_tags($_GET['popup']) : 0;
 //Sanitize popup
-$popup = !!$popup;
+$popup = (bool)$popup;
 
 $crossdomain = isset($_GET['crossdomain']) ? strip_tags($_GET['crossdomain']) : 0;
 //Sanitize crossdomain
-$crossdomain = !!$crossdomain;
+$crossdomain = (bool)$crossdomain;
 
 //view type
 if (!isset($_SESSION['RF']['view_type'])) {
@@ -415,7 +415,7 @@ $get_params = http_build_query($get_params);
 <script src="js/jquery.fileupload-ui.js"></script>
 
 <input type="hidden" id="ftp" value="<?php
-echo !!$ftp; ?>"/>
+echo (bool)$ftp; ?>"/>
 <input type="hidden" id="popup" value="<?php
 echo $popup; ?>"/>
 <input type="hidden" id="callback" value="<?php

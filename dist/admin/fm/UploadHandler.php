@@ -1186,7 +1186,7 @@ class UploadHandler
         if (!preg_match('/\.(gif|jpe?g|png)$/i', $file_path)) {
             return false;
         }
-        return !!$this->imagetype($file_path);
+        return (bool)$this->imagetype($file_path);
     }
 
     protected function handle_image_file($file_path, $file)

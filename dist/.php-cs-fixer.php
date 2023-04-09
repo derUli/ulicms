@@ -274,6 +274,8 @@ $config
     'single_quote' => true,
      // Unused `use` statements must be removed.
      'no_unused_imports' => true,
+     // Short cast `bool` using double exclamation mark should not be used.
+    'no_short_bool_cast' => true,
     ]);
 
 return $config->setFinder(
