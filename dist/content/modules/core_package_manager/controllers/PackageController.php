@@ -125,10 +125,7 @@ class PackageController extends MainClass
     public function _uninstallModule(string $name): bool
     {
         $type = 'module';
-        return (bool) (uninstall_module($name, $type))
-
-
-         ;
+        return (bool) (uninstall_module($name, $type));
     }
 
     public function uninstallTheme(): void
@@ -149,10 +146,7 @@ class PackageController extends MainClass
 
     public function _uninstallTheme(string $name): bool
     {
-        return (bool) (uninstall_module($name, 'theme'))
-
-
-         ;
+        return (bool) (uninstall_module($name, 'theme'));
     }
 
     public function toggleModule(): void

@@ -40,8 +40,7 @@ class PrivacyCheckbox
                 Settings::get(
                     "privacy_policy_checkbox_enable_{$this->language}",
                     'bool'
-                )
-        ;
+                );
     }
 
     /**

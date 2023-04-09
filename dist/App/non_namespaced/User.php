@@ -1053,8 +1053,7 @@ class User extends Model
                     $group->getID()
                 ],
                 true
-            )
-            ;
+            );
         }
     }
 
@@ -1129,8 +1128,7 @@ class User extends Model
     {
         return
             $this->getProcessedAvatarPath() &&
-            is_file($this->getProcessedAvatarPath())
-        ;
+            is_file($this->getProcessedAvatarPath());
     }
 
     /**
