@@ -15,5 +15,5 @@ function set_custom_data(string $var, $value, ?string $page = null): void
 function delete_custom_data(?string $var = null, ?string $page = null): void
 {
     CustomData::delete($var, $page);
-    return;
+
 }
