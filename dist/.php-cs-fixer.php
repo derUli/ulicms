@@ -53,8 +53,6 @@ $tmpRules = [
     'no_alternative_syntax' => true,
     // There must be a comment when fall-through is intentional in a non-empty case body.
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
-    // There MUST NOT be a space after the opening parenthesis. There MUST NOT be a space before the closing parenthesis.
-    'no_spaces_inside_parenthesis' => true,
     // A `final` class must not have `final` methods and `private` methods must not be `final`.
     'no_unneeded_final_method' => true,
     // Variables must be set `null` instead of using `(unset)` casting.
@@ -277,6 +275,8 @@ $config
     'function_to_constant' => true,
     // Order the flags in `fopen` calls, `b` and `t` must be last.
     'fopen_flag_order' => true,
+    // There MUST NOT be a space after the opening parenthesis. There MUST NOT be a space before the closing parenthesis.
+    'no_spaces_inside_parenthesis' => true,
     ]);
 
 return $config->setFinder(
