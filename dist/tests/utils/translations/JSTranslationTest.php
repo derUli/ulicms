@@ -71,8 +71,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase
                 ULICMS_ROOT . '/tests/fixtures/JSTranslation/JSTranslation3.html'
             ),
             $translation->getJS('<script id="my-script">{code}</script>')
-        )
-        ;
+        );
     }
 
     public function testRender()
