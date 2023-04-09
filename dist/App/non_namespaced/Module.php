@@ -207,8 +207,7 @@ class Module
         return ($mainController &&
                 method_exists($mainController, 'uninstall')) ||
                 is_file($uninstallScript1) ||
-                is_file($uninstallScript2)
-        ;
+                is_file($uninstallScript2);
     }
 
     public function delete(): ?bool

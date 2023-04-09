@@ -272,8 +272,7 @@ class Group
     {
         return
             isset($this->permissions[$name]) &&
-            $this->permissions[$name]
-        ;
+            $this->permissions[$name];
     }
 
     /**
