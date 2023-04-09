@@ -23,8 +23,6 @@ $tmpRules = [
     'no_alternative_syntax' => true,
     // There must be a comment when fall-through is intentional in a non-empty case body.
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
-    // A `final` class must not have `final` methods and `private` methods must not be `final`.
-    'no_unneeded_final_method' => true,
     // Converts `protected` variables and methods to `private` where possible.
     'protected_to_private' => true,
     // There should be one or no space before colon, and one space after it in return type declarations, according to configuration.
@@ -277,6 +275,8 @@ $config
     'no_unset_on_property' => false,
     // All multi-line strings must use correct line ending.
     'string_line_ending' => true,
+    // A `final` class must not have `final` methods and `private` methods must not be `final`.
+    'no_unneeded_final_method' => true,
     ]);
 
 return $config->setFinder(
