@@ -33,8 +33,6 @@ $tmpRules = [
     'simplified_null_return' => true,
     // Lambdas not (indirect) referencing `$this` must be declared `static`.
     'static_lambda' => true,
-    // All multi-line strings must use correct line ending.
-    'string_line_ending' => true,
     // Visibility MUST be declared on all properties and methods; `abstract` and `final` MUST be declared before the visibility; `static` MUST be declared after the visibility.
     'visibility_required' => true,
     // Add `void` return type to functions with missing or empty return statements, but priority is given to `@return` annotations. Requires PHP >= 7.1.
@@ -277,6 +275,8 @@ $config
     'no_unset_cast' => false,
     // Properties should be set to `null` instead of using `unset`.
     'no_unset_on_property' => false,
+    // All multi-line strings must use correct line ending.
+    'string_line_ending' => true,
     ]);
 
 return $config->setFinder(
