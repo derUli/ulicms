@@ -49,7 +49,7 @@ $config
         // Equal sign in declare statement should be surrounded by spaces or not following configuration.
         'declare_equal_normalize' => ['space'=>'single'],
         // Replaces `dirname(__FILE__)` expression with equivalent `__DIR__` constant.
-        'dir_constant' => true,
+        'dir_constant' => false,
         // The keyword `elseif` should be used instead of `else if` so that all control keywords look like single words.
         'elseif' => true,
         // PHP code MUST use only UTF-8 without BOM (remove BOM).
@@ -277,5 +277,6 @@ $config
 return $config->setFinder(
     PhpCsFixer\Finder::create()
             ->exclude('vendor')
+            ->exclude('content/configurations')
             ->in(__DIR__)
 );
