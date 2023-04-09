@@ -6,9 +6,9 @@ use App\Helpers\StringHelper;
 use Nette\Utils\Random;
 
 if (! defined('RESPONSIVE_FM')) {
-    function sanitize(array & $array): void
+    function sanitize(array &$array): void
     {
-        foreach ($array as & $data) {
+        foreach ($array as &$data) {
             $data = str_ireplace([
                 "\r",
                 "\n",
