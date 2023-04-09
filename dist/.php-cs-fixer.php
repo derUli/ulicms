@@ -142,8 +142,6 @@ $tmpRules = [
     'no_unset_on_property' => true,
     // In array declaration, there MUST NOT be a whitespace before each comma.
     'no_whitespace_before_comma_in_array' => true,
-    // Remove Zero-width space (ZWSP), Non-breaking space (NBSP) and other invisible unicode symbols.
-    'non_printable_character' => ['use_escape_sequences_in_strings'=>true],
     // Array index should always be written by using square braces.
     'normalize_index_brace' => true,
     // Adds or removes `?` before type declarations for parameters with a default `null` value.
@@ -280,6 +278,8 @@ $config
     'trim_array_spaces' => true,
     // There should not be space before or after object operators `->` and `?->`.
     'object_operator_without_whitespace' => true,
+    // Remove Zero-width space (ZWSP), Non-breaking space (NBSP) and other invisible unicode symbols.
+    'non_printable_character' => ['use_escape_sequences_in_strings'=>true],
     ]);
 
 return $config->setFinder(
