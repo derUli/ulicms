@@ -5,7 +5,7 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('update_system')) {
     $version = new UliCMSVersion();
     $currentVersion = $version->getInternalVersionAsString();
-    $newVersion = ControllerRegistry::get()->checkForUpgrades() ? ControllerRegistry::get()->checkForUpgrades() : $currentVersion;
+    $newVersion = ControllerRegistry::get()->checkForUpgrades() ?: $currentVersion;
     $json = ControllerRegistry::get()->getJSON();
     $release_notes = null;
     if (isset($json->release_notes)) {

@@ -54,8 +54,7 @@ class Mailer
         string $headers = ''
     ): bool {
         // Use PHP Mail or SMTP
-        $mode = Settings::get('email_mode') ?
-                Settings::get('email_mode') : EmailModes::INTERNAL;
+        $mode = Settings::get('email_mode') ?: EmailModes::INTERNAL;
 
         // UliCMS speichert seit UliCMS 9.0.1 E-Mails, die das System versendet hat
         // in der Datenbank

@@ -190,8 +190,7 @@ $useragent = Settings::get('useragent');
 
 define(
     'ULICMS_USERAGENT',
-    $useragent ?
-            $useragent : 'UliCMS Release ' . cms_version()
+    $useragent ?: 'UliCMS Release ' . cms_version()
 );
 
 $cache_period = Settings::get('cache_period');

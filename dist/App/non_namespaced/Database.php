@@ -65,7 +65,7 @@ class Database
         error_reporting($errorReporting);
         ini_set('display_errors', $displayErrors);
 
-        self::$connection = $connected ? $connected : null;
+        self::$connection = $connected ?: null;
         if (! self::$connection) {
             return null;
         }

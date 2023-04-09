@@ -15,7 +15,7 @@ class SessionManager extends Controller
         if (! empty($_POST['system_language'])) {
             $_SESSION['system_language'] = basename($_POST['system_language']);
         } else {
-            $_SESSION['system_language'] = $user->getDefaultLanguage() ? $user->getDefaultLanguage() : Settings::get('system_language');
+            $_SESSION['system_language'] = $user->getDefaultLanguage() ?: Settings::get('system_language');
         }
 
         $confirmation_code = null;

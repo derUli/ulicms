@@ -464,7 +464,7 @@ class RoboFile extends Tasks
     {
         Database::setEchoQueries(true);
 
-        $migrator = new DBMigrator($component ? $component : '[all]', getcwd());
+        $migrator = new DBMigrator($component ?: '[all]', getcwd());
         if ($component) {
             $migrator->resetDBTrack();
         } else {

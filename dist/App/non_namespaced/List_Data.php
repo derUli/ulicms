@@ -95,15 +95,15 @@ class List_Data extends Model
     protected function fillVars($data = null)
     {
         $this->content_id = $data->content_id ? (int) ($data->content_id) : null;
-        $this->language = $data->language ? $data->language : null;
+        $this->language = $data->language ?: null;
         $this->category_id = $data->category_id ? (int) ($data->category_id) : null;
-        $this->menu = $data->menu ? $data->menu : null;
+        $this->menu = $data->menu ?: null;
         $this->parent_id = $data->parent_id ? (int) ($data->parent_id) : null;
-        $this->order_by = $data->order_by ? $data->order_by : null;
-        $this->order_direction = $data->order_direction ? $data->order_direction : null;
+        $this->order_by = $data->order_by ?: null;
+        $this->order_direction = $data->order_direction ?: null;
         $this->limit = $data->limit ? (int) ($data->limit) : null;
         $this->use_pagination = (bool)$data->use_pagination;
-        $this->type = $data->type ? $data->type : null;
+        $this->type = $data->type ?: null;
     }
 
     public function save()

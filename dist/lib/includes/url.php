@@ -21,7 +21,7 @@ function get_jquery_url(): string
 function get_shortlink($id = null): ?string
 {
     $shortlink = null;
-    $id = $id ? $id : get_ID();
+    $id = $id ?: get_ID();
 
     if ($id) {
         $shortlink = getBaseFolderURL() . '/?goid=' . $id;

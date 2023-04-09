@@ -252,7 +252,7 @@ function get_cache_control(): string
 
     if ($result && db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
-        $cacheControl = $dataset->cache_control ? $dataset->cache_control : $cacheControl;
+        $cacheControl = $dataset->cache_control ?: $cacheControl;
     }
     $cacheControl = apply_filter($cacheControl, 'get_cache_control');
     Vars::set('cache_control', $cacheControl);

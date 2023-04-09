@@ -575,7 +575,7 @@ if ($permissionChecker->hasPermission('pages')) {
                             if (count($fields) > 0) {
                                 ?>
                                 <div class="custom-field-tab" data-type="<?php echo $name; ?>">
-                                    <h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name); ?></h2>
+                                    <h2 class="accordion-header"><?php translate($type->customFieldTabTitle ?: $name); ?></h2>
 
                                     <div class="accordion-content">
                                         <?php

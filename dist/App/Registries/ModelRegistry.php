@@ -24,8 +24,7 @@ class ModelRegistry
         $modules = $moduleManager->getEnabledModuleNames();
 
         foreach ($modules as $module) {
-            $models = getModuleMeta($module, 'models') ?
-                    getModuleMeta($module, 'models') : getModuleMeta($module, 'objects');
+            $models = getModuleMeta($module, 'models') ?: getModuleMeta($module, 'objects');
             if (! $models) {
                 continue;
             }

@@ -145,8 +145,7 @@ function setLocaleByLanguage(): array
             'locale_' . $_SESSION['system_language'] :
             'locale_' . getFrontendLanguage();
 
-    $localeSetting = Settings::get($var) ?
-            Settings::get($var) : Settings::get('locale');
+    $localeSetting = Settings::get($var) ?: Settings::get('locale');
 
     if ($localeSetting) {
         $locale = splitAndTrim($localeSetting);

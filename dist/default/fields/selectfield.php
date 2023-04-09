@@ -1,7 +1,7 @@
 <?php
 $field = ViewBag::get('field');
 $value = ViewBag::get('field_value');
-$options = Viewbag::get('field_options') ? Viewbag::get('field_options') : [];
+$options = Viewbag::get('field_options') ?: [];
 if ($value === null) {
     $value = $field->defaultValue;
 }

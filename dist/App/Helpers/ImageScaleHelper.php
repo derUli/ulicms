@@ -65,7 +65,7 @@ class ImageScaleHelper extends Helper
 
             $imagine->open($file)
                     ->thumbnail($size, $mode)
-                    ->save($outputFile ? $outputFile : $file);
+                    ->save($outputFile ?: $file);
 
             $scaled = true;
         }

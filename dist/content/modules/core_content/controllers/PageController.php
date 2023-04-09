@@ -148,7 +148,7 @@ class PageController extends Controller
         $model->title = Request::getVar('title');
         $model->alternate_title = Request::getVar('alternate_title');
 
-        $model->author_id = $userId ? $userId : get_user_id();
+        $model->author_id = $userId ?: get_user_id();
 
         // if the user is not permitted to change page status
         // then select2 is disabled which causes the "active" value
@@ -283,7 +283,7 @@ class PageController extends Controller
                 Request::getVar('comments_enabled', false, 'bool') : null;
 
         $model->show_headline = Request::getVar('show_headline', 1, 'bool');
-        $model->group_id = $groupId ? $groupId : get_group_id();
+        $model->group_id = $groupId ?: get_group_id();
 
         do_event('before_create_page');
 
@@ -485,8 +485,8 @@ class PageController extends Controller
         ?int $historyId = null,
         ?int $contentId = null
     ): DiffViewModel {
-        $historyId = $historyId ? $historyId : (int)$_GET['history_id'];
-        $contentId = $contentId ? $contentId : (int)$_GET['content_id'];
+        $historyId = $historyId ?: (int)$_GET['history_id'];
+        $contentId = $contentId ?: (int)$_GET['content_id'];
 
         $currentVersion = getPageByID($contentId);
         $oldVersion = VCS::getRevisionByID($historyId);

@@ -17,7 +17,7 @@ class Logger
 
     public function __construct(string $path, ?CMSConfig $cmsConfig = null)
     {
-        $cfg = $cmsConfig ? $cmsConfig : new CMSConfig();
+        $cfg = $cmsConfig ?: new CMSConfig();
         $environment = get_environment();
         $this->path = $path;
         // if the directory doesn't exist, create it.
