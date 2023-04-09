@@ -48,18 +48,15 @@ if (
             'id' => 'pageform',
             'style' => 'display:none',
             'class' => 'pageform main-form new-page-form',
-            'data-get-content-types-url' =>
-            ModuleHelper::buildMethodCallUrl(
+            'data-get-content-types-url' => ModuleHelper::buildMethodCallUrl(
                 PageController::class,
                 'getContentTypes'
             ),
-            'data-slug-free-url' =>
-            ModuleHelper::buildMethodCallUrl(
+            'data-slug-free-url' => ModuleHelper::buildMethodCallUrl(
                 PageController::class,
                 'nextFreeSlug'
             ),
-            'data-parent-pages-url' =>
-            ModuleHelper::buildMethodCallUrl(
+            'data-parent-pages-url' => ModuleHelper::buildMethodCallUrl(
                 PageController::class,
                 'filterParentPages'
             )
