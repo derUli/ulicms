@@ -11,13 +11,10 @@ $tmpRules = [
     'combine_consecutive_unsets' => true,
     // Replace multiple nested calls of `dirname` by only one call with second `$level` parameter. Requires PHP >= 7.0.
     'combine_nested_dirname' => true,
-
     // Concatenation should be spaced according configuration.
     'concat_space' => ['spacing'=>'one'],
     // Equal sign in declare statement should be surrounded by spaces or not following configuration.
     'declare_equal_normalize' => ['space'=>'single'],
-    // Replaces `dirname(__FILE__)` expression with equivalent `__DIR__` constant.
-    'dir_constant' => false,
     // The keyword `elseif` should be used instead of `else if` so that all control keywords look like single words.
     'elseif' => true,
     // Replace deprecated `ereg` regular expression functions with `preg`.
@@ -278,6 +275,8 @@ $config
     'general_phpdoc_tag_rename' => true,
     // Classes must be in a path that matches their namespace, be at least one namespace deep and the class name should match the file name.
     'psr_autoloading' => false,
+    // Replaces `dirname(__FILE__)` expression with equivalent `__DIR__` constant.
+    'dir_constant' => false,
     ]);
 
 return $config->setFinder(
