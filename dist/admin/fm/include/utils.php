@@ -816,10 +816,10 @@ function image_check_memory_usage($img, $max_breedte, $max_hoogte)
             $mem = ini_get('memory_limit');
             $memory_limit = 0;
             if (strpos($mem, 'M') !== false) {
-                $memory_limit = abs(intval(str_replace(array('M'), '', $mem) * 1024 * 1024));
+                $memory_limit = abs((int) (str_replace(array('M'), '', $mem) * 1024 * 1024));
             }
             if (strpos($mem, 'G') !== false) {
-                $memory_limit = abs(intval(str_replace(array('G'), '', $mem) * 1024 * 1024 * 1024));
+                $memory_limit = abs((int) (str_replace(array('G'), '', $mem) * 1024 * 1024 * 1024));
             }
 
             $image_properties = getimagesize($img);
@@ -838,7 +838,7 @@ function image_check_memory_usage($img, $max_breedte, $max_hoogte)
             }
             $image_memory_usage = $K64 + ($image_width * $image_height * ($image_bits >> 3) * 2);
             $thumb_memory_usage = $K64 + ($max_breedte * $max_hoogte * ($image_bits >> 3) * 2);
-            $memory_needed = abs(intval($memory_usage + $image_memory_usage + $thumb_memory_usage));
+            $memory_needed = abs((int) ($memory_usage + $image_memory_usage + $thumb_memory_usage));
 
             if ($memory_needed > $memory_limit) {
                 return false;

@@ -85,14 +85,14 @@ class List_Data extends Model
 
     protected function fillVars($data = null)
     {
-        $this->content_id = $data->content_id ? intval($data->content_id) : null;
+        $this->content_id = $data->content_id ? (int) ($data->content_id) : null;
         $this->language = $data->language ? $data->language : null;
-        $this->category_id = $data->category_id ? intval($data->category_id) : null;
+        $this->category_id = $data->category_id ? (int) ($data->category_id) : null;
         $this->menu = $data->menu ? $data->menu : null;
-        $this->parent_id = $data->parent_id ? intval($data->parent_id) : null;
+        $this->parent_id = $data->parent_id ? (int) ($data->parent_id) : null;
         $this->order_by = $data->order_by ? $data->order_by : null;
         $this->order_direction = $data->order_direction ? $data->order_direction : null;
-        $this->limit = $data->limit ? intval($data->limit) : null;
+        $this->limit = $data->limit ? (int) ($data->limit) : null;
         $this->use_pagination = (bool)$data->use_pagination;
         $this->type = $data->type ? $data->type : null;
     }
@@ -102,7 +102,7 @@ class List_Data extends Model
         if ($this->content_id === null) {
             throw new DatabaseException("no content_id for list set");
         }
-        $id = intval($this->content_id);
+        $id = (int) ($this->content_id);
         $result = Database::query("select * from " . tbname("lists")
                         . " WHERE content_id = $id");
         if (Database::getNumRows($result) > 0) {
@@ -114,7 +114,7 @@ class List_Data extends Model
 
     protected function create()
     {
-        $content_id = intval($this->content_id);
+        $content_id = (int) ($this->content_id);
 
         if ($this->language === null) {
             $language = "null";
@@ -137,7 +137,7 @@ class List_Data extends Model
         if ($this->parent_id === null or $this->parent_id === 0) {
             $parent_id = "null";
         } else {
-            $parent_id = intval($this->parent_id);
+            $parent_id = (int) ($this->parent_id);
         }
         if ($this->order_by === null) {
             $order_by = "null";
@@ -150,7 +150,7 @@ class List_Data extends Model
             $order_direction = "asc";
         }
 
-        $use_pagination = intval($this->use_pagination);
+        $use_pagination = (int) ($this->use_pagination);
 
         if ($this->type === null || $this->type == "null") {
             $type = "null";
@@ -159,8 +159,8 @@ class List_Data extends Model
         }
 
         $limit = "null";
-        if (intval($this->limit) > 0) {
-            $limit = intval($this->limit);
+        if ((int) ($this->limit) > 0) {
+            $limit = (int) ($this->limit);
         }
         $sql = "INSERT INTO " . tbname("lists") .
                 " (content_id, language, category_id, menu, parent_id, "
@@ -196,7 +196,7 @@ class List_Data extends Model
         if ($this->parent_id === null or $this->parent_id === 0) {
             $parent_id = "null";
         } else {
-            $parent_id = intval($this->parent_id);
+            $parent_id = (int) ($this->parent_id);
         }
 
         if ($this->order_by === null) {
@@ -222,7 +222,7 @@ class List_Data extends Model
             $type = "'" . Database::escapeValue($this->type) . "'";
         }
 
-        $use_pagination = intval($this->use_pagination);
+        $use_pagination = (int) ($this->use_pagination);
 
         $sql = "UPDATE " . tbname("lists") . " set language = $language,
 		category_id = $category_id, menu = $menu,"

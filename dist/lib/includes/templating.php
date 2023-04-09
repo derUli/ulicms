@@ -465,13 +465,13 @@ function get_title(?string $slug = null, bool $headline = false): string
         return Vars::get($cacheVar);
     }
 
-    $errorPage403 = intval(
+    $errorPage403 = (int) (
         Settings::getLanguageSetting(
             "error_page_403",
             getCurrentLanguage()
         )
     );
-    $errorPage404 = intval(
+    $errorPage404 = (int) (
         Settings::getLanguageSetting(
             "error_page_404",
             getCurrentLanguage()
@@ -711,7 +711,7 @@ function get_menu(
     if ($parent_id === null) {
         $sql .= " IS NULL ";
     } else {
-        $sql .= " = " . intval($parent_id) . " ";
+        $sql .= " = " . (int) $parent_id . " ";
     }
     $sql .= " ORDER by " . $order;
     $result = db_query($sql);
@@ -723,7 +723,7 @@ function get_menu(
     if ($parent_id === null) {
         $html .= "<ul class='menu_" . $name . " navmenu'>\n";
     } else {
-        $containsCurrentItem = parent_item_contains_current_page(intval($parent_id));
+        $containsCurrentItem = parent_item_contains_current_page((int) $parent_id);
 
         $classes = "sub_menu";
 

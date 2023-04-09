@@ -167,7 +167,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                         <option
                             value="<?php echo $key; ?>"
                             <?php
-                            if (intval($row->group_id) == $key) {
+                            if ((int) ($row->group_id) == $key) {
                                 echo "selected";
                             }
                         ?>>

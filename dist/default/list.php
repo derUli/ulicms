@@ -9,10 +9,10 @@ if ($id !== null) {
             $entries_count_total = count($entries);
             $use_pagination = $list->use_pagination;
             $start = 0;
-            $limit = intval($list->limit);
+            $limit = (int) ($list->limit);
             if ($limit > 0 and $use_pagination) {
                 if (isset($_GET["start"])) {
-                    $start = intval($_GET["start"]);
+                    $start = (int) ($_GET["start"]);
                 }
                 $entries = array_slice($entries, $start, $limit);
                 $entries_count = count($entries);
