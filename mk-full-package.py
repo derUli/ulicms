@@ -37,7 +37,7 @@ def main():
               "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
               "configurations", ".phpunit.result.cache", "nbproject", "report",
               "avatars", ".php_cs.cache", ".php_cs.dist", ".phplint-cache", ".php-cs-fixer.cache",
-              '.phpunit.cache'
+              '.phpunit.cache', '.DS_STORE'
             ]
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
