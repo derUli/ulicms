@@ -464,7 +464,7 @@ function folder_info($path, $count_hidden = true)
                 if (is_dir($currentFile)) {
                     [$size, $tmp, $tmp1] = folder_info($currentFile);
                     $total_size += $size;
-                    $folders_count ++;
+                    $folders_count++;
                 } else {
                     $size = filesize($currentFile);
                     $total_size += $size;

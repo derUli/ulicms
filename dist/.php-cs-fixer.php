@@ -164,8 +164,6 @@ $tmpRules = [
     'string_line_ending' => true,
     // Removes extra spaces between colon and case value.
     'switch_case_space' => true,
-    // Unary operators should be placed adjacent to their operands.
-    'unary_operator_spaces' => true,
     // Visibility MUST be declared on all properties and methods; `abstract` and `final` MUST be declared before the visibility; `static` MUST be declared after the visibility.
     'visibility_required' => true,
     // Add `void` return type to functions with missing or empty return statements, but priority is given to `@return` annotations. Requires PHP >= 7.1.
@@ -278,6 +276,8 @@ $config
     'standardize_not_equals' => true,
     // A case should be followed by a colon and not a semicolon.
     'switch_case_semicolon_to_colon' => true,
+    // Unary operators should be placed adjacent to their operands.
+    'unary_operator_spaces' => true,
     ]);
 
 return $config->setFinder(

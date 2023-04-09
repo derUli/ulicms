@@ -653,7 +653,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                 <?php
                                 $lcat = $list_data->category_id;
             if ($lcat === null) {
-                $lcat = - 1;
+                $lcat = -1;
             }
             ?>
                                 <?php echo Categories::getHTMLSelect($lcat, true, 'list_category') ?>
