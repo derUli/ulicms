@@ -129,8 +129,6 @@ $tmpRules = [
     'no_unset_cast' => true,
     // Properties should be set to `null` instead of using `unset`.
     'no_unset_on_property' => true,
-    // In array declaration, there MUST NOT be a whitespace before each comma.
-    'no_whitespace_before_comma_in_array' => true,
     // Array index should always be written by using square braces.
     'normalize_index_brace' => true,
     // Adds or removes `?` before type declarations for parameters with a default `null` value.
@@ -279,6 +277,8 @@ $config
     'no_trailing_whitespace' => true,
     // There MUST be no trailing spaces inside comment or PHPDoc.
     'no_trailing_whitespace_in_comment' => true,
+    // In array declaration, there MUST NOT be a whitespace before each comma.
+    'no_whitespace_before_comma_in_array' => true,
     ]);
 
 return $config->setFinder(
