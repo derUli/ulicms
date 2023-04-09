@@ -100,8 +100,6 @@ $tmpRules = [
     'ordered_class_elements' => ['order'=>['use_trait','constant_public','constant_protected','constant_private','property_public','property_protected','property_private','construct','destruct','magic','phpunit','method_public','method_protected','method_private']],
     // Orders the interfaces in an `implements` or `interface extends` clause.
     'ordered_interfaces' => true,
-    // Trait `use` statements must be sorted alphabetically.
-    'ordered_traits' => true,
     // Converts `protected` variables and methods to `private` where possible.
     'protected_to_private' => true,
     // Classes must be in a path that matches their namespace, be at least one namespace deep and the class name should match the file name.
@@ -280,6 +278,8 @@ $config
     'no_superfluous_phpdoc_tags' => false,
     // Adds or removes `?` before type declarations for parameters with a default `null` value.
     'nullable_type_declaration_for_default_null_value' => true,
+    // Trait `use` statements must be sorted alphabetically.
+    'ordered_traits' => true,
     ]);
 
 return $config->setFinder(
