@@ -148,8 +148,6 @@ $tmpRules = [
     'normalize_index_brace' => true,
     // Adds or removes `?` before type declarations for parameters with a default `null` value.
     'nullable_type_declaration_for_default_null_value' => true,
-    // There should not be space before or after object operators `->` and `?->`.
-    'object_operator_without_whitespace' => true,
     // Orders the elements of classes/interfaces/traits.
     'ordered_class_elements' => ['order'=>['use_trait','constant_public','constant_protected','constant_private','property_public','property_protected','property_private','construct','destruct','magic','phpunit','method_public','method_protected','method_private']],
     // Orders the interfaces in an `implements` or `interface extends` clause.
@@ -280,6 +278,8 @@ $config
     'ordered_imports' => true,
     // Arrays should be formatted like function/method arguments, without leading or trailing single line space.
     'trim_array_spaces' => true,
+    // There should not be space before or after object operators `->` and `?->`.
+    'object_operator_without_whitespace' => true,
     ]);
 
 return $config->setFinder(
