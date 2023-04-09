@@ -9,8 +9,6 @@ $tmpRules = [
     'declare_equal_normalize' => ['space'=>'single'],
     // Spaces should be properly placed in a function declaration.
     'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
-    // Ensure single space between function's argument and its typehint.
-    'function_typehint_space' => true,
     // Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.
     'method_chaining_indentation' => true,
     // Add leading `\` before function invocation to speed up resolving.
@@ -275,6 +273,8 @@ $config
     'protected_to_private' => false,
     // In method arguments and method call, there MUST NOT be a space before each comma and there MUST be one space after each comma. Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line.
     'method_argument_space' => false,
+    // Ensure single space between function's argument and its typehint.
+    'function_typehint_space' => true,
     ]);
 
 return $config->setFinder(

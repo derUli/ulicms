@@ -135,7 +135,7 @@ class Audio extends Model
         $this->category_id = $val instanceof Category ? $val->getID() : null;
     }
 
-    public function delete(bool$deletePhysical = true): void
+    public function delete(bool $deletePhysical = true): void
     {
         if ($this->getId()) {
             if ($deletePhysical) {
