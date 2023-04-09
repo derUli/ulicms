@@ -95,11 +95,11 @@ class CoreUpgradeController extends Controller
 
                 response::redirect('../update.php');
                 return true;
-            } else {
+            }  
                 return false;
-            }
-        } else {
+            
+        }  
             return false;
-        }
+        
     }
 }

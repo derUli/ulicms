@@ -853,10 +853,10 @@ function get_page(?string $slug = ''): ?array
         $dataset = db_fetch_assoc($result);
         Vars::set('page_' . $slug, $dataset);
         return $dataset;
-    } else {
+    }  
         Vars::set('page_' . $slug, null);
         return null;
-    }
+    
 }
 
 function content(): void

@@ -548,10 +548,10 @@ class Database
                 return (int)$value;
             } elseif (is_bool($value)) {
                 return (int) $value;
-            } else {
+            }  
                 return mysqli_real_escape_string(self::$connection, $value);
-            }
-        } else {
+            
+        }  
             if ($type === DB_TYPE_INT) {
                 return (int)$value;
             } elseif ($type === DB_TYPE_FLOAT) {
@@ -563,10 +563,10 @@ class Database
                 );
             } elseif ($type === DB_TYPE_BOOL) {
                 return (int)$value;
-            } else {
+            }  
                 return $value;
-            }
-        }
+            
+        
     }
 
     // returns a list of all tables of a table

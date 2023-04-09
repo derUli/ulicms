@@ -536,9 +536,9 @@ if (isset($_GET['action'])) {
                 if (! is_file('lang/' . $choosen_lang . '.php')) {
                     response(trans('Lang_Not_Found').AddErrorLocation())->send();
                     exit;
-                } else {
+                }  
                     $_SESSION['RF']['language'] = $choosen_lang;
-                }
+                
             }
 
             break;

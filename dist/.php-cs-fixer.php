@@ -140,8 +140,6 @@ $tmpRules = [
     'no_unset_cast' => true,
     // Properties should be set to `null` instead of using `unset`.
     'no_unset_on_property' => true,
-    // Unused `use` statements must be removed.
-    'no_useless_else' => true,
     // There should not be an empty `return` statement at the end of a function.
     'no_useless_return' => true,
     // In array declaration, there MUST NOT be a whitespace before each comma.
@@ -280,6 +278,8 @@ $config
     'no_alias_functions' => true,
     // There must be no `sprintf` calls with only the first argument.
     'no_useless_sprintf' => true,
+    // Unused `use` statements must be removed.
+    'no_useless_else' => true,
     ]);
 
 return $config->setFinder(

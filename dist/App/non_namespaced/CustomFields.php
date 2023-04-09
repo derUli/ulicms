@@ -47,7 +47,7 @@ class CustomFields
                 $sql = 'DELETE FROM {prefix}custom_fields '
                         . 'where id = ?';
                 return Database::pQuery($sql, $args, true);
-            } else {
+            }  
                 $args = [
                     $value,
                     $name,
@@ -56,7 +56,7 @@ class CustomFields
                 $sql = 'UPDATE {prefix}custom_fields set value = ? '
                         . 'where name = ? and content_id = ?';
                 return Database::pQuery($sql, $args, true);
-            }
+            
         } elseif ($value !== null) {
             $args = [
                 $content_id,
