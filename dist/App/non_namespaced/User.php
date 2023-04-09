@@ -950,8 +950,8 @@ class User extends Model
         $generatedAvatar = $this->getProcessedAvatarPath();
 
         $imagine->open($inputFile)
-                ->thumbnail($size, $mode)
-                ->save($generatedAvatar);
+            ->thumbnail($size, $mode)
+            ->save($generatedAvatar);
     }
 
     /**

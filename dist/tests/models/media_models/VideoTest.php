@@ -36,7 +36,7 @@ class VideoTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('video.webm', $video->getWebmFile());
         $this->assertEquals(1, $video->getCategoryId());
         $this->assertEquals(1, $video->getCategory()
-                        ->getID());
+            ->getID());
         $this->assertEquals(640, $video->getWidth());
         $this->assertEquals(480, $video->getHeight());
 
@@ -71,7 +71,7 @@ class VideoTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(1, $video->getCategoryId());
         $this->assertEquals(1, $video->getCategory()
-                        ->getID());
+            ->getID());
 
         $video->delete();
         $this->assertNull($video->getID());

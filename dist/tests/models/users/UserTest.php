@@ -92,9 +92,9 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('max@muster.de', $user->getEmail());
         $this->assertEquals(1, $user->getPrimaryGroupId());
         $this->assertEquals(1, $user->getPrimaryGroup()
-                        ->getId());
+            ->getId());
         $this->assertEquals('Administrator', $user->getPrimaryGroup()
-                        ->getName());
+            ->getName());
         $this->assertEquals(
             Hash::hashPassword('password123'),
             $user->getPassword()
@@ -113,9 +113,9 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $user->setAboutMe('bye');
         $user->setPrimaryGroup($this->otherGroup);
         $this->assertEquals('Other Group', $user->getPrimaryGroup()
-                        ->getName());
+            ->getName());
         $this->assertEquals($user->getPrimaryGroupId(), $user->getPrimaryGroup()
-                        ->getId());
+            ->getId());
         $user->save();
 
         $user = new User();

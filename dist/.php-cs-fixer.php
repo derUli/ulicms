@@ -9,8 +9,6 @@ $tmpRules = [
     'declare_equal_normalize' => ['space'=>'single'],
     // Spaces should be properly placed in a function declaration.
     'function_declaration' => ['closure_function_spacing'=>'none', 'closure_fn_spacing'=>'none'],
-    // Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.
-    'method_chaining_indentation' => true,
     // Add leading `\` before function invocation to speed up resolving.
     'native_function_invocation' => ['include'=>['@all','trans']],
     // Replace control structure alternative syntax to use braces.
@@ -275,6 +273,8 @@ $config
     'method_argument_space' => false,
     // Ensure single space between function's argument and its typehint.
     'function_typehint_space' => true,
+    // Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.
+    'method_chaining_indentation' => true,
     ]);
 
 return $config->setFinder(

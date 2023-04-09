@@ -116,7 +116,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertInstanceOf(PermissionChecker::class, $this->testUser->getPermissionChecker());
         $this->assertEquals($this->testUser->getId(), $this->testUser->getPermissionChecker()
-                        ->getUserId());
+            ->getUserId());
     }
 
     public function testHasPermissionWithUserReturnsFalse()

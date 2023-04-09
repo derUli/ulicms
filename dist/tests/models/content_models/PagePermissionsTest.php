@@ -78,26 +78,26 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
         $page->getPermissions()->setEditRestriction('group', true);
 
         $this->assertTrue($page->getPermissions()
-                        ->getEditRestriction('owner'));
+            ->getEditRestriction('owner'));
         $this->assertTrue($page->getPermissions()
-                        ->getEditRestriction('group'));
+            ->getEditRestriction('group'));
         $this->assertFalse($page->getPermissions()
-                        ->getEditRestriction('others'));
+            ->getEditRestriction('others'));
         $this->assertFalse($page->getPermissions()
-                        ->getEditRestriction('admins'));
+            ->getEditRestriction('admins'));
         $page->save();
 
         $page2 = new Page();
         $page2->loadBySlugAndLanguage('page_permission_test', 'en');
         $this->assertEquals('Page Permission Test', $page2->title);
         $this->assertTrue($page->getPermissions()
-                        ->getEditRestriction('owner'));
+            ->getEditRestriction('owner'));
         $this->assertTrue($page->getPermissions()
-                        ->getEditRestriction('group'));
+            ->getEditRestriction('group'));
         $this->assertFalse($page->getPermissions()
-                        ->getEditRestriction('others'));
+            ->getEditRestriction('others'));
         $this->assertFalse($page->getPermissions()
-                        ->getEditRestriction('admins'));
+            ->getEditRestriction('admins'));
 
         $page2->delete();
     }

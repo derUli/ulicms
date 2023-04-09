@@ -64,8 +64,8 @@ class ImageScaleHelper extends Helper
             $mode = ImageInterface::THUMBNAIL_INSET;
 
             $imagine->open($file)
-                    ->thumbnail($size, $mode)
-                    ->save($outputFile ?: $file);
+                ->thumbnail($size, $mode)
+                ->save($outputFile ?: $file);
 
             $scaled = true;
         }
