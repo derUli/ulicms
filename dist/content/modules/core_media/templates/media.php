@@ -1,7 +1,7 @@
 <?php
 $permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("videos") or
-        $permissionChecker->hasPermission("audio") or
+if ($permissionChecker->hasPermission("videos") ||
+        $permissionChecker->hasPermission("audio") ||
         $permissionChecker->hasPermission("files")) {
     ?>
     <h2>

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use ContentFactory;
 use User;
@@ -64,7 +64,7 @@ class ContentPermissionChecker implements IDatasetPermissionChecker
         $canEditThis = false;
 
         // if there are edit restrictions
-        if ($groupCanEdit or $adminsCanEdit or $ownerCanEdit or $othersCanEdit) {
+        if ($groupCanEdit || $adminsCanEdit || $ownerCanEdit || $othersCanEdit) {
             if ($groupCanEdit && in_array($contentGroup, $groupIds)) {
                 $canEditThis = true;
             } elseif ($adminsCanEdit && $user->isAdmin()) {

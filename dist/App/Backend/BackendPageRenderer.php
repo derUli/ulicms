@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Backend;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use Template;
 use Vars;
@@ -122,7 +122,7 @@ class BackendPageRenderer
             $action_permission = ActionRegistry::getActionPermission(
                 $this->getAction()
             );
-            if ($action_permission and $action_permission === "*") {
+            if ($action_permission && $action_permission === "*") {
                 Vars::set("action_filename", $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(
                     "backend/container.php"
@@ -170,9 +170,9 @@ class BackendPageRenderer
                 $this->getAction()
             );
             if (!$requiredPermission
-                    or (
+                    || (
                         $requiredPermission
-                        and $permissionChecker->hasPermission($requiredPermission))
+                        && $permissionChecker->hasPermission($requiredPermission))
             ) {
                 Vars::set("action_filename", $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(

@@ -2,7 +2,7 @@
 
 namespace App\Utils;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 /**
  * Utils for version number comparisons

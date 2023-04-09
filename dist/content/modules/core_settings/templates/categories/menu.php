@@ -7,13 +7,13 @@ $permissionChecker = new PermissionChecker(get_user_id());
 <h1><?php translate("settings"); ?></h1>
 <?php
 if ($permissionChecker->hasPermission("settings_simple")
-        or $permissionChecker->hasPermission("design")
-        or $permissionChecker->hasPermission("spam_filter")
-        or $permissionChecker->hasPermission("cache")
-        or $permissionChecker->hasPermission("motd")
-        or $permissionChecker->hasPermission("logo")
-        or $permissionChecker->hasPermission("languages")
-        or $permissionChecker->hasPermission("other")) {
+        || $permissionChecker->hasPermission("design")
+        || $permissionChecker->hasPermission("spam_filter")
+        || $permissionChecker->hasPermission("cache")
+        || $permissionChecker->hasPermission("motd")
+        || $permissionChecker->hasPermission("logo")
+        || $permissionChecker->hasPermission("languages")
+        || $permissionChecker->hasPermission("other")) {
     ?>
     <div class="button-menu">
         <?php

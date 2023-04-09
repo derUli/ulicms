@@ -10,9 +10,9 @@ if (Settings::get("visitors_can_register") == "off" || !Settings::get("visitors_
 
     $errors = false;
     if (isset($_POST["register_user"])) {
-        if ($checkbox->isEnabled() and !$checkbox->isChecked()) {
+        if ($checkbox->isEnabled() && !$checkbox->isChecked()) {
             echo "<p style='color:red;'>" . get_translation("please_accept_privacy_conditions") . "</p>";
-        } elseif (empty($_POST["username"]) or empty($_POST["password"]) or empty($_POST["firstname"]) or empty($_POST["lastname"])) {
+        } elseif (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["firstname"]) || empty($_POST["lastname"])) {
             echo "<p style='color:red;'>" . get_translation("FILL_ALL_FIELDS") . "</p>";
         } elseif (user_exists($_POST["username"])) {
             echo "<p style='color:red;'>" . get_translation("USERNAME_ALREADY_EXISTS") . "</p>";

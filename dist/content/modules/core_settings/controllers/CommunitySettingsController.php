@@ -21,7 +21,7 @@ class CommunitySettingsController extends Controller
         }
 
         if (isset($_POST["commentable_content_types"])
-                and is_array($_POST["commentable_content_types"])) {
+                && is_array($_POST["commentable_content_types"])) {
             Settings::set(
                 "commentable_content_types",
                 implode(";", $_POST["commentable_content_types"])

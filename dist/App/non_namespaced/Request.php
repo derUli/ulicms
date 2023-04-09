@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Constants\RequestMethod;
 
@@ -163,7 +163,7 @@ class Request
 
     public static function isAjaxRequest(): bool
     {
-        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) and
+        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
                 strtolower(
                     $_SERVER['HTTP_X_REQUESTED_WITH']
                 ) == 'xmlhttprequest');

@@ -18,7 +18,7 @@ if (!Settings::get("disable_ulicms_newsfeed")) {
 
     $xml = file_get_contents_wrapper($feed_url, true);
 
-    if ($xml and $rss->loadXML($xml)) {
+    if ($xml && $rss->loadXML($xml)) {
         $feed = [];
         foreach ($rss->getElementsByTagName('item') as $node) {
             $item = array(

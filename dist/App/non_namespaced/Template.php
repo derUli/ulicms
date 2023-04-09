@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Utils\File;
 use App\Exceptions\FileNotFoundException;
@@ -20,7 +20,7 @@ class Template
         $str .= (is_home() ? "home " : "");
         $str .= (is_404() ? "error404 " : "");
         $str .= (is_403() ? "error403 " : "");
-        $str .= ((is_404() or is_403()) ? "errorPage " : "page ");
+        $str .= ((is_404() || is_403()) ? "errorPage " : "page ");
         $str .= (is_mobile() ? "mobile " : "desktop ");
         $str .= (containsModule(get_slug()) ?
                 " containsModule " : "");
@@ -57,7 +57,7 @@ class Template
             case "module":
                 $page = get_page();
 
-                if ($page["module"] != null and strlen($page['module']) > 0) {
+                if ($page["module"] != null && strlen($page['module']) > 0) {
                     Vars::setNoCache(true);
                     $output = replaceShortcodesWithModules(
                         "[module=\"" . $page["module"] . "\"]"
@@ -66,7 +66,7 @@ class Template
                 break;
             case "video":
                 $page = get_page();
-                if ($page["video"] != null and strlen($page['video']) > 0) {
+                if ($page["video"] != null && strlen($page['video']) > 0) {
                     $output = replaceVideoTags(
                         "[video id=" . $page['video'] . "]"
                     );
@@ -74,7 +74,7 @@ class Template
                 break;
             case "audio":
                 $page = get_page();
-                if ($page["audio"] != null and strlen($page["audio"]) > 0) {
+                if ($page["audio"] != null && strlen($page["audio"]) > 0) {
                     $output = replaceAudioTags(
                         "[audio id=" . $page['audio'] . "]"
                     );
@@ -363,14 +363,14 @@ class Template
 
         output_favicon_code();
 
-        if (!Settings::get("hide_shortlink") and (is_200() or is_403())) {
+        if (!Settings::get("hide_shortlink") && (is_200() || is_403())) {
             $shortlink = get_shortlink();
             if ($shortlink) {
                 echo '<link rel="shortlink" href="' . $shortlink . '"/>';
             }
         }
 
-        if (!Settings::get("hide_canonical") and (is_200() or is_403())) {
+        if (!Settings::get("hide_canonical") && (is_200() || is_403())) {
             $canonical = get_canonical();
             if ($canonical) {
                 echo '<link rel="canonical"  href="' . $canonical . '"/>';

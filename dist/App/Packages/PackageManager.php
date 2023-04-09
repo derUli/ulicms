@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Packages;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Services\Connectors\PackageSourceConnector;
 use App\Constants\PackageTypes;
@@ -160,9 +160,9 @@ class PackageManager
      */
     public function getInstalledPackages(string $type = 'modules'): ?array
     {
-        if ($type === 'modules' or $type === 'module') {
+        if ($type === 'modules' || $type === 'module') {
             return $this->getInstalledModules();
-        } elseif ($type === 'themes' or $type === 'theme') {
+        } elseif ($type === 'themes' || $type === 'theme') {
             return $this->getInstalledThemes();
         }
         throw new BadMethodCallException("No such package type: $type");

@@ -39,14 +39,14 @@ class ExtendUpgradeHelper extends Controller
             return false;
         }
         $data = json_decode($json, true);
-        if (!($data and isset($data["data"]))) {
+        if (!($data && isset($data["data"]))) {
             return false;
         }
         $versionMatcher = new AvailablePackageVersionMatcher($data["data"]);
         $available = $versionMatcher->getCompatibleVersions();
 
         return (
-            count($available) and
+            count($available) &&
             \App\Utils\VersionComparison::compare($available[0]["version"], $version, ">")
         );
     }

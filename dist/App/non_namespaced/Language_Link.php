@@ -1,6 +1,6 @@
 <?php
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Models\Content\Language;
 

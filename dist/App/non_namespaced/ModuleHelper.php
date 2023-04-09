@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Models\Content\Language;
 use App\HTML\Form;
@@ -88,7 +88,7 @@ class ModuleHelper extends Helper
         if ($suffix !== null && !empty($suffix)) {
             $url .= "&" . $suffix;
         }
-        if (!is_admin_dir() and $prependSuffixIfRequired) {
+        if (!is_admin_dir() && $prependSuffixIfRequired) {
             $url = "admin/" . $url;
         }
         $url = rtrim($url, "&");

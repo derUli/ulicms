@@ -24,7 +24,7 @@ if (!$permissionChecker->hasPermission("categories")) {
     ?>
     <?php
     if (!isset($_GET["add"]) && !isset($_GET["edit"])
-            and $permissionChecker->hasPermission("categories_create")) {
+            && $permissionChecker->hasPermission("categories_create")) {
         ?>
         <?php
         echo Template::executeModuleTemplate(

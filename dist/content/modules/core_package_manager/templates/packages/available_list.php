@@ -20,7 +20,7 @@ if ($permissionChecker->hasPermission("install_packages")) {
         $fetch = $packageSource->fetch();
         $packages = $packageSource->getAllAvailablePackages();
 
-        if (!$fetch or count($packages) === 0) {
+        if (!$fetch || count($packages) === 0) {
             ?>
             <p>
                 <strong><?php translate("error"); ?> </strong> <br />

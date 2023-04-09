@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Exceptions\AccessDeniedException;
 
@@ -88,7 +88,7 @@ abstract class Controller
                     );
                 }
             } elseif (method_exists($this, $sMethod) && !str_starts_with($sMethod, "_")
-                    and $reflection and $reflection->isPublic()) {
+                    && $reflection && $reflection->isPublic()) {
                 if (ControllerRegistry::userCanCall($sClass, $sMethod)) {
                     $this->$sMethod();
                 } else {

@@ -41,10 +41,10 @@ if ($permissionChecker->hasPermission("list_packages")) {
                         "admin_permission"
                     );
                     $userIsPermitted = (
-                        $adminPermission and
+                        $adminPermission &&
                         $permissionChecker->hasPermission($adminPermission)
                     )
-                            or (!$adminPermission
+                            || (!$adminPermission
                             );
                     $btnClass = ($hasAdminPage && $userIsPermitted) ?
                             "btn btn-primary" :
@@ -61,7 +61,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                     ?>
                                 data-btn-for="<?php esc($module->getName()); ?>"><i
                                     class="fas fa-tools"></i> <?php esc($module->getName()); ?> </a>
-                                <?php if (!$userIsPermitted and $hasAdminPage) { ?>
+                                <?php if (!$userIsPermitted && $hasAdminPage) { ?>
                                 <i class="fas fa-lock pull-right"
                                    title="<?php translate("no_permission"); ?>"></i>
                                <?php } ?>
@@ -90,7 +90,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                       data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "getModuleInfo", "name={$module->getName()}"); ?>"><i
                                         class="fas fa-info-circle"></i> </span>
                                     <?php
-                                $canToggleModule = (getModuleMeta($module->getName(), "source") != "core" and $permissionChecker->hasPermission("enable_disable_module"));
+                                $canToggleModule = (getModuleMeta($module->getName(), "source") != "core" && $permissionChecker->hasPermission("enable_disable_module"));
                     echo ModuleHelper::buildMethodCallForm(PackageController::class, "toggleModule", array(
                         "name" => $module->getName()
                             ), RequestMethod::POST, array(
@@ -120,7 +120,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                     ?>" title="<?php translate("enable_module"); ?>"><?php translate("off"); ?></button>
                                         <?php echo ModuleHelper::endForm(); ?>
                                         <?php
-                    if ($permissionChecker->hasPermission("remove_packages") and getModuleMeta($module->getName(), "source") != "core") {
+                    if ($permissionChecker->hasPermission("remove_packages") && getModuleMeta($module->getName(), "source") != "core") {
                         echo ModuleHelper::buildMethodCallForm(PackageController::class, "uninstallModule", array(
                             "name" => $module->getName()
                                 ), RequestMethod::POST, array(
@@ -241,7 +241,7 @@ if ($permissionChecker->hasPermission("list_packages")) {
                                 <?php }
                                 ?>
                                 <?php
-                                if ($permissionChecker->hasPermission("remove_packages") and getModuleMeta($module->getName(), "source") != "core") {
+                                if ($permissionChecker->hasPermission("remove_packages") && getModuleMeta($module->getName(), "source") != "core") {
                                     echo ModuleHelper::buildMethodCallForm(PackageController::class, "uninstallTheme", array(
                                         "name" => $theme
                                             ), RequestMethod::POST, array(

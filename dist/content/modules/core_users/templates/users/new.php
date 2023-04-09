@@ -2,7 +2,7 @@
 use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_create")) {
+if ($permissionChecker->hasPermission("users") && $permissionChecker->hasPermission("users_create")) {
     $languages = getAvailableBackendLanguages();
     $default_language = getSystemLanguage();
     $ref = _esc(Request::getVar("ref", "home"));

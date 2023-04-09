@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Security\PermissionChecker;
 use App\Constants\ModuleEventConstants;
@@ -164,7 +164,7 @@ class ACL
         $modules = getAllModules();
         foreach ($modules as $module) {
             $acl_metadata = getModuleMeta($module, 'custom_acl');
-            if ($acl_metadata and is_array($acl_metadata)) {
+            if ($acl_metadata && is_array($acl_metadata)) {
                 foreach ($acl_metadata as $permission) {
                     $acl_data[$permission] = null;
                 }

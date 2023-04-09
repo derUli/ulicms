@@ -99,7 +99,7 @@ foreach ($filteredPages as $index => $page) {
                     Template::outputContentElement();
                 }
 
-                if ($page instanceof Article and
+                if ($page instanceof Article &&
                         $page->article_image) {
                     echo App\HTML\imageTag($page->article_image, ["class" => "article-image"]);
                 }

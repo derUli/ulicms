@@ -11,7 +11,7 @@ class CoreMediaController extends MainClass
         $data = CustomData::get();
 
         $mediaEmbedEnabled = !(
-            $data and isset($data["disable_media_embed"]) &&
+            $data && isset($data["disable_media_embed"]) &&
             $data["disable_media_embed"]
         );
 
@@ -95,7 +95,7 @@ class CoreMediaController extends MainClass
 
             $embedCode = $this->embedCodeFromUrl($href);
 
-            if ($href === $text and $embedCode) {
+            if ($href === $text && $embedCode) {
                 $newNode = $this->createElementFromHTML($embedCode, $dom);
                 $importNode = $dom->importNode($newNode, true);
                 $link = new stdClass();

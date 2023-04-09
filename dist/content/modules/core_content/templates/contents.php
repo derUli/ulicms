@@ -1,10 +1,10 @@
 <?php
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('pages')
-        or $permissionChecker->hasPermission("banners")
-        or $permissionChecker->hasPermission("categories")
-        or $permissionChecker->hasPermission("export")
-        or $permissionChecker->hasPermission("forms")) {
+        || $permissionChecker->hasPermission("banners")
+        || $permissionChecker->hasPermission("categories")
+        || $permissionChecker->hasPermission("export")
+        || $permissionChecker->hasPermission("forms")) {
     ?>
     <h2><?php translate("contents"); ?></h2>
     <strong><?php translate("select_content_type"); ?> </strong>

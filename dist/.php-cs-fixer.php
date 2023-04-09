@@ -275,7 +275,8 @@ $config
     ->setRiskyAllowed(true)
     //->setIndent("  ")
     ->setRules([
-        'modernize_types_casting' => true
+        'modernize_types_casting' => true,
+        'logical_operators' => true,
     ]);
 
 return $config->setFinder(

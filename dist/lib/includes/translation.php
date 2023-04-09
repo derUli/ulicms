@@ -76,7 +76,7 @@ function register_translation(string $key, string $value): void
         $key = "TRANSLATION_" . $key;
     }
 
-    defined($key) or define($key, $value);
+    defined($key) || define($key, $value);
 }
 
 function getFrontendLanguage()

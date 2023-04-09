@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Content\Advertisement;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use Template;
 use Database;
@@ -212,7 +212,7 @@ class Banner extends Model
 
     public function setDateFrom($val): void
     {
-        if ($val === null or is_string($val)) {
+        if ($val === null || is_string($val)) {
             $this->date_from = $val;
         } elseif (is_numeric($val)) {
             $this->date_from = date("Y-m-d", $val);
@@ -225,7 +225,7 @@ class Banner extends Model
 
     public function setDateTo($val): void
     {
-        if ($val === null or is_string($val)) {
+        if ($val === null || is_string($val)) {
             $this->date_to = $val;
         } elseif (is_numeric($val)) {
             $this->date_to = date("Y-m-d", $val);

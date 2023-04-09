@@ -62,9 +62,9 @@ if ($permissionChecker->hasPermission('pages')) {
 
         if ($row->approved) {
             $canActivateThis = true;
-        } elseif ($is_owner and $pages_approve_own) {
+        } elseif ($is_owner && $pages_approve_own) {
             $canActivateThis = true;
-        } elseif (!$is_owner and $pages_approve_others) {
+        } elseif (!$is_owner && $pages_approve_others) {
             $canActivateThis = true;
         }
 
@@ -784,7 +784,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                     name="module">
                                     <option value="null"
                                     <?php
-            if ($module == null or empty($module)) {
+            if ($module == null || empty($module)) {
                 echo " selected";
             }
             ?>>[<?php translate("none"); ?>]</option>
@@ -811,7 +811,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                     name="video">
                                     <option value=""
                                     <?php
-                                    if ($row->video == null or empty($row->video)) {
+                                    if ($row->video == null || empty($row->video)) {
                                         echo " selected";
                                     }
             ?>>[<?php translate("none"); ?>]</option>
@@ -838,7 +838,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                     name="audio">
                                     <option value=""
                                     <?php
-                                    if ($row->audio == null or empty($row->audio)) {
+                                    if ($row->audio == null || empty($row->audio)) {
                                         echo " selected";
                                     }
             ?>>[<?php translate("none"); ?>]</option>
@@ -1034,7 +1034,7 @@ if ($permissionChecker->hasPermission('pages')) {
                             </div>
                             <?php
                             $hasComments = count(Comment::getAllByContentId($row->id)) >= 1;
-            if ($hasComments and $permissionChecker->hasPermission("comments_manage")) {
+            if ($hasComments && $permissionChecker->hasPermission("comments_manage")) {
                 ?>
                                 <div class="field">
                                     <a

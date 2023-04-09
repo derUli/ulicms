@@ -87,7 +87,7 @@ class LanguageController extends Controller
     {
         // Fix for security issue CVE-2019-11398
         if (stringContainsHtml($_POST['name'])
-                or stringContainsHtml($_POST["language_code"])) {
+                || stringContainsHtml($_POST["language_code"])) {
             ExceptionResult(get_translation("no_html_allowed"));
         }
 

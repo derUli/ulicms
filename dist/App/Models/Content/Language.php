@@ -2,7 +2,7 @@
 
 namespace App\Models\Content;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use Model;
 use Database;
@@ -26,7 +26,7 @@ class Language extends Model
 
     public function fillVars($result = null)
     {
-        if ($result and Database::getNumRows($result) > 0) {
+        if ($result && Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
             $this->id = $result->id;
             $this->name = $result->name;

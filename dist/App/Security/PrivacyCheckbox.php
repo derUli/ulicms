@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\HTML\Input;
 use Settings;
@@ -112,7 +112,7 @@ class PrivacyCheckbox
         $fullHtml = Settings::get(
             "privacy_policy_checkbox_text_{$this->language}"
         );
-        if (!$this->isEnabled() or
+        if (!$this->isEnabled() ||
                 empty($fullHtml)
         ) {
             return "";

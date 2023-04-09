@@ -113,7 +113,7 @@ if ($error) {
 }
 ?>
 <?php
-if (Settings::get("visitors_can_register") === "on" or Settings::get("visitors_can_register") === "1") {
+if (Settings::get("visitors_can_register") === "on" || Settings::get("visitors_can_register") === "1") {
     ?>
     <a
         href="?register=register&<?php

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Exceptions\NotImplementedException;
 
@@ -108,7 +108,7 @@ class Model
     public static function checkValueType($value, ?string $type, bool $required = false): bool
     {
         // if it's required and $value is null throw exception
-        if ($required and $value === null) {
+        if ($required && $value === null) {
             throw new InvalidArgumentException("Required field not filled");
         }
         // if it's null and not required it's ok
@@ -119,7 +119,7 @@ class Model
         $isXyzFunction = "is_" . $type;
         if (function_exists($isXyzFunction) && !var_is_type($value, $type, $required)) {
             throw new InvalidArgumentException("\"{$value}\" is not of type {$type}.");
-        } elseif (class_exists($type) and $value instanceof $type) {
+        } elseif (class_exists($type) && $value instanceof $type) {
             $dumpedValue = var_dump_str($value);
             throw new InvalidArgumentException("\"{$dumpedValue}\" is not of type {$type}.");
         }
@@ -166,7 +166,7 @@ class Model
             $method = "get" . ucfirst($camelCaseVar);
 
             if (method_exists($this, $method)
-                    and $this->$method() != $originalDataset->$method()) {
+                    && $this->$method() != $originalDataset->$method()) {
                 $hasChanges = true;
             }
         }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-function_exists('get_environment') or exit('no direct script access allowed');
+function_exists('get_environment') || exit('no direct script access allowed');
 
 // This file file loads the configuration based on the environment
 // Set the environment variable ULICMS_ENVIRONMENT to change the configuration environment

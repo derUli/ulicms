@@ -54,13 +54,13 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
                 $acl = new ACL();
                 $settingsName = "user/" . get_user_id() . "/show_positions";
 
-                if ($acl->hasPermission("pages_show_positions") and Settings::get($settingsName)) {
+                if ($acl->hasPermission("pages_show_positions") && Settings::get($settingsName)) {
                     $title .= " ({$row->position})";
                 }
             }
 
             // if content has type link or node url is the target url else build seo url
-            $url = ($row->type == "link" or $row->type == "node") ? $row->link_url : buildSEOUrl($row->slug);
+            $url = ($row->type == "link" || $row->type == "node") ? $row->link_url : buildSEOUrl($row->slug);
             $url = Template::getEscape($url);
 
             if (get_slug() != $row->slug) {

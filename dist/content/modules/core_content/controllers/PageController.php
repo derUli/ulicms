@@ -330,7 +330,7 @@ class PageController extends Controller
             $limit = Request::getVar("limit", 0, 'int');
             $list_type = Request::getVar("list_type", "null", "str");
 
-            if (empty($list_type) or $list_type == "null") {
+            if (empty($list_type) || $list_type == "null") {
                 $list_type = null;
             }
 

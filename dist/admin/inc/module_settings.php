@@ -11,12 +11,12 @@ if ($main_class) {
 }
 
 $disabledModules = Vars::get("disabledModules") ?? [];
-if ((!is_file($admin_file_path) && !is_file($admin_file_path2) && !($controller and method_exists($controller, "settings")) || in_array($module, $disabledModules))) {
+if ((!is_file($admin_file_path) && !is_file($admin_file_path2) && !($controller && method_exists($controller, "settings")) || in_array($module, $disabledModules))) {
     ?>
     <div class="alert alert-danger"><?php translate("this_module_has_no_settings") ?></div>
     <?php
 } else {
-    if ($controller and method_exists($controller, "settings")) {
+    if ($controller && method_exists($controller, "settings")) {
         if (method_exists($controller, "getSettingsHeadline")) {
             define("MODULE_ADMIN_HEADLINE", $controller->getSettingsHeadline());
         }
@@ -43,7 +43,7 @@ if ((!is_file($admin_file_path) && !is_file($admin_file_path2) && !($controller 
             define("MODULE_ACCESS_PERMITTED", false);
         }
     } elseif (defined("MODULE_ADMIN_REQUIRED_PERMISSION")) {
-        if ($permissionChecker->hasPermission(MODULE_ADMIN_REQUIRED_PERMISSION) and $permissionChecker->hasPermission("module_settings")) {
+        if ($permissionChecker->hasPermission(MODULE_ADMIN_REQUIRED_PERMISSION) && $permissionChecker->hasPermission("module_settings")) {
             define("MODULE_ACCESS_PERMITTED", true);
         } else {
             define("MODULE_ACCESS_PERMITTED", false);
@@ -52,8 +52,8 @@ if ((!is_file($admin_file_path) && !is_file($admin_file_path2) && !($controller 
 
     $admin_func = $module . "_admin";
 
-    if ($controller and method_exists($controller, "settings")) {
-        if (defined("MODULE_ACCESS_PERMITTED") and MODULE_ACCESS_PERMITTED) {
+    if ($controller && method_exists($controller, "settings")) {
+        if (defined("MODULE_ACCESS_PERMITTED") && MODULE_ACCESS_PERMITTED) {
             echo $controller->settings();
         } else {
             noPerms();

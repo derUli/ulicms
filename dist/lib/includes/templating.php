@@ -45,11 +45,11 @@ function get_og_tags(?string $slug = null): string
 
         // Falls kein og_title für die Seite gesetzt ist,
         // Standardtitel bzw. Headline verwenden
-        if (is_null($og_title) or empty($og_title)) {
+        if (is_null($og_title) || empty($og_title)) {
             $og_title = get_headline();
         }
 
-        if (is_null($og_image) or empty($og_image)) {
+        if (is_null($og_image) || empty($og_image)) {
             $og_image = Settings::get("og_image");
         }
 
@@ -64,7 +64,7 @@ function get_og_tags(?string $slug = null): string
         if (!empty($og_image) && !str_starts_with($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, '/');
         }
-        if (is_null($og_description) or empty($og_description)) {
+        if (is_null($og_description) || empty($og_description)) {
             $og_description = get_meta_description();
         }
 
@@ -345,7 +345,7 @@ function get_theme(?string $page = null): ?string
     }
     $theme = Settings::get('theme');
     $mobile_theme = Settings::get("mobile_theme");
-    if ($mobile_theme and is_mobile()) {
+    if ($mobile_theme && is_mobile()) {
         $theme = $mobile_theme;
     }
 
@@ -354,7 +354,7 @@ function get_theme(?string $page = null): ?string
                 db_escape($page) . "'  AND language='" .
                 db_escape(getFrontendLanguage()) . "'";
         $result = db_query($sql);
-        if ($result and db_num_rows($result) > 0) {
+        if ($result && db_num_rows($result) > 0) {
             $data = db_fetch_object($result);
             if ($data->theme) {
                 $theme = $data->theme;
@@ -554,7 +554,7 @@ function apply_filter($text, string $type)
             $controller = ControllerRegistry::get($main_class);
         }
         $escapedName = ModuleHelper::underscoreToCamel($type . "_filter");
-        if ($controller and method_exists($controller, $escapedName)) {
+        if ($controller && method_exists($controller, $escapedName)) {
             $text = $controller->$escapedName($text);
         } elseif (is_file($module_content_filter_file1)) {
             require_once $module_content_filter_file1;
@@ -753,7 +753,7 @@ function get_menu(
             // Show page positions in menu if user has the "pages_show_positions" permission.
             if (is_logged_in()) {
                 $acl = new ACL();
-                if ($acl->hasPermission("pages_show_positions") and Settings::get("user/" . get_user_id() . "/show_positions")) {
+                if ($acl->hasPermission("pages_show_positions") && Settings::get("user/" . get_user_id() . "/show_positions")) {
                     $title .= " ({$row->position})";
                 }
             }
@@ -764,7 +764,7 @@ function get_menu(
                 $redirection = $language->getLanguageLink();
             }
             // if content has type link or node url is the target url else build seo url
-            $url = ($row->type == "link" or $row->type == "node") ? $row->link_url : buildSEOUrl($row->slug);
+            $url = ($row->type == "link" || $row->type == "node") ? $row->link_url : buildSEOUrl($row->slug);
             $url = Template::getEscape($url);
 
             if (get_slug() != $row->slug) {
@@ -901,14 +901,14 @@ function checkAccess(string $access = ''): ?string
         return "all";
     }
 
-    if (in_array("registered", $access) and is_logged_in()) {
+    if (in_array("registered", $access) && is_logged_in()) {
         return "registered";
     }
 
     $accessCount = count($access);
 
     for ($i = 0; $i < $accessCount; $i++) {
-        if (is_numeric($access[$i]) and isset($_SESSION['group_id']) and $access[$i] == $_SESSION['group_id']) {
+        if (is_numeric($access[$i]) && isset($_SESSION['group_id']) && $access[$i] == $_SESSION['group_id']) {
             return $access[$i];
         }
     }

@@ -361,7 +361,7 @@ class FtpClient implements Countable
      */
     public function mkdir($directory, $recursive = false)
     {
-        if (!$recursive or $this->isDir($directory)) {
+        if (!$recursive || $this->isDir($directory)) {
             return $this->ftp->mkdir($directory);
         }
 
@@ -446,7 +446,7 @@ class FtpClient implements Countable
     {
         try {
             if (@$this->ftp->delete($path)
-            or ($this->isDir($path) and @$this->rmdir($path, $recursive))) {
+            || ($this->isDir($path) && @$this->rmdir($path, $recursive))) {
                 return true;
             }
 
@@ -542,7 +542,7 @@ class FtpClient implements Countable
 
         $count = 0;
         foreach ($items as $item) {
-            if (null === $type or $item['type'] == $type) {
+            if (null === $type || $item['type'] == $type) {
                 $count++;
             }
         }
@@ -702,7 +702,7 @@ class FtpClient implements Countable
             || ($item[$len-1] == '.' && $item[$len-2] == ' '
 
             // '..'
-            or $item[$len-1] == '.' && $item[$len-2] == '.' && $item[$len-3] == ' ')
+            || $item[$len-1] == '.' && $item[$len-2] == '.' && $item[$len-3] == ' ')
             ) {
                 continue;
             }
@@ -759,7 +759,7 @@ class FtpClient implements Countable
         foreach ($rawlist as $key => $child) {
             $chunks = preg_split("/\s+/", $child);
 
-            if (isset($chunks[8]) && ($chunks[8] == '.' or $chunks[8] == '..')) {
+            if (isset($chunks[8]) && ($chunks[8] == '.' || $chunks[8] == '..')) {
                 continue;
             }
 

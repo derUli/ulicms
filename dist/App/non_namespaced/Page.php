@@ -1,6 +1,6 @@
 <?php
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Security\Permissions\PagePermissions;
 use App\Models\Content\Comment;
@@ -550,7 +550,7 @@ class Page extends Content
     // returns true if this page is configured as an error page
     public function isErrorPage(): bool
     {
-        return $this->isErrorPage403() or $this->isErrorPage404();
+        return $this->isErrorPage403() || $this->isErrorPage404();
     }
 
     // set this page as error page for http status 403

@@ -3,7 +3,7 @@
 use App\Models\Content\Comment;
 use App\Translations\Translation;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 if (!defined("LOADED_LANGUAGE_FILE")) {
     setLanguageByDomain();

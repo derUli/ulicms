@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 // Page that has assigned a module
 class Module_Page extends Page
@@ -57,7 +57,7 @@ class Module_Page extends Page
             $retval = true;
         }
         if ($this->module !== null && !empty($this->module)) {
-            if (($module and $this->module == $module) || !$module) {
+            if (($module && $this->module == $module) || !$module) {
                 $retval = true;
             }
         }

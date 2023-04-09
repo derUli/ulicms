@@ -119,13 +119,13 @@ if ($permissionChecker->hasPermission("users")) {
                                 _esc($user->getEmail()) . "</td>";
                                 echo "<td class=\"hide-on-mobile\">";
                                 $id = $user->getPrimaryGroupId();
-                                if ($id and $permissionChecker->hasPermission("groups_edit")) {
+                                if ($id && $permissionChecker->hasPermission("groups_edit")) {
                                     $url = ModuleHelper::buildActionURL("groups", "edit=$id");
                                     echo '<a href="' . Template::getEscape($url) . '" class="is-not-ajax">';
                                 }
                                 esc($group);
 
-                                if ($id and $permissionChecker->hasPermission("groups_edit")) {
+                                if ($id && $permissionChecker->hasPermission("groups_edit")) {
                                     echo "</a>";
                                 }
                                 echo "</td>";

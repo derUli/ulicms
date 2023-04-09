@@ -3,7 +3,7 @@
 use App\Models\Content\Categories;
 
 $permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("videos") and $permissionChecker->hasPermission("videos_create")) {
+if ($permissionChecker->hasPermission("videos") && $permissionChecker->hasPermission("videos_create")) {
     ?><p>
         <a href="<?php echo ModuleHelper::buildActionURL("videos"); ?>"
            class="btn btn-default btn-back is-not-ajax"> <i class="fa fa-arrow-left"></i>

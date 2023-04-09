@@ -459,7 +459,7 @@ function folder_info($path, $count_hidden=true)
     $folders_count = 0;
     foreach ($files as $t) {
         if ($t != "." && $t != '..') {
-            if ($count_hidden or !(in_array($t, $config['hidden_folders']) or in_array($t, $config['hidden_files']))) {
+            if ($count_hidden || !(in_array($t, $config['hidden_folders']) || in_array($t, $config['hidden_files']))) {
                 $currentFile = $cleanPath . $t;
                 if (is_dir($currentFile)) {
                     list($size, $tmp, $tmp1) = folder_info($currentFile);
@@ -492,7 +492,7 @@ function filescount($path, $count_hidden=true)
 
     foreach ($files as $t) {
         if ($t != "." && $t != '..') {
-            if ($count_hidden or !(in_array($t, $config['hidden_folders']) or in_array($t, $config['hidden_files']))) {
+            if ($count_hidden || !(in_array($t, $config['hidden_folders']) || in_array($t, $config['hidden_files']))) {
                 $currentFile = $cleanPath . $t;
                 if (is_dir($currentFile)) {
                     $size = filescount($currentFile);
@@ -551,7 +551,7 @@ function create_folder($path = null, $path_thumbs = null, $ftp = null, $config =
             mkdir($path, $permission, true);
         } // or even 01777 so you get the sticky bit set
         if ($path_thumbs) {
-            mkdir($path_thumbs, $permission, true) or die("$path_thumbs cannot be found");
+            mkdir($path_thumbs, $permission, true) || die("$path_thumbs cannot be found");
         } // or even 01777 so you get the sticky bit set
         umask($oldumask);
         return true;
@@ -1224,7 +1224,7 @@ function is_php($version = '5.0.0')
 */
 function AddErrorLocation()
 {
-    if (defined('DEBUG_ERROR_MESSAGE') and DEBUG_ERROR_MESSAGE) {
+    if (defined('DEBUG_ERROR_MESSAGE') && DEBUG_ERROR_MESSAGE) {
         $pile=debug_backtrace();
         return " (@".$pile[0]["file"]."#".$pile[0]["line"].")";
     }

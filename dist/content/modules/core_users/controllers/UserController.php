@@ -63,7 +63,7 @@ class UserController extends Controller
     public function updatePost(): void
     {
         $permissionChecker = new PermissionChecker(get_user_id());
-        if ($permissionChecker->hasPermission("users_edit") or $_POST['id'] == $_SESSION['login_id']) {
+        if ($permissionChecker->hasPermission("users_edit") || $_POST['id'] == $_SESSION['login_id']) {
             $id = (int)$_POST['id'];
             $lastname = $_POST["lastname"];
             $firstname = $_POST["firstname"];

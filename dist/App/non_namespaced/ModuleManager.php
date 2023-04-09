@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 class ModuleManager
 {
@@ -45,7 +45,7 @@ class ModuleManager
         $sql = "select name from {prefix}modules";
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
-            if ($source and getModuleMeta($row->name, "source") != $source) {
+            if ($source && getModuleMeta($row->name, "source") != $source) {
                 continue;
             }
             $modules [] = $row->name;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Registries\ActionRegistry;
 
@@ -60,7 +60,7 @@ class ControllerRegistry
     public static function runMethods(): void
     {
         if (isset($_REQUEST["sClass"])
-                and !empty($_REQUEST["sClass"])) {
+                && !empty($_REQUEST["sClass"])) {
             if (self::get($_REQUEST["sClass"])) {
                 $sClass = $_REQUEST["sClass"];
                 self::get($sClass)->runCommand();
@@ -77,7 +77,7 @@ class ControllerRegistry
     // If $class is null it returns the main class for the current backend action if defined
     public static function get(?string $class = null): ?Controller
     {
-        if ($class == null and get_action()) {
+        if ($class == null && get_action()) {
             return ActionRegistry::getController();
         } elseif (isset(self::$controllers[$class])) {
             return self::$controllers[$class];

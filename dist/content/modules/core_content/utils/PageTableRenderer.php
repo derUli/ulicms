@@ -77,7 +77,7 @@ class PageTableRenderer
         if ($order) {
             $sortDirection = (isset($order["dir"]) && $order["dir"] === "desc") ? "desc" : "asc";
             $columnNumber = isset($order["column"]) ? (int)$order["column"] : 0;
-            if ($columnNumber >= 0 and $columnNumber < count($orderColumns)) {
+            if ($columnNumber >= 0 && $columnNumber < count($orderColumns)) {
                 $sortColumn = $orderColumns[$columnNumber];
             }
         }
@@ -151,7 +151,7 @@ class PageTableRenderer
 
         $filterNames = array_keys($filters);
         // Filtered page count if the user apply filters, else total page count
-        $result["recordsFiltered"] = ($search or count($filterNames)) ?
+        $result["recordsFiltered"] = ($search || count($filterNames)) ?
                 $filteredCount : $totalCount;
 
         return $result;

@@ -5,7 +5,7 @@ use App\Models\Content\Categories;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners")
-        and $permissionChecker->hasPermission("banners_create")) {
+        && $permissionChecker->hasPermission("banners_create")) {
     ?>
 
     <?php

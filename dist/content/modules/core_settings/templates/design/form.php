@@ -159,7 +159,7 @@ if (!$permissionChecker->hasPermission("design")) {
             $selected = "selected";
         }
 
-        if (!in_array($default_font, $fonts) and $i === $font_amount) {
+        if (!in_array($default_font, $fonts) && $i === $font_amount) {
             $selected = "selected";
         }
 

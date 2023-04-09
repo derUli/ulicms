@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Content;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use mysqli_result;
 use Database;
@@ -38,7 +38,7 @@ class Category
         $this->name = null;
         $this->description = null;
 
-        if ($result and Database::getNumRows($result) > 0) {
+        if ($result && Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
             $this->id = (int)$result->id;
             $this->name = $result->name;

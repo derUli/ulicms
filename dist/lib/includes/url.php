@@ -55,7 +55,7 @@ function getBaseFolderURL(?string $suffix = null): string
     $sp = strtolower($_SERVER['SERVER_PROTOCOL']);
     $protocol = substr($sp, 0, strpos($sp, '/')) . $s;
     $port = ($_SERVER['SERVER_PORT'] == "80"
-            or $_SERVER['SERVER_PORT'] == "443") ?
+            || $_SERVER['SERVER_PORT'] == "443") ?
             "" : (":" . $_SERVER['SERVER_PORT']);
     $path = basename(dirname($_SERVER['REQUEST_URI'])) == '' ?
             $_SERVER['REQUEST_URI'] : dirname($_SERVER['REQUEST_URI']);

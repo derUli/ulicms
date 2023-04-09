@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security\SpamChecker;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Helpers\AntiSpamHelper;
 
@@ -89,7 +89,7 @@ class CommentSpamChecker implements ISpamChecker
         // check the useragent
         $useragent = $this->comment->getUserAgent();
         $rejectRequestsFromBots = $this->spamFilterConfiguration->getRejectRequestsFromBots();
-        if (!empty($useragent) and
+        if (!empty($useragent) &&
                 $rejectRequestsFromBots) {
             if (AntiSpamHelper::checkForBot($useragent)) {
                 $this->errors[] = new SpamDetectionResult(

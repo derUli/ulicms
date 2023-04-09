@@ -9,7 +9,7 @@ use App\Translations\JSTranslation;
 use function App\HTML\imageTag;
 
 $permissionChecker = new ACL();
-if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_edit")) or ($_GET['id'] == $_SESSION['login_id'])) {
+if (($permissionChecker->hasPermission("users") && $permissionChecker->hasPermission("users_edit")) || ($_GET['id'] == $_SESSION['login_id'])) {
     $id = (int)$_GET['id'];
     $languages = getAvailableBackendLanguages();
     $result = db_query("SELECT * FROM " . tbname('users') . " WHERE id='$id'");
@@ -210,7 +210,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
                 name="html_editor">
                 <option value="ckeditor"
                 <?php
-                if (!$row->html_editor or $row->html_editor == HtmlEditor::CKEDITOR) {
+                if (!$row->html_editor || $row->html_editor == HtmlEditor::CKEDITOR) {
                     echo "selected";
                 }
         ?>>CKEditor</option>

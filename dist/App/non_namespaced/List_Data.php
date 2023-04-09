@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Exceptions\DatabaseException;
 
@@ -122,7 +122,7 @@ class List_Data extends Model
             $language = "'" . Database::escapeValue($this->language) . "'";
         }
 
-        if ($this->category_id === null or $this->category_id === 0) {
+        if ($this->category_id === null || $this->category_id === 0) {
             $category_id = "null";
         } else {
             $category_id = (int)$this->category_id;
@@ -134,7 +134,7 @@ class List_Data extends Model
             $menu = "'" . Database::escapeValue($this->menu) . "'";
         }
 
-        if ($this->parent_id === null or $this->parent_id === 0) {
+        if ($this->parent_id === null || $this->parent_id === 0) {
             $parent_id = "null";
         } else {
             $parent_id = (int) ($this->parent_id);
@@ -181,7 +181,7 @@ class List_Data extends Model
             $language = "'" . Database::escapeValue($this->language) . "'";
         }
 
-        if ($this->category_id === null or $this->category_id === 0) {
+        if ($this->category_id === null || $this->category_id === 0) {
             $category_id = "null";
         } else {
             $category_id = (int)$this->category_id;
@@ -193,7 +193,7 @@ class List_Data extends Model
             $menu = "'" . Database::escapeValue($this->menu) . "'";
         }
 
-        if ($this->parent_id === null or $this->parent_id === 0) {
+        if ($this->parent_id === null || $this->parent_id === 0) {
             $parent_id = "null";
         } else {
             $parent_id = (int) ($this->parent_id);

@@ -158,7 +158,7 @@ function validate_login(
         $user->save();
 
         if ($max_failed_logins_items >= 1
-                and $user->getFailedLogins() >= $max_failed_logins_items) {
+                && $user->getFailedLogins() >= $max_failed_logins_items) {
             $user->setLocked($user->isLocked());
             $user->save();
 

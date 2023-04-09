@@ -4,7 +4,7 @@ use App\Models\Content\Categories;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("audio")
-        and $permissionChecker->hasPermission("audio_create")) {
+        && $permissionChecker->hasPermission("audio_create")) {
     ?>
     <div class="btn-toolbar">
         <a href="<?php echo ModuleHelper::buildActionURL("audio"); ?>"

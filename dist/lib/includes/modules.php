@@ -48,7 +48,7 @@ function do_event(
         }
         ob_start();
         $escapedName = ModuleHelper::underscoreToCamel($name);
-        if ($controller and method_exists($controller, $escapedName)) {
+        if ($controller && method_exists($controller, $escapedName)) {
             echo $controller->$escapedName();
         } elseif (is_file($file1)) {
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
@@ -111,7 +111,7 @@ function replaceShortcodesWithModules(
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
         }
-        if ($controller and method_exists($controller, "render")) {
+        if ($controller && method_exists($controller, "render")) {
             $html_output = $controller->render();
         } elseif (function_exists($module . "_render")) {
             $html_output = call_user_func($module . "_render");
@@ -191,9 +191,9 @@ function replaceOtherShortCodes(string $string): string
             $page = ContentFactory::getByID($id);
             // a page should not include itself
             // because that would cause an endless loop
-            if ($page and $id != get_ID()) {
+            if ($page && $id != get_ID()) {
                 $content = '';
-                if ($page->active and checkAccess($page->access)) {
+                if ($page->active && checkAccess($page->access)) {
                     $content = $page->content;
                 }
                 $string = str_ireplace($placeholder, $content, $string);

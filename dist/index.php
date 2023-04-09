@@ -120,7 +120,7 @@ do_event("before_http_header");
 
 $redirection = get_redirection();
 
-if ($redirection && (is_active() or is_logged_in())) {
+if ($redirection && (is_active() || is_logged_in())) {
     Response::redirect($redirection, 302);
 }
 

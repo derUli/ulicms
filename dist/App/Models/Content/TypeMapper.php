@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace App\Models\Content;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use ModuleManager;
 

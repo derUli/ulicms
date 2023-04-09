@@ -37,7 +37,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
             unlink($post_install_script);
         }
 
-        if (count($packagesToInstall) === 0 or empty($_REQUEST["packages"])) {
+        if (count($packagesToInstall) === 0 || empty($_REQUEST["packages"])) {
             ?>
             <p>
                 <strong><?php translate("error"); ?></strong> <br />
@@ -52,7 +52,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
                     $pkgContent = @file_get_contents_wrapper($pkgURL);
 
                     // Wenn Paket nicht runtergeladen werden konnte
-                    if (!$pkgContent or strlen($pkgContent) < 1) {
+                    if (!$pkgContent || strlen($pkgContent) < 1) {
                         echo "<p style='color:red;'>" . str_ireplace("%pkg%", $packagesToInstall [$i], get_translation("download_failed")) . "</p>";
                     } else {
                         $tmpdir = "../content/tmp/";
