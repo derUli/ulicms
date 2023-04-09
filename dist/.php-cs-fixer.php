@@ -25,10 +25,6 @@ $tmpRules = [
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
     // A `final` class must not have `final` methods and `private` methods must not be `final`.
     'no_unneeded_final_method' => true,
-    // Variables must be set `null` instead of using `(unset)` casting.
-    'no_unset_cast' => true,
-    // Properties should be set to `null` instead of using `unset`.
-    'no_unset_on_property' => true,
     // Converts `protected` variables and methods to `private` where possible.
     'protected_to_private' => true,
     // There should be one or no space before colon, and one space after it in return type declarations, according to configuration.
@@ -277,6 +273,10 @@ $config
     'blank_line_before_statement' => ['statements'=>[]],
     // A single space or none should be between cast and variable.
     'cast_spaces' => ['space'=>'none'],
+    // Variables must be set `null` instead of using `(unset)` casting.
+    'no_unset_cast' => false,
+    // Properties should be set to `null` instead of using `unset`.
+    'no_unset_on_property' => false,
     ]);
 
 return $config->setFinder(
