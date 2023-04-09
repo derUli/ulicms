@@ -15,7 +15,7 @@ if (! $permissionChecker->hasPermission('install_packages')) {
         <a href="<?php echo ModuleHelper::buildActionURL('install_method'); ?>"
            class="btn btn-default btn-back is-ajax">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
-            <?php translate('back') ?></a>
+            <?php translate('back'); ?></a>
     </p>
     <?php
     $temp_folder = ULICMS_ROOT . DIRECTORY_SEPARATOR . 'content' . DIRECTORY_SEPARATOR . 'tmp';

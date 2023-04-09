@@ -22,7 +22,7 @@ if ($permissionChecker->hasPermission('privacy_settings')) {
             href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
             class="btn btn-default btn-back is-not-ajax">
             <i class="fa fa-arrow-left"></i>
-            <?php translate('back') ?>
+            <?php translate('back'); ?>
         </a>
     </div>
     <?php
@@ -81,7 +81,7 @@ if ($permissionChecker->hasPermission('privacy_settings')) {
             <?php $editor = get_html_editor(); ?>
             <div id="privacy_policy_checkbox_text_container"
                  style="<?php echo $privacy_policy_checkbox_enable ? 'display:block' : 'display:none'; ?>">
-                <strong><?php translate('privacy_policy_checkbox_text') ?></strong><br />
+                <strong><?php translate('privacy_policy_checkbox_text'); ?></strong><br />
                 <textarea name="privacy_policy_checkbox_text"
                           class="<?php esc($editor); ?>" data-mimetype="text/html"
                           id="privacy_policy_checkbox_text" cols=60 rows=15><?php esc(Settings::get("privacy_policy_checkbox_text_{$currentLanguage}")); ?></textarea>

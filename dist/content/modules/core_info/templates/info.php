@@ -11,7 +11,7 @@ if (! $admin_logo) {
     <strong>Release <?php echo cms_version(); ?>
         "<?php echo $version->getCodeName(); ?>"</strong>
     <br /> <small><?php translate('build_date'); ?>:
-        <?php echo $version->getBuildDate() ?></small>
+        <?php echo $version->getBuildDate(); ?></small>
 </p>
 <p>
     <a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2011 -
@@ -73,7 +73,7 @@ if (! $admin_logo) {
         class="btn btn-info is-ajax"
         >
         <i class="fa fa-info-circle" aria-hidden="true"></i>
-        <?php translate('license') ?>
+        <?php translate('license'); ?>
     </a>
     <a href="http://www.ulicms.de/kontakt.html" target="_blank"
        class="btn btn-info" role="button"><i class="fas fa-envelope"></i>

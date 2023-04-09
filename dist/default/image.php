@@ -6,7 +6,7 @@ if ($id !== null) {
     if ($image->image_url !== null && ! empty($image->image_url)) {
         ?>
         <div class="ulicms-content-image">
-            <img src="<?php Template::escape($image->image_url) ?>">
+            <img src="<?php Template::escape($image->image_url); ?>">
         </div>
 
         <?php

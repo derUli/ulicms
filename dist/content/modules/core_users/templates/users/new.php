@@ -9,7 +9,7 @@ if ($permissionChecker->hasPermission('users') && $permissionChecker->hasPermiss
     ?>
     <div class="btn-toolbar">
         <a href="<?php echo ModuleHelper::buildActionURL('admins'); ?>"
-           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back') ?></a>
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </div>
     <form action="index.php?sClass=UserController&sMethod=create"
           method="post" id="edit-user" class="voffset2">
@@ -80,7 +80,7 @@ if ($permissionChecker->hasPermission('users') && $permissionChecker->hasPermiss
                     echo 'selected';
                 }
                 ?>>
-                                <?php echo _esc($value) ?>
+                                <?php echo _esc($value); ?>
                     </option>
                 <?php }
             ?>
@@ -95,7 +95,7 @@ if ($permissionChecker->hasPermission('users') && $permissionChecker->hasPermiss
             foreach ($allGroups as $key => $value) {
                 ?>
                     <option value="<?php echo $key; ?>">
-                        <?php echo _esc($value) ?>
+                        <?php echo _esc($value); ?>
                     </option>
                 <?php }
             ?>

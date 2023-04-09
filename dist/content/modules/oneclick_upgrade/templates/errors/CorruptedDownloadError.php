@@ -3,7 +3,7 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('update_system')) {
     ?>
     <div class="alert alert-danger">
-        <strong><?php translate('error'); ?>!</strong> <?php translate('corrupted_download') ?>
+        <strong><?php translate('error'); ?>!</strong> <?php translate('corrupted_download'); ?>
     </div>
     <form action="../?sClass=CoreUpgradeController&sMethod=runUpgrade"
           method="post">

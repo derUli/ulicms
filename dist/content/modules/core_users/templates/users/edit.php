@@ -24,7 +24,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
     ?>
     <div class="btn-toolbar">
         <a href="<?php echo $backUrl; ?>"
-           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back') ?></a>
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </div>
     <?php
     while ($row = db_fetch_object($result)) {
@@ -73,7 +73,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
                             '1',
                             ['class' => 'js-switch']
                         );
-                ?><?php translate('delete_avatar') ?>
+                ?><?php translate('delete_avatar'); ?>
                     </label>
                 </div>
             <?php }
@@ -171,7 +171,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
                                 echo 'selected';
                             }
                         ?>>
-                                <?php esc($value) ?>
+                                <?php esc($value); ?>
                         </option>
                     <?php }
                     ?>
@@ -188,7 +188,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
                     <option
                         value="<?php echo $key; ?>"
                         <?php echo in_array($key, $secondaryGroupIds) ? 'selected' : ''; ?>>
-                            <?php echo _esc($value) ?>
+                            <?php echo _esc($value); ?>
                     </option>
                 <?php }
                 ?>
@@ -296,7 +296,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
             <strong class="field-label">
                 <?php translate('about_me'); ?>
             </strong>
-            <textarea rows=10 cols=50 name="about_me"><?php esc($row->about_me) ?></textarea>
+            <textarea rows=10 cols=50 name="about_me"><?php esc($row->about_me); ?></textarea>
         </div>
         <div class="voffset2">
             <button type="submit" class="btn btn-primary">

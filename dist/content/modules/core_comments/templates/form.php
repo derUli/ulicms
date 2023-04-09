@@ -55,7 +55,7 @@ if (Vars::get('comments_enabled')) {
     ?>
 
         <div>
-            <label for="author_name"><?php translate('your_name') ?>
+            <label for="author_name"><?php translate('your_name'); ?>
                 <span class="text-danger">*</span></label>
             <div>
                 <?php
@@ -72,7 +72,7 @@ if (Vars::get('comments_enabled')) {
             </div>
         </div>
         <div>
-            <label for="author_email"><?php translate('your_email') ?></label>
+            <label for="author_email"><?php translate('your_email'); ?></label>
             <div>
                 <?php
     echo App\HTML\Input::textBox(
@@ -86,7 +86,7 @@ if (Vars::get('comments_enabled')) {
     ?>
             </div>
         </div>
-        <label for="author_url"><?php translate('your_website') ?></label>
+        <label for="author_url"><?php translate('your_website'); ?></label>
         <div>
             <?php
             echo App\HTML\Input::textBox('author_url', '', 'url', [
@@ -97,13 +97,13 @@ if (Vars::get('comments_enabled')) {
         <div>
             <div class="comment-text">
                 <p>
-                    <label for="text"><?php translate('text') ?>
+                    <label for="text"><?php translate('text'); ?>
                         <span class="text-danger">*</span></label>
                     <?php
             echo App\HTML\Input::textArea('text', '', 10, 80, [
                 'required' => 'required',
                 'class' => 'form-control'
-            ])
+            ]);
     ?>
                 </p>
             </div>
@@ -120,7 +120,7 @@ if (Vars::get('comments_enabled')) {
             <button type="submit" class="btn btn-primary"><?php
             translate(
                 'post_comment'
-            )
+            );
     ?></button>
         </p>
     </div>

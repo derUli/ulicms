@@ -88,7 +88,7 @@ if ($permissionChecker->hasPermission('pages')) {
             <div class="pageform" style="display: none">
                 <div class="top-bar">
                     <a href="<?php echo ModuleHelper::buildActionURL('pages'); ?>"
-                       class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back') ?></a>
+                       class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
                        <?php
                        echo ModuleHelper::buildMethodCallButton('PageController', 'delete', '<i class="fas fa-trash"></i> ' . get_translation('delete'), [
                            'class' => 'btn btn-danger',
@@ -112,7 +112,7 @@ if ($permissionChecker->hasPermission('pages')) {
             ?>
                 <input type="hidden" name="edit_page" value="edit_page"> <input
                     type="hidden" name="page_id" id="page_id"
-                    value="<?php echo $row->id ?>">
+                    value="<?php echo $row->id; ?>">
                 <div id="accordion-container">
                     <h2 class="accordion-header"><?php translate('title_and_headline'); ?></h2>
                     <div class="accordion-content">
@@ -166,11 +166,11 @@ if ($permissionChecker->hasPermission('pages')) {
                         <div class="typedep show-on-snippet">
                             <div class="field">
                                 <strong class="field-label">
-                                    <?php translate('snippet_code') ?>
+                                    <?php translate('snippet_code'); ?>
                                 </strong>
                                 <input
                                     type="text" class="select-on-click"
-                                    value="<?php Template::escape('[include=' . $row->id . ']') ?>" readonly>
+                                    value="<?php Template::escape('[include=' . $row->id . ']'); ?>" readonly>
                                 <small><?php translate('snippet_code_help'); ?></small>
                             </div>
                         </div>
@@ -245,7 +245,7 @@ if ($permissionChecker->hasPermission('pages')) {
                     echo 'selected="selected" ';
                 }
                 ?>
-                                            value="<?php echo $menu ?>">
+                                            value="<?php echo $menu; ?>">
                                                 <?php translate($menu); ?>
                                         </option>
                                     <?php }
@@ -597,7 +597,7 @@ if ($permissionChecker->hasPermission('pages')) {
                         <div class="accordion-content">
                             <div class="field">
                                 <strong class="field-label">
-                                    <?php translate('type') ?>
+                                    <?php translate('type'); ?>
                                 </strong>
                                 <?php $types = get_available_post_types(); ?>
                                 <select name="list_type">
@@ -607,7 +607,7 @@ if ($permissionChecker->hasPermission('pages')) {
                             echo 'selected';
                         }
             ?>>
-                                        [<?php translate('every') ?>]
+                                        [<?php translate('every'); ?>]
                                     </option>
                                     <?php
             foreach ($types as $type) {
@@ -656,7 +656,7 @@ if ($permissionChecker->hasPermission('pages')) {
                 $lcat = -1;
             }
             ?>
-                                <?php echo Categories::getHTMLSelect($lcat, true, 'list_category') ?>
+                                <?php echo Categories::getHTMLSelect($lcat, true, 'list_category'); ?>
                             </div>
 
                             <div class="field">
@@ -668,7 +668,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                     <?php
                 foreach (get_all_menus() as $menu) {
                     ?>
-                                        <option value="<?php echo $menu ?>"
+                                        <option value="<?php echo $menu; ?>"
                                         <?php
                     if ($menu == $list_data->menu) {
                         echo 'selected';
@@ -763,13 +763,13 @@ if ($permissionChecker->hasPermission('pages')) {
             if ($list_data->use_pagination) {
                 echo 'selected';
             }
-            ?>><?php translate('yes') ?></option>
+            ?>><?php translate('yes'); ?></option>
                                     <option value="0"
                                     <?php
             if (! $list_data->use_pagination) {
                 echo 'selected';
             }
-            ?>><?php translate('no') ?></option>
+            ?>><?php translate('no'); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -884,13 +884,13 @@ if ($permissionChecker->hasPermission('pages')) {
                                     if ($row->text_position == 'before') {
                                         echo 'selected';
                                     }
-            ?>><?php translate('description_before_content') ?></option>
+            ?>><?php translate('description_before_content'); ?></option>
                                     <option value="after"
                                     <?php
             if ($row->text_position == 'after') {
                 echo 'selected';
             }
-            ?>><?php translate('description_after_content') ?></option>
+            ?>><?php translate('description_after_content'); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -917,7 +917,7 @@ if ($permissionChecker->hasPermission('pages')) {
                     </div>
                     <div style="<?php
             echo ! $permissionChecker->hasPermission('pages_edit_permissions') ?
-                    'display:none' : ''
+                    'display:none' : '';
             ?>"
                          >
                         <h2 class="accordion-header"><?php translate('permissions'); ?></h2>

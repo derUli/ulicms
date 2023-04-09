@@ -5,7 +5,7 @@ use App\Translations\JSTranslation;
 <p>
     <a
         href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fas fa-arrow-left"></i> <?php translate('back') ?></a>
+        class="btn btn-default btn-back is-not-ajax"><i class="fas fa-arrow-left"></i> <?php translate('back'); ?></a>
 </p>
 <h1><?php translate('spamfilter'); ?></h1>
 <?php

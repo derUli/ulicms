@@ -7,7 +7,7 @@ if ($permissionChecker->hasPermission('videos') && $permissionChecker->hasPermis
     ?><p>
         <a href="<?php echo ModuleHelper::buildActionURL('videos'); ?>"
            class="btn btn-default btn-back is-not-ajax"> <i class="fa fa-arrow-left"></i>
-            <?php translate('back') ?></a>
+            <?php translate('back'); ?></a>
     </p>
     <h1><?php translate('UPLOAD_VIDEO'); ?></h1>
     <form action="index.php?sClass=VideoController&sMethod=create"

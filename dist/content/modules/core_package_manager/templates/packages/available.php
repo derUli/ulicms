@@ -10,9 +10,9 @@ if (! $permissionChecker->hasPermission('install_packages')) {
     ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL('install_method'); ?>"
-           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php translate('back') ?></a>
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php translate('back'); ?></a>
     </p>
-    <h1><?php translate('available_packages') ?></h1>
+    <h1><?php translate('available_packages'); ?></h1>
     <div id="loadpkg">
         <?php require 'inc/loadspinner.php'; ?>
     </div>

@@ -122,7 +122,7 @@ echo ModuleHelper::buildMethodCallForm(
                 <th><?php translate('date'); ?></th>
                 <th><?php translate('status'); ?></th>
                 <th><?php translate('author'); ?></th>
-                <th><?php translate('comment') ?></th>
+                <th><?php translate('comment'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -200,7 +200,7 @@ echo ModuleHelper::buildMethodCallForm(
     <div class="col-xs-6">
         <button type="submit" class="btn btn-primary">
             <i class="fas fa-running"></i>
-            <?php translate('do_action') ?></button>
+            <?php translate('do_action'); ?></button>
     </div>
 </div>
 <?php

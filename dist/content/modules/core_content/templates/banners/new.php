@@ -22,7 +22,7 @@ if ($permissionChecker->hasPermission('banners')
     <div class="field">
         <a href="<?php echo ModuleHelper::buildActionURL('banner'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
-            <?php translate('back') ?></a>
+            <?php translate('back'); ?></a>
     </div>
 
     <div class="field">
@@ -113,7 +113,7 @@ if ($permissionChecker->hasPermission('banners')
         <strong class="field-label">
             <?php translate('category'); ?>
         </strong>
-        <?php echo Categories::getHTMLSelect() ?></div>
+        <?php echo Categories::getHTMLSelect(); ?></div>
     </div>
 
     <div class="voffset2">

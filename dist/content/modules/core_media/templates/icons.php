@@ -13,7 +13,7 @@ $icons = array_filter($icons, function ($cssClass, $action) {
     return $permissionChecker->hasPermission($action);
 }, ARRAY_FILTER_USE_BOTH);
 $selectedButton = 'btn btn-primary';
-$notSelectedButton = 'btn btn-default'
+$notSelectedButton = 'btn btn-default';
 ?>
 <div class="btn-toolbar" role="toolbar"
      aria-label="Toolbar with button groups">
@@ -30,7 +30,7 @@ $notSelectedButton = 'btn btn-default'
                        $selectedButton : $notSelectedButton;
         echo $action == 'files' ? ' is-ajax' : ' is-not-ajax';
         ?>">
-                <i class="<?php echo $cssClass ?>"></i>
+                <i class="<?php echo $cssClass; ?>"></i>
                 <span class="hide-on-820">
                     <?php translate($action); ?>
                 </span>

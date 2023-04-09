@@ -28,14 +28,14 @@ if ($installed_at) {
     <tr>
         <td><?php translate('REGISTERED_USERS_COUNT'); ?>
         </td>
-        <td><?php echo count(getUsers()) ?></td>
+        <td><?php echo count(getUsers()); ?></td>
     </tr>
     <?php
 if (Settings::get('contact_form_refused_spam_mails')) {
     ?>
         <tr>
             <td><?php echo translate('BLOCKED_SPAM_MAILS'); ?></td>
-            <td><?php echo Settings::get('contact_form_refused_spam_mails') ?></td>
+            <td><?php echo Settings::get('contact_form_refused_spam_mails'); ?></td>
         </tr>
         <?php
 }

@@ -165,7 +165,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                     $theTheme = new Theme($theme);
 
                     $inGeneralUse = (Settings::get('theme') == $theme);
-                    $inMobileUse = (Settings::get('mobile_theme') == $theme)
+                    $inMobileUse = (Settings::get('mobile_theme') == $theme);
                     ?>
                     <tr>
                         <td><?php esc($theme); ?></td>

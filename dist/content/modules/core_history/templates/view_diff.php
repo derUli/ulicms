@@ -13,7 +13,7 @@ if ($permissionChecker->hasPermission('pages')) {
             );
     ?>"
             class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
-            <?php translate('back') ?></a>
+            <?php translate('back'); ?></a>
     </p>
     <h1><?php translate('diff'); ?></h1>
     <p><?php
@@ -38,7 +38,7 @@ if ($permissionChecker->hasPermission('pages')) {
             'doRestore',
             'version_id=' .
                                             $diff->history_id
-        )
+        );
     ?>"
             class="btn btn-danger voffset3"
             onclick="return confirm(

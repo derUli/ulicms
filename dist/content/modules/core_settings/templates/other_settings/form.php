@@ -64,7 +64,7 @@ if (! $permissionChecker->hasPermission('other')) {
     ?>
     <a
         href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back') ?></a>
+        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     <div id="accordion-container" class="voffset3">
         <h2 class="accordion-header">
             <?php translate('DOMAIN2LANGUAGE_MAPPING'); ?>

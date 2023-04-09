@@ -13,13 +13,13 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     <p>
         <a
             href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
-            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back') ?></a>
+            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </p>
     <h2><?php translate('general_settings'); ?></h2>
     <?php
     echo ModuleHelper::buildMethodCallForm('SimpleSettingsController', 'save', [], 'post', [
         'id' => 'settings_simple'
-    ])
+    ]);
     ?>
     <table>
         <tr>
@@ -146,7 +146,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
             <td>
             <td style="text-align: center">
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-save"></i> <?php translate('save_changes') ?></button>
+                    <i class="fa fa-save"></i> <?php translate('save_changes'); ?></button>
             </td>
         </tr>
     </table>

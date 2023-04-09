@@ -11,7 +11,7 @@ if (! $permissionChecker->hasPermission('forms') || ! $permissionChecker->hasPer
     ?><div class="field">
         <a href="<?php echo ModuleHelper::buildActionURL('forms'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
-            <?php translate('back') ?></a>
+            <?php translate('back'); ?></a>
     </div>
     <h1><?php translate('create_form'); ?></h1>
     <?php echo ModuleHelper::buildMethodCallForm('FormController', 'create'); ?>

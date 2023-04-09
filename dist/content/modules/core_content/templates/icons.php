@@ -29,7 +29,7 @@ $specialLabels = [
 ];
 
 $selectedButton = 'btn btn-primary';
-$notSelectedButton = 'btn btn-default'
+$notSelectedButton = 'btn btn-default';
 ?>
 
 <div class="btn-toolbar" role="toolbar"
@@ -38,7 +38,7 @@ $notSelectedButton = 'btn btn-default'
         <a href="<?php echo ModuleHelper::buildActionURL('contents'); ?>"
            class="btn btn-default btn-back is-ajax"
            ><i class="fa fa-arrow-left"></i>
-            <?php translate('back') ?></a>
+            <?php translate('back'); ?></a>
     </div>
     <?php foreach ($icons as $action => $cssClass) { ?>
         <div class="btn-group" role="group">
@@ -47,7 +47,7 @@ $notSelectedButton = 'btn btn-default'
                echo $action == $currentAction ?
                        $selectedButton : $notSelectedButton;
         ?> is-not-ajax">
-                <i class="<?php echo $cssClass ?>"></i>
+                <i class="<?php echo $cssClass; ?>"></i>
                 <span class="hide-on-820">
                     <?php
              (

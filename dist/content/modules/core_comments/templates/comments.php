@@ -11,7 +11,7 @@ $comments = Comment::getAllByStatus(
 $last = end($comments);
 reset($comments);
 ?>
-<?php echo Template::executeModuleTemplate('core_comments', 'form.php') ?>
+<?php echo Template::executeModuleTemplate('core_comments', 'form.php'); ?>
 <?php if (count($comments) > 0) { ?>
     <div class="comment-list">
         <h3><?php translate('comments'); ?></h3>

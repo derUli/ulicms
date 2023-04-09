@@ -21,7 +21,7 @@ if ($permissionChecker->hasPermission('dashboard')) {
     ?> </p>
     <p>
         <a
-            href="?action=admin_edit&id=<?php echo get_user_id() ?>&ref=home"
+            href="?action=admin_edit&id=<?php echo get_user_id(); ?>&ref=home"
             class="btn btn-default is-not-ajax"
             ><i class="fas fa-user"></i> <?php translate('edit_profile'); ?></a>
     </p>
@@ -54,7 +54,7 @@ if ($permissionChecker->hasPermission('dashboard')) {
     if (! Settings::get('disable_ulicms_newsfeed')) {
         ?>
             <div class="has-ajax-content"
-                 data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, 'newsfeed') ?>">
+                 data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, 'newsfeed'); ?>">
 
                 <h2 class="accordion-header" >
                     <?php translate('ulicms_news'); ?></h2>

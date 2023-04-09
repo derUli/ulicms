@@ -53,7 +53,7 @@ if (! $permissionChecker->hasPermission('performance_settings')) {
     ?>"
         class="btn btn-default btn-back is-not-ajax">
         <i class="fas fa-arrow-left"></i>
-        <?php translate('back') ?></a>
+        <?php translate('back'); ?></a>
     <a
         href="<?php
     echo ModuleHelper::buildMethodCallUrl(
@@ -116,7 +116,7 @@ if (! $permissionChecker->hasPermission('performance_settings')) {
         <div class="accordion-content">
             <div class="field">
                 <div class="label">
-                    <?php translate('lazy_loading') ?>
+                    <?php translate('lazy_loading'); ?>
                 </div>
                 <div class="inputWrapper">
                     <?php

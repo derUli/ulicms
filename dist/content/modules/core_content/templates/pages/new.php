@@ -69,7 +69,7 @@ if (
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL('pages'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
-            <?php translate('back') ?></a>
+            <?php translate('back'); ?></a>
     </p>
     <input type="hidden" name="add" value="add">
     <div id="accordion-container">
@@ -184,7 +184,7 @@ if (
                             <?php
             foreach (get_all_menus() as $menu) {
                 ?>
-                            <option value="<?php echo $menu ?>"
+                            <option value="<?php echo $menu; ?>"
                             <?php
                             if ($menu == DEFAULT_MENU) {
                                 echo 'selected';
@@ -463,11 +463,11 @@ if (
             <div class="accordion-content">
                 <div class="field">
                     <strong class="field-label">
-    <?php translate('type') ?>
+    <?php translate('type'); ?>
                     </strong>
 
                     <select name="list_type">
-                        <option value="null" selected>[<?php translate('every') ?>]
+                        <option value="null" selected>[<?php translate('every'); ?>]
                         </option>
                         <?php
                 foreach ($types as $type) {
@@ -498,7 +498,7 @@ if (
                     <strong class="field-label">
                     <?php translate('category'); ?>
                     </strong>
-    <?php echo Categories::getHTMLSelect(-1, true, 'list_category') ?>
+    <?php echo Categories::getHTMLSelect(-1, true, 'list_category'); ?>
                 </div>
 
                 <div class="field">
@@ -581,8 +581,8 @@ if (
 
                     <select
                         name="list_use_pagination">
-                        <option value="1"><?php translate('yes') ?></option>
-                        <option value="0" selected><?php translate('no') ?></option>
+                        <option value="1"><?php translate('yes'); ?></option>
+                        <option value="0" selected><?php translate('no'); ?></option>
                     </select>
                 </div>
             </div>
@@ -657,8 +657,8 @@ if (
     <?php translate('position_of_description'); ?>
                     </strong>
                     <select name="text_position">
-                        <option value="before"><?php translate('description_before_content') ?></option>
-                        <option value="after"><?php translate('description_after_content') ?></option>
+                        <option value="before"><?php translate('description_before_content'); ?></option>
+                        <option value="after"><?php translate('description_after_content'); ?></option>
                     </select>
                 </div>
             </div>

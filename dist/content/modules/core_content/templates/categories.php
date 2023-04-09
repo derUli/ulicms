@@ -145,7 +145,7 @@ if (! $permissionChecker->hasPermission('categories')) {
                 <a href="<?php echo ModuleHelper::buildActionURL('categories'); ?>"
                    class="btn btn-default btn-back is-not-ajax">
                     <i class="fa fa-arrow-left"></i>
-                    <?php translate('back') ?></a>
+                    <?php translate('back'); ?></a>
             </div>
             <h2><?php translate('create_category'); ?></h2>
             <?php
@@ -191,7 +191,7 @@ if (! $permissionChecker->hasPermission('categories')) {
                 <a href="<?php echo ModuleHelper::buildActionURL('categories'); ?>"
                    class="btn btn-default btn-back is-not-ajax">
                     <i class="fa fa-arrow-left"></i>
-                    <?php translate('back') ?></a>
+                    <?php translate('back'); ?></a>
             </div>
             <h2><?php translate('edit_category'); ?></h2>
             <?php
@@ -201,7 +201,7 @@ if (! $permissionChecker->hasPermission('categories')) {
             );
             ?>
             <input type="hidden" name="id"
-                   value="<?php echo (int) ($_GET['edit']) ?>">
+                   value="<?php echo (int) ($_GET['edit']); ?>">
             <div class="field">
                 <strong><?php translate('name'); ?>*</strong>
                 <input

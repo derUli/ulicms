@@ -18,13 +18,13 @@ if ($commentableContentTypeSettings) {
 <a
     href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
     class="btn btn-default btn-back is-not-ajax">
-    <i class="fa fa-arrow-left"></i> <?php translate('back') ?>
+    <i class="fa fa-arrow-left"></i> <?php translate('back'); ?>
 </a>
 
 <?php if (Request::getVar('save')) { ?>
     <div class="alert alert-success alert-dismissable fade in voffset3">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <?php translate('changes_was_saved') ?>
+        <?php translate('changes_was_saved'); ?>
     </div>
 <?php } ?>
 <?php
@@ -38,7 +38,7 @@ echo ModuleHelper::buildMethodCallForm(
     ]
 );
 ?>
-<h1><?php translate('comments') ?></h1>
+<h1><?php translate('comments'); ?></h1>
 <div class="field">
     <div class="checkbox">
         <label><?php
@@ -48,7 +48,7 @@ echo ModuleHelper::buildMethodCallForm(
                 '1',
                 ['class' => 'js-switch']
             );
-?><?php translate('comments_enabled') ?></label>
+?><?php translate('comments_enabled'); ?></label>
     </div>
 </div>
 <div class="field">
@@ -60,11 +60,11 @@ echo App\HTML\Input::checkBox(
     '1',
     ['class' => 'js-switch']
 );
-?><?php translate('comments_must_be_approved') ?></label>
+?><?php translate('comments_must_be_approved'); ?></label>
     </div>
 </div>
 <div class="field">
-    <label for="commentable_content_types[]"><?php translate('commentable_content_types') ?></label>
+    <label for="commentable_content_types[]"><?php translate('commentable_content_types'); ?></label>
     <?php
     echo App\HTML\Input::multiSelect('commentable_content_types[]', $commentableContentTypes, $typeSelection, 5);
 ?>

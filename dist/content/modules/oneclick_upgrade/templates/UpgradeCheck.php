@@ -16,7 +16,7 @@ if ($permissionChecker->hasPermission('update_system')) {
     }
     ?>
     <?php if ($currentVersion == $newVersion) { ?>
-        <h1><?php translate('oneclick_upgrade') ?></h1>
+        <h1><?php translate('oneclick_upgrade'); ?></h1>
         <p><?php translate('no_new_version_available'); ?></p>
     <?php } ?>
     <form action="?sClass=CoreUpgradeController&sMethod=runUpgrade"
@@ -38,7 +38,7 @@ if ($permissionChecker->hasPermission('update_system')) {
             <div class="col-xs-6 text-right"><?php Template::escape($newVersion); ?></div>
         </div>
         <?php if ($release_notes) { ?>
-            <h2><?php translate('release_notes') ?></h2>
+            <h2><?php translate('release_notes'); ?></h2>
             <p>
                 <textarea rows="25" cols="80" readonly><?php echo $release_notes; ?></textarea>
             </p>
