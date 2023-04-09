@@ -228,7 +228,7 @@ class imageLib
             }
                 throw new Exception();
 
-        };
+        }
 
         $this->initialise();
 
@@ -343,7 +343,7 @@ class imageLib
             }
                 throw new Exception();
 
-        };
+        }
 
         // *** Get optimal width and height - based on $option
         $dimensionsArray = $this->getDimensions($newWidth, $newHeight, $option);
@@ -413,7 +413,7 @@ class imageLib
             }
                 throw new Exception();
 
-        };
+        }
 
         $this->imageResized = $this->image;
         $this->crop($this->width, $this->height, $newWidth, $newHeight, $cropPos);
@@ -1720,21 +1720,21 @@ class imageLib
             }
                 return [];
 
-        };
+        }
         if (! file_exists($this->fileName)) {
             if ($debug) {
                 throw new Exception('Image not found.');
             }
                 return [];
 
-        };
+        }
         if ($this->fileExtension != '.jpg') {
             if ($debug) {
                 throw new Exception('Metadata not supported for this image type.');
             }
                 return [];
 
-        };
+        }
         $exifData = exif_read_data($this->fileName, 'IFD0');
 
         // *** Format the apperture value
@@ -2298,7 +2298,7 @@ class imageLib
                 case 'tr':
                     $width = $this->width - $assetWidth - $padding;
                     $height = 0 + $padding;
-                    ;
+
                     break;
 
                 case 'l':
@@ -2431,7 +2431,7 @@ class imageLib
             }
                 throw new Exception();
 
-        };
+        }
 
         // *** Get extension / image type
         $extension = mime_content_type($file);

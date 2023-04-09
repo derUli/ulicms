@@ -93,7 +93,7 @@ class PageController extends Controller
     {
         $success = $this->_editPost();
 
-        $id = Request::getVar('page_id', null, 'int'); #
+        $id = Request::getVar('page_id', null, 'int');
         $url = ModuleHelper::buildActionURL(
             'pages_edit',
             "page={$id}"

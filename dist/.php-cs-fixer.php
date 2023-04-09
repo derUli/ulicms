@@ -76,12 +76,6 @@ $tmpRules = [
     'no_blank_lines_after_phpdoc' => true,
     // There must be a comment when fall-through is intentional in a non-empty case body.
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
-    // There should not be any empty comments.
-    'no_empty_comment' => true,
-    // There should not be empty PHPDoc blocks.
-    'no_empty_phpdoc' => true,
-    // Remove useless (semicolon) statements.
-    'no_empty_statement' => true,
     // Replace accidental usage of homoglyphs (non ascii characters) in names.
     'no_homoglyph_names' => true,
     // Remove leading slashes in `use` clauses.
@@ -278,6 +272,12 @@ $config
     'unary_operator_spaces' => true,
     // Removes extra spaces between colon and case value.
     'switch_case_space' => true,
+    // There should not be any empty comments.
+    'no_empty_comment' => true,
+    // There should not be empty PHPDoc blocks.
+    'no_empty_phpdoc' => true,
+    // Remove useless (semicolon) statements.
+    'no_empty_statement' => true,
     ]);
 
 return $config->setFinder(
