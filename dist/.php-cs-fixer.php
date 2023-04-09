@@ -9,10 +9,6 @@ $tmpRules = [
     'cast_spaces' => ['space'=>'none'],
     // Class, trait and interface elements must be separated with one or none blank line.
     'class_attributes_separation' => true,
-
-    // Namespace must not contain spacing, comments or PHPDoc.
-    'clean_namespace' => true,
-
     // Calling `unset` on multiple items should be done in one call.
     'combine_consecutive_unsets' => true,
     // Replace multiple nested calls of `dirname` by only one call with second `$level` parameter. Requires PHP >= 7.0.
@@ -278,8 +274,10 @@ $config
     'blank_line_after_namespace' => true,
     // Ensure there is no code on the same line as the PHP open tag and it is followed by a blank line.
     'blank_line_after_opening_tag' => true,
-        // Whitespace around the keywords of a class, trait or interfaces definition should be one space.
-        'class_definition' => true,
+    // Whitespace around the keywords of a class, trait or interfaces definition should be one space.
+    'class_definition' => true,
+    // Namespace must not contain spacing, comments or PHPDoc.
+    'clean_namespace' => true,
     ]);
 
 return $config->setFinder(
