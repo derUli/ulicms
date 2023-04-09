@@ -13,8 +13,6 @@ $tmpRules = [
     'combine_nested_dirname' => true,
     // Comments with annotation should be docblock when used on structural elements.
     'comment_to_phpdoc' => true,
-    // Remove extra spaces in a nullable typehint.
-    'compact_nullable_typehint' => true,
     // Concatenation should be spaced according configuration.
     'concat_space' => ['spacing'=>'one'],
     // Equal sign in declare statement should be surrounded by spaces or not following configuration.
@@ -277,6 +275,8 @@ $config
     'fopen_flag_order' => true,
     // There MUST NOT be a space after the opening parenthesis. There MUST NOT be a space before the closing parenthesis.
     'no_spaces_inside_parenthesis' => true,
+    // Remove extra spaces in a nullable typehint.
+    'compact_nullable_typehint' => true,
     ]);
 
 return $config->setFinder(
