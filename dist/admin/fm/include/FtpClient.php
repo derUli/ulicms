@@ -446,11 +446,7 @@ class FtpClient implements Countable
     {
         try {
             return (bool) (@$this->ftp->delete($path)
-            || ($this->isDir($path) && @$this->rmdir($path, $recursive)))
-
-
-
-             ;
+            || ($this->isDir($path) && @$this->rmdir($path, $recursive)));
         } catch (\Exception $e) {
             return false;
         }

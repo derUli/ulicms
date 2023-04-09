@@ -2943,10 +2943,7 @@ class imageLib
         $g = $colorArray['g'];
         $b = $colorArray['b'];
 
-        return ! (imagecolorexact($this->imageResized, $r, $g, $b) == -1)
-
-
-             ;
+        return ! (imagecolorexact($this->imageResized, $r, $g, $b) == -1);
 
     }
 

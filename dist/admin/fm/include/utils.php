@@ -93,10 +93,7 @@ function checkRelativePathPartial($path)
         || strpos($path, '\\..') !== false
         || strpos($path, '.\\') !== false
         || $path === '..'
-    )
-
-
-     ;
+    );
 }
 
 /**
@@ -128,10 +125,7 @@ function isUploadDir($path, $config)
 {
     $upload_dir = $config['current_path'];
     $thumbs_dir = $config['thumbs_base_path'];
-    return (bool) (realpath($path) === realpath($upload_dir) || realpath($path) === realpath($thumbs_dir))
-
-
-     ;
+    return (bool) (realpath($path) === realpath($upload_dir) || realpath($path) === realpath($thumbs_dir));
 }
 
 /**
@@ -296,10 +290,7 @@ function rename_file($old_path, $name, $ftp = null, $config = null)
 
 function url_exists($url)
 {
-    return ! (! $fp = curl_init($url))
-
-
-     ;
+    return ! (! $fp = curl_init($url));
 }
 
 
@@ -655,10 +646,7 @@ function fix_get_params($str)
 function check_extension($extension, $config)
 {
     $extension = fix_strtolower($extension);
-    return ! ((! $config['ext_blacklist'] && ! in_array($extension, $config['ext'])) || ($config['ext_blacklist'] && in_array($extension, $config['ext_blacklist'])))
-
-
-     ;
+    return ! ((! $config['ext_blacklist'] && ! in_array($extension, $config['ext'])) || ($config['ext_blacklist'] && in_array($extension, $config['ext_blacklist'])));
 }
 
 
