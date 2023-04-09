@@ -7,10 +7,6 @@ $tmpRules = [
     'align_multiline_comment' => ['comment_type'=>'all_multiline'],
     // Each element of an array must be indented exactly once.
     'array_indentation' => true,
-    // Converts simple usages of `array_push($x, $y);` to `$x[] = $y;`.
-    'array_push' => true,
-    // PHP arrays should be declared using the configured syntax.
-    'array_syntax' => ['syntax'=>'short'],
     // Converts backtick operators to `shell_exec` calls.
     'backtick_to_shell_exec' => true,
     // Binary operators should be surrounded by space as configured.
@@ -75,17 +71,12 @@ $tmpRules = [
     'include' => true,
     // Code MUST use configured indentation type.
     'indentation_type' => true,
-    // Replaces `is_null($var)` expression with `null === $var`.
-    'is_null' => true,
     // All PHP files must use same line ending.
     'line_ending' => true,
     // Ensure there is no code on the same line as the PHP open tag.
     'linebreak_after_opening_tag' => true,
     // List (`array` destructuring) assignment should be declared using the configured syntax. Requires PHP >= 7.1.
     'list_syntax' => ['syntax'=>'short'],
-    // Use `&&` and `||` logical operators instead of `and` and `or`.
-    'logical_operators' => true,
-    // Cast should be written in lower case.
     'lowercase_cast' => true,
     // PHP keywords MUST be in lower case.
     'lowercase_keywords' => true,
@@ -99,8 +90,6 @@ $tmpRules = [
     'method_argument_space' => true,
     // Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.
     'method_chaining_indentation' => true,
-    // Replaces `intval`, `floatval`, `doubleval`, `strval` and `boolval` function calls with according type casting operator.
-    'modernize_types_casting' => true,
     // Forbid multi-line whitespace before the closing semicolon or move the semicolon to the new line for chained calls.
     'multiline_whitespace_before_semicolons' => true,
     // Function defined by PHP should be called using the correct casing.
@@ -236,8 +225,6 @@ $tmpRules = [
     // Single-line comments and multi-line comments with only one line of actual content should use the `//` syntax.
     'single_line_comment_style' => true,
     // Convert double quotes to single quotes for simple strings.
-    'single_quote' => true,
-    // Each trait `use` must be done as single statement.
     'single_trait_insert_per_statement' => true,
     // Replace all `<>` with `!=`.
     'standardize_not_equals' => true,
@@ -275,7 +262,6 @@ $config
     ->setRiskyAllowed(true)
     //->setIndent("  ")
     ->setRules([
-        
     // Replaces `intval`, `floatval`, `doubleval`, `strval` and `boolval` function calls with according type casting operator.
     'modernize_types_casting' => true,
     // Use `&&` and `||` logical operators instead of `and` and `or`.
