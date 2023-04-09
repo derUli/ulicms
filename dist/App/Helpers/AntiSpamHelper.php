@@ -107,7 +107,7 @@ class AntiSpamHelper extends Helper
      */
     public static function containsBadwords(
         ?string $str,
-        array $words_blacklist = null
+        ?array $words_blacklist = null
     ) {
         if (! $str) {
             return null;

@@ -96,8 +96,6 @@ $tmpRules = [
     'no_unset_cast' => true,
     // Properties should be set to `null` instead of using `unset`.
     'no_unset_on_property' => true,
-    // Adds or removes `?` before type declarations for parameters with a default `null` value.
-    'nullable_type_declaration_for_default_null_value' => true,
     // Orders the elements of classes/interfaces/traits.
     'ordered_class_elements' => ['order'=>['use_trait','constant_public','constant_protected','constant_private','property_public','property_protected','property_private','construct','destruct','magic','phpunit','method_public','method_protected','method_private']],
     // Orders the interfaces in an `implements` or `interface extends` clause.
@@ -280,6 +278,8 @@ $config
     'no_blank_lines_after_phpdoc' => true,
     // Removes `@param`, `@return` and `@var` tags that don't provide any useful information.
     'no_superfluous_phpdoc_tags' => false,
+    // Adds or removes `?` before type declarations for parameters with a default `null` value.
+    'nullable_type_declaration_for_default_null_value' => true,
     ]);
 
 return $config->setFinder(

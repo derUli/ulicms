@@ -278,7 +278,7 @@ function get_text_position(): string
     return $dataset;
 }
 
-function get_parent(string $page = null): ?int
+function get_parent(?string $page = null): ?int
 {
     if (! $page) {
         $page = get_slug();

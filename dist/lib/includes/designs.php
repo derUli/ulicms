@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @param string $attrib
  * @return type
  */
-function getThemeMeta(string $theme, string $attrib = null)
+function getThemeMeta(string $theme, ?string $attrib = null)
 {
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . 'metadata.json';

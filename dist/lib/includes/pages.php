@@ -53,10 +53,10 @@ function getAllPagesWithTitle(): array
 
 // Get all pages
 function getAllPages(
-    string $lang = null,
+    ?string $lang = null,
     string $order = 'slug',
     bool $exclude_hash_links = true,
-    string $menu = null
+    ?string $menu = null
 ): array {
     if (! $lang) {
         if (! $menu) {
@@ -92,7 +92,7 @@ function getAllPages(
 }
 
 // Get slugs of all pages
-function getAllSlugs(string $lang = null): array
+function getAllSlugs(?string $lang = null): array
 {
     $slugs = [];
 
