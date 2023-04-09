@@ -126,16 +126,6 @@ $tmpRules = [
     'simplified_if_return' => true,
     // A return statement wishing to return `void` should not return `null`.
     'simplified_null_return' => true,
-    // There MUST NOT be more than one property or constant declared per statement.
-    'single_class_element_per_statement' => true,
-    // There MUST be one use keyword per declaration.
-    'single_import_per_statement' => true,
-    // Each namespace use MUST go on its own line and there MUST be one blank line after the use statements block.
-    'single_line_after_imports' => true,
-    // Single-line comments and multi-line comments with only one line of actual content should use the `//` syntax.
-    'single_line_comment_style' => true,
-    // Convert double quotes to single quotes for simple strings.
-    'single_trait_insert_per_statement' => true,
     // Lambdas not (indirect) referencing `$this` must be declared `static`.
     'static_lambda' => true,
     // All multi-line strings must use correct line ending.
@@ -278,6 +268,16 @@ $config
     'phpdoc_tag_casing' => true,
     // Cast `(boolean)` and `(integer)` should be written as `(bool)` and `(int)`, `(double)` and `(real)` as `(float)`, `(binary)` as `(string)`.
     'short_scalar_cast' => true,
+    // There MUST NOT be more than one property or constant declared per statement.
+    'single_class_element_per_statement' => true,
+    // There MUST be one use keyword per declaration.
+    'single_import_per_statement' => true,
+    // Each namespace use MUST go on its own line and there MUST be one blank line after the use statements block.
+    'single_line_after_imports' => true,
+    // Single-line comments and multi-line comments with only one line of actual content should use the `//` syntax.
+    'single_line_comment_style' => true,
+    // Convert double quotes to single quotes for simple strings.
+    'single_trait_insert_per_statement' => true,
     ]);
 
 return $config->setFinder(

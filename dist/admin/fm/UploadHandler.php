@@ -149,9 +149,7 @@ class UploadHandler
             // Uncomment the following to add parameters in front of each
             // ImageMagick convert call (the limit constraints seem only
             // to have an effect if put in front):
-            /*
-              'convert_params' => '-limit memory 32MiB -limit map 32MiB',
-             */
+            // 'convert_params' => '-limit memory 32MiB -limit map 32MiB',
             // Command or path for to the ImageMagick identify binary:
             'identify_bin' => 'identify',
             'image_versions' => [

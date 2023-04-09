@@ -306,21 +306,21 @@ $config = [
     //
     //Watermark path or false
     'image_watermark' => false, //"../watermark.png",
-    # Could be a pre-determined position such as:
-    #           tl = top left,
-    #           t  = top (middle),
-    #           tr = top right,
-    #           l  = left,
-    #           m  = middle,
-    #           r  = right,
-    #           bl = bottom left,
-    #           b  = bottom (middle),
-    #           br = bottom right
-    #           Or, it could be a co-ordinate position such as: 50x100
+    // Could be a pre-determined position such as:
+    //           tl = top left,
+    //           t  = top (middle),
+    //           tr = top right,
+    //           l  = left,
+    //           m  = middle,
+    //           r  = right,
+    //           bl = bottom left,
+    //           b  = bottom (middle),
+    //           br = bottom right
+    //           Or, it could be a co-ordinate position such as: 50x100
     'image_watermark_position' => 'br',
-    # padding: If using a pre-determined position you can
-    #         adjust the padding from the edges by passing an amount
-    #         in pixels. If using co-ordinates, this value is ignored.
+    // padding: If using a pre-determined position you can
+    //         adjust the padding from the edges by passing an amount
+    //         in pixels. If using co-ordinates, this value is ignored.
     'image_watermark_padding' => 10,
     //******************
     // Default layout setting
@@ -397,9 +397,7 @@ $config = [
       |
      */
     'files_without_extension' => false,
-    /*     * ****************
-     * TUI Image Editor config
-     * ***************** */
+    // TUI Image Editor config
     // Add or modify the options below as needed - they will be json encoded when added to the configuration so arrays can be utilized as needed
     'tui_active' => true,
     'tui_position' => 'bottom',
@@ -470,9 +468,7 @@ $config = [
     'hidden_folders' => [],
     // set the names of any files you want hidden. Remember these names will be hidden in all folders (eg "this_document.pdf", "that_image.jpg" )
     'hidden_files' => ['config.php'],
-    /*     * *****************
-     * URL upload
-     * ***************** */
+    // URL upload
     'url_upload' => true,
     //************************************
     //Thumbnail for external use creation

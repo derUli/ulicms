@@ -87,9 +87,7 @@ if ($config['show_total_size']) {
     [$sizeCurrentFolder, $fileCurrentNum, $foldersCurrentCount] = folder_info($config['current_path'], false);
 }
 
-/***
- * SUB-DIR CODE
- ***/
+// SUB-DIR CODE
 if (! isset($_SESSION['RF']['subfolder'])) {
     $_SESSION['RF']['subfolder'] = '';
 }
