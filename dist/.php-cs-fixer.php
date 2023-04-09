@@ -61,8 +61,6 @@ $tmpRules = [
     'no_alternative_syntax' => true,
     // There must be a comment when fall-through is intentional in a non-empty case body.
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
-    // Either language construct `print` or `echo` should be used.
-    'no_mixed_echo_print' => true,
     // Operator `=>` should not be surrounded by multi-line whitespaces.
     'no_multiline_whitespace_around_double_arrow' => true,
     // There MUST NOT be a space after the opening parenthesis. There MUST NOT be a space before the closing parenthesis.
@@ -277,6 +275,8 @@ $config
     'native_function_type_declaration_casing' => true,
     // Function defined by PHP should be called using the correct casing.
     'native_function_casing' => true,
+    // Either language construct `print` or `echo` should be used.
+    'no_mixed_echo_print' => true,
     ]);
 
 return $config->setFinder(
