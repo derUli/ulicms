@@ -138,10 +138,6 @@ $tmpRules = [
     'simplified_if_return' => true,
     // A return statement wishing to return `void` should not return `null`.
     'simplified_null_return' => true,
-    // A PHP file without end tag must always end with a single empty line feed.
-    'single_blank_line_at_eof' => true,
-    // There should be exactly one blank line before a namespace declaration.
-    'single_blank_line_before_namespace' => true,
     // There MUST NOT be more than one property or constant declared per statement.
     'single_class_element_per_statement' => true,
     // There MUST be one use keyword per declaration.
@@ -278,6 +274,10 @@ $config
     'no_empty_phpdoc' => true,
     // Remove useless (semicolon) statements.
     'no_empty_statement' => true,
+     // A PHP file without end tag must always end with a single empty line feed.
+     'single_blank_line_at_eof' => true,
+     // There should be exactly one blank line before a namespace declaration.
+     'single_blank_line_before_namespace' => true,
     ]);
 
 return $config->setFinder(
