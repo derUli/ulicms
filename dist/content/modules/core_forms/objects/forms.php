@@ -61,7 +61,7 @@ class Forms
         $fields = db_escape($fields);
         $required_fields = db_escape($required_fields);
         $mail_from_field = db_escape($mail_from_field);
-        $target_page_id = (int) $target_page_id;
+        $target_page_id = (int)$target_page_id;
         $updated = time();
         $id = (int)$id;
 

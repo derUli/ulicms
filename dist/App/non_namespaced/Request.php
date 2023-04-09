@@ -46,13 +46,13 @@ class Request
                     $value = (int)(bool)$value;
                     break;
                 case 'int':
-                    $value = (int) $value;
+                    $value = (int)$value;
                     break;
                 case 'float':
-                    $value = (float) $value;
+                    $value = (float)$value;
                     break;
                 case 'str':
-                    $value = (string) $value;
+                    $value = (string)$value;
                     break;
             }
         }

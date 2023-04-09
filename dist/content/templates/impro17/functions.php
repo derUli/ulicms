@@ -10,7 +10,7 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
     if ($parent_id === null) {
         $sql .= ' IS NULL ';
     } else {
-        $sql .= ' = ' . (int) $parent_id . ' ';
+        $sql .= ' = ' . (int)$parent_id . ' ';
     }
     $sql .= ' ORDER by ' . $order;
 

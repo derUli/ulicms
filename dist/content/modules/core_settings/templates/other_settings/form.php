@@ -93,7 +93,7 @@ if (! $permissionChecker->hasPermission('other')) {
                 </div>
                 <div class="inputWrapper">
                     <input type="number" name="max_failed_logins_items" min="0" max="999"
-                           value="<?php echo (int) $max_failed_logins_items; ?>" />
+                           value="<?php echo (int)$max_failed_logins_items; ?>" />
                 </div>
             </div>
             <h2><?php translate('google_authenticator'); ?></h2>

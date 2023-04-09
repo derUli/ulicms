@@ -42,11 +42,10 @@ class SpamFilterConfiguration
             (bool)Settings::get('disallow_chinese_chars')
         );
 
-        $disallow_cyrillic_chars = (bool) Settings::get('disallow_cyrillic_chars');
+        $disallow_cyrillic_chars = (bool)Settings::get('disallow_cyrillic_chars');
         $settings->setDisallowCyrillicChars($disallow_cyrillic_chars);
 
-        $disallow_rtl_chars = (bool)
-            Settings::get('disallow_rtl_chars');
+        $disallow_rtl_chars = (bool)Settings::get('disallow_rtl_chars');
 
         $settings->setDisallowRtlChars($disallow_rtl_chars);
         $settings->setRejectRequestsFromBots(

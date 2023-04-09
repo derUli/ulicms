@@ -97,7 +97,7 @@ class ListItem
      */
     public function setValue($val)
     {
-        $this->value = $val !== null ? (string) $val : null;
+        $this->value = $val !== null ? (string)$val : null;
     }
 
     /**
@@ -107,7 +107,7 @@ class ListItem
      */
     public function setText($val): void
     {
-        $this->text = $val !== null ? (string) $val : null;
+        $this->text = $val !== null ? (string)$val : null;
     }
 
     /**

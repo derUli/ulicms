@@ -97,7 +97,7 @@ class Page extends Content
     {
         $result = Database::pQuery('SELECT * FROM `{prefix}content` '
                         . 'where id = ?', [
-                            (int) $id
+                            (int)$id
                         ], true);
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
@@ -169,7 +169,7 @@ class Page extends Content
         $sql .= (int)$this->approved . ',';
         $this->created = time();
         $this->lastmodified = $this->created;
-        $sql .= (int) $this->created . ',';
+        $sql .= (int)$this->created . ',';
         $sql .= (int)$this->lastmodified . ',';
         $sql .= (int)$this->author_id . ',';
 
@@ -443,7 +443,7 @@ class Page extends Content
     {
         $commentsEnabled = false;
         if ($this->comments_enabled === null) {
-            $commentsEnabled = (bool) Settings::get('comments_enabled');
+            $commentsEnabled = (bool)Settings::get('comments_enabled');
 
             $commentable_content_types = Settings::get(
                 'commentable_content_types'
@@ -461,7 +461,7 @@ class Page extends Content
                 }
             }
         } else {
-            $commentsEnabled = (bool) $this->comments_enabled;
+            $commentsEnabled = (bool)$this->comments_enabled;
         }
         return $commentsEnabled;
     }
@@ -558,7 +558,7 @@ class Page extends Content
 
     protected function fillVars($result = null)
     {
-        $this->id = (int) $result->id;
+        $this->id = (int)$result->id;
         $this->slug = $result->slug;
         $this->title = $result->title;
         $this->alternate_title = $result->alternate_title;
@@ -593,12 +593,12 @@ class Page extends Content
         $this->og_description = $result->og_description;
         $this->cache_control = $result->cache_control;
         $this->hidden = $result->hidden;
-        $this->show_headline = (bool) $result->show_headline;
+        $this->show_headline = (bool)$result->show_headline;
         $this->comments_enabled = $result->comments_enabled !== null ?
-                (bool) $result->comments_enabled : null;
+                (bool)$result->comments_enabled : null;
 
         // fill page permissions object
-        $resultArray = (array) $result;
+        $resultArray = (array)$result;
         foreach ($resultArray as $key => $value) {
             preg_match('/only_([a-z]+)_can_edit/', $key, $matches);
             if (count($matches) >= 2) {

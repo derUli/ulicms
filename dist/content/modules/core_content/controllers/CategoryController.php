@@ -46,7 +46,7 @@ class CategoryController extends Controller
 
     public function deletePost(): void
     {
-        $del = (int) $_GET['del'];
+        $del = (int)$_GET['del'];
 
         if ($del != 1) {
             Categories::deleteCategory($del);

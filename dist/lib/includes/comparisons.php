@@ -14,7 +14,7 @@ use Nette\Utils\JsonException;
  */
 function is_decimal($val): bool
 {
-    return is_numeric($val) && ! ctype_digit((string) $val);
+    return is_numeric($val) && ! ctype_digit((string)$val);
 }
 
 /**
@@ -91,7 +91,7 @@ function is_maintenance_mode(): bool
         return false;
     }
 
-    return (bool) Settings::get('maintenance_mode');
+    return (bool)Settings::get('maintenance_mode');
 }
 
 /**

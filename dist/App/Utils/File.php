@@ -79,7 +79,7 @@ class File
         $sniffer->setFromFilename($file);
 
         $type = $sniffer->getType();
-        return (string) $type;
+        return (string)$type;
     }
 
     /**

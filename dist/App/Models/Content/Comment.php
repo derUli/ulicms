@@ -45,10 +45,10 @@ class Comment extends Model
 
     public function loadByID($id)
     {
-        $result = Database::selectAll('comments', [], 'id=' . (int) $id);
+        $result = Database::selectAll('comments', [], 'id=' . (int)$id);
         if ($result == null || ! Database::any($result)) {
             throw new DatasetNotFoundException('no comment with id ' .
-                            (int) $id);
+                            (int)$id);
         }
         $this->fillVars($result);
     }
@@ -66,7 +66,7 @@ class Comment extends Model
         $this->setStatus($data->status);
         $this->setIp($data->ip);
         $this->setUserAgent($data->useragent);
-        $this->setRead((bool) $data->read);
+        $this->setRead((bool)$data->read);
     }
 
     public function delete()
@@ -98,7 +98,7 @@ class Comment extends Model
 
     public function setContentId(int $val): void
     {
-        $this->content_id = (int) $val;
+        $this->content_id = (int)$val;
     }
 
     public function getAuthorName(): ?string
@@ -109,7 +109,7 @@ class Comment extends Model
     public function setAuthorName(?string $val): void
     {
         $this->author_name = ! empty($val) ?
-                (string) $val : null;
+                (string)$val : null;
     }
 
     public function getAuthorEmail(): ?string
@@ -120,7 +120,7 @@ class Comment extends Model
     public function setAuthorEmail(?string $val): void
     {
         $this->author_email = ! empty($val) ?
-                (string) $val : null;
+                (string)$val : null;
     }
 
     public function getAuthorUrl(): ?string
@@ -137,7 +137,7 @@ class Comment extends Model
 
     public function setAuthorUrl(?string $val): void
     {
-        $this->author_url = is_url($val) ? (string) $val : null;
+        $this->author_url = is_url($val) ? (string)$val : null;
     }
 
     public function getDate()
@@ -154,7 +154,7 @@ class Comment extends Model
                 var_dump_str($val) . ' is not an integer timestamp'
             );
         }
-        $this->date = (int) $val;
+        $this->date = (int)$val;
     }
 
     public function getText(): ?string
@@ -165,7 +165,7 @@ class Comment extends Model
     public function setText(?string $val): void
     {
         $this->text = ! empty($val) ?
-                (string) $val : null;
+                (string)$val : null;
     }
 
     public function getStatus()
@@ -186,7 +186,7 @@ class Comment extends Model
     public function setIp(?string $val): void
     {
         $this->ip = ! empty($val) ?
-                (string) $val : null;
+                (string)$val : null;
     }
 
     public function getUserAgent(): ?string
@@ -197,7 +197,7 @@ class Comment extends Model
     public function setUserAgent(?string $val): void
     {
         $this->useragent = ! empty($val) ?
-                (string) $val : null;
+                (string)$val : null;
     }
 
     // returns the content where this comment is attached
@@ -218,7 +218,7 @@ class Comment extends Model
             self::TABLE_NAME,
             self::class,
             $order_by,
-            'content_id = ' . (int) $content_id
+            'content_id = ' . (int)$content_id
         );
     }
 
@@ -229,7 +229,7 @@ class Comment extends Model
     ): array {
         $where = "status = '" . Database::escapeValue($status) . "'";
         if ($content_id) {
-            $where .= ' and content_id = ' . (int) $content_id;
+            $where .= ' and content_id = ' . (int)$content_id;
         }
         return self::getAllDatasets(
             self::TABLE_NAME,
@@ -268,7 +268,7 @@ class Comment extends Model
             true
         );
         $dataset = Database::fetchObject($result);
-        return (int) $dataset->amount;
+        return (int)$dataset->amount;
     }
 
     // returns the count of all comments
@@ -304,11 +304,11 @@ class Comment extends Model
     ): bool {
         $sql = 'select ip from {prefix}comments where ip = ?';
         $args = [
-            (string) $ip
+            (string)$ip
         ];
         if ($status) {
             $sql .= ' and status = ?';
-            $args[] = (string) $status;
+            $args[] = (string)$status;
         }
         $result = Database::pQuery($sql, $args, true);
         return Database::any($result);
@@ -317,12 +317,12 @@ class Comment extends Model
     // returns true if the comments was read by a backend user
     public function isRead(): bool
     {
-        return (bool) $this->read;
+        return (bool)$this->read;
     }
 
     public function setRead(?bool $val): void
     {
-        $this->read = (bool) $val;
+        $this->read = (bool)$val;
     }
 
     protected function insert()

@@ -67,7 +67,7 @@ class Model
     // bind values from associative array $values to class properties
     public function bindValues($values = [])
     {
-        $values = (array) $values;
+        $values = (array)$values;
         foreach ($values as $key => $value) {
             $camelCaseVar = ModuleHelper::underscoreToCamel($key);
             $method = 'set' . ucfirst($camelCaseVar);

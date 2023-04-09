@@ -76,7 +76,7 @@ class ACL
      */
     public function deleteGroup(int $id, ?int $move_users_to = null)
     {
-        $id = (int) $id;
+        $id = (int)$id;
 
         if ($move_users_to === null) {
             $updateUsers = 'UPDATE ' . tbname('users') .

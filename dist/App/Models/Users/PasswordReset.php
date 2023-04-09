@@ -26,7 +26,7 @@ class PasswordReset
      */
     public function addToken(int $user_id): string
     {
-        $token = md5(uniqid() . (string) $user_id);
+        $token = md5(uniqid() . (string)$user_id);
         $sql = 'INSERT INTO {prefix}password_reset (token, user_id) '.
                 'values (?, ?)';
 

@@ -153,7 +153,7 @@ function get_ID(): ?int
     $result = db_query($sql);
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
-        $dataset = (int) $dataset->id;
+        $dataset = (int)$dataset->id;
     }
     Vars::set('id', $dataset);
     return $dataset;
@@ -176,7 +176,7 @@ function is_active(): bool
 
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_object($result);
-        $dataset = (bool) $dataset->active;
+        $dataset = (bool)$dataset->active;
     }
 
     Vars::set('active', $dataset);
@@ -465,13 +465,13 @@ function get_title(?string $slug = null, bool $headline = false): string
         return Vars::get($cacheVar);
     }
 
-    $errorPage403 = (int) (
+    $errorPage403 = (int)(
         Settings::getLanguageSetting(
             'error_page_403',
             getCurrentLanguage()
         )
     );
-    $errorPage404 = (int) (
+    $errorPage404 = (int)(
         Settings::getLanguageSetting(
             'error_page_404',
             getCurrentLanguage()
@@ -677,7 +677,7 @@ function parent_item_contains_current_page(?int $id): bool
     if (! $id) {
         return $retval;
     }
-    $id = (int) $id;
+    $id = (int)$id;
     $language = $_SESSION['language'];
     $sql = 'SELECT id, slug, parent_id FROM ' . tbname('content') . " WHERE language = '{$language}' AND active = 1 AND `deleted_at` IS NULL";
     $r = db_query($sql);
@@ -711,7 +711,7 @@ function get_menu(
     if ($parent_id === null) {
         $sql .= ' IS NULL ';
     } else {
-        $sql .= ' = ' . (int) $parent_id . ' ';
+        $sql .= ' = ' . (int)$parent_id . ' ';
     }
     $sql .= ' ORDER by ' . $order;
     $result = db_query($sql);
@@ -723,7 +723,7 @@ function get_menu(
     if ($parent_id === null) {
         $html .= "<ul class='menu_" . $name . " navmenu'>\n";
     } else {
-        $containsCurrentItem = parent_item_contains_current_page((int) $parent_id);
+        $containsCurrentItem = parent_item_contains_current_page((int)$parent_id);
 
         $classes = 'sub_menu';
 
@@ -735,7 +735,7 @@ function get_menu(
 
     while ($row = db_fetch_object($result)) {
         if (checkAccess($row->access)) {
-            $containsCurrentItem = parent_item_contains_current_page((int) $row->id);
+            $containsCurrentItem = parent_item_contains_current_page((int)$row->id);
 
             $additional_classes = ' menu-link-to-' . $row->id . ' ';
             if ($containsCurrentItem) {
@@ -780,7 +780,7 @@ function get_menu(
             $html .= "</a>\n";
 
             if ($recursive) {
-                $html .= get_menu($name, (int) $row->id, true, $order);
+                $html .= get_menu($name, (int)$row->id, true, $order);
             }
 
             $html .= '</li>';

@@ -201,7 +201,7 @@ if (! $permissionChecker->hasPermission('categories')) {
             );
             ?>
             <input type="hidden" name="id"
-                   value="<?php echo (int) ($_GET['edit']); ?>">
+                   value="<?php echo (int)($_GET['edit']); ?>">
             <div class="field">
                 <strong><?php translate('name'); ?>*</strong>
                 <input
@@ -209,7 +209,7 @@ if (! $permissionChecker->hasPermission('categories')) {
                     name="name"
                     required
                     class="form-control"
-                    value="<?php echo Categories::getCategoryById((int) ($_GET['edit'])); ?>">
+                    value="<?php echo Categories::getCategoryById((int)($_GET['edit'])); ?>">
             </div>
             <div class="field">
                 <strong><?php translate('description'); ?></strong> <br />
@@ -220,7 +220,7 @@ if (! $permissionChecker->hasPermission('categories')) {
                     class="form-control"
                     maxlength="255"><?php
                         esc(
-                            Categories::getCategoryDescriptionById((int) ($_GET['edit']))
+                            Categories::getCategoryDescriptionById((int)($_GET['edit']))
                         );
             ?></textarea>
             </div>

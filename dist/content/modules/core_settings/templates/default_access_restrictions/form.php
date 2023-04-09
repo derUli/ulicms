@@ -5,10 +5,10 @@ use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission('default_access_restrictions_edit')) {
-    $only_admins_can_edit = (int) (Settings::get('only_admins_can_edit'));
-    $only_group_can_edit = (int) (Settings::get('only_group_can_edit'));
-    $only_owner_can_edit = (int) (Settings::get('only_owner_can_edit'));
-    $only_others_can_edit = (int) (Settings::get('only_others_can_edit'));
+    $only_admins_can_edit = (int)(Settings::get('only_admins_can_edit'));
+    $only_group_can_edit = (int)(Settings::get('only_group_can_edit'));
+    $only_owner_can_edit = (int)(Settings::get('only_owner_can_edit'));
+    $only_others_can_edit = (int)(Settings::get('only_others_can_edit'));
     ?>
     <p>
         <a href="<?php echo ModuleHelper::buildActionURL('other_settings'); ?>"

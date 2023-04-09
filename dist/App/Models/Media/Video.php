@@ -57,7 +57,7 @@ class Video extends Model
         $sql = "SELECT id FROM {prefix}videos ORDER BY {$order}";
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
-            $datasets[] = new self((int) $row->id);
+            $datasets[] = new self((int)$row->id);
         }
         return $datasets;
     }
@@ -66,7 +66,7 @@ class Video extends Model
     {
         $result = Database::pQuery('select * from `{prefix}videos` '
                         . 'where id = ?', [
-                            (int) $id
+                            (int)$id
                         ], true);
         if (! Database::any($result)) {
             $result = null;
@@ -121,24 +121,24 @@ class Video extends Model
 
     public function getCreated(): int
     {
-        return (int) $this->created;
+        return (int)$this->created;
     }
 
     public function getUpdated(): ?int
     {
         return $this->updated !== null ?
-                (int) $this->updated : null;
+                (int)$this->updated : null;
     }
 
     public function setName(?string $val): void
     {
         $this->name = ! empty($val) ?
-                (string) $val : null;
+                (string)$val : null;
     }
 
     public function setCategoryId(?int $val): void
     {
-        $this->category_id = is_numeric($val) ? (int) $val : null;
+        $this->category_id = is_numeric($val) ? (int)$val : null;
         $this->category = is_numeric($val) ? new Category($val) : null;
     }
 
@@ -243,13 +243,13 @@ class Video extends Model
     {
         if ($result) {
             $result = Database::fetchSingle($result);
-            $this->setID((int) $result->id);
+            $this->setID((int)$result->id);
             $this->setName($result->name);
             $this->mp4_file = $result->mp4_file;
             $this->ogg_file = $result->ogg_file;
             $this->webm_file = $result->webm_file;
             $this->setCategoryId($result->category_id ?
-                            (int) $result->category_id : null);
+                            (int)$result->category_id : null);
             $this->created = (int)$result->created;
             $this->updated = (int)$result->updated;
             $this->width = (int)$result->width;

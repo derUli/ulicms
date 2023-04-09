@@ -12,7 +12,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
-        $this->initialCommentsMustBeApproved = (bool) Settings::get('comments_must_be_approved');
+        $this->initialCommentsMustBeApproved = (bool)Settings::get('comments_must_be_approved');
         $this->initialCommentsDefaultLimit = Settings::get(
             'comments_default_limit'
         );

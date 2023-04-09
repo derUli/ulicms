@@ -67,7 +67,7 @@ class AntiSpamHelper extends Helper
             return false;
         }
 
-        return (bool) preg_match("/\p{Han}+/u", $str);
+        return (bool)preg_match("/\p{Han}+/u", $str);
     }
 
     /**
@@ -81,7 +81,7 @@ class AntiSpamHelper extends Helper
             return false;
         }
 
-        return (bool) preg_match('/\p{Cyrillic}+/u', $str);
+        return (bool)preg_match('/\p{Cyrillic}+/u', $str);
     }
 
     /**
@@ -96,7 +96,7 @@ class AntiSpamHelper extends Helper
         }
 
         $rtl_chars_pattern = '/[\x{0590}-\x{05ff}\x{0600}-\x{06ff}]/u';
-        return (bool) preg_match($rtl_chars_pattern, $str);
+        return (bool)preg_match($rtl_chars_pattern, $str);
     }
 
     /**

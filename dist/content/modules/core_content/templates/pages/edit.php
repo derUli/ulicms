@@ -702,7 +702,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                         <option
                                             value="<?php echo $page['id']; ?>"
                                             <?php
-                    if ($list_data->parent_id === (int) ($page['id'])) {
+                    if ($list_data->parent_id === (int)($page['id'])) {
                         echo 'selected="selected"';
                     }
                 ?>>
@@ -749,7 +749,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                     <?php translate('entries_per_page'); ?>
                                 </strong>
                                 <input type="number" name="limit" min="0" step="1"
-                                       value="<?php echo (int) ($list_data->limit); ?>">
+                                       value="<?php echo (int)($list_data->limit); ?>">
                             </div>
 
                             <div class="field">

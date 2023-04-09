@@ -280,7 +280,7 @@ class Database
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? (float) $val : (int) $val;
+        return is_decimal($val) ? (float)$val : (int)$val;
     }
 
     public static function selectMax(
@@ -304,7 +304,7 @@ class Database
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? (float) $val : (int) $val;
+        return is_decimal($val) ? (float)$val : (int)$val;
     }
 
     public static function selectAvg(
@@ -328,7 +328,7 @@ class Database
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? (float) $val : (int) $val;
+        return is_decimal($val) ? (float)$val : (int)$val;
     }
 
     public static function deleteFrom(
@@ -545,11 +545,11 @@ class Database
         }
         if ($type === null) {
             if (is_float($value)) {
-                return (float) $value;
+                return (float)$value;
             } elseif (is_int($value)) {
                 return (int)$value;
             } elseif (is_bool($value)) {
-                return (int) $value;
+                return (int)$value;
             }
                 return mysqli_real_escape_string(self::$connection, $value);
 
@@ -557,7 +557,7 @@ class Database
             if ($type === DB_TYPE_INT) {
                 return (int)$value;
             } elseif ($type === DB_TYPE_FLOAT) {
-                return (float) $value;
+                return (float)$value;
             } elseif ($type === DB_TYPE_STRING) {
                 return mysqli_real_escape_string(
                     self::$connection,

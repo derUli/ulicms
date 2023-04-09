@@ -5,7 +5,7 @@ $id = get_ID();
 if ($id !== null) {
     $list = new List_Data($id);
     if ($list->content_id !== null) {
-        $limit = (int) ($list->limit);
+        $limit = (int)($list->limit);
         $use_pagination = $list->use_pagination;
 
         $list->use_pagination = false;
@@ -17,7 +17,7 @@ if ($id !== null) {
 
             if ($limit > 0 && $use_pagination) {
                 if (isset($_GET['start'])) {
-                    $start = (int) ($_GET['start']);
+                    $start = (int)($_GET['start']);
                 }
                 $entries = array_slice($entries, $start, $limit);
                 $entries_count = count($entries);

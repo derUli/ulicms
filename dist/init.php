@@ -198,7 +198,7 @@ $cache_period = Settings::get('cache_period');
 // by Check if the cache expiry is set.
 // if not initialize setting with default value
 if ($cache_period === null) {
-    Settings::set('cache_period', (string) ONE_DAY_IN_SECONDS);
+    Settings::set('cache_period', (string)ONE_DAY_IN_SECONDS);
     define('CACHE_PERIOD', ONE_DAY_IN_SECONDS);
 } else {
     define('CACHE_PERIOD', $cache_period);

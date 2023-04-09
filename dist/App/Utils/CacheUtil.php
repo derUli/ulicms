@@ -137,7 +137,7 @@ class CacheUtil
      */
     public static function getCachePeriod(): int
     {
-        return (int) Settings::get('cache_period');
+        return (int)Settings::get('cache_period');
     }
 
     /**

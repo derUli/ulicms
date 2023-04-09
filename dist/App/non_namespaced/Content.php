@@ -12,7 +12,7 @@ abstract class Content extends Model
      */
     public function getShowHeadline(): bool
     {
-        return (bool) $this->show_headline;
+        return (bool)$this->show_headline;
     }
 
     /**

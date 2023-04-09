@@ -27,7 +27,7 @@ class Group
         $acl = new ACL();
         $this->permissions = $acl->getDefaultACLAsJSON(false, true);
         if ($id !== null) {
-            $this->loadById((int) $id);
+            $this->loadById((int)$id);
         }
     }
 
@@ -35,12 +35,12 @@ class Group
     {
         $sql = 'select * from `{prefix}groups` where id = ?';
         $args = [
-            (int) $id
+            (int)$id
         ];
         $result = Database::pQuery($sql, $args, true);
         if (Database::any($result)) {
             $dataset = Database::fetchObject($result);
-            $this->id = (int) $dataset->id;
+            $this->id = (int)$dataset->id;
             $this->name = $dataset->name;
             $this->permissions = json_decode($dataset->permissions, true);
             $this->allowable_tags = $dataset->allowable_tags;
@@ -95,7 +95,7 @@ class Group
     public static function getDefaultPrimaryGroupId(): ?int
     {
         return Settings::get('default_acl_group') ?
-                (int) Settings::get('default_acl_group') : null;
+                (int)Settings::get('default_acl_group') : null;
     }
 
     // get the default group
@@ -270,7 +270,7 @@ class Group
     public function setAllowableTags(?string $val): void
     {
         $this->allowable_tags = ! empty($val) ?
-                (string) $val : null;
+                (string)$val : null;
     }
 
     /**

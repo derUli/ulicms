@@ -51,7 +51,7 @@ class PagePermissions
     public function getAll(): array
     {
         $result = [];
-        $classArray = (array) $this;
+        $classArray = (array)$this;
         foreach ($classArray as $key => $value) {
             preg_match('/only_([a-z]+)_can_edit/', $key, $matches);
             if (count($matches) >= 2) {
@@ -76,7 +76,7 @@ class PagePermissions
         $sql .= ' id = id ';
         $sql = trim($sql);
 
-        $args[] = (int) $id;
+        $args[] = (int)$id;
         $sql .= ' where id = ?';
         Database::pQuery($sql, $args, true) || exit(Database::getError());
     }

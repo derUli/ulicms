@@ -97,7 +97,7 @@ class ContentFactory
         $sql = 'SELECT id, type FROM {prefix}content ';
 
         $args = [
-            $parent_id !== null ? (int) $parent_id : null
+            $parent_id !== null ? (int)$parent_id : null
         ];
 
         $sql .= $parent_id !== null ? 'where `parent_id` = ?' :
@@ -177,7 +177,7 @@ class ContentFactory
             $sql .= "language = '{$language}' and ";
         }
         if ($category_id !== null && $category_id !== 0) {
-            $category_id = (int) $category_id;
+            $category_id = (int)$category_id;
             $sql .= "category_id = {$category_id} and ";
         }
         if ($menu !== null && $menu !== '') {
@@ -186,7 +186,7 @@ class ContentFactory
         }
 
         if ($parent_id !== null && $parent_id !== 0) {
-            $parent_id = (int) $parent_id;
+            $parent_id = (int)$parent_id;
             $sql .= "parent_id = {$parent_id} and ";
         }
 
@@ -297,7 +297,7 @@ class ContentFactory
         $mappings = TypeMapper::getMappings();
         if (isset($mappings[$type]) && ! empty($mappings[$type]) && class_exists($mappings[$type])) {
             $retval = new $mappings[$type]();
-            $retval->loadByID((int) $row->id);
+            $retval->loadByID((int)$row->id);
         } else {
             $message = "Content with id={$row->id} has unknown content type "
                     . "\"{$type}\"";

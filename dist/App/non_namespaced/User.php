@@ -74,7 +74,7 @@ class User extends Model
     {
         $sql = 'select * from {prefix}users where id = ?';
         $args = [
-            (int) $id
+            (int)$id
         ];
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
@@ -259,7 +259,7 @@ class User extends Model
             }
             // load secondary groups
             $this->loadGroups($result['id']);
-            $this->setId((int) $result['id']);
+            $this->setId((int)$result['id']);
             return;
         }
         $this->setSecondaryGroups([]);
@@ -499,7 +499,7 @@ class User extends Model
             $result = Database::pQuery($sql, $args, true);
             if (Database::any($result)) {
                 $data = Database::fetchObject($result);
-                $lastAction = (int) $data->last_action;
+                $lastAction = (int)$data->last_action;
             }
         }
         return $lastAction;
@@ -598,7 +598,7 @@ class User extends Model
      */
     public function getRequirePasswordChange(): bool
     {
-        return (bool) $this->require_password_change;
+        return (bool)$this->require_password_change;
     }
 
     /**
@@ -608,7 +608,7 @@ class User extends Model
      */
     public function setRequirePasswordChange($val): void
     {
-        $this->require_password_change = (bool) $val;
+        $this->require_password_change = (bool)$val;
     }
 
     /**
@@ -618,7 +618,7 @@ class User extends Model
      */
     public function isAdmin(): bool
     {
-        return (bool) $this->admin;
+        return (bool)$this->admin;
     }
 
     /**
@@ -628,7 +628,7 @@ class User extends Model
      */
     public function setAdmin($val): void
     {
-        $this->admin = (bool) $val;
+        $this->admin = (bool)$val;
     }
 
     /**
@@ -637,7 +637,7 @@ class User extends Model
      */
     public function isLocked(): bool
     {
-        return (bool) $this->locked;
+        return (bool)$this->locked;
     }
 
     /**
@@ -646,7 +646,7 @@ class User extends Model
      */
     public function setLocked($val)
     {
-        $this->locked = (bool) $val;
+        $this->locked = (bool)$val;
     }
 
     /**
@@ -683,7 +683,7 @@ class User extends Model
             $result = Database::pQuery($sql, $args, true);
             if (Database::any($result)) {
                 $data = Database::fetchObject($result);
-                $failedLogins = (int) $data->failed_logins;
+                $failedLogins = (int)$data->failed_logins;
             }
         }
         return $failedLogins;
@@ -754,7 +754,7 @@ class User extends Model
      */
     public function setHomepage(?string $val): void
     {
-        $this->homepage = (string) $val;
+        $this->homepage = (string)$val;
     }
 
     /**
@@ -773,7 +773,7 @@ class User extends Model
      */
     public function setDefaultLanguage(?string $val): void
     {
-        $this->default_language = ! empty($val) ? (string) $val : null;
+        $this->default_language = ! empty($val) ? (string)$val : null;
     }
 
     /**
@@ -1126,7 +1126,7 @@ class User extends Model
 
         $sql = 'select `group_id` from `{prefix}user_groups` where user_id = ?';
         $args = [
-            (int) $user_id
+            (int)$user_id
         ];
         $result = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($result)) {

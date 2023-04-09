@@ -42,7 +42,7 @@ class CustomFields
             $result = Database::fetchObject($result);
             if ($value === null) {
                 $args = [
-                    (int) $result->id
+                    (int)$result->id
                 ];
                 $sql = 'DELETE FROM {prefix}custom_fields '
                         . 'where id = ?';

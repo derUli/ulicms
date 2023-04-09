@@ -31,7 +31,7 @@ class Module
         if ($dataset) {
             $this->name = $dataset->name;
             $this->version = $dataset->version;
-            $this->enabled = (bool) $dataset->enabled;
+            $this->enabled = (bool)$dataset->enabled;
             return true;
         }
         return false;
@@ -64,7 +64,7 @@ class Module
 
     public function isEnabled(): bool
     {
-        return (bool) $this->enabled;
+        return (bool)$this->enabled;
     }
 
     public function enable(): void

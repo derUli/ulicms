@@ -28,11 +28,11 @@ class ImageScaleHelper extends Helper
 
         if (count($explodedScale) === 2) {
             if (! empty($explodedScale[0])) {
-                $width = (int) $explodedScale[0];
+                $width = (int)$explodedScale[0];
             }
 
             if (! empty($explodedScale[1])) {
-                $height = (int) $explodedScale[1];
+                $height = (int)$explodedScale[1];
             }
         }
 
