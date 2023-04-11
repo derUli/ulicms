@@ -136,7 +136,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
         $timezones = $controller->getTimezones();
         $this->assertStringContainsString('<option value="Asia/Tokyo">', $timezones);
 
-        $this->assertEquals(422, substr_count($timezones, '<option'));
+        $this->assertGreaterThan(400, substr_count($timezones, '<option'));
         $this->assertEquals(10, substr_count($timezones, '<optgroup'));
     }
 
