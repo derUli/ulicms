@@ -2,6 +2,9 @@
 
 use App\Backend\UliCMSVersion;
 
+// TODO: Make it work without this
+mysqli_report(MYSQLI_REPORT_OFF);
+
 class InstallerController
 {
     public static function getStep()
@@ -97,6 +100,7 @@ class InstallerController
             $_POST['loginname'],
             $_POST['passwort']
         );
+
         if ($connection == false) {
             exit(TRANSLATION_DB_CONNECTION_FAILED);
         }
@@ -162,12 +166,15 @@ class InstallerController
             $_SESSION['mysql_host'],
             $_SESSION['mysql_user'],
             $_SESSION['mysql_password']
-        ) || exit(TRANSLATION_DB_CONNECTION_FAILED);
+        );
+
+        if ($connection == false) {
+            exit(TRANSLATION_DB_CONNECTION_FAILED);
+        }
 
         $select = mysqli_select_db($connection, $_SESSION['mysql_database']);
 
-        mysqli_query($connection, "SET NAMES 'utf8mb4'")
-                || exit(mysqli_error($connection));
+        mysqli_query($connection, "SET NAMES 'utf8mb4'");
 
         // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
         mysqli_query($connection, "SET SESSION sql_mode = '';");
