@@ -8,6 +8,7 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use DateTimeZone;
 use IntlDateFormatter;
+use Settings;
 
 /**
  * This class contains methods to deal with DateTimes
@@ -29,7 +30,7 @@ class DateTimeHelper
      */
     public static function getCurrentLocale(): ?string
     {
-        return setlocale(LC_ALL, 0) ?? null;
+        return Settings::getLang('locale');
     }
 
     /**

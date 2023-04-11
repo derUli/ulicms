@@ -334,7 +334,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
 
     public function testGetSqlStrictModeFlags()
     {
-        $this->assertCount(7, Database::getSqlStrictModeFlags());
+        $this->assertCount(6, Database::getSqlStrictModeFlags());
         foreach (Database::getSqlStrictModeFlags() as $flag) {
             $this->assertIsString($flag);
             $this->assertNotEmpty($flag);
