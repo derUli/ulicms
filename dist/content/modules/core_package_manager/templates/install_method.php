@@ -1,23 +1,23 @@
 <?php
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission("install_packages")) {
+if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();
 } else {
     ?>
     <p>
         <a
-            href="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "redirectToPackageView"); ?>"
+            href="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, 'redirectToPackageView'); ?>"
             class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-            <?php translate("back") ?></a>
+            <?php translate('back'); ?></a>
     </p>
-    <h1><?php translate("install_package"); ?></h1>
+    <h1><?php translate('install_package'); ?></h1>
     <p>
         <a href="?action=upload_package" class="btn btn-default is-ajax">
-            <i class="fa fa-upload"></i> <?php translate("upload_file"); ?>
+            <i class="fa fa-upload"></i> <?php translate('upload_file'); ?>
         </a>
     </p>
     <p>
-        <a href="?action=available_modules" class="btn btn-default"><i class="fas fa-box"></i> <?php translate("from_the_package_source"); ?>
+        <a href="?action=available_modules" class="btn btn-default"><i class="fas fa-box"></i> <?php translate('from_the_package_source'); ?>
         </a>
     </p>
     <p>

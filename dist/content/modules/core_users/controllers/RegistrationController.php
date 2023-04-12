@@ -10,7 +10,7 @@ class RegistrationController extends Controller
     public function registerPost(): void
     {
         throw new NotImplementedException(
-            "This Controller will handle user registrations in future"
+            'This Controller will handle user registrations in future'
         );
     }
 }

@@ -10,9 +10,9 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase
     public function testContainsModuleReturnsTrue()
     {
         $modulePage = new Module_Page();
-        $modulePage->title = "Unit Test Article";
-        $modulePage->slug = "unit test";
-        $modulePage->menu = "none";
+        $modulePage->title = 'Unit Test Article';
+        $modulePage->slug = 'unit test';
+        $modulePage->menu = 'none';
         $modulePage->language = 'de';
         $modulePage->article_date = 1413821696;
         $modulePage->author_id = 1;
@@ -27,33 +27,33 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase
         $modulePage = ContentFactory::getByID($id);
 
         $this->assertTrue($modulePage->containsModule());
-        $this->assertTrue($modulePage->containsModule("blog"));
-        $this->assertFalse($modulePage->containsModule("not_existing"));
+        $this->assertTrue($modulePage->containsModule('blog'));
+        $this->assertFalse($modulePage->containsModule('not_existing'));
     }
 
     public function testContainsModuleReturnFalse()
     {
         $modulePage = new Module_Page();
-        $modulePage->title = "Unit Test Article";
-        $modulePage->slug = "unit test";
-        $modulePage->menu = "none";
+        $modulePage->title = 'Unit Test Article';
+        $modulePage->slug = 'unit test';
+        $modulePage->menu = 'none';
         $modulePage->language = 'de';
         $modulePage->article_date = 1413821696;
         $modulePage->author_id = 1;
         $modulePage->group_id = 1;
         $modulePage->update();
         $this->assertFalse($modulePage->containsModule());
-        $this->assertFalse($modulePage->containsModule("blog"));
+        $this->assertFalse($modulePage->containsModule('blog'));
     }
 
     public function testGetEmbeddedModulesReturnsModules()
     {
-        $module = new Module("fortune2");
+        $module = new Module('fortune2');
 
         $modulePage = new Module_Page();
-        $modulePage->title = "Unit Test Article";
-        $modulePage->slug = "unit test";
-        $modulePage->menu = "none";
+        $modulePage->title = 'Unit Test Article';
+        $modulePage->slug = 'unit test';
+        $modulePage->menu = 'none';
         $modulePage->language = 'de';
         $modulePage->article_date = 1413821696;
         $modulePage->author_id = 1;
@@ -63,13 +63,13 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase
         $modulePage->content = $module->getShortCode();
         $modulePage->save();
 
-        $this->assertTrue($modulePage->containsModule("fortune2"));
-        $this->assertTrue($modulePage->containsModule("blog"));
+        $this->assertTrue($modulePage->containsModule('fortune2'));
+        $this->assertTrue($modulePage->containsModule('blog'));
 
         $this->assertEquals(
             [
-                "fortune2",
-                "blog"
+                'fortune2',
+                'blog'
             ],
             $modulePage->getEmbeddedModules()
         );
@@ -77,22 +77,22 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase
 
     public function testGetEmbeddedModulesReturnsNothing()
     {
-        $module = new Module("fortune2");
+        $module = new Module('fortune2');
 
         $modulePage = new Module_Page();
-        $modulePage->title = "Unit Test Article";
-        $modulePage->slug = "unit test";
-        $modulePage->menu = "none";
+        $modulePage->title = 'Unit Test Article';
+        $modulePage->slug = 'unit test';
+        $modulePage->menu = 'none';
         $modulePage->language = 'de';
         $modulePage->article_date = 1413821696;
         $modulePage->author_id = 1;
         $modulePage->group_id = 1;
 
-        $modulePage->content = "no content";
+        $modulePage->content = 'no content';
         $modulePage->save();
 
-        $this->assertFalse($modulePage->containsModule("fortune2"));
-        $this->assertFalse($modulePage->containsModule("blog"));
+        $this->assertFalse($modulePage->containsModule('fortune2'));
+        $this->assertFalse($modulePage->containsModule('blog'));
 
         $this->assertCount(0, $modulePage->getEmbeddedModules());
     }

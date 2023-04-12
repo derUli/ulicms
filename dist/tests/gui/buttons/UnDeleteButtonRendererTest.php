@@ -5,16 +5,17 @@ use App\CoreContent\Partials\UnDeleteButtonRenderer;
 class UnDeleteButtonRendererTest extends \PHPUnit\Framework\TestCase
 {
     private $user;
+
     private $group;
 
     protected function setUp(): void
     {
         $user = new User();
-        $user->setUsername("paul.panzer");
-        $user->setLastname("Panzer");
-        $user->setFirstname("Paul");
-        $user->setPassword("secret");
-        $user->setEmail("paul@panzer.de");
+        $user->setUsername('paul.panzer');
+        $user->setLastname('Panzer');
+        $user->setFirstname('Paul');
+        $user->setPassword('secret');
+        $user->setEmail('paul@panzer.de');
         $user->save();
 
         $this->user = $user;
@@ -36,7 +37,7 @@ class UnDeleteButtonRendererTest extends \PHPUnit\Framework\TestCase
 
         $page = new Page();
         $page->slug = uniqid();
-        $page->title = "Test Page " . uniqid();
+        $page->title = 'Test Page ' . uniqid();
         $page->author_id = $this->user->getId();
         $page->group_id = $allGroups[0]->getId();
         $page->save();
@@ -67,7 +68,7 @@ class UnDeleteButtonRendererTest extends \PHPUnit\Framework\TestCase
 
         $page = new Page();
         $page->slug = uniqid();
-        $page->title = "Test Page " . uniqid();
+        $page->title = 'Test Page ' . uniqid();
         $page->author_id = $this->user->getId();
         $page->group_id = $allGroups[0]->getId();
         $page->save();

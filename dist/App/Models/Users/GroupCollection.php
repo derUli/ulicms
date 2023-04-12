@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Users;
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 use User;
 
 /**
@@ -19,7 +21,7 @@ class GroupCollection
      */
     public function __construct(?User $user = null)
     {
-        $this->user = $user ? $user : new User();
+        $this->user = $user ?: new User();
     }
 
     /**
@@ -70,7 +72,7 @@ class GroupCollection
     private function joinTags(array $tags): string
     {
         $tags = array_map(
-            function ($tag) {
+            static function($tag) {
                 return "<{$tag}>";
             },
             $tags

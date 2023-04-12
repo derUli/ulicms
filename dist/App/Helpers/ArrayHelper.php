@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Helper;
 use Exception;
 
 /**
@@ -19,16 +18,16 @@ class ArrayHelper extends Helper
      * @param array $input
      * @param int $index
      * @param type $element
-     * @return array
      * @throws Exception
+     * @return array
      */
     public static function insertBefore(
         array $input,
         int $index,
         $element
     ): array {
-        if (!array_key_exists($index, $input)) {
-            throw new Exception("Index not found");
+        if (! array_key_exists($index, $input)) {
+            throw new Exception('Index not found');
         }
         $tmpArray = [];
         $originalIndex = 0;
@@ -49,16 +48,16 @@ class ArrayHelper extends Helper
      * @param array $input
      * @param int $index
      * @param type $element
-     * @return array
      * @throws Exception
+     * @return array
      */
     public static function insertAfter(
         array $input,
         int $index,
         $element
     ): array {
-        if (!array_key_exists($index, $input)) {
-            throw new Exception("Index not found");
+        if (! array_key_exists($index, $input)) {
+            throw new Exception('Index not found');
         }
         $tmpArray = [];
         $originalIndex = 0;
@@ -82,14 +81,14 @@ class ArrayHelper extends Helper
      */
     public static function hasMultipleKeys(?array $input, array $keys): bool
     {
-        if (!$input) {
+        if (! $input) {
             return false;
         }
 
         $hasKeys = true;
 
         foreach ($keys as $key) {
-            if (!array_key_exists($key, $input)) {
+            if (! array_key_exists($key, $input)) {
                 $hasKeys = false;
             }
         }

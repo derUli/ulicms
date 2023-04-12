@@ -5,13 +5,14 @@ use App\Models\Content\Language;
 class LanguageControllerTest extends \PHPUnit\Framework\TestCase
 {
     private $lang = null;
+
     private $initialSettings = [];
 
     protected function setUp(): void
     {
         $this->initialDefaultLanguage = [
-            "system_language" => Settings::get("system_language"),
-            "default_language" => Settings::get("default_language")
+            'system_language' => Settings::get('system_language'),
+            'default_language' => Settings::get('default_language')
         ];
     }
 
@@ -30,22 +31,22 @@ class LanguageControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testCreatePostReturnsModel(): void
     {
-        $_POST['name'] = "Lampukisch";
-        $_POST["language_code"] = "lp";
+        $_POST['name'] = 'Lampukisch';
+        $_POST['language_code'] = 'lp';
         $controller = new LanguageController();
         $model = $controller->_createPost();
         $this->assertInstanceOf(Language::class, $model);
 
         $language = new Language($model->getID());
-        $this->assertEquals("Lampukisch", $language->getName());
-        $this->assertEquals("lp", $language->getLanguageCode());
+        $this->assertEquals('Lampukisch', $language->getName());
+        $this->assertEquals('lp', $language->getLanguageCode());
     }
 
     public function testDeleteReturnTrue(): void
     {
         $lang = new Language();
-        $lang->setName("Lampukisch");
-        $lang->setLanguageCode("lp");
+        $lang->setName('Lampukisch');
+        $lang->setLanguageCode('lp');
         $lang->save();
 
         $_GET['id'] = $lang->getId();
@@ -62,14 +63,14 @@ class LanguageControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testDefaultLanguage()
     {
-        $this->assertNotEquals("it", Settings::get("system_language"));
-        $this->assertNotEquals("it", Settings::get("default_language"));
+        $this->assertNotEquals('it', Settings::get('system_language'));
+        $this->assertNotEquals('it', Settings::get('default_language'));
 
-        $_POST["default"] = "it";
+        $_POST['default'] = 'it';
         $controller = new LanguageController();
         $controller->_setDefaultLanguage();
 
-        $this->assertEquals("it", Settings::get("system_language"));
-        $this->assertEquals("it", Settings::get("default_language"));
+        $this->assertEquals('it', Settings::get('system_language'));
+        $this->assertEquals('it', Settings::get('default_language'));
     }
 }

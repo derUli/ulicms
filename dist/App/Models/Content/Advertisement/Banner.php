@@ -4,27 +4,37 @@ declare(strict_types=1);
 
 namespace App\Models\Content\Advertisement;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Template;
-use Database;
-use Model;
-use InvalidArgumentException;
 use App\Exceptions\DatasetNotFoundException;
+use Database;
+use InvalidArgumentException;
+use Model;
+use Template;
 
 // advertisement banners can be html codes or classic gif banners
 class Banner extends Model
 {
     protected $id = null;
+
     private $name = null;
+
     private $link_url = null;
+
     private $image_url = null;
+
     private $category_id = 1;
-    private $type = "gif";
+
+    private $type = 'gif';
+
     private $html = null;
+
     private $language = null;
+
     private $enabled = true;
+
     private $date_from = null;
+
     private $date_to = null;
 
     public function __construct($id = null)
@@ -37,29 +47,14 @@ class Banner extends Model
     public function loadByID($id)
     {
         $id = (int)$id;
-        $result = Database::query("SELECT * FROM `" . tbname("banner") .
-                        "` where id = $id");
+        $result = Database::query('SELECT * FROM `' . tbname('banner') .
+                        "` where id = {$id}");
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
             $this->fillVars($result);
         } else {
-            throw new DatasetNotFoundException("No banner with id $id");
+            throw new DatasetNotFoundException("No banner with id {$id}");
         }
-    }
-
-    protected function fillVars($result = null)
-    {
-        $this->id = (int)$result->id;
-        $this->name = $result->name;
-        $this->link_url = $result->link_url;
-        $this->image_url = $result->image_url;
-        $this->category_id = (int)$result->category_id;
-        $this->type = $result->type;
-        $this->html = $result->html;
-        $this->language = $result->language;
-        $this->enabled = (bool)$result->enabled;
-        $this->date_from = $result->date_from;
-        $this->date_to = $result->date_to;
     }
 
     public function save()
@@ -67,9 +62,9 @@ class Banner extends Model
         $retval = false;
         if ($this->id != null) {
             $retval = $this->update();
-        } {
-            $retval = $this->create();
         }
+            $retval = $this->create();
+
         return $retval;
     }
 
@@ -83,58 +78,58 @@ class Banner extends Model
 
     public function insert()
     {
-        $sql = "INSERT INTO " . tbname("banner") . "(name, link_url, image_url, "
-                . "category_id, type, html, language, date_from, date_to, "
-                . "enabled) values (";
+        $sql = 'INSERT INTO ' . tbname('banner') . '(name, link_url, image_url, '
+                . 'category_id, type, html, language, date_from, date_to, '
+                . 'enabled) values (';
         if ($this->name === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->name) . "',";
         }
         if ($this->link_url === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->link_url) . "',";
         }
         if ($this->image_url === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->image_url) . "',";
         }
         if ($this->category_id === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
-            $sql .= "'" . intval($this->category_id) . "',";
+            $sql .= "'" . (int)$this->category_id . "',";
         }
 
         $sql .= "'" . Database::escapeValue($this->type) . "',";
 
         if ($this->html === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->html) . "',";
         }
         if ($this->language === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->language) . "',";
         }
 
         if ($this->date_from === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->date_from) . "',";
         }
 
         if ($this->date_to === null) {
-            $sql .= "NULL, ";
+            $sql .= 'NULL, ';
         } else {
             $sql .= "'" . Database::escapeValue($this->date_to) . "',";
         }
 
-        $sql .= intval($this->enabled);
+        $sql .= (int)$this->enabled;
 
-        $sql .= ")";
+        $sql .= ')';
 
         $result = Database::query($sql);
         $this->id = Database::getLastInsertID();
@@ -147,61 +142,61 @@ class Banner extends Model
         if ($this->id === null) {
             return $this->create();
         }
-        $sql = "UPDATE " . tbname("banner") . " set ";
+        $sql = 'UPDATE ' . tbname('banner') . ' set ';
 
         if ($this->name === null) {
-            $sql .= "name=NULL, ";
+            $sql .= 'name=NULL, ';
         } else {
             $sql .= "name='" . Database::escapeValue($this->name) . "',";
         }
         if ($this->link_url === null) {
-            $sql .= "link_url = NULL, ";
+            $sql .= 'link_url = NULL, ';
         } else {
             $sql .= "link_url='" . Database::escapeValue($this->link_url) .
                     "',";
         }
         if ($this->image_url === null) {
-            $sql .= "image_url=NULL, ";
+            $sql .= 'image_url=NULL, ';
         } else {
             $sql .= "image_url='" . Database::escapeValue($this->image_url) .
                     "',";
         }
         if ($this->category_id === null) {
-            $sql .= "category_id=NULL, ";
+            $sql .= 'category_id=NULL, ';
         } else {
-            $sql .= "category_id='" . intval($this->category_id) . "',";
+            $sql .= "category_id='" . (int)$this->category_id . "',";
         }
 
         $sql .= "`type`='" . Database::escapeValue($this->type) . "',";
 
         if ($this->html === null) {
-            $sql .= "html=NULL, ";
+            $sql .= 'html=NULL, ';
         } else {
             $sql .= "html='" . Database::escapeValue($this->html) . "',";
         }
         if ($this->language === null) {
-            $sql .= "language=NULL, ";
+            $sql .= 'language=NULL, ';
         } else {
             $sql .= "language='" . Database::escapeValue($this->language) .
                     "', ";
         }
 
         if ($this->date_from === null) {
-            $sql .= "date_from=NULL, ";
+            $sql .= 'date_from=NULL, ';
         } else {
             $sql .= "date_from='" . Database::escapeValue($this->date_from) .
                     "', ";
         }
         if ($this->date_to === null) {
-            $sql .= "date_to=NULL, ";
+            $sql .= 'date_to=NULL, ';
         } else {
             $sql .= "date_to='" . Database::escapeValue($this->date_to) .
                     "', ";
         }
 
-        $sql .= "enabled = " . intval($this->enabled);
+        $sql .= 'enabled = ' . (int)$this->enabled;
 
-        $sql .= " where id = " . intval($this->id);
+        $sql .= ' where id = ' . (int)$this->id;
         return Database::query($sql);
     }
 
@@ -212,36 +207,36 @@ class Banner extends Model
 
     public function setDateFrom($val): void
     {
-        if ($val === null or is_string($val)) {
+        if ($val === null || is_string($val)) {
             $this->date_from = $val;
         } elseif (is_numeric($val)) {
-            $this->date_from = date("Y-m-d", $val);
+            $this->date_from = date('Y-m-d', $val);
         } else {
             throw new InvalidArgumentException(
-                "not a date and not a timestamp"
+                'not a date and not a timestamp'
             );
         }
     }
 
     public function setDateTo($val): void
     {
-        if ($val === null or is_string($val)) {
+        if ($val === null || is_string($val)) {
             $this->date_to = $val;
         } elseif (is_numeric($val)) {
-            $this->date_to = date("Y-m-d", $val);
+            $this->date_to = date('Y-m-d', $val);
         } else {
             throw new InvalidArgumentException(
-                "not a date and not a timestamp"
+                'not a date and not a timestamp'
             );
         }
     }
 
     public function setType(string $type): void
     {
-        $allowedTypes = array(
-            "gif",
-            "html"
-        );
+        $allowedTypes = [
+            'gif',
+            'html'
+        ];
         if (in_array($type, $allowedTypes)) {
             $this->type = $type;
         }
@@ -336,7 +331,7 @@ class Banner extends Model
     {
         $retval = false;
         if ($this->id !== null) {
-            $sql = "DELETE from " . tbname("banner") . " where id = " .
+            $sql = 'DELETE from ' . tbname('banner') . ' where id = ' .
                     $this->id;
             $retval = Database::Query($sql);
             $this->id = null;
@@ -349,20 +344,35 @@ class Banner extends Model
         $html = '';
 
         switch ($this->getType()) {
-            case "gif":
+            case 'gif':
                 $title = Template::getEscape($this->getName());
                 $link_url = Template::getEscape($this->getLinkUrl());
                 $image_url = Template::getEscape($this->getImageUrl());
-                $html = "<a href=\"$link_url\" target=\"_blank\">"
-                        . "<img src=\"$image_url\" title=\"$title\" "
-                        . "alt=\"$title\" border=\"0\"></a>";
+                $html = "<a href=\"{$link_url}\" target=\"_blank\">"
+                        . "<img src=\"{$image_url}\" title=\"{$title}\" "
+                        . "alt=\"{$title}\" border=\"0\"></a>";
                 break;
-            case "html":
+            case 'html':
                 $html = $this->getHtml();
 
                 break;
         }
 
         return $html;
+    }
+
+    protected function fillVars($result = null)
+    {
+        $this->id = (int)$result->id;
+        $this->name = $result->name;
+        $this->link_url = $result->link_url;
+        $this->image_url = $result->image_url;
+        $this->category_id = (int)$result->category_id;
+        $this->type = $result->type;
+        $this->html = $result->html;
+        $this->language = $result->language;
+        $this->enabled = (bool)$result->enabled;
+        $this->date_from = $result->date_from;
+        $this->date_to = $result->date_to;
     }
 }

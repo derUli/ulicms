@@ -1,9 +1,9 @@
 <?php
-$controller = ControllerRegistry::get("FaviconController");
+$controller = ControllerRegistry::get('FaviconController');
 
 $hasFavicon = $controller && $controller->_hasFavicon();
 ?>
-<?php if (!$hasFavicon) { ?>
+<?php if (! $hasFavicon) { ?>
     <link rel="icon" href="gfx/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="gfx/favicon.ico" type="image/x-icon" />
 <?php }

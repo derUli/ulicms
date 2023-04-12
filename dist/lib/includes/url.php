@@ -8,8 +8,8 @@ declare(strict_types=1);
  */
 function get_jquery_url(): string
 {
-    $url = "node_modules/jquery/dist/jquery.min.js";
-    $url = apply_filter($url, "jquery_url");
+    $url = 'node_modules/jquery/dist/jquery.min.js';
+    $url = apply_filter($url, 'jquery_url');
     return $url;
 }
 
@@ -21,7 +21,7 @@ function get_jquery_url(): string
 function get_shortlink($id = null): ?string
 {
     $shortlink = null;
-    $id = $id ? $id : get_ID();
+    $id = $id ?: get_ID();
 
     if ($id) {
         $shortlink = getBaseFolderURL() . '/?goid=' . $id;
@@ -38,7 +38,7 @@ function get_shortlink($id = null): ?string
 function get_canonical(): string
 {
     $canonical = getBaseFolderURL() . '/';
-    if (!is_frontpage()) {
+    if (! is_home()) {
         $canonical .= buildSEOUrl();
     }
 
@@ -50,20 +50,20 @@ function get_canonical(): string
 // rewrite this method
 function getBaseFolderURL(?string $suffix = null): string
 {
-    $s = empty($_SERVER['HTTPS']) ? '' : (($_SERVER['HTTPS'] == "on") ?
-            "s" : "");
+    $s = empty($_SERVER['HTTPS']) ? '' : (($_SERVER['HTTPS'] == 'on') ?
+            's' : '');
     $sp = strtolower($_SERVER['SERVER_PROTOCOL']);
     $protocol = substr($sp, 0, strpos($sp, '/')) . $s;
-    $port = ($_SERVER['SERVER_PORT'] == "80"
-            or $_SERVER['SERVER_PORT'] == "443") ?
-            "" : (":" . $_SERVER['SERVER_PORT']);
+    $port = ($_SERVER['SERVER_PORT'] == '80'
+            || $_SERVER['SERVER_PORT'] == '443') ?
+            '' : (':' . $_SERVER['SERVER_PORT']);
     $path = basename(dirname($_SERVER['REQUEST_URI'])) == '' ?
             $_SERVER['REQUEST_URI'] : dirname($_SERVER['REQUEST_URI']);
     $suffix = $suffix ?
-            str_replace("\\", '/', $suffix) : str_replace("\\", '/', $path);
+            str_replace('\\', '/', $suffix) : str_replace('\\', '/', $path);
     return trim(
         rtrim(
-            $protocol . "://"
+            $protocol . '://'
             . $_SERVER['HTTP_HOST'] . $port
             .
             $suffix
@@ -91,23 +91,23 @@ function getCurrentURL(): string
 function buildSEOUrl(
     ?string $page = null,
     ?string $redirection = null,
-        // TODO: Obsoleten Parameter $format entfernen
-        ?string $format = null
+    // TODO: Obsoleten Parameter $format entfernen
+    ?string $format = null
 ) {
     if ($redirection) {
         return $redirection;
     }
-    if (!$page) {
+    if (! $page) {
         $page = get_slug();
     }
     if ($page === get_frontpage()) {
-        return "./";
+        return './';
     }
 
     $seo_url = '';
 
     if (is_admin_dir()) {
-        $seo_url .= "../";
+        $seo_url .= '../';
     }
     $seo_url .= $page;
     return $seo_url;

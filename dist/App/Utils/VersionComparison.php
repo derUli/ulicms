@@ -2,7 +2,7 @@
 
 namespace App\Utils;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 /**
  * Utils for version number comparisons
@@ -19,15 +19,15 @@ class VersionComparison
     public static function compare(
         ?string $version1,
         ?string $version2,
-        string $operator = ">"
+        string $operator = '>'
     ): bool {
-        $splitted1 = explode('.', $version1);
-        $splitted2 = explode('.', $version2);
+        $splitted1 = explode('.', $version1 ?? '');
+        $splitted2 = explode('.', $version2 ?? '');
         $fillUp = self::fillUpVersionNumbers($splitted1, $splitted2);
         $splitted1 = $fillUp[0];
         $splitted2 = $fillUp[1];
 
-        if ($operator === "=") {
+        if ($operator === '=') {
             return $splitted1 === $splitted2;
         }
 
@@ -52,11 +52,7 @@ class VersionComparison
             return true;
         }
 
-        if ($operator === '<=' && $splitted1 <= $splitted2) {
-            return true;
-        }
-
-        return false;
+        return (bool)($operator === '<=' && $splitted1 <= $splitted2);
     }
 
     /**
@@ -71,15 +67,15 @@ class VersionComparison
             return [$splitted1, $splitted2];
         }
         if (count($splitted1) > count($splitted2)) {
-            $splitted2[] = "0";
+            $splitted2[] = '0';
             $difference = count($splitted1) - count($splitted2);
             for ($i = 0; $i < $difference; $i++) {
-                $splitted2[] = "0";
+                $splitted2[] = '0';
             }
         } elseif (count($splitted1) < count($splitted2)) {
             $difference = count($splitted2) - count($splitted1);
             for ($i = 0; $i < $difference; $i++) {
-                $splitted1[] = "0";
+                $splitted1[] = '0';
             }
         }
         return [$splitted1, $splitted2];

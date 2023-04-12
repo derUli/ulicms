@@ -1,16 +1,16 @@
 <?php
 
-use App\Security\SpamChecker\SpamFilterConfiguration;
 use App\Models\Content\Comment;
 use App\Security\SpamChecker\CommentSpamChecker;
+use App\Security\SpamChecker\SpamFilterConfiguration;
 
 class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
         require_once getLanguageFilePath('en');
-        require_once ModuleHelper::buildModuleRessourcePath('core_comments', "lang/en.php");
-        require_once ModuleHelper::buildModuleRessourcePath("core_forms", "lang/en.php");
+        require_once ModuleHelper::buildModuleRessourcePath('core_comments', 'lang/en.php');
+        require_once ModuleHelper::buildModuleRessourcePath('core_forms', 'lang/en.php');
     }
 
     protected function tearDown(): void
@@ -31,10 +31,10 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $configuration = new SpamFilterConfiguration();
 
         $comment = new Comment();
-        $comment->setAuthorName("Motherfucker");
-        $comment->setText("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
+        $comment->setAuthorName('Motherfucker');
+        $comment->setText('hey, you motherfucker! You are a shit cock! You need cheap viagra!');
 
-        $_POST["my_homepage_url"] = "http://www.google.de";
+        $_POST['my_homepage_url'] = 'http://www.google.de';
 
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
@@ -47,22 +47,22 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Honeypot', $error->field);
         $this->assertEquals('Honeypot is not empty!', $error->message);
 
-        unset($_POST["my_homepage_url"]);
+        unset($_POST['my_homepage_url']);
     }
 
     public function testSpamWithBadwords()
     {
         $configuration = new SpamFilterConfiguration();
-        $configuration->setBadwords(array(
-            "Shit",
-            "Fuck",
-            "Cock",
-            "Viagra"
-        ));
+        $configuration->setBadwords([
+            'Shit',
+            'Fuck',
+            'Cock',
+            'Viagra'
+        ]);
 
         $comment = new Comment();
-        $comment->setAuthorName("Motherfucker");
-        $comment->setText("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
+        $comment->setAuthorName('Motherfucker');
+        $comment->setText('hey, you motherfucker! You are a shit cock! You need cheap viagra!');
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
 
@@ -85,9 +85,9 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $configuration->setCheckMxOfMailAddress(true);
 
         $comment = new Comment();
-        $comment->setAuthorName("Motherfucker");
-        $comment->setText("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
-        $comment->setAuthorEmail("shittyspammer@ftp.gnu.org");
+        $comment->setAuthorName('Motherfucker');
+        $comment->setText('hey, you motherfucker! You are a shit cock! You need cheap viagra!');
+        $comment->setAuthorEmail('shittyspammer@ftp.gnu.org');
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
         $errors = $checker->getErrors();
@@ -104,10 +104,10 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $configuration->setRejectRequestsFromBots(true);
 
         $comment = new Comment();
-        $comment->setAuthorName("Motherfucker");
-        $comment->setText("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
-        $comment->setAuthorEmail("shittyspammer@example.org");
-        $comment->setUserAgent("libwww-perl/5.805");
+        $comment->setAuthorName('Motherfucker');
+        $comment->setText('hey, you motherfucker! You are a shit cock! You need cheap viagra!');
+        $comment->setAuthorEmail('shittyspammer@example.org');
+        $comment->setUserAgent('libwww-perl/5.805');
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
         $errors = $checker->getErrors();
@@ -124,8 +124,8 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $configuration->setDisallowChineseChars(true);
 
         $comment = new Comment();
-        $comment->setAuthorName("中國人在科騰 vong China");
-        $comment->setText("Yo! 中国人在科腾 Yo!");
+        $comment->setAuthorName('中國人在科騰 vong China');
+        $comment->setText('Yo! 中国人在科腾 Yo!');
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
 
@@ -138,8 +138,8 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Author Name', $error0->field);
         $this->assertEquals('Comment Text', $error1->field);
 
-        $this->assertEquals("Chinese chars are not allowed!", $error0->message);
-        $this->assertEquals("Chinese chars are not allowed!", $error1->message);
+        $this->assertEquals('Chinese chars are not allowed!', $error0->message);
+        $this->assertEquals('Chinese chars are not allowed!', $error1->message);
     }
 
     public function testSpamWithCyrillicChars()
@@ -148,8 +148,8 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $configuration->setDisallowCyrillicChars(true);
 
         $comment = new Comment();
-        $comment->setAuthorName("Гомофобный русский диктатор Путин");
-        $comment->setText("Yo!Православная Церковь - это Yo!");
+        $comment->setAuthorName('Гомофобный русский диктатор Путин');
+        $comment->setText('Yo!Православная Церковь - это Yo!');
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
 
@@ -162,8 +162,8 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Author Name', $error0->field);
         $this->assertEquals('Comment Text', $error1->field);
 
-        $this->assertEquals("Cyrillic chars are not allowed!", $error0->message);
-        $this->assertEquals("Cyrillic chars are not allowed!", $error1->message);
+        $this->assertEquals('Cyrillic chars are not allowed!', $error0->message);
+        $this->assertEquals('Cyrillic chars are not allowed!', $error1->message);
     }
 
     public function testSpamWithRtlChars()
@@ -172,8 +172,8 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $configuration->setDisallowRtlChars(true);
 
         $comment = new Comment();
-        $comment->setAuthorName("نیک ایران");
-        $comment->setText("היהודים הם מענים לילדים");
+        $comment->setAuthorName('نیک ایران');
+        $comment->setText('היהודים הם מענים לילדים');
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
 
@@ -186,24 +186,24 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Author Name', $error0->field);
         $this->assertEquals('Comment Text', $error1->field);
 
-        $this->assertEquals("Right-To-Left languages are not allowed!", $error0->message);
-        $this->assertEquals("Right-To-Left languages are not allowed!", $error1->message);
+        $this->assertEquals('Right-To-Left languages are not allowed!', $error0->message);
+        $this->assertEquals('Right-To-Left languages are not allowed!', $error1->message);
     }
 
     public function testWithBlockedCountries()
     {
         $configuration = new SpamFilterConfiguration();
 
-        $configuration->setBlockedCountries(array(
-            "vn",
-            "cn",
-            "ru"
-        ));
+        $configuration->setBlockedCountries([
+            'vn',
+            'cn',
+            'ru'
+        ]);
 
         $comment = new Comment();
-        $comment->setAuthorName("Гомофобный русский диктатор Путин");
-        $comment->setText("Yo!Православная Церковь - это Yo!");
-        $comment->setIp("123.30.54.106");
+        $comment->setAuthorName('Гомофобный русский диктатор Путин');
+        $comment->setText('Yo!Православная Церковь - это Yo!');
+        $comment->setIp('123.30.54.106');
 
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
@@ -223,10 +223,10 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $configuration->setSpamFilterEnabled(false);
 
         $comment = new Comment();
-        $comment->setAuthorName("Motherfucker");
-        $comment->setText("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
+        $comment->setAuthorName('Motherfucker');
+        $comment->setText('hey, you motherfucker! You are a shit cock! You need cheap viagra!');
 
-        $_POST["my_homepage_url"] = "http://www.google.de";
+        $_POST['my_homepage_url'] = 'http://www.google.de';
 
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertFalse($checker->doSpamCheck());
@@ -234,26 +234,26 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $errors = $checker->getErrors();
         $this->assertCount(0, $errors);
 
-        unset($_POST["my_homepage_url"]);
+        unset($_POST['my_homepage_url']);
     }
 
     public function testNoSpamWithAllOptions()
     {
         $configuration = new SpamFilterConfiguration();
         $configuration->setSpamFilterEnabled(true);
-        $configuration->setBadwords("shit", "fuck", "crap");
-        $configuration->setBlockedCountries("vn", "cn", "ir");
+        $configuration->setBadwords('shit', 'fuck', 'crap');
+        $configuration->setBlockedCountries('vn', 'cn', 'ir');
         $configuration->setCheckMxOfMailAddress(true);
         $configuration->setDisallowChineseChars(true);
         $configuration->setDisallowCyrillicChars(true);
         $configuration->setRejectRequestsFromBots(true);
 
         $comment = new Comment();
-        $comment->setAuthorName("John Doe");
-        $comment->setAuthorEmail("john@doe.de");
-        $comment->setAuthorUrl("http://john-doe.de");
-        $comment->setIp("123.123.123.123");
-        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setAuthorName('John Doe');
+        $comment->setAuthorEmail('john@doe.de');
+        $comment->setAuthorUrl('http://john-doe.de');
+        $comment->setIp('123.123.123.123');
+        $comment->setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36');
         $comment->setDate(time());
 
         $checker = new CommentSpamChecker($comment, $configuration);

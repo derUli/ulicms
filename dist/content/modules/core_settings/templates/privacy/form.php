@@ -2,54 +2,55 @@
 
 use App\Constants\RequestMethod;
 use App\HTML\Alert;
+use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("privacy_settings")) {
-    $currentLanguage = Request::getVar("language");
-    if (!$currentLanguage) {
-        $currentLanguage = Settings::get("default_language");
+if ($permissionChecker->hasPermission('privacy_settings')) {
+    $currentLanguage = Request::getVar('language');
+    if (! $currentLanguage) {
+        $currentLanguage = Settings::get('default_language');
     }
-    $privacy_policy_checkbox_enable = $currentLanguage ? Settings::get("privacy_policy_checkbox_enable_{$currentLanguage}") : Settings::get("privacy_policy_checkbox_enable");
-    $log_ip = Settings::get("log_ip");
-    $delete_ips_after_48_hours = Settings::get("delete_ips_after_48_hours");
-    $keep_spam_ips = Settings::get("keep_spam_ips");
+    $privacy_policy_checkbox_enable = $currentLanguage ? Settings::get("privacy_policy_checkbox_enable_{$currentLanguage}") : Settings::get('privacy_policy_checkbox_enable');
+    $log_ip = Settings::get('log_ip');
+    $delete_ips_after_48_hours = Settings::get('delete_ips_after_48_hours');
+    $keep_spam_ips = Settings::get('keep_spam_ips');
 
     $languages = getAllLanguages(true);
     ?>
     <div class="field">
         <a
-            href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
+            href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
             class="btn btn-default btn-back is-not-ajax">
             <i class="fa fa-arrow-left"></i>
-            <?php translate("back") ?>
+            <?php translate('back'); ?>
         </a>
     </div>
     <?php
-    if (Request::getVar("save")) {
+    if (Request::getVar('save')) {
         echo Alert::success(
-            get_translation("changes_was_saved"),
-            "voffset2"
+            get_translation('changes_was_saved'),
+            'voffset2'
         );
     }
     ?>
-    <h2><?php translate("privacy"); ?></h2>
+    <h2><?php translate('privacy'); ?></h2>
     <?php
     echo ModuleHelper::buildMethodCallForm(
-        "PrivacyController",
-        "save",
+        'PrivacyController',
+        'save',
         [],
         RequestMethod::POST,
-        array(
-            "id" => "privacy-form"
-        )
+        [
+            'id' => 'privacy-form'
+        ]
     );
     ?>
     <div id="accordion-container">
-        <h2 class="accordion-header"><?php translate("dsgvo_checkbox"); ?></h2>
+        <h2 class="accordion-header"><?php translate('dsgvo_checkbox'); ?></h2>
         <div class="accordion-content">
 
             <div class="field">
-                <strong><?php translate("language"); ?></strong> <br /> <select
+                <strong><?php translate('language'); ?></strong> <br /> <select
                     name="language" id="language">
                         <?php
                         foreach ($languages as $language) {
@@ -57,7 +58,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                         <option value="<?php Template::escape($language); ?>"
                         <?php
                         if ($currentLanguage == $language) {
-                            echo "selected";
+                            echo 'selected';
                         }
                             ?>><?php Template::escape(getLanguageNameByCode($language)); ?></option>
                             <?php }
@@ -72,28 +73,28 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                        class="js-switch"
                        <?php
                        if ($privacy_policy_checkbox_enable) {
-                           echo "checked";
+                           echo 'checked';
                        }
     ?>> <label
-                       for="privacy_policy_checkbox_enable"><?php translate("privacy_policy_checkbox_enable"); ?></label>
+                       for="privacy_policy_checkbox_enable"><?php translate('privacy_policy_checkbox_enable'); ?></label>
             </div>
             <?php $editor = get_html_editor(); ?>
             <div id="privacy_policy_checkbox_text_container"
-                 style="<?php echo $privacy_policy_checkbox_enable ? "display:block" : "display:none"; ?>">
-                <strong><?php translate("privacy_policy_checkbox_text") ?></strong><br />
+                 style="<?php echo $privacy_policy_checkbox_enable ? 'display:block' : 'display:none'; ?>">
+                <strong><?php translate('privacy_policy_checkbox_text'); ?></strong><br />
                 <textarea name="privacy_policy_checkbox_text"
                           class="<?php esc($editor); ?>" data-mimetype="text/html"
                           id="privacy_policy_checkbox_text" cols=60 rows=15><?php esc(Settings::get("privacy_policy_checkbox_text_{$currentLanguage}")); ?></textarea>
             </div>
         </div>
         <h2 class="accordion-header">
-            <?php translate("IP_ADDRESSES"); ?>
+            <?php translate('IP_ADDRESSES'); ?>
         </h2>
 
         <div class="accordion-content">
             <div class="field">
                 <div class="field-label">
-                    <label for="log_ip"> <?php translate("LOG_IP_ADDRESSES"); ?>
+                    <label for="log_ip"> <?php translate('LOG_IP_ADDRESSES'); ?>
                     </label>
                 </div>
                 <div class="inputWrapper">
@@ -101,19 +102,19 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                            class="js-switch"
                            <?php
         if ($log_ip) {
-            echo "checked ";
+            echo 'checked ';
         }
     ?>>
                 </div>
                 <small>
-                    <?php translate("LOG_IP_ADDRESSES_NOTICE"); ?>
+                    <?php translate('LOG_IP_ADDRESSES_NOTICE'); ?>
                 </small>
             </div>
             <hr />
             <div class="field">
                 <div class="field-label">
                     <label for="delete_ips_after_48_hours">
-                        <?php translate("DELETE_IPS_AFTER_48_HOURS"); ?>
+                        <?php translate('DELETE_IPS_AFTER_48_HOURS'); ?>
                     </label>
                 </div>
                 <div class="inputWrapper">
@@ -122,7 +123,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                            class="js-switch"
                            <?php
     if ($delete_ips_after_48_hours) {
-        echo "checked ";
+        echo 'checked ';
     }
     ?>>
                 </div>
@@ -130,7 +131,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
             <div class="field">
                 <div class="field-label">
                     <label for="keep_spam_ips">
-                        <?php translate("keep_spam_ips"); ?>
+                        <?php translate('keep_spam_ips'); ?>
                     </label>
                 </div>
                 <div class="inputWrapper">
@@ -138,7 +139,7 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
                            class="js-switch"
                            <?php
     if ($keep_spam_ips) {
-        echo "checked ";
+        echo 'checked ';
     }
     ?>>
                 </div>
@@ -148,15 +149,15 @@ if ($permissionChecker->hasPermission("privacy_settings")) {
     <div class="voffset2">
         <button type="submit" class="btn btn-primary">
             <i class="fas fa-save"></i>
-            <?php translate("save_changes"); ?></button>
+            <?php translate('save_changes'); ?></button>
     </div>
     <?php
     $translation = new JSTranslation();
-    $translation->addKey("changes_was_saved");
+    $translation->addKey('changes_was_saved');
     $translation->render();
 
     BackendHelper::enqueueEditorScripts();
-    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/privacy.js"));
+    enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/privacy.js'));
     combinedScriptHtml();
     echo ModuleHelper::endForm();
     ?>

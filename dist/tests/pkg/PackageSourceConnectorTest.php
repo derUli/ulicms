@@ -4,8 +4,9 @@ use App\Services\Connectors\PackageSourceConnector;
 
 class PackageSourceConnectorTest extends \PHPUnit\Framework\TestCase
 {
-    public const VALID_PACKAGE_SOURCE_URL = "https://packages.ulicms.de/2019.2.6/";
-    public const INVALID_PACKAGE_SOURCE_URL = "https://gibts-nicht.de/";
+    public const VALID_PACKAGE_SOURCE_URL = 'https://packages.ulicms.de/2019.2.6/';
+
+    public const INVALID_PACKAGE_SOURCE_URL = 'https://gibts-nicht.de/';
 
     public function testFetchWithInvalidUrl()
     {
@@ -28,53 +29,53 @@ class PackageSourceConnectorTest extends \PHPUnit\Framework\TestCase
     public function testGetPackageVersionReturnsString()
     {
         $connector = new PackageSourceConnector(self::VALID_PACKAGE_SOURCE_URL);
-        $this->assertEquals("2.0.1", $connector->getVersionOfPackage("facebook_sdk"));
+        $this->assertEquals('2.0.1', $connector->getVersionOfPackage('facebook_sdk'));
     }
 
     public function testGetPackageVersionReturnsNull()
     {
         $connector = new PackageSourceConnector(self::VALID_PACKAGE_SOURCE_URL);
-        $this->assertNull($connector->getVersionOfPackage("gibts_nicht"));
+        $this->assertNull($connector->getVersionOfPackage('gibts_nicht'));
     }
 
     public function testGetPackageLicenseReturnsString()
     {
         $connector = new PackageSourceConnector(self::VALID_PACKAGE_SOURCE_URL);
-        $license = $connector->getLicenseOfPackage("IXR_Library");
-        $this->assertStringContainsString("Copyright (c) 2010, Incutio Ltd.", $license);
-        $this->assertStringContainsString("Redistributions of source code must retain the above copyright notice", $license);
+        $license = $connector->getLicenseOfPackage('IXR_Library');
+        $this->assertStringContainsString('Copyright (c) 2010, Incutio Ltd.', $license);
+        $this->assertStringContainsString('Redistributions of source code must retain the above copyright notice', $license);
     }
 
     public function testGetPackageLicenseReturnsNull()
     {
         $connector = new PackageSourceConnector(self::VALID_PACKAGE_SOURCE_URL);
-        $this->assertNull($connector->getLicenseOfPackage("gibts_nicht"));
+        $this->assertNull($connector->getLicenseOfPackage('gibts_nicht'));
     }
 
     public function testGetPackageDataReturnsObjectTypeTheme()
     {
         $connector = new PackageSourceConnector(self::VALID_PACKAGE_SOURCE_URL);
-        $metadata = $connector->getDataOfPackage("theme-2017");
+        $metadata = $connector->getDataOfPackage('theme-2017');
         $this->assertInstanceOf(stdClass::class, $metadata);
-        $this->assertEquals("theme-2017", $metadata->name);
-        $this->assertEquals("theme", $metadata->type);
-        $this->assertEquals("1.0.4", $metadata->version);
+        $this->assertEquals('theme-2017', $metadata->name);
+        $this->assertEquals('theme', $metadata->type);
+        $this->assertEquals('1.0.4', $metadata->version);
     }
 
     public function testGetPackageDataReturnsObjectTypeModule()
     {
         $connector = new PackageSourceConnector(self::VALID_PACKAGE_SOURCE_URL);
-        $metadata = $connector->getDataOfPackage("break_frames");
+        $metadata = $connector->getDataOfPackage('break_frames');
         $this->assertInstanceOf(stdClass::class, $metadata);
-        $this->assertEquals("break_frames", $metadata->name);
-        $this->assertEquals("module", $metadata->type);
-        $this->assertEquals("0.0.2", $metadata->version);
+        $this->assertEquals('break_frames', $metadata->name);
+        $this->assertEquals('module', $metadata->type);
+        $this->assertEquals('0.0.2', $metadata->version);
     }
 
     public function testGetPackageDataReturnsNull()
     {
         $connector = new PackageSourceConnector(self::VALID_PACKAGE_SOURCE_URL);
-        $this->assertNull($connector->getDataOfPackage("gibts_nicht"));
+        $this->assertNull($connector->getDataOfPackage('gibts_nicht'));
     }
 
     public function testFetchPackagesWithDefaultPackageSource()
@@ -82,19 +83,19 @@ class PackageSourceConnectorTest extends \PHPUnit\Framework\TestCase
         $connector = new PackageSourceConnector();
         $this->assertTrue($connector->fetch(true));
 
-        $metadata = $connector->getDataOfPackage("bootstrap");
+        $metadata = $connector->getDataOfPackage('bootstrap');
 
         $this->assertInstanceOf(stdClass::class, $metadata);
-        $this->assertEquals("bootstrap", $metadata->name);
-        $this->assertEquals("module", $metadata->type);
-        $this->assertEquals("3.3.7", $metadata->version);
+        $this->assertEquals('bootstrap', $metadata->name);
+        $this->assertEquals('module', $metadata->type);
+        $this->assertEquals('3.3.7', $metadata->version);
     }
 
     public function testGetPackageSourceUrl()
     {
         $connector = new PackageSourceConnector(self::VALID_PACKAGE_SOURCE_URL);
         $this->assertEquals(
-            "https://packages.ulicms.de/2019.2.6/index.json",
+            'https://packages.ulicms.de/2019.2.6/index.json',
             $connector->getPackageSourceUrl()
         );
     }

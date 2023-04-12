@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Security;
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 use ContentFactory;
-use User;
 use Group;
+use User;
 
 // permission checks for read, write and delete content permissions
 class ContentPermissionChecker implements IDatasetPermissionChecker
@@ -37,7 +39,7 @@ class ContentPermissionChecker implements IDatasetPermissionChecker
         $user = new User($this->user_id);
         $permissionChecker = new PermissionChecker($this->user_id);
         $userGroups = [];
-        $primaryGroup = $user->getGroupId();
+        $primaryGroup = $user->getPrimaryGroupId();
 
         if ($primaryGroup) {
             $userGroups[] = new Group($primaryGroup);
@@ -54,28 +56,28 @@ class ContentPermissionChecker implements IDatasetPermissionChecker
         }
 
         // page edit restrictions (booleans)
-        $adminsCanEdit = $permissions->getEditRestriction("admins");
-        $groupCanEdit = $permissions->getEditRestriction("group");
-        $ownerCanEdit = $permissions->getEditRestriction("owner");
-        $othersCanEdit = $permissions->getEditRestriction("others");
+        $adminsCanEdit = $permissions->getEditRestriction('admins');
+        $groupCanEdit = $permissions->getEditRestriction('group');
+        $ownerCanEdit = $permissions->getEditRestriction('owner');
+        $othersCanEdit = $permissions->getEditRestriction('others');
 
         $canEditThis = false;
 
         // if there are edit restrictions
-        if ($groupCanEdit or $adminsCanEdit or $ownerCanEdit or $othersCanEdit) {
+        if ($groupCanEdit || $adminsCanEdit || $ownerCanEdit || $othersCanEdit) {
             if ($groupCanEdit && in_array($contentGroup, $groupIds)) {
                 $canEditThis = true;
             } elseif ($adminsCanEdit && $user->isAdmin()) {
                 $canEditThis = true;
-            } elseif ($ownerCanEdit && $isOwner && $permissionChecker->hasPermission("pages_edit_own")) {
+            } elseif ($ownerCanEdit && $isOwner && $permissionChecker->hasPermission('pages_edit_own')) {
                 $canEditThis = true;
-            } elseif ($othersCanEdit && !in_array($contentGroup, $groupIds) && !$user->isAdmin() && !$isOwner) {
+            } elseif ($othersCanEdit && ! in_array($contentGroup, $groupIds) && ! $user->isAdmin() && ! $isOwner) {
                 $canEditThis = true;
             }
         } else {
-            if (!$isOwner && $permissionChecker->hasPermission("pages_edit_others")) {
+            if (! $isOwner && $permissionChecker->hasPermission('pages_edit_others')) {
                 $canEditThis = true;
-            } elseif ($isOwner && $permissionChecker->hasPermission("pages_edit_own")) {
+            } elseif ($isOwner && $permissionChecker->hasPermission('pages_edit_own')) {
                 $canEditThis = true;
             }
         }

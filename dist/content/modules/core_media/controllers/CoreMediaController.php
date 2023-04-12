@@ -10,57 +10,16 @@ class CoreMediaController extends MainClass
     {
         $data = CustomData::get();
 
-        $mediaEmbedEnabled = !(
-            $data and isset($data["disable_media_embed"]) &&
-            $data["disable_media_embed"]
+        $mediaEmbedEnabled = ! (
+            $data && isset($data['disable_media_embed']) &&
+            $data['disable_media_embed']
         );
 
-        $input = $mediaEmbedEnabled && !empty($input) ?
+        $input = $mediaEmbedEnabled && ! empty($input) ?
                 $this->_replaceLinks($input) : $input;
         $input = $this->_addLazyLoad($input);
 
         return $input;
-    }
-
-    protected function _addLazyload($input)
-    {
-        if (empty($input)) {
-            return $input;
-        }
-
-        $input = mb_convert_encoding($input, 'HTML-ENTITIES', "UTF-8");
-        $dom = new DOMDocument();
-        @$dom->loadHTML($input);
-
-        if (Settings::get('lazy_loading_img', 'bool')) {
-            foreach ($dom->getElementsByTagName('img') as $node) {
-                if (!$node->getAttribute('loading')) {
-                    $node->setAttribute('loading', 'lazy');
-                }
-            }
-        }
-
-        if (Settings::get('lazy_loading_iframe', 'bool')) {
-            foreach ($dom->getElementsByTagName('iframe') as $node) {
-                if (!$node->getAttribute('loading')) {
-                    $node->setAttribute('loading', 'lazy');
-                }
-            }
-        }
-
-
-        $newHtml = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace(array(
-            '<html>',
-            '</html>',
-            '<body>',
-            '</body>'
-                        ), array(
-            '',
-            '',
-            '',
-            ''
-                        ), $dom->saveHTML()));
-        return $newHtml;
     }
 
     // This method replaces links to media services like youtube with embedded media
@@ -70,7 +29,7 @@ class CoreMediaController extends MainClass
             return $input;
         }
 
-        $content = mb_convert_encoding($input, 'HTML-ENTITIES', "UTF-8");
+        $content = mb_convert_encoding($input, 'HTML-ENTITIES', 'UTF-8');
 
         $dom = new DOMDocument();
         @$dom->loadHTML($content);
@@ -82,11 +41,52 @@ class CoreMediaController extends MainClass
         return $this->getBodyContent($dom->saveHTML());
     }
 
+    protected function _addLazyload($input)
+    {
+        if (empty($input)) {
+            return $input;
+        }
+
+        $input = mb_convert_encoding($input, 'HTML-ENTITIES', 'UTF-8');
+        $dom = new DOMDocument();
+        @$dom->loadHTML($input);
+
+        if (Settings::get('lazy_loading_img', 'bool')) {
+            foreach ($dom->getElementsByTagName('img') as $node) {
+                if (! $node->getAttribute('loading')) {
+                    $node->setAttribute('loading', 'lazy');
+                }
+            }
+        }
+
+        if (Settings::get('lazy_loading_iframe', 'bool')) {
+            foreach ($dom->getElementsByTagName('iframe') as $node) {
+                if (! $node->getAttribute('loading')) {
+                    $node->setAttribute('loading', 'lazy');
+                }
+            }
+        }
+
+
+        $newHtml = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace([
+            '<html>',
+            '</html>',
+            '<body>',
+            '</body>'
+        ], [
+            '',
+            '',
+            '',
+            ''
+        ], $dom->saveHTML()));
+        return $newHtml;
+    }
+
     // this method collect all embedable links and return it including
     // a replacement node containg the embed element
     protected function collectLinks(DOMDocument $dom): array
     {
-        $elements = $dom->getElementsByTagName("a");
+        $elements = $dom->getElementsByTagName('a');
         $linksToReplace = [];
 
         foreach ($elements as $oldNode) {
@@ -95,7 +95,7 @@ class CoreMediaController extends MainClass
 
             $embedCode = $this->embedCodeFromUrl($href);
 
-            if ($href === $text and $embedCode) {
+            if ($href === $text && $embedCode) {
                 $newNode = $this->createElementFromHTML($embedCode, $dom);
                 $importNode = $dom->importNode($newNode, true);
                 $link = new stdClass();
@@ -111,17 +111,17 @@ class CoreMediaController extends MainClass
     // This method extracts the content of the body
     protected function getBodyContent(string $html): string
     {
-        return preg_replace('/^<!DOCTYPE.+?>/', '', str_replace(array(
+        return preg_replace('/^<!DOCTYPE.+?>/', '', str_replace([
             '<html>',
             '</html>',
             '<body>',
             '</body>'
-                        ), array(
+        ], [
             '',
             '',
             '',
             ''
-                        ), $html));
+        ], $html));
     }
 
     // This method retrieves the embed code for an URL
@@ -143,7 +143,7 @@ class CoreMediaController extends MainClass
         string $str,
         DOMDocument $dom
     ): DOMElement {
-        $element = $dom->createElement("span");
+        $element = $dom->createElement('span');
         $this->appendHTML($element, $str);
         return $element;
     }

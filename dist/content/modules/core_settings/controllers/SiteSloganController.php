@@ -13,11 +13,11 @@ class SiteSloganController extends Controller
 
         for ($i = 0; $i < $languagesCount; $i++) {
             $lang = $languages[$i];
-            if (isset($_POST["site_slogan_" . $lang])) {
-                $page = $_POST["site_slogan_" . $lang];
-                Settings::set("site_slogan_" . $lang, $page);
-                if ($lang === Settings::get("default_language")) {
-                    Settings::set("site_slogan", $page);
+            if (isset($_POST['site_slogan_' . $lang])) {
+                $page = $_POST['site_slogan_' . $lang];
+                Settings::set('site_slogan_' . $lang, $page);
+                if ($lang === Settings::get('default_language')) {
+                    Settings::set('site_slogan', $page);
                 }
             }
         }
@@ -30,7 +30,7 @@ class SiteSloganController extends Controller
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL("site_slogan")
+            ModuleHelper::buildActionURL('site_slogan')
         );
     }
 }

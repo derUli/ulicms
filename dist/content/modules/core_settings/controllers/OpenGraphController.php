@@ -8,8 +8,8 @@ class OpenGraphController extends Controller
 {
     public function _savePost(): void
     {
-        if (isset($_POST["og_image"])) {
-            Settings::set("og_image", $_POST["og_image"]);
+        if (isset($_POST['og_image'])) {
+            Settings::set('og_image', $_POST['og_image']);
         }
 
         CacheUtil::clearPageCache();
@@ -20,7 +20,7 @@ class OpenGraphController extends Controller
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL("open_graph")
+            ModuleHelper::buildActionURL('open_graph')
         );
     }
 }

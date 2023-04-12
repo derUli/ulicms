@@ -9,8 +9,8 @@ declare(strict_types=1);
 function get_all_used_menus(): array
 {
     $retval = [];
-    $result = db_query("select menu from " . tbname("content") .
-            " group by menu");
+    $result = db_query('select menu from ' . tbname('content') .
+            ' group by menu');
     while ($row = db_fetch_object($result)) {
         $retval[] = $row->menu;
     }
@@ -18,17 +18,17 @@ function get_all_used_menus(): array
 }
 
 // Gibt die Identifier aller Menüs zurück.
-function getAllMenus(
+function get_all_menus(
     bool $only_used = false,
     bool $read_theme_menus = true
 ): array {
-    $menus = array(
-        "left",
-        "top",
-        "right",
-        "bottom",
-        "not_in_menu"
-    );
+    $menus = [
+        'left',
+        'top',
+        'right',
+        'bottom',
+        'not_in_menu'
+    ];
 
     if ($only_used) {
         $used = get_all_used_menus();
@@ -47,10 +47,10 @@ function getAllMenus(
     $themesList = getAllThemes();
     $allThemeMenus = [];
     foreach ($themesList as $theme) {
-        $themeMenus = getThemeMeta($theme, "menus");
+        $themeMenus = getThemeMeta($theme, 'menus');
         if ($themeMenus && is_array($themeMenus)) {
             foreach ($themeMenus as $m) {
-                if (!in_array($m, $allThemeMenus)) {
+                if (! in_array($m, $allThemeMenus)) {
                     $allThemeMenus[] = $m;
                 }
             }
@@ -61,8 +61,8 @@ function getAllMenus(
         $menus = $allThemeMenus;
     }
 
-    if (!in_array("not_in_menu", $menus)) {
-        $menus[] = "not_in_menu";
+    if (! in_array('not_in_menu', $menus)) {
+        $menus[] = 'not_in_menu';
     }
 
     sort($menus);

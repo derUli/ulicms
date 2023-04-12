@@ -46,7 +46,7 @@ function get_host(): string
         ];
 
         foreach ($vars as $var) {
-            if (isset($_SERVER[$var]) && !empty($_SERVER[$var])) {
+            if (isset($_SERVER[$var]) && ! empty($_SERVER[$var])) {
                 $host = $_SERVER[$var];
                 break;
             }
@@ -62,7 +62,7 @@ function get_host(): string
 // Übersetzung HTTP Status Code => Name
 function getStatusCodeByNumber(int $nr)
 {
-    return Request::getStatusCodeByNumber($nr);
+    return Response::getStatusCodeByNumber($nr);
 }
 
 function get_request_uri(): ?string
@@ -96,27 +96,18 @@ function is_ssl(): bool
     return Request::isSSL();
 }
 
-function ulicms_mail(
-    string $to,
-    string $subject,
-    string $message,
-    ?string $headers = ''
-): bool {
-    return Mailer::send($to, $subject, $message, $headers);
-}
-
 function send_header(string $header): bool
 {
-    $headers = Vars::get("http_headers");
+    $headers = Vars::get('http_headers');
 
-    if (!$headers) {
+    if (! $headers) {
         $headers = [];
     }
-    if (!in_array($header, $headers)) {
+    if (! in_array($header, $headers)) {
         $headers[] = $header;
     }
 
-    Vars::set("http_headers", $headers);
+    Vars::set('http_headers', $headers);
 
-    return class_exists("Response") ? Response::sendHeader($header) : false;
+    return class_exists('Response') ? Response::sendHeader($header) : false;
 }

@@ -3,11 +3,11 @@ $site_slogan = get_site_slogan();
 $data = get_custom_data();
 $site_slogan = $data['site_slogan'] ?? get_site_slogan();
 
-$q = $_GET["q"] ?? '';
+$q = $_GET['q'] ?? '';
 
 $modules = getAllModules();
-$hasSearch = in_array("extended_search", $modules);
-$searchPage = ModuleHelper::getFirstPageWithModule("extended_search");
+$hasSearch = in_array('extended_search', $modules);
+$searchPage = ModuleHelper::getFirstPageWithModule('extended_search');
 
 html5_doctype();
 og_html_prefix();
@@ -39,7 +39,7 @@ combinedStylesheetHtml();
 
             <div id="mobile-nav"></div>
             <?php
-  if (!containsModule(null, 'extended_search') && $hasSearch && $searchPage) {
+  if (! containsModule(null, 'extended_search') && $hasSearch && $searchPage) {
       ?>
                 <form id="search-form-head" method="get"
                       action="<?php Template::escape(buildSEOURL($searchPage->slug)); ?>">
@@ -51,7 +51,7 @@ combinedStylesheetHtml();
             <?php }
   ?>
         </div>
-        <?php if (is_frontpage()) { ?>
+        <?php if (is_home()) { ?>
             <div class="jumbotron">
                 <?php
       if (Settings::get('logo_disabled') == 'no') {
@@ -60,7 +60,7 @@ combinedStylesheetHtml();
             ?>
                 <div class="lead"><?php echo Settings::get('motd'); ?></div>
                 <p>
-                    <a class="btn btn-lg btn-success" href="admin/" role="button"><?php translate('login') ?></a>
+                    <a class="btn btn-lg btn-success" href="admin/" role="button"><?php translate('login'); ?></a>
                 </p>
             </div>
         <?php } ?>

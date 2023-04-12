@@ -9,8 +9,8 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $settings = [
-            "twofactor_authentication",
-            "ga_secret"
+            'twofactor_authentication',
+            'ga_secret'
         ];
         foreach ($settings as $setting) {
             $this->initialSettings[$setting] = Settings::get($setting);
@@ -32,25 +32,25 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase
 
     public function testIsEnabledReturnsTrue()
     {
-        Settings::set("twofactor_authentication", "twofactor_authentication");
+        Settings::set('twofactor_authentication', 'twofactor_authentication');
         $this->assertTrue(TwoFactorAuthentication::isEnabled());
     }
 
     public function testIsEnabledReturnsFalse()
     {
-        Settings::delete("twofactor_authentication");
+        Settings::delete('twofactor_authentication');
         $this->assertFalse(TwoFactorAuthentication::isEnabled());
     }
 
     public function testConstructor()
     {
-        Settings::set("twofactor_authentication", "twofactor_authentication");
-        Settings::delete("ga_secret");
-        $this->assertNull(Settings::get("ga_secret"));
+        Settings::set('twofactor_authentication', 'twofactor_authentication');
+        Settings::delete('ga_secret');
+        $this->assertNull(Settings::get('ga_secret'));
 
         $auth = new TwoFactorAuthentication();
-        $this->assertIsString(Settings::get("ga_secret"));
-        $this->assertEquals(Settings::get("ga_secret"), $auth->getSecret());
+        $this->assertIsString(Settings::get('ga_secret'));
+        $this->assertEquals(Settings::get('ga_secret'), $auth->getSecret());
     }
 
     public function testGenerateSecret()
@@ -67,12 +67,12 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase
     {
         $auth = new TwoFactorAuthentication();
         $this->assertIsString($auth->getSecret());
-        $this->assertEquals(Settings::get("ga_secret"), $auth->getSecret());
+        $this->assertEquals(Settings::get('ga_secret'), $auth->getSecret());
     }
 
     public function testGetCode()
     {
-        Settings::set("twofactor_authentication", "twofactor_authentication");
+        Settings::set('twofactor_authentication', 'twofactor_authentication');
         $auth = new TwoFactorAuthentication();
 
         $code = $auth->getCode();
@@ -82,7 +82,7 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase
 
     public function testCheckCodeReturnsTrue()
     {
-        Settings::set("twofactor_authentication", "twofactor_authentication");
+        Settings::set('twofactor_authentication', 'twofactor_authentication');
         $auth = new TwoFactorAuthentication();
         $code = $auth->getCode();
 
@@ -91,15 +91,15 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase
 
     public function testCheckCodeReturnsFalse()
     {
-        Settings::set("twofactor_authentication", "twofactor_authentication");
+        Settings::set('twofactor_authentication', 'twofactor_authentication');
         $auth = new TwoFactorAuthentication();
 
-        $this->assertFalse($auth->checkCode("123456"));
+        $this->assertFalse($auth->checkCode('123456'));
     }
 
     public function testEnable()
     {
-        Settings::delete("twofactor_authentication");
+        Settings::delete('twofactor_authentication');
 
         $this->assertFalse(TwoFactorAuthentication::isEnabled());
         TwoFactorAuthentication::enable();
@@ -108,7 +108,7 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase
 
     public function testDisable()
     {
-        Settings::delete("twofactor_authentication");
+        Settings::delete('twofactor_authentication');
 
         TwoFactorAuthentication::enable();
         TwoFactorAuthentication::disable();
@@ -118,7 +118,7 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase
 
     public function testToggle()
     {
-        Settings::delete("twofactor_authentication");
+        Settings::delete('twofactor_authentication');
 
         $this->assertFalse(TwoFactorAuthentication::isEnabled());
 

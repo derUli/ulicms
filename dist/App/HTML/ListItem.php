@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use Template;
 
@@ -14,7 +14,9 @@ use Template;
 class ListItem
 {
     private $value;
+
     private $text;
+
     private $selected;
 
     /**
@@ -28,6 +30,15 @@ class ListItem
         $this->value = $value;
         $this->text = $text;
         $this->selected = $selected;
+    }
+
+    /**
+     * ListItem to string
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getHtml();
     }
 
     /**
@@ -45,15 +56,6 @@ class ListItem
     }
 
     /**
-     * ListItem to string
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return $this->getHtml();
-    }
-
-    /**
      * Output element as HTML
      * @return void
      */
@@ -61,7 +63,6 @@ class ListItem
     {
         echo $this->getHtml();
     }
-
 
     /**
      * Get value
@@ -71,7 +72,6 @@ class ListItem
     {
         return $this->value;
     }
-
 
     /**
      * Get text
@@ -97,7 +97,7 @@ class ListItem
      */
     public function setValue($val)
     {
-        $this->value = $val !== null ? (string) $val : null;
+        $this->value = $val !== null ? (string)$val : null;
     }
 
     /**
@@ -107,7 +107,7 @@ class ListItem
      */
     public function setText($val): void
     {
-        $this->text = $val !== null ? (string) $val : null;
+        $this->text = $val !== null ? (string)$val : null;
     }
 
     /**

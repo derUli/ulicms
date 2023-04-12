@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 use Intervention\MimeSniffer\MimeSniffer;
+use Nette\Utils\FileSystem;
 
 /**
  * Utils for handling files
@@ -38,13 +41,12 @@ class File
     // Delete a file or a directory if it exist
     public static function deleteIfExists(string $file): bool
     {
-        if (is_file($file)) {
-            return unlink($file);
-        } elseif (is_dir($file)) {
-            sureRemoveDir($file, true);
-            return !is_file($file);
+        if(! file_exists($file)) {
+            return false;
         }
-        return false;
+
+        FileSystem::delete($file);
+        return true;
     }
 
     /**
@@ -77,7 +79,7 @@ class File
         $sniffer->setFromFilename($file);
 
         $type = $sniffer->getType();
-        return (string) $type;
+        return (string)$type;
     }
 
     /**
@@ -90,28 +92,10 @@ class File
         string $dir,
         bool $deleteMe = true
     ): void {
-        if (!is_dir($dir)) {
-            return;
-        }
+        FileSystem::delete($dir);
 
-        $dh = opendir($dir);
-
-        while (false !== ($obj = readdir($dh))) {
-            if ($obj == '.' || $obj == '..') {
-                continue;
-            }
-            $path = "$dir/$obj";
-
-            if (is_dir($path)) {
-                sureRemoveDir($path, true);
-            } elseif (is_file($path)) {
-                unlink($path);
-            }
-        }
-
-        closedir($dh);
-        if ($deleteMe) {
-            @rmdir($dir);
+        if(! $deleteMe) {
+            FileSystem::createDir($dir);
         }
     }
 
@@ -144,9 +128,9 @@ class File
             if ($value === '.' || $value === '..') {
                 continue;
             }
-            if (is_dir("$dir/$value")) {
-                $result[] = str_Replace("\\", '/', "$dir/$value");
-                $result = array_merge($result, self::findAllDirs("$dir/$value"));
+            if (is_dir("{$dir}/{$value}")) {
+                $result[] = str_replace('\\', '/', "{$dir}/{$value}");
+                $result = array_merge($result, self::findAllDirs("{$dir}/{$value}"));
                 continue;
             }
         }
@@ -168,13 +152,13 @@ class File
                 continue;
             }
 
-            if (is_file("$dir/$value")) {
-                $result[] = str_Replace("\\", '/', "$dir/$value");
+            if (is_file("{$dir}/{$value}")) {
+                $result[] = str_replace('\\', '/', "{$dir}/{$value}");
                 continue;
             }
 
-            foreach (self::findAllFiles("$dir/$value") as $value) {
-                $value = str_replace("\\", '/', $value);
+            foreach (self::findAllFiles("{$dir}/{$value}") as $value) {
+                $value = str_replace('\\', '/', $value);
                 $result[] = $value;
             }
         }

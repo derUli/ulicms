@@ -34,3 +34,5 @@ modules.aus
 .phplint-cache
 .php-cs-fixer.cache
 .phpunit.result.cache
+.phpunit.cache
+.DS_STORE

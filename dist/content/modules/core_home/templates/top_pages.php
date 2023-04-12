@@ -1,21 +1,21 @@
 <?php
-$controller = ControllerRegistry::get("HomeController");
+$controller = ControllerRegistry::get('HomeController');
 $model = $controller->getModel();
 ?>
 <table>
     <tr style="font-weight: bold;">
-        <td><?php translate("title"); ?>
+        <td><?php translate('title'); ?>
         </td>
-        <td><?php translate("views"); ?>
+        <td><?php translate('views'); ?>
         </td>
     </tr>
     <?php
     foreach ($model->topPages as $row) {
         $domain = getDomainByLanguage($row->language);
-        if (!$domain) {
-            $url = "../" . $row->slug;
+        if (! $domain) {
+            $url = '../' . $row->slug;
         } else {
-            $url = "http://" . $domain . '/' . $row->slug;
+            $url = 'http://' . $domain . '/' . $row->slug;
         }
         ?>
         <tr>

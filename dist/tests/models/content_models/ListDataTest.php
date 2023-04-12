@@ -22,7 +22,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
 
         foreach ($contents as $content) {
             $this->assertEquals('de', $content->language);
-            $this->assertEquals("top", $content->menu);
+            $this->assertEquals('top', $content->menu);
             $this->assertInstanceOf(Module_Page::class, $content);
         }
     }
@@ -32,14 +32,14 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         for ($i = 1; $i <= 20; $i++) {
             $page = new Page();
             $page->category_id = $category->getId();
-            $page->title = "Unit Test $i";
+            $page->title = "Unit Test {$i}";
             $page->slug = uniqid();
-            $page->menu = "top";
+            $page->menu = 'top';
             $page->language = 'de';
-            $page->content = "foo [csrf_token_html] bar";
+            $page->content = 'foo [csrf_token_html] bar';
             $page->author_id = 1;
             $page->group_id = 1;
-            $page->content = "foo";
+            $page->content = 'foo';
             $page->save();
         }
     }
@@ -47,7 +47,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
     public function testFilterAll()
     {
         $category = new Category();
-        $category->setName("Test Category");
+        $category->setName('Test Category');
         $category->save();
 
         $this->createTestContent($category);
@@ -58,7 +58,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $listData->limit = 5;
         $listData->category_id = $category->getID();
         $listData->use_pagination = true;
-        $listData->menu = "top";
+        $listData->menu = 'top';
         $listData->parent_id = null;
         $listData->type = null;
         $listData->save();
@@ -70,7 +70,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
     public function testFilterHasMoreReturnsTrue()
     {
         $category = new Category();
-        $category->setName("Test Category");
+        $category->setName('Test Category');
         $category->save();
 
         $this->createTestContent($category);
@@ -81,7 +81,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $listData->limit = 5;
         $listData->category_id = $category->getID();
         $listData->use_pagination = true;
-        $listData->menu = "top";
+        $listData->menu = 'top';
         $listData->parent_id = null;
         $listData->type = null;
         $listData->save();
@@ -104,7 +104,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
     public function testFilterHasMoreReturnsFalse()
     {
         $category = new Category();
-        $category->setName("Test Category");
+        $category->setName('Test Category');
         $category->save();
 
         $this->createTestContent($category);
@@ -115,7 +115,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $listData->limit = 5;
         $listData->category_id = $category->getID();
         $listData->use_pagination = true;
-        $listData->menu = "top";
+        $listData->menu = 'top';
         $listData->parent_id = null;
         $listData->type = null;
         $listData->save();
@@ -129,7 +129,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
     public function testFilterPaginated()
     {
         $category = new Category();
-        $category->setName("Test Category");
+        $category->setName('Test Category');
         $category->save();
 
         $this->createTestContent($category);
@@ -140,11 +140,11 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $listData->limit = 5;
         $listData->category_id = $category->getID();
         $listData->use_pagination = true;
-        $listData->menu = "top";
+        $listData->menu = 'top';
         $listData->parent_id = null;
         $listData->type = null;
-        $listData->order_by = "id";
-        $listData->order_direction = "asc";
+        $listData->order_by = 'id';
+        $listData->order_direction = 'asc';
         $listData->save();
 
         $pagination1 = $listData->filterPaginated(0);
@@ -161,11 +161,11 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(2, $pagination5);
         $this->assertCount(0, $pagination6);
 
-        $this->assertEquals("Unit Test 1", $pagination1[0]->title);
-        $this->assertEquals("Unit Test 6", $pagination2[0]->title);
-        $this->assertEquals("Unit Test 11", $pagination3[0]->title);
-        $this->assertEquals("Unit Test 16", $pagination4[0]->title);
-        $this->assertEquals("Unit Test 19", $pagination5[0]->title);
+        $this->assertEquals('Unit Test 1', $pagination1[0]->title);
+        $this->assertEquals('Unit Test 6', $pagination2[0]->title);
+        $this->assertEquals('Unit Test 11', $pagination3[0]->title);
+        $this->assertEquals('Unit Test 16', $pagination4[0]->title);
+        $this->assertEquals('Unit Test 19', $pagination5[0]->title);
     }
 
     public function testLoadById()
@@ -178,13 +178,13 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('de', $loaded->language);
         $this->assertEquals(1, $loaded->category_id);
-        $this->assertEquals("not_in_menu", $loaded->menu);
+        $this->assertEquals('not_in_menu', $loaded->menu);
         $this->assertEquals(5, $loaded->parent_id);
         $this->assertTrue($loaded->use_pagination);
         $this->assertEquals(4, $loaded->limit);
-        $this->assertEquals("module", $loaded->type);
-        $this->assertEquals("id", $loaded->order_by);
-        $this->assertEquals("desc", $loaded->order_direction);
+        $this->assertEquals('module', $loaded->type);
+        $this->assertEquals('id', $loaded->order_by);
+        $this->assertEquals('desc', $loaded->order_direction);
     }
 
     public function testUpdate()
@@ -197,15 +197,15 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
 
         $updated = new List_Data($contentList->getId());
         $this->assertEquals(10, $updated->limit);
-        $this->assertEquals("page", $updated->type);
+        $this->assertEquals('page', $updated->type);
     }
 
     public function testCreateEmpty()
     {
         $contentList = new Content_List();
-        $contentList->title = "Unit Test Article";
-        $contentList->slug = "unit test";
-        $contentList->menu = "none";
+        $contentList->title = 'Unit Test Article';
+        $contentList->slug = 'unit test';
+        $contentList->menu = 'none';
         $contentList->language = 'de';
         $contentList->article_date = 1413821696;
         $contentList->author_id = 1;
@@ -224,7 +224,15 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($loaded->limit);
         $this->assertNull($loaded->type);
         $this->assertNull($loaded->order_by);
-        $this->assertEquals("asc", $loaded->order_direction);
+        $this->assertEquals('asc', $loaded->order_direction);
+    }
+
+    public function testSaveWithoutContentId()
+    {
+        $this->expectException(DatabaseException::class);
+
+        $listData = new List_Data();
+        $listData->save();
     }
 
     private function getEmptyListData($contentId)
@@ -241,9 +249,9 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
     private function createContentList()
     {
         $contentList = new Content_List();
-        $contentList->title = "Unit Test Article";
-        $contentList->slug = "unit test";
-        $contentList->menu = "none";
+        $contentList->title = 'Unit Test Article';
+        $contentList->slug = 'unit test';
+        $contentList->menu = 'none';
         $contentList->language = 'de';
         $contentList->article_date = 1413821696;
         $contentList->author_id = 1;
@@ -260,7 +268,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $listData = new List_Data($contentId);
         $listData->language = 'de';
         $listData->category_id = 1;
-        $listData->menu = "not_in_menu";
+        $listData->menu = 'not_in_menu';
         $listData->parent_id = 5;
         $listData->use_pagination = true;
         $listData->limit = 4;
@@ -270,13 +278,5 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $listData->save();
 
         return $listData;
-    }
-
-    public function testSaveWithoutContentId()
-    {
-        $this->expectException(DatabaseException::class);
-
-        $listData = new List_Data();
-        $listData->save();
     }
 }

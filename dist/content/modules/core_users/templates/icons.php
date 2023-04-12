@@ -3,27 +3,27 @@
 use App\Security\PermissionChecker;
 
 $currentAction = BackendHelper::getAction();
-$icons = array(
-    "admins" => "fa fa-user",
-    "groups" => "fa fa-users"
-);
+$icons = [
+    'admins' => 'fa fa-user',
+    'groups' => 'fa fa-users'
+];
 
-$icons = array_filter($icons, function ($cssClass, $action) {
-    $permissions = array(
-        "admins" => "users",
-        "groups" => "groups"
-    );
+$icons = array_filter($icons, static function($cssClass, $action) {
+    $permissions = [
+        'admins' => 'users',
+        'groups' => 'groups'
+    ];
 
     $permissionChecker = new PermissionChecker(get_user_id());
     return $permissionChecker->hasPermission($permissions[$action]);
 }, ARRAY_FILTER_USE_BOTH);
 
-$specialLabels = array(
-    "admins" => get_translation("users")
-);
+$specialLabels = [
+    'admins' => get_translation('users')
+];
 
-$selectedButton = "btn btn-primary";
-$notSelectedButton = "btn btn-default"
+$selectedButton = 'btn btn-primary';
+$notSelectedButton = 'btn btn-default';
 ?>
 
 <div class="btn-toolbar" role="toolbar"
@@ -35,7 +35,7 @@ $notSelectedButton = "btn btn-default"
                echo $action == $currentAction ?
                        $selectedButton : $notSelectedButton;
              ?> is-not-ajax">
-                <i class="<?php echo $cssClass ?>"></i>
+                <i class="<?php echo $cssClass; ?>"></i>
                 <?php
               (isset($specialLabels[$action]) ?
                               esc($specialLabels[$action]) : translate($action));

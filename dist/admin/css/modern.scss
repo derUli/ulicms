@@ -324,16 +324,6 @@ p {
     line-height: 1.5em;
 }
 
-code {
-    background-color: $default-background-color;
-    display: block;
-    padding: 20px;
-    border: 1px dotted blue;
-    word-wrap: break-word;
-    font-family: $code-font;
-    border-radius: 0 !important;
-}
-
 div.diff {
     background-color: $default-background-color;
     display: block;

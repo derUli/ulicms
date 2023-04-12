@@ -77,26 +77,6 @@ $(() => {
         });
     });
 
-    $('#truncate-installed-patches').submit((event) => {
-        event.preventDefault();
-
-        message = $(event.target).data("confirm-message");
-
-        bootbox.confirm(message, (result) => {
-            if (result) {
-                const form = $(event.target);
-                // submit the form
-                $(form).ajaxSubmit({
-                    success: (result) =>
-                        $("#patch-list tbody tr").remove()
-                    ,
-                    error: (xhr, status, error) =>
-                        bootbox.alert(error)
-                });
-            }
-        });
-    });
-
     $(".toggle-module-form").submit((event) => {
         event.preventDefault();
 

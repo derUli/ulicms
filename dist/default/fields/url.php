@@ -1,6 +1,6 @@
 <?php
-$field = ViewBag::get("field");
-$value = ViewBag::get("field_value");
+$field = ViewBag::get('field');
+$value = ViewBag::get('field_value');
 if ($value === null) {
     $value = $field->defaultValue;
 }
@@ -9,15 +9,15 @@ if ($value === null) {
      data-field-name="<?php Template::escape($field->name); ?>">
     <strong class="field-label"><?php translate($field->title); ?> <?php
         if ($field->required) {
-            echo "*";
+            echo '*';
         }
 ?></strong>
     <input type="url"
-           name="<?php Template::escape(ViewBag::get("field_name")); ?>"
+           name="<?php Template::escape(ViewBag::get('field_name')); ?>"
            value="<?php Template::escape($value); ?>"
            <?php
    if ($field->required) {
-       echo "required";
+       echo 'required';
    }
 ?>
            <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>>

@@ -2,22 +2,19 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 use App\Models\Media\Video;
 
 // video pages are pages that are linked to video files
 // video files are played with html5
 class Video_Page extends Page
 {
-    public $type = "video";
-    public $video = null;
-    public $text_position = "after";
+    public $type = 'video';
 
-    protected function fillVars($result = null)
-    {
-        parent::fillVars($result);
-        $this->video = $result->video ? intval($result->video) : null;
-        $this->text_position = $result->text_position;
-    }
+    public $video = null;
+
+    public $text_position = 'after';
 
     public function save()
     {
@@ -38,13 +35,13 @@ class Video_Page extends Page
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set video = ?, text_position = ? "
-                . "where id = ?";
-        $args = array(
+        $sql = 'update {prefix}content set video = ?, text_position = ? '
+                . 'where id = ?';
+        $args = [
             $this->video,
             $this->text_position,
             $this->id
-        );
+        ];
 
         $result = Database::pQuery($sql, $args, true);
         return $result;
@@ -61,11 +58,18 @@ class Video_Page extends Page
     }
 
      /**
-     * Get css classes for Font Awesome icon
-     * @return string
-     */
+      * Get css classes for Font Awesome icon
+      * @return string
+      */
     public function getIcon(): string
     {
-        return "fas fa-film";
+        return 'fas fa-film';
+    }
+
+    protected function fillVars($result = null)
+    {
+        parent::fillVars($result);
+        $this->video = $result->video ? (int)$result->video : null;
+        $this->text_position = $result->text_position;
     }
 }

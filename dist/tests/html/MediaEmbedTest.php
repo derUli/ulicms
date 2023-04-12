@@ -20,8 +20,8 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase
 
     public function testReplaceLinks()
     {
-        $input = file_get_contents("tests/fixtures/AutoEmbed/input.html");
-        $actual = apply_filter($input, "before_content");
+        $input = file_get_contents('tests/fixtures/AutoEmbed/input.html');
+        $actual = apply_filter($input, 'before_content');
 
         $this->assertMatchesHtmlSnapshot($actual);
     }
@@ -31,10 +31,10 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase
         $page = $this->getTestPage();
 
         set_requested_pagename($page->slug, $page->language);
-        CustomData::set("disable_media_embed", true);
+        CustomData::set('disable_media_embed', true);
 
-        $input = file_get_contents("tests/fixtures/AutoEmbed/input.html");
-        $actual = apply_filter($input, "before_content");
+        $input = file_get_contents('tests/fixtures/AutoEmbed/input.html');
+        $actual = apply_filter($input, 'before_content');
 
         $this->assertMatchesHtmlSnapshot($actual);
 
@@ -46,10 +46,10 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase
         $page = $this->getTestPage();
 
         set_requested_pagename($page->slug, $page->language);
-        CustomData::set("disable_media_embed", false);
+        CustomData::set('disable_media_embed', false);
 
-        $input = file_get_contents("tests/fixtures/AutoEmbed/input.html");
-        $actual = apply_filter($input, "before_content");
+        $input = file_get_contents('tests/fixtures/AutoEmbed/input.html');
+        $actual = apply_filter($input, 'before_content');
 
         $this->assertMatchesHtmlSnapshot($actual);
 
@@ -62,7 +62,7 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase
         $page->title = 'Test Page';
         $page->slug = uniqid();
         $page->language = 'de';
-        $page->content = "foo [csrf_token_html] bar";
+        $page->content = 'foo [csrf_token_html] bar';
         $page->author_id = 1;
         $page->group_id = 1;
         $page->author_id = 1;

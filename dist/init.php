@@ -4,7 +4,7 @@
 // of the page load procedure to measure site performance
 define('START_TIME', microtime(true));
 
-if (!defined('CORE_COMPONENT')) {
+if (! defined('CORE_COMPONENT')) {
     throw new Exception('Core Component is not defined');
 }
 
@@ -29,9 +29,12 @@ define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
 
 use App\Exceptions\ConnectionFailedException;
 use App\Exceptions\SqlException;
-use App\Registries\HelperRegistry;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
+use App\Registries\HelperRegistry;
+use App\Registries\LoggerRegistry;
+use App\Registries\ModelRegistry;
+use App\Utils\Logger;
 
 // load composer packages
 $composerAutoloadFile = dirname(__FILE__) . '/vendor/autoload.php';
@@ -46,16 +49,16 @@ if (is_file($composerAutoloadFile)) {
 }
 
 // Autoloader
-spl_autoload_register(function ($className) {
+spl_autoload_register(function($className) {
     // Interim solution for not yet namespaced classes
-    if (!str_contains($className, "\\")) {
+    if (! str_contains($className, '\\')) {
         $className = "App\\non_namespaced\\{$className}";
     }
 
     $basePath = ULICMS_ROOT . "/{$className}.php";
     $basePath = str_replace('\\', '/', $basePath);
 
-    if (!is_file($basePath)) {
+    if (! is_file($basePath)) {
         return;
     }
 
@@ -77,7 +80,7 @@ if (is_file($path_to_config)) {
     throw new Exception('Can\'t require CMSConfig.php. Starting installer failed, too.');
 }
 
-if (php_sapi_name() != 'cli') {
+if (PHP_SAPI != 'cli') {
     set_exception_handler('exception_handler');
 }
 
@@ -92,29 +95,28 @@ if (isset($config->debug) && $config->debug) {
     error_reporting(0);
 }
 
-if (!is_dir(ULICMS_TMP)) {
+if (! is_dir(ULICMS_TMP)) {
     mkdir(ULICMS_TMP);
 }
 
-if (!is_dir(ULICMS_CACHE_BASE)) {
+if (! is_dir(ULICMS_CACHE_BASE)) {
     mkdir(ULICMS_CACHE_BASE);
 }
 
-if (!is_dir(ULICMS_LOG)) {
+if (! is_dir(ULICMS_LOG)) {
     mkdir(ULICMS_LOG);
 }
 
-if (!is_dir(ULICMS_GENERATED)) {
+if (! is_dir(ULICMS_GENERATED)) {
     mkdir(ULICMS_GENERATED);
 }
 
 $htaccessForLogFolderSource = ULICMS_ROOT . '/lib/htaccess-deny-all.txt';
 $htaccessLogFolderTarget = ULICMS_LOG . '/.htaccess';
-if (!is_file($htaccessLogFolderTarget)) {
+if (! is_file($htaccessLogFolderTarget)) {
     copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
 }
 
-Translation::init();
 
 if (isset($config->exception_logging) && $config->exception_logging) {
     LoggerRegistry::register(
@@ -148,7 +150,7 @@ $db_strict_mode = $config->db_strict_mode ?? false;
     $db_strict_mode
 );
 
-if (!$connection) {
+if (! $connection) {
     throw new ConnectionFailedException('Can\'t connect to Database.');
 }
 
@@ -170,7 +172,7 @@ if (isset($config->dbmigrator_auto_migrate) && $config->dbmigrator_auto_migrate)
 
 Database::setEchoQueries(false);
 
-if (!$select) {
+if (! $select) {
     throw new SqlException('<h1>Database '
                     . $config->db_database . ' doesn\'t exist.</h1>');
 }
@@ -178,7 +180,7 @@ if (!$select) {
 // Preload all settings
 Settings::getAll();
 
-if (!Settings::get('session_name')) {
+if (! Settings::get('session_name')) {
     Settings::set('session_name', uniqid() . '_SESSION');
 }
 
@@ -188,8 +190,7 @@ $useragent = Settings::get('useragent');
 
 define(
     'ULICMS_USERAGENT',
-    $useragent ?
-            $useragent : 'UliCMS Release ' . cms_version()
+    $useragent ?: 'UliCMS Release ' . cms_version()
 );
 
 $cache_period = Settings::get('cache_period');
@@ -197,7 +198,7 @@ $cache_period = Settings::get('cache_period');
 // by Check if the cache expiry is set.
 // if not initialize setting with default value
 if ($cache_period === null) {
-    Settings::set('cache_period', (string) ONE_DAY_IN_SECONDS);
+    Settings::set('cache_period', (string)ONE_DAY_IN_SECONDS);
     define('CACHE_PERIOD', ONE_DAY_IN_SECONDS);
 } else {
     define('CACHE_PERIOD', $cache_period);
@@ -216,7 +217,7 @@ if ($locale) {
     @call_user_func_array('setlocale', $locale);
 }
 
-$session_timeout = 60 * intval(Settings::get('session_timeout'));
+$session_timeout = 60 * Settings::get('session_timeout');
 
 // Session abgelaufen
 if (isset($_SESSION['session_begin'])) {
@@ -224,17 +225,17 @@ if (isset($_SESSION['session_begin'])) {
         App\Utils\Session\sessionDestroy();
         send_header('Location: ./');
         exit();
-    } else {
-        $_SESSION['session_begin'] = time();
     }
+        $_SESSION['session_begin'] = time();
+
 }
 
 register_shutdown_function(
-    function () {
+    static function() {
         do_event('shutdown');
 
         $cfg = new CMSConfig();
-        if (isset($cfg->show_render_time) && $cfg->show_render_time && !Request::isAjaxRequest()) {
+        if (isset($cfg->show_render_time) && $cfg->show_render_time && ! Request::isAjaxRequest()) {
             echo '\n\n<!--' . (microtime(true) - START_TIME) . '-->';
         }
         if (isset($cfg->dbmigrator_drop_database_on_shutdown) && $cfg->dbmigrator_drop_database_on_shutdown) {
@@ -247,23 +248,24 @@ register_shutdown_function(
     }
 );
 
-$defaultMenu = isset($config->default_menu) && !empty($config->default_menu) ?
+$defaultMenu = isset($config->default_menu) && ! empty($config->default_menu) ?
         $config->default_menu : 'not_in_menu';
 define('DEFAULT_MENU', $defaultMenu);
 
-$defaultContentType = isset($config->default_content_type) && !empty($config->default_menu) ?
+$defaultContentType = isset($config->default_content_type) && ! empty($config->default_menu) ?
         $config->default_content_type : 'page';
 define('DEFAULT_CONTENT_TYPE', $defaultContentType);
 
 $enforce_https = Settings::get('enforce_https');
 
-if (!is_ssl() && $enforce_https) {
+if (! is_ssl() && $enforce_https) {
     send_header('Location: https://' . $_SERVER['HTTP_HOST'] .
             $_SERVER['REQUEST_URI']);
     exit();
 }
 
 $moduleManager = new ModuleManager();
+$moduleManager->sync();
 Vars::set('disabledModules', $moduleManager->getDisabledModuleNames());
 
 ModelRegistry::loadModuleModels();

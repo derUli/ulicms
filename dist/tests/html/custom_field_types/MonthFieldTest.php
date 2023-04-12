@@ -14,8 +14,8 @@ class MonthFieldTest extends \PHPUnit\Framework\TestCase
     public function testRender()
     {
         $field = new MonthField();
-        $field->name = "my_field";
-        $field->title = "username";
-        $this->assertMatchesHtmlSnapshot($field->render("2019-04"));
+        $field->name = 'my_field';
+        $field->title = 'username';
+        $this->assertMatchesHtmlSnapshot($field->render('2019-04'));
     }
 }

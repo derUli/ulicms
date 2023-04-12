@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Packages\PackageManager;
 use App\Utils\CacheUtil;
 
 /**
@@ -11,8 +12,8 @@ use App\Utils\CacheUtil;
 function getAllModules(): array
 {
     // Check if cached
-    if (Vars::get("allModules")) {
-        return Vars::get("allModules");
+    if (Vars::get('allModules')) {
+        return Vars::get('allModules');
     }
 
     // Fetch installed modules
@@ -20,7 +21,7 @@ function getAllModules(): array
     $modules = $pkg->getInstalledPackages('modules');
 
     // Save installed modules in cache
-    Vars::set("allModules", $modules);
+    Vars::set('allModules', $modules);
     return $modules;
 }
 
@@ -41,10 +42,10 @@ function getAllThemes(): array
  * @param string $type
  * @return bool
  */
-function uninstall_module(string $name, string $type = "module"): bool
+function uninstall_module(string $name, string $type = 'module'): bool
 {
     $acl = new ACL();
-    if (!$acl->hasPermission("install_packages") && !is_cli()) {
+    if (! $acl->hasPermission('install_packages') && ! is_cli()) {
         return false;
     }
 
@@ -52,7 +53,7 @@ function uninstall_module(string $name, string $type = "module"): bool
 
     // Verhindern, dass der Modulordner oder gar das ganze
     // CMS gelöscht werden kann
-    if ($name == '.' or $name == '..' or empty($name)) {
+    if ($name == '.' || $name == '..' || empty($name)) {
         return false;
     }
     switch ($type) {
@@ -67,7 +68,7 @@ function uninstall_module(string $name, string $type = "module"): bool
                 // Uninstall Script ausführen, sofern vorhanden
                 $mainController = ModuleHelper::getMainController($name);
                 if ($mainController
-                        and method_exists($mainController, "uninstall")) {
+                        && method_exists($mainController, 'uninstall')) {
                     $mainController->uninstall();
                 } elseif (is_file($uninstall_script)) {
                     require $uninstall_script;
@@ -76,18 +77,18 @@ function uninstall_module(string $name, string $type = "module"): bool
                 }
                 sureRemoveDir($moduleDir, true);
                 CacheUtil::clearCache();
-                return !is_dir($moduleDir);
+                return ! is_dir($moduleDir);
             }
             break;
         case 'theme':
             $cTheme = Settings::get('theme');
             $allThemes = getAllThemes();
 
-            if (in_array($name, $allThemes) and $cTheme !== $name) {
+            if (in_array($name, $allThemes) && $cTheme !== $name) {
                 $theme_path = getTemplateDirPath($name, true);
                 sureRemoveDir($theme_path, true);
                 CacheUtil::clearCache();
-                return !is_dir($theme_path);
+                return ! is_dir($theme_path);
             }
             break;
     }

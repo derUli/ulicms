@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Utils\CacheUtil;
 use App\Exceptions\CorruptDownloadException;
 use App\Security\Hash;
+use App\Utils\CacheUtil;
 
 // die Funktionalität von file_get_contents
 // mit dem Curl-Modul umgesetzt
@@ -44,8 +44,8 @@ function is_url(mixed $url): bool
  * @param string $url
  * @param bool $no_cache
  * @param type $checksum
- * @return string|null
  * @throws CorruptDownloadException
+ * @return string|null
  */
 function file_get_contents_wrapper(
     string $url,
@@ -54,13 +54,13 @@ function file_get_contents_wrapper(
 ): ?string {
     $content = null;
 
-    if (!is_url($url)) {
+    if (! is_url($url)) {
         return is_file($url) ? file_get_contents($url) : null;
     }
 
     $cacheItemId = Hash::hashCacheIdentifier($url);
 
-    $cacheAdapter = !$noCache ? CacheUtil::getAdapter(true) : null;
+    $cacheAdapter = ! $noCache ? CacheUtil::getAdapter(true) : null;
 
     if ($cacheAdapter && $cacheAdapter->has($cacheItemId)) {
         return $cacheAdapter->get($cacheItemId);
@@ -70,11 +70,11 @@ function file_get_contents_wrapper(
 
     if (
         $content &&
-        StringHelper::isNotNullOrWhitespace($checksum) &&
+        ! empty($checksum) &&
         md5($content) !== strtolower($checksum)
     ) {
         throw new CorruptDownloadException(
-            "Download of $url - Checksum validation failed"
+            "Download of {$url} - Checksum validation failed"
         );
     }
 
@@ -85,6 +85,11 @@ function file_get_contents_wrapper(
     return $content;
 }
 
+/**
+ * Check if an URL exists
+ * @param string $url
+ * @return bool
+ */
 function curl_url_exists(string $url): bool
 {
     $timeout = 10;
@@ -100,5 +105,5 @@ function curl_url_exists(string $url): bool
 
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    return $http_code >= 200 and $http_code < 400;
+    return $http_code >= 200 && $http_code < 400;
 }

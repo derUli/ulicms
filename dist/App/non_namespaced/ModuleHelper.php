@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
-use App\Models\Content\Language;
-use App\HTML\Form;
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 use App\Constants\RequestMethod;
+use App\Helpers\Helper;
+use App\HTML\Form;
+use App\Models\Content\Language;
 
 class ModuleHelper extends Helper
 {
@@ -13,11 +16,11 @@ class ModuleHelper extends Helper
         string $module,
         ?string $suffix = null
     ): string {
-        $url = "?action=module_settings&module=" . $module;
-        if ($suffix !== null && !empty($suffix)) {
-            $url .= "&" . $suffix;
+        $url = '?action=module_settings&module=' . $module;
+        if ($suffix !== null && ! empty($suffix)) {
+            $url .= '&' . $suffix;
         }
-        $url = rtrim($url, "&");
+        $url = rtrim($url, '&');
         return $url;
     }
 
@@ -47,19 +50,19 @@ class ModuleHelper extends Helper
     ): ?object {
         $language = $language ?? getCurrentLanguage();
 
-        $args = array(
+        $args = [
             1,
             $language
-        );
-        $sql = "select * from {prefix}content where active = ? and language = ?";
+        ];
+        $sql = 'select * from {prefix}content where active = ? and language = ?';
         $result = Database::pQuery($sql, $args, true);
         while ($dataset = Database::fetchObject($result)) {
             $content = $dataset->content;
-            $content = str_replace("&quot;", "\"", $content);
+            $content = str_replace('&quot;', '"', $content);
 
             // TODO: refactor this if-hell
-            if (!empty($dataset->module) && $dataset->type == "module") {
-                if (!$module || ($module && $dataset->module == $module)) {
+            if (! empty($dataset->module) && $dataset->type == 'module') {
+                if (! $module || ($module && $dataset->module == $module)) {
                     return $dataset;
                 }
             } elseif ($module) {
@@ -81,14 +84,14 @@ class ModuleHelper extends Helper
         ?string $suffix = null,
         bool $prependSuffixIfRequired = false
     ): string {
-        $url = "?action=" . $action;
-        if ($suffix !== null && !empty($suffix)) {
-            $url .= "&" . $suffix;
+        $url = '?action=' . $action;
+        if ($suffix !== null && ! empty($suffix)) {
+            $url .= '&' . $suffix;
         }
-        if (!is_admin_dir() and $prependSuffixIfRequired) {
-            $url = "admin/" . $url;
+        if (! is_admin_dir() && $prependSuffixIfRequired) {
+            $url = 'admin/' . $url;
         }
-        $url = rtrim($url, "&");
+        $url = rtrim($url, '&');
         return $url;
     }
 
@@ -99,20 +102,20 @@ class ModuleHelper extends Helper
         $modules = getAllModules();
         foreach ($modules as $module) {
             $noembedfile1 = Path::Resolve(
-                "ULICMS_ROOT/content/modules/$module/.noembed"
+                "ULICMS_ROOT/content/modules/{$module}/.noembed"
             );
             $noembedfile2 = Path::Resolve(
-                "ULICMS_ROOT/content/modules/$module/noembed.txt"
+                "ULICMS_ROOT/content/modules/{$module}/noembed.txt"
             );
 
             $embed_attrib = true;
 
-            $meta_attr = getModuleMeta($module, "embed");
+            $meta_attr = getModuleMeta($module, 'embed');
             if (is_bool($meta_attr)) {
                 $embed_attrib = $meta_attr;
             }
 
-            if (!is_file($noembedfile1) && !is_file($noembedfile2) && $embed_attrib) {
+            if (! is_file($noembedfile1) && ! is_file($noembedfile2) && $embed_attrib) {
                 $retval[] = $module;
             }
         }
@@ -123,7 +126,7 @@ class ModuleHelper extends Helper
     public static function getMainController(string $module): ?Controller
     {
         $controller = null;
-        $main_class = getModuleMeta($module, "main_class");
+        $main_class = getModuleMeta($module, 'main_class');
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
         }
@@ -141,20 +144,20 @@ class ModuleHelper extends Helper
     {
         $retval = true;
         $noembedfile1 = Path::Resolve(
-            "ULICMS_ROOT/content/modules/$module/.noembed"
+            "ULICMS_ROOT/content/modules/{$module}/.noembed"
         );
         $noembedfile2 = Path::Resolve(
-            "ULICMS_ROOT/content/modules/$module/noembed.txt"
+            "ULICMS_ROOT/content/modules/{$module}/noembed.txt"
         );
 
         $embed_attrib = true;
 
-        $meta_attr = getModuleMeta($module, "embed");
+        $meta_attr = getModuleMeta($module, 'embed');
         if (is_bool($meta_attr)) {
             $embed_attrib = $meta_attr;
         }
 
-        if (is_file($noembedfile1) || is_file($noembedfile2) || !$embed_attrib) {
+        if (is_file($noembedfile1) || is_file($noembedfile2) || ! $embed_attrib) {
             $retval = false;
         }
         return $retval;
@@ -168,14 +171,14 @@ class ModuleHelper extends Helper
         $dirname = dirname(get_request_uri());
 
         // Replace backslashes with slashes (Windows)
-        $dirname = str_replace("\\", '/', $dirname);
+        $dirname = str_replace('\\', '/', $dirname);
 
         if (is_admin_dir()) {
-            $dirname = dirname($dirname . "/..");
+            $dirname = dirname($dirname . '/..');
         }
 
         // Replace backslashes with slashes (Windows)
-        $dirname = str_replace("\\", '/', $dirname);
+        $dirname = str_replace('\\', '/', $dirname);
 
         $dirname = rtrim($dirname, '/');
 
@@ -187,11 +190,11 @@ class ModuleHelper extends Helper
         ?int $page_id = null,
         ?string $suffix = null
     ): ?string {
-        if (!$page_id) {
+        if (! $page_id) {
             $page_id = get_id();
         }
 
-        if (!$page_id) {
+        if (! $page_id) {
             return null;
         }
 
@@ -202,7 +205,7 @@ class ModuleHelper extends Helper
 
         if ($page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
-            if ($language->getID() !== null && StringHelper::isNotNullOrWhitespace($language->getLanguageLink())) {
+            if ($language->getID() !== null && ! empty($language->getLanguageLink())) {
                 return $language->getLanguageLink();
             }
         }
@@ -210,25 +213,24 @@ class ModuleHelper extends Helper
         $domain = getDomainByLanguage($page->language);
         $dirname = dirname(get_request_uri());
 
-        $dirname = str_replace("\\", '/', $dirname);
+        $dirname = str_replace('\\', '/', $dirname);
 
         if (is_admin_dir()) {
-            $dirname = dirname(dirname($dirname . "/.."));
+            $dirname = dirname($dirname . '/..', 2);
         }
 
-        if (!str_starts_with($dirname, '/')) {
+        if (! str_starts_with($dirname, '/')) {
             $dirname = '/' . $dirname;
         }
 
-        if (!str_ends_with($dirname, '/')) {
+        if (! str_ends_with($dirname, '/')) {
             $dirname = $dirname . '/';
         }
 
         // Replace backslashes with slashes (Windows)
-        $dirname = str_replace("\\", '/', $dirname);
+        $dirname = str_replace('\\', '/', $dirname);
 
-        $currentLanguage = isset($_SESSION['language']) ?
-                $_SESSION['language'] : Settings::get("default_language");
+        $currentLanguage = $_SESSION['language'] ?? Settings::get('default_language');
 
         // Todo: Too much if's refactor this code
         if ($domain) {
@@ -240,7 +242,7 @@ class ModuleHelper extends Helper
         } else {
             if ($page->language != $currentLanguage) {
                 $url = get_protocol_and_domain() . $dirname .
-                        $page->slug . "?language=" . $page->language;
+                        $page->slug . '?language=' . $page->language;
                 if ($suffix !== null) {
                     $url .= "&{$suffix}";
                 }
@@ -272,9 +274,9 @@ class ModuleHelper extends Helper
         string $sMethod,
         ?string $suffix = null
     ): string {
-        $result = "sClass=" . urlencode($sClass) . "&sMethod=" . urlencode($sMethod);
-        if (StringHelper::isNotNullOrWhitespace($suffix)) {
-            $result .= "&" . trim($suffix);
+        $result = 'sClass=' . urlencode($sClass) . '&sMethod=' . urlencode($sMethod);
+        if (! empty($suffix)) {
+            $result .= '&' . trim($suffix);
         }
         return $result;
     }
@@ -285,7 +287,7 @@ class ModuleHelper extends Helper
         string $sMethod,
         ?string $suffix = null
     ): string {
-        return "index.php?" . self::buildMethodCall($sClass, $sMethod, $suffix);
+        return 'index.php?' . self::buildMethodCall($sClass, $sMethod, $suffix);
     }
 
     // build a html form to upload a file to a backend controller action
@@ -296,7 +298,7 @@ class ModuleHelper extends Helper
         string $requestMethod = RequestMethod::POST,
         array $htmlAttributes = []
     ): string {
-        $htmlAttributes["enctype"] = "multipart/form-data";
+        $htmlAttributes['enctype'] = 'multipart/form-data';
         return self::buildMethodCallForm(
             $sClass,
             $sMethod,
@@ -323,9 +325,9 @@ class ModuleHelper extends Helper
         string $sMethod,
         string $buttonText,
         array $buttonAttributes = [
-                "class" => "btn btn-default",
-                "type" => "submit"
-            ],
+            'class' => 'btn btn-default',
+            'type' => 'submit'
+        ],
         array $otherVars = [],
         array $formAttributes = [],
         string $requestMethod = RequestMethod::POST
@@ -368,7 +370,7 @@ class ModuleHelper extends Helper
         $data,
         bool $forHtml = true
     ): string {
-        $seperator = $forHtml ? "&amp;" : "&";
+        $seperator = $forHtml ? '&amp;' : '&';
         return http_build_query($data, '', $seperator);
     }
 

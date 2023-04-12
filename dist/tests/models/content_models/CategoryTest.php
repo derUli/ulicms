@@ -4,18 +4,21 @@ use App\Models\Content\Category;
 
 class CategoryTest extends \PHPUnit\Framework\TestCase
 {
-    public const name1 = "Name 1";
-    public const name2 = "Name 2";
-    public const description1 = "Description 1";
-    public const description2 = "Description 2";
+    public const name1 = 'Name 1';
+
+    public const name2 = 'Name 2';
+
+    public const description1 = 'Description 1';
+
+    public const description2 = 'Description 2';
 
     protected function setUp(): void
     {
-        Database::pQuery("delete from `{prefix}categories`
-							where name = ? or name = ?", array(
+        Database::pQuery('delete from `{prefix}categories`
+							where name = ? or name = ?', [
             self::name1,
             self::name2
-                ), true);
+        ], true);
     }
 
     protected function tearDown(): void

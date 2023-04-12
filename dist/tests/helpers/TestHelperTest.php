@@ -11,22 +11,22 @@ class TestHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testGetOutput()
     {
-        $output = TestHelper::getOutput(function () {
-            echo "Hello World!";
+        $output = TestHelper::getOutput(static function() {
+            echo 'Hello World!';
         });
 
-        $this->assertEquals("Hello World!", $output);
+        $this->assertEquals('Hello World!', $output);
     }
 
     public function testGetOutputThrowsException()
     {
         $this->expectException(BadMethodCallException::class);
-        $this->expectExceptionMessage("Fehler!");
+        $this->expectExceptionMessage('Fehler!');
 
-        $output = TestHelper::getOutput(function () {
-            throw new BadMethodCallException("Fehler!");
+        $output = TestHelper::getOutput(static function() {
+            throw new BadMethodCallException('Fehler!');
         });
 
-        $this->assertEquals("Hello World!", $output);
+        $this->assertEquals('Hello World!', $output);
     }
 }

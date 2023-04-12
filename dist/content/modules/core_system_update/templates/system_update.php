@@ -10,12 +10,12 @@ if ($permissionChecker->hasPermission('update_system')) {
         <div>
             <a href="../update.php" class="btn btn-warning">
                 <i class="fas fa-sync"></i>
-                <?php translate("run_update"); ?>
+                <?php translate('run_update'); ?>
             </a>
         </div>
         <?php
     } else {
-        translate("update_information_text");
+        translate('update_information_text');
         ?>
         <?php
     }

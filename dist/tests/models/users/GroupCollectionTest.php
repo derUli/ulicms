@@ -12,7 +12,7 @@ class GroupCollectionTest extends \PHPUnit\Framework\TestCase
         $collection = new GroupCollection($user);
 
         $this->assertEquals(
-            "<div><foo><img><p><span><strong><video>",
+            '<div><foo><img><p><span><strong><video>',
             $collection->getAllowableTags()
         );
     }
@@ -22,13 +22,13 @@ class GroupCollectionTest extends \PHPUnit\Framework\TestCase
         $user = new User();
 
         $group1 = new Group();
-        $group1->setAllowableTags("<p><div><strong><span><img>");
+        $group1->setAllowableTags('<p><div><strong><span><img>');
 
         $group2 = new Group();
-        $group2->setAllowableTags("<p><img><foo>");
+        $group2->setAllowableTags('<p><img><foo>');
 
         $group3 = new Group();
-        $group3->setAllowableTags("<video><audio");
+        $group3->setAllowableTags('<video><audio');
 
         $user->setPrimaryGroup($group1);
         $user->setSecondaryGroups([$group2, $group3]);

@@ -14,8 +14,8 @@ class EmailFieldTest extends \PHPUnit\Framework\TestCase
     public function testRender()
     {
         $field = new EmailField();
-        $field->name = "my_field";
-        $field->title = "email";
-        $this->assertMatchesHtmlSnapshot($field->render("foo@bar.de"));
+        $field->name = 'my_field';
+        $field->title = 'email';
+        $this->assertMatchesHtmlSnapshot($field->render('foo@bar.de'));
     }
 }

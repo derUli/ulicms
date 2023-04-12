@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Constants\ModuleEventConstants;
+use App\Security\PrivacyCheckbox;
 
 function getModuleMeta($module, $attrib = null)
 {
@@ -11,14 +12,14 @@ function getModuleMeta($module, $attrib = null)
         'metadata.json',
         true
     );
-    if (!is_file($metadata_file)) {
+    if (! is_file($metadata_file)) {
         return null;
     }
 
     $data = file_get_contents($metadata_file);
     $json = json_decode($data, true);
 
-    if ($attrib && !isset($json[$attrib])) {
+    if ($attrib && ! isset($json[$attrib])) {
         return null;
     }
     return $attrib ? $json[$attrib] : $json;
@@ -29,7 +30,7 @@ function do_event(
     string $runs = ModuleEventConstants::RUNS_ONCE
 ): void {
     $modules = getAllModules();
-    $disabledModules = Vars::get("disabledModules") ?? [];
+    $disabledModules = Vars::get('disabledModules') ?? [];
     $modulesCount = count($modules);
 
     for ($hook_i = 0; $hook_i < $modulesCount; $hook_i++) {
@@ -37,18 +38,18 @@ function do_event(
             continue;
         }
         $file1 = getModulePath($modules[$hook_i], true) .
-                $modules[$hook_i] . "_" . $name . ".php";
+                $modules[$hook_i] . '_' . $name . '.php';
         $file2 = getModulePath($modules[$hook_i], true) .
-                "hooks/" . $name . ".php";
-        $main_class = getModuleMeta($modules[$hook_i], "main_class");
+                'hooks/' . $name . '.php';
+        $main_class = getModuleMeta($modules[$hook_i], 'main_class');
         $controller = null;
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
         }
         ob_start();
         $escapedName = ModuleHelper::underscoreToCamel($name);
-        if ($controller and method_exists($controller, $escapedName)) {
-            echo $controller->$escapedName();
+        if ($controller && method_exists($controller, $escapedName)) {
+            echo $controller->{$escapedName}();
         } elseif (is_file($file1)) {
             if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
                 require $file1;
@@ -69,7 +70,7 @@ function do_event(
 function stringContainsShortCodes(string $content, ?string $module = null): bool
 {
     $quot = '(' . preg_quote('&quot;') . ')?';
-    return boolval(
+    return (bool)(
         $module ?
         preg_match('/\[module=\"?' . $quot . preg_quote($module) . '\"?' .
                 $quot . '\]/m', $content) :
@@ -86,10 +87,10 @@ function replaceShortcodesWithModules(
     $string = $replaceOther ? replaceOtherShortCodes($string) : $string;
 
     $allModules = ModuleHelper::getAllEmbedModules();
-    $disabledModules = Vars::get("disabledModules") ?? [];
+    $disabledModules = Vars::get('disabledModules') ?? [];
 
     foreach ($allModules as $module) {
-        if (in_array($module, $disabledModules) || !stringContainsShortCodes($string, $module)) {
+        if (in_array($module, $disabledModules) || ! stringContainsShortCodes($string, $module)) {
             continue;
         }
         $stringToReplace1 = '[module="' . $module . '"]';
@@ -105,18 +106,18 @@ function replaceShortcodesWithModules(
             require_once $module_mainfile_path2;
         }
 
-        $main_class = getModuleMeta($module, "main_class");
+        $main_class = getModuleMeta($module, 'main_class');
         $controller = null;
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
         }
-        if ($controller and method_exists($controller, "render")) {
+        if ($controller && method_exists($controller, 'render')) {
             $html_output = $controller->render();
-        } elseif (function_exists($module . "_render")) {
-            $html_output = call_user_func($module . "_render");
+        } elseif (function_exists($module . '_render')) {
+            $html_output = call_user_func($module . '_render');
         } else {
-            throw new BadMethodCallException("Module $module "
-                            . "has no render() method");
+            throw new BadMethodCallException("Module {$module} "
+                            . 'has no render() method');
         }
 
         $string = str_replace($stringToReplace1, $html_output, $string);
@@ -141,7 +142,7 @@ function replaceOtherShortCodes(string $string): string
     $language = getCurrentLanguage(true);
     $checkbox = new PrivacyCheckbox($language);
     $string = str_ireplace(
-        "[accept_privacy_policy]",
+        '[accept_privacy_policy]',
         $checkbox->render(),
         $string
     );
@@ -171,9 +172,9 @@ function replaceOtherShortCodes(string $string): string
         $string
     );
 
-    $string = str_ireplace("[year]", Template::getYear(), $string);
+    $string = str_ireplace('[year]', Template::getYear(), $string);
     $string = str_ireplace(
-        "[homepage_owner]",
+        '[homepage_owner]',
         Template::getHomepageOwner(),
         $string
     );
@@ -184,15 +185,15 @@ function replaceOtherShortCodes(string $string): string
         $matchCount = count($match[0]);
         for ($i = 0; $i < $matchCount; $i++) {
             $placeholder = $match[0][$i];
-            $id = unhtmlspecialchars($match[1][$i]);
+            $id = _unesc($match[1][$i]);
             $id = (int)$id;
 
             $page = ContentFactory::getByID($id);
             // a page should not include itself
             // because that would cause an endless loop
-            if ($page and $id != get_ID()) {
+            if ($page && $id != get_ID()) {
                 $content = '';
-                if ($page->active and checkAccess($page->access)) {
+                if ($page->active && checkAccess($page->access)) {
                     $content = $page->content;
                 }
                 $string = str_ireplace($placeholder, $content, $string);
@@ -211,30 +212,30 @@ function containsModule(?string $page = null, ?string $module = null): bool
         $page = get_slug();
     }
 
-    if (Vars::get("page_" . $page . "_contains_" . $module) !== null) {
-        return Vars::get("page_" . $page . "_contains_" . $module);
+    if (Vars::get('page_' . $page . '_contains_' . $module) !== null) {
+        return Vars::get('page_' . $page . '_contains_' . $module);
     }
 
-    $result = db_query("SELECT content, module, `type` FROM " .
-            tbname("content") . " WHERE slug = '" . db_escape($page) . "'");
+    $result = db_query('SELECT content, module, `type` FROM ' .
+            tbname('content') . " WHERE slug = '" . db_escape($page) . "'");
 
-    if (!Database::any($result)) {
+    if (! Database::any($result)) {
         return $containsModule;
     }
 
     $dataset = db_fetch_assoc($result);
-    $content = $dataset["content"];
-    $content = str_replace("&quot;", "\"", $content);
+    $content = $dataset['content'];
+    $content = str_replace('&quot;', '"', $content);
 
     // TODO: Refactor this
-    if ($dataset["module"] !== null && !empty($dataset["module"]) && $dataset["type"] == "module") {
-        if (!$module || ($module && $dataset["module"] == $module)) {
+    if ($dataset['module'] !== null && ! empty($dataset['module']) && $dataset['type'] == 'module') {
+        if (! $module || ($module && $dataset['module'] == $module)) {
             $containsModule = true;
         }
     } elseif (stringContainsShortCodes($content, $module)) {
         $containsModule = true;
     }
 
-    Vars::set("page_" . $page . "_contains_" . $module, $containsModule);
+    Vars::set('page_' . $page . '_contains_' . $module, $containsModule);
     return $containsModule;
 }

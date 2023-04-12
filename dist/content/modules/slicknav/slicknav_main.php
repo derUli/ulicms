@@ -2,5 +2,5 @@
 
 function slicknav_render()
 {
-    return "";
+    return '';
 }

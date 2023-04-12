@@ -10,9 +10,13 @@ namespace App\CoreContent\Models\ViewModels;
 class DiffViewModel
 {
     public $html;
+
     public $current_version_date;
+
     public $old_version_date;
+
     public $content_id;
+
     public $history_id;
 
     /**

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 // This class contains methods to manipulate CustomFields
 // defined by modules
 class CustomFields
@@ -21,48 +23,48 @@ class CustomFields
 
         // use two nullbytes as seperator for arrays
         if (is_array($value)) {
-            $value = join("\0\0", $value);
+            $value = implode("\0\0", $value);
         } elseif (is_bool($value)) {
-            $value = strval((int) $value);
+            $value = (string)(int)$value;
         } elseif ($value !== null) {
-            $value = (string) $value;
+            $value = (string)$value;
         }
 
         $content_id = (int)$content_id;
-        $args = array(
+        $args = [
             $content_id,
             $name
-        );
-        $sql = "Select id from {prefix}custom_fields "
-                . "where content_id = ? and name = ?";
+        ];
+        $sql = 'Select id from {prefix}custom_fields '
+                . 'where content_id = ? and name = ?';
         $result = Database::pQuery($sql, $args, true);
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
             if ($value === null) {
-                $args = array(
-                    (int) $result->id
-                );
-                $sql = "DELETE FROM {prefix}custom_fields "
-                        . "where id = ?";
+                $args = [
+                    (int)$result->id
+                ];
+                $sql = 'DELETE FROM {prefix}custom_fields '
+                        . 'where id = ?';
                 return Database::pQuery($sql, $args, true);
-            } else {
-                $args = array(
+            }
+                $args = [
                     $value,
                     $name,
                     $content_id
-                );
-                $sql = "UPDATE {prefix}custom_fields set value = ? "
-                        . "where name = ? and content_id = ?";
+                ];
+                $sql = 'UPDATE {prefix}custom_fields set value = ? '
+                        . 'where name = ? and content_id = ?';
                 return Database::pQuery($sql, $args, true);
-            }
+
         } elseif ($value !== null) {
-            $args = array(
+            $args = [
                 $content_id,
                 $name,
                 $value
-            );
-            $sql = "INSERT INTO {prefix}custom_fields "
-                    . "(content_id, name, value) VALUES(?, ?, ?)";
+            ];
+            $sql = 'INSERT INTO {prefix}custom_fields '
+                    . '(content_id, name, value) VALUES(?, ?, ?)';
             return Database::pQuery($sql, $args, true);
         }
         return false;
@@ -78,11 +80,11 @@ class CustomFields
         }
 
         $content_id = (int)$content_id;
-        $args = array(
+        $args = [
             $content_id
-        );
-        $sql = "Select name, value from {prefix}custom_fields "
-                . "where content_id = ?";
+        ];
+        $sql = 'Select name, value from {prefix}custom_fields '
+                . 'where content_id = ?';
         $result = Database::pQuery($sql, $args, true);
 
         while ($row = Database::fetchObject($result)) {
@@ -115,12 +117,12 @@ class CustomFields
             $name = "{$page->type}_{$name}";
         }
 
-        $args = array(
+        $args = [
             $content_id,
             $name
-        );
-        $sql = "Select value from {prefix}custom_fields "
-                . "where content_id = ? and name = ?";
+        ];
+        $sql = 'Select value from {prefix}custom_fields '
+                . 'where content_id = ? and name = ?';
         $result = Database::pQuery($sql, $args, true);
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);

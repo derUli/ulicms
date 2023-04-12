@@ -2,31 +2,35 @@
 
 declare(strict_types=1);
 
-use App\Exceptions\FileNotFoundException;
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
+use App\Registries\ActionRegistry;
 
 class ControllerRegistry
 {
     private static $controllers = [];
+
     private static $controller_function_permissions = [];
 
     // load and initialize all module controllers
     public static function loadModuleControllers(): void
     {
         $controllerRegistry = [];
-        $modules = getAllModules();
-        $disabledModules = Vars::get("disabledModules") ?? [];
+
+        $moduleManager = new ModuleManager();
+        $modules = $moduleManager->getEnabledModuleNames();
+
         foreach ($modules as $module) {
-            if (in_array($module, $disabledModules)) {
-                continue;
-            }
-            $controllers = getModuleMeta($module, "controllers");
+            $controllers = getModuleMeta($module, 'controllers');
             if ($controllers) {
                 foreach ($controllers as $key => $value) {
                     $path = getModulePath($module, true) .
                             trim($value, '/');
-                    if (!str_ends_with($path, ".php")) {
-                        $path .= ".php";
+
+                    if (! str_ends_with($path, '.php')) {
+                        $path .= '.php';
                     }
+
                     $controllerRegistry[$key] = $path;
                 }
             }
@@ -34,7 +38,7 @@ class ControllerRegistry
             // read controller function permissions from metadata files of modules
             $controller_function_permissions = getModuleMeta(
                 $module,
-                "controller_function_permissions"
+                'controller_function_permissions'
             );
             if ($controller_function_permissions) {
                 foreach ($controller_function_permissions as $key => $value) {
@@ -43,12 +47,8 @@ class ControllerRegistry
             }
         }
         foreach ($controllerRegistry as $key => $value) {
-            if (is_file($value)) {
-                require_once $value;
-            } else {
-                throw new FileNotFoundException("Module {$module}: "
-                                . "File '{$value}' not found.");
-            }
+            include_once $value;
+
             if (class_exists($key)) {
                 $classInstance = new $key();
                 if ($classInstance instanceof Controller) {
@@ -60,15 +60,15 @@ class ControllerRegistry
 
     public static function runMethods(): void
     {
-        if (isset($_REQUEST["sClass"])
-                and StringHelper::isNotNullOrEmpty($_REQUEST["sClass"])) {
-            if (self::get($_REQUEST["sClass"])) {
-                $sClass = $_REQUEST["sClass"];
+        if (isset($_REQUEST['sClass'])
+                && ! empty($_REQUEST['sClass'])) {
+            if (self::get($_REQUEST['sClass'])) {
+                $sClass = $_REQUEST['sClass'];
                 self::get($sClass)->runCommand();
             } else {
-                $sClass = $_REQUEST["sClass"];
+                $sClass = $_REQUEST['sClass'];
                 throw new BadMethodCallException(
-                    "class " . _esc($sClass) . " not found"
+                    'class ' . _esc($sClass) . ' not found'
                 );
             }
         }
@@ -78,7 +78,7 @@ class ControllerRegistry
     // If $class is null it returns the main class for the current backend action if defined
     public static function get(?string $class = null): ?Controller
     {
-        if ($class == null and get_action()) {
+        if ($class == null && get_action()) {
             return ActionRegistry::getController();
         } elseif (isset(self::$controllers[$class])) {
             return self::$controllers[$class];
@@ -91,20 +91,20 @@ class ControllerRegistry
     {
         $allowed = true;
         $acl = new ACL();
-        $methodIdentifier = $sClass . "::" . $sMethod;
+        $methodIdentifier = $sClass . '::' . $sMethod;
 
-        $wildcardMethodIdentifier = $sClass . "::*";
+        $wildcardMethodIdentifier = $sClass . '::*';
 
         if (
             isset(self::$controller_function_permissions[$methodIdentifier]) &&
-            !empty(self::$controller_function_permissions[$methodIdentifier])
+            ! empty(self::$controller_function_permissions[$methodIdentifier])
         ) {
             $allowed = $acl->hasPermission(
                 self::$controller_function_permissions[$methodIdentifier]
             );
         } elseif (
             isset(self::$controller_function_permissions[$wildcardMethodIdentifier]) &&
-            !empty(self::$controller_function_permissions[$wildcardMethodIdentifier])) {
+            ! empty(self::$controller_function_permissions[$wildcardMethodIdentifier])) {
             $allowed = $acl->hasPermission(
                 self::$controller_function_permissions[$wildcardMethodIdentifier]
             );

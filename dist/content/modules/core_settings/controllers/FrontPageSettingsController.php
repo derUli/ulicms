@@ -14,11 +14,11 @@ class FrontPageSettingsController extends Controller
         for ($i = 0; $i < $languagesCount; $i++) {
             $lang = $languages[$i];
             $varName = "frontpage_{$lang}";
-            $page = Request::getVar($varName, "", "str");
+            $page = Request::getVar($varName, '', 'str');
 
             Settings::set($varName, $page);
-            if ($lang === Settings::get("default_language")) {
-                Settings::set("frontpage", $page);
+            if ($lang === Settings::get('default_language')) {
+                Settings::set('frontpage', $page);
             }
         }
         CacheUtil::clearPageCache();
@@ -30,7 +30,7 @@ class FrontPageSettingsController extends Controller
         // if called by ajax return no content to improve performance
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL("frontpage_settings")
+            ModuleHelper::buildActionURL('frontpage_settings')
         );
     }
 }

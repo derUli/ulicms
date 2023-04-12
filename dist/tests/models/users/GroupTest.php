@@ -6,9 +6,9 @@ class GroupTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
-        $settings = array(
+        $settings = [
             'default_acl_group'
-        );
+        ];
         foreach ($settings as $setting) {
             $this->savedSettings[$setting] = Settings::get($setting);
         }
@@ -29,23 +29,23 @@ class GroupTest extends \PHPUnit\Framework\TestCase
     {
         $group = new Group();
         $this->assertNull($group->getId());
-        $group->setName("bla");
-        $this->assertEquals("bla", $group->getName());
+        $group->setName('bla');
+        $this->assertEquals('bla', $group->getName());
         $group->save();
 
         $oldID = $group->getId();
         $this->assertNotNull($oldID);
         $group = new Group($oldID);
         $this->assertEquals($oldID, $group->getId());
-        $this->assertEquals("bla", $group->getName());
+        $this->assertEquals('bla', $group->getName());
         $this->assertTrue(is_array($group->getPermissions()));
-        $this->assertTrue(count($group->getPermissions()) >= 65);
+        $this->assertGreaterThanOrEqual(62, count($group->getPermissions()));
 
-        $group->setName("Hello");
+        $group->setName('Hello');
         $group->save();
 
         $group = new Group($oldID);
-        $this->assertEquals("Hello", $group->getName());
+        $this->assertEquals('Hello', $group->getName());
 
         $group->delete();
         $this->assertNull($group->getId());
@@ -76,7 +76,7 @@ class GroupTest extends \PHPUnit\Framework\TestCase
         $group = Group::getCurrentGroup();
         $this->assertInstanceOf(Group::class, $group);
         $this->assertEquals(1, $group->getId());
-        $this->assertFalse(StringHelper::isNullOrWhitespace($group->getName()));
+        $this->assertFalse(empty($group->getName()));
     }
 
     public function testGetCurrentGroupReturnsNull()
@@ -98,26 +98,26 @@ class GroupTest extends \PHPUnit\Framework\TestCase
 
     public function testGetPrimaryGroupIdReturnsId()
     {
-        Settings::set('default_acl_group', "1");
+        Settings::set('default_acl_group', '1');
         $this->assertEquals(1, Group::getDefaultPrimaryGroupId());
     }
 
     public function testGetPrimaryGroupReturnsGroup()
     {
-        Settings::set('default_acl_group', "1");
+        Settings::set('default_acl_group', '1');
 
         $group = Group::getDefaultPrimaryGroup();
         $this->assertInstanceOf(Group::class, $group);
         $this->assertEquals(1, $group->getId());
-        $this->assertFalse(StringHelper::isNullOrWhitespace($group->getName()));
+        $this->assertFalse(empty($group->getName()));
     }
 
     public function testSetPermissions()
     {
         $group = new Group();
-        $group->setPermissions(["foo", "bar"]);
+        $group->setPermissions(['foo', 'bar']);
         $this->assertEquals(
-            ["foo", "bar"],
+            ['foo', 'bar'],
             $group->getPermissions()
         );
     }
@@ -125,19 +125,19 @@ class GroupTest extends \PHPUnit\Framework\TestCase
     public function testAddPermission()
     {
         $group = new Group();
-        $group->setPermissions(["foo" => true, "bar" => false]);
-        $group->removePermission("foo");
+        $group->setPermissions(['foo' => true, 'bar' => false]);
+        $group->removePermission('foo');
 
-        $this->assertEquals(["bar" => false], $group->getPermissions());
+        $this->assertEquals(['bar' => false], $group->getPermissions());
     }
 
     public function testSetAllowableTags()
     {
         $group = new Group();
-        $group->setAllowableTags("<strong><p><i><em><a><ul><li><ol>");
+        $group->setAllowableTags('<strong><p><i><em><a><ul><li><ol>');
 
         $this->assertEquals(
-            "<strong><p><i><em><a><ul><li><ol>",
+            '<strong><p><i><em><a><ul><li><ol>',
             $group->getAllowableTags()
         );
     }

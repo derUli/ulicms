@@ -1,14 +1,14 @@
 <?php
 
-use App\Models\Media\Audio;
 use App\Models\Content\Categories;
+use App\Models\Media\Audio;
 
 class AudioControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected function tearDown(): void
     {
         $_POST = [];
-        Database::deleteFrom("audio", "name like 'test-audio-%'", true);
+        Database::deleteFrom('audio', "name like 'test-audio-%'", true);
     }
 
     public function testUpdatePostReturnsTrue(): void
@@ -17,18 +17,18 @@ class AudioControllerTest extends \PHPUnit\Framework\TestCase
         $first = $categories[0];
 
         $audio = new Audio();
-        $audio->setName("test-audio-1");
-        $audio->setMP3File("test-audio-1.mp3");
-        $audio->setOGGFile("test-audio-1.ogg");
+        $audio->setName('test-audio-1');
+        $audio->setMP3File('test-audio-1.mp3');
+        $audio->setOGGFile('test-audio-1.ogg');
         $audio->setCategory($first);
         $audio->save();
 
         $_POST = [
-            "name" => "test-audio-2",
-            "mp3_file" => "test-audio-2.mp3",
-            "ogg_file" => "test-audio-2.ogg",
-            "id" => $audio->getID(),
-            "category_id" => $first->getId()
+            'name' => 'test-audio-2',
+            'mp3_file' => 'test-audio-2.mp3',
+            'ogg_file' => 'test-audio-2.ogg',
+            'id' => $audio->getID(),
+            'category_id' => $first->getId()
         ];
 
         $controller = new AudioController();
@@ -36,20 +36,20 @@ class AudioControllerTest extends \PHPUnit\Framework\TestCase
 
         $audio->reload();
 
-        $this->assertEquals("test-audio-2", $audio->getName());
-        $this->assertEquals("test-audio-2.mp3", $audio->getMP3File());
-        $this->assertEquals("test-audio-2.ogg", $audio->getOggFile());
+        $this->assertEquals('test-audio-2', $audio->getName());
+        $this->assertEquals('test-audio-2.mp3', $audio->getMP3File());
+        $this->assertEquals('test-audio-2.ogg', $audio->getOggFile());
         $this->assertEquals($first->getId(), $audio->getCategoryId());
     }
 
     public function testUpdatePostReturnsFalse(): void
     {
         $_POST = [
-            "name" => "test-audio-2",
-            "mp3_file" => "test-audio-2.mp3",
-            "ogg_file" => "test-audio-2.ogg",
-            "id" => PHP_INT_MAX,
-            "category_id" => 1
+            'name' => 'test-audio-2',
+            'mp3_file' => 'test-audio-2.mp3',
+            'ogg_file' => 'test-audio-2.ogg',
+            'id' => PHP_INT_MAX,
+            'category_id' => 1
         ];
 
         $controller = new AudioController();

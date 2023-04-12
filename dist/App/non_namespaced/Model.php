@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 use App\Exceptions\NotImplementedException;
 
 // This is a base class for database models
@@ -32,7 +36,7 @@ class Model
     // override this method to implement your sql select statement
     public function loadByID($id)
     {
-        throw new NotImplementedException("load not implemented");
+        throw new NotImplementedException('load not implemented');
     }
 
     public function save()
@@ -44,30 +48,10 @@ class Model
         }
     }
 
-    // $result must be a mysqli result or null
-    // use this method to fill the data from database to
-    // class variables
-    protected function fillVars($result = null)
-    {
-        throw new NotImplementedException("fillVars not implemented");
-    }
-
-    // override this method to implement your sql insert statement
-    protected function insert()
-    {
-        throw new NotImplementedException("insert not implemented");
-    }
-
-    // override this method to implement your sql update statement
-    protected function update()
-    {
-        throw new NotImplementedException("update not implemented");
-    }
-
     // override this method to implement your sql delete statement
     public function delete()
     {
-        throw new NotImplementedException("delete not implemented");
+        throw new NotImplementedException('delete not implemented');
     }
 
     public function setID($id)
@@ -83,19 +67,19 @@ class Model
     // bind values from associative array $values to class properties
     public function bindValues($values = [])
     {
-        $values = (array) $values;
+        $values = (array)$values;
         foreach ($values as $key => $value) {
             $camelCaseVar = ModuleHelper::underscoreToCamel($key);
-            $method = "set" . ucfirst($camelCaseVar);
+            $method = 'set' . ucfirst($camelCaseVar);
             // if a setter method exists, call it
             if (method_exists($this, $method)) {
-                $this->$method($value);
+                $this->{$method}($value);
             // if there is a class property in snake_case set it
-            } elseif (isset($this->$value)) {
+            } elseif (isset($this->{$value})) {
                 $this->value = $value;
             // if there is a class property in camelcase set it
-            } elseif (isset($this->$camelCaseVar)) {
-                $this->$camelCaseVar = $value;
+            } elseif (isset($this->{$camelCaseVar})) {
+                $this->{$camelCaseVar} = $value;
             }
         }
     }
@@ -104,18 +88,18 @@ class Model
     public static function checkValueType($value, ?string $type, bool $required = false): bool
     {
         // if it's required and $value is null throw exception
-        if ($required and $value === null) {
-            throw new InvalidArgumentException("Required field not filled");
+        if ($required && $value === null) {
+            throw new InvalidArgumentException('Required field not filled');
         }
         // if it's null and not required it's ok
         if ($type === null) {
             return true;
         }
 
-        $isXyzFunction = "is_" . $type;
-        if (function_exists($isXyzFunction) && !var_is_type($value, $type, $required)) {
+        $isXyzFunction = 'is_' . $type;
+        if (function_exists($isXyzFunction) && ! var_is_type($value, $type, $required)) {
             throw new InvalidArgumentException("\"{$value}\" is not of type {$type}.");
-        } elseif (class_exists($type) and $value instanceof $type) {
+        } elseif (class_exists($type) && $value instanceof $type) {
             $dumpedValue = var_dump_str($value);
             throw new InvalidArgumentException("\"{$dumpedValue}\" is not of type {$type}.");
         }
@@ -125,13 +109,13 @@ class Model
     public static function getAllDatasets(
         $tableName,
         $modelClass,
-        $orderBy = "id",
+        $orderBy = 'id',
         $where = ''
     ): array {
         $datasets = [];
-        $result = Database::selectAll($tableName, array(
-                    "id"
-                        ), $where, [], true, $orderBy);
+        $result = Database::selectAll($tableName, [
+            'id'
+        ], $where, [], true, $orderBy);
         while ($row = Database::fetchObject($result)) {
             $datasets[] = new $modelClass($row->id);
         }
@@ -149,7 +133,7 @@ class Model
     public function hasChanges(): bool
     {
         $hasChanges = false;
-        $className = get_class($this);
+        $className = static::class;
         $originalDataset = new $className($this->getID());
 
         $reflection = new ReflectionClass($this);
@@ -159,10 +143,10 @@ class Model
             $camelCaseVar = ModuleHelper::underscoreToCamel(
                 $property->getName()
             );
-            $method = "get" . ucfirst($camelCaseVar);
+            $method = 'get' . ucfirst($camelCaseVar);
 
             if (method_exists($this, $method)
-                    and $this->$method() != $originalDataset->$method()) {
+                    && $this->{$method}() != $originalDataset->{$method}()) {
                 $hasChanges = true;
             }
         }
@@ -176,5 +160,25 @@ class Model
             return true;
         }
         return false;
+    }
+
+    // $result must be a mysqli result or null
+    // use this method to fill the data from database to
+    // class variables
+    protected function fillVars($result = null)
+    {
+        throw new NotImplementedException('fillVars not implemented');
+    }
+
+    // override this method to implement your sql insert statement
+    protected function insert()
+    {
+        throw new NotImplementedException('insert not implemented');
+    }
+
+    // override this method to implement your sql update statement
+    protected function update()
+    {
+        throw new NotImplementedException('update not implemented');
     }
 }

@@ -2,17 +2,21 @@
 
 namespace App\Models\Content;
 
-use Model;
-use Database;
-use Request;
-use Settings;
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
+use Database;
 use function getDomainByLanguage;
+use Model;
+use Request;
+
+use Settings;
 
 class Language extends Model
 {
     protected $id = null;
+
     private $name = null;
+
     private $language_code = null;
 
     public function __construct($id = null)
@@ -22,9 +26,14 @@ class Language extends Model
         }
     }
 
+    public function __toString(): string
+    {
+        return $this->getLanguageCode();
+    }
+
     public function fillVars($result = null)
     {
-        if ($result and Database::getNumRows($result) > 0) {
+        if ($result && Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
             $this->id = $result->id;
             $this->name = $result->name;
@@ -38,20 +47,20 @@ class Language extends Model
 
     public function loadById($id)
     {
-        $args = array(
+        $args = [
             $id
-        );
-        $sql = "SELECT * FROM `{prefix}languages` where id = ?";
+        ];
+        $sql = 'SELECT * FROM `{prefix}languages` where id = ?';
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
     }
 
     public function loadByLanguageCode(string $language_code): void
     {
-        $args = array(
+        $args = [
             (string)$language_code
-        );
-        $sql = "SELECT * FROM `{prefix}languages` where language_code = ?";
+        ];
+        $sql = 'SELECT * FROM `{prefix}languages` where language_code = ?';
         $result = Database::pQuery($sql, $args, true);
         $this->fillVars($result);
     }
@@ -85,37 +94,13 @@ class Language extends Model
         }
     }
 
-    protected function insert()
-    {
-        $sql = "INSERT INTO `{prefix}languages` (name, language_code) "
-                . "values (?,?)";
-        $args = array(
-            $this->name,
-            $this->language_code
-        );
-        Database::pQuery($sql, $args, true);
-        $this->id = Database::getLastInsertID();
-    }
-
-    protected function update()
-    {
-        $sql = "UPDATE `{prefix}languages` set name = ?, language_code = ? "
-                . "where id = ?";
-        $args = array(
-            $this->name,
-            $this->language_code,
-            $this->id
-        );
-        Database::pQuery($sql, $args, true);
-    }
-
     public function delete()
     {
         if ($this->id !== null) {
-            $sql = "DELETE FROM `{prefix}languages` where id = ?";
-            $args = array(
+            $sql = 'DELETE FROM `{prefix}languages` where id = ?';
+            $args = [
                 $this->id
-            );
+            ];
             Database::pQuery($sql, $args, true);
             $this->id = null;
             $this->name = null;
@@ -126,14 +111,14 @@ class Language extends Model
     public function makeDefaultLanguage(): void
     {
         if ($this->language_code !== null) {
-            Settings::set("default_language", $this->language_code);
+            Settings::set('default_language', $this->language_code);
         }
     }
 
     // returns true if this language is the default language
     public function isDefaultLanguage(): bool
     {
-        return $this->language_code == Settings::get("default_language");
+        return $this->language_code == Settings::get('default_language');
     }
 
     // returns true if this is the user's current language
@@ -148,17 +133,12 @@ class Language extends Model
     public static function getAllLanguages(string $order = 'id'): array
     {
         $datasets = [];
-        $sql = "select id from `{prefix}languages` order by $order";
+        $sql = "select id from `{prefix}languages` order by {$order}";
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
             $datasets[] = new Language($row->id);
         }
         return $datasets;
-    }
-
-    public function __toString(): string
-    {
-        return $this->getLanguageCode();
     }
 
     // returns a link to view the website in this language
@@ -168,8 +148,32 @@ class Language extends Model
         if ($domain) {
             $url = Request::getProtocol($domain);
         } else {
-            $url = "./?language=" . $this->language_code;
+            $url = './?language=' . $this->language_code;
         }
         return $url;
+    }
+
+    protected function insert()
+    {
+        $sql = 'INSERT INTO `{prefix}languages` (name, language_code) '
+                . 'values (?,?)';
+        $args = [
+            $this->name,
+            $this->language_code
+        ];
+        Database::pQuery($sql, $args, true);
+        $this->id = Database::getLastInsertID();
+    }
+
+    protected function update()
+    {
+        $sql = 'UPDATE `{prefix}languages` set name = ?, language_code = ? '
+                . 'where id = ?';
+        $args = [
+            $this->name,
+            $this->language_code,
+            $this->id
+        ];
+        Database::pQuery($sql, $args, true);
     }
 }

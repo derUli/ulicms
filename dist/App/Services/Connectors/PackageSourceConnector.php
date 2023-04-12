@@ -4,31 +4,32 @@ declare(strict_types=1);
 
 namespace App\Services\Connectors;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
-
-use Settings;
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use function cms_version;
+
 use function file_get_contents_wrapper;
+use Settings;
 
 class PackageSourceConnector
 {
     private $packageSourceUrl = null;
+
     private $data = null;
 
     public function __construct(?string $packageSourceUrl = null)
     {
-        if (!$packageSourceUrl) {
-            $packageSourceUrl = Settings::get("pkg_src");
+        if (! $packageSourceUrl) {
+            $packageSourceUrl = Settings::get('pkg_src');
         }
 
         $packageSourceUrl = str_replace(
-            "{version}",
+            '{version}',
             cms_version(),
             $packageSourceUrl
         );
 
-        $packageSourceUrl .= "index.json";
+        $packageSourceUrl .= 'index.json';
         $this->packageSourceUrl = $packageSourceUrl;
     }
 
@@ -38,7 +39,7 @@ class PackageSourceConnector
             $this->packageSourceUrl,
             $forceUpdate
         );
-        if (!$json) {
+        if (! $json) {
             return false;
         }
         $this->data = json_decode($json);
@@ -52,7 +53,7 @@ class PackageSourceConnector
 
     public function getAllAvailablePackages(): ?array
     {
-        if (!$this->data) {
+        if (! $this->data) {
             $this->fetch();
         }
         return $this->data;
@@ -60,7 +61,7 @@ class PackageSourceConnector
 
     public function getVersionOfPackage(string $name): ?string
     {
-        if (!$this->data) {
+        if (! $this->data) {
             $this->fetch();
         }
         foreach ($this->data as $package) {
@@ -73,7 +74,7 @@ class PackageSourceConnector
 
     public function getDataOfPackage(string $name): ?object
     {
-        if (!$this->data) {
+        if (! $this->data) {
             $this->fetch();
         }
         foreach ($this->data as $package) {
@@ -86,7 +87,7 @@ class PackageSourceConnector
 
     public function getLicenseOfPackage(string $name): ?string
     {
-        if (!$this->data) {
+        if (! $this->data) {
             $this->fetch();
         }
         foreach ($this->data as $package) {

@@ -1,28 +1,30 @@
 <?php
-
+use App\Helpers\ImagineHelper;
 use function App\HTML\imageTag;
+
+use App\Translations\JSTranslation;
 
 $controller = new LogoController();
 
 $permissionChecker = new ACL();
 
-$logoUrl = "../content/images/" . Settings::get("logo_image");
+$logoUrl = '../content/images/' . Settings::get('logo_image');
 
-$logoStoragePath = ULICMS_ROOT . "/content/images/" . Settings::get("logo_image");
+$logoStoragePath = ULICMS_ROOT . '/content/images/' . Settings::get('logo_image');
 
-if ($permissionChecker->hasPermission("logo")) {
+if ($permissionChecker->hasPermission('logo')) {
     ?>
     <p>
         <a
-            href="<?php echo ModuleHelper::buildActionURL("design"); ?>"
+            href="<?php echo ModuleHelper::buildActionURL('design'); ?>"
             class="btn btn-default btn-back is-not-ajax">
             <i class="fa fa-arrow-left"></i> 
-            <?php translate("back") ?>
+            <?php translate('back'); ?>
         </a>
     </p>
-    <h1><?php translate("upload_new_logo"); ?></h1>
+    <h1><?php translate('upload_new_logo'); ?></h1>
     <p>
-        <?php translate("logo_infotext"); ?>
+        <?php translate('logo_infotext'); ?>
     </p>
     <form enctype="multipart/form-data" action="index.php" method="post">
         <?php csrf_token_html(); ?>
@@ -34,7 +36,7 @@ if ($permissionChecker->hasPermission("logo")) {
                 ?>
 
                 <tr>
-                    <td><strong><?php translate("your_logo"); ?>
+                    <td><strong><?php translate('your_logo'); ?>
                         </strong></td>
                     <td>
                         <div id="logo-wrapper">
@@ -43,8 +45,8 @@ if ($permissionChecker->hasPermission("logo")) {
                                 echo imageTag(
                                     $logoUrl,
                                     [
-                                        "alt" => Settings::get("homepage_title"),
-                                        "class" => "img-responsive"
+                                        'alt' => Settings::get('homepage_title'),
+                                        'class' => 'img-responsive'
                                     ]
                                 );
                                 ?>
@@ -55,14 +57,14 @@ if ($permissionChecker->hasPermission("logo")) {
                                         id="delete-logo"
                                         data-url="<?php
                                         echo ModuleHelper::buildMethodCallUrl(
-                                    LogoController::class,
-                                    "deleteLogo"
-                                );
+                                            LogoController::class,
+                                            'deleteLogo'
+                                        );
                                 ?>
                                         "
                                         >
                                         <i class="fa fa-trash" aria-hidden="true"></i>
-                                        <?php translate("delete_logo"); ?>
+                                        <?php translate('delete_logo'); ?>
                                     </button>
                                 <?php }
                             ?>
@@ -71,7 +73,7 @@ if ($permissionChecker->hasPermission("logo")) {
                         <img
                             id="delete-logo-loading"
                             src="gfx/loading.gif"
-                            alt="<?php translate("loading_alt"); ?>"
+                            alt="<?php translate('loading_alt'); ?>"
                             style="display: none;"
                             >
                     </td>
@@ -79,7 +81,7 @@ if ($permissionChecker->hasPermission("logo")) {
             <?php }
             ?>
             <tr>
-                <td width="480"><strong><?php translate("upload_new_logo"); ?>
+                <td width="480"><strong><?php translate('upload_new_logo'); ?>
                     </strong></td>
                 <td>
                     <input name="logo_upload_file" type="file" accept="<?php echo ImagineHelper::ACCEPT_MIMES; ?>">
@@ -89,20 +91,20 @@ if ($permissionChecker->hasPermission("logo")) {
                 <td></td>
                 <td class="text-center"><button type="submit"
                                                 class="btn btn-primary voffset2">
-                        <i class="fa fa-upload"></i> <?php translate("upload"); ?></button></td>
+                        <i class="fa fa-upload"></i> <?php translate('upload'); ?></button></td>
             </tr>
         </table>
     </form>
     <?php
     $translation = new JSTranslation();
-    $translation->addKey("delete_logo");
-    $translation->addKey("logo_deleted");
+    $translation->addKey('delete_logo');
+    $translation->addKey('logo_deleted');
     $translation->render();
 
     enqueueScriptFile(
         ModuleHelper::buildRessourcePath(
-            "core_settings",
-            "js/logo.js"
+            'core_settings',
+            'js/logo.js'
         )
     );
     combinedScriptHtml();

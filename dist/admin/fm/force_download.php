@@ -5,12 +5,12 @@ $config = include 'config/config.php';
 include 'include/utils.php';
 include 'include/mime_type_lib.php';
 
-if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager") {
+if ($_SESSION['RF']['verify'] != 'RESPONSIVEfilemanager') {
     response(trans('forbidden') . AddErrorLocation(), 403)->send();
     exit;
 }
 
-if (!checkRelativePath($_POST['path']) || strpos($_POST['path'], '/') === 0) {
+if (! checkRelativePath($_POST['path']) || strpos($_POST['path'], '/') === 0) {
     response(trans('wrong path') . AddErrorLocation(), 400)->send();
     exit;
 }
@@ -31,7 +31,7 @@ if ($ftp) {
 $name = $_POST['name'];
 $info = pathinfo($name);
 
-if (!check_extension($info['extension'], $config)) {
+if (! check_extension($info['extension'], $config)) {
     response(trans('wrong extension') . AddErrorLocation(), 400)->send();
     exit;
 }
@@ -44,11 +44,11 @@ $file_path = $path . $name;
 // make sure the file exists
 if ($ftp) {
     header('Content-Type: application/octet-stream');
-    header("Content-Transfer-Encoding: Binary");
-    header("Content-disposition: attachment; filename=\"" . $file_name . "\"");
+    header('Content-Transfer-Encoding: Binary');
+    header('Content-disposition: attachment; filename="' . $file_name . '"');
     readfile($file_path);
 } elseif (is_file($file_path) && is_readable($file_path)) {
-    if (!file_exists($path . $name)) {
+    if (! file_exists($path . $name)) {
         response(trans('File_Not_Found') . AddErrorLocation(), 404)->send();
         exit;
     }
@@ -73,27 +73,27 @@ if ($ftp) {
     }
     header('Content-Type: ' . $mime_type);
     header('Content-Disposition: attachment; filename="' . $file_name . '"');
-    header("Content-Transfer-Encoding: binary");
+    header('Content-Transfer-Encoding: binary');
     header('Accept-Ranges: bytes');
 
     if (isset($_SERVER['HTTP_RANGE'])) {
-        list($a, $range) = explode("=", $_SERVER['HTTP_RANGE'], 2);
-        list($range) = explode(",", $range, 2);
-        list($range, $range_end) = explode("-", $range);
-        $range = intval($range);
-        if (!$range_end) {
+        [$a, $range] = explode('=', $_SERVER['HTTP_RANGE'], 2);
+        [$range] = explode(',', $range, 2);
+        [$range, $range_end] = explode('-', $range);
+        $range = (int)$range;
+        if (! $range_end) {
             $range_end = $size - 1;
         } else {
-            $range_end = intval($range_end);
+            $range_end = (int)$range_end;
         }
 
         $new_length = $range_end - $range + 1;
-        header("HTTP/1.1 206 Partial Content");
-        header("Content-Length: $new_length");
-        header("Content-Range: bytes $range-$range_end/$size");
+        header('HTTP/1.1 206 Partial Content');
+        header("Content-Length: {$new_length}");
+        header("Content-Range: bytes {$range}-{$range_end}/{$size}");
     } else {
         $new_length = $size;
-        header("Content-Length: " . $size);
+        header('Content-Length: ' . $size);
     }
 
     $chunksize = 1 * (1024 * 1024);
@@ -104,8 +104,8 @@ if ($ftp) {
             fseek($file, $range);
         }
 
-        while (!feof($file) &&
-            (!connection_aborted()) &&
+        while (! feof($file) &&
+            (! connection_aborted()) &&
             ($bytes_send < $new_length)
         ) {
             $buffer = fread($file, $chunksize);
@@ -115,13 +115,13 @@ if ($ftp) {
         }
         fclose($file);
     } else {
-        die('Error - can not open file.');
+        exit('Error - can not open file.');
     }
 
-    die();
+    exit();
 } else {
     // file does not exist
-    header("HTTP/1.0 404 Not Found");
+    header('HTTP/1.0 404 Not Found');
 }
 
 exit;

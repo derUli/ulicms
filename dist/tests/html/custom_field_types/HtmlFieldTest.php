@@ -1,7 +1,7 @@
 <?php
 
-use Spatie\Snapshots\MatchesSnapshots;
 use App\Constants\HtmlEditor;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class HtmlFieldTest extends \PHPUnit\Framework\TestCase
 {
@@ -14,9 +14,9 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase
         include_once getLanguageFilePath('en');
 
         $user = new User();
-        $user->setUsername("testuser-nicht-admin");
-        $user->setLastname("Admin");
-        $user->setFirstname("Nicht");
+        $user->setUsername('testuser-nicht-admin');
+        $user->setLastname('Admin');
+        $user->setFirstname('Nicht');
         $user->setPassword(uniqid());
         $user->setAdmin(false);
         $user->setHTMLEditor(HtmlEditor::CODEMIRROR);
@@ -35,10 +35,10 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase
         $this->testUser->registerSession();
 
         $field = new HtmlField();
-        $field->name = "my_field";
-        $field->title = "content";
+        $field->name = 'my_field';
+        $field->title = 'content';
         $this->assertMatchesHtmlSnapshot(
-            $field->render("hello <strong>world</strong>")
+            $field->render('hello <strong>world</strong>')
         );
     }
 }

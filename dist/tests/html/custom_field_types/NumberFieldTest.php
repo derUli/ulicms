@@ -14,8 +14,8 @@ class NumberFieldTest extends \PHPUnit\Framework\TestCase
     public function testRender()
     {
         $field = new NumberField();
-        $field->name = "my_field";
-        $field->title = "users";
-        $this->assertMatchesHtmlSnapshot($field->render("hello world"));
+        $field->name = 'my_field';
+        $field->title = 'users';
+        $this->assertMatchesHtmlSnapshot($field->render('hello world'));
     }
 }

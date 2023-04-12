@@ -14,11 +14,11 @@ class HomepageTitleController extends Controller
         for ($i = 0; $i < $languagesCount; $i++) {
             $lang = $languages[$i];
             $varName = "homepage_title_{$lang}";
-            $page = Request::getVar($varName, "", "str");
+            $page = Request::getVar($varName, '', 'str');
 
             Settings::set($varName, $page);
-            if ($lang === Settings::get("default_language")) {
-                Settings::set("homepage_title", $page);
+            if ($lang === Settings::get('default_language')) {
+                Settings::set('homepage_title', $page);
             }
         }
 
@@ -30,7 +30,7 @@ class HomepageTitleController extends Controller
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL("homepage_title")
+            ModuleHelper::buildActionURL('homepage_title')
         );
     }
 }

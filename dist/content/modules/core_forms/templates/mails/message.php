@@ -7,7 +7,7 @@
     <body>
         <table border="1">
             <tbody>
-                <?php foreach (ViewBag::get("data") as $label => $value) { ?>
+                <?php foreach (ViewBag::get('data') as $label => $value) { ?>
                     <tr>
                         <td><strong><?php esc($label); ?></strong></td>
                         <td><?php echo nl2br(_esc($value)); ?></td>

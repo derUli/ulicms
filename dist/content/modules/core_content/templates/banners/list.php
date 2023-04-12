@@ -1,64 +1,67 @@
 <?php
 
+use App\HTML\Alert;
 use App\Models\Content\Advertisement\Banners;
 use App\Models\Content\Categories;
-use App\HTML\Alert;
+use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("banners")) {
-    if (!isset($_SESSION["filter_category"])) {
-        $_SESSION["filter_category"] = 0;
+if ($permissionChecker->hasPermission('banners')) {
+    if (! isset($_SESSION['filter_category'])) {
+        $_SESSION['filter_category'] = 0;
     }
-    if (isset($_GET["filter_category"])) {
-        $_SESSION["filter_category"] = intval($_GET["filter_category"]);
+
+    if (isset($_GET['filter_category'])) {
+        $_SESSION['filter_category'] = (int)$_GET['filter_category'];
     }
-    if ($_SESSION["filter_category"] == 0) {
+
+    if ($_SESSION['filter_category'] == 0) {
         $banners = Banners::getAll();
     } else {
-        $banners = Banners::getByCategory($_SESSION["filter_category"]);
+        $banners = Banners::getByCategory($_SESSION['filter_category']);
     }
     ?>
-    <?php echo Template::executeModuleTemplate("core_content", "icons.php"); ?>
+    <?php echo Template::executeModuleTemplate('core_content', 'icons.php'); ?>
 
-    <h2><?php translate("advertisements"); ?></h2>
+    <h2><?php translate('advertisements'); ?></h2>
     <?php
     echo Alert::info(
-        get_translation("advertisement_infotext")
+        get_translation('advertisement_infotext')
     );
     ?>
 
     <?php
-    if ($permissionChecker->hasPermission("banners_create")) {
+    if ($permissionChecker->hasPermission('banners_create')) {
         ?>
         <div class="field"><a href="index.php?action=banner_new"
                               class="btn btn-default is-not-ajax"><i class="fa fa-plus"></i>
-                                  <?php translate("add_advertisement"); ?>
+                                  <?php translate('add_advertisement'); ?>
             </a>
         </div>
     <?php }
     ?>
     <div class="field">
-        <?php translate("category"); ?>
-        <?php echo Categories::getHTMLSelect($_SESSION["filter_category"], true); ?>
+        <?php translate('category'); ?>
+        <?php echo Categories::getHTMLSelect($_SESSION['filter_category'], true); ?>
     </div>
     <div class="scroll">
         <table class="tablesorter">
             <thead>
                 <tr style="font-weight: bold;">
-                    <th><?php translate("advertisements"); ?>
+                    <th><?php translate('advertisements'); ?>
                     </th>
-                    <th><?php translate("language"); ?>
+                    <th><?php translate('language'); ?>
                     </th>
                     <?php
                     if ($permissionChecker->hasPermission(
-        "banners_edit"
-    )) {
+                        'banners_edit'
+                    )) {
                         ?>
                         <td class="no-sort text-center">
-                            <?php translate("edit"); ?>
+                            <?php translate('edit'); ?>
                         </td>
                         <td class="no-sort text-center">
-                            <?php translate("delete"); ?>
+                            <?php translate('delete'); ?>
                         </td>
                     <?php }
                     ?>
@@ -71,7 +74,7 @@ if ($permissionChecker->hasPermission("banners")) {
                         ?>
                         <?php
                         echo '<tr id="dataset-' . $banner->getId() . '">';
-                        if ($banner->getType() == "gif") {
+                        if ($banner->getType() == 'gif') {
                             $link_url = Template::getEscape($banner->getLinkUrl());
                             $image_url = Template::getEscape($banner->getImageUrl());
                             $name = Template::getEscape($banner->getName());
@@ -84,19 +87,19 @@ if ($permissionChecker->hasPermission("banners")) {
                             Template::getEscape($banner->render()) .
                             '</td>';
                         }
-                        if (!$banner->getLanguage()) {
-                            echo '<td>' . get_translation("every") . '</td>';
+                        if (! $banner->getLanguage()) {
+                            echo '<td>' . get_translation('every') . '</td>';
                         } else {
-                            echo '<td>' . getLanguageNameByCode($banner->getLanguage()) . "</td>";
+                            echo '<td>' . getLanguageNameByCode($banner->getLanguage()) . '</td>';
                         }
-                        if ($permissionChecker->hasPermission("banners_edit")) {
-                            echo "<td class=\"text-center\">" .
+                        if ($permissionChecker->hasPermission('banners_edit')) {
+                            echo '<td class="text-center">' .
                             '<a href="index.php?action=banner_edit&banner=' .
                             $banner->getId() .
                             '" class="is-not-ajax"><img class="mobile-big-image" src="gfx/edit.png" alt="' .
-                            get_translation("edit") . '" title="' .
-                            get_translation("edit") . '"></a></td>';
-                            echo "<td class=\"text-center\">" .
+                            get_translation('edit') . '" title="' .
+                            get_translation('edit') . '"></a></td>';
+                            echo '<td class="text-center">' .
                             '<form action="index.php?sClass=BannerController&sMethod=delete&banner=' .
                             $banner->getId() .
                             '" method="post" class="delete-form">' .
@@ -104,7 +107,7 @@ if ($permissionChecker->hasPermission("banners")) {
                             '<input type="image" '
                             . 'class="mobile-big-image" '
                             . 'src="gfx/delete.png" title="' .
-                            get_translation("delete") . '">'
+                            get_translation('delete') . '">'
                             . '</form></td>';
                         }
                         echo '</tr>';
@@ -117,8 +120,8 @@ if ($permissionChecker->hasPermission("banners")) {
     <?php
     enqueueScriptFile(
         ModuleHelper::buildRessourcePath(
-            "core_content",
-            "js/banners.js"
+            'core_content',
+            'js/banners.js'
         )
     );
     combinedScriptHtml();
@@ -129,7 +132,9 @@ if ($permissionChecker->hasPermission("banners")) {
     noPerms();
 }
 
-$translation = new JSTranslation(array(
-    "ask_for_delete"
-        ));
+$translation = new JSTranslation(
+    [
+        'ask_for_delete'
+    ]
+);
 $translation->render();

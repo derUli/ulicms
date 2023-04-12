@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 class Module
 {
     private $name = null;
+
     private $version = null;
+
     private $enabled = 0;
 
     public function __construct(?string $name = null)
@@ -17,17 +21,17 @@ class Module
 
     public function loadByName(string $name): bool
     {
-        $sql = "select * from {prefix}modules where name = ?";
-        $args = array(
+        $sql = 'select * from {prefix}modules where name = ?';
+        $args = [
             $name
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         $dataset = Database::fetchSingle($result);
 
         if ($dataset) {
             $this->name = $dataset->name;
             $this->version = $dataset->version;
-            $this->enabled = (bool) $dataset->enabled;
+            $this->enabled = (bool)$dataset->enabled;
             return true;
         }
         return false;
@@ -35,10 +39,10 @@ class Module
 
     public function save(): void
     {
-        $sql = "select name from {prefix}modules where name = ?";
-        $args = array(
+        $sql = 'select name from {prefix}modules where name = ?';
+        $args = [
             $this->name
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
 
         if (Database::any($result)) {
@@ -46,30 +50,6 @@ class Module
         } else {
             $this->insert();
         }
-    }
-
-    protected function insert(): bool
-    {
-        $sql = "INSERT INTO {prefix}modules (name, version, enabled) "
-                . "values(?, ?, ?)";
-        $args = array(
-            $this->name,
-            $this->version,
-            $this->enabled
-        );
-        return Database::pQuery($sql, $args, true);
-    }
-
-    protected function update(): bool
-    {
-        $sql = "update {prefix}modules set version = ?, enabled = ? "
-                . "where name = ?";
-        $args = array(
-            $this->version,
-            $this->enabled,
-            $this->name
-        );
-        return Database::pQuery($sql, $args, true);
     }
 
     public function getVersion(): ?string
@@ -84,12 +64,12 @@ class Module
 
     public function isEnabled(): bool
     {
-        return (bool) $this->enabled;
+        return (bool)$this->enabled;
     }
 
     public function enable(): void
     {
-        if (!$this->isMissingDependencies()) {
+        if (! $this->isMissingDependencies()) {
             $this->enabled = 1;
             $this->save();
         }
@@ -102,7 +82,7 @@ class Module
         $dependencies = $manager->getDependencies($this->name);
         $enabledMods = $manager->getEnabledModuleNames();
         foreach ($dependencies as $dependency) {
-            if (!in_array($dependency, $enabledMods)) {
+            if (! in_array($dependency, $enabledMods)) {
                 $result [] = $dependency;
             }
         }
@@ -111,7 +91,7 @@ class Module
 
     public function isInstalled(): bool
     {
-        if (!$this->getName()) {
+        if (! $this->getName()) {
             return false;
         }
         return getModuleMeta($this->getName()) !== null;
@@ -119,20 +99,20 @@ class Module
 
     public function isMissingDependencies(): bool
     {
-        return (count($this->getMissingDependencies()) > 0);
+        return count($this->getMissingDependencies()) > 0;
     }
 
     public function hasAdminPage(): bool
     {
         $controller = ModuleHelper::getMainController($this->name);
-        return (
+        return
             is_file(getModuleAdminFilePath($this->name)) ||
             is_file(getModuleAdminFilePath2($this->name)) ||
-            ($controller && method_exists($controller, "settings")) ||
+            ($controller && method_exists($controller, 'settings')) ||
             (
-                getModuleMeta($this->name, "main_class")
+                getModuleMeta($this->name, 'main_class')
             ) &&
-            getModuleMeta($this->name, "admin_permission"));
+            getModuleMeta($this->name, 'admin_permission');
     }
 
     public function isEmbedModule(): bool
@@ -162,12 +142,12 @@ class Module
 
     public function hasDependentModules(): bool
     {
-        return (count($this->getDependentModules()) > 0);
+        return count($this->getDependentModules()) > 0;
     }
 
     public function disable(): void
     {
-        if (!$this->hasDependentModules()) {
+        if (! $this->hasDependentModules()) {
             $this->enabled = 0;
             $this->save();
         }
@@ -200,25 +180,24 @@ class Module
 
         // Uninstall Script ausführen, sofern vorhanden
         $mainController = ModuleHelper::getMainController($name);
-        return (($mainController &&
-                method_exists($mainController, "uninstall")) ||
+        return ($mainController &&
+                method_exists($mainController, 'uninstall')) ||
                 is_file($uninstallScript1) ||
-                is_file($uninstallScript2)
-        );
+                is_file($uninstallScript2);
     }
 
     public function delete(): ?bool
     {
-        $sql = "select name from {prefix}modules where name = ?";
-        $args = array(
+        $sql = 'select name from {prefix}modules where name = ?';
+        $args = [
             $this->name
-        );
+        ];
         $result = Database::pQuery($sql, $args, true);
         if (Database::any($result)) {
-            $sql = "delete from {prefix}modules where name = ?";
-            $args = array(
+            $sql = 'delete from {prefix}modules where name = ?';
+            $args = [
                 $this->name
-            );
+            ];
             return Database::pQuery($sql, $args, true);
         }
         return null;
@@ -226,6 +205,30 @@ class Module
 
     public function uninstall(): bool
     {
-        return uninstall_module($this->getName(), "module");
+        return uninstall_module($this->getName(), 'module');
+    }
+
+    protected function insert(): bool
+    {
+        $sql = 'INSERT INTO {prefix}modules (name, version, enabled) '
+                . 'values(?, ?, ?)';
+        $args = [
+            $this->name,
+            $this->version,
+            $this->enabled
+        ];
+        return Database::pQuery($sql, $args, true);
+    }
+
+    protected function update(): bool
+    {
+        $sql = 'update {prefix}modules set version = ?, enabled = ? '
+                . 'where name = ?';
+        $args = [
+            $this->version,
+            $this->enabled,
+            $this->name
+        ];
+        return Database::pQuery($sql, $args, true);
     }
 }

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 use App\Exceptions\NotImplementedException;
 
 /**
@@ -10,18 +12,24 @@ use App\Exceptions\NotImplementedException;
 class CustomField
 {
     public $name;
+
     public $title;
+
     public $required = false;
+
     public $helpText;
+
     public $defaultValue = '';
+
     public $htmlAttributes = [];
+
     public $contentType;
 
     /**
      * Render custom field as html
      * @param type $value
-     * @return string
      * @throws NotImplementedException
+     * @return string
      */
     public function render($value = null): string
     {

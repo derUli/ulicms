@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Helper;
-use Westsworld\TimeAgo;
-use DateTime;
 use ChrisUllyott\FileSize;
+use DateTime;
+use Westsworld\TimeAgo;
 
 /**
  * Utils to deal with number values such as size units and timestamps
  */
 class NumberFormatHelper extends Helper
 {
-    public const SQL_DATE_WITH_SECONDS = "Y-m-d H:i:s";
-    public const SQL_DATE_WITHOUT_SECONDS = "Y-m-d H:i";
+    public const SQL_DATE_WITH_SECONDS = 'Y-m-d H:i:s';
+
+    public const SQL_DATE_WITHOUT_SECONDS = 'Y-m-d H:i';
 
     /**
      * Format filesizes in a more human readable format
@@ -26,7 +26,7 @@ class NumberFormatHelper extends Helper
      */
     public static function formatSizeUnits(float $bytes): string
     {
-        $size = new FileSize("$bytes Bytes");
+        $size = new FileSize("{$bytes} Bytes");
         return $size->asAuto();
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\ImagineHelper;
 use Imagine\Image\AbstractImagine;
 
 class ImagineHelperTest extends \PHPUnit\Framework\TestCase
@@ -8,15 +9,5 @@ class ImagineHelperTest extends \PHPUnit\Framework\TestCase
     {
         $image = ImagineHelper::getImagine();
         $this->assertInstanceOf(AbstractImagine::class, $image);
-    }
-
-    public function testGetLibraryName()
-    {
-        $this->assertTrue(
-            in_array(
-                ImagineHelper::getLibraryName(),
-                ['gd', 'imagick', 'gmagick']
-            )
-        );
     }
 }

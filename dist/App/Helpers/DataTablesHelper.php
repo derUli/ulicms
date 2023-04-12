@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Helper;
 
 /**
  * This tool returns methods to use DataTables (https://datatables.net/)
@@ -22,11 +21,11 @@ class DataTablesHelper extends Helper
      */
     public static function getLanguageFileURL(string $lang): string
     {
-        $baseUrl = "scripts/datatables/lang";
+        $baseUrl = 'scripts/datatables/lang';
         $file = "{$baseUrl}/{$lang}.lang";
         if (is_file($file)) {
             return $file;
         }
-        return "$baseUrl/en.lang";
+        return "{$baseUrl}/en.lang";
     }
 }

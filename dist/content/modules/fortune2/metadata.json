@@ -4,7 +4,7 @@
         "Fortune": "fortune.php"
     },
     "main_class": "Fortune",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "manufacturer_name": "Ulrich Schmidt",
     "manufacturer_url": "https://www.ulicms.de",
     "embed": true,
@@ -14,6 +14,12 @@
         "fortune2_post",
         "fortune2_get"
     ],
+    "models": {
+        "HelloWorldModel": "HelloWorldModel.php"
+    },
+    "helpers": {
+        "HelloWorldHelper": "HelloWorldHelper.php"
+    },
     "controller_function_permissions": {
         "Fortune::doSomethingPost": "fortune2_post",
         "Fortune::doSomethingGet": "fortune2_get"

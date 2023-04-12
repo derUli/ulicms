@@ -4,7 +4,7 @@ class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase
 {
     public function testExtendUpgradeHelper()
     {
-        if (!class_exists("ExtendUpgradeHelper")) {
+        if (! class_exists('ExtendUpgradeHelper')) {
             $this->markTestSkipped('extend_upgrade_helper is not installed');
         }
         $helper = new ExtendUpgradeHelper();
@@ -33,8 +33,8 @@ class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase
     private function getExpectedModuleNames(): array
     {
         return [
-            "oneclick_upgrade",
-            "fortune2",
+            'oneclick_upgrade',
+            'fortune2',
         ];
     }
 }

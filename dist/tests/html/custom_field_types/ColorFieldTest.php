@@ -14,9 +14,9 @@ class ColorFieldTest extends \PHPUnit\Framework\TestCase
     public function testRender()
     {
         $field = new ColorField();
-        $field->name = "my_field";
-        $field->title = "design";
+        $field->name = 'my_field';
+        $field->title = 'design';
 
-        $this->assertMatchesHtmlSnapshot($field->render("FFC0CB"));
+        $this->assertMatchesHtmlSnapshot($field->render('FFC0CB'));
     }
 }

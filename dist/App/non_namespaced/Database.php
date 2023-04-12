@@ -2,16 +2,20 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
+use App\Database\DBMigrator;
 use App\Exceptions\SqlException;
+use App\Registries\LoggerRegistry;
 
 // this class provides an abstraction for database access
 // and many helpful utility methods to do database stuff
 class Database
 {
     private static $connection = null;
+
     private static $echoQueries = false;
+
     private static $schema_selected = false;
 
     // this is used to show sql queries while running the unit tests
@@ -29,7 +33,6 @@ class Database
             'NO_ZERO_IN_DATE',
             'NO_ZERO_DATE',
             'ERROR_FOR_DIVISION_BY_ZERO',
-            'NO_AUTO_CREATE_USER',
             'NO_ENGINE_SUBSTITUTION'
         ];
     }
@@ -43,6 +46,10 @@ class Database
         ?string $socket = null,
         bool $db_strict_mode = false
     ): ?mysqli {
+        // Until PHP 8.0 this was the default value
+        // TODO: Make hard exceptions for SQL default
+        mysqli_report(MYSQLI_REPORT_OFF);
+
         // Store old error reporting settings
         $displayErrors = ini_get('display_errors');
         $errorReporting = error_reporting();
@@ -57,8 +64,8 @@ class Database
         error_reporting($errorReporting);
         ini_set('display_errors', $displayErrors);
 
-        self::$connection = $connected ? $connected : null;
-        if (!self::$connection) {
+        self::$connection = $connected ?: null;
+        if (! self::$connection) {
             return null;
         }
 
@@ -66,8 +73,8 @@ class Database
         // sql_mode auf leer setzen, da sich UliCMS nicht im
         // strict_mode betreiben lässt
         if ($db_strict_mode) {
-            self::pQuery("SET SESSION sql_mode = ?", [
-                implode(",", self::getSqlStrictModeFlags())
+            self::pQuery('SET SESSION sql_mode = ?', [
+                implode(',', self::getSqlStrictModeFlags())
             ]);
         } else {
             self::query("SET SESSION sql_mode = ''");
@@ -95,7 +102,7 @@ class Database
         array $otherScripts = []
     ): bool {
         $selected = self::select($schemaName);
-        if (!$selected) {
+        if (! $selected) {
             $success = self::createSchema($schemaName);
             if ($success) {
                 $selected = self::select($schemaName);
@@ -104,8 +111,8 @@ class Database
 
         if ($selected) {
             $migrator = new DBMigrator(
-                "core",
-                Path::resolve("ULICMS_ROOT/lib/migrations/up")
+                'core',
+                Path::resolve('ULICMS_ROOT/lib/migrations/up')
             );
             $migrator->migrate();
             foreach ($otherScripts as $script) {
@@ -124,9 +131,9 @@ class Database
     {
         $cfg = new CMSConfig();
         if ($replacePrefix) {
-            $sql = str_replace("{prefix}", $cfg->db_prefix, $sql);
+            $sql = str_replace('{prefix}', $cfg->db_prefix, $sql);
         }
-        $logger = LoggerRegistry::get("sql_log");
+        $logger = LoggerRegistry::get('sql_log');
         if ($logger) {
             $logger->info($sql);
         }
@@ -134,7 +141,7 @@ class Database
             echo $sql . "\n";
         }
         $result = mysqli_query(self::$connection, $sql);
-        if (!$result) {
+        if (! $result) {
             throw new SqlException(self::getError());
         }
         return $result;
@@ -147,9 +154,9 @@ class Database
     ) {
         $cfg = new CMSConfig();
         if ($replacePrefix) {
-            $sql = str_replace("{prefix}", $cfg->db_prefix, $sql);
+            $sql = str_replace('{prefix}', $cfg->db_prefix, $sql);
         }
-        $logger = LoggerRegistry::get("sql_log");
+        $logger = LoggerRegistry::get('sql_log');
         if ($logger) {
             $logger->info($sql);
         }
@@ -192,18 +199,18 @@ class Database
         $chars = mb_str_split($sql);
         $i = 0;
         foreach ($chars as $char) {
-            if ($char != "?") {
+            if ($char != '?') {
                 $preparedQuery .= $char;
             } else {
                 $value = $args[$i];
                 if (is_float($value)) {
-                    $value = str_replace(",", '.', strval((float) $value));
+                    $value = str_replace(',', '.', (string)(float)$value);
                 } elseif (is_int($value)) {
-                    $value = strval((int)$value);
+                    $value = (string)(int)$value;
                 } elseif (is_bool($value)) {
-                    $value = strval((int)$value);
+                    $value = (string)(int)$value;
                 } elseif ($value === null) {
-                    $value = "NULL";
+                    $value = 'NULL';
                 } else {
                     $value = "'" . self::escapeValue($value) . "'";
                 }
@@ -221,7 +228,7 @@ class Database
 
     public static function getClientInfo(): string
     {
-        return mysqli_get_client_info(self::$connection);
+        return mysqli_get_client_info();
     }
 
     public static function getClientVersion(): ?int
@@ -237,18 +244,18 @@ class Database
             $table = tbname($table);
         }
 
-        if (!self::tableExists($table, false)) {
+        if (! self::tableExists($table, false)) {
             return true;
         }
 
         $table = self::escapeName($table);
-        return self::query("DROP TABLE IF EXISTS $table");
+        return self::query("DROP TABLE IF EXISTS {$table}");
     }
 
     public static function dropSchema(string $schema): bool
     {
         $schema = self::escapeName($schema);
-        return self::query("DROP SCHEMA IF EXISTS $schema ");
+        return self::query("DROP SCHEMA IF EXISTS {$schema} ");
     }
 
     public static function selectMin(
@@ -263,16 +270,16 @@ class Database
 
         $table = self::escapeName($table);
         $column = self::escapeName($column);
-        $sql = "select min($column) as val from $table";
-        if (StringHelper::isNotNullOrEmpty($where)) {
-            $sql .= " where $where";
+        $sql = "select min({$column}) as val from {$table}";
+        if (! empty($where)) {
+            $sql .= " where {$where}";
         }
 
         $result = Database::query($sql);
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? (float) $val : (int) $val;
+        return is_decimal($val) ? (float)$val : (int)$val;
     }
 
     public static function selectMax(
@@ -287,16 +294,16 @@ class Database
 
         $table = self::escapeName($table);
         $column = self::escapeName($column);
-        $sql = "select max($column) as val from $table";
-        if (StringHelper::isNotNullOrEmpty($where)) {
-            $sql .= " where $where";
+        $sql = "select max({$column}) as val from {$table}";
+        if (! empty($where)) {
+            $sql .= " where {$where}";
         }
 
         $result = Database::query($sql);
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? (float) $val : (int) $val;
+        return is_decimal($val) ? (float)$val : (int)$val;
     }
 
     public static function selectAvg(
@@ -311,16 +318,16 @@ class Database
 
         $table = self::escapeName($table);
         $column = self::escapeName($column);
-        $sql = "select avg($column) as val from $table";
-        if (StringHelper::isNotNullOrEmpty($where)) {
-            $sql .= " where $where";
+        $sql = "select avg({$column}) as val from {$table}";
+        if (! empty($where)) {
+            $sql .= " where {$where}";
         }
 
         $result = Database::query($sql);
 
         $row = Database::fetchObject($result);
         $val = $row->val;
-        return is_decimal($val) ? (float) $val : (int) $val;
+        return is_decimal($val) ? (float)$val : (int)$val;
     }
 
     public static function deleteFrom(
@@ -333,10 +340,10 @@ class Database
         }
         $table = self::escapeName($table);
 
-        $sql = "DELETE FROM $table";
+        $sql = "DELETE FROM {$table}";
 
-        if (StringHelper::isNotNullOrEmpty($where)) {
-            $sql .= " where $where";
+        if (! empty($where)) {
+            $sql .= " where {$where}";
         }
         $result = Database::query($sql);
         return $result;
@@ -351,7 +358,7 @@ class Database
         }
 
         $table = self::escapeName($table);
-        return self::query("TRUNCATE TABLE $table");
+        return self::query("TRUNCATE TABLE {$table}");
     }
 
     public static function dropColumn(
@@ -365,7 +372,7 @@ class Database
 
         $column = self::escapeName($column);
         $table = self::escapeName($table);
-        return self::query("ALTER TABLE $table DROP COLUMN $column");
+        return self::query("ALTER TABLE {$table} DROP COLUMN {$column}");
     }
 
     public static function selectAll(
@@ -382,28 +389,28 @@ class Database
         $table = self::escapeName($table);
 
         if (count($columns) == 0) {
-            $columns[] = "*";
+            $columns[] = '*';
         }
 
-        $columns_sql = implode(", ", $columns);
+        $columns_sql = implode(', ', $columns);
 
-        $sql = "select $columns_sql from $table";
+        $sql = "select {$columns_sql} from {$table}";
 
-        if (StringHelper::isNotNullOrWhitespace($where)) {
-            $sql .= " where $where ";
+        if (! empty($where)) {
+            $sql .= " where {$where} ";
         }
 
-        if (StringHelper::isNotNullOrWhitespace($order)) {
-            $sql .= " order by $order";
+        if (! empty($order)) {
+            $sql .= " order by {$order}";
         }
         return self::pQuery($sql, $args, $replacePrefix);
     }
 
     public static function escapeName(string $name): string
     {
-        $name = str_replace("'", "", $name);
-        $name = str_replace("\"", "", $name);
-        $name = "`" . db_escape($name) . "`";
+        $name = str_replace("'", '', $name);
+        $name = str_replace('"', '', $name);
+        $name = '`' . db_escape($name) . '`';
         return $name;
     }
 
@@ -447,8 +454,13 @@ class Database
     // Datenbank auswählen
     public static function select(string $schema): bool
     {
-        $selected = mysqli_select_db(self::$connection, $schema);
-        self::$schema_selected = $selected;
+        try {
+            $selected = mysqli_select_db(self::$connection, $schema);
+            self::$schema_selected = $selected;
+        } catch (Exception $ex) {
+            $selected = false;
+        }
+
         return $selected;
     }
 
@@ -504,7 +516,7 @@ class Database
     public static function getAllTables(): array
     {
         $tableList = [];
-        $res = mysqli_query(self::$connection, "SHOW TABLES");
+        $res = mysqli_query(self::$connection, 'SHOW TABLES');
         while ($cRow = mysqli_fetch_array($res)) {
             $tableList[] = $cRow[0];
         }
@@ -528,23 +540,23 @@ class Database
     public static function escapeValue($value, ?int $type = null)
     {
         if ($value === null) {
-            return "NULL";
+            return 'NULL';
         }
         if ($type === null) {
             if (is_float($value)) {
-                return (float) $value;
+                return (float)$value;
             } elseif (is_int($value)) {
                 return (int)$value;
             } elseif (is_bool($value)) {
-                return (int) $value;
-            } else {
-                return mysqli_real_escape_string(self::$connection, $value);
+                return (int)$value;
             }
-        } else {
+                return mysqli_real_escape_string(self::$connection, $value);
+
+        }
             if ($type === DB_TYPE_INT) {
                 return (int)$value;
             } elseif ($type === DB_TYPE_FLOAT) {
-                return (float) $value;
+                return (float)$value;
             } elseif ($type === DB_TYPE_STRING) {
                 return mysqli_real_escape_string(
                     self::$connection,
@@ -552,10 +564,10 @@ class Database
                 );
             } elseif ($type === DB_TYPE_BOOL) {
                 return (int)$value;
-            } else {
-                return $value;
             }
-        }
+                return $value;
+
+
     }
 
     // returns a list of all tables of a table
@@ -567,11 +579,11 @@ class Database
         if ($prefix) {
             $table = tbname($table);
         }
-        $result = Database::query("SELECT * FROM $table limit 1");
+        $result = Database::query("SELECT * FROM {$table} limit 1");
         $fields_num = self::getNumFieldCount();
         if ($fields_num > 0) {
             for ($i = 0; $i < $fields_num; $i++) {
-                $field = db_fetch_field($result);
+                $field = self::fetchField($result);
                 $retval[] = $field->name;
             }
             sort($retval);
@@ -635,7 +647,7 @@ class Database
     // returns true if the database result contains at least one row
     public static function any(mysqli_result $result): bool
     {
-        return (Database::getNumRows($result) > 0);
+        return Database::getNumRows($result) > 0;
     }
 
     // used for multi queries

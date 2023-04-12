@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . "/RoboTestFile.php";
-require_once __DIR__ . "/RoboTestBase.php";
+require_once __DIR__ . '/RoboTestFile.php';
+require_once __DIR__ . '/RoboTestBase.php';
 
 class RoboTest extends RoboTestBase
 {
@@ -14,23 +14,23 @@ class RoboTest extends RoboTestBase
 
     public function testTestsRun()
     {
-        if (!$this->shouldDropDbOnShutdown()) {
+        if (! $this->shouldDropDbOnShutdown()) {
             $this->markTestSkipped();
         }
 
         $cfg = new CMSConfig();
         Database::dropSchema($cfg->db_database);
 
-        putenv("ULICMS_ENVIRONMENT=" . get_environment());
+        putenv('ULICMS_ENVIRONMENT=' . get_environment());
 
         $actual = $this->runRoboCommand(
             [
-                "tests:run",
-                "tests/environment/UliCMSVersionTest.php"
+                'tests:run',
+                'tests/environment/UliCMSVersionTest.php'
             ]
         );
         $this->assertStringContainsString(
-            "OK (6 tests, 40 assertions)",
+            'OK (7 tests, 47 assertions)',
             $actual
         );
     }

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use App\HTML\Style;
-use App\HTML\Script;
 use App\Exceptions\SCSSCompileException;
+use App\HTML\Script;
+use App\HTML\Style;
+use App\Security\Hash;
+use MatthiasMullie\Minify;
 use ScssPhp\ScssPhp\Compiler;
 use zz\Html\HTMLMinify;
-use MatthiasMullie\Minify;
-use App\Security\Hash;
 
 /**
  * Clears the Javascript queue
@@ -29,10 +29,10 @@ function optimizeHtml(
     string $html,
     int $level = HTMLMinify::OPTIMIZATION_SIMPLE
 ): string {
-    if (Database::isConnected() &&  Settings::get('minify_html')) {
-        $options = array(
+    if (Database::isConnected() && Settings::get('minify_html')) {
+        $options = [
             'optimizationLevel' => $level
-        );
+        ];
         $minifier = new HTMLMinify($html, $options);
         $html = $minifier->process();
     }
@@ -43,7 +43,7 @@ function optimizeHtml(
 
 function enqueueScriptFile($path): void
 {
-    if (!Vars::get('script_queue')) {
+    if (! Vars::get('script_queue')) {
         resetScriptQueue();
     }
     $script_queue = Vars::get('script_queue');
@@ -55,21 +55,21 @@ function enqueueScriptFile($path): void
 function setSCSSImportPaths(?array $importPaths = null): void
 {
     if ($importPaths == null) {
-        $importPaths = array(
-            Path::resolve("ULICMS_ROOT")
-        );
+        $importPaths = [
+            Path::resolve('ULICMS_ROOT')
+        ];
     }
-    Vars::set("css_include_paths", $importPaths);
+    Vars::set('css_include_paths', $importPaths);
 }
 
 function getSCSSImportPaths(): ?array
 {
-    return Vars::get("css_include_paths");
+    return Vars::get('css_include_paths');
 }
 
 function unsetSCSSImportPaths(): void
 {
-    Vars::delete("css_include_paths");
+    Vars::delete('css_include_paths');
 }
 
 function minifyJs(): string
@@ -84,30 +84,30 @@ function minifyJs(): string
     foreach ($scripts as $script) {
         $script = ltrim($script, '/');
         if (is_file($script)
-                && pathinfo($script, PATHINFO_EXTENSION) == "js"
+                && pathinfo($script, PATHINFO_EXTENSION) == 'js'
                 && filemtime($script) > $lastmod) {
             $lastmod = filemtime($script);
         }
     }
 
-    $cacheId = Hash::hashCacheIdentifier((implode(";", $scripts)) . $lastmod);
-    $jsDir = Path::resolve("ULICMS_CACHE/scripts");
+    $cacheId = Hash::hashCacheIdentifier((implode(';', $scripts)) . $lastmod);
+    $jsDir = Path::resolve('ULICMS_CACHE/scripts');
 
-    if (!is_dir($jsDir)) {
+    if (! is_dir($jsDir)) {
         mkdir($jsDir, 0777, true);
     }
-    $jsUrl = !is_admin_dir() ?
-            "content/cache/legacy/scripts" : "../content/cache/legacy/scripts";
+    $jsUrl = ! is_admin_dir() ?
+            'content/cache/legacy/scripts' : '../content/cache/legacy/scripts';
 
     $bundleFile = "{$jsDir}/{$cacheId}.js";
     $bundleUrl = "{$jsUrl}/{$cacheId}.js";
 
     $output = '';
-    if (!is_file($bundleFile)) {
+    if (! is_file($bundleFile)) {
         foreach ($scripts as $script) {
             $script = ltrim($script, '/');
             if (is_file($script) &&
-                    pathinfo($script, PATHINFO_EXTENSION) == "js") {
+                    pathinfo($script, PATHINFO_EXTENSION) == 'js') {
                 $minifier->add($script);
             }
         }
@@ -122,7 +122,7 @@ function minifyJs(): string
 
 function minifyCSS(): string
 {
-    $stylesheets = Vars::get("stylesheet_queue");
+    $stylesheets = Vars::get('stylesheet_queue');
     $lastmod = 0;
 
     $minifier = new Minify\CSS();
@@ -132,34 +132,34 @@ function minifyCSS(): string
     foreach ($stylesheets as $stylesheet) {
         $stylesheet = ltrim($stylesheet, '/');
         $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
-        if (is_file($stylesheet) && ($type == "css" || $type == "scss")
+        if (is_file($stylesheet) && ($type == 'css' || $type == 'scss')
                 && filemtime($stylesheet) > $lastmod) {
             $lastmod = filemtime($stylesheet);
         }
     }
 
-    $cacheId = Hash::hashCacheIdentifier((implode(";", $stylesheets)) . $lastmod);
+    $cacheId = Hash::hashCacheIdentifier((implode(';', $stylesheets)) . $lastmod);
 
-    $cssDir = Path::resolve("ULICMS_CACHE/stylesheets");
+    $cssDir = Path::resolve('ULICMS_CACHE/stylesheets');
 
-    if (!is_dir($cssDir)) {
+    if (! is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);
     }
-    $cssUrl = !is_admin_dir() ?
-            "content/cache/legacy/stylesheets" : "../content/cache/legacy/stylesheets";
+    $cssUrl = ! is_admin_dir() ?
+            'content/cache/legacy/stylesheets' : '../content/cache/legacy/stylesheets';
 
     $bundleFile = "{$cssDir}/{$cacheId}.css";
     $bundleUrl = "{$cssUrl}/{$cacheId}.css";
 
     $output = '';
 
-    if (!is_file($bundleFile)) {
+    if (! is_file($bundleFile)) {
         foreach ($stylesheets as $stylesheet) {
             $stylesheet = ltrim($stylesheet, '/');
             $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
-            if (is_file($stylesheet) && $type == "css") {
+            if (is_file($stylesheet) && $type == 'css') {
                 $minifier->add($stylesheet);
-            } elseif (is_file($stylesheet) && $type == "scss") {
+            } elseif (is_file($stylesheet) && $type == 'scss') {
                 $scssOutput = compileSCSS($stylesheet);
                 $minifier->add($scssOutput);
             }
@@ -189,7 +189,7 @@ function compileSCSS(string $stylesheet): string
     try {
         $scssOutput = $scss->compileString($scssInput)->getCSS();
     } catch (Exception $e) {
-        throw new SCSSCompileException("Compilation of $stylesheet failed: "
+        throw new SCSSCompileException("Compilation of {$stylesheet} failed: "
                         . "{$e->getMessage()}");
     }
     return $scssOutput;
@@ -197,9 +197,9 @@ function compileSCSS(string $stylesheet): string
 
 function compileSCSSToFile(string $stylesheet): string
 {
-    $cssDir = Path::resolve("ULICMS_CACHE/stylesheets");
+    $cssDir = Path::resolve('ULICMS_CACHE/stylesheets');
 
-    if (!is_dir($cssDir)) {
+    if (! is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);
     }
 
@@ -207,8 +207,8 @@ function compileSCSSToFile(string $stylesheet): string
 
     $cacheId = Hash::hashCacheIdentifier($stylesheet . filemtime($stylesheet));
 
-    $cssUrl = !is_admin_dir() ?
-            "content/cache/legacy/stylesheets" : "../content/cache/legacy/stylesheets";
+    $cssUrl = ! is_admin_dir() ?
+            'content/cache/legacy/stylesheets' : '../content/cache/legacy/stylesheets';
 
     $bundleFile = "{$cssDir}/{$cacheId}.css";
     $bundleUrl = "{$cssUrl}/{$cacheId}.css";
@@ -243,18 +243,18 @@ function getCombinedScriptHtml(): string
 // Ab hier Stylesheet Funktionen
 function resetStylesheetQueue(): void
 {
-    Vars::set("stylesheet_queue", []);
+    Vars::set('stylesheet_queue', []);
 }
 
 function enqueueStylesheet(string $path): void
 {
-    if (!Vars::get("stylesheet_queue")) {
+    if (! Vars::get('stylesheet_queue')) {
         resetStylesheetQueue();
     }
-    $stylesheet_queue = Vars::get("stylesheet_queue");
+    $stylesheet_queue = Vars::get('stylesheet_queue');
     $stylesheet_queue[] = $path;
 
-    Vars::set("stylesheet_queue", $stylesheet_queue);
+    Vars::set('stylesheet_queue', $stylesheet_queue);
 }
 
 function getCombinedStylesheetHTML(): ?string
@@ -262,15 +262,15 @@ function getCombinedStylesheetHTML(): ?string
     $html = '';
 
     $cfg = new CMSConfig();
-    if (!Vars::get("stylesheet_queue")) {
+    if (! Vars::get('stylesheet_queue')) {
         return null;
     }
     if (isset($cfg->no_minify) && ($cfg->no_minify)) {
-        foreach (Vars::get("stylesheet_queue") as $stylesheet) {
+        foreach (Vars::get('stylesheet_queue') as $stylesheet) {
             $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
-            if ($type == "css") {
+            if ($type == 'css') {
                 $html .= Style::fromExternalFile($stylesheet);
-            } elseif ($type == "scss") {
+            } elseif ($type == 'scss') {
                 $html .= Style::fromExternalFile(
                     compileSCSSToFile($stylesheet)
                 );

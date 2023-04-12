@@ -2,97 +2,98 @@
 
 declare(strict_types=1);
 
-use App\Utils\CacheUtil;
 use App\Packages\Theme;
+use App\Utils\CacheUtil;
 
 class DesignSettingsController extends Controller
 {
-    private $moduleName = "core_settings";
     protected $generatedSCSS;
+
+    private $moduleName = 'core_settings';
 
     public function __construct()
     {
         parent::__construct();
         // generate scss file for design settings if it doesn't exist.
         $this->generatedSCSS = Path::resolve(
-            "ULICMS_GENERATED/design_variables.scss"
+            'ULICMS_GENERATED/design_variables.scss'
         );
-        if (!is_file($this->generatedSCSS)) {
+        if (! is_file($this->generatedSCSS)) {
             $this->_generateSCSSToFile();
         }
     }
 
     public function savePost(): void
     {
-        if (isset($_REQUEST["no_mobile_design_on_tablet"])) {
+        if (isset($_REQUEST['no_mobile_design_on_tablet'])) {
             Settings::set(
-                "no_mobile_design_on_tablet",
-                "no_mobile_design_on_tablet"
+                'no_mobile_design_on_tablet',
+                'no_mobile_design_on_tablet'
             );
         } else {
-            Settings::delete("no_mobile_design_on_tablet");
+            Settings::delete('no_mobile_design_on_tablet');
         }
 
         // Wenn Formular abgesendet wurde, Wert Speichern
         $themes = getAllThemes();
-        if (in_array($_REQUEST["theme"], $themes)) {
-            Settings::set("theme", $_REQUEST["theme"]);
-            $theme = $_REQUEST["theme"];
+        if (in_array($_REQUEST['theme'], $themes)) {
+            Settings::set('theme', $_REQUEST['theme']);
+            $theme = $_REQUEST['theme'];
         }
 
         // Wenn Formular abgesendet wurde, Wert Speichern
         $themes = getAllThemes();
-        if (empty($_REQUEST["mobile_theme"])) {
-            Settings::delete("mobile_theme");
-        } elseif (in_array($_REQUEST["mobile_theme"], $themes)) {
-            Settings::set("mobile_theme", $_REQUEST["mobile_theme"]);
-            $mobile_theme = $_REQUEST["mobile_theme"];
+        if (empty($_REQUEST['mobile_theme'])) {
+            Settings::delete('mobile_theme');
+        } elseif (in_array($_REQUEST['mobile_theme'], $themes)) {
+            Settings::set('mobile_theme', $_REQUEST['mobile_theme']);
+            $mobile_theme = $_REQUEST['mobile_theme'];
         }
 
-        if ($_REQUEST["default_font"] != Settings::get("default_font")) {
-            if (!empty($_REQUEST["custom-font"])) {
-                $font = $_REQUEST["custom-font"];
+        if ($_REQUEST['default_font'] != Settings::get('default_font')) {
+            if (! empty($_REQUEST['custom-font'])) {
+                $font = $_REQUEST['custom-font'];
             } else {
-                $font = $_REQUEST["default_font"];
+                $font = $_REQUEST['default_font'];
             }
 
             $font = $font;
 
-            Settings::set("default_font", $font);
+            Settings::set('default_font', $font);
         }
 
 
-        Settings::set("font_size", $_REQUEST["font_size"]);
-        Settings::set("ckeditor_skin", $_REQUEST["ckeditor_skin"]);
+        Settings::set('font_size', $_REQUEST['font_size']);
+        Settings::set('ckeditor_skin', $_REQUEST['ckeditor_skin']);
 
-        if (Settings::get("header_background_color") != $_REQUEST["header_background_color"]
+        if (Settings::get('header_background_color') != $_REQUEST['header_background_color']
         ) {
             Settings::set(
-                "header_background_color",
-                $_REQUEST["header_background_color"]
+                'header_background_color',
+                $_REQUEST['header_background_color']
             );
         }
 
-        if (Settings::get("body_text_color") != $_REQUEST["body_text_color"]) {
-            Settings::set("body_text_color", $_REQUEST["body_text_color"]);
+        if (Settings::get('body_text_color') != $_REQUEST['body_text_color']) {
+            Settings::set('body_text_color', $_REQUEST['body_text_color']);
         }
 
-        if (Settings::get("title_format") != $_REQUEST["title_format"]) {
-            Settings::set("title_format", $_REQUEST["title_format"]);
+        if (Settings::get('title_format') != $_REQUEST['title_format']) {
+            Settings::set('title_format', $_REQUEST['title_format']);
         }
 
-        if (Settings::get("body_background_color") != $_REQUEST["body_background_color"]
+        if (Settings::get('body_background_color') != $_REQUEST['body_background_color']
         ) {
             Settings::set(
-                "body_background_color",
-                $_REQUEST["body_background_color"]
+                'body_background_color',
+                $_REQUEST['body_background_color']
             );
         }
 
         CacheUtil::clearPageCache();
 
         $this->_generateSCSSToFile();
-        sureRemoveDir(Path::resolve("ULICMS_CACHE/stylesheets"), false);
+        sureRemoveDir(Path::resolve('ULICMS_CACHE/stylesheets'), false);
 
         HTTPStatusCodeResult(HttpStatusCode::OK);
     }
@@ -134,7 +135,7 @@ class DesignSettingsController extends Controller
     {
         $themeName = Request::getVar('theme', null, 'str');
 
-        if (!$themeName) {
+        if (! $themeName) {
             HTTPStatusCodeResult(HttpStatusCode::UNPROCESSABLE_ENTITY);
         }
 
@@ -195,38 +196,38 @@ class DesignSettingsController extends Controller
 
     public function setDefaultTheme(): void
     {
-        $theme = Request::getVar("name");
+        $theme = Request::getVar('name');
         $this->_setDefaultTheme($theme);
-        Settings::set("theme", $theme);
+        Settings::set('theme', $theme);
 
         Response::sendHttpStatusCodeResultIfAjax(
             HTTPStatusCode::OK,
-            ModuleHelper::buildActionURL("packages")
+            ModuleHelper::buildActionURL('packages')
         );
     }
 
     public function _setDefaultTheme(?string $theme): void
     {
-        Settings::set("theme", $theme);
+        Settings::set('theme', $theme);
     }
 
     public function setDefaultMobileTheme(): void
     {
-        $theme = Request::getVar("name");
+        $theme = Request::getVar('name');
         $this->_setDefaultMobileTheme($theme);
 
         Response::sendHttpStatusCodeResultIfAjax(
             HTTPStatusCode::OK,
-            ModuleHelper::buildActionURL("packages")
+            ModuleHelper::buildActionURL('packages')
         );
     }
 
     public function _setDefaultMobileTheme(?string $theme): void
     {
-        if ($theme !== Settings::get("mobile_theme")) {
-            Settings::set("mobile_theme", $theme);
+        if ($theme !== Settings::get('mobile_theme')) {
+            Settings::set('mobile_theme', $theme);
         } else {
-            Settings::delete("mobile_theme");
+            Settings::delete('mobile_theme');
         }
     }
 
@@ -234,11 +235,11 @@ class DesignSettingsController extends Controller
     {
         $sizes = [];
         for ($i = 6; $i <= 80; $i++) {
-            $sizes[] = $i . "px";
+            $sizes[] = $i . 'px';
         }
-        do_event("custom_font_sizes");
+        do_event('custom_font_sizes');
 
-        $sizes = apply_filter($sizes, "font_sizes");
+        $sizes = apply_filter($sizes, 'font_sizes');
         return $sizes;
     }
 }

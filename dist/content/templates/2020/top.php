@@ -4,12 +4,12 @@ $permissionChecker = new App\Security\ContentPermissionChecker(get_user_id());
 html5_doctype();
 og_html_prefix();
 
-$pages = ContentFactory::getAllByMenu("top", "position");
+$pages = ContentFactory::getAllByMenu('top', 'position');
 
-$frontpagePhotoFile = ULICMS_CONTENT . "/images/theme/frontpage_photo.png";
+$frontpagePhotoFile = ULICMS_CONTENT . '/images/theme/frontpage_photo.png';
 
 $frontpagePhoto = is_file($frontpagePhotoFile) ? App\HTML\imageTag(
-    "content/images/theme/frontpage_photo.png"
+    'content/images/theme/frontpage_photo.png'
 ) : null;
 ?>
 <head>
@@ -22,25 +22,25 @@ enqueueStylesheet(
     getTemplateDirPath(
         get_theme()
     ) .
-    "node_modules/fullpage.js/dist/fullpage.min.css"
+    'node_modules/fullpage.js/dist/fullpage.min.css'
 );
 enqueueStylesheet(
     getTemplateDirPath(
         get_theme()
     ) .
-    "css/main.scss"
+    'css/main.scss'
 );
 combinedStylesheetHtml();
 
-$titles = [get_translation("frontpage")];
+$titles = [get_translation('frontpage')];
 $filteredPages = [];
 
-$slugs = ["frontpage"];
+$slugs = ['frontpage'];
 foreach ($pages as $index => $page) {
     if ($page->isDeleted() || $page->language !== getCurrentLanguage() ||
-            !$page->isRegular() ||
-            (!$page->active && !is_logged_in()) ||
-            !$permissionChecker->canRead($page->id)) {
+            ! $page->isRegular() ||
+            (! $page->active && ! is_logged_in()) ||
+            ! $permissionChecker->canRead($page->id)) {
         continue;
     }
     $slugs[] = $page->slug;
@@ -48,8 +48,8 @@ foreach ($pages as $index => $page) {
     $filteredPages[] = $page;
 }
 
-$slugAttr = implode("||", $slugs);
-$titleAttr = implode("||", $titles);
+$slugAttr = implode('||', $slugs);
+$titleAttr = implode('||', $titles);
 ?>
 
 </head>
@@ -92,19 +92,19 @@ foreach ($filteredPages as $index => $page) {
     ?>
             <div class="section bgcolor<?php echo $color; ?>">
                 <div class="content">
-                    <?php echo $page->getShowHeadline() ? "<h1 class=\"sliding\">{$page->getHeadline()}</h1>" : ""; ?>
+                    <?php echo $page->getShowHeadline() ? "<h1 class=\"sliding\">{$page->getHeadline()}</h1>" : ''; ?>
                     <div class="text-content">
                         <?php
-                if ($text_position == "after") {
+                if ($text_position == 'after') {
                     Template::outputContentElement();
                 }
 
-                if ($page instanceof Article and
+                if ($page instanceof Article &&
                         $page->article_image) {
-                    echo App\HTML\imageTag($page->article_image, ["class" => "article-image"]);
+                    echo App\HTML\imageTag($page->article_image, ['class' => 'article-image']);
                 }
                 content();
-    if ($text_position == "before") {
+    if ($text_position == 'before') {
         Template::outputContentElement();
     }
     ?>

@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use Detection\MobileDetect;
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
+use Nette\Utils\Json;
+use Nette\Utils\JsonException;
 
 /**
  * Checks if a variable is a decimal number
@@ -12,7 +14,7 @@ use Detection\MobileDetect;
  */
 function is_decimal($val): bool
 {
-    return is_numeric($val) && !ctype_digit((string) $val);
+    return is_numeric($val) && ! ctype_digit((string)$val);
 }
 
 /**
@@ -22,7 +24,12 @@ function is_decimal($val): bool
  */
 function is_json(?string $str): bool
 {
-    return $str ? json_decode($str) != null : false;
+    try {
+        Json::decode($str);
+        return true;
+    } catch (JsonException) {
+        return false;
+    }
 }
 
 /**
@@ -40,7 +47,7 @@ function is_admin_dir(): bool
  */
 function is_desktop(): bool
 {
-    return !is_mobile();
+    return ! is_mobile();
 }
 
 /**
@@ -65,7 +72,7 @@ function is_mobile(): bool
     $mobileDetect = new MobileDetect();
     $result = $mobileDetect->isMobile();
 
-    if (Settings::get("no_mobile_design_on_tablet") &&
+    if (Settings::get('no_mobile_design_on_tablet') &&
             $result &&
             $mobileDetect->isTablet()) {
         $result = false;
@@ -80,11 +87,11 @@ function is_mobile(): bool
  */
 function is_maintenance_mode(): bool
 {
-    if (!is_string(Settings::get('maintenance_mode'))) {
+    if (! is_string(Settings::get('maintenance_mode'))) {
         return false;
     }
 
-    return (bool) Settings::get('maintenance_mode');
+    return (bool)Settings::get('maintenance_mode');
 }
 
 /**
@@ -105,7 +112,7 @@ function is_tablet(): bool
  */
 function is_cli(): bool
 {
-    return php_sapi_name() == 'cli';
+    return PHP_SAPI == 'cli';
 }
 
 /**
@@ -120,7 +127,7 @@ function var_is_type($var, $type, $required = false): bool
     $methodName = "is_{$type}";
 
     if ($var === null || $var === '') {
-        return !$required;
+        return ! $required;
     }
 
     if (function_exists($methodName)) {
@@ -136,5 +143,5 @@ function var_is_type($var, $type, $required = false): bool
  */
 function is_version_number(?string $input): bool
 {
-    return ($input && version_compare($input, '0.0.1', '>='));
+    return $input && version_compare($input, '0.0.1', '>=');
 }

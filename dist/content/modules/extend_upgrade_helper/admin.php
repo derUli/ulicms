@@ -2,15 +2,15 @@
 
 use function App\HTML\icon;
 
-define("MODULE_ADMIN_HEADLINE", get_translation("extend_upgrade_helper"));
+define('MODULE_ADMIN_HEADLINE', get_translation('extend_upgrade_helper'));
 
 function extend_upgrade_helper_admin()
 {
-    $controller = ControllerRegistry::get("ExtendUpgradeHelper");
+    $controller = ControllerRegistry::get('ExtendUpgradeHelper');
     $modules = $controller->getModules();
     ?>
     <div class="alert alert-info">
-        <?php translate("EXTEND_UPGRADE_HELPER_INSTRUCTION"); ?></div>
+        <?php translate('EXTEND_UPGRADE_HELPER_INSTRUCTION'); ?></div>
     <?php
     if (count($modules) > 0) {
         ?>
@@ -21,7 +21,7 @@ function extend_upgrade_helper_admin()
                         <?php Template::escape($module->version); ?></a>
                     <?php
                     if ($module->updateAvailable) {
-                        echo ' ' . icon("fas fa-download text-red");
+                        echo ' ' . icon('fas fa-download text-red');
                     }
                 ?>
 
@@ -33,7 +33,7 @@ function extend_upgrade_helper_admin()
         ?>
         <div class="alert alert-success alert-dismissable fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <?php translate("no_extend_modules") ?>
+            <?php translate('no_extend_modules'); ?>
         </div>
         <?php
     }

@@ -8,19 +8,19 @@ class PerformanceSettingsController extends Controller
 {
     public function _savePost(): void
     {
-        if (isset($_POST["cache_enabled"])) {
-            Settings::delete("cache_disabled");
+        if (isset($_POST['cache_enabled'])) {
+            Settings::delete('cache_disabled');
         } else {
-            Settings::set("cache_disabled", "disabled");
+            Settings::set('cache_disabled', 'disabled');
         }
-        if (isset($_POST["cache_period"])) {
-            Settings::set("cache_period", intval($_POST["cache_period"]) * 60);
+        if (isset($_POST['cache_period'])) {
+            Settings::set('cache_period', $_POST['cache_period'] * 60);
         }
 
-        $lazy_loading = $_POST["lazy_loading"] ?? [];
+        $lazy_loading = $_POST['lazy_loading'] ?? [];
 
-        $lazy_loading_img = intval(in_array('img', $lazy_loading));
-        $lazy_loading_iframe = intval(in_array('iframe', $lazy_loading));
+        $lazy_loading_img = (int)in_array('img', $lazy_loading);
+        $lazy_loading_iframe = (int)in_array('iframe', $lazy_loading);
 
         Settings::set('lazy_loading_img', $lazy_loading_img);
         Settings::set('lazy_loading_iframe', $lazy_loading_iframe);
@@ -33,8 +33,8 @@ class PerformanceSettingsController extends Controller
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
             ModuleHelper::buildActionUrl(
-                "performance_settings",
-                "save=1"
+                'performance_settings',
+                'save=1'
             )
         );
     }
@@ -46,14 +46,14 @@ class PerformanceSettingsController extends Controller
 
     public function clearCache(): void
     {
-        if (!is_logged_in()) {
-            Request::redirect("index.php");
+        if (! is_logged_in()) {
+            Response::redirect('index.php');
         }
 
         $this->_clearCache();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL("performance_settings")
+            ModuleHelper::buildActionURL('performance_settings')
         );
     }
 }

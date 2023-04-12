@@ -1,5 +1,6 @@
 <?php
 
+use App\Backend\UliCMSVersion;
 use App\Services\Connectors\PackageSourceConnector;
 
 class UliCMSVersionTest extends \PHPUnit\Framework\TestCase
@@ -13,7 +14,7 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase
     public function testDbSchemaVersionSet()
     {
         $version = new UliCMSVersion();
-        $this->assertNotEmpty(Settings::get("db_schema_version"));
+        $this->assertNotEmpty(Settings::get('db_schema_version'));
     }
 
     public function testGetBuildTimestamp()
@@ -37,16 +38,16 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase
         $ulicmsVersion = (new UliCMSVersion())->getInternalVersionAsString();
 
         foreach ($modules as $module) {
-            $moduleVersion = getModuleMeta($module, "version");
+            $moduleVersion = getModuleMeta($module, 'version');
             $this->assertNotEmpty($moduleVersion);
-            if (str_starts_with($module, "core_")) {
+            if (str_starts_with($module, 'core_')) {
                 $this->assertTrue(
                     \App\Utils\VersionComparison::compare(
                         $moduleVersion,
                         $ulicmsVersion,
-                        "="
+                        '='
                     ),
-                    "$module has a bad version $moduleVersion"
+                    "{$module} has a bad version {$moduleVersion}"
                 );
             }
         }
@@ -57,7 +58,7 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase
         $modules = getAllModules();
         $connector = new PackageSourceConnector();
         foreach ($modules as $module) {
-            $installedVersion = getModuleMeta($module, "version");
+            $installedVersion = getModuleMeta($module, 'version');
             $availableVersion = $connector->getVersionOfPackage($module);
 
             if ($availableVersion) {
@@ -65,13 +66,22 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase
                     \App\Utils\VersionComparison::compare(
                         $availableVersion,
                         $installedVersion,
-                        ">="
+                        '>='
                     ),
-                    "$module $availableVersion in the package source "
-                    . "is not at least equal to "
-                    . "the installed version $module $installedVersion"
+                    "{$module} {$availableVersion} in the package source "
+                    . 'is not at least equal to '
+                    . "the installed version {$module} {$installedVersion}"
                 );
             }
         }
+    }
+
+    public function testgetYear()
+    {
+        $version = new UliCMSVersion();
+        $year = $version->getReleaseYear();
+        $this->assertGreaterThanOrEqual(2020, (int)$year);
+        $this->assertLessThanOrEqual(2050, (int)$year);
+        $this->assertEquals(4, strlen($year));
     }
 }

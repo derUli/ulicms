@@ -1,9 +1,9 @@
 <?php
 
-define("DB_TYPE_INT", 1);
-define("DB_TYPE_FLOAT", 2);
-define("DB_TYPE_STRING", 3);
-define("DB_TYPE_BOOL", 4);
+define('DB_TYPE_INT', 1);
+define('DB_TYPE_FLOAT', 2);
+define('DB_TYPE_STRING', 3);
+define('DB_TYPE_BOOL', 4);
 
 // database api functions
 // all functions in this file are deprecated you should
@@ -13,35 +13,14 @@ function db_query(string $query)
     return Database::query($query);
 }
 
-// Fetch Row in diversen Datentypen
-function db_fetch_array(?mysqli_result $result)
-{
-    return Database::fetchArray($result);
-}
-
-function db_fetch_field(?mysqli_result $result)
-{
-    return Database::fetchField($result);
-}
-
 function db_fetch_assoc(?mysqli_result $result)
 {
     return Database::fetchAssoc($result);
 }
 
-function db_num_fields(): ?int
-{
-    return Database::getNumFieldCount();
-}
-
 function db_fetch_object(?mysqli_result $result)
 {
     return Database::fetchObject($result);
-}
-
-function db_fetch_row(?mysqli_result $result)
-{
-    return Database::fetchRow($result);
 }
 
 function db_num_rows(mysqli_result $result): ?int

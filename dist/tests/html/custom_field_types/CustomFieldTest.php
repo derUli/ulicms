@@ -13,6 +13,6 @@ class CustomFieldTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(NotImplementedException::class);
         $customField = new CustomField();
-        $customField->render("foobar");
+        $customField->render('foobar');
     }
 }

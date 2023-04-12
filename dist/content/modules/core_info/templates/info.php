@@ -1,19 +1,17 @@
 <?php
+use App\Backend\UliCMSVersion;
+
 $version = new UliCMSVersion();
-$admin_logo = Settings::get("admin_logo");
-if (!$admin_logo) {
-    $admin_logo = "gfx/logo.png";
+$admin_logo = Settings::get('admin_logo');
+if (! $admin_logo) {
+    $admin_logo = 'gfx/logo.png';
 }
 ?>
 <p>
     <strong>Release <?php echo cms_version(); ?>
         "<?php echo $version->getCodeName(); ?>"</strong>
-    <?php if ($version->getBuildTimestamp() > 0) { ?>
-        <br /> <small><?php translate("build_date"); ?>:
-            <?php echo $version->getBuildDate() ?></small>
-        <?php
-    }
-?>
+    <br /> <small><?php translate('build_date'); ?>:
+        <?php echo $version->getBuildDate(); ?></small>
 </p>
 <p>
     <a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2011 -
@@ -68,18 +66,18 @@ if (!$admin_logo) {
 <div class="btn-group voffset2">
     <a href="http://www.ulicms.de" target="_blank" class="btn btn-info"
        role="button"><i class="fa fa-globe" aria-hidden="true"></i> UliCMS
-           <?php translate("portal"); ?>
+           <?php translate('portal'); ?>
     </a>
     <a
         href="index.php?action=license"
         class="btn btn-info is-ajax"
         >
         <i class="fa fa-info-circle" aria-hidden="true"></i>
-        <?php translate("license") ?>
+        <?php translate('license'); ?>
     </a>
     <a href="http://www.ulicms.de/kontakt.html" target="_blank"
        class="btn btn-info" role="button"><i class="fas fa-envelope"></i>
-           <?php translate("feedback"); ?>
+           <?php translate('feedback'); ?>
     </a>
 
     <a 
@@ -87,14 +85,14 @@ if (!$admin_logo) {
         class="btn btn-info is-ajax"
         >            
         <i class="fab fa-readme"></i>
-        <?php translate("changelog"); ?>
+        <?php translate('changelog'); ?>
 
     </a>
-    <a href="<?php echo ModuleHelper::buildActionURL("legal_composer"); ?>" 
+    <a href="<?php echo ModuleHelper::buildActionURL('legal_composer'); ?>" 
        class="btn btn-info is-ajax"
        data-url="">
         <i class="fas fa-file-contract"></i>
-        <?php translate("legal"); ?>
+        <?php translate('legal'); ?>
     </a>
 </div>
 

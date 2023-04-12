@@ -74,8 +74,8 @@ class FtpWrapper
      *
      * @param  string       $function
      * @param  array        $arguments
-     * @return mixed
      * @throws FtpException When the function is not valid
+     * @return mixed
      */
     public function __call($function, array $arguments)
     {

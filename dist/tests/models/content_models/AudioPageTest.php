@@ -10,9 +10,9 @@ class AudioPageTest extends \PHPUnit\Framework\TestCase
     public function testSetArticle()
     {
         $audioPage = new Audio_Page();
-        $audioPage->title = "Unit Test Article";
-        $audioPage->slug = "unit test";
-        $audioPage->menu = "none";
+        $audioPage->title = 'Unit Test Article';
+        $audioPage->slug = 'unit test';
+        $audioPage->menu = 'none';
         $audioPage->language = 'de';
         $audioPage->article_date = 1413821696;
         $audioPage->author_id = 1;

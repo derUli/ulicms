@@ -1,12 +1,12 @@
 <?php
-$field = ViewBag::get("field");
-$value = ViewBag::get("field_value") ? ViewBag::get("field_value") : [];
+$field = ViewBag::get('field');
+$value = ViewBag::get('field_value') ?: [];
 if (is_string($value)) {
-    $value = array(
+    $value = [
         $value
-    );
+    ];
 }
-$options = Viewbag::get("field_options") ? Viewbag::get("field_options") : [];
+$options = Viewbag::get('field_options') ?: [];
 if ($value === null) {
     $value = $field->defaultValue;
 }
@@ -15,13 +15,13 @@ if ($value === null) {
      data-field-name="<?php Template::escape($field->name); ?>">
     <strong class="field-label"><?php translate($field->title); ?> <?php
         if ($field->required) {
-            echo "*";
+            echo '*';
         }
 ?></strong>
-    <select name="<?php Template::escape(ViewBag::get("field_name")); ?>[]"
+    <select name="<?php Template::escape(ViewBag::get('field_name')); ?>[]"
     <?php
     if ($field->required) {
-        echo "required";
+        echo 'required';
     }
 ?>
             <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>>
@@ -29,7 +29,7 @@ if ($value === null) {
             <option value="<?php Template::escape($optionValue); ?>"
             <?php
         if (in_array($optionValue, $value)) {
-            echo "selected";
+            echo 'selected';
         }
                     ?>><?php
                                 if ($field->translateOptions) {

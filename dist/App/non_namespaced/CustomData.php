@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 // This class contains methods to handle CustomData which is saved
 // as json object in the "content" database table
 class CustomData
@@ -10,13 +12,13 @@ class CustomData
 
     public static function get(?string $page = null): array
     {
-        if (!$page) {
+        if (! $page) {
             $page = get_slug();
         }
 
         $language = getCurrentLanguage();
 
-        $sql = "SELECT `custom_data` FROM " . tbname("content") .
+        $sql = 'SELECT `custom_data` FROM ' . tbname('content') .
                 " WHERE slug='" . Database::escapeValue($page) .
                 "' AND language='" .
                 Database::escapeValue($language) . "'";
@@ -30,14 +32,14 @@ class CustomData
 
     public static function set(string $var, $value, ?string $page = null): void
     {
-        if (!$page) {
+        if (! $page) {
             $page = get_slug();
         }
         $data = self::get($page);
         $data[$var] = $value;
 
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        Database::query("UPDATE " . tbname("content") .
+        Database::query('UPDATE ' . tbname('content') .
                         " SET custom_data = '" .
                         Database::escapeValue($json) .
                         "' WHERE slug='" . Database::escapeValue($page) . "'") .
@@ -49,12 +51,12 @@ class CustomData
         ?string $var = null,
         ?string $page = null
     ): void {
-        if (!$page) {
+        if (! $page) {
             $page = get_slug();
         }
 
         $data = self::get($page);
-        if ($data === null || !$var) {
+        if ($data === null || ! $var) {
             $data = [];
         }
         // Wenn $var gesetzt ist, nur $var aus custom_data löschen
@@ -64,7 +66,7 @@ class CustomData
 
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-        Database::query("UPDATE " . tbname("content") . " SET custom_data = '"
+        Database::query('UPDATE ' . tbname('content') . " SET custom_data = '"
                 . Database::escapeValue($json)
                 . "' WHERE slug='" . Database::escapeValue($page) . "' "
                 . "AND language='" .
@@ -87,7 +89,7 @@ class CustomData
 
     public static function getDefault(string $key)
     {
-        if (!isset(self::$defaults[$key])) {
+        if (! isset(self::$defaults[$key])) {
             return null;
         }
         return self::$defaults[$key];

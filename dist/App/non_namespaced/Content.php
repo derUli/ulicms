@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 abstract class Content extends Model
 {
-    abstract protected function loadBySlugAndLanguage($name, $language);
-
     /**
      * Get if the headline is shown
      * @return bool
      */
     public function getShowHeadline(): bool
     {
-        return (bool) $this->show_headline;
+        return (bool)$this->show_headline;
     }
 
     /**
@@ -22,8 +22,8 @@ abstract class Content extends Model
     public static function emptyTrash(): void
     {
         Database::deleteFrom(
-            "content",
-            "deleted_at IS NOT NULL"
+            'content',
+            'deleted_at IS NOT NULL'
         );
     }
 
@@ -33,7 +33,7 @@ abstract class Content extends Model
      */
     public function getHeadline(): ?string
     {
-        return StringHelper::isNullOrEmpty($this->alternate_title) ?
+        return empty($this->alternate_title) ?
                 $this->title : $this->alternate_title;
     }
 
@@ -55,7 +55,7 @@ abstract class Content extends Model
      */
     public function getChildren(string $order = 'id'): array
     {
-        if (!$this->getID()) {
+        if (! $this->getID()) {
             return [];
         }
 
@@ -72,11 +72,13 @@ abstract class Content extends Model
     }
 
      /**
-     * Get css classes for Font Awesome icon
-     * @return string
-     */
+      * Get css classes for Font Awesome icon
+      * @return string
+      */
     public function getIcon(): string
     {
-        return "far fa-file-alt";
+        return 'far fa-file-alt';
     }
+
+    abstract protected function loadBySlugAndLanguage($name, $language);
 }

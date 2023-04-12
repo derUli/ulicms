@@ -1,50 +1,53 @@
 <?php
+
+use App\Packages\PackageManager;
+
 // TODO: Refactor this
 // Move logic to controller
 // don't use so much nested if-statements
 
 $permissionChecker = new ACL();
-if (!$permissionChecker->hasPermission("install_packages")) {
+if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();
 } else {
     ?>
     <p>
-        <a href="<?php echo ModuleHelper::buildActionURL("install_method"); ?>"
+        <a href="<?php echo ModuleHelper::buildActionURL('install_method'); ?>"
            class="btn btn-default btn-back is-ajax">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
-            <?php translate("back") ?></a>
+            <?php translate('back'); ?></a>
     </p>
     <?php
-    $temp_folder = ULICMS_ROOT . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "tmp";
-    if (!empty($_POST)) {
+    $temp_folder = ULICMS_ROOT . DIRECTORY_SEPARATOR . 'content' . DIRECTORY_SEPARATOR . 'tmp';
+    if (! empty($_POST)) {
         if (count($_FILES) > 0) {
             $file_in_tmp = $temp_folder . DIRECTORY_SEPARATOR . $_FILES['file']['name'];
             if (move_uploaded_file($_FILES['file']['tmp_name'], $file_in_tmp)) {
-                if (str_ends_with($file_in_tmp, ".tar.gz")) {
+                if (str_ends_with($file_in_tmp, '.tar.gz')) {
                     $pkg = new PackageManager();
                     if ($pkg->installPackage($file_in_tmp, false)) {
                         @unlink($file_in_tmp);
-                        echo "<p style='color:green'>" . get_translation("PACKAGE_SUCCESSFULLY_UPLOADED", array(
-                            "%file%" => $_FILES['file']['name']
-                        )) . "</p>";
+                        echo "<p style='color:green'>" . get_translation('PACKAGE_SUCCESSFULLY_UPLOADED', [
+                            '%file%' => $_FILES['file']['name']
+                        ]) . '</p>';
                     } else {
-                        echo "<p style='color:red'>" . get_translation("installation_failed", array(
-                            "%file%" => $_FILES['file']['name']
-                        )) . "</p>";
+                        echo "<p style='color:red'>" . get_translation('installation_failed', [
+                            '%file%' => $_FILES['file']['name']
+                        ]) . '</p>';
                     }
-                } elseif (str_ends_with($file_in_tmp, ".sin")) {
-                    $url = "?action=pkginfo&file=" . basename($file_in_tmp);
-                    Request::javascriptRedirect($url);
+                } elseif (str_ends_with($file_in_tmp, '.sin')) {
+                    $url = '?action=pkginfo&file=' . basename($file_in_tmp);
+                    Response::javascriptRedirect($url);
                 } else {
-                    echo "<p style='color:red'>" . get_translation("not_supported_format") . "</p>";
+                    echo "<p style='color:red'>" . get_translation('not_supported_format') . '</p>';
                 }
             } else {
-                echo "<p style='color:red'>" . get_translation("upload_failed") . "</p>";
+                echo "<p style='color:red'>" . get_translation('upload_failed') . '</p>';
             }
         }
     }
     ?>
-    <h1><?php translate("upload_package"); ?></h1>
+    <h1><?php translate('upload_package'); ?></h1>
     <form action="?action=upload_package" enctype="multipart/form-data"
           method="post">
               <?php csrf_token_html(); ?>
@@ -60,7 +63,7 @@ if (!$permissionChecker->hasPermission("install_packages")) {
         <p>
             <button type="submit" class="btn btn-warning">
                 <i class="fa fa-upload" aria-hidden="true"></i>
-                <?php translate("install_package"); ?>
+                <?php translate('install_package'); ?>
             </button>
         </p>
     </form>

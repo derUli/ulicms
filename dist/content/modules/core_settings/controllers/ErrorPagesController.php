@@ -8,7 +8,7 @@ class ErrorPagesController extends Controller
 {
     public function _savePost(): void
     {
-        $errorPages = $_POST["error_page"];
+        $errorPages = $_POST['error_page'];
         if (is_array($errorPages)) {
             foreach ($errorPages as $code => $languages) {
                 foreach ($languages as $language => $page_id) {
@@ -33,7 +33,7 @@ class ErrorPagesController extends Controller
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL("error_pages")
+            ModuleHelper::buildActionURL('error_pages')
         );
     }
 }

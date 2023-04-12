@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 class Link extends Page
 {
     public $link_url = '';
-    public $type = "link";
+
+    public $type = 'link';
 
     public function save()
     {
@@ -19,12 +22,6 @@ class Link extends Page
         return $retval;
     }
 
-    protected function fillVars($result = null)
-    {
-        parent::fillVars($result);
-        $this->link_url = $result->link_url;
-    }
-
     public function update()
     {
         $result = null;
@@ -32,11 +29,11 @@ class Link extends Page
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set link_url = ? where id = ?";
-        $args = array(
+        $sql = 'update {prefix}content set link_url = ? where id = ?';
+        $args = [
             $this->link_url,
             $this->id
-        );
+        ];
 
         $result = Database::pQuery($sql, $args, true);
         return $result;
@@ -54,11 +51,17 @@ class Link extends Page
     }
 
      /**
-     * Get css classes for Font Awesome icon
-     * @return string
-     */
+      * Get css classes for Font Awesome icon
+      * @return string
+      */
     public function getIcon(): string
     {
-        return "fas fa-link";
+        return 'fas fa-link';
+    }
+
+    protected function fillVars($result = null)
+    {
+        parent::fillVars($result);
+        $this->link_url = $result->link_url;
     }
 }

@@ -1,3 +1,3 @@
 <?php
 
-echo Template::executeModuleTemplate("oneclick_upgrade", "Dashboard");
+echo Template::executeModuleTemplate('oneclick_upgrade', 'Dashboard');

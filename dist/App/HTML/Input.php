@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use ModuleHelper;
 use Template;
 
-// this class contains methods to build input fields
+/**
+ * This class contains methods to build input fields
+ */
 class Input
 {
     /**
@@ -23,21 +25,20 @@ class Input
     public static function textBox(
         string $name,
         $value,
-        string $type = "text",
+        string $type = 'text',
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
-            "type" => $type,
-            "name" => $name,
-            "value" => $value
-        );
+        $attributes = [
+            'type' => $type,
+            'name' => $name,
+            'value' => $value
+        ];
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
         return "<input {$attribHTML}>";
     }
-
 
     /**
      * Generate textarea input
@@ -55,11 +56,11 @@ class Input
         int $cols = 80,
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
-            "name" => $name,
-            "rows" => $rows,
-            "cols" => $cols
-        );
+        $attributes = [
+            'name' => $name,
+            'rows' => $rows,
+            'cols' => $cols
+        ];
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
@@ -86,19 +87,19 @@ class Input
         int $cols = 80,
         array $htmlAttributes = []
     ): string {
-        if (!isset($htmlAttributes['id'])) {
+        if (! isset($htmlAttributes['id'])) {
             $htmlAttributes['id'] = $name;
         }
-        if (isset($htmlAttributes["class"])) {
-            $htmlAttributes["class"] .= " " . get_html_editor();
+        if (isset($htmlAttributes['class'])) {
+            $htmlAttributes['class'] .= ' ' . get_html_editor();
         } else {
-            $htmlAttributes["class"] = get_html_editor();
+            $htmlAttributes['class'] = get_html_editor();
         }
 
-        $htmlAttributes["class"] = trim($htmlAttributes["class"]);
+        $htmlAttributes['class'] = trim($htmlAttributes['class']);
 
-        $htmlAttributes["data-mimetype"] = !isset($htmlAttributes["data-mimetype"]) ?
-                "text/html" : $htmlAttributes["data-mimetype"];
+        $htmlAttributes['data-mimetype'] = ! isset($htmlAttributes['data-mimetype']) ?
+                'text/html' : $htmlAttributes['data-mimetype'];
 
         return self::textArea($name, $value, $rows, $cols, $htmlAttributes);
     }
@@ -115,7 +116,7 @@ class Input
         $value,
         array $htmlAttributes = []
     ): string {
-        return self::textBox($name, $value, "password", $htmlAttributes);
+        return self::textBox($name, $value, 'password', $htmlAttributes);
     }
 
     /**
@@ -132,24 +133,24 @@ class Input
         $accept = null,
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
-            "name" => $name
-        );
+        $attributes = [
+            'name' => $name
+        ];
         if (is_string($accept)) {
-            $attributes["accept"] = Template::getEscape($accept);
+            $attributes['accept'] = Template::getEscape($accept);
         } elseif (is_array($accept)) {
-            $accept = join(", ", $accept);
-            $attributes["accept"] = Template::getEscape($accept);
+            $accept = implode(', ', $accept);
+            $attributes['accept'] = Template::getEscape($accept);
         }
         if ($multiple) {
-            $attributes["multiple"] = "multiple";
+            $attributes['multiple'] = 'multiple';
         }
 
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
 
-        return self::textBox($name, "", "file", $attributes);
+        return self::textBox($name, '', 'file', $attributes);
     }
 
     /**
@@ -164,7 +165,7 @@ class Input
         $value,
         array $htmlAttributes = []
     ): string {
-        return self::textBox($name, $value, "hidden", $htmlAttributes);
+        return self::textBox($name, $value, 'hidden', $htmlAttributes);
     }
 
     /**
@@ -178,13 +179,13 @@ class Input
     public static function checkBox(
         string $name,
         bool $checked = false,
-        $value = "1",
+        $value = '1',
         array $htmlAttributes = []
     ): string {
         if ($checked) {
-            $htmlAttributes["checked"] = "checked";
+            $htmlAttributes['checked'] = 'checked';
         }
-        return self::textBox($name, $value, "checkbox", $htmlAttributes);
+        return self::textBox($name, $value, 'checkbox', $htmlAttributes);
     }
 
     /**
@@ -198,13 +199,13 @@ class Input
     public static function radioButton(
         string $name,
         bool $checked = false,
-        $value = "1",
+        $value = '1',
         array $htmlAttributes = []
     ): string {
         if ($checked) {
-            $htmlAttributes["checked"] = "checked";
+            $htmlAttributes['checked'] = 'checked';
         }
-        return self::textBox($name, $value, "radio", $htmlAttributes);
+        return self::textBox($name, $value, 'radio', $htmlAttributes);
     }
 
     /**
@@ -223,21 +224,21 @@ class Input
         int $size = 1,
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
-            "name" => $name,
-            "size" => $size
-        );
+        $attributes = [
+            'name' => $name,
+            'size' => $size
+        ];
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
 
-        if (!isset($attributes['id'])) {
+        if (! isset($attributes['id'])) {
             $attributes['id'] = $name;
         }
 
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        $html = "<select $attribHTML>";
+        $html = "<select {$attribHTML}>";
         foreach ($options as $option) {
             if ($value == $option->getValue()) {
                 $option->setSelected(true);
@@ -264,16 +265,16 @@ class Input
         int $size = 5,
         array $htmlAttributes = []
     ): string {
-        $attributes = array(
-            "name" => $name,
-            "size" => $size
-        );
+        $attributes = [
+            'name' => $name,
+            'size' => $size
+        ];
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        $html = "<select $attribHTML multiple>";
+        $html = "<select {$attribHTML} multiple>";
         foreach ($options as $option) {
             if (is_array($value) && in_array($option->getValue(), $value)) {
                 $option->setSelected(true);

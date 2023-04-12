@@ -1,5 +1,5 @@
 <div class="text-center">
     <?php
-    echo ViewBag::get("button");
+    echo ViewBag::get('button');
     ?>
 </div>

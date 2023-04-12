@@ -1,32 +1,32 @@
 <?php
-
 use App\Models\Content\Language;
+use App\Translations\JSTranslation;
 
 $permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("languages")) {
+if ($permissionChecker->hasPermission('languages')) {
     $languages = Language::getAllLanguages();
     ?>
     <p>
         <a
-            href="<?php echo ModuleHelper::buildActionURL("settings_categories"); ?>"
-            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+            href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
+            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </p>
-    <h2><?php translate("languages"); ?></h2>
-    <?php echo ModuleHelper::buildMethodCallForm("LanguageController", "create"); ?>
+    <h2><?php translate('languages'); ?></h2>
+    <?php echo ModuleHelper::buildMethodCallForm('LanguageController', 'create'); ?>
     <div class="scroll">
         <table style="border: 0">
             <tr>
-                <td><strong><?php translate("language_shortcode"); ?>*</strong></td>
+                <td><strong><?php translate('language_shortcode'); ?>*</strong></td>
                 <td><input type="text" name="language_code" maxlength="6" required></td>
             </tr>
             <tr>
-                <td style="width: 100px;"><strong><?php translate("full_name"); ?>*</strong></td>
+                <td style="width: 100px;"><strong><?php translate('full_name'); ?>*</strong></td>
                 <td><input type="text" name="name" maxlength="100" required></td>
             </tr>
         </table>
         <div>
             <button type="submit" class="btn btn-primary voffset2">
-                <i class="fa fa-plus"></i> <?php translate("add_language"); ?></button>
+                <i class="fa fa-plus"></i> <?php translate('add_language'); ?></button>
         </div>
     </div>
     <?php echo ModuleHelper::endForm(); ?>
@@ -39,13 +39,13 @@ if ($permissionChecker->hasPermission("languages")) {
                 <thead>
                     <tr>
                         <th>
-                            <strong><?php translate("language_shortcode"); ?></strong>
+                            <strong><?php translate('language_shortcode'); ?></strong>
                         </th>
                         <th>
-                            <strong><?php translate("full_name"); ?></strong>
+                            <strong><?php translate('full_name'); ?></strong>
                         </th>
                         <th class="no-sort">
-                            <strong><?php translate("standard"); ?></strong>
+                            <strong><?php translate('standard'); ?></strong>
                         </th>
                         <th class="no-sort"></th>
                     </tr>
@@ -63,28 +63,28 @@ if ($permissionChecker->hasPermission("languages")) {
                             </td>
                             <td class="text-bold">
                                 <?php
-                                if ($language->getLanguageCode() !== Settings::get("default_language")) {
+                                if ($language->getLanguageCode() !== Settings::get('default_language')) {
                                     ?>
                                     <a class="btn btn-primary btn-make-default"
                                        href="<?php
                                        echo ModuleHelper::buildMethodCallUrl(
-                                        "LanguageController",
-                                        "setDefaultLanguage",
-                                        ModuleHelper::buildQueryString(
-                                               array("default" => $language->getLanguageCode()
-                                               )
+                                           'LanguageController',
+                                           'setDefaultLanguage',
+                                           ModuleHelper::buildQueryString(
+                                               ['default' => $language->getLanguageCode()
+                                               ]
                                            )
-                                    );
+                                       );
                                     ?>"
                                        data-message="<?php
                                     translate(
-                                        "REALLY_MAKE_DEFAULT_LANGUAGE",
-                                        array(
-                                            "%name%" => $language->getName())
+                                        'REALLY_MAKE_DEFAULT_LANGUAGE',
+                                        [
+                                            '%name%' => $language->getName()]
                                     );
                                     ?>">
                                         <i class="fas fa-language"></i>
-                                        <?php translate("make_default"); ?>
+                                        <?php translate('make_default'); ?>
                                     </a>
                                 <?php } else {
                                     ?>
@@ -94,9 +94,9 @@ if ($permissionChecker->hasPermission("languages")) {
                             <td>
                                 <?php
                                 echo ModuleHelper::deleteButton(
-                                        ModuleHelper::buildMethodCallUrl(LanguageController::class, "delete"),
-                                        ["id" => $language->getID()]
-                                    );
+                                    ModuleHelper::buildMethodCallUrl(LanguageController::class, 'delete'),
+                                    ['id' => $language->getID()]
+                                );
                         ?>
                             </td>
                         </tr>
@@ -107,19 +107,21 @@ if ($permissionChecker->hasPermission("languages")) {
         </div>
         <?php
         enqueueScriptFile(
-                        ModuleHelper::buildModuleRessourcePath(
-                "core_settings",
-                "js/languages.js"
+            ModuleHelper::buildModuleRessourcePath(
+                'core_settings',
+                'js/languages.js'
             )
-                    );
+        );
         combinedScriptHtml();
     }
 } else {
     noPerms();
 }
 
-$translation = new JSTranslation(array(
-    "ask_for_delete",
-    "REALLY_MAKE_DEFAULT_LANGUAGE"
-        ));
+$translation = new JSTranslation(
+    [
+        'ask_for_delete',
+        'REALLY_MAKE_DEFAULT_LANGUAGE'
+    ]
+);
 $translation->render();

@@ -1,4 +1,10 @@
-<?php Template::comments(); ?>
+<?php
+
+use App\Translations\JSTranslation;
+
+Template::comments();
+
+?>
 <div class="advertisement">
     <?php random_banner(); ?>
 </div>

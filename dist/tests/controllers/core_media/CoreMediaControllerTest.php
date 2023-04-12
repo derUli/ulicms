@@ -1,9 +1,9 @@
 <?php
 
-use App\HTML\Link;
-use Spatie\Snapshots\MatchesSnapshots;
-
 use function App\HTML\imageTag;
+use App\HTML\Link;
+
+use Spatie\Snapshots\MatchesSnapshots;
 
 class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
 {
@@ -28,39 +28,39 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertMatchesHtmlSnapshot($actual);
     }
 
+    public function testReplaceLinksWithEmpty()
+    {
+        $controller = new CoreMediaController();
+        $output = $controller->_replaceLinks('');
+        $this->assertEmpty($output);
+    }
+
     private function getExampleHtml()
     {
         $urls = [
-            "http://example.org/",
-            "https://youtu.be/7b-B1-xs6Og",
-            "https://soundcloud.com/atbense/ritscheratsche-cyber-cyber-mix"
+            'http://example.org/',
+            'https://youtu.be/7b-B1-xs6Og',
+            'https://soundcloud.com/atbense/ritscheratsche-cyber-cyber-mix'
         ];
 
-        $links = array_map(function ($url) {
+        $links = array_map(static function($url) {
             return Link::link($url, $url);
         }, $urls);
 
         $html = implode("\n", $links);
 
         $html .= imageTag(
-            "foo.jpg",
-            ["class" => "foo"]
+            'foo.jpg',
+            ['class' => 'foo']
         );
         $html .= imageTag(
-            "foo.jpg",
+            'foo.jpg',
             [
-                "class" => "foo",
-                "loading" => "auto"
+                'class' => 'foo',
+                'loading' => 'auto'
             ]
         );
 
         return $html;
-    }
-
-    public function testReplaceLinksWithEmpty()
-    {
-        $controller = new CoreMediaController();
-        $output = $controller->_replaceLinks('');
-        $this->assertEmpty($output);
     }
 }

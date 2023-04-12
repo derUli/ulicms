@@ -4,9 +4,10 @@
 
 declare(strict_types=1);
 
-use zz\Html\HTMLMinify;
 use App\Backend\BackendPageRenderer;
 use App\Helpers\TestHelper;
+use Nette\Utils\Json;
+use zz\Html\HTMLMinify;
 
 /**
  * Serialize $data as JSON, output it to the client and exit script
@@ -17,9 +18,7 @@ use App\Helpers\TestHelper;
  */
 function JSONResult($data, int $status = 200, $compact = true): void
 {
-    $json = $compact ?
-            json_encode($data, JSON_UNESCAPED_SLASHES) :
-            json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    $json = Json::encode($data, ! $compact);
 
     RawJSONResult($json, $status);
 }
@@ -78,11 +77,11 @@ function Result(string $data, int $status = 200, ?string $type = null): void
     $size = getStringLengthInBytes($data);
 
     if ($type) {
-        send_header("Content-Type: $type");
+        send_header("Content-Type: {$type}");
     }
 
-    send_header("Content-length: $size");
-    die($data);
+    send_header("Content-length: {$size}");
+    exit($data);
 }
 
 /**
@@ -104,19 +103,19 @@ function HTTPStatusCodeResult(
  */
 function ExceptionResult(string $message, int $status = 500): void
 {
-    ViewBag::set("exception", nl2br($message));
-    $content = Template::executeDefaultOrOwnTemplate("exception.php");
+    ViewBag::set('exception', nl2br($message));
+    $content = Template::executeDefaultOrOwnTemplate('exception.php');
 
     $size = getStringLengthInBytes($content);
-    if (!TestHelper::isRunningPHPUnit()) {
-        send_header($_SERVER['SERVER_PROTOCOL'] . " "
-                . getStatusCodeByNumber((int)$status));
-        send_header("Content-Type: text/html; charset=UTF-8");
-        send_header("Content-length: $size");
+    if (! TestHelper::isRunningPHPUnit()) {
+        send_header($_SERVER['SERVER_PROTOCOL'] . ' '
+                . Response::getStatusCodeByNumber((int)$status));
+        send_header('Content-Type: text/html; charset=UTF-8');
+        send_header("Content-length: {$size}");
     }
 
     echo $content;
-    if (!TestHelper::isRunningPHPUnit()) {
+    if (! TestHelper::isRunningPHPUnit()) {
         exit();
     }
 }

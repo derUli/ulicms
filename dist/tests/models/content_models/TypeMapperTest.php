@@ -35,6 +35,6 @@ class TypeMapperTest extends \PHPUnit\Framework\TestCase
 
     public function testGetModelReturnsNull()
     {
-        $this->assertNull(TypeMapper::getModel("magic_page"));
+        $this->assertNull(TypeMapper::getModel('magic_page'));
     }
 }

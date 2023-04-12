@@ -1,36 +1,35 @@
 <?php
 
 use App\Constants\CommentStatus;
-use App\Models\Content\Comment;
 use App\Exceptions\NotImplementedException;
+use App\Models\Content\Comment;
 
 class CommentsControllerTest extends \PHPUnit\Framework\TestCase
 {
     private $initialCommentsMustBeApproved;
+
     private $initialCommentsDefaultLimit;
 
     protected function setUp(): void
     {
-        $this->initialCommentsMustBeApproved = Settings::get(
-            "comments_must_be_approved"
-        );
+        $this->initialCommentsMustBeApproved = (bool)Settings::get('comments_must_be_approved');
         $this->initialCommentsDefaultLimit = Settings::get(
-            "comments_default_limit"
+            'comments_default_limit'
         );
     }
 
     protected function tearDown(): void
     {
-        Database::deleteFrom("comments", "text like 'Unit Test%'");
+        Database::deleteFrom('comments', "text like 'Unit Test%'");
 
-        if (boolval($this->initialCommentsMustBeApproved)) {
-            Settings::set("comments_must_be_approved", "1");
+        if ($this->initialCommentsMustBeApproved) {
+            Settings::set('comments_must_be_approved', '1');
         } else {
-            Settings::delete("comments_must_be_approved");
+            Settings::delete('comments_must_be_approved');
         }
 
         Settings::set(
-            "comments_default_limit",
+            'comments_default_limit',
             $this->initialCommentsDefaultLimit
         );
     }
@@ -38,7 +37,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
     public function testGetDefaultStatusExpectPending()
     {
         $controller = new CommentsController();
-        Settings::set("comments_must_be_approved", "1");
+        Settings::set('comments_must_be_approved', '1');
         $this->assertEquals(
             CommentStatus::PENDING,
             $controller->_getDefaultStatus()
@@ -47,7 +46,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testGetDefaultStatusExpectPublished()
     {
-        Settings::delete("comments_must_be_approved");
+        Settings::delete('comments_must_be_approved');
 
         $controller = new CommentsController();
         $this->assertEquals(
@@ -85,7 +84,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testGetDefaultLimit()
     {
-        Settings::set("comments_default_limit", "123");
+        Settings::set('comments_default_limit', '123');
 
         $controller = new CommentsController();
         $this->assertEquals(123, $controller->_getDefaultLimit());
@@ -114,29 +113,6 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($commentText);
     }
 
-    protected function getTestComment(): Comment
-    {
-        $content = ContentFactory::getAll();
-        $first = $content[0];
-        $comment = new Comment();
-        $comment->setContentId($first->id);
-        $comment->setAuthorName("John Doe");
-        $comment->setAuthorEmail("john@doe.de");
-        $comment->setAuthorUrl("http://john-doe.de");
-        $comment->setIp("123.123.123.123");
-        $comment->setStatus(CommentStatus::PUBLISHED);
-        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
-        $comment->setText("Unit Test 1\nhttps://google.com");
-        $comment->setRead(true);
-
-        $time = time();
-        $comment->setDate($time);
-
-        $comment->save();
-
-        return $comment;
-    }
-
     public function testFilterComments()
     {
         $page = $this->getTestComment();
@@ -156,7 +132,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException(NotImplementedException::class);
         $comment = new Comment();
-        $controller->_doAction($comment, "do_magic");
+        $controller->_doAction($comment, 'do_magic');
     }
 
     public function testDoActionPublish()
@@ -164,7 +140,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
-        $updatedComment = $controller->_doAction($comment, "publish");
+        $updatedComment = $controller->_doAction($comment, 'publish');
 
         $this->assertEquals(CommentStatus::PUBLISHED, $updatedComment->getStatus());
         $this->assertTrue($updatedComment->isRead());
@@ -175,7 +151,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
-        $updatedComment = $controller->_doAction($comment, "unpublish");
+        $updatedComment = $controller->_doAction($comment, 'unpublish');
 
         $this->assertEquals(CommentStatus::PENDING, $updatedComment->getStatus());
     }
@@ -185,7 +161,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
-        $updatedComment = $controller->_doAction($comment, "mark_as_spam");
+        $updatedComment = $controller->_doAction($comment, 'mark_as_spam');
 
         $this->assertEquals(CommentStatus::SPAM, $updatedComment->getStatus());
     }
@@ -195,7 +171,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
-        $updatedComment = $controller->_doAction($comment, "mark_as_read");
+        $updatedComment = $controller->_doAction($comment, 'mark_as_read');
 
         $this->assertTrue($updatedComment->isRead());
     }
@@ -208,7 +184,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
             $this->getTestComment()->getId(),
             $this->getTestComment()->getId(),
         ];
-        $updatedComments = $controller->_doActions($commentIds, "mark_as_read");
+        $updatedComments = $controller->_doActions($commentIds, 'mark_as_read');
         $this->assertCount(2, $updatedComments);
 
         foreach ($updatedComments as $comment) {
@@ -221,7 +197,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
-        $updatedComment = $controller->_doAction($comment, "mark_as_unread");
+        $updatedComment = $controller->_doAction($comment, 'mark_as_unread');
 
         $this->assertFalse($updatedComment->isRead());
     }
@@ -231,8 +207,31 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
-        $updatedComment = $controller->_doAction($comment, "delete");
+        $updatedComment = $controller->_doAction($comment, 'delete');
 
         $this->assertFalse($updatedComment->isPersistent());
+    }
+
+    protected function getTestComment(): Comment
+    {
+        $content = ContentFactory::getAll();
+        $first = $content[0];
+        $comment = new Comment();
+        $comment->setContentId($first->id);
+        $comment->setAuthorName('John Doe');
+        $comment->setAuthorEmail('john@doe.de');
+        $comment->setAuthorUrl('http://john-doe.de');
+        $comment->setIp('123.123.123.123');
+        $comment->setStatus(CommentStatus::PUBLISHED);
+        $comment->setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36');
+        $comment->setText("Unit Test 1\nhttps://google.com");
+        $comment->setRead(true);
+
+        $time = time();
+        $comment->setDate($time);
+
+        $comment->save();
+
+        return $comment;
     }
 }

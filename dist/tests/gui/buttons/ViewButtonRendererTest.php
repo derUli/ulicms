@@ -9,11 +9,11 @@ class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $user = new User();
-        $user->setUsername("paul.panzer");
-        $user->setLastname("Panzer");
-        $user->setFirstname("Paul");
-        $user->setPassword("secret");
-        $user->setEmail("paul@panzer.de");
+        $user->setUsername('paul.panzer');
+        $user->setLastname('Panzer');
+        $user->setFirstname('Paul');
+        $user->setPassword('secret');
+        $user->setEmail('paul@panzer.de');
         $user->save();
 
         $this->user = $user;
@@ -31,7 +31,7 @@ class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
 
         $page = new Page();
         $page->slug = uniqid();
-        $page->title = "Test Page " . uniqid();
+        $page->title = 'Test Page ' . uniqid();
         $page->author_id = $this->user->getId();
         $page->group_id = $allGroups[0]->getId();
         $page->save();
@@ -59,7 +59,7 @@ class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
 
         $page = new Node();
         $page->slug = uniqid();
-        $page->title = "Test Page " . uniqid();
+        $page->title = 'Test Page ' . uniqid();
         $page->author_id = $this->user->getId();
         $page->group_id = $allGroups[0]->getId();
         $page->save();
@@ -78,10 +78,10 @@ class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
 
         $page = new Page();
         $page->slug = uniqid();
-        $page->title = "Test Page " . uniqid();
+        $page->title = 'Test Page ' . uniqid();
         $page->author_id = $this->user->getId();
         $page->group_id = $allGroups[0]->getId();
-        $page->access = strval(PHP_INT_MAX);
+        $page->access = (string)(PHP_INT_MAX);
         $page->save();
 
         $render = new ViewButtonRenderer();

@@ -5,24 +5,6 @@ use App\Models\Content\Types\DefaultContentTypes;
 
 class ContentTypesTest extends \PHPUnit\Framework\TestCase
 {
-    private function getBaseTypes()
-    {
-        $baseTypes = array(
-            "page",
-            "article",
-            "snippet",
-            "list",
-            "link",
-            "language_link",
-            "node",
-            "image",
-            "module",
-            "video",
-            "audio"
-        );
-        return $baseTypes;
-    }
-
     public function testTypesArray()
     {
         DefaultContentTypes::initTypes();
@@ -42,21 +24,11 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetAvailablePostTypes()
-    {
-        $baseTypes = $this->getBaseTypes();
-        $availableTypes = get_available_post_types();
-
-        foreach ($baseTypes as $type) {
-            $this->assertTrue(in_array($type, $availableTypes));
-        }
-    }
-
     public function testIsRegularReturnsTrue()
     {
-        $types = array("Page", "Article", "Image_Page",
-            "Video_Page", "Audio_Page", "Snippet",
-            "Module_Page", "Content_List");
+        $types = ['Page', 'Article', 'Image_Page',
+            'Video_Page', 'Audio_Page', 'Snippet',
+            'Module_Page', 'Content_List'];
         foreach ($types as $type) {
             $model = new $type();
             $this->assertTrue($model->isRegular());
@@ -65,10 +37,28 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase
 
     public function testIsRegularReturnsFalse()
     {
-        $types = array("Link", "Node", "Language_Link");
+        $types = ['Link', 'Node', 'Language_Link'];
         foreach ($types as $type) {
             $model = new $type();
             $this->assertFalse($model->isRegular());
         }
     }
+
+       private function getBaseTypes()
+       {
+           $baseTypes = [
+               'page',
+               'article',
+               'snippet',
+               'list',
+               'link',
+               'language_link',
+               'node',
+               'image',
+               'module',
+               'video',
+               'audio'
+           ];
+           return $baseTypes;
+       }
 }

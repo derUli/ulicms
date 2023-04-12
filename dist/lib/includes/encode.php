@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Nette\Utils\Json;
+
 /**
  * Like var_dump() but returns it as string
  * @return string
@@ -25,44 +27,9 @@ function var_dump_str(): string
 /**
  * Like json_encode() but human readable
  * @param type $in
- * @param type $indent
  * @return string
  */
-function json_readable_encode($in, $indent = 0): string
+function json_readable_encode($in): string
 {
-    $_myself = __FUNCTION__;
-    $_escape = function ($str) {
-        return preg_replace("!([\b\t\n\r\f\"\\'])!", "\\\\\\1", $str);
-    };
-
-    $out = '';
-
-    foreach ($in as $key => $value) {
-        $out .= str_repeat("\t", $indent + 1);
-        $out .= "\"" . $_escape((string) $key) . "\": ";
-
-        if (is_object($value) || is_array($value)) {
-            $out .= "\n";
-            $out .= $_myself($value, $indent + 1);
-        } elseif (is_bool($value)) {
-            $out .= $value ? 'true' : 'false';
-        } elseif ($value === null) {
-            $out .= 'null';
-        } elseif (is_string($value)) {
-            $out .= "\"" . $_escape($value) . "\"";
-        } else {
-            $out .= $value;
-        }
-
-        $out .= ",\n";
-    }
-
-    if (!empty($out)) {
-        $out = substr($out, 0, - 2);
-    }
-
-    $out = str_repeat("\t", $indent) . "{\n" . $out;
-    $out .= "\n" . str_repeat("\t", $indent) . "}";
-
-    return $out;
+    return Json::encode($in, true, false, false, true);
 }

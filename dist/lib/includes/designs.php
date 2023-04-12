@@ -8,13 +8,13 @@ declare(strict_types=1);
  * @param string $attrib
  * @return type
  */
-function getThemeMeta(string $theme, string $attrib = null)
+function getThemeMeta(string $theme, ?string $attrib = null)
 {
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . 'metadata.json';
 
     if (is_file($metadata_file)) {
-        $data = !Vars::get("theme_{$theme}_meta") ?
+        $data = ! Vars::get("theme_{$theme}_meta") ?
                 file_get_contents($metadata_file) : Vars::get("theme_{$theme}_meta");
 
         if (is_string($data)) {

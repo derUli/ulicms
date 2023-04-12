@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 function getTemplateDirPath(
-    string $sub = "default",
+    string $sub = 'default',
     bool $abspath = false
 ): string {
     if ($abspath) {
@@ -32,12 +32,12 @@ function getModulePath($module, $abspath = false): string
 {
     if ($abspath) {
         return Path::resolve(
-            "ULICMS_ROOT/content/modules/$module"
+            "ULICMS_ROOT/content/modules/{$module}"
         ) . '/';
     }
 
     // Frontend Directory
-    if (!is_admin_dir()) {
+    if (! is_admin_dir()) {
         $module_folder = 'content/modules/';
     } // Backend Directory
     else {
@@ -65,7 +65,7 @@ function getModuleMainFilePath($module): string
 
 function getModuleMainFilePath2($module): string
 {
-    return getModulePath($module, true) .'main.php';
+    return getModulePath($module, true) . 'main.php';
 }
 
 function getModuleUninstallScriptPath(

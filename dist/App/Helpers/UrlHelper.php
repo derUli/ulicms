@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use Helper;
 
 /**
  * Helper methods for handling URLs
@@ -21,13 +20,13 @@ class UrlHelper extends Helper
     public static function getUrlWithoutGetParameters(string $url): string
     {
         $parsedUri = parse_url($url);
-        $hostWithPort = $parsedUri["host"];
-        if (!empty($parsedUri["port"])) {
-            $hostWithPort .= ":" . $parsedUri["port"];
+        $hostWithPort = $parsedUri['host'];
+        if (! empty($parsedUri['port'])) {
+            $hostWithPort .= ':' . $parsedUri['port'];
         }
 
-        $path = isset($parsedUri["path"]) ? $parsedUri["path"] : "";
-        return $parsedUri["scheme"] . "://" . $hostWithPort
+        $path = $parsedUri['path'] ?? '';
+        return $parsedUri['scheme'] . '://' . $hostWithPort
                 . $path;
     }
 }

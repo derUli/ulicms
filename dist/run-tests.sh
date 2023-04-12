@@ -1,1 +1,1 @@
-./vendor/bin/phpunit
+php vendor/bin/phpunit tests

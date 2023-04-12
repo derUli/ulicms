@@ -1,33 +1,36 @@
 <?php
+
+use App\Translations\JSTranslation;
+
 $permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("settings_simple")) {
+if ($permissionChecker->hasPermission('settings_simple')) {
     $languages = getAllLanguages();
     $homepage_titles = [];
     $languageCount = count($languages);
     for ($i = 0; $i < $languageCount; $i++) {
         $lang = $languages[$i];
-        $homepage_titles[$lang] = Settings::get("homepage_title_" . $lang);
+        $homepage_titles[$lang] = Settings::get('homepage_title_' . $lang);
 
-        if (!$homepage_titles[$lang]) {
-            $homepage_titles[$lang] = Settings::get("homepage_title");
+        if (! $homepage_titles[$lang]) {
+            $homepage_titles[$lang] = Settings::get('homepage_title');
         }
     }
     ?>
     <p>
-        <a href="<?php echo ModuleHelper::buildActionURL("settings_simple"); ?>"
-           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate("back") ?></a>
+        <a href="<?php echo ModuleHelper::buildActionURL('settings_simple'); ?>"
+           class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </p>
-    <h1><?php translate("homepage_title"); ?></h1>
+    <h1><?php translate('homepage_title'); ?></h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm("HomepageTitleController", "save", [], "post", array(
-        "id" => "homepage_title_settings"
-    ));
+    echo ModuleHelper::buildMethodCallForm('HomepageTitleController', 'save', [], 'post', [
+        'id' => 'homepage_title_settings'
+    ]);
     ?>
     <table>
         <tr>
-            <td style="min-width: 100px;"><strong><?php translate("language"); ?>
+            <td style="min-width: 100px;"><strong><?php translate('language'); ?>
                 </strong></td>
-            <td><strong><?php translate("title"); ?>
+            <td><strong><?php translate('title'); ?>
                 </strong></td>
         </tr>
         <?php
@@ -47,7 +50,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
             <td></td>
             <td class="text-center">
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
+                    <i class="fa fa-save"></i> <?php translate('save_changes'); ?></button>
             </td>
         </tr>
     </table>
@@ -55,10 +58,10 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     echo ModuleHelper::endForm();
 
     $translation = new JSTranslation();
-    $translation->addKey("changes_was_saved");
+    $translation->addKey('changes_was_saved');
     $translation->render();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/homepage_title.js"));
+    enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/homepage_title.js'));
     combinedScriptHtml();
 } else {
     noPerms();

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Utils\File;
 use ModuleHelper;
@@ -29,19 +29,19 @@ class Script
         array $htmlAttributes = []
     ): string {
         $attributes = [
-            "src" => $file
+            'src' => $file
         ];
 
         if ($async) {
-            $attributes["async"] = "async";
+            $attributes['async'] = 'async';
         }
 
         if ($defer) {
-            $attributes["defer"] = "defer";
+            $attributes['defer'] = 'defer';
         }
 
-        if (!parse_url($file, PHP_URL_SCHEME) && is_file($file)) {
-            $attributes["src"] .= "?time=" . File::getLastChanged($file);
+        if (! parse_url($file, PHP_URL_SCHEME) && is_file($file)) {
+            $attributes['src'] .= '?time=' . File::getLastChanged($file);
         }
 
         foreach ($htmlAttributes as $key => $value) {
@@ -50,8 +50,8 @@ class Script
 
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        if (!empty($attribHTML)) {
-            $attribHTML = " " . $attribHTML;
+        if (! empty($attribHTML)) {
+            $attribHTML = ' ' . $attribHTML;
         }
 
         return "<script{$attribHTML}></script>";
@@ -73,20 +73,20 @@ class Script
     ): string {
         $attributes = [];
         if ($async) {
-            $attributes["async"] = "async";
+            $attributes['async'] = 'async';
         }
         if ($defer) {
-            $attributes["defer"] = "defer";
+            $attributes['defer'] = 'defer';
         }
         foreach ($htmlAttributes as $key => $value) {
             $attributes[$key] = $value;
         }
         $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
-        if (!empty($attribHTML)) {
-            $attribHTML = " " . $attribHTML;
+        if (! empty($attribHTML)) {
+            $attribHTML = ' ' . $attribHTML;
         }
 
-        return "<script{$attribHTML}>" . $code . "</script>";
+        return "<script{$attribHTML}>" . $code . '</script>';
     }
 }

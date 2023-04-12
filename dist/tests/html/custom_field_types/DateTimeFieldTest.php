@@ -14,10 +14,10 @@ class DateTimeFieldTest extends \PHPUnit\Framework\TestCase
     public function testRender()
     {
         $field = new DatetimeField();
-        $field->name = "my_field";
-        $field->title = "date";
+        $field->name = 'my_field';
+        $field->title = 'date';
         $this->assertMatchesHtmlSnapshot(
-            $field->render("2020-05-17 11:51")
+            $field->render('2020-05-17 11:51')
         );
     }
 }

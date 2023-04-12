@@ -80,17 +80,17 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBlockedCountries());
 
-        $configuration->setBlockedCountries("ir, vn");
+        $configuration->setBlockedCountries('ir, vn');
         $this->assertCount(2, $configuration->getBlockedCountries());
-        $this->assertContains("ir", $configuration->getBlockedCountries());
-        $this->assertContains("vn", $configuration->getBlockedCountries());
+        $this->assertContains('ir', $configuration->getBlockedCountries());
+        $this->assertContains('vn', $configuration->getBlockedCountries());
     }
 
     public function testSetBlockedCountriesWithNull()
     {
         $configuration = new SpamFilterConfiguration();
 
-        $configuration->setBlockedCountries(["ir, vn"]);
+        $configuration->setBlockedCountries(['ir, vn']);
 
         $configuration->setBlockedCountries(null);
         $this->assertCount(0, $configuration->getBlockedCountries());
@@ -100,7 +100,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
     {
         $configuration = new SpamFilterConfiguration();
 
-        $configuration->setBlockedCountries(["ir, vn"]);
+        $configuration->setBlockedCountries(['ir, vn']);
         $this->expectException(InvalidArgumentException::class);
         $configuration->setBlockedCountries(new Page());
     }
@@ -110,15 +110,15 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBlockedCountries());
 
-        $configuration->setBlockedCountries(array(
-            "cn",
-            "ru",
-            "vn"
-        ));
+        $configuration->setBlockedCountries([
+            'cn',
+            'ru',
+            'vn'
+        ]);
         $this->assertCount(3, $configuration->getBlockedCountries());
-        $this->assertContains("cn", $configuration->getBlockedCountries());
-        $this->assertContains("ru", $configuration->getBlockedCountries());
-        $this->assertContains("vn", $configuration->getBlockedCountries());
+        $this->assertContains('cn', $configuration->getBlockedCountries());
+        $this->assertContains('ru', $configuration->getBlockedCountries());
+        $this->assertContains('vn', $configuration->getBlockedCountries());
     }
 
     public function testSetBadwordsWithString()
@@ -128,10 +128,10 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
 
         $configuration->setBadwords("fuck\nshit\nnigger\nbastard");
         $this->assertCount(4, $configuration->getBadwords());
-        $this->assertContains("fuck", $configuration->getBadwords());
-        $this->assertContains("shit", $configuration->getBadwords());
-        $this->assertContains("nigger", $configuration->getBadwords());
-        $this->assertContains("bastard", $configuration->getBadwords());
+        $this->assertContains('fuck', $configuration->getBadwords());
+        $this->assertContains('shit', $configuration->getBadwords());
+        $this->assertContains('nigger', $configuration->getBadwords());
+        $this->assertContains('bastard', $configuration->getBadwords());
     }
 
     public function testSetBadwordsWithArray()
@@ -139,28 +139,28 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBadwords());
 
-        $configuration->setBadwords(array(
-            "fuck",
-            "shit",
-            "nigger",
-            "bastard"
-        ));
+        $configuration->setBadwords([
+            'fuck',
+            'shit',
+            'nigger',
+            'bastard'
+        ]);
         $this->assertCount(4, $configuration->getBadwords());
-        $this->assertContains("fuck", $configuration->getBadwords());
-        $this->assertContains("shit", $configuration->getBadwords());
-        $this->assertContains("nigger", $configuration->getBadwords());
-        $this->assertContains("bastard", $configuration->getBadwords());
+        $this->assertContains('fuck', $configuration->getBadwords());
+        $this->assertContains('shit', $configuration->getBadwords());
+        $this->assertContains('nigger', $configuration->getBadwords());
+        $this->assertContains('bastard', $configuration->getBadwords());
     }
 
     public function testSetBadwordsWithNull()
     {
         $configuration = new SpamFilterConfiguration();
-        $configuration->setBadwords(array(
-            "fuck",
-            "shit",
-            "nigger",
-            "bastard"
-        ));
+        $configuration->setBadwords([
+            'fuck',
+            'shit',
+            'nigger',
+            'bastard'
+        ]);
         $configuration->setBadwords(null);
 
         $this->assertCount(0, $configuration->getBadwords());

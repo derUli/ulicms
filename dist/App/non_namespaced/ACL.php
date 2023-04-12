@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
-use App\Security\PermissionChecker;
 use App\Constants\ModuleEventConstants;
+use App\Security\PermissionChecker;
 
 /**
  * Old permission checker class
@@ -34,8 +34,8 @@ class ACL
     {
         $permissionData = $permissions === null ? $this->getDefaultACL() : json_encode($permissions);
 
-        $sql = "INSERT INTO `" . tbname('groups') .
-                "` (`name`, `permissions`) " .
+        $sql = 'INSERT INTO `' . tbname('groups') .
+                '` (`name`, `permissions`) ' .
                 "VALUES('" . db_escape($name) . "','" .
                 db_escape($permissionData) . "')";
 
@@ -60,7 +60,7 @@ class ACL
     ): int {
         $permissionData = $permissions === null ? $this->getDefaultACL() : json_encode($permissions);
 
-        $sql = "UPDATE `" . tbname('groups') . "` SET name='" .
+        $sql = 'UPDATE `' . tbname('groups') . "` SET name='" .
                 db_escape($name) . "', permissions='" . db_escape($permissionData) . "' WHERE id=" . $id;
 
         // Führe Query aus
@@ -76,20 +76,20 @@ class ACL
      */
     public function deleteGroup(int $id, ?int $move_users_to = null)
     {
-        $id = (int) $id;
+        $id = (int)$id;
 
         if ($move_users_to === null) {
-            $updateUsers = "UPDATE " . tbname('users') .
-                    " SET `group_id`=NULL where `group_id`=$id";
+            $updateUsers = 'UPDATE ' . tbname('users') .
+                    " SET `group_id`=NULL where `group_id`={$id}";
         } else {
-            $updateUsers = "UPDATE " . tbname('users') .
-                    " SET `group_id`=" . $move_users_to . " where `group_id`=$id";
+            $updateUsers = 'UPDATE ' . tbname('users') .
+                    ' SET `group_id`=' . $move_users_to . " where `group_id`={$id}";
         }
 
         db_query($updateUsers);
 
-        $deleteGroupSQL = "DELETE FROM `" . tbname('groups') .
-                "` WHERE id=" . $id;
+        $deleteGroupSQL = 'DELETE FROM `' . tbname('groups') .
+                '` WHERE id=' . $id;
         db_query($deleteGroupSQL);
     }
 
@@ -106,12 +106,12 @@ class ACL
         } elseif (isset($_SESSION['group_id'])) {
             $group_id = $_SESSION['group_id'];
         }
-        if (!$group_id) {
+        if (! $group_id) {
             return null;
         }
 
-        $sqlString = "SELECT * FROM `" . tbname('groups') .
-                "` WHERE id=" . $group_id;
+        $sqlString = 'SELECT * FROM `' . tbname('groups') .
+                '` WHERE id=' . $group_id;
         $result = db_query($sqlString);
 
         if (db_num_rows($result) == 0) {
@@ -131,7 +131,7 @@ class ACL
     public function getAllGroups(string $order = 'id DESC'): array
     {
         $list = [];
-        $sql = "SELECT id, name FROM `" . tbname('groups') . "` ORDER by " . $order;
+        $sql = 'SELECT id, name FROM `' . tbname('groups') . '` ORDER by ' . $order;
         $result = db_query($sql);
         while ($assoc = db_fetch_assoc($result)) {
             $list[$assoc['id']] = $assoc['name'];
@@ -164,7 +164,7 @@ class ACL
         $modules = getAllModules();
         foreach ($modules as $module) {
             $acl_metadata = getModuleMeta($module, 'custom_acl');
-            if ($acl_metadata and is_array($acl_metadata)) {
+            if ($acl_metadata && is_array($acl_metadata)) {
                 foreach ($acl_metadata as $permission) {
                     $acl_data[$permission] = null;
                 }

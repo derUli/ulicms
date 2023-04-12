@@ -12,7 +12,7 @@ import time
 
 def zipdir(basedir, archivename):
     assert os.path.isdir(basedir)
-    with closing(ZipFile(archivename, "w", ZIP_DEFLATED)) as z:
+    with closing(ZipFile(archivename, mode="w", compression=ZIP_DEFLATED, compresslevel=9)) as z:
         for root, dirs, files in os.walk(basedir):
             # NOTE: ignore empty directories
             for fn in files:
@@ -30,13 +30,15 @@ def main():
     target = os.path.abspath(args.target)
     source_dir = os.path.dirname(__file__)
 
-    ignore = ('.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
-              "Releases", "cms-config.php", "services", "update.php",
+    ignore = ['.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
+              "Releases", "cms-config.php", "update.php",
               ".gitignore", "cache", "*~", ".settings", ".project",
               ".buildpath", "tests", "run-tests.sh", "run-tests.bat",
               "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
               "configurations", ".phpunit.result.cache", "nbproject", "report",
-              "avatars", ".php_cs.cache", ".php_cs.dist", ".phplint-cache", ".php-cs-fixer.cache")
+              "avatars", ".php_cs.cache", ".php_cs.dist", ".phplint-cache", ".php-cs-fixer.cache",
+              '.phpunit.cache', '.DS_STORE'
+            ]
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     if args.delete and os.path.exists(target):
@@ -52,7 +54,7 @@ def main():
 
     main_dir = os.path.join(target, "dist")
 
-    version_file = os.path.join(target, "dist", "App", "non_namespaced", "UliCMSVersion.php")
+    version_file = os.path.join(target, "dist", "App", "Backend", "UliCMSVersion.php")
 
     print("set build date...")
     with codecs.open(version_file, 'r+', "utf-8") as f:

@@ -395,21 +395,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-### cocur/slugify 
-Converts a string into a slug.
-Homepage: Not configured.
-Licenses Used: MIT
-The MIT License (MIT)
-
-Copyright (c) 2012-217 Florian Eckerstorfer
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
 ### composer/semver 
 Semver library that offers utilities, version constraint parsing and validation.
 Homepage: Not configured.
@@ -1166,7 +1151,7 @@ Homepage: Not configured.
 Licenses Used: MIT
 MIT License
 
-Copyright (c) 2018-2022 Jack Cherng <jfcherng@gmail.com>
+Copyright (c) 2018-2023 Jack Cherng <jfcherng@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1193,7 +1178,7 @@ Homepage: Not configured.
 Licenses Used: BSD-3-Clause
 BSD 3-Clause License
 
-Copyright (c) 2019-2020 Jack Cherng <jfcherng@gmail.com>
+Copyright (c) 2019-2023 Jack Cherng <jfcherng@gmail.com>
 Copyright (c) 2009 Chris Boulton <chris.boulton@interspire.com>
 
 All rights reserved.
@@ -1511,6 +1496,72 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+
+### nette/utils 
+🛠  Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.
+Homepage: https://nette.org
+Licenses Used: BSD-3-Clause, GPL-2.0-only, GPL-3.0-only
+Licenses
+========
+
+Good news! You may use Nette Framework under the terms of either
+the New BSD License or the GNU General Public License (GPL) version 2 or 3.
+
+The BSD License is recommended for most projects. It is easy to understand and it
+places almost no restrictions on what you can do with the framework. If the GPL
+fits better to your project, you can use the framework under this license.
+
+You don't have to notify anyone which license you are using. You can freely
+use Nette Framework in commercial projects as long as the copyright header
+remains intact.
+
+Please be advised that the name "Nette Framework" is a protected trademark and its
+usage has some limitations. So please do not use word "Nette" in the name of your
+project or top-level domain, and choose a name that stands on its own merits.
+If your stuff is good, it will not take long to establish a reputation for yourselves.
+
+
+New BSD License
+---------------
+
+Copyright (c) 2004, 2014 David Grudl (https://davidgrudl.com)
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+	* Redistributions of source code must retain the above copyright notice,
+	this list of conditions and the following disclaimer.
+
+	* Redistributions in binary form must reproduce the above copyright notice,
+	this list of conditions and the following disclaimer in the documentation
+	and/or other materials provided with the distribution.
+
+	* Neither the name of "Nette Framework" nor the names of its contributors
+	may be used to endorse or promote products derived from this software
+	without specific prior written permission.
+
+This software is provided by the copyright holders and contributors "as is" and
+any express or implied warranties, including, but not limited to, the implied
+warranties of merchantability and fitness for a particular purpose are
+disclaimed. In no event shall the copyright owner or contributors be liable for
+any direct, indirect, incidental, special, exemplary, or consequential damages
+(including, but not limited to, procurement of substitute goods or services;
+loss of use, data, or profits; or business interruption) however caused and on
+any theory of liability, whether in contract, strict liability, or tort
+(including negligence or otherwise) arising in any way out of the use of this
+software, even if advised of the possibility of such damage.
+
+
+GNU General Public License
+--------------------------
+
+GPL licenses are very very long, so instead of including them here we offer
+you URLs with full text:
+
+- [GPL version 2](http://www.gnu.org/licenses/gpl-2.0.html)
+- [GPL version 3](http://www.gnu.org/licenses/gpl-3.0.html)
 
 
 ### overtrue/pinyin 
@@ -2417,7 +2468,32 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Eases the creation of beautiful and testable command line interfaces
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is furnished
+to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+### symfony/deprecation-contracts 
+A generic function and convention to trigger deprecation notices
+Homepage: https://symfony.com
+Licenses Used: MIT
+Copyright (c) 2020-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2442,7 +2518,7 @@ THE SOFTWARE.
 Provides tools that allow your application components to communicate with each other by dispatching events and listening to them
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2467,7 +2543,7 @@ THE SOFTWARE.
 Generic abstractions related to dispatching event
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2022 Fabien Potencier
+Copyright (c) 2018-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2492,7 +2568,7 @@ THE SOFTWARE.
 Provides basic utilities for the filesystem
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2517,7 +2593,7 @@ THE SOFTWARE.
 Finds files and directories via an intuitive fluent interface
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2692,7 +2768,7 @@ THE SOFTWARE.
 Executes commands in sub-processes
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2717,7 +2793,7 @@ THE SOFTWARE.
 Generic abstractions related to writing services
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2022 Fabien Potencier
+Copyright (c) 2018-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2742,7 +2818,7 @@ THE SOFTWARE.
 Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2019-2023 Fabien Potencier
+Copyright (c) 2019-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2767,7 +2843,7 @@ THE SOFTWARE.
 Provides tools to internationalize your application
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2792,7 +2868,7 @@ THE SOFTWARE.
 Generic abstractions related to translation
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2022 Fabien Potencier
+Copyright (c) 2018-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2817,7 +2893,7 @@ THE SOFTWARE.
 Loads and dumps YAML files
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2004-2023 Fabien Potencier
+Copyright (c) 2004-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

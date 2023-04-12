@@ -1,12 +1,15 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 use App\Models\Content\Language;
 
 // Links to another language
 class Language_Link extends Page
 {
     public $link_to_language = null;
-    public $type = "language_link";
+
+    public $type = 'language_link';
 
     public function save()
     {
@@ -20,12 +23,6 @@ class Language_Link extends Page
         return $retval;
     }
 
-    protected function fillVars($result = null)
-    {
-        parent::fillVars($result);
-        $this->link_to_language = $result->link_to_language;
-    }
-
     public function update()
     {
         $result = null;
@@ -33,11 +30,11 @@ class Language_Link extends Page
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set link_to_language = ? where id = ?";
-        $args = array(
+        $sql = 'update {prefix}content set link_to_language = ? where id = ?';
+        $args = [
             $this->link_to_language,
             $this->id
-        );
+        ];
 
         $result = Database::pQuery($sql, $args, true);
         return $result;
@@ -64,13 +61,18 @@ class Language_Link extends Page
         return false;
     }
 
-
      /**
-     * Get css classes for Font Awesome icon
-     * @return string
-     */
+      * Get css classes for Font Awesome icon
+      * @return string
+      */
     public function getIcon(): string
     {
-        return "fas fa-language";
+        return 'fas fa-language';
+    }
+
+    protected function fillVars($result = null)
+    {
+        parent::fillVars($result);
+        $this->link_to_language = $result->link_to_language;
     }
 }

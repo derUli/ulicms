@@ -2,36 +2,38 @@
 
 use function App\HTML\icon;
 
+use  App\Translations\JSTranslation;
+
 $menuTranslation = new JSTranslation(
     [
-    "logout",
-    "on",
-    "off"
+        'logout',
+        'on',
+        'off'
     ],
-    "MenuTranslation"
+    'MenuTranslation'
 );
 $menuTranslation->render();
 
 $globalTranslation = new JSTranslation(
     [
-    "all",
-    "copied_to_clipboard_success",
-    "copied_to_clipboard_failed"
+        'all',
+        'copied_to_clipboard_success',
+        'copied_to_clipboard_failed'
     ],
-    "GlobalTranslation"
+    'GlobalTranslation'
 );
 $globalTranslation->render();
 
 $passwordSecurityTranslation = new JSTranslation(
     [
-    "short_pass",
-    "bad_pass",
-    "good_pass",
-    "strong_pass",
-    "contains_username",
-    "enter_pass",
+        'short_pass',
+        'bad_pass',
+        'good_pass',
+        'strong_pass',
+        'contains_username',
+        'enter_pass',
     ],
-    "PasswordSecurityTranslation"
+    'PasswordSecurityTranslation'
 );
 $passwordSecurityTranslation->render();
 ?>
@@ -39,7 +41,7 @@ $passwordSecurityTranslation->render();
     <img
         id="loading"
         src="gfx/loading.gif"
-        alt="<?php translate("loading_alt"); ?>"
+        alt="<?php translate('loading_alt'); ?>"
         style="display: none;"
         >
 </div>
@@ -47,11 +49,11 @@ $passwordSecurityTranslation->render();
     <br />
 </div>
 </div>
-<?php do_event("admin_copyright_footer_left"); ?>
+<?php do_event('admin_copyright_footer_left'); ?>
 </div>
 <a href="#" id="scroll-to-top" class="has-pointer">
-    <?php echo icon("fas fa-arrow-circle-up"); ?>
+    <?php echo icon('fas fa-arrow-circle-up'); ?>
 </a>
-<?php do_event("backend_footer"); ?>
+<?php do_event('backend_footer'); ?>
 </body>
 </html>

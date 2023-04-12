@@ -1,7 +1,7 @@
 <?php
 
-use App\HTML\Button;
 use App\Constants\ButtonType;
+use App\HTML\Button;
 
 class ButtonTest extends \PHPUnit\Framework\TestCase
 {
@@ -9,7 +9,7 @@ class ButtonTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<button type="submit" class="btn">Do Something</button>',
-            Button::button("Do Something")
+            Button::button('Do Something')
         );
     }
 
@@ -17,7 +17,7 @@ class ButtonTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<button type="reset" class="btn">Do Something</button>',
-            Button::button("Do Something", ButtonType::BUTTON_RESET)
+            Button::button('Do Something', ButtonType::BUTTON_RESET)
         );
     }
 
@@ -25,7 +25,7 @@ class ButtonTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<button type="submit" class="btn">&lt;i class=&quot;fa fa-save&quot;&gt;&lt;/i&gt; Do Something</button>',
-            Button::button("<i class=\"fa fa-save\"></i> Do Something")
+            Button::button('<i class="fa fa-save"></i> Do Something')
         );
     }
 
@@ -33,7 +33,7 @@ class ButtonTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<button type="submit" class="btn"><i class="fa fa-save"></i> Do Something</button>',
-            Button::button("<i class=\"fa fa-save\"></i> Do Something", ButtonType::BUTTON_SUBMIT, [], true)
+            Button::button('<i class="fa fa-save"></i> Do Something', ButtonType::BUTTON_SUBMIT, [], true)
         );
     }
 
@@ -41,7 +41,7 @@ class ButtonTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<button class="btn btn-default" type="submit">Do Something</button>',
-            Button::default("Do Something")
+            Button::default('Do Something')
         );
     }
 
@@ -49,7 +49,7 @@ class ButtonTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<button class="btn btn-primary" type="submit">Do Something</button>',
-            Button::primary("Do Something")
+            Button::primary('Do Something')
         );
     }
 
@@ -57,7 +57,7 @@ class ButtonTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<button class="btn btn-success" type="submit">Do Something</button>',
-            Button::success("Do Something")
+            Button::success('Do Something')
         );
     }
 
@@ -65,7 +65,7 @@ class ButtonTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<button class="btn btn-info" type="submit">Do Something</button>',
-            Button::info("Do Something")
+            Button::info('Do Something')
         );
     }
 
@@ -73,7 +73,7 @@ class ButtonTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<button class="btn btn-warning" type="submit">Do Something</button>',
-            Button::warning("Do Something")
+            Button::warning('Do Something')
         );
     }
 
@@ -81,7 +81,7 @@ class ButtonTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<button class="btn btn-danger" type="submit">Do Something</button>',
-            Button::danger("Do Something")
+            Button::danger('Do Something')
         );
     }
 
@@ -89,7 +89,7 @@ class ButtonTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals(
             '<button class="btn btn-link" type="submit">Do Something</button>',
-            Button::link("Do Something")
+            Button::link('Do Something')
         );
     }
 }

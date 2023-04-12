@@ -2,12 +2,15 @@
 
 declare(strict_types=1);
 
-use App\Packages\PatchManager;
+use App\Constants\DefaultValues;
+use App\Database\DBMigrator;
+use App\Exceptions\SqlException;
+use App\Helpers\DateTimeHelper;
+use App\Packages\PackageManager;
+use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
 use App\Utils\CacheUtil;
 use Robo\Tasks;
-use App\Exceptions\SqlException;
-use App\Constants\DefaultValues;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -18,33 +21,11 @@ class RoboFile extends Tasks
 {
     public function __construct()
     {
-        if (!defined('CORE_COMPONENT')) {
+        if (! defined('CORE_COMPONENT')) {
             define('CORE_COMPONENT', 'robo');
         }
 
         $this->initUliCMS();
-    }
-
-    protected function initUliCMS()
-    {
-        try {
-            $this->initCore();
-        } catch (SqlException $e) {
-            $this->showException($e);
-        }
-    }
-
-    protected function showException(Exception $e)
-    {
-        $this->writeln($e->getMessage());
-    }
-
-    protected function initCore()
-    {
-        if (!defined('ULICMS_ROOT')) {
-            require dirname(__FILE__) . '/init.php';
-            require_once getLanguageFilePath('en');
-        }
     }
 
     /**
@@ -60,7 +41,7 @@ class RoboFile extends Tasks
      */
     public function truncateHistory(): void
     {
-        Database::truncateTable("history");
+        Database::truncateTable('history');
     }
 
     /**
@@ -68,7 +49,7 @@ class RoboFile extends Tasks
      */
     public function truncateMails(): void
     {
-        Database::truncateTable("mails");
+        Database::truncateTable('mails');
     }
 
     /**
@@ -124,7 +105,7 @@ class RoboFile extends Tasks
      */
     public function maintenanceOn()
     {
-        Settings::set('maintenance_mode', "1");
+        Settings::set('maintenance_mode', '1');
     }
 
     /**
@@ -132,7 +113,7 @@ class RoboFile extends Tasks
      */
     public function maintenanceOff()
     {
-        Settings::set('maintenance_mode', "0");
+        Settings::set('maintenance_mode', '0');
     }
 
     /**
@@ -149,8 +130,8 @@ class RoboFile extends Tasks
      */
     public function packageExamine(string $file)
     {
-        if (!is_file($file)) {
-            $this->writeln("File " . basename($file) . " not found!");
+        if (! is_file($file)) {
+            $this->writeln('File ' . basename($file) . ' not found!');
             return;
         }
         $json = json_decode(file_get_contents($file), true);
@@ -159,35 +140,15 @@ class RoboFile extends Tasks
         $this->showPageKeys($json);
     }
 
-    private function showPageKeys($json)
-    {
-        $skipAttributes = array(
-            "data",
-            "screenshot"
-        );
-
-        foreach ($json as $key => $value) {
-            if (in_array($key, $skipAttributes)) {
-                continue;
-            }
-            if (is_array($value)) {
-                $processedValue = implode(", ", $value);
-            } else {
-                $processedValue = $value;
-            }
-            $this->writeln("$key: $processedValue");
-        }
-    }
-
     /**
      * list all installed packages
      */
     public function packagesList()
     {
-        $this->writeln("Modules:");
+        $this->writeln('Modules:');
         $this->modulesList([]);
         $this->writeln('');
-        $this->writeln("Themes:");
+        $this->writeln('Themes:');
         $this->themesList([]);
     }
 
@@ -197,28 +158,28 @@ class RoboFile extends Tasks
      */
     public function packageInstall($file): void
     {
-        if (!is_file($file)) {
-            $this->writeln("Can't open $file. File doesn't exists.");
+        if (! is_file($file)) {
+            $this->writeln("Can't open {$file}. File doesn't exists.");
             return;
         }
 
         $result = false;
 
-        if (str_ends_with($file, ".tar.gz")) {
+        if (str_ends_with($file, '.tar.gz')) {
             $pkg = new PackageManager();
             $result = $pkg->installPackage($file);
-        } elseif (str_ends_with($file, ".sin")) {
+        } elseif (str_ends_with($file, '.sin')) {
             $pkg = new SinPackageInstaller($file);
             $result = $pkg->installPackage();
         }
         if ($result) {
             $this->writeln('Package ' . basename($file)
-                    . " successfully installed");
+                    . ' successfully installed');
             return;
-        } else {
-            $this->writeln('Installation of package '
-                    . basename($file) . " failed.");
         }
+            $this->writeln('Installation of package '
+                    . basename($file) . ' failed.');
+
         if ($pkg instanceof SinPackageInstaller) {
             foreach ($pkg->getErrors() as $error) {
                 $this->writeln($error);
@@ -242,20 +203,6 @@ class RoboFile extends Tasks
         }
     }
 
-    private function getModuleInfo(string $name): string
-    {
-        $version = getModuleMeta($name, "version");
-        $line = $name;
-
-        if ($version !== null) {
-            $line .= " $version";
-        }
-        $module = new Module($name);
-        $status = $module->isEnabled() ? "enabled" : "disabled";
-        $line .= " ($status)";
-        return $line;
-    }
-
     /**
      * toggles one or more modules
      * @param array $modules one or more modules
@@ -270,37 +217,6 @@ class RoboFile extends Tasks
             $module->toggleEnabled();
             $this->writeln($this->getModuleInfo($name));
         }
-    }
-
-    private function replaceModulePlaceholders(array $modules): array
-    {
-        $manager = new ModuleManager();
-        $manager->sync();
-        $outModules = [];
-
-        foreach ($modules as $name) {
-            if (strtolower($name) == "[all]") {
-                $outModules = array_merge(
-                    $outModules,
-                    $manager->getAllModuleNames()
-                );
-            } elseif (strtolower($name) == "[core]") {
-                $outModules = array_merge(
-                    $outModules,
-                    $manager->getAllModuleNames("core")
-                );
-            } elseif (strtolower($name) == "[extend]") {
-                $outModules = array_merge($outModules, $manager->getAllModuleNames("extend"));
-            } elseif (strtolower($name) == "[pkgsrc]") {
-                $outModules = array_merge(
-                    $outModules,
-                    $manager->getAllModuleNames("pkgsrc")
-                );
-            } else {
-                $outModules[] = $name;
-            }
-        }
-        return $outModules;
     }
 
     /**
@@ -343,10 +259,10 @@ class RoboFile extends Tasks
     public function modulesRemove(array $modules)
     {
         foreach ($modules as $module) {
-            if (uninstall_module($module, "module")) {
-                $this->writeln("Package $module removed.");
+            if (uninstall_module($module, 'module')) {
+                $this->writeln("Package {$module} removed.");
             } else {
-                $this->writeln("Removing $module failed.");
+                $this->writeln("Removing {$module} failed.");
             }
         }
     }
@@ -363,7 +279,7 @@ class RoboFile extends Tasks
             $url = "https://extend.ulicms.de/{$module}.json";
             $json = file_get_contents_wrapper($url, true);
             $data = json_decode($json, true);
-            $releases = $data["data"];
+            $releases = $data['data'];
             $checker = new AvailablePackageVersionMatcher($releases);
             $this->writeln(
                 var_dump_str($checker->getCompatibleVersions())
@@ -380,10 +296,10 @@ class RoboFile extends Tasks
         if (count($theme) > 0) {
             $themesCount = count($theme);
             for ($i = 0; $i < $themesCount; $i++) {
-                $version = getThemeMeta($theme[$i], "version");
+                $version = getThemeMeta($theme[$i], 'version');
                 $line = $theme[$i];
                 if ($version !== null) {
-                    $line .= " $version";
+                    $line .= " {$version}";
                 }
                 $this->writeln($line);
             }
@@ -397,10 +313,10 @@ class RoboFile extends Tasks
     public function themesRemove(array $themes)
     {
         foreach ($themes as $theme) {
-            if (uninstall_module($theme, "theme")) {
-                $this->writeln("Package $theme removed.");
+            if (uninstall_module($theme, 'theme')) {
+                $this->writeln("Package {$theme} removed.");
             } else {
-                $this->writeln("Removing $theme failed.");
+                $this->writeln("Removing {$theme} failed.");
             }
         }
     }
@@ -416,7 +332,7 @@ class RoboFile extends Tasks
         string $directory,
         ?string $stop = null
     ): void {
-        $folder = Path::resolve($directory . "/up");
+        $folder = Path::resolve($directory . '/up');
 
         $migrator = new DBMigrator($component, $folder);
         try {
@@ -440,7 +356,7 @@ class RoboFile extends Tasks
         string $directory,
         ?string $stop = null
     ): void {
-        $folder = Path::resolve($directory . "/down");
+        $folder = Path::resolve($directory . '/down');
 
         $migrator = new DBMigrator($component, $folder);
         try {
@@ -461,7 +377,7 @@ class RoboFile extends Tasks
     {
         Database::setEchoQueries(true);
 
-        $migrator = new DBMigrator($component ? $component : "[all]", getcwd());
+        $migrator = new DBMigrator($component ?: '[all]', getcwd());
         if ($component) {
             $migrator->resetDBTrack();
         } else {
@@ -478,39 +394,12 @@ class RoboFile extends Tasks
     public function dbmigratorList(?string $component = null): void
     {
         $where = $component ? "component='" .
-                Database::escapeValue($component) . "'" : "1=1";
-        $result = Database::query("Select component, name, date from {prefix}dbtrack "
-                        . "where $where order by component, date", true);
+                Database::escapeValue($component) . "'" : '1=1';
+        $result = Database::query('Select component, name, date from {prefix}dbtrack '
+                        . "where {$where} order by component, date", true);
         while ($row = Database::fetchObject($result)) {
             $this->writeln("{$row->component} | {$row->name} | {$row->date}");
         }
-    }
-
-    /**
-     * get a list of all available patches
-     */
-    public function patchesAvailable()
-    {
-        $available = $this->patchckAvailable();
-        if (!$available) {
-            $this->writeln("No patches available");
-        }
-        $this->writeln(trim($available));
-    }
-
-    private function patchckAvailable()
-    {
-        $patchManager = new PatchManager();
-        return $patchManager->fetchPackageIndex();
-    }
-
-    /**
-     * Truncate list of installed patches in database
-     */
-    public function patchesTruncate(): void
-    {
-        $patchManager = new PatchManager();
-        $patchManager->truncateInstalledPatches();
     }
 
     /**
@@ -523,66 +412,17 @@ class RoboFile extends Tasks
     }
 
     /**
-     * List installed patches
-     */
-    public function patchesInstalled()
-    {
-        $patchManager = new PatchManager();
-        $installedPatches = $patchManager->getInstalledPatchNames();
-        if (count($installedPatches) == 0) {
-            $this->writeln("No Patches installed");
-            return;
-        }
-        foreach ($installedPatches as $patch) {
-            $this->writeln($patch);
-        }
-    }
-
-    /**
-     * install patches
-     * @param array $patchesToInstall name of the patches to install or "all"
-     */
-    public function patchesInstall(array $patchesToInstall): void
-    {
-        $patchManager = new PatchManager();
-        $available = $this->patchckAvailable();
-        if (!$available) {
-            $this->writeln("no patches available");
-            return;
-        }
-        $availablePatches = $patchManager->getAvailablePatches();
-
-        $filteredPatches = [];
-        foreach ($availablePatches as $patch) {
-            if (in_array($patch->name, $patchesToInstall) ||
-                    in_array("all", $patchesToInstall)) {
-                $filteredPatches[] = $patch;
-            }
-        }
-        // apply patches
-        foreach ($filteredPatches as $patch) {
-            $this->writeln("Apply patch {$patch->name}...");
-            if ($patch->install()) {
-                $this->writeln("Patch {$patch->name} applied");
-            } else {
-                $this->writeln("Installation of patch {$patch->name} failed.");
-                exit(1);
-            }
-        }
-    }
-
-    /**
      * Run PHPUnit Tests
      * @param string $testFile test file to run
      */
     public function testsRun(string $testFile = '')
     {
-        $command = "vendor/bin/phpunit";
-        if (DIRECTORY_SEPARATOR === "\\") {
-            $command = str_replace('/', "\\", $command);
+        $command = 'vendor/bin/phpunit';
+        if (DIRECTORY_SEPARATOR === '\\') {
+            $command = str_replace('/', '\\', $command);
         }
 
-        system("$command $testFile");
+        system("{$command} {$testFile}");
     }
 
     /**
@@ -591,12 +431,12 @@ class RoboFile extends Tasks
      */
     public function testsUpdateSnapshots(string $testFile = '')
     {
-        $command = "vendor/bin/phpunit -d --update-snapshots";
-        if (DIRECTORY_SEPARATOR === "\\") {
-            $command = str_replace('/', "\\", $command);
+        $command = 'vendor/bin/phpunit -d --update-snapshots';
+        if (DIRECTORY_SEPARATOR === '\\') {
+            $command = str_replace('/', '\\', $command);
         }
 
-        system("$command $testFile");
+        system("{$command} {$testFile}");
     }
 
     /**
@@ -656,9 +496,106 @@ class RoboFile extends Tasks
      */
     public function cron()
     {
-        do_event("before_cron");
+        do_event('before_cron');
         require 'lib/cron.php';
-        do_event("after_cron");
-        $this->writeln("finished cron at " . strftime("%x %X"));
+        do_event('after_cron');
+
+        $timezone = DateTimeHelper::getCurrentTimezone();
+        $currentLocale = DateTimeHelper::getCurrentLocale();
+
+        $formatter = new IntlDateFormatter($currentLocale, IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM, $timezone);
+        $pattern = str_replace(',', '', $formatter->getPattern());
+        $formatter->setPattern($pattern);
+
+        $formatedCurrentTime = $formatter->format(time());
+
+        $this->writeln('finished cron at ' . $formatedCurrentTime);
+    }
+
+    protected function initUliCMS()
+    {
+        try {
+            $this->initCore();
+        } catch (SqlException $e) {
+            $this->showException($e);
+        }
+    }
+
+    protected function showException(Exception $e)
+    {
+        $this->writeln($e->getMessage());
+    }
+
+    protected function initCore()
+    {
+        if (! defined('ULICMS_ROOT')) {
+            require dirname(__FILE__) . '/init.php';
+            require_once getLanguageFilePath('en');
+        }
+    }
+
+    private function showPageKeys($json)
+    {
+        $skipAttributes = [
+            'data',
+            'screenshot'
+        ];
+
+        foreach ($json as $key => $value) {
+            if (in_array($key, $skipAttributes)) {
+                continue;
+            }
+            if (is_array($value)) {
+                $processedValue = implode(', ', $value);
+            } else {
+                $processedValue = $value;
+            }
+            $this->writeln("{$key}: {$processedValue}");
+        }
+    }
+
+    private function getModuleInfo(string $name): string
+    {
+        $version = getModuleMeta($name, 'version');
+        $line = $name;
+
+        if ($version !== null) {
+            $line .= " {$version}";
+        }
+        $module = new Module($name);
+        $status = $module->isEnabled() ? 'enabled' : 'disabled';
+        $line .= " ({$status})";
+        return $line;
+    }
+
+    private function replaceModulePlaceholders(array $modules): array
+    {
+        $manager = new ModuleManager();
+        $manager->sync();
+        $outModules = [];
+
+        foreach ($modules as $name) {
+            if (strtolower($name) == '[all]') {
+                $outModules = array_merge(
+                    $outModules,
+                    $manager->getAllModuleNames()
+                );
+            } elseif (strtolower($name) == '[core]') {
+                $outModules = array_merge(
+                    $outModules,
+                    $manager->getAllModuleNames('core')
+                );
+            } elseif (strtolower($name) == '[extend]') {
+                $outModules = array_merge($outModules, $manager->getAllModuleNames('extend'));
+            } elseif (strtolower($name) == '[pkgsrc]') {
+                $outModules = array_merge(
+                    $outModules,
+                    $manager->getAllModuleNames('pkgsrc')
+                );
+            } else {
+                $outModules[] = $name;
+            }
+        }
+        return $outModules;
     }
 }

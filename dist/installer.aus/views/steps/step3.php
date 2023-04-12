@@ -1,9 +1,9 @@
 <?php
 use App\Utils\VersionComparison;
 
-$minPhpRequired = '8.0.2';
+$minPhpRequired = '8.1.0';
 
-$phpVersion = phpversion();
+$phpVersion = PHP_VERSION;
 
 $phpVersionCompatible = VersionComparison::compare(
     $phpVersion,
@@ -19,7 +19,8 @@ $phpModules = [
     'openssl',
     'dom',
     'xml',
-    'curl'
+    'curl',
+    'intl'
 ];
 
 sort($phpModules);
@@ -41,8 +42,8 @@ sort($phpModules);
     <?php
     foreach ($phpModules as $module) {
         $check = extension_loaded($module);
-        echo "<li>";
-        echo htmlspecialchars($module) . " ";
+        echo '<li>';
+        echo htmlspecialchars($module) . ' ';
 
         if ($check) {
             echo '<i class="fa fa-check text-green" aria-hidden="true"></i>';
@@ -50,7 +51,7 @@ sort($phpModules);
             echo '<i class="fa fa-exclamation-triangle text-red" aria-hidden="true"></i>';
         }
 
-        echo "</li>";
+        echo '</li>';
     }
 ?>
 </ul>

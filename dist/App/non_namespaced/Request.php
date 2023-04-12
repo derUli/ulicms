@@ -2,20 +2,22 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 use App\Constants\RequestMethod;
 
 class Request
 {
     public static function getPort(): ?int
     {
-        return isset($_SERVER['SERVER_PORT']) ? intval($_SERVER['SERVER_PORT']) : null;
+        return isset($_SERVER['SERVER_PORT']) ? (int)$_SERVER['SERVER_PORT'] : null;
     }
 
     public static function getProtocol(?string $suffix = null): string
     {
-        $protocol = self::isSSL() ? "https://" : "http://";
+        $protocol = self::isSSL() ? 'https://' : 'http://';
 
-        if (StringHelper::isNotNullOrWhitespace($suffix)) {
+        if (! empty($suffix)) {
             $protocol .= $suffix;
         }
         return $protocol;
@@ -41,16 +43,16 @@ class Request
                     } elseif ($value === 'false') {
                         $value = false;
                     }
-                    $value = intval((bool)$value);
+                    $value = (int)(bool)$value;
                     break;
                 case 'int':
-                    $value = (int) $value;
+                    $value = (int)$value;
                     break;
                 case 'float':
-                    $value = (float) $value;
+                    $value = (float)$value;
                     break;
                 case 'str':
-                    $value = (string) $value;
+                    $value = (string)$value;
                     break;
             }
         }
@@ -59,27 +61,7 @@ class Request
 
     public static function hasVar(string $name): bool
     {
-        return (isset($_POST[$name]) or isset($_GET[$name]));
-    }
-
-    // Übersetzung HTTP Status Code => Name
-    public static function getStatusCodeByNumber(int $nr): string
-    {
-        return Response::getStatusCodeByNumber($nr);
-    }
-
-    // Weiterleitung per Location header;
-    public static function redirect(
-        string $url = 'http://www.ulicms.de',
-        int $status = 302
-    ): void {
-        Response::redirect($url, $status);
-    }
-
-    public static function javascriptRedirect(
-        string $url = 'http://www.ulicms.de'
-    ): void {
-        Response::javascriptRedirect($url);
+        return isset($_POST[$name]) || isset($_GET[$name]);
     }
 
     public static function getMethod(): ?string
@@ -117,14 +99,79 @@ class Request
 
     public static function isSSL(): bool
     {
-        return (!empty($_SERVER['HTTPS']) and
-                $_SERVER['HTTPS'] !== 'off') ||
-                (self::getPort() === 443);
+        return (
+            ! empty($_SERVER['HTTPS']) &&
+            $_SERVER['HTTPS'] !== 'off') ||
+                (
+                    self::getPort() === 443
+                );
+    }
+
+    public static function getIp(): ?string
+    {
+        $proxy_headers = self::getProxyHeaders();
+        foreach ($proxy_headers as $proxy_header) {
+            if (isset($_SERVER[$proxy_header])) {
+                /**
+                 * HEADER ist gesetzt und dies ist eine gültige IP
+                 */
+                return $_SERVER[$proxy_header];
+            }
+        }
+        return $_SERVER['REMOTE_ADDR'] ?? null;
+    }
+
+    public static function isHeaderSent(string $header, ?array $headers = null): bool
+    {
+        $headers = ! $headers ? headers_list() : $headers;
+        $header = trim($header, ': ');
+        $result = false;
+
+        foreach ($headers as $hdr) {
+            if (stripos($hdr, $header) !== false) {
+                $result = true;
+            }
+        }
+
+        return $result;
+    }
+
+    public static function isAjaxRequest(): bool
+    {
+        return ! empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+                strtolower(
+                    $_SERVER['HTTP_X_REQUESTED_WITH']
+                ) == 'xmlhttprequest';
+    }
+
+    public static function getDomain(): ?string
+    {
+        return $_SERVER['HTTP_HOST'] ??
+                null;
+    }
+
+    public static function getReferrer(): ?string
+    {
+        $referrer = null;
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $referrer = $_SERVER['HTTP_REFERER'];
+        }
+        return $referrer;
+    }
+
+    public static function getUserAgent(): ?string
+    {
+        return $_SERVER['HTTP_USER_AGENT'] ?? null;
+    }
+
+    public static function getRequestUri(): ?string
+    {
+        return $_SERVER['REQUEST_URI'] ?? null;
     }
 
     private static function getProxyHeaders(): array
     {
-        return array(
+        return [
             'CLIENT_IP',
             'FORWARDED',
             'FORWARDED_FOR',
@@ -144,71 +191,6 @@ class Request
             'VIA',
             'X_FORWARDED',
             'X_FORWARDED_FOR'
-        );
-    }
-
-    public static function getIp(): ?string
-    {
-        $proxy_headers = self::getProxyHeaders();
-        foreach ($proxy_headers as $proxy_header) {
-            if (isset($_SERVER[$proxy_header])) {
-                /**
-                 * HEADER ist gesetzt und dies ist eine gültige IP
-                 */
-                return $_SERVER[$proxy_header];
-            }
-        }
-        return isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
-    }
-
-    public static function isHeaderSent(string $header, ?array $headers = null): bool
-    {
-        $headers = !$headers ? headers_list() : $headers;
-        $header = trim($header, ': ');
-        $result = false;
-
-        foreach ($headers as $hdr) {
-            if (stripos($hdr, $header) !== false) {
-                $result = true;
-            }
-        }
-
-        return $result;
-    }
-
-    public static function isAjaxRequest(): bool
-    {
-        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) and
-                strtolower(
-                    $_SERVER['HTTP_X_REQUESTED_WITH']
-                ) == 'xmlhttprequest');
-    }
-
-    public static function getDomain(): ?string
-    {
-        return isset($_SERVER['HTTP_HOST']) ?
-                $_SERVER['HTTP_HOST'] :
-                null;
-    }
-
-    public static function getReferrer(): ?string
-    {
-        $referrer = null;
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            $referrer = $_SERVER['HTTP_REFERER'];
-        }
-        return $referrer;
-    }
-
-    public static function getUserAgent(): ?string
-    {
-        return isset($_SERVER['HTTP_USER_AGENT']) ?
-                $_SERVER['HTTP_USER_AGENT'] : null;
-    }
-
-    public static function getRequestUri(): ?string
-    {
-        return isset($_SERVER['REQUEST_URI']) ?
-                $_SERVER['REQUEST_URI'] : null;
+        ];
     }
 }

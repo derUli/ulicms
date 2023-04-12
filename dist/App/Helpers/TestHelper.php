@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
-defined('ULICMS_ROOT') or exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use Closure;
 use Exception;
-use Helper;
 
 /**
  * This class contains tools for running in context of unit tests
@@ -27,8 +26,8 @@ class TestHelper extends Helper
     /**
      * Executes a closure and captures it's output
      * @param Closure $method
-     * @return string
      * @throws Exception
+     * @return string
      */
     public static function getOutput(Closure $method): string
     {
@@ -42,13 +41,12 @@ class TestHelper extends Helper
         }
     }
 
-
     /**
      * Check if the application is running on a Windows machine
      * @return bool
      */
     public static function isWindowsServer(): bool
     {
-        return defined("PHP_WINDOWS_VERSION_MAJOR");
+        return defined('PHP_WINDOWS_VERSION_MAJOR');
     }
 }

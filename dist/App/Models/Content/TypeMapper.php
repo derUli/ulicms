@@ -8,28 +8,29 @@ declare(strict_types=1);
 
 namespace App\Models\Content;
 
-use ModuleManager;
-use StringHelper;
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use function getModuleMeta;
+
+use ModuleManager;
 
 // this class maps the values in the "type" column of the
 // "content" table to the equally model class names
 class TypeMapper
 {
-    private static $mapping = array(
-        "page" => "Page",
-        "snippet" => "Snippet",
-        "list" => "Content_List",
-        "node" => "Node",
-        "link" => "Link",
-        "module" => "Module_Page",
-        "video" => "Video_Page",
-        "audio" => "Audio_Page",
-        "image" => "Image_Page",
-        "article" => "Article",
-        "language_link" => "Language_Link"
-    );
+    private static $mapping = [
+        'page' => 'Page',
+        'snippet' => 'Snippet',
+        'list' => 'Content_List',
+        'node' => 'Node',
+        'link' => 'Link',
+        'module' => 'Module_Page',
+        'video' => 'Video_Page',
+        'audio' => 'Audio_Page',
+        'image' => 'Image_Page',
+        'article' => 'Article',
+        'language_link' => 'Language_Link'
+    ];
 
     public static function getMappings(): array
     {
@@ -38,8 +39,7 @@ class TypeMapper
 
     public static function getModel($type): ?object
     {
-        if (!(isset(self::$mapping[$type])
-                and class_exists(self::$mapping[$type]))) {
+        if (! (isset(self::$mapping[$type]) && class_exists(self::$mapping[$type]))) {
             return null;
         }
         return new self::$mapping[$type]();
@@ -51,14 +51,14 @@ class TypeMapper
         $manager = new ModuleManager();
         $modules = $manager->getEnabledModuleNames();
         foreach ($modules as $module) {
-            $mappings = getModuleMeta($module, "type_classes");
+            $mappings = getModuleMeta($module, 'type_classes');
 
-            if (!$mappings) {
+            if (! $mappings) {
                 continue;
             }
 
             foreach ($mappings as $key => $value) {
-                if (StringHelper::isNullOrEmpty($value)) {
+                if (empty($value)) {
                     unset(self::$mapping[$key]);
                 } else {
                     self::$mapping[$key] = $value;

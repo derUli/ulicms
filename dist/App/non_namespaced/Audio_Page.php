@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 use App\Models\Media\Audio;
 
 // audio pages are pages that are linked to audio files
@@ -8,15 +10,10 @@ use App\Models\Media\Audio;
 class Audio_Page extends Page
 {
     public $audio = null;
-    public $type = "audio";
-    public $text_position = "after";
 
-    protected function fillVars($result = null)
-    {
-        parent::fillVars($result);
-        $this->audio = $result->audio;
-        $this->text_position = $result->text_position;
-    }
+    public $type = 'audio';
+
+    public $text_position = 'after';
 
     public function save()
     {
@@ -37,13 +34,13 @@ class Audio_Page extends Page
             return $this->create();
         }
         parent::update();
-        $sql = "update {prefix}content set audio = ?, "
-                . "text_position = ? where id = ?";
-        $args = array(
+        $sql = 'update {prefix}content set audio = ?, '
+                . 'text_position = ? where id = ?';
+        $args = [
             $this->audio,
             $this->text_position,
             $this->id
-        );
+        ];
 
         $result = Database::pQuery($sql, $args, true);
         return $result;
@@ -59,13 +56,19 @@ class Audio_Page extends Page
         $this->audio = $audio ? $audio->getID() : null;
     }
 
-
      /**
-     * Get css classes for Font Awesome icon
-     * @return string
-     */
+      * Get css classes for Font Awesome icon
+      * @return string
+      */
     public function getIcon(): string
     {
-        return "fas fa-volume-up";
+        return 'fas fa-volume-up';
+    }
+
+    protected function fillVars($result = null)
+    {
+        parent::fillVars($result);
+        $this->audio = $result->audio;
+        $this->text_position = $result->text_position;
     }
 }

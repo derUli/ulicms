@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Media\Video;
 use App\Models\Content\Category;
+use App\Models\Media\Video;
 
 class VideoTest extends \PHPUnit\Framework\TestCase
 {
@@ -13,10 +13,10 @@ class VideoTest extends \PHPUnit\Framework\TestCase
     public function testCreateUpdateAndDelete()
     {
         $video = new Video();
-        $video->setName("My Name");
-        $video->setMP4File("video.mp4");
-        $video->setOGGFile("video.ogv");
-        $video->setWebmFile("video.webm");
+        $video->setName('My Name');
+        $video->setMP4File('video.mp4');
+        $video->setOGGFile('video.ogv');
+        $video->setWebmFile('video.webm');
         $video->setCategoryId(1);
         $video->setWidth(640);
         $video->setHeight(480);
@@ -30,20 +30,20 @@ class VideoTest extends \PHPUnit\Framework\TestCase
         $id = $video->getId();
         $video = new Video($id);
         $this->assertNotNull($video->getID());
-        $this->assertEquals("My Name", $video->getName());
-        $this->assertEquals("video.mp4", $video->getMP4File());
-        $this->assertEquals("video.ogv", $video->getOggFile());
-        $this->assertEquals("video.webm", $video->getWebmFile());
+        $this->assertEquals('My Name', $video->getName());
+        $this->assertEquals('video.mp4', $video->getMP4File());
+        $this->assertEquals('video.ogv', $video->getOggFile());
+        $this->assertEquals('video.webm', $video->getWebmFile());
         $this->assertEquals(1, $video->getCategoryId());
         $this->assertEquals(1, $video->getCategory()
-                        ->getID());
+            ->getID());
         $this->assertEquals(640, $video->getWidth());
         $this->assertEquals(480, $video->getHeight());
 
-        $video->setName("New Name");
-        $video->setMP4File("not-video.mp4");
-        $video->setOGGFile("not-video.ogg");
-        $video->setWebmFile("not-video.webm");
+        $video->setName('New Name');
+        $video->setMP4File('not-video.mp4');
+        $video->setOGGFile('not-video.ogg');
+        $video->setWebmFile('not-video.webm');
         $video->setCategoryId(null);
 
         $video->setWidth(800);
@@ -54,10 +54,10 @@ class VideoTest extends \PHPUnit\Framework\TestCase
 
         $video = new Video($id);
 
-        $this->assertEquals("New Name", $video->getName());
-        $this->assertEquals("not-video.mp4", $video->getMP4File());
-        $this->assertEquals("not-video.ogg", $video->getOggFile());
-        $this->assertEquals("not-video.webm", $video->getWebmFile());
+        $this->assertEquals('New Name', $video->getName());
+        $this->assertEquals('not-video.mp4', $video->getMP4File());
+        $this->assertEquals('not-video.ogg', $video->getOggFile());
+        $this->assertEquals('not-video.webm', $video->getWebmFile());
         $this->assertEquals(null, $video->getCategoryId());
         $this->assertEquals(800, $video->getWidth());
         $this->assertEquals(600, $video->getHeight());
@@ -71,7 +71,7 @@ class VideoTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(1, $video->getCategoryId());
         $this->assertEquals(1, $video->getCategory()
-                        ->getID());
+            ->getID());
 
         $video->delete();
         $this->assertNull($video->getID());
@@ -82,10 +82,10 @@ class VideoTest extends \PHPUnit\Framework\TestCase
     public function testVideoHtml()
     {
         $video = new Video();
-        $video->setName("My Name");
-        $video->setMP4File("video.mp4");
-        $video->setOGGFile("video.ogv");
-        $video->setWebmFile("video.webm");
+        $video->setName('My Name');
+        $video->setMP4File('video.mp4');
+        $video->setOGGFile('video.ogv');
+        $video->setWebmFile('video.webm');
         $video->setWidth(800);
         $video->setHeight(600);
         $video->setCategoryId(1);
@@ -97,10 +97,10 @@ class VideoTest extends \PHPUnit\Framework\TestCase
         $savedVideos = [];
         for ($i = 1; $i <= 10; $i++) {
             $video = new Video();
-            $video->setName("My Name $i");
-            $video->setMP4File("video.mp4");
-            $video->setOGGFile("video.ogv");
-            $video->setWebmFile("video.webm");
+            $video->setName("My Name {$i}");
+            $video->setMP4File('video.mp4');
+            $video->setOGGFile('video.ogv');
+            $video->setWebmFile('video.webm');
             $video->setWidth(800);
             $video->setHeight(600);
             $video->setCategoryId(1);

@@ -14,12 +14,12 @@
 </form>
 <br />
 <form
-    action="<?php Template::escape(ModuleHelper::buildAdminURL("fortune2", "sClass=Fortune&sMethod=doSomething")); ?>"
+    action="<?php Template::escape(ModuleHelper::buildAdminURL('fortune2', 'sClass=Fortune&sMethod=doSomething')); ?>"
     method="post">
         <?php csrf_token_html(); ?>
     <button type="submit" class="btn btn-default">POST</button>
 </form>
 <br />
-<code><?php if (ViewBag::get("sample_text")) { ?>
-        <?php Template::escape(ViewBag::get("sample_text")); ?>
+<code><?php if (ViewBag::get('sample_text')) { ?>
+        <?php Template::escape(ViewBag::get('sample_text')); ?>
     <?php } ?></code>

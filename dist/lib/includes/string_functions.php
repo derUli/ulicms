@@ -2,48 +2,32 @@
 
 declare(strict_types=1);
 
-function cleanString(string $string, string $separator = '-'): string
-{
-    return StringHelper::cleanString($string, $separator);
-}
+use App\Helpers\StringHelper;
+use Nette\Utils\Random;
 
-if (!defined("RESPONSIVE_FM")) {
-    function sanitize(array & $array): void
+if (! defined('RESPONSIVE_FM')) {
+    function sanitize(array &$array): void
     {
-        foreach ($array as & $data) {
-            $data = str_ireplace(array(
+        foreach ($array as &$data) {
+            $data = str_ireplace([
                 "\r",
                 "\n",
-                "%0a",
-                "%0d"
-                    ), '', stripslashes($data));
+                '%0a',
+                '%0d'
+            ], '', stripslashes($data));
         }
     }
 }
 
-// TODO: Deprecate this
-// use unesc() and _unesc() instead
-function unhtmlspecialchars(string $string): string
-{
-    return _unesc($string);
-}
-
 function _unesc(string $string): string
 {
-    return html_entity_decode($string, ENT_COMPAT, "UTF-8");
+    return html_entity_decode($string, ENT_COMPAT, 'UTF-8');
 }
 
 function unesc(string $string): void
 {
     echo _unesc($string);
 }
-
-function br2nlr(
-    string $html
-): string {
-    return preg_replace('#<br\s*/?>#i', "\r\n", $html);
-}
-
 
 /**
  * Normalize line breaks
@@ -61,29 +45,6 @@ function normalizeLN(string $txt, string $style = "\r\n"): string
     );
     $txt = str_replace("\n", $style, $txt);
     return $txt;
-}
-
-function real_htmlspecialchars(string $string): string
-{
-    return StringHelper::realHtmlSpecialchars($string);
-}
-
-function multi_explode(array $delimiters, string $string): array
-{
-    return explode(
-        $delimiters[0],
-        strtr(
-            $string,
-            array_combine(
-                array_slice($delimiters, 1),
-                array_fill(
-                    0,
-                    count($delimiters) - 1,
-                    array_shift($delimiters)
-                )
-            )
-        )
-    );
 }
 
 /**
@@ -115,58 +76,9 @@ function getExcerpt(
     return StringHelper::getExcerpt($str, $startPos, $maxLength);
 }
 
-function decodeHTMLEntities(string $str): string
-{
-    return StringHelper::decodeHTMLEntities($str);
-}
-
-// Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
-// z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
-function keywordsFromString(string $text): array
-{
-    $return = [];
-
-    // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
-    $text = str_replace(array(
-        "\n",
-        '.',
-        ",",
-        "!",
-        "?"
-            ), " ", $text);
-
-    // text an Leerzeichen zerlegen
-    $array = explode(" ", $text);
-
-    foreach ($array as $word) {
-        if (strlen($word) == 0) {
-            // wenn kein Wort vorhanden ist nichts machen
-            continue;
-        }
-        if (!isset($return[$word])) {
-            // wenn das wort zum ersten mal gefunden wurde
-
-            $return[$word] = 1;
-        } else {
-            // wenn schon vorhanden
-            $return[$word]++;
-        }
-    }
-
-    $return = array_filter(
-        $return,
-        "decodeHTMLEntities"
-    );
-    // nach häufigkeit sortieren
-    arsort($return);
-
-    // array zurückgeben
-    return $return;
-}
-
 function stringOrNull($val): ?string
 {
-    return is_string($val) && !empty($val) ? $val : null;
+    return is_string($val) && ! empty($val) ? $val : null;
 }
 
 // Aus einer Boolean einen String machen ("true" oder "false")
@@ -179,37 +91,6 @@ function strbool($value): string
 function convertLineEndingsToLN(string $s): string
 {
     return normalizeLN($s, "\n");
-}
-
-function str_replace_nth(
-    string $search,
-    string $replace,
-    string $subject,
-    int $nth
-): string {
-    $found = preg_match_all('/' .
-            preg_quote($search) . '/', $subject, $matches, PREG_OFFSET_CAPTURE);
-    if (false !== $found && $found > $nth) {
-        return substr_replace(
-            $subject,
-            $replace,
-            $matches[0][$nth][1],
-            strlen($search)
-        );
-    }
-    return $subject;
-}
-
-function str_replace_first(
-    string $search,
-    string $replace,
-    string $subject
-): string {
-    $pos = strpos($subject, $search);
-    if ($pos !== false) {
-        return substr_replace($subject, $replace, $pos, strlen($search));
-    }
-    return $subject;
 }
 
 function esc($value): void
@@ -243,13 +124,13 @@ function bool2YesNo(
     ?string $yesString = null,
     ?string $noString = null
 ): string {
-    if (!$yesString) {
-        $yesString = get_translation("yes");
+    if (! $yesString) {
+        $yesString = get_translation('yes');
     }
-    if (!$noString) {
-        $noString = get_translation("no");
+    if (! $noString) {
+        $noString = get_translation('no');
     }
-    return ($value ? $yesString : $noString);
+    return $value ? $yesString : $noString;
 }
 
 /**
@@ -259,8 +140,7 @@ function bool2YesNo(
  */
 function rand_string(int $length): string
 {
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    return substr(str_shuffle($chars), 0, $length);
+    return Random::generate($length);
 }
 
 function getStringLengthInBytes(string $data): int
@@ -271,5 +151,5 @@ function getStringLengthInBytes(string $data): int
 
 function splitAndTrim(string $str): array
 {
-    return array_map('trim', explode(";", $str));
+    return array_map('trim', explode(';', $str));
 }

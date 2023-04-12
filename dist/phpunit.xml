@@ -2,26 +2,24 @@
 <phpunit
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     bootstrap="lib/phpunit_init.php"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
-    backupGlobals="true"
-    backupStaticAttributes="false"
-    cacheResult="true"
-    colors="true"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
-    forceCoversAnnotation="false"
-    stopOnError="true"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+    backupGlobals="true" 
+    cacheResult="true" 
+    colors="true" 
+    stopOnError="false"
     stopOnFailure="true"
     stopOnIncomplete="true"
     stopOnSkipped="true"
     stopOnRisky="true"
     timeoutForSmallTests="1"
     timeoutForMediumTests="10"
+    beStrictAboutOutputDuringTests="true"
     timeoutForLargeTests="60"
-    verbose="true"
+    cacheDirectory=".phpunit.cache"
+    backupStaticProperties="false"
+    requireCoverageMetadata="false"
 >
-    <coverage processUncoveredFiles="true">
+    <coverage>
         <include>
             <directory suffix=".php">./</directory>
         </include>
@@ -30,6 +28,7 @@
             <directory>installer.aus/</directory>
             <directory>installer</directory>
             <file>test.php</file>
+            <file>.php-cs-fixer.php</file>
             <directory>content/configurations</directory>
             <directory>content/modules/core_comments/lang</directory>
             <directory>content/modules/core_home/lang</directory>
@@ -70,7 +69,7 @@
             <file>lib/CMSConfigSample.php</file>
             <file>CMSConfig.php</file>
             <file>admin/index.php</file>
-            <file>lib/phpunit_init</file>
+            <file>lib/phpunit_init.php</file>
             <file>update.php</file>
             <file>admin.php</file>
             <file>admin/inc/getlinksforeditor.php</file>
@@ -84,9 +83,6 @@
     <php>
         <env name="ULICMS_ENVIRONMENT" value="test" force="true"/>
     </php>
-    <logging>
-        <!-- <log type="testdox-html" target="./log/testdox.html" /> -->
-    </logging>
     <testsuites>
         <testsuite name="Application Test Suite">
             <directory>tests/</directory>

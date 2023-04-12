@@ -12,9 +12,9 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
     public function testFormatSizeUnitsGB()
     {
         $this->assertEquals(
-            "64.05 GB",
+            '64.05 GB',
             NumberFormatHelper::formatSizeUnits(
-                floatval((64 * 1024 * 1024 * 1024) + (55 * 1024 * 1024))
+                (float)(64 * 1024 * 1024 * 1024) + (55 * 1024 * 1024)
             )
         );
     }
@@ -22,9 +22,9 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
     public function testFormatSizeUnitsMB()
     {
         $this->assertEquals(
-            "64.05 MB",
+            '64.05 MB',
             NumberFormatHelper::formatSizeUnits(
-                floatval((64 * 1024 * 1024) + (55 * 1024))
+                (float)(64 * 1024 * 1024) + (55 * 1024)
             )
         );
     }
@@ -32,28 +32,28 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
     public function testFormatSizeUnitsKB()
     {
         $this->assertEquals(
-            "64.05 KB",
-            NumberFormatHelper::formatSizeUnits(floatval((64 * 1024) + 55))
+            '64.05 KB',
+            NumberFormatHelper::formatSizeUnits((float)(64 * 1024) + 55)
         );
     }
 
     public function testFormatSizeUnitsBytes()
     {
         $this->assertEquals(
-            "64 B",
-            NumberFormatHelper::formatSizeUnits(floatval(64))
+            '64 B',
+            NumberFormatHelper::formatSizeUnits((float)64)
         );
         $this->assertEquals(
-            "0 B",
-            NumberFormatHelper::formatSizeUnits(floatval(0))
+            '0 B',
+            NumberFormatHelper::formatSizeUnits((float)0)
         );
     }
 
     public function testFormatSizeUnitsByte()
     {
         $this->assertEquals(
-            "1 B",
-            NumberFormatHelper::formatSizeUnits(floatval(1))
+            '1 B',
+            NumberFormatHelper::formatSizeUnits((float)1)
         );
     }
 
@@ -61,7 +61,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
     {
         $number = time() - (60 * 60 * 24 * 367 * 2);
         $this->assertEquals(
-            "vor über 2 Jahren",
+            'vor über 2 Jahren',
             NumberFormatHelper::formatTime($number)
         );
     }
@@ -78,7 +78,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
     {
         $timestamp = 1568118319;
         $this->assertEquals(
-            "2019-09-10 14:25",
+            '2019-09-10 14:25',
             NumberFormatHelper::timestampToSqlDate($timestamp)
         );
     }
@@ -87,7 +87,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
     {
         $timestamp = 1568118319;
         $this->assertEquals(
-            "2019-09-10 14:25:19",
+            '2019-09-10 14:25:19',
             NumberFormatHelper::timestampToSqlDate(
                 $timestamp,
                 NumberFormatHelper::SQL_DATE_WITH_SECONDS

@@ -1,5 +1,6 @@
 <?php
 
+use App\Translations\Translation;
 use App\Utils\CacheUtil;
 
 class InfoControllerTest extends \PHPUnit\Framework\TestCase
@@ -19,7 +20,7 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase
     {
         $controller = new InfoController();
         $this->assertStringContainsString(
-            "Neues in UliCMS 2020",
+            'Neues in UliCMS 2020',
             $controller->_fetchChangelog()
         );
     }
@@ -29,7 +30,7 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new InfoController();
         $legalInfo = $controller->_getComposerLegalInfo();
         $this->assertStringContainsString(
-            "<h1>Composer Licenses</h1>",
+            '<h1>Composer Licenses</h1>',
             $legalInfo
         );
 

@@ -30,6 +30,7 @@
         "ext-openssl": "*",
         "ext-dom": "*",
         "ext-libxml": "*",
+        "ext-intl": "*",
         "phpfastcache/phpfastcache": "*",
         "phpgangsta/googleauthenticator": "dev-master",
         "katzgrau/klogger": "dev-master",
@@ -38,7 +39,6 @@
         "scssphp/scssphp": "*",
         "chrisjean/php-ico": "*",
         "willdurand/negotiation": "*",
-        "cocur/slugify": "*",
         "matthiasmullie/minify": "*",
         "rakit/validation": "*",
         "nesbot/carbon": "*",
@@ -54,15 +54,15 @@
         "jaybizzle/laravel-crawler-detect": "^1.3",
         "mobiledetect/mobiledetectlib": "^3.74",
         "jfcherng/php-diff": "^6.13",
-        "jessedp/php-timezones": "^0.2.2"
+        "jessedp/php-timezones": "*",
+        "nette/utils": "^4.0"
     },
     "require-dev": {
         "spatie/phpunit-snapshot-assertions": "*",
         "phpunit/phpunit": "*",
         "friendsofphp/php-cs-fixer": "*",
         "overtrue/phplint": "*",
-        "phpstan/phpstan": "^1.9",
-        "barryvdh/composer-cleanup-plugin": "0.2.x"
+        "phpstan/phpstan": "^1.9"
     },
     "autoload": {
         "files": [
@@ -85,7 +85,6 @@
             "lib/includes/minify.php",
             "lib/includes/modules.php",
             "lib/includes/network.php",
-            "lib/includes/output.php",
             "lib/includes/packages.php",
             "lib/includes/pages.php",
             "lib/includes/path.php",

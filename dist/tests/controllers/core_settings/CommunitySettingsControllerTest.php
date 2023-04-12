@@ -7,9 +7,9 @@ class CommunitySettingsControllerTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $this->defaultSettings = [
-            "comments_enabled " => Settings::get("comments_enabled"),
-            "comments_must_be_approved" => Settings::get("comments_must_be_approved"),
-            "commentable_content_types" => Settings::get("commentable_content_types")
+            'comments_enabled ' => Settings::get('comments_enabled'),
+            'comments_must_be_approved' => Settings::get('comments_must_be_approved'),
+            'commentable_content_types' => Settings::get('commentable_content_types')
         ];
     }
 
@@ -24,33 +24,33 @@ class CommunitySettingsControllerTest extends \PHPUnit\Framework\TestCase
 
     public function testSavePostShouldSave(): void
     {
-        $_POST["comments_enabled"] = "1";
-        $_POST["comments_must_be_approved"] = "1";
-        $_POST["commentable_content_types"] = ["page", "article"];
+        $_POST['comments_enabled'] = '1';
+        $_POST['comments_must_be_approved'] = '1';
+        $_POST['commentable_content_types'] = ['page', 'article'];
 
-        Settings::set("default_language", 'en');
+        Settings::set('default_language', 'en');
 
         $controller = new CommunitySettingsController();
         $controller->_savePost();
 
         $this->assertEquals(
-            "1",
+            '1',
             Settings::get('comments_enabled')
         );
 
         $this->assertEquals(
-            "1",
+            '1',
             Settings::get('comments_must_be_approved')
         );
         $this->assertEquals(
-            "page;article",
+            'page;article',
             Settings::get('commentable_content_types')
         );
     }
 
     public function testSavePostShoulDelete(): void
     {
-        Settings::set("default_language", 'en');
+        Settings::set('default_language', 'en');
 
         $controller = new CommunitySettingsController();
         $controller->_savePost();

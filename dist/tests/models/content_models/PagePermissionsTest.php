@@ -6,63 +6,63 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
 {
     protected function tearDown(): void
     {
-        $sql = "delete from `{prefix}content` where slug = ?";
-        $args = array(
-            "page_permission_test"
-        );
+        $sql = 'delete from `{prefix}content` where slug = ?';
+        $args = [
+            'page_permission_test'
+        ];
         Database::pQuery($sql, $args, true);
     }
 
     public function testPagePermissionsConstructorDefault()
     {
         $permissions = new PagePermissions();
-        $this->assertFalse($permissions->getEditRestriction("admins"));
-        $this->assertFalse($permissions->getEditRestriction("group"));
-        $this->assertFalse($permissions->getEditRestriction("owner"));
-        $this->assertFalse($permissions->getEditRestriction("others"));
+        $this->assertFalse($permissions->getEditRestriction('admins'));
+        $this->assertFalse($permissions->getEditRestriction('group'));
+        $this->assertFalse($permissions->getEditRestriction('owner'));
+        $this->assertFalse($permissions->getEditRestriction('others'));
     }
 
     public function testPagePermissionsConstructorWithArguments()
     {
-        $permissions = new PagePermissions(array(
-            "group" => true,
-            "others" => false,
-            "owner" => true
-        ));
-        $this->assertFalse($permissions->getEditRestriction("admins"));
-        $this->assertTrue($permissions->getEditRestriction("group"));
-        $this->assertTrue($permissions->getEditRestriction("owner"));
-        $this->assertFalse($permissions->getEditRestriction("others"));
+        $permissions = new PagePermissions([
+            'group' => true,
+            'others' => false,
+            'owner' => true
+        ]);
+        $this->assertFalse($permissions->getEditRestriction('admins'));
+        $this->assertTrue($permissions->getEditRestriction('group'));
+        $this->assertTrue($permissions->getEditRestriction('owner'));
+        $this->assertFalse($permissions->getEditRestriction('others'));
     }
 
     public function testPagePermissionsSetEditRestriction()
     {
         $permissions = new PagePermissions();
-        $permissions->setEditRestriction("others", true);
-        $this->assertFalse($permissions->getEditRestriction("admins"));
-        $this->assertFalse($permissions->getEditRestriction("group"));
-        $this->assertFalse($permissions->getEditRestriction("owner"));
-        $this->assertTrue($permissions->getEditRestriction("others"));
+        $permissions->setEditRestriction('others', true);
+        $this->assertFalse($permissions->getEditRestriction('admins'));
+        $this->assertFalse($permissions->getEditRestriction('group'));
+        $this->assertFalse($permissions->getEditRestriction('owner'));
+        $this->assertTrue($permissions->getEditRestriction('others'));
     }
 
     public function testPagePermissionsgetAll()
     {
-        $permissions = new PagePermissions(array(
-            "group" => true,
-            "others" => false,
-            "owner" => true
-        ));
+        $permissions = new PagePermissions([
+            'group' => true,
+            'others' => false,
+            'owner' => true
+        ]);
         $all = $permissions->getAll();
         $this->assertEquals(4, count($all));
-        $this->assertTrue($all["group"]);
-        $this->assertFalse($all["others"]);
+        $this->assertTrue($all['group']);
+        $this->assertFalse($all['others']);
     }
 
     public function testCreatePageWithPermissions()
     {
         $page = new Page();
-        $page->slug = "page_permission_test";
-        $page->title = "Page Permission Test";
+        $page->slug = 'page_permission_test';
+        $page->title = 'Page Permission Test';
         $page->language = 'en';
 
         $manager = new UserManager();
@@ -74,30 +74,30 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
         $firstGroup = $groups[0];
         $page->group_id = $firstGroup->getId();
 
-        $page->getPermissions()->setEditRestriction("owner", true);
-        $page->getPermissions()->setEditRestriction("group", true);
+        $page->getPermissions()->setEditRestriction('owner', true);
+        $page->getPermissions()->setEditRestriction('group', true);
 
         $this->assertTrue($page->getPermissions()
-                        ->getEditRestriction("owner"));
+            ->getEditRestriction('owner'));
         $this->assertTrue($page->getPermissions()
-                        ->getEditRestriction("group"));
+            ->getEditRestriction('group'));
         $this->assertFalse($page->getPermissions()
-                        ->getEditRestriction("others"));
+            ->getEditRestriction('others'));
         $this->assertFalse($page->getPermissions()
-                        ->getEditRestriction("admins"));
+            ->getEditRestriction('admins'));
         $page->save();
 
         $page2 = new Page();
-        $page2->loadBySlugAndLanguage("page_permission_test", 'en');
-        $this->assertEquals("Page Permission Test", $page2->title);
+        $page2->loadBySlugAndLanguage('page_permission_test', 'en');
+        $this->assertEquals('Page Permission Test', $page2->title);
         $this->assertTrue($page->getPermissions()
-                        ->getEditRestriction("owner"));
+            ->getEditRestriction('owner'));
         $this->assertTrue($page->getPermissions()
-                        ->getEditRestriction("group"));
+            ->getEditRestriction('group'));
         $this->assertFalse($page->getPermissions()
-                        ->getEditRestriction("others"));
+            ->getEditRestriction('others'));
         $this->assertFalse($page->getPermissions()
-                        ->getEditRestriction("admins"));
+            ->getEditRestriction('admins'));
 
         $page2->delete();
     }
@@ -107,7 +107,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase
         $page = new Page();
 
         // Der Pumuckl ist nur das Hirngespinst von Meister Eder
-        $page->getPermissions()->setEditRestriction("pumuckl", true);
-        $this->assertNull($page->getPermissions()->getEditRestriction("pumuckl"));
+        $page->getPermissions()->setEditRestriction('pumuckl', true);
+        $this->assertNull($page->getPermissions()->getEditRestriction('pumuckl'));
     }
 }

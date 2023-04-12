@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('no direct script access allowed');
+
 use App\Exceptions\AccessDeniedException;
 
 /**
@@ -13,9 +15,9 @@ abstract class Controller
      * List of not callable public methods
      * @var type
      */
-    protected $blacklist = array(
-        "runCommand"
-    );
+    protected $blacklist = [
+        'runCommand'
+    ];
 
     /**
      * Constructor
@@ -24,9 +26,9 @@ abstract class Controller
     {
         // add all hooks to blacklist
         // blacklisted methods can not be remote called as action
-        $file = Path::resolve("ULICMS_ROOT/lib/ressources/hooks.txt");
+        $file = Path::resolve('ULICMS_ROOT/lib/ressources/hooks.txt');
         if (is_file($file)) {
-            $lines = StringHelper::linesFromFile($file);
+            $lines = \App\Helpers\StringHelper::linesFromFile($file);
             $lines = array_unique($lines);
             foreach ($lines as $line) {
                 $this->blacklist[] = ModuleHelper::underscoreToCamel($line);
@@ -39,19 +41,19 @@ abstract class Controller
      * Controller name and method can be specified as sClass and sMethod
      * Arguments by GET or POST request
      * Example URL: index.php?sClass=MyController&sMethod=helloWorld
-     * @return void
      * @throws AccessDeniedException
      * @throws BadMethodCallException
+     * @return void
      */
     public function runCommand(): void
     {
-        $sClass = $_REQUEST["sClass"];
-        if (isset($_REQUEST["sMethod"]) && StringHelper::isNotNullOrEmpty($_REQUEST["sMethod"]) && !in_array(
-            $_REQUEST["sMethod"],
+        $sClass = $_REQUEST['sClass'];
+        if (isset($_REQUEST['sMethod']) && ! empty($_REQUEST['sMethod']) && ! in_array(
+            $_REQUEST['sMethod'],
             $this->blacklist
         )
         ) {
-            $sMethod = $_REQUEST["sMethod"];
+            $sMethod = $_REQUEST['sMethod'];
             $sMethodWithRequestType = $sMethod . ucfirst(Request::getMethod());
 
             $reflection = null;
@@ -74,30 +76,30 @@ abstract class Controller
 
             // if there is a method, it is public and the user has the required
             // permissions, call it
-            if (method_exists($this, $sMethodWithRequestType) && !str_starts_with($sMethodWithRequestType, "_") && $reflectionWithRequestType && $reflectionWithRequestType->isPublic()) {
+            if (method_exists($this, $sMethodWithRequestType) && ! str_starts_with($sMethodWithRequestType, '_') && $reflectionWithRequestType && $reflectionWithRequestType->isPublic()) {
                 if (ControllerRegistry::userCanCall(
                     $sClass,
                     $sMethodWithRequestType
                 )) {
-                    $this->$sMethodWithRequestType();
+                    $this->{$sMethodWithRequestType}();
                 } else {
                     throw new AccessDeniedException(
-                        get_translation("forbidden")
+                        get_translation('forbidden')
                     );
                 }
-            } elseif (method_exists($this, $sMethod) && !str_starts_with($sMethod, "_")
-                    and $reflection and $reflection->isPublic()) {
+            } elseif (method_exists($this, $sMethod) && ! str_starts_with($sMethod, '_')
+                    && $reflection && $reflection->isPublic()) {
                 if (ControllerRegistry::userCanCall($sClass, $sMethod)) {
-                    $this->$sMethod();
+                    $this->{$sMethod}();
                 } else {
                     throw new AccessDeniedException(
-                        get_translation("forbidden")
+                        get_translation('forbidden')
                     );
                 }
             } else {
                 throw new BadMethodCallException(
-                    "method " . _esc($sMethod) .
-                    " is not callable"
+                    'method ' . _esc($sMethod) .
+                    ' is not callable'
                 );
             }
         }

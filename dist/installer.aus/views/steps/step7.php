@@ -5,8 +5,8 @@
             <label><input type="checkbox" value="yes" name="install_demodata"
                           id="install_demodata"
                           <?php
-                          if (!empty($_SESSION["install_demodata"])) {
-                              echo "checked";
+                          if (! empty($_SESSION['install_demodata'])) {
+                              echo 'checked';
                           }
                           ?>><?php echo TRANSLATION_INSTALL_DEMO_DATA; ?></label>
         </div>
