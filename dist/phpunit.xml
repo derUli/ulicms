@@ -28,6 +28,7 @@
             <directory>installer.aus/</directory>
             <directory>installer</directory>
             <file>test.php</file>
+            <file>.php-cs-fixer.php</file>
             <directory>content/configurations</directory>
             <directory>content/modules/core_comments/lang</directory>
             <directory>content/modules/core_home/lang</directory>
