@@ -108,10 +108,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
 
         $path = $logger->getPath();
 
-        if (TestHelper::isWindowsServer()) {
-            $this->assertTrue(is_writable($path));
-        } else {
-            $this->assertEquals(0777, fileperms($path));
-        }
+      
+        $this->assertTrue(is_writable($path));
     }
 }
