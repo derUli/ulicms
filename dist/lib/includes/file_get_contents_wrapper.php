@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Exceptions\CorruptDownloadException;
 use App\Security\Hash;
 use App\Utils\CacheUtil;
+use Fetcher\Fetcher;
 
 // die Funktionalität von file_get_contents
 // mit dem Curl-Modul umgesetzt
@@ -36,7 +37,7 @@ function file_get_contents_curl(string $url): ?string
  */
 function is_url(mixed $url): bool
 {
-    return filter_var($url, FILTER_VALIDATE_URL) !== false;
+    return Fetcher::isUrl((string)$url);
 }
 
 /**

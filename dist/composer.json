@@ -19,7 +19,11 @@
         {
             "url": "https://github.com/derUli/html-minifier",
             "type": "git"
-        }
+        },
+            {
+              "type": "git",
+              "url": "https://github.com/deruli/fetcher"
+            }    
     ],
     "require": {
         "php": ">=8.1",
@@ -55,7 +59,8 @@
         "mobiledetect/mobiledetectlib": "^3.74",
         "jfcherng/php-diff": "^6.13",
         "jessedp/php-timezones": "*",
-        "nette/utils": "^4.0"
+        "nette/utils": "^4.0",
+        "deruli/fetcher": "*"
     },
     "require-dev": {
         "spatie/phpunit-snapshot-assertions": "*",
