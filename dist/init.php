@@ -27,15 +27,6 @@ define('ULICMS_CONTENT', ULICMS_ROOT . '/content');
 define('ULICMS_GENERATED', ULICMS_CONTENT . '/generated');
 define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
 
-use App\Exceptions\ConnectionFailedException;
-use App\Exceptions\SqlException;
-use App\Models\Content\TypeMapper;
-use App\Models\Content\Types\DefaultContentTypes;
-use App\Registries\HelperRegistry;
-use App\Registries\LoggerRegistry;
-use App\Registries\ModelRegistry;
-use App\Utils\Logger;
-
 // load composer packages
 $composerAutoloadFile = dirname(__FILE__) . '/vendor/autoload.php';
 
@@ -48,22 +39,14 @@ if (is_file($composerAutoloadFile)) {
     );
 }
 
-// Autoloader
-spl_autoload_register(function($className) {
-    // Interim solution for not yet namespaced classes
-    if (! str_contains($className, '\\')) {
-        $className = "App\\non_namespaced\\{$className}";
-    }
-
-    $basePath = ULICMS_ROOT . "/{$className}.php";
-    $basePath = str_replace('\\', '/', $basePath);
-
-    if (! is_file($basePath)) {
-        return;
-    }
-
-    require $basePath;
-});
+use App\Exceptions\ConnectionFailedException;
+use App\Exceptions\SqlException;
+use App\Models\Content\TypeMapper;
+use App\Models\Content\Types\DefaultContentTypes;
+use App\Registries\HelperRegistry;
+use App\Registries\LoggerRegistry;
+use App\Registries\ModelRegistry;
+use App\Utils\Logger;
 
 // if config exists require_config else redirect to installer
 $path_to_config = dirname(__FILE__) . '/CMSConfig.php';
