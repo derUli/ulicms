@@ -16,7 +16,7 @@ use Fetcher\Fetcher;
  */
 function is_url(mixed $url): bool
 {
-    return Fetcher::isUrl((string)$url);
+    return is_string($url) ? Fetcher::isUrl($url) : false;
 }
 
 /**
@@ -24,20 +24,20 @@ function is_url(mixed $url): bool
  *
  * @deprecated since 2023.3
  * @param string $url
- * @param bool $no_cache
- * @param type $checksum
- * @throws CorruptDownloadException
+ * @param bool $noCache
+ * @param string|null $checksum
+ * 
  * @return string|null
  */
 function file_get_contents_wrapper(
     string $url,
     bool $noCache = false,
-    $checksum = null
+    ?string $checksum = null
 ): ?string {
     $content = null;
 
     if (! is_url($url)) {
-        return is_file($url) ? file_get_contents($url) : null;
+        return is_file($url) ? (string)file_get_contents($url) : null;
     }
 
     $cacheItemId = Hash::hashCacheIdentifier($url);
@@ -45,7 +45,7 @@ function file_get_contents_wrapper(
     $cacheAdapter = ! $noCache ? CacheUtil::getAdapter(true) : null;
 
     if ($cacheAdapter && $cacheAdapter->has($cacheItemId)) {
-        return $cacheAdapter->get($cacheItemId);
+        return (string)$cacheAdapter->get($cacheItemId);
     }
 
     $fetcher = new Fetcher($url);
