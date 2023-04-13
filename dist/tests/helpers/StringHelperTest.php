@@ -1,12 +1,13 @@
 <?php
-use Spatie\Snapshots\MatchesSnapshots;
 
 use App\Helpers\StringHelper;
+
+use Spatie\Snapshots\MatchesSnapshots;
 
 class StringHelperTest extends \PHPUnit\Framework\TestCase
 {
     use MatchesSnapshots;
-    
+
     public function testRemoveEmptyLineFromString()
     {
         $input = file_get_contents(
@@ -90,8 +91,8 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
     {
         $inputFile = Path::resolve('ULICMS_ROOT/tests/fixtures/trimLines.input.txt');
 
-        $actual = file_get_contents($inputFile);
-        
+        $actual = StringHelper::trimLines(file_get_contents($inputFile));
+
         $this->assertMatchesTextSnapshot($actual);
     }
 

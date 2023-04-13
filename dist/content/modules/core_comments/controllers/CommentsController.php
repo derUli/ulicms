@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Constants\CommentStatus;
+use App\Controllers\MainClass;
 use App\Exceptions\DatasetNotFoundException;
 use App\Exceptions\NotImplementedException;
 use App\HTML as HTML;

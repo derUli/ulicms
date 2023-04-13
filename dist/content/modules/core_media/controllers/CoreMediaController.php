@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Controllers\MainClass;
 use MediaEmbed\MediaEmbed;
 
 class CoreMediaController extends MainClass

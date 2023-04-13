@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\MainClass;
 use Michelf\MarkdownExtra;
 
 class InfoController extends MainClass

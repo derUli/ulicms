@@ -1,5 +1,7 @@
 <?php
 
+use App\Controllers\MainClass;
+
 class Fortune extends MainClass
 {
     private $moduleName = 'fortune2';

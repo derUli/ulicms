@@ -1,8 +1,5 @@
 Hallo Welt
-   Das ist eine Einrückung
-   
-		Diesmal auch mit
-			Tabulatoren
-			
-			
-			# Foo
+Das ist eine Einrückung
+Diesmal auch mit
+Tabulatoren
+# Foo

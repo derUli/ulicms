@@ -1,6 +1,5 @@
 <?php
 
-use App\Helpers\TestHelper;
 use App\Registries\LoggerRegistry;
 use App\Utils\Logger;
 
@@ -108,7 +107,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
 
         $path = $logger->getPath();
 
-      
+
         $this->assertTrue(is_writable($path));
     }
 }
