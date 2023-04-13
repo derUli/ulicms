@@ -4,6 +4,10 @@ API-Änderungen:
 * Controller in Namespace App\Controllers verschoben
 * MainClass in Namespace App\Controllers verschoben
 
+
+Entfernte Features:
+* Scroll To Top
+
 ===== Neues in UliCMS 2023.2 =====
 
 Neue Features:

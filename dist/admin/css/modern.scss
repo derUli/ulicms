@@ -73,16 +73,6 @@ button,
     }
 }
 
-#scroll-to-top {
-    position: fixed;
-    bottom: 5px;
-    right: 20px;
-    padding: 0;
-    display: none;
-    font-size: 32px;
-    z-index: 5;
-}
-
 button:disabled, .disabled {
     cursor: not-allowed;
     pointer-events: all !important;

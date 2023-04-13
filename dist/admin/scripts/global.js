@@ -190,7 +190,6 @@ $(() => {
         step: 30
     });
 
-
     // User has to confirm logout
     $("a.backend-menu-item-logout").click((event) => {
         event.preventDefault();
@@ -204,24 +203,6 @@ $(() => {
             }
         });
     });
-
-    // show a scroll-to-top arrow
-    // if the scroll viewport isn't at top of the page
-    $(window).scroll(() => {
-        if ($(window).scrollTop() > 0) {
-            $("#scroll-to-top").fadeIn();
-        } else {
-            $("#scroll-to-top").fadeOut();
-        }
-    });
-
-    // scroll to top arrow at bottom right
-    $("#scroll-to-top").click((event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        zenscroll.toY(0);
-    });
-
 
     $.fn.toggleVisibility = function (state) {
         return this.each(function () {

@@ -51,9 +51,6 @@ $passwordSecurityTranslation->render();
 </div>
 <?php do_event('admin_copyright_footer_left'); ?>
 </div>
-<a href="#" id="scroll-to-top" class="has-pointer">
-    <?php echo icon('fas fa-arrow-circle-up'); ?>
-</a>
 <?php do_event('backend_footer'); ?>
 </body>
 </html>
