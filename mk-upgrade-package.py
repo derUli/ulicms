@@ -53,7 +53,6 @@ def main():
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
 
     update_script = os.path.join(target, "dist", "update.php")
-
     
     content_dir_from = os.path.join(source_dir, "dist", "App", "Models", "Content")
     content_dir_to = os.path.join(target, "dist", "App", "Models", "Content")
