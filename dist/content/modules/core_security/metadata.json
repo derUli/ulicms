@@ -1,6 +1,6 @@
 {
     "source": "core",
-    "version": "2023.2",
+    "version": "2023.3",
     "embed": false,
     "controllers": {
         "CoreSecurityController": "controllers/CoreSecurityController.php"
