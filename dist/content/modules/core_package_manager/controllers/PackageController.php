@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Controllers\MainClass;
 use function App\HTML\text;
 use App\Services\Connectors\PackageSourceConnector;
+use Fetcher\Fetcher;
 use zz\Html\HTMLMinify;
 
 class PackageController extends MainClass
@@ -56,8 +57,11 @@ class PackageController extends MainClass
 
     public function _getPackageDownloadUrl(string $package): ?string
     {
+
         $url = "https://extend.ulicms.de/{$package}.html";
-        return curl_url_exists($url) ? $url : null;
+        $fetcher = new Fetcher($url);
+
+        return $fetcher->exists() ? $url : null;
     }
 
     public function getThemeInfo(): void

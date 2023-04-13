@@ -12,6 +12,7 @@ use App\Security\SpamChecker\CommentSpamChecker;
 use App\Security\SpamChecker\SpamFilterConfiguration;
 use ContentFactory;
 use Database;
+use Fetcher\Fetcher;
 use InvalidArgumentException;
 use Model;
 use ModuleHelper;
@@ -137,7 +138,7 @@ class Comment extends Model
 
     public function setAuthorUrl(?string $val): void
     {
-        $this->author_url = is_url($val) ? (string)$val : null;
+        $this->author_url = Fetcher::isUrl((string)$val) ? (string)$val : null;
     }
 
     public function getDate()

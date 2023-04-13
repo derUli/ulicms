@@ -5,10 +5,10 @@ declare(strict_types=1);
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Constants\RequestMethod;
+use App\Controllers\Controller;
 use App\Helpers\Helper;
 use App\HTML\Form;
 use App\Models\Content\Language;
-use App\Controllers\Controller;
 
 class ModuleHelper extends Helper
 {

@@ -1,6 +1,5 @@
 <?php
 
-use function App\HTML\icon;
 
 use  App\Translations\JSTranslation;
 

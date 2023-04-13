@@ -1,5 +1,7 @@
 <?php
 
+use Fetcher\Fetcher;
+
 class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase
 {
     public function testExtendUpgradeHelper()
@@ -23,7 +25,7 @@ class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase
                 $module->url
             );
 
-            $this->assertTrue(is_url($module->url));
+            $this->assertTrue(Fetcher::isUrl($module->url));
         }
         foreach ($this->getExpectedModuleNames() as $expectedModuleName) {
             $this->assertContains($expectedModuleName, $actualModuleNames);

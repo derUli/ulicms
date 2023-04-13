@@ -9,6 +9,8 @@ use Fetcher\Fetcher;
 
 /**
  * Check if a given variable is an URL
+ * 
+ * @deprecated since 2023.3
  * @param mixed $url
  * @return bool
  */
@@ -19,6 +21,8 @@ function is_url(mixed $url): bool
 
 /**
  * Retrieves an URL by curl if available or by file_get_contents
+ *
+ * @deprecated since 2023.3
  * @param string $url
  * @param bool $no_cache
  * @param type $checksum
@@ -47,7 +51,7 @@ function file_get_contents_wrapper(
     $fetcher = new Fetcher($url);
     $content = $fetcher->fetch();
 
-    if ($content &&! empty($checksum) && md5($content) !== strtolower($checksum)
+    if ($content && ! empty($checksum) && md5($content) !== strtolower($checksum)
     ) {
         throw new CorruptDownloadException(
             "Download of {$url} - Checksum validation failed"
@@ -63,6 +67,8 @@ function file_get_contents_wrapper(
 
 /**
  * Check if an URL exists
+ *
+ * @deprecated since 2023.3
  * @param string $url
  * @return bool
  */
