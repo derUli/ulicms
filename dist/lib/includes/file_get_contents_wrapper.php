@@ -44,14 +44,14 @@ function file_get_contents_wrapper(
 
     $cacheAdapter = ! $noCache ? CacheUtil::getAdapter(true) : null;
 
-    if ($cacheAdapter && $cacheAdapter->has($cacheItemId)) {
-        return (string)$cacheAdapter->get($cacheItemId);
+    if ($cacheAdapter && is_string($cacheAdapter->get($cacheItemId))) {
+        return $cacheAdapter->get($cacheItemId);
     }
 
     $fetcher = new Fetcher($url);
     $content = $fetcher->fetch();
 
-    if ($content && ! empty($checksum) && md5($content) !== strtolower($checksum)
+    if ($content && !empty($checksum) && md5($content) !== strtolower($checksum)
     ) {
         throw new CorruptDownloadException(
             "Download of {$url} - Checksum validation failed"
