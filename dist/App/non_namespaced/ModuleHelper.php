@@ -8,6 +8,7 @@ use App\Constants\RequestMethod;
 use App\Helpers\Helper;
 use App\HTML\Form;
 use App\Models\Content\Language;
+use App\Controllers\Controller;
 
 class ModuleHelper extends Helper
 {

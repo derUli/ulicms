@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Packages\SinPackageInstaller;
 
-class PkgInfoController extends Controller
+class PkgInfoController extends \App\Controllers\Controller
 {
     public function installPost(): void
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Services\Connectors\AvailablePackageVersionMatcher;
 
-class ExtendUpgradeHelper extends Controller
+class ExtendUpgradeHelper extends \App\Controllers\Controller
 {
     public function getModules(): array
     {

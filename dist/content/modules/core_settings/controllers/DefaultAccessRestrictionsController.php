@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class DefaultAccessRestrictionsController extends Controller
+class DefaultAccessRestrictionsController extends \App\Controllers\Controller
 {
     public function _savePost(): void
     {

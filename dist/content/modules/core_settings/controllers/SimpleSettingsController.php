@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Utils\CacheUtil;
 use jessedp\Timezones\Timezones;
 
-class SimpleSettingsController extends Controller
+class SimpleSettingsController extends \App\Controllers\Controller
 {
     public function _savePost(): void
     {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Utils\CacheUtil;
 use App\Utils\File;
 
-class FaviconController extends Controller
+class FaviconController extends \App\Controllers\Controller
 {
     public function _getSizes($highResolution = false): array
     {

@@ -6,7 +6,7 @@ use App\Helpers\ImageScaleHelper;
 use App\Utils\CacheUtil;
 use App\Utils\File;
 
-class LogoController extends Controller
+class LogoController extends \App\Controllers\Controller
 {
     public function _buildFileName(
         string $filename,

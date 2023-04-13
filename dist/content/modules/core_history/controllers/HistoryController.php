@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Models\Content\VCS;
 use App\Utils\CacheUtil;
 
-class HistoryController extends Controller
+class HistoryController extends \App\Controllers\Controller
 {
     public function doRestore(): void
     {

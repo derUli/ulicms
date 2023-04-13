@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Exceptions\NotImplementedException;
 
-class RegistrationController extends Controller
+class RegistrationController extends \App\Controllers\Controller
 {
     // TODO: move user registration code to this controller
     public function registerPost(): void

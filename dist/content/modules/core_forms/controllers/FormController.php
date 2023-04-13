@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class FormController extends Controller
+class FormController extends \App\Controllers\Controller
 {
     public function __construct()
     {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Models\Users\PasswordReset;
 use App\Utils\CacheUtil;
 
-class SessionManager extends Controller
+class SessionManager extends \App\Controllers\Controller
 {
     public function login(): void
     {

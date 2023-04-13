@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class AudioController extends Controller
+class AudioController extends \App\Controllers\Controller
 {
     public function createPost(): void
     {

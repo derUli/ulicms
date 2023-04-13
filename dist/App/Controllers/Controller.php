@@ -2,9 +2,18 @@
 
 declare(strict_types=1);
 
+namespace App\Controllers;
+
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Exceptions\AccessDeniedException;
+use App\Helpers\StringHelper;
+use BadMethodCallException;
+use ControllerRegistry;
+use ModuleHelper;
+use Path;
+use ReflectionMethod;
+use Request;
 
 /**
  * All module controllers must inherited from this class
@@ -28,7 +37,7 @@ abstract class Controller
         // blacklisted methods can not be remote called as action
         $file = Path::resolve('ULICMS_ROOT/lib/ressources/hooks.txt');
         if (is_file($file)) {
-            $lines = \App\Helpers\StringHelper::linesFromFile($file);
+            $lines = StringHelper::linesFromFile($file);
             $lines = array_unique($lines);
             foreach ($lines as $line) {
                 $this->blacklist[] = ModuleHelper::underscoreToCamel($line);

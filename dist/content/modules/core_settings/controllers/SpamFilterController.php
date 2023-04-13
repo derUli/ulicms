@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class SpamFilterController extends Controller
+class SpamFilterController extends \App\Controllers\Controller
 {
     public function _savePost(): void
     {

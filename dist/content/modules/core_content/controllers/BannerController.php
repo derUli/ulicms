@@ -6,7 +6,7 @@ use App\Exceptions\DatasetNotFoundException;
 use App\Models\Content\Advertisement\Banner;
 use App\Utils\CacheUtil;
 
-class BannerController extends Controller
+class BannerController extends \App\Controllers\Controller
 {
     public function __construct()
     {

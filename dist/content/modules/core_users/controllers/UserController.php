@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Security\PermissionChecker;
 
-class UserController extends Controller
+class UserController extends \App\Controllers\Controller
 {
     public function __construct()
     {

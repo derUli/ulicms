@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Utils\CacheUtil;
 
-class FooterTextController extends Controller
+class FooterTextController extends \App\Controllers\Controller
 {
     public function _savePost(): void
     {

@@ -8,7 +8,7 @@ use App\Utils\CacheUtil;
 
 use Rakit\Validation\Validator;
 
-class LanguageController extends Controller
+class LanguageController extends \App\Controllers\Controller
 {
     public function _createPost(): Language
     {

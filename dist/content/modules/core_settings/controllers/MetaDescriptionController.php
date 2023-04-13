@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Utils\CacheUtil;
 
-class MetaDescriptionController extends Controller
+class MetaDescriptionController extends \App\Controllers\Controller
 {
     public function _savePost(): void
     {

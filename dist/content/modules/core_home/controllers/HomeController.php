@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Helpers\StringHelper;
 use zz\Html\HTMLMinify;
 
-class HomeController extends Controller
+class HomeController extends \App\Controllers\Controller
 {
     public function getModel(): HomeViewModel
     {

@@ -21,7 +21,7 @@ use Rakit\Validation\Validator;
 
 use zz\Html\HTMLMinify;
 
-class PageController extends Controller
+class PageController extends \App\Controllers\Controller
 {
     public const MODULE_NAME = 'core_content';
 

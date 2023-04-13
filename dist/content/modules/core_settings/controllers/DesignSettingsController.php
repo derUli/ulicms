@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Packages\Theme;
 use App\Utils\CacheUtil;
 
-class DesignSettingsController extends Controller
+class DesignSettingsController extends \App\Controllers\Controller
 {
     protected $generatedSCSS;
 

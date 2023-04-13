@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Models\Content\Categories;
 
-class CategoryController extends Controller
+class CategoryController extends \App\Controllers\Controller
 {
     public function __construct()
     {

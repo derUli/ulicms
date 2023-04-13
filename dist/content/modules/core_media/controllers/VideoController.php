@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class VideoController extends Controller
+class VideoController extends \App\Controllers\Controller
 {
     public function createPost(): void
     {
