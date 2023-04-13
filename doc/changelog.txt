@@ -1,3 +1,8 @@
+===== Neues in UliCMS 2023.3 =====
+
+API-Änderungen:
+* MainClass in Namespace App\Controllers verschoben
+
 ===== Neues in UliCMS 2023.2 =====
 
 Neue Features:
