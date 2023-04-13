@@ -9,7 +9,7 @@ use Fetcher\Fetcher;
 
 /**
  * Check if a given variable is an URL
- * 
+ *
  * @deprecated since 2023.3
  * @param mixed $url
  * @return bool
@@ -26,7 +26,7 @@ function is_url(mixed $url): bool
  * @param string $url
  * @param bool $noCache
  * @param string|null $checksum
- * 
+ *
  * @return string|null
  */
 function file_get_contents_wrapper(
