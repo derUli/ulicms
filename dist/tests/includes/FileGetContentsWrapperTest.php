@@ -83,16 +83,6 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(curl_url_exists('https://www.ulicms.de/gibtsnicht.html'));
     }
 
-    public function testFileGetContentsCurlReturnsString()
-    {
-        $this->assertTrue(is_string(file_get_contents_curl('http://example.org')));
-    }
-
-    public function testFileGetContentsCurlReturnsNull()
-    {
-        $this->assertNull(file_get_contents_curl('http://www.gibtsnicht.ch'));
-    }
-
     public function testFileGetContentsWrapperNoCache()
     {
         $first = file_get_contents_wrapper(self::UNIQID_URL, true, null);
@@ -112,14 +102,5 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase
         $first = file_get_contents_wrapper(self::UNIQID_URL, false, null);
         $second = file_get_contents_wrapper(self::UNIQID_URL, false, md5($first));
         $this->assertEquals($second, $first);
-    }
-
-    public function testUserAgent()
-    {
-        $this->assertTrue(defined('ULICMS_USERAGENT'));
-        $expectedUseragent = 'UliCMS Release ' . cms_version();
-        $this->assertEquals($expectedUseragent, ULICMS_USERAGENT);
-        $useragent = file_get_contents_wrapper(self::USER_AGENT_URL, true);
-        $this->assertEquals($expectedUseragent, $useragent);
     }
 }

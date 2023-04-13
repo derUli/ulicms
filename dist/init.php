@@ -186,13 +186,6 @@ if (! Settings::get('session_name')) {
 
 App\Utils\Session\sessionName(Settings::get('session_name'));
 
-$useragent = Settings::get('useragent');
-
-define(
-    'ULICMS_USERAGENT',
-    $useragent ?: 'UliCMS Release ' . cms_version()
-);
-
 $cache_period = Settings::get('cache_period');
 
 // by Check if the cache expiry is set.
