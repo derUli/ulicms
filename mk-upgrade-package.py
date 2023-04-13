@@ -33,7 +33,7 @@ def main():
     source_dir = os.path.dirname(__file__)
 
     ignore = ['.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
-                       "Releases", "cms-config.php", "content",
+                       "Releases", "cms-config.php", "content"
                        ".gitignore", ".htaccess", "installer.aus", "installer",
               "modules", "templates", "contents.css",
               "comments", "*~", ".settings", ".project", ".buildpath",
@@ -51,14 +51,15 @@ def main():
 
     print("copying files")
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
-
+    
     update_script = os.path.join(target, "dist", "update.php")
     
     content_dir_from = os.path.join(source_dir, "dist", "App", "Models", "Content")
     content_dir_to = os.path.join(target, "dist", "App", "Models", "Content")
-    
-    shutil.copytree(content_dir_from, content_dir_to, ignore=IGNORE_PATTERNS)
 
+    if not os.path.exists(content_dir_to):
+        shutil.copytree(content_dir_from, content_dir_to, ignore=IGNORE_PATTERNS)
+    
     modules_dir_from = os.path.join(source_dir, "dist", "content", "modules")
     modules_dir_to = os.path.join(target, "dist", "content", "modules")
 
