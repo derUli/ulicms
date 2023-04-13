@@ -13,20 +13,26 @@ use App\Helpers\DateTimeHelper;
  */
 class UliCMSVersion
 {
+    private string $codeName;
+
+    private int $releaseYear;
+
+    private int $buildDate;
+
+    private array $internalVersion;
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->codename = 'Beetle-Eating Nandu';
+        $this->codeName = 'Beetle-Eating Nandu';
         $this->releaseYear = 2023;
         $this->buildDate = 0; // {InsertBuildDate}
         $this->internalVersion = [
             2023,
             3
         ];
-
-        $this->update = '';
     }
 
     /**
@@ -44,7 +50,7 @@ class UliCMSVersion
      */
     public function getCodeName(): string
     {
-        return $this->codename;
+        return $this->codeName;
     }
 
     /**
