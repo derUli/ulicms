@@ -70,6 +70,12 @@
         "phpstan/phpstan": "^1.9"
     },
     "autoload": {
+        "psr-4": {
+            "": [
+                ".",
+                "App/non_namespaced"
+            ]
+        },
         "files": [
             "App/Utils/Session/Session.php",
             "App/HTML/functions.php",
@@ -100,12 +106,6 @@
             "lib/includes/types.php",
             "lib/includes/url.php",
             "lib/includes/users_api.php"
-        ],
-        "psr-4": {
-            "": [
-                ".",
-                "App/non_namespaced"
-            ]
-        }
+        ]
     }
 }

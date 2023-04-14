@@ -581,7 +581,7 @@ function get_site_slogan(): string
 
 function site_slogan(): void
 {
-    echo Template::siteSlogan();
+    Template::siteSlogan();
 }
 
 function motto(): void

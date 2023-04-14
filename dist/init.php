@@ -27,6 +27,16 @@ define('ULICMS_CONTENT', ULICMS_ROOT . '/content');
 define('ULICMS_GENERATED', ULICMS_CONTENT . '/generated');
 define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
 
+use App\Exceptions\ConnectionFailedException;
+use App\Exceptions\SqlException;
+use App\Models\Content\TypeMapper;
+use App\Models\Content\Types\DefaultContentTypes;
+use App\Registries\HelperRegistry;
+use App\Registries\LoggerRegistry;
+use App\Registries\ModelRegistry;
+use App\Exceptions\FileNotFoundException;
+use App\Utils\Logger;
+
 // load composer packages
 $composerAutoloadFile = dirname(__FILE__) . '/vendor/autoload.php';
 
@@ -39,14 +49,6 @@ if (is_file($composerAutoloadFile)) {
     );
 }
 
-use App\Exceptions\ConnectionFailedException;
-use App\Exceptions\SqlException;
-use App\Models\Content\TypeMapper;
-use App\Models\Content\Types\DefaultContentTypes;
-use App\Registries\HelperRegistry;
-use App\Registries\LoggerRegistry;
-use App\Registries\ModelRegistry;
-use App\Utils\Logger;
 
 // if config exists require_config else redirect to installer
 $path_to_config = dirname(__FILE__) . '/CMSConfig.php';

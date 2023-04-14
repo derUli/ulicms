@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Registries\LoggerRegistry;
+use App\Exceptions\AccessDeniedException;
 
 /**
  * Default exception handler
