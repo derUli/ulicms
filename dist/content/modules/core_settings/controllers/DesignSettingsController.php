@@ -201,7 +201,7 @@ class DesignSettingsController extends \App\Controllers\Controller
         Settings::set('theme', $theme);
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HTTPStatusCode::OK,
+            HttpStatusCode::OK,
             ModuleHelper::buildActionURL('packages')
         );
     }
@@ -217,7 +217,7 @@ class DesignSettingsController extends \App\Controllers\Controller
         $this->_setDefaultMobileTheme($theme);
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HTTPStatusCode::OK,
+            HttpStatusCode::OK,
             ModuleHelper::buildActionURL('packages')
         );
     }

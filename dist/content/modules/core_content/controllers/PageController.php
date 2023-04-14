@@ -157,7 +157,7 @@ class PageController extends \App\Controllers\Controller
         }
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HTTPStatusCode::OK,
+            HttpStatusCode::OK,
             ModuleHelper::buildActionURL('pages')
         );
     }
@@ -201,7 +201,7 @@ class PageController extends \App\Controllers\Controller
         }
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HTTPStatusCode::OK,
+            HttpStatusCode::OK,
             ModuleHelper::buildActionURL('pages')
         );
     }

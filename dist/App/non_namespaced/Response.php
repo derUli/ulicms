@@ -8,7 +8,7 @@ if (! defined('RESPONSIVE_FM')) {
     class Response
     {
         public static function sendHttpStatusCodeResultIfAjax(
-            int $status = HTTPStatusCode::OK,
+            int $status = HttpStatusCode::OK,
             ?string $redirect = null,
             int $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
