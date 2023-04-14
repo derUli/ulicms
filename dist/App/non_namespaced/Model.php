@@ -76,7 +76,7 @@ class Model
                 $this->{$method}($value);
             // if there is a class property in snake_case set it
             } elseif (isset($this->{$value})) {
-                $this->value = $value;
+                $this->$value = $value;
             // if there is a class property in camelcase set it
             } elseif (isset($this->{$camelCaseVar})) {
                 $this->{$camelCaseVar} = $value;

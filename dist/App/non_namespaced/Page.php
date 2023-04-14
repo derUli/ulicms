@@ -13,10 +13,6 @@ class Page extends Content
 
     public $slug = '';
 
-    public $title = '';
-
-    public $alternate_title = '';
-
     public $target = '_self';
 
     public $category_id = 1;
@@ -74,8 +70,6 @@ class Page extends Content
     public $hidden = 0;
 
     public $comments_enabled = null;
-
-    public $show_headline = true;
 
     private $deleted_at = null;
 
