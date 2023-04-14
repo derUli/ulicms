@@ -1,7 +1,7 @@
 <?php
 use App\Translations\JSTranslation;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission('motd')) {
     $editor = get_html_editor();
     ?>

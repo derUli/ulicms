@@ -51,7 +51,7 @@ function file_get_contents_wrapper(
     $fetcher = new Fetcher($url);
     $content = $fetcher->fetch();
 
-    if ($content && !empty($checksum) && md5($content) !== strtolower($checksum)
+    if ($content && ! empty($checksum) && md5($content) !== strtolower($checksum)
     ) {
         throw new CorruptDownloadException(
             "Download of {$url} - Checksum validation failed"

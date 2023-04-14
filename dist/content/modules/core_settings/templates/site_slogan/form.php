@@ -2,7 +2,7 @@
 
 use App\Translations\JSTranslation;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission('settings_simple')) {
     $languages = getAllLanguages();
     $site_slogans = [];

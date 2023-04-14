@@ -57,7 +57,7 @@ class AdminMenu
     public function render(): string
     {
         $html = '<ul>';
-        
+
         foreach ($this->children as $child) {
             // only render items for that the current user has permissions
             if ($child->userHasPermission()) {

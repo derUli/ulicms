@@ -2,7 +2,7 @@
 use App\Models\Content\Language;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission('languages')) {
     $languages = Language::getAllLanguages();
     ?>

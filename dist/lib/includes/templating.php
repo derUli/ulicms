@@ -752,7 +752,7 @@ function get_menu(
 
             // Show page positions in menu if user has the "pages_show_positions" permission.
             if (is_logged_in()) {
-                $acl = new ACL();
+                $acl = new \App\Security\ACL();
                 if ($acl->hasPermission('pages_show_positions') && Settings::get('user/' . get_user_id() . '/show_positions')) {
                     $title .= " ({$row->position})";
                 }

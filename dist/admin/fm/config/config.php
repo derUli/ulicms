@@ -15,7 +15,7 @@ if (session_id() == '') {
     session_start();
 }
 
-$acl = new ACL();
+$acl = new \App\Security\ACL();
 $permissions = ['files'];
 
 $isPermitted = false;

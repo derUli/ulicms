@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
+namespace App\Security;
+
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 use App\Constants\ModuleEventConstants;
-use App\Security\PermissionChecker;
+use Database;
 
 /**
  * Old permission checker class

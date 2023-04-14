@@ -2,13 +2,13 @@
 
 use App\Models\Content\Language;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 
 if (! $permissionChecker->hasPermission('groups')) {
     noPerms();
 } else {
     $id = (int)$_REQUEST['edit'];
-    $permissionChecker = new ACL();
+    $permissionChecker = new \App\Security\ACL();
     $all_permissions = $permissionChecker->getPermissionQueryResult($id);
     $groupName = _esc($all_permissions['name']);
     $all_permissions_all = $permissionChecker->getDefaultACL(false, true);

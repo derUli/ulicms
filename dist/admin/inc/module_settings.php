@@ -33,7 +33,7 @@ if ((! is_file($admin_file_path) && ! is_file($admin_file_path2) && ! ($controll
         echo "<h1>{$capitalized_module_name}  " . get_translation('settings') . '</h1>';
     }
 
-    $permissionChecker = new ACL();
+    $permissionChecker = new \App\Security\ACL();
     $admin_permission = getModuleMeta($module, 'admin_permission');
 
     if ($admin_permission) {

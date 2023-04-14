@@ -1,5 +1,5 @@
 <?php
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission('update_system')) {
     if (is_file(Path::resolve('ULICMS_ROOT/update.php'))) {
         ?>

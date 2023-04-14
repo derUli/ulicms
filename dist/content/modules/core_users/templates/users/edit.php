@@ -8,7 +8,7 @@ use App\HTML\Input;
 
 use App\Translations\JSTranslation;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermission('users_edit')) || ($_GET['id'] == $_SESSION['login_id'])) {
     $id = (int)$_GET['id'];
     $languages = getAvailableBackendLanguages();
@@ -145,7 +145,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
             </div>
         </div>
         <?php
-        $permissionChecker = new ACL();
+        $permissionChecker = new \App\Security\ACL();
         if ($permissionChecker->hasPermission('users')) {
             $allGroups = $permissionChecker->getAllGroups();
             asort($allGroups);

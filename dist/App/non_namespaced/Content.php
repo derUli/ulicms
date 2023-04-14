@@ -6,13 +6,11 @@ defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 abstract class Content extends Model
 {
-
     public $show_headline = true;
-    
+
     public $title = '';
 
     public $alternate_title = '';
-
 
     /**
      * Get if the headline is shown

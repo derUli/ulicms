@@ -2,7 +2,7 @@
 
 use App\Models\Content\VCS;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission('pages')) {
     $content_id = (int)$_GET['content_id'];
     $revisions = VCS::getRevisionsByContentID($content_id);

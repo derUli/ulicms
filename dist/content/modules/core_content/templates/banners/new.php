@@ -3,7 +3,7 @@
 use App\Constants\RequestMethod;
 use App\Models\Content\Categories;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission('banners')
         && $permissionChecker->hasPermission('banners_create')) {
     ?>

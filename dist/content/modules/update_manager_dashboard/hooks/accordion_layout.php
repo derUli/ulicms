@@ -1,5 +1,5 @@
 <?php
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission('install_packages')) {
     ?>
     <div id="update-manager-dashboard-container" style="display: none">

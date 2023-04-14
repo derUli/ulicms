@@ -51,7 +51,7 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
             $title = $row->title;
             // Show page positions in menu if user has the "pages_show_positions" permission.
             if (is_logged_in()) {
-                $acl = new ACL();
+                $acl = new \App\Security\ACL();
                 $settingsName = 'user/' . get_user_id() . '/show_positions';
 
                 if ($acl->hasPermission('pages_show_positions') && Settings::get($settingsName)) {

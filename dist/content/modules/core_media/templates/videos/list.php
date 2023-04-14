@@ -3,7 +3,7 @@
 use App\Models\Content\Categories;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 
 $video_folder = ULICMS_ROOT . '/content/videos';
 if (! is_dir($video_folder)) {

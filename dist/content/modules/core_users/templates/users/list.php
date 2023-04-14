@@ -5,7 +5,7 @@ use function App\HTML\imageTag;
 
 use App\Translations\JSTranslation;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission('users')) {
     if (! isset($_SESSION['admins_filter_group'])) {
         $_SESSION['admins_filter_group'] = 0;

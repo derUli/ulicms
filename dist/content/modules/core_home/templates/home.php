@@ -4,7 +4,7 @@ use App\Constants\DefaultValues;
 use App\HTML\Alert;
 use App\Security\XSSProtection;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 
 $controller = ControllerRegistry::get();
 $model = $controller->getModel();

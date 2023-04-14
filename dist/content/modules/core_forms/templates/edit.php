@@ -2,7 +2,7 @@
 
 use App\Models\Content\Categories;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if (! $permissionChecker->hasPermission('forms') || ! $permissionChecker->hasPermission('forms_edit')) {
     noPerms();
 } else {

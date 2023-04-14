@@ -3,7 +3,7 @@
 use App\Models\Content\Categories;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 $audio_folder = ULICMS_ROOT . '/content/audio';
 if (! is_dir($audio_folder)) {
     mkdir($audio_folder);

@@ -16,7 +16,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
 
     public function testGetAllGroups()
     {
-        $acl = new ACL();
+        $acl = new \App\Security\ACL();
         $groups = $acl->getAllGroups();
         $this->assertGreaterThanOrEqual(1, count($groups));
         foreach ($groups as $id => $name) {
@@ -27,7 +27,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
 
     public function testGetDefaultACLAsJSONWithAdminAndPlain()
     {
-        $acl = new ACL();
+        $acl = new \App\Security\ACL();
         $output = $acl->getDefaultACLAsJSON(true, false);
 
         $this->assertTrue(is_json($output));
@@ -35,7 +35,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
 
     public function testGetDefaultACLWithAdminAndPlain()
     {
-        $acl = new ACL();
+        $acl = new \App\Security\ACL();
         $output = $acl->getDefaultACL(true, false);
 
         $this->assertTrue(is_json($output));
@@ -43,7 +43,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
 
     public function testCreateUpdateAndDeleteGroup()
     {
-        $acl = new ACL();
+        $acl = new \App\Security\ACL();
         $id = $acl->createGroup(
             'Test-Gruppe ' . uniqid(),
             [
@@ -67,7 +67,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
 
     public function testDeleteGroupMoveToOthers()
     {
-        $acl = new ACL();
+        $acl = new \App\Security\ACL();
         $id = $acl->createGroup(
             'Test-Gruppe ' . uniqid(),
             [
@@ -91,7 +91,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         $user->setPrimaryGroupId($id);
         $user->save();
 
-        $acl = new ACL();
+        $acl = new \App\Security\ACL();
 
         $acl->deleteGroup($id, $otherGroupId);
 
@@ -107,13 +107,13 @@ class ACLTest extends \PHPUnit\Framework\TestCase
 
     public function testPermissionQueryResultWithNonExistingGroupReturnsNull()
     {
-        $acl = new ACL();
+        $acl = new \App\Security\ACL();
         $this->assertNull($acl->getPermissionQueryResult(PHP_INT_MAX));
     }
 
     public function testPermissionQueryResultWithoutIdReturnsNull()
     {
-        $acl = new ACL();
+        $acl = new \App\Security\ACL();
         $this->assertNull($acl->getPermissionQueryResult());
     }
 
@@ -122,7 +122,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         $group = new Group();
         $group->setName('testgroup');
         $group->save();
-        $acl = new ACL();
+        $acl = new \App\Security\ACL();
 
         $groupData = $acl->getPermissionQueryResult($group->getId());
         $this->assertIsArray($groupData);
@@ -147,7 +147,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
 
         $_SESSION['group_id'] = $group->getId();
 
-        $acl = new ACL();
+        $acl = new \App\Security\ACL();
         $groupData = $acl->getPermissionQueryResult();
         $this->assertIsArray($groupData);
 
@@ -161,5 +161,10 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         );
 
         $group->delete();
+    }
+
+    public function testHasPermissionReturnsFalse() {
+        $acl = new \App\Security\ACL();
+        $this->assertFalse($acl->hasPermission('foobar'));
     }
 }

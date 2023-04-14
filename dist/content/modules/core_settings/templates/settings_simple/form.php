@@ -1,7 +1,7 @@
 <?php
 use App\Translations\JSTranslation;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission('settings_simple')) {
     $controller = ControllerRegistry::get();
     $allSettings = Settings::getAll();

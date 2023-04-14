@@ -5,7 +5,7 @@ use App\Models\Content\Advertisement\Banners;
 use App\Models\Content\Categories;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission('banners')) {
     if (! isset($_SESSION['filter_category'])) {
         $_SESSION['filter_category'] = 0;

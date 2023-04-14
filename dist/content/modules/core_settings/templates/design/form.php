@@ -11,7 +11,7 @@ foreach ($skins as $skin) {
 }
 
 $controller = ControllerRegistry::get();
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if (! $permissionChecker->hasPermission('design')) {
     noPerms();
 } else {

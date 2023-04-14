@@ -6,7 +6,7 @@
 // Implement a backend action which fetches the index of the package source
 use App\Services\Connectors\PackageSourceConnector;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission('install_packages')) {
     if (! Settings::get('pkg_src')) {
         ?>

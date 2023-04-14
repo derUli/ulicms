@@ -4,7 +4,7 @@ use App\Helpers\DateTimeHelper;
 use App\Helpers\NumberFormatHelper;
 use App\Packages\SinPackageInstaller;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();
 } else {

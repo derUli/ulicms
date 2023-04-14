@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Backend\Menu;
 
-use ACL;
-
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 /**
@@ -29,7 +27,7 @@ class MenuEntry
 
     /**
      * Constructor
-     * 
+     *
      * @param string $title
      * @param string $link
      * @param string $identifier
@@ -58,7 +56,7 @@ class MenuEntry
 
     /**
      * Get title
-     * 
+     *
      * @return string
      */
     public function getTitle(): string
@@ -68,7 +66,7 @@ class MenuEntry
 
     /**
      * Get link
-     * 
+     *
      * @return string
      */
     public function getLink(): string
@@ -78,7 +76,7 @@ class MenuEntry
 
     /**
      * Get identifier
-     * 
+     *
      * @return string
      */
     public function getIdentifier(): string
@@ -88,7 +86,7 @@ class MenuEntry
 
     /**
      * Set title
-     * 
+     *
      * @param string $value
      * @return void
      */
@@ -99,7 +97,7 @@ class MenuEntry
 
     /**
      * Set link
-     * 
+     *
      * @param string $value
      * @return void
      */
@@ -110,7 +108,7 @@ class MenuEntry
 
     /**
      * Set identifier
-     * 
+     *
      * @param string $value
      * @return void
      */
@@ -121,7 +119,7 @@ class MenuEntry
 
     /**
      * Get children
-     * 
+     *
      * @return array
      */
     public function getChildren(): array
@@ -131,7 +129,7 @@ class MenuEntry
 
     /**
      * Set children
-     * 
+     *
      * @param array $value
      * @return void
      */
@@ -142,7 +140,7 @@ class MenuEntry
 
     /**
      * Has children
-     * 
+     *
      * @return bool
      */
     public function hasChildren(): bool
@@ -152,7 +150,7 @@ class MenuEntry
 
     /**
      * Add children
-     * 
+     *
      * @param array $children
      * @return void
      */
@@ -163,7 +161,7 @@ class MenuEntry
 
     /**
      * Get permissions
-     * 
+     *
      * @return type
      */
     public function getPermissions()
@@ -173,7 +171,7 @@ class MenuEntry
 
     /**
      * Set permissions
-     * 
+     *
      * @param type $permissions
      * @return void
      */
@@ -184,7 +182,7 @@ class MenuEntry
 
     /**
      * get new window
-     * 
+     *
      * @return bool
      */
     public function getNewWindow(): bool
@@ -194,7 +192,7 @@ class MenuEntry
 
     /**
      * Set new window
-     * 
+     *
      * @param bool $val
      * @return void
      */
@@ -205,7 +203,7 @@ class MenuEntry
 
     /**
      * Get isAjax
-     * 
+     *
      * @return bool
      */
     public function getIsAjax(): bool
@@ -215,7 +213,7 @@ class MenuEntry
 
     /**
      * Set isAjax
-     * 
+     *
      * @param bool $val
      * @return void
      */
@@ -230,7 +228,7 @@ class MenuEntry
      */
     public function userHasPermission(): bool
     {
-        $acl = new ACL();
+        $acl = new \App\Security\ACL();
         if (is_string($this->permissions) && ! empty($this->permissions)) {
             return $acl->hasPermission($this->permissions);
         }

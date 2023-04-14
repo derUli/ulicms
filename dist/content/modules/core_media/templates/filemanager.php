@@ -1,5 +1,5 @@
 <?php
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission($_GET['action'])) {
     ?>
     <?php echo Template::executeModuleTemplate('core_media', 'icons.php'); ?>

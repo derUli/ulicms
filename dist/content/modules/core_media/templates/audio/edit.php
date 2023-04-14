@@ -2,7 +2,7 @@
 
 use App\Models\Content\Categories;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 if ($permissionChecker->hasPermission('audio')
         && $permissionChecker->hasPermission('audio_edit')) {
     $id = (int)$_REQUEST['id'];

@@ -2,7 +2,7 @@
 
 use App\Helpers\NumberFormatHelper;
 
-$permissionChecker = new ACL();
+$permissionChecker = new \App\Security\ACL();
 
 $controller = ControllerRegistry::get('HomeController');
 $model = $controller->getModel();
