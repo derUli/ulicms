@@ -46,7 +46,6 @@
         "matthiasmullie/minify": "*",
         "rakit/validation": "*",
         "nesbot/carbon": "*",
-        "symfony/polyfill-mbstring": "*",
         "dereuromark/media-embed": "*",
         "jimmiw/php-time-ago": "*",
         "consolidation/robo": "*",
