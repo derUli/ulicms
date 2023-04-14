@@ -77,7 +77,7 @@ class LogoController extends \App\Controllers\Controller
     public function deleteLogo(): void
     {
         $success = $this->_deleteLogo();
-        if ($succes) {
+        if ($success) {
             CacheUtil::clearPageCache();
         }
         Response::sendHttpStatusCodeResultIfAjax(

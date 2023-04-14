@@ -8,7 +8,7 @@ class CoreSecurityController extends MainClass
 {
     public function beforeInit(): void
     {
-        $x_frame_options = settings::get('x_frame_options');
+        $x_frame_options = Settings::get('x_frame_options');
 
         $allowedOptions = [
             'DENY',

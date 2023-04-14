@@ -7,6 +7,11 @@ use App\Exceptions\CorruptDownloadException;
 
 class CoreUpgradeController extends \App\Controllers\Controller
 {
+    /**
+     * @var string $checkURL
+     */
+    private string $checkURL;
+
     public function __construct()
     {
         parent::__construct();
@@ -93,7 +98,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
                 recurse_copy($upgradeCodeDir, ULICMS_ROOT);
                 sureRemoveDir($tmpDir, true);
 
-                response::redirect('../update.php');
+                Response::redirect('../update.php');
                 return true;
             }
                 return false;

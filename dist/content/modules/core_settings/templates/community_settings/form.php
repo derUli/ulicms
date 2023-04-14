@@ -1,6 +1,7 @@
 <?php
 
 use App\Constants\RequestMethod;
+use App\Translations\JSTranslation;
 
 $types = get_available_post_types();
 $typeSelection = [];

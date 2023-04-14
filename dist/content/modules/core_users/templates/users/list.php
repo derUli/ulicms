@@ -106,7 +106,7 @@ if ($permissionChecker->hasPermission('users')) {
                                 echo '<td class="text-center">' . $avatar . '</td>';
                                 echo '<td>';
 
-                                esc($user->getUsername()) . '</td>';
+                                echo _esc($user->getUsername()) . '</td>';
                                 echo '<td class="hide-on-mobile">' .
                                 _esc($user->getLastName()) .
                                 '</td>';

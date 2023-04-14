@@ -447,7 +447,7 @@ class PageController extends \App\Controllers\Controller
                 echo 'selected';
             }
             ?>>
-                    <?php echo esc($page['title']); ?>
+                    <?php esc($page['title']); ?>
 
                 <?php if (! Request::getVar('no_id')) {
                     ?>
@@ -696,14 +696,16 @@ class PageController extends \App\Controllers\Controller
         return implode('', $selectItems);
     }
 
-    public function getParentPageId(): object
+    public function getParentPageId(): void
     {
         $id = Request::getVar('id', 0, 'int');
+
         try {
             JSONResult($this->_getParentPageId($id));
         } catch (DatasetNotFoundException $e) {
             HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
         }
+
     }
 
     public function _getParentPageId(int $pageId): object
