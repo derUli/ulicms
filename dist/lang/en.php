@@ -1,6 +1,7 @@
 <?php
 
 define('LOADED_LANGUAGE_FILE', 'en');
+
 // Dashboard (Willkommen)
 add_translation('MOTD', 'Message of the Day');
 add_translation('STATISTICS', 'Statistics');
