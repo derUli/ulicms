@@ -13,14 +13,13 @@ use App\Helpers\DateTimeHelper;
  */
 class UliCMSVersion
 {
+    public const CODE_NAME = 'Beetle-Eating Nandu';
 
-    const CODE_NAME = 'Beetle-Eating Nandu';
+    public const RELEASE_YEAR = 2023;
 
-    const RELEASE_YEAR = 2023;
-    
-    const BUILD_DATE = 0; // {InsertBuildDate}
+    public const BUILD_DATE = 0; // {InsertBuildDate}
 
-    const VERSION_NUMBER = [2023, 3];
+    public const VERSION_NUMBER = [2023, 3];
 
     /**
      * Returns the release year
@@ -60,7 +59,7 @@ class UliCMSVersion
 
     /**
      * Returns the Unix timestamp when the release was built
-     * 
+     *
      * @return int
      */
     public function getBuildTimestamp(): int

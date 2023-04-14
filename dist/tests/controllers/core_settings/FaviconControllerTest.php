@@ -1,7 +1,12 @@
 <?php
 
+
+use Spatie\Snapshots\MatchesSnapshots;
+
 class FaviconControllerTest extends \PHPUnit\Framework\TestCase
 {
+    use MatchesSnapshots;
+
     protected function setUp(): void
     {
         $controller = new FaviconController();
@@ -85,14 +90,8 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($controller->_hasFavicon());
 
-        $this->assertEquals(
-            '48316b69c96d0a8568d16580dade391e',
-            md5_file($controller->_getDestination1())
-        );
-        $this->assertEquals(
-            '48316b69c96d0a8568d16580dade391e',
-            md5_file($controller->_getDestination2())
-        );
+        $this->assertMatchesFileHashSnapshot($controller->_getDestination1());
+        $this->assertMatchesFileHashSnapshot($controller->_getDestination2());
 
         $this->assertTrue($controller->_deleteFavicon());
         $this->assertFileDoesNotExist($controller->_getDestination1());
@@ -107,14 +106,8 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
             $controller->_placeFiles($source, $controller->_getSizes(true))
         );
 
-        $this->assertEquals(
-            '70aae2ed780bc052c1f4c91602528070',
-            md5_file($controller->_getDestination1())
-        );
-        $this->assertEquals(
-            '70aae2ed780bc052c1f4c91602528070',
-            md5_file($controller->_getDestination2())
-        );
+        $this->assertMatchesFileHashSnapshot($controller->_getDestination1());
+        $this->assertMatchesFileHashSnapshot($controller->_getDestination2());
 
         $this->assertTrue($controller->_deleteFavicon());
         $this->assertFalse($controller->_hasFavicon());

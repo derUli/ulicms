@@ -1,5 +1,4 @@
 <?php
-
 // use this constant at the end
 // of the page load procedure to measure site performance
 define('START_TIME', microtime(true));
@@ -257,3 +256,4 @@ do_event('init');
 do_event('after_init');
 
 DefaultContentTypes::initTypes();
+
