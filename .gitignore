@@ -36,3 +36,4 @@ modules.aus
 .phpunit.result.cache
 .phpunit.cache
 .DS_STORE
+*.bak
