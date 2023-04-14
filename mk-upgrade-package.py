@@ -94,7 +94,7 @@ def main():
         for line in lines:
             if "{InsertBuildDate}" in line:
                 timestamp = str(int(time.time()))
-                line = "            $this->buildDate = " + timestamp + "; // {InsertBuildDate}\r\n"
+                line = "     const BUILD_DATE = " + timestamp + "; // {InsertBuildDate}\r\n"
             print(line)
             f.write(line)
 

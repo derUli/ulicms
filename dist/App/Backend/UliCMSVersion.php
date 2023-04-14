@@ -13,27 +13,14 @@ use App\Helpers\DateTimeHelper;
  */
 class UliCMSVersion
 {
-    private string $codeName;
 
-    private int $releaseYear;
+    const CODE_NAME = 'Beetle-Eating Nandu';
 
-    private int $buildDate;
+    const RELEASE_YEAR = 2023;
+    
+    const BUILD_DATE = 0; // {InsertBuildDate}
 
-    private array $internalVersion;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->codeName = 'Beetle-Eating Nandu';
-        $this->releaseYear = 2023;
-        $this->buildDate = 0; // {InsertBuildDate}
-        $this->internalVersion = [
-            2023,
-            3
-        ];
-    }
+    const VERSION_NUMBER = [2023, 3];
 
     /**
      * Returns the release year
@@ -41,7 +28,7 @@ class UliCMSVersion
      */
     public function getReleaseYear(): string
     {
-        return (string)$this->releaseYear;
+        return (string)static::RELEASE_YEAR;
     }
 
     /**
@@ -50,16 +37,16 @@ class UliCMSVersion
      */
     public function getCodeName(): string
     {
-        return $this->codeName;
+        return static::CODE_NAME;
     }
 
     /**
      * Returns the full number as array
-     * @return array
+     * @return int[]
      */
     public function getInternalVersion(): array
     {
-        return $this->internalVersion;
+        return static::VERSION_NUMBER;
     }
 
     /**
@@ -68,16 +55,17 @@ class UliCMSVersion
      */
     public function getInternalVersionAsString(): string
     {
-        return implode('.', $this->internalVersion);
+        return implode('.', static::VERSION_NUMBER);
     }
 
     /**
      * Returns the Unix timestamp when the release was built
+     * 
      * @return int
      */
     public function getBuildTimestamp(): int
     {
-        return $this->buildDate;
+        return static::BUILD_DATE;
     }
 
     /**

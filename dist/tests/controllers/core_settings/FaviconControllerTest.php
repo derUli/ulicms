@@ -86,11 +86,11 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($controller->_hasFavicon());
 
         $this->assertEquals(
-            '444aa40c763f942322f6b1d1a4ab18cc',
+            '48316b69c96d0a8568d16580dade391e',
             md5_file($controller->_getDestination1())
         );
         $this->assertEquals(
-            '444aa40c763f942322f6b1d1a4ab18cc',
+            '48316b69c96d0a8568d16580dade391e',
             md5_file($controller->_getDestination2())
         );
 

@@ -73,7 +73,7 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase
             $this->getFixturePath(),
             'cat.jpg'
         );
-        $this->assertEquals('94f7fbd93d43a9f6b026f4b712d48be7.jpg', $fileName);
+        $this->assertEquals('61edbeb9410bc87763cebc93fbba8335.jpg', $fileName);
     }
 
     public function testBuildFilePath()
@@ -84,9 +84,9 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase
             $this->getFixturePath(),
             'cat.jpg'
         );
-        
+
         $this->assertStringEndsWith(
-            '/content/images/94f7fbd93d43a9f6b026f4b712d48be7.jpg',
+            '/content/images/61edbeb9410bc87763cebc93fbba8335.jpg',
             $filePath
         );
     }
