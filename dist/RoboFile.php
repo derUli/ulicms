@@ -85,6 +85,16 @@ class RoboFile extends Tasks
         }
     }
 
+
+    public function foobar(){
+        foreach (Finder::findFiles(['*.php']) as $name => $file) {
+            
+            $path = $file->getRealPath();
+            $result = shell_exec("php \"{$path}\"");
+            echo $result;
+        }
+    }
+
     /**
      * shows the value of a setting
      * @param string $settingsName settings identifier name
