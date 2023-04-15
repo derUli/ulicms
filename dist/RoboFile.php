@@ -585,6 +585,24 @@ class RoboFile extends Tasks
      * Cleanup vendor directory
      */
     public function buildCleanupVendor(){
+        $this->cleanUpDirectory('vendor');
+    }
+
+    /**
+     * Cleanup node_modules directory
+     */
+    public function buildCleanupNodeModules(){
+        $this->cleanUpDirectory('node_modules');
+    }
+
+    /** 
+     * Clean up directory
+     * 
+     * @param string $directory
+     * 
+     * @return void
+    */
+    protected function cleanUpDirectory(string $directory = 'vendor'): void{
         $patterns = [
             'test',
             'tests',
@@ -616,26 +634,26 @@ class RoboFile extends Tasks
         $files = 0;
         $filesToDelete = [];
 
-        $searchResult = Finder::find($patterns)->from('vendor')->collect();
-
+        $searchResult = Finder::find($patterns)->from($directory)->collect();
 
         foreach($searchResult as $file) {
         
             $path = $file->getRealPath();
             $files +=1;
             $size += $file->getSize();
-            $filesToDelete[] = $path;            
+
+            if(!in_array($path, $filesToDelete)){
+                $filesToDelete[] = $path;    
+            }        
         }
 
         foreach($filesToDelete as $file){
             try{
-                $this->writeln($path);
+                $this->writeln($file);
                 FileSystem::delete($path);
             }
             catch(IOException $e){
-                continue;
-            } catch(UnexpectedValueException $e){
-                continue;
+                $this->writeln('Errror ' . $path);
             }
         }
 
