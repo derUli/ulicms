@@ -36,6 +36,7 @@ use App\Registries\HelperRegistry;
 use App\Registries\LoggerRegistry;
 use App\Registries\ModelRegistry;
 use App\Utils\Logger;
+use App\Backend\UliCMSVersion;
 
 // TODO: refactor Bootstrap to a new UliCMSBoostrap Class which is splitted into methods
 
@@ -190,6 +191,7 @@ if (isset($_GET['output_stylesheets'])) {
 }
 
 $locale = Settings::get('locale');
+
 if ($locale) {
     $locale = splitAndTrim($locale);
     array_unshift($locale, LC_ALL);
@@ -243,8 +245,19 @@ if (! is_ssl() && $enforce_https) {
     exit();
 }
 
+$initialized = Settings::get('initialized');
+
+
 $moduleManager = new ModuleManager();
-$moduleManager->sync();
+
+$version = new UliCMSVersion();
+$versionNumber = $version->getInternalVersionAsString();
+
+if($initialized !== $versionNumber) {
+    Settings::set('initialized', $versionNumber);
+    $moduleManager->sync();
+}
+
 \App\Storages\Vars::set('disabledModules', $moduleManager->getDisabledModuleNames());
 
 ModelRegistry::loadModuleModels();
