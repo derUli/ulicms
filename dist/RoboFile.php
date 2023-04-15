@@ -97,6 +97,10 @@ class RoboFile extends Tasks
             if(str_contains($path, 'vendor')){
                 continue;
             }
+            
+            if(str_contains($path, 'tests')){
+                continue;
+            }
 
             if(str_starts_with($path, '.')){
                 continue;
@@ -111,9 +115,14 @@ class RoboFile extends Tasks
                 $this->writeln("Unprotected: $path");
             }
         }
+
+        $totalCheckedFiles = $protectedFiles + $unprotectedFiles;
+
+        $protectedFilesPercent = round(100 / $totalCheckedFiles * $protectedFiles);
+        $unprotectedFilesPercent = round(100 / $totalCheckedFiles * $unprotectedFiles);
         
-        $this->writeln('Protected files: ' . $protectedFiles);
-        $this->writeln('Unprotected files: ' . $unprotectedFiles);
+        $this->writeln("Protected files: {$protectedFiles} ({$protectedFilesPercent}%)");
+        $this->writeln("Unprotected files: {$unprotectedFiles} ({$unprotectedFilesPercent}%)");
     }
 
     /**
