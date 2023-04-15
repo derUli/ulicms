@@ -22,9 +22,9 @@ abstract class Controller
 {
     /**
      * List of not callable public methods
-     * @var type
+     * @var string[]
      */
-    protected $blacklist = [
+    protected array $blacklist = [
         'runCommand'
     ];
 
@@ -38,7 +38,7 @@ abstract class Controller
         $file = Path::resolve('ULICMS_ROOT/lib/ressources/hooks.txt');
         if (is_file($file)) {
             $lines = StringHelper::linesFromFile($file);
-            $lines = array_unique($lines);
+            $lines = array_unique($lines ?? []);
             foreach ($lines as $line) {
                 $this->blacklist[] = ModuleHelper::underscoreToCamel($line);
             }
@@ -63,7 +63,7 @@ abstract class Controller
         )
         ) {
             $sMethod = $_REQUEST['sMethod'];
-            $sMethodWithRequestType = $sMethod . ucfirst(Request::getMethod());
+            $sMethodWithRequestType = $sMethod . ucfirst(Request::getMethod() ?? '');
 
             $reflection = null;
             $reflectionWithRequestType = null;
