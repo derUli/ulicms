@@ -61,7 +61,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
         @set_time_limit(0);
         @ignore_user_abort(true);
         $acl = new PermissionChecker(get_user_id());
-        
+
         if ((! $skipPermissions && (! $acl->hasPermission('update_system')) || ! $this->checkForUpgrades() || get_request_method() != 'post')) {
             return false;
         }

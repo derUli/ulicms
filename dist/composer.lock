@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fbde97d353e5f8b8db0ff3bc54122171",
+    "content-hash": "d55e503bbdd1a93bc3a04172602a99ff",
     "packages": [
         {
             "name": "chrisjean/php-ico",
@@ -5698,6 +5698,60 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "comcast/php-legal-licenses",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Comcast/php-legal-licenses.git",
+                "reference": "dbdeb6ee6d994a4930bfc85ba6aecc7fc5a3e602"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Comcast/php-legal-licenses/zipball/dbdeb6ee6d994a4930bfc85ba6aecc7fc5a3e602",
+                "reference": "dbdeb6ee6d994a4930bfc85ba6aecc7fc5a3e602",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "symfony/console": "~2.3|~3.0|~4.0|~5.0|~6.0",
+                "symfony/process": "~2.3|~3.0|~4.0|~5.0|~6.0"
+            },
+            "bin": [
+                "bin/php-legal-licenses"
+            ],
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Marshall",
+                    "email": "adam_marshall2@comcast.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "A utility to generate a Licenses file containing the full license text for every dependency in your project for legal purposes.",
+            "homepage": "https://github.com/Comcast/php-legal-licenses",
+            "keywords": [
+                "binary",
+                "legal",
+                "license",
+                "licenses",
+                "utility"
+            ],
+            "support": {
+                "issues": "https://github.com/Comcast/php-legal-licenses/issues",
+                "source": "https://github.com/Comcast/php-legal-licenses/tree/v1.2.0"
+            },
+            "time": "2022-04-05T18:21:20+00:00"
+        },
         {
             "name": "composer/pcre",
             "version": "3.1.0",

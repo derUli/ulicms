@@ -37,8 +37,16 @@ def main():
               "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
               "configurations", ".phpunit.result.cache", "nbproject", "report",
               "avatars", ".php_cs.cache", ".php_cs.dist", ".phplint-cache", ".php-cs-fixer.cache",
-              '.phpunit.cache', '.DS_STORE'
+              '.phpunit.cache', '.DS_STORE',
+
+                '.thumbs', 'cache', 'generated', 'tmp', 'videos', '.php-cs-fixer.php',
+              'phpunit_init.php'
             ]
+
+    # Prepare build
+    os.chdir("dist")
+    os.system("vendor/bin/robo build:prepare")
+    os.chdir("..")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     if args.delete and os.path.exists(target):
@@ -68,21 +76,22 @@ def main():
             print(line)
             f.write(line)
 
-    # Composer packages zu Deploy hinzufügen
-    os.system("composer install --working-dir=" + main_dir + "/ --no-dev")
+    old_cwd = os.getcwd()
+
+    os.chdir(main_dir)
 
     old_cwd = os.getcwd()
 
-    # Install npm packages
-    # TODO: is there are a way to specify a working dir like used for composer (code above)?
-    os.chdir("dist")
+    # change dir to output dist dir
+    os.chdir(main_dir)
+
+    # Remove all non dev npm packages
     os.system("npm install --omit=dev")
 
-    # generate license files
-    os.system("php-legal-licenses generate --hide-version")
-    os.system("license-report --only=prod --output=json > licenses.json")
-    shutil.copy("../doc/changelog.txt", "content/modules/core_info")
-
+    # Remove all non dev composer packages
+    os.system("composer install --no-dev")
+    
+    # Change dir back
     os.chdir(old_cwd)
 
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")

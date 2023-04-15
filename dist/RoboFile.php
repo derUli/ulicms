@@ -10,6 +10,7 @@ use App\Packages\PackageManager;
 use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
 use App\Utils\CacheUtil;
+use Nette\Utils\FileSystem;
 use Robo\Tasks;
 
 /**
@@ -509,7 +510,39 @@ class RoboFile extends Tasks
 
         $formatedCurrentTime = $formatter->format(time());
 
-        $this->writeln('finished cron at ' . $formatedCurrentTime);
+        $this->writeln('Finished cron at ' . $formatedCurrentTime);
+    }
+
+    /**
+     * Prepare build
+     */
+    public function buildPrepare() {
+        $this->buildCopyChangelog();
+        $this->buildLicenses();
+        $this->buildPhpCsFixer();
+    }
+
+    /**
+     * Run php-cs-fiyer
+     */
+    public function buildPhpCsFixer() {
+       system('vendor/bin/php-cs-fixer fix');
+    }
+
+    /**
+     * Copy changelog to core_info module
+     */
+    public function buildCopyChangelog() {
+        FileSystem::copy('../doc/changelog.txt', ULICMS_CONTENT . '/modules/core_info/changelog.txt', true);
+    }
+
+    /**
+     * Generate license files
+     */
+    public function buildLicenses()
+    {
+        system('vendor/bin/php-legal-licenses generate --hide-version');
+        system('node_modules/.bin/license-report --only=prod --output=json > licenses.json');
     }
 
     protected function initUliCMS()

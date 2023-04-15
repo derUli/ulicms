@@ -4,6 +4,8 @@ API-Änderungen:
 * Controller in Namespace App\Controllers verschoben
 * MainClass in Namespace App\Controllers verschoben
 * ACL in Namespace App\Security verschoben
+* ViewBag in Namespace App\Storages verschoben
+* Vars in Namespace App\Storages verschoben
 
 Entfernte Features:
 * Scroll To Top

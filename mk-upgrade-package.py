@@ -40,7 +40,17 @@ def main():
               "tests", "run-tests.sh", "run-tests.bat",
               "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
               "configurations", ".phpunit.result.cache", "nbproject", "report", 
-              "avatars", ".php_cs.cache", ".php_cs.dist", ".phplint-cache", ".php-cs-fixer.cache", '.phpunit.cache', '.DS_STORE']
+              "avatars", ".php_cs.cache", ".php_cs.dist", ".phplint-cache", ".php-cs-fixer.cache", '.phpunit.cache', '.DS_STORE',
+            
+              '.thumbs', 'cache', 'generated', 'tmp', 'videos', '.php-cs-fixer.php',
+              'phpunit_init.php'
+              ]
+
+    # Prepare build
+    os.chdir("dist")
+    os.system("vendor/bin/robo build:prepare")
+    os.chdir("..")
+
     if not args.with_config_js:
         ignore.append("config.js")
 
@@ -101,21 +111,18 @@ def main():
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
 
     main_dir = os.path.join(target, "dist")
-
-    # Install all non-dev composer packages
-    os.system("composer install --working-dir=" + main_dir + "/ --no-dev")
-
     old_cwd = os.getcwd()
 
-    # Install npm packages
-    # TODO: is there are a way to specify a working dir like used for composer (code above)?
-    os.chdir("dist")
+    # change dir to output dist dir
+    os.chdir(main_dir)
+
+    # Remove all non dev npm packages
     os.system("npm install --omit=dev")
 
-    os.system("php-legal-licenses generate --hide-version")
-    os.system("license-report --only=prod --output=json > licenses.json")
-    shutil.copy("../doc/changelog.txt", "content/modules/core_info")
+    # Remove all non dev composer packages
+    os.system("composer install --no-dev")
     
+    # Change dir back
     os.chdir(old_cwd)
 
     if args.zip:

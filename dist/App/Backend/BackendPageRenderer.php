@@ -12,7 +12,6 @@ use App\Security\PermissionChecker;
 use Request;
 use Settings;
 use Template;
-use Vars;
 use zz\Html\HTMLMinify;
 
 /**
