@@ -15,6 +15,8 @@ use Nette\Utils\FileSystem;
 use Nette\Utils\Finder;
 use Robo\Tasks;
 use App\Helpers\NumberFormatHelper;
+use Nette\IOException;
+use Nette\UnexpectedValueException;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -579,6 +581,9 @@ class RoboFile extends Tasks
         }
     }
 
+    /**
+     * Cleanup vendor directory
+     */
     public function buildCleanupVendor(){
         $patterns = [
             'test',
@@ -601,20 +606,37 @@ class RoboFile extends Tasks
             '.coveralls.yml',
             '.gitattributes',
             'README.md',
-            '.psalm'
+            '.psalm',
+            '.settings',
+            '.editorconfig',
+            '.project'
         ];
 
         $size = 0;
         $files = 0;
+        $filesToDelete = [];
 
-        $searchResult = Finder::find($patterns)->from('vendor');
+        $searchResult = Finder::find($patterns)->from('vendor')->collect();
 
-        foreach($searchResult as $name => $file) {
 
+        foreach($searchResult as $file) {
+        
             $path = $file->getRealPath();
-            // $this->writeln($path);
-            $size += $file->getSize();
             $files +=1;
+            $size += $file->getSize();
+            $filesToDelete[] = $path;            
+        }
+
+        foreach($filesToDelete as $file){
+            try{
+                $this->writeln($path);
+                FileSystem::delete($path);
+            }
+            catch(IOException $e){
+                continue;
+            } catch(UnexpectedValueException $e){
+                continue;
+            }
         }
 
         $this->writeln('Files: ' . NumberFormatHelper::formatSizeUnits($size));
