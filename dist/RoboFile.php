@@ -10,10 +10,10 @@ use App\Packages\PackageManager;
 use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
 use App\Utils\CacheUtil;
-use Nette\Utils\FileSystem;
-use Robo\Tasks;
 use App\Utils\File;
+use Nette\Utils\FileSystem;
 use Nette\Utils\Finder;
+use Robo\Tasks;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -550,16 +550,16 @@ class RoboFile extends Tasks
     /**
      * Optimize all image files
      */
-    public function buildOptimizeImages(){
+    public function buildOptimizeImages() {
         $dirs = [];
-        
+
         foreach(Finder::findFiles(['*.jpg', '*.png'])->from('.') as $name => $file) {
             $dirs[] = dirname($file->getRealPath());
-        };
-        
+        }
+
         $dirs = array_unique($dirs);
-        $dirs = array_filter($dirs, function($dir){
-            return !str_contains($dir, 'fixtures');
+        $dirs = array_filter($dirs, static function($dir) {
+            return ! str_contains($dir, 'fixtures');
         });
 
         foreach($dirs as $dir){
@@ -569,7 +569,7 @@ class RoboFile extends Tasks
                 $dir
             ];
 
-            system('optimize-images '.implode(' ', $args));
+            system('optimize-images ' . implode(' ', $args));
     }
     }
 
