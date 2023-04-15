@@ -10,41 +10,90 @@ from contextlib import closing
 from zipfile import ZipFile, ZIP_DEFLATED
 import time
 
+
 def zipdir(basedir, archivename):
     assert os.path.isdir(basedir)
-    with closing(ZipFile(archivename, mode="w", compression=ZIP_DEFLATED, compresslevel=9)) as z:
+    with closing(
+        ZipFile(archivename, mode="w", compression=ZIP_DEFLATED, compresslevel=9)
+    ) as z:
         for root, dirs, files in os.walk(basedir):
             # NOTE: ignore empty directories
             for fn in files:
                 absfn = os.path.join(root, fn)
-                zfn = absfn[len(basedir) + len(os.sep):]  # XXX: relative path
+                zfn = absfn[len(basedir) + len(os.sep) :]  # XXX: relative path
                 z.write(absfn, zfn)
+
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-z", "--zip", help="Compress with zip", action="store_true")
-    parser.add_argument("-d", "--delete", help="empty folder if exists", action="store_true")
-    parser.add_argument("-c", "--with-config-js", help="include config.js", action="store_true")
-    parser.add_argument('-t', '--target', action="store", dest="target", required=True, help="Target directory")
+    parser.add_argument(
+        "-d", "--delete", help="empty folder if exists", action="store_true"
+    )
+    parser.add_argument(
+        "-c", "--with-config-js", help="include config.js", action="store_true"
+    )
+    parser.add_argument(
+        "-t",
+        "--target",
+        action="store",
+        dest="target",
+        required=True,
+        help="Target directory",
+    )
 
     args = parser.parse_args()
     target = os.path.expanduser(args.target)
     target = os.path.abspath(args.target)
     source_dir = os.path.dirname(__file__)
 
-    ignore = ['.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
-                       "Releases", "cms-config.php", "content"
-                       ".gitignore", ".htaccess", "installer.aus", "installer",
-              "modules", "templates", "contents.css",
-              "comments", "*~", ".settings", ".project", ".buildpath",
-              "tests", "run-tests.sh", "run-tests.bat",
-              "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
-              "configurations", ".phpunit.result.cache", "nbproject", "report", 
-              "avatars", ".php_cs.cache", ".php_cs.dist", ".phplint-cache", ".php-cs-fixer.cache", '.phpunit.cache', '.DS_STORE',
-            
-              '.thumbs', 'cache', 'generated', 'tmp', 'videos', '.php-cs-fixer.php',
-              'phpunit_init.php'
-              ]
+    ignore = [
+        ".git",
+        "doc-src",
+        "press",
+        "phpCB-1.0.1-linux",
+        "*.py",
+        "*.pyc",
+        "Releases",
+        "cms-config.php",
+        "content" ".gitignore",
+        ".htaccess",
+        "installer.aus",
+        "installer",
+        "modules",
+        "templates",
+        "contents.css",
+        "comments",
+        "*~",
+        ".settings",
+        ".project",
+        ".buildpath",
+        "tests",
+        "run-tests.sh",
+        "run-tests.bat",
+        "run-tests.xampp.mac.sh",
+        ".pydevproject",
+        "CMSConfig.php",
+        "log",
+        "configurations",
+        ".phpunit.result.cache",
+        "nbproject",
+        "report",
+        "avatars",
+        ".php_cs.cache",
+        ".php_cs.dist",
+        ".phplint-cache",
+        ".php-cs-fixer.cache",
+        ".phpunit.cache",
+        ".DS_STORE",
+        ".thumbs",
+        "cache",
+        "generated",
+        "tmp",
+        "videos",
+        ".php-cs-fixer.php",
+        "phpunit_init.php",
+    ]
 
     # Prepare build
     os.chdir("dist")
@@ -61,26 +110,32 @@ def main():
 
     print("copying files")
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
-    
+
     update_script = os.path.join(target, "dist", "update.php")
-    
+
     content_dir_from = os.path.join(source_dir, "dist", "App", "Models", "Content")
     content_dir_to = os.path.join(target, "dist", "App", "Models", "Content")
 
     if not os.path.exists(content_dir_to):
         shutil.copytree(content_dir_from, content_dir_to, ignore=IGNORE_PATTERNS)
-    
+
     modules_dir_from = os.path.join(source_dir, "dist", "content", "modules")
     modules_dir_to = os.path.join(target, "dist", "content", "modules")
 
     os.makedirs(modules_dir_to)
-    prefixed = [filename for filename in os.listdir(modules_dir_from) if filename.startswith("core_")]
+    prefixed = [
+        filename
+        for filename in os.listdir(modules_dir_from)
+        if filename.startswith("core_")
+    ]
     for prefix in prefixed:
-        shutil.copytree(os.path.join(modules_dir_from, prefix), os.path.join(modules_dir_to, prefix))
+        shutil.copytree(
+            os.path.join(modules_dir_from, prefix), os.path.join(modules_dir_to, prefix)
+        )
 
     if os.path.exists(update_script):
         print("preparing update Script")
-        with codecs.open(update_script, 'r+', "utf-8") as f:
+        with codecs.open(update_script, "r+", "utf-8") as f:
             lines = f.readlines()
             f.seek(0)
             f.truncate()
@@ -96,15 +151,19 @@ def main():
     version_file = os.path.join(target, "dist", "App", "Backend", "UliCMSVersion.php")
 
     print("set build date...")
-    
-    with codecs.open(version_file, 'r+', "utf-8") as f:
+
+    with codecs.open(version_file, "r+", "utf-8") as f:
         lines = f.readlines()
         f.seek(0)
         f.truncate()
         for line in lines:
             if "{InsertBuildDate}" in line:
                 timestamp = str(int(time.time()))
-                line = "     const BUILD_DATE = " + timestamp + "; // {InsertBuildDate}\r\n"
+                line = (
+                    "     const BUILD_DATE = "
+                    + timestamp
+                    + "; // {InsertBuildDate}\r\n"
+                )
             print(line)
             f.write(line)
 
@@ -121,7 +180,7 @@ def main():
 
     # Remove all non dev composer packages
     os.system("composer install --no-dev")
-    
+
     # Change dir back
     os.chdir(old_cwd)
 
@@ -130,6 +189,8 @@ def main():
         zipdir(target, archive_name)
         print("removing target folder...")
         shutil.rmtree(target)
+
+
 try:
     main()
 except KeyboardInterrupt:
