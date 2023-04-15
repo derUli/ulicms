@@ -57,7 +57,7 @@ if (! $permissionChecker->hasPermission('install_packages')) {
                     } else {
                         $tmpdir = '../content/tmp/';
                         if (! is_dir($tmpdir)) {
-                            mkdir($tmpdir, 0777);
+                            mkdir($tmpdir);
                         }
 
                         $tmpFile = $tmpdir . $packagesToInstall [$i] . '.tar.gz';

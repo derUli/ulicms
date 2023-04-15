@@ -47,7 +47,6 @@ class FaviconController extends \App\Controllers\Controller
         if (! empty($_FILES['favicon_upload_file']['name'])) {
             if (! is_dir('../content/images')) {
                 @mkdir('../content/images');
-                @chmod('../content/images', 0777);
             }
             $favicon_upload_file = $_FILES['favicon_upload_file'];
             $type = $favicon_upload_file['type'];

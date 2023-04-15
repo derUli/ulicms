@@ -94,20 +94,4 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
         LoggerRegistry::unregister('test_log');
     }
 
-    public function testFixLogPermissions()
-    {
-        $cfg = new CMSConfig();
-        $cfg->fix_log_permissions = true;
-
-        $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'), $cfg);
-
-        $logger->debug('Test');
-
-        clearstatcache();
-
-        $path = $logger->getPath();
-
-
-        $this->assertTrue(is_writable($path));
-    }
 }
