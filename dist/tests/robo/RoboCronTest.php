@@ -12,6 +12,6 @@ class RoboCronTest extends RoboTestBase
                 'cron'
             ]
         );
-        $this->assertStringContainsString('finished cron at', $actual);
+        $this->assertStringContainsString('Finished cron at', $actual);
     }
 }

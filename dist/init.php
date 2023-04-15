@@ -27,6 +27,7 @@ define('ULICMS_CONTENT', ULICMS_ROOT . '/content');
 define('ULICMS_GENERATED', ULICMS_CONTENT . '/generated');
 define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
 
+use App\Backend\UliCMSVersion;
 use App\Exceptions\ConnectionFailedException;
 use App\Exceptions\FileNotFoundException;
 use App\Exceptions\SqlException;
@@ -36,7 +37,6 @@ use App\Registries\HelperRegistry;
 use App\Registries\LoggerRegistry;
 use App\Registries\ModelRegistry;
 use App\Utils\Logger;
-use App\Backend\UliCMSVersion;
 
 // TODO: refactor Bootstrap to a new UliCMSBoostrap Class which is splitted into methods
 

@@ -194,7 +194,6 @@ def main():
         print("removing target folder...")
         shutil.rmtree(target)
 
-
 try:
     main()
 except KeyboardInterrupt:

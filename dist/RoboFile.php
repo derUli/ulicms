@@ -35,7 +35,7 @@ class RoboFile extends Tasks
         // to pass direct access preventions
         if (! defined('ULICMS_ROOT')) {
             define('ULICMS_ROOT', dirname(__FILE__));
-        }        
+        }
     }
 
     /**

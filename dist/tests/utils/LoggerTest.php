@@ -93,5 +93,4 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
 
         LoggerRegistry::unregister('test_log');
     }
-
 }

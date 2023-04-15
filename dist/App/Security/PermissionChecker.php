@@ -6,27 +6,51 @@ namespace App\Security;
 
 defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
+use App\Models\Content\Language;
 use User;
+use Group;
 
 // class for permission checks
 class PermissionChecker
 {
-    private $user_id;
+    /**
+     * @var ?int $user_id
+     */
+    private ?int $user_id;
 
+    /**
+     * Constructor
+     *
+     * @param ?int $user_id
+     */
     public function __construct(?int $user_id = null)
     {
-        // if ($user_id == null) {
-        // $user_id = get_user_id();
-        // }
         $this->user_id = $user_id;
     }
 
+    /**
+     * Get PermissionChecker from current user
+     *
+     * @return self
+     */
+    public static function fromCurrentUser(): self
+    {
+        return new self(get_user_id());
+    }
+
+    /**
+     * Check if the user has a permission
+     *
+     * @param string $permission
+     * @return bool
+     */
     public function hasPermission(string $permission): bool
     {
         // If the user is not logged in he has no permissions on anything
         if (! $this->user_id) {
             return false;
         }
+
         $user = new User($this->user_id);
 
         // If the "Is Admin" flag is set the user has full access
@@ -49,6 +73,11 @@ class PermissionChecker
         return false;
     }
 
+    /**
+     * Get assigned languages
+     *
+     * @return Language[]
+     */
     public function getLanguages(): array
     {
         $user = new User($this->user_id);
@@ -63,16 +92,33 @@ class PermissionChecker
         return $languages;
     }
 
+    /**
+     * Get user id
+     *
+     * @return ?int
+     */
     public function getUserId(): ?int
     {
         return $this->user_id;
     }
 
+    /**
+     * Set user id
+     *
+     * @param ?int $val
+     * @return void
+     */
     public function setUserId(?int $val): void
     {
         $this->user_id = is_numeric($val) ? (int)$val : null;
     }
 
+    /**
+     * Get groups from user
+     *
+     * @param User $user
+     * @return Group[]
+     */
     private function getUserGroups(User $user): array
     {
         // Collect primary group and secondary groups of the user

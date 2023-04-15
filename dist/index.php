@@ -62,7 +62,7 @@ if (Request::getVar('run_cron')) {
     require 'lib/cron.php';
     do_event('after_cron');
 
-    TextResult('finished cron at ' . DateTimeHelper::timestampToFormattedDateTime(time()), HttpStatusCode::OK);
+    TextResult('Finished cron at ' . DateTimeHelper::timestampToFormattedDateTime(time()), HttpStatusCode::OK);
 }
 
 

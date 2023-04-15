@@ -56,9 +56,9 @@ class User extends Model
 
     /**
      * Constructor
-     * @param type $id
+     * @param ?ìnt $id
      */
-    public function __construct($id = null)
+    public function __construct(?int $id = null)
     {
         if ($id) {
             $this->loadById($id);
@@ -526,7 +526,8 @@ class User extends Model
 
     /**
      * Get primary group
-     * @return type
+     *
+     * @return ?int
      */
     public function getPrimaryGroupId()
     {
@@ -546,7 +547,7 @@ class User extends Model
 
     /**
      * Get primary group
-     * @return type
+     * @return ?Group
      */
     public function getPrimaryGroup()
     {
