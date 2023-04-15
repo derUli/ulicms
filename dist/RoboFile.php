@@ -12,6 +12,7 @@ use App\Services\Connectors\AvailablePackageVersionMatcher;
 use App\Utils\CacheUtil;
 use Nette\Utils\FileSystem;
 use Robo\Tasks;
+use App\Utils\File;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -543,6 +544,17 @@ class RoboFile extends Tasks
     {
         system('vendor/bin/php-legal-licenses generate --hide-version');
         system('node_modules/.bin/license-report --only=prod --output=json > licenses.json');
+    }
+
+    /**
+     * Optimize all image files
+     */
+    public function buildOptimizeImages(){
+        $dirs = array_filter(File::findAllDirs(ULICMS_ROOT), function($dir){
+            return !str_contains($dir, 'tests');
+        });
+
+        var_dump($dirs);
     }
 
     protected function initUliCMS()
