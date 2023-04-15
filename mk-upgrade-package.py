@@ -51,7 +51,6 @@ def main():
         ".git",
         "doc-src",
         "press",
-        "phpCB-1.0.1-linux",
         "*.py",
         "*.pyc",
         "Releases",
