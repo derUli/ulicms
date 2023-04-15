@@ -77,6 +77,12 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(123, $checker->getUserId());
     }
 
+    public function testFromCurrentUser()
+    {
+        $checker = PermissionChecker::fromCurrentUser();
+        $this->assertFalse($checker->hasPermission('foobar'));
+    }
+
     public function testSetUserId()
     {
         $checker = new PermissionChecker();
