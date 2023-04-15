@@ -25,7 +25,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
 
     protected function tearDown(): void
     {
-        Vars::delete('allModules');
+        \App\Storages\Vars::delete('allModules');
         $module = new Module('fortune2');
         $module->enable();
 
@@ -169,7 +169,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new PackageController();
         $success = $controller->_uninstallModule('hello_world');
 
-        Vars::delete('allModules');
+        \App\Storages\Vars::delete('allModules');
         $this->assertTrue($success);
         $this->assertNotContains('hello_world', getAllModules());
     }
@@ -202,7 +202,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $installer = new SinPackageInstaller($packageFile);
         $installer->installPackage();
 
-        Vars::delete('allModules');
+        \App\Storages\Vars::delete('allModules');
 
         $this->assertContains('hello_world', getAllModules());
     }

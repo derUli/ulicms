@@ -14,14 +14,14 @@ function getThemeMeta(string $theme, ?string $attrib = null)
     $metadata_file = getTemplateDirPath($theme, true) . 'metadata.json';
 
     if (is_file($metadata_file)) {
-        $data = ! Vars::get("theme_{$theme}_meta") ?
-                file_get_contents($metadata_file) : Vars::get("theme_{$theme}_meta");
+        $data = ! \App\Storages\Vars::get("theme_{$theme}_meta") ?
+                file_get_contents($metadata_file) : \App\Storages\Vars::get("theme_{$theme}_meta");
 
         if (is_string($data)) {
             $data = json_decode($data, true);
         }
 
-        Vars::set("theme_{$theme}_meta", $data);
+        \App\Storages\Vars::set("theme_{$theme}_meta", $data);
 
         if ($attrib != null) {
             if (isset($data[$attrib])) {

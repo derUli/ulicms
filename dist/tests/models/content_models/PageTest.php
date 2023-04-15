@@ -71,7 +71,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
         Settings::delete('comments_enabled');
         Settings::delete('commentable_content_types');
 
-        Vars::clear();
+        \App\Storages\Vars::clear();
     }
 
     public function testGetEmbeddedModulesPage()
@@ -654,7 +654,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $snippet->save();
         $shortcode = "This is [include={$snippet->id}]";
 
-        Vars::set('id', time());
+        \App\Storages\Vars::set('id', time());
 
         $this->assertEquals('This is even more text', replaceShortcodesWithModules($shortcode));
     }
@@ -673,7 +673,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
 
         $shortcode = "[include={$page->id}]";
 
-        Vars::set('id', $page->id);
+        \App\Storages\Vars::set('id', $page->id);
 
         $this->assertEquals($shortcode, replaceShortcodesWithModules($shortcode));
     }

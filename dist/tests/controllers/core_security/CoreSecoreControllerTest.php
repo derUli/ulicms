@@ -8,7 +8,7 @@ class CoreSecoreControllerTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
-        Vars::get('http_headers', []);
+        \App\Storages\Vars::get('http_headers', []);
 
         $this->initialEnableHsts = Settings::get('enable_hsts');
         $this->initialExpectCt = Settings::get('expect_ct');
@@ -16,7 +16,7 @@ class CoreSecoreControllerTest extends \PHPUnit\Framework\TestCase
 
     protected function tearDown(): void
     {
-        Vars::get('http_headers', []);
+        \App\Storages\Vars::get('http_headers', []);
 
         if ($this->initialEnableHsts) {
             Settings::delete('enable_hsts');
@@ -34,7 +34,7 @@ class CoreSecoreControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new CoreSecurityController();
         $controller->beforeInit();
 
-        $headers = Vars::get('http_headers');
+        $headers = \App\Storages\Vars::get('http_headers');
         $this->assertContains('X-Frame-Options: SAMEORIGIN', $headers);
         $this->assertContains('X-XSS-Protection: 1', $headers);
         $this->assertContains('X-Content-Type-Options: nosniff', $headers);

@@ -77,14 +77,14 @@ class RoboPackageTest extends RoboTestBase
             $installOutput
         );
 
-        Vars::delete('allModules');
+        \App\Storages\Vars::delete('allModules');
         $this->assertContains('hello_world', getAllModules());
 
         $removeOutput = $this->runRoboCommand(
             ['modules:remove', 'hello_world']
         );
 
-        Vars::delete('allModules');
+        \App\Storages\Vars::delete('allModules');
         $this->assertEquals('Package hello_world removed.', $removeOutput);
         $this->assertNotContains('hello_world', getAllModules());
     }
@@ -102,7 +102,7 @@ class RoboPackageTest extends RoboTestBase
             $installOutput
         );
 
-        Vars::delete('allModules');
+        \App\Storages\Vars::delete('allModules');
         $this->assertContains('hello_world', getAllModules());
     }
 

@@ -12,7 +12,7 @@ class CustomFieldsTest extends \PHPUnit\Framework\TestCase
             (int)$id
         ], true);
 
-        Vars::delete('id');
+        \App\Storages\Vars::delete('id');
 
         $_GET = [];
         $_REQUEST = [];

@@ -43,7 +43,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
             Settings::set($key, $value);
         }
 
-        Vars::setNoCache(false);
+        \App\Storages\Vars::setNoCache(false);
 
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
         $this->cleanUp();
@@ -119,7 +119,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testGetAllModules()
     {
-        Vars::delete('allModules');
+        \App\Storages\Vars::delete('allModules');
         $modules = getAllModules();
         $modules = getAllModules();
         $this->assertContains('core_content', $modules);
@@ -510,8 +510,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     public function testNoCacheWithTrue()
     {
-        $this->assertFalse(Vars::getNoCache());
-        Vars::setNoCache(true);
-        $this->assertTrue(Vars::getNoCache());
+        $this->assertFalse(\App\Storages\Vars::getNoCache());
+        \App\Storages\Vars::setNoCache(true);
+        $this->assertTrue(\App\Storages\Vars::getNoCache());
     }
 }

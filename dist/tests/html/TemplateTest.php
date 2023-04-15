@@ -14,7 +14,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         Translation::loadAllModuleLanguageFiles('en');
-        Vars::setNoCache(true);
+        \App\Storages\Vars::setNoCache(true);
 
         $settings = [
             'site_slogan',
@@ -43,7 +43,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     protected function tearDown(): void
     {
-        Vars::setNoCache(false);
+        \App\Storages\Vars::setNoCache(false);
 
         foreach ($this->savedSettings as $key => $value) {
             Settings::set($key, $value);
@@ -55,11 +55,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             . " like 'test-page%' or slug ='testgetbodyclasses'",
             true
         );
-        Vars::delete('headline');
-        Vars::delete('title');
+        \App\Storages\Vars::delete('headline');
+        \App\Storages\Vars::delete('title');
 
         Settings::delete('disable_no_format_detection');
-        Vars::delete('id');
+        \App\Storages\Vars::delete('id');
     }
 
     public function testRenderPartialSuccess()
@@ -388,8 +388,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             Template::getBodyClasses()
         );
 
-        Vars::delete('id');
-        Vars::delete('active');
+        \App\Storages\Vars::delete('id');
+        \App\Storages\Vars::delete('active');
     }
 
     public function testBodyClassesHome()
@@ -405,8 +405,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             ob_get_clean()
         );
 
-        Vars::delete('id');
-        Vars::delete('active');
+        \App\Storages\Vars::delete('id');
+        \App\Storages\Vars::delete('active');
     }
 
     public function testGetBodyClassesError403Active()
@@ -432,8 +432,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
         $page->delete();
 
-        Vars::delete('id');
-        Vars::delete('active');
+        \App\Storages\Vars::delete('id');
+        \App\Storages\Vars::delete('active');
     }
 
     public function testGetBodyClassesError403CauseAccess()
@@ -459,8 +459,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
         $page->delete();
 
-        Vars::delete('id');
-        Vars::delete('active');
+        \App\Storages\Vars::delete('id');
+        \App\Storages\Vars::delete('active');
     }
 
     public function testGetBodyClassesError404()
@@ -472,8 +472,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             Template::getBodyClasses()
         );
 
-        Vars::delete('id');
-        Vars::delete('active');
+        \App\Storages\Vars::delete('id');
+        \App\Storages\Vars::delete('active');
     }
 
     public function testGetBodyClassesMobile()
@@ -491,8 +491,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             Template::getBodyClasses()
         );
 
-        Vars::delete('id');
-        Vars::delete('active');
+        \App\Storages\Vars::delete('id');
+        \App\Storages\Vars::delete('active');
     }
 
     public function testGetBodyClassesDesktop()
@@ -510,8 +510,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             Template::getBodyClasses()
         );
 
-        Vars::delete('id');
-        Vars::delete('active');
+        \App\Storages\Vars::delete('id');
+        \App\Storages\Vars::delete('active');
     }
 
     public function testGetBodyClassesContainsModule()
@@ -522,8 +522,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             '/page-id-\d+ (.+)containsModule/',
             Template::getBodyClasses()
         );
-        Vars::delete('id');
-        Vars::delete('active');
+        \App\Storages\Vars::delete('id');
+        \App\Storages\Vars::delete('active');
     }
 
     public function testGetDocType()

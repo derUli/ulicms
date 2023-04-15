@@ -30,7 +30,7 @@ function do_event(
     string $runs = ModuleEventConstants::RUNS_ONCE
 ): void {
     $modules = getAllModules();
-    $disabledModules = Vars::get('disabledModules') ?? [];
+    $disabledModules = \App\Storages\Vars::get('disabledModules') ?? [];
     $modulesCount = count($modules);
 
     for ($hook_i = 0; $hook_i < $modulesCount; $hook_i++) {
@@ -87,7 +87,7 @@ function replaceShortcodesWithModules(
     $string = $replaceOther ? replaceOtherShortCodes($string) : $string;
 
     $allModules = ModuleHelper::getAllEmbedModules();
-    $disabledModules = Vars::get('disabledModules') ?? [];
+    $disabledModules = \App\Storages\Vars::get('disabledModules') ?? [];
 
     foreach ($allModules as $module) {
         if (in_array($module, $disabledModules) || ! stringContainsShortCodes($string, $module)) {
@@ -212,8 +212,8 @@ function containsModule(?string $page = null, ?string $module = null): bool
         $page = get_slug();
     }
 
-    if (Vars::get('page_' . $page . '_contains_' . $module) !== null) {
-        return Vars::get('page_' . $page . '_contains_' . $module);
+    if (\App\Storages\Vars::get('page_' . $page . '_contains_' . $module) !== null) {
+        return \App\Storages\Vars::get('page_' . $page . '_contains_' . $module);
     }
 
     $result = db_query('SELECT content, module, `type` FROM ' .
@@ -236,6 +236,6 @@ function containsModule(?string $page = null, ?string $module = null): bool
         $containsModule = true;
     }
 
-    Vars::set('page_' . $page . '_contains_' . $module, $containsModule);
+    \App\Storages\Vars::set('page_' . $page . '_contains_' . $module, $containsModule);
     return $containsModule;
 }

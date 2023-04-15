@@ -10,7 +10,7 @@ if ($main_class) {
     $controller = ControllerRegistry::get($main_class);
 }
 
-$disabledModules = Vars::get('disabledModules') ?? [];
+$disabledModules = \App\Storages\Vars::get('disabledModules') ?? [];
 if ((! is_file($admin_file_path) && ! is_file($admin_file_path2) && ! ($controller && method_exists($controller, 'settings')) || in_array($module, $disabledModules))) {
     ?>
     <div class="alert alert-danger"><?php translate('this_module_has_no_settings'); ?></div>

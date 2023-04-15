@@ -13,8 +13,8 @@ use App\Utils\CacheUtil;
 function getAllModules(): array
 {
     // Check if cached
-    if (Vars::get('allModules')) {
-        return Vars::get('allModules');
+    if (\App\Storages\Vars::get('allModules')) {
+        return \App\Storages\Vars::get('allModules');
     }
 
     // Fetch installed modules
@@ -22,7 +22,7 @@ function getAllModules(): array
     $modules = $pkg->getInstalledPackages('modules');
 
     // Save installed modules in cache
-    Vars::set('allModules', $modules);
+    \App\Storages\Vars::set('allModules', $modules);
     return $modules;
 }
 

@@ -3,7 +3,7 @@
 use App\Constants\CommentStatus;
 use App\Security\PrivacyCheckbox;
 
-if (Vars::get('comments_enabled')) {
+if (\App\Storages\Vars::get('comments_enabled')) {
     ?>
     <?php
     $comment_published = Request::getVar('comment_published');
@@ -50,7 +50,7 @@ if (Vars::get('comments_enabled')) {
         <?php
     echo App\HTML\Input::hidden(
         'content_id',
-        Vars::get('content_id')
+        \App\Storages\Vars::get('content_id')
     );
     ?>
 

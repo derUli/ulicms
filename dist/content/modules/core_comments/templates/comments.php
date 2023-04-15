@@ -6,7 +6,7 @@ use App\Models\Content\Comment;
 
 $comments = Comment::getAllByStatus(
     CommentStatus::PUBLISHED,
-    Vars::get('content_id')
+    \App\Storages\Vars::get('content_id')
 );
 $last = end($comments);
 reset($comments);

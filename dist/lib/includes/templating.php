@@ -140,8 +140,8 @@ function all_combined_html(): void
 
 function get_ID(): ?int
 {
-    if (Vars::get('id') !== null) {
-        return Vars::get('id');
+    if (\App\Storages\Vars::get('id') !== null) {
+        return \App\Storages\Vars::get('id');
     }
 
     $page = get_slug();
@@ -156,14 +156,14 @@ function get_ID(): ?int
         $dataset = db_fetch_object($result);
         $dataset = (int)$dataset->id;
     }
-    Vars::set('id', $dataset);
+    \App\Storages\Vars::set('id', $dataset);
     return $dataset;
 }
 
 function is_active(): bool
 {
-    if (Vars::get('active') !== null) {
-        return Vars::get('active');
+    if (\App\Storages\Vars::get('active') !== null) {
+        return \App\Storages\Vars::get('active');
     }
 
     $page = get_slug();
@@ -180,7 +180,7 @@ function is_active(): bool
         $dataset = (bool)$dataset->active;
     }
 
-    Vars::set('active', $dataset);
+    \App\Storages\Vars::set('active', $dataset);
     return $dataset;
 }
 
@@ -194,8 +194,8 @@ function get_type(?string $slug = null, ?string $language = null): ?string
         $language = getCurrentLanguage();
     }
     $varName = "type_{$slug}_{$language}";
-    if (Vars::get($varName)) {
-        return Vars::get($varName);
+    if (\App\Storages\Vars::get($varName)) {
+        return \App\Storages\Vars::get($varName);
     }
 
     $type = null;
@@ -208,7 +208,7 @@ function get_type(?string $slug = null, ?string $language = null): ?string
     }
 
     $result = apply_filter($type, 'get_type');
-    Vars::set($varName, $type);
+    \App\Storages\Vars::set($varName, $type);
     return $result;
 }
 
@@ -239,8 +239,8 @@ function get_article_meta(?string $page = null): ?object
 
 function get_cache_control(): string
 {
-    if (Vars::get('cache_control') !== null) {
-        return Vars::get('cache_control');
+    if (\App\Storages\Vars::get('cache_control') !== null) {
+        return \App\Storages\Vars::get('cache_control');
     }
     $page = get_slug();
 
@@ -256,7 +256,7 @@ function get_cache_control(): string
         $cacheControl = $dataset->cache_control ?: $cacheControl;
     }
     $cacheControl = apply_filter($cacheControl, 'get_cache_control');
-    Vars::set('cache_control', $cacheControl);
+    \App\Storages\Vars::set('cache_control', $cacheControl);
     return $cacheControl;
 }
 
@@ -341,8 +341,8 @@ function get_theme(?string $page = null): ?string
         $page = get_slug();
     }
 
-    if (Vars::get('theme_' . $page) !== null) {
-        return Vars::get('theme_' . $page);
+    if (\App\Storages\Vars::get('theme_' . $page) !== null) {
+        return \App\Storages\Vars::get('theme_' . $page);
     }
     $theme = Settings::get('theme');
     $mobile_theme = Settings::get('mobile_theme');
@@ -363,7 +363,7 @@ function get_theme(?string $page = null): ?string
         }
     }
     $theme = apply_filter($theme, 'theme');
-    Vars::set('theme_' . $page, $theme);
+    \App\Storages\Vars::set('theme_' . $page, $theme);
     return $theme;
 }
 
@@ -462,8 +462,8 @@ function meta_description(): void
 function get_title(?string $slug = null, bool $headline = false): string
 {
     $cacheVar = $headline ? 'headline' : 'title';
-    if (Vars::get($cacheVar)) {
-        return Vars::get($cacheVar);
+    if (\App\Storages\Vars::get($cacheVar)) {
+        return \App\Storages\Vars::get($cacheVar);
     }
 
     $errorPage403 = (int)(
@@ -512,7 +512,7 @@ function get_title(?string $slug = null, bool $headline = false): string
 
             $title = apply_filter($title, 'title');
             $title = Template::getEscape($title);
-            Vars::set($cacheVar, $title);
+            \App\Storages\Vars::set($cacheVar, $title);
             return $title;
         }
     }
@@ -537,7 +537,7 @@ function get_headline(?string $ipage = null): string
 function apply_filter($text, string $type)
 {
     $modules = getAllModules();
-    $disabledModules = Vars::get('disabledModules') ?? [];
+    $disabledModules = \App\Storages\Vars::get('disabledModules') ?? [];
 
     $modulesCount = count($modules);
     for ($i = 0; $i < $modulesCount; $i++) {
@@ -847,16 +847,16 @@ function get_page(?string $slug = ''): ?array
     if (empty($slug)) {
         $slug = get_frontpage();
     }
-    if (Vars::get('page_' . $slug)) {
-        return Vars::get('page_' . $slug);
+    if (\App\Storages\Vars::get('page_' . $slug)) {
+        return \App\Storages\Vars::get('page_' . $slug);
     }
     $result = db_query('SELECT * FROM ' . tbname('content') . " WHERE slug='" . db_escape($slug) . "' AND language='" . db_escape(getFrontendLanguage()) . "'");
     if (db_num_rows($result) > 0) {
         $dataset = db_fetch_assoc($result);
-        Vars::set('page_' . $slug, $dataset);
+        \App\Storages\Vars::set('page_' . $slug, $dataset);
         return $dataset;
     }
-        Vars::set('page_' . $slug, null);
+        \App\Storages\Vars::set('page_' . $slug, null);
         return null;
 
 }
@@ -940,18 +940,18 @@ function check_status(): string
 
     $test = isset($_GET['slug']) ? get_page($_GET['slug']) : null;
     if (! $test || null !== $test['deleted_at']) {
-        Vars::setNoCache(false);
+        \App\Storages\Vars::setNoCache(false);
         return '404 Not Found';
     }
 
     $access = checkAccess($test['access']);
     if ($access) {
         if ($access != 'all') {
-            Vars::setNoCache(false);
+            \App\Storages\Vars::setNoCache(false);
         }
         return '200 OK';
     }
-    Vars::setNoCache(false);
+    \App\Storages\Vars::setNoCache(false);
     return '403 Forbidden';
 }
 

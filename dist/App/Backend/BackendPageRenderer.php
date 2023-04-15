@@ -154,7 +154,7 @@ class BackendPageRenderer
                 $this->getAction()
             );
             if ($action_permission && $action_permission === '*') {
-                Vars::set('action_filename', $actions[$this->getAction()]);
+                \App\Storages\Vars::set('action_filename', $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(
                     'backend/container.php'
                 );
@@ -205,7 +205,7 @@ class BackendPageRenderer
                         $requiredPermission
                         && $permissionChecker->hasPermission($requiredPermission))
             ) {
-                Vars::set('action_filename', $actions[$this->getAction()]);
+                \App\Storages\Vars::set('action_filename', $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(
                     'backend/container.php'
                 );

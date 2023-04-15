@@ -53,7 +53,7 @@ if (is_file($composerAutoloadFile)) {
 // if config exists require_config else redirect to installer
 $path_to_config = dirname(__FILE__) . '/CMSConfig.php';
 
-Vars::set('http_headers', []);
+\App\Storages\Vars::set('http_headers', []);
 
 // load config file
 if (is_file($path_to_config)) {
@@ -244,7 +244,7 @@ if (! is_ssl() && $enforce_https) {
 
 $moduleManager = new ModuleManager();
 $moduleManager->sync();
-Vars::set('disabledModules', $moduleManager->getDisabledModuleNames());
+\App\Storages\Vars::set('disabledModules', $moduleManager->getDisabledModuleNames());
 
 ModelRegistry::loadModuleModels();
 

@@ -4,7 +4,7 @@ class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        Vars::delete('allModules');
+        \App\Storages\Vars::delete('allModules');
 
         $source = Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/hello_world-1.0.sin'
@@ -35,7 +35,7 @@ class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase
         $success = $controller->_installPost('hello_world-10.sin');
         $this->assertTrue($success);
 
-        Vars::delete('allModules');
+        \App\Storages\Vars::delete('allModules');
 
         $this->assertContains('hello_world', getAllModules());
     }

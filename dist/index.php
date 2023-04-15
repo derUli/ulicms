@@ -182,26 +182,26 @@ $cache_control = get_cache_control();
 switch ($cache_control) {
     case 'auto':
     case 'force':
-        Vars::setNoCache(false);
+        \App\Storages\Vars::setNoCache(false);
         break;
     case 'no_cache':
-        Vars::setNoCache(true);
+        \App\Storages\Vars::setNoCache(true);
         break;
 }
 
 if ($hasModule) {
-    Vars::setNoCache(false);
+    \App\Storages\Vars::setNoCache(false);
 }
 
 // Kein Caching wenn man eingeloggt ist
 if (is_logged_in() && get_cache_control() == 'auto') {
-    Vars::setNoCache(false);
+    \App\Storages\Vars::setNoCache(false);
 }
 
 do_event('before_html');
 
 $cacheAdapter = null;
-if (CacheUtil::isCacheEnabled() && Request::isGet() && ! Vars::getNoCache()) {
+if (CacheUtil::isCacheEnabled() && Request::isGet() && ! \App\Storages\Vars::getNoCache()) {
     $cacheAdapter = CacheUtil::getAdapter();
 }
 $uid = CacheUtil::getCurrentUid();

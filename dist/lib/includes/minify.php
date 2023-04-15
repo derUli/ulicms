@@ -16,7 +16,7 @@ use zz\Html\HTMLMinify;
  */
 function resetScriptQueue(): void
 {
-    Vars::set('script_queue', []);
+    \App\Storages\Vars::set('script_queue', []);
 }
 
 /**
@@ -43,13 +43,13 @@ function optimizeHtml(
 
 function enqueueScriptFile($path): void
 {
-    if (! Vars::get('script_queue')) {
+    if (! \App\Storages\Vars::get('script_queue')) {
         resetScriptQueue();
     }
-    $script_queue = Vars::get('script_queue');
+    $script_queue = \App\Storages\Vars::get('script_queue');
     $script_queue[] = $path;
 
-    Vars::set('script_queue', $script_queue);
+    \App\Storages\Vars::set('script_queue', $script_queue);
 }
 
 function setSCSSImportPaths(?array $importPaths = null): void
@@ -59,22 +59,22 @@ function setSCSSImportPaths(?array $importPaths = null): void
             Path::resolve('ULICMS_ROOT')
         ];
     }
-    Vars::set('css_include_paths', $importPaths);
+    \App\Storages\Vars::set('css_include_paths', $importPaths);
 }
 
 function getSCSSImportPaths(): ?array
 {
-    return Vars::get('css_include_paths');
+    return \App\Storages\Vars::get('css_include_paths');
 }
 
 function unsetSCSSImportPaths(): void
 {
-    Vars::delete('css_include_paths');
+    \App\Storages\Vars::delete('css_include_paths');
 }
 
 function minifyJs(): string
 {
-    $scripts = Vars::get('script_queue');
+    $scripts = \App\Storages\Vars::get('script_queue');
     $lastmod = 0;
 
     $minifier = new Minify\JS();
@@ -122,7 +122,7 @@ function minifyJs(): string
 
 function minifyCSS(): string
 {
-    $stylesheets = Vars::get('stylesheet_queue');
+    $stylesheets = \App\Storages\Vars::get('stylesheet_queue');
     $lastmod = 0;
 
     $minifier = new Minify\CSS();
@@ -227,7 +227,7 @@ function getCombinedScriptHtml(): string
     $html = '';
     $cfg = new CMSConfig();
     if (isset($cfg->no_minify) && $cfg->no_minify) {
-        foreach (Vars::get('script_queue') as $script) {
+        foreach (\App\Storages\Vars::get('script_queue') as $script) {
             $html .= Script::fromFile($script);
         }
         resetScriptQueue();
@@ -243,18 +243,18 @@ function getCombinedScriptHtml(): string
 // Ab hier Stylesheet Funktionen
 function resetStylesheetQueue(): void
 {
-    Vars::set('stylesheet_queue', []);
+    \App\Storages\Vars::set('stylesheet_queue', []);
 }
 
 function enqueueStylesheet(string $path): void
 {
-    if (! Vars::get('stylesheet_queue')) {
+    if (! \App\Storages\Vars::get('stylesheet_queue')) {
         resetStylesheetQueue();
     }
-    $stylesheet_queue = Vars::get('stylesheet_queue');
+    $stylesheet_queue = \App\Storages\Vars::get('stylesheet_queue');
     $stylesheet_queue[] = $path;
 
-    Vars::set('stylesheet_queue', $stylesheet_queue);
+    \App\Storages\Vars::set('stylesheet_queue', $stylesheet_queue);
 }
 
 function getCombinedStylesheetHTML(): ?string
@@ -262,11 +262,11 @@ function getCombinedStylesheetHTML(): ?string
     $html = '';
 
     $cfg = new CMSConfig();
-    if (! Vars::get('stylesheet_queue')) {
+    if (! \App\Storages\Vars::get('stylesheet_queue')) {
         return null;
     }
     if (isset($cfg->no_minify) && ($cfg->no_minify)) {
-        foreach (Vars::get('stylesheet_queue') as $stylesheet) {
+        foreach (\App\Storages\Vars::get('stylesheet_queue') as $stylesheet) {
             $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
             if ($type == 'css') {
                 $html .= Style::fromExternalFile($stylesheet);

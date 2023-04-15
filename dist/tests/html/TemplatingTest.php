@@ -128,7 +128,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
             )
         );
         // unset the cached type
-        Vars::delete("type_{$content1->slug}_{$content1->language}");
+        \App\Storages\Vars::delete("type_{$content1->slug}_{$content1->language}");
 
         // no it should get the actual type (video)
         $this->assertEquals(
@@ -332,8 +332,8 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
             $cssClasses
         );
 
-        Vars::delete('id');
-        Vars::delete('active');
+        \App\Storages\Vars::delete('id');
+        \App\Storages\Vars::delete('active');
     }
 
     public function testCMSReleaseYear()
@@ -781,11 +781,11 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase
 
     private function cleanUp()
     {
-        Vars::delete('title');
-        Vars::delete('headline');
-        Vars::delete('page');
-        Vars::delete('type');
-        Vars::delete('cache_control');
+        \App\Storages\Vars::delete('title');
+        \App\Storages\Vars::delete('headline');
+        \App\Storages\Vars::delete('page');
+        \App\Storages\Vars::delete('type');
+        \App\Storages\Vars::delete('cache_control');
 
         Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%'", true);
     }

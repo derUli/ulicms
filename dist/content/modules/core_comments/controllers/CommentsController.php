@@ -16,7 +16,7 @@ class CommentsController extends MainClass
 {
     public function beforeHtml(): void
     {
-        Vars::set('comments_enabled', false);
+        \App\Storages\Vars::set('comments_enabled', false);
 
         if (is_200()) {
             $page = ContentFactory::getCurrentPage();
@@ -26,10 +26,10 @@ class CommentsController extends MainClass
             // This is a limitation of UliCMS caching system and will get fixed
             // in a future release
             if ($page->areCommentsEnabled()) {
-                Vars::setNoCache(true);
-                Vars::set('comments_enabled', true);
+                \App\Storages\Vars::setNoCache(true);
+                \App\Storages\Vars::set('comments_enabled', true);
             }
-            Vars::set('content_id', $page->id);
+            \App\Storages\Vars::set('content_id', $page->id);
         }
     }
 

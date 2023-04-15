@@ -161,8 +161,8 @@ function setLocaleByLanguage(): array
 // else it returns $_SESSION['language'];
 function getCurrentLanguage($current = false): string
 {
-    if (Vars::get('current_language_' . strbool($current))) {
-        return Vars::get('current_language_' . strbool($current));
+    if (\App\Storages\Vars::get('current_language_' . strbool($current))) {
+        return \App\Storages\Vars::get('current_language_' . strbool($current));
     }
     if ($current) {
         $result = db_query('SELECT language FROM ' . tbname('content') .
@@ -170,7 +170,7 @@ function getCurrentLanguage($current = false): string
         if (db_num_rows($result) > 0) {
             $dataset = db_fetch_object($result);
             $language = $dataset->language;
-            Vars::set('current_language_' . strbool($current), $language);
+            \App\Storages\Vars::set('current_language_' . strbool($current), $language);
         }
     }
 
@@ -198,8 +198,8 @@ function getAllLanguages($filtered = false): array
         }
     }
 
-    if (Vars::get('all_languages') !== null) {
-        return Vars::get('all_languages');
+    if (\App\Storages\Vars::get('all_languages') !== null) {
+        return \App\Storages\Vars::get('all_languages');
     }
     $result = db_query('SELECT language_code FROM `' . tbname('languages') .
             '` ORDER BY language_code');
@@ -207,6 +207,6 @@ function getAllLanguages($filtered = false): array
     while ($row = db_fetch_object($result)) {
         $languageCodes[] = $row->language_code;
     }
-    Vars::set('all_languages', $languageCodes);
+    \App\Storages\Vars::set('all_languages', $languageCodes);
     return $languageCodes;
 }

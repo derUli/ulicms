@@ -11,7 +11,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         resetStylesheetQueue();
 
         setSCSSImportPaths([]);
-        Vars::delete('css_include_paths');
+        \App\Storages\Vars::delete('css_include_paths');
     }
 
     public function testScriptQueue()
@@ -28,18 +28,18 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
                 $filemtime = filemtime($file);
             }
         }
-        $this->assertCount(3, Vars::get('script_queue'));
+        $this->assertCount(3, \App\Storages\Vars::get('script_queue'));
         $this->assertEquals(
             'node_modules/jquery/dist/jquery.js',
-            Vars::get('script_queue')[0]
+            \App\Storages\Vars::get('script_queue')[0]
         );
         $this->assertEquals(
             'node_modules/bootbox/bootbox.js',
-            Vars::get('script_queue')[2]
+            \App\Storages\Vars::get('script_queue')[2]
         );
 
         resetScriptQueue();
-        $this->assertCount(0, Vars::get('script_queue'));
+        $this->assertCount(0, \App\Storages\Vars::get('script_queue'));
 
         foreach ($files as $file) {
             enqueueScriptFile($file);
@@ -53,7 +53,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString('.js?time=', $html);
         $this->assertStringEndsWith('></script>', $html);
 
-        $this->assertCount(0, Vars::get('script_queue'));
+        $this->assertCount(0, \App\Storages\Vars::get('script_queue'));
     }
 
     public function testCombinedScriptHTMLDeprecated()
@@ -79,7 +79,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString('.js?time=', $html);
         $this->assertStringEndsWith('></script>', $html);
 
-        $this->assertCount(0, Vars::get('script_queue'));
+        $this->assertCount(0, \App\Storages\Vars::get('script_queue'));
     }
 
     public function testStylesheetQueue()
@@ -97,18 +97,18 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
                 $filemtime = filemtime($file);
             }
         }
-        $this->assertCount(4, Vars::get('stylesheet_queue'));
+        $this->assertCount(4, \App\Storages\Vars::get('stylesheet_queue'));
         $this->assertEquals(
             'node_modules/bootstrap/dist/css/bootstrap.css',
-            Vars::get('stylesheet_queue')[1]
+            \App\Storages\Vars::get('stylesheet_queue')[1]
         );
         $this->assertEquals(
             'node_modules/bootstrap/dist/css/bootstrap-theme.css',
-            Vars::get('stylesheet_queue')[2]
+            \App\Storages\Vars::get('stylesheet_queue')[2]
         );
 
         resetStylesheetQueue();
-        $this->assertCount(0, Vars::get('stylesheet_queue'));
+        $this->assertCount(0, \App\Storages\Vars::get('stylesheet_queue'));
 
         foreach ($files as $file) {
             enqueueStylesheet($file);
@@ -119,7 +119,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString('.css?time=', $html);
         $this->assertStringEndsWith('" type="text/css"/>', $html);
 
-        $this->assertCount(0, Vars::get('script_queue'));
+        $this->assertCount(0, \App\Storages\Vars::get('script_queue'));
     }
 
     public function testCombinedStylesheetHtml()
@@ -143,7 +143,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString('.css?time=', $html);
         $this->assertStringEndsWith('" type="text/css"/>', $html);
 
-        $this->assertCount(0, Vars::get('script_queue'));
+        $this->assertCount(0, \App\Storages\Vars::get('script_queue'));
     }
 
     public function testMinifySCSSExpectCSS()

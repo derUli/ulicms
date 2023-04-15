@@ -98,7 +98,7 @@ function is_ssl(): bool
 
 function send_header(string $header): bool
 {
-    $headers = Vars::get('http_headers');
+    $headers = \App\Storages\Vars::get('http_headers');
 
     if (! $headers) {
         $headers = [];
@@ -107,7 +107,7 @@ function send_header(string $header): bool
         $headers[] = $header;
     }
 
-    Vars::set('http_headers', $headers);
+    \App\Storages\Vars::set('http_headers', $headers);
 
     return class_exists('Response') ? Response::sendHeader($header) : false;
 }
