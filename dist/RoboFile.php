@@ -87,20 +87,33 @@ class RoboFile extends Tasks
 
 
     public function foobar(){
-        foreach (Finder::findFiles(['*.php']) as $name => $file) {
-            
+        $protectedFiles = 0;
+        $unprotectedFiles = 0;
+        foreach (Finder::findFiles(['*.php'])->from('.') as $name => $file) {
+
             $path = $file->getRealPath();
+            $filename = basename($path);
+            
+            if(str_contains($path, 'vendor')){
+                continue;
+            }
 
-            $beforeCode = 'error_reporting(0);';
-
+            if(str_starts_with($path, '.')){
+                continue;
+            }
+            
             $output = trim((string)shell_exec("php -f \"{$path}\""));
-
-            echo $output;
             
             if($output === 'No direct script access allowed'){
-                $this->writeln($path);
+                $protectedFiles += 1;
+            } else {
+                $unprotectedFiles += 1;
+                $this->writeln("Unprotected: $path");
             }
         }
+        
+        $this->writeln('Protected files: ' . $protectedFiles);
+        $this->writeln('Unprotected files: ' . $unprotectedFiles);
     }
 
     /**
