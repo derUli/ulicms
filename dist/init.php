@@ -37,8 +37,10 @@ use App\Registries\LoggerRegistry;
 use App\Registries\ModelRegistry;
 use App\Utils\Logger;
 
+// TODO: refactor Bootstrap to a new UliCMSBoostrap Class which is splitted into methods
+
 // load composer packages
-$composerAutoloadFile = dirname(__FILE__) . '/vendor/autoload.php';
+$composerAutoloadFile = ULICMS_ROOT . '/vendor/autoload.php';
 
 if (is_file($composerAutoloadFile)) {
     require $composerAutoloadFile;
@@ -48,7 +50,6 @@ if (is_file($composerAutoloadFile)) {
         . 'Please run \'./composer install\' to install dependecies.'
     );
 }
-
 
 // if config exists require_config else redirect to installer
 $path_to_config = dirname(__FILE__) . '/CMSConfig.php';

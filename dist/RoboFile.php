@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 use App\Constants\DefaultValues;
 use App\Database\DBMigrator;
-use App\Exceptions\SqlException;
 use App\Helpers\DateTimeHelper;
+use App\Helpers\NumberFormatHelper;
 use App\Packages\PackageManager;
 use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
 use App\Utils\CacheUtil;
 use App\Utils\File;
+use Nette\IOException;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Finder;
 use Robo\Tasks;
-use App\Helpers\NumberFormatHelper;
-use Nette\IOException;
-use Nette\UnexpectedValueException;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -32,6 +30,12 @@ class RoboFile extends Tasks
         }
 
         $this->initUliCMS();
+
+        // If initialization failed, initialize at least ULICMS_ROOT
+        // to pass direct access preventions
+        if (! defined('ULICMS_ROOT')) {
+            define('ULICMS_ROOT', dirname(__FILE__));
+        }        
     }
 
     /**
@@ -584,25 +588,25 @@ class RoboFile extends Tasks
     /**
      * Cleanup vendor directory
      */
-    public function buildCleanupVendor(){
+    public function buildCleanupVendor() {
         $this->cleanUpDirectory('vendor');
     }
 
     /**
      * Cleanup node_modules directory
      */
-    public function buildCleanupNodeModules(){
+    public function buildCleanupNodeModules() {
         $this->cleanUpDirectory('node_modules');
     }
 
-    /** 
+    /**
      * Clean up directory
-     * 
+     *
      * @param string $directory
-     * 
+     *
      * @return void
-    */
-    protected function cleanUpDirectory(string $directory = 'vendor'): void{
+     */
+    protected function cleanUpDirectory(string $directory = 'vendor'): void {
         $patterns = [
             'test',
             'tests',
@@ -627,7 +631,12 @@ class RoboFile extends Tasks
             '.psalm',
             '.settings',
             '.editorconfig',
-            '.project'
+            '.project',
+            '.stylelintrc',
+            '.circleci',
+            '.commitlintrc.json',
+            '.husky',
+            '.vscode'
         ];
 
         $size = 0;
@@ -637,14 +646,14 @@ class RoboFile extends Tasks
         $searchResult = Finder::find($patterns)->from($directory)->collect();
 
         foreach($searchResult as $file) {
-        
+
             $path = $file->getRealPath();
-            $files +=1;
+            $files += 1;
             $size += $file->getSize();
 
-            if(!in_array($path, $filesToDelete)){
-                $filesToDelete[] = $path;    
-            }        
+            if(! in_array($path, $filesToDelete)){
+                $filesToDelete[] = $path;
+            }
         }
 
         foreach($filesToDelete as $file){
@@ -658,14 +667,14 @@ class RoboFile extends Tasks
         }
 
         $this->writeln('Files: ' . NumberFormatHelper::formatSizeUnits($size));
-        $this->writeln('Size: ' .$files);
+        $this->writeln('Size: ' . $files);
     }
 
     protected function initUliCMS()
     {
         try {
             $this->initCore();
-        } catch (SqlException $e) {
+        } catch (Exception $e) {
             $this->showException($e);
         }
     }
