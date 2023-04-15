@@ -90,8 +90,16 @@ class RoboFile extends Tasks
         foreach (Finder::findFiles(['*.php']) as $name => $file) {
             
             $path = $file->getRealPath();
-            $result = shell_exec("php \"{$path}\"");
-            echo $result;
+
+            $beforeCode = 'error_reporting(0);';
+
+            $output = trim((string)shell_exec("php -f \"{$path}\""));
+
+            echo $output;
+            
+            if($output === 'No direct script access allowed'){
+                $this->writeln($path);
+            }
         }
     }
 

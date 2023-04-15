@@ -1018,7 +1018,7 @@ class User extends Model
 
         $users = [];
         while ($row = Database::fetchObject($query)) {
-            $users[] = new self($row->id);
+            $users[] = new self((int)$row->id);
         }
         return $users;
     }
