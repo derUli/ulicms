@@ -565,12 +565,16 @@ class RoboFile extends Tasks
         foreach($dirs as $dir){
             $args = [
                 '-nr', // Don't recurse through subdirectories.
-                '-o 83', // JPEG Quality
+                '-q 83', // JPEG Quality
                 $dir
             ];
 
-            system('optimize-images ' . implode(' ', $args));
-    }
+            $cmd = 'optimize-images ' . implode(' ', $args);
+
+            $this->writeln($cmd);
+
+            system($cmd);
+        }
     }
 
     protected function initUliCMS()
