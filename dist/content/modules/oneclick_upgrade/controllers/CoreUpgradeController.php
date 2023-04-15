@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Backend\UliCMSVersion;
 use App\Exceptions\CorruptDownloadException;
+use App\Security\PermissionChecker;
 
 class CoreUpgradeController extends \App\Controllers\Controller
 {
@@ -59,7 +60,8 @@ class CoreUpgradeController extends \App\Controllers\Controller
     {
         @set_time_limit(0);
         @ignore_user_abort(true);
-        $acl = new \App\Security\ACL();
+        $acl = new PermissionChecker(get_user_id());
+        
         if ((! $skipPermissions && (! $acl->hasPermission('update_system')) || ! $this->checkForUpgrades() || get_request_method() != 'post')) {
             return false;
         }
