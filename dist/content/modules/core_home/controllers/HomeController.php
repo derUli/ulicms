@@ -110,7 +110,7 @@ class HomeController extends \App\Controllers\Controller
 
     public function _onlineUsers(): string
     {
-        ViewBag::set('users', User::getOnlineUsers());
+        \App\Storages\ViewBag::set('users', User::getOnlineUsers());
 
         $html = Template::executeModuleTemplate('core_home', 'online_users.php');
         $options = [

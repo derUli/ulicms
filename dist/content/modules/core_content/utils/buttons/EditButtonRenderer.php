@@ -11,7 +11,6 @@ use ModuleHelper;
 use Template;
 
 use User;
-use ViewBag;
 
 class EditButtonRenderer
 {
@@ -32,7 +31,7 @@ class EditButtonRenderer
 
         $url = ModuleHelper::buildActionURL('pages_edit', "page={$pageId}");
         $link = link($url, $icon, true);
-        ViewBag::set('button', $link);
+        \App\Storages\ViewBag::set('button', $link);
 
         return $permitted ? Template::executeModuleTemplate(
             self::MODULE_NAME,

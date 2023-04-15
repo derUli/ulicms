@@ -18,7 +18,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
         $_REQUEST = [];
         $_SERVER = [];
         $_SESSION = [];
-        ViewBag::delete('sample_text');
+        \App\Storages\ViewBag::delete('sample_text');
         Database::deleteFrom('users', "username like 'testuser-%'");
     }
 
@@ -70,7 +70,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             'This is POST answer.',
-            ViewBag::get('sample_text')
+            \App\Storages\ViewBag::get('sample_text')
         );
     }
 
@@ -89,7 +89,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             'Unkwown Request Method',
-            ViewBag::get('sample_text')
+            \App\Storages\ViewBag::get('sample_text')
         );
     }
 

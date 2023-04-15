@@ -12,7 +12,6 @@ use PageController;
 use Template;
 
 use User;
-use ViewBag;
 
 class DeleteButtonRenderer
 {
@@ -50,7 +49,7 @@ class DeleteButtonRenderer
             'class' => 'delete-icon'
         ];
         $link = link($url, $icon, true, null, $attributes);
-        ViewBag::set('button', $link);
+        \App\Storages\ViewBag::set('button', $link);
 
         return $permitted ? Template::executeModuleTemplate(
             self::MODULE_NAME,

@@ -20,6 +20,6 @@
     <button type="submit" class="btn btn-default">POST</button>
 </form>
 <br />
-<code><?php if (ViewBag::get('sample_text')) { ?>
-        <?php Template::escape(ViewBag::get('sample_text')); ?>
+<code><?php if (\App\Storages\ViewBag::get('sample_text')) { ?>
+        <?php Template::escape(\App\Storages\ViewBag::get('sample_text')); ?>
     <?php } ?></code>

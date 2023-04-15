@@ -16,7 +16,7 @@
     <body>
         <h1><?php translate('error'); ?></h1>
         <blockquote>
-            <?php echo ViewBag::get('exception'); ?>
+            <?php echo \App\Storages\ViewBag::get('exception'); ?>
         </blockquote>
     </body>
 </html>

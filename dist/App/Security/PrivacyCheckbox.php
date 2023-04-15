@@ -10,7 +10,6 @@ use App\HTML\Input;
 use Request;
 use Settings;
 use Template;
-use ViewBag;
 
 /**
  * Handling GDPR / DSGVO privacy checkbox
@@ -83,7 +82,7 @@ class PrivacyCheckbox
             if ($failed != null) {
                 $failed();
             } else {
-                ViewBag::set('exception', get_translation('please_accept_privacy_conditions'));
+                \App\Storages\ViewBag::set('exception', get_translation('please_accept_privacy_conditions'));
                 echo Template::executeDefaultOrOwnTemplate('exception.php');
                 exit();
             }

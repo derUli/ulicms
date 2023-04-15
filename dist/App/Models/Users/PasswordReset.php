@@ -12,7 +12,6 @@ use ModuleHelper;
 use SessionManager;
 use Settings;
 use Template;
-use ViewBag;
 
 /**
  * Reset admin user password
@@ -55,10 +54,10 @@ class PasswordReset
         string $firstname,
         string $lastname
     ): void {
-        ViewBag::set('url', $this->getPasswordResetLink($token));
-        ViewBag::set('firstname', $firstname);
-        ViewBag::set('lastname', $lastname);
-        ViewBag::set('ip', $ip);
+        \App\Storages\ViewBag::set('url', $this->getPasswordResetLink($token));
+        \App\Storages\ViewBag::set('firstname', $firstname);
+        \App\Storages\ViewBag::set('lastname', $lastname);
+        \App\Storages\ViewBag::set('ip', $ip);
 
         $message = Template::executeDefaultOrOwnTemplate('email/password_reset');
         $subject = get_translation('reset_password_subject');

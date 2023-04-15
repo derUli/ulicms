@@ -70,17 +70,17 @@ class Fortune extends MainClass
 
     public function doSomething()
     {
-        ViewBag::set('sample_text', get_translation('unknown_request_type'));
+        \App\Storages\ViewBag::set('sample_text', get_translation('unknown_request_type'));
     }
 
     public function doSomethingPost()
     {
-        ViewBag::set('sample_text', get_translation('post_request_type'));
+        \App\Storages\ViewBag::set('sample_text', get_translation('post_request_type'));
     }
 
     public function doSomethingGet()
     {
-        ViewBag::set('sample_text', get_translation('get_request_type'));
+        \App\Storages\ViewBag::set('sample_text', get_translation('get_request_type'));
     }
 
     public function showFortune()

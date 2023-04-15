@@ -11,7 +11,6 @@ use ContentFactory;
 use Template;
 
 use User;
-use ViewBag;
 
 class ViewButtonRenderer
 {
@@ -37,7 +36,7 @@ class ViewButtonRenderer
 
         $url = "../?goid={$pageId}";
         $link = link($url, $icon, true);
-        ViewBag::set('button', $link);
+        \App\Storages\ViewBag::set('button', $link);
 
         $templateFile = Template::executeModuleTemplate(
             self::MODULE_NAME,

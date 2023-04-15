@@ -2,7 +2,7 @@
 
 use App\HTML\Link;
 
-$model = ViewBag::get('model');
+$model = \App\Storages\ViewBag::get('model');
 ?>
 <h3><?php esc($model->name); ?></h3>
 <?php if ($model->version) { ?>

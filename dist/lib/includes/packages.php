@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Packages\PackageManager;
+use App\Security\PermissionChecker;
 use App\Utils\CacheUtil;
 
 /**
@@ -44,7 +45,8 @@ function getAllThemes(): array
  */
 function uninstall_module(string $name, string $type = 'module'): bool
 {
-    $acl = new \App\Security\ACL();
+    $acl = new PermissionChecker(get_user_id());
+
     if (! $acl->hasPermission('install_packages') && ! is_cli()) {
         return false;
     }

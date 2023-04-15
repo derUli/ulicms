@@ -103,7 +103,7 @@ function HTTPStatusCodeResult(
  */
 function ExceptionResult(string $message, int $status = 500): void
 {
-    ViewBag::set('exception', nl2br($message));
+    \App\Storages\ViewBag::set('exception', nl2br($message));
     $content = Template::executeDefaultOrOwnTemplate('exception.php');
 
     $size = getStringLengthInBytes($content);

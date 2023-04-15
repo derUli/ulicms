@@ -232,9 +232,9 @@ class User extends Model
      */
     public function getWelcomeMailText(string $password): string
     {
-        ViewBag::set('user', $this);
-        ViewBag::set('url', ModuleHelper::getBaseUrl());
-        ViewBag::set('password', $password);
+        \App\Storages\ViewBag::set('user', $this);
+        \App\Storages\ViewBag::set('url', ModuleHelper::getBaseUrl());
+        \App\Storages\ViewBag::set('password', $password);
         return Template::executeDefaultOrOwnTemplate('email/user_welcome.php');
     }
 

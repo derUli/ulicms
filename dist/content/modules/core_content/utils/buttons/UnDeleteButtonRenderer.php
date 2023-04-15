@@ -12,7 +12,6 @@ use PageController;
 use Template;
 
 use User;
-use ViewBag;
 
 class UnDeleteButtonRenderer
 {
@@ -50,7 +49,7 @@ class UnDeleteButtonRenderer
         ];
 
         $link = link($url, $icon, true, null, $attributes);
-        ViewBag::set('button', $link);
+        \App\Storages\ViewBag::set('button', $link);
 
         return $permitted ? Template::executeModuleTemplate(
             self::MODULE_NAME,

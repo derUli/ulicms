@@ -12,9 +12,9 @@ class ColorField extends CustomField
 
     public function render($value = null): string
     {
-        ViewBag::set('field', $this);
-        ViewBag::set('field_value', $value);
-        ViewBag::set('field_name', $this->contentType !== null ?
+        \App\Storages\ViewBag::set('field', $this);
+        \App\Storages\ViewBag::set('field_value', $value);
+        \App\Storages\ViewBag::set('field_name', $this->contentType !== null ?
                         $this->contentType . '_' . $this->name : $this->name);
 
         return Template::executeDefaultOrOwnTemplate('fields/textfield.php');

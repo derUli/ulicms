@@ -104,7 +104,7 @@ class Forms
             foreach ($required_fields as $field) {
                 $fieldName = $fields[$field] ?? $field;
                 if (! (isset($_POST[$field]) && ! empty($_POST[$field]))) {
-                    ViewBag::set('exception', get_translation(
+                    \App\Storages\ViewBag::set('exception', get_translation(
                         'please_fill_all_required_fields',
                         [
                             '%field%' => _esc($fieldName)

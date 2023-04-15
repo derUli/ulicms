@@ -29,7 +29,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $module = new Module('fortune2');
         $module->enable();
 
-        ViewBag::delete('model');
+        \App\Storages\ViewBag::delete('model');
         $this->testUser->delete();
         $_SESSION = [];
     }

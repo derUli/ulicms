@@ -1,6 +1,6 @@
 <?php
-$field = ViewBag::get('field');
-$value = ViewBag::get('field_value');
+$field = \App\Storages\ViewBag::get('field');
+$value = \App\Storages\ViewBag::get('field_value');
 if ($value === null) {
     $value = $field->defaultValue;
 }
@@ -12,8 +12,8 @@ if ($value === null) {
             echo '*';
         }
 ?></strong>
-    <textarea name="<?php esc(ViewBag::get('field_name')); ?>"
-              id="<?php esc(ViewBag::get('field_name')); ?>"
+    <textarea name="<?php esc(\App\Storages\ViewBag::get('field_name')); ?>"
+              id="<?php esc(\App\Storages\ViewBag::get('field_name')); ?>"
               <?php
       if ($field->required) {
           echo 'required';

@@ -47,7 +47,7 @@ class PackageController extends MainClass
         $model->adminPermission = getModuleMeta($name, 'admin_permission');
 
         natcasesort($model->customPermissions);
-        ViewBag::set('model', $model);
+        \App\Storages\ViewBag::set('model', $model);
 
         return Template::executeModuleTemplate(
             self::MODULE_NAME,
@@ -94,7 +94,7 @@ class PackageController extends MainClass
 
         natcasesort($model->disableFunctions);
 
-        ViewBag::set('model', $model);
+        \App\Storages\ViewBag::set('model', $model);
 
         return Template::executeModuleTemplate(
             self::MODULE_NAME,

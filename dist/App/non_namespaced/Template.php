@@ -546,6 +546,7 @@ class Template
         }
 
         $acl = new PermissionChecker(get_user_id());
+
         if ($acl->hasPermission('pages') && Vars::getNoCache() && is_200()) {
             $id = get_ID();
             $page = ContentFactory::getById($id);
