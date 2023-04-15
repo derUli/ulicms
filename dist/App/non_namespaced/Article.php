@@ -1,6 +1,6 @@
 <?php
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 class Article extends Page
 {

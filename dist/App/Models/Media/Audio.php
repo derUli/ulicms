@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Media;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use function _esc;
 use App\Models\Content\Category;

@@ -7,7 +7,7 @@ namespace App\Helpers;
 use Request;
 use Settings;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 /**
  * Class with methods for checking comments for spam

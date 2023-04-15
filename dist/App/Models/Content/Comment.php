@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Content;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\CommentStatus;
 use App\Exceptions\DatasetNotFoundException;
