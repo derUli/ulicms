@@ -946,7 +946,7 @@ function check_status(): string
 
     $access = checkAccess($test['access']);
     if ($access) {
-        if ($access != 'all') {
+        if ($access !== 'all') {
             \App\Storages\Vars::setNoCache(false);
         }
         return '200 OK';

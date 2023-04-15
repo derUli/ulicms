@@ -26,7 +26,7 @@ function _check_form_timestamp(): bool
  */
 function check_form_timestamp(): void
 {
-    if (Settings::get('spamfilter_enabled') != 'yes') {
+    if (Settings::get('spamfilter_enabled') !== 'yes') {
         return;
     }
 

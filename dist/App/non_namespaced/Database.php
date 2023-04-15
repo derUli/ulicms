@@ -199,7 +199,7 @@ class Database
         $chars = mb_str_split($sql);
         $i = 0;
         foreach ($chars as $char) {
-            if ($char != '?') {
+            if ($char !== '?') {
                 $preparedQuery .= $char;
             } else {
                 $value = $args[$i];

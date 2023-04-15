@@ -16,7 +16,7 @@ if (Settings::get('visitors_can_register') == 'off' || ! Settings::get('visitors
             echo "<p style='color:red;'>" . get_translation('FILL_ALL_FIELDS') . '</p>';
         } elseif (user_exists($_POST['username'])) {
             echo "<p style='color:red;'>" . get_translation('USERNAME_ALREADY_EXISTS') . '</p>';
-        } elseif ($_POST['password'] != $_POST['password_repeat']) {
+        } elseif ($_POST['password'] !== $_POST['password_repeat']) {
             echo "<p style='color:red;'>" . get_translation('PASSWORD_REPEAT_IS_WRONG') . '</p>';
         } else {
             do_event('before_user_registration');

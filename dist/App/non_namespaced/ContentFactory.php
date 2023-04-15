@@ -199,7 +199,7 @@ class ContentFactory
 
         $order_by = Database::escapeName($order_by);
 
-        if ($order_direction != 'desc') {
+        if ($order_direction !== 'desc') {
             $order_direction = 'asc';
         }
         $sql .= " order by {$order_by} {$order_direction}";

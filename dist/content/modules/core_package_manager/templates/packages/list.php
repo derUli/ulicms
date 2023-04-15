@@ -90,7 +90,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                       data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, 'getModuleInfo', "name={$module->getName()}"); ?>"><i
                                         class="fas fa-info-circle"></i> </span>
                                     <?php
-                                $canToggleModule = (getModuleMeta($module->getName(), 'source') != 'core' && $permissionChecker->hasPermission('enable_disable_module'));
+                                $canToggleModule = (getModuleMeta($module->getName(), 'source') !== 'core' && $permissionChecker->hasPermission('enable_disable_module'));
                     echo ModuleHelper::buildMethodCallForm(PackageController::class, 'toggleModule', [
                         'name' => $module->getName()
                     ], RequestMethod::POST, [
@@ -120,7 +120,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                     ?>" title="<?php translate('enable_module'); ?>"><?php translate('off'); ?></button>
                                         <?php echo ModuleHelper::endForm(); ?>
                                         <?php
-                    if ($permissionChecker->hasPermission('remove_packages') && getModuleMeta($module->getName(), 'source') != 'core') {
+                    if ($permissionChecker->hasPermission('remove_packages') && getModuleMeta($module->getName(), 'source') !== 'core') {
                         echo ModuleHelper::buildMethodCallForm(PackageController::class, 'uninstallModule', [
                             'name' => $module->getName()
                         ], RequestMethod::POST, [
@@ -241,7 +241,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                 <?php }
                                 ?>
                                 <?php
-                                if ($permissionChecker->hasPermission('remove_packages') && getModuleMeta($module->getName(), 'source') != 'core') {
+                                if ($permissionChecker->hasPermission('remove_packages') && getModuleMeta($module->getName(), 'source') !== 'core') {
                                     echo ModuleHelper::buildMethodCallForm(PackageController::class, 'uninstallTheme', [
                                         'name' => $theme
                                     ], RequestMethod::POST, [

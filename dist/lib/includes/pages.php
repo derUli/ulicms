@@ -82,8 +82,8 @@ function getAllPages(
     $returnvalues = [];
     while ($row = db_fetch_assoc($result)) {
         if (! $exclude_hash_links || ($exclude_hash_links
-                && $row['type'] != 'link' && $row['type'] != 'node'
-                && $row['type'] != 'language_link')) {
+                && $row['type'] !== 'link' && $row['type'] !== 'node'
+                && $row['type'] !== 'language_link')) {
             $returnvalues[] = $row;
         }
     }

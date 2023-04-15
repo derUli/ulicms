@@ -68,7 +68,7 @@ if ($permissionChecker->hasPermission('banners')
                 for="radio_gif"><?php translate('gif_banner'); ?></label>
         </div>
         <fieldset id="type_gif" style="<?php
-        if ($row->getType() != 'gif') {
+        if ($row->getType() !== 'gif') {
             echo 'display:none';
         }
         ?>">
@@ -105,7 +105,7 @@ if ($permissionChecker->hasPermission('banners')
             <label for="radio_html">HTML</label>
         </div>
         <fieldset id="type_html" style="<?php
-        if ($row->getType() != 'html') {
+        if ($row->getType() !== 'html') {
             echo 'display:none';
         }
         ?>">

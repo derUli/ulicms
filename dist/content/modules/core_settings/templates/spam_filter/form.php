@@ -29,7 +29,7 @@ if ($permissionChecker->hasPermission('spam_filter')) {
         </div>
         <div id="country_filter_settings"
         <?php
-        if (Settings::get('spamfilter_enabled') != 'yes') {
+        if (Settings::get('spamfilter_enabled') !== 'yes') {
             echo " style='display:none;'";
         }
     ?>>

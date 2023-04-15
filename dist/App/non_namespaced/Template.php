@@ -151,7 +151,7 @@ class Template
 
     public static function logo(): void
     {
-        if (Settings::get('logo_disabled') != 'no') {
+        if (Settings::get('logo_disabled') !== 'no') {
             return;
         }
 
@@ -407,7 +407,7 @@ class Template
 
         $description = get_meta_description() ?: Settings::get('meta_description');
 
-        if ($description != '' && $description != false) {
+        if ($description !== '' && $description != false) {
             $description = apply_filter($description, 'meta_description');
 
             echo '<meta name="description" content="'

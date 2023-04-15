@@ -66,7 +66,7 @@ class DesignSettingsController extends \App\Controllers\Controller
         Settings::set('font_size', $_REQUEST['font_size']);
         Settings::set('ckeditor_skin', $_REQUEST['ckeditor_skin']);
 
-        if (Settings::get('header_background_color') != $_REQUEST['header_background_color']
+        if (Settings::get('header_background_color') !== $_REQUEST['header_background_color']
         ) {
             Settings::set(
                 'header_background_color',
@@ -74,15 +74,15 @@ class DesignSettingsController extends \App\Controllers\Controller
             );
         }
 
-        if (Settings::get('body_text_color') != $_REQUEST['body_text_color']) {
+        if (Settings::get('body_text_color') !== $_REQUEST['body_text_color']) {
             Settings::set('body_text_color', $_REQUEST['body_text_color']);
         }
 
-        if (Settings::get('title_format') != $_REQUEST['title_format']) {
+        if (Settings::get('title_format') !== $_REQUEST['title_format']) {
             Settings::set('title_format', $_REQUEST['title_format']);
         }
 
-        if (Settings::get('body_background_color') != $_REQUEST['body_background_color']
+        if (Settings::get('body_background_color') !== $_REQUEST['body_background_color']
         ) {
             Settings::set(
                 'body_background_color',
