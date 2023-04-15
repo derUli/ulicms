@@ -580,24 +580,45 @@ class RoboFile extends Tasks
     }
 
     public function buildCleanupVendor(){
-        
         $patterns = [
             'test',
             'tests',
             'doc',
-            'docs'
+            'docs',
+            '.github',
+            '.gitignore',
+            '*.bat',
+            'CODE_OF_CONDUCT.md',
+            'CONTRIBUTING.md',
+            'CHANGELOG.md',
+            'Contributors.md',
+            'phpunit.xml',
+            'phpunit.xml.*',
+            '.phpunit.*',
+            '.php-cs-fixer.*',
+            '.travis.yml',
+            '.styleci',
+            '.coveralls.yml',
+            '.gitattributes',
+            'README.md',
+            '.psalm'
         ];
 
         $size = 0;
+        $files = 0;
 
-        foreach(Finder::find($patterns)->from('vendor') as $name => $file) {
+        $searchResult = Finder::find($patterns)->from('vendor');
+
+        foreach($searchResult as $name => $file) {
 
             $path = $file->getRealPath();
-            $this->writeln($path);
-            $size += filesize($path);
+            // $this->writeln($path);
+            $size += $file->getSize();
+            $files +=1;
         }
 
-        $this->writeln('Size ' . NumberFormatHelper::formatSizeUnits($size));
+        $this->writeln('Files: ' . NumberFormatHelper::formatSizeUnits($size));
+        $this->writeln('Size: ' .$files);
     }
 
     protected function initUliCMS()
