@@ -50,7 +50,6 @@ def main():
     ignore = [
         ".git",
         "doc-src",
-        "press",
         "*.py",
         "*.pyc",
         "Releases",

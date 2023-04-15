@@ -46,7 +46,6 @@ def main():
     ignore = [
         ".git",
         "doc-src",
-        "press",
         "*.py",
         "*.pyc",
         "Releases",
@@ -146,7 +145,6 @@ def main():
         zipdir(target, archive_name)
         print("removing target folder...")
         shutil.rmtree(target)
-
 
 try:
     main()
