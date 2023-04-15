@@ -14,6 +14,7 @@ use App\Utils\File;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Finder;
 use Robo\Tasks;
+use App\Helpers\NumberFormatHelper;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -576,6 +577,27 @@ class RoboFile extends Tasks
 
             system($cmd);
         }
+    }
+
+    public function buildCleanupVendor(){
+        
+        $patterns = [
+            'test',
+            'tests',
+            'doc',
+            'docs'
+        ];
+
+        $size = 0;
+
+        foreach(Finder::find($patterns)->from('vendor') as $name => $file) {
+
+            $path = $file->getRealPath();
+            $this->writeln($path);
+            $size += filesize($path);
+        }
+
+        $this->writeln('Size ' . NumberFormatHelper::formatSizeUnits($size));
     }
 
     protected function initUliCMS()
