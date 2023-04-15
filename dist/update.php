@@ -6,11 +6,10 @@ require_once dirname(__FILE__) . '/init.php';
 
 use App\Backend\UliCMSVersion;
 use App\Database\DBMigrator;
+use App\Utils\CacheUtil;
 
 // Enable maintenance mode
 Settings::set('maintenance_mode', '1');
-
-use App\Utils\CacheUtil;
 
 // no time limit to prevent a timeout while running sql migrations
 @set_time_limit(0);
@@ -22,8 +21,6 @@ $migrator->migrate();
 $version = new UliCMSVersion();
 $versionNumber = $version->getInternalVersionAsString();
 Settings::set('db_schema_version', $versionNumber);
-
-Settings::set('maintenance_mode', '0');
 
 // Clear Cache
 CacheUtil::clearCache();

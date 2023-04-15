@@ -164,25 +164,29 @@ if (! $select) {
                     . $config->db_database . ' doesn\'t exist.</h1>');
 }
 
+
+$initialized = Settings::get('initialized');
+
+$moduleManager = new ModuleManager();
+
+$version = new UliCMSVersion();
+$versionNumber = $version->getInternalVersionAsString();
+
+// Run this code only after first call after update
+if($initialized !== $versionNumber) {
+    Settings::set('initialized', $versionNumber);
+    $moduleManager->sync();
+
+    Settings::register('session_name', uniqid() . '_SESSION');
+    Settings::register('cache_period', (string)ONE_DAY_IN_SECONDS);
+}
+
 // Preload all settings
 Settings::getAll();
 
-if (! Settings::get('session_name')) {
-    Settings::set('session_name', uniqid() . '_SESSION');
-}
-
 App\Utils\Session\sessionName(Settings::get('session_name'));
 
-$cache_period = Settings::get('cache_period');
-
-// by Check if the cache expiry is set.
-// if not initialize setting with default value
-if ($cache_period === null) {
-    Settings::set('cache_period', (string)ONE_DAY_IN_SECONDS);
-    define('CACHE_PERIOD', ONE_DAY_IN_SECONDS);
-} else {
-    define('CACHE_PERIOD', $cache_period);
-}
+define('CACHE_PERIOD', (int)Settings::get('cache_period'));
 
 date_default_timezone_set(Settings::get('timezone'));
 
@@ -243,19 +247,6 @@ if (! is_ssl() && $enforce_https) {
     send_header('Location: https://' . $_SERVER['HTTP_HOST'] .
             $_SERVER['REQUEST_URI']);
     exit();
-}
-
-$initialized = Settings::get('initialized');
-
-
-$moduleManager = new ModuleManager();
-
-$version = new UliCMSVersion();
-$versionNumber = $version->getInternalVersionAsString();
-
-if($initialized !== $versionNumber) {
-    Settings::set('initialized', $versionNumber);
-    $moduleManager->sync();
 }
 
 \App\Storages\Vars::set('disabledModules', $moduleManager->getDisabledModuleNames());

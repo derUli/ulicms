@@ -7,8 +7,8 @@ namespace App\Security;
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Models\Content\Language;
-use User;
 use Group;
+use User;
 
 // class for permission checks
 class PermissionChecker

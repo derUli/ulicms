@@ -194,7 +194,7 @@ if ($hasModule) {
 }
 
 // Kein Caching wenn man eingeloggt ist
-if (is_logged_in() && get_cache_control() == 'auto') {
+if (is_logged_in() && get_cache_control() === 'auto') {
     \App\Storages\Vars::setNoCache(false);
 }
 
@@ -238,7 +238,7 @@ foreach ($top_files as $file) {
 
 do_event('before_content');
 $text_position = get_text_position();
-if ($text_position == 'after') {
+if ($text_position === 'after') {
     Template::outputContentElement();
 }
 
@@ -248,7 +248,7 @@ if (! (is_array($disable_functions) && in_array('output_content', $disable_funct
     content();
 }
 
-if ($text_position == 'before') {
+if ($text_position === 'before') {
     Template::outputContentElement();
 }
 

@@ -119,7 +119,7 @@ function user_exists(string $name): bool
  */
 function register_session(array $user, bool $redirect = true): void
 {
-    $userDataset = new User($user['id']);
+    $userDataset = new User((int)$user['id']);
     $userDataset->registerSession($redirect);
 }
 /**
