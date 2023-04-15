@@ -522,6 +522,7 @@ class RoboFile extends Tasks
         $this->buildCopyChangelog();
         $this->buildLicenses();
         $this->buildPhpCsFixer();
+        $this->buildOptimizeImages();
     }
 
     /**
