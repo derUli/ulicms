@@ -15,7 +15,7 @@ class UserManager
         ];
         $result = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($result)) {
-            $users[] = new User($row->id);
+            $users[] = new User((int)$row->id);
         }
         return $users;
     }
@@ -26,7 +26,7 @@ class UserManager
         $sql = "select id from {prefix}users order by {$order}";
         $result = Database::Query($sql, true);
         while ($row = Database::fetchObject($result)) {
-            $users[] = new User($row->id);
+            $users[] = new User((int)$row->id);
         }
         return $users;
     }
@@ -43,7 +43,7 @@ class UserManager
         ];
         $result = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($result)) {
-            $users[] = new User($row->id);
+            $users[] = new User((int)$row->id);
         }
         return $users;
     }

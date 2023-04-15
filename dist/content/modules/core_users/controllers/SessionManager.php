@@ -71,7 +71,7 @@ class SessionManager extends \App\Controllers\Controller
         $token = $reset->getTokenByTokenString($_REQUEST['token']);
         if ($token) {
             $user_id = $token->user_id;
-            $user = new User($user_id);
+            $user = new User((int)$user_id);
             $user->setRequirePasswordChange(1);
             $user->save();
             $token = $reset->deleteToken($_REQUEST['token']);
