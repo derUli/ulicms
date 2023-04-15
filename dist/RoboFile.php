@@ -13,6 +13,7 @@ use App\Utils\CacheUtil;
 use Nette\Utils\FileSystem;
 use Robo\Tasks;
 use App\Utils\File;
+use Nette\Utils\Finder;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -550,11 +551,26 @@ class RoboFile extends Tasks
      * Optimize all image files
      */
     public function buildOptimizeImages(){
-        $dirs = array_filter(File::findAllDirs(ULICMS_ROOT), function($dir){
-            return !str_contains($dir, 'tests');
+        $dirs = [];
+        
+        foreach(Finder::findFiles(['*.jpg', '*.png'])->from('.') as $name => $file) {
+            $dirs[] = dirname($file->getRealPath());
+        };
+        
+        $dirs = array_unique($dirs);
+        $dirs = array_filter($dirs, function($dir){
+            return !str_contains($dir, 'fixtures');
         });
 
-        var_dump($dirs);
+        foreach($dirs as $dir){
+            $args = [
+                '-nr', // Don't recurse through subdirectories.
+                '-o 83', // JPEG Quality
+                $dir
+            ];
+
+            system('optimize-images '.implode(' ', $args));
+    }
     }
 
     protected function initUliCMS()
