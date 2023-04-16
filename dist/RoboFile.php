@@ -583,7 +583,6 @@ class RoboFile extends Tasks
         $this->buildCopyChangelog();
         $this->buildLicenses();
         $this->buildPhpCsFixer();
-        $this->buildOptimizeResources();
     }
 
     /**
@@ -614,9 +613,9 @@ class RoboFile extends Tasks
      */
     public function buildOptimizeResources(){
         $this->buildOptimizeImages();
-        $this->buildOptimizeResources();
+        $this->buildOptimizeSvg();
     }
-    
+
     /**
      * Optimize all image files
      */
