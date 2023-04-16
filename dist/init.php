@@ -36,6 +36,7 @@ use App\Registries\HelperRegistry;
 use App\Registries\LoggerRegistry;
 use App\Registries\ModelRegistry;
 use App\Utils\Logger;
+use Nette\Utils\FileSystem;
 
 // TODO: refactor Bootstrap to a new UliCMSBoostrap Class which is splitted into methods
 
@@ -79,19 +80,19 @@ if (isset($config->debug) && $config->debug) {
 }
 
 if (! is_dir(ULICMS_TMP)) {
-    mkdir(ULICMS_TMP);
+    FileSystem::createDir(ULICMS_TMP);
 }
 
 if (! is_dir(ULICMS_CACHE_BASE)) {
-    mkdir(ULICMS_CACHE_BASE);
+    FileSystem::createDir(ULICMS_CACHE_BASE);
 }
 
 if (! is_dir(ULICMS_LOG)) {
-    mkdir(ULICMS_LOG);
+    FileSystem::createDir(ULICMS_LOG);
 }
 
 if (! is_dir(ULICMS_GENERATED)) {
-    mkdir(ULICMS_GENERATED);
+    FileSystem::createDir(ULICMS_GENERATED);
 }
 
 $htaccessForLogFolderSource = ULICMS_ROOT . '/lib/htaccess-deny-all.txt';
