@@ -34,5 +34,7 @@ class RoboBuildTest extends RoboTestBase
 
         $this->assertFileExists($file1);
         $this->assertFileExists($file2);
+
+        $this->assertIsArray(json_decode(file_get_contents($file2)), true);
     }
 }

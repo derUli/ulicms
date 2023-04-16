@@ -7,7 +7,7 @@
       cacheResult="true"
       colors="true"
       stopOnError="true"
-      stopOnWarning="true"
+      stopOnWarning="false"
       stopOnFailure="true"
       stopOnIncomplete="true"
       stopOnSkipped="true"

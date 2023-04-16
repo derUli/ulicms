@@ -1,7 +1,6 @@
 <?php
 
 use Nette\Utils\Finder;
-use GisoStallenberg\FilePermissionCalculator\FilePermissionCalculator;
 
 class SecurityTest extends \PHPUnit\Framework\TestCase
 {
@@ -58,8 +57,8 @@ class SecurityTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testNewFilePermissions(){
-        $testFile = Path::resolve("ULICMS_TMP", uniqid() . ".tmp");
+    public function testNewFilePermissions() {
+        $testFile = Path::resolve('ULICMS_TMP/' . uniqid() . '.tmp');
 
         file_put_contents($testFile, 'Hello World');
 
@@ -68,14 +67,15 @@ class SecurityTest extends \PHPUnit\Framework\TestCase
 
     }
 
-    public function testNewDirectoryPermissions(){
-        $testDir = Path::resolve("ULICMS_TMP", uniqid() . ".tmp");
+    public function testNewDirectoryPermissions() {
+        $testDir = Path::resolve('ULICMS_TMP/' . uniqid() . '.tmp');
         mkdir($testDir);
 
-        $testFile = $testDir . '/' . uniqid() . ".tmp";
+        $testFile = $testDir . '/' . uniqid() . '.tmp';
         file_put_contents($testFile, 'Hello World');
 
         $this->assertTrue(is_readable($testDir));
         $this->assertTrue(is_readable($testFile));
+
     }
 }
