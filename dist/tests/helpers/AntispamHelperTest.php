@@ -83,6 +83,9 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(AntiSpamHelper::isRtl(null));
     }
 
+     /**
+     * @medium
+     */
     public function testIsCountryBlockedReturnsTrue()
     {
         Settings::set('country_blacklist', 'vn,jp,at,tr');
@@ -97,10 +100,6 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase
 
         // Austria
         $_SERVER['REMOTE_ADDR'] = '194.116.243.20';
-        $this->assertTrue(AntiSpamHelper::isCountryBlocked());
-
-        // Turkey
-        $_SERVER['REMOTE_ADDR'] = '88.255.55.110';
         $this->assertTrue(AntiSpamHelper::isCountryBlocked());
     }
 

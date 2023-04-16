@@ -35,7 +35,7 @@ class BackendHelperTest extends \PHPUnit\Framework\TestCase
         BackendHelper::enqueueEditorScripts();
         ob_get_clean();
         $this->assertStringContainsString(
-            '<script src="content/cache/legacy/scripts/',
+            '<script src="content/generated/public/scripts/',
             getCombinedScriptHtml()
         );
     }

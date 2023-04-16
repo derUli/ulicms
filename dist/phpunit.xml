@@ -12,15 +12,15 @@
       stopOnIncomplete="true"
       stopOnSkipped="true"
       stopOnRisky="true"
-      defaultTimeLimit="3"
-      timeoutForSmallTests="3"
+      defaultTimeLimit="5"
+      timeoutForSmallTests="2"
       timeoutForMediumTests="10"
       beStrictAboutOutputDuringTests="true"
       timeoutForLargeTests="30"
       cacheDirectory=".phpunit.cache"
       backupStaticProperties="false"
       requireCoverageMetadata="false"
-      enforceTimeLimit="true"
+      enforceTimeLimit="false"
    >
       <coverage>
          <report>

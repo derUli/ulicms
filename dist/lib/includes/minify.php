@@ -93,13 +93,13 @@ function minifyJs(): string
     }
 
     $cacheId = Hash::hashCacheIdentifier((implode(';', $scripts)) . $lastmod);
-    $jsDir = Path::resolve('ULICMS_CACHE/scripts');
+    $jsDir = Path::resolve('ULICMS_GENERATED_PUBLIC/scripts');
 
     if (! is_dir($jsDir)) {
         mkdir($jsDir, 0777, true);
     }
     $jsUrl = ! is_admin_dir() ?
-            'content/cache/legacy/scripts' : '../content/cache/legacy/scripts';
+            'content/generated/public/scripts' : '../content/generated/public/scripts';
 
     $bundleFile = "{$jsDir}/{$cacheId}.js";
     $bundleUrl = "{$jsUrl}/{$cacheId}.js";
