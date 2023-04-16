@@ -1,10 +1,12 @@
 <?php
+
 use Nette\Utils\Finder;
 
-class SecurityTest extends \PHPUnit\Framework\TestCase{
-    public function testPhpFilesProtected(){
+class SecurityTest extends \PHPUnit\Framework\TestCase
+{
+    public function testPhpFilesProtected() {
         $startTime = time();
-        
+
         $skipDirs = [
             'vendor',
             'tests',
@@ -22,7 +24,7 @@ class SecurityTest extends \PHPUnit\Framework\TestCase{
         foreach (Finder::findFiles(['*.php'])->from('.') as $name => $file) {
             $path = $file->getRealPath();
             $filename = basename($path);
-            
+
             $containsMessage = false;
 
             $skip = false;
@@ -46,7 +48,7 @@ class SecurityTest extends \PHPUnit\Framework\TestCase{
             $expected = 'No direct script access allowed';
 
             while (($actual = fgets($handle)) !== false) {
-                
+
                 if(str_contains($actual, 'No direct script access allowed')){
                     $containsMessage = true;
                     break;
@@ -55,7 +57,7 @@ class SecurityTest extends \PHPUnit\Framework\TestCase{
 
             fclose($handle);
 
-            $this->assertTrue($containsMessage, "$path is not protected");   
+            $this->assertTrue($containsMessage, "{$path} is not protected");
         }
     }
 }
