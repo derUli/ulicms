@@ -39,10 +39,6 @@ class SecurityTest extends \PHPUnit\Framework\TestCase
                 continue;
             }
 
-            if(str_starts_with($path, '.')){
-                continue;
-            }
-
             $handle = fopen($path, 'r');
 
             $expected = 'No direct script access allowed';

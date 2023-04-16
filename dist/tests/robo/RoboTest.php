@@ -12,7 +12,6 @@ class RoboTest extends RoboTestBase
         }
     }
 
-    
     /**
      * @medium
      */
