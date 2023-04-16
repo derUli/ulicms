@@ -592,7 +592,7 @@ class RoboFile extends Tasks
      * Run php-cs-fiyer
      */
     public function buildPhpCsFixer() {
-       system('vendor/bin/php-cs-fixer fix');
+       system('robo build:php-cs-fixer');
     }
 
     /**
