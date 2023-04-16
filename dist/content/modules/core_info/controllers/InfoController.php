@@ -90,9 +90,7 @@ class InfoController extends MainClass
         $legalJson = file_get_contents(
             Path::resolve('ULICMS_ROOT/licenses.json')
         );
-
-        var_dump($legalJson);exit;
-
+        
         return json_decode($legalJson);
     }
 }
