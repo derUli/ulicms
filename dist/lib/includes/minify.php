@@ -142,13 +142,14 @@ function minifyCSS(): string
 
     $cacheId = Hash::hashCacheIdentifier((implode(';', $stylesheets)) . $lastmod);
 
-    $cssDir = Path::resolve('ULICMS_CACHE/stylesheets');
+    $cssDir = Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets');
 
     if (! is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);
     }
+
     $cssUrl = ! is_admin_dir() ?
-            'content/cache/legacy/stylesheets' : '../content/cache/legacy/stylesheets';
+            'content/generated/public/stylesheets' : '../content/generated/public/stylesheets';
 
     $bundleFile = "{$cssDir}/{$cacheId}.css";
     $bundleUrl = "{$cssUrl}/{$cacheId}.css";
@@ -199,7 +200,7 @@ function compileSCSS(string $stylesheet): string
 
 function compileSCSSToFile(string $stylesheet): string
 {
-    $cssDir = Path::resolve('ULICMS_CACHE/stylesheets');
+    $cssDir = Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets');
 
     if (! is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);
@@ -210,7 +211,7 @@ function compileSCSSToFile(string $stylesheet): string
     $cacheId = Hash::hashCacheIdentifier($stylesheet . filemtime($stylesheet));
 
     $cssUrl = ! is_admin_dir() ?
-            'content/cache/legacy/stylesheets' : '../content/cache/legacy/stylesheets';
+            'content/generated/public/stylesheets' : '../content/generated/public/stylesheets';
 
     $bundleFile = "{$cssDir}/{$cacheId}.css";
     $bundleUrl = "{$cssUrl}/{$cacheId}.css";

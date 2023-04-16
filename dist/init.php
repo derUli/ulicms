@@ -178,11 +178,11 @@ $initialized = Settings::get('initialized');
 $moduleManager = new ModuleManager();
 
 $version = new UliCMSVersion();
-$versionNumber = $version->getInternalVersionAsString();
+$buildTimestamp = (string)$version->getBuildTimestamp();
 
 // Run this code only after first call after update
-if($initialized !== $versionNumber) {
-    Settings::set('initialized', $versionNumber);
+if($initialized !== $buildTimestamp) {
+    Settings::set('initialized', $buildTimestamp);
     $moduleManager->sync();
 
     Settings::register('session_name', uniqid() . '_SESSION');

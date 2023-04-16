@@ -95,7 +95,7 @@ class DesignSettingsController extends \App\Controllers\Controller
         CacheUtil::clearPageCache();
 
         $this->_generateSCSSToFile();
-        sureRemoveDir(Path::resolve('ULICMS_CACHE/stylesheets'), false);
+        sureRemoveDir(Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets'), false);
 
         HTTPStatusCodeResult(HttpStatusCode::OK);
     }

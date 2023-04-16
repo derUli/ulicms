@@ -62,7 +62,7 @@ class BackendHelper extends Helper
         enqueueScriptFile(
             '../node_modules/codemirror-minified/mode/php/php.js'
         );
-        
+
         enqueueScriptFile(
             '../node_modules/codemirror-minified/mode/xml/xml.js'
         );

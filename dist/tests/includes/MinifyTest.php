@@ -91,12 +91,14 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
             'node_modules/bootstrap/dist/css/bootstrap-theme.css',
             'admin/css/modern.scss'
         ];
+
         foreach ($files as $file) {
             enqueueStylesheet($file);
             if (filemtime($file) > $filemtime) {
                 $filemtime = filemtime($file);
             }
         }
+
         $this->assertCount(4, \App\Storages\Vars::get('stylesheet_queue'));
         $this->assertEquals(
             'node_modules/bootstrap/dist/css/bootstrap.css',
@@ -245,7 +247,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
     {
         sureRemoveDir(
             Path::resolve(
-                'ULICMS_CACHE/stylesheets'
+                'ULICMS_GENERATED_PUBLIC/stylesheets'
             )
         );
         setSCSSImportPaths(
@@ -277,7 +279,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
             $html
         );
         $this->assertStringContainsString(
-            '<link rel="stylesheet" href="content/cache/legacy/stylesheets/',
+            '<link rel="stylesheet" href="content/generated/public/stylesheets/',
             $html
         );
     }
@@ -295,7 +297,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
             $html
         );
         $this->assertStringContainsString(
-            '<link rel="stylesheet" href="content/cache/legacy/stylesheets/',
+            '<link rel="stylesheet" href="content/generated/public/stylesheets/',
             $html
         );
     }
