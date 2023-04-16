@@ -619,6 +619,9 @@ class RoboFile extends Tasks
         $this->buildCleanupNodeModules();
         $this->buildOptimizeImages();
         $this->buildOptimizeSvg();
+        $this->buildMinifyCSS();
+        $this->buildMinifyJSON();
+        $this->buildMinifyHTML();
     }
 
     /**
@@ -699,13 +702,25 @@ class RoboFile extends Tasks
     /**
      * Minify CSS files
      */
-    public function buildMinifyCSS(){
+    public function buildMinifyCSS() {
 
-        foreach (Finder::findFiles(['*.css'])->from('.') as $name => $file) {
-            
-            $path = $file->getRealPath();
-            system("minifyall {$path}");
-        }
+        system('minifyall -e css');
+    }
+
+    /**
+     * Minify JSON files
+     */
+    public function buildMinifyJSON() {
+
+        system('minifyall -e json,cjson');
+    }
+
+    /**
+     * Minify HTML files
+     */
+    public function buildMinifyHTML() {
+
+        system('minifyall -e html');
     }
 
     /**
