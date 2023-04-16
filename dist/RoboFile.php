@@ -638,6 +638,38 @@ class RoboFile extends Tasks
             system($cmd);
         }
     }
+    
+     /**
+     * Optimize all svg files
+     */
+    public function buildOptimizeSvg() {
+        $files = [];
+
+        foreach(Finder::findFiles(['*.svg'])->from('.') as $name => $file) {
+            $files[] = $file->getRealPath();
+        }
+
+        $files = array_unique($files);
+        $files = array_filter($files, static function($file) {
+            return ! str_contains($file, 'fixtures');
+        });
+
+        foreach($files as $file){
+            $args = [
+                '-f',
+                $file,
+                '-o',
+                $file
+            ];
+
+            $cmd = 'svgo ' . implode(' ', $args);
+
+            $this->writeln($cmd);
+
+            system($cmd);
+        }
+    }
+
 
     /**
      * Cleanup vendor directory
