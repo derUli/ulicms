@@ -179,13 +179,8 @@ def main():
     # Remove all non dev composer packages
     os.system("composer install --no-dev")
 
-    os.system('vendor/bin/robo build:optimize-resources')
-
     # Clean up vendor dir
-    os.system("vendor/bin/robo build:cleanup-vendor")
-
-    # Clean up node_modules dir
-    os.system("vendor/bin/robo build:cleanup-node-modules")
+    os.system("vendor/bin/robo build:optimize-resources")
 
     # Change dir back
     os.chdir(old_cwd)

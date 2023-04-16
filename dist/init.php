@@ -46,10 +46,7 @@ $composerAutoloadFile = ULICMS_ROOT . '/vendor/autoload.php';
 if (is_file($composerAutoloadFile)) {
     require $composerAutoloadFile;
 } else {
-    throw new FileNotFoundException(
-        'autoload.php not found. '
-        . 'Please run \'./composer install\' to install dependecies.'
-    );
+    exit('Could not find autoloader. Run \'composer install\'.');
 }
 
 // if config exists require_config else redirect to installer
