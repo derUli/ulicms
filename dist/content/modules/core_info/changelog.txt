@@ -3,7 +3,10 @@
 API-Änderungen:
 * Controller in Namespace App\Controllers verschoben
 * MainClass in Namespace App\Controllers verschoben
-* ACL in Namespace App\Security verschoben
+* ACL in Namespace App\Security\Permissions verschoben
+* PermissionChecker in Namespace App\Security\Permissions verschoben
+* ContentPermissionChecker in Namespace App\Security\Permissions verschoben
+* IDatasetPermissionChecker in Namespace App\Security\Permissions verschoben
 * ViewBag in Namespace App\Storages verschoben
 * Vars in Namespace App\Storages verschoben
 

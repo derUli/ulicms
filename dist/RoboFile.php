@@ -584,7 +584,6 @@ class RoboFile extends Tasks
      */
     public function buildPrepare() {
         $this->buildCopyChangelog();
-        $this->buildLicenses();
         $this->buildPhpCsFixer();
     }
 
@@ -615,6 +614,7 @@ class RoboFile extends Tasks
      * Optimize resources
      */
     public function buildOptimizeResources() {
+        $this->buildLicenses();
         $this->buildCleanupVendor();
         $this->buildCleanupNodeModules();
         $this->buildOptimizeImages();
