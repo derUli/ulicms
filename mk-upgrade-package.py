@@ -95,7 +95,7 @@ def main():
 
     # Prepare build
     os.chdir("dist")
-    os.system("vendor/bin/robo build:prepare")
+    os.system("robo build:prepare")
     os.chdir("..")
 
     if not args.with_config_js:
@@ -180,7 +180,7 @@ def main():
     os.system("composer install --no-dev")
 
     # Clean up vendor dir
-    os.system("vendor/bin/robo build:optimize-resources")
+    os.system("robo build:optimize-resources")
 
     # Change dir back
     os.chdir(old_cwd)
