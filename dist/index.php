@@ -114,7 +114,7 @@ if (is_maintenance_mode()) {
     exit();
 }
 
-setSCSSImportPaths([ULICMS_GENERATED]);
+setSCSSImportPaths([ULICMS_GENERATED_PRIVATE]);
 
 do_event('before_http_header');
 

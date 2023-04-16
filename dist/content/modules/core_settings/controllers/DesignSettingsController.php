@@ -18,7 +18,7 @@ class DesignSettingsController extends \App\Controllers\Controller
         parent::__construct();
         // generate scss file for design settings if it doesn't exist.
         $this->generatedSCSS = Path::resolve(
-            'ULICMS_GENERATED/design_variables.scss'
+            'ULICMS_GENERATED_PRIVATE/design_variables.scss'
         );
         if (! is_file($this->generatedSCSS)) {
             $this->_generateSCSSToFile();

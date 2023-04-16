@@ -126,6 +126,7 @@ class CacheUtil
         $designSettingsController = ControllerRegistry::get(
             DesignSettingsController::class
         );
+        
         $designSettingsController->_generateSCSSToFile();
 
         do_event('after_clear_cache');

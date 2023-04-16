@@ -19,13 +19,14 @@ const ONE_DAY_IN_SECONDS = 86400;
 
 // Define path constants
 define('ULICMS_ROOT', dirname(__FILE__));
-define('ULICMS_TMP', ULICMS_ROOT . '/content/tmp');
-define('ULICMS_CACHE_BASE', ULICMS_ROOT . '/content/cache');
-define('ULICMS_CACHE', ULICMS_CACHE_BASE . '/legacy');
-define('ULICMS_LOG', ULICMS_ROOT . '/content/log');
 define('ULICMS_CONTENT', ULICMS_ROOT . '/content');
-define('ULICMS_GENERATED', ULICMS_CONTENT . '/generated');
+define('ULICMS_TMP', ULICMS_CONTENT . '/tmp');
+define('ULICMS_LOG', ULICMS_CONTENT . '/log');
+define('ULICMS_GENERATED_PUBLIC', ULICMS_CONTENT . '/generated/public');
+define('ULICMS_GENERATED_PRIVATE', ULICMS_CONTENT . '/generated/private');
 define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
+define('ULICMS_CACHE_BASE', ULICMS_CONTENT . '/cache');
+define('ULICMS_CACHE', ULICMS_CACHE_BASE . '/legacy');
 
 use App\Backend\UliCMSVersion;
 use App\Exceptions\ConnectionFailedException;
@@ -79,26 +80,37 @@ if (isset($config->debug) && $config->debug) {
     error_reporting(0);
 }
 
-if (! is_dir(ULICMS_TMP)) {
-    FileSystem::createDir(ULICMS_TMP);
-}
+// Create required directories
+$createDirectories = [
+    ULICMS_TMP,
+    ULICMS_CACHE_BASE,
+    ULICMS_LOG,
+    ULICMS_GENERATED_PUBLIC,
+    ULICMS_GENERATED_PRIVATE,
+];
 
-if (! is_dir(ULICMS_CACHE_BASE)) {
-    FileSystem::createDir(ULICMS_CACHE_BASE);
-}
-
-if (! is_dir(ULICMS_LOG)) {
-    FileSystem::createDir(ULICMS_LOG);
-}
-
-if (! is_dir(ULICMS_GENERATED)) {
-    FileSystem::createDir(ULICMS_GENERATED);
+foreach($createDirectories as $dir){
+    if(! is_dir($dir)){
+        FileSystem::createDir($dir);
+    }
 }
 
 $htaccessForLogFolderSource = ULICMS_ROOT . '/lib/htaccess-deny-all.txt';
-$htaccessLogFolderTarget = ULICMS_LOG . '/.htaccess';
-if (! is_file($htaccessLogFolderTarget)) {
-    copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
+
+// Put .htaccess deny from all to this directories
+$secureDirectories =
+[
+    ULICMS_TMP,
+    ULICMS_LOG,
+    ULICMS_GENERATED_PRIVATE
+];
+
+foreach($secureDirectories as $dir){
+    $htaccessFile = "{$dir}/.htaccess";
+
+    if (! is_file($htaccessFile)) {
+        FileSystem::copy($htaccessForLogFolderSource, $htaccessFile);
+    }
 }
 
 if (isset($config->exception_logging) && $config->exception_logging) {
