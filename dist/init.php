@@ -101,7 +101,6 @@ if (! is_file($htaccessLogFolderTarget)) {
     copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
 }
 
-
 if (isset($config->exception_logging) && $config->exception_logging) {
     LoggerRegistry::register(
         'exception_log',
