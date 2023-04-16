@@ -678,9 +678,7 @@ class RoboFile extends Tasks
             ];
 
             $cmd = 'svgo ' . implode(' ', $args);
-
-            $this->writeln($cmd);
-
+            
             system($cmd);
         }
     }
