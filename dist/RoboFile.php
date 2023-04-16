@@ -583,7 +583,7 @@ class RoboFile extends Tasks
         $this->buildCopyChangelog();
         $this->buildLicenses();
         $this->buildPhpCsFixer();
-        $this->buildOptimizeImages();
+        $this->buildOptimizeResources();
     }
 
     /**
@@ -609,6 +609,14 @@ class RoboFile extends Tasks
         system('node_modules/.bin/license-report --only=prod --output=json > licenses.json');
     }
 
+    /**
+     * Optimize resources
+     */
+    public function buildOptimizeResources(){
+        $this->buildOptimizeImages();
+        $this->buildOptimizeResources();
+    }
+    
     /**
      * Optimize all image files
      */
@@ -656,7 +664,6 @@ class RoboFile extends Tasks
 
         foreach($files as $file){
             $args = [
-                '-f',
                 $file,
                 '-o',
                 $file
