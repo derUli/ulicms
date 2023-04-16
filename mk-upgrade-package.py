@@ -158,7 +158,7 @@ def main():
             if "{InsertBuildDate}" in line:
                 timestamp = str(int(time.time()))
                 line = (
-                    "     const BUILD_DATE = "
+                    "     public const BUILD_DATE = "
                     + timestamp
                     + "; // {InsertBuildDate}\r\n"
                 )
