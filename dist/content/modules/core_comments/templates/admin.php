@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Backend\BackendPageRenderer;
 use App\Constants\CommentStatus;
 use App\HTML\Input;

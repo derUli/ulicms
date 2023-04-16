@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Models\Content\Categories;
 use App\Translations\JSTranslation;
 

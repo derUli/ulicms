@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Models\Content\Categories;
 
 $permissionChecker = new \App\Security\Permissions\ACL();
