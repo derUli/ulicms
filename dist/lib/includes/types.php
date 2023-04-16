@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 use App\Models\Content\Types\DefaultContentTypes;
 
 function get_used_post_types(): array

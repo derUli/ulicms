@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 use App\Packages\PackageManager;
 use App\Security\Permissions\PermissionChecker;
 use App\Utils\CacheUtil;

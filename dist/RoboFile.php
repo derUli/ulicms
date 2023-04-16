@@ -93,7 +93,8 @@ class RoboFile extends Tasks
             'fm',
             'index.php',
             'CMSConfigSample.php',
-            'CMSConfig.php'
+            'CMSConfig.php',
+            'phpunit_init.php'
         ];
 
         $protectedFiles = 0;

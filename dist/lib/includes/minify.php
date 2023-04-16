@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 use App\Exceptions\SCSSCompileException;
 use App\HTML\Script;
 use App\HTML\Style;

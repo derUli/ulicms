@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class_exists("\\Composer\\Autoload\\ClassLoader") || ('No direct script access allowed');
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
 use App\Utils\File;
 use Nette\Utils\FileSystem;

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 // returns site protocl
 // http:// or https://
 function get_site_protocol(): string

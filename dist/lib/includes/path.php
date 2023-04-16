@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 function getTemplateDirPath(
     string $sub = 'default',
     bool $abspath = false

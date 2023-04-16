@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class_exists("\\Composer\\Autoload\\ClassLoader") || ('No direct script access allowed');
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
 // HTML Code für Anti CSRF Token zurückgeben
 // Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
