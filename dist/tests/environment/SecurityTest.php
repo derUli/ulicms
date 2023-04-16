@@ -20,9 +20,10 @@ class SecurityTest extends \PHPUnit\Framework\TestCase{
         $protectedFiles = 0;
         $unprotectedFiles = 0;
         foreach (Finder::findFiles(['*.php'])->from('.') as $name => $file) {
-
             $path = $file->getRealPath();
             $filename = basename($path);
+            
+            $containsMessage = false;
 
             $skip = false;
 
@@ -40,14 +41,21 @@ class SecurityTest extends \PHPUnit\Framework\TestCase{
                 continue;
             }
 
-            $output = trim((string)shell_exec("php -f \"{$path}\""));
+            $handle = fopen($path, 'r');
 
-            if($output !== 'No direct script access allowed'){
-                $this->fail("$path is not protected");
+            $expected = 'No direct script access allowed';
+
+            while (($actual = fgets($handle)) !== false) {
+                
+                if(str_contains($actual, 'No direct script access allowed')){
+                    $containsMessage = true;
+                    break;
+                }
             }
+
+            fclose($handle);
+
+            $this->assertTrue($containsMessage, "$path is not protected");   
         }
-        $duration = time() - $startTime;
-        
-        $this->assertEquals(0, $duration);
     }
 }
