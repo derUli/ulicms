@@ -130,14 +130,14 @@ def main():
     # change dir to output dist dir
     os.chdir(main_dir)
 
-    # Remove all non dev npm packages
-    os.system("npm install --omit=dev")
+    # Clean up vendor dir
+    os.system("vendor/bin/robo build:optimize-resources")
 
     # Remove all non dev composer packages
     os.system("composer install --no-dev")
 
-    # Clean up vendor dir
-    os.system("vendor/bin/robo build:optimize-resources")
+    # Remove all non dev npm packages
+    os.system("npm install --omit=dev")
 
     # Change dir back
     os.chdir(old_cwd)

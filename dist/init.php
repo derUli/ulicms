@@ -84,6 +84,7 @@ if (isset($config->debug) && $config->debug) {
 $createDirectories = [
     ULICMS_TMP,
     ULICMS_CACHE_BASE,
+    ULICMS_CACHE,
     ULICMS_LOG,
     ULICMS_GENERATED_PUBLIC,
     ULICMS_GENERATED_PRIVATE,
