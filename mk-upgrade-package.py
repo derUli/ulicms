@@ -179,6 +179,8 @@ def main():
     # Remove all non dev composer packages
     os.system("composer install --no-dev")
 
+    os.system('vendor/bin/robo build:optimize-resources')
+
     # Clean up vendor dir
     os.system("vendor/bin/robo build:cleanup-vendor")
 
