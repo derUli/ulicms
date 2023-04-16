@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 class AudioController extends \App\Controllers\Controller
 {
     public function createPost(): void

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Packages\SinPackageInstaller;
 
 class PkgInfoController extends \App\Controllers\Controller

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Controllers\MainClass;
 use function App\HTML\text;
 use App\Services\Connectors\PackageSourceConnector;

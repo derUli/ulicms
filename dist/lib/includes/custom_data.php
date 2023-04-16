@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+class_exists("\\Composer\\Autoload\\ClassLoader") || ('No direct script access allowed');
+
 function get_custom_data(?string $page = null): array
 {
     return CustomData::get($page);

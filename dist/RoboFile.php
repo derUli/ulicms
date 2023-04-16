@@ -86,6 +86,16 @@ class RoboFile extends Tasks
     }
 
     public function foobar() {
+
+        $skipDirs = [
+            'vendor',
+            'tests',
+            'fm',
+            'index.php',
+            'CMSConfigSample.php',
+            'CMSConfig.php'
+        ];
+
         $protectedFiles = 0;
         $unprotectedFiles = 0;
         foreach (Finder::findFiles(['*.php'])->from('.') as $name => $file) {
@@ -93,11 +103,15 @@ class RoboFile extends Tasks
             $path = $file->getRealPath();
             $filename = basename($path);
 
-            if(str_contains($path, 'vendor')){
-                continue;
+            $skip = false;
+
+            foreach($skipDirs as $skipDir){
+                if(str_contains($path, $skipDir)){
+                    $skip = true;
+                }
             }
 
-            if(str_contains($path, 'tests')){
+            if($skip){
                 continue;
             }
 

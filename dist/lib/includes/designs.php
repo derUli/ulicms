@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+class_exists("\\Composer\\Autoload\\ClassLoader") || ('No direct script access allowed');
+
 /**
  * Gets metadata of a theme
  * @param string $theme

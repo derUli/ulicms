@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Helpers\AntiSpamHelper;
 use App\Utils\Mailer;
 

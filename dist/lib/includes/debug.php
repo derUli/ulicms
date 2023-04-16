@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+class_exists("\\Composer\\Autoload\\ClassLoader") || ('No direct script access allowed');
+
 use App\Exceptions\AccessDeniedException;
 use App\Registries\LoggerRegistry;
 

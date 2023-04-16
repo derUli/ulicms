@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 add_translation('HELP', 'Hilfe');
 add_translation('UNKNOWN_TOPIC', 'Unbekanntes Thema');
 add_translation(

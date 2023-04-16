@@ -7,10 +7,9 @@ namespace App\Controllers;
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Exceptions\AccessDeniedException;
-use App\Helpers\StringHelper;
 use BadMethodCallException;
 use ControllerRegistry;
-use ModuleHelper;
+use Nette\Utils\Json;
 use Path;
 use ReflectionMethod;
 use Request;
@@ -35,13 +34,14 @@ abstract class Controller
     {
         // add all hooks to blacklist
         // blacklisted methods can not be remote called as action
-        $file = Path::resolve('ULICMS_ROOT/lib/ressources/hooks.txt');
+        $file = Path::resolve('ULICMS_ROOT/lib/hooks.json');
+
+        /**
+         * Load hooks from Json to prevent direct access to protected public controller methods
+         */
         if (is_file($file)) {
-            $lines = StringHelper::linesFromFile($file);
-            $lines = array_unique($lines ?? []);
-            foreach ($lines as $line) {
-                $this->blacklist[] = ModuleHelper::underscoreToCamel($line);
-            }
+            $hooks = file_get_contents($file);
+            $this->blacklist = [...$this->blacklist, Json::decode($hooks, true)];
         }
     }
 

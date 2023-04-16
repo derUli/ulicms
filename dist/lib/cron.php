@@ -5,6 +5,7 @@ use App\Translations\Translation;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+// TODO: rewrite Cron runner in OOP
 if (! defined('LOADED_LANGUAGE_FILE')) {
     setLanguageByDomain();
 

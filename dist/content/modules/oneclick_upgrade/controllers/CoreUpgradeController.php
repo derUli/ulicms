@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Backend\UliCMSVersion;
 use App\Exceptions\CorruptDownloadException;
 use App\Security\Permissions\PermissionChecker;
