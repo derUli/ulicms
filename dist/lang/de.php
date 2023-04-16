@@ -1,7 +1,12 @@
 <?php
 
-// Dashboard (Willkommen)
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 define('LOADED_LANGUAGE_FILE', 'de');
+
+// Dashboard (Willkommen)
 add_translation('MOTD', 'Nachricht des Tages');
 add_translation('STATISTICS', 'Statistiken');
 add_translation('ONLINE_NOW', 'Jetzt online sind');

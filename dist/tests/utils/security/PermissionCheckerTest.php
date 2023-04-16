@@ -2,7 +2,7 @@
 
 use App\Constants\HtmlEditor;
 use App\Models\Content\Language;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 
 class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
 {

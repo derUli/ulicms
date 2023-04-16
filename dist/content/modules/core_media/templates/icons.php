@@ -1,6 +1,6 @@
 <?php
 
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 
 $currentAction = BackendHelper::getAction();
 $icons = [

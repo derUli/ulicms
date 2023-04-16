@@ -4,7 +4,7 @@ use App\Constants\RequestMethod;
 use App\HTML\Alert;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if ($permissionChecker->hasPermission('privacy_settings')) {
     $currentLanguage = Request::getVar('language');
     if (! $currentLanguage) {

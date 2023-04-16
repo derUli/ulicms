@@ -6,7 +6,7 @@ use App\HTML\Alert;
 use App\Models\Content\Advertisement\Banner;
 use App\Models\Content\Categories;
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if ($permissionChecker->hasPermission('banners')
         && $permissionChecker->hasPermission('banners_edit')) {
     $banner = Request::getVar('banner', 0, 'int');

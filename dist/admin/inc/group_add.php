@@ -3,7 +3,7 @@
 use App\Constants\DefaultValues;
 use App\Models\Content\Language;
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 $all_permissions = $permissionChecker->getDefaultACL(true, true);
 $languages = Language::getAllLanguages();
 ?>

@@ -1,5 +1,5 @@
 <?php
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if ($permissionChecker->hasPermission('install_packages')) {
     if (isset($_REQUEST['file'])) {
         $file = Template::getEscape($_REQUEST['file']);

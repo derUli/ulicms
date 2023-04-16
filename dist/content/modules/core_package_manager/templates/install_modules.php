@@ -3,7 +3,7 @@ use App\Backend\UliCMSVersion;
 use App\Packages\PackageManager;
 
 // TODO: Refactor this, move business logic to controller
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 $pkg = new PackageManager();
 if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();

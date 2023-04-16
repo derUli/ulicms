@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Exceptions\DatasetNotFoundException;
 use App\Models\Content\Advertisement\Banner;
 use App\Utils\CacheUtil;

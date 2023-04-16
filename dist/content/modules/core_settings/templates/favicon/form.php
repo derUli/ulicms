@@ -6,7 +6,7 @@ use App\Translations\JSTranslation;
 
 use App\Utils\File;
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if ($permissionChecker->hasPermission('favicon')) {
     ?>
     <p>

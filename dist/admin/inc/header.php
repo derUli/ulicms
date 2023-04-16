@@ -16,7 +16,7 @@ if (! is_file($select2TranslationFile)) {
     $select2Language = 'en';
 }
 
-$permissionChecker = new App\Security\PermissionChecker(get_user_id());
+$permissionChecker = new App\Security\Permissions\PermissionChecker(get_user_id());
 ?>
 <!DOCTYPE html>
 <html data-select2-language="<?php esc($select2Language); ?>">

@@ -3,7 +3,7 @@
 use App\HTML\Alert;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if ($permissionChecker->hasPermission('open_graph')) {
     $og_image = Settings::get('og_image');
     $og_url = '';

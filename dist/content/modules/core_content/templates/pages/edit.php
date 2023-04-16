@@ -13,8 +13,8 @@ use App\Models\Content\Language;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
 use App\Models\Content\VCS;
-use App\Security\ContentPermissionChecker;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\ContentPermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 
 use App\Translations\JSTranslation;
 

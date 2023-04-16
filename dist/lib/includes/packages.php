@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Packages\PackageManager;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 use App\Utils\CacheUtil;
 
 /**

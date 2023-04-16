@@ -1,7 +1,7 @@
 <?php
 use App\Backend\UliCMSVersion;
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if ($permissionChecker->hasPermission('update_system')) {
     $version = new UliCMSVersion();
     $currentVersion = $version->getInternalVersionAsString();

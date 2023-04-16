@@ -9,7 +9,7 @@ use App\Helpers\ImagineHelper;
 use App\Models\Users\GroupCollection;
 use App\Models\Users\PasswordReset;
 use App\Security\Hash;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 use App\Utils\Mailer;
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 

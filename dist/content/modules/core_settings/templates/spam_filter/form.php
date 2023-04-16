@@ -9,7 +9,7 @@ use App\Translations\JSTranslation;
 </p>
 <h1><?php translate('spamfilter'); ?></h1>
 <?php
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if ($permissionChecker->hasPermission('spam_filter')) {
     ?>
     <form id="spamfilter_settings" name="?action=spam_filter" method="post">

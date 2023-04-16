@@ -2,7 +2,7 @@
 
 use App\Constants\RequestMethod;
 use App\Packages\Theme;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 

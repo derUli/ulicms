@@ -4,7 +4,7 @@
 // This should be rewritten with MVC pattern and using partial views
 use App\HTML\Alert;
 use function App\HTML\icon;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 
 use App\Translations\JSTranslation;
 

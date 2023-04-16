@@ -6,7 +6,7 @@ use App\Packages\PackageManager;
 // Move logic to controller
 // don't use so much nested if-statements
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();
 } else {

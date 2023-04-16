@@ -1,6 +1,6 @@
 <?php
 
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 
 function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true, $order = 'position')
 {

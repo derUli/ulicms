@@ -8,7 +8,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Helpers\StringHelper;
 use App\Registries\ActionRegistry;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 use Request;
 use Settings;
 use Template;

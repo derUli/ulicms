@@ -1,5 +1,5 @@
 <?php
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if ($permissionChecker->hasPermission('videos') ||
         $permissionChecker->hasPermission('audio') ||
         $permissionChecker->hasPermission('files')) {

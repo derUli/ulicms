@@ -8,7 +8,7 @@ use App\Exceptions\DatasetNotFoundException;
 use App\Exceptions\FileNotFoundException;
 use App\HTML\Script;
 use App\Models\Content\Advertisement\Banners;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 use App\Utils\File;
 
 class Template

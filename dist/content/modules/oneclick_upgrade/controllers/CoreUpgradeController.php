@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Backend\UliCMSVersion;
 use App\Exceptions\CorruptDownloadException;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 
 class CoreUpgradeController extends \App\Controllers\Controller
 {

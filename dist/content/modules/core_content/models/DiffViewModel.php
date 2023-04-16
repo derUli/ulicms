@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\CoreContent\Models\ViewModels;
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 /**
  * Model to view content diffs
  */

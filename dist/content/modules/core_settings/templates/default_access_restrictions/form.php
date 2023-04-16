@@ -3,7 +3,7 @@
 use App\Constants\RequestMethod;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if ($permissionChecker->hasPermission('default_access_restrictions_edit')) {
     $only_admins_can_edit = (int)(Settings::get('only_admins_can_edit'));
     $only_group_can_edit = (int)(Settings::get('only_group_can_edit'));

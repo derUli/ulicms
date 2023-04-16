@@ -1,5 +1,8 @@
 <?php
+
 declare(strict_types=1);
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants;
 use App\Constants\LinkTarget;
@@ -11,7 +14,7 @@ use function App\HTML\stringContainsHtml;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
 use App\Models\Content\VCS;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 use App\Security\XSSProtection;
 use App\Utils\CacheUtil;
 use Jfcherng\Diff\Differ;

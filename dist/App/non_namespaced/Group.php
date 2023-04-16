@@ -24,7 +24,7 @@ class Group
      */
     public function __construct($id = null)
     {
-        $acl = new \App\Security\ACL();
+        $acl = new \App\Security\Permissions\ACL();
         $this->permissions = $acl->getDefaultACLAsJSON(false, true);
         if ($id !== null) {
             $this->loadById((int)$id);
@@ -44,7 +44,7 @@ class Group
             $this->name = $dataset->name;
             $this->permissions = json_decode($dataset->permissions, true);
             $this->allowable_tags = $dataset->allowable_tags;
-            $acl = new \App\Security\ACL();
+            $acl = new \App\Security\Permissions\ACL();
             $allPermissions = $acl->getDefaultACLAsJSON(false, true);
             foreach ($allPermissions as $name => $value) {
                 if (! isset($this->permissions[$name])) {

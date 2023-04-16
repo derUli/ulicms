@@ -6,7 +6,7 @@ if (isset($_REQUEST['standard'])) {
     Settings::set('default_acl_group', $standard);
 }
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 $groups = $permissionChecker->getAllGroups();
 
 $default_acl_group = (int)Settings::get('default_acl_group');

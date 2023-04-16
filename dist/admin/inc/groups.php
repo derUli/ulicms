@@ -3,7 +3,7 @@
 // FIXME: this file looks like shit, refactor this code to MVC pattern.
 use App\Models\Content\Language;
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if (! $permissionChecker->hasPermission('groups')) {
     noPerms();
 } else {
@@ -12,7 +12,7 @@ if (! $permissionChecker->hasPermission('groups')) {
     $removed = false;
 
     if (isset($_POST['add_group'])) {
-        $permissionChecker = new \App\Security\ACL();
+        $permissionChecker = new \App\Security\Permissions\ACL();
         $all_permissions = $permissionChecker->getDefaultACL(false, true);
         if (isset($_POST['user_permissons']) && count($_POST['user_permissons']) > 0) {
             foreach ($_POST['user_permissons'] as $permission_name) {
@@ -40,14 +40,14 @@ if (! $permissionChecker->hasPermission('groups')) {
         }
     } elseif (isset($_GET['delete']) && Request::isPost()) {
         $id = (int)$_GET['delete'];
-        $permissionChecker = new \App\Security\ACL();
+        $permissionChecker = new \App\Security\Permissions\ACL();
         $permissionChecker->deleteGroup($id);
         $removed = true;
         if (isset($GLOBALS['permissions'])) {
             unset($GLOBALS['permissions']);
         }
     } elseif (isset($_POST['edit_group'])) {
-        $permissionChecker = new \App\Security\ACL();
+        $permissionChecker = new \App\Security\Permissions\ACL();
         $all_permissions = $permissionChecker->getDefaultACL(false, true);
 
         $id = $_POST['id'];

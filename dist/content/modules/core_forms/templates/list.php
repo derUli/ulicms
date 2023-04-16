@@ -1,7 +1,7 @@
 <?php
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if (! $permissionChecker->hasPermission('forms')) {
     noPerms();
 } else {

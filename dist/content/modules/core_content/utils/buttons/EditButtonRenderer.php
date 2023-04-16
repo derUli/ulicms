@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\CoreContent\Partials;
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use function App\HTML\icon;
 use function App\HTML\Link;
-use App\Security\ContentPermissionChecker;
+use App\Security\Permissions\ContentPermissionChecker;
 use ModuleHelper;
 use Template;
 

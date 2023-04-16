@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 
 class UserController extends \App\Controllers\Controller
 {

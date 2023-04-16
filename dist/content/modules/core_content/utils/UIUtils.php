@@ -2,6 +2,8 @@
 
 namespace App\CoreContent;
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\HTML\ListItem;
 
 class UIUtils

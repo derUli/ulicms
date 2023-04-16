@@ -7,7 +7,7 @@ use App\Translations\JSTranslation;
 $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = Settings::get('ga_secret');
 $qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation('ULICMS_LOGIN_AT') . ' ' . get_domain(), $ga_secret);
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if (! $permissionChecker->hasPermission('other')) {
     noPerms();
 } else {

@@ -1,6 +1,6 @@
 <?php
 
-use App\Security\ContentPermissionChecker;
+use App\Security\Permissions\ContentPermissionChecker;
 
 class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
 {

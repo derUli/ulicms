@@ -6,7 +6,7 @@ use App\Translations\JSTranslation;
 
 $controller = new LogoController();
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 
 $logoUrl = '../content/images/' . Settings::get('logo_image');
 

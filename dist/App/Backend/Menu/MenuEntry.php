@@ -228,7 +228,7 @@ class MenuEntry
      */
     public function userHasPermission(): bool
     {
-        $acl = new \App\Security\ACL();
+        $acl = new \App\Security\Permissions\ACL();
         if (is_string($this->permissions) && ! empty($this->permissions)) {
             return $acl->hasPermission($this->permissions);
         }

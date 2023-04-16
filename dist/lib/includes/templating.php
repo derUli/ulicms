@@ -6,7 +6,7 @@ use App\Backend\UliCMSVersion;
 use App\Exceptions\DatasetNotFoundException;
 use App\Models\Content\Categories;
 use App\Models\Content\Language;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 use App\Utils\File;
 
 function html5_doctype(): void

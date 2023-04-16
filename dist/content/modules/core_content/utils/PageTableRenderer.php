@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\CoreContent;
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\CoreContent\Partials\DeleteButtonRenderer;
 use App\CoreContent\Partials\EditButtonRenderer;
 use App\CoreContent\Partials\UnDeleteButtonRenderer;

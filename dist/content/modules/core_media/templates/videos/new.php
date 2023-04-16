@@ -2,7 +2,7 @@
 
 use App\Models\Content\Categories;
 
-$permissionChecker = new \App\Security\ACL();
+$permissionChecker = new \App\Security\Permissions\ACL();
 if ($permissionChecker->hasPermission('videos') && $permissionChecker->hasPermission('videos_create')) {
     ?><p>
         <a href="<?php echo ModuleHelper::buildActionURL('videos'); ?>"

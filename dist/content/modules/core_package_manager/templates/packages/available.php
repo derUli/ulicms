@@ -1,6 +1,6 @@
 <?php
 
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
 $permissionChecker = new PermissionChecker(get_user_id());

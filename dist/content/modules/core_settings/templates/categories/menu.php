@@ -1,6 +1,6 @@
 <?php
 
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 ?>

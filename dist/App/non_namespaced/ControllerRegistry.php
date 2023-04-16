@@ -91,7 +91,7 @@ class ControllerRegistry
     public static function userCanCall(string $sClass, string $sMethod): bool
     {
         $allowed = true;
-        $acl = new \App\Security\ACL();
+        $acl = new \App\Security\Permissions\ACL();
         $methodIdentifier = $sClass . '::' . $sMethod;
 
         $wildcardMethodIdentifier = $sClass . '::*';
