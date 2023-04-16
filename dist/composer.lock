@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d55e503bbdd1a93bc3a04172602a99ff",
+    "content-hash": "23394f7212313ee941df884b7ebe84b4",
     "packages": [
         {
             "name": "chrisjean/php-ico",
@@ -6139,6 +6139,52 @@
             "time": "2023-04-02T19:30:06+00:00"
         },
         {
+            "name": "gisostallenberg/file-permission-calculator",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gisostallenberg/file-permission-calculator.git",
+                "reference": "cc8051b683f3f0a7244d533d0956c3224eff7094"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gisostallenberg/file-permission-calculator/zipball/cc8051b683f3f0a7244d533d0956c3224eff7094",
+                "reference": "cc8051b683f3f0a7244d533d0956c3224eff7094",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8 || ^5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GisoStallenberg\\FilePermissionCalculator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Giso Stallenberg",
+                    "email": "gisostallenberg@gmail.com"
+                }
+            ],
+            "description": "Library to convert file permissions from various formats to another",
+            "keywords": [
+                "chmod",
+                "file permissions",
+                "fileperms",
+                "permissions"
+            ],
+            "support": {
+                "issues": "https://github.com/gisostallenberg/file-permission-calculator/issues",
+                "source": "https://github.com/gisostallenberg/file-permission-calculator/tree/master"
+            },
+            "time": "2016-07-05T08:25:30+00:00"
+        },
+        {
             "name": "myclabs/deep-copy",
             "version": "1.11.1",
             "source": {
@@ -8629,5 +8675,5 @@
         "ext-intl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }

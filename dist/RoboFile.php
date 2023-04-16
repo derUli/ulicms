@@ -429,9 +429,6 @@ class RoboFile extends Tasks
     public function testsRun(string $testFile = '')
     {
         $command = 'vendor/bin/phpunit';
-        if (DIRECTORY_SEPARATOR === '\\') {
-            $command = str_replace('/', '\\', $command);
-        }
 
         system("{$command} {$testFile}");
     }

@@ -6,6 +6,8 @@ namespace App\Backend\Menu;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+use App\Security\Permissions\PermissionChecker;
+
 /**
  * Backend menu entry
  */
@@ -228,7 +230,8 @@ class MenuEntry
      */
     public function userHasPermission(): bool
     {
-        $acl = new \App\Security\Permissions\ACL();
+        $acl = PermissionChecker::fromCurrentUser();
+
         if (is_string($this->permissions) && ! empty($this->permissions)) {
             return $acl->hasPermission($this->permissions);
         }
