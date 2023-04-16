@@ -12,6 +12,10 @@ class RoboTest extends RoboTestBase
         }
     }
 
+    
+    /**
+     * @medium
+     */
     public function testTestsRun()
     {
         if (! $this->shouldDropDbOnShutdown()) {

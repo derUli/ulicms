@@ -104,6 +104,9 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(AntiSpamHelper::isCountryBlocked());
     }
 
+    /**
+    * @medium
+    */
     public function testIsCountryBlockedReturnsFalse()
     {
         Settings::set('country_blacklist', 'vn,jp,at,tr');
