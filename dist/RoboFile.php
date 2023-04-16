@@ -782,16 +782,12 @@ class RoboFile extends Tasks
 
         foreach($filesToDelete as $file){
             try{
-                $this->writeln($file);
                 FileSystem::delete($path);
             }
             catch(IOException $e){
                 $this->writeln('Errror ' . $path);
             }
         }
-
-        $this->writeln('Files: ' . NumberFormatHelper::formatSizeUnits($size));
-        $this->writeln('Size: ' . $files);
     }
 
     protected function initUliCMS()
