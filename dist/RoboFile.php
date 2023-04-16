@@ -697,6 +697,18 @@ class RoboFile extends Tasks
     }
 
     /**
+     * Minify CSS files
+     */
+    public function buildMinifyCSS(){
+
+        foreach (Finder::findFiles(['*.css'])->from('.') as $name => $file) {
+            
+            $path = $file->getRealPath();
+            system("minifyall {$path}");
+        }
+    }
+
+    /**
      * Clean up directory
      *
      * @param string $directory
