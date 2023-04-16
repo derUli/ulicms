@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 $field = \App\Storages\ViewBag::get('field');
 $value = \App\Storages\ViewBag::get('field_value') ?: [];
 if (is_string($value)) {

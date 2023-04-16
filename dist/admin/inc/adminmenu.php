@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Backend\Menu\AdminMenu;
 use App\Backend\Menu\MenuEntry;
 

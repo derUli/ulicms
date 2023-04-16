@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Backend\UliCMSVersion;
 
 // TODO: Make it work without this

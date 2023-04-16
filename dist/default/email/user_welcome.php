@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 $user = \App\Storages\ViewBag::get('user');
 
 translate('hello_x', ['%x%' => $user->getFirstname()]);

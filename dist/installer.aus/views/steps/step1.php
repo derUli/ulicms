@@ -1,3 +1,7 @@
+<?php
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+?>
+
 <p><?php
     echo TRANSLATION_SELECT_LANGUAGE;
 $language = InstallerController::getLanguage();

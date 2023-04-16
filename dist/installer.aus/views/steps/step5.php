@@ -1,3 +1,6 @@
+<?php
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+?>
 <form role="form" id="database-login" method="post"
       action="index.php?step=6">
     <div class="form-group">

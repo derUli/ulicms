@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Security\PrivacyCheckbox;
 
 if (Settings::get('visitors_can_register') == 'off' || ! Settings::get('visitors_can_register')) {

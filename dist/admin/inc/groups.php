@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 // FIXME: this file looks like shit, refactor this code to MVC pattern.
 use App\Models\Content\Language;
 

@@ -1,3 +1,6 @@
+<?php
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+?>
 <div id="content-container">
     <div id="main-backend-content">
         <?php

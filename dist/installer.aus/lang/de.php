@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 add_translation('INSTALLATION', 'Installation');
 add_translation('TITLE_STEP_1', 'Sprache auswählen');
 add_translation('TITLE_STEP_2', 'Lizenzbedingungen akzeptieren');

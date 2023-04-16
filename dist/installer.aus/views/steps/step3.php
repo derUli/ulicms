@@ -1,4 +1,7 @@
 <?php
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+?>
+<?php
 use App\Utils\VersionComparison;
 
 $minPhpRequired = '8.1.0';

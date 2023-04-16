@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 $module = basename($_GET['module']);
 
 $admin_file_path = getModuleAdminFilePath($module);

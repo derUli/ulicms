@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 if (isset($_POST['change_password'])) {
     if (! empty($_POST['password']) && $_POST['password'] === $_POST['password_repeat']) {
         $uid = get_user_id();

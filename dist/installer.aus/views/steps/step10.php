@@ -1,3 +1,6 @@
+<?php
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+?>
 <p>
     <?php echo TRANSLATION_LAST_STEP; ?>
 </p>
