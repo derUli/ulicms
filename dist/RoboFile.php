@@ -614,7 +614,7 @@ class RoboFile extends Tasks
     /**
      * Optimize resources
      */
-    public function buildOptimizeResources(){
+    public function buildOptimizeResources() {
         $this->buildCleanupVendor();
         $this->buildCleanupNodeModules();
         $this->buildOptimizeImages();
@@ -650,10 +650,10 @@ class RoboFile extends Tasks
             system($cmd);
         }
     }
-    
+
      /**
-     * Optimize all svg files
-     */
+      * Optimize all svg files
+      */
     public function buildOptimizeSvg() {
         $files = [];
 
@@ -681,7 +681,6 @@ class RoboFile extends Tasks
             system($cmd);
         }
     }
-
 
     /**
      * Cleanup vendor directory

@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\HTML\Link;
 
 $model = \App\Storages\ViewBag::get('model');

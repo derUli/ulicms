@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 // TODO: Refactor Code
 // This file should not contain any business logic.
 // It should only do output

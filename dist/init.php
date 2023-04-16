@@ -29,7 +29,6 @@ define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
 
 use App\Backend\UliCMSVersion;
 use App\Exceptions\ConnectionFailedException;
-use App\Exceptions\FileNotFoundException;
 use App\Exceptions\SqlException;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
