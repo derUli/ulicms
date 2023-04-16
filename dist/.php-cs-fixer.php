@@ -1,5 +1,7 @@
 <?php
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 $config = new PhpCsFixer\Config();
 
 $config
