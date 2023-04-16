@@ -169,6 +169,10 @@ def main():
 
     main_dir = os.path.join(target, "dist")
     old_cwd = os.getcwd()
+    image_dir = os.path.join(main_dir, 'content', 'images')
+
+    # Delete images directory
+    shutil.rmtree(image_dir)
 
     # change dir to output dist dir
     os.chdir(main_dir)
