@@ -7,7 +7,6 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 use App\Constants\DefaultValues;
 use App\Database\DBMigrator;
 use App\Helpers\DateTimeHelper;
-use App\Helpers\NumberFormatHelper;
 use App\Packages\PackageManager;
 use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
@@ -679,7 +678,7 @@ class RoboFile extends Tasks
             ];
 
             $cmd = 'svgo ' . implode(' ', $args);
-            
+
             system($cmd);
         }
     }

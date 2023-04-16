@@ -9,7 +9,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use Request;
 use Settings;
 
-
 /**
  * Class with methods for checking comments for spam
  */

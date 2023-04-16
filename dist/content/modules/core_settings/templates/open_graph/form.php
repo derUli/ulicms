@@ -1,6 +1,6 @@
 <?php
 
-defined('ULICMS_ROOT') || exit('No direct script access allowed');#
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\HTML\Alert;
 use App\Translations\JSTranslation;
