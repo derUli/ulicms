@@ -86,62 +86,6 @@ class RoboFile extends Tasks
         }
     }
 
-    public function foobar() {
-
-        $skipDirs = [
-            'vendor',
-            'tests',
-            'fm',
-            'index.php',
-            'CMSConfigSample.php',
-            'CMSConfig.php',
-            'phpunit_init.php',
-            'init.php',
-            'update.php'
-        ];
-
-        $protectedFiles = 0;
-        $unprotectedFiles = 0;
-        foreach (Finder::findFiles(['*.php'])->from('.') as $name => $file) {
-
-            $path = $file->getRealPath();
-            $filename = basename($path);
-
-            $skip = false;
-
-            foreach($skipDirs as $skipDir){
-                if(str_contains($path, $skipDir)){
-                    $skip = true;
-                }
-            }
-
-            if($skip){
-                continue;
-            }
-
-            if(str_starts_with($path, '.')){
-                continue;
-            }
-
-            $output = trim((string)shell_exec("php -f \"{$path}\""));
-
-            if($output === 'No direct script access allowed'){
-                $protectedFiles += 1;
-            } else {
-                $unprotectedFiles += 1;
-                $this->writeln("Unprotected: {$path}");
-            }
-        }
-
-        $totalCheckedFiles = $protectedFiles + $unprotectedFiles;
-
-        $protectedFilesPercent = round(100 / $totalCheckedFiles * $protectedFiles);
-        $unprotectedFilesPercent = round(100 / $totalCheckedFiles * $unprotectedFiles);
-
-        $this->writeln("Protected files: {$protectedFiles} ({$protectedFilesPercent}%)");
-        $this->writeln("Unprotected files: {$unprotectedFiles} ({$unprotectedFilesPercent}%)");
-    }
-
     /**
      * shows the value of a setting
      * @param string $settingsName settings identifier name
@@ -591,14 +535,14 @@ class RoboFile extends Tasks
      * Run php-cs-fiyer
      */
     public function buildPhpCsFixer() {
-       system('robo build:php-cs-fixer');
+       system('vendor/bin/robo build:php-cs-fixer');
     }
 
     /**
      * Copy changelog to core_info module
      */
     public function buildCopyChangelog() {
-        FileSystem::copy('../doc/changelog.txt', ULICMS_CONTENT . '/modules/core_info/changelog.txt', true);
+        FileSystem::copy(ULICMS_ROOT . '/../doc/changelog.txt', ULICMS_CONTENT . '/modules/core_info/changelog.txt', true);
     }
 
     /**
