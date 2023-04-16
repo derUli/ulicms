@@ -10,7 +10,6 @@
 
 <IfModule mod_deflate.c>
 	AddOutputFilterByType DEFLATE application/javascript
-	AddOutputFilterByType DEFLATE application/rss+xml
 	AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
 	AddOutputFilterByType DEFLATE application/x-font
 	AddOutputFilterByType DEFLATE application/x-font-opentype
@@ -46,19 +45,25 @@
 </files>
 
 # Deny access to composer executable file
-<files composer>
-	order allow,deny
-	deny from all
-</files>
-
-# Deny access to composer executable file
 <files composer.json>
 	order allow,deny
 	deny from all
 </files>
 
 # Deny access to composer executable file
+<files composer.lock>
+	order allow,deny
+	deny from all
+</files>
+
+# Deny access to composer executable file
 <files package.json>
+	order allow,deny
+	deny from all
+</files>
+
+# Deny access to composer executable file
+<files package.lock>
 	order allow,deny
 	deny from all
 </files>
