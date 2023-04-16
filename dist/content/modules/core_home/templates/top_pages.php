@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 $controller = ControllerRegistry::get('HomeController');
 $model = $controller->getModel();
 ?>

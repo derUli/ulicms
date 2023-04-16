@@ -1,3 +1,6 @@
+<?php
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+?>
 <form action="index.php" method="get">
     <input type="hidden" name="action" value="module_settings"> <input
         type="hidden" name="module" value="fortune2">

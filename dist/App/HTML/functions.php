@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 use App\Exceptions\FileNotFoundException;
 use App\Utils\File;
 use ModuleHelper;

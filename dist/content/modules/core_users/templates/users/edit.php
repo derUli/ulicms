@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Constants\HtmlEditor;
 use App\Constants\RequestMethod;
 use App\Helpers\DateTimeHelper;

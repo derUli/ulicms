@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 $site_slogan = get_site_slogan();
 $data = get_custom_data();
 $site_slogan = $data['site_slogan'] ?? get_site_slogan();

@@ -6,7 +6,6 @@ namespace App\Helpers;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-
 /**
  * Helper methods for handling URLs
  */

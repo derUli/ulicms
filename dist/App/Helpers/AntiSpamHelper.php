@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use Request;
 use Settings;
 
-defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 /**
  * Class with methods for checking comments for spam

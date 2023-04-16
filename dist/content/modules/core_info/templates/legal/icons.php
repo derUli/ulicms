@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 $currentAction = BackendHelper::getAction();
 $icons = [
     'legal_composer' => 'fas fa-file-contract',

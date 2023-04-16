@@ -1,6 +1,5 @@
 <?php
-
-
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 ?>
 
 <a href="<?php echo ModuleHelper::buildActionURL('info'); ?>"

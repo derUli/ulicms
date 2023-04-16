@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use Nette\Utils\Strings;
 
 class StringHelper extends Helper

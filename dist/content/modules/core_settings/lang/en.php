@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 add_translation('YOUR_LOGO', 'Your Logo');
 add_translation('UPLOAD_NEW_LOGO', 'Upload new logo');
 add_translation('UPLOAD', 'Upload');

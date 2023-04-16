@@ -1,3 +1,6 @@
+<?php
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+?>
 <?php $meta = get_article_meta(); ?>
 <?php if (! empty($meta->article_author_name)) { ?>
     <p class="author-info"><?php

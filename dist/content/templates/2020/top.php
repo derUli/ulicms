@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 $permissionChecker = new App\Security\Permissions\ContentPermissionChecker(get_user_id());
 
 html5_doctype();

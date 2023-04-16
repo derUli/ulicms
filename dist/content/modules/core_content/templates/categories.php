@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 // TODO: refactor this file into multiple files
 use App\HTML\Alert;
 use App\Models\Content\Categories;

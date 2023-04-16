@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Helpers\NumberFormatHelper;
 
 $permissionChecker = new \App\Security\Permissions\ACL();

@@ -1,4 +1,6 @@
 <?php
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 csrf_token_html();
 $show_filters = Settings::get('user/' . get_user_id() . '/show_filters');
 ?>

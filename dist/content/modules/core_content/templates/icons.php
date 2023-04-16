@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Security\Permissions\PermissionChecker;
 
 $currentAction = BackendHelper::getAction();

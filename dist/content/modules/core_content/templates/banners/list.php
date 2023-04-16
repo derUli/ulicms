@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\HTML\Alert;
 use App\Models\Content\Advertisement\Banners;
 use App\Models\Content\Categories;

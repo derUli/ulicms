@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Content;
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use Database;
 
 use function db_escape;

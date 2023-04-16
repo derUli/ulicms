@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Utils\Session;
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 function sessionStart(): bool
 {
     return ! headers_sent() && ! session_id() ? session_start() : false;

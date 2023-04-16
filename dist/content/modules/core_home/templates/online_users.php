@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use function App\HTML\imageTag;
 
 $users = \App\Storages\ViewBag::get('users');

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Helpers\ImageScaleHelper;
 use App\Utils\CacheUtil;
 use App\Utils\File;

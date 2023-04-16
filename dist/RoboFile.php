@@ -97,6 +97,7 @@ class RoboFile extends Tasks
             'CMSConfigSample.php',
             'CMSConfig.php',
             'phpunit_init.php',
+            'init.php',
             'update.php'
         ];
 

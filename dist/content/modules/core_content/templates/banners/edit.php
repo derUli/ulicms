@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Constants\RequestMethod;
 use App\Exceptions\DatasetNotFoundException;
 use App\HTML\Alert;
