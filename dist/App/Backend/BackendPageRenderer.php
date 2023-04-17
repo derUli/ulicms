@@ -19,14 +19,14 @@ use zz\Html\HTMLMinify;
  */
 class BackendPageRenderer
 {
-    private $action;
+    private string $action;
 
-    private static $model;
+    private static mixed $model;
 
     /**
      * Constructor
-     * @param type $action
-     * @param type $model
+     * @param string $action
+     * @param mixed $model
      */
     public function __construct(string $action, mixed $model = null)
     {
@@ -117,7 +117,8 @@ class BackendPageRenderer
         $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
         ];
-        $HTMLMinify = new HTMLMinify($generatedHtml, $options);
+
+        $HTMLMinify = new HTMLMinify((string)$generatedHtml, $options);
         $generatedHtml = $HTMLMinify->process();
         $generatedHtml = StringHelper::removeEmptyLinesFromString(
             $generatedHtml
@@ -199,11 +200,7 @@ class BackendPageRenderer
             $requiredPermission = ActionRegistry::getActionPermission(
                 $this->getAction()
             );
-            if (! $requiredPermission
-                    || (
-                        $requiredPermission
-                        && $permissionChecker->hasPermission($requiredPermission))
-            ) {
+            if (($requiredPermission && $permissionChecker->hasPermission($requiredPermission)) || !$requiredPermission) {
                 \App\Storages\Vars::set('action_filename', $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(
                     'backend/container.php'
