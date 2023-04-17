@@ -6,6 +6,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Controllers\Controller;
 use App\Registries\ActionRegistry;
+use App\Security\Permissions\PermissionChecker;
 
 class ControllerRegistry
 {
@@ -91,7 +92,7 @@ class ControllerRegistry
     public static function userCanCall(string $sClass, string $sMethod): bool
     {
         $allowed = true;
-        $acl = new \App\Security\Permissions\ACL();
+        $acl = PermissionChecker::fromCurrentUser();
         $methodIdentifier = $sClass . '::' . $sMethod;
 
         $wildcardMethodIdentifier = $sClass . '::*';

@@ -200,7 +200,7 @@ class BackendPageRenderer
             $requiredPermission = ActionRegistry::getActionPermission(
                 $this->getAction()
             );
-            if (($requiredPermission && $permissionChecker->hasPermission($requiredPermission)) || !$requiredPermission) {
+            if (($requiredPermission && $permissionChecker->hasPermission($requiredPermission)) || ! $requiredPermission) {
                 \App\Storages\Vars::set('action_filename', $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(
                     'backend/container.php'

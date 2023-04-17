@@ -67,8 +67,8 @@ abstract class NumberFormatHelper extends Helper
         $language = null;
         if (class_exists($translationClass)) {
             /**
-            * @var Language|null
-            */
+             * @var Language|null
+             */
             $language = new $translationClass();
         }
 

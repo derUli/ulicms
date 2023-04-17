@@ -37,8 +37,8 @@ class DBMigrator
     public function migrate(?string $stop = null): void
     {
         $this->checkVars();
-        $files = scandir($this->folder) ? scandir($this->folder) : [];
-        
+        $files = scandir($this->folder) ?: [];
+
         natcasesort($files);
         foreach ($files as $file) {
             $this->executeSqlScript($file);
