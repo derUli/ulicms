@@ -11,7 +11,7 @@ use Group;
 use User;
 
 // permission checks for read, write and delete content permissions
-class ContentPermissionChecker implements IDatasetPermissionChecker
+class ContentPermissionChecker implements DatasetPermissionCheckerInterface
 {
     private $user_id;
 

@@ -11,7 +11,7 @@ use App\Helpers\AntiSpamHelper;
 use App\Models\Content\Comment;
 use Request;
 
-class CommentSpamChecker implements ISpamChecker
+class CommentSpamChecker implements SpamCheckerInterface
 {
     private $comment;
 
