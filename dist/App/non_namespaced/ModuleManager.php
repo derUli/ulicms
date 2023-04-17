@@ -11,6 +11,7 @@ class ModuleManager
         $modules = [];
         $sql = 'select name from {prefix}modules';
         $result = Database::query($sql, true);
+
         while ($row = Database::fetchObject($result)) {
             $modules [] = new Module($row->name);
         }
@@ -25,6 +26,11 @@ class ModuleManager
         while ($row = Database::fetchObject($result)) {
             $modules [] = $row->name;
         }
+
+        
+        var_dump("foo");
+        
+
         return $modules;
     }
 
@@ -36,6 +42,7 @@ class ModuleManager
         while ($row = Database::fetchObject($result)) {
             $modules [] = $row->name;
         }
+        
         return $modules;
     }
 
@@ -95,7 +102,6 @@ class ModuleManager
     {
         $this->removeDeletedModules();
         $this->addNewModules();
-
         $this->initModulesDefaultSettings();
     }
 
