@@ -15,6 +15,7 @@ class ModuleManager
         while ($row = Database::fetchObject($result)) {
             $modules [] = new Module($row->name);
         }
+
         return $modules;
     }
 
@@ -23,13 +24,10 @@ class ModuleManager
         $modules = [];
         $sql = 'select name from {prefix}modules where enabled = 1';
         $result = Database::query($sql, true);
+
         while ($row = Database::fetchObject($result)) {
             $modules [] = $row->name;
         }
-
-        
-        var_dump("foo");
-        
 
         return $modules;
     }
@@ -39,10 +37,11 @@ class ModuleManager
         $modules = [];
         $sql = 'select name from {prefix}modules where enabled = 0';
         $result = Database::query($sql, true);
+
         while ($row = Database::fetchObject($result)) {
             $modules [] = $row->name;
         }
-        
+
         return $modules;
     }
 
@@ -51,12 +50,15 @@ class ModuleManager
         $modules = [];
         $sql = 'select name from {prefix}modules';
         $result = Database::query($sql, true);
+
         while ($row = Database::fetchObject($result)) {
             if ($source && getModuleMeta($row->name, 'source') != $source) {
                 continue;
             }
+
             $modules [] = $row->name;
         }
+
         return $modules;
     }
 
@@ -65,12 +67,14 @@ class ModuleManager
         array $allDeps = []
     ): array {
         $dependencies = getModuleMeta($module, 'dependencies');
+
         if ($dependencies) {
             foreach ($dependencies as $dep) {
                 $allDeps [] = $dep;
                 $allDeps = array_combine($allDeps, $this->getDependencies($dep, $allDeps));
             }
         }
+
         $allDeps = array_unique($allDeps);
         return $allDeps;
     }
@@ -80,6 +84,7 @@ class ModuleManager
         array $allDeps = []
     ): array {
         $allModules = $this->getEnabledModuleNames();
+
         foreach ($allModules as $mod) {
             $dependencies = getModuleMeta($mod, 'dependencies');
             if ($dependencies && in_array($module, $dependencies)) {
@@ -87,6 +92,7 @@ class ModuleManager
                 $allDeps = array_combine($allDeps, $this->getDependentModules($mod, $allDeps));
             }
         }
+
         $allDeps = array_unique($allDeps);
         return $allDeps;
     }
@@ -102,6 +108,7 @@ class ModuleManager
     {
         $this->removeDeletedModules();
         $this->addNewModules();
+
         $this->initModulesDefaultSettings();
     }
 
