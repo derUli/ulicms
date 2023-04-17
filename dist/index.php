@@ -204,6 +204,7 @@ $cacheAdapter = null;
 if (CacheUtil::isCacheEnabled() && Request::isGet() && ! \App\Storages\Vars::getNoCache()) {
     $cacheAdapter = CacheUtil::getAdapter();
 }
+
 $uid = CacheUtil::getCurrentUid();
 if ($cacheAdapter && $cacheAdapter->get($uid)) {
     echo $cacheAdapter->get($uid);
@@ -221,6 +222,7 @@ if ($cacheAdapter && $cacheAdapter->get($uid)) {
 if ($cacheAdapter || Settings::get('minify_html')) {
     ob_start();
 }
+
 $top_files = [
     'type/' . get_type() . '/oben.php',
     'type/' . get_type() . '/top.php',
@@ -280,7 +282,7 @@ do_event('after_html');
 
 if ($cacheAdapter || Settings::get('minify_html')) {
     $generatedHtml = ob_get_clean();
-    $generatedHtml = normalizeLN($generatedHtml, "\n");
+    $generatedHtml = normalizeLN($generatedHtml, PHP_EOL);
     $generatedHtml = optimizeHtml($generatedHtml);
 
     echo $generatedHtml;

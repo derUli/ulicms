@@ -13,7 +13,6 @@ const CORE_COMPONENT_FRONTEND = 'frontend';
 const CORE_COMPONENT_ADMIN = 'admin';
 const CORE_COMPONENT_PHPUNIT = 'phpunit';
 
-const LF = '\n';  // line feed; Unix
 // Define path constants
 define('ULICMS_ROOT', dirname(__FILE__));
 define('ULICMS_CONTENT', ULICMS_ROOT . '/content');
