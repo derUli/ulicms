@@ -3,9 +3,10 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Models\Content\Categories;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
 
 $video_folder = ULICMS_ROOT . '/content/videos';
 if (! is_dir($video_folder)) {

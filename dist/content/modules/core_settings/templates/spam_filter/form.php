@@ -2,6 +2,7 @@
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
 ?>
@@ -12,7 +13,9 @@ use App\Translations\JSTranslation;
 </p>
 <h1><?php translate('spamfilter'); ?></h1>
 <?php
-$permissionChecker = new \App\Security\Permissions\ACL();
+
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('spam_filter')) {
     ?>
     <form id="spamfilter_settings" name="?action=spam_filter" method="post">

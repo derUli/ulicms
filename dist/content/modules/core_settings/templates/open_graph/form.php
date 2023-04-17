@@ -3,9 +3,11 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\HTML\Alert;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('open_graph')) {
     $og_image = Settings::get('og_image');
     $og_url = '';

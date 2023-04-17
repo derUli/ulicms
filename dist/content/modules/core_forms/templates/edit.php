@@ -3,8 +3,10 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Models\Content\Categories;
+use App\Security\Permissions\PermissionChecker;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if (! $permissionChecker->hasPermission('forms') || ! $permissionChecker->hasPermission('forms_edit')) {
     noPerms();
 } else {

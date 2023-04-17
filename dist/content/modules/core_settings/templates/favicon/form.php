@@ -4,11 +4,12 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Helpers\ImagineHelper;
 use function App\HTML\imageTag;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
-
 use App\Utils\File;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('favicon')) {
     ?>
     <p>

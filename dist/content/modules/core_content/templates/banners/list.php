@@ -5,9 +5,11 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\HTML\Alert;
 use App\Models\Content\Advertisement\Banners;
 use App\Models\Content\Categories;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('banners')) {
     if (! isset($_SESSION['filter_category'])) {
         $_SESSION['filter_category'] = 0;

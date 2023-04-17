@@ -5,9 +5,11 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 // TODO: refactor this file into multiple files
 use App\HTML\Alert;
 use App\Models\Content\Categories;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if (! $permissionChecker->hasPermission('categories')) {
     noPerms();
 } else {

@@ -4,12 +4,12 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Helpers\ImagineHelper;
 use function App\HTML\imageTag;
-
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
 $controller = new LogoController();
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
 
 $logoUrl = '../content/images/' . Settings::get('logo_image');
 

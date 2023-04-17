@@ -4,12 +4,15 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\EmailModes;
 use App\HTML\Alert;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
+
+$permissionChecker = PermissionChecker::fromCurrentUser();
 
 $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = Settings::get('ga_secret');
 $qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation('ULICMS_LOGIN_AT') . ' ' . get_domain(), $ga_secret);
-$permissionChecker = new \App\Security\Permissions\ACL();
+
 if (! $permissionChecker->hasPermission('other')) {
     noPerms();
 } else {

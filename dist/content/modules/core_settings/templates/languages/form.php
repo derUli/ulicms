@@ -3,9 +3,11 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Models\Content\Language;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('languages')) {
     $languages = Language::getAllLanguages();
     ?>

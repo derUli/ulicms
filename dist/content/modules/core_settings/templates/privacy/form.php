@@ -4,9 +4,11 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\RequestMethod;
 use App\HTML\Alert;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('privacy_settings')) {
     $currentLanguage = Request::getVar('language');
     if (! $currentLanguage) {

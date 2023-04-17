@@ -3,9 +3,11 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Models\Content\Categories;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 $audio_folder = ULICMS_ROOT . '/content/audio';
 if (! is_dir($audio_folder)) {
     mkdir($audio_folder);

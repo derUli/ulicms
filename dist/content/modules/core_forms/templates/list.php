@@ -2,9 +2,11 @@
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if (! $permissionChecker->hasPermission('forms')) {
     noPerms();
 } else {

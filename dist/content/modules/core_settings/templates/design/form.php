@@ -4,16 +4,20 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\HTML\Input;
 use App\HTML\ListItem;
-use App\Translations\JSTranslation;
+use App\Security\Permissions\PermissionChecker;
 
 $skins = BackendHelper::getCKEditorSkins();
+
 $skinItems = [];
 foreach ($skins as $skin) {
     $skinItems[] = new ListItem($skin, $skin);
 }
 
 $controller = ControllerRegistry::get();
-$permissionChecker = new \App\Security\Permissions\ACL();
+use App\Translations\JSTranslation;
+
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if (! $permissionChecker->hasPermission('design')) {
     noPerms();
 } else {
