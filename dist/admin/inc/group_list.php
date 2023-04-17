@@ -14,6 +14,7 @@ $groups = $permissionChecker->getAllGroups();
 
 $default_acl_group = (int)Settings::get('default_acl_group');
 
+
 if (isset($_REQUEST['sort']) && in_array($_REQUEST['sort'], [
     'id',
     'name'
@@ -50,9 +51,9 @@ if (count($groups) > 0) {
                 foreach ($groups as $id => $name) {
                     ?>
                     <tr id="dataset-<?php echo $id; ?>">
-                        <td><?php echo $id; ?>
+                        <td><?php echo esc($id); ?>
                         </td>
-                        <td><?php echo $name; ?>
+                        <td><?php esc($name); ?>
                         </td>
 
                         <?php if ($permissionChecker->hasPermission('groups_edit')) { ?>
