@@ -18,6 +18,7 @@ use App\Translations\JSTranslation;
 $parent_id = Request::getVar('parent_id', null, 'int');
 
 $permissionChecker = new \App\Security\Permissions\ACL();
+
 $groups = db_query('SELECT id, name from ' . tbname('groups'));
 if (
     $permissionChecker->hasPermission('pages') &&

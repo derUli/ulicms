@@ -5,6 +5,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Models\Content\VCS;
 
 $permissionChecker = new \App\Security\Permissions\ACL();
+
 if ($permissionChecker->hasPermission('pages')) {
     $content_id = (int)$_GET['content_id'];
     $revisions = VCS::getRevisionsByContentID($content_id);

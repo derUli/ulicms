@@ -179,7 +179,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
                     ?>
                 </select>
             </div>
-            <div class="field"
+            <div class="field">
                  <strong class="field-label">
                      <?php translate('secondary_groups'); ?>
             </strong>

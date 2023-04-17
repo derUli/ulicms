@@ -7,8 +7,6 @@ use Michelf\MarkdownExtra;
 
 class InfoController extends MainClass
 {
-    public const CHANGELOG_URL = 'https://raw.githubusercontent.com/derUli/ulicms/master/doc/changelog.txt';
-
     public function _fetchChangelog()
     {
         $lines = $this->_getChangelogContent();
@@ -46,9 +44,7 @@ class InfoController extends MainClass
             'changelog.txt'
         );
 
-        $content = is_file($file) ?
-                file_get_contents($file) :
-                file_get_contents_wrapper(self::CHANGELOG_URL);
+        $content = file_get_contents($file);
 
         return explode("\n", $content);
     }

@@ -3,6 +3,7 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 $permissionChecker = new \App\Security\Permissions\ACL();
+
 if ($permissionChecker->hasPermission('pages')) {
     $diff = ControllerRegistry::get('PageController')->_diffContents();
     ?>
