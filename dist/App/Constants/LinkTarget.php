@@ -9,7 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * Targets for HTML Links
  */
-class LinkTarget
+abstract class LinkTarget
 {
     public const TARGET_BLANK = '_blank';
 

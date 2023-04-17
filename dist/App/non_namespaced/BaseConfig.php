@@ -7,6 +7,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * Inhereit all base configurations from this class
  */
-class BaseConfig
+abstract class BaseConfig
 {
 }

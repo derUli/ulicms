@@ -9,7 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * Bootstrap 3.x Button Styles
  */
-class ButtonType
+abstract class ButtonType
 {
     public const BUTTON_BUTTON = 'button';
 

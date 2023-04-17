@@ -9,7 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * Use this class to compare HTTP request methods
  */
-class RequestMethod
+abstract class RequestMethod
 {
     public const POST = 'post';
 

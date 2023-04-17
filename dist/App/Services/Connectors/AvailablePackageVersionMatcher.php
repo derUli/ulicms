@@ -14,7 +14,7 @@ class AvailablePackageVersionMatcher
 
     /**
      * Constructor
-     * @param type $versionData
+     * @param $versionData
      */
     public function __construct($versionData = null)
     {

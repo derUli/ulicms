@@ -14,9 +14,6 @@ const CORE_COMPONENT_ADMIN = 'admin';
 const CORE_COMPONENT_PHPUNIT = 'phpunit';
 
 const LF = '\n';  // line feed; Unix
-const CRLF = '\r\n'; // carriage return and line feed; Windows
-const ONE_DAY_IN_SECONDS = 86400;
-
 // Define path constants
 define('ULICMS_ROOT', dirname(__FILE__));
 define('ULICMS_CONTENT', ULICMS_ROOT . '/content');
@@ -29,6 +26,7 @@ define('ULICMS_CACHE_BASE', ULICMS_CONTENT . '/cache');
 define('ULICMS_CACHE', ULICMS_CACHE_BASE . '/legacy');
 
 use App\Backend\UliCMSVersion;
+use App\Constants\DateTimeConstants;
 use App\Exceptions\ConnectionFailedException;
 use App\Exceptions\SqlException;
 use App\Models\Content\TypeMapper;
@@ -189,7 +187,7 @@ if($initialized !== $buildTimestamp) {
     $moduleManager->sync();
 
     Settings::register('session_name', uniqid() . '_SESSION');
-    Settings::register('cache_period', (string)ONE_DAY_IN_SECONDS);
+    Settings::register('cache_period', (string)DateTimeConstants::ONE_DAY_IN_SECONDS);
 }
 
 App\Utils\Session\sessionName(Settings::get('session_name'));

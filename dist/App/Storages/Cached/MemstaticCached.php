@@ -4,10 +4,11 @@ namespace App\Storages\Cached;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+use App\Constants\DateTimeConstants;
 use Phpfastcache\Config\ConfigurationOption;
 use Phpfastcache\Helper\Psr16Adapter;
 
-class MemstaticCached extends Cached
+abstract class MemstaticCached extends Cached
 {
     /**
      * Get caching adapter
@@ -20,7 +21,7 @@ class MemstaticCached extends Cached
         }
 
         $cacheConfig = [
-            'defaultTtl' => ONE_DAY_IN_SECONDS,
+            'defaultTtl' => DateTimeConstants::ONE_DAY_IN_SECONDS,
         ];
 
         // Use a Memstatic adapter, because persistent caching would worse
