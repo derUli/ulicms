@@ -13,19 +13,25 @@ use App\Security\Permissions\PermissionChecker;
  */
 class MenuEntry
 {
-    private $title;
+    private string $title;
 
-    private $link;
+    private string $link;
 
-    private $identifier;
+    private string $identifier;
 
+    /**
+     * @var string|string[]|null
+     */
     private $permissions;
 
-    private $children = [];
+    /**
+     * @var MenuEntry[]
+     */
+    private array $children = [];
 
-    private $newWindow = false;
+    private bool $newWindow = false;
 
-    private $isAjax = false;
+    private bool $isAjax = false;
 
     /**
      * Constructor
@@ -33,8 +39,8 @@ class MenuEntry
      * @param string $title
      * @param string $link
      * @param string $identifier
-     * @param type $permissions
-     * @param array $children
+     * @param string|string[]|null $permissions
+     * @param MenuEntry[] $children
      * @param bool $newWindow
      * @param bool $isAjax
      */
@@ -122,7 +128,7 @@ class MenuEntry
     /**
      * Get children
      *
-     * @return array
+     * @return MenuEntry[]
      */
     public function getChildren(): array
     {
@@ -132,7 +138,8 @@ class MenuEntry
     /**
      * Set children
      *
-     * @param array $value
+     * @param MenuEntry[] $value
+     *
      * @return void
      */
     public function setChildren(array $value): void
@@ -153,18 +160,33 @@ class MenuEntry
     /**
      * Add children
      *
-     * @param array $children
+     * @param MenuEntry $children
+     *
      * @return void
      */
-    public function addChildren(array $children): void
+    public function addChild(MenuEntry $children): void
     {
         $this->children[] = $children;
+    }
+
+     /**
+      * Add children
+      *
+      * @param MenuEntry[] $children
+      *
+      * @return void
+      */
+    public function addChildren(array $children): void
+    {
+        foreach($children as $child){
+            $this->addChild($child);
+        }
     }
 
     /**
      * Get permissions
      *
-     * @return type
+     * @return string|string[]|null
      */
     public function getPermissions()
     {
@@ -174,7 +196,7 @@ class MenuEntry
     /**
      * Set permissions
      *
-     * @param type $permissions
+     * @param string|string[]|null $permissions
      * @return void
      */
     public function setPermissions($permissions): void

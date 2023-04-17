@@ -6,16 +6,20 @@ namespace App\Backend\Menu;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+
 /**
  * This class renders the admin menu
  */
 class AdminMenu
 {
-    private $children = [];
+    /**
+     * @var MenuEntry[]
+     */
+    private array $children = [];
 
     /**
      * Constructor
-     * @param array $children
+     * @param MenuEntry[] $children
      */
     public function __construct(array $children = [])
     {
@@ -24,7 +28,7 @@ class AdminMenu
 
     /**
      * Get children
-     * @return array
+     * @return MenuEntry[]
      */
     public function getChildren(): array
     {
@@ -33,7 +37,8 @@ class AdminMenu
 
     /**
      * Set children
-     * @param array $value
+     * @param MenuEntry[] $value
+     *
      * @return void
      */
     public function setChildren(array $value): void

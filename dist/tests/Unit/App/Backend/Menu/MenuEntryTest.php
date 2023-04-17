@@ -119,6 +119,22 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(3, $menuEntry->getChildren());
     }
 
+    public function testAddChild()
+    {
+        $menuEntry = $this->constructMenuEntryWithoutChildren();
+        $menuEntry->setChildren([
+            $this->constructMenuEntryWithoutChildren(),
+            $this->constructMenuEntryWithoutChildren(),
+            $this->constructMenuEntryWithoutChildren()
+        ]);
+
+        $menuEntry->addChild(
+            $this->constructMenuEntryWithoutChildren()
+
+        );
+        $this->assertCount(4, $menuEntry->getChildren());
+    }
+
     public function testAddChildren()
     {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
