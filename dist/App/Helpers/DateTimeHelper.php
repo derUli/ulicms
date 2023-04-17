@@ -37,9 +37,10 @@ abstract class DateTimeHelper
      * Format integer timestamp user readable
      * Format integer timestamp
      * @param int $timestamp
+     * 
      * @return string
      */
-    public static function timestampToFormattedDateTime(int $timestamp, int $dateType = IntlDateFormatter::MEDIUM, int $timeType = IntlDateFormatter::MEDIUM): string
+    public static function timestampToFormattedDateTime(int $timestamp, int $dateType = IntlDateFormatter::MEDIUM, int $timeType = IntlDateFormatter::MEDIUM): ?string
     {
         $timezone = self::getCurrentTimezone();
         $currentLocale = self::getCurrentLocale();
@@ -48,6 +49,6 @@ abstract class DateTimeHelper
         $pattern = str_replace(',', '', $formatter->getPattern());
         $formatter->setPattern($pattern);
 
-        return $formatter->format($timestamp);
+        return $formatter->format($timestamp) ? $formatter->format($timestamp) : null;
     }
 }

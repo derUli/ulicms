@@ -16,9 +16,9 @@ use Exception;
  */
 class DBMigrator
 {
-    private $component = null;
+    private string $component;
 
-    private $folder = null;
+    private string $folder;
 
     // component is an identifier for the module which executes the migrations
     // $folder is the path to an up or down folder
@@ -37,7 +37,8 @@ class DBMigrator
     public function migrate(?string $stop = null): void
     {
         $this->checkVars();
-        $files = scandir($this->folder);
+        $files = scandir($this->folder) ? scandir($this->folder) : [];
+        
         natcasesort($files);
         foreach ($files as $file) {
             $this->executeSqlScript($file);

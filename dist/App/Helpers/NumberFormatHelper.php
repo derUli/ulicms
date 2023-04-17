@@ -9,6 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use ChrisUllyott\FileSize;
 use DateTime;
 use Westsworld\TimeAgo;
+use Westsworld\TimeAgo\Language;
 
 /**
  * Utils to deal with number values such as size units and timestamps
@@ -60,8 +61,14 @@ abstract class NumberFormatHelper extends Helper
 
         // If there is a translation class for the current language use it
         // else it will fallback to english as default
+        /**
+         * @var Language|null
+         */
         $language = null;
         if (class_exists($translationClass)) {
+            /**
+            * @var Language|null
+            */
             $language = new $translationClass();
         }
 
