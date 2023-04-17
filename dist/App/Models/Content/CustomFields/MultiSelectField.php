@@ -11,11 +11,17 @@ use Template;
 
 class MultiSelectField extends CustomField
 {
-    public $options = [];
+    /**
+     * @var array<string, mixed>
+     */
+    public array $options = [];
 
-    public $translateOptions = true;
+    /**
+     * @var bool
+     */
+    public bool $translateOptions = true;
 
-    public function render($value = null): string
+    public function render(mixed $value = null): string
     {
         if (! isset($this->htmlAttributes['multiple'])) {
             $this->htmlAttributes['multiple'] = '';

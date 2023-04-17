@@ -11,12 +11,19 @@ use Template;
 
 class SelectField extends CustomField
 {
-    public $options = [];
+    /**
+     * @var array<string, mixed>
+     */
+    public array $options = [];
 
-    public $translateOptions = true;
+    /**
+     * @var bool
+     */
+    public bool $translateOptions = true;
 
-    public function render($value = null): string
+    public function render(mixed $value = null): string
     {
+
         ViewBag::set('field', $this);
         ViewBag::set('field_value', $value);
         ViewBag::set('field_options', $this->options);

@@ -11,11 +11,14 @@ use Template;
 
 class ColorField extends CustomField
 {
-    public $htmlAttributes = [
+    /**
+     * @var array<string, string>
+     */
+    public array $htmlAttributes = [
         'class' => 'jscolor {hash:true,caps:true}'
     ];
 
-    public function render($value = null): string
+    public function render(mixed $value = null): string
     {
         ViewBag::set('field', $this);
         ViewBag::set('field_value', $value);

@@ -12,7 +12,7 @@ use Template;
 
 class HtmlField extends CustomField
 {
-    public function render($value = null): string
+    public function render(mixed $value = null): string
     {
         $htmlEditor = get_html_editor();
 

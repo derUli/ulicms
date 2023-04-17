@@ -13,27 +13,30 @@ use App\Exceptions\NotImplementedException;
  */
 class CustomField
 {
-    public $name;
+    public string $name;
 
-    public $title;
+    public ?string $title = null;
 
-    public $required = false;
+    public bool $required = false;
 
-    public $helpText;
+    public ?string $helpText = null;
 
-    public $defaultValue = '';
+    public mixed $defaultValue;
 
-    public $htmlAttributes = [];
+    /**
+     * @var array<string, string>
+     */
+    public array $htmlAttributes = [];
 
-    public $contentType;
+    public ?string $contentType = null;
 
     /**
      * Render custom field as html
-     * @param type $value
+     * @param mixed $value
      * @throws NotImplementedException
      * @return string
      */
-    public function render($value = null): string
+    public function render(mixed $value = null): string
     {
         throw new NotImplementedException();
     }

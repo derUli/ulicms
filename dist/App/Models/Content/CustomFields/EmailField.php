@@ -11,7 +11,7 @@ use Template;
 
 class EmailField extends CustomField
 {
-    public function render($value = null): string
+    public function render(mixed $value = null): string
     {
         ViewBag::set('field', $this);
         ViewBag::set('field_value', $value);
