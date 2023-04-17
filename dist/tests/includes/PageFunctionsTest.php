@@ -77,7 +77,7 @@ class PageFunctionsTest extends \PHPUnit\Framework\TestCase
         $hasHashhLinks = false;
         foreach ($pages as $page) {
             $content = ContentFactory::getById($page['id']);
-            $this->assertInstanceOf(Content::class, $content);
+            $this->assertInstanceOf(AbstractContent::class, $content);
             $this->assertIsNumeric($content->getId());
             if (! $content->isRegular()) {
                 $hasHashhLinks = true;

@@ -307,13 +307,13 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
     {
         $this->createDeletedPage();
 
-        $deleted = Content::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
+        $deleted = AbstractContent::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
         $this->assertGreaterThanOrEqual(1, count($deleted));
 
         $controller = new PageController();
         $controller->_emptyTrash();
 
-        $deleted = Content::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
+        $deleted = AbstractContent::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
         $this->assertCount(0, $deleted);
     }
 
@@ -487,7 +487,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase
         $controller = new PageController();
         $content = $controller->_createPost();
 
-        $this->assertInstanceOf(Content::class, $content);
+        $this->assertInstanceOf(AbstractContent::class, $content);
         $this->assertTrue($content->isPersistent());
     }
 

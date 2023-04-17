@@ -6,7 +6,7 @@ class ContentTest extends \PHPUnit\Framework\TestCase
 {
     protected function tearDown(): void
     {
-        Content::emptyTrash();
+        AbstractContent::emptyTrash();
     }
 
     public function testEmptyTrash()
@@ -22,12 +22,12 @@ class ContentTest extends \PHPUnit\Framework\TestCase
         $page->save();
         $page->delete();
 
-        $deleted = Content::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
+        $deleted = AbstractContent::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
         $this->assertGreaterThanOrEqual(1, count($deleted));
 
-        Content::emptyTrash();
+        AbstractContent::emptyTrash();
 
-        $deleted = Content::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
+        $deleted = AbstractContent::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
         $this->assertCount(0, $deleted);
     }
 

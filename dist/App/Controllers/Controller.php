@@ -17,7 +17,7 @@ use Request;
 /**
  * All module controllers must inherited from this class
  */
-abstract class Controller
+class Controller
 {
     /**
      * List of not callable public methods
@@ -40,8 +40,13 @@ abstract class Controller
          * Load hooks from Json to prevent direct access to protected public controller methods
          */
         if (is_file($file)) {
-            $hooks = file_get_contents($file);
-            $this->blacklist = [...$this->blacklist, Json::decode($hooks, true)];
+            $hooksJson = (string)file_get_contents($file);
+
+            /**
+             * @var string[]
+             */
+            $hooks = Json::decode($hooksJson, true);
+            $this->blacklist = [...$this->blacklist, ...$hooks];
         }
     }
 

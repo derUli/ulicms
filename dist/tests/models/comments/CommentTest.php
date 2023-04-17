@@ -257,7 +257,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         $comment->setContentId($first->id);
 
         $content = $comment->getContent();
-        $this->assertTrue(is_subclass_of($content, Content::class));
+        $this->assertTrue(is_subclass_of($content, AbstractContent::class));
         $this->assertEquals($first->id, $content->getId());
     }
 

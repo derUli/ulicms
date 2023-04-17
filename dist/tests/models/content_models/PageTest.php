@@ -822,7 +822,7 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $dataset = Database::fetchObject($result);
 
         $page = ContentFactory::getByID($dataset->id);
-        $this->assertInstanceOf(Content::class, $page->getParent());
+        $this->assertInstanceOf(AbstractContent::class, $page->getParent());
         $this->assertEquals($page->getParent()->getId(), $dataset->parent_id);
         $this->assertGreaterThanOrEqual(1, count($page->getParent()->getChildren()));
     }

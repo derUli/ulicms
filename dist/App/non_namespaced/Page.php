@@ -7,7 +7,7 @@ use App\Models\Content\Comment;
 use App\Models\Content\VCS;
 use App\Security\Permissions\PagePermissions;
 
-class Page extends Content
+class Page extends AbstractContent
 {
     public $id = null;
 
@@ -402,7 +402,7 @@ class Page extends Content
     }
 
     // returns the parent page
-    public function getParent(): ?Content
+    public function getParent(): ?AbstractContent
     {
         if (! $this->parent_id) {
             return null;

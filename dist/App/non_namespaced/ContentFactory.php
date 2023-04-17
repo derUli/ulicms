@@ -13,7 +13,7 @@ use App\Registries\LoggerRegistry;
 class ContentFactory
 {
     // this methods returns the model of the current page
-    public static function getCurrentPage(): ?Content
+    public static function getCurrentPage(): ?AbstractContent
     {
         $slug = get_slug();
         $language = getCurrentLanguage(true);
@@ -23,7 +23,7 @@ class ContentFactory
         );
     }
 
-    public static function getByID(int $id): ?Content
+    public static function getByID(int $id): ?AbstractContent
     {
         $result = Database::query('SELECT `id`, `type` FROM `' .
                         tbname('content') . '` where id = ' . $id);
@@ -37,7 +37,7 @@ class ContentFactory
     public static function getBySlugAndLanguage(
         string $name,
         string $language
-    ): ?Content {
+    ): ?AbstractContent {
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
         $result = Database::query('SELECT id, `type` FROM `' .
@@ -292,7 +292,7 @@ class ContentFactory
         return $result;
     }
 
-    private static function getContentObjectByID(object $row): ?Content
+    private static function getContentObjectByID(object $row): ?AbstractContent
     {
         $retval = null;
         $type = $row->type;

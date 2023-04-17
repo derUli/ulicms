@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-abstract class Content extends Model
+abstract class AbstractContent extends Model
 {
     public $show_headline = true;
 

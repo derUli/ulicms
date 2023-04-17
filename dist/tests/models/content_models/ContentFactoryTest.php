@@ -123,7 +123,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(count($content), Database::getNumRows($result));
 
         foreach ($content as $page) {
-            $this->assertInstanceOf(Content::class, $page);
+            $this->assertInstanceOf(AbstractContent::class, $page);
         }
     }
 

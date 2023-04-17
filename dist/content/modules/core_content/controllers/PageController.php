@@ -72,7 +72,7 @@ class PageController extends \App\Controllers\Controller
         Response::redirect(ModuleHelper::buildActionURL('pages'));
     }
 
-    public function _createPost(): ?Content
+    public function _createPost(): ?AbstractContent
     {
         $permissionChecker = new PermissionChecker(get_user_id());
         $model = TypeMapper::getModel(Request::getVar('type'));
@@ -234,7 +234,7 @@ class PageController extends \App\Controllers\Controller
     public function _emptyTrash(): void
     {
         do_event('before_empty_trash');
-        Content::emptyTrash();
+        AbstractContent::emptyTrash();
         do_event('after_empty_trash');
 
         CacheUtil::clearPageCache();

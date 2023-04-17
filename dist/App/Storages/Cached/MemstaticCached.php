@@ -7,7 +7,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use Phpfastcache\Config\ConfigurationOption;
 use Phpfastcache\Helper\Psr16Adapter;
 
-abstract class MemstaticCached extends Cached
+class MemstaticCached extends Cached
 {
     /**
      * Get caching adapter

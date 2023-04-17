@@ -8,7 +8,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Storages\Cached\MemstaticCached;
 
-abstract class Storage extends MemstaticCached implements StorageInterface
+class Storage extends MemstaticCached implements StorageInterface
 {
     /**
      * @var array<string, mixed>
