@@ -29,7 +29,7 @@ class RoboTest extends RoboTestBase
         $actual = $this->runRoboCommand(
             [
                 'tests:run',
-                'tests/environment/UliCMSVersionTest.php'
+                'tests/Unit/App/Backend/UliCMSVersionTest.php'
             ]
         );
         $this->assertStringContainsString(
