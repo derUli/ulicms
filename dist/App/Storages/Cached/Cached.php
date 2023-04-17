@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils\Cached;
+namespace App\Storages\Cached;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 

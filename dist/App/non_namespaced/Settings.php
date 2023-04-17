@@ -5,7 +5,7 @@ declare(strict_types=1);
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\DefaultValues;
-use App\Utils\Cached\MemstaticCached;
+use App\Storages\Cached\MemstaticCached;
 
 // class for handling system settings
 class Settings extends MemstaticCached
