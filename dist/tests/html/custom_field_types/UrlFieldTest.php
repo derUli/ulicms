@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Content\CustomFields\UrlField;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class UrlFieldTest extends \PHPUnit\Framework\TestCase

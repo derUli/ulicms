@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Content\CustomFields\EmailField;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class EmailFieldTest extends \PHPUnit\Framework\TestCase

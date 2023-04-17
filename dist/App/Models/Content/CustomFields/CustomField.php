@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Models\Content\CustomFields;
+
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Exceptions\NotImplementedException;

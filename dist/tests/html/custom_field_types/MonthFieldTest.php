@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Content\CustomFields\MonthField;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class MonthFieldTest extends \PHPUnit\Framework\TestCase

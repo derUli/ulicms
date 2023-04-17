@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Content\CustomFields\FileFile;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class FileFileTest extends \PHPUnit\Framework\TestCase

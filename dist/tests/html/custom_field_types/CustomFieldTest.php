@@ -1,6 +1,7 @@
 <?php
 
 use App\Exceptions\NotImplementedException;
+use App\Models\Content\CustomFields\CustomField;
 
 class CustomFieldTest extends \PHPUnit\Framework\TestCase
 {

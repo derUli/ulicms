@@ -9,6 +9,21 @@ API-Änderungen:
 * IDatasetPermissionChecker in Namespace App\Security\Permissions verschoben
 * ViewBag in Namespace App\Storages verschoben
 * Vars in Namespace App\Storages verschoben
+* CheckboxField in Namespace App\Models\Content\CustomFields verschoben
+* ColorField in Namespace App\Models\Content\CustomFields verschoben
+* CustomField in Namespace App\Models\Content\CustomFields verschoben
+* DatetimeField in Namespace App\Models\Content\CustomFields verschoben
+* EmailField in Namespace App\Models\Content\CustomFields verschoben
+* FileFile in Namespace App\Models\Content\CustomFields verschoben
+* FileImage in Namespace App\Models\Content\CustomFields verschoben
+* HtmlField in Namespace App\Models\Content\CustomFields verschoben
+* MonthField in Namespace App\Models\Content\CustomFields verschoben
+* MultiSelectField in Namespace App\Models\Content\CustomFields verschoben
+* MultilineTextField in Namespace App\Models\Content\CustomFields verschoben
+* NumberField in Namespace App\Models\Content\CustomFields verschoben
+* SelectField in Namespace App\Models\Content\CustomFields verschoben
+* TextField in Namespace App\Models\Content\CustomFields verschoben
+* UrlField in Namespace App\Models\Content\CustomFields verschoben
 
 Entfernte Features:
 * Scroll To Top

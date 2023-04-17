@@ -2,7 +2,12 @@
 
 declare(strict_types=1);
 
+namespace App\Models\Content\CustomFields;
+
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Storages\ViewBag;
+use Template;
 
 class MultiSelectField extends CustomField
 {
@@ -15,10 +20,10 @@ class MultiSelectField extends CustomField
         if (! isset($this->htmlAttributes['multiple'])) {
             $this->htmlAttributes['multiple'] = '';
         }
-        \App\Storages\ViewBag::set('field', $this);
-        \App\Storages\ViewBag::set('field_value', $value);
-        \App\Storages\ViewBag::set('field_options', $this->options);
-        \App\Storages\ViewBag::set('field_name', $this->contentType !== null ?
+        ViewBag::set('field', $this);
+        ViewBag::set('field_value', $value);
+        ViewBag::set('field_options', $this->options);
+        ViewBag::set('field_name', $this->contentType !== null ?
                         $this->contentType . '_' . $this->name : $this->name);
 
         return Template::executeDefaultOrOwnTemplate('fields/multiselect.php');

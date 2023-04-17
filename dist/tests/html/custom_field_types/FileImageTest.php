@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Content\CustomFields\FileImage;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class FileImageTest extends \PHPUnit\Framework\TestCase

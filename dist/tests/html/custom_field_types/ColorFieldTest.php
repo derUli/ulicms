@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Content\CustomFields\ColorField;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class ColorFieldTest extends \PHPUnit\Framework\TestCase

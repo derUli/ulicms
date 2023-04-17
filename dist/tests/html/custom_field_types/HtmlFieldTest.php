@@ -1,6 +1,7 @@
 <?php
 
 use App\Constants\HtmlEditor;
+use App\Models\Content\CustomFields\HtmlField;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class HtmlFieldTest extends \PHPUnit\Framework\TestCase

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Content\CustomFields\MultilineTextField;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class MultilineTextFieldTest extends \PHPUnit\Framework\TestCase

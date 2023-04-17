@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Content\CustomFields\CheckboxField;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class CheckboxFieldTest extends \PHPUnit\Framework\TestCase

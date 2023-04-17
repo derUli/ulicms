@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Content\CustomFields\MultiSelectField;
+use App\Models\Content\CustomFields\SelectField;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class SelectFieldTest extends \PHPUnit\Framework\TestCase

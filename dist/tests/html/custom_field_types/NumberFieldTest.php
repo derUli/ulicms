@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Content\CustomFields\NumberField;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class NumberFieldTest extends \PHPUnit\Framework\TestCase

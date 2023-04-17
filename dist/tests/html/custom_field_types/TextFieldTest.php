@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Content\CustomFields\TextField;
 use Spatie\Snapshots\MatchesSnapshots;
 
 class TextFieldTest extends \PHPUnit\Framework\TestCase
