@@ -19,7 +19,7 @@ abstract class Cached
      * @param string $key
      * @return mixed
      */
-    protected static function retrieveFromCache(string $key): mixed
+    protected static function getFromCache(string $key): mixed
     {
         $adapter = static::getCacheAdapter();
         $cacheUid = static::generateCacheUid($key);
@@ -32,7 +32,7 @@ abstract class Cached
      * @param mixed $value
      * @return bool
      */
-    protected static function storeInCache(string $key, mixed $value): bool
+    protected static function setToCache(string $key, mixed $value): bool
     {
         $adapter = static::getCacheAdapter();
         $cacheUid = static::generateCacheUid($key);
@@ -45,11 +45,21 @@ abstract class Cached
      * @param string $key
      * @return bool
      */
-    protected static function deleteInCache(string $key): bool
+    protected static function deleteFromCache(string $key): bool
     {
         $adapter = static::getCacheAdapter();
         $cacheUid = static::generateCacheUid($key);
         return $adapter->delete($cacheUid);
+    }
+
+      /**
+       * Delete setting from cache
+       * @return bool
+       */
+    protected static function clearCache(): bool
+    {
+        $adapter = static::getCacheAdapter();
+        return $adapter->clear();
     }
 
     /**

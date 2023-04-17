@@ -1,47 +1,52 @@
 <?php
 
+use App\Storages\Vars;
+
 class VarsTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp(): void
     {
-        \App\Storages\Vars::set('foo', 'bar');
-        \App\Storages\Vars::set('john', 'doe');
-        \App\Storages\Vars::set('hello', 'world');
+        Vars::set('foo', 'bar');
+        Vars::set('john', 'doe');
+        Vars::set('hello', 'world');
     }
 
     protected function tearDown(): void
     {
-        \App\Storages\Vars::clear();
+        Vars::clear();
     }
 
     public function testSetAndGet()
     {
-        $this->assertEquals('bar', \App\Storages\Vars::get('foo'));
-        $this->assertEquals('world', \App\Storages\Vars::get('hello'));
+        $this->assertEquals('bar', Vars::get('foo'));
+        $this->assertEquals('world', Vars::get('hello'));
 
-        \App\Storages\Vars::set('hello', 'you');
-        $this->assertEquals('you', \App\Storages\Vars::get('hello'));
-    }
-
-    public function testgetAll()
-    {
-        $vars = \App\Storages\Vars::getAll();
-        $this->assertEquals('doe', $vars['john']);
-        $this->assertGreaterThanOrEqual(2, count($vars));
+        Vars::set('hello', 'you');
+        $this->assertEquals('you', Vars::get('hello'));
     }
 
     public function testDelete()
     {
-        $this->assertEquals('bar', \App\Storages\Vars::get('foo'));
+        $this->assertEquals('bar', Vars::get('foo'));
 
-        \App\Storages\Vars::delete('foo');
-        $this->assertNull(\App\Storages\Vars::get('foo'));
+        Vars::delete('foo');
+        $this->assertNull(Vars::get('foo'));
     }
 
     public function testClear()
     {
-        $this->assertGreaterThanOrEqual(1, count(\App\Storages\Vars::getAll()));
-        \App\Storages\Vars::clear();
-        $this->assertCount(0, \App\Storages\Vars::getAll());
+        for($i = 0; $i < 100; $i++){
+            Vars::set("foo_{$i}", $i);
+        }
+
+        for($i = 0; $i < 100; $i++){
+            $this->assertEquals($i, Vars::get("foo_{$i}", $i));
+        }
+
+        Vars::clear();
+
+        for($i = 0; $i < 100; $i++){
+            $this->assertNull(Vars::get("foo_{$i}", $i));
+        }
     }
 }

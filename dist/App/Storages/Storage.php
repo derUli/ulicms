@@ -6,7 +6,9 @@ namespace App\Storages;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-abstract class Storage
+use App\Storages\Cached\MemstaticCached;
+
+abstract class Storage extends MemstaticCached
 {
     /**
      * @var array<string, mixed>
@@ -21,11 +23,7 @@ abstract class Storage
      */
     public static function get(string $var): mixed
     {
-        if (isset(self::$vars[$var])) {
-            return self::$vars[$var];
-        }
-
-        return null;
+        return static::getFromCache($var);
     }
 
     /**
@@ -38,7 +36,7 @@ abstract class Storage
      */
     public static function set(string $var, mixed $val): void
     {
-        self::$vars[$var] = $val;
+        static::setToCache($var, $val);
     }
 
     /**
@@ -49,9 +47,7 @@ abstract class Storage
      */
     public static function delete(string $var): void
     {
-        if (isset(self::$vars[$var])) {
-            unset(self::$vars[$var]);
-        }
+        static::deleteFromCache($var);
     }
 
     /**
@@ -61,16 +57,6 @@ abstract class Storage
      */
     public static function clear(): void
     {
-        self::$vars = [];
-    }
-
-    /**
-     * Get all vars
-     *
-     * @return array<string, mixed>
-     */
-    public static function getAll(): array
-    {
-        return self::$vars;
+        static::clearCache();
     }
 }

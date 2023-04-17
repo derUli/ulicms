@@ -34,7 +34,7 @@ class Settings extends MemstaticCached
         string $key,
         ?string $type = 'str'
     ) {
-        $cachedValue = static::retrieveFromCache($key);
+        $cachedValue = static::getFromCache($key);
 
         // Is cached but null
         if ($cachedValue === DefaultValues::NULL_VALUE) {
@@ -52,11 +52,11 @@ class Settings extends MemstaticCached
                 " WHERE name='{$key}'");
         if (db_num_rows($result) > 0) {
             while ($row = db_fetch_object($result)) {
-                static::storeInCache($row->name, $row->value);
+                static::setToCache($row->name, $row->value);
                 $value = static::convertVar($row->value, $type);
             }
         } else {
-            static::storeInCache($key, DefaultValues::NULL_VALUE);
+            static::setToCache($key, DefaultValues::NULL_VALUE);
         }
 
         return $value;
@@ -107,7 +107,7 @@ class Settings extends MemstaticCached
         $value,
         ?string $type = 'str'
     ): void {
-        static::storeInCache($key, $value);
+        static::setToCache($key, $value);
 
         $key = db_escape($key);
         $originalValue = static::convertVar($value, $type);
@@ -126,7 +126,7 @@ class Settings extends MemstaticCached
     // Remove an configuration variable
     public static function delete(string $key): bool
     {
-        static::deleteInCache($key);
+        static::deleteFromCache($key);
         $key = db_escape($key);
         db_query('DELETE FROM ' . tbname('settings') . " WHERE name='{$key}'");
         return Database::getAffectedRows() > 0;
@@ -166,7 +166,7 @@ class Settings extends MemstaticCached
         while ($dataset = Database::fetchObject($result)) {
             $datasets[] = $dataset;
 
-            static::storeInCache($dataset->name, $dataset->value);
+            static::setToCache($dataset->name, $dataset->value);
         }
 
         return $datasets;
@@ -210,9 +210,9 @@ class Settings extends MemstaticCached
       * @param type $value
       * @return bool
       */
-    protected static function storeInCache(string $key, $value): bool
+    protected static function setToCache(string $key, $value): bool
     {
         $valueToStore = $value !== null ? $value : DefaultValues::NULL_VALUE;
-        return parent::storeInCache($key, $valueToStore);
+        return parent::setToCache($key, $valueToStore);
     }
 }
