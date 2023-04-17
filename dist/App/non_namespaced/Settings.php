@@ -59,6 +59,8 @@ class Settings
                 self::storeInCache($row->name, $row->value);
                 $value = self::convertVar($row->value, $type);
             }
+        } else {
+            self::storeInCache($key, DefaultValues::NULL_VALUE);
         }
 
         return $value;
@@ -109,9 +111,7 @@ class Settings
         $value,
         ?string $type = 'str'
     ): void {
-        $cacheValue = $value !== null ? $value : DefaultValues::NULL_VALUE;
-
-        self::storeInCache($key, $cacheValue);
+        self::storeInCache($key, $value);
 
         $key = db_escape($key);
         $originalValue = self::convertVar($value, $type);
@@ -173,7 +173,6 @@ class Settings
             self::storeInCache($dataset->name, $dataset->value);
         }
 
-
         return $datasets;
     }
 
@@ -231,7 +230,10 @@ class Settings
     {
         $adapter = self::getCacheAdapter();
         $cacheUid = self::generateCacheUid($key);
-        return $adapter->set($cacheUid, $value);
+
+        $valueToStore = $value !== null ? $value : DefaultValues::NULL_VALUE;
+
+        return $adapter->set($cacheUid, $valueToStore);
     }
 
     /**
@@ -267,7 +269,7 @@ class Settings
         }
 
         $cacheConfig = [
-            'defaultTtl' => ONE_DAY_IN_SECONDS
+            'defaultTtl' => ONE_DAY_IN_SECONDS,
         ];
 
         // Use a Memstatic adapter, because persistent caching would worse

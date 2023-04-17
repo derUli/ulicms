@@ -173,6 +173,8 @@ if (! $select) {
                     . $config->db_database . ' doesn\'t exist.</h1>');
 }
 
+// Preload all settings
+Settings::getAll();
 
 $initialized = Settings::get('initialized');
 
@@ -189,9 +191,6 @@ if($initialized !== $buildTimestamp) {
     Settings::register('session_name', uniqid() . '_SESSION');
     Settings::register('cache_period', (string)ONE_DAY_IN_SECONDS);
 }
-
-// Preload all settings
-Settings::getAll();
 
 App\Utils\Session\sessionName(Settings::get('session_name'));
 
