@@ -3,8 +3,10 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Backend\UliCMSVersion;
+use App\Security\Permissions\PermissionChecker;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('update_system')) {
     $version = new UliCMSVersion();
     $currentVersion = $version->getInternalVersionAsString();

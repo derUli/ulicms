@@ -40,9 +40,9 @@ if (count($groups) > 0) {
                     <th style="min-width: 200px;"><strong><?php translate('name'); ?> </strong></th>
                     <?php if ($permissionChecker->hasPermission('groups_edit')) { ?>
                         <th><strong><?php translate('standard'); ?> </strong></th>
-                        <td class="no-sort"></td>
-                        <td class="no-sort"></td>
-                        <td class="no-sort"></td>
+                        <th class="no-sort"><?php translate('view'); ?></td>
+                        <th class="no-sort"><?php translate('edit');?></td>
+                        <th class="no-sort"><?php translate('delete'); ?></td>
                     <?php } ?>
                 </tr>
             </thead>
@@ -51,11 +51,8 @@ if (count($groups) > 0) {
                 foreach ($groups as $id => $name) {
                     ?>
                     <tr id="dataset-<?php echo $id; ?>">
-                        <td><?php echo esc($id); ?>
-                        </td>
-                        <td><?php esc($name); ?>
-                        </td>
-
+                        <td><?php esc($id); ?></td>
+                        <td><?php esc($name); ?></td>
                         <?php if ($permissionChecker->hasPermission('groups_edit')) { ?>
                             <td><?php
                                 if ($default_acl_group === $id) {
@@ -100,11 +97,8 @@ if (count($groups) > 0) {
                                 </form></td>
                         <?php } ?>
                     </tr>
-
-
                 <?php }
                 ?>
-
             </tbody>
         </table>
     </div>
