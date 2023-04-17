@@ -17,7 +17,7 @@ use Request;
 /**
  * All module controllers must inherited from this class
  */
-class Controller
+abstract class Controller
 {
     /**
      * List of not callable public methods

@@ -12,7 +12,7 @@ use Nette\Utils\FileSystem;
 /**
  * Utils for handling files
  */
-class File
+abstract class File
 {
     /**
      * Get the last modification time of a file as Unix timestamp

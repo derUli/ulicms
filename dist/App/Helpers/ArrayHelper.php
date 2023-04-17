@@ -11,7 +11,7 @@ use Exception;
 /**
  * This class contains utilities to deal with arrays
  */
-class ArrayHelper extends Helper
+abstract class ArrayHelper extends Helper
 {
     /**
      * inserts an item before an index to an array

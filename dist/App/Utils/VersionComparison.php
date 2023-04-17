@@ -7,7 +7,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * Utils for version number comparisons
  */
-class VersionComparison
+abstract class VersionComparison
 {
     /**
      * Compares two version numbers using the given operator

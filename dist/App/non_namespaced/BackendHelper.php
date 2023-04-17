@@ -12,7 +12,7 @@ use App\Utils\File;
 /**
  * Backend utilities
  */
-class BackendHelper extends Helper
+abstract class BackendHelper extends Helper
 {
     /**
      * Get the current backend action

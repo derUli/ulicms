@@ -25,7 +25,7 @@ use Settings;
 use function strbool;
 use function sureRemoveDir;
 
-class CacheUtil
+abstract class CacheUtil
 {
     private static $adapter;
 

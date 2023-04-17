@@ -13,7 +13,7 @@ use Settings;
 /**
  * Utils to scale down image uploads
  */
-class ImageScaleHelper extends Helper
+abstract class ImageScaleHelper extends Helper
 {
     /**
      * Get maximum allowed size dimension for images

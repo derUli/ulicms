@@ -12,7 +12,7 @@ use Settings;
 /**
  * Class with methods for checking comments for spam
  */
-class AntiSpamHelper extends Helper
+abstract class AntiSpamHelper extends Helper
 {
     // checking if this Country is blocked by spamfilter
     // blocking works by the domain extension of the client's

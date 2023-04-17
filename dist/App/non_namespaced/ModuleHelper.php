@@ -10,7 +10,7 @@ use App\Helpers\Helper;
 use App\HTML\Form;
 use App\Models\Content\Language;
 
-class ModuleHelper extends Helper
+abstract class ModuleHelper extends Helper
 {
     // builds an url to the main backend GUI of a module
     public static function buildAdminURL(

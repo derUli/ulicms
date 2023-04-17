@@ -8,7 +8,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use Nette\Utils\Strings;
 
-class StringHelper extends Helper
+abstract class StringHelper extends Helper
 {
     // removes empty lines from a string
     public static function removeEmptyLinesFromString(string $input): string

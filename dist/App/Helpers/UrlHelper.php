@@ -9,7 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * Helper methods for handling URLs
  */
-class UrlHelper extends Helper
+abstract class UrlHelper extends Helper
 {
     /**
      * This method removes the get parameters from an URL

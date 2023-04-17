@@ -10,7 +10,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * This tool returns methods to use DataTables (https://datatables.net/)
  */
-class DataTablesHelper extends Helper
+abstract class DataTablesHelper extends Helper
 {
     /**
      * Returns a path to DataTables lang file based on $lang

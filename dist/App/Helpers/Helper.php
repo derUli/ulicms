@@ -9,6 +9,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * Extend all helpers from this class
  */
-class Helper
+abstract class Helper
 {
 }

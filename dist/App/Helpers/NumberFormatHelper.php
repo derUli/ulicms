@@ -13,7 +13,7 @@ use Westsworld\TimeAgo;
 /**
  * Utils to deal with number values such as size units and timestamps
  */
-class NumberFormatHelper extends Helper
+abstract class NumberFormatHelper extends Helper
 {
     public const SQL_DATE_WITH_SECONDS = 'Y-m-d H:i:s';
 

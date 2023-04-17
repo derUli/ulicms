@@ -13,7 +13,7 @@ use Settings;
 /**
  * This class contains methods to deal with DateTimes
  */
-class DateTimeHelper
+abstract class DateTimeHelper
 {
     /**
      * Get Current Timezone

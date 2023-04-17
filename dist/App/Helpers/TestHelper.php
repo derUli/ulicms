@@ -12,7 +12,7 @@ use Exception;
 /**
  * This class contains tools for running in context of unit tests
  */
-class TestHelper extends Helper
+abstract class TestHelper extends Helper
 {
     /**
      * Check if we are running unit tests
