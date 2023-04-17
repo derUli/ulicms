@@ -23,9 +23,9 @@ class VarsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('you', \App\Storages\Vars::get('hello'));
     }
 
-    public function testGetAllVars()
+    public function testgetAll()
     {
-        $vars = \App\Storages\Vars::getAllVars();
+        $vars = \App\Storages\Vars::getAll();
         $this->assertEquals('doe', $vars['john']);
         $this->assertGreaterThanOrEqual(2, count($vars));
     }
@@ -40,8 +40,8 @@ class VarsTest extends \PHPUnit\Framework\TestCase
 
     public function testClear()
     {
-        $this->assertGreaterThanOrEqual(1, count(\App\Storages\Vars::getAllVars()));
+        $this->assertGreaterThanOrEqual(1, count(\App\Storages\Vars::getAll()));
         \App\Storages\Vars::clear();
-        $this->assertCount(0, \App\Storages\Vars::getAllVars());
+        $this->assertCount(0, \App\Storages\Vars::getAll());
     }
 }

@@ -23,9 +23,9 @@ class ViewBagTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('you', \App\Storages\ViewBag::get('hello'));
     }
 
-    public function testGetAllVars()
+    public function testgetAll()
     {
-        $vars = \App\Storages\ViewBag::getAllVars();
+        $vars = \App\Storages\ViewBag::getAll();
         $this->assertEquals('doe', $vars['john']);
         $this->assertGreaterThanOrEqual(2, count($vars));
     }
@@ -40,8 +40,8 @@ class ViewBagTest extends \PHPUnit\Framework\TestCase
 
     public function testClear()
     {
-        $this->assertGreaterThanOrEqual(1, count(\App\Storages\ViewBag::getAllVars()));
+        $this->assertGreaterThanOrEqual(1, count(\App\Storages\ViewBag::getAll()));
         \App\Storages\ViewBag::clear();
-        $this->assertCount(0, \App\Storages\ViewBag::getAllVars());
+        $this->assertCount(0, \App\Storages\ViewBag::getAll());
     }
 }
