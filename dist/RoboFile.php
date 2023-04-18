@@ -660,6 +660,28 @@ class RoboFile extends Tasks
     }
 
     /**
+     * Converts an old BaseConfig to .env file format
+     */
+    public function dotenvFromConfig() {
+        $cfg = new CMSConfig();
+
+        $rc = new \ReflectionClass($cfg);
+
+        //get all the public properties.
+        $properties = $rc->getProperties(\ReflectionProperty::IS_PUBLIC);
+
+        foreach($properties as $p) {
+            //get the name and value of each of the public properties.
+
+            $attribute = $p->getName();
+            $value = ! is_bool($cfg->{$attribute}) ? (string)($cfg->{$attribute}) : (bool)$cfg->{$attribute};
+
+            $key = strtoupper($attribute);
+            $this->writeln("{$key}={$value}");
+        }
+    }
+
+    /**
      * Clean up directory
      *
      * @param string $directory

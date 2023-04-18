@@ -82,6 +82,7 @@ def main():
         "videos",
         ".php-cs-fixer.php",
         "phpunit_init.php",
+        ".env"
     ]
 
     # Prepare build

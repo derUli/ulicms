@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 declare(strict_types=1);
 
@@ -6,41 +7,41 @@ namespace App\Storages\Settings;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use Dotenv\Dotenv;
 use App\Exceptions\FileNotFoundException;
+use Dotenv\Dotenv;
 use Path;
 
 /**
  * Loads a .env configuration file
  */
-class DotEnvLoader {
-    
-    const DEFAULT_ENVIRONMENT = 'default';
-    
+class DotEnvLoader
+{
+    public const DEFAULT_ENVIRONMENT = 'default';
+
     private string $dir;
 
     private string $file;
 
     /**
      * Constructor
-     * 
+     *
      * @param string $dir Directory name
      * @param string $file Filename
      */
-    public function __construct(string $dir, string $file = '.env'){
+    public function __construct(string $dir, string $file = '.env') {
         $this->dir = $dir;
         $this->file = $file;
     }
 
     /**
-     * Initialize dotenv loader from environment  
-     * 
+     * Initialize dotenv loader from environment
+     *
      * @param string $dir Directory name
      * @param string $environment ENVIRONMENT name
-     * 
+     *
      * @return self
      **/
-    public static function fromEnvironment(string $dir, string $environment): self{
+    public static function fromEnvironment(string $dir, string $environment): self {
         $file = $environment === static::DEFAULT_ENVIRONMENT ? '.env' : ".env.{$environment}";
 
         static::checkExists($dir, $file);
@@ -48,13 +49,12 @@ class DotEnvLoader {
         return new self($dir, $file);
     }
 
-
     /**
      * Load and validate dotenv file
-     * 
+     *
      * @return void
      */
-    public function load(): void{
+    public function load(): void {
         static::checkExists($this->dir, $this->file);
 
         $dotenv = Dotenv::createImmutable($this->dir, $this->file);
@@ -64,19 +64,19 @@ class DotEnvLoader {
 
     /**
      * Validates the .env file
-     * 
+     *
      * @return void
      */
-    public function validation(DotEnv $dotenv): void {        
+    public function validation(DotEnv $dotenv): void {
         // App Environment
          $dotenv->required('APP_ENV')->notEmpty();
-         
+
          // Database stuff
          $dotenv->required('DB_SERVER')->notEmpty();
          $dotenv->required('DB_USER')->notEmpty();
          $dotenv->required('DB_PASSWORD');
-         $dotenv->required('DB_DATABASE')->notEmpty();;
-         $dotenv->required('DB_PREFIX')->notEmpty();;
+         $dotenv->required('DB_DATABASE')->notEmpty();
+         $dotenv->required('DB_PREFIX')->notEmpty();
 
          // Debugging stuff
          $dotenv->required('DEBUG')->isBoolean();
@@ -88,10 +88,10 @@ class DotEnvLoader {
     }
 
     protected static function checkExists(string $dir, string $file): void {
-        
-        $path = Path::resolve("$dir/$file");
-        
-        if(!is_file($file)){
+
+        $path = Path::resolve("{$dir}/{$file}");
+
+        if(! is_file($file)){
             throw new FileNotFoundException("Environment file {$file} not found");
         }
     }

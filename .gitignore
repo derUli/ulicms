@@ -37,3 +37,4 @@ modules.aus
 .phpunit.cache
 .DS_STORE
 *.bak
+.env
