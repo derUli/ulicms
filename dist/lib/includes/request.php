@@ -24,7 +24,8 @@ function _check_form_timestamp(): bool
 /**
  * Time trap for trapping spam bots:
  * https://www.stefan.lu/blog/time-trap-anti-spam-technique/
- * @return bool
+ * 
+ * @return void
  */
 function check_form_timestamp(): void
 {
@@ -35,7 +36,7 @@ function check_form_timestamp(): void
     if (! _check_form_timestamp()) {
         Settings::set(
             'contact_form_refused_spam_mails',
-            Settins::get('contact_form_refused_spam_mails') + 1
+            Settings::get('contact_form_refused_spam_mails') + 1
         );
         HTMLResult('Spam detected based on timestamp.', 400);
     }
