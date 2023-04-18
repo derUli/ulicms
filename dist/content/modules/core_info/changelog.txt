@@ -1,5 +1,8 @@
 ===== Neues in UliCMS 2023.3 =====
 
+Fehlerkorrekturen:
+* Warnings wenn man update.php von der Kommandozeile aufruft korrigiert
+
 Entfernte Features:
 * Veraltete HTTP Security Header entfernt (X-XSS-Protection, Expect-CT, Referrer-Policy)
 

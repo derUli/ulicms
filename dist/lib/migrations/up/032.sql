@@ -4,5 +4,5 @@ DELETE FROM `{prefix}settings` where `name` in (
     'date_format',
     'meta_keywords',
     'referrer_policy',
-    'x_xss_protection',
+    'x_xss_protection'
 );
