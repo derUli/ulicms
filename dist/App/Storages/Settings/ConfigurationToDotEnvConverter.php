@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 declare(strict_types=1);
 
 namespace App\Storages\Settings;
@@ -8,18 +9,40 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use CMSConfig;
 
 /**
- * Loads a .env configuration file
+ * Converts old configuration files to dotenv
  */
 class ConfigurationToDotEnvConverter
 {
+    /**
+     * @var CMSConfig
+     */
     private CMSConfig $config;
 
-    public function __construct(CMSConfig $config){
+    /**
+     * Constructor
+     *
+     * @param CMSConfig $config
+     */
+    public function __construct(CMSConfig $config) {
         $this->config = $config;
     }
 
+    /**
+     * Call convertToString on typecast
+     *
+     * @return string
+     */
+    public function __toString(): string {
+        return $this->convertToString();
+    }
+
+    /**
+     * Converts the CMSConfig to a key value pair
+     *
+     * @return array<string, string|bool|int>
+     */
     public function convertToArray(): array {
-        
+
         $convertedProperties = [];
         $cfg = $this->config;
 
@@ -31,7 +54,7 @@ class ConfigurationToDotEnvConverter
         foreach($properties as $p) {
 
             $attribute = $p->getName();
-            $value = !is_bool($cfg->$attribute) ? (string)$cfg->$attribute : strbool($cfg->$attribute);
+            $value = ! is_bool($cfg->{$attribute}) ? (string)$cfg->{$attribute} : strbool($cfg->{$attribute});
             $key = strtoupper($attribute);
             $convertedProperties[$key] = $value;
         }
@@ -39,18 +62,20 @@ class ConfigurationToDotEnvConverter
         return $convertedProperties;
     }
 
+    /**
+     * Converts the CMSConfig to a .env style string
+     *
+     * @return string
+     */
     public function convertToString(): string {
         $output = '';
-        
+
         $attributes = $this->convertToArray();
 
         foreach($attributes as $key => $value){
             $output .= "{$key}={$value}" . PHP_EOL;
         }
-        return $output;
-    }
 
-    public function __toString(): string{
-        return $this->convertToString();
+        return $output;
     }
 }

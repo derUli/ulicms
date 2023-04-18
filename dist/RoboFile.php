@@ -10,13 +10,13 @@ use App\Helpers\DateTimeHelper;
 use App\Packages\PackageManager;
 use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
+use App\Storages\Settings\ConfigurationToDotEnvConverter;
 use App\Utils\CacheUtil;
 use App\Utils\File;
 use Nette\IOException;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Finder;
 use Robo\Tasks;
-use App\Storages\Settings\ConfigurationToDotEnvConverter;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -29,14 +29,6 @@ class RoboFile extends Tasks
     {
         if (! defined('CORE_COMPONENT')) {
             define('CORE_COMPONENT', 'robo');
-        }
-
-        $this->initUliCMS();
-
-        // If initialization failed, initialize at least ULICMS_ROOT
-        // to pass direct access preventions
-        if (! defined('ULICMS_ROOT')) {
-            define('ULICMS_ROOT', dirname(__FILE__));
         }
     }
 
@@ -53,6 +45,8 @@ class RoboFile extends Tasks
      */
     public function truncateHistory(): void
     {
+        $this->initUliCMS();
+
         Database::truncateTable('history');
     }
 
@@ -61,6 +55,7 @@ class RoboFile extends Tasks
      */
     public function truncateMails(): void
     {
+        $this->initUliCMS();
         Database::truncateTable('mails');
     }
 
@@ -69,6 +64,7 @@ class RoboFile extends Tasks
      */
     public function cacheClear(): void
     {
+        $this->initUliCMS();
         CacheUtil::clearCache();
     }
 
@@ -77,6 +73,8 @@ class RoboFile extends Tasks
      */
     public function settingsList(): void
     {
+        $this->initUliCMS();
+
         // show all settings
         $settings = Settings::getAll();
         foreach ($settings as $setting) {
@@ -90,6 +88,8 @@ class RoboFile extends Tasks
      */
     public function settingsGet($settingsName): void
     {
+        $this->initUliCMS();
+
         $value = Settings::get($settingsName) !== null ?
                 Settings::get($settingsName) : DefaultValues::NULL_VALUE;
         $this->writeln($value);
@@ -102,6 +102,8 @@ class RoboFile extends Tasks
      */
     public function settingsSet($settingsName, $value): void
     {
+        $this->initUliCMS();
+
         if (strtoupper($value) !== DefaultValues::NULL_VALUE) {
             Settings::set($settingsName, $value);
         } else {
@@ -114,6 +116,7 @@ class RoboFile extends Tasks
      */
     public function maintenanceOn()
     {
+        $this->initUliCMS();
         Settings::set('maintenance_mode', '1');
     }
 
@@ -122,6 +125,7 @@ class RoboFile extends Tasks
      */
     public function maintenanceOff()
     {
+        $this->initUliCMS();
         Settings::set('maintenance_mode', '0');
     }
 
@@ -130,6 +134,8 @@ class RoboFile extends Tasks
      */
     public function maintenanceStatus()
     {
+        $this->initUliCMS();
+
         $this->writeln(strbool(is_maintenance_mode()));
     }
 
@@ -139,6 +145,8 @@ class RoboFile extends Tasks
      */
     public function packageExamine(string $file)
     {
+        $this->initUliCMS();
+
         if (! is_file($file)) {
             $this->writeln('File ' . basename($file) . ' not found!');
             return;
@@ -154,6 +162,8 @@ class RoboFile extends Tasks
      */
     public function packagesList()
     {
+        $this->initUliCMS();
+
         $this->writeln('Modules:');
         $this->modulesList([]);
         $this->writeln('');
@@ -167,6 +177,8 @@ class RoboFile extends Tasks
      */
     public function packageInstall($file): void
     {
+        $this->initUliCMS();
+
         if (! is_file($file)) {
             $this->writeln("Can't open {$file}. File doesn't exists.");
             return;
@@ -202,6 +214,8 @@ class RoboFile extends Tasks
      */
     public function modulesList(array $modules)
     {
+        $this->initUliCMS();
+
         $modules = count($modules) ?
                 $this->replaceModulePlaceholders($modules) : getAllModules();
         if (count($modules) > 0) {
@@ -218,6 +232,8 @@ class RoboFile extends Tasks
      */
     public function modulesToggle(array $modules)
     {
+        $this->initUliCMS();
+
         $modules = $this->replaceModulePlaceholders($modules);
 
         foreach ($modules as $name) {
@@ -234,6 +250,8 @@ class RoboFile extends Tasks
      */
     public function modulesEnable(array $modules)
     {
+        $this->initUliCMS();
+
         $modules = $this->replaceModulePlaceholders($modules);
 
         foreach ($modules as $name) {
@@ -250,6 +268,8 @@ class RoboFile extends Tasks
      */
     public function modulesDisable(array $modules)
     {
+        $this->initUliCMS();
+
         $modules = $this->replaceModulePlaceholders($modules);
 
         $manager = new ModuleManager();
@@ -267,6 +287,8 @@ class RoboFile extends Tasks
      */
     public function modulesRemove(array $modules)
     {
+        $this->initUliCMS();
+
         foreach ($modules as $module) {
             if (uninstall_module($module, 'module')) {
                 $this->writeln("Package {$module} removed.");
@@ -282,6 +304,8 @@ class RoboFile extends Tasks
      */
     public function modulesGetPackageVersions(array $modules)
     {
+        $this->initUliCMS();
+
         $modules = $this->replaceModulePlaceholders($modules);
 
         foreach ($modules as $module) {
@@ -301,6 +325,8 @@ class RoboFile extends Tasks
      */
     public function themesList()
     {
+        $this->initUliCMS();
+
         $theme = getAllThemes();
         if (count($theme) > 0) {
             $themesCount = count($theme);
@@ -321,6 +347,8 @@ class RoboFile extends Tasks
      */
     public function themesRemove(array $themes)
     {
+        $this->initUliCMS();
+
         foreach ($themes as $theme) {
             if (uninstall_module($theme, 'theme')) {
                 $this->writeln("Package {$theme} removed.");
@@ -341,6 +369,8 @@ class RoboFile extends Tasks
         string $directory,
         ?string $stop = null
     ): void {
+        $this->initUliCMS();
+
         $folder = Path::resolve($directory . '/up');
 
         $migrator = new DBMigrator($component, $folder);
@@ -365,6 +395,8 @@ class RoboFile extends Tasks
         string $directory,
         ?string $stop = null
     ): void {
+        $this->initUliCMS();
+
         $folder = Path::resolve($directory . '/down');
 
         $migrator = new DBMigrator($component, $folder);
@@ -384,6 +416,8 @@ class RoboFile extends Tasks
      */
     public function dbmigratorReset(?string $component = null): void
     {
+        $this->initUliCMS();
+
         Database::setEchoQueries(true);
 
         $migrator = new DBMigrator($component ?: '[all]', getcwd());
@@ -402,6 +436,8 @@ class RoboFile extends Tasks
      */
     public function dbmigratorList(?string $component = null): void
     {
+        $this->initUliCMS();
+
         $where = $component ? "component='" .
                 Database::escapeValue($component) . "'" : '1=1';
         $result = Database::query('Select component, name, date from {prefix}dbtrack '
@@ -416,6 +452,8 @@ class RoboFile extends Tasks
      */
     public function modulesSync(): void
     {
+        $this->initUliCMS();
+
         $modules = new ModuleManager();
         $modules->sync();
     }
@@ -450,6 +488,8 @@ class RoboFile extends Tasks
      */
     public function dbCreate()
     {
+        $this->initUliCMS();
+
         Database::setEchoQueries(true);
         $cfg = new CMSConfig();
         Database::createSchema($cfg->db_database);
@@ -461,6 +501,8 @@ class RoboFile extends Tasks
      */
     public function dbMigrate()
     {
+        $this->initUliCMS();
+
         Database::setEchoQueries(true);
 
         $cfg = new CMSConfig();
@@ -478,6 +520,8 @@ class RoboFile extends Tasks
      */
     public function dbDrop()
     {
+        $this->initUliCMS();
+
         $cfg = new CMSConfig();
         Database::setEchoQueries(true);
         if (Database::isConnected()) {
@@ -490,6 +534,8 @@ class RoboFile extends Tasks
      */
     public function dbReset()
     {
+        $this->initUliCMS();
+
         Database::setEchoQueries(true);
 
         $this->dbDrop();
@@ -502,6 +548,8 @@ class RoboFile extends Tasks
      */
     public function cron()
     {
+        $this->initUliCMS();
+
         do_event('before_cron');
         require 'lib/cron.php';
         do_event('after_cron');
@@ -522,6 +570,7 @@ class RoboFile extends Tasks
      * Prepare build
      */
     public function buildPrepare() {
+        $this->initUliCMS();
         $this->buildCopyChangelog();
         $this->buildPhpCsFixer();
         $this->buildLicenses();
@@ -538,6 +587,7 @@ class RoboFile extends Tasks
      * Copy changelog to core_info module
      */
     public function buildCopyChangelog() {
+        $this->initUliCMS();
         FileSystem::copy(ULICMS_ROOT . '/../doc/changelog.txt', ULICMS_CONTENT . '/modules/core_info/changelog.txt', true);
     }
 
@@ -664,12 +714,13 @@ class RoboFile extends Tasks
      * Converts an old BaseConfig to .env file format
      */
     public function dotenvFromConfig() {
+        $this->initUliCMS();
+
         $cfg = new CMSConfig();
         $converter = new ConfigurationToDotEnvConverter($cfg);
-        
-        $attributes =  $converter->convertToArray();
+        $attributes = $converter->convertToArray();
 
-        foreach($attributes as $key=>$value) {
+        foreach($attributes as $key => $value) {
             $this->writeln("{$key}={$value}");
         }
     }
@@ -682,6 +733,7 @@ class RoboFile extends Tasks
      * @return void
      */
     protected function cleanUpDirectory(string $directory = 'vendor'): void {
+
         $patterns = [
             'test',
             'tests',
@@ -746,6 +798,12 @@ class RoboFile extends Tasks
         try {
             $this->initCore();
         } catch (Exception $e) {
+            // If initialization failed, initialize at least ULICMS_ROOT
+            // to pass direct access preventions
+            if (! defined('ULICMS_ROOT')) {
+                define('ULICMS_ROOT', dirname(__FILE__));
+            }
+
             $this->showException($e);
         }
     }

@@ -2,7 +2,9 @@
 
 const CORE_COMPONENT = 'update';
 
-require_once dirname(__FILE__) . '/init.php';
+$rootDir = dirname(__FILE__);
+
+require_once $rootDir . '/init.php';
 
 use App\Backend\UliCMSVersion;
 use App\Database\DBMigrator;

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Exceptions\FileNotFoundException;
 use App\Storages\Settings\ConfigurationToDotEnvConverter;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
@@ -17,7 +16,7 @@ class ConfigurationToDotEnvConverterTest extends TestCase
         $converter = new ConfigurationToDotEnvConverter($config);
 
         $actual = $converter->convertToArray();
-        
+
         $this->assertEquals('myUser', $actual['DB_USER']);
         $this->assertEquals('true', $actual['DEBUG']);
         $this->assertEquals('false', $actual['EXCEPTION_LOGGING']);
@@ -29,7 +28,7 @@ class ConfigurationToDotEnvConverterTest extends TestCase
         $converter = new ConfigurationToDotEnvConverter($config);
 
         $actual = $converter->convertToString();
-        
+
         $this->assertMatchesTextSnapshot($actual);
     }
 
@@ -37,7 +36,7 @@ class ConfigurationToDotEnvConverterTest extends TestCase
         $config = $this->getCMSConfig();
 
         $converter = new ConfigurationToDotEnvConverter($config);
-        
+
         $this->assertMatchesTextSnapshot((string)$converter);
     }
 
@@ -45,15 +44,15 @@ class ConfigurationToDotEnvConverterTest extends TestCase
         $config = new CMSConfig();
 
         $rc = new \ReflectionClass($config);
-    
+
         //get all the public properties
         $properties = $rc->getProperties(\ReflectionProperty::IS_PUBLIC);
 
-        foreach($properties as $p) {   
+        foreach($properties as $p) {
             $attribute = $p->getName();
 
-            if(!is_bool($config->$attribute)){
-                $config->$attribute = null;
+            if(! is_bool($config->{$attribute})){
+                $config->{$attribute} = null;
             }
         }
 
