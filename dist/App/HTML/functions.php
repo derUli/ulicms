@@ -10,15 +10,26 @@ use App\Exceptions\FileNotFoundException;
 use App\Utils\File;
 use ModuleHelper;
 
-// use this to output a string as html
-// html specialchars are encoded, line breaks are replaced with
-// <br>
-function text($str)
+/**
+ * Replaces HTML entities and replaces linebreaks with <br>
+ * 
+ * 
+ * @param string $str
+ * @return string
+ */
+function text($str): string
 {
     return \nl2br(\_esc($str));
 }
 
-// generates a html img tag
+/**
+ * Generates an image HTML tag
+ * 
+ * @param string $file
+ * @param array<string, string> $htmlAttributes
+ * 
+ * @return string
+ */
 function imageTag(string $file, array $htmlAttributes = []): string
 {
     if (! isset($htmlAttributes['src'])) {
@@ -28,11 +39,23 @@ function imageTag(string $file, array $htmlAttributes = []): string
     return "<img {$attribHTML}>";
 }
 
-// generates a html link which looks like a button
+
+/**
+ * Generates a link that looks like a button
+ * 
+ * @param string $url
+ * @param string $text
+ * @param string $type
+ * @param bool $allowHtml
+ * @param ?string $target
+ * @param array<string, string> $htmlAttributes
+ * 
+ * @return string
+ */
 function buttonLink(
     string $url,
     string $text,
-    ?string $type = null,
+    string $type,
     bool $allowHtml = false,
     ?string $target = null,
     array $htmlAttributes = []
@@ -42,10 +65,21 @@ function buttonLink(
     } else {
         $htmlAttributes['class'] = "{$type} {$htmlAttributes['class']}";
     }
+
     return link($url, $text, $allowHtml, $target, $htmlAttributes);
 }
 
-// generates a html link
+/**
+ * Generates a link
+ * 
+ * @param string $url
+ * @param string $text
+ * @param bool $allowHtml
+ * @param ?string $target
+ * @param array<string, string> $htmlAttributes
+ * 
+ * @return string
+ */
 function link(
     string $url,
     string $text,
@@ -67,8 +101,14 @@ function link(
     return "<a {$attribHTML}>{$text}</a>";
 }
 
-// Use this method to output font-awesome icons
-// e.g. icon("fas fa-cog");
+/**
+ * Generates a font awesome icon
+ * 
+ * @param string $classes
+ * @param array<string, string> $htmlAttributes
+ * 
+ * @return string
+ */
 function icon(string $classes, array $htmlAttributes = []): string
 {
     if (! isset($htmlAttributes['class'])) {
@@ -81,7 +121,14 @@ function icon(string $classes, array $htmlAttributes = []): string
     return "<i {$attribHTML}></i>";
 }
 
-// embed an image as base64 data URI
+/**
+ * Generates an image tag with base64 uri encoding image
+ * 
+ * @param string $file
+ * @param array<string, string> $htmlAttributes
+ * 
+ * @return string
+ */
 function imageTagInline(string $file, array $htmlAttributes = []): string
 {
     $url = File::toDataUri($file);
@@ -95,6 +142,7 @@ function imageTagInline(string $file, array $htmlAttributes = []): string
 /**
  * Checks if a string contains HTML code
  * @param string $string
+ * 
  * @return bool
  */
 function stringContainsHtml(string $string): bool

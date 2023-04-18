@@ -73,6 +73,6 @@ class UliCMSVersion
      */
     public function getBuildDate(): string
     {
-        return DateTimeHelper::timestampToFormattedDateTime($this->getBuildTimestamp());
+        return DateTimeHelper::timestampToFormattedDateTime($this->getBuildTimestamp()) ?? '';
     }
 }

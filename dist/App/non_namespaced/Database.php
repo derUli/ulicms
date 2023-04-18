@@ -54,22 +54,16 @@ class Database
         $displayErrors = ini_get('display_errors');
         $errorReporting = error_reporting();
 
-        // Disable error reporting, to prevent errors showing in PHPUnit
-        error_reporting(0);
-        ini_set('display_errors', '0');
-
-        @$connected = mysqli_connect($server, $user, $password, '', $port, $socket);
-
-        // Enable error reporting
-        error_reporting($errorReporting);
-        ini_set('display_errors', $displayErrors);
+        $connected = @mysqli_connect($server, $user, $password, '', $port, $socket);
 
         self::$connection = $connected ?: null;
+
         if (! self::$connection) {
             return null;
         }
 
         self::query("SET NAMES 'utf8mb4'");
+
         // sql_mode auf leer setzen, da sich UliCMS nicht im
         // strict_mode betreiben lässt
         if ($db_strict_mode) {
