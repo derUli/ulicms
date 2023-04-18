@@ -23,7 +23,9 @@ class PackageManager
 {
     /**
      * Check package source for a newer version of a package
+     *
      * @param string $name
+     *
      * @return string|null
      */
     public function checkForNewerVersionOfPackage(string $name): ?string
@@ -35,9 +37,11 @@ class PackageManager
 
     /**
      * Check if a package is installed
+     *
      * @param string $package
      * @param string $type
      * @throws BadMethodCallException
+     *
      * @return bool
      */
     public function isInstalled(
@@ -59,8 +63,10 @@ class PackageManager
 
     /**
      * Install a package from file
+     *
      * @param string $file
      * @param bool $clear_cache
+     *
      * @return bool
      */
     public function installPackage(
@@ -104,7 +110,8 @@ class PackageManager
 
     /**
      * Get installed modules
-     * @return array
+     *
+     * @return array<string>
      */
     public function getInstalledModules(): array
     {
@@ -127,7 +134,8 @@ class PackageManager
 
     /**
      * Get installed themes
-     * @return array
+     *
+     * @return array<string>
      */
     public function getInstalledThemes(): array
     {
@@ -154,9 +162,11 @@ class PackageManager
 
     /**
      * Get installed packages
+     *
      * @param string $type
      * @throws BadMethodCallException
-     * @return array|null
+     *
+     * @return array<string>|null
      */
     public function getInstalledPackages(string $type = 'modules'): ?array
     {

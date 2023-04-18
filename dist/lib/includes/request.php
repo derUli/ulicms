@@ -24,7 +24,7 @@ function _check_form_timestamp(): bool
 /**
  * Time trap for trapping spam bots:
  * https://www.stefan.lu/blog/time-trap-anti-spam-technique/
- * 
+ *
  * @return void
  */
 function check_form_timestamp(): void

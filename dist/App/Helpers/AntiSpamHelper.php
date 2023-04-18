@@ -14,9 +14,15 @@ use Settings;
  */
 abstract class AntiSpamHelper extends Helper
 {
-    // checking if this Country is blocked by spamfilter
-    // blocking works by the domain extension of the client's
-    // hostname
+    /**
+     * Checking if this Country is blocked by spamfilter
+     * blocking works by the domain extension of the client's Hostname
+     *
+     * @param ?string $ip
+     * @param ?array<string> $country_blacklist
+     *
+     * @return bool
+     */
     public static function isCountryBlocked(
         ?string $ip = null,
         ?array $country_blacklist = null
@@ -36,7 +42,7 @@ abstract class AntiSpamHelper extends Helper
             return false;
         }
 
-        @$hostname = gethostbyaddr($ip);
+        @$hostname = gethostbyaddr((string)$ip);
 
         if (! $hostname || $hostname === $ip) {
             return false;
@@ -101,14 +107,16 @@ abstract class AntiSpamHelper extends Helper
 
     /**
      * Check if the string contains forbidden words
+     *
      * @param string|null $str
-     * @param array $words_blacklist
-     * @return type
+     * @param array<string> $words_blacklist
+     *
+     * @return ?string
      */
     public static function containsBadwords(
         ?string $str,
         ?array $words_blacklist = null
-    ) {
+    ): ?string {
         if (! $str) {
             return null;
         }
@@ -165,7 +173,8 @@ abstract class AntiSpamHelper extends Helper
     public static function checkMailDomain(string $email): bool
     {
         $domain = strstr($email, '@');
-        $domain = remove_prefix($domain, '@');
+        $domain = remove_prefix((string)$domain, '@');
+
         // In some cases getmxrr() would return a result for an invalid domain
         // if there is no additional dot at the end
         $domain = ! str_ends_with($domain, '.') ? $domain . '.' : $domain;

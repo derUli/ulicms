@@ -34,7 +34,8 @@ abstract class TestHelper extends Helper
         ob_start();
         try {
             $method();
-            return ob_get_clean();
+            $output = ob_get_clean();
+            return $output ? $output : '';
         } catch (Exception $e) {
             ob_get_clean();
             throw $e;

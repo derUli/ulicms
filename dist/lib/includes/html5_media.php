@@ -10,9 +10,10 @@ use App\Models\Media\Video;
 /**
  * Replaces audio tags with rendered html5 audio elements
  * @param string $txt
- * @return string|null
+ *
+ * @return string
  */
-function replaceAudioTags(string $txt): ?string
+function replaceAudioTags(string $txt): string
 {
     $audio_dir = 'content/audio/';
 

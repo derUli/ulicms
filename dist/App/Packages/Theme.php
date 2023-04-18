@@ -14,28 +14,31 @@ use function getThemeMeta;
  */
 class Theme
 {
-    private $name = null;
+    private string $name;
 
     /**
      * Constructor
-     * @param type $name
+     *
+     * @param string $name
      */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->name = $name;
     }
 
     /**
      * Get version number
-     * @return string|null
+     *
+     * @return string
      */
     public function getVersion(): ?string
     {
-        return getThemeMeta($this->name, 'version');
+        return getThemeMeta($this->name, 'version') ? getThemeMeta($this->name, 'version') : null;
     }
 
     /**
      * Get the path of the screenshot file
+     *
      * @return string|null
      */
     public function getScreenshotFile(): ?string
@@ -46,12 +49,14 @@ class Theme
             'screenshot.png',
             'screenshot.gif'
         ];
+
         foreach ($screenshotFiles as $file) {
             $fullPath = getTemplateDirPath($this->name) . $file;
             if (is_file($fullPath)) {
                 $screenshotFile = $fullPath;
             }
         }
+
         return $screenshotFile;
     }
 
