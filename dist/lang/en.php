@@ -470,8 +470,6 @@ add_translation('MOBILE_DEVICES', 'Mobile Devices');
 add_translation('DESKTOP_COMPUTERS', 'Desktop PCs');
 
 add_translation('DELETE_IPS_AFTER_48_HOURS', 'Delete IP addresses after 48 hours');
-add_translation('LOGIN_FROM_IP_NOT_ALLOWED', 'Access from your ip address is not allowed.<br/>
-Please ask your system administrator to add your ip address to whitelist.');
 
 // Open Graph
 add_translation('OPEN_GRAPH', 'Open Graph');

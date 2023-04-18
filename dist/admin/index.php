@@ -36,15 +36,7 @@ do_event('before_set_locale_by_language');
 setLocaleByLanguage();
 do_event('after_set_locale_by_language');
 
-// it's supported to configure an ip whitelist in the
-// configuration file
-// reject access to the backend if the client's ip is not whitelisted
-$cfg = new CMSConfig();
-if (isset($cfg->ip_whitelist) && is_array($cfg->ip_whitelist) && count($cfg->ip_whitelist) > 0 && ! in_array(get_ip(), $cfg->ip_whitelist)) {
-    ExceptionResult(get_translation('login_from_ip_not_allowed'));
-    exit();
-}
-
+// TODO: Move this to class
 // if the user is logged in then update the time of
 // last action on every request
 if (is_logged_in()) {

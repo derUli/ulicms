@@ -17,13 +17,14 @@ class Logger
 
     public function __construct(string $path, ?CMSConfig $cmsConfig = null)
     {
-        $cfg = $cmsConfig ?: new CMSConfig();
+        
         $environment = get_environment();
         $this->path = $path;
         // if the directory doesn't exist, create it.
         if (! is_dir($this->path)) {
             @mkdir($path, 0777, true);
         }
+        
         if (is_dir($this->path)) {
             $this->logger = new \Katzgrau\KLogger\Logger(
                 $this->path,

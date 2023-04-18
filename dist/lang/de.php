@@ -469,9 +469,6 @@ add_translation('DESKTOP_COMPUTERS', 'Arbeitsplatz Rechner');
 
 add_translation('DELETE_IPS_AFTER_48_HOURS', 'IP-Adressen nach 48 Stunden löschen');
 
-add_translation('LOGIN_FROM_IP_NOT_ALLOWED', 'Der Zugriff von Ihrer IP-Adresse ist nicht erlaubt.<br/>
-Bitte kontaktieren Sie Ihren Systemadministrator, dass er Ihre IP-Adresse zur Whitelist hinzufügt.');
-
 // Open Graph
 add_translation('OPEN_GRAPH', 'Open Graph');
 add_translation('TYPE', 'Typ');
