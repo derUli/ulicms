@@ -9,57 +9,26 @@ use App\Translations\JSTranslation;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();
 
-$ga = new PHPGangsta_GoogleAuthenticator();
-$ga_secret = Settings::get('ga_secret');
-$qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation('ULICMS_LOGIN_AT') . ' ' . get_domain(), $ga_secret);
 
 if (! $permissionChecker->hasPermission('other')) {
     noPerms();
 } else {
-    $email_mode = Settings::get('email_mode');
-    $menus = get_all_menus();
-
     $max_failed_logins_items = Settings::get('max_failed_logins_items');
 
+    $email_mode = Settings::get('email_mode');
     $smtp_encryption = Settings::get('smtp_encryption');
-
     $smtp_no_verify_certificate = Settings::get('smtp_no_verify_certificate');
-
-    $smtp_host = Settings::get('smtp_host');
-    if (! $smtp_host) {
-        $smtp_host = '127.0.0.1';
-    }
-
-    $smtp_port = Settings::get('smtp_port');
-    if (! $smtp_port) {
-        $smtp_port = '25';
-    }
-
+    $smtp_host = Settings::get('smtp_host') ?? '127.0.0.1';
+    $smtp_port = Settings::get('smtp_port') ?? '25';
     $smtp_user = Settings::get('smtp_user');
-    if (! $smtp_user) {
-        $smtp_user = null;
-    }
     $smtp_password = Settings::get('smtp_password');
-    if (! $smtp_password) {
-        $smtp_password = null;
-    }
-
     $smtp_auth = Settings::get('smtp_auth');
+
     $twofactor_authentication = Settings::get('twofactor_authentication');
 
-    $x_frame_options = Settings::get('x_frame_options');
-    $xFrameOptionsItems = [
-        new App\HTML\ListItem('', get_translation('allow')),
-        new App\HTML\ListItem('SAMEORIGIN', get_translation('sameorigin')),
-        new App\HTML\ListItem('DENY', get_translation('deny'))
-    ];
-
-    $x_xss_protection = Settings::get('x_xss_protection');
-    $xXssProtectionOptions = [
-        new App\HTML\ListItem('', get_translation('off')),
-        new App\HTML\ListItem('sanitize', get_translation('on')),
-        new App\HTML\ListItem('block', get_translation('on_block'))
-    ];
+    $ga = new PHPGangsta_GoogleAuthenticator();
+    $ga_secret = Settings::get('ga_secret');
+    $qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation('ULICMS_LOGIN_AT') . ' ' . get_domain(), $ga_secret);
     ?>
     <?php
     echo ModuleHelper::buildMethodCallForm('OtherSettingsController', 'save', [], 'post', [

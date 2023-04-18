@@ -1,5 +1,8 @@
 ===== Neues in UliCMS 2023.3 =====
 
+Entfernte Features:
+* Veraltete HTTP Security Header entfernt (X-XSS-Protection, Expect-CT, Referrer-Policy)
+
 API-Änderungen:
 * Controller in Namespace App\Controllers verschoben
 * MainClass in Namespace App\Controllers verschoben

@@ -39,9 +39,9 @@ class SecurityTest extends \PHPUnit\Framework\TestCase
                 continue;
             }
 
-            $handle = fopen($path, 'r');
-
             $expected = 'No direct script access allowed';
+
+            $handle = fopen($path, 'r');
 
             while (($actual = fgets($handle)) !== false) {
 
@@ -76,6 +76,5 @@ class SecurityTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue(is_readable($testDir));
         $this->assertTrue(is_readable($testFile));
-
     }
 }

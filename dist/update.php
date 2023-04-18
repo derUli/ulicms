@@ -31,5 +31,11 @@ Settings::set('maintenance_mode', '0');
 // The line below will be uncommented by the mk-upgrade-package.py deploy script
 // The script will delete itself after execution.
 // @unlink ("update.php");
+
+// If this script is called by CLI exit here
+if (is_cli()) {
+    exit;
+}
+
 // Redirect to Admin backend after running the update script
 Response::redirect('admin/');

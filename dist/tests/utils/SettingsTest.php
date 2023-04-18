@@ -1,5 +1,6 @@
 <?php
 
+
 class SettingsTest extends \PHPUnit\Framework\TestCase
 {
     protected function tearDown(): void

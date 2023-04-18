@@ -82,7 +82,9 @@ class RoboFile extends Tasks
             if (empty($setting->name)) {
                 continue;
             }
-            $this->writeln("{$setting->name}: {$setting->value}");
+
+            $value = $settings->value ?? DefaultValues::NULL_VALUE;
+            $this->writeln("{$setting->name}: {$value}");
         }
     }
 
