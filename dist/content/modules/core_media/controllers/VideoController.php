@@ -10,7 +10,6 @@ class VideoController extends \App\Controllers\Controller
     {
         $video_folder = ULICMS_ROOT . '/content/videos';
 
-        if (isset($_FILES)) {
             $mp4_file_value = '';
             // MP4
             if (! empty($_FILES ['mp4_file'] ['name'])) {
@@ -93,7 +92,7 @@ class VideoController extends \App\Controllers\Controller
                         . "{$width}, {$height}, {$timestamp}, {$category_id}, "
                         . "{$timestamp});");
             }
-        }
+
         Response::redirect(ModuleHelper::buildActionURL('videos'));
     }
 

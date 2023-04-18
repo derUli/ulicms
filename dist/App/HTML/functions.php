@@ -12,8 +12,8 @@ use ModuleHelper;
 
 /**
  * Replaces HTML entities and replaces linebreaks with <br>
- * 
- * 
+ *
+ *
  * @param string $str
  * @return string
  */
@@ -24,10 +24,10 @@ function text($str): string
 
 /**
  * Generates an image HTML tag
- * 
+ *
  * @param string $file
  * @param array<string, string> $htmlAttributes
- * 
+ *
  * @return string
  */
 function imageTag(string $file, array $htmlAttributes = []): string
@@ -42,14 +42,14 @@ function imageTag(string $file, array $htmlAttributes = []): string
 
 /**
  * Generates a link that looks like a button
- * 
+ *
  * @param string $url
  * @param string $text
  * @param string $type
  * @param bool $allowHtml
  * @param ?string $target
  * @param array<string, string> $htmlAttributes
- * 
+ *
  * @return string
  */
 function buttonLink(
@@ -71,13 +71,13 @@ function buttonLink(
 
 /**
  * Generates a link
- * 
+ *
  * @param string $url
  * @param string $text
  * @param bool $allowHtml
  * @param ?string $target
  * @param array<string, string> $htmlAttributes
- * 
+ *
  * @return string
  */
 function link(
@@ -103,10 +103,10 @@ function link(
 
 /**
  * Generates a font awesome icon
- * 
+ *
  * @param string $classes
  * @param array<string, string> $htmlAttributes
- * 
+ *
  * @return string
  */
 function icon(string $classes, array $htmlAttributes = []): string
@@ -123,10 +123,10 @@ function icon(string $classes, array $htmlAttributes = []): string
 
 /**
  * Generates an image tag with base64 uri encoding image
- * 
+ *
  * @param string $file
  * @param array<string, string> $htmlAttributes
- * 
+ *
  * @return string
  */
 function imageTagInline(string $file, array $htmlAttributes = []): string
@@ -142,7 +142,7 @@ function imageTagInline(string $file, array $htmlAttributes = []): string
 /**
  * Checks if a string contains HTML code
  * @param string $string
- * 
+ *
  * @return bool
  */
 function stringContainsHtml(string $string): bool
