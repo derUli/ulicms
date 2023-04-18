@@ -2,7 +2,6 @@
 
 Fehlerkorrekturen:
 * Warnings wenn man update.php von der Kommandozeile aufruft korrigiert
-* Robotask settings:list gibt nun Null-Werte als [NULL] aus
 
 Entfernte Features:
 * Veraltete HTTP Security Header entfernt (X-XSS-Protection, Expect-CT, Referrer-Policy)

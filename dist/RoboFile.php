@@ -79,12 +79,7 @@ class RoboFile extends Tasks
         // show all settings
         $settings = Settings::getAll();
         foreach ($settings as $setting) {
-            if (empty($setting->name)) {
-                continue;
-            }
-
-            $value = $settings->value ?? DefaultValues::NULL_VALUE;
-            $this->writeln("{$setting->name}: {$value}");
+            $this->writeln("{$setting->name}: {$setting->value}");
         }
     }
 
