@@ -16,6 +16,7 @@ use Nette\IOException;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Finder;
 use Robo\Tasks;
+use App\Storages\Settings\ConfigurationToDotEnvConverter;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -664,19 +665,11 @@ class RoboFile extends Tasks
      */
     public function dotenvFromConfig() {
         $cfg = new CMSConfig();
+        $converter = new ConfigurationToDotEnvConverter($cfg);
+        
+        $attributes =  $converter->convertToArray();
 
-        $rc = new \ReflectionClass($cfg);
-
-        //get all the public properties.
-        $properties = $rc->getProperties(\ReflectionProperty::IS_PUBLIC);
-
-        foreach($properties as $p) {
-            //get the name and value of each of the public properties.
-
-            $attribute = $p->getName();
-            $value = ! is_bool($cfg->{$attribute}) ? (string)($cfg->{$attribute}) : (bool)$cfg->{$attribute};
-
-            $key = strtoupper($attribute);
+        foreach($attributes as $key=>$value) {
             $this->writeln("{$key}={$value}");
         }
     }
