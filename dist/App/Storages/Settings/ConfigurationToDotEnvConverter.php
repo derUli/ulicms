@@ -40,7 +40,6 @@ class ConfigurationToDotEnvConverter
     }
 
     public function convertToString(): string {
-        
         $output = '';
         
         $attributes = $this->convertToArray();

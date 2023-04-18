@@ -24,7 +24,7 @@ class RoboTest extends RoboTestBase
         $cfg = new CMSConfig();
         Database::dropSchema($cfg->db_database);
 
-        putenv('ULICMS_ENVIRONMENT=' . get_environment());
+        putenv('APP_ENV=' . get_environment());
 
         $actual = $this->runRoboCommand(
             [

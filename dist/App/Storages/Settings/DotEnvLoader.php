@@ -56,7 +56,7 @@ class DotEnvLoader
     public function load(): void {
         static::checkExists($this->dir, $this->file);
 
-        $dotenv = Dotenv::createImmutable($this->dir, $this->file);
+        $dotenv = Dotenv::createMutable($this->dir, $this->file);
         $dotenv->load();
         $this->validation($dotenv);
     }
