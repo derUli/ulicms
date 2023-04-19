@@ -47,7 +47,7 @@ use Nette\Utils\FileSystem;
 $composerAutoloadFile = ULICMS_ROOT . '/vendor/autoload.php';
 
 if (is_file($composerAutoloadFile)) {
-    require $composerAutoloadFile;
+    require_once $composerAutoloadFile;
 } else {
     exit('Could not find autoloader. Run \'composer install\'.\n');
 }
