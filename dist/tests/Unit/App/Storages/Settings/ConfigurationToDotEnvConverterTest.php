@@ -56,7 +56,7 @@ class ConfigurationToDotEnvConverterTest extends TestCase
         $this->assertMatchesTextSnapshot((string)$converter);
     }
 
-    public function testWriteEnvFile() {
+    public function testWriteEnvFile(): void {
         $config = $this->getCMSConfig();
         $converter = new ConfigurationToDotEnvConverter($config);
         $targetEnv = 'foobar';
@@ -68,7 +68,7 @@ class ConfigurationToDotEnvConverterTest extends TestCase
         $this->assertMatchesFileSnapshot($this->envFile);
     }
 
-    public function testWriteEnvFileOverwrite() {
+    public function testWriteEnvFileOverwrite(): void {
 
         $config = $this->getCMSConfig();
         $converter = new ConfigurationToDotEnvConverter($config);

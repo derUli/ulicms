@@ -55,7 +55,7 @@ class ConfigurationToDotEnvConverter
         foreach($properties as $p) {
             $attribute = $p->getName();
             $value = $cfg->{$attribute};
-            
+
             // Handle values
             if(is_array($value)){
                 $value = implode('; ', $value);
@@ -82,7 +82,7 @@ class ConfigurationToDotEnvConverter
 
         foreach($attributes as $key => $value){
             $output .= "{$key}={$value}" . PHP_EOL;
-            
+
         }
 
         return $output;
