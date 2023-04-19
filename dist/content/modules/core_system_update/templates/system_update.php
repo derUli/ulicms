@@ -2,7 +2,10 @@
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+use App\Security\Permissions\PermissionChecker;
+
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('update_system')) {
     if (is_file(Path::resolve('ULICMS_ROOT/update.php'))) {
         ?>
