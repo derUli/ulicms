@@ -1,8 +1,11 @@
 <?php
 
+use App\Security\Permissions\PermissionChecker;
+
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission($_GET['action'])) {
     ?>
     <?php echo Template::executeModuleTemplate('core_media', 'icons.php'); ?>
