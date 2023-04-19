@@ -21,4 +21,9 @@ class CMSConfig extends BaseConfig
     public $default_menu = 'not_in_menu';
 
     public $default_content_type = 'page';
+
+    public $an_array = [
+        'foo',
+        'bar'
+    ];
 }

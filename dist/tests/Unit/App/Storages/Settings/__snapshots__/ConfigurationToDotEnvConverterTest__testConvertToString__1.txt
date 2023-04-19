@@ -7,3 +7,4 @@ DEBUG=true
 EXCEPTION_LOGGING=false
 DEFAULT_MENU=not_in_menu
 DEFAULT_CONTENT_TYPE=page
+AN_ARRAY=foo; bar

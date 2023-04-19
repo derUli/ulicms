@@ -35,6 +35,7 @@ class ConfigurationToDotEnvConverterTest extends TestCase
         $this->assertEquals('myUser', $actual['DB_USER']);
         $this->assertEquals('true', $actual['DEBUG']);
         $this->assertEquals('false', $actual['EXCEPTION_LOGGING']);
+        $this->assertEquals('foo; bar', $actual['AN_ARRAY']);
     }
 
     public function testConvertToString(): void {
