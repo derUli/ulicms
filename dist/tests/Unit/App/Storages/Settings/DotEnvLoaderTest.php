@@ -50,4 +50,12 @@ class DotEnvLoaderTest extends TestCase
         $loader = DotEnvLoader::fromEnvironment(ULICMS_ROOT, 'non_existing_environment');
         $loader->load();
     }
+
+    public function testEnvFilenameFromEnvironmentDefault(): void {
+        $this->assertEquals('.env', DotEnvLoader::envFilenameFromEnvironment(DotEnvLoader::DEFAULT_ENVIRONMENT));
+    }
+
+    public function testEnvFilenameFromEnvironmentOther(): void {
+        $this->assertEquals('.env.foobar', DotEnvLoader::envFilenameFromEnvironment('foobar'));
+    }
 }

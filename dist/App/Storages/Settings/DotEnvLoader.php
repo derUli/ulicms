@@ -36,16 +36,27 @@ class DotEnvLoader
      * Initialize dotenv loader from environment
      *
      * @param string $dir Directory name
-     * @param string $environment ENVIRONMENT name
+     * @param string $environment Environment name
      *
      * @return self
      **/
     public static function fromEnvironment(string $dir, string $environment): self {
-        $file = $environment === static::DEFAULT_ENVIRONMENT ? '.env' : ".env.{$environment}";
+        $file = static::envFilenameFromEnvironment($environment);
 
         static::checkExists($dir, $file);
 
         return new self($dir, $file);
+    }
+
+    /**
+     * Gets .env filename from environment name
+     *
+     * @param string $environment Environment name
+     *
+     * @return string
+     */
+    public static function envFilenameFromEnvironment(string $environment): string {
+        return $environment === static::DEFAULT_ENVIRONMENT ? '.env' : ".env.{$environment}";
     }
 
     /**
