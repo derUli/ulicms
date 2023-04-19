@@ -643,7 +643,7 @@ class RoboFile extends Tasks
     public function buildOptimizeResources(): void {
         $this->buildCleanupVendor();
         $this->buildCleanupNodeModules();
-        $this->buildOptimizeImages();
+        // $this->buildOptimizeImages();
         $this->buildOptimizeSvg();
         $this->buildMinifyCSS();
         $this->buildMinifyJSON();
