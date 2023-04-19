@@ -87,17 +87,6 @@ class ConfigurationToDotEnvConverterTest extends TestCase
 
         $rc = new \ReflectionClass($config);
 
-        //get all the public properties
-        $properties = $rc->getProperties(\ReflectionProperty::IS_PUBLIC);
-
-        foreach($properties as $p) {
-            $attribute = $p->getName();
-
-            if(! is_bool($config->{$attribute})){
-                $config->{$attribute} = null;
-            }
-        }
-
         $config->db_user = 'myUser';
         $config->debug = true;
         $config->exception_logging = false;

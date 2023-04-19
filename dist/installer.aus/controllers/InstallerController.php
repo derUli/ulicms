@@ -39,6 +39,7 @@ class InstallerController
             'admin_firstname',
             'install_demodata'
         ];
+
         foreach ($vars as $var) {
             if (! isset($_SESSION[$var])) {
                 $_SESSION[$var] = '';
@@ -281,11 +282,17 @@ class InstallerController
         $loader->load();
 
         $_ENV['APP_ENV'] = 'default';
+
+        // Database credentials
         $_ENV['DB_PREFIX'] = $_SESSION['mysql_prefix'];
         $_ENV['DB_SERVER'] = $_SESSION['mysql_host'];
         $_ENV['DB_USER'] = $_SESSION['mysql_user'];
         $_ENV['DB_PASSWORD'] = $_SESSION['mysql_password'];
         $_ENV['DB_DATABASE'] = $_SESSION['mysql_database'];
+
+        // Default file permissions
+        // Owner: rwx, Group: rwx, World: ---
+        $_ENV['UMASK'] = '0007';
 
         $dotEnvContent = '';
         foreach($_ENV as $key => $value) {
