@@ -7,6 +7,7 @@ namespace App\Storages\Settings;
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use CMSConfig;
+use Nette\Utils\FileSystem;
 
 /**
  * Converts old configuration files to dotenv
@@ -77,5 +78,32 @@ class ConfigurationToDotEnvConverter
         }
 
         return $output;
+    }
+
+    /**
+     * writes env file
+     *
+     * @param bool $overwrite Overwrite file if it already exists
+     * @param ?string $environment
+     *
+     * @return bool
+     */
+    public function writeEnvFile(bool $overwrite = false, ?string $environment = null): bool {
+        $environment = $environment ?? get_environment();
+
+        $dir = ULICMS_ROOT;
+        $envFile = DotEnvLoader::envFilenameFromEnvironment($environment);
+
+        $envFilePath = "{$dir}/{$envFile}";
+
+        if(is_file($envFilePath) && ! $overwrite){
+            return false;
+        }
+
+        $envFileContend = $this->convertToString();
+
+        FileSystem::write($envFile, $envFileContend);
+
+        return is_file($envFile);
     }
 }

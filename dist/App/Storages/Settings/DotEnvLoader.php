@@ -70,6 +70,16 @@ class DotEnvLoader
         $dotenv = Dotenv::createMutable($this->dir, $this->file);
         $dotenv->load();
         $this->validation($dotenv);
+
+        foreach($_ENV as $key => $value){
+
+            // Convert booleans since dotenv validation does no type castings
+            if($value === 'true' || $value === 'false'){
+                $value = $value === 'true';
+            }
+
+            $_ENV[$key] = $value;
+        }
     }
 
     /**

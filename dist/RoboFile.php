@@ -706,7 +706,6 @@ class RoboFile extends Tasks
      * Minify HTML files
      */
     public function buildMinifyHTML() {
-
         system('minifyall -e html');
     }
 
@@ -723,6 +722,8 @@ class RoboFile extends Tasks
         foreach($attributes as $key => $value) {
             $this->writeln("{$key}={$value}");
         }
+
+        $converter->writeEnvFile();
     }
 
     /**
