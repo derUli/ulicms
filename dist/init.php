@@ -75,7 +75,7 @@ if (PHP_SAPI !== 'cli') {
 
 // Set default umask for PHP created files
 if(isset($_ENV['UMASK'])){
-    umask((int)$_ENV['UMASK']);
+    umask((string)$_ENV['UMASK']);
 }
 
 if ($_ENV['DEBUG']) {

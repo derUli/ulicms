@@ -290,10 +290,6 @@ class InstallerController
         $_ENV['DB_PASSWORD'] = $_SESSION['mysql_password'];
         $_ENV['DB_DATABASE'] = $_SESSION['mysql_database'];
 
-        // Default file permissions
-        // Owner: rwx, Group: rwx, World: ---
-        $_ENV['UMASK'] = '0007';
-
         $dotEnvContent = '';
         foreach($_ENV as $key => $value) {
 
@@ -303,7 +299,6 @@ class InstallerController
 
             $dotEnvContent .= "{$key}={$value}" . PHP_EOL;
         }
-
 
         if (file_put_contents($targetConfig, $dotEnvContent)) {
             echo '<!--ok-->';

@@ -20,8 +20,6 @@ class RoboDatabaseTest extends RoboTestBase
         $actualDrop = $this->runRoboCommand(['db:drop']);
         $this->assertStringContainsString('DROP SCHEMA IF EXISTS `', $actualDrop);
 
-        new RoboFile();
-
         $actualCreate = $this->runRoboCommand(['db:create']);
         $this->assertStringContainsString('CREATE DATABASE', $actualCreate);
     }
