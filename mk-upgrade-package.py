@@ -53,7 +53,6 @@ def main():
         "*.py",
         "*.pyc",
         "Releases",
-        "cms-config.php",
         "content" ".gitignore",
         ".htaccess",
         "installer.aus",
@@ -90,7 +89,9 @@ def main():
         "videos",
         ".php-cs-fixer.php",
         "phpunit_init.php",
-        ".env"
+        ".env",
+        ".env.foobar",
+        ".env.test"
     ]
 
     # Prepare build

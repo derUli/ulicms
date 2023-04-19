@@ -23,6 +23,9 @@ define('ULICMS_TMP', ULICMS_CONTENT . '/tmp');
 define('ULICMS_LOG', ULICMS_CONTENT . '/log');
 define('ULICMS_GENERATED_PUBLIC', ULICMS_CONTENT . '/generated/public');
 define('ULICMS_GENERATED_PRIVATE', ULICMS_CONTENT . '/generated/private');
+/**
+ * @deprecated since UliCMS 2023.3
+ */
 define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
 define('ULICMS_CACHE_BASE', ULICMS_CONTENT . '/cache');
 define('ULICMS_CACHE', ULICMS_CACHE_BASE . '/legacy');
@@ -53,6 +56,15 @@ if (is_file($composerAutoloadFile)) {
 }
 
 Vars::set('http_headers', []);
+
+$oldConfigFile = ULICMS_ROOT . '/CMSConfig.php';
+$newConfigFile = DotEnvLoader::envFilenameFromEnvironment(get_environment());
+$installerFile = ULICMS_ROOT . '/installer/index.php';
+
+// If there is no new or old config redirect to installer
+if(! is_file($oldConfigFile) && ! is_file($newConfigFile) && is_file($installerFile)){
+    Response::redirect('installer');
+}
 
 $loader = DotEnvLoader::fromEnvironment(ULICMS_ROOT, get_environment());
 $loader->load();
@@ -145,8 +157,6 @@ $db_strict_mode = isset($_ENV['DB_STRICT_MODE']) && $_ENV['DB_STRICT_MODE'];
 if (! $connection) {
     throw new ConnectionFailedException('Can\'t connect to Database.');
 }
-
-$path_to_installer = dirname(__FILE__) . '/installer/installer.php';
 
 $autoMigrate = isset($_ENV['DBMIGRATOR_AUTO_MIGRATE']) && $_ENV['DBMIGRATOR_AUTO_MIGRATE'];
 $autoMigrate = isset($_ENV['DBMIGRATOR_AUTO_MIGRATE']) && $_ENV['DBMIGRATOR_AUTO_MIGRATE'];

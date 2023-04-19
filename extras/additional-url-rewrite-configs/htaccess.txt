@@ -38,12 +38,6 @@
 	deny from all
 </files>
 
-# Deny access to cms-config.php file
-<files cms-config.php>
-	order allow,deny
-	deny from all
-</files>
-
 # Deny access to composer executable file
 <files composer.json>
 	order allow,deny

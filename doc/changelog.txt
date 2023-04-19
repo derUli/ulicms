@@ -1,5 +1,8 @@
 ===== Neues in UliCMS 2023.3 =====
 
+Neue Features:
+* Dotenv Konfiguration
+
 Fehlerkorrekturen:
 * Warnings wenn man update.php von der Kommandozeile aufruft korrigiert
 

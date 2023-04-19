@@ -81,6 +81,8 @@ class ConfigurationToDotEnvConverterTest extends TestCase
     }
 
    protected function getCMSConfig(): CMSConfig {
+
+        require_once ULICMS_ROOT . '/tests/fixtures/CMSConfig.php';
         $config = new CMSConfig();
 
         $rc = new \ReflectionClass($config);

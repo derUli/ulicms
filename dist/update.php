@@ -34,7 +34,7 @@ try {
         $fileContent = "APP_ENV={$appEnv}" . PHP_EOL . $fileContent;
         file_put_contents($newConfigFile, $fileContent);
 
-        // @unlink($oldConfigFile);
+        @unlink($oldConfigFile);
 
         // CLI: Tell the user to run update.php again
         if (is_cli()) {

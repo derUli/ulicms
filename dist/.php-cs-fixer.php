@@ -279,6 +279,5 @@ return $config->setFinder(
     PhpCsFixer\Finder::create()
     ->in(__DIR__)
         ->exclude(__DIR__ .'fm')
-        ->exclude(__DIR__ .'configurations')
         ->exclude(__DIR__ .'/vendor')
 );
