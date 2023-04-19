@@ -499,7 +499,7 @@ class RoboFile extends Tasks
         $this->initUliCMS();
 
         Database::setEchoQueries(true);
-        
+
         Database::createSchema($_ENV['DB_DATABASE']);
         Database::select($_ENV['DB_DATABASE']);
     }
@@ -512,7 +512,7 @@ class RoboFile extends Tasks
         $this->initUliCMS();
 
         Database::setEchoQueries(true);
-        
+
         $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? explode(';', $_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
         $additionalSql = array_map('trim', $additionalSql);
 

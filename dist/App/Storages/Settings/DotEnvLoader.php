@@ -8,7 +8,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Exceptions\FileNotFoundException;
 use Dotenv\Dotenv;
-use Path;
 
 /**
  * Loads a .env configuration file
@@ -42,6 +41,7 @@ class DotEnvLoader
      **/
     public static function fromEnvironment(string $dir, string $environment): self {
         $file = static::envFilenameFromEnvironment($environment);
+
 
         static::checkExists($dir, $file);
 
@@ -108,10 +108,9 @@ class DotEnvLoader
     }
 
     protected static function checkExists(string $dir, string $file): void {
+        $path = "{$dir}/{$file}";
 
-        $path = Path::resolve("{$dir}/{$file}");
-
-        if(! is_file($file)){
+        if(! is_file($path)){
             throw new FileNotFoundException("Environment file {$file} not found");
         }
     }

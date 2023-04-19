@@ -154,7 +154,7 @@ class Database
         if ($logger) {
             $logger->info($sql);
         }
-        
+
         if (self::$echoQueries) {
             echo $sql . "\n";
         }

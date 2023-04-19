@@ -71,7 +71,6 @@ def main():
         "run-tests.bat",
         "run-tests.xampp.mac.sh",
         ".pydevproject",
-        "CMSConfig.php",
         "log",
         "configurations",
         ".phpunit.result.cache",

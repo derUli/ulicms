@@ -32,14 +32,8 @@
 	AddOutputFilterByType DEFLATE text/xml
 </IfModule>
 
-# Deny access to CMSConfig.php file
-<files CMSConfig.php>
-	order allow,deny
-	deny from all
-</files>
-
-# Deny access to cms-config.php file
-<files cms-config.php>
+# Deny access to files starting with a dot
+<files .*>
 	order allow,deny
 	deny from all
 </files>

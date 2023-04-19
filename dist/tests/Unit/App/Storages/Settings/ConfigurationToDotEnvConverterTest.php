@@ -99,7 +99,7 @@ class ConfigurationToDotEnvConverterTest extends TestCase
         $config->db_user = 'myUser';
         $config->debug = true;
         $config->exception_logging = false;
-        $config->dbmigrator_drop_database_on_shutdown  = true;
+        $config->dbmigrator_drop_database_on_shutdown = true;
 
         return $config;
    }

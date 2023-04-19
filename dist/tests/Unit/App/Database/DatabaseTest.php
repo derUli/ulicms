@@ -525,7 +525,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(Database::createSchema($schema));
         $this->assertTrue(Database::select($schema));
 
-        
+
         $this->assertTrue(
             Database::select($_ENV['DB_DATABASE'])
         );
@@ -613,12 +613,12 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
 
     private function reconnect($db_strict_mode = null)
     {
-    
+
         $db_socket = isset($_ENV['DB_SOCKET']) ? (string)$_ENV['DB_SOCKET'] : ini_get('mysqli.default_socket');
         $db_port = (int)($_ENV['DB_PORT'] ?? ini_get('mysqli.default_port'));
 
         if ($db_strict_mode === null) {
-            $db_strict_mode =  isset($_ENV['DB_STRICT_MODE']) && $_ENV['DB_STRICT_MODE'];
+            $db_strict_mode = isset($_ENV['DB_STRICT_MODE']) && $_ENV['DB_STRICT_MODE'];
         }
 
         Database::connect($_ENV['DB_SERVER'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $db_port, $db_socket, $db_strict_mode);

@@ -36,10 +36,10 @@ use App\Models\Content\Types\DefaultContentTypes;
 use App\Registries\HelperRegistry;
 use App\Registries\LoggerRegistry;
 use App\Registries\ModelRegistry;
-use App\Utils\Logger;
 use App\Storages\Settings\DotEnvLoader;
+use App\Storages\Vars;
+use App\Utils\Logger;
 use Nette\Utils\FileSystem;
-use \App\Storages\Vars;
 
 // TODO: refactor Bootstrap to a new UliCMSBoostrap Class which is splitted into methods
 
@@ -61,6 +61,10 @@ if (PHP_SAPI !== 'cli') {
     set_exception_handler('exception_handler');
 }
 
+// Set default umask for PHP created files
+if(isset($_ENV['UMASK'])){
+    umask((int)$_ENV['UMASK']);
+}
 
 if ($_ENV['DEBUG']) {
     ini_set('display_errors', 1);

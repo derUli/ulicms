@@ -12,8 +12,6 @@ class SecurityTest extends \PHPUnit\Framework\TestCase
             'tests',
             'fm',
             'index.php',
-            'CMSConfigSample.php',
-            'CMSConfig.php',
             'phpunit_init.php',
             'init.php',
             'update.php'

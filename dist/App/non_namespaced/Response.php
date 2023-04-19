@@ -61,7 +61,7 @@ if (! defined('RESPONSIVE_FM')) {
             string $url,
             $safeHosts = null
         ): string {
-            
+
 
             if (is_array($safeHosts) && count($safeHosts) >= 1) {
                 $safeHosts = $safeHosts;

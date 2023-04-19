@@ -234,7 +234,7 @@ function getCombinedScriptHtml(): string
         foreach (\App\Storages\Vars::get('script_queue') as $script) {
             $html .= Script::fromFile($script);
         }
-        
+
         resetScriptQueue();
         return $html;
     }
@@ -269,7 +269,7 @@ function getCombinedStylesheetHTML(): ?string
     if (! \App\Storages\Vars::get('stylesheet_queue')) {
         return null;
     }
-    
+
     $noMinify = isset($_ENV['NO_MINIFY']) && $_ENV['NO_MINIFY'];
 
     if ($noMinify) {

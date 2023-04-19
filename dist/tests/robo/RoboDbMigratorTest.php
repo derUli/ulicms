@@ -33,7 +33,7 @@ class RoboDbMigratorTest extends RoboTestBase
     }
 
     public function testDbMigratorReset()
-    {        
+    {
         if (! $this->shouldDropDbOnShutdown()) {
             $this->markTestSkipped();
         }

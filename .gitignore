@@ -7,7 +7,6 @@ dist/content/log
 dist/content/tmp
 !dist/content/log/.htaccess
 cms-config.php
-CMSConfig.php
 dist/packages
 dist/cms-config.php
 *#
@@ -37,4 +36,5 @@ modules.aus
 .phpunit.cache
 .DS_STORE
 *.bak
-.env
+.env*
+!.env.example
