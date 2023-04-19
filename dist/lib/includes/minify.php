@@ -227,12 +227,14 @@ function combinedScriptHtml(): void
 
 function getCombinedScriptHtml(): string
 {
+    $noMinify = isset($_ENV['NO_MINIFY']) && $_ENV['NO_MINIFY'];
     $html = '';
-    $cfg = new CMSConfig();
-    if (isset($cfg->no_minify) && $cfg->no_minify) {
+
+    if ($noMinify) {
         foreach (\App\Storages\Vars::get('script_queue') as $script) {
             $html .= Script::fromFile($script);
         }
+        
         resetScriptQueue();
         return $html;
     }
@@ -264,13 +266,16 @@ function getCombinedStylesheetHTML(): ?string
 {
     $html = '';
 
-    $cfg = new CMSConfig();
     if (! \App\Storages\Vars::get('stylesheet_queue')) {
         return null;
     }
-    if (isset($cfg->no_minify) && ($cfg->no_minify)) {
+    
+    $noMinify = isset($_ENV['NO_MINIFY']) && $_ENV['NO_MINIFY'];
+
+    if ($noMinify) {
         foreach (\App\Storages\Vars::get('stylesheet_queue') as $stylesheet) {
             $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
+
             if ($type == 'css') {
                 $html .= Style::fromExternalFile($stylesheet);
             } elseif ($type == 'scss') {
@@ -279,6 +284,7 @@ function getCombinedStylesheetHTML(): ?string
                 );
             }
         }
+
         resetStylesheetQueue();
         return $html;
     }

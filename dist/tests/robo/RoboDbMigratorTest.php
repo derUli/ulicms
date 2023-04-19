@@ -33,8 +33,7 @@ class RoboDbMigratorTest extends RoboTestBase
     }
 
     public function testDbMigratorReset()
-    {
-        $config = new CMSConfig();
+    {        
         if (! $this->shouldDropDbOnShutdown()) {
             $this->markTestSkipped();
         }

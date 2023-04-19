@@ -41,6 +41,14 @@ class RoboFile extends Tasks
     }
 
     /**
+     * shows the current environment
+     */
+    public function environment(): void
+    {
+        $this->writeln(get_environment());
+    }
+
+    /**
      * truncates the history database table
      */
     public function truncateHistory(): void
@@ -491,9 +499,9 @@ class RoboFile extends Tasks
         $this->initUliCMS();
 
         Database::setEchoQueries(true);
-        $cfg = new CMSConfig();
-        Database::createSchema($cfg->db_database);
-        Database::select($cfg->db_database);
+        
+        Database::createSchema($_ENV['DB_DATABASE']);
+        Database::select($_ENV['DB_DATABASE']);
     }
 
     /**
@@ -504,13 +512,12 @@ class RoboFile extends Tasks
         $this->initUliCMS();
 
         Database::setEchoQueries(true);
-
-        $cfg = new CMSConfig();
-        $additionalSql = is_array($cfg->dbmigrator_initial_sql_files) ?
-                $cfg->dbmigrator_initial_sql_files : [];
+        
+        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? explode(';', $_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
+        $additionalSql = array_map('trim', $additionalSql);
 
         Database::setupSchemaAndSelect(
-            $cfg->db_database,
+            $_ENV['DB_DATABASE'],
             $additionalSql
         );
     }
@@ -522,10 +529,9 @@ class RoboFile extends Tasks
     {
         $this->initUliCMS();
 
-        $cfg = new CMSConfig();
         Database::setEchoQueries(true);
         if (Database::isConnected()) {
-            Database::dropSchema($cfg->db_database);
+            Database::dropSchema($_ENV['DB_DATABASE']);
         }
     }
 

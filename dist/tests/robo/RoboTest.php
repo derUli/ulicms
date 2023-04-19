@@ -21,8 +21,7 @@ class RoboTest extends RoboTestBase
             $this->markTestSkipped();
         }
 
-        $cfg = new CMSConfig();
-        Database::dropSchema($cfg->db_database);
+        Database::dropSchema($_ENV['DB_DATABASE']);
 
         putenv('APP_ENV=' . get_environment());
 
@@ -32,6 +31,7 @@ class RoboTest extends RoboTestBase
                 'tests/Unit/App/Backend/UliCMSVersionTest.php'
             ]
         );
+
         $this->assertStringContainsString(
             'OK (7 tests, 47 assertions)',
             $actual

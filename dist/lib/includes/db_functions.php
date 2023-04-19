@@ -37,8 +37,7 @@ function db_num_rows(mysqli_result $result): ?int
  */
 function tbname(string $name): string
 {
-    $config = new CMSConfig();
-    return $config->db_prefix . $name;
+    return $_ENV['DB_PREFIX'] . $name;
 }
 
 // Abstraktion für Escapen von Werten

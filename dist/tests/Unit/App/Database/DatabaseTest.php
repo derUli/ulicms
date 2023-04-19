@@ -13,8 +13,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         Settings::delete('foo');
         Settings::delete('foo2');
 
-        $configuration = new CMSConfig();
-        Database::select($configuration->db_database);
+        Database::select($_ENV['DB_DATABASE']);
     }
 
     public function testIsConnectedReturnsTrue()
@@ -47,8 +46,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
     public function testGetAllTables()
     {
         $tables = Database::getAllTables();
-        $cfg = new CMSConfig();
-        $prefix = $cfg->db_prefix;
+        $prefix = $_ENV['DB_PREFIX'];
         $this->assertGreaterThanOrEqual(20, count($tables));
 
         $this->assertContains("{$prefix}content", $tables);
@@ -155,8 +153,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
                         email VARCHAR(50),
                         reg_date TIMESTAMP)', true);
 
-        $cfg = new CMSConfig();
-        $prefix = $cfg->db_prefix;
+        $prefix = $_ENV['DB_PREFIX'];
 
         $this->assertContains("{$prefix}test_table", Database::getAllTables());
         Database::dropTable('test_table');
@@ -528,9 +525,9 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(Database::createSchema($schema));
         $this->assertTrue(Database::select($schema));
 
-        $configuration = new CMSConfig();
+        
         $this->assertTrue(
-            Database::select($configuration->db_database)
+            Database::select($_ENV['DB_DATABASE'])
         );
 
         $this->assertTrue(Database::dropSchema($schema));
@@ -571,13 +568,12 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
     {
         Database::close();
 
-        $config = new CMSConfig();
-        $db_socket = $config->db_socket ?? ini_get('mysqli.default_socket');
-        $db_port = $config->db_port ?? ini_get('mysqli.default_port');
 
-        $db_strict_mode = isset($config->db_strict_mode) && $config->db_strict_mode;
+        $db_socket = isset($_ENV['DB_SOCKET']) ? (string)$_ENV['DB_SOCKET'] : ini_get('mysqli.default_socket');
+        $db_port = (int)($_ENV['DB_PORT'] ?? ini_get('mysqli.default_port'));
+        $db_strict_mode = isset($_ENV['DB_STRICT_MODE']) && $_ENV['DB_STRICT_MODE'];
 
-        @$connect = Database::connect($config->db_server, $config->db_user, 'invalid_password', $db_port, $db_socket, $db_strict_mode);
+        @$connect = Database::connect($_ENV['DB_SERVER'], $_ENV['DB_USER'], 'invalid_password', $db_port, $db_socket, $db_strict_mode);
         $this->assertNull($connect);
 
         $this->reconnect();
@@ -617,17 +613,16 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
 
     private function reconnect($db_strict_mode = null)
     {
-        $config = new CMSConfig();
-        $db_socket = $config->db_socket ?? ini_get('mysqli.default_socket');
-
-        $db_port = $config->db_port ?? ini_get('mysqli.default_port');
+    
+        $db_socket = isset($_ENV['DB_SOCKET']) ? (string)$_ENV['DB_SOCKET'] : ini_get('mysqli.default_socket');
+        $db_port = (int)($_ENV['DB_PORT'] ?? ini_get('mysqli.default_port'));
 
         if ($db_strict_mode === null) {
-            $db_strict_mode = isset($config->db_strict_mode) && $config->db_strict_mode;
+            $db_strict_mode =  isset($_ENV['DB_STRICT_MODE']) && $_ENV['DB_STRICT_MODE'];
         }
 
-        Database::connect($config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket, $db_strict_mode);
+        Database::connect($_ENV['DB_SERVER'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $db_port, $db_socket, $db_strict_mode);
 
-        Database::select($config->db_database);
+        Database::select($_ENV['DB_DATABASE']);
     }
 }
