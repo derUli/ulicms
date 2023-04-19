@@ -4,14 +4,14 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Helpers\NumberFormatHelper;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
-
 $controller = ControllerRegistry::get('HomeController');
 $model = $controller->getModel();
+
+$installed_at = Settings::get('installed_at');
+
 ?>
 <table>
     <?php
-    $installed_at = Settings::get('installed_at');
 if ($installed_at) {
     $formatted = NumberFormatHelper::formatTime($installed_at);
     ?>
