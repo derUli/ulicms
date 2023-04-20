@@ -10,6 +10,7 @@ use App\Security\Permissions\ContentPermissionChecker;
 use ModuleHelper;
 use Template;
 use User;
+
 use function App\HTML\icon;
 
 use function App\HTML\Link;

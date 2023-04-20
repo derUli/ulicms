@@ -278,11 +278,13 @@ $config
     'mb_str_functions' => false,
     // Replace strpos() calls with str_starts_with() or str_contains() if possible.
     'modernize_strpos' => true,
+    // Putting blank lines between use statement groups.
+    'blank_line_between_import_groups' => true
     ]);
 
 return $config->setFinder(
     PhpCsFixer\Finder::create()
     ->in(__DIR__)
-        ->exclude(__DIR__ .'fm')
+        ->exclude(__DIR__ .'/admin/fm')
         ->exclude(__DIR__ .'/vendor')
 );

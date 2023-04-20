@@ -6,6 +6,7 @@ use App\Helpers\ImagineHelper;
 use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 use App\Utils\File;
+
 use function App\HTML\imageTag;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();

@@ -8,6 +8,7 @@ use App\Controllers\MainClass;
 use App\Services\Connectors\PackageSourceConnector;
 use Fetcher\Fetcher;
 use zz\Html\HTMLMinify;
+
 use function App\HTML\text;
 
 class PackageController extends MainClass
