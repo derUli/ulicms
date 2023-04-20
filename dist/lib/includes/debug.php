@@ -15,10 +15,7 @@ function exception_handler(Throwable $exception): void
 {
     defined('EXCEPTION_OCCURRED') || define('EXCEPTION_OCCURRED', true);
 
-    $cfg = class_exists('CMSConfig') ? new CMSConfig() : null;
-    $debug = isset($cfg->debug) ? (bool)$cfg->debug : true;
-
-    $message = $debug ?
+    $message = $_ENV['DEBUG'] ?
             $exception : 'An error occurred! See exception_log for details. 😞';
     $logger = LoggerRegistry::get('exception_log');
 

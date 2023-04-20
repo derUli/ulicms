@@ -49,7 +49,6 @@ def main():
         "*.py",
         "*.pyc",
         "Releases",
-        "cms-config.php",
         "update.php",
         ".gitignore",
         "cache",
@@ -62,7 +61,6 @@ def main():
         "run-tests.bat",
         "run-tests.xampp.mac.sh",
         ".pydevproject",
-        "CMSConfig.php",
         "log",
         "configurations",
         ".phpunit.result.cache",
@@ -82,7 +80,9 @@ def main():
         "videos",
         ".php-cs-fixer.php",
         "phpunit_init.php",
-        ".env"
+        ".env",
+        ".env.foobar",
+        ".env.test"
     ]
 
     # Prepare build

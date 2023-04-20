@@ -4,9 +4,10 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\DefaultValues;
 use App\HTML\Alert;
+use App\Security\Permissions\PermissionChecker;
 use App\Security\XSSProtection;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
 
 $controller = ControllerRegistry::get();
 $model = $controller->getModel();

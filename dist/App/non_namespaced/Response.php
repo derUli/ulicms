@@ -61,11 +61,13 @@ if (! defined('RESPONSIVE_FM')) {
             string $url,
             $safeHosts = null
         ): string {
-            $cfg = new CMSConfig();
+
+
             if (is_array($safeHosts) && count($safeHosts) >= 1) {
                 $safeHosts = $safeHosts;
-            } elseif (isset($cfg->safe_hosts) && is_array($cfg->safe_hosts)) {
-                $safeHosts = $cfg->safe_hosts;
+            } elseif (isset($_ENV['SAFE_HOSTS'])) {
+                $safeHosts = explode('; ', $_ENV['SAFE_HOSTS']);
+                $safeHosts = array_map('trim', $safeHosts);
             } else {
                 $safeHosts = [
                     get_http_host()

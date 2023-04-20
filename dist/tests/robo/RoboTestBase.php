@@ -18,20 +18,17 @@ class RoboTestBase extends \PHPUnit\Framework\TestCase
 
     protected function shouldDropDbOnShutdown(): bool
     {
-        $cfg = new CMSConfig();
-        return isset($cfg->dbmigrator_drop_database_on_shutdown) &&
-                $cfg->dbmigrator_drop_database_on_shutdown;
+        return isset($_ENV['DBMIGRATOR_DROP_DATABASE_ON_SHUTDOWN']) && $_ENV['DBMIGRATOR_DROP_DATABASE_ON_SHUTDOWN'];
     }
 
     protected function resetDb()
     {
-        $cfg = new CMSConfig();
-        $additionalSql = is_array($cfg->dbmigrator_initial_sql_files) ?
-                $cfg->dbmigrator_initial_sql_files : [];
+        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? explode(';', $_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
+        $additionalSql = array_map('trim', $additionalSql);
 
-        Database::dropSchema($cfg->db_database);
+        Database::dropSchema($_ENV['DB_DATABASE']);
         Database::setupSchemaAndSelect(
-            $cfg->db_database,
+            $_ENV['DB_DATABASE'],
             $additionalSql
         );
     }

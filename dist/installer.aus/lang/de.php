@@ -40,8 +40,8 @@ add_translation('MYSQL_PREFIX', 'MySQL Präfix');
 add_translation('INSTALL_DEMO_DATA', 'Installiere zusätzliche Demodaten');
 add_translation('INSTALL_X_OF_Y', 'Installiere Datei %x% von %y%');
 add_translation('BUILD_DATABASE', 'Datenbank aufbauen');
-add_translation('CREATE_CMS_CONFIG_PHP', 'Erstelle CMSConfig.php');
-add_translation('WRITE_CMS_CONFIG_FAILED', 'Speichern der CMSConfig.php fehlgeschlagen.<br/>' . 'Bitte erstellen Sie die Datei CMSConfig.php und fügen Sie den folgenden Code darin ein.');
+add_translation('CREATE_CMS_CONFIG_PHP', 'Erstelle .env');
+add_translation('WRITE_CMS_CONFIG_FAILED', 'Speichern der .env fehlgeschlagen.<br/>' . 'Bitte erstellen Sie die Datei .env und fügen Sie den folgenden Inhalt darin ein.');
 add_translation('LAST_STEP', 'Dies ist der letzte Schritt der Installation.<br/>'
         . 'Bitte löschen Sie den "installer" Ordner von ihrem Server.<br/>'
         . 'Danach können Sie sich in UliCMS einloggen.');
