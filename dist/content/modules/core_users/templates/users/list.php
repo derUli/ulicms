@@ -3,9 +3,9 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\HTML\Alert;
-use function App\HTML\imageTag;
-
 use App\Translations\JSTranslation;
+
+use function App\HTML\imageTag;
 
 $permissionChecker = new \App\Security\Permissions\ACL();
 if ($permissionChecker->hasPermission('users')) {

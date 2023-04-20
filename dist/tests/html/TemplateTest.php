@@ -2,10 +2,10 @@
 
 use App\Exceptions\FileNotFoundException;
 use App\Helpers\TestHelper;
-use function App\HTML\stringContainsHtml;
 use App\Translations\Translation;
-
 use App\Utils\File;
+
+use function App\HTML\stringContainsHtml;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase
 {

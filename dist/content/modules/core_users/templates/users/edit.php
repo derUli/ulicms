@@ -5,10 +5,10 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Constants\HtmlEditor;
 use App\Constants\RequestMethod;
 use App\Helpers\DateTimeHelper;
-use function App\HTML\imageTag;
 use App\HTML\Input;
-
 use App\Translations\JSTranslation;
+
+use function App\HTML\imageTag;
 
 $permissionChecker = new \App\Security\Permissions\ACL();
 if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermission('users_edit')) || ($_GET['id'] == $_SESSION['login_id'])) {

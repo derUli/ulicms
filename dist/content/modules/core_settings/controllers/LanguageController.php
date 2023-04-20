@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use function App\HTML\stringContainsHtml;
 use App\Models\Content\Language;
 use App\Utils\CacheUtil;
-
 use Rakit\Validation\Validator;
+
+use function App\HTML\stringContainsHtml;
 
 class LanguageController extends \App\Controllers\Controller
 {

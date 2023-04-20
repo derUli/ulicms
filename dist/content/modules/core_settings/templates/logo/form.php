@@ -3,9 +3,9 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Helpers\ImagineHelper;
-use function App\HTML\imageTag;
 use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
+use function App\HTML\imageTag;
 
 $controller = new LogoController();
 

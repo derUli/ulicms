@@ -59,7 +59,7 @@ $config
     // There should not be an empty `return` statement at the end of a function.
     'no_useless_return' => true,
     // Ordering `use` statements.
-    'ordered_imports' => true,
+    'ordered_imports' => ['imports_order' => ['class', 'function', 'const'], 'sort_algorithm' => 'alpha'],
     // Arrays should be formatted like function/method arguments, without leading or trailing single line space.
     'trim_array_spaces' => true,
     // There should not be space before or after object operators `->` and `?->`.
