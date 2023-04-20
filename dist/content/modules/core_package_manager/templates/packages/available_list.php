@@ -7,8 +7,10 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 // It should only do output
 // Implement a backend action which fetches the index of the package source
 use App\Services\Connectors\PackageSourceConnector;
+use App\Security\Permissions\PermissionChecker;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('install_packages')) {
     if (! Settings::get('pkg_src')) {
         ?>
