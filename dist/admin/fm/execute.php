@@ -60,7 +60,7 @@ function returnPaths($_path, $_name, $config)
     }
     if ($_name) {
         $name = fix_filename($_name, $config);
-        if (strpos($name, '../') !== false || strpos($name, '..\\') !== false) {
+        if (str_contains($name, '../') || str_contains($name, '..\\')) {
             response(trans('wrong name') . AddErrorLocation())->send();
             exit;
         }
@@ -196,7 +196,7 @@ if (isset($_GET['action'])) {
             }
 
             // check if user supplied extension
-            if (strpos($name, '.') === false) {
+            if (! str_contains($name, '.')) {
                 response(trans('No_Extension') . ' ' . sprintf(trans('Valid_Extensions'), implode(', ', $config['editable_text_file_exts'])) . AddErrorLocation())->send();
                 exit;
             }
@@ -352,7 +352,7 @@ if (isset($_GET['action'])) {
             }
 
             // user wants to paste folder to it's own sub folder.. baaaah.
-            if (is_dir($data['path']) && strpos($path, $data['path']) !== false) {
+            if (is_dir($data['path']) && str_contains($path, $data['path'])) {
                 response()->send();
                 exit;
             }

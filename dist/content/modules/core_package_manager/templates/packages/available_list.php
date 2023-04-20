@@ -6,8 +6,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 // This file should not contain any business logic.
 // It should only do output
 // Implement a backend action which fetches the index of the package source
-use App\Services\Connectors\PackageSourceConnector;
 use App\Security\Permissions\PermissionChecker;
+use App\Services\Connectors\PackageSourceConnector;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();
 

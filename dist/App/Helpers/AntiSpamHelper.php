@@ -135,7 +135,7 @@ abstract class AntiSpamHelper extends Helper
         $wordCount = count($words_blacklist);
         for ($i = 0; $i < $wordCount; $i++) {
             $word = strtolower($words_blacklist[$i]);
-            if (strpos(strtolower($str), $word) !== false) {
+            if (str_contains(strtolower($str), $word)) {
                 return $words_blacklist[$i];
             }
         }

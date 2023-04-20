@@ -19,7 +19,7 @@ function replaceAudioTags(string $txt): string
 
 
     // TODO: Use Regex
-    $contains = strpos($txt, '[audio id=') !== false;
+    $contains = str_contains($txt, '[audio id=')  ;
 
     // If there is no [audio=XXX] in page return
     if (! $contains) {
@@ -53,7 +53,7 @@ function replaceVideoTags(string $txt): string
     $video_dir = 'content/videos/';
 
     // TODO: Use Regex
-    $contains = strpos($txt, '[video id=') !== false;
+    $contains = str_contains($txt, '[video id=')  ;
 
     // If there is no [video=XXX] in page return
     if (! $contains) {

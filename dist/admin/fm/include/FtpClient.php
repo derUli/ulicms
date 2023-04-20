@@ -797,7 +797,7 @@ class FtpClient implements Countable
             }
 
             // if the key is not the path, behavior of ftp_rawlist() PHP function
-            if (is_int($key) || false === strpos($key, $item['name'])) {
+            if (is_int($key) || ! str_contains($key, $item['name'])) {
                 array_splice($chunks, 0, 8);
 
                 $key = $item['type'] . '#'

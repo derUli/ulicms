@@ -86,12 +86,12 @@ if (! function_exists('trans')) {
 
 function checkRelativePathPartial($path)
 {
-    return ! (strpos($path, '../') !== false
-        || strpos($path, './') !== false
-        || strpos($path, '/..') !== false
-        || strpos($path, '..\\') !== false
-        || strpos($path, '\\..') !== false
-        || strpos($path, '.\\') !== false
+    return ! (str_contains($path, '../')
+        || str_contains($path, './')
+        || str_contains($path, '/..')
+        || str_contains($path, '..\\')
+        || str_contains($path, '\\..')
+        || str_contains($path, '.\\')
         || $path === '..'
     );
 }
@@ -393,8 +393,8 @@ function create_img($imgfile, $imgthumb, $newwidth, $newheight = null, $option =
             $imgthumb = $temp;
         }
     }
-    if (file_exists($imgfile) || strpos($imgfile, 'http') === 0) {
-        if (strpos($imgfile, 'http') === 0 || image_check_memory_usage($imgfile, $newwidth, $newheight)) {
+    if (file_exists($imgfile) || str_starts_with($imgfile, 'http')) {
+        if (str_starts_with($imgfile, 'http') || image_check_memory_usage($imgfile, $newwidth, $newheight)) {
             require_once 'php_image_magician.php';
             try {
                 $magicianObj = new imageLib($imgfile);
@@ -701,7 +701,7 @@ function fix_filename($str, $config, $is_folder = false)
     // Empty or incorrectly transliterated filename.
     // Here is a point: a good file UNKNOWN_LANGUAGE.jpg could become .jpg in previous code.
     // So we add that default 'file' name to fix that issue.
-    if (! $config['empty_filename'] && strpos($str, '.') === 0 && $is_folder === false) {
+    if (! $config['empty_filename'] && str_starts_with($str, '.') && $is_folder === false) {
         $str = 'file' . $str;
     }
 
@@ -802,10 +802,10 @@ function image_check_memory_usage($img, $max_breedte, $max_hoogte)
         if (ini_get('memory_limit') > 0) {
             $mem = ini_get('memory_limit');
             $memory_limit = 0;
-            if (strpos($mem, 'M') !== false) {
+            if (str_contains($mem, 'M')) {
                 $memory_limit = abs((int)(str_replace(['M'], '', $mem) * 1024 * 1024));
             }
-            if (strpos($mem, 'G') !== false) {
+            if (str_contains($mem, 'G')) {
                 $memory_limit = abs((int)(str_replace(['G'], '', $mem) * 1024 * 1024 * 1024));
             }
 

@@ -272,11 +272,12 @@ $config
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
     // Write conditions in Yoda style (`true`), non-Yoda style (`['equal' => false, 'identical' => false, 'less_and_greater' => false]`) or ignore those conditions (`null`) based on configuration.
     'yoda_style' => false,
+    // Add leading \ before function invocation to speed up resolving.
     'native_function_invocation' => false,
     // Replace non multibyte-safe functions with corresponding mb function.
     'mb_str_functions' => false,
     // Replace strpos() calls with str_starts_with() or str_contains() if possible.
-    'modernize_strpos' => false,
+    'modernize_strpos' => true,
     ]);
 
 return $config->setFinder(
