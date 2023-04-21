@@ -76,7 +76,7 @@ function TextResult(string $data, int $status = 200): void
 function Result(string $data, int $status = 200, ?string $type = null): void
 {
     Response::sendStatusHeader($status);
-    $size = getStringLengthInBytes($data);
+    $size = strlen($data);
 
     if ($type) {
         send_header("Content-Type: {$type}");
@@ -108,7 +108,7 @@ function ExceptionResult(string $message, int $status = 500): void
     \App\Storages\ViewBag::set('exception', nl2br($message));
     $content = Template::executeDefaultOrOwnTemplate('exception.php');
 
-    $size = getStringLengthInBytes($content);
+    $size = strlen($content);
     if (! TestHelper::isRunningPHPUnit()) {
         send_header($_SERVER['SERVER_PROTOCOL'] . ' '
                 . Response::getStatusCodeByNumber((int)$status));

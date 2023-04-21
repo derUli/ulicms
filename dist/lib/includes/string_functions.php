@@ -145,12 +145,6 @@ function rand_string(int $length): string
     return Random::generate($length);
 }
 
-function getStringLengthInBytes(string $data): int
-{
-    return ini_get('mbstring.func_overload') ?
-            mb_strlen($data, '8bit') : strlen($data);
-}
-
 function splitAndTrim(string $str): array
 {
     return array_map('trim', explode(';', $str));

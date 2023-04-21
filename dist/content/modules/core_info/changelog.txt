@@ -34,6 +34,9 @@ API-Änderungen:
 * TextField in Namespace App\Models\Content\CustomFields verschoben
 * UrlField in Namespace App\Models\Content\CustomFields verschoben
 
+Entfernte API-Methoden:
+* getStringLengthInBytes()
+
 Entfernte Features:
 * Scroll To Top
 

@@ -156,11 +156,6 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         $this->assertNotEquals($password2, $password1);
     }
 
-            public function testGetStringLengthInBytes()
-            {
-                $this->assertEquals(39, getStringLengthInBytes('Das ist die Lösung für die Änderung.'));
-            }
-
     public function testSplitAndTrim()
     {
         $input = 'Max;
