@@ -10,6 +10,9 @@ Fehlerkorrekturen:
 Entfernte Features:
 * Veraltete HTTP Security Header entfernt (X-XSS-Protection, Expect-CT, Referrer-Policy)
 
+* Neue API-Methoden:
+* StringHelper::splitAndTrim()
+
 API-Änderungen:
 * Controller in Namespace App\Controllers verschoben
 * MainClass in Namespace App\Controllers verschoben
@@ -38,6 +41,7 @@ API-Änderungen:
 
 Entfernte API-Methoden:
 * getStringLengthInBytes()
+* splitAndTrim()
 
 Entfernte Features:
 * Scroll To Top
