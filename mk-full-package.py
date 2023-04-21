@@ -45,9 +45,6 @@ def main():
 
     ignore = [
        '*.py',
-        '*.pyc',
-        '*~',
-        '.DS_STORE',
         '.env',
         '.env.foobar',
         '.env.test'
@@ -56,13 +53,8 @@ def main():
         '.php-cs-fixer.cache',
         '.php-cs-fixer.php',
         '.php_cs.dist',
-        '.phpunit.cache',
         '.phpunit.result.cache',
-        '.project',
-        '.settings',
-        '.thumbs',
         'avatars',
-        'cache',
         'doc-src',
         'generated',
         'log',
@@ -70,7 +62,6 @@ def main():
         'report',
         'run-tests.sh',
         'tests',
-        'tmp',
         'update.php',
     ]
 

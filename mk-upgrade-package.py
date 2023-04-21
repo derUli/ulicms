@@ -49,9 +49,6 @@ def main():
 
     ignore = [
         '*.py',
-        '*.pyc',
-        '*~',
-        '.DS_STORE',
         '.env',
         '.env.foobar',
         '.env.test'
@@ -63,11 +60,7 @@ def main():
         '.php_cs.dist',
         '.phpunit.cache',
         '.phpunit.result.cache',
-        '.project',
-        '.settings',
-        '.thumbs',
         'avatars',
-        'cache',
         'content',
         '.gitignore',
         'contents.css',
@@ -81,8 +74,7 @@ def main():
         'report',
         'run-tests.sh',
         'templates',
-        'tests',
-        'tmp'
+        'tests'
     ]
 
     # Prepare build
