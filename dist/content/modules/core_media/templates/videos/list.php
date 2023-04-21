@@ -9,6 +9,7 @@ use App\Translations\JSTranslation;
 $permissionChecker = PermissionChecker::fromCurrentUser();
 
 $video_folder = ULICMS_ROOT . '/content/videos';
+
 if (! is_dir($video_folder)) {
     mkdir($video_folder);
 }

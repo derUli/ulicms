@@ -3,6 +3,7 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Backend\UliCMSVersion;
+use App\Storages\Settings\DotEnvLoader;
 
 // TODO: Make it work without this
 mysqli_report(MYSQLI_REPORT_OFF);
@@ -38,6 +39,7 @@ class InstallerController
             'admin_firstname',
             'install_demodata'
         ];
+
         foreach ($vars as $var) {
             if (! isset($_SESSION[$var])) {
                 $_SESSION[$var] = '';
@@ -273,49 +275,37 @@ class InstallerController
 
     public static function submitCreateConfig()
     {
-        $template_path = 'templates/CMSConfig.tpl';
-        $content = file_get_contents($template_path);
-        $content = str_replace(
-            '{prefix}',
-            $_SESSION['mysql_prefix'],
-            $content
-        );
-        $content = str_replace(
-            '{mysql_host}',
-            $_SESSION['mysql_host'],
-            $content
-        );
-        $content = str_replace(
-            '{mysql_user}',
-            $_SESSION['mysql_user'],
-            $content
-        );
-        $content = str_replace(
-            '{mysql_password}',
-            $_SESSION['mysql_password'],
-            $content
-        );
-        $content = str_replace(
-            '{mysql_database}',
-            $_SESSION['mysql_database'],
-            $content
-        );
 
-        copy(ULICMS_ROOT . '/lib/CMSConfigSample.php', ULICMS_ROOT . '/CMSConfig.php');
+        $targetConfig = ULICMS_ROOT . '/.env';
 
-        $defaultConfigFile = ULICMS_ROOT . '/content/configurations/default.php';
+        $loader = DotEnvLoader::fromEnvironment(ULICMS_ROOT, 'example');
+        $loader->load();
 
-        $configurationDir = dirname($defaultConfigFile);
-        if (! is_dir($configurationDir)) {
-            mkdir($configurationDir);
+        $_ENV['APP_ENV'] = 'default';
+
+        // Database credentials
+        $_ENV['DB_PREFIX'] = $_SESSION['mysql_prefix'];
+        $_ENV['DB_SERVER'] = $_SESSION['mysql_host'];
+        $_ENV['DB_USER'] = $_SESSION['mysql_user'];
+        $_ENV['DB_PASSWORD'] = $_SESSION['mysql_password'];
+        $_ENV['DB_DATABASE'] = $_SESSION['mysql_database'];
+
+        $dotEnvContent = '';
+        foreach($_ENV as $key => $value) {
+
+            if(is_bool($value)){
+                $value = strbool($value);
+            }
+
+            $dotEnvContent .= "{$key}={$value}" . PHP_EOL;
         }
 
-        if (file_put_contents($defaultConfigFile, $content)) {
+        if (file_put_contents($targetConfig, $dotEnvContent)) {
             echo '<!--ok-->';
         } else {
             echo '<!--failed-->' . TRANSLATION_WRITE_CMS_CONFIG_FAILED;
             echo '<p><textarea rows=10 class="form-control" readonly>' .
-            htmlspecialchars($content) . '</textarea></p>';
+            htmlspecialchars($dotEnvContent) . '</textarea></p>';
         }
     }
 

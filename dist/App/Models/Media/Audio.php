@@ -6,14 +6,14 @@ namespace App\Models\Media;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use function _esc;
 use App\Models\Content\Category;
 use App\Utils\File;
 use Database;
-use function get_translation;
-
 use Model;
 use Path;
+
+use function _esc;
+use function get_translation;
 
 // html5 format support of browser are different
 // UliCMS allows *.mp3 and *.ogg file uploads for audio

@@ -59,7 +59,7 @@ $config
     // There should not be an empty `return` statement at the end of a function.
     'no_useless_return' => true,
     // Ordering `use` statements.
-    'ordered_imports' => true,
+    'ordered_imports' => ['imports_order' => ['class', 'function', 'const'], 'sort_algorithm' => 'alpha'],
     // Arrays should be formatted like function/method arguments, without leading or trailing single line space.
     'trim_array_spaces' => true,
     // There should not be space before or after object operators `->` and `?->`.
@@ -272,13 +272,19 @@ $config
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
     // Write conditions in Yoda style (`true`), non-Yoda style (`['equal' => false, 'identical' => false, 'less_and_greater' => false]`) or ignore those conditions (`null`) based on configuration.
     'yoda_style' => false,
+    // Add leading \ before function invocation to speed up resolving.
     'native_function_invocation' => false,
+    // Replace non multibyte-safe functions with corresponding mb function.
+    'mb_str_functions' => false,
+    // Replace strpos() calls with str_starts_with() or str_contains() if possible.
+    'modernize_strpos' => true,
+    // Putting blank lines between use statement groups.
+    'blank_line_between_import_groups' => true
     ]);
 
 return $config->setFinder(
     PhpCsFixer\Finder::create()
     ->in(__DIR__)
-        ->exclude(__DIR__ .'fm')
-        ->exclude(__DIR__ .'configurations')
+        ->exclude(__DIR__ .'/admin/fm')
         ->exclude(__DIR__ .'/vendor')
 );

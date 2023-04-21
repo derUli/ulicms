@@ -59,7 +59,7 @@ if (checkRelativePath($subdir_path)) {
 }
 
 if ($subdir == '') {
-    if (! empty($_COOKIE['last_position']) && strpos($_COOKIE['last_position'], '.') === false) {
+    if (! empty($_COOKIE['last_position']) && ! str_contains($_COOKIE['last_position'], '.')) {
         $subdir = trim($_COOKIE['last_position']);
     }
 }
@@ -94,8 +94,8 @@ if (! isset($_SESSION['RF']['subfolder'])) {
 $rfm_subfolder = '';
 
 if (! empty($_SESSION['RF']['subfolder'])
-    && strpos($_SESSION['RF']['subfolder'], '/') !== 0
-    && strpos($_SESSION['RF']['subfolder'], '.') === false
+    && ! str_starts_with($_SESSION['RF']['subfolder'], '/')
+    && ! str_contains($_SESSION['RF']['subfolder'], '.')
 ) {
     $rfm_subfolder = $_SESSION['RF']['subfolder'];
 }

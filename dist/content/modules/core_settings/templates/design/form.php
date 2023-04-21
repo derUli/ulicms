@@ -50,12 +50,12 @@ if (! $permissionChecker->hasPermission('design')) {
         <table style="width: 100%;">
             <tr>
                 <td style="width: 300px;"><strong><?php translate('title_format'); ?> </strong></td>
-                <td><input type="text" name="title_format"
+                <td><input type="text" name="title_format" class="form-control"
                            value="<?php esc($title_format); ?>"></td>
             </tr>
             <tr>
                 <td><strong><?php translate('frontend_design'); ?> </strong></td>
-                <td><select name="theme" size="1"
+                <td><select name="theme" size="1" class="form-control"
                             data-preview-target-element="#theme-preview">
                                 <?php
          foreach ($allThemes as $th) {
@@ -89,7 +89,7 @@ if (! $permissionChecker->hasPermission('design')) {
                 <td><strong><?php translate('mobile_design'); ?> </strong></td>
                 <td>
                     <p>
-                        <select name="mobile_theme" size="1"
+                        <select name="mobile_theme" size="1"  class="form-control"
                                 data-preview-target-element="#theme-mobile-preview">
                             <option value=""
                             <?php
@@ -155,7 +155,7 @@ if (! $permissionChecker->hasPermission('design')) {
             </tr>
             <tr>
                 <td><strong><?php translate('font_family'); ?> </strong></td>
-                <td><select name="default_font" id="default_font" size=1>
+                <td><select name="default_font" id="default_font" size=1 class="form-control">
                         <?php
         $font_amount = count($fonts);
     $i = 1;
@@ -182,7 +182,7 @@ if (! $permissionChecker->hasPermission('design')) {
             <tr>
                 <td><strong><?php translate('font_size'); ?> </strong>
 
-                <td> <select name="font_size" id="font_size">
+                <td> <select name="font_size" id="font_size" class="form-control">
                         <?php
     foreach ($font_sizes as $size) {
         echo '<option value="' . $size . '"';
@@ -210,7 +210,7 @@ if (! $permissionChecker->hasPermission('design')) {
             </tr>
             <tr>
                 <td><strong><?php translate('font_color'); ?> </strong></td>
-                <td><input name="body_text_color"
+                <td><input name="body_text_color" id="body_text_color"
                            class="jscolor {
                                hash:true,caps:true
                            }"

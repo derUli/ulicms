@@ -1,10 +1,17 @@
 ===== Neues in UliCMS 2023.3 =====
 
+Neue Features:
+* Dotenv Konfiguration
+* Schriftart-Vorschau bei Änderung der Schriftgröße und der Textfarbe
+
 Fehlerkorrekturen:
 * Warnings wenn man update.php von der Kommandozeile aufruft korrigiert
 
 Entfernte Features:
 * Veraltete HTTP Security Header entfernt (X-XSS-Protection, Expect-CT, Referrer-Policy)
+
+* Neue API-Methoden:
+* StringHelper::splitAndTrim()
 
 API-Änderungen:
 * Controller in Namespace App\Controllers verschoben
@@ -30,6 +37,11 @@ API-Änderungen:
 * SelectField in Namespace App\Models\Content\CustomFields verschoben
 * TextField in Namespace App\Models\Content\CustomFields verschoben
 * UrlField in Namespace App\Models\Content\CustomFields verschoben
+* Methode sanitize() in sanitize_headers() umbenannt
+
+Entfernte API-Methoden:
+* getStringLengthInBytes()
+* splitAndTrim()
 
 Entfernte Features:
 * Scroll To Top

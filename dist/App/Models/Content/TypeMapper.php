@@ -10,9 +10,9 @@ namespace App\Models\Content;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use function getModuleMeta;
-
 use ModuleManager;
+
+use function getModuleMeta;
 
 // this class maps the values in the "type" column of the
 // "content" table to the equally model class names

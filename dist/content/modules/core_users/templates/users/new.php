@@ -5,6 +5,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Translations\JSTranslation;
 
 $permissionChecker = new \App\Security\Permissions\ACL();
+
 if ($permissionChecker->hasPermission('users') && $permissionChecker->hasPermission('users_create')) {
     $languages = getAvailableBackendLanguages();
     $default_language = getSystemLanguage();

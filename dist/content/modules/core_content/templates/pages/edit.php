@@ -7,7 +7,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\CoreContent\UIUtils;
 use App\Helpers\NumberFormatHelper;
-use function App\HTML\icon;
 use App\HTML\Input;
 use App\Models\Content\Categories;
 use App\Models\Content\Comment;
@@ -17,8 +16,9 @@ use App\Models\Content\Types\DefaultContentTypes;
 use App\Models\Content\VCS;
 use App\Security\Permissions\ContentPermissionChecker;
 use App\Security\Permissions\PermissionChecker;
-
 use App\Translations\JSTranslation;
+
+use function App\HTML\icon;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission('pages')) {

@@ -35,6 +35,7 @@ class ConfigurationToDotEnvConverterTest extends TestCase
         $this->assertEquals('myUser', $actual['DB_USER']);
         $this->assertEquals('true', $actual['DEBUG']);
         $this->assertEquals('false', $actual['EXCEPTION_LOGGING']);
+        $this->assertEquals('foo; bar', $actual['AN_ARRAY']);
     }
 
     public function testConvertToString(): void {
@@ -55,7 +56,7 @@ class ConfigurationToDotEnvConverterTest extends TestCase
         $this->assertMatchesTextSnapshot((string)$converter);
     }
 
-    public function testWriteEnvFile() {
+    public function testWriteEnvFile(): void {
         $config = $this->getCMSConfig();
         $converter = new ConfigurationToDotEnvConverter($config);
         $targetEnv = 'foobar';
@@ -67,7 +68,7 @@ class ConfigurationToDotEnvConverterTest extends TestCase
         $this->assertMatchesFileSnapshot($this->envFile);
     }
 
-    public function testWriteEnvFileOverwrite() {
+    public function testWriteEnvFileOverwrite(): void {
 
         $config = $this->getCMSConfig();
         $converter = new ConfigurationToDotEnvConverter($config);
@@ -81,25 +82,16 @@ class ConfigurationToDotEnvConverterTest extends TestCase
     }
 
    protected function getCMSConfig(): CMSConfig {
+
+        require_once ULICMS_ROOT . '/tests/fixtures/CMSConfig.php';
         $config = new CMSConfig();
 
         $rc = new \ReflectionClass($config);
 
-        //get all the public properties
-        $properties = $rc->getProperties(\ReflectionProperty::IS_PUBLIC);
-
-        foreach($properties as $p) {
-            $attribute = $p->getName();
-
-            if(! is_bool($config->{$attribute})){
-                $config->{$attribute} = null;
-            }
-        }
-
         $config->db_user = 'myUser';
         $config->debug = true;
         $config->exception_logging = false;
-        $config->dbmigrator_drop_database_on_shutdown  = true;
+        $config->dbmigrator_drop_database_on_shutdown = true;
 
         return $config;
    }

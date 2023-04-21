@@ -7,7 +7,6 @@ namespace App\Database;
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Exceptions\SqlException;
-use CMSConfig;
 use Database;
 use Exception;
 
@@ -68,8 +67,7 @@ class DBMigrator
             if (! $result || Database::getNumRows($result) == 0) {
                 $path = $this->folder . '/' . $file;
                 $sql = file_get_contents($path);
-                $cfg = new CMSConfig();
-                $sql = str_ireplace('{prefix}', $cfg->db_prefix, $sql);
+                $sql = str_ireplace('{prefix}', $_ENV['DB_PREFIX'], $sql);
 
                 $success = Database::multiQuery($sql, true);
 
@@ -115,8 +113,9 @@ class DBMigrator
                 if (Database::getNumRows($result) > 0) {
                     $path = $this->folder . '/' . $file;
                     $sql = file_get_contents($path);
-                    $cfg = new CMSConfig();
-                    $sql = str_ireplace('{prefix}', $cfg->db_prefix, $sql);
+
+                    $sql = str_ireplace('{prefix}', $_ENV['DB_PREFIX'], $sql);
+
                     $success = Database::multiQuery($sql, true);
                     while (mysqli_more_results(Database::getConnection())) {
                         mysqli_next_result(Database::getConnection());

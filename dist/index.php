@@ -6,6 +6,7 @@ require_once dirname(__FILE__) . '/init.php';
 
 use App\Helpers\DateTimeHelper;
 use App\Models\Content\Language;
+use App\Storages\Vars;
 use App\Translations\Translation;
 use App\Utils\CacheUtil;
 
@@ -182,26 +183,26 @@ $cache_control = get_cache_control();
 switch ($cache_control) {
     case 'auto':
     case 'force':
-        \App\Storages\Vars::setNoCache(false);
+       Vars::setNoCache(false);
         break;
     case 'no_cache':
-        \App\Storages\Vars::setNoCache(true);
+       Vars::setNoCache(true);
         break;
 }
 
 if ($hasModule) {
-    \App\Storages\Vars::setNoCache(false);
+   Vars::setNoCache(false);
 }
 
 // Kein Caching wenn man eingeloggt ist
 if (is_logged_in() && get_cache_control() === 'auto') {
-    \App\Storages\Vars::setNoCache(false);
+   Vars::setNoCache(true);
 }
 
 do_event('before_html');
 
 $cacheAdapter = null;
-if (CacheUtil::isCacheEnabled() && Request::isGet() && ! \App\Storages\Vars::getNoCache()) {
+if (CacheUtil::isCacheEnabled() && Request::isGet() && ! Vars::getNoCache()) {
     $cacheAdapter = CacheUtil::getAdapter();
 }
 
@@ -255,7 +256,6 @@ if ($text_position === 'before') {
 }
 
 do_event('after_content');
-
 do_event('before_edit_button');
 
 if (! (is_array($disable_functions) && in_array('edit_button', $disable_functions))) {

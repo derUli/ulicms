@@ -79,10 +79,10 @@ require 'inc/touch_icons.php';
       $styles[] = '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 $styles[] = '../node_modules/codemirror-minified/lib/codemirror.css';
 $styles[] = '../node_modules/vanilla-toast/vanilla-toast.css';
-$styles[] = 'css/modern.scss';
 $styles[] = '../node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css';
 $styles[] = '../node_modules/select2/dist/css/select2.min.css';
 $styles[] = '../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css';
+$styles[] = 'css/modern.scss';
 
 $styles = apply_filter($styles, 'admin_head_styles');
 

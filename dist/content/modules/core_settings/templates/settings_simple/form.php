@@ -45,12 +45,12 @@ if ($permissionChecker->hasPermission('settings_simple')) {
         </tr>
         <tr>
             <td><strong><?php translate('homepage_owner'); ?></strong></td>
-            <td><input type="text" name="homepage_owner"
+            <td><input type="text" name="homepage_owner" class="form-control"
                        value="<?php echo $settings['homepage_owner']; ?>"></td>
         </tr>
         <tr>
             <td><strong><?php translate('OWNER_MAILADRESS'); ?></strong></td>
-            <td><input type="email" name="email"
+            <td><input type="email" name="email" class="form-control"
                        value="<?php echo $settings['email']; ?>"></td>
         </tr>
         <tr>
@@ -108,7 +108,8 @@ if ($permissionChecker->hasPermission('settings_simple')) {
         </tr>
         <tr>
             <td><strong><?php translate('search_engines'); ?></strong></td>
-            <td style="width:50%"><select name="robots" size=1>
+            <td style="width:50%">
+            <select name="robots" size=1 class="form-control form2">
                     <?php
     if (Settings::get('robots') == 'noindex,nofollow') {
         ?>
@@ -156,6 +157,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
         </tr>
     </table>
     <input type="hidden" name="save_settings" value="save_settings">
+    
     <?php
     echo ModuleHelper::endForm();
 

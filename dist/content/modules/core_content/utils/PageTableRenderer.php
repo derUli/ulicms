@@ -10,13 +10,13 @@ use App\CoreContent\Partials\DeleteButtonRenderer;
 use App\CoreContent\Partials\EditButtonRenderer;
 use App\CoreContent\Partials\UnDeleteButtonRenderer;
 use App\CoreContent\Partials\ViewButtonRenderer;
-use function App\HTML\icon;
-use function App\HTML\link;
 use App\Models\Content\TypeMapper;
 use ContentFactory;
-
 use Database;
 use User;
+
+use function App\HTML\icon;
+use function App\HTML\link;
 
 class PageTableRenderer
 {

@@ -139,6 +139,19 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         );
     }
 
+    public function testSplitAndTrim()
+    {
+        $input = 'Max;
+        Muster;
+        max@muster.de;
+        Musterstadt';
+        $result = StringHelper::splitAndTrim($input);
+        $this->assertEquals('Max', $result[0]);
+        $this->assertEquals('Muster', $result[1]);
+        $this->assertEquals('max@muster.de', $result[2]);
+        $this->assertEquals('Musterstadt', $result[3]);
+    }
+
     private function getTestFilePath()
     {
         return Path::resolve('ULICMS_ROOT/tests/fixtures/lines.txt');

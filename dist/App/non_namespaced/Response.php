@@ -4,7 +4,14 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-if (! defined('RESPONSIVE_FM')) {
+// This file conflicts with PHP Responsive FM
+$url = $_SERVER['REQUEST_URI'] ?? '';
+$urlParts = explode('/' , $url);
+
+$isFm = in_array('fm', $urlParts);
+
+// Don't load this class for Responsive FM
+if (! $isFm) {
     class Response
     {
         public static function sendHttpStatusCodeResultIfAjax(
@@ -12,9 +19,11 @@ if (! defined('RESPONSIVE_FM')) {
             ?string $redirect = null,
             int $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
+
             if (Request::isAjaxRequest()) {
                 HTTPStatusCodeResult($status);
             }
+
             if ($redirect) {
                 self::redirect($redirect, $redirectStatus);
             }
@@ -61,11 +70,13 @@ if (! defined('RESPONSIVE_FM')) {
             string $url,
             $safeHosts = null
         ): string {
-            $cfg = new CMSConfig();
+
+
             if (is_array($safeHosts) && count($safeHosts) >= 1) {
                 $safeHosts = $safeHosts;
-            } elseif (isset($cfg->safe_hosts) && is_array($cfg->safe_hosts)) {
-                $safeHosts = $cfg->safe_hosts;
+            } elseif (isset($_ENV['SAFE_HOSTS'])) {
+                $safeHosts = explode('; ', $_ENV['SAFE_HOSTS']);
+                $safeHosts = array_map('trim', $safeHosts);
             } else {
                 $safeHosts = [
                     get_http_host()

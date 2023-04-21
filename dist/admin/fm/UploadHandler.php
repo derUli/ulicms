@@ -559,7 +559,7 @@ class UploadHandler
 
     protected function get_query_separator($url)
     {
-        return strpos($url, '?') === false ? '?' : '&';
+        return ! str_contains($url, '?') ? '?' : '&';
     }
 
     protected function get_download_url($file_name, $version = null, $direct = false)
@@ -816,7 +816,7 @@ class UploadHandler
         $content_range
     ) {
         // Add missing file extension for known image types:
-        if (strpos($name, '.') === false &&
+        if (! str_contains($name, '.') &&
                 preg_match('/^image\/(gif|jpe?g|png|webp)/', $type, $matches)) {
             $name .= '.' . $matches[1];
         }
@@ -1697,7 +1697,7 @@ class UploadHandler
     protected function send_content_type_header()
     {
         $this->header('Vary: Accept');
-        if (strpos($this->get_server_var('HTTP_ACCEPT'), 'application/json') !== false) {
+        if (str_contains($this->get_server_var('HTTP_ACCEPT'), 'application/json')) {
             $this->header('Content-type: application/json');
         } else {
             $this->header('Content-type: text/plain');

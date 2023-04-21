@@ -53,9 +53,16 @@ class ConfigurationToDotEnvConverter
         $properties = $rc->getProperties(\ReflectionProperty::IS_PUBLIC);
 
         foreach($properties as $p) {
-
             $attribute = $p->getName();
-            $value = ! is_bool($cfg->{$attribute}) ? (string)$cfg->{$attribute} : strbool($cfg->{$attribute});
+            $value = $cfg->{$attribute};
+
+            // Handle values
+            if(is_array($value)){
+                $value = implode('; ', $value);
+            } else {
+                $value = ! is_bool($value) ? (string)$value : strbool($value);
+            }
+
             $key = strtoupper($attribute);
             $convertedProperties[$key] = $value;
         }
@@ -75,6 +82,7 @@ class ConfigurationToDotEnvConverter
 
         foreach($attributes as $key => $value){
             $output .= "{$key}={$value}" . PHP_EOL;
+
         }
 
         return $output;

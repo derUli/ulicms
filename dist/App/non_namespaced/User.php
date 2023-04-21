@@ -798,7 +798,7 @@ class User extends Model
             mkdir($userAvatarDirectory, 0777, true);
         }
 
-        // If there is a display name (Firstname Lastname
+        // If there is a display name (Firstname Lastname)
         if (is_dir($userAvatarDirectory) && $this->getDisplayName()) {
             // Custom avatar
             $avatarImageFile1 = Path::Resolve("{$userAvatarDirectory}/user-" .

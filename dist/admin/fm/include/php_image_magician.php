@@ -324,7 +324,7 @@ class imageLib
         if (is_array($option) && fix_strtolower($option[0]) == 'crop') {
             $cropPos = $option[1];         // get the crop option
         } else {
-            if (strpos($option, '-') !== false) {
+            if (str_contains($option, '-')) {
                 // *** Or pass in a hyphen seperated option
                 $optionPiecesArray = explode('-', $option);
                 $cropPos = end($optionPiecesArray);
@@ -1970,7 +1970,7 @@ class imageLib
         // *** Crop this bad boy
         $crop = imagecreatetruecolor($newWidth, $newHeight);
         $this->keepTransparancy($optimalWidth, $optimalHeight, $crop);
-        imagecopyresampled($crop, $this->imageResized, 0, 0, $cropStartX, $cropStartY, $newWidth, $newHeight, $newWidth, $newHeight);
+        imagecopyresampled($crop, $this->imageResized, 0, 0, (int)$cropStartX, (int)$cropStartY, (int)$newWidth, (int)$newHeight, (int)$newWidth, (int)$newHeight);
 
         $this->imageResized = $crop;
 
@@ -2378,7 +2378,7 @@ class imageLib
                 throw new Exception('Crop resize option array is badly formatted.');
 
         } else {
-            if (strpos($option, 'crop') !== false) {
+            if (str_contains($option, 'crop')) {
                 return 'crop';
             }
         }

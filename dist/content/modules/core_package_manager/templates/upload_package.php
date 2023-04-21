@@ -3,12 +3,14 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Packages\PackageManager;
+use App\Security\Permissions\PermissionChecker;
+
+$permissionChecker = PermissionChecker::fromCurrentUser();
 
 // TODO: Refactor this
 // Move logic to controller
 // don't use so much nested if-statements
 
-$permissionChecker = new \App\Security\Permissions\ACL();
 if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();
 } else {

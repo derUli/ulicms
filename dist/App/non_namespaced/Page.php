@@ -3,6 +3,7 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Exceptions\DatasetNotFoundException;
+use App\Helpers\StringHelper;
 use App\Models\Content\Comment;
 use App\Models\Content\VCS;
 use App\Security\Permissions\PagePermissions;
@@ -443,7 +444,7 @@ class Page extends AbstractContent
                 'commentable_content_types'
             );
             if ($commentable_content_types) {
-                $commentable_content_types = splitAndTrim(
+                $commentable_content_types = StringHelper::splitAndTrim(
                     $commentable_content_types
                 );
 

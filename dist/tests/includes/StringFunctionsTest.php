@@ -22,7 +22,7 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, convertLineEndingsToLN($input));
     }
 
-    public function testSanitize()
+    public function testSanitizeHeaders()
     {
         $input = [
             "My\r\nWorld\r",
@@ -31,7 +31,7 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
             '%0dlorem ipsum %0d'
         ];
 
-        sanitize($input);
+        sanitize_headers($input);
         $this->assertCount(4, $input);
         $this->assertEquals('MyWorld', $input[0]);
         $this->assertEquals(' entfernedas', $input[1]);
@@ -154,23 +154,5 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         $this->assertEquals(15, strlen($password2));
         $this->assertEquals(12, strlen($password3));
         $this->assertNotEquals($password2, $password1);
-    }
-
-            public function testGetStringLengthInBytes()
-            {
-                $this->assertEquals(39, getStringLengthInBytes('Das ist die Lösung für die Änderung.'));
-            }
-
-    public function testSplitAndTrim()
-    {
-        $input = 'Max;
-        Muster;
-        max@muster.de;
-        Musterstadt';
-        $result = splitAndTrim($input);
-        $this->assertEquals('Max', $result[0]);
-        $this->assertEquals('Muster', $result[1]);
-        $this->assertEquals('max@muster.de', $result[2]);
-        $this->assertEquals('Musterstadt', $result[3]);
     }
 }

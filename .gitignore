@@ -6,10 +6,7 @@ dist/backup
 dist/content/log
 dist/content/tmp
 !dist/content/log/.htaccess
-cms-config.php
-CMSConfig.php
 dist/packages
-dist/cms-config.php
 *#
 ~$*
 *~
@@ -26,7 +23,6 @@ vendor/
 .thumbs
 nbproject
 node_modules
-dist/content/configurations/*
 dist/content/generated/*
 report
 modules.aus
@@ -37,4 +33,5 @@ modules.aus
 .phpunit.cache
 .DS_STORE
 *.bak
-.env
+.env*
+!.env.example

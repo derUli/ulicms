@@ -123,9 +123,8 @@ class Database
     // Abstraktion für Ausführen von SQL Strings
     public static function query(string $sql, bool $replacePrefix = false)
     {
-        $cfg = new CMSConfig();
         if ($replacePrefix) {
-            $sql = str_replace('{prefix}', $cfg->db_prefix, $sql);
+            $sql = str_replace('{prefix}', $_ENV['DB_PREFIX'], $sql);
         }
         $logger = LoggerRegistry::get('sql_log');
         if ($logger) {
@@ -146,14 +145,16 @@ class Database
         string $sql,
         bool $replacePrefix = false
     ) {
-        $cfg = new CMSConfig();
         if ($replacePrefix) {
-            $sql = str_replace('{prefix}', $cfg->db_prefix, $sql);
+            $sql = str_replace('{prefix}', $_ENV['DB_PREFIX'], $sql);
         }
+
         $logger = LoggerRegistry::get('sql_log');
+
         if ($logger) {
             $logger->info($sql);
         }
+
         if (self::$echoQueries) {
             echo $sql . "\n";
         }

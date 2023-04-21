@@ -9,19 +9,19 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Helpers\TestHelper;
 use ControllerRegistry;
 use DesignSettingsController;
-use function do_event;
-use function get_request_uri;
-use function getCurrentLanguage;
-use function is_crawler;
-use function is_mobile;
-use function is_tablet;
-
 use ModuleManager;
 use Path;
 use Phpfastcache\CacheManager;
 use Phpfastcache\Config\ConfigurationOption;
 use Phpfastcache\Helper\Psr16Adapter;
 use Settings;
+
+use function do_event;
+use function get_request_uri;
+use function getCurrentLanguage;
+use function is_crawler;
+use function is_mobile;
+use function is_tablet;
 use function strbool;
 use function sureRemoveDir;
 
@@ -95,7 +95,8 @@ abstract class CacheUtil
      */
     public static function clearPageCache(): void
     {
-        $adapter = self::getAdapter();
+        $adapter = self::getAdapter(true);
+
         if ($adapter) {
             $adapter->clear();
         }
@@ -108,11 +109,6 @@ abstract class CacheUtil
     public static function clearCache(): void
     {
         do_event('before_clear_cache');
-
-        // clear opcache if available
-        if (function_exists('opcache_reset')) {
-            opcache_reset();
-        }
 
         self::clearPageCache();
 

@@ -528,6 +528,18 @@ div#login-welcome-text {
     margin-top: 10px;
     margin-bottom: 20px;
     width:100%;
+
+        &.action-info {
+            .btn-info {
+                margin-top: 15px;
+                margin-bottom: 15px;
+
+                @media only screen and (max-width: 820px) {
+                    width: 100%;
+                    padding: 15px;
+                }
+            }
+    }
 }
 
 #page-list {
@@ -745,7 +757,9 @@ input[type="checkbox"] {
 
 @media only screen and (min-width: 375px) {
     .btn-group .btn {
+
         margin-right: 10px;
+
         &:last-child {
             margin-right: 0;
         }
@@ -1007,7 +1021,10 @@ iframe.fm {
 
 
 .changelog {
+
     line-height: 2;
+    word-break: break-word;
+
     h3{
         padding-top: 10px;
         &:not(:first-child) {

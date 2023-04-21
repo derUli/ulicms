@@ -10,7 +10,6 @@ use App\CoreContent\Models\ViewModels\DiffViewModel;
 use App\CoreContent\PageTableRenderer;
 use App\Exceptions\DatasetNotFoundException;
 use App\HTML\ListItem;
-use function App\HTML\stringContainsHtml;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
 use App\Models\Content\VCS;
@@ -21,8 +20,9 @@ use Jfcherng\Diff\Differ;
 use Jfcherng\Diff\DiffHelper;
 use Jfcherng\Diff\Renderer\RendererConstant;
 use Rakit\Validation\Validator;
-
 use zz\Html\HTMLMinify;
+
+use function App\HTML\stringContainsHtml;
 
 class PageController extends \App\Controllers\Controller
 {
