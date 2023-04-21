@@ -1308,7 +1308,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v10.7.1",
+            "version": "v10.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -1363,7 +1363,7 @@
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v10.7.1",
+            "version": "v10.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -1409,16 +1409,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v10.7.1",
+            "version": "v10.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "84f1da424ab9596a422ce118abd05667b0069624"
+                "reference": "df6cb22937345609dbd42ef9f9cc62bf9f20104f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/84f1da424ab9596a422ce118abd05667b0069624",
-                "reference": "84f1da424ab9596a422ce118abd05667b0069624",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/df6cb22937345609dbd42ef9f9cc62bf9f20104f",
+                "reference": "df6cb22937345609dbd42ef9f9cc62bf9f20104f",
                 "shasum": ""
             },
             "require": {
@@ -1453,11 +1453,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-02-14T15:00:37+00:00"
+            "time": "2023-04-17T16:01:53+00:00"
         },
         {
             "name": "illuminate/macroable",
-            "version": "v10.7.1",
+            "version": "v10.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -1503,16 +1503,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v10.7.1",
+            "version": "v10.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "ec027f7daeb75e14268f710a7ce071dfcedf22dd"
+                "reference": "22f859b0d9947cc00bae7a66d76e4b78e2c27893"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/ec027f7daeb75e14268f710a7ce071dfcedf22dd",
-                "reference": "ec027f7daeb75e14268f710a7ce071dfcedf22dd",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/22f859b0d9947cc00bae7a66d76e4b78e2c27893",
+                "reference": "22f859b0d9947cc00bae7a66d76e4b78e2c27893",
                 "shasum": ""
             },
             "require": {
@@ -1570,7 +1570,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-04-11T08:12:43+00:00"
+            "time": "2023-04-15T21:53:23+00:00"
         },
         {
             "name": "imagine/imagine",
@@ -2147,26 +2147,29 @@
         },
         {
             "name": "jfcherng/php-mb-string",
-            "version": "1.4.7",
+            "version": "1.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jfcherng/php-mb-string.git",
-                "reference": "08194ae9de7d22e4555d311e0e88c2492009035d"
+                "reference": "ef8926ff849863bfea234e99ee827947bedd86b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jfcherng/php-mb-string/zipball/08194ae9de7d22e4555d311e0e88c2492009035d",
-                "reference": "08194ae9de7d22e4555d311e0e88c2492009035d",
+                "url": "https://api.github.com/repos/jfcherng/php-mb-string/zipball/ef8926ff849863bfea234e99ee827947bedd86b0",
+                "reference": "ef8926ff849863bfea234e99ee827947bedd86b0",
                 "shasum": ""
             },
             "require": {
-                "ext-iconv": "*",
                 "php": ">=7.1.3"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.18",
                 "phan/phan": "^2 || ^3 || ^4",
                 "phpunit/phpunit": "^7.2 || ^8 || ^9"
+            },
+            "suggest": {
+                "ext-iconv": "Either \"ext-iconv\" or \"ext-mbstring\" is requried.",
+                "ext-mbstring": "Either \"ext-iconv\" or \"ext-mbstring\" is requried."
             },
             "type": "library",
             "autoload": {
@@ -2187,7 +2190,7 @@
             "description": "A high performance multibytes sting implementation for frequently reading/writing operations.",
             "support": {
                 "issues": "https://github.com/jfcherng/php-mb-string/issues",
-                "source": "https://github.com/jfcherng/php-mb-string/tree/1.4.7"
+                "source": "https://github.com/jfcherng/php-mb-string/tree/1.4.8"
             },
             "funding": [
                 {
@@ -2195,7 +2198,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2023-02-26T16:51:55+00:00"
+            "time": "2023-04-17T14:22:37+00:00"
         },
         {
             "name": "jfcherng/php-sequence-matcher",
@@ -6667,16 +6670,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.13",
+            "version": "1.10.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "f07bf8c6980b81bf9e49d44bd0caf2e737614a70"
+                "reference": "d232901b09e67538e5c86a724be841bea5768a7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f07bf8c6980b81bf9e49d44bd0caf2e737614a70",
-                "reference": "f07bf8c6980b81bf9e49d44bd0caf2e737614a70",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d232901b09e67538e5c86a724be841bea5768a7c",
+                "reference": "d232901b09e67538e5c86a724be841bea5768a7c",
                 "shasum": ""
             },
             "require": {
@@ -6725,7 +6728,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-12T19:29:52+00:00"
+            "time": "2023-04-19T13:47:27+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -8059,16 +8062,16 @@
         },
         {
             "name": "spatie/phpunit-snapshot-assertions",
-            "version": "5.0.1",
+            "version": "5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/phpunit-snapshot-assertions.git",
-                "reference": "fda3c42cd84f0b96d0e3e3c54987d5e4e8739d28"
+                "reference": "b1748c4b62750a2ea2e2df544d962806e0f8995e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/phpunit-snapshot-assertions/zipball/fda3c42cd84f0b96d0e3e3c54987d5e4e8739d28",
-                "reference": "fda3c42cd84f0b96d0e3e3c54987d5e4e8739d28",
+                "url": "https://api.github.com/repos/spatie/phpunit-snapshot-assertions/zipball/b1748c4b62750a2ea2e2df544d962806e0f8995e",
+                "reference": "b1748c4b62750a2ea2e2df544d962806e0f8995e",
                 "shasum": ""
             },
             "require": {
@@ -8117,7 +8120,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/phpunit-snapshot-assertions/issues",
-                "source": "https://github.com/spatie/phpunit-snapshot-assertions/tree/5.0.1"
+                "source": "https://github.com/spatie/phpunit-snapshot-assertions/tree/5.0.2"
             },
             "funding": [
                 {
@@ -8125,7 +8128,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2023-02-13T07:44:22+00:00"
+            "time": "2023-04-20T08:25:04+00:00"
         },
         {
             "name": "symfony/cache",
