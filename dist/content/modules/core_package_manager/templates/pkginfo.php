@@ -5,8 +5,10 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Helpers\DateTimeHelper;
 use App\Helpers\NumberFormatHelper;
 use App\Packages\SinPackageInstaller;
+use App\Security\Permissions\PermissionChecker;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();
 } else {
