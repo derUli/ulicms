@@ -7,8 +7,10 @@ use App\Exceptions\DatasetNotFoundException;
 use App\HTML\Alert;
 use App\Models\Content\Advertisement\Banner;
 use App\Models\Content\Categories;
+use App\Security\Permissions\PermissionChecker;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('banners')
         && $permissionChecker->hasPermission('banners_edit')) {
     $banner = Request::getVar('banner', 0, 'int');
