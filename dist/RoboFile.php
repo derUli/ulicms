@@ -611,6 +611,36 @@ class RoboFile extends Tasks
         $this->buildCopyChangelog();
         $this->buildPhpCsFixer();
         $this->buildLicenses();
+        $this->buildDeleteBullshit();
+    }
+
+    /**
+     * Delete bullshit files such as .DS_STORE, thumbs.db
+     */
+    public function buildDeleteBullshit(): void {
+        $filesToDelete = [];
+        foreach(Finder::find(
+            [
+                '.DS_STORE',
+                'thumbs.db',
+                '.thumbs',
+                'tmp',
+                'cache',
+                'generated',
+                '*.pyc'
+            ]
+            )->from('.') as $name => $file) {
+            $filesToDelete[] = $file->getRealPath();
+        }
+
+        foreach($filesToDelete as $file){
+            try{
+                FileSystem::delete($file);
+            }
+            catch(IOException $e){
+                $this->writeln('Errror ' . $path);
+            }
+        }
     }
 
     /**
