@@ -22,7 +22,7 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, convertLineEndingsToLN($input));
     }
 
-    public function testSanitize()
+    public function testSanitizeHeaders()
     {
         $input = [
             "My\r\nWorld\r",
@@ -31,7 +31,7 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
             '%0dlorem ipsum %0d'
         ];
 
-        sanitize($input);
+        sanitize_headers($input);
         $this->assertCount(4, $input);
         $this->assertEquals('MyWorld', $input[0]);
         $this->assertEquals(' entfernedas', $input[1]);

@@ -44,7 +44,8 @@ def main():
     source_dir = os.path.dirname(__file__)
 
     ignore = [
-       '*.py',
+        '.gitignore'
+        '*.py',
         '.env',
         '.env.foobar',
         '.env.test'

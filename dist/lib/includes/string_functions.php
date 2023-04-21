@@ -7,19 +7,18 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 use App\Helpers\StringHelper;
 use Nette\Utils\Random;
 
-if (! defined('RESPONSIVE_FM')) {
-    function sanitize(array &$array): void
-    {
-        foreach ($array as &$data) {
-            $data = str_ireplace([
-                "\r",
-                "\n",
-                '%0a',
-                '%0d'
-            ], '', stripslashes($data));
-        }
+function sanitize_headers(array &$array): void
+{
+    foreach ($array as &$data) {
+        $data = str_ireplace([
+            "\r",
+            "\n",
+            '%0a',
+            '%0d'
+        ], '', stripslashes($data));
     }
 }
+
 
 function _unesc(string $string): string
 {

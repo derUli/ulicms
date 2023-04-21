@@ -164,7 +164,8 @@ class Forms
                     ] : [
                         Settings::get('email')
                     ];
-            sanitize($mail_from);
+
+            sanitize_headers($mail_from);
 
             $headers = 'From: ' . $mail_from[0] . "\n";
             $headers .= 'Content-Type: text/html; charset=utf-8';

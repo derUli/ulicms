@@ -48,6 +48,7 @@ def main():
     source_dir = os.path.dirname(__file__)
 
     ignore = [
+        '.gitignore',
         '.git',
         'doc-src',
         '*.py',
