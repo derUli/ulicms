@@ -34,7 +34,7 @@ API-Änderungen:
 * SelectField in Namespace App\Models\Content\CustomFields verschoben
 * TextField in Namespace App\Models\Content\CustomFields verschoben
 * UrlField in Namespace App\Models\Content\CustomFields verschoben
-* Methode sanitize in sanitize_headers umbenannt
+* Methode sanitize() in sanitize_headers() umbenannt
 
 Entfernte API-Methoden:
 * getStringLengthInBytes()

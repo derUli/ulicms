@@ -23,7 +23,7 @@ class RoboTestBase extends \PHPUnit\Framework\TestCase
 
     protected function resetDb()
     {
-        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? explode(';', $_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
+        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
         $additionalSql = array_map('trim', $additionalSql);
 
         Database::dropSchema($_ENV['DB_DATABASE']);

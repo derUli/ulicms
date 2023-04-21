@@ -544,7 +544,7 @@ class RoboFile extends Tasks
 
         Database::setEchoQueries(true);
 
-        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? explode(';', $_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
+        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
         $additionalSql = array_map('trim', $additionalSql);
 
         Database::setupSchemaAndSelect(

@@ -1,7 +1,5 @@
 <?php
 
-define('RESPONSIVE_FM', true);
-
 define('CORE_COMPONENT', 'admin');
 
 require_once '../../init.php';

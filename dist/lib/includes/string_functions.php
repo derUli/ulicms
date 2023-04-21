@@ -7,6 +7,13 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 use App\Helpers\StringHelper;
 use Nette\Utils\Random;
 
+/**
+ * Sanitize mail headers
+ *
+ * @param array<string, string> $array
+ *
+ * @return void
+ */
 function sanitize_headers(array &$array): void
 {
     foreach ($array as &$data) {
@@ -61,13 +68,14 @@ function make_links_clickable(string $text): string
 /**
  * Get excerpt from string
  *
- * @param String $str
+ * @param string $str
  *            String to get an excerpt from
- * @param Integer $startPos
+ * @param int $startPos
  *            Position int string to start excerpt from
- * @param Integer $maxLength
+ * @param int $maxLength
  *            Maximum length the excerpt may be
- * @return String excerpt
+ *
+ * @return string excerpt
  */
 function getExcerpt(
     string $str,
@@ -77,16 +85,28 @@ function getExcerpt(
     return StringHelper::getExcerpt($str, $startPos, $maxLength);
 }
 
-function stringOrNull($val): ?string
+/**
+ * Returns $val if it is a string or null
+ *
+ * @param mixed $val
+ *
+ * @return ?string
+ */
+function stringOrNull(mixed $val): ?string
 {
-    return is_string($val) && ! empty($val) ? $val : null;
+    return is_string($val) && ! empty($val) ? (string)$val : null;
 }
 
-// Aus einer Boolean einen String machen ("true" oder "false")
-
-function strbool($value): string
+/**
+ * Convert a bool to string
+ *
+ * @param mixed $value
+ *
+ * @return string
+ */
+function strbool(mixed $value): string
 {
-    return($value) ? 'true' : 'false';
+    return $value ? 'true' : 'false';
 }
 
 function convertLineEndingsToLN(string $s): string
@@ -94,12 +114,26 @@ function convertLineEndingsToLN(string $s): string
     return normalizeLN($s, "\n");
 }
 
-function esc($value): void
+/**
+ * Escaped output of a string for XSS prevention
+ *
+ * @param mixed $value
+ *
+ * @return void
+ */
+function esc(mixed $value): void
 {
     Template::escape($value);
 }
 
-function _esc($value): string
+/**
+ * Escape a string for XSS prevention
+ *
+ * @param mixed $value
+ *
+ * @return string
+ */
+function _esc(mixed $value): string
 {
     return Template::getEscape($value);
 }
@@ -144,6 +178,14 @@ function rand_string(int $length): string
     return Random::generate($length);
 }
 
+/**
+ * Split and trim a semicolon separated string
+ * string $str
+ *
+ * @param string $str
+ *
+ * @return array<string>
+ */
 function splitAndTrim(string $str): array
 {
     return array_map('trim', explode(';', $str));

@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-if (! defined('RESPONSIVE_FM')) {
+$url = $_SERVER['REQUEST_URI'] ?? '';
+$urlParts = explode('/' , $url);
+$isFm = in_array('fm', $urlParts);
+
+if (! $isFm) {
     class Response
     {
         public static function sendHttpStatusCodeResultIfAjax(
@@ -12,9 +16,11 @@ if (! defined('RESPONSIVE_FM')) {
             ?string $redirect = null,
             int $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
+
             if (Request::isAjaxRequest()) {
                 HTTPStatusCodeResult($status);
             }
+
             if ($redirect) {
                 self::redirect($redirect, $redirectStatus);
             }
