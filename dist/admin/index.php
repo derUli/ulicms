@@ -28,7 +28,7 @@ Translation::loadAllModuleLanguageFiles($syslang);
 
 // Cross-Site-Request-Forgery Protection
 if (is_logged_in() && Request::isPost() && ! check_csrf_token()) {
-    ExceptionResult('This is probably a CSRF attack!', HttpStatusCode::FORBIDDEN);
+    ExceptionResult('Invalid CSRF Token', HttpStatusCode::FORBIDDEN);
 }
 
 // set locale for date formats and other stuff
