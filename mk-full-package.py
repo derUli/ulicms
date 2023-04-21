@@ -55,7 +55,6 @@ def main():
         '.gitignore',
         '.php-cs-fixer.cache',
         '.php-cs-fixer.php',
-        '.php_cs.cache',
         '.php_cs.dist',
         '.phpunit.cache',
         '.phpunit.result.cache',
