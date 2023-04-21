@@ -95,7 +95,8 @@ abstract class CacheUtil
      */
     public static function clearPageCache(): void
     {
-        $adapter = self::getAdapter();
+        $adapter = self::getAdapter(true);
+
         if ($adapter) {
             $adapter->clear();
         }
@@ -108,11 +109,6 @@ abstract class CacheUtil
     public static function clearCache(): void
     {
         do_event('before_clear_cache');
-
-        // clear opcache if available
-        if (function_exists('opcache_reset')) {
-            opcache_reset();
-        }
 
         self::clearPageCache();
 

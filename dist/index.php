@@ -6,9 +6,9 @@ require_once dirname(__FILE__) . '/init.php';
 
 use App\Helpers\DateTimeHelper;
 use App\Models\Content\Language;
+use App\Storages\Vars;
 use App\Translations\Translation;
 use App\Utils\CacheUtil;
-use App\Storages\Vars;
 
 global $connection;
 
@@ -202,7 +202,7 @@ if (is_logged_in() && get_cache_control() === 'auto') {
 do_event('before_html');
 
 $cacheAdapter = null;
-if (CacheUtil::isCacheEnabled() && Request::isGet() && !Vars::getNoCache()) {
+if (CacheUtil::isCacheEnabled() && Request::isGet() && ! Vars::getNoCache()) {
     $cacheAdapter = CacheUtil::getAdapter();
 }
 
@@ -258,7 +258,7 @@ if ($text_position === 'before') {
 do_event('after_content');
 do_event('before_edit_button');
 
-if (!(is_array($disable_functions) && in_array('edit_button', $disable_functions))) {
+if (! (is_array($disable_functions) && in_array('edit_button', $disable_functions))) {
     Template::editButton();
 }
 

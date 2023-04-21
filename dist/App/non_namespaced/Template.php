@@ -9,8 +9,8 @@ use App\Exceptions\FileNotFoundException;
 use App\HTML\Script;
 use App\Models\Content\Advertisement\Banners;
 use App\Security\Permissions\PermissionChecker;
-use App\Utils\File;
 use App\Storages\Vars;
+use App\Utils\File;
 
 class Template
 {
