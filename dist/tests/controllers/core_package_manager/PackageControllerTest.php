@@ -98,10 +98,6 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
             $output
         );
         $this->assertStringContainsString(
-            '<li>output_design_settings_styles</li>',
-            $output
-        );
-        $this->assertStringContainsString(
             '<a href="https://extend.ulicms.de/impro17.html" '
             . 'target="_blank">extend</a>',
             $output

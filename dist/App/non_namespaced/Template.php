@@ -10,6 +10,7 @@ use App\HTML\Script;
 use App\Models\Content\Advertisement\Banners;
 use App\Security\Permissions\PermissionChecker;
 use App\Utils\File;
+use App\Storages\Vars;
 
 class Template
 {
@@ -58,7 +59,7 @@ class Template
                 $page = get_page();
 
                 if ($page['module'] != null && strlen($page['module']) > 0) {
-                    \App\Storages\Vars::setNoCache(true);
+                    Vars::setNoCache(true);
                     $output = replaceShortcodesWithModules(
                         '[module="' . $page['module'] . '"]'
                     );
@@ -547,7 +548,7 @@ class Template
 
         $acl = new PermissionChecker(get_user_id());
 
-        if ($acl->hasPermission('pages') && \App\Storages\Vars::getNoCache() && is_200()) {
+        if ($acl->hasPermission('pages') && Vars::getNoCache() && is_200()) {
             $id = get_ID();
             $page = ContentFactory::getById($id);
             if (in_array($page->language, getAllLanguages(true))) {
