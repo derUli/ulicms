@@ -70,7 +70,8 @@ def main():
         'run-tests.sh',
         'tests',
         'update.php',
-        'video'
+        'video',
+        'phpunit.xml'
     ]
 
     # Prepare build
