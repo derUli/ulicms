@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+// This file conflicts with PHP Responsive FM
 $url = $_SERVER['REQUEST_URI'] ?? '';
 $urlParts = explode('/' , $url);
+
 $isFm = in_array('fm', $urlParts);
 
+// Don't load this class for Responsive FM
 if (! $isFm) {
     class Response
     {
