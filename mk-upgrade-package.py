@@ -66,7 +66,6 @@ def main():
         '.project',
         '.settings',
         '.thumbs',
-        'audio',
         'avatars',
         'cache',
         'content',
@@ -83,8 +82,7 @@ def main():
         'run-tests.sh',
         'templates',
         'tests',
-        'tmp',
-        'videos'
+        'tmp'
     ]
 
     # Prepare build

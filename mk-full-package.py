@@ -61,7 +61,6 @@ def main():
         '.project',
         '.settings',
         '.thumbs',
-        'audio',
         'avatars',
         'cache',
         'doc-src',
@@ -73,7 +72,6 @@ def main():
         'tests',
         'tmp',
         'update.php',
-        'video'
     ]
 
     # Prepare build
