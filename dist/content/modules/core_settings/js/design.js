@@ -58,7 +58,7 @@ const updateFontPreview = () => {
 };
 
 $(() => {
-    $("select#default_font, select#font-size").change(updateFontPreview);
+    $("select#default_font, select#font_size").change(updateFontPreview);
 
     updateFontPreview();
 

@@ -82,6 +82,7 @@ const initSelect2 = (container) => {
  * @returns {undefined}
  */
 const initBootstrapToggle = (container) => {
+    
     // Toggle switches for some checkboxes
     $(container).find(".js-switch").bootstrapToggle({
         on: MenuTranslation.On,
