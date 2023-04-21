@@ -34,6 +34,7 @@ use App\Backend\UliCMSVersion;
 use App\Constants\DateTimeConstants;
 use App\Exceptions\ConnectionFailedException;
 use App\Exceptions\SqlException;
+use App\Helpers\StringHelper;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
 use App\Registries\HelperRegistry;
@@ -160,7 +161,7 @@ if (! $connection) {
 
 $autoMigrate = isset($_ENV['DBMIGRATOR_AUTO_MIGRATE']) && $_ENV['DBMIGRATOR_AUTO_MIGRATE'];
 $autoMigrate = isset($_ENV['DBMIGRATOR_AUTO_MIGRATE']) && $_ENV['DBMIGRATOR_AUTO_MIGRATE'];
-$additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
+$additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? StringHelper::splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
 $additionalSql = array_map('trim', $additionalSql);
 
 if ($autoMigrate) {
@@ -214,7 +215,7 @@ if (isset($_GET['output_stylesheets'])) {
 $locale = Settings::get('locale');
 
 if ($locale) {
-    $locale = splitAndTrim($locale);
+    $locale = StringHelper::splitAndTrim($locale);
     array_unshift($locale, LC_ALL);
     @call_user_func_array('setlocale', $locale);
 }

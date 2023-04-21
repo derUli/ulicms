@@ -151,4 +151,17 @@ abstract class StringHelper extends Helper
         $str = implode($newline, $str);
         return $str;
     }
-}
+
+    /**
+     * Split and trim a semicolon separated string
+     * string $str
+     *
+     * @param string $str
+     *
+     * @return array<string>
+     */
+    public static function splitAndTrim(string $str): array
+    {
+        return array_map('trim', explode(';', $str));
+    }
+    }

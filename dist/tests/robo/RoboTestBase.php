@@ -5,6 +5,8 @@ declare(strict_types=1);
 require_once 'RoboFile.php';
 require_once __DIR__ . '/RoboTestFile.php';
 
+use App\Helpers\StringHelper;
+
 class RoboTestBase extends \PHPUnit\Framework\TestCase
 {
     protected function runRoboCommand(array $command): string
@@ -23,7 +25,7 @@ class RoboTestBase extends \PHPUnit\Framework\TestCase
 
     protected function resetDb()
     {
-        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
+        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? StringHelper::splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
         $additionalSql = array_map('trim', $additionalSql);
 
         Database::dropSchema($_ENV['DB_DATABASE']);

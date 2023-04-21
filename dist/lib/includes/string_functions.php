@@ -177,16 +177,3 @@ function rand_string(int $length): string
 {
     return Random::generate($length);
 }
-
-/**
- * Split and trim a semicolon separated string
- * string $str
- *
- * @param string $str
- *
- * @return array<string>
- */
-function splitAndTrim(string $str): array
-{
-    return array_map('trim', explode(';', $str));
-}

@@ -3,6 +3,7 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\RequestMethod;
+use App\Helpers\StringHelper;
 use App\Translations\JSTranslation;
 
 $types = get_available_post_types();
@@ -15,7 +16,7 @@ $commentableContentTypes = [];
 
 $commentableContentTypeSettings = Settings::get('commentable_content_types');
 if ($commentableContentTypeSettings) {
-    $commentableContentTypes = splitAndTrim($commentableContentTypeSettings);
+    $commentableContentTypes = StringHelper::splitAndTrim($commentableContentTypeSettings);
 }
 ?>
 <a

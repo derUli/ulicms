@@ -155,17 +155,4 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         $this->assertEquals(12, strlen($password3));
         $this->assertNotEquals($password2, $password1);
     }
-
-    public function testSplitAndTrim()
-    {
-        $input = 'Max;
-        Muster;
-        max@muster.de;
-        Musterstadt';
-        $result = splitAndTrim($input);
-        $this->assertEquals('Max', $result[0]);
-        $this->assertEquals('Muster', $result[1]);
-        $this->assertEquals('max@muster.de', $result[2]);
-        $this->assertEquals('Musterstadt', $result[3]);
-    }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
+use App\Helpers\StringHelper;
 use App\Security\Permissions\PermissionChecker;
 use Negotiation\LanguageNegotiator;
 
@@ -150,7 +151,7 @@ function setLocaleByLanguage(): array
     $localeSetting = Settings::get($var) ?: Settings::get('locale');
 
     if ($localeSetting) {
-        $locale = splitAndTrim($localeSetting);
+        $locale = StringHelper::splitAndTrim($localeSetting);
         array_unshift($locale, LC_ALL);
     }
 

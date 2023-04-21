@@ -7,6 +7,7 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 use App\Constants\DefaultValues;
 use App\Database\DBMigrator;
 use App\Helpers\DateTimeHelper;
+use App\Helpers\StringHelper;
 use App\Packages\PackageManager;
 use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
@@ -544,7 +545,7 @@ class RoboFile extends Tasks
 
         Database::setEchoQueries(true);
 
-        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
+        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? StringHelper::splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
         $additionalSql = array_map('trim', $additionalSql);
 
         Database::setupSchemaAndSelect(
