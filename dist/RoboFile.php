@@ -625,7 +625,6 @@ class RoboFile extends Tasks
                 'thumbs.db',
                 '.thumbs',
                 'tmp',
-                'cache',
                 '*.pyc'
             ]
             )->from('.') as $name => $file) {
