@@ -3,8 +3,9 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Models\Content\VCS;
+use App\Security\Permissions\PermissionChecker;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
 
 if ($permissionChecker->hasPermission('pages')) {
     $content_id = (int)$_GET['content_id'];

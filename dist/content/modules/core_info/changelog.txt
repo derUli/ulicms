@@ -12,6 +12,7 @@ Entfernte Features:
 
 * Neue API-Methoden:
 * StringHelper::splitAndTrim()
+* BooleanHelper::bool2YesNo()
 
 API-Änderungen:
 * Controller in Namespace App\Controllers verschoben
@@ -42,6 +43,8 @@ API-Änderungen:
 Entfernte API-Methoden:
 * getStringLengthInBytes()
 * splitAndTrim()
+* convertLineEndingsToLN()
+* bool2YesNo
 
 Entfernte Features:
 * Scroll To Top

@@ -4,8 +4,10 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\RequestMethod;
 use App\Models\Content\Categories;
+use App\Security\Permissions\PermissionChecker;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('banners')
         && $permissionChecker->hasPermission('banners_create')) {
     ?>

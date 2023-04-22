@@ -3,11 +3,13 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\HTML\Alert;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
 use function App\HTML\imageTag;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUSer();
+
 if ($permissionChecker->hasPermission('users')) {
     if (! isset($_SESSION['admins_filter_group'])) {
         $_SESSION['admins_filter_group'] = 0;
@@ -88,11 +90,11 @@ if ($permissionChecker->hasPermission('users')) {
                 <tbody>
                     <?php
                             foreach ($users as $user) {
-                                $group = '[' . get_translation('none') . ']';
-                                if ($user->getPrimaryGroupId()) {
-                                    $group = $permissionChecker->getPermissionQueryResult($user->getPrimaryGroupId());
-                                    $group = $group['name'];
-                                }
+                                $groupName = '[' . get_translation('none') . ']';
+
+                                $primaryGroup = $user->getPrimaryGroup();
+
+                                $groupName = $primaryGroup ? $primaryGroup->getName() : '[' . get_translation('none') . ']';
                                 ?>
                         <?php
                                 $avatar = imageTag(
@@ -125,7 +127,7 @@ if ($permissionChecker->hasPermission('users')) {
                                     $url = ModuleHelper::buildActionURL('groups', "edit={$id}");
                                     echo '<a href="' . Template::getEscape($url) . '" class="is-not-ajax">';
                                 }
-                                esc($group);
+                                esc($groupName);
 
                                 if ($id && $permissionChecker->hasPermission('groups_edit')) {
                                     echo '</a>';

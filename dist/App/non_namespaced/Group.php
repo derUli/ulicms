@@ -5,6 +5,7 @@ declare(strict_types=1);
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Models\Content\Language;
+use App\Security\Permissions\ACL;
 
 class Group
 {
@@ -24,8 +25,7 @@ class Group
      */
     public function __construct($id = null)
     {
-        $acl = new \App\Security\Permissions\ACL();
-        $this->permissions = $acl->getDefaultACLAsJSON(false, true);
+        $this->permissions = ACL::getDefaultACL(false);
         if ($id !== null) {
             $this->loadById((int)$id);
         }
@@ -44,8 +44,9 @@ class Group
             $this->name = $dataset->name;
             $this->permissions = json_decode($dataset->permissions, true);
             $this->allowable_tags = $dataset->allowable_tags;
-            $acl = new \App\Security\Permissions\ACL();
-            $allPermissions = $acl->getDefaultACLAsJSON(false, true);
+
+            $allPermissions = ACL::getDefaultACL(false);
+
             foreach ($allPermissions as $name => $value) {
                 if (! isset($this->permissions[$name])) {
                     $this->addPermission($name, $value);
@@ -107,10 +108,10 @@ class Group
         return null;
     }
 
-    public static function getAll(): array
+    public static function getAll(string $order = 'id'): array
     {
         $datasets = [];
-        $sql = 'select id from `{prefix}groups` order by id';
+        $sql = 'select id from `{prefix}groups` order by ' . $order;
         $result = Database::query($sql, true);
         while ($row = Database::fetchobject($result)) {
             $datasets[] = new Group($row->id);

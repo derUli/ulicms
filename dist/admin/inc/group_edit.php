@@ -3,18 +3,22 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Models\Content\Language;
+use App\Security\Permissions\ACL;
+use App\Security\Permissions\PermissionChecker;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
 
 if (! $permissionChecker->hasPermission('groups')) {
     noPerms();
 } else {
     $id = (int)$_REQUEST['edit'];
-    $permissionChecker = new \App\Security\Permissions\ACL();
-    $all_permissions = $permissionChecker->getPermissionQueryResult($id);
-    $groupName = _esc($all_permissions['name']);
-    $all_permissions_all = $permissionChecker->getDefaultACL(false, true);
-    $all_permissions = json_decode($all_permissions['permissions'], true);
+    $group = new Group($id);
+    $groupName = $group->getName();
+
+    $all_permissions_all = ACL::getDefaultACL(false);
+
+    $all_permissions = $group->getPermissions();
+
     foreach ($all_permissions_all as $name => $value) {
         if (! isset($all_permissions[$name])) {
             $all_permissions[$name] = $value;

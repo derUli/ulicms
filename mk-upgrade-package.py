@@ -87,7 +87,8 @@ def main():
         'phpunit_init.php',
         '.env',
         '.env.foobar',
-        '.env.test'
+        '.env.test',
+        'phpunit.xml'
     ]
 
     # Prepare build

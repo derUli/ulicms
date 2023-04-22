@@ -8,7 +8,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use Database;
 
-// this class is used to store the edit restrictions of content
+// This class is used to store the edit restrictions of content
 // think of it as ACL like write permissions
 class PagePermissions
 {

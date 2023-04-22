@@ -109,11 +109,6 @@ function strbool(mixed $value): string
     return $value ? 'true' : 'false';
 }
 
-function convertLineEndingsToLN(string $s): string
-{
-    return normalizeLN($s, "\n");
-}
-
 /**
  * Escaped output of a string for XSS prevention
  *
@@ -152,20 +147,6 @@ function remove_suffix(string $text, string $suffix): string
         $text = substr($text, 0, strlen($text) - strlen($suffix));
     }
     return $text;
-}
-
-function bool2YesNo(
-    bool $value,
-    ?string $yesString = null,
-    ?string $noString = null
-): string {
-    if (! $yesString) {
-        $yesString = get_translation('yes');
-    }
-    if (! $noString) {
-        $noString = get_translation('no');
-    }
-    return $value ? $yesString : $noString;
 }
 
 /**

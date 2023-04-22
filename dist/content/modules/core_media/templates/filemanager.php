@@ -1,8 +1,8 @@
 <?php
 
-use App\Security\Permissions\PermissionChecker;
-
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Security\Permissions\PermissionChecker;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();
 

@@ -68,14 +68,14 @@ if (! $admin_logo) {
                       title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
 </div>
 <div class="row">
-    <div class="col-xs-12 col-lg-2">
+    <div class="col col-xs-12 col-lg-2 ">
         <a href="http://www.ulicms.de" target="_blank" class="btn btn-info"
         role="button"><i class="fa fa-globe" aria-hidden="true"></i> UliCMS
             <?php translate('portal'); ?>
         </a>
     </div>
     
-    <div class="col-xs-12 col-lg-2">
+    <div class="col col-xs-12 col-lg-2">
         <a
             href="index.php?action=license"
             class="btn btn-info is-ajax"
@@ -85,13 +85,13 @@ if (! $admin_logo) {
         </a>
     </div>
     
-    <div class="col-xs-12 col-lg-2">
+    <div class="col col-xs-12 col-lg-2">
         <a href="http://www.ulicms.de/kontakt.html" target="_blank"
         class="btn btn-info" role="button"><i class="fas fa-envelope"></i>
             <?php translate('feedback'); ?>
         </a>
     </div>
-    <div class="col-xs-12 col-lg-2">
+    <div class="col col-xs-12 col-lg-2">
         <a 
             href="index.php?action=changelog"
             class="btn btn-info is-ajax"
@@ -101,7 +101,7 @@ if (! $admin_logo) {
 
         </a>
     </div>
-    <div class="col-xs-12 col-lg-2">
+    <div class="col col-xs-12 col-lg-2">
         <a href="<?php echo ModuleHelper::buildActionURL('legal_composer'); ?>" 
         class="btn btn-info is-ajax"
         data-url="">

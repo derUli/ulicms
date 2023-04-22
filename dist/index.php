@@ -49,7 +49,7 @@ do_event('custom_lang_' . $_SESSION['language']);
 
 if (Request::isPost()) {
     if (! check_csrf_token()) {
-        exit('This is probably a CSRF attack!');
+        exit('Invalid CSRF token');
     }
     if (Settings::get('min_time_to_fill_form', 'int') > 0) {
         check_form_timestamp();

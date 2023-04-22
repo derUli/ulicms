@@ -10,6 +10,7 @@ use App\CoreContent\Partials\DeleteButtonRenderer;
 use App\CoreContent\Partials\EditButtonRenderer;
 use App\CoreContent\Partials\UnDeleteButtonRenderer;
 use App\CoreContent\Partials\ViewButtonRenderer;
+use App\Helpers\BooleanHelper;
 use App\Models\Content\TypeMapper;
 use ContentFactory;
 use Database;
@@ -265,7 +266,7 @@ class PageTableRenderer
             _esc(get_translation($dataset->menu)),
             _esc($dataset->position),
             _esc(getPageTitleByID((int)$dataset->parent_id)),
-            bool2YesNo((bool)$dataset->active),
+            BooleanHelper::bool2YesNo((bool)$dataset->active),
             $viewButton,
             $editButton,
             ! $dataset->deleted_at ? $deleteButton : $undeleteButton

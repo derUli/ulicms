@@ -4,8 +4,11 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 // FIXME: this file looks like shit, refactor this code to MVC pattern.
 use App\Models\Content\Language;
+use App\Security\Permissions\ACL;
+use App\Security\Permissions\PermissionChecker;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if (! $permissionChecker->hasPermission('groups')) {
     noPerms();
 } else {
@@ -14,8 +17,7 @@ if (! $permissionChecker->hasPermission('groups')) {
     $removed = false;
 
     if (isset($_POST['add_group'])) {
-        $permissionChecker = new \App\Security\Permissions\ACL();
-        $all_permissions = $permissionChecker->getDefaultACL(false, true);
+        $all_permissions = ACL::getDefaultACL(false);
         if (isset($_POST['user_permissons']) && count($_POST['user_permissons']) > 0) {
             foreach ($_POST['user_permissons'] as $permission_name) {
                 $all_permissions[$permission_name] = true;
@@ -23,15 +25,20 @@ if (! $permissionChecker->hasPermission('groups')) {
         }
 
         $name = trim($_POST['name']);
+
         if (! empty($name)) {
-            $id = $permissionChecker->createGroup($name, $all_permissions);
-            $group = new Group($id);
+            $group = new Group();
+            $group->setName($name);
+            $group->setPermissions($all_permissions);
+
             $languages = [];
+
             if (isset($_POST['restrict_edit_access_language']) && count($_POST['restrict_edit_access_language']) > 0) {
                 foreach ($_POST['restrict_edit_access_language'] as $lang) {
                     $languages[] = new Language($lang);
                 }
             }
+
             $group->setLanguages($languages);
             $allowed_tags = ! empty($_POST['allowable_tags']) ? $_POST['allowable_tags'] : null;
             $group->setAllowableTags($allowed_tags);
@@ -42,30 +49,16 @@ if (! $permissionChecker->hasPermission('groups')) {
         }
     } elseif (isset($_GET['delete']) && Request::isPost()) {
         $id = (int)$_GET['delete'];
-        $permissionChecker = new \App\Security\Permissions\ACL();
-        $permissionChecker->deleteGroup($id);
+
+        $group = new Group($id);
+        $group->delete();
+
         $removed = true;
-        if (isset($GLOBALS['permissions'])) {
-            unset($GLOBALS['permissions']);
-        }
     } elseif (isset($_POST['edit_group'])) {
-        $permissionChecker = new \App\Security\Permissions\ACL();
-        $all_permissions = $permissionChecker->getDefaultACL(false, true);
+        $id = (int)$_POST['id'];
+        $name = trim($_POST['name']);
 
-        $id = $_POST['id'];
-
-        $group = new Group();
-        $group->loadById($id);
-        $allowed_tags = ! empty($_POST['allowable_tags']) ? $_POST['allowable_tags'] : null;
-        $group->setAllowableTags($allowed_tags);
-        $languages = [];
-        if (isset($_POST['restrict_edit_access_language']) && count($_POST['restrict_edit_access_language']) > 0) {
-            foreach ($_POST['restrict_edit_access_language'] as $lang) {
-                $languages[] = new Language($lang);
-            }
-        }
-        $group->setLanguages($languages);
-        $group->save();
+        $all_permissions = ACL::getDefaultACL(false);
 
         if (isset($_POST['user_permissons']) && count($_POST['user_permissons']) > 0) {
             foreach ($_POST['user_permissons'] as $permission_name) {
@@ -73,17 +66,26 @@ if (! $permissionChecker->hasPermission('groups')) {
             }
         }
 
-        $name = trim($_POST['name']);
-        if (! empty($name)) {
-            $permissionChecker->updateGroup($id, $name, $all_permissions);
-            $modified = true;
-            $name = _esc($name);
+        $group = new Group($id);
+        $group->setName($name);
+        $group->setPermissions($all_permissions);
+
+        $languages = [];
+
+        if (isset($_POST['restrict_edit_access_language']) && count($_POST['restrict_edit_access_language']) > 0) {
+            foreach ($_POST['restrict_edit_access_language'] as $lang) {
+                $languages[] = new Language($lang);
+            }
         }
 
-        if (isset($GLOBALS['permissions'])) {
-            unset($GLOBALS['permissions']);
-        }
+        $group->setLanguages($languages);
+        $allowed_tags = ! empty($_POST['allowable_tags']) ? $_POST['allowable_tags'] : null;
+        $group->setAllowableTags($allowed_tags);
+        $group->save();
+
+        $modified = true;
     }
+
     ?>
     <?php echo Template::executeModuleTemplate('core_users', 'icons.php'); ?>
     <h2><?php translation('groups'); ?></h2>

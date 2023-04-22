@@ -6,11 +6,15 @@ use App\Constants\HtmlEditor;
 use App\Constants\RequestMethod;
 use App\Helpers\DateTimeHelper;
 use App\HTML\Input;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
+
+$groups = Group::getAll('name');
+
+$permissionChecker = PermissionChecker::fromCurrentUser();
 
 use function App\HTML\imageTag;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
 if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermission('users_edit')) || ($_GET['id'] == $_SESSION['login_id'])) {
     $id = (int)$_GET['id'];
     $languages = getAvailableBackendLanguages();
@@ -147,10 +151,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
             </div>
         </div>
         <?php
-        $permissionChecker = new \App\Security\Permissions\ACL();
         if ($permissionChecker->hasPermission('users')) {
-            $allGroups = $permissionChecker->getAllGroups();
-            asort($allGroups);
             ?>
             <div class="field">
                 <strong class="field-label">
@@ -164,16 +165,16 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
                     }
             ?>>[<?php translate('none'); ?>]</option>
                             <?php
-                    foreach ($allGroups as $key => $value) {
+                    foreach ($groups as $group) {
                         ?>
                         <option
-                            value="<?php echo $key; ?>"
+                            value="<?php echo $group->getID(); ?>"
                             <?php
-                            if ((int)($row->group_id) == $key) {
+                            if ((int)($row->group_id) == $group->getID()) {
                                 echo 'selected';
                             }
                         ?>>
-                                <?php esc($value); ?>
+                                <?php esc($group->getName()); ?>
                         </option>
                     <?php }
                     ?>
