@@ -9,8 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Constants\ModuleEventConstants;
 
 /**
- * Old permission checker class
- * @deprecated since version 2023.1
+ * This class provides a ACL permission list
  */
 abstract class ACL
 {
