@@ -8,15 +8,13 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\HtmlEditor;
 use App\Helpers\ImagineHelper;
-use App\Models\Users\GroupCollection;
-use App\Models\Users\PasswordReset;
 use App\Security\Hash;
 use App\Security\Permissions\PermissionChecker;
 use App\Utils\Mailer;
-use LasseRafn\InitialAvatarGenerator\InitialAvatar;
-use Model;
 use Database;
 use Group;
+use LasseRafn\InitialAvatarGenerator\InitialAvatar;
+use Model;
 
 /**
  * User model

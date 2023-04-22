@@ -101,11 +101,12 @@ class CoreUpgradeController extends \App\Controllers\Controller
         @ignore_user_abort(true);
         $acl = new PermissionChecker(get_user_id());
 
-        if ((! $skipPermissions && (! $acl->hasPermission('update_system')) || ! $this->checkForUpgrades() || get_request_method() !== 'post')) {
+        if ((! $skipPermissions && ! $acl->hasPermission('update_system')) || ! $this->checkForUpgrades() || get_request_method() !== 'post') {
             return false;
         }
 
         $jsonData = $this->getJSON();
+
         if (! $jsonData) {
             return null;
         }
@@ -114,9 +115,9 @@ class CoreUpgradeController extends \App\Controllers\Controller
         $tmpArchive = Path::resolve("{$tmpDir}/upgrade.zip");
 
         if (is_dir($tmpDir)) {
-            // FileSystem::delete($tmpDir, true);
+            FileSystem::delete($tmpDir, true);
         }
-        
+
         FileSystem::createDir($tmpDir);
 
         $data = null;
@@ -130,7 +131,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
         if ($data) {
             file_put_contents($tmpArchive, $data);
 
-            $zip = new ZipArchive();            
+            $zip = new ZipArchive();
             if ($zip->open($tmpArchive) === true) {
                 $zip->extractTo($tmpDir);
                 $zip->close();
@@ -139,18 +140,17 @@ class CoreUpgradeController extends \App\Controllers\Controller
             $upgradeCodeDir = Path::resolve("{$tmpDir}/dist");
             if (is_dir($upgradeCodeDir)) {
                 recurse_copy($upgradeCodeDir, ULICMS_ROOT);
-                var_dump($tmpDir);
-                // sureRemoveDir($tmpDir, true);
+                FileSystem::delete($tmpDir);
 
-                // Response::redirect('../update.php');
+                if(! is_cli()){
+                    Response::redirect('../update.php');
+                }
+
                 return true;
             }
-
-            return false;
-
         }
-            return false;
 
+        return false;
     }
 
     /**

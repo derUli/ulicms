@@ -5,7 +5,6 @@ declare(strict_types=1);
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
 use App\Utils\File;
-use Nette\Utils\FileSystem;
 
 /**
  * Deletes a directory including its content

@@ -94,7 +94,7 @@ abstract class File
     ): void {
         FileSystem::delete($dir);
 
-        if(!$deleteMe) {
+        if(! $deleteMe) {
             FileSystem::createDir($dir);
         }
     }
