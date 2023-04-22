@@ -4,14 +4,16 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Backend\UliCMSVersion;
 use App\Packages\PackageManager;
+use App\Security\Permissions\PermissionChecker;
 
-// TODO: Refactor this, move business logic to controller
-$permissionChecker = new \App\Security\Permissions\ACL();
-$pkg = new PackageManager();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if (! $permissionChecker->hasPermission('install_packages')) {
     noPerms();
 } else {
     $pkg_src = Settings::get('pkg_src');
+    $pkg = new PackageManager();
+    
     @set_time_limit(0);
     ?>
     <p>
@@ -88,7 +90,7 @@ if (! $permissionChecker->hasPermission('install_packages')) {
 
             // Disabled because this caused issues
             // with the stylesheet queue on this page
-            //clearCache ();
+            // clearCache ();
             ?>
             <p>
                 <a
