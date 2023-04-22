@@ -51,11 +51,7 @@ class TypeMapper
         $manager = new ModuleManager();
         $modules = $manager->getEnabledModuleNames();
         foreach ($modules as $module) {
-            $mappings = getModuleMeta($module, 'type_classes');
-
-            if (! $mappings) {
-                continue;
-            }
+            $mappings = getModuleMeta($module, 'type_classes') ?? [];
 
             foreach ($mappings as $key => $value) {
                 if (empty($value)) {
