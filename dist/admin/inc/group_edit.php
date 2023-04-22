@@ -12,11 +12,13 @@ if (! $permissionChecker->hasPermission('groups')) {
     noPerms();
 } else {
     $id = (int)$_REQUEST['edit'];
-    $all_permissions = ACL::getPermissionQueryResult($id);
-    $groupName = _esc($all_permissions['name']);
+    $group = new Group($id);
+    $groupName = $group->getName();
 
     $all_permissions_all = ACL::getDefaultACL(false);
-    $all_permissions = json_decode($all_permissions['permissions'], true);
+
+    $all_permissions = $group->getPermissions();
+
     foreach ($all_permissions_all as $name => $value) {
         if (! isset($all_permissions[$name])) {
             $all_permissions[$name] = $value;
