@@ -620,6 +620,7 @@ class RoboFile extends Tasks
      */
     public function buildDeleteBullshit(): void {
         $filesToDelete = [];
+
         foreach(Finder::find(
             [
                 '.DS_STORE',

@@ -191,15 +191,15 @@ abstract class ModuleHelper extends Helper
         ?int $page_id = null,
         ?string $suffix = null
     ): ?string {
-        if (! $page_id) {
-            $page_id = get_id();
-        }
+
+        $page_id = $page_id ?? get_id();
 
         if (! $page_id) {
             return null;
         }
 
         $page = ContentFactory::getByID($page_id);
+
         if ($page->id === null) {
             return null;
         }
@@ -215,18 +215,9 @@ abstract class ModuleHelper extends Helper
         $dirname = dirname(get_request_uri());
 
         $dirname = str_replace('\\', '/', $dirname);
-
-        if (is_admin_dir()) {
-            $dirname = dirname($dirname . '/..', 2);
-        }
-
-        if (! str_starts_with($dirname, '/')) {
-            $dirname = '/' . $dirname;
-        }
-
-        if (! str_ends_with($dirname, '/')) {
-            $dirname = $dirname . '/';
-        }
+        $dirname = is_admin_dir() ? dirname($dirname . '/..', 2) : $dirname;
+        $dirname = ! str_starts_with($dirname, '/') ? '/' . $dirname : $dirname;
+        $dirname = ! str_ends_with($dirname, '/') ? $dirname . '/' : $dirname;
 
         // Replace backslashes with slashes (Windows)
         $dirname = str_replace('\\', '/', $dirname);
