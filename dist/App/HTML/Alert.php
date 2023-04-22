@@ -14,9 +14,11 @@ class Alert
 {
     /**
      * Generate Bootstrap alert
+     * 
      * @param string $text
      * @param string $cssClasses
      * @param bool $allowHtml
+     * 
      * @return string
      */
     public static function alert(
@@ -32,9 +34,11 @@ class Alert
 
     /**
      * Generate Bootstrap info style alert
+     * 
      * @param string $text
      * @param string $cssClasses
      * @param bool $allowHtml
+     * 
      * @return string
      */
     public static function info(
@@ -47,9 +51,11 @@ class Alert
 
     /**
      * Generate Bootstrap danger style alert
-     * @param type $text
+     * 
+     * @param string $text
      * @param string $cssClasses
      * @param bool $allowHtml
+     * 
      * @return string
      */
     public static function danger(
@@ -62,9 +68,11 @@ class Alert
 
     /**
      * Generate Bootstrap warning style alert
+     * 
      * @param string $text
      * @param string $cssClasses
      * @param bool $allowHtml
+     * 
      * @return string
      */
     public static function warning(
@@ -77,9 +85,11 @@ class Alert
 
     /**
      * Generate Bootstrap success style alert
+     * 
      * @param string $text
      * @param string $cssClasses
      * @param bool $allowHtml
+     * 
      * @return string
      */
     public static function success(

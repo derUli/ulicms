@@ -16,11 +16,14 @@ use ModuleHelper;
 class Button
 {
     /**
-     * Generates Button
+     * Generate Button
+     * 
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
+     * 
      * @param bool $allowHtml
+     * 
      * @return string
      */
     public static function button(
@@ -46,11 +49,14 @@ class Button
     }
 
     /**
-     * Generates default button
+     * Generate default button
+     * 
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
+     * 
      * @param bool $allowHtml
+     * 
      * @return string
      */
     public static function default(
@@ -67,11 +73,13 @@ class Button
     }
 
     /**
-     * Generates primary button
+     * Generate primary button
+     * 
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
      * @param bool $allowHtml
+     * 
      * @return string
      */
     public static function primary(
@@ -88,12 +96,14 @@ class Button
     }
 
     /**
-     * Generates success button
+     * Generate success button
+     * 
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
      * @param bool $allowHtml
-     * @return type
+     * 
+     * @return string
      */
     public static function success(
         string $text,
@@ -109,11 +119,13 @@ class Button
     }
 
     /**
-     * Generates info button
+     * Generate info button
+     * 
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
      * @param bool $allowHtml
+     * 
      * @return string
      */
     public static function info(
@@ -130,11 +142,13 @@ class Button
     }
 
     /**
-     * Generates warning button
+     * Generate warning button
+     * 
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
      * @param bool $allowHtml
+     * 
      * @return string
      */
     public static function warning(
@@ -151,11 +165,13 @@ class Button
     }
 
     /**
-     * Generates danger button
+     * Generate danger button
+     * 
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
      * @param bool $allowHtml
+     * 
      * @return string
      */
     public static function danger(
@@ -172,11 +188,13 @@ class Button
     }
 
     /**
-     * Generates link button
+     * Generate link button
+     * 
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
      * @param bool $allowHtml
+     * 
      * @return string
      */
     public static function link(
