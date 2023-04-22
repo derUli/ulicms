@@ -14,7 +14,6 @@ $groups = $permissionChecker->getAllGroups();
 
 $default_acl_group = (int)Settings::get('default_acl_group');
 
-
 if (isset($_REQUEST['sort']) && in_array($_REQUEST['sort'], [
     'id',
     'name'

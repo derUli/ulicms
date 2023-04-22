@@ -27,75 +27,6 @@ class ACL
     }
 
     /**
-     * Creates a group
-     * @param string $name
-     * @param array|null $permissions
-     * @return int
-     */
-    public function createGroup(string $name, ?array $permissions = null): int
-    {
-        $permissionData = $permissions === null ? json_encode($this->getDefaultACL()) : json_encode($permissions);
-
-        $sql = 'INSERT INTO `' . tbname('groups') .
-                '` (`name`, `permissions`) ' .
-                "VALUES('" . db_escape($name) . "','" .
-                db_escape($permissionData) . "')";
-
-        // Führe Query aus
-        db_query($sql);
-
-        // Gebe die letzte Insert-ID zurück, damit man gleich mit der erzeugten Gruppe arbeiten kann.
-        return Database::getLastInsertID();
-    }
-
-    /**
-     * Updates a group
-     * @param int $id
-     * @param string $name
-     * @param array|null $permissions
-     * @return int
-     */
-    public function updateGroup(
-        int $id,
-        string $name,
-        ?array $permissions = null
-    ): int {
-        $permissionData = $permissions === null ? json_encode($this->getDefaultACL()) : json_encode($permissions);
-
-        $sql = 'UPDATE `' . tbname('groups') . "` SET name='" .
-                db_escape($name) . "', permissions='" . db_escape($permissionData) . "' WHERE id=" . $id;
-
-        // Führe Query aus
-        db_query($sql);
-        // Gebe die letzte Insert-ID zurück, damit man gleich mit der erzeugten Gruppe arbeiten kann.
-        return $id;
-    }
-
-    /**
-     * Deletes a group
-     * @param int $id
-     * @param int|null $move_users_to
-     */
-    public function deleteGroup(int $id, ?int $move_users_to = null)
-    {
-        $id = (int)$id;
-
-        if ($move_users_to === null) {
-            $updateUsers = 'UPDATE ' . tbname('users') .
-                    " SET `group_id`=NULL where `group_id`={$id}";
-        } else {
-            $updateUsers = 'UPDATE ' . tbname('users') .
-                    ' SET `group_id`=' . $move_users_to . " where `group_id`={$id}";
-        }
-
-        db_query($updateUsers);
-
-        $deleteGroupSQL = 'DELETE FROM `' . tbname('groups') .
-                '` WHERE id=' . $id;
-        db_query($deleteGroupSQL);
-    }
-
-    /**
      * Fetches a group
      * @param int|null $id
      * @return array|null
@@ -144,7 +75,7 @@ class ACL
     /**
      * Returns default ACL permissions for a new user
      * @global array<string, bool> $acl_array
-     * @param bool $admin If "admin" every permission is true
+     * @param bool $admin default value
      *
      * @return bool
      */
