@@ -116,10 +116,6 @@ class CoreUpgradeController extends \App\Controllers\Controller
             sureRemoveDir($tmpDir, true);
         }
 
-        if (! is_dir($tmpDir)) {
-            mkdir($tmpDir, 0777, true);
-        }
-
         $data = null;
 
         try {
