@@ -149,20 +149,6 @@ function remove_suffix(string $text, string $suffix): string
     return $text;
 }
 
-function bool2YesNo(
-    bool $value,
-    ?string $yesString = null,
-    ?string $noString = null
-): string {
-    if (! $yesString) {
-        $yesString = get_translation('yes');
-    }
-    if (! $noString) {
-        $noString = get_translation('no');
-    }
-    return $value ? $yesString : $noString;
-}
-
 /**
  * Generate random string
  * @param int $length
