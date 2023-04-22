@@ -7,7 +7,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Backend\UliCMSVersion;
 use App\Exceptions\CorruptDownloadException;
 use App\Security\Permissions\PermissionChecker;
-use Nette\Utile\FileSystem;
+use Nette\Utils\FileSystem;
 
 class CoreUpgradeController extends \App\Controllers\Controller
 {
@@ -113,13 +113,11 @@ class CoreUpgradeController extends \App\Controllers\Controller
         $tmpDir = Path::resolve('ULICMS_TMP/upgrade');
         $tmpArchive = Path::resolve("{$tmpDir}/upgrade.zip");
 
-        var_dump($tmpDir);
-
         if (is_dir($tmpDir)) {
-            FileSystem::delete($tmpDir, true);
+            // FileSystem::delete($tmpDir, true);
         }
         
-        FileSystem::createDir($tmp);
+        FileSystem::createDir($tmpDir);
 
         $data = null;
 
@@ -132,19 +130,17 @@ class CoreUpgradeController extends \App\Controllers\Controller
         if ($data) {
             file_put_contents($tmpArchive, $data);
 
-            $zip = new ZipArchive();
-            return false;
+            $zip = new ZipArchive();            
             if ($zip->open($tmpArchive) === true) {
                 $zip->extractTo($tmpDir);
                 $zip->close();
-                var_dump("foo");
-                return false;
             }
 
             $upgradeCodeDir = Path::resolve("{$tmpDir}/dist");
 
             if (is_dir($upgradeCodeDir)) {
                 recurse_copy($upgradeCodeDir, ULICMS_ROOT);
+                var_dump($tmpDir);
                 // sureRemoveDir($tmpDir, true);
 
                 Response::redirect('../update.php');
