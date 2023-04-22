@@ -107,10 +107,6 @@ class CoreUpgradeController extends \App\Controllers\Controller
 
         $jsonData = $this->getJSON();
 
-        if (! $jsonData) {
-            return null;
-        }
-
         $tmpDir = Path::resolve('ULICMS_TMP/upgrade');
         $tmpArchive = Path::resolve("{$tmpDir}/upgrade.zip");
 
