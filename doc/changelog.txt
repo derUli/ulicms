@@ -42,6 +42,7 @@ API-Änderungen:
 Entfernte API-Methoden:
 * getStringLengthInBytes()
 * splitAndTrim()
+* convertLineEndingsToLN()
 
 Entfernte Features:
 * Scroll To Top

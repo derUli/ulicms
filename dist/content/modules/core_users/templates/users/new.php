@@ -2,9 +2,11 @@
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+$groups = Group::getAll('name');
 
 if ($permissionChecker->hasPermission('users') && $permissionChecker->hasPermission('users_create')) {
     $languages = getAvailableBackendLanguages();
@@ -64,9 +66,7 @@ if ($permissionChecker->hasPermission('users') && $permissionChecker->hasPermiss
             </div>
         </div>
         <?php
-        $permissionChecker = new \App\Security\Permissions\ACL();
-    $allGroups = $permissionChecker->getAllGroups();
-    asort($allGroups);
+
     ?>
         <div class="field">
             <strong class="field-label">
@@ -76,15 +76,15 @@ if ($permissionChecker->hasPermission('users') && $permissionChecker->hasPermiss
                 name="group_id">
                 <option value="-">[<?php translate('none'); ?>]</option>
                 <?php
-            foreach ($allGroups as $key => $value) {
+            foreach ($groups as $group) {
                 ?>
-                    <option value="<?php echo $key; ?>"
+                    <option value="<?php echo $group->getId(); ?>"
                     <?php
-                if (Settings::get('default_acl_group') == $key) {
+                if (Settings::get('default_acl_group') == $group->getId()) {
                     echo 'selected';
                 }
                 ?>>
-                                <?php echo _esc($value); ?>
+                                <?php echo _esc($group->getName()); ?>
                     </option>
                 <?php }
             ?>

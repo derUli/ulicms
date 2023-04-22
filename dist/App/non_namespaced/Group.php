@@ -107,10 +107,10 @@ class Group
         return null;
     }
 
-    public static function getAll(): array
+    public static function getAll(string $order = 'id'): array
     {
         $datasets = [];
-        $sql = 'select id from `{prefix}groups` order by id';
+        $sql = 'select id from `{prefix}groups` order by ' . $order;
         $result = Database::query($sql, true);
         while ($row = Database::fetchobject($result)) {
             $datasets[] = new Group($row->id);

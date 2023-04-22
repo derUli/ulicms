@@ -15,13 +15,6 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('false', strbool(null));
     }
 
-    public function testConvertLineEndingsToLN()
-    {
-        $input = "Line1\r\nLine2\r\nLine3\n";
-        $expected = "Line1\nLine2\nLine3\n";
-        $this->assertEquals($expected, convertLineEndingsToLN($input));
-    }
-
     public function testSanitizeHeaders()
     {
         $input = [

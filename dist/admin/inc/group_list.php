@@ -2,6 +2,7 @@
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
 if (isset($_REQUEST['standard'])) {
@@ -9,8 +10,8 @@ if (isset($_REQUEST['standard'])) {
     Settings::set('default_acl_group', $standard);
 }
 
-$permissionChecker = new \App\Security\Permissions\ACL();
-$groups = $permissionChecker->getAllGroups();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+$groups = Group::getAll();
 
 $default_acl_group = (int)Settings::get('default_acl_group');
 
@@ -47,7 +48,10 @@ if (count($groups) > 0) {
             </thead>
             <tbody>
                 <?php
-                foreach ($groups as $id => $name) {
+                foreach ($groups as $group) {
+                    $id = $group->getId();
+                    $name = $group->getName();
+
                     ?>
                     <tr id="dataset-<?php echo $id; ?>">
                         <td><?php esc($id); ?></td>

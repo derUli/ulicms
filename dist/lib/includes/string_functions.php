@@ -109,11 +109,6 @@ function strbool(mixed $value): string
     return $value ? 'true' : 'false';
 }
 
-function convertLineEndingsToLN(string $s): string
-{
-    return normalizeLN($s, "\n");
-}
-
 /**
  * Escaped output of a string for XSS prevention
  *

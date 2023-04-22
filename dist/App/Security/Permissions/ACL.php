@@ -7,7 +7,6 @@ namespace App\Security\Permissions;
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\ModuleEventConstants;
-use Database;
 
 /**
  * Old permission checker class
@@ -54,22 +53,6 @@ class ACL
         $dataset = db_fetch_assoc($result);
 
         return $dataset;
-    }
-
-    /**
-     * Fetches all groups
-     * @param string $order
-     * @return array
-     */
-    public function getAllGroups(string $order = 'id DESC'): array
-    {
-        $list = [];
-        $sql = 'SELECT id, name FROM `' . tbname('groups') . '` ORDER by ' . $order;
-        $result = db_query($sql);
-        while ($assoc = db_fetch_assoc($result)) {
-            $list[$assoc['id']] = $assoc['name'];
-        }
-        return $list;
     }
 
     /**

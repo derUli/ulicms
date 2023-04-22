@@ -14,7 +14,6 @@ if (! $permissionChecker->hasPermission('groups')) {
     $removed = false;
 
     if (isset($_POST['add_group'])) {
-        $permissionChecker = new \App\Security\Permissions\ACL();
         $all_permissions = $permissionChecker->getDefaultACL(false);
         if (isset($_POST['user_permissons']) && count($_POST['user_permissons']) > 0) {
             foreach ($_POST['user_permissons'] as $permission_name) {

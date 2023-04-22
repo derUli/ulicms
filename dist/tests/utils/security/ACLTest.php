@@ -13,17 +13,6 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         $_SESSION = [];
     }
 
-    public function testGetAllGroups()
-    {
-        $acl = new \App\Security\Permissions\ACL();
-        $groups = $acl->getAllGroups();
-        $this->assertGreaterThanOrEqual(1, count($groups));
-        foreach ($groups as $id => $name) {
-            $this->assertIsNumeric($id);
-            $this->assertNotEmpty($name);
-        }
-    }
-
     public function testGetDefaultACL()
     {
         $acl = new \App\Security\Permissions\ACL();
