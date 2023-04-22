@@ -138,7 +138,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
 
             $upgradeCodeDir = Path::resolve("{$tmpDir}/dist");
             if (is_dir($upgradeCodeDir)) {
-                // recurse_copy($upgradeCodeDir, ULICMS_ROOT);
+                recurse_copy($upgradeCodeDir, ULICMS_ROOT);
                 var_dump($tmpDir);
                 // sureRemoveDir($tmpDir, true);
 
