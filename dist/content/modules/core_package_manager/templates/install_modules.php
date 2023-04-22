@@ -13,7 +13,7 @@ if (! $permissionChecker->hasPermission('install_packages')) {
 } else {
     $pkg_src = Settings::get('pkg_src');
     $pkg = new PackageManager();
-    
+
     @set_time_limit(0);
     ?>
     <p>

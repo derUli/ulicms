@@ -11,8 +11,9 @@ use App\Models\Content\Categories;
 use App\Models\Content\Language;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
-use App\Translations\JSTranslation;
 use App\Security\Permissions\PermissionChecker;
+use App\Translations\JSTranslation;
+
 use function App\HTML\icon;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();

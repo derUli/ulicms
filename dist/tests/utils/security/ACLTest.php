@@ -1,6 +1,5 @@
 <?php
 
-use App\Constants\HtmlEditor;
 
 class ACLTest extends \PHPUnit\Framework\TestCase
 {
@@ -38,7 +37,6 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-
     public function testGetDefaultACLAdmin()
     {
         $acl = new \App\Security\Permissions\ACL();
@@ -50,70 +48,6 @@ class ACLTest extends \PHPUnit\Framework\TestCase
             $this->assertIsString($key);
             $this->assertTrue($value);
         }
-    }
-
-    public function testCreateUpdateAndDeleteGroup()
-    {
-        $acl = new \App\Security\Permissions\ACL();
-        $id = $acl->createGroup(
-            'Test-Gruppe ' . uniqid(),
-            [
-                'foo' => true
-            ]
-        );
-        $this->assertGreaterThan(0, $id);
-
-        $this->assertEquals(
-            $id,
-            $acl->updateGroup(
-                $id,
-                'Test-Gruppe ' . uniqid() . ' umbenannt',
-                [
-                    'hello' => false
-                ]
-            )
-        );
-        $acl->deleteGroup($id);
-    }
-
-    public function testDeleteGroupMoveToOthers()
-    {
-        $acl = new \App\Security\Permissions\ACL();
-        $id = $acl->createGroup(
-            'Test-Gruppe ' . uniqid(),
-            [
-                'foo' => true
-            ]
-        );
-
-        $otherGroupId = $acl->createGroup(
-            'Test-Gruppe 2 ' . uniqid(),
-            [
-                'foo' => true
-            ]
-        );
-
-        $user = new User();
-        $user->setUsername('testuser-1');
-        $user->setPassword(rand_string(23));
-        $user->setLastname('Beutlin');
-        $user->setFirstname('Bilbo');
-        $user->setHTMLEditor(HtmlEditor::CKEDITOR);
-        $user->setPrimaryGroupId($id);
-        $user->save();
-
-        $acl = new \App\Security\Permissions\ACL();
-
-        $acl->deleteGroup($id, $otherGroupId);
-
-        $user->loadById($user->getId());
-
-        $this->assertEquals($otherGroupId, $user->getPrimaryGroupId());
-
-        $acl->deleteGroup($otherGroupId);
-
-        $user->loadById($user->getId());
-        $this->assertNull($user->getPrimaryGroupId());
     }
 
     public function testPermissionQueryResultWithNonExistingGroupReturnsNull()

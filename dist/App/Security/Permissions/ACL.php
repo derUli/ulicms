@@ -145,7 +145,7 @@ class ACL
      * Returns default ACL permissions for a new user
      * @global array<string, bool> $acl_array
      * @param bool $admin If "admin" every permission is true
-     * 
+     *
      * @return bool
      */
     public function getDefaultACL(
