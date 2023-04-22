@@ -148,7 +148,7 @@ class ACL
      * @param bool $plain if true returns a JSON string
      * @return bool
      */
-    public function getDefaultACLAsJSON(
+    public function getDefaultACL(
         bool $admin = false,
         bool $plain = false
     ) {
@@ -187,16 +187,5 @@ class ACL
 
         $json = json_encode($acl_data);
         return $json;
-    }
-
-    /**
-     * Alias for getDefaultACLAsJSON()
-     * @param bool $admin
-     * @param bool $plain
-     * @return type
-     */
-    public function getDefaultACL(bool $admin = false, bool $plain = false)
-    {
-        return $this->getDefaultACLAsJSON($admin, $plain);
     }
 }
