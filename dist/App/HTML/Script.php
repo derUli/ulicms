@@ -16,12 +16,12 @@ class Script
 {
     /**
      * Generates a <script> tag for file
-     * 
+     *
      * @param string $file
      * @param bool $async
      * @param bool $defer
      * @param array<string, string> $htmlAttributes
-     * 
+     *
      * @return string
      */
     public static function fromFile(
@@ -61,12 +61,12 @@ class Script
 
     /**
      * Generates a inline <script> tag
-     * 
+     *
      * @param string|null $code
      * @param bool $async
      * @param bool $defer
      * @param array<string, string> $htmlAttributes
-     * 
+     *
      * @return string
      */
     public static function fromString(

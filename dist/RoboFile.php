@@ -673,41 +673,10 @@ class RoboFile extends Tasks
     public function buildOptimizeResources(): void {
         $this->buildCleanupVendor();
         $this->buildCleanupNodeModules();
-        // $this->buildOptimizeImages();
         $this->buildOptimizeSvg();
         $this->buildMinifyCSS();
         $this->buildMinifyJSON();
         $this->buildMinifyHTML();
-    }
-
-    /**
-     * Optimize all image files
-     */
-    public function buildOptimizeImages(): void {
-        $dirs = [];
-
-        foreach(Finder::findFiles(['*.jpg', '*.png'])->from('.') as $name => $file) {
-            $dirs[] = dirname($file->getRealPath());
-        }
-
-        $dirs = array_unique($dirs);
-        $dirs = array_filter($dirs, static function($dir) {
-            return ! str_contains($dir, 'fixtures');
-        });
-
-        foreach($dirs as $dir){
-            $args = [
-                '-nr', // Don't recurse through subdirectories.
-                '-q 83', // JPEG Quality
-                $dir
-            ];
-
-            $cmd = 'optimize-images ' . implode(' ', $args);
-
-            $this->writeln($cmd);
-
-            system($cmd);
-        }
     }
 
      /**

@@ -16,11 +16,11 @@ class Style
 {
     /**
      * Generates a <link> tag for a stylesheet file
-     * 
+     *
      * @param string $href
      * @param ?string $media
      * @param array<string, string> $htmlAttributes
-     * 
+     *
      * @return string
      */
     public static function fromExternalFile(
@@ -53,11 +53,11 @@ class Style
 
     /**
      * Generates a <script> tag from string
-     * 
+     *
      * @param string|null $code
      * @param string|null $media
      * @param array<string, string> $htmlAttributes
-     * 
+     *
      * @return string
      */
     public static function fromString(

@@ -87,4 +87,11 @@ class RoboBuildTest extends RoboTestBase
 
         $this->assertEquals(12, substr_count($actual, '.svg'));
     }
+
+    public function testBuildMinifyCss(){
+        
+        $actual = $this->runRoboCommand(['build:minify-css']);
+        $this->assertStringContainsString('Compressing ', $actual);
+        $this->assertStringContainsString('/dist', $actual);
+    }
 }

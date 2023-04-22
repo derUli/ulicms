@@ -15,11 +15,11 @@ class Link
 {
     /**
      * Generate a <a> tag
-     * 
+     *
      * @param string $href
      * @param string $text
      * @param array<string, string> $htmlAttributes
-     * 
+     *
      * @return string
      */
     public static function link(
@@ -41,13 +41,13 @@ class Link
 
     /**
      * Returns a link to an action
-     * 
+     *
      * @param string $action
      * @param string $text
      * @param string|null $suffix
-     * 
+     *
      * @param array<string, string> $htmlAttributes
-     * 
+     *
      * @return string
      */
     public static function actionLink(

@@ -17,11 +17,13 @@ class Form
 {
     /**
      * Generates method call form
+     * 
      * @param string $sClass
      * @param string $sMethod
-     * @param array $otherVars
+     * @param array<string, string> $otherVars
      * @param string $requestMethod
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
+     * 
      * @return string
      */
     public static function buildMethodCallForm(
@@ -56,13 +58,15 @@ class Form
 
     /**
      * Generates method call button
+     * 
      * @param string $sClass
      * @param string $sMethod
      * @param string $buttonText
-     * @param array $buttonAttributes
-     * @param array $otherVars
-     * @param array $formAttributes
+     * @param array<string, string> $buttonAttributes
+     * @param array<string, string> $otherVars
+     * @param array<string, string> $formAttributes
      * @param string $requestMethod
+     * 
      * @return string
      */
     public static function buildMethodCallButton(
@@ -95,10 +99,12 @@ class Form
 
     /**
      * Generates delete button
+     * 
      * @param string $url
-     * @param array $otherVars
-     * @param array $htmlAttributes
-     * @return type
+     * @param array<string, string> $otherVars
+     * @param array<string, string> $htmlAttributes
+     * 
+     * @return string
      */
     public static function deleteButton(
         string $url,
@@ -116,7 +122,7 @@ class Form
         $htmlAttributesString = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
         $attribHtml = '';
 
-        if (! empty($htmlAttributes)) {
+        if (! empty($htmlAttributesString)) {
             $attribHtml .= " {$htmlAttributesString}";
         }
 
@@ -137,6 +143,7 @@ class Form
 
     /**
      * Returns closing tag for HTML form
+     * 
      * @return string
      */
     public static function endForm(): string
