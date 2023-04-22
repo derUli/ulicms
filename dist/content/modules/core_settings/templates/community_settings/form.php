@@ -28,7 +28,7 @@ if ($commentableContentTypeSettings) {
 <?php if (Request::getVar('save')) { ?>
     <div class="alert alert-success alert-dismissable fade in voffset3">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <?php translate('changes_was_saved'); ?>
+        <?php translate('changes_were_saved'); ?>
     </div>
 <?php } ?>
 <?php
@@ -81,7 +81,7 @@ echo App\HTML\Input::checkBox(
 echo ModuleHelper::endForm();
 
 $translation = new JSTranslation();
-$translation->addKey('changes_was_saved');
+$translation->addKey('changes_were_saved');
 $translation->render();
 
 enqueueScriptFile(

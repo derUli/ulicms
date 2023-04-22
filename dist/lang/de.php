@@ -177,7 +177,7 @@ add_translation('PLEASE_SELECT_FILETYPE', 'Bitte wählen Sie einen Dateityp aus'
 // Vorlagen
 add_translation('TEMPLATE_INFO_TEXT', 'Hier können Sie das Aussehen Ihrer Website durch Templates anpassen. Bitte vorsichtig beim Bearbeiten sein, wegen des enthaltenen PHP-Codes. Am Besten sollte diese Aufgabe von einem Profi übernommen werden.');
 add_translation('PLEASE_SELECT_TEMPLATE', 'Bitte wählen Sie ein Template aus:');
-add_translation('CHANGES_WAS_SAVED', 'Die Änderungen wurden gespeichert.');
+add_translation('CHANGES_WERE_SAVED', 'Die Änderungen wurden gespeichert.');
 
 add_translation('INSTALL_PACKAGE', 'Paket installieren');
 add_translation('INSTALLED_MODULES', 'Installierte Module');

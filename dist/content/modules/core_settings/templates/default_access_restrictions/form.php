@@ -89,13 +89,13 @@ if ($permissionChecker->hasPermission('default_access_restrictions_edit')) {
     if (Request::getVar('submit_form')) {
         ?>
         <p style="color: green" class="voffset3">
-            <?php translate('changes_was_saved'); ?>
+            <?php translate('changes_were_saved'); ?>
         </p>
         <?php
     }
     echo ModuleHelper::endForm();
     $translation = new JSTranslation();
-    $translation->addKey('changes_was_saved');
+    $translation->addKey('changes_were_saved');
     $translation->render();
     enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/default_edit_restrictions.js'));
     combinedScriptHtml();

@@ -67,7 +67,7 @@ if ($permissionChecker->hasPermission('motd')) {
     </div>
     <?php
     $translation = new JSTranslation();
-    $translation->addKey('changes_was_saved');
+    $translation->addKey('changes_were_saved');
     $translation->render();
 
     BackendHelper::enqueueEditorScripts();

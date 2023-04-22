@@ -32,7 +32,7 @@ if ($permissionChecker->hasPermission('privacy_settings')) {
     <?php
     if (Request::getVar('save')) {
         echo Alert::success(
-            get_translation('changes_was_saved'),
+            get_translation('changes_were_saved'),
             'voffset2'
         );
     }
@@ -157,7 +157,7 @@ if ($permissionChecker->hasPermission('privacy_settings')) {
     </div>
     <?php
     $translation = new JSTranslation();
-    $translation->addKey('changes_was_saved');
+    $translation->addKey('changes_were_saved');
     $translation->render();
 
     BackendHelper::enqueueEditorScripts();

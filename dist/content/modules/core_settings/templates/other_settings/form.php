@@ -257,7 +257,7 @@ if (! $permissionChecker->hasPermission('other')) {
     echo ModuleHelper::endForm();
 
     $translation = new JSTranslation();
-    $translation->addKey('changes_was_saved');
+    $translation->addKey('changes_were_saved');
     $translation->render();
 
     enqueueScriptFile(

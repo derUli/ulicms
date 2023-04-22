@@ -100,7 +100,7 @@ if (! $permissionChecker->hasPermission('groups')) {
     if ($modified) {
         ?>
         <div class="alert alert-success">
-            <?php translate('changes_was_saved'); ?>
+            <?php translate('changes_were_saved'); ?>
         </div>
         <?php
     }

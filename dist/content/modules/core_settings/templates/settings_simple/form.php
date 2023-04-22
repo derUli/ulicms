@@ -162,7 +162,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     echo ModuleHelper::endForm();
 
     $translation = new JSTranslation();
-    $translation->addKey('changes_was_saved');
+    $translation->addKey('changes_were_saved');
     $translation->render();
 
     enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/settings_simple.js'));

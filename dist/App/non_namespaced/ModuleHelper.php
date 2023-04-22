@@ -128,9 +128,11 @@ abstract class ModuleHelper extends Helper
     {
         $controller = null;
         $main_class = getModuleMeta($module, 'main_class');
+
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
         }
+
         return $controller;
     }
 
