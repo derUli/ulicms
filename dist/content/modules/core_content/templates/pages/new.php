@@ -12,14 +12,13 @@ use App\Models\Content\Language;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
 use App\Translations\JSTranslation;
-
+use App\Security\Permissions\PermissionChecker;
 use function App\HTML\icon;
 
+$permissionChecker = PermissionChecker::fromCurrentUser();
 $parent_id = Request::getVar('parent_id', null, 'int');
-
-$permissionChecker = new \App\Security\Permissions\ACL();
-
 $groups = db_query('SELECT id, name from ' . tbname('groups'));
+
 if (
     $permissionChecker->hasPermission('pages') &&
     $permissionChecker->hasPermission('pages_create')
