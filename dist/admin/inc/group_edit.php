@@ -13,7 +13,8 @@ if (! $permissionChecker->hasPermission('groups')) {
     $permissionChecker = new \App\Security\Permissions\ACL();
     $all_permissions = $permissionChecker->getPermissionQueryResult($id);
     $groupName = _esc($all_permissions['name']);
-    $all_permissions_all = $permissionChecker->getDefaultACL(false, true);
+    
+    $all_permissions_all = $permissionChecker->getDefaultACL(false);
     $all_permissions = json_decode($all_permissions['permissions'], true);
     foreach ($all_permissions_all as $name => $value) {
         if (! isset($all_permissions[$name])) {

@@ -25,20 +25,31 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetDefaultACLAsJSONWithAdminAndPlain()
+    public function testGetDefaultACL()
     {
         $acl = new \App\Security\Permissions\ACL();
-        $output = $acl->getDefaultACLAsJSON(true, false);
+        $actual = $acl->getDefaultACL(false);
 
-        $this->assertTrue(is_json($output));
+        $this->assertIsArray($actual);
+
+        foreach($actual as $key => $value){
+            $this->assertIsString($key);
+            $this->assertFalse($value);
+        }
     }
 
-    public function testGetDefaultACLWithAdminAndPlain()
+
+    public function testGetDefaultACLAdmin()
     {
         $acl = new \App\Security\Permissions\ACL();
-        $output = $acl->getDefaultACL(true, false);
+        $actual = $acl->getDefaultACL(true);
 
-        $this->assertTrue(is_json($output));
+        $this->assertIsArray($actual);
+
+        foreach($actual as $key => $value){
+            $this->assertIsString($key);
+            $this->assertTrue($value);
+        }
     }
 
     public function testCreateUpdateAndDeleteGroup()

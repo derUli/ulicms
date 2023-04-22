@@ -34,7 +34,7 @@ class ACL
      */
     public function createGroup(string $name, ?array $permissions = null): int
     {
-        $permissionData = $permissions === null ? $this->getDefaultACL() : json_encode($permissions);
+        $permissionData = $permissions === null ? json_encode($this->getDefaultACL()) : json_encode($permissions);
 
         $sql = 'INSERT INTO `' . tbname('groups') .
                 '` (`name`, `permissions`) ' .
@@ -60,7 +60,7 @@ class ACL
         string $name,
         ?array $permissions = null
     ): int {
-        $permissionData = $permissions === null ? $this->getDefaultACL() : json_encode($permissions);
+        $permissionData = $permissions === null ? json_encode($this->getDefaultACL()) : json_encode($permissions);
 
         $sql = 'UPDATE `' . tbname('groups') . "` SET name='" .
                 db_escape($name) . "', permissions='" . db_escape($permissionData) . "' WHERE id=" . $id;
@@ -143,14 +143,13 @@ class ACL
 
     /**
      * Returns default ACL permissions for a new user
-     * @global type $acl_array
+     * @global array<string, bool> $acl_array
      * @param bool $admin If "admin" every permission is true
-     * @param bool $plain if true returns a JSON string
+     * 
      * @return bool
      */
     public function getDefaultACL(
         bool $admin = false,
-        bool $plain = false
     ) {
         $acl_data = [];
 
@@ -173,19 +172,12 @@ class ACL
             }
         }
 
-        // Admin has all rights
-        $default_value = $admin;
-
+        // Default value
         foreach ($acl_data as $key => $value) {
-            $acl_data[$key] = $default_value;
+            $acl_data[$key] = $admin;
         }
 
         ksort($acl_data);
-        if ($plain) {
-            return $acl_data;
-        }
-
-        $json = json_encode($acl_data);
-        return $json;
+        return $acl_data;
     }
 }

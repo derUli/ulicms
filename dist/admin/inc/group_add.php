@@ -6,7 +6,8 @@ use App\Constants\DefaultValues;
 use App\Models\Content\Language;
 
 $permissionChecker = new \App\Security\Permissions\ACL();
-$all_permissions = $permissionChecker->getDefaultACL(true, true);
+$all_permissions = $permissionChecker->getDefaultACL(true);
+
 $languages = Language::getAllLanguages();
 ?>
 <form action="?action=groups" method="post">
