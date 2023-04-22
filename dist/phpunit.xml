@@ -72,7 +72,6 @@
             <directory>content/modules/extend_upgrade_helper</directory>
             <directory>content/modules/core_package_manager/templates</directory>
             <directory>content/modules/fortune2</directory>
-            <directory>content/modules/oneclick_upgrade</directory>
             <directory>content/modules/slicknav/</directory>
             <directory>content/modules/core_home/templates</directory>
             <directory>content/modules/core_history/templates</directory>

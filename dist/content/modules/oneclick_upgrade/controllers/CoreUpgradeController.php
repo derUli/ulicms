@@ -112,8 +112,10 @@ class CoreUpgradeController extends \App\Controllers\Controller
         $tmpDir = Path::resolve('ULICMS_TMP/upgrade');
         $tmpArchive = Path::resolve("{$tmpDir}/upgrade.zip");
 
+        var_dump($tmpDir);
+
         if (is_dir($tmpDir)) {
-            sureRemoveDir($tmpDir, true);
+            sureRemoveDir($tmpDir, false);
         }
 
         $data = null;
@@ -143,7 +145,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
                 return true;
             }
 
-                return false;
+            return false;
 
         }
             return false;
