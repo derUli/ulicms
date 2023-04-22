@@ -12,7 +12,7 @@ class RoboTestBase extends \PHPUnit\Framework\TestCase
     protected function runRoboCommand(array $command): string
     {
         $runner = new Robo\Runner(RoboTestFile::class);
-        array_unshift($command, 'vendor/bin/robo');
+        array_unshift($command, Path::resolve('ULICMS_ROOT/vendor/bin/robo'));
         ob_start();
         $runner->execute($command);
         return trim(ob_get_clean());

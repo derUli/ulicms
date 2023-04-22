@@ -57,7 +57,7 @@ class Video extends Model
         $sql = "SELECT id FROM {prefix}videos ORDER BY {$order}";
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
-            $datasets[] = new self((int)$row->id);
+            $datasets[] = new static((int)$row->id);
         }
         return $datasets;
     }

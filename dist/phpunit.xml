@@ -20,7 +20,7 @@
       cacheDirectory=".phpunit.cache"
       backupStaticProperties="false"
       requireCoverageMetadata="false"
-      enforceTimeLimit="false"
+      enforceTimeLimit="true"
    >
       <coverage>
          <report>

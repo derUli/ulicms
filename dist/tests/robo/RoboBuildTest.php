@@ -2,6 +2,7 @@
 
 use Nette\Utils\FileSystem;
 use Nette\Utils\Finder;
+use App\Helpers\TestHelper;
 
 require_once __DIR__ . '/RoboTestFile.php';
 require_once __DIR__ . '/RoboTestBase.php';
@@ -17,6 +18,8 @@ class RoboBuildTest extends RoboTestBase
     protected function tearDown(): void {
         FileSystem::delete('.DS_STORE');
         FileSystem::createDir(ULICMS_TMP);
+
+        chdir(Path::Resolve('ULICMS_ROOT'));
 
         parent::tearDown();
     }
@@ -75,5 +78,15 @@ class RoboBuildTest extends RoboTestBase
                 '*.pyc'
             ])->collect();
             $this->assertCount(0, $collectedAfter);
+    }
+
+    
+    public function testBuildOptimizeSVG(): void
+    {
+        chdir(Path::resolve('ULICMS_ROOT/vendor'));
+        
+        $actual = $this->runRoboCommand(['build:optimize-svg']);
+        
+        $this->assertEquals(12, substr_count($actual, '.svg'));
     }
 }

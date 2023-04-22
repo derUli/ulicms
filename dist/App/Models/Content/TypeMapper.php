@@ -42,7 +42,7 @@ class TypeMapper
         if (! (isset(self::$mapping[$type]) && class_exists(self::$mapping[$type]))) {
             return null;
         }
-        return new self::$mapping[$type]();
+        return new static::$mapping[$type]();
     }
 
     // custom modules may load their own content type models

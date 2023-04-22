@@ -35,7 +35,7 @@ class PermissionChecker
      */
     public static function fromCurrentUser(): self
     {
-        return new self(get_user_id());
+        return new static(get_user_id());
     }
 
     /**

@@ -87,7 +87,7 @@ class Group
     public static function getCurrentGroup(): ?Group
     {
         if (self::getCurrentGroupId()) {
-            return new self(self::getCurrentGroupId());
+            return new static(self::getCurrentGroupId());
         }
         return null;
     }
@@ -103,7 +103,7 @@ class Group
     public static function getDefaultPrimaryGroup(): ?Group
     {
         if (self::getDefaultPrimaryGroupId()) {
-            return new self(self::getDefaultPrimaryGroupId());
+            return new static(self::getDefaultPrimaryGroupId());
         }
         return null;
     }

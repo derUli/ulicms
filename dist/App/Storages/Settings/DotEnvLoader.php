@@ -45,7 +45,7 @@ class DotEnvLoader
 
         static::checkExists($dir, $file);
 
-        return new self($dir, $file);
+        return new static($dir, $file);
     }
 
     /**
