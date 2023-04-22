@@ -15,7 +15,7 @@ abstract class ACL
 {
     /**
      * Returns default ACL permissions for a new user
-     * 
+     *
      * @global array<string, bool> $acl_array
      * @param bool $admin default value
      *

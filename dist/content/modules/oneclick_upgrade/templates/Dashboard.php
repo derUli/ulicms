@@ -4,10 +4,19 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Security\Permissions\PermissionChecker;
 
+/**
+ * @var PermissionChecker
+ */
 $permissionChecker = PermissionChecker::fromCurrentUser();
 
-if ($permissionChecker->hasPermission('update_system')) {
-    $version = ControllerRegistry::get('CoreUpgradeController')->checkForUpgrades();
+/**
+ * @var CoreUpgradeController|null
+ */
+$controller = ControllerRegistry::get('CoreUpgradeController');
+
+if ($controller && $permissionChecker->hasPermission('update_system')) {
+    $version = $controller->checkForUpgrades();
+
     if ($version) {
         ?>
         <h2 class="accordion-header"><?php translate('ONECLICK_UPGRADE'); ?></h2>

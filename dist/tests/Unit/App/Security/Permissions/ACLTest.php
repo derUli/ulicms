@@ -26,7 +26,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetDefaultACLAdmin(): void 
+    public function testGetDefaultACLAdmin(): void
     {
         $actual = ACL::getDefaultACL(true);
 
