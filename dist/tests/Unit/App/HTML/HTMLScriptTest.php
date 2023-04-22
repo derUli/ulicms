@@ -37,6 +37,11 @@ class HTMLScriptTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('<script src="folder/script.js"></script>', Script::fromFile('folder/script.js'));
     }
 
+    public function testExternalScriptExisting()
+    {
+        $this->assertStringStartsWith('<script src="lib/js/global.js?time=', Script::fromFile('lib/js/global.js'));
+    }
+
     public function testExternalScriptAsync()
     {
         $this->assertEquals('<script src="folder/script.js" async="async"></script>', Script::fromFile('folder/script.js', true));

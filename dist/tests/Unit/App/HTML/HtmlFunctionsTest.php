@@ -71,9 +71,10 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase
 
     public function testWithAdditionalAttributes()
     {
-        $this->assertEquals('<i title="Hallo Welt" data-something="hello" class="fas fa-hamburger"></i>', icon('fas fa-hamburger', [
+        $this->assertEquals('<i title="Hallo Welt" data-something="hello" class="fas fa-hamburger foobar"></i>', icon('fas fa-hamburger', [
             'title' => 'Hallo Welt',
-            'data-something' => 'hello'
+            'data-something' => 'hello',
+            'class' => 'foobar'
         ]));
     }
 

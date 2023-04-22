@@ -29,4 +29,8 @@ class TestHelperTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('Hello World!', $output);
     }
+
+    public function testIsWindowsServer() {
+        $this->assertIsBool(TestHelper::isWindowsServer());
+    }
 }
