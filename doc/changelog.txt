@@ -10,7 +10,7 @@ Fehlerkorrekturen:
 Entfernte Features:
 * Veraltete HTTP Security Header entfernt (X-XSS-Protection, Expect-CT, Referrer-Policy)
 
-* Neue API-Methoden:
+Neue API-Methoden:
 * StringHelper::splitAndTrim()
 * BooleanHelper::bool2YesNo()
 
