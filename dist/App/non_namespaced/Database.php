@@ -46,21 +46,23 @@ class Database
         ?string $socket = null,
         bool $db_strict_mode = false
     ): ?mysqli {
-        // Until PHP 8.0 this was the default value
-        // TODO: Make hard exceptions for SQL default
-        mysqli_report(MYSQLI_REPORT_OFF);
 
         // Store old error reporting settings
         $displayErrors = ini_get('display_errors');
         $errorReporting = error_reporting();
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Set MySQLi to throw exceptions
 
-        $connected = @mysqli_connect($server, $user, $password, '', $port, $socket);
-
-        self::$connection = $connected ?: null;
-
-        if (! self::$connection) {
+        // Catch connection exceptions to prevent PHPUnit log from being spammed
+        try {
+          self::$connection = mysqli_connect($server, $user, $password, '', $port, $socket);
+        } catch(mysqli_sql_exception $e){
+            self::$connection = null;
             return null;
         }
+
+        // Until PHP 8.0 this was the default value
+        // TODO: Make hard exceptions for SQL default
+        mysqli_report(MYSQLI_REPORT_OFF);
 
         self::query("SET NAMES 'utf8mb4'");
 
