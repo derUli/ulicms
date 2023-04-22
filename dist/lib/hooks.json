@@ -111,5 +111,7 @@
     "afterCreateUser",
     "afterJqueryInclude",
     "head",
-    "uninstall"
+    "uninstall",
+    "settings",
+    "getSettingsHeadline"
  ]

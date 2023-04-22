@@ -176,7 +176,7 @@ add_translation('PLEASE_SELECT_FILETYPE', 'Plese select a file type');
 // Vorlagen
 add_translation('TEMPLATE_INFO_TEXT', 'You can edit your website templates here. Please be careful, because of the contained PHP code.');
 add_translation('PLEASE_SELECT_TEMPLATE', 'please select a template');
-add_translation('CHANGES_WAS_SAVED', 'Changes was saved.');
+add_translation('CHANGES_WERE_SAVED', 'Changes were saved.');
 
 add_translation('INSTALL_PACKAGE', 'Install package');
 add_translation('INSTALLED_MODULES', 'Installed modules');
