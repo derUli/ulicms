@@ -1,5 +1,6 @@
 <?php
 
+use App\Security\Permissions\ACL;
 
 class ACLTest extends \PHPUnit\Framework\TestCase
 {
@@ -15,8 +16,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
 
     public function testGetDefaultACL()
     {
-        $acl = new \App\Security\Permissions\ACL();
-        $actual = $acl->getDefaultACL(false);
+        $actual = ACL::getDefaultACL(false);
 
         $this->assertIsArray($actual);
 
@@ -28,8 +28,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
 
     public function testGetDefaultACLAdmin()
     {
-        $acl = new \App\Security\Permissions\ACL();
-        $actual = $acl->getDefaultACL(true);
+        $actual = ACL::getDefaultACL(true);
 
         $this->assertIsArray($actual);
 
@@ -41,14 +40,12 @@ class ACLTest extends \PHPUnit\Framework\TestCase
 
     public function testPermissionQueryResultWithNonExistingGroupReturnsNull()
     {
-        $acl = new \App\Security\Permissions\ACL();
-        $this->assertNull($acl->getPermissionQueryResult(PHP_INT_MAX));
+        $this->assertNull(ACL::getPermissionQueryResult(PHP_INT_MAX));
     }
 
     public function testPermissionQueryResultWithoutIdReturnsNull()
     {
-        $acl = new \App\Security\Permissions\ACL();
-        $this->assertNull($acl->getPermissionQueryResult());
+        $this->assertNull(ACL::getPermissionQueryResult());
     }
 
     public function testPermissionQueryResultWithGroupIdAsArgumentReturnsAssoc()
@@ -56,9 +53,9 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         $group = new Group();
         $group->setName('testgroup');
         $group->save();
-        $acl = new \App\Security\Permissions\ACL();
 
-        $groupData = $acl->getPermissionQueryResult($group->getId());
+        $groupData = ACL::getPermissionQueryResult($group->getId());
+
         $this->assertIsArray($groupData);
 
         $this->assertGreaterThanOrEqual(4, count($groupData));
@@ -81,8 +78,7 @@ class ACLTest extends \PHPUnit\Framework\TestCase
 
         $_SESSION['group_id'] = $group->getId();
 
-        $acl = new \App\Security\Permissions\ACL();
-        $groupData = $acl->getPermissionQueryResult();
+        $groupData = ACL::getPermissionQueryResult();
         $this->assertIsArray($groupData);
 
         $this->assertGreaterThanOrEqual(4, count($groupData));
@@ -95,10 +91,5 @@ class ACLTest extends \PHPUnit\Framework\TestCase
         );
 
         $group->delete();
-    }
-
-    public function testHasPermissionReturnsFalse() {
-        $acl = new \App\Security\Permissions\ACL();
-        $this->assertFalse($acl->hasPermission('foobar'));
     }
 }

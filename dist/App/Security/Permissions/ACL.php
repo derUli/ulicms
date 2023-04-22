@@ -15,29 +15,20 @@ use App\Constants\ModuleEventConstants;
 class ACL
 {
     /**
-     * Checks if the current user has a permission
-     * @param string $name
-     * @return bool
-     */
-    public function hasPermission(string $name): bool
-    {
-        $checker = new PermissionChecker(get_user_id());
-        return $checker->hasPermission($name);
-    }
-
-    /**
      * Fetches a group
      * @param int|null $id
      * @return array|null
      */
-    public function getPermissionQueryResult(?int $id = null): ?array
+    public static function getPermissionQueryResult(?int $id = null): ?array
     {
         $group_id = null;
+
         if ($id) {
             $group_id = $id;
         } elseif (isset($_SESSION['group_id'])) {
             $group_id = $_SESSION['group_id'];
         }
+
         if (! $group_id) {
             return null;
         }
@@ -62,7 +53,7 @@ class ACL
      *
      * @return bool
      */
-    public function getDefaultACL(
+    public static function getDefaultACL(
         bool $admin = false,
     ) {
         $acl_data = [];

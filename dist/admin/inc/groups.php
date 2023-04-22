@@ -4,8 +4,11 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 // FIXME: this file looks like shit, refactor this code to MVC pattern.
 use App\Models\Content\Language;
+use App\Security\Permissions\ACL;
+use App\Security\Permissions\PermissionChecker;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if (! $permissionChecker->hasPermission('groups')) {
     noPerms();
 } else {
@@ -14,7 +17,7 @@ if (! $permissionChecker->hasPermission('groups')) {
     $removed = false;
 
     if (isset($_POST['add_group'])) {
-        $all_permissions = $permissionChecker->getDefaultACL(false);
+        $all_permissions = ACL::getDefaultACL(false);
         if (isset($_POST['user_permissons']) && count($_POST['user_permissons']) > 0) {
             foreach ($_POST['user_permissons'] as $permission_name) {
                 $all_permissions[$permission_name] = true;
@@ -55,8 +58,7 @@ if (! $permissionChecker->hasPermission('groups')) {
         $id = (int)$_POST['id'];
         $name = trim($_POST['name']);
 
-        $permissionChecker = new \App\Security\Permissions\ACL();
-        $all_permissions = $permissionChecker->getDefaultACL(false);
+        $all_permissions = ACL::getDefaultACL(false);
 
         if (isset($_POST['user_permissons']) && count($_POST['user_permissons']) > 0) {
             foreach ($_POST['user_permissons'] as $permission_name) {

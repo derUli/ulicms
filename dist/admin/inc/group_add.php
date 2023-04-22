@@ -4,9 +4,9 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\DefaultValues;
 use App\Models\Content\Language;
+use App\Security\Permissions\ACL;
 
-$permissionChecker = new \App\Security\Permissions\ACL();
-$all_permissions = $permissionChecker->getDefaultACL(true);
+$all_permissions = ACL::getDefaultACL(true);
 
 $languages = Language::getAllLanguages();
 ?>
