@@ -50,7 +50,7 @@ class Audio extends Model {
         $sql = "SELECT id FROM {prefix}audio ORDER BY {$order}";
         $result = Database::query($sql, true);
         while ($row = Database::fetchObject($result)) {
-            $datasets[] = new static((int)$row->id);
+            $datasets[] = new self((int)$row->id);
         }
         return $datasets;
     }

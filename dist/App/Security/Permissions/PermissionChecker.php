@@ -32,7 +32,7 @@ class PermissionChecker {
      * @return self
      */
     public static function fromCurrentUser(): self {
-        return new static(get_user_id());
+        return new self(get_user_id());
     }
 
     /**
