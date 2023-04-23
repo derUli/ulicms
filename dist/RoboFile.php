@@ -653,7 +653,6 @@ class RoboFile extends Tasks {
     public function buildPrepare(): void {
         $this->initUliCMS();
         $this->buildCopyChangelog();
-        $this->buildPhpCsFixer();
         $this->buildLicenses();
         $this->buildDeleteBullshit();
     }

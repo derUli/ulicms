@@ -16,10 +16,12 @@ function get_jquery_url(): string {
 
 /**
  * Gets absolute shortlink URL in the foramt https://example.org/?goid=123
- * @param type $id
+ *
+ * @param int $id
+ *
  * @return string|null
  */
-function get_shortlink($id = null): ?string {
+function get_shortlink(?int $id = null): ?string {
     $shortlink = null;
     $id = $id ?: get_ID();
 
@@ -33,6 +35,7 @@ function get_shortlink($id = null): ?string {
 
 /**
  * Gets canonciel URL for current page
+ *
  * @return string
  */
 function get_canonical(): string {
