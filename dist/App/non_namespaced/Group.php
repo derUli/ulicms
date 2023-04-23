@@ -8,19 +8,26 @@ use App\Models\Content\Language;
 use App\Security\Permissions\ACL;
 
 class Group {
-    private $id = null;
+    private ?int $id = null;
 
-    private $name = '';
+    private string $name = '';
 
-    private $permissions = [];
+    /**
+     * @var array<int|string, bool|null>
+     */
+    private array $permissions = [];
 
-    private $languages = [];
+    /**
+     * @var Language[]
+     */
+    private array $languages = [];
 
-    private $allowable_tags = null;
+    private ?string $allowable_tags = null;
 
     /**
      * Constructor
-     * @param type $id
+     *
+     * @param ?int $id
      */
     public function __construct($id = null) {
         $this->permissions = ACL::getDefaultACL(false);
@@ -46,7 +53,7 @@ class Group {
 
             foreach ($allPermissions as $name => $value) {
                 if (! isset($this->permissions[$name])) {
-                    $this->addPermission($name, $value);
+                    $this->addPermission((string)$name, (bool)$value);
                 }
             }
         }
@@ -70,6 +77,7 @@ class Group {
 
    /**
     * Get the primary group id of the current user
+    *
     * @return int|null
     */
     public static function getCurrentGroupId(): ?int {
@@ -78,11 +86,12 @@ class Group {
 
     /**
      * Get the primary group of the current user
+     *
      * @return Group|null
      */
     public static function getCurrentGroup(): ?Group {
         if (self::getCurrentGroupId()) {
-            return new static(self::getCurrentGroupId());
+            return new self(self::getCurrentGroupId());
         }
         return null;
     }
@@ -96,11 +105,18 @@ class Group {
     // get the default group
     public static function getDefaultPrimaryGroup(): ?Group {
         if (self::getDefaultPrimaryGroupId()) {
-            return new static(self::getDefaultPrimaryGroupId());
+            return new self(self::getDefaultPrimaryGroupId());
         }
         return null;
     }
 
+    /**
+     * Get all groups
+     *
+     * @param string $order
+     *
+     * @return Group[]
+     */
     public static function getAll(string $order = 'id'): array {
         $datasets = [];
         $sql = 'select id from `{prefix}groups` order by ' . $order;
@@ -135,6 +151,7 @@ class Group {
 
     /**
      * Get id
+     *
      * @return int|null
      */
     public function getId(): ?int {
@@ -143,7 +160,9 @@ class Group {
 
     /**
      * Set id
+     *
      * @param int|null $id
+     *
      * @return void
      */
     public function setId(?int $id): void {
@@ -152,6 +171,7 @@ class Group {
 
     /**
      * Get name
+     *
      * @return string|null
      */
     public function getName(): ?string {
@@ -160,16 +180,19 @@ class Group {
 
     /**
      * Set name
-     * @param string|null $name
+     *
+     * @param string $name
+     *
      * @return void
      */
-    public function setName(?string $name): void {
+    public function setName(string $name): void {
         $this->name = $name;
     }
 
     /**
      * Get permissions
-     * @return array
+     *
+     * @return array<int|string, bool|null>
      */
     public function getPermissions(): array {
         return $this->permissions;
@@ -177,7 +200,9 @@ class Group {
 
     /**
      * Set permissions
-     * @param array $permissions
+     *
+     * @param array<int|string, bool|null> $permissions
+     *
      * @return void
      */
     public function setPermissions(array $permissions): void {
@@ -186,8 +211,10 @@ class Group {
 
     /**
      * Add permission
+     *
      * @param string $name
      * @param bool $value
+     *
      * @return void
      */
     public function addPermission(string $name, bool $value = false): void {
@@ -196,7 +223,9 @@ class Group {
 
     /**
      * Has permission
+     *
      * @param string $name
+     *
      * @return bool
      */
     public function hasPermission(string $name): bool {
@@ -207,7 +236,9 @@ class Group {
 
     /**
      * Remove permission
+     *
      * @param string $name
+     *
      * @return void
      */
     public function removePermission(string $name): void {
@@ -218,7 +249,8 @@ class Group {
 
     /**
      * Get languages
-     * @return array
+     *
+     * @return Language[]
      */
     public function getLanguages(): array {
         return $this->languages;
@@ -226,7 +258,9 @@ class Group {
 
     /**
      * Set languages
-     * @param array $val
+     *
+     * @param Language[] $val
+     *
      * @return void
      */
     public function setLanguages(array $val): void {
@@ -235,6 +269,7 @@ class Group {
 
     /**
      * Get allowed HTML tags
+     *
      * @return string|null
      */
     public function getAllowableTags(): ?string {
@@ -243,7 +278,9 @@ class Group {
 
     /**
      * Set allowed HTML tags
+     *
      * @param string|null $val
+     *
      * @return void
      */
     public function setAllowableTags(?string $val): void {
@@ -253,8 +290,10 @@ class Group {
 
     /**
      * Get all users in this group
+     *
      * @param string $order
-     * @return array
+     *
+     * @return User[]
      */
     public function getUsers(string $order = 'id'): array {
         $manager = new UserManager();
