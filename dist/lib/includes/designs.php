@@ -6,8 +6,10 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 
 /**
  * Gets metadata of a theme
+ *
  * @param string $theme
  * @param string $attrib
+ *
  * @return type
  */
 function getThemeMeta(string $theme, ?string $attrib = null) {

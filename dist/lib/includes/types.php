@@ -6,6 +6,11 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 
 use App\Models\Content\Types\DefaultContentTypes;
 
+/**
+ * Get used post types
+ *
+ * @return string[]
+ */
 function get_used_post_types(): array {
     $result = Database::query('select `type` from {prefix}content '
                     . 'group by `type`', true);
@@ -23,6 +28,11 @@ function get_used_post_types(): array {
     return $return_types;
 }
 
+/**
+ * Get available post types
+ *
+ * @return string[]
+ */
 function get_available_post_types(): array {
     $types = DefaultContentTypes::getAll();
     $types = array_keys($types);

@@ -8,9 +8,7 @@ use App\Packages\Theme;
 use App\Utils\CacheUtil;
 
 class DesignSettingsController extends \App\Controllers\Controller {
-    protected $generatedSCSS;
-
-    private $moduleName = 'core_settings';
+    protected string $generatedSCSS;
 
     public function __construct() {
         parent::__construct();
@@ -99,8 +97,8 @@ class DesignSettingsController extends \App\Controllers\Controller {
 
     /**
      * Get font family selection for design settings
-     * @global type $fonts
-     * @return array
+     *
+     * @return array<string, string>
      */
     public function getFontFamilys(): array {
         $fonts = [];
@@ -109,7 +107,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
             'ULICMS_ROOT/node_modules/system-font-stacks/index.json'
         );
 
-        $fontIndex = json_decode(file_get_contents($fontStackFile), true);
+        $fontIndex = json_decode(file_get_contents($fontStackFile) ?: '', true);
 
         foreach ($fontIndex as $index => $fontStack) {
             $name = $fontStack[0];
@@ -221,12 +219,15 @@ class DesignSettingsController extends \App\Controllers\Controller {
         }
     }
 
+    /**
+     * Get font size selections for dropdown
+     * @return string[]
+     */
     public function getFontSizes(): array {
         $sizes = [];
         for ($i = 6; $i <= 80; $i++) {
             $sizes[] = $i . 'px';
         }
-        do_event('custom_font_sizes');
 
         $sizes = apply_filter($sizes, 'font_sizes');
         return $sizes;

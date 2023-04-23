@@ -30,6 +30,8 @@ function get_ip(): ?string {
 }
 
 function get_host(): string {
+    $host = '';
+
     if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
         $host = $_SERVER['HTTP_X_FORWARDED_HOST'];
         $elements = explode(',', $host);
@@ -55,7 +57,13 @@ function get_host(): string {
     return trim($host);
 }
 
-// Übersetzung HTTP Status Code => Name
+/**
+ * Translate number to HttpStatusCode
+ *
+ * @param int $nr
+ *
+ * @return string
+ */
 function getStatusCodeByNumber(int $nr) {
     return Response::getStatusCodeByNumber($nr);
 }
@@ -73,11 +81,11 @@ function get_referrer(): ?string {
 }
 
 function get_useragent(): string {
-    return Request::getUserAgent();
+    return Request::getUserAgent() ?? '';
 }
 
 function get_request_method(): string {
-    return Request::getMethod();
+    return Request::getMethod() ?? '';
 }
 
 // Check for Secure HTTP Connection (SSL)
@@ -85,12 +93,23 @@ function is_ssl(): bool {
     return Request::isSSL();
 }
 
+/**
+ * Send HTTP Header
+ *
+ * @param string $header
+ *
+ * @return bool
+ */
 function send_header(string $header): bool {
+    /**
+     * @var array<string, string>
+     */
     $headers = \App\Storages\Vars::get('http_headers');
 
     if (! $headers) {
         $headers = [];
     }
+
     if (! in_array($header, $headers)) {
         $headers[] = $header;
     }

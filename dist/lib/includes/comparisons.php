@@ -48,6 +48,7 @@ function is_admin_dir(): bool {
 
 /**
  * Checks by useragent if the client is a desktop computer
+ *
  * @return bool
  */
 function is_desktop(): bool {

@@ -9,7 +9,10 @@ use App\Registries\LoggerRegistry;
 
 /**
  * Default exception handler
- * @param AccessDeniedException $exception
+ *
+ * @param Throwable $exception
+ *
+ * @return void
  */
 function exception_handler(Throwable $exception): void {
     defined('EXCEPTION_OCCURRED') || define('EXCEPTION_OCCURRED', true);

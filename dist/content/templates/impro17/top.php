@@ -3,7 +3,7 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 $site_slogan = get_site_slogan();
-$data = get_custom_data();
+$data = CustomData::get();
 $site_slogan = $data['site_slogan'] ?? get_site_slogan();
 
 $q = $_GET['q'] ?? '';
@@ -20,12 +20,12 @@ og_html_prefix();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet"
           href="<?php echo getModulePath('bootstrap'); ?>css/bootstrap.min.css">
-          <?php
-          base_metas();
-og_tags();
+<?php
+    base_metas();
+    og_tags();
 
-enqueueStylesheet(getTemplateDirPath('impro17') . 'style.scss');
-combinedStylesheetHtml();
+    enqueueStylesheet(getTemplateDirPath('impro17') . 'style.scss');
+    combinedStylesheetHtml();
 ?>
 </head>
 <body class="<?php body_classes(); ?>">

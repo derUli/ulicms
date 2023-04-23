@@ -13,6 +13,7 @@ abstract class AbstractContent extends Model {
 
     /**
      * Get if the headline is shown
+     *
      * @return bool
      */
     public function getShowHeadline(): bool {
@@ -21,6 +22,7 @@ abstract class AbstractContent extends Model {
 
     /**
      * Do a hard delete of all soft deleted content
+     *
      * @return void
      */
     public static function emptyTrash(): void {
@@ -32,6 +34,7 @@ abstract class AbstractContent extends Model {
 
     /**
      * Get title or alternate title
+     *
      * @return string|null
      */
     public function getHeadline(): ?string {
@@ -43,6 +46,7 @@ abstract class AbstractContent extends Model {
      * Check if this is content is regular
      * Regular means that it is a accessible page
      * This applies to any default contents except Link, Language_Link and Node
+     *
      * @return bool
      */
     public function isRegular(): bool {
@@ -51,7 +55,9 @@ abstract class AbstractContent extends Model {
 
     /**
      * Get children of this content
+     *
      * @param string $order
+     *
      * @return array
      */
     public function getChildren(string $order = 'id'): array {
@@ -64,6 +70,7 @@ abstract class AbstractContent extends Model {
 
     /**
      * Check if the content has children
+     *
      * @return bool
      */
     public function hasChildren(): bool {
@@ -72,6 +79,7 @@ abstract class AbstractContent extends Model {
 
      /**
       * Get css classes for Font Awesome icon
+      *
       * @return string
       */
     public function getIcon(): string {

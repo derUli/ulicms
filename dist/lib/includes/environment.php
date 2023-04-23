@@ -8,6 +8,7 @@ use App\Backend\UliCMSVersion;
 
 /**
  * Returns the version number of UliCMS Core
+ *
  * @return string
  */
 function cms_version(): string {
@@ -17,6 +18,7 @@ function cms_version(): string {
 
 /**
  * Gets the UliCMS configuration environment
+ *
  * @return string
  */
 function get_environment(): string {
