@@ -114,7 +114,7 @@ class User extends Model {
      * @return User|null
      */
     public static function fromSessionData(): ?User {
-        return get_user_id() ? new static(get_user_id()) : null;
+        return get_user_id() ? new self(get_user_id()) : null;
     }
 
     /**
@@ -944,7 +944,7 @@ class User extends Model {
 
         $users = [];
         while ($row = Database::fetchObject($query)) {
-            $users[] = new static((int)$row->id);
+            $users[] = new self((int)$row->id);
         }
         return $users;
     }
