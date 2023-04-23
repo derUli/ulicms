@@ -13,7 +13,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
         class="img-responsive"
         src="media/chmod_<?php
         echo htmlspecialchars(InstallerController::getLanguage());
-    ?>.png"
+?>.png"
         alt="<?php echo TRANSLATION_PERMISSIONS2; ?>"
         title="<?php echo TRANSLATION_PERMISSIONS2; ?>" border="1" />
 </p>

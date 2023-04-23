@@ -1,5 +1,5 @@
 <?php
-    defined('ULICMS_ROOT') || exit('No direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 ?>
 </div>
 </div>

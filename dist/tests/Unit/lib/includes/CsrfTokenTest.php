@@ -1,7 +1,7 @@
 <?php
 
 class CsrfTokenTest extends \PHPUnit\Framework\TestCase {
-    private $initialMinTime;
+    private ?string $initialMinTime;
 
     protected function setUp(): void {
         $_SESSION = [];
@@ -53,7 +53,7 @@ class CsrfTokenTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertStringContainsString(
             '<input type="hidden" name="form_timestamp" value="',
-            ob_get_clean()
+            ob_get_clean() ?: ''
         );
     }
 }
