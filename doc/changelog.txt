@@ -3,6 +3,8 @@
 Neue Features:
 * Dotenv Konfiguration
 * Schriftart-Vorschau bei Änderung der Schriftgröße und der Textfarbe
+* Neue Robo-Tasks
+* Installer prüft nun, ob ULICMS_ROOT beschreibbar ist
 
 Fehlerkorrekturen:
 * Warnings wenn man update.php von der Kommandozeile aufruft korrigiert

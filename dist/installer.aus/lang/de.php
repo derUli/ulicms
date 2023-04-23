@@ -51,5 +51,6 @@ add_translation('ACCEPT_LICNSE', 'Lizenz akzeptieren');
 add_translation('NEXT', 'Weiter');
 add_translation('THIS_PROCEDUDRE_WILL_TAKE_SOME_MINUTES', 'Dieser Vorgang kann einige Minuten dauern.');
 
-add_translation('TRANSLATION_PHP_MODULES', 'PHP Module');
 add_translation('TRANSLATION_PHP_VERSION', 'PHP >=');
+add_translation('TRANSLATION_IS_WRITABLE', 'ULICMS_ROOT ist beschreibbar');
+add_translation('TRANSLATION_PHP_MODULE', 'PHP Modul');

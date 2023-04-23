@@ -13,6 +13,10 @@ class SystemRequirementsTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
+    public function testRootDirWritable() {
+        $this->assertDirectoryIsWritable(ULICMS_ROOT);
+    }
+
     public function testPhpModuleMySqli(): void {
         $this->assertTrue(extension_loaded('mysqli'));
     }

@@ -6,7 +6,7 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 
 /**
  * Get hidden fields for CSRF check
- * 
+ *
  * @return string
  */
 function get_csrf_token_html(): string {
@@ -28,7 +28,7 @@ function get_csrf_token_html(): string {
 
 /**
  * Output hidden fields for CSRF check
- * 
+ *
  * @return void
  */
 function csrf_token_html(): void {
@@ -37,7 +37,7 @@ function csrf_token_html(): void {
 
 /**
  * Get CSRF token
- * 
+ *
  * @return string
  */
 function get_csrf_token(): string {
@@ -49,7 +49,7 @@ function get_csrf_token(): string {
 
 /**
  * Compare check CSRF token
- * 
+ *
  * @return bool
  */
 function check_csrf_token(): bool {

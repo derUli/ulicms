@@ -43,12 +43,6 @@ class RoboFile extends Tasks {
         $this->writeln(cms_version());
     }
 
-    public function writable(){
-        $this->initUliCMS();
-        
-        FileSystem::makeWritable(ULICMS_ROOT);
-    }
-
     /**
      * Show the current environment
      *

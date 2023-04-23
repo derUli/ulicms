@@ -14,6 +14,8 @@ $phpVersionCompatible = VersionComparison::compare(
     '>='
 );
 
+$isWritable = is_writable(ULICMS_ROOT);
+
 $phpModules = [
     'mysqli',
     'gd',
@@ -29,13 +31,24 @@ $phpModules = [
 sort($phpModules);
 ?>
 
-<h2><?php echo TRANSLATION_PHP_MODULES; ?></h2>
 <ul>
     <li>
-        <?php echo htmlspecialchars(TRANSLATION_PHP_VERSION); ?>
+        <?php echo TRANSLATION_PHP_VERSION; ?>
         <?php echo $minPhpRequired; ?>
         <?php
         if ($phpVersionCompatible) {
+            echo '<i class="fa fa-check text-green" aria-hidden="true"></i>';
+        } else {
+            echo '<i class="fa fa-exclamation-triangle text-red" aria-hidden="true"></i>';
+        }
+?>
+    </li>
+    <li>
+    <?php
+
+        echo TRANSLATION_IS_WRITABLE . ' ';
+
+        if ($isWritable) {
             echo '<i class="fa fa-check text-green" aria-hidden="true"></i>';
         } else {
             echo '<i class="fa fa-exclamation-triangle text-red" aria-hidden="true"></i>';
@@ -46,7 +59,7 @@ sort($phpModules);
     foreach ($phpModules as $module) {
         $check = extension_loaded($module);
         echo '<li>';
-        echo htmlspecialchars($module) . ' ';
+        echo TRANSLATION_PHP_MODULE . ' ' . htmlspecialchars($module) . ' ';
 
         if ($check) {
             echo '<i class="fa fa-check text-green" aria-hidden="true"></i>';
