@@ -1,14 +1,11 @@
 <?php
 
-class ImagePageTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class ImagePageTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         Database::deleteFrom('content', "slug like 'unit_test_%'");
     }
 
-    public function testCreateUpdateAndDeleteLink()
-    {
+    public function testCreateUpdateAndDeleteLink() {
         $imagePage = new Image_Page();
         $imagePage->title = 'Unit Test Link';
         $imagePage->slug = 'unit_test_' . uniqid();
@@ -45,8 +42,7 @@ class ImagePageTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('cats.png', $loadedImagePage->image_url);
     }
 
-    public function testUpdateCreatesDataset()
-    {
+    public function testUpdateCreatesDataset() {
         $imagePage = new Image_Page();
         $imagePage->title = 'Unit Test Link';
         $imagePage->slug = 'unit_test_' . uniqid();

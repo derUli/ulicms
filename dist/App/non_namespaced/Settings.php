@@ -8,10 +8,8 @@ use App\Constants\DefaultValues;
 use App\Storages\Cached\MemstaticCached;
 
 // class for handling system settings
-class Settings extends MemstaticCached
-{
-    public static function register(string $key, $value, $type = 'str'): void
-    {
+class Settings extends MemstaticCached {
+    public static function register(string $key, $value, $type = 'str'): void {
         static::init($key, $value, $type);
     }
 
@@ -124,16 +122,14 @@ class Settings extends MemstaticCached
     }
 
     // Remove an configuration variable
-    public static function delete(string $key): bool
-    {
+    public static function delete(string $key): bool {
         static::deleteFromCache($key);
         $key = db_escape($key);
         db_query('DELETE FROM ' . tbname('settings') . " WHERE name='{$key}'");
         return Database::getAffectedRows() > 0;
     }
 
-    public static function convertVar($value, ?string $type)
-    {
+    public static function convertVar($value, ?string $type) {
         switch ($type) {
             case 'str':
                 $value = (string)$value;
@@ -158,8 +154,7 @@ class Settings extends MemstaticCached
         return $value;
     }
 
-    public static function getAll(string $order = 'name'): array
-    {
+    public static function getAll(string $order = 'name'): array {
         $datasets = [];
         $result = Database::query('SELECT * FROM `{prefix}settings` '
                         . "order by {$order}", true);
@@ -177,8 +172,7 @@ class Settings extends MemstaticCached
     // example mapping string
     // foo=>bar
     // hello=>world
-    public static function mappingStringToArray(string $str): array
-    {
+    public static function mappingStringToArray(string $str): array {
         $str = trim($str);
         $str = normalizeLN($str, "\n");
         $lines = explode("\n", $str);
@@ -210,8 +204,7 @@ class Settings extends MemstaticCached
       * @param type $value
       * @return bool
       */
-    protected static function setToCache(string $key, $value): bool
-    {
+    protected static function setToCache(string $key, $value): bool {
         $valueToStore = $value !== null ? $value : DefaultValues::NULL_VALUE;
         return parent::setToCache($key, $valueToStore);
     }

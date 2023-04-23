@@ -17,8 +17,7 @@ use zz\Html\HTMLMinify;
 /**
  * This class renders a backend page
  */
-class BackendPageRenderer
-{
+class BackendPageRenderer {
     private string $action;
 
     private static mixed $model;
@@ -28,8 +27,7 @@ class BackendPageRenderer
      * @param string $action
      * @param mixed $model
      */
-    public function __construct(string $action, mixed $model = null)
-    {
+    public function __construct(string $action, mixed $model = null) {
         $this->action = $action;
 
         self::$model = $model;
@@ -39,8 +37,7 @@ class BackendPageRenderer
      * Gets the action
      * @return string
      */
-    public function getAction(): string
-    {
+    public function getAction(): string {
         return $this->action;
     }
 
@@ -49,8 +46,7 @@ class BackendPageRenderer
      * @param string $action
      * @return void
      */
-    public function setAction(string $action): void
-    {
+    public function setAction(string $action): void {
         $this->action = $action;
     }
 
@@ -58,8 +54,7 @@ class BackendPageRenderer
      * Gets the model
      * @return mixed
      */
-    public static function getModel(): mixed
-    {
+    public static function getModel(): mixed {
         return self::$model;
     }
 
@@ -68,8 +63,7 @@ class BackendPageRenderer
      * @param mixed $model
      * @return void`
      */
-    public static function setModel(mixed $model): void
-    {
+    public static function setModel(mixed $model): void {
         self::$model = $model;
     }
 
@@ -77,8 +71,7 @@ class BackendPageRenderer
      * Renders a backend page outputs it and runs cron events
      * @return void
      */
-    public function render(): void
-    {
+    public function render(): void {
         if (Settings::get('minify_html')) {
             ob_start();
         }
@@ -111,8 +104,7 @@ class BackendPageRenderer
      * Outputs minified HTML
      * @return void
      */
-    public function outputMinified(): void
-    {
+    public function outputMinified(): void {
         $generatedHtml = ob_get_clean();
         $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
@@ -131,8 +123,7 @@ class BackendPageRenderer
      * Run cron events of modules
      * @return void
      */
-    public function doCronEvents(): void
-    {
+    public function doCronEvents(): void {
         do_event('before_admin_cron');
         do_event('admin_cron');
         do_event('after_admin_cron');
@@ -144,8 +135,7 @@ class BackendPageRenderer
      * @param bool $onlyContent
      * @return void
      */
-    protected function handleNotLoggedIn(bool $onlyContent = false): void
-    {
+    protected function handleNotLoggedIn(bool $onlyContent = false): void {
         ActionRegistry::loadModuleActions();
         $actions = ActionRegistry::getActions();
 
@@ -181,8 +171,7 @@ class BackendPageRenderer
      * @param bool $onlyContent
      * @return void
      */
-    protected function handleLoggedIn(bool $onlyContent = false): void
-    {
+    protected function handleLoggedIn(bool $onlyContent = false): void {
         $permissionChecker = new PermissionChecker(get_user_id());
 
         if (! $onlyContent) {

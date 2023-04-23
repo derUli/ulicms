@@ -24,13 +24,11 @@ use Robo\Tasks;
  *
  * @see http://robo.li/
  */
-class RoboFile extends Tasks
-{
+class RoboFile extends Tasks {
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         if (! defined('CORE_COMPONENT')) {
             define('CORE_COMPONENT', 'robo');
         }
@@ -39,24 +37,21 @@ class RoboFile extends Tasks
     /**
      * Show the UliCMS release version
      */
-    public function version(): void
-    {
+    public function version(): void {
         $this->writeln(cms_version());
     }
 
     /**
      * Show the current environment
      */
-    public function environment(): void
-    {
+    public function environment(): void {
         $this->writeln(get_environment());
     }
 
     /**
      * Show the umask
      */
-    public function umask(): void
-    {
+    public function umask(): void {
         $this->initUliCMS();
         $umask = str_pad(
             decoct(umask()),
@@ -70,8 +65,7 @@ class RoboFile extends Tasks
     /**
      * Truncate the history database table
      */
-    public function truncateHistory(): void
-    {
+    public function truncateHistory(): void {
         $this->initUliCMS();
 
         Database::truncateTable('history');
@@ -80,8 +74,7 @@ class RoboFile extends Tasks
     /**
      * Truncate the mails database table
      */
-    public function truncateMails(): void
-    {
+    public function truncateMails(): void {
         $this->initUliCMS();
         Database::truncateTable('mails');
     }
@@ -89,8 +82,7 @@ class RoboFile extends Tasks
     /**
      * Truncate the mails database table
      */
-    public function cacheClear(): void
-    {
+    public function cacheClear(): void {
         $this->initUliCMS();
         CacheUtil::clearCache();
     }
@@ -98,8 +90,7 @@ class RoboFile extends Tasks
     /**
      * List all settings
      */
-    public function settingsList(): void
-    {
+    public function settingsList(): void {
         $this->initUliCMS();
 
         // show all settings
@@ -114,8 +105,7 @@ class RoboFile extends Tasks
      *
      * @param string $settingsName settings identifier name
      */
-    public function settingsGet($settingsName): void
-    {
+    public function settingsGet($settingsName): void {
         $this->initUliCMS();
 
         $value = Settings::get($settingsName) !== null ?
@@ -129,8 +119,7 @@ class RoboFile extends Tasks
      * @param string $settingsName settings identifier name
      * @param string $value value to set
      */
-    public function settingsSet($settingsName, $value): void
-    {
+    public function settingsSet($settingsName, $value): void {
         $this->initUliCMS();
 
         if (strtoupper($value) !== DefaultValues::NULL_VALUE) {
@@ -143,8 +132,7 @@ class RoboFile extends Tasks
     /**
      * Enable the maintenance mode
      */
-    public function maintenanceOn(): void
-    {
+    public function maintenanceOn(): void {
         $this->initUliCMS();
         Settings::set('maintenance_mode', '1');
     }
@@ -152,8 +140,7 @@ class RoboFile extends Tasks
     /**
      * Disable the maintenance mode
      */
-    public function maintenanceOff(): void
-    {
+    public function maintenanceOff(): void {
         $this->initUliCMS();
         Settings::set('maintenance_mode', '0');
     }
@@ -161,8 +148,7 @@ class RoboFile extends Tasks
     /**
      * Show the status of maintenance mode
      */
-    public function maintenanceStatus(): void
-    {
+    public function maintenanceStatus(): void {
         $this->initUliCMS();
 
         $this->writeln(strbool(is_maintenance_mode()));
@@ -173,8 +159,7 @@ class RoboFile extends Tasks
      *
      * @param string $file path to *.sin package file
      */
-    public function packageExamine(string $file): void
-    {
+    public function packageExamine(string $file): void {
         $this->initUliCMS();
 
         if (! is_file($file)) {
@@ -190,8 +175,7 @@ class RoboFile extends Tasks
     /**
      * List all installed packages
      */
-    public function packagesList(): void
-    {
+    public function packagesList(): void {
         $this->initUliCMS();
 
         $this->writeln('Modules:');
@@ -206,8 +190,7 @@ class RoboFile extends Tasks
      *
      * @param string $file path to *.sin or *.tar.gz package file
      */
-    public function packageInstall($file): void
-    {
+    public function packageInstall($file): void {
         $this->initUliCMS();
 
         if (! is_file($file)) {
@@ -244,8 +227,7 @@ class RoboFile extends Tasks
      *
      * @param string $modules one or more modules
      */
-    public function modulesList(array $modules): void
-    {
+    public function modulesList(array $modules): void {
         $this->initUliCMS();
 
         $modules = count($modules) ?
@@ -262,8 +244,7 @@ class RoboFile extends Tasks
      * Toggle one or more modules
      * @param array $modules one or more modules
      */
-    public function modulesToggle(array $modules): void
-    {
+    public function modulesToggle(array $modules): void {
         $this->initUliCMS();
 
         $modules = $this->replaceModulePlaceholders($modules);
@@ -281,8 +262,7 @@ class RoboFile extends Tasks
      *
      * @param array $modules one or more modules
      */
-    public function modulesEnable(array $modules): void
-    {
+    public function modulesEnable(array $modules): void {
         $this->initUliCMS();
 
         $modules = $this->replaceModulePlaceholders($modules);
@@ -300,8 +280,7 @@ class RoboFile extends Tasks
      *
      * @param array $modules one or more modules
      */
-    public function modulesDisable(array $modules): void
-    {
+    public function modulesDisable(array $modules): void {
         $this->initUliCMS();
 
         $modules = $this->replaceModulePlaceholders($modules);
@@ -320,8 +299,7 @@ class RoboFile extends Tasks
      *
      * @param array $modules one or more modules
      */
-    public function modulesRemove(array $modules): void
-    {
+    public function modulesRemove(array $modules): void {
         $this->initUliCMS();
 
         foreach ($modules as $module) {
@@ -338,8 +316,7 @@ class RoboFile extends Tasks
      *
      * @param array $modules one or more modules
      */
-    public function modulesGetPackageVersions(array $modules): void
-    {
+    public function modulesGetPackageVersions(array $modules): void {
         $this->initUliCMS();
 
         $modules = $this->replaceModulePlaceholders($modules);
@@ -359,8 +336,7 @@ class RoboFile extends Tasks
     /**
      * List all installed themes and their version numbers
      */
-    public function themesList(): void
-    {
+    public function themesList(): void {
         $this->initUliCMS();
 
         $theme = getAllThemes();
@@ -382,8 +358,7 @@ class RoboFile extends Tasks
      *
      * @param array $themes one or more themes
      */
-    public function themesRemove(array $themes): void
-    {
+    public function themesRemove(array $themes): void {
         $this->initUliCMS();
 
         foreach ($themes as $theme) {
@@ -453,8 +428,7 @@ class RoboFile extends Tasks
      *
      * @param string $component name of the component
      */
-    public function dbmigratorReset(?string $component = null): void
-    {
+    public function dbmigratorReset(?string $component = null): void {
         $this->initUliCMS();
 
         Database::setEchoQueries(true);
@@ -474,8 +448,7 @@ class RoboFile extends Tasks
      *
      * @param string $component name of the component
      */
-    public function dbmigratorList(?string $component = null): void
-    {
+    public function dbmigratorList(?string $component = null): void {
         $this->initUliCMS();
 
         $where = $component ? "component='" .
@@ -490,8 +463,7 @@ class RoboFile extends Tasks
     /**
      * Sync installed modules with database
      */
-    public function modulesSync(): void
-    {
+    public function modulesSync(): void {
         $this->initUliCMS();
 
         $modules = new ModuleManager();
@@ -502,8 +474,7 @@ class RoboFile extends Tasks
      * Run PHPUnit Tests
      * @param string $testFile test file to run
      */
-    public function testsRun(string $testFile = ''): void
-    {
+    public function testsRun(string $testFile = ''): void {
         $command = 'vendor/bin/phpunit';
 
         system("{$command} {$testFile}");
@@ -513,8 +484,7 @@ class RoboFile extends Tasks
      * Run PHPUnit Tests and update snapshots
      * @param string $testFile test file to run
      */
-    public function testsUpdateSnapshots(string $testFile = ''): void
-    {
+    public function testsUpdateSnapshots(string $testFile = ''): void {
         $command = 'vendor/bin/phpunit -d --update-snapshots';
         if (DIRECTORY_SEPARATOR === '\\') {
             $command = str_replace('/', '\\', $command);
@@ -526,8 +496,7 @@ class RoboFile extends Tasks
     /**
      * Create the application's database
      */
-    public function dbCreate(): void
-    {
+    public function dbCreate(): void {
         $this->initUliCMS();
 
         Database::setEchoQueries(true);
@@ -539,8 +508,7 @@ class RoboFile extends Tasks
     /**
      * Drop and recreate the application's database
      */
-    public function dbMigrate(): void
-    {
+    public function dbMigrate(): void {
         $this->initUliCMS();
 
         Database::setEchoQueries(true);
@@ -557,8 +525,7 @@ class RoboFile extends Tasks
     /**
      * Drop the application's database
      */
-    public function dbDrop(): void
-    {
+    public function dbDrop(): void {
         $this->initUliCMS();
 
         Database::setEchoQueries(true);
@@ -570,8 +537,7 @@ class RoboFile extends Tasks
     /**
      * Create and migrate the application's database
      */
-    public function dbReset(): void
-    {
+    public function dbReset(): void {
         $this->initUliCMS();
 
         Database::setEchoQueries(true);
@@ -584,8 +550,7 @@ class RoboFile extends Tasks
     /**
      * Execute cronjobs
      */
-    public function cron(): void
-    {
+    public function cron(): void {
         $this->initUliCMS();
 
         do_event('before_cron');
@@ -633,11 +598,11 @@ class RoboFile extends Tasks
             $filesToDelete[] = $file->getRealPath();
         }
 
-        foreach($filesToDelete as $file){
-            try{
+        foreach($filesToDelete as $file) {
+            try {
                 FileSystem::delete($file);
             }
-            catch(IOException $e){
+            catch(IOException $e) {
                 $this->writeln('Errror ' . $path);
             }
         }
@@ -661,8 +626,7 @@ class RoboFile extends Tasks
     /**
      * Generate license files
      */
-    public function buildLicenses(): void
-    {
+    public function buildLicenses(): void {
         system('vendor/bin/php-legal-licenses generate --hide-version');
         system('node_modules/.bin/license-report --only=prod --output=json > licenses.json');
     }
@@ -694,7 +658,7 @@ class RoboFile extends Tasks
             return ! str_contains($file, 'fixtures');
         });
 
-        foreach($files as $file){
+        foreach($files as $file) {
             $args = [
                 '--multipass',
                 $file,
@@ -815,23 +779,22 @@ class RoboFile extends Tasks
             $files += 1;
             $size += $file->getSize();
 
-            if(! in_array($path, $filesToDelete)){
+            if(! in_array($path, $filesToDelete)) {
                 $filesToDelete[] = $path;
             }
         }
 
-        foreach($filesToDelete as $file){
-            try{
+        foreach($filesToDelete as $file) {
+            try {
                 FileSystem::delete($path);
             }
-            catch(IOException $e){
+            catch(IOException $e) {
                 $this->writeln('Errror ' . $path);
             }
         }
     }
 
-    protected function initUliCMS(): void
-    {
+    protected function initUliCMS(): void {
         try {
             $this->initCore();
         } catch (Exception $e) {
@@ -845,21 +808,18 @@ class RoboFile extends Tasks
         }
     }
 
-    protected function showException(Exception $e): void
-    {
+    protected function showException(Exception $e): void {
         $this->writeln($e->getMessage());
     }
 
-    protected function initCore(): void
-    {
+    protected function initCore(): void {
         if (! defined('ULICMS_ROOT')) {
             require dirname(__FILE__) . '/init.php';
             require_once getLanguageFilePath('en');
         }
     }
 
-    private function showPageKeys($json): void
-    {
+    private function showPageKeys($json): void {
         $skipAttributes = [
             'data',
             'screenshot'
@@ -878,8 +838,7 @@ class RoboFile extends Tasks
         }
     }
 
-    private function getModuleInfo(string $name): string
-    {
+    private function getModuleInfo(string $name): string {
         $version = getModuleMeta($name, 'version');
         $line = $name;
 
@@ -892,8 +851,7 @@ class RoboFile extends Tasks
         return $line;
     }
 
-    private function replaceModulePlaceholders(array $modules): array
-    {
+    private function replaceModulePlaceholders(array $modules): array {
         $manager = new ModuleManager();
         $manager->sync();
         $outModules = [];

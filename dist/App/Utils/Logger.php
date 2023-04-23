@@ -9,14 +9,12 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use CMSConfig;
 
 // Wrapper for KLogger
-class Logger
-{
+class Logger {
     private $path;
 
     private $logger;
 
-    public function __construct(string $path, ?CMSConfig $cmsConfig = null)
-    {
+    public function __construct(string $path, ?CMSConfig $cmsConfig = null) {
 
         $environment = get_environment();
         $this->path = $path;
@@ -37,27 +35,23 @@ class Logger
         }
     }
 
-    public function getPath(): string
-    {
+    public function getPath(): string {
         return $this->path;
     }
 
-    public function debug($message): void
-    {
+    public function debug($message): void {
         if ($this->logger) {
             $this->logger->debug($message);
         }
     }
 
-    public function error($message): void
-    {
+    public function error($message): void {
         if ($this->logger) {
             $this->logger->error($message);
         }
     }
 
-    public function info($message): void
-    {
+    public function info($message): void {
         if ($this->logger) {
             $this->logger->info($message);
         }

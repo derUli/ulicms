@@ -2,10 +2,8 @@
 
 use App\CoreContent\UIUtils;
 
-class UIUtilsTest extends \PHPUnit\Framework\TestCase
-{
-    public function testGetRobotsListItems()
-    {
+class UIUtilsTest extends \PHPUnit\Framework\TestCase {
+    public function testGetRobotsListItems() {
         $items = UIUtils::getRobotsListItems();
 
         $this->assertCount(5, $items);

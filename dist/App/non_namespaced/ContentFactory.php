@@ -10,11 +10,9 @@ use App\Models\Content\TypeMapper;
 use App\Registries\LoggerRegistry;
 
 // this class contains methods to return one content model or an array of multiple content datasets
-class ContentFactory
-{
+class ContentFactory {
     // this methods returns the model of the current page
-    public static function getCurrentPage(): ?AbstractContent
-    {
+    public static function getCurrentPage(): ?AbstractContent {
         $slug = get_slug();
         $language = getCurrentLanguage(true);
         return ContentFactory::getBySlugAndLanguage(
@@ -23,8 +21,7 @@ class ContentFactory
         );
     }
 
-    public static function getByID(int $id): ?AbstractContent
-    {
+    public static function getByID(int $id): ?AbstractContent {
         $result = Database::query('SELECT `id`, `type` FROM `' .
                         tbname('content') . '` where id = ' . $id);
         if (Database::getNumRows($result) > 0) {
@@ -51,8 +48,7 @@ class ContentFactory
                         . "{$name} and {$language}");
     }
 
-    public static function getAll(string $order = 'id'): array
-    {
+    public static function getAll(string $order = 'id'): array {
         $datasets = [];
         $sql = 'SELECT id, `type` FROM ' . tbname('content') .
                 " ORDER BY {$order}";
@@ -63,8 +59,7 @@ class ContentFactory
         return $datasets;
     }
 
-    public static function getAllRegular(string $order = 'id'): array
-    {
+    public static function getAllRegular(string $order = 'id'): array {
         $datasets = [];
         $sql = 'SELECT id, `type` FROM ' . tbname('content') .
                 " where type not in ('link', 'language_link', 'node') ORDER BY {$order}";
@@ -145,8 +140,7 @@ class ContentFactory
         return $datasets;
     }
 
-    public static function getAllWithComments(string $order = 'title'): array
-    {
+    public static function getAllWithComments(string $order = 'title'): array {
         $datasets = [];
         $sql = 'select type, a.id from {prefix}content a inner join '
                 . '{prefix}comments c on c.content_id = a.id group by '
@@ -292,8 +286,7 @@ class ContentFactory
         return $result;
     }
 
-    private static function getContentObjectByID(object $row): ?AbstractContent
-    {
+    private static function getContentObjectByID(object $row): ?AbstractContent {
         $retval = null;
         $type = $row->type;
         $mappings = TypeMapper::getMappings();

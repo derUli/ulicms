@@ -9,8 +9,7 @@ use App\Exceptions\CorruptDownloadException;
 use App\Security\Permissions\PermissionChecker;
 use Nette\Utils\FileSystem;
 
-class CoreUpgradeController extends \App\Controllers\Controller
-{
+class CoreUpgradeController extends \App\Controllers\Controller {
     /**
      * @var string $checkUrl
      */
@@ -19,8 +18,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->checkUrl = $this->generateCheckUrl();
     }
@@ -30,8 +28,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
      *
      * @return string
      */
-    public function getCheckUrl(): string
-    {
+    public function getCheckUrl(): string {
         return $this->checkUrl;
     }
 
@@ -42,8 +39,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
      *
      * @return void
      */
-    public function setCheckUrl(string $url): void
-    {
+    public function setCheckUrl(string $url): void {
         $this->checkUrl = $url;
     }
 
@@ -52,8 +48,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
      *
      * @return ?object
      */
-    public function getJSON(): ?object
-    {
+    public function getJSON(): ?object {
         $data = file_get_contents_wrapper($this->getCheckUrl(), true);
 
         if (! $data) {
@@ -69,8 +64,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
      *
      * @return ?string
      */
-    public function checkForUpgrades(): ?string
-    {
+    public function checkForUpgrades(): ?string {
         $data = $this->getJSON();
 
         if (! $data) {
@@ -95,8 +89,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
      *
      * @return ?bool
      */
-    public function runUpgrade(bool $skipPermissions = false): ?bool
-    {
+    public function runUpgrade(bool $skipPermissions = false): ?bool {
         @set_time_limit(0);
         @ignore_user_abort(true);
         $acl = new PermissionChecker(get_user_id());
@@ -138,7 +131,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
                 recurse_copy($upgradeCodeDir, ULICMS_ROOT);
                 FileSystem::delete($tmpDir);
 
-                if(! is_cli()){
+                if(! is_cli()) {
                     Response::redirect('../update.php');
                 }
 
@@ -154,8 +147,7 @@ class CoreUpgradeController extends \App\Controllers\Controller
      *
      * @return string
      */
-    protected function generateCheckUrl(): string
-    {
+    protected function generateCheckUrl(): string {
         $version = cms_version();
         $channel = Settings::get('oneclick_upgrade_channel');
         return "https://channels.ulicms.de/{$version}/{$channel}.json";

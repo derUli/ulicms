@@ -6,8 +6,7 @@ use Nette\Utils\Finder;
 require_once __DIR__ . '/RoboTestFile.php';
 require_once __DIR__ . '/RoboTestBase.php';
 
-class RoboBuildTest extends RoboTestBase
-{
+class RoboBuildTest extends RoboTestBase {
     protected function setUp(): void {
         parent::setUp();
 
@@ -23,8 +22,7 @@ class RoboBuildTest extends RoboTestBase
         parent::tearDown();
     }
 
-    public function testBuildCopyChangelog(): void
-    {
+    public function testBuildCopyChangelog(): void {
         $source = ULICMS_ROOT . '/../doc/changelog.txt';
         $target = ULICMS_CONTENT . '/modules/core_info/changelog.txt';
 
@@ -35,8 +33,7 @@ class RoboBuildTest extends RoboTestBase
         $this->assertFileEquals($target, $source);
     }
 
-    public function testBuildLicenses(): void
-    {
+    public function testBuildLicenses(): void {
         $file1 = ULICMS_ROOT . '/licenses.md';
         $file2 = ULICMS_ROOT . '/licenses.json';
 
@@ -79,8 +76,7 @@ class RoboBuildTest extends RoboTestBase
             $this->assertCount(0, $collectedAfter);
     }
 
-    public function testBuildOptimizeSVG(): void
-    {
+    public function testBuildOptimizeSVG(): void {
         chdir(Path::resolve('ULICMS_ROOT/vendor'));
 
         $actual = $this->runRoboCommand(['build:optimize-svg']);
@@ -88,8 +84,8 @@ class RoboBuildTest extends RoboTestBase
         $this->assertEquals(12, substr_count($actual, '.svg'));
     }
 
-    public function testBuildMinifyCss(){
-        
+    public function testBuildMinifyCss(): void {
+
         $actual = $this->runRoboCommand(['build:minify-css']);
         $this->assertStringContainsString('Compressing ', $actual);
         $this->assertStringContainsString('/dist', $actual);

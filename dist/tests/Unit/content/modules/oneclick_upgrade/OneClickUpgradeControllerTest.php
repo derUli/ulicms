@@ -5,8 +5,7 @@ declare(strict_types=1);
 use App\Helpers\TestHelper;
 use App\Translations\Translation;
 
-class OneClickUpgradeControllerTest extends \PHPUnit\Framework\TestCase
-{
+class OneClickUpgradeControllerTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
         require_once getLanguageFilePath('en');
         Translation::loadAllModuleLanguageFiles('en');

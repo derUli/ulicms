@@ -2,15 +2,12 @@
 
 use App\Helpers\NumberFormatHelper;
 
-class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         require_once getLanguageFilePath('en');
     }
 
-    public function testFormatSizeUnitsGB()
-    {
+    public function testFormatSizeUnitsGB() {
         $this->assertEquals(
             '64.05 GB',
             NumberFormatHelper::formatSizeUnits(
@@ -19,8 +16,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testFormatSizeUnitsMB()
-    {
+    public function testFormatSizeUnitsMB() {
         $this->assertEquals(
             '64.05 MB',
             NumberFormatHelper::formatSizeUnits(
@@ -29,16 +25,14 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testFormatSizeUnitsKB()
-    {
+    public function testFormatSizeUnitsKB() {
         $this->assertEquals(
             '64.05 KB',
             NumberFormatHelper::formatSizeUnits((float)(64 * 1024) + 55)
         );
     }
 
-    public function testFormatSizeUnitsBytes()
-    {
+    public function testFormatSizeUnitsBytes() {
         $this->assertEquals(
             '64 B',
             NumberFormatHelper::formatSizeUnits((float)64)
@@ -49,16 +43,14 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testFormatSizeUnitsByte()
-    {
+    public function testFormatSizeUnitsByte() {
         $this->assertEquals(
             '1 B',
             NumberFormatHelper::formatSizeUnits((float)1)
         );
     }
 
-    public function testFormatTime()
-    {
+    public function testFormatTime() {
         $number = time() - (60 * 60 * 24 * 367 * 2);
         $this->assertEquals(
             'vor über 2 Jahren',
@@ -66,16 +58,14 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testTimestampToSqlDateWithoutArgs()
-    {
+    public function testTimestampToSqlDateWithoutArgs() {
         $this->assertMatchesRegularExpression(
             '/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$/',
             NumberFormatHelper::timestampToSqlDate()
         );
     }
 
-    public function testTimestampToSqlDateWithTimestamp()
-    {
+    public function testTimestampToSqlDateWithTimestamp() {
         $timestamp = 1568118319;
         $this->assertEquals(
             '2019-09-10 14:25',
@@ -83,8 +73,7 @@ class NumberFormatHelperTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testTimestampToSqlDateWithTimestampAndFormat()
-    {
+    public function testTimestampToSqlDateWithTimestampAndFormat() {
         $timestamp = 1568118319;
         $this->assertEquals(
             '2019-09-10 14:25:19',

@@ -1,9 +1,7 @@
 <?php
 
-class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         \App\Storages\Vars::delete('allModules');
 
         $source = Path::resolve(
@@ -17,8 +15,7 @@ class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase
         copy($source, $destination);
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $destination = Path::resolve(
             'ULICMS_TMP/hello_world-10.sin'
         );
@@ -29,8 +26,7 @@ class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase
         uninstall_module('hello_world');
     }
 
-    public function testInstallPostReturnsTrue()
-    {
+    public function testInstallPostReturnsTrue() {
         $controller = new PkgInfoController();
         $success = $controller->_installPost('hello_world-10.sin');
         $this->assertTrue($success);
@@ -40,8 +36,7 @@ class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertContains('hello_world', getAllModules());
     }
 
-    public function testInstallPostReturnsFalse()
-    {
+    public function testInstallPostReturnsFalse() {
         $controller = new PkgInfoController();
         $success = $controller->_installPost('gibtsnicht');
         $this->assertFalse($success);

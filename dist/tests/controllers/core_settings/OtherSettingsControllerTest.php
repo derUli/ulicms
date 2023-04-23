@@ -1,11 +1,9 @@
 <?php
 
-class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase
-{
+class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase {
     private $defaultSettings = [];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->defaultSettings = [
             'email_mode' => Settings::get('email_mode'),
             'domain_to_language' => Settings::get('domain_to_language'),
@@ -22,8 +20,7 @@ class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_POST = [
         ];
 
@@ -32,8 +29,7 @@ class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSavePostAllSet(): void
-    {
+    public function testSavePostAllSet(): void {
         $mappingLines = [
             'example.de=>de',
             'example.co.uk=>en'
@@ -84,8 +80,7 @@ class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('password', Settings::get('smtp_password'));
     }
 
-    public function testSavePostNothingSet(): void
-    {
+    public function testSavePostNothingSet(): void {
         $_POST = [
         ];
 

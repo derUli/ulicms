@@ -13,8 +13,7 @@ use App\Models\Media\Video;
  *
  * @return string
  */
-function replaceAudioTags(string $txt): string
-{
+function replaceAudioTags(string $txt): string {
     $audio_dir = 'content/audio/';
 
 
@@ -48,8 +47,7 @@ function replaceAudioTags(string $txt): string
  * @param string $txt
  * @return string
  */
-function replaceVideoTags(string $txt): string
-{
+function replaceVideoTags(string $txt): string {
     $video_dir = 'content/videos/';
 
     // TODO: Use Regex

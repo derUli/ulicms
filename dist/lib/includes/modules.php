@@ -7,8 +7,7 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 use App\Constants\ModuleEventConstants;
 use App\Security\PrivacyCheckbox;
 
-function getModuleMeta($module, $attrib = null)
-{
+function getModuleMeta($module, $attrib = null) {
     $metadata_file = ModuleHelper::buildModuleRessourcePath(
         $module,
         'metadata.json',
@@ -69,8 +68,7 @@ function do_event(
     }
 }
 
-function stringContainsShortCodes(string $content, ?string $module = null): bool
-{
+function stringContainsShortCodes(string $content, ?string $module = null): bool {
     $quot = '(' . preg_quote('&quot;') . ')?';
     return (bool)(
         $module ?
@@ -135,8 +133,7 @@ function replaceShortcodesWithModules(
     return $string;
 }
 
-function replaceOtherShortCodes(string $string): string
-{
+function replaceOtherShortCodes(string $string): string {
     $string = str_ireplace('[title]', get_title(), $string);
     ob_start();
     logo();
@@ -206,8 +203,7 @@ function replaceOtherShortCodes(string $string): string
 }
 
 // Check if site contains a module
-function containsModule(?string $page = null, ?string $module = null): bool
-{
+function containsModule(?string $page = null, ?string $module = null): bool {
     $containsModule = false;
 
     if ($page === null) {

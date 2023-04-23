@@ -11,8 +11,7 @@ use App\Helpers\DateTimeHelper;
 /**
  * Provides information about the UliCMS release version
  */
-class UliCMSVersion
-{
+class UliCMSVersion {
     public const CODE_NAME = 'Beetle-Eating Nandu';
 
     public const RELEASE_YEAR = 2023;
@@ -25,8 +24,7 @@ class UliCMSVersion
      * Returns the release year
      * @return string
      */
-    public function getReleaseYear(): string
-    {
+    public function getReleaseYear(): string {
         return (string)static::RELEASE_YEAR;
     }
 
@@ -34,8 +32,7 @@ class UliCMSVersion
      * Returns the release Codename
      * @return string
      */
-    public function getCodeName(): string
-    {
+    public function getCodeName(): string {
         return static::CODE_NAME;
     }
 
@@ -43,8 +40,7 @@ class UliCMSVersion
      * Returns the full number as array
      * @return int[]
      */
-    public function getInternalVersion(): array
-    {
+    public function getInternalVersion(): array {
         return static::VERSION_NUMBER;
     }
 
@@ -52,8 +48,7 @@ class UliCMSVersion
      * Returns the full version number as formatted string
      * @return string
      */
-    public function getInternalVersionAsString(): string
-    {
+    public function getInternalVersionAsString(): string {
         return implode('.', static::VERSION_NUMBER);
     }
 
@@ -62,8 +57,7 @@ class UliCMSVersion
      *
      * @return int
      */
-    public function getBuildTimestamp(): int
-    {
+    public function getBuildTimestamp(): int {
         return static::BUILD_DATE;
     }
 
@@ -71,8 +65,7 @@ class UliCMSVersion
      * Returns the formatted date when the release was built.
      * @return string
      */
-    public function getBuildDate(): string
-    {
+    public function getBuildDate(): string {
         return DateTimeHelper::timestampToFormattedDateTime($this->getBuildTimestamp()) ?? '';
     }
 }

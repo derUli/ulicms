@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
-function get_translation(string $name, array $placeholders = []): string
-{
+function get_translation(string $name, array $placeholders = []): string {
     $iname = strtoupper($name);
     foreach (get_defined_constants() as $key => $value) {
         if (str_starts_with($key, 'TRANSLATION_') && $key === 'TRANSLATION_' . $iname) {
@@ -22,30 +21,25 @@ function get_translation(string $name, array $placeholders = []): string
     return $name;
 }
 
-function _t(string $name, array $placeholders = []): string
-{
+function _t(string $name, array $placeholders = []): string {
     return get_translation($name, $placeholders);
 }
 
-function t(string $name, array $placeholders = []): void
-{
+function t(string $name, array $placeholders = []): void {
     echo _t($name, $placeholders);
 }
 
-function singularOrPlural(int $count, string $singular, string $plural)
-{
+function singularOrPlural(int $count, string $singular, string $plural) {
     return $count === 1 ?
             str_ireplace('%number%', (string)$count, (string)$singular) :
             str_ireplace('%number%', (string)$count, (string)$plural);
 }
 
-function translation(string $name, array $placeholders = []): void
-{
+function translation(string $name, array $placeholders = []): void {
     echo get_translation($name, $placeholders);
 }
 
-function translate(string $name, array $placeholders = [])
-{
+function translate(string $name, array $placeholders = []) {
     translation($name, $placeholders);
 }
 
@@ -56,23 +50,19 @@ function get_secure_translation(
     return Template::getEscape(get_translation($name, $placeholders));
 }
 
-function secure_translation(string $name, array $placeholders = []): void
-{
+function secure_translation(string $name, array $placeholders = []): void {
     echo get_secure_translation($name, $placeholders);
 }
 
-function secure_translate(string $name, array $placeholders = []): void
-{
+function secure_translate(string $name, array $placeholders = []): void {
     secure_translation($name, $placeholders);
 }
 
-function add_translation(string $key, string $value): void
-{
+function add_translation(string $key, string $value): void {
     register_translation($key, $value);
 }
 
-function register_translation(string $key, string $value): void
-{
+function register_translation(string $key, string $value): void {
     $key = strtoupper($key);
     if (! str_starts_with($key, 'TRANSLATION_')) {
         $key = 'TRANSLATION_' . $key;
@@ -81,8 +71,7 @@ function register_translation(string $key, string $value): void
     defined($key) || define($key, $value);
 }
 
-function getFrontendLanguage()
-{
+function getFrontendLanguage() {
     $domainLanguage = get_domain() ?
             getDomainByLanguage(get_domain()) : null;
     $fallbackLanguage = $domainLanguage ?: Settings::get('language');

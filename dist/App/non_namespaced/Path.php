@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class Path
-{
+class Path {
     /**
      * Normalize path
      * @param string $path
      * @return string
      */
-    public static function normalize(string $path): string
-    {
+    public static function normalize(string $path): string {
         $path = str_replace('\\', DIRECTORY_SEPARATOR, $path);
         $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
         return $path;
@@ -23,8 +21,7 @@ class Path
      * @param string $path
      * @return string
      */
-    public static function resolve(string $path): string
-    {
+    public static function resolve(string $path): string {
         $path = str_ireplace('ULICMS_ROOT', ULICMS_ROOT, $path);
 
         $path = str_ireplace(

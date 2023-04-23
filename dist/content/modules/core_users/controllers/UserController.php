@@ -6,15 +6,12 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Security\Permissions\PermissionChecker;
 
-class UserController extends \App\Controllers\Controller
-{
-    public function __construct()
-    {
+class UserController extends \App\Controllers\Controller {
+    public function __construct() {
         parent::__construct();
     }
 
-    public function _createPost(): User
-    {
+    public function _createPost(): User {
         $username = $_POST['username'];
         $lastname = $_POST['lastname'];
         $firstname = $_POST['firstname'];
@@ -56,14 +53,12 @@ class UserController extends \App\Controllers\Controller
         return $user;
     }
 
-    public function createPost(): void
-    {
+    public function createPost(): void {
         $this->_createPost();
         Response::redirect(ModuleHelper::buildActionURL('admins'));
     }
 
-    public function updatePost(): void
-    {
+    public function updatePost(): void {
         $permissionChecker = new PermissionChecker(get_user_id());
         if ($permissionChecker->hasPermission('users_edit') || $_POST['id'] == $_SESSION['login_id']) {
             $id = (int)$_POST['id'];
@@ -145,16 +140,14 @@ class UserController extends \App\Controllers\Controller
         ExceptionResult(get_translation('forbidden'), HttpStatusCode::FORBIDDEN);
     }
 
-    public function deletePost(): void
-    {
+    public function deletePost(): void {
         $id = Request::getVar('id', 0, 'int');
 
         $this->_deletePost($id);
         Response::redirect(ModuleHelper::buildActionURL('admins'));
     }
 
-    public function _deletePost(int $id): bool
-    {
+    public function _deletePost(int $id): bool {
         do_event('before_admin_delete');
 
         $user = new User($id);

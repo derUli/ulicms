@@ -6,10 +6,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Utils\CacheUtil;
 
-class PrivacyController extends \App\Controllers\Controller
-{
-    public function _savePost(): void
-    {
+class PrivacyController extends \App\Controllers\Controller {
+    public function _savePost(): void {
         $language = basename(Request::getVar('language', null, 'str'));
         $varName = ! empty($language) ?
                 "privacy_policy_checkbox_enable_{$language}" :
@@ -55,8 +53,7 @@ class PrivacyController extends \App\Controllers\Controller
         CacheUtil::clearPageCache();
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
 
         $language = basename(Request::getVar('language', null, 'str'));

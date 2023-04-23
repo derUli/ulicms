@@ -3,15 +3,12 @@
 use App\Exceptions\NotImplementedException;
 use App\Models\Content\CustomFields\CustomField;
 
-class CustomFieldTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class CustomFieldTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         include_once getLanguageFilePath('en');
     }
 
-    public function testRender()
-    {
+    public function testRender() {
         $this->expectException(NotImplementedException::class);
         $customField = new CustomField();
         $customField->render('foobar');

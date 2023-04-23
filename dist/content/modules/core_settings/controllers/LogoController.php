@@ -8,8 +8,7 @@ use App\Helpers\ImageScaleHelper;
 use App\Utils\CacheUtil;
 use App\Utils\File;
 
-class LogoController extends \App\Controllers\Controller
-{
+class LogoController extends \App\Controllers\Controller {
     public function _buildFileName(
         string $filename,
         string $originalName
@@ -27,8 +26,7 @@ class LogoController extends \App\Controllers\Controller
                 $this->_buildFileName($filename, $originalName);
     }
 
-    public function upload(): void
-    {
+    public function upload(): void {
         // Logo Upload
         if (! empty($_FILES['logo_upload_file']['name'])) {
             $logo_upload = $_FILES['logo_upload_file'];
@@ -60,8 +58,7 @@ class LogoController extends \App\Controllers\Controller
         Response::redirect(ModuleHelper::buildActionURL('logo'));
     }
 
-    public function _deleteLogo(): bool
-    {
+    public function _deleteLogo(): bool {
         $logoImage = Settings::get('logo_image');
         $path = ULICMS_ROOT . "/content/images/{$logoImage}";
 
@@ -76,8 +73,7 @@ class LogoController extends \App\Controllers\Controller
         return true;
     }
 
-    public function deleteLogo(): void
-    {
+    public function deleteLogo(): void {
         $success = $this->_deleteLogo();
         if ($success) {
             CacheUtil::clearPageCache();
@@ -90,8 +86,7 @@ class LogoController extends \App\Controllers\Controller
         );
     }
 
-    public function _hasLogo(): bool
-    {
+    public function _hasLogo(): bool {
         return ! empty(Settings::get('logo_image')) &&
                 Settings::get('logo_disabled') !== 'yes';
     }

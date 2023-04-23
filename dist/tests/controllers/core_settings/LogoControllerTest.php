@@ -1,11 +1,9 @@
 <?php
 
-class LogoControllerTest extends \PHPUnit\Framework\TestCase
-{
+class LogoControllerTest extends \PHPUnit\Framework\TestCase {
     private $initialSettings = [];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->initialSettings = [
             'logo_disabled' => Settings::get('logo_disabled'),
             'logo_image' => Settings::get('logo_image'),
@@ -23,8 +21,7 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase
         Settings::set('logo_image', basename($filePath));
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         foreach ($this->initialSettings as $key => $value) {
             Settings::set($key, $value);
         }
@@ -41,8 +38,7 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testDeleteLogo()
-    {
+    public function testDeleteLogo() {
         $controller = new LogoController();
         $this->assertEquals('no', Settings::get('logo_disabled'));
         $this->assertTrue($controller->_deleteLogo());
@@ -52,21 +48,18 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($controller->_deleteLogo());
     }
 
-    public function testHasLogoReturnsTrue()
-    {
+    public function testHasLogoReturnsTrue() {
         $controller = new LogoController();
         $this->assertTrue($controller->_hasLogo());
     }
 
-    public function testHasLogoReturnsFalse()
-    {
+    public function testHasLogoReturnsFalse() {
         $controller = new LogoController();
         $controller->_deleteLogo();
         $this->assertFalse($controller->_hasLogo());
     }
 
-    public function testBuildFileName()
-    {
+    public function testBuildFileName() {
         $controller = new LogoController();
 
         $fileName = $controller->_buildFileName(
@@ -76,8 +69,7 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('61edbeb9410bc87763cebc93fbba8335.jpg', $fileName);
     }
 
-    public function testBuildFilePath()
-    {
+    public function testBuildFilePath() {
         $controller = new LogoController();
 
         $filePath = $controller->_buildFilePath(
@@ -91,8 +83,7 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    protected function getFixturePath(): string
-    {
+    protected function getFixturePath(): string {
         return Path::Resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
     }
 }

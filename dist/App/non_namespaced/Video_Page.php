@@ -8,16 +8,14 @@ use App\Models\Media\Video;
 
 // video pages are pages that are linked to video files
 // video files are played with html5
-class Video_Page extends Page
-{
+class Video_Page extends Page {
     public $type = 'video';
 
     public $video = null;
 
     public $text_position = 'after';
 
-    public function save()
-    {
+    public function save() {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -28,8 +26,7 @@ class Video_Page extends Page
         return $retval;
     }
 
-    public function update()
-    {
+    public function update() {
         $result = null;
         if ($this->id === null) {
             return $this->create();
@@ -47,13 +44,11 @@ class Video_Page extends Page
         return $result;
     }
 
-    public function getVideo(): ?Video
-    {
+    public function getVideo(): ?Video {
         return $this->video ? new Video($this->video) : null;
     }
 
-    public function setVideo(?Video $video): void
-    {
+    public function setVideo(?Video $video): void {
         $this->video = $video ? $video->getID() : null;
     }
 
@@ -61,13 +56,11 @@ class Video_Page extends Page
       * Get css classes for Font Awesome icon
       * @return string
       */
-    public function getIcon(): string
-    {
+    public function getIcon(): string {
         return 'fas fa-film';
     }
 
-    protected function fillVars($result = null)
-    {
+    protected function fillVars($result = null) {
         parent::fillVars($result);
         $this->video = $result->video ? (int)$result->video : null;
         $this->text_position = $result->text_position;

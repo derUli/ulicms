@@ -10,23 +10,19 @@ define('DB_TYPE_BOOL', 4);
 // database api functions
 // all functions in this file are deprecated you should
 // use the Database class instead.
-function db_query(string $query)
-{
+function db_query(string $query) {
     return Database::query($query);
 }
 
-function db_fetch_assoc(?mysqli_result $result)
-{
+function db_fetch_assoc(?mysqli_result $result) {
     return Database::fetchAssoc($result);
 }
 
-function db_fetch_object(?mysqli_result $result)
-{
+function db_fetch_object(?mysqli_result $result) {
     return Database::fetchObject($result);
 }
 
-function db_num_rows(mysqli_result $result): ?int
-{
+function db_num_rows(mysqli_result $result): ?int {
     return Database::getNumRows($result);
 }
 
@@ -35,13 +31,11 @@ function db_num_rows(mysqli_result $result): ?int
  * @param string $name
  * @return string
  */
-function tbname(string $name): string
-{
+function tbname(string $name): string {
     return $_ENV['DB_PREFIX'] . $name;
 }
 
 // Abstraktion für Escapen von Werten
-function db_escape($value, ?string $type = null): string
-{
+function db_escape($value, ?string $type = null): string {
     return Database::escapeValue($value, $type);
 }

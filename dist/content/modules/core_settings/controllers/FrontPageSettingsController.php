@@ -6,10 +6,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Utils\CacheUtil;
 
-class FrontPageSettingsController extends \App\Controllers\Controller
-{
-    public function _savePost(): void
-    {
+class FrontPageSettingsController extends \App\Controllers\Controller {
+    public function _savePost(): void {
         $languages = getAllLanguages();
         $languagesCount = count($languages);
 
@@ -26,8 +24,7 @@ class FrontPageSettingsController extends \App\Controllers\Controller
         CacheUtil::clearPageCache();
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
         // if called by ajax return no content to improve performance
         Response::sendHttpStatusCodeResultIfAjax(

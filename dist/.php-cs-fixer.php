@@ -279,7 +279,17 @@ $config
     // Replace strpos() calls with str_starts_with() or str_contains() if possible.
     'modernize_strpos' => true,
     // Putting blank lines between use statement groups.
-    'blank_line_between_import_groups' => true
+    'blank_line_between_import_groups' => true,
+    // Curly braces must be placed as configured.
+    'curly_braces_position' => [
+        'control_structures_opening_brace' => 'same_line',
+        'functions_opening_brace' => 'same_line',
+        'anonymous_functions_opening_brace' => 'same_line',
+        'classes_opening_brace' => 'same_line',
+        'anonymous_classes_opening_brace' => 'same_line',
+        'allow_single_line_empty_anonymous_classes' => true,
+        'allow_single_line_anonymous_functions' => true
+        ]
     ]);
 
 return $config->setFinder(

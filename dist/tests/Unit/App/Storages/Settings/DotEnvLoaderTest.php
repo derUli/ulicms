@@ -6,8 +6,7 @@ use App\Exceptions\FileNotFoundException;
 use App\Storages\Settings\DotEnvLoader;
 use PHPUnit\Framework\TestCase;
 
-class DotEnvLoaderTest extends TestCase
-{
+class DotEnvLoaderTest extends TestCase {
     public function testLoad(): void {
         $loader = new DotEnvLoader(ULICMS_ROOT, '.env.example');
         $loader->load();

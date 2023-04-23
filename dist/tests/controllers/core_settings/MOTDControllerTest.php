@@ -1,11 +1,9 @@
 <?php
 
-class MOTDControllerTest extends \PHPUnit\Framework\TestCase
-{
+class MOTDControllerTest extends \PHPUnit\Framework\TestCase {
     private $defaultSettings = [];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->defaultSettings = [
             'motd' => Settings::get('default_language'),
             'motd_de' => Settings::get('homepage_title_de'),
@@ -13,8 +11,7 @@ class MOTDControllerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_POST = [];
 
         foreach ($this->defaultSettings as $key => $value) {
@@ -22,8 +19,7 @@ class MOTDControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSavePostWith(): void
-    {
+    public function testSavePostWith(): void {
         $_POST['motd'] = 'Hallo Welt!';
         $controller = new MOTDController();
         $controller->_savePost();
@@ -34,8 +30,7 @@ class MOTDControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testSavePostWithLanguage(): void
-    {
+    public function testSavePostWithLanguage(): void {
         $_POST['motd'] = 'Hallo Welt!';
         $_POST['language'] = 'de';
         $controller = new MOTDController();

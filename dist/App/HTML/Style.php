@@ -12,8 +12,7 @@ use ModuleHelper;
 /**
  * Utils to generate <style> tags
  */
-class Style
-{
+class Style {
     /**
      * Generates a <link> tag for a stylesheet file
      *

@@ -6,8 +6,7 @@ namespace App\Security\SpamChecker;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-interface SpamCheckerInterface
-{
+interface SpamCheckerInterface {
     // this must be an array which must return an array of
     // SpamDetectionResults
     public function getErrors(): array;

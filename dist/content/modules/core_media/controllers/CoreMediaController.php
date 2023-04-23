@@ -10,8 +10,7 @@ use MediaEmbed\MediaEmbed;
 /**
  * This controller handles media replacement
  */
-class CoreMediaController extends MainClass
-{
+class CoreMediaController extends MainClass {
     /**
      * This is applied to content by event
      *
@@ -19,8 +18,7 @@ class CoreMediaController extends MainClass
      *
      * @return string Processed HTML string
      */
-    public function beforeContentFilter(string $input): string
-    {
+    public function beforeContentFilter(string $input): string {
         $data = CustomData::get();
 
         // Check if media replacement is not disabled in CustomData JSON
@@ -46,8 +44,7 @@ class CoreMediaController extends MainClass
      *
      * @return string Processed HTML string
      */
-    public function _replaceLinks(string $input): string
-    {
+    public function _replaceLinks(string $input): string {
         if (empty($input)) {
             return $input;
         }
@@ -74,8 +71,7 @@ class CoreMediaController extends MainClass
      *
      * @return string Processed HTML string
      */
-    protected function _addLazyload(string $input): string
-    {
+    protected function _addLazyload(string $input): string {
         if (empty($input)) {
             return $input;
         }
@@ -125,8 +121,7 @@ class CoreMediaController extends MainClass
      *
      * @return array
      */
-    protected function collectLinks(DOMDocument $dom): array
-    {
+    protected function collectLinks(DOMDocument $dom): array {
         $elements = $dom->getElementsByTagName('a');
         $linksToReplace = [];
 
@@ -156,8 +151,7 @@ class CoreMediaController extends MainClass
      *
      * @return string content of <body>
      */
-    protected function getBodyContent(string $html): string
-    {
+    protected function getBodyContent(string $html): string {
         $match = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace([
             '<html>',
             '</html>',
@@ -180,8 +174,7 @@ class CoreMediaController extends MainClass
      *
      * @return ?string HTML embed code or null
      */
-    protected function embedCodeFromUrl(string $url): ?string
-    {
+    protected function embedCodeFromUrl(string $url): ?string {
         $mediaEmbed = new MediaEmbed();
         $mediaObject = $mediaEmbed->parseUrl($url);
         if ($mediaObject) {
@@ -220,8 +213,7 @@ class CoreMediaController extends MainClass
      *
      * @return void
      */
-    protected function appendHTML(DOMNode $parent, string $html): void
-    {
+    protected function appendHTML(DOMNode $parent, string $html): void {
         $tmpDoc = new DOMDocument();
         $tmpDoc->loadHTML($html);
         foreach ($tmpDoc->getElementsByTagName('body')->item(0)->childNodes as $node) {

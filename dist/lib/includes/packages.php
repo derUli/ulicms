@@ -12,8 +12,7 @@ use App\Utils\CacheUtil;
  * Get list of all installed modules
  * @return array
  */
-function getAllModules(): array
-{
+function getAllModules(): array {
     // Check if cached
     if (\App\Storages\Vars::get('allModules')) {
         return \App\Storages\Vars::get('allModules');
@@ -32,8 +31,7 @@ function getAllModules(): array
  * Get list of installed themes
  * @return array
  */
-function getAllThemes(): array
-{
+function getAllThemes(): array {
     $pkg = new PackageManager();
     return $pkg->getInstalledPackages('themes');
 }
@@ -45,8 +43,7 @@ function getAllThemes(): array
  * @param string $type
  * @return bool
  */
-function uninstall_module(string $name, string $type = 'module'): bool
-{
+function uninstall_module(string $name, string $type = 'module'): bool {
     $acl = new PermissionChecker(get_user_id());
 
     if (! $acl->hasPermission('install_packages') && ! is_cli()) {

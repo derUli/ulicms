@@ -5,17 +5,14 @@ require_once __DIR__ . '/RoboTestBase.php';
 
 use App\Constants\DefaultValues;
 
-class RoboSettingsTest extends RoboTestBase
-{
-    protected function tearDown(): void
-    {
+class RoboSettingsTest extends RoboTestBase {
+    protected function tearDown(): void {
         Settings::delete('foo1');
         Settings::delete('foo2');
         Settings::delete('');
     }
 
-    public function testSettingsList()
-    {
+    public function testSettingsList() {
         Settings::set('', '');
         Settings::set('foo2', '');
         $output = $this->runRoboCommand(['settings:list']);
@@ -33,21 +30,18 @@ class RoboSettingsTest extends RoboTestBase
         }
     }
 
-    public function testSettingsPrintsString()
-    {
+    public function testSettingsPrintsString() {
         Settings::set('foo1', 'Hello World');
         $output = $this->runRoboCommand(['settings:get', 'foo1']);
         $this->assertStringContainsString('Hello World', $output);
     }
 
-    public function testSettingsPrintsNull()
-    {
+    public function testSettingsPrintsNull() {
         $output = $this->runRoboCommand(['settings:get', 'gibts_nicht']);
         $this->assertStringContainsString(DefaultValues::NULL_VALUE, $output);
     }
 
-    public function testSettingsSetToValue()
-    {
+    public function testSettingsSetToValue() {
         $this->runRoboCommand(
             [
                 'settings:set',

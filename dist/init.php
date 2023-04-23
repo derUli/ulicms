@@ -63,7 +63,7 @@ $newConfigFile = DotEnvLoader::envFilenameFromEnvironment(get_environment());
 $installerFile = ULICMS_ROOT . '/installer/index.php';
 
 // If there is no new or old config redirect to installer
-if(! is_file($oldConfigFile) && ! is_file($newConfigFile) && is_file($installerFile)){
+if(! is_file($oldConfigFile) && ! is_file($newConfigFile) && is_file($installerFile)) {
     Response::redirect('installer');
 }
 
@@ -75,7 +75,7 @@ if (PHP_SAPI !== 'cli') {
 }
 
 // Set default umask for PHP created files
-if(isset($_ENV['UMASK'])){
+if(isset($_ENV['UMASK'])) {
     umask((string)$_ENV['UMASK']);
 }
 
@@ -97,8 +97,8 @@ $createDirectories = [
     ULICMS_GENERATED_PRIVATE,
 ];
 
-foreach($createDirectories as $dir){
-    if(! is_dir($dir)){
+foreach($createDirectories as $dir) {
+    if(! is_dir($dir)) {
         FileSystem::createDir($dir);
     }
 }
@@ -113,7 +113,7 @@ $secureDirectories =
     ULICMS_GENERATED_PRIVATE
 ];
 
-foreach($secureDirectories as $dir){
+foreach($secureDirectories as $dir) {
     $htaccessFile = "{$dir}/.htaccess";
 
     if (! is_file($htaccessFile)) {

@@ -2,10 +2,8 @@
 
 use App\Helpers\ArrayHelper;
 
-class ArrayHelperTest extends \PHPUnit\Framework\TestCase
-{
-    public function testInsertBeforeReturnsArray()
-    {
+class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
+    public function testInsertBeforeReturnsArray() {
         $input = [
             'apple',
             'tomato',
@@ -30,8 +28,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
         ], ArrayHelper::insertBefore($input, 0, 'pineapple'));
     }
 
-    public function testInsertBeforeReturnsThrowsException()
-    {
+    public function testInsertBeforeReturnsThrowsException() {
         $input = [
             'apple',
             'tomato',
@@ -45,8 +42,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
         ArrayHelper::insertBefore($input, PHP_INT_MAX, 'gibts_nicht');
     }
 
-    public function testInsertAfterReturnsArray()
-    {
+    public function testInsertAfterReturnsArray() {
         $input = [
             'apple',
             'tomato',
@@ -71,8 +67,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
         ], ArrayHelper::insertAfter($input, 3, 'pineapple'));
     }
 
-    public function testInsertAfterReturnsThrowsException()
-    {
+    public function testInsertAfterReturnsThrowsException() {
         $input = [
             'apple',
             'tomato',
@@ -86,8 +81,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
         ArrayHelper::insertAfter($input, PHP_INT_MAX, 'gibts_nicht');
     }
 
-    public function testArrayHasMultipleKeysReturnsTrue()
-    {
+    public function testArrayHasMultipleKeysReturnsTrue() {
         $this->assertTrue(
             ArrayHelper::hasMultipleKeys(
                 $this->getArrayTestData(),
@@ -99,8 +93,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testArrayHasMultipleKeysReturnsFalse()
-    {
+    public function testArrayHasMultipleKeysReturnsFalse() {
         $this->assertFalse(
             ArrayHelper::hasMultipleKeys(
                 $this->getArrayTestData(),
@@ -124,8 +117,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    private function getNestesdArray()
-    {
+    private function getNestesdArray() {
         return [
             'foo',
             'bar',
@@ -141,8 +133,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    private function getArrayTestData(): array
-    {
+    private function getArrayTestData(): array {
         return [
             'foo' => 'bar',
             'hello' => 'world',

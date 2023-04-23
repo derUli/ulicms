@@ -2,29 +2,24 @@
 
 use App\Security\Hash;
 
-class EncryptionTest extends \PHPUnit\Framework\TestCase
-{
+class EncryptionTest extends \PHPUnit\Framework\TestCase {
     private $salt;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->salt = Settings::get('password_salt');
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         Settings::set('password_salt', $this->salt);
     }
 
-    public function testHashPassword()
-    {
+    public function testHashPassword() {
         $this->assertEquals(128, strlen(Hash::hashPassword('foobar')));
         $this->assertEquals(128, strlen(Hash::hashPassword('hello world')));
         $this->assertEquals(128, strlen(Hash::hashPassword('topsecret')));
     }
 
-    public function testHashPasswordWithCreateNewSalt()
-    {
+    public function testHashPasswordWithCreateNewSalt() {
         Settings::delete('password_salt');
 
         $this->assertNull(Settings::get('password_salt'));

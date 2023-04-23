@@ -8,8 +8,7 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
  * Returns path to minified jQuery
  * @return string
  */
-function get_jquery_url(): string
-{
+function get_jquery_url(): string {
     $url = 'node_modules/jquery/dist/jquery.min.js';
     $url = apply_filter($url, 'jquery_url');
     return $url;
@@ -20,8 +19,7 @@ function get_jquery_url(): string
  * @param type $id
  * @return string|null
  */
-function get_shortlink($id = null): ?string
-{
+function get_shortlink($id = null): ?string {
     $shortlink = null;
     $id = $id ?: get_ID();
 
@@ -37,8 +35,7 @@ function get_shortlink($id = null): ?string
  * Gets canonciel URL for current page
  * @return string
  */
-function get_canonical(): string
-{
+function get_canonical(): string {
     $canonical = getBaseFolderURL() . '/';
     if (! is_home()) {
         $canonical .= buildSEOUrl();
@@ -50,8 +47,7 @@ function get_canonical(): string
 
 // TODO: this code works but looks like shit
 // rewrite this method
-function getBaseFolderURL(?string $suffix = null): string
-{
+function getBaseFolderURL(?string $suffix = null): string {
     $s = empty($_SERVER['HTTPS']) ? '' : (($_SERVER['HTTPS'] == 'on') ?
             's' : '');
     $sp = strtolower($_SERVER['SERVER_PROTOCOL']);
@@ -76,8 +72,7 @@ function getBaseFolderURL(?string $suffix = null): string
 
 // This Returns the current full URL
 // for example: http://www.homepage.de/news?single=title
-function getCurrentURL(): string
-{
+function getCurrentURL(): string {
     return getBaseFolderURL(get_request_uri());
 }
 

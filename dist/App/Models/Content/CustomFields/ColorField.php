@@ -9,8 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Storages\ViewBag;
 use Template;
 
-class ColorField extends CustomField
-{
+class ColorField extends CustomField {
     /**
      * @var array<string, string>
      */
@@ -18,8 +17,7 @@ class ColorField extends CustomField
         'class' => 'jscolor {hash:true,caps:true}'
     ];
 
-    public function render(mixed $value = null): string
-    {
+    public function render(mixed $value = null): string {
         ViewBag::set('field', $this);
         ViewBag::set('field_value', $value);
         ViewBag::set('field_name', $this->contentType !== null ?

@@ -5,10 +5,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Helpers\AntiSpamHelper;
 use App\Utils\Mailer;
 
-class Forms
-{
-    public static function getFormByID($id)
-    {
+class Forms {
+    public static function getFormByID($id) {
         $retval = null;
         $result = db_query('select * from `' . tbname('forms') . '` WHERE id = ' . (int)$id);
         if (db_num_rows($result) > 0) {
@@ -53,8 +51,7 @@ class Forms
         return Database::query($sql, true);
     }
 
-    public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled)
-    {
+    public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled) {
         $name = db_escape($name);
         $enabled = (int)$enabled;
         $email_to = db_escape($email_to);
@@ -79,8 +76,7 @@ class Forms
         );
     }
 
-    public static function getAllForms()
-    {
+    public static function getAllForms() {
         $retval = [];
         $result = db_query('select * from `' . tbname('forms') .
                 '` ORDER BY id');
@@ -93,8 +89,7 @@ class Forms
         return $retval;
     }
 
-    public static function submitForm($id)
-    {
+    public static function submitForm($id) {
         $retval = false;
         $form = self::getFormByID($id);
         if ($form) {
@@ -181,8 +176,7 @@ class Forms
         return $retval;
     }
 
-    public static function deleteForm($id)
-    {
+    public static function deleteForm($id) {
         $id = (int)$id;
         return db_query('DELETE FROM ' . tbname('forms') . " WHERE id = {$id}");
     }

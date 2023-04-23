@@ -9,8 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * Default Values
  */
-abstract class DefaultValues
-{
+abstract class DefaultValues {
     public const ALLOWED_TAGS = '<a>' .
             '<abbr>' .
             '<address>' .

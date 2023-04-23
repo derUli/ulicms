@@ -1,9 +1,7 @@
 <?php
 
-class DefaultAccessRestrictionsControllerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class DefaultAccessRestrictionsControllerTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         $_POST = [];
         Settings::set(
             'only_admins_can_edit',
@@ -23,8 +21,7 @@ class DefaultAccessRestrictionsControllerTest extends \PHPUnit\Framework\TestCas
         );
     }
 
-    public function testSavePost()
-    {
+    public function testSavePost() {
         $_POST = [
             'only_admins_can_edit' => '1',
             'only_owner_can_edit' => '1',

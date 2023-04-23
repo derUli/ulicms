@@ -1,14 +1,11 @@
 <?php
 
-class AudioPageTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class AudioPageTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
     }
 
-    public function testSetArticle()
-    {
+    public function testSetArticle() {
         $audioPage = new Audio_Page();
         $audioPage->title = 'Unit Test Article';
         $audioPage->slug = 'unit test';

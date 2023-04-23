@@ -9,10 +9,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Storages\ViewBag;
 use Template;
 
-class MultilineTextField extends CustomField
-{
-    public function render(mixed $value = null): string
-    {
+class MultilineTextField extends CustomField {
+    public function render(mixed $value = null): string {
         ViewBag::set('field', $this);
         ViewBag::set('field_value', $value);
         ViewBag::set('field_name', $this->contentType !== null ?

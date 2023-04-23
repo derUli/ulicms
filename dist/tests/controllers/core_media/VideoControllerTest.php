@@ -3,16 +3,13 @@
 use App\Models\Content\Categories;
 use App\Models\Media\Video;
 
-class VideoControllerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class VideoControllerTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         $_POST = [];
         Database::deleteFrom('videos', "name like 'test-video-%'", true);
     }
 
-    public function testUpdatePostReturnsTrue(): void
-    {
+    public function testUpdatePostReturnsTrue(): void {
         $categories = Categories::getAllCategories();
         $first = $categories[0];
 
@@ -53,8 +50,7 @@ class VideoControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(480, $video->getHeight());
     }
 
-    public function testUpdatePostReturnsFalse(): void
-    {
+    public function testUpdatePostReturnsFalse(): void {
         $categories = Categories::getAllCategories();
         $first = $categories[0];
 

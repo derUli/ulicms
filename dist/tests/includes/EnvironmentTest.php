@@ -1,10 +1,8 @@
 <?php
 
 
-class EnvironmentTest extends \PHPUnit\Framework\TestCase
-{
-    public function testCmsVersion()
-    {
+class EnvironmentTest extends \PHPUnit\Framework\TestCase {
+    public function testCmsVersion() {
         $this->assertTrue(\App\Utils\VersionComparison::compare(
             cms_version(),
             '2019.4',
@@ -12,8 +10,7 @@ class EnvironmentTest extends \PHPUnit\Framework\TestCase
         ));
     }
 
-    public function testGetEnvironment()
-    {
+    public function testGetEnvironment() {
         $this->assertEquals('test', get_environment());
     }
 }

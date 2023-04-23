@@ -15,12 +15,10 @@ use function App\HTML\icon;
 
 use function App\HTML\Link;
 
-class EditButtonRenderer
-{
+class EditButtonRenderer {
     public const MODULE_NAME = 'core_content';
 
-    public function render(int $pageId, User $user): string
-    {
+    public function render(int $pageId, User $user): string {
         $permitted = true;
 
         // check edit permissions

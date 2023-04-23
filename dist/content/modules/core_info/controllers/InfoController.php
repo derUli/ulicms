@@ -5,10 +5,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Controllers\MainClass;
 use Michelf\MarkdownExtra;
 
-class InfoController extends MainClass
-{
-    public function _fetchChangelog()
-    {
+class InfoController extends MainClass {
+    public function _fetchChangelog() {
         $lines = $this->_getChangelogContent();
         $lines = array_map('trim', $lines);
         $lines = array_map('_esc', $lines);
@@ -37,8 +35,7 @@ class InfoController extends MainClass
         return $text ? trim($text) : get_translation('fetch_failed');
     }
 
-    public function _getChangelogContent(): array
-    {
+    public function _getChangelogContent(): array {
         $file = ModuleHelper::buildModuleRessourcePath(
             'core_info',
             'changelog.txt'
@@ -49,8 +46,7 @@ class InfoController extends MainClass
         return explode("\n", $content);
     }
 
-    public function _getComposerLegalInfo(): string
-    {
+    public function _getComposerLegalInfo(): string {
         $legalFile = Path::resolve('ULICMS_ROOT/licenses.md');
         $lastModified = filemtime($legalFile);
 
@@ -81,8 +77,7 @@ class InfoController extends MainClass
         return $parsed;
     }
 
-    public function _getNpmLegalInfo(): array
-    {
+    public function _getNpmLegalInfo(): array {
         $legalJson = file_get_contents(
             Path::resolve('ULICMS_ROOT/licenses.json')
         );

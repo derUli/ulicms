@@ -6,8 +6,7 @@ namespace App\Storages;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class Vars extends Storage
-{
+class Vars extends Storage {
     /**
      * @var bool
      */
@@ -19,8 +18,7 @@ class Vars extends Storage
      * @param bool $bool
      * @return void
      */
-    public static function setNoCache(bool $bool): void
-    {
+    public static function setNoCache(bool $bool): void {
         self::$noCache = $bool;
     }
 
@@ -29,8 +27,7 @@ class Vars extends Storage
      *
      * @return bool
      */
-    public static function getNoCache(): bool
-    {
+    public static function getNoCache(): bool {
         return self::$noCache;
     }
 }

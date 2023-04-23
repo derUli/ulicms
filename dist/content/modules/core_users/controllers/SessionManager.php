@@ -7,10 +7,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Models\Users\PasswordReset;
 use App\Utils\CacheUtil;
 
-class SessionManager extends \App\Controllers\Controller
-{
-    public function login(): void
-    {
+class SessionManager extends \App\Controllers\Controller {
+    public function login(): void {
         $user = new User();
         $user->loadByUsername($_POST['user']);
 
@@ -50,8 +48,7 @@ class SessionManager extends \App\Controllers\Controller
         }
     }
 
-    public function logout(): void
-    {
+    public function logout(): void {
         $id = $_SESSION['login_id'];
 
         // set user state to offline
@@ -64,8 +61,7 @@ class SessionManager extends \App\Controllers\Controller
         exit();
     }
 
-    public function resetPassword(): void
-    {
+    public function resetPassword(): void {
         if (! isset($_REQUEST['token'])) {
             ExceptionResult('A token is required');
         }

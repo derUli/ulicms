@@ -6,36 +6,30 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 
 // returns site protocl
 // http:// or https://
-function get_site_protocol(): string
-{
+function get_site_protocol(): string {
     return Request::getProtocol();
 }
 
-function site_protocol(): void
-{
+function site_protocol(): void {
     echo get_site_protocol();
 }
 
-function get_protocol_and_domain(): string
-{
+function get_protocol_and_domain(): string {
     return get_site_protocol() . get_domain();
 }
 
-function get_domain(): ?string
-{
+function get_domain(): ?string {
     return Request::getDomain();
 }
 
 // Die IP-Adresse des Clients zurückgeben
 // Falls ein Proxy genutzt wurde, versuchen, die echte IP statt der
 // des Proxy zu ermitteln
-function get_ip(): ?string
-{
+function get_ip(): ?string {
     return Request::getIp();
 }
 
-function get_host(): string
-{
+function get_host(): string {
     if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
         $host = $_SERVER['HTTP_X_FORWARDED_HOST'];
         $elements = explode(',', $host);
@@ -62,44 +56,36 @@ function get_host(): string
 }
 
 // Übersetzung HTTP Status Code => Name
-function getStatusCodeByNumber(int $nr)
-{
+function getStatusCodeByNumber(int $nr) {
     return Response::getStatusCodeByNumber($nr);
 }
 
-function get_request_uri(): ?string
-{
+function get_request_uri(): ?string {
     return Request::getRequestUri();
 }
 
-function get_http_host(): ?string
-{
+function get_http_host(): ?string {
     return get_domain();
 }
 
-function get_referrer(): ?string
-{
+function get_referrer(): ?string {
     return Request::getReferrer();
 }
 
-function get_useragent(): string
-{
+function get_useragent(): string {
     return Request::getUserAgent();
 }
 
-function get_request_method(): string
-{
+function get_request_method(): string {
     return Request::getMethod();
 }
 
 // Check for Secure HTTP Connection (SSL)
-function is_ssl(): bool
-{
+function is_ssl(): bool {
     return Request::isSSL();
 }
 
-function send_header(string $header): bool
-{
+function send_header(string $header): bool {
     $headers = \App\Storages\Vars::get('http_headers');
 
     if (! $headers) {

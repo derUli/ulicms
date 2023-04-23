@@ -10,8 +10,7 @@ use Database;
 
 // This class is used to store the edit restrictions of content
 // think of it as ACL like write permissions
-class PagePermissions
-{
+class PagePermissions {
     private $only_admins_can_edit = false;
 
     private $only_group_can_edit = false;
@@ -20,15 +19,13 @@ class PagePermissions
 
     private $only_others_can_edit = false;
 
-    public function __construct($objects = [])
-    {
+    public function __construct($objects = []) {
         foreach ($objects as $object => $restriction) {
             $this->setEditRestriction($object, $restriction);
         }
     }
 
-    public function getEditRestriction(string $object): ?bool
-    {
+    public function getEditRestriction(string $object): ?bool {
         $varName = "only_{$object}_can_edit";
         if (! isset($this->{$varName})) {
             return null;
@@ -48,8 +45,7 @@ class PagePermissions
         $this->{$varName} = $restricted;
     }
 
-    public function getAll(): array
-    {
+    public function getAll(): array {
         $result = [];
         $classArray = (array)$this;
         foreach ($classArray as $key => $value) {
@@ -62,8 +58,7 @@ class PagePermissions
         return $result;
     }
 
-    public function save(int $id): void
-    {
+    public function save(int $id): void {
         $all = $this->getAll();
 
         $sql = 'update `{prefix}content` set ';

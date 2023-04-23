@@ -16,15 +16,13 @@ use Template;
 /**
  * Reset admin user password
  */
-class PasswordReset
-{
+class PasswordReset {
     /**
      * Insert token to database
      * @param int $user_id
      * @return string
      */
-    public function addToken(int $user_id): string
-    {
+    public function addToken(int $user_id): string {
         $token = md5(uniqid() . (string)$user_id);
         $sql = 'INSERT INTO {prefix}password_reset (token, user_id) ' .
                 'values (?, ?)';
@@ -73,8 +71,7 @@ class PasswordReset
      * @param string $token
      * @return string
      */
-    public function getPasswordResetLink(string $token): string
-    {
+    public function getPasswordResetLink(string $token): string {
         $url = getBaseFolderURL();
         $url = rtrim($url, '/');
 
@@ -94,8 +91,7 @@ class PasswordReset
      * Get all tokens
      * @return array
      */
-    public function getAllTokens(): array
-    {
+    public function getAllTokens(): array {
         $tokens = [];
         $result = Database::selectAll('password_reset');
 
@@ -111,8 +107,7 @@ class PasswordReset
      * @param int $user_id
      * @return array
      */
-    public function getAllTokensByUserId(int $user_id): array
-    {
+    public function getAllTokensByUserId(int $user_id): array {
         $tokens = [];
 
         $result = Database::selectAll(
@@ -132,8 +127,7 @@ class PasswordReset
      * @param string $token
      * @return object|null
      */
-    public function getTokenByTokenString(string $token): ?object
-    {
+    public function getTokenByTokenString(string $token): ?object {
         $sql = 'select * from {prefix}password_reset where token = ?';
 
         $args = [
@@ -154,8 +148,7 @@ class PasswordReset
      * @param string $token
      * @return void
      */
-    public function deleteToken(string $token): void
-    {
+    public function deleteToken(string $token): void {
         $sql = 'delete from {prefix}password_reset where token = ?';
         $args = [
             (string)$token

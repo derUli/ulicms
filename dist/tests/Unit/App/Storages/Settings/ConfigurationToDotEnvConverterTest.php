@@ -7,8 +7,7 @@ use Nette\Utils\FileSystem;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 
-class ConfigurationToDotEnvConverterTest extends TestCase
-{
+class ConfigurationToDotEnvConverterTest extends TestCase {
     use MatchesSnapshots;
 
     private string $envFile;

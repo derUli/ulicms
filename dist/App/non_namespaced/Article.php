@@ -2,8 +2,7 @@
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class Article extends Page
-{
+class Article extends Page {
     // FIXME: Variablen alle private machen
     // und getter und setter implementieren
     public $article_author_name = '';
@@ -18,8 +17,7 @@ class Article extends Page
 
     public $type = 'article';
 
-    public function save()
-    {
+    public function save() {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -30,8 +28,7 @@ class Article extends Page
         return $retval;
     }
 
-    public function update()
-    {
+    public function update() {
         if ($this->id === null) {
             return false;
         }
@@ -64,13 +61,11 @@ excerpt = ? where id = ?';
       * Get css classes for Font Awesome icon
       * @return string
       */
-    public function getIcon(): string
-    {
+    public function getIcon(): string {
         return 'far fa-newspaper';
     }
 
-    protected function fillVars($result = null)
-    {
+    protected function fillVars($result = null) {
         parent::fillVars($result);
 
         // article metadata

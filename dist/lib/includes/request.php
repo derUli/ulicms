@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
-function get_action(): string
-{
+function get_action(): string {
     return BackendHelper::getAction();
 }
 
@@ -14,8 +13,7 @@ function get_action(): string
  * https://www.stefan.lu/blog/time-trap-anti-spam-technique/
  * @return bool
  */
-function _check_form_timestamp(): bool
-{
+function _check_form_timestamp(): bool {
     $original_timestamp = Request::getVar('form_timestamp', 0, 'int');
     $min_time_to_fill_form = Settings::get('min_time_to_fill_form', 'int');
     return ! (time() - $original_timestamp < $min_time_to_fill_form);
@@ -27,8 +25,7 @@ function _check_form_timestamp(): bool
  *
  * @return void
  */
-function check_form_timestamp(): void
-{
+function check_form_timestamp(): void {
     if (Settings::get('spamfilter_enabled') !== 'yes') {
         return;
     }

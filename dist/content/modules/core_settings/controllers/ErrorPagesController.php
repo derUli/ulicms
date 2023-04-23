@@ -6,10 +6,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Utils\CacheUtil;
 
-class ErrorPagesController extends \App\Controllers\Controller
-{
-    public function _savePost(): void
-    {
+class ErrorPagesController extends \App\Controllers\Controller {
+    public function _savePost(): void {
         $errorPages = $_POST['error_page'];
         if (is_array($errorPages)) {
             foreach ($errorPages as $code => $languages) {
@@ -30,8 +28,7 @@ class ErrorPagesController extends \App\Controllers\Controller
         CacheUtil::clearPageCache();
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,

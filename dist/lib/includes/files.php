@@ -12,8 +12,7 @@ use App\Utils\File;
  * @param bool $deleteMe
  * @return void
  */
-function sureRemoveDir(string $dir, bool $deleteMe = true): void
-{
+function sureRemoveDir(string $dir, bool $deleteMe = true): void {
     File::sureRemoveDir($dir, $deleteMe);
 }
 
@@ -23,11 +22,10 @@ function sureRemoveDir(string $dir, bool $deleteMe = true): void
  * @param string $dst
  * @return void
  */
-function recurse_copy(string $src, string $dst): void
-{
+function recurse_copy(string $src, string $dst): void {
     $dir = opendir($src);
 
-    if(! is_dir($dst)){
+    if(! is_dir($dst)) {
         mkdir($dst, 0777, true);
     }
 

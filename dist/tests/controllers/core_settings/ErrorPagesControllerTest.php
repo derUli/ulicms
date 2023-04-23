@@ -1,11 +1,9 @@
 <?php
 
-class ErrorPagesControllerTest extends \PHPUnit\Framework\TestCase
-{
+class ErrorPagesControllerTest extends \PHPUnit\Framework\TestCase {
     private $defaultSettings = [];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->defaultSettings = [
             'error_page_403_de' => Settings::get('error_page_403_de'),
             'error_page_403_en' => Settings::get('error_page_403_en'),
@@ -14,8 +12,7 @@ class ErrorPagesControllerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_POST = [];
 
         foreach ($this->defaultSettings as $key => $value) {
@@ -23,8 +20,7 @@ class ErrorPagesControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSavePost(): void
-    {
+    public function testSavePost(): void {
         $_POST['error_page'] = [
             '403' => [
                 'de' => '12',
@@ -60,8 +56,7 @@ class ErrorPagesControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testSavePostUnset(): void
-    {
+    public function testSavePostUnset(): void {
         $_POST['error_page'] = [
             '403' => [
                 'de' => '12',

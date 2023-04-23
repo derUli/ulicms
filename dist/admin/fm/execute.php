@@ -48,8 +48,7 @@ while ($cycle && $i < $max_cycles) {
     $path = fix_dirname($path) . '/';
 }
 
-function returnPaths($_path, $_name, $config)
-{
+function returnPaths($_path, $_name, $config) {
     global $ftp;
     $path = $config['current_path'] . $_path;
     $path_thumb = $config['thumbs_base_path'] . $_path;

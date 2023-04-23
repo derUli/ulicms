@@ -7,8 +7,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * Available HTML Editors
  */
-abstract class HtmlEditor
-{
+abstract class HtmlEditor {
     // See https://ckeditor.com
     public const CKEDITOR = 'ckeditor';
 

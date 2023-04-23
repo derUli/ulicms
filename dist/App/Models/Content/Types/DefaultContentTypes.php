@@ -7,12 +7,10 @@ namespace App\Models\Content\Types;
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 
-class DefaultContentTypes
-{
+class DefaultContentTypes {
     private static $types = [];
 
-    public static function initTypes(): void
-    {
+    public static function initTypes(): void {
         self::$types = [];
         self::$types['page'] = new ContentType();
         self::$types['page']->show = [
@@ -82,21 +80,18 @@ class DefaultContentTypes
         self::$types = apply_filter(self::$types, 'content_types');
     }
 
-    public static function getAll(): array
-    {
+    public static function getAll(): array {
         return self::$types;
     }
 
-    public static function get($name): ?object
-    {
+    public static function get($name): ?object {
         if (isset(self::$types[$name])) {
             return self::$types[$name];
         }
         return null;
     }
 
-    public static function toJSON(): string
-    {
+    public static function toJSON(): string {
         $result = [];
         foreach (self::$types as $key => $value) {
             $result[$key] = ['show' => $value->show];

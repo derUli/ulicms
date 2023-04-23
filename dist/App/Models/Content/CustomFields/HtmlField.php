@@ -10,10 +10,8 @@ use App\Constants\HtmlEditor;
 use App\Storages\ViewBag;
 use Template;
 
-class HtmlField extends CustomField
-{
-    public function render(mixed $value = null): string
-    {
+class HtmlField extends CustomField {
+    public function render(mixed $value = null): string {
         $htmlEditor = get_html_editor();
 
         if (! isset($this->htmlAttributes['class'])) {

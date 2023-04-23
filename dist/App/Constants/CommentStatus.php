@@ -11,8 +11,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
  * if a comment is pending
  * it has to be approved by a backend user
  */
-abstract class CommentStatus
-{
+abstract class CommentStatus {
     public const PENDING = 'pending';
 
     public const PUBLISHED = 'published';

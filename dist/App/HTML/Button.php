@@ -13,8 +13,7 @@ use ModuleHelper;
  * This class contains helper methods to build Bootstrap buttons
  * See https://getbootstrap.com/docs/3.3/components/
  */
-class Button
-{
+class Button {
     /**
      * Generate Button
      *

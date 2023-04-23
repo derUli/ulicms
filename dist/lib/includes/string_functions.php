@@ -14,8 +14,7 @@ use Nette\Utils\Random;
  *
  * @return void
  */
-function sanitize_headers(array &$array): void
-{
+function sanitize_headers(array &$array): void {
     foreach ($array as &$data) {
         $data = str_ireplace([
             "\r",
@@ -27,13 +26,11 @@ function sanitize_headers(array &$array): void
 }
 
 
-function _unesc(string $string): string
-{
+function _unesc(string $string): string {
     return html_entity_decode($string, ENT_COMPAT, 'UTF-8');
 }
 
-function unesc(string $string): void
-{
+function unesc(string $string): void {
     echo _unesc($string);
 }
 
@@ -43,8 +40,7 @@ function unesc(string $string): void
  * @param string $style
  * @return string
  */
-function normalizeLN(string $txt, string $style = "\r\n"): string
-{
+function normalizeLN(string $txt, string $style = "\r\n"): string {
     $txt = str_replace("\r\n", "\n", $txt);
     $txt = str_replace(
         "\r",
@@ -60,8 +56,7 @@ function normalizeLN(string $txt, string $style = "\r\n"): string
  * @param string $text
  * @return string
  */
-function make_links_clickable(string $text): string
-{
+function make_links_clickable(string $text): string {
     return StringHelper::makeLinksClickable($text);
 }
 
@@ -92,8 +87,7 @@ function getExcerpt(
  *
  * @return ?string
  */
-function stringOrNull(mixed $val): ?string
-{
+function stringOrNull(mixed $val): ?string {
     return is_string($val) && ! empty($val) ? (string)$val : null;
 }
 
@@ -104,8 +98,7 @@ function stringOrNull(mixed $val): ?string
  *
  * @return string
  */
-function strbool(mixed $value): string
-{
+function strbool(mixed $value): string {
     return $value ? 'true' : 'false';
 }
 
@@ -116,8 +109,7 @@ function strbool(mixed $value): string
  *
  * @return void
  */
-function esc(mixed $value): void
-{
+function esc(mixed $value): void {
     Template::escape($value);
 }
 
@@ -128,21 +120,18 @@ function esc(mixed $value): void
  *
  * @return string
  */
-function _esc(mixed $value): string
-{
+function _esc(mixed $value): string {
     return Template::getEscape($value);
 }
 
-function remove_prefix(string $text, string $prefix): string
-{
+function remove_prefix(string $text, string $prefix): string {
     if (str_starts_with($text, $prefix)) {
         $text = substr($text, strlen($prefix));
     }
     return $text;
 }
 
-function remove_suffix(string $text, string $suffix): string
-{
+function remove_suffix(string $text, string $suffix): string {
     if (str_ends_with($text, $suffix)) {
         $text = substr($text, 0, strlen($text) - strlen($suffix));
     }
@@ -154,7 +143,6 @@ function remove_suffix(string $text, string $suffix): string
  * @param int $length
  * @return string
  */
-function rand_string(int $length): string
-{
+function rand_string(int $length): string {
     return Random::generate($length);
 }

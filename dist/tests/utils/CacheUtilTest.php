@@ -6,33 +6,28 @@ use Phpfastcache\Helper\Psr16Adapter;
 // if opcache is not installed, define dummy function to
 // have full code coverage
 if (! function_exists('opcache_reset')) {
-    function opcache_reset()
-    {
+    function opcache_reset() {
     }
 }
 // if apc is not installed, define dummy function to
 // have full code coverage
 if (! function_exists('apc_clear_cache')) {
-    function apc_clear_cache()
-    {
+    function apc_clear_cache() {
     }
 }
 
-class CacheUtilTest extends \PHPUnit\Framework\TestCase
-{
+class CacheUtilTest extends \PHPUnit\Framework\TestCase {
     private $cacheDisabledOriginal;
 
     private $cachePeriodOriginal;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->cacheDisabledOriginal = Settings::get('cache_disabled');
         $this->cachePeriodOriginal = Settings::get('cache_period');
         Settings::delete('cache_disabled');
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         if ($this->cacheDisabledOriginal) {
             Settings::set('cache_disabled', 'yes');
         } else {
@@ -41,8 +36,7 @@ class CacheUtilTest extends \PHPUnit\Framework\TestCase
         Settings::set('cache_period', $this->cachePeriodOriginal);
     }
 
-    public function testIsCacheEnabled()
-    {
+    public function testIsCacheEnabled() {
         Settings::delete('cache_disabled');
         $this->assertTrue(CacheUtil::isCacheEnabled());
 
@@ -52,8 +46,7 @@ class CacheUtilTest extends \PHPUnit\Framework\TestCase
         Settings::delete('cache_disabled');
     }
 
-    public function testIsCacheEnabledLoggedIn()
-    {
+    public function testIsCacheEnabledLoggedIn() {
         $_SESSION['logged_in'] = true;
         Settings::delete('cache_disabled');
         $this->assertFalse(CacheUtil::isCacheEnabled());
@@ -64,13 +57,11 @@ class CacheUtilTest extends \PHPUnit\Framework\TestCase
         Settings::delete('cache_disabled');
     }
 
-    public function testGetAdapter()
-    {
+    public function testGetAdapter() {
         $this->assertInstanceOf(Psr16Adapter::class, CacheUtil::getAdapter());
     }
 
-    public function testGetCachePeriod()
-    {
+    public function testGetCachePeriod() {
         Settings::set('cache_period', 123);
         $this->assertEquals(123, CacheUtil::getCachePeriod());
         Settings::set('cache_period', 456);
@@ -79,8 +70,7 @@ class CacheUtilTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(0, CacheUtil::getCachePeriod());
     }
 
-    public function testGetCurrentUid()
-    {
+    public function testGetCurrentUid() {
         $_SERVER['REQUEST_URI'] = '/my-url.html';
         $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1';
         $_SESSION['language'] = 'de';
@@ -97,8 +87,7 @@ class CacheUtilTest extends \PHPUnit\Framework\TestCase
     }
 
     // Tests for a bug where two different requests are producing the same hash
-    public function testGetCurrentUidCollisionBug()
-    {
+    public function testGetCurrentUidCollisionBug() {
         $_SERVER['REQUEST_URI'] = '/my-url.html';
         $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3';
         $_SESSION['language'] = 'de';
@@ -114,8 +103,7 @@ class CacheUtilTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEquals($uid2, $uid1);
     }
 
-    public function testClearCache()
-    {
+    public function testClearCache() {
         Settings::delete('cache_disabled');
         Settings::set('cache_period', 123);
 

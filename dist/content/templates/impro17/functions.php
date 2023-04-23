@@ -4,8 +4,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Security\Permissions\PermissionChecker;
 
-function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true, $order = 'position')
-{
+function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true, $order = 'position') {
     $html = '';
     $name = db_escape($name);
     $language = $_SESSION['language'];

@@ -10,8 +10,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * This class renders the admin menu
  */
-class AdminMenu
-{
+class AdminMenu {
     /**
      * @var MenuEntry[]
      */
@@ -21,8 +20,7 @@ class AdminMenu
      * Constructor
      * @param MenuEntry[] $children
      */
-    public function __construct(array $children = [])
-    {
+    public function __construct(array $children = []) {
         $this->children = $children;
     }
 
@@ -30,8 +28,7 @@ class AdminMenu
      * Get children
      * @return MenuEntry[]
      */
-    public function getChildren(): array
-    {
+    public function getChildren(): array {
         return $this->children;
     }
 
@@ -41,8 +38,7 @@ class AdminMenu
      *
      * @return void
      */
-    public function setChildren(array $value): void
-    {
+    public function setChildren(array $value): void {
         $this->children = $value;
     }
 
@@ -50,8 +46,7 @@ class AdminMenu
      * Check if the menu has children
      * @return bool
      */
-    public function hasChildren(): bool
-    {
+    public function hasChildren(): bool {
         return count($this->children) > 0;
     }
 
@@ -59,8 +54,7 @@ class AdminMenu
      * Render the menu to HTML
      * @return string
      */
-    public function render(): string
-    {
+    public function render(): string {
         $html = '<ul>';
 
         foreach ($this->children as $child) {

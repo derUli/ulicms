@@ -16,15 +16,13 @@ use Settings;
 /**
  * Send Mails
  */
-class Mailer
-{
+class Mailer {
     /**
      * Split mail header string to array
      * @param string $headers
      * @return array
      */
-    public static function splitHeaders(string $headers): array
-    {
+    public static function splitHeaders(string $headers): array {
         $header_array = [];
         $lines = normalizeLN($headers, "\n");
         $lines = explode("\n", $lines);
@@ -78,8 +76,7 @@ class Mailer
      * Get mail logger
      * @return Closure
      */
-    public static function getMailLogger(): Closure
-    {
+    public static function getMailLogger(): Closure {
         return static function($str, $level) {
             $logger = LoggerRegistry::get('phpmailer_log');
             if ($logger) {
@@ -166,8 +163,7 @@ class Mailer
      * @param PHPMailer $mailer
      * @return PHPMailer
      */
-    protected static function setPHPMailerAttributes(PHPMailer $mailer): PHPMailer
-    {
+    protected static function setPHPMailerAttributes(PHPMailer $mailer): PHPMailer {
         $mailer->SMTPSecure = Settings::get('smtp_encryption');
 
         // Disable verification of ssl certificates

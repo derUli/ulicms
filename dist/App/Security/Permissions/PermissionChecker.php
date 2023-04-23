@@ -11,8 +11,7 @@ use Group;
 use User;
 
 // class for permission checks
-class PermissionChecker
-{
+class PermissionChecker {
     /**
      * @var ?int $user_id
      */
@@ -23,8 +22,7 @@ class PermissionChecker
      *
      * @param ?int $user_id
      */
-    public function __construct(?int $user_id = null)
-    {
+    public function __construct(?int $user_id = null) {
         $this->user_id = $user_id;
     }
 
@@ -33,8 +31,7 @@ class PermissionChecker
      *
      * @return self
      */
-    public static function fromCurrentUser(): self
-    {
+    public static function fromCurrentUser(): self {
         return new static(get_user_id());
     }
 
@@ -44,8 +41,7 @@ class PermissionChecker
      * @param string $permission
      * @return bool
      */
-    public function hasPermission(string $permission): bool
-    {
+    public function hasPermission(string $permission): bool {
         // If the user is not logged in he has no permissions on anything
         if (! $this->user_id) {
             return false;
@@ -78,8 +74,7 @@ class PermissionChecker
      *
      * @return Language[]
      */
-    public function getLanguages(): array
-    {
+    public function getLanguages(): array {
         $user = new User($this->user_id);
         $groups = $this->getUserGroups($user);
 
@@ -97,8 +92,7 @@ class PermissionChecker
      *
      * @return ?int
      */
-    public function getUserId(): ?int
-    {
+    public function getUserId(): ?int {
         return $this->user_id;
     }
 
@@ -108,8 +102,7 @@ class PermissionChecker
      * @param ?int $val
      * @return void
      */
-    public function setUserId(?int $val): void
-    {
+    public function setUserId(?int $val): void {
         $this->user_id = is_numeric($val) ? (int)$val : null;
     }
 
@@ -119,8 +112,7 @@ class PermissionChecker
      * @param User $user
      * @return Group[]
      */
-    private function getUserGroups(User $user): array
-    {
+    private function getUserGroups(User $user): array {
         // Collect primary group and secondary groups of the user
         $groups = [];
         if ($user->getPrimaryGroup()) {

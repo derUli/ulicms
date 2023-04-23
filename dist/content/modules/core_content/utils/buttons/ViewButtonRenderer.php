@@ -15,12 +15,10 @@ use function App\HTML\icon;
 
 use function App\HTML\Link;
 
-class ViewButtonRenderer
-{
+class ViewButtonRenderer {
     public const MODULE_NAME = 'core_content';
 
-    public function render(int $pageId, User $user)
-    {
+    public function render(int $pageId, User $user) {
         $permitted = true;
 
         $content = ContentFactory::getByID($pageId);

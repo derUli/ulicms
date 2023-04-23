@@ -3,14 +3,13 @@
 declare(strict_types=1);
 
 
-class CoreUpgradeControllerTest extends \PHPUnit\Framework\TestCase
-{
+class CoreUpgradeControllerTest extends \PHPUnit\Framework\TestCase {
     protected function tearDown(): void {
         unset($_SERVER['REQUEST_METHOD']);
 
         $testFile = Path::resolve('ULICMS_ROOT/upgrade-check.txt');
 
-        if(is_file($testFile)){
+        if(is_file($testFile)) {
             unlink($testFile);
         }
     }

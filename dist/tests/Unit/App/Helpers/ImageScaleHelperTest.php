@@ -2,25 +2,21 @@
 
 use App\Helpers\ImageScaleHelper;
 
-class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         if (is_file($this->getProcessedPath())) {
             unlink($this->getProcessedPath());
         }
     }
 
-    public function testGetMaxImageDimensions()
-    {
+    public function testGetMaxImageDimensions() {
         $this->assertEquals(
             [2500, 1667],
             ImageScaleHelper::getMaxImageDimensions()
         );
     }
 
-    public function testScaleDown()
-    {
+    public function testScaleDown() {
         ImageScaleHelper::scaleDown(
             $this->getFixturePath(),
             $this->getProcessedPath()
@@ -40,13 +36,11 @@ class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(1667, $size->getHeight());
     }
 
-    protected function getFixturePath(): string
-    {
+    protected function getFixturePath(): string {
         return Path::resolve('ULICMS_ROOT/tests/fixtures/huge-image.jpg');
     }
 
-    protected function getProcessedPath(): string
-    {
+    protected function getProcessedPath(): string {
         return Path::resolve('ULICMS_TMP/scaled-image.jpg');
     }
 }

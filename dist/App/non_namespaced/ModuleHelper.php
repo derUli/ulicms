@@ -10,8 +10,7 @@ use App\Helpers\Helper;
 use App\HTML\Form;
 use App\Models\Content\Language;
 
-abstract class ModuleHelper extends Helper
-{
+abstract class ModuleHelper extends Helper {
     // builds an url to the main backend GUI of a module
     public static function buildAdminURL(
         string $module,
@@ -97,8 +96,7 @@ abstract class ModuleHelper extends Helper
     }
 
     // get the names of all modules, that are embeddable
-    public static function getAllEmbedModules(): array
-    {
+    public static function getAllEmbedModules(): array {
         $retval = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
@@ -124,8 +122,7 @@ abstract class ModuleHelper extends Helper
     }
 
     // returns an instance of the MainClass of a module
-    public static function getMainController(string $module): ?Controller
-    {
+    public static function getMainController(string $module): ?Controller {
         $controller = null;
         $main_class = getModuleMeta($module, 'main_class');
 
@@ -137,14 +134,12 @@ abstract class ModuleHelper extends Helper
     }
 
     // alias for getMainController()
-    public static function getMainClass(string $module): ?Controller
-    {
+    public static function getMainClass(string $module): ?Controller {
         return self::getMainController($module);
     }
 
     // returns true if $module offers an embed shortcode
-    public static function isEmbedModule(string $module): bool
-    {
+    public static function isEmbedModule(string $module): bool {
         $retval = true;
         $noembedfile1 = Path::Resolve(
             "ULICMS_ROOT/content/modules/{$module}/.noembed"
@@ -167,8 +162,7 @@ abstract class ModuleHelper extends Helper
     }
 
     // returns the absolute url to UliCMS
-    public static function getBaseUrl(string $suffix = '/'): string
-    {
+    public static function getBaseUrl(string $suffix = '/'): string {
         $domain = get_http_host();
 
         $dirname = dirname(get_request_uri());
@@ -256,8 +250,7 @@ abstract class ModuleHelper extends Helper
      *
      * @param {string} $str
      */
-    public static function underscoreToCamel(string $str): string
-    {
+    public static function underscoreToCamel(string $str): string {
         // Remove underscores, capitalize words, squash, lowercase first.
         return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $str))));
     }
@@ -369,8 +362,7 @@ abstract class ModuleHelper extends Helper
     }
 
     // closes a html form
-    public static function endForm(): string
-    {
+    public static function endForm(): string {
         return Form::endForm();
     }
 }

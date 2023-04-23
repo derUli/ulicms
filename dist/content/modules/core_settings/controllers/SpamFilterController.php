@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class SpamFilterController extends \App\Controllers\Controller
-{
-    public function _savePost(): void
-    {
+class SpamFilterController extends \App\Controllers\Controller {
+    public function _savePost(): void {
         do_event('before_save_spamfilter_settings');
 
         if ($_POST['spamfilter_enabled'] == 'yes') {
@@ -67,8 +65,7 @@ class SpamFilterController extends \App\Controllers\Controller
         // if called by ajax return no content to improve performance
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,

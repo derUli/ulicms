@@ -12,14 +12,12 @@ use App\Utils\File;
 /**
  * Backend utilities
  */
-abstract class BackendHelper extends Helper
-{
+abstract class BackendHelper extends Helper {
     /**
      * Get the current backend action
      * @return string
      */
-    public static function getAction(): string
-    {
+    public static function getAction(): string {
         return $_REQUEST['action'] ?? 'home';
     }
 
@@ -28,8 +26,7 @@ abstract class BackendHelper extends Helper
      * @param string $action
      * @return void
      */
-    public static function setAction(string $action): void
-    {
+    public static function setAction(string $action): void {
         $_REQUEST['action'] = $action;
 
         if (Request::isPost()) {
@@ -43,8 +40,7 @@ abstract class BackendHelper extends Helper
      * Enqueue HTML editor scripts
      * @return void
      */
-    public static function enqueueEditorScripts(): void
-    {
+    public static function enqueueEditorScripts(): void {
         // ckeditor is huge so embed it only if this is the user'S preferred html editor
         if (get_html_editor() == HtmlEditor::CKEDITOR) {
             echo Script::fromFile('ckeditor/ckeditor.js');
@@ -89,8 +85,7 @@ abstract class BackendHelper extends Helper
     * Get CKEditor Skin.
     * @return array
     */
-    public static function getCKEditorSkins(): array
-    {
+    public static function getCKEditorSkins(): array {
         $skins = [];
         $dir = Path::resolve('ULICMS_ROOT/admin/ckeditor/skins');
         $folders = File::findAllDirs($dir);

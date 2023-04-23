@@ -10,8 +10,7 @@ use Nette\Utils\Json;
  * Like var_dump() but returns it as string
  * @return string
  */
-function var_dump_str(): string
-{
+function var_dump_str(): string {
     $argc = func_num_args();
     $argv = func_get_args();
 
@@ -31,7 +30,6 @@ function var_dump_str(): string
  * @param type $in
  * @return string
  */
-function json_readable_encode($in): string
-{
+function json_readable_encode($in): string {
     return Json::encode($in, true, false, false, true);
 }

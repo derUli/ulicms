@@ -3,15 +3,12 @@
 use App\Models\Content\Category;
 use App\Models\Media\Audio;
 
-class AudioTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class AudioTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         require_once getLanguageFilePath('en');
     }
 
-    public function testCreateUpdateAndDelete()
-    {
+    public function testCreateUpdateAndDelete() {
         $audio = new Audio();
         $audio->setName('My Name');
         $audio->setMP3File('music.mp3');
@@ -62,8 +59,7 @@ class AudioTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($audio->getID());
     }
 
-    public function testAudioHtml()
-    {
+    public function testAudioHtml() {
         $audio = new Audio();
         $audio->setName('My Name');
         $audio->setMP3File('music.mp3');
@@ -75,8 +71,7 @@ class AudioTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetAll()
-    {
+    public function testGetAll() {
         $savedAudios = [];
 
         for ($i = 1; $i <= 10; $i++) {
@@ -101,8 +96,7 @@ class AudioTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testLoadByIdNotFound()
-    {
+    public function testLoadByIdNotFound() {
         $audio = new Audio(PHP_INT_MAX);
         $this->assertNull($audio->getID());
     }

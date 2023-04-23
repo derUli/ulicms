@@ -860,8 +860,7 @@ foreach ($files as $k => $file) {
     }
 }
 
-function filenameSort($x, $y)
-{
+function filenameSort($x, $y) {
     global $descending;
 
     if ($x['is_dir'] !== $y['is_dir']) {
@@ -874,8 +873,7 @@ function filenameSort($x, $y)
     return $greater ? 1 : -1;
 }
 
-function dateSort($x, $y)
-{
+function dateSort($x, $y) {
     global $descending;
 
     if ($x['is_dir'] !== $y['is_dir']) {
@@ -889,8 +887,7 @@ function dateSort($x, $y)
 }
 
 
-function sizeSort($x, $y)
-{
+function sizeSort($x, $y) {
     global $descending;
 
     if ($x['is_dir'] !== $y['is_dir']) {
@@ -903,8 +900,7 @@ function sizeSort($x, $y)
     return $greater ? 1 : -1;
 }
 
-function extensionSort($x, $y)
-{
+function extensionSort($x, $y) {
     global $descending;
 
     if ($x['is_dir'] !== $y['is_dir']) {

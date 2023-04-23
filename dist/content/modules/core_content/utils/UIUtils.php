@@ -6,12 +6,10 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\HTML\ListItem;
 
-class UIUtils
-{
+class UIUtils {
     // get items for the "Robots" dropdown in the metadata section of
     // page edit form
-    public static function getRobotsListItems()
-    {
+    public static function getRobotsListItems() {
         $robotsListItems = [];
         $robotsListItems[] = new ListItem(
             null,

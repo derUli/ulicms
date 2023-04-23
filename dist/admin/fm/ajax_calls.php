@@ -314,7 +314,7 @@ if (isset($_GET['action'])) {
                 });
             </script>
 
-            <?php } elseif (in_array(strtolower($info['extension']), $config['ext_video'])){	?>
+            <?php } elseif (in_array(strtolower($info['extension']), $config['ext_video'])) {	?>
 
             <script>
                 $(document).ready(function () {

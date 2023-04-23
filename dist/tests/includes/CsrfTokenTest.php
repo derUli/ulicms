@@ -1,27 +1,23 @@
 <?php
 
-class CsrfTokenTest extends \PHPUnit\Framework\TestCase
-{
+class CsrfTokenTest extends \PHPUnit\Framework\TestCase {
     private $initialMinTime;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $_SESSION = [];
         $_REQUEST = [];
 
         $this->initialMinTime = Settings::get('min_time_to_fill_form');
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_SESSION = [];
         $_REQUEST = [];
 
         Settings::set('min_time_to_fill_form', $this->initialMinTime);
     }
 
-    public function testCheckCsrfTokenValid()
-    {
+    public function testCheckCsrfTokenValid() {
         $token = get_csrf_token();
         $this->assertNotNull($token);
 
@@ -30,20 +26,17 @@ class CsrfTokenTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(check_csrf_token());
     }
 
-    public function testCheckCsrfTokenInvalid()
-    {
+    public function testCheckCsrfTokenInvalid() {
         $_SESSION['csrf_token'] = 'foo';
         $_REQUEST['csrf_token'] = 'thisisnotthetoken';
         $this->assertFalse(check_csrf_token());
     }
 
-    public function testCheckCsrfTokenNoToken()
-    {
+    public function testCheckCsrfTokenNoToken() {
         $this->assertFalse(check_csrf_token());
     }
 
-    public function testGetCsrfTokenHtmlWithMinTimeToFillForm()
-    {
+    public function testGetCsrfTokenHtmlWithMinTimeToFillForm() {
         Settings::set('min_time_to_fill_form', '6');
 
         $this->assertStringContainsString(
@@ -52,8 +45,7 @@ class CsrfTokenTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testCsrfTokenHtmlWithMinTimeToFillForm()
-    {
+    public function testCsrfTokenHtmlWithMinTimeToFillForm() {
         Settings::set('min_time_to_fill_form', '6');
 
         ob_start();

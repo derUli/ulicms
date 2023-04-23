@@ -9,8 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Storages\ViewBag;
 use Template;
 
-class SelectField extends CustomField
-{
+class SelectField extends CustomField {
     /**
      * @var array<string, mixed>
      */
@@ -21,8 +20,7 @@ class SelectField extends CustomField
      */
     public bool $translateOptions = true;
 
-    public function render(mixed $value = null): string
-    {
+    public function render(mixed $value = null): string {
 
         ViewBag::set('field', $this);
         ViewBag::set('field_value', $value);

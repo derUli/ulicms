@@ -8,8 +8,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 // permission checker interface for objects with read, write and delete
 // permission
-interface DatasetPermissionCheckerInterface
-{
+interface DatasetPermissionCheckerInterface {
     public function __construct(int $user_id);
 
     public function canRead(int $dataset): bool;

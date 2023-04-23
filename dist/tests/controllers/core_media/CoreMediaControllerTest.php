@@ -5,12 +5,10 @@ use Spatie\Snapshots\MatchesSnapshots;
 
 use function App\HTML\imageTag;
 
-class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
-{
+class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase {
     use MatchesSnapshots;
 
-    public function testReplaceLinks()
-    {
+    public function testReplaceLinks() {
         $input = $this->getExampleHtml();
 
         $controller = new CoreMediaController();
@@ -19,8 +17,7 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertMatchesHtmlSnapshot($actual);
     }
 
-    public function testBeforeContentFilterEnabled()
-    {
+    public function testBeforeContentFilterEnabled() {
         $input = $this->getExampleHtml();
 
         $controller = new CoreMediaController();
@@ -28,15 +25,13 @@ class CoreMediaControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertMatchesHtmlSnapshot($actual);
     }
 
-    public function testReplaceLinksWithEmpty()
-    {
+    public function testReplaceLinksWithEmpty() {
         $controller = new CoreMediaController();
         $output = $controller->_replaceLinks('');
         $this->assertEmpty($output);
     }
 
-    private function getExampleHtml()
-    {
+    private function getExampleHtml() {
         $urls = [
             'http://example.org/',
             'https://youtu.be/7b-B1-xs6Og',

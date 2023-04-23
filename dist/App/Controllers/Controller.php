@@ -17,8 +17,7 @@ use Request;
 /**
  * All module controllers must inherited from this class
  */
-abstract class Controller
-{
+abstract class Controller {
     /**
      * List of not callable public methods
      * @var string[]
@@ -30,8 +29,7 @@ abstract class Controller
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         // add all hooks to blacklist
         // blacklisted methods can not be remote called as action
         $file = Path::resolve('ULICMS_ROOT/lib/hooks.json');
@@ -59,8 +57,7 @@ abstract class Controller
      * @throws BadMethodCallException
      * @return void
      */
-    public function runCommand(): void
-    {
+    public function runCommand(): void {
         $sClass = $_REQUEST['sClass'];
         if (isset($_REQUEST['sMethod']) && ! empty($_REQUEST['sMethod']) && ! in_array(
             $_REQUEST['sMethod'],

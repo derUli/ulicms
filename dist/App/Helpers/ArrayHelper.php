@@ -11,8 +11,7 @@ use Exception;
 /**
  * This class contains utilities to deal with arrays
  */
-abstract class ArrayHelper extends Helper
-{
+abstract class ArrayHelper extends Helper {
     /**
      * inserts an item before an index to an array
      *
@@ -83,8 +82,7 @@ abstract class ArrayHelper extends Helper
      * @param string[] $keys
      * @return bool
      */
-    public static function hasMultipleKeys(?array $input, array $keys): bool
-    {
+    public static function hasMultipleKeys(?array $input, array $keys): bool {
         if (! $input) {
             return false;
         }

@@ -6,10 +6,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Utils\CacheUtil;
 
-class OtherSettingsController extends \App\Controllers\Controller
-{
-    public function _savePost(): void
-    {
+class OtherSettingsController extends \App\Controllers\Controller {
+    public function _savePost(): void {
         if (isset($_POST['email_mode'])) {
             Settings::set('email_mode', $_POST['email_mode']);
         }
@@ -81,8 +79,7 @@ class OtherSettingsController extends \App\Controllers\Controller
         CacheUtil::clearPageCache();
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,

@@ -19,14 +19,12 @@ use User;
 use function App\HTML\icon;
 use function App\HTML\link;
 
-class PageTableRenderer
-{
+class PageTableRenderer {
     public const MODULE_NAME = 'core_content';
 
     private $user;
 
-    public function __construct($user = null)
-    {
+    public function __construct($user = null) {
         $this->user = ! $user ? User::fromSessionData() : $user;
     }
 
@@ -160,8 +158,7 @@ class PageTableRenderer
         return $result;
     }
 
-    protected function buildFilterSQL($where, $filters): string
-    {
+    protected function buildFilterSQL($where, $filters): string {
         if (isset($filters['type']) && ! empty($filters['type'])) {
             $where .= " and type ='" .
                     Database::escapeValue($filters['type']) .
@@ -212,8 +209,7 @@ class PageTableRenderer
     }
 
     // fetch all datasets of mysqli result
-    protected function fetchResults(\mysqli_result $results, User $user)
-    {
+    protected function fetchResults(\mysqli_result $results, User $user) {
         $filteredResults = [];
 
         while ($row = Database::fetchObject($results)) {
@@ -224,8 +220,7 @@ class PageTableRenderer
     }
 
     // builds an array which is used to show table data in frontend
-    protected function pageDatasetsToResponse(object $dataset, User $user)
-    {
+    protected function pageDatasetsToResponse(object $dataset, User $user) {
         $viewButtonRenderer = new ViewButtonRenderer();
         $editButtonRenderer = new EditButtonRenderer();
 

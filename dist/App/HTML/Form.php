@@ -13,17 +13,16 @@ use Template;
 /**
  * This class contains method to build <form> tags
  */
-class Form
-{
+class Form {
     /**
      * Generates method call form
-     * 
+     *
      * @param string $sClass
      * @param string $sMethod
      * @param array<string, string> $otherVars
      * @param string $requestMethod
      * @param array<string, string> $htmlAttributes
-     * 
+     *
      * @return string
      */
     public static function buildMethodCallForm(
@@ -58,7 +57,7 @@ class Form
 
     /**
      * Generates method call button
-     * 
+     *
      * @param string $sClass
      * @param string $sMethod
      * @param string $buttonText
@@ -66,7 +65,7 @@ class Form
      * @param array<string, string> $otherVars
      * @param array<string, string> $formAttributes
      * @param string $requestMethod
-     * 
+     *
      * @return string
      */
     public static function buildMethodCallButton(
@@ -99,11 +98,11 @@ class Form
 
     /**
      * Generates delete button
-     * 
+     *
      * @param string $url
      * @param array<string, string> $otherVars
      * @param array<string, string> $htmlAttributes
-     * 
+     *
      * @return string
      */
     public static function deleteButton(
@@ -143,11 +142,10 @@ class Form
 
     /**
      * Returns closing tag for HTML form
-     * 
+     *
      * @return string
      */
-    public static function endForm(): string
-    {
+    public static function endForm(): string {
         return '</form>';
     }
 }

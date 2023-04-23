@@ -16,8 +16,7 @@ use function getModuleMeta;
 
 // this class maps the values in the "type" column of the
 // "content" table to the equally model class names
-class TypeMapper
-{
+class TypeMapper {
     private static $mapping = [
         'page' => 'Page',
         'snippet' => 'Snippet',
@@ -32,13 +31,11 @@ class TypeMapper
         'language_link' => 'Language_Link'
     ];
 
-    public static function getMappings(): array
-    {
+    public static function getMappings(): array {
         return self::$mapping;
     }
 
-    public static function getModel($type): ?object
-    {
+    public static function getModel($type): ?object {
         if (! (isset(self::$mapping[$type]) && class_exists(self::$mapping[$type]))) {
             return null;
         }
@@ -46,8 +43,7 @@ class TypeMapper
     }
 
     // custom modules may load their own content type models
-    public static function loadMapping(): void
-    {
+    public static function loadMapping(): void {
         $manager = new ModuleManager();
         $modules = $manager->getEnabledModuleNames();
         foreach ($modules as $module) {

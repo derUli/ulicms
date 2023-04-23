@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class DefaultAccessRestrictionsController extends \App\Controllers\Controller
-{
-    public function _savePost(): void
-    {
+class DefaultAccessRestrictionsController extends \App\Controllers\Controller {
+    public function _savePost(): void {
         Settings::set(
             'only_admins_can_edit',
             Request::getVar('only_admins_can_edit', 0, 'int')
@@ -26,8 +24,7 @@ class DefaultAccessRestrictionsController extends \App\Controllers\Controller
         );
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,

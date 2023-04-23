@@ -10,8 +10,7 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
  * @param string $attrib
  * @return type
  */
-function getThemeMeta(string $theme, ?string $attrib = null)
-{
+function getThemeMeta(string $theme, ?string $attrib = null) {
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . 'metadata.json';
 

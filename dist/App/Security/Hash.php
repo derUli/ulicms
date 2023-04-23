@@ -11,15 +11,13 @@ use Settings;
 /**
  * This class contains security releated utils
  */
-class Hash
-{
+class Hash {
     /**
      * Hash user password
      * @param string $password
      * @return string
      */
-    public static function hashPassword(string $password): string
-    {
+    public static function hashPassword(string $password): string {
         // TODO: Move password salt from database to CMSConfig
         $salt = Settings::get('password_salt');
 
@@ -37,8 +35,7 @@ class Hash
      * @param string $identifier
      * @return string
      */
-    public static function hashCacheIdentifier(string $identifier): string
-    {
+    public static function hashCacheIdentifier(string $identifier): string {
         return (string)crc32($identifier);
     }
 }

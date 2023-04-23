@@ -8,10 +8,8 @@ use App\Storages\Settings\DotEnvLoader;
 // TODO: Make it work without this
 mysqli_report(MYSQLI_REPORT_OFF);
 
-class InstallerController
-{
-    public static function getStep()
-    {
+class InstallerController {
+    public static function getStep() {
         $step = 1;
         if (isset($_REQUEST['step']) && ! empty($_REQUEST['step'])) {
             $step = (int)$_REQUEST['step'];
@@ -23,8 +21,7 @@ class InstallerController
         return $step;
     }
 
-    public static function initSessionVars()
-    {
+    public static function initSessionVars() {
         $vars = [
             'mysql_user',
             'mysql_host',
@@ -58,14 +55,12 @@ class InstallerController
         }
     }
 
-    public static function loadLanguageFile($lang)
-    {
+    public static function loadLanguageFile($lang) {
         include_once 'lang/' . $lang . '.php';
         include_once 'lang/all.php';
     }
 
-    public static function getLanguage()
-    {
+    public static function getLanguage() {
         if (isset($_SESSION['language']) && ! empty($_SESSION['language'])) {
             return basename($_SESSION['language']);
         }
@@ -74,21 +69,18 @@ class InstallerController
 
     }
 
-    public static function getTitle()
-    {
+    public static function getTitle() {
         return constant('TRANSLATION_TITLE_STEP_' . self::getStep());
     }
 
-    public static function getFooter()
-    {
+    public static function getFooter() {
         $version = new UliCMSVersion();
         return '&copy; 2011 - ' . $version->getReleaseYear() .
                 ' by <a href="http://www.ulicms.de" '
                 . 'target="_blank">UliCMS</a>';
     }
 
-    public static function submitAdminData()
-    {
+    public static function submitAdminData() {
         $_SESSION['admin_password'] = $_POST['admin_password'];
         $_SESSION['admin_user'] = $_POST['admin_user'];
         $_SESSION['admin_email'] = $_POST['admin_email'];
@@ -97,8 +89,7 @@ class InstallerController
         header('Location: index.php?step=7');
     }
 
-    public static function submitTryConnect()
-    {
+    public static function submitTryConnect() {
         @$connection = mysqli_connect(
             $_POST['servername'],
             $_POST['loginname'],
@@ -141,8 +132,7 @@ class InstallerController
         $_SESSION['mysql_prefix'] = $_POST['mysql_prefix'];
     }
 
-    public static function submitInstall()
-    {
+    public static function submitInstall() {
         @set_time_limit(60 * 10); // 10 Minuten
 
         if (! isset($_SESSION['install_index'])) {
@@ -273,8 +263,7 @@ class InstallerController
         $_SESSION['install_index'] += 1;
     }
 
-    public static function submitCreateConfig()
-    {
+    public static function submitCreateConfig() {
 
         $targetConfig = ULICMS_ROOT . '/.env';
 
@@ -293,7 +282,7 @@ class InstallerController
         $dotEnvContent = '';
         foreach($_ENV as $key => $value) {
 
-            if(is_bool($value)){
+            if(is_bool($value)) {
                 $value = strbool($value);
             }
 
@@ -309,8 +298,7 @@ class InstallerController
         }
     }
 
-    public static function submitDemodata()
-    {
+    public static function submitDemodata() {
         if (isset($_REQUEST['install_demodata'])) {
             $_SESSION['install_demodata'] = 'yes';
         } else {
@@ -320,8 +308,7 @@ class InstallerController
         header('Location: index.php?step=8');
     }
 
-    public static function SureRemoveDir($dir, $DeleteMe)
-    {
+    public static function SureRemoveDir($dir, $DeleteMe) {
         if (! $dh = @opendir($dir)) {
             return;
         }
@@ -340,8 +327,7 @@ class InstallerController
         }
     }
 
-    public static function submitLoginToBackend()
-    {
+    public static function submitLoginToBackend() {
         $installerDir = '../installer';
         if (is_dir($installerDir)) {
             @sureRemoveDir($installerDir, true);

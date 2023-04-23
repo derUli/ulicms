@@ -12,14 +12,12 @@ use Exception;
 /**
  * This class contains tools for running in context of unit tests
  */
-abstract class TestHelper extends Helper
-{
+abstract class TestHelper extends Helper {
     /**
      * Check if we are running unit tests
      * @return bool
      */
-    public static function isRunningPHPUnit(): bool
-    {
+    public static function isRunningPHPUnit(): bool {
         return CORE_COMPONENT === CORE_COMPONENT_PHPUNIT;
     }
 
@@ -29,8 +27,7 @@ abstract class TestHelper extends Helper
      * @throws Exception
      * @return string
      */
-    public static function getOutput(Closure $method): string
-    {
+    public static function getOutput(Closure $method): string {
         ob_start();
         try {
             $method();
@@ -46,8 +43,7 @@ abstract class TestHelper extends Helper
      * Check if the application is running on a Windows machine
      * @return bool
      */
-    public static function isWindowsServer(): bool
-    {
+    public static function isWindowsServer(): bool {
         return defined('PHP_WINDOWS_VERSION_MAJOR');
     }
 }

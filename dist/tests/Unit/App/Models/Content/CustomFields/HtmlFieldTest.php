@@ -4,14 +4,12 @@ use App\Constants\HtmlEditor;
 use App\Models\Content\CustomFields\HtmlField;
 use Spatie\Snapshots\MatchesSnapshots;
 
-class HtmlFieldTest extends \PHPUnit\Framework\TestCase
-{
+class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
     use MatchesSnapshots;
 
     private $testUser;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         include_once getLanguageFilePath('en');
 
         $user = new User();
@@ -26,13 +24,11 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase
         $this->testUser = $user;
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $this->testUser->delete();
     }
 
-    public function testRender()
-    {
+    public function testRender() {
         $this->testUser->registerSession();
 
         $field = new HtmlField();

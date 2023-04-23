@@ -12,8 +12,7 @@ use Settings;
 /**
  * Class with methods for checking comments for spam
  */
-abstract class AntiSpamHelper extends Helper
-{
+abstract class AntiSpamHelper extends Helper {
     /**
      * Checking if this Country is blocked by spamfilter
      * blocking works by the domain extension of the client's Hostname
@@ -67,8 +66,7 @@ abstract class AntiSpamHelper extends Helper
      * @param string|null $str
      * @return bool
      */
-    public static function isChinese(?string $str): bool
-    {
+    public static function isChinese(?string $str): bool {
         if (! $str) {
             return false;
         }
@@ -81,8 +79,7 @@ abstract class AntiSpamHelper extends Helper
      * @param string|null $str
      * @return bool
      */
-    public static function isCyrillic(?string $str): bool
-    {
+    public static function isCyrillic(?string $str): bool {
         if (! $str) {
             return false;
         }
@@ -95,8 +92,7 @@ abstract class AntiSpamHelper extends Helper
      * @param string|null $str
      * @return bool
      */
-    public static function isRtl(?string $str): bool
-    {
+    public static function isRtl(?string $str): bool {
         if (! $str) {
             return false;
         }
@@ -147,8 +143,7 @@ abstract class AntiSpamHelper extends Helper
      * Check if the spam filter is enabled
      * @return bool
      */
-    public static function isSpamFilterEnabled(): bool
-    {
+    public static function isSpamFilterEnabled(): bool {
         return Settings::get('spamfilter_enabled') == 'yes';
     }
 
@@ -157,8 +152,7 @@ abstract class AntiSpamHelper extends Helper
      * @param string|null $useragent
      * @return bool
      */
-    public static function checkForBot(?string $useragent = null): bool
-    {
+    public static function checkForBot(?string $useragent = null): bool {
         $useragent = $useragent ?? Request::getUserAgent();
 
         return is_crawler($useragent);
@@ -170,8 +164,7 @@ abstract class AntiSpamHelper extends Helper
     // please note that this function returns also true if
     // you send an email to a nonexisting user on a valid domain.
     // Use this function with care
-    public static function checkMailDomain(string $email): bool
-    {
+    public static function checkMailDomain(string $email): bool {
         $domain = strstr($email, '@');
         $domain = remove_prefix((string)$domain, '@');
 

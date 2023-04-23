@@ -8,8 +8,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Storages\Cached\MemstaticCached;
 
-class Storage extends MemstaticCached implements StorageInterface
-{
+class Storage extends MemstaticCached implements StorageInterface {
     /**
      * @var array<string, mixed>
      */
@@ -21,8 +20,7 @@ class Storage extends MemstaticCached implements StorageInterface
      * @param string $var
      * @return mixed
      */
-    public static function get(string $var): mixed
-    {
+    public static function get(string $var): mixed {
         return static::getFromCache($var);
     }
 
@@ -34,8 +32,7 @@ class Storage extends MemstaticCached implements StorageInterface
      *
      * @return void
      */
-    public static function set(string $var, mixed $val): void
-    {
+    public static function set(string $var, mixed $val): void {
         static::setToCache($var, $val);
     }
 
@@ -45,8 +42,7 @@ class Storage extends MemstaticCached implements StorageInterface
      * @param $var
      * @return void
      */
-    public static function delete(string $var): void
-    {
+    public static function delete(string $var): void {
         static::deleteFromCache($var);
     }
 
@@ -55,8 +51,7 @@ class Storage extends MemstaticCached implements StorageInterface
      *
      * @return void
      */
-    public static function clear(): void
-    {
+    public static function clear(): void {
         static::clearCache();
     }
 }

@@ -7,14 +7,12 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Packages\Theme;
 use App\Utils\CacheUtil;
 
-class DesignSettingsController extends \App\Controllers\Controller
-{
+class DesignSettingsController extends \App\Controllers\Controller {
     protected $generatedSCSS;
 
     private $moduleName = 'core_settings';
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         // generate scss file for design settings if it doesn't exist.
         $this->generatedSCSS = Path::resolve(
@@ -25,8 +23,7 @@ class DesignSettingsController extends \App\Controllers\Controller
         }
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         if (isset($_REQUEST['no_mobile_design_on_tablet'])) {
             Settings::set(
                 'no_mobile_design_on_tablet',
@@ -105,8 +102,7 @@ class DesignSettingsController extends \App\Controllers\Controller
      * @global type $fonts
      * @return array
      */
-    public function getFontFamilys(): array
-    {
+    public function getFontFamilys(): array {
         $fonts = [];
 
         $fontStackFile = Path::resolve(
@@ -133,8 +129,7 @@ class DesignSettingsController extends \App\Controllers\Controller
         return $fonts;
     }
 
-    public function themePreview(): void
-    {
+    public function themePreview(): void {
         $themeName = Request::getVar('theme', null, 'str');
 
         if (! $themeName) {
@@ -157,15 +152,13 @@ class DesignSettingsController extends \App\Controllers\Controller
         HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
     }
 
-    public function _themePreview(string $themeName): ?string
-    {
+    public function _themePreview(string $themeName): ?string {
         $theme = new Theme($themeName);
         $screenshot = $theme->getScreenshotFile();
         return $screenshot;
     }
 
-    public function _generateSCSS(): ?string
-    {
+    public function _generateSCSS(): ?string {
         $settings = [
             'header-background-color' => Settings::get('header_background_color'),
             'body-text-color' => Settings::get('body_text_color'),
@@ -184,8 +177,7 @@ class DesignSettingsController extends \App\Controllers\Controller
         return $output;
     }
 
-    public function _generateSCSSToFile(): ?string
-    {
+    public function _generateSCSSToFile(): ?string {
         $scss = $this->_generateSCSS();
 
         if ($scss) {
@@ -196,8 +188,7 @@ class DesignSettingsController extends \App\Controllers\Controller
         return null;
     }
 
-    public function setDefaultTheme(): void
-    {
+    public function setDefaultTheme(): void {
         $theme = Request::getVar('name');
         $this->_setDefaultTheme($theme);
         Settings::set('theme', $theme);
@@ -208,13 +199,11 @@ class DesignSettingsController extends \App\Controllers\Controller
         );
     }
 
-    public function _setDefaultTheme(?string $theme): void
-    {
+    public function _setDefaultTheme(?string $theme): void {
         Settings::set('theme', $theme);
     }
 
-    public function setDefaultMobileTheme(): void
-    {
+    public function setDefaultMobileTheme(): void {
         $theme = Request::getVar('name');
         $this->_setDefaultMobileTheme($theme);
 
@@ -224,8 +213,7 @@ class DesignSettingsController extends \App\Controllers\Controller
         );
     }
 
-    public function _setDefaultMobileTheme(?string $theme): void
-    {
+    public function _setDefaultMobileTheme(?string $theme): void {
         if ($theme !== Settings::get('mobile_theme')) {
             Settings::set('mobile_theme', $theme);
         } else {
@@ -233,8 +221,7 @@ class DesignSettingsController extends \App\Controllers\Controller
         }
     }
 
-    public function getFontSizes(): array
-    {
+    public function getFontSizes(): array {
         $sizes = [];
         for ($i = 6; $i <= 80; $i++) {
             $sizes[] = $i . 'px';

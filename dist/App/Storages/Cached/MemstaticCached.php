@@ -8,14 +8,12 @@ use App\Constants\DateTimeConstants;
 use Phpfastcache\Config\ConfigurationOption;
 use Phpfastcache\Helper\Psr16Adapter;
 
-abstract class MemstaticCached extends Cached
-{
+abstract class MemstaticCached extends Cached {
     /**
      * Get caching adapter
      * @return Psr16Adapter
      */
-    protected static function getCacheAdapter(): Psr16Adapter
-    {
+    protected static function getCacheAdapter(): Psr16Adapter {
         if (static::$adapter) {
             return static::$adapter;
         }

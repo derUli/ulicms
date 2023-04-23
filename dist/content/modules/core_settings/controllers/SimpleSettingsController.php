@@ -7,10 +7,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Utils\CacheUtil;
 use jessedp\Timezones\Timezones;
 
-class SimpleSettingsController extends \App\Controllers\Controller
-{
-    public function _savePost(): void
-    {
+class SimpleSettingsController extends \App\Controllers\Controller {
+    public function _savePost(): void {
         do_event('before_safe_simple_settings');
         Settings::set('homepage_owner', $_POST['homepage_owner']);
         Settings::set('language', $_POST['language']);
@@ -34,8 +32,7 @@ class SimpleSettingsController extends \App\Controllers\Controller
         CacheUtil::clearPageCache();
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
 
         Response::sendHttpStatusCodeResultIfAjax(
@@ -44,8 +41,7 @@ class SimpleSettingsController extends \App\Controllers\Controller
         );
     }
 
-    public function getTimezones(): string
-    {
+    public function getTimezones(): string {
         // TODO: Fork package and fix deprecation warning
         @$html = Timezones::create(
             'timezone',

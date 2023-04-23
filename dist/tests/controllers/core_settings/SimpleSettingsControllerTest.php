@@ -2,12 +2,10 @@
 
 use Spatie\Snapshots\MatchesSnapshots;
 
-class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
-{
+class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase {
     use MatchesSnapshots;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->defaultSettings = [
             'homepage_owner' => Settings::get('homepage_owner'),
             'language' => Settings::get('language'),
@@ -20,8 +18,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_POST = [];
 
         foreach ($this->defaultSettings as $key => $value) {
@@ -29,8 +26,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSavePostAllSet(): void
-    {
+    public function testSavePostAllSet(): void {
         $_POST = $this->getPost();
         $_POST['disable_password_reset'] = '1';
 
@@ -77,8 +73,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testSavePostNothingSet(): void
-    {
+    public function testSavePostNothingSet(): void {
         $_POST = $this->getPost();
 
         $controller = new SimpleSettingsController();
@@ -130,8 +125,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetTimezones()
-    {
+    public function testGetTimezones() {
         $controller = new SimpleSettingsController();
         $timezones = $controller->getTimezones();
         $this->assertStringContainsString('<option value="Asia/Tokyo">', $timezones);
@@ -140,8 +134,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(10, substr_count($timezones, '<optgroup'));
     }
 
-    protected function getPost(): array
-    {
+    protected function getPost(): array {
         return [
             'homepage_owner' => 'Jane Doe',
             'language' => 'en',

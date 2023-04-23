@@ -4,16 +4,13 @@
 use App\Exceptions\DatabaseException;
 use App\Models\Content\Category;
 
-class ListDataTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class ListDataTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
         Database::query("delete from {prefix}categories where name = 'Test Category'", true);
     }
 
-    public function testFilter()
-    {
+    public function testFilter() {
         $contentList = $this->createContentList();
         $contents = $contentList->listData->filter();
 
@@ -27,8 +24,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function createTestContent($category)
-    {
+    public function createTestContent($category) {
         for ($i = 1; $i <= 20; $i++) {
             $page = new Page();
             $page->category_id = $category->getId();
@@ -44,8 +40,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testFilterAll()
-    {
+    public function testFilterAll() {
         $category = new Category();
         $category->setName('Test Category');
         $category->save();
@@ -67,8 +62,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(20, count($contents));
     }
 
-    public function testFilterHasMoreReturnsTrue()
-    {
+    public function testFilterHasMoreReturnsTrue() {
         $category = new Category();
         $category->setName('Test Category');
         $category->save();
@@ -101,8 +95,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($listData->hasMore(14));
     }
 
-    public function testFilterHasMoreReturnsFalse()
-    {
+    public function testFilterHasMoreReturnsFalse() {
         $category = new Category();
         $category->setName('Test Category');
         $category->save();
@@ -126,8 +119,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($listData->hasMore(20));
     }
 
-    public function testFilterPaginated()
-    {
+    public function testFilterPaginated() {
         $category = new Category();
         $category->setName('Test Category');
         $category->save();
@@ -168,8 +160,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Unit Test 19', $pagination5[0]->title);
     }
 
-    public function testLoadById()
-    {
+    public function testLoadById() {
         $contentList = $this->createContentList();
         $loaded = new List_Data($contentList->getId());
 
@@ -187,8 +178,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('desc', $loaded->order_direction);
     }
 
-    public function testUpdate()
-    {
+    public function testUpdate() {
         $contentList = $this->createContentList();
         $loaded = new List_Data($contentList->getId());
         $loaded->limit = 10;
@@ -200,8 +190,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('page', $updated->type);
     }
 
-    public function testCreateEmpty()
-    {
+    public function testCreateEmpty() {
         $contentList = new Content_List();
         $contentList->title = 'Unit Test Article';
         $contentList->slug = 'unit test';
@@ -227,16 +216,14 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('asc', $loaded->order_direction);
     }
 
-    public function testSaveWithoutContentId()
-    {
+    public function testSaveWithoutContentId() {
         $this->expectException(DatabaseException::class);
 
         $listData = new List_Data();
         $listData->save();
     }
 
-    private function getEmptyListData($contentId)
-    {
+    private function getEmptyListData($contentId) {
         $listData = new List_Data($contentId);
         $listData->order_by = null;
 
@@ -246,8 +233,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         return $listData;
     }
 
-    private function createContentList()
-    {
+    private function createContentList() {
         $contentList = new Content_List();
         $contentList->title = 'Unit Test Article';
         $contentList->slug = 'unit test';
@@ -263,8 +249,7 @@ class ListDataTest extends \PHPUnit\Framework\TestCase
         return $contentList;
     }
 
-    private function createListData($contentId)
-    {
+    private function createListData($contentId) {
         $listData = new List_Data($contentId);
         $listData->language = 'de';
         $listData->category_id = 1;

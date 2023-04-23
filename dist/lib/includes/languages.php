@@ -12,8 +12,7 @@ use Negotiation\LanguageNegotiator;
  * Get all languages that have  content
  * @return array
  */
-function getAllUsedLanguages(): array
-{
+function getAllUsedLanguages(): array {
     $languages = [];
     $sql = 'select language from `{prefix}content` where active = 1 '
             . 'group by language order by language';
@@ -43,13 +42,11 @@ function get_prefered_language(
  * @param string $lang
  * @return string
  */
-function getLanguageFilePath(string $lang = 'de'): string
-{
+function getLanguageFilePath(string $lang = 'de'): string {
     return ULICMS_ROOT . '/lang/' . $lang . '.php';
 }
 
-function getAvailableBackendLanguages(): array
-{
+function getAvailableBackendLanguages(): array {
     $langdir = ULICMS_ROOT . '/lang/';
     $list = scandir($langdir);
     sort($list);
@@ -64,8 +61,7 @@ function getAvailableBackendLanguages(): array
     return $retval;
 }
 
-function getSystemLanguage(): string
-{
+function getSystemLanguage(): string {
     if (isset($_SESSION['system_language'])) {
         $lang = $_SESSION['system_language'];
     } elseif (isset($_SESSION['language'])) {
@@ -81,8 +77,7 @@ function getSystemLanguage(): string
     return $lang;
 }
 
-function getDomainByLanguage($givenLanguage): ?string
-{
+function getDomainByLanguage($givenLanguage): ?string {
     $domainMapping = Settings::get('domain_to_language');
     $domainMapping = Settings::mappingStringToArray($domainMapping);
     foreach ($domainMapping as $domain => $language) {
@@ -93,8 +88,7 @@ function getDomainByLanguage($givenLanguage): ?string
     return null;
 }
 
-function getLanguageByDomain($givenDomain): ?string
-{
+function getLanguageByDomain($givenDomain): ?string {
     $domainMapping = Settings::get('domain_to_language');
     $domainMapping = Settings::mappingStringToArray($domainMapping);
     foreach ($domainMapping as $domain => $language) {
@@ -105,8 +99,7 @@ function getLanguageByDomain($givenDomain): ?string
     return null;
 }
 
-function setLanguageByDomain(): bool
-{
+function setLanguageByDomain(): bool {
     $domainMapping = Settings::get('domain_to_language');
     $domainMapping = Settings::mappingStringToArray($domainMapping);
 
@@ -125,8 +118,7 @@ function setLanguageByDomain(): bool
     return false;
 }
 
-function getLanguageNameByCode(string $code): string
-{
+function getLanguageNameByCode(string $code): string {
     $result = db_query(
         'SELECT name FROM `' . tbname('languages') .
         "` WHERE language_code = '" . db_escape($code) . "'"
@@ -140,8 +132,7 @@ function getLanguageNameByCode(string $code): string
     return $retval;
 }
 
-function setLocaleByLanguage(): array
-{
+function setLocaleByLanguage(): array {
     $locale = [];
 
     $var = (is_admin_dir() && isset($_SESSION['system_language'])) ?
@@ -162,8 +153,7 @@ function setLocaleByLanguage(): array
 // Returns the language code of the current language
 // If $current is true returns language of the current page
 // else it returns $_SESSION['language'];
-function getCurrentLanguage($current = false): string
-{
+function getCurrentLanguage($current = false): string {
     if (\App\Storages\Vars::get('current_language_' . strbool($current))) {
         return \App\Storages\Vars::get('current_language_' . strbool($current));
     }
@@ -185,8 +175,7 @@ function getCurrentLanguage($current = false): string
 }
 
 // Sprachcodes abfragen und als Array zurück geben
-function getAllLanguages($filtered = false): array
-{
+function getAllLanguages($filtered = false): array {
     $languageCodes = [];
 
     if ($filtered) {

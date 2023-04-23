@@ -17,8 +17,7 @@ use ModuleHelper;
  * @param string $str
  * @return string
  */
-function text($str): string
-{
+function text($str): string {
     return \nl2br(\_esc($str));
 }
 
@@ -30,8 +29,7 @@ function text($str): string
  *
  * @return string
  */
-function imageTag(string $file, array $htmlAttributes = []): string
-{
+function imageTag(string $file, array $htmlAttributes = []): string {
     if (! isset($htmlAttributes['src'])) {
         $htmlAttributes['src'] = $file;
     }
@@ -109,8 +107,7 @@ function link(
  *
  * @return string
  */
-function icon(string $classes, array $htmlAttributes = []): string
-{
+function icon(string $classes, array $htmlAttributes = []): string {
     if (! isset($htmlAttributes['class'])) {
         $htmlAttributes['class'] = $classes;
     } else {
@@ -129,8 +126,7 @@ function icon(string $classes, array $htmlAttributes = []): string
  *
  * @return string
  */
-function imageTagInline(string $file, array $htmlAttributes = []): string
-{
+function imageTagInline(string $file, array $htmlAttributes = []): string {
     $url = File::toDataUri($file);
     if (! $url) {
         throw new FileNotFoundException("Image {$file} not found");
@@ -145,7 +141,6 @@ function imageTagInline(string $file, array $htmlAttributes = []): string
  *
  * @return bool
  */
-function stringContainsHtml(string $string): bool
-{
+function stringContainsHtml(string $string): bool {
     return $string != strip_tags($string);
 }

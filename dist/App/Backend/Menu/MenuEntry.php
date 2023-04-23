@@ -11,8 +11,7 @@ use App\Security\Permissions\PermissionChecker;
 /**
  * Backend menu entry
  */
-class MenuEntry
-{
+class MenuEntry {
     private string $title;
 
     private string $link;
@@ -67,8 +66,7 @@ class MenuEntry
      *
      * @return string
      */
-    public function getTitle(): string
-    {
+    public function getTitle(): string {
         return $this->title;
     }
 
@@ -77,8 +75,7 @@ class MenuEntry
      *
      * @return string
      */
-    public function getLink(): string
-    {
+    public function getLink(): string {
         return $this->link;
     }
 
@@ -87,8 +84,7 @@ class MenuEntry
      *
      * @return string
      */
-    public function getIdentifier(): string
-    {
+    public function getIdentifier(): string {
         return $this->identifier;
     }
 
@@ -98,8 +94,7 @@ class MenuEntry
      * @param string $value
      * @return void
      */
-    public function setTitle(string $value): void
-    {
+    public function setTitle(string $value): void {
         $this->title = $value;
     }
 
@@ -109,8 +104,7 @@ class MenuEntry
      * @param string $value
      * @return void
      */
-    public function setLink(string $value): void
-    {
+    public function setLink(string $value): void {
         $this->link = $value;
     }
 
@@ -120,8 +114,7 @@ class MenuEntry
      * @param string $value
      * @return void
      */
-    public function setIdentifier(string $value): void
-    {
+    public function setIdentifier(string $value): void {
         $this->identifier = $value;
     }
 
@@ -130,8 +123,7 @@ class MenuEntry
      *
      * @return MenuEntry[]
      */
-    public function getChildren(): array
-    {
+    public function getChildren(): array {
         return $this->children;
     }
 
@@ -142,8 +134,7 @@ class MenuEntry
      *
      * @return void
      */
-    public function setChildren(array $value): void
-    {
+    public function setChildren(array $value): void {
         $this->children = $value;
     }
 
@@ -152,8 +143,7 @@ class MenuEntry
      *
      * @return bool
      */
-    public function hasChildren(): bool
-    {
+    public function hasChildren(): bool {
         return count($this->children) > 0;
     }
 
@@ -164,8 +154,7 @@ class MenuEntry
      *
      * @return void
      */
-    public function addChild(MenuEntry $children): void
-    {
+    public function addChild(MenuEntry $children): void {
         $this->children[] = $children;
     }
 
@@ -176,9 +165,8 @@ class MenuEntry
       *
       * @return void
       */
-    public function addChildren(array $children): void
-    {
-        foreach($children as $child){
+    public function addChildren(array $children): void {
+        foreach($children as $child) {
             $this->addChild($child);
         }
     }
@@ -188,8 +176,7 @@ class MenuEntry
      *
      * @return string|string[]|null
      */
-    public function getPermissions()
-    {
+    public function getPermissions() {
         return $this->permissions;
     }
 
@@ -199,8 +186,7 @@ class MenuEntry
      * @param string|string[]|null $permissions
      * @return void
      */
-    public function setPermissions($permissions): void
-    {
+    public function setPermissions($permissions): void {
         $this->permissions = $permissions;
     }
 
@@ -209,8 +195,7 @@ class MenuEntry
      *
      * @return bool
      */
-    public function getNewWindow(): bool
-    {
+    public function getNewWindow(): bool {
         return $this->newWindow;
     }
 
@@ -220,8 +205,7 @@ class MenuEntry
      * @param bool $val
      * @return void
      */
-    public function setNewWindow(bool $val): void
-    {
+    public function setNewWindow(bool $val): void {
         $this->newWindow = $val;
     }
 
@@ -230,8 +214,7 @@ class MenuEntry
      *
      * @return bool
      */
-    public function getIsAjax(): bool
-    {
+    public function getIsAjax(): bool {
         return $this->isAjax;
     }
 
@@ -241,8 +224,7 @@ class MenuEntry
      * @param bool $val
      * @return void
      */
-    public function setIsAjax(bool $val): void
-    {
+    public function setIsAjax(bool $val): void {
         $this->isAjax = $val;
     }
 
@@ -250,8 +232,7 @@ class MenuEntry
      * Check if the current user has permissions to access this menu entry
      * @return bool
      */
-    public function userHasPermission(): bool
-    {
+    public function userHasPermission(): bool {
         $acl = PermissionChecker::fromCurrentUser();
 
         if (is_string($this->permissions) && ! empty($this->permissions)) {
@@ -277,8 +258,7 @@ class MenuEntry
      * Render this menu entry as HTML
      * @return string
      */
-    public function render(): string
-    {
+    public function render(): string {
         $html = '<li>';
         $targetString = $this->getNewWindow() ? '_blank' : '_self';
         $cssClasses = "backend-menu-item-{$this->getIdentifier()}";

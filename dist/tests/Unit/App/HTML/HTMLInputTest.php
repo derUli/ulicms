@@ -3,50 +3,42 @@
 use App\HTML\Input as Input;
 use App\HTML\ListItem;
 
-class HTMLInputTest extends \PHPUnit\Framework\TestCase
-{
-    public function testTextBox()
-    {
+class HTMLInputTest extends \PHPUnit\Framework\TestCase {
+    public function testTextBox() {
         $this->assertEquals('<input type="text" name="my_field" value="Hello World" required="required">', Input::textBox('my_field', 'Hello World', 'text', [
             'required' => 'required'
         ]));
     }
 
-    public function testTextArea()
-    {
+    public function testTextArea() {
         $this->assertEquals('<textarea name="my_field" rows="25" cols="80" required="required">&lt;h2&gt;Hello World!&lt;/h2&gt;</textarea>', Input::textArea('my_field', '<h2>Hello World!</h2>', 25, 80, [
             'required' => 'required'
         ]));
     }
 
-    public function testPassword()
-    {
+    public function testPassword() {
         $this->assertEquals('<input type="password" name="my_field" value="Hello World" required="required">', Input::password('my_field', 'Hello World', [
             'required' => 'required'
         ]));
     }
 
-    public function testHidden()
-    {
+    public function testHidden() {
         $this->assertEquals('<input type="hidden" name="my_field" value="Hello World" required="required">', Input::hidden('my_field', 'Hello World', [
             'required' => 'required'
         ]));
     }
 
-    public function testCheckbox()
-    {
+    public function testCheckbox() {
         $this->assertEquals('<input type="checkbox" name="my_field" value="1">', Input::checkBox('my_field'));
         $this->assertEquals('<input type="checkbox" name="my_field" value="1" checked="checked">', Input::checkBox('my_field', true));
     }
 
-    public function testRadioButton()
-    {
+    public function testRadioButton() {
         $this->assertEquals('<input type="radio" name="my_field" value="1">', Input::radioButton('my_field'));
         $this->assertEquals('<input type="radio" name="my_field" value="1" checked="checked">', Input::radioButton('my_field', true));
     }
 
-    public function testSingleSelect()
-    {
+    public function testSingleSelect() {
         $options = [
             new ListItem('windows', 'Windows'),
             new ListItem('linux', 'Linux'),
@@ -66,8 +58,7 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testSingleSelectWithSelectedItem()
-    {
+    public function testSingleSelectWithSelectedItem() {
         $options = [
             new ListItem('windows', 'Windows'),
             new ListItem('linux', 'Linux'),
@@ -76,8 +67,7 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('<select name="operating_system" size="5" id="operating_system"><option value="windows">Windows</option><option value="linux" selected>Linux</option><option value="mac">macOS</option></select>', Input::singleSelect('operating_system', 'linux', $options, 5));
     }
 
-    public function testMultiSelect()
-    {
+    public function testMultiSelect() {
         $options = [
             new ListItem('windows', 'Windows'),
             new ListItem('linux', 'Linux'),
@@ -86,8 +76,7 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('<select name="operating_system" size="5" multiple><option value="windows">Windows</option><option value="linux">Linux</option><option value="mac">macOS</option></select>', Input::multiSelect('operating_system', null, $options));
     }
 
-    public function testMultiSelectWithSelected()
-    {
+    public function testMultiSelectWithSelected() {
         $options = [
             new ListItem('windows', 'Windows'),
             new ListItem('linux', 'Linux'),
@@ -110,13 +99,11 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testFileWithoutAnything()
-    {
+    public function testFileWithoutAnything() {
         $this->assertEquals('<input type="file" name="my_file" value="">', Input::file('my_file'));
     }
 
-    public function testFileWithHtmlAttributes()
-    {
+    public function testFileWithHtmlAttributes() {
         $this->assertEquals(
             '<input type="file" name="my_file" value="" class="foo">',
             Input::file(
@@ -130,31 +117,26 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testFileWithMultiple()
-    {
+    public function testFileWithMultiple() {
         $this->assertEquals('<input type="file" name="my_file" value="" multiple="multiple">', Input::file('my_file', true));
     }
 
-    public function testFileWithAcceptAsArray()
-    {
+    public function testFileWithAcceptAsArray() {
         $this->assertEquals('<input type="file" name="my_file" value="" accept="image/jpeg, image/png">', Input::file('my_file', false, [
             'image/jpeg',
             'image/png'
         ]));
     }
 
-    public function testFileWithAcceptAsString()
-    {
+    public function testFileWithAcceptAsString() {
         $this->assertEquals('<input type="file" name="my_file" value="" accept="application/pdf">', Input::file('my_file', false, 'application/pdf'));
     }
 
-    public function testFileWithAcceptAsStringAndMultiple()
-    {
+    public function testFileWithAcceptAsStringAndMultiple() {
         $this->assertEquals('<input type="file" name="my_file" value="" accept="application/pdf" multiple="multiple">', Input::file('my_file', true, 'application/pdf'));
     }
 
-    public function testEditorWithoutClass()
-    {
+    public function testEditorWithoutClass() {
         $this->assertEquals(
             '<textarea name="foo" rows="20" cols="70" id="foo" ' .
             'class="ckeditor" data-mimetype="text/html">' .
@@ -170,8 +152,7 @@ class HTMLInputTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testEditorWithClass()
-    {
+    public function testEditorWithClass() {
         $this->assertEquals(
             '<textarea name="foo" rows="20" cols="70" ' .
             'class="foo-class ckeditor" id="foo" ' .

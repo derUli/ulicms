@@ -9,8 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * This class contains helper methods to deal with boolean vars
  */
-abstract class BooleanHelper
-{
+abstract class BooleanHelper {
     /**
      * Converts a boolean to a humand readable string
      *

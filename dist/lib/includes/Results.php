@@ -18,8 +18,7 @@ use zz\Html\HTMLMinify;
  * @param type $compact
  * @return void
  */
-function JSONResult($data, int $status = 200, $compact = true): void
-{
+function JSONResult($data, int $status = 200, $compact = true): void {
     $json = Json::encode($data, ! $compact);
 
     RawJSONResult($json, $status);
@@ -32,8 +31,7 @@ function JSONResult($data, int $status = 200, $compact = true): void
  * @param type $compact
  * @return void
  */
-function RawJSONResult(string $data, int $status = 200): void
-{
+function RawJSONResult(string $data, int $status = 200): void {
     Result($data, $status, 'application/json');
 }
 
@@ -61,8 +59,7 @@ function HTMLResult(
  * @param int $optimizationLevel
  * @return void
  */
-function TextResult(string $data, int $status = 200): void
-{
+function TextResult(string $data, int $status = 200): void {
     Result($data, $status, 'text/plain; charset=utf-8');
 }
 
@@ -73,8 +70,7 @@ function TextResult(string $data, int $status = 200): void
  * @param int $optimizationLevel
  * @return void
  */
-function Result(string $data, int $status = 200, ?string $type = null): void
-{
+function Result(string $data, int $status = 200, ?string $type = null): void {
     Response::sendStatusHeader($status);
     $size = strlen($data);
 
@@ -103,8 +99,7 @@ function HTTPStatusCodeResult(
  * @param int $status
  * @return void
  */
-function ExceptionResult(string $message, int $status = 500): void
-{
+function ExceptionResult(string $message, int $status = 500): void {
     \App\Storages\ViewBag::set('exception', nl2br($message));
     $content = Template::executeDefaultOrOwnTemplate('exception.php');
 
@@ -128,8 +123,7 @@ function ExceptionResult(string $message, int $status = 500): void
  * @param type $model
  * @return void
  */
-function ActionResult(string $action, $model = null): void
-{
+function ActionResult(string $action, $model = null): void {
     $renderer = new BackendPageRenderer($action, $model);
     $renderer->render();
 }

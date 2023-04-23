@@ -50,8 +50,7 @@ namespace FtpClient;
  *
  * @author Nicolas Tallefourtane <dev@nicolab.net>
  */
-class FtpWrapper
-{
+class FtpWrapper {
     /**
      * The connection with the server
      *
@@ -64,8 +63,7 @@ class FtpWrapper
      *
      * @param resource &$connection The FTP (or SSL-FTP) connection (takes by reference).
      */
-    public function __construct(&$connection)
-    {
+    public function __construct(&$connection) {
         $this->conn = &$connection;
     }
 
@@ -77,8 +75,7 @@ class FtpWrapper
      * @throws FtpException When the function is not valid
      * @return mixed
      */
-    public function __call($function, array $arguments)
-    {
+    public function __call($function, array $arguments) {
         $function = 'ftp_' . $function;
 
         if (function_exists($function)) {
@@ -97,8 +94,7 @@ class FtpWrapper
      * @param  int      $timeout
      * @return resource
      */
-    public function connect($host, $port = 21, $timeout = 90)
-    {
+    public function connect($host, $port = 21, $timeout = 90) {
         return ftp_connect($host, $port, $timeout);
     }
 
@@ -109,8 +105,7 @@ class FtpWrapper
      * @param  int      $timeout
      * @return resource
      */
-    public function ssl_connect($host, $port = 21, $timeout = 90)
-    {
+    public function ssl_connect($host, $port = 21, $timeout = 90) {
         return ftp_ssl_connect($host, $port, $timeout);
     }
 }

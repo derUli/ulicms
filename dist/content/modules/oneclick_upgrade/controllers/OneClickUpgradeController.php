@@ -6,8 +6,7 @@ use App\Storages\ViewBag;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class OneClickUpgradeController extends MainClass
-{
+class OneClickUpgradeController extends MainClass {
     public const MODULE_NAME = 'oneclick_upgrade';
 
     public function accordionLayout(): void {

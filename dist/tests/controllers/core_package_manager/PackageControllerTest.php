@@ -3,12 +3,10 @@
 use App\Packages\PackageManager;
 use App\Packages\SinPackageInstaller;
 
-class PackageControllerTest extends \PHPUnit\Framework\TestCase
-{
+class PackageControllerTest extends \PHPUnit\Framework\TestCase {
     private $testUser = null;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $user = new User();
         $user->setUsername('test-admin');
         $user->setLastname('Admin');
@@ -23,8 +21,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         \App\Storages\Vars::delete('allModules');
         $module = new Module('fortune2');
         $module->enable();
@@ -34,8 +31,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $_SESSION = [];
     }
 
-    public function testGetPackageDownloadUrlReturnsUrl()
-    {
+    public function testGetPackageDownloadUrlReturnsUrl() {
         $controller = new PackageController();
 
         $this->assertEquals(
@@ -49,16 +45,14 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetPackageDownloadUrlReturnsNull()
-    {
+    public function testGetPackageDownloadUrlReturnsNull() {
         $controller = new PackageController();
 
         $this->assertNull($controller->_getPackageDownloadUrl('gibts_nicht'));
         $this->assertNull($controller->_getPackageDownloadUrl(''));
     }
 
-    public function testAvailablePackages()
-    {
+    public function testAvailablePackages() {
         $controller = new PackageController();
         $output = $controller->_availablePackages();
 
@@ -68,8 +62,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString('slicknav-1.0.10', $output);
     }
 
-    public function testGetModuleInfo()
-    {
+    public function testGetModuleInfo() {
         $controller = new PackageController();
         $output = $controller->_getModuleInfo('fortune2');
 
@@ -88,8 +81,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetThemeInfo()
-    {
+    public function testGetThemeInfo() {
         $controller = new PackageController();
         $output = $controller->_getThemeInfo('impro17');
 
@@ -104,22 +96,19 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetLicenseReturnsString()
-    {
+    public function testGetLicenseReturnsString() {
         $controller = new PackageController();
         $output = $controller->_getPackageLicense('bootstrap');
         $this->assertStringContainsString('The MIT License (MIT)', $output);
     }
 
-    public function testGetLicenseReturnsNull()
-    {
+    public function testGetLicenseReturnsNull() {
         $controller = new PackageController();
         $output = $controller->_getPackageLicense('magic_package');
         $this->assertNull($output);
     }
 
-    public function testToggleModule()
-    {
+    public function testToggleModule() {
         $module = new Module('fortune2');
         $module->disable();
 
@@ -140,8 +129,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testUninstallThemeReturnsTrue()
-    {
+    public function testUninstallThemeReturnsTrue() {
         $this->installTheme2017();
 
         $controller = new PackageController();
@@ -151,15 +139,13 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertNotContains('2017', getAllThemes());
     }
 
-    public function testUninstallThemeReturnsFalse()
-    {
+    public function testUninstallThemeReturnsFalse() {
         $controller = new PackageController();
         $success = $controller->_uninstallTheme('augenkrebs');
         $this->assertFalse($success);
     }
 
-    public function testUninstallModuleReturnsTrue()
-    {
+    public function testUninstallModuleReturnsTrue() {
         $this->installHelloWorld();
 
         $controller = new PackageController();
@@ -170,15 +156,13 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertNotContains('hello_world', getAllModules());
     }
 
-    public function testUninstallModuleReturnsFalse()
-    {
+    public function testUninstallModuleReturnsFalse() {
         $controller = new PackageController();
         $success = $controller->_uninstallModule('augenkrebs');
         $this->assertFalse($success);
     }
 
-    protected function installTheme2017()
-    {
+    protected function installTheme2017() {
         $packageFile = Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/theme-2017-1.1.1.tar.gz'
         );
@@ -189,8 +173,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertContains('2017', getAllThemes());
     }
 
-    protected function installHelloWorld()
-    {
+    protected function installHelloWorld() {
         $packageFile = Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/hello_world-1.0.sin'
         );

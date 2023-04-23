@@ -12,15 +12,13 @@ use Nette\Utils\FileSystem;
 /**
  * Utils for handling files
  */
-abstract class File
-{
+abstract class File {
     /**
      * Get the last modification time of a file as Unix timestamp
      * @param string $file
      * @return int
      */
-    public static function getLastChanged(string $file): int
-    {
+    public static function getLastChanged(string $file): int {
         clearstatcache();
         $retval = filemtime($file);
         clearstatcache();
@@ -32,15 +30,13 @@ abstract class File
      * @param string $filename
      * @return string
      */
-    public static function getExtension(string $filename): string
-    {
+    public static function getExtension(string $filename): string {
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
         return strtolower($ext);
     }
 
     // Delete a file or a directory if it exist
-    public static function deleteIfExists(string $file): bool
-    {
+    public static function deleteIfExists(string $file): bool {
         if(! file_exists($file)) {
             return false;
         }
@@ -55,8 +51,7 @@ abstract class File
      * @param string|null $mime
      * @return string|null
      */
-    public static function toDataUri(string $file, ?string $mime = null): ?string
-    {
+    public static function toDataUri(string $file, ?string $mime = null): ?string {
         $url = null;
 
         if (is_file($file)) {
@@ -73,8 +68,7 @@ abstract class File
      * @param string $file
      * @return string
      */
-    public static function getMime(string $file): string
-    {
+    public static function getMime(string $file): string {
         $sniffer = new MimeSniffer();
         $sniffer->setFromFilename($file);
 
@@ -104,8 +98,7 @@ abstract class File
      * @param array $files
      * @return int|null
      */
-    public static function getNewestMtime(array $files): ?int
-    {
+    public static function getNewestMtime(array $files): ?int {
         $mtime = 0;
         foreach ($files as $file) {
             if (is_file($file) && filemtime($file) > $mtime) {
@@ -120,8 +113,7 @@ abstract class File
      * @param string $dir
      * @return array
      */
-    public static function findAllDirs(string $dir): array
-    {
+    public static function findAllDirs(string $dir): array {
         $root = scandir($dir);
         $result = [];
         foreach ($root as $value) {
@@ -142,8 +134,7 @@ abstract class File
      * @param string $dir
      * @return array
      */
-    public static function findAllFiles(string $dir): array
-    {
+    public static function findAllFiles(string $dir): array {
         $root = scandir($dir);
         $result = [];
 

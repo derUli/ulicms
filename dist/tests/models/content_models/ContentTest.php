@@ -2,15 +2,12 @@
 
 use App\Models\Content\TypeMapper;
 
-class ContentTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class ContentTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         AbstractContent::emptyTrash();
     }
 
-    public function testEmptyTrash()
-    {
+    public function testEmptyTrash() {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -31,14 +28,12 @@ class ContentTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(0, $deleted);
     }
 
-    public function testGetChildrenWithoutId()
-    {
+    public function testGetChildrenWithoutId() {
         $page = new Page();
         $this->assertCount(0, $page->getChildren());
     }
 
-    public function testGetIcon()
-    {
+    public function testGetIcon() {
         $types = TypeMapper::getMappings();
         foreach ($types as $type => $class) {
             $model = new $class();

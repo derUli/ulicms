@@ -9,8 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * Modes for Email delivery
  */
-abstract class EmailModes
-{
+abstract class EmailModes {
     /**
      * Uses mail()
      */

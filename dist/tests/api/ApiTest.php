@@ -3,14 +3,12 @@
 use App\Constants\HtmlEditor;
 use App\Utils\CacheUtil;
 
-class ApiTest extends \PHPUnit\Framework\TestCase
-{
+class ApiTest extends \PHPUnit\Framework\TestCase {
     private $initialUser;
 
     private $initialSettings = [];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
         ControllerRegistry::loadModuleControllers();
@@ -35,8 +33,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         chdir(Path::resolve('ULICMS_ROOT'));
 
         foreach ($this->initialSettings as $key => $value) {
@@ -72,15 +69,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $_POST = [];
     }
 
-    public function cleanUp()
-    {
+    public function cleanUp() {
         unset($_REQUEST['action']);
         Settings::set('maintenance_mode', '0');
         chdir(Path::resolve('ULICMS_ROOT'));
     }
 
-    public function testAddTranslation()
-    {
+    public function testAddTranslation() {
         $key1 = uniqid();
         $key2 = 'TRANSLATION_' . uniqid();
         $value1 = uniqid();
@@ -94,8 +89,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($value2, constant(strtoupper($key2)));
     }
 
-    public function testGetModuleMeta()
-    {
+    public function testGetModuleMeta() {
         $this->assertEquals('core', getModuleMeta('core_home', 'source'));
         $meta = getModuleMeta('core_home');
         $this->assertEquals('models/HomeViewModel.php', $meta['objects']['HomeViewModel']);
@@ -110,15 +104,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(false, $meta['embed']);
     }
 
-    public function testGetAllThemes()
-    {
+    public function testGetAllThemes() {
         $themes = getAllThemes();
         $this->assertContains('impro17', $themes);
         $this->assertContains('2020', $themes);
     }
 
-    public function testGetAllModules()
-    {
+    public function testGetAllModules() {
         \App\Storages\Vars::delete('allModules');
         $modules = getAllModules();
         $modules = getAllModules();
@@ -127,15 +119,13 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertContains('bootstrap', $modules);
     }
 
-    public function testGetHtmlEditorNotLoggedInReturnsCkeditor()
-    {
+    public function testGetHtmlEditorNotLoggedInReturnsCkeditor() {
         if (session_id()) {
         }
         $this->assertEquals(HtmlEditor::CKEDITOR, get_html_editor());
     }
 
-    public function testGetHtmlEditorReturnsCKEditor()
-    {
+    public function testGetHtmlEditorReturnsCKEditor() {
         $user = new User();
         $user->setUsername('testuser-1');
         $user->setPassword(rand_string(23));
@@ -148,8 +138,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(HtmlEditor::CKEDITOR, get_html_editor());
     }
 
-    public function testGetHtmlEditorReturnsCodeMirror()
-    {
+    public function testGetHtmlEditorReturnsCodeMirror() {
         $user = new User();
         $user->setUsername('testuser-2');
         $user->setPassword(rand_string(666));
@@ -162,8 +151,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(HtmlEditor::CODEMIRROR, get_html_editor());
     }
 
-    public function testGetBaseFolderUrlWithFilenameInUrl()
-    {
+    public function testGetBaseFolderUrlWithFilenameInUrl() {
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
         $_SERVER['SERVER_PORT'] = '80';
         $_SERVER['HTTP_HOST'] = 'example.org';
@@ -172,8 +160,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('http://example.org/foobar', getBaseFolderURL());
     }
 
-    public function testGetBaseFolderUrlWithFilenameInUrlAndHttps()
-    {
+    public function testGetBaseFolderUrlWithFilenameInUrlAndHttps() {
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
         $_SERVER['SERVER_PORT'] = '443';
         $_SERVER['HTTPS'] = 'on';
@@ -189,8 +176,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     }
 
-    public function testGetBaseFolderUrlWithFilenameInUrlAndHttpsAndAlternativePort()
-    {
+    public function testGetBaseFolderUrlWithFilenameInUrlAndHttpsAndAlternativePort() {
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
         $_SERVER['SERVER_PORT'] = '8080';
         $_SERVER['HTTPS'] = 'on';
@@ -206,8 +192,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     }
 
-    public function testStringContainsShortCodeWithoutNameReturnsTrue()
-    {
+    public function testStringContainsShortCodeWithoutNameReturnsTrue() {
         $this->assertTrue(
             stringContainsShortCodes(
                 'Foo [module=hello_world] Bar'
@@ -220,8 +205,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testStringContainsShortCodeWithoutNameReturnsFalse()
-    {
+    public function testStringContainsShortCodeWithoutNameReturnsFalse() {
         $this->assertFalse(
             stringContainsShortCodes(
                 '[module=hello_world '
@@ -234,8 +218,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testStringContainsShortCodeWithNameReturnsTrue()
-    {
+    public function testStringContainsShortCodeWithNameReturnsTrue() {
         $this->assertTrue(
             stringContainsShortCodes(
                 'Foo [module=hello_world] Bar',
@@ -250,8 +233,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testStringContainsShortCodeWithNameReturnsFalse()
-    {
+    public function testStringContainsShortCodeWithNameReturnsFalse() {
         $this->assertFalse(
             stringContainsShortCodes(
                 'Foo [module="hello_world"] Bar',
@@ -266,8 +248,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testReplaceShortcodesWithModulesWithOther()
-    {
+    public function testReplaceShortcodesWithModulesWithOther() {
         $inputString = 'Foo [year] Bar [module=fortune2]';
         $processedInput = replaceShortcodesWithModules($inputString, true);
 
@@ -285,8 +266,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testReplaceShortcodesWithModulesThreeFormats()
-    {
+    public function testReplaceShortcodesWithModulesThreeFormats() {
         $formats = [
             '[module=fortune2]',
             '[module="fortune2"]',
@@ -299,16 +279,14 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testReplaceShortcodesWithNonExistingName()
-    {
+    public function testReplaceShortcodesWithNonExistingName() {
         $this->assertEquals(
             '[module=gibts_nicht]',
             replaceShortcodesWithModules('[module=gibts_nicht]')
         );
     }
 
-    public function testReplaceShortcodesWithModulesWithoutOther()
-    {
+    public function testReplaceShortcodesWithModulesWithoutOther() {
         $inputString = 'Foo [year] Bar [module=fortune2]';
         $processedInput = replaceShortcodesWithModules($inputString, false);
 
@@ -317,13 +295,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThan(strlen($inputString) + 10, strlen($processedInput));
     }
 
-    public function testReplaceOtherShortcodes()
-    {
+    public function testReplaceOtherShortcodes() {
         $this->assertStringMatchesFormat('Foo %d Bar [module=fortune2]', replaceOtherShortCodes('Foo [year] Bar [module=fortune2]'));
     }
 
-    public function testContainsModuleWithoutArgumentsReturnsTrue()
-    {
+    public function testContainsModuleWithoutArgumentsReturnsTrue() {
         $page = new Module_Page();
         $page->title = 'Unit Test ' . uniqid();
         $page->slug = 'unit-test-' . uniqid();
@@ -341,8 +317,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(containsModule());
     }
 
-    public function testContainsModuleReturnsTrue()
-    {
+    public function testContainsModuleReturnsTrue() {
         $page = new Module_Page();
         $page->title = 'Unit Test ' . uniqid();
         $page->slug = 'unit-test-' . uniqid();
@@ -359,8 +334,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(containsModule($page->slug));
     }
 
-    public function testContainsModuleReturnsFalse()
-    {
+    public function testContainsModuleReturnsFalse() {
         $page = new Page();
         $page->title = 'Unit Test ' . uniqid();
         $page->slug = 'unit-test-' . uniqid();
@@ -376,8 +350,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(containsModule($page->slug));
     }
 
-    public function testContainsModuleWithModulePageAndNameReturnsTrue()
-    {
+    public function testContainsModuleWithModulePageAndNameReturnsTrue() {
         $page = new Module_Page();
         $page->title = 'Unit Test ' . uniqid();
         $page->slug = 'unit-test-' . uniqid();
@@ -394,8 +367,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(containsModule($page->slug, 'fortune2'));
     }
 
-    public function testContainsModuleWithShortcodeAndNameReturnsTrue()
-    {
+    public function testContainsModuleWithShortcodeAndNameReturnsTrue() {
         $page = new Page();
         $page->title = 'Unit Test ' . uniqid();
         $page->slug = 'unit-test-' . uniqid();
@@ -411,8 +383,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(containsModule($page->slug, 'fortune2'));
     }
 
-    public function testContainsModuleWithNameReturnsFalse()
-    {
+    public function testContainsModuleWithNameReturnsFalse() {
         $page = new Page();
         $page->title = 'Unit Test ' . uniqid();
         $page->slug = 'unit-test-' . uniqid();
@@ -429,8 +400,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(containsModule($page->slug, 'nicht_enthalten'));
     }
 
-    public function testVarDumpStrReturnsStringWithOneVar()
-    {
+    public function testVarDumpStrReturnsStringWithOneVar() {
         $output = var_dump_str(new User());
 
         $this->assertStringContainsString(
@@ -459,13 +429,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testVarDumpStrWithoutAnything()
-    {
+    public function testVarDumpStrWithoutAnything() {
         $this->assertEmpty(var_dump_str());
     }
 
-    public function testGetLangConfig()
-    {
+    public function testGetLangConfig() {
         Settings::setLanguageSetting('my_setting', 'Lampukisch');
         Settings::setLanguageSetting('my_setting', 'Germanisch', 'de');
         Settings::setLanguageSetting('my_setting', 'Angelsächisch', 'en');
@@ -475,41 +443,35 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Angelsächisch', Settings::getLang('my_setting', 'en'));
     }
 
-    public function testGetModuleUninstallScriptPath()
-    {
+    public function testGetModuleUninstallScriptPath() {
         $this->assertStringEndsWith('content/modules/my_module/my_module_uninstall.php', getModuleUninstallScriptPath('my_module'));
     }
 
-    public function testGetModuleUninstallScriptPath2()
-    {
+    public function testGetModuleUninstallScriptPath2() {
         $this->assertStringEndsWith('content/modules/my_module/uninstall.php', getModuleUninstallScriptPath2('my_module'));
     }
 
     // XXX: Whats the purpose of this method?
-    public function testGetModuleAdminSelfPath()
-    {
+    public function testGetModuleAdminSelfPath() {
         $_SERVER['REQUEST_URI'] = '/foo/?bar="hello"';
         $this->assertEquals('/foo/?bar=&quot;hello&quot;', getModuleAdminSelfPath());
     }
 
-    public function testGetModuleAdminFilePath()
-    {
+    public function testGetModuleAdminFilePath() {
         $this->assertStringEndsWith(
             '/content/modules/my_module/my_module_admin.php',
             getModuleAdminFilePath('my_module')
         );
     }
 
-    public function testGetModuleAdminFilePath2()
-    {
+    public function testGetModuleAdminFilePath2() {
         $this->assertStringEndsWith(
             '/content/modules/my_module/admin.php',
             getModuleAdminFilePath2('my_module')
         );
     }
 
-    public function testNoCacheWithTrue()
-    {
+    public function testNoCacheWithTrue() {
         $this->assertFalse(\App\Storages\Vars::getNoCache());
         \App\Storages\Vars::setNoCache(true);
         $this->assertTrue(\App\Storages\Vars::getNoCache());

@@ -14,10 +14,8 @@ use App\Security\PrivacyCheckbox;
 use App\Utils\CacheUtil;
 use zz\Html\HTMLMinify;
 
-class CommentsController extends MainClass
-{
-    public function beforeHtml(): void
-    {
+class CommentsController extends MainClass {
+    public function beforeHtml(): void {
         \App\Storages\Vars::set('comments_enabled', false);
 
         if (is_200()) {
@@ -36,8 +34,7 @@ class CommentsController extends MainClass
     }
 
     // This method handles posted comments
-    public function postComment(): void
-    {
+    public function postComment(): void {
         // check if DSGVO checkbox is checked
         $checkbox = new PrivacyCheckbox(getCurrentLanguage(true));
         if ($checkbox->isEnabled()) {
@@ -102,8 +99,7 @@ class CommentsController extends MainClass
         );
     }
 
-    public function getCommentText(): void
-    {
+    public function getCommentText(): void {
         $id = Request::getVar('id', 0, 'int');
         $text = $this->_getCommentText($id);
         if ($text) {
@@ -112,8 +108,7 @@ class CommentsController extends MainClass
         HTMLResult(get_translation('not_found'), 404);
     }
 
-    public function _getCommentText(int $id): ?string
-    {
+    public function _getCommentText(int $id): ?string {
         try {
             $comment = new Comment($id);
             $comment->setRead(true);
@@ -127,8 +122,7 @@ class CommentsController extends MainClass
     }
 
     // this returns the default status for new comments
-    public function _getDefaultStatus(): string
-    {
+    public function _getDefaultStatus(): string {
         $defaultStatus = Settings::get('comments_must_be_approved') ?
                 CommentStatus::PENDING : CommentStatus::PUBLISHED;
         return $defaultStatus;
@@ -152,8 +146,7 @@ class CommentsController extends MainClass
     }
 
     // filter and show the comments to the comment moderation
-    public function filterComments(): void
-    {
+    public function filterComments(): void {
         // get arguments from the URL
         $status = Request::getVar('status', null, 'str');
         $content_id = Request::getVar('content_id', null, 'int');
@@ -174,13 +167,11 @@ class CommentsController extends MainClass
     }
 
     // get the configured default limit or if is set the default value
-    public function _getDefaultLimit(): int
-    {
+    public function _getDefaultLimit(): int {
         return (int)(Settings::get('comments_default_limit') ?? 100);
     }
 
-    public function doAction(): void
-    {
+    public function doAction(): void {
         // post arguments
         $commentIds = Request::getVar('comments', []);
         $action = Request::getVar('action', null, 'str');
@@ -208,8 +199,7 @@ class CommentsController extends MainClass
         Response::redirect($referrer);
     }
 
-    public function _doActions(array $commentIds, string $action): array
-    {
+    public function _doActions(array $commentIds, string $action): array {
         $processedComments = [];
 
         foreach ($commentIds as $id) {
@@ -219,8 +209,7 @@ class CommentsController extends MainClass
         return $processedComments;
     }
 
-    public function _doAction(Comment $comment, string $action): Comment
-    {
+    public function _doAction(Comment $comment, string $action): Comment {
         switch ($action) {
             case 'mark_as_spam':
                 $comment->setStatus(CommentStatus::SPAM);

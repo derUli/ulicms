@@ -14,12 +14,12 @@ $oldConfigFile = $rootDir . '/CMSConfig.php';
 try {
     // Init will fail after upgrade to 2023.3 since the configuration files are not converted yet
     require_once $rootDir . '/init.php';
-} catch(Exception $e){
+} catch(Exception $e) {
     $appEnv = get_environment();
     $newConfigFile = DotEnvLoader::envFilenameFromEnvironment($appEnv);
 
     // If there is no .env file but a CMSConfig.php in ULICMS_ROOT migrate config
-    if(is_file($oldConfigFile) && ! is_file($newConfigFile)){
+    if(is_file($oldConfigFile) && ! is_file($newConfigFile)) {
         require $oldConfigFile;
 
     $oldConfig = new CMSConfig();
@@ -27,7 +27,7 @@ try {
     $converter = new ConfigurationToDotEnvConverter($oldConfig);
 
     // If conversion successful
-    if($converter->writeEnvFile()){
+    if($converter->writeEnvFile()) {
 
         // Prepend required variable APP_ENV to .env file
         $fileContent = file_get_contents($newConfigFile);

@@ -6,10 +6,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Utils\CacheUtil;
 
-class PerformanceSettingsController extends \App\Controllers\Controller
-{
-    public function _savePost(): void
-    {
+class PerformanceSettingsController extends \App\Controllers\Controller {
+    public function _savePost(): void {
         if (isset($_POST['cache_enabled'])) {
             Settings::delete('cache_disabled');
         } else {
@@ -28,8 +26,7 @@ class PerformanceSettingsController extends \App\Controllers\Controller
         Settings::set('lazy_loading_iframe', $lazy_loading_iframe);
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
 
         Response::sendHttpStatusCodeResultIfAjax(
@@ -41,13 +38,11 @@ class PerformanceSettingsController extends \App\Controllers\Controller
         );
     }
 
-    public function _clearCache(): void
-    {
+    public function _clearCache(): void {
         CacheUtil::clearCache();
     }
 
-    public function clearCache(): void
-    {
+    public function clearCache(): void {
         if (! is_logged_in()) {
             Response::redirect('index.php');
         }

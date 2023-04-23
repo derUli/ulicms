@@ -2,25 +2,21 @@
 
 use App\Translations\Translation;
 
-class TranslationTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class TranslationTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         require_once getLanguageFilePath('en');
         Translation::loadAllModuleLanguageFiles('en');
         Translation::loadCurrentThemeLanguageFiles('en');
     }
 
-    public function testGetTranslation()
-    {
+    public function testGetTranslation() {
         $this->assertEquals(
             'Type your password',
             get_translation('enter_pass')
         );
     }
 
-    public function testGetTranslationWithPlaceholders()
-    {
+    public function testGetTranslationWithPlaceholders() {
         $this->assertEquals(
             'Hello John Doe!',
             get_translation(
@@ -32,8 +28,7 @@ class TranslationTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetSecureTranslation()
-    {
+    public function testGetSecureTranslation() {
         $this->assertEquals(
             normalizeLN(_esc('<p>Um die Performance der Website zu verbessern,
 bietet das UliCMS eine Cache-Funktion.<br/>
@@ -43,8 +38,7 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
         );
     }
 
-    public function testSecureTranslation()
-    {
+    public function testSecureTranslation() {
         ob_start();
         secure_translation('CACHE_TEXT1');
 
@@ -57,8 +51,7 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
         );
     }
 
-    public function testSecureTranslate()
-    {
+    public function testSecureTranslate() {
         ob_start();
         secure_translate('CACHE_TEXT1');
 
@@ -71,8 +64,7 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
         );
     }
 
-    public function testGetSecureTranslationWithPlaceholders()
-    {
+    public function testGetSecureTranslationWithPlaceholders() {
         $this->assertEquals(
             _esc("Hello <script>alert('xss');</script>John " .
                     'Doe!'),
@@ -85,16 +77,14 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
         );
     }
 
-    public function test_T()
-    {
+    public function test_T() {
         $this->assertEquals(
             'Type your password',
             _t('enter_pass')
         );
     }
 
-    public function test_TWithPlaceholders()
-    {
+    public function test_TWithPlaceholders() {
         $this->assertEquals(
             'Hello John Doe!',
             _t(
@@ -106,16 +96,14 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
         );
     }
 
-    public function testT()
-    {
+    public function testT() {
         ob_start();
         t('enter_pass');
         $output = ob_get_clean();
         $this->assertEquals('Type your password', $output);
     }
 
-    public function testTWithPlaceholders()
-    {
+    public function testTWithPlaceholders() {
         ob_start();
         t(
             'hello_name',
@@ -127,38 +115,32 @@ Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, 
         $this->assertEquals('Hello John Doe!', $output);
     }
 
-    public function testSingularOrPluralWith0ExpectSingular()
-    {
+    public function testSingularOrPluralWith0ExpectSingular() {
         $this->assertEquals(
             '0 Katzen',
             singularOrPlural(0, '%number% Katze', '%number% Katzen')
         );
     }
 
-    public function testSingularOrPluralWith1ExpectSingular()
-    {
+    public function testSingularOrPluralWith1ExpectSingular() {
         $this->assertEquals('1 Hund', singularOrPlural(1, '%number% Hund', '%number% Hunde'));
     }
 
-    public function testSingularOrPluralWith3ExpectSingular()
-    {
+    public function testSingularOrPluralWith3ExpectSingular() {
         $this->assertEquals('3 Biere', singularOrPlural(3, '%number% Bier', '%number% Biere'));
     }
 
-    public function testGetTranslationNotFoundReturnsKey()
-    {
+    public function testGetTranslationNotFoundReturnsKey() {
         $this->assertEquals('not_a_translation', get_translation('not_a_translation'));
     }
 
-    public function testTranslate()
-    {
+    public function testTranslate() {
         ob_start();
         translate('pages');
         $this->assertEquals('Pages', ob_get_clean());
     }
 
-    public function testTranslation()
-    {
+    public function testTranslation() {
         ob_start();
         translation('pages');
         $this->assertEquals('Pages', ob_get_clean());

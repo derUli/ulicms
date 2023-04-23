@@ -7,10 +7,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Utils\CacheUtil;
 use App\Utils\File;
 
-class FaviconController extends \App\Controllers\Controller
-{
-    public function _getSizes($highResolution = false): array
-    {
+class FaviconController extends \App\Controllers\Controller {
+    public function _getSizes($highResolution = false): array {
         $sizes = [
             [
                 32,
@@ -31,20 +29,17 @@ class FaviconController extends \App\Controllers\Controller
         return $sizes;
     }
 
-    public function _getDestination1(): string
-    {
+    public function _getDestination1(): string {
         return ULICMS_ROOT
                 . '/content/images/favicon.ico';
     }
 
-    public function _getDestination2(): string
-    {
+    public function _getDestination2(): string {
         return ULICMS_ROOT
                 . '/favicon.ico';
     }
 
-    public function doUpload(): void
-    {
+    public function doUpload(): void {
         // Favicon Upload
         if (! empty($_FILES['favicon_upload_file']['name'])) {
             if (! is_dir('../content/images')) {
@@ -82,8 +77,7 @@ class FaviconController extends \App\Controllers\Controller
         }
     }
 
-    public function _placeFiles(string $source, array $sizes): bool
-    {
+    public function _placeFiles(string $source, array $sizes): bool {
         $success = [];
         $files = [
             $this->_getDestination1(),
@@ -100,8 +94,7 @@ class FaviconController extends \App\Controllers\Controller
         return count(array_filter($success)) > 0;
     }
 
-    public function _deleteFavicon(): bool
-    {
+    public function _deleteFavicon(): bool {
         $success = [];
 
         $files = [
@@ -120,8 +113,7 @@ class FaviconController extends \App\Controllers\Controller
         return count(array_filter($success)) > 0;
     }
 
-    public function deleteFavicon(): void
-    {
+    public function deleteFavicon(): void {
         $success = $this->_deleteFavicon();
         Response::sendHttpStatusCodeResultIfAjax(
             $success ?
@@ -131,8 +123,7 @@ class FaviconController extends \App\Controllers\Controller
         );
     }
 
-    public function _hasFavicon(): bool
-    {
+    public function _hasFavicon(): bool {
         return is_file($this->_getDestination2());
     }
 }

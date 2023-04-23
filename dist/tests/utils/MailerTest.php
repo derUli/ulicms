@@ -7,12 +7,10 @@ use App\Utils\Mailer;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
-class MailerTest extends \PHPUnit\Framework\TestCase
-{
+class MailerTest extends \PHPUnit\Framework\TestCase {
     private $initialSettings = [];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         LoggerRegistry::register(
             'phpmailer_log',
             new Logger(Path::resolve('ULICMS_LOG/phpmailer_log'))
@@ -34,8 +32,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         LoggerRegistry::unregister('phpmailer_log');
 
         foreach ($this->initialSettings as $key => $value) {
@@ -43,8 +40,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSplitHeaders()
-    {
+    public function testSplitHeaders() {
         $headers = '';
         $headers .= "From: info@company.com\n";
         $headers .= "Reply-To: reply@company.com\n";
@@ -61,8 +57,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('My Cool Mailer', $parsed['X-Mailer']);
     }
 
-    public function testGetPHPMailer()
-    {
+    public function testGetPHPMailer() {
         $mailer = Mailer::getPHPMailer();
         $this->assertInstanceOf(PHPMailer::class, $mailer);
         $this->assertTrue(in_array($mailer->SMTPSecure, [
@@ -75,8 +70,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($mailer->SMTPAuth);
     }
 
-    public function testGetPHPMailerWithEmailMode()
-    {
+    public function testGetPHPMailerWithEmailMode() {
         $mailer = $this->setUpPhpMailer();
         $this->assertEquals(
             [
@@ -101,14 +95,12 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         ]));
     }
 
-    public function testEmailModes()
-    {
+    public function testEmailModes() {
         $this->assertEquals('internal', EmailModes::INTERNAL);
         $this->assertEquals('phpmailer', EmailModes::PHPMAILER);
     }
 
-    public function testSendWithPHPMailer()
-    {
+    public function testSendWithPHPMailer() {
         $headers = "X-Mailer: Der Gerät\n";
         $headers .= "Reply-To: antwort@adresse.invalid\n";
         $headers .= 'Content-Type: text/html';
@@ -118,16 +110,14 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetMailLogger()
-    {
+    public function testGetMailLogger() {
         $logFunction = Mailer::getMailLogger();
 
         $this->assertIsCallable($logFunction);
         $logFunction('Hallo Welt', SMTP::DEBUG_CONNECTION);
     }
 
-    protected function setUpPhpMailer(): PHPMailer
-    {
+    protected function setUpPhpMailer(): PHPMailer {
         Settings::set('smtp_auth', '1');
         Settings::set('smtp_no_verify_certificate', '1');
         Settings::set('smtp_host', 'smtp.foo.bar');

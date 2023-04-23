@@ -6,16 +6,14 @@ namespace App\Security;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class XSSProtection
-{
+class XSSProtection {
     /**
      * Like PHP's strip_tags but remove also inline javascript code
      * @param string $input
      * @param string|null $allowed
      * @return string
      */
-    public static function stripTags(string $input, ?string $allowed = null): string
-    {
+    public static function stripTags(string $input, ?string $allowed = null): string {
         $output = strip_tags($input, $allowed);
 
         // If <script> isn't allowed then remove also inline event handlers

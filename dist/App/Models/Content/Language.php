@@ -11,28 +11,24 @@ use Settings;
 
 use function getDomainByLanguage;
 
-class Language extends Model
-{
+class Language extends Model {
     protected $id = null;
 
     private $name = null;
 
     private $language_code = null;
 
-    public function __construct($id = null)
-    {
+    public function __construct($id = null) {
         if ($id !== null) {
             $this->loadById($id);
         }
     }
 
-    public function __toString(): string
-    {
+    public function __toString(): string {
         return $this->getLanguageCode();
     }
 
-    public function fillVars($result = null)
-    {
+    public function fillVars($result = null) {
         if ($result && Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
             $this->id = $result->id;
@@ -45,8 +41,7 @@ class Language extends Model
         }
     }
 
-    public function loadById($id)
-    {
+    public function loadById($id) {
         $args = [
             $id
         ];
@@ -55,8 +50,7 @@ class Language extends Model
         $this->fillVars($result);
     }
 
-    public function loadByLanguageCode(string $language_code): void
-    {
+    public function loadByLanguageCode(string $language_code): void {
         $args = [
             (string)$language_code
         ];
@@ -65,28 +59,23 @@ class Language extends Model
         $this->fillVars($result);
     }
 
-    public function getName(): ?string
-    {
+    public function getName(): ?string {
         return $this->name;
     }
 
-    public function getLanguageCode(): ?string
-    {
+    public function getLanguageCode(): ?string {
         return $this->language_code;
     }
 
-    public function setName($val)
-    {
+    public function setName($val) {
         $this->name = $val !== null ? (string)$val : null;
     }
 
-    public function setLanguageCode($val)
-    {
+    public function setLanguageCode($val) {
         $this->language_code = $val !== null ? (string)$val : null;
     }
 
-    public function save()
-    {
+    public function save() {
         if ($this->id === null) {
             $this->insert();
         } else {
@@ -94,8 +83,7 @@ class Language extends Model
         }
     }
 
-    public function delete()
-    {
+    public function delete() {
         if ($this->id !== null) {
             $sql = 'DELETE FROM `{prefix}languages` where id = ?';
             $args = [
@@ -108,30 +96,26 @@ class Language extends Model
         }
     }
 
-    public function makeDefaultLanguage(): void
-    {
+    public function makeDefaultLanguage(): void {
         if ($this->language_code !== null) {
             Settings::set('default_language', $this->language_code);
         }
     }
 
     // returns true if this language is the default language
-    public function isDefaultLanguage(): bool
-    {
+    public function isDefaultLanguage(): bool {
         return $this->language_code == Settings::get('default_language');
     }
 
     // returns true if this is the user's current language
-    public function isCurrentLanguage(): bool
-    {
+    public function isCurrentLanguage(): bool {
         $current_language = is_admin_dir() ?
                 getSystemLanguage() : getCurrentLanguage();
         return $this->language_code == $current_language;
     }
 
     // returns an array of all languages
-    public static function getAllLanguages(string $order = 'id'): array
-    {
+    public static function getAllLanguages(string $order = 'id'): array {
         $datasets = [];
         $sql = "select id from `{prefix}languages` order by {$order}";
         $result = Database::query($sql, true);
@@ -142,8 +126,7 @@ class Language extends Model
     }
 
     // returns a link to view the website in this language
-    public function getLanguageLink(): string
-    {
+    public function getLanguageLink(): string {
         $domain = getDomainByLanguage($this->language_code);
         if ($domain) {
             $url = Request::getProtocol($domain);
@@ -153,8 +136,7 @@ class Language extends Model
         return $url;
     }
 
-    protected function insert()
-    {
+    protected function insert() {
         $sql = 'INSERT INTO `{prefix}languages` (name, language_code) '
                 . 'values (?,?)';
         $args = [
@@ -165,8 +147,7 @@ class Language extends Model
         $this->id = Database::getLastInsertID();
     }
 
-    protected function update()
-    {
+    protected function update() {
         $sql = 'UPDATE `{prefix}languages` set name = ?, language_code = ? '
                 . 'where id = ?';
         $args = [

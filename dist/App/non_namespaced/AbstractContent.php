@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-abstract class AbstractContent extends Model
-{
+abstract class AbstractContent extends Model {
     public $show_headline = true;
 
     public $title = '';
@@ -16,8 +15,7 @@ abstract class AbstractContent extends Model
      * Get if the headline is shown
      * @return bool
      */
-    public function getShowHeadline(): bool
-    {
+    public function getShowHeadline(): bool {
         return (bool)$this->show_headline;
     }
 
@@ -25,8 +23,7 @@ abstract class AbstractContent extends Model
      * Do a hard delete of all soft deleted content
      * @return void
      */
-    public static function emptyTrash(): void
-    {
+    public static function emptyTrash(): void {
         Database::deleteFrom(
             'content',
             'deleted_at IS NOT NULL'
@@ -37,8 +34,7 @@ abstract class AbstractContent extends Model
      * Get title or alternate title
      * @return string|null
      */
-    public function getHeadline(): ?string
-    {
+    public function getHeadline(): ?string {
         return empty($this->alternate_title) ?
                 $this->title : $this->alternate_title;
     }
@@ -49,8 +45,7 @@ abstract class AbstractContent extends Model
      * This applies to any default contents except Link, Language_Link and Node
      * @return bool
      */
-    public function isRegular(): bool
-    {
+    public function isRegular(): bool {
         return true;
     }
 
@@ -59,8 +54,7 @@ abstract class AbstractContent extends Model
      * @param string $order
      * @return array
      */
-    public function getChildren(string $order = 'id'): array
-    {
+    public function getChildren(string $order = 'id'): array {
         if (! $this->getID()) {
             return [];
         }
@@ -72,8 +66,7 @@ abstract class AbstractContent extends Model
      * Check if the content has children
      * @return bool
      */
-    public function hasChildren(): bool
-    {
+    public function hasChildren(): bool {
         return count($this->getChildren()) > 0;
     }
 
@@ -81,8 +74,7 @@ abstract class AbstractContent extends Model
       * Get css classes for Font Awesome icon
       * @return string
       */
-    public function getIcon(): string
-    {
+    public function getIcon(): string {
         return 'far fa-file-alt';
     }
 

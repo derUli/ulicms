@@ -173,8 +173,7 @@ $mime_types = [
 
 
 if (! function_exists('get_extension_from_mime')) {
-    function get_extension_from_mime($mime)
-    {
+    function get_extension_from_mime($mime) {
         global $mime_types;
 
         if (str_contains($mime, ';')) {
@@ -190,8 +189,7 @@ if (! function_exists('get_extension_from_mime')) {
 }
 
 if (! function_exists('get_file_mime_type')) {
-    function get_file_mime_type($filename, $debug = false)
-    {
+    function get_file_mime_type($filename, $debug = false) {
         if (function_exists('finfo_open') && function_exists('finfo_file') && function_exists('finfo_close')) {
             $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
             $mime_type = finfo_file($fileinfo, $filename);

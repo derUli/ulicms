@@ -12,8 +12,7 @@ use Template;
 /**
  * This class contains methods to build input fields
  */
-class Input
-{
+class Input {
     /**
      * Generate text input
      * @param string $name

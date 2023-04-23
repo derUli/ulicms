@@ -19,8 +19,7 @@ use function get_translation;
 // UliCMS allows *.mp3 and *.ogg file uploads for audio
 // *.ogg is used by browsers which are not allowed to include
 // a *.mp3 codec due legal reasons
-class Audio extends Model
-{
+class Audio extends Model {
     public const AUDIO_DIR = 'content/audio/';
 
     private $name = null;
@@ -37,8 +36,7 @@ class Audio extends Model
 
     private $updated;
 
-    public function __construct($id = null)
-    {
+    public function __construct($id = null) {
         if ($id !== null) {
             $this->loadById($id);
         } else {
@@ -47,8 +45,7 @@ class Audio extends Model
         }
     }
 
-    public static function getAll(string $order = 'id'): array
-    {
+    public static function getAll(string $order = 'id'): array {
         $datasets = [];
         $sql = "SELECT id FROM {prefix}audio ORDER BY {$order}";
         $result = Database::query($sql, true);
@@ -58,8 +55,7 @@ class Audio extends Model
         return $datasets;
     }
 
-    public function loadById($id)
-    {
+    public function loadById($id) {
         $result = Database::pQuery('select * from `{prefix}audio` '
                         . 'where id = ?', [
                             (int)$id
@@ -70,73 +66,60 @@ class Audio extends Model
         $this->fillVars($result);
     }
 
-    public function getName(): ?string
-    {
+    public function getName(): ?string {
         return $this->name;
     }
 
-    public function getMP3File(): ?string
-    {
+    public function getMP3File(): ?string {
         return $this->mp3_file;
     }
 
-    public function getOggFile(): ?string
-    {
+    public function getOggFile(): ?string {
         return $this->ogg_file;
     }
 
-    public function getCategoryId(): ?int
-    {
+    public function getCategoryId(): ?int {
         return $this->category_id;
     }
 
-    public function getCategory(): ?Category
-    {
+    public function getCategory(): ?Category {
         return $this->category;
     }
 
-    public function getCreated(): ?int
-    {
+    public function getCreated(): ?int {
         return $this->created;
     }
 
-    public function getUpdated(): ?int
-    {
+    public function getUpdated(): ?int {
         return $this->updated;
     }
 
-    public function setName(?string $val): void
-    {
+    public function setName(?string $val): void {
         $this->name = ! empty($val) ?
                 (string)$val : null;
     }
 
-    public function setMP3File(?string $val): void
-    {
+    public function setMP3File(?string $val): void {
         $this->mp3_file = ! empty($val) ?
                 (string)$val : null;
     }
 
-    public function setOGGFile(?string $val): void
-    {
+    public function setOGGFile(?string $val): void {
         $this->ogg_file = ! empty($val) ?
                 (string)$val : null;
     }
 
-    public function setCategoryId(?int $val): void
-    {
+    public function setCategoryId(?int $val): void {
         $this->category_id = is_numeric($val) ? (int)$val : null;
         $this->category = is_numeric($val) ? new Category($val) : null;
     }
 
-    public function setCategory(?Category $val)
-    {
+    public function setCategory(?Category $val) {
         $this->category = $val instanceof Category ? $val : null;
         $this->category_id = $val instanceof Category ? $val->getID() : null;
     }
 
-    public function delete(bool $deletePhysical = true): void
-    {
+    public function delete(bool $deletePhysical = true): void {
         if ($this->getId()) {
             if ($deletePhysical) {
                 if ($this->getMP3File()) {
@@ -162,8 +145,7 @@ class Audio extends Model
     }
 
     // render HTML5 <audio> tag
-    public function render(): string
-    {
+    public function render(): string {
         $audioDir = $this->getAudioDir();
 
         $html = '<audio controls>';
@@ -190,8 +172,7 @@ class Audio extends Model
         return $html;
     }
 
-    protected function fillVars($result = null)
-    {
+    protected function fillVars($result = null) {
         if ($result) {
             $result = Database::fetchSingle($result);
             $this->setID($result->id);
@@ -215,8 +196,7 @@ class Audio extends Model
         }
     }
 
-    protected function insert(): void
-    {
+    protected function insert(): void {
         $this->created = time();
         $this->updated = $this->created;
         $args = [
@@ -235,8 +215,7 @@ class Audio extends Model
         $this->setID(Database::getLastInsertID());
     }
 
-    protected function update(): void
-    {
+    protected function update(): void {
         $this->updated = time();
         $args = [
             $this->name,
@@ -253,8 +232,7 @@ class Audio extends Model
         Database::pQuery($sql, $args, true);
     }
 
-    protected function getAudioDir(): string
-    {
+    protected function getAudioDir(): string {
         return self::AUDIO_DIR;
     }
 }

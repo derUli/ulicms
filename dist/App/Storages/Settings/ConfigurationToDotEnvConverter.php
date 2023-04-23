@@ -12,8 +12,7 @@ use Nette\Utils\FileSystem;
 /**
  * Converts old configuration files to dotenv
  */
-class ConfigurationToDotEnvConverter
-{
+class ConfigurationToDotEnvConverter {
     /**
      * @var CMSConfig
      */
@@ -57,7 +56,7 @@ class ConfigurationToDotEnvConverter
             $value = $cfg->{$attribute};
 
             // Handle values
-            if(is_array($value)){
+            if(is_array($value)) {
                 $value = implode('; ', $value);
             } else {
                 $value = ! is_bool($value) ? (string)$value : strbool($value);
@@ -80,7 +79,7 @@ class ConfigurationToDotEnvConverter
 
         $attributes = $this->convertToArray();
 
-        foreach($attributes as $key => $value){
+        foreach($attributes as $key => $value) {
             $output .= "{$key}={$value}" . PHP_EOL;
 
         }
@@ -104,7 +103,7 @@ class ConfigurationToDotEnvConverter
 
         $envFilePath = "{$dir}/{$envFile}";
 
-        if(is_file($envFilePath) && ! $overwrite){
+        if(is_file($envFilePath) && ! $overwrite) {
             return false;
         }
 

@@ -4,8 +4,7 @@ namespace App\Storages;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-interface StorageInterface
-{
+interface StorageInterface {
     public static function get(string $var): mixed;
 
     /**

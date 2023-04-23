@@ -16,8 +16,7 @@ use Fetcher\Fetcher;
  * @param mixed $url
  * @return bool
  */
-function is_url(mixed $url): bool
-{
+function is_url(mixed $url): bool {
     return is_string($url) ? Fetcher::isUrl($url) : false;
 }
 
@@ -74,8 +73,7 @@ function file_get_contents_wrapper(
  * @param string $url
  * @return bool
  */
-function curl_url_exists(string $url): bool
-{
+function curl_url_exists(string $url): bool {
     $fetcher = new Fetcher($url);
 
     return $fetcher->exists();

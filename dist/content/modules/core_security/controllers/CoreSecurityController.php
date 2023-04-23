@@ -9,8 +9,7 @@ use App\Controllers\MainClass;
 /**
  * This module is injecting security HTTP headers
  */
-class CoreSecurityController extends MainClass
-{
+class CoreSecurityController extends MainClass {
     public const ALLOWED_X_FRAME_OPTIONS = [
         'DENY',
         'SAMEORIGIN'
@@ -19,8 +18,7 @@ class CoreSecurityController extends MainClass
     /**
      * This is executed before first output
      */
-    public function beforeInit(): void
-    {
+    public function beforeInit(): void {
         $this->sendXFrameOptions();
         $this->sendXContentTypeOptions();
         $this->sendSTS();

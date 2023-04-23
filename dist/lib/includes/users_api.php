@@ -10,8 +10,7 @@ use App\Security\TwoFactorAuthentication;
  * Gets id and username of all users
  * @return array
  */
-function getUsers(): array
-{
+function getUsers(): array {
     $users = [];
     $result = Database::query('SELECT id, username FROM ' . tbname('users') .
                     ' ORDER by username');
@@ -26,8 +25,7 @@ function getUsers(): array
  * Gets the usernames of all users whose last action was less than 5 minutes ago
  * @return array
  */
-function getUsersOnline(): array
-{
+function getUsersOnline(): array {
     $users_online = Database::query('SELECT username FROM ' . tbname('users') . ' WHERE last_action > ' . (time() - 300) . ' ORDER BY username');
     $retval = [];
     while ($row = db_fetch_object($users_online)) {
@@ -42,8 +40,7 @@ function getUsersOnline(): array
  * @param int|null $userId
  * @return bool
  */
-function changePassword(string $password, ?int $userId)
-{
+function changePassword(string $password, ?int $userId) {
     $user = new User($userId);
     if (! $user->isPersistent()) {
         return false;
@@ -58,8 +55,7 @@ function changePassword(string $password, ?int $userId)
  * @param string $name
  * @return array|null
  */
-function getUserByName(string $name): ?array
-{
+function getUserByName(string $name): ?array {
     $result = Database::query('SELECT * FROM ' . tbname('users') .
                     " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
     if (db_num_rows($result) > 0) {
@@ -73,8 +69,7 @@ function getUserByName(string $name): ?array
  * @param type $id
  * @return array|null
  */
-function getUserById($id): ?array
-{
+function getUserById($id): ?array {
     $result = Database::query('SELECT * FROM ' . tbname('users') .
                     ' WHERE id = ' . (int)$id);
     if (db_num_rows($result) > 0) {
@@ -87,8 +82,7 @@ function getUserById($id): ?array
  * Gets the id of the currently logged in user or
  * @return int
  */
-function get_user_id(): ?int
-{
+function get_user_id(): ?int {
     return $_SESSION['login_id'] ?? null;
 }
 
@@ -96,8 +90,7 @@ function get_user_id(): ?int
  * Gets the primary group id of the currentlogy logged in user
  * @return int|null
  */
-function get_group_id(): ?int
-{
+function get_group_id(): ?int {
     return isset($_SESSION['group_id']) ? (int)$_SESSION['group_id'] : null;
 }
 
@@ -106,8 +99,7 @@ function get_group_id(): ?int
  * @param string $name
  * @return bool
  */
-function user_exists(string $name): bool
-{
+function user_exists(string $name): bool {
     $user = new User();
     $user->loadByUsername($name);
     return $user->isPersistent();
@@ -119,8 +111,7 @@ function user_exists(string $name): bool
  * @param bool $redirect
  * @return void
  */
-function register_session(array $user, bool $redirect = true): void
-{
+function register_session(array $user, bool $redirect = true): void {
     $userDataset = new User((int)$user['id']);
     $userDataset->registerSession($redirect);
 }
@@ -184,8 +175,7 @@ function validate_login(
  * Checks if a user is logged in
  * @return bool
  */
-function is_logged_in(): bool
-{
+function is_logged_in(): bool {
     return isset($_SESSION['logged_in']);
 }
 
@@ -193,8 +183,7 @@ function is_logged_in(): bool
  * Gets the configured HTML editor for the currently logged in user or default
  * @return string
  */
-function get_html_editor(): string
-{
+function get_html_editor(): string {
     $userId = get_user_id();
 
     $user = new User($userId);

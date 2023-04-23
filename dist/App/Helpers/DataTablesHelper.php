@@ -10,8 +10,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * This tool returns methods to use DataTables (https://datatables.net/)
  */
-abstract class DataTablesHelper extends Helper
-{
+abstract class DataTablesHelper extends Helper {
     /**
      * Returns a path to DataTables lang file based on $lang
      * If there is no translation for the given language returns path
@@ -19,8 +18,7 @@ abstract class DataTablesHelper extends Helper
      * @param string $lang Language Code
      * @return string Path to language file
      */
-    public static function getLanguageFileURL(string $lang): string
-    {
+    public static function getLanguageFileURL(string $lang): string {
         $baseUrl = 'scripts/datatables/lang';
         $file = "{$baseUrl}/{$lang}.lang";
         if (is_file($file)) {

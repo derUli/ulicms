@@ -1,19 +1,15 @@
 <?php
 
-class UrlTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class UrlTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         chdir(ULICMS_ROOT);
     }
 
-    public function testGetJqueryUrl()
-    {
+    public function testGetJqueryUrl() {
         $this->assertEquals('node_modules/jquery/dist/jquery.min.js', get_jquery_url());
     }
 
-        public function testGetShortlink()
-        {
+        public function testGetShortlink() {
             $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
             $_SERVER['SERVER_PORT'] = '443';
             $_SERVER['HTTPS'] = 'on';
@@ -31,8 +27,7 @@ class UrlTest extends \PHPUnit\Framework\TestCase
             );
         }
 
-    public function testGetCanonical()
-    {
+    public function testGetCanonical() {
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
         $_SERVER['SERVER_PORT'] = '443';
         $_SERVER['HTTPS'] = 'on';
@@ -47,8 +42,7 @@ class UrlTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-     public function testGetBaseFolderUrlWithoutFilename()
-     {
+     public function testGetBaseFolderUrlWithoutFilename() {
          $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
          $_SERVER['SERVER_PORT'] = '80';
          $_SERVER['HTTP_HOST'] = 'example.org';
@@ -62,8 +56,7 @@ class UrlTest extends \PHPUnit\Framework\TestCase
 
      }
 
-    public function testGetCurrentURL()
-    {
+    public function testGetCurrentURL() {
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
         $_SERVER['SERVER_PORT'] = '8080';
         $_SERVER['HTTPS'] = 'on';
@@ -79,42 +72,36 @@ class UrlTest extends \PHPUnit\Framework\TestCase
 
     }
 
-     public function testBuildSEOUrlWithoutAnythingNoPageSpecified()
-     {
+     public function testBuildSEOUrlWithoutAnythingNoPageSpecified() {
          unset($_GET['slug'], $_GET['html']);
 
 
          $this->assertEquals('./', buildSEOUrl());
      }
 
-    public function testBuildSEOUrlWithoutAnything()
-    {
+    public function testBuildSEOUrlWithoutAnything() {
         set_requested_pagename('hello_world');
         $this->assertEquals('hello_world', buildSEOUrl());
     }
 
-    public function testBuildSEOUrlWithPage()
-    {
+    public function testBuildSEOUrlWithPage() {
         $this->assertEquals('foobar', buildSEOUrl('foobar'));
     }
 
-    public function testBuildSEOUrlWithPageAndRedirection()
-    {
+    public function testBuildSEOUrlWithPageAndRedirection() {
         $this->assertEquals('#', buildSEOUrl('foobar', '#'));
 
         $this->assertEquals('https://google.com', buildSEOUrl('foobar', 'https://google.com'));
     }
 
-    public function testBuildSEOUrlWithPageAndType()
-    {
+    public function testBuildSEOUrlWithPageAndType() {
         $this->assertEquals(
             'foobar',
             buildSEOUrl('foobar', null)
         );
     }
 
-    public function testBuildSEOUrlInAdminDir()
-    {
+    public function testBuildSEOUrlInAdminDir() {
         chdir(Path::resolve('ULICMS_ROOT/admin'));
 
         $this->assertEquals(

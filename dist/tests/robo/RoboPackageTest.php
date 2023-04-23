@@ -3,23 +3,19 @@
 require_once __DIR__ . '/RoboTestFile.php';
 require_once __DIR__ . '/RoboTestBase.php';
 
-class RoboPackageTest extends RoboTestBase
-{
-    protected function setUp(): void
-    {
+class RoboPackageTest extends RoboTestBase {
+    protected function setUp(): void {
         $this->runRoboCommand(['modules:sync']);
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $moduleDir = Path::resolve('ULICMS_ROOT/content/modules/hello_world');
         if (is_dir($moduleDir)) {
             sureRemoveDir($moduleDir);
         }
     }
 
-    public function testPackagesList()
-    {
+    public function testPackagesList() {
         $output = $this->runRoboCommand(['packages:list']);
 
         $this->assertEquals(13, substr_count($output, 'core_'));
@@ -28,8 +24,7 @@ class RoboPackageTest extends RoboTestBase
         $this->assertStringContainsString('impro17 2.1.6', $output);
     }
 
-    public function testPackageExamineReturnsData()
-    {
+    public function testPackageExamineReturnsData() {
         $packageFile = Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/lock_inactive_users-1.0.1.sin'
         );
@@ -48,24 +43,21 @@ class RoboPackageTest extends RoboTestBase
         );
     }
 
-    public function testPackageExamineReturnsError()
-    {
+    public function testPackageExamineReturnsError() {
         $output = $this->runRoboCommand(
             ['package:examine', '../magic-1.0.sin']
         );
         $this->assertEquals('File magic-1.0.sin not found!', $output);
     }
 
-    public function testPackagesInstallReturnsError()
-    {
+    public function testPackagesInstallReturnsError() {
         $output = $this->runRoboCommand(
             ['package:install', '../magic-1.0.sin']
         );
         $this->assertEquals("Can't open ../magic-1.0.sin. File doesn't exists.", $output);
     }
 
-    public function testPackageInstallWithSinFile()
-    {
+    public function testPackageInstallWithSinFile() {
         $packageFile = Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/hello_world-1.0.sin'
         );
@@ -89,8 +81,7 @@ class RoboPackageTest extends RoboTestBase
         $this->assertNotContains('hello_world', getAllModules());
     }
 
-    public function testPackageInstallWithTarGzFile()
-    {
+    public function testPackageInstallWithTarGzFile() {
         $packageFile = Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/hello_world-1.0.tar.gz'
         );
@@ -106,8 +97,7 @@ class RoboPackageTest extends RoboTestBase
         $this->assertContains('hello_world', getAllModules());
     }
 
-    public function testPackageInstallReturnsError()
-    {
+    public function testPackageInstallReturnsError() {
         $packageFile = Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/error-1.0.sin'
         );

@@ -9,8 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * Type of a package
  */
-abstract class PackageTypes
-{
+abstract class PackageTypes {
     public const TYPE_MODULE = 'module';
 
     public const TYPE_THEME = 'theme';

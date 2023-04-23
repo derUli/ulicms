@@ -11,16 +11,14 @@ use User;
 /**
  * This class contains methods to join group settings together
  */
-class GroupCollection
-{
+class GroupCollection {
     private $user;
 
     /**
      * Constructor
      * @param User|null $user
      */
-    public function __construct(?User $user = null)
-    {
+    public function __construct(?User $user = null) {
         $this->user = $user ?: new User();
     }
 
@@ -28,8 +26,7 @@ class GroupCollection
      * Join allowed Html Tags of all users together
      * @return string
      */
-    public function getAllowableTags(): string
-    {
+    public function getAllowableTags(): string {
         $groups = $this->user->getAllGroups();
         $tagString = '';
 
@@ -69,8 +66,7 @@ class GroupCollection
      * @param array $tags
      * @return string
      */
-    private function joinTags(array $tags): string
-    {
+    private function joinTags(array $tags): string {
         $tags = array_map(
             static function($tag) {
                 return "<{$tag}>";

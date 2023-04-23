@@ -6,13 +6,11 @@ namespace App\Utils\Session;
 
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
-function sessionStart(): bool
-{
+function sessionStart(): bool {
     return ! headers_sent() && ! session_id() ? session_start() : false;
 }
 
-function sessionName(?string $name = null): string
-{
+function sessionName(?string $name = null): string {
     if (! $name) {
         return session_name();
     }
@@ -20,7 +18,6 @@ function sessionName(?string $name = null): string
     return ! headers_sent() ? session_name($name) : sessionName();
 }
 
-function sessionDestroy(): bool
-{
+function sessionDestroy(): bool {
     return session_id() ? session_destroy() : false;
 }

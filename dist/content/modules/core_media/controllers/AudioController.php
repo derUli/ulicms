@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class AudioController extends \App\Controllers\Controller
-{
-    public function createPost(): void
-    {
+class AudioController extends \App\Controllers\Controller {
+    public function createPost(): void {
         $mp3_file_value = '';
         $audio_folder = ULICMS_ROOT . '/content/audio';
         // mp3
@@ -70,8 +68,7 @@ class AudioController extends \App\Controllers\Controller
         Response::redirect(ModuleHelper::buildActionURL('audio'));
     }
 
-    public function _updatePost(): bool
-    {
+    public function _updatePost(): bool {
         $name = db_escape($_POST['name']);
         $id = (int)$_POST['id'];
         $ogg_file = db_escape(basename($_POST['ogg_file']));
@@ -86,14 +83,12 @@ class AudioController extends \App\Controllers\Controller
         return Database::getAffectedRows() > 0;
     }
 
-    public function updatePost(): void
-    {
+    public function updatePost(): void {
         $this->_updatePost();
         Response::redirect(ModuleHelper::buildActionURL('audio'));
     }
 
-    public function deletePost(): void
-    {
+    public function deletePost(): void {
         $result = db_query('select ogg_file, mp3_file from ' .
                 tbname('audio') . ' where id = ' .
                 (int)$_REQUEST['delete']);

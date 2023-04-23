@@ -11,8 +11,7 @@ use App\Exceptions\NotImplementedException;
 /**
  * Inherit all custom fields from this class
  */
-class CustomField
-{
+class CustomField {
     public string $name;
 
     public ?string $title = null;
@@ -36,8 +35,7 @@ class CustomField
      * @throws NotImplementedException
      * @return string
      */
-    public function render(mixed $value = null): string
-    {
+    public function render(mixed $value = null): string {
         throw new NotImplementedException();
     }
 }

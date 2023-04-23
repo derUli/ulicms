@@ -2,8 +2,7 @@
 
 use Nette\Utils\Finder;
 
-class SecurityTest extends \PHPUnit\Framework\TestCase
-{
+class SecurityTest extends \PHPUnit\Framework\TestCase {
     public function testPhpFilesProtected() {
         $startTime = time();
 
@@ -27,13 +26,13 @@ class SecurityTest extends \PHPUnit\Framework\TestCase
 
             $skip = false;
 
-            foreach($skipDirs as $skipDir){
-                if(str_contains($path, $skipDir)){
+            foreach($skipDirs as $skipDir) {
+                if(str_contains($path, $skipDir)) {
                     $skip = true;
                 }
             }
 
-            if($skip){
+            if($skip) {
                 continue;
             }
 
@@ -43,7 +42,7 @@ class SecurityTest extends \PHPUnit\Framework\TestCase
 
             while (($actual = fgets($handle)) !== false) {
 
-                if(str_contains($actual, 'No direct script access allowed')){
+                if(str_contains($actual, 'No direct script access allowed')) {
                     $containsMessage = true;
                     break;
                 }

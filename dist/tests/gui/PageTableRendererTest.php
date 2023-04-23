@@ -3,15 +3,12 @@
 use App\CoreContent\PageTableRenderer;
 use App\Models\Content\Language;
 
-class PageTableRendererTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         include_once getLanguageFilePath('en');
     }
 
-    public function testGetDataReturns3Items()
-    {
+    public function testGetDataReturns3Items() {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -24,8 +21,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($data['recordsTotal'], $data['recordsFiltered']);
     }
 
-    public function testGetDataReturnsOther3Items()
-    {
+    public function testGetDataReturnsOther3Items() {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -48,8 +44,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($data2['recordsTotal'], $data2['recordsFiltered']);
     }
 
-    public function testGetDataFiltered()
-    {
+    public function testGetDataFiltered() {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -66,8 +61,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetDataFilterLanguagesByGroup()
-    {
+    public function testGetDataFilterLanguagesByGroup() {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -94,8 +88,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetDataFilterByLanguageAndType()
-    {
+    public function testGetDataFilterByLanguageAndType() {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -122,8 +115,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetDataFilterByParentIdNoParent()
-    {
+    public function testGetDataFilterByParentIdNoParent() {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -149,8 +141,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetDataFilterByParentIdWithParent()
-    {
+    public function testGetDataFilterByParentIdWithParent() {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -182,8 +173,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetDataFilterByCategoryId()
-    {
+    public function testGetDataFilterByCategoryId() {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -212,8 +202,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(0, $nonExistingCategory['data']);
     }
 
-    public function testGetDataFilterByApproved()
-    {
+    public function testGetDataFilterByApproved() {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -241,8 +230,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEquals(count($approvedData['data']), $notApprovedData['data']);
     }
 
-    public function testGetDataFilterByMenu()
-    {
+    public function testGetDataFilterByMenu() {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -263,8 +251,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetDataFilterActive()
-    {
+    public function testGetDataFilterActive() {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -299,8 +286,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetDataFilteredWithStart()
-    {
+    public function testGetDataFilteredWithStart() {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 

@@ -9,8 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Storages\ViewBag;
 use Template;
 
-class MultiSelectField extends CustomField
-{
+class MultiSelectField extends CustomField {
     /**
      * @var array<string, mixed>
      */
@@ -21,8 +20,7 @@ class MultiSelectField extends CustomField
      */
     public bool $translateOptions = true;
 
-    public function render(mixed $value = null): string
-    {
+    public function render(mixed $value = null): string {
         if (! isset($this->htmlAttributes['multiple'])) {
             $this->htmlAttributes['multiple'] = '';
         }

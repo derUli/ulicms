@@ -2,10 +2,8 @@
 
 use App\Registries\ActionRegistry;
 
-class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
@@ -14,29 +12,25 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
         ActionRegistry::loadModuleActionAssignment();
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
         unset($_REQUEST['sClass'], $_REQUEST['sMethod'], $_SERVER['REQUEST_METHOD']);
 
 
     }
 
-    public function testGetWithClassNameReturnsController()
-    {
+    public function testGetWithClassNameReturnsController() {
         $this->assertInstanceOf(
             CommentsController::class,
             ControllerRegistry::get('CommentsController')
         );
     }
 
-    public function testGetWithClassNameReturnsNull()
-    {
+    public function testGetWithClassNameReturnsNull() {
         $this->assertNull(ControllerRegistry::get('GibtsNichtController'));
     }
 
-    public function testGetWithActionReturnsController()
-    {
+    public function testGetWithActionReturnsController() {
         BackendHelper::setAction('audio');
         $this->assertInstanceOf(
             AudioController::class,
@@ -46,8 +40,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
         BackendHelper::setAction('home');
     }
 
-    public function testGetWithNonExistingActionReturnsNull()
-    {
+    public function testGetWithNonExistingActionReturnsNull() {
         BackendHelper::setAction('pages');
         $this->assertNull(
             ControllerRegistry::get()
@@ -56,23 +49,20 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
         BackendHelper::setAction('home');
     }
 
-    public function testGetReturnsNull()
-    {
+    public function testGetReturnsNull() {
         BackendHelper::setAction('info');
         $this->assertNull(
             ControllerRegistry::get()
         );
     }
 
-    public function testUserCanCallNotLoggedIn()
-    {
+    public function testUserCanCallNotLoggedIn() {
         $this->assertFalse(
             ControllerRegistry::userCanCall('PageController', 'createPost')
         );
     }
 
-    public function testUserCanCallReturnsTrue()
-    {
+    public function testUserCanCallReturnsTrue() {
         $user = new User();
         $user->setUsername('testuser-nicht-admin');
         $user->setLastname('Admin');
@@ -87,8 +77,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
         unset($_SESSION['login_id']);
     }
 
-    public function testUserCanCallReturnsFalse()
-    {
+    public function testUserCanCallReturnsFalse() {
         $user = new User();
         $user->setUsername('testuser-nicht-admin');
         $user->setLastname('Admin');
@@ -103,8 +92,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
         unset($_SESSION['login_id']);
     }
 
-    public function testUserCanCallWildCard()
-    {
+    public function testUserCanCallWildCard() {
         $user = new User();
         $user->setUsername('testuser-nicht-admin');
         $user->setLastname('Admin');
@@ -124,8 +112,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
         unset($_SESSION['login_id']);
     }
 
-    public function testRunMethodsWithNonExistingClassName()
-    {
+    public function testRunMethodsWithNonExistingClassName() {
         $_REQUEST['sClass'] = 'GibtsNichtController';
         $_REQUEST['sMethod'] = 'puke';
 
@@ -133,8 +120,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase
         ControllerRegistry::runMethods();
     }
 
-    public function testRunMethods()
-    {
+    public function testRunMethods() {
         $_REQUEST['sClass'] = 'Fortune';
         $_REQUEST['sMethod'] = 'helloWorld';
         $_SERVER['REQUEST_METHOD'] = 'GET';

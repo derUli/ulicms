@@ -1,14 +1,11 @@
 <?php
 
-class ArticleTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class ArticleTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
     }
 
-    public function testSetArticle()
-    {
+    public function testSetArticle() {
         $article = new Article();
         $article->title = 'Unit Test Article';
         $article->slug = 'unit test';
@@ -29,8 +26,7 @@ class ArticleTest extends \PHPUnit\Framework\TestCase
         $article->save();
     }
 
-    public function testSetArticleWithStringDate()
-    {
+    public function testSetArticleWithStringDate() {
         $article = new Article();
         $article->title = 'Unit Test Article';
         $article->slug = 'unit test';
@@ -48,8 +44,7 @@ class ArticleTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(1554588000, $article->article_date);
     }
 
-    public function testUpdateWithoutIdReturnsFalse()
-    {
+    public function testUpdateWithoutIdReturnsFalse() {
         $article = new Article();
         $this->assertFalse($article->update());
         $this->assertFalse($article->isPersistent());

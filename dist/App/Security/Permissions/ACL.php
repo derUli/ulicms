@@ -11,8 +11,7 @@ use App\Constants\ModuleEventConstants;
 /**
  * This class provides a ACL permission list
  */
-abstract class ACL
-{
+abstract class ACL {
     /**
      * Returns default ACL permissions for a new user
      *

@@ -13,14 +13,12 @@ use Settings;
 /**
  * Utils to scale down image uploads
  */
-abstract class ImageScaleHelper extends Helper
-{
+abstract class ImageScaleHelper extends Helper {
     /**
      * Get maximum allowed size dimension for images
      * @return int[]
      */
-    public static function getMaxImageDimensions(): array
-    {
+    public static function getMaxImageDimensions(): array {
         $dimensions = null;
         $scale = strtolower(Settings::get('max_image_dimensions') ?? '');
 

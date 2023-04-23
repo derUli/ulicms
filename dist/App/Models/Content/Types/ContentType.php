@@ -6,8 +6,7 @@ namespace App\Models\Content\Types;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class ContentType
-{
+class ContentType {
     public $show = [];
 
     public $customFieldTabTitle;

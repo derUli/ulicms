@@ -3,10 +3,8 @@
 use App\Models\Content\Types\ContentType;
 use App\Models\Content\Types\DefaultContentTypes;
 
-class ContentTypesTest extends \PHPUnit\Framework\TestCase
-{
-    public function testTypesArray()
-    {
+class ContentTypesTest extends \PHPUnit\Framework\TestCase {
+    public function testTypesArray() {
         DefaultContentTypes::initTypes();
         $types = DefaultContentTypes::getAll();
         $this->assertTrue(is_array($types));
@@ -24,8 +22,7 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testIsRegularReturnsTrue()
-    {
+    public function testIsRegularReturnsTrue() {
         $types = ['Page', 'Article', 'Image_Page',
             'Video_Page', 'Audio_Page', 'Snippet',
             'Module_Page', 'Content_List'];
@@ -35,8 +32,7 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testIsRegularReturnsFalse()
-    {
+    public function testIsRegularReturnsFalse() {
         $types = ['Link', 'Node', 'Language_Link'];
         foreach ($types as $type) {
             $model = new $type();
@@ -44,8 +40,7 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-       private function getBaseTypes()
-       {
+       private function getBaseTypes() {
            $baseTypes = [
                'page',
                'article',

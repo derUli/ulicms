@@ -10,8 +10,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
  * This class contains helper methods to build Bootstrap alerts
  * See https://getbootstrap.com/docs/3.3/components/#alerts
  */
-class Alert
-{
+class Alert {
     /**
      * Generate Bootstrap alert
      *

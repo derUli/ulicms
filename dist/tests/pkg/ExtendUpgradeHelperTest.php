@@ -2,10 +2,8 @@
 
 use Fetcher\Fetcher;
 
-class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase
-{
-    public function testExtendUpgradeHelper()
-    {
+class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase {
+    public function testExtendUpgradeHelper() {
         if (! class_exists('ExtendUpgradeHelper')) {
             $this->markTestSkipped('extend_upgrade_helper is not installed');
         }
@@ -32,8 +30,7 @@ class ExtendUpgradeHelperTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    private function getExpectedModuleNames(): array
-    {
+    private function getExpectedModuleNames(): array {
         return [
             'oneclick_upgrade',
             'fortune2',

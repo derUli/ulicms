@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
-function getPageSlugByID(?int $id): ?string
-{
+function getPageSlugByID(?int $id): ?string {
     $result = db_query('SELECT slug, id FROM `' . tbname('content')
             . '` where id=' . (int)$id);
     if (db_num_rows($result) > 0) {
@@ -15,8 +14,7 @@ function getPageSlugByID(?int $id): ?string
     return null;
 }
 
-function getPageByID(int $id): ?object
-{
+function getPageByID(int $id): ?object {
     $id = (int)$id;
     $result = db_query('SELECT * FROM ' . tbname('content') .
             ' where id = ' . $id);
@@ -26,8 +24,7 @@ function getPageByID(int $id): ?object
     return null;
 }
 
-function getPageTitleByID(?int $id): string
-{
+function getPageTitleByID(?int $id): string {
     $result = db_query('SELECT title, id FROM `' . tbname('content')
             . '` where id=' . (int)$id);
     if (db_num_rows($result) > 0) {
@@ -38,8 +35,7 @@ function getPageTitleByID(?int $id): string
 }
 
 // Get slugs of all pages
-function getAllPagesWithTitle(): array
-{
+function getAllPagesWithTitle(): array {
     $result = db_query('SELECT slug, id, title FROM `' . tbname('content') .
             '` WHERE `deleted_at` IS NULL ORDER BY slug');
     $returnvalues = [];
@@ -94,8 +90,7 @@ function getAllPages(
 }
 
 // Get slugs of all pages
-function getAllSlugs(?string $lang = null): array
-{
+function getAllSlugs(?string $lang = null): array {
     $slugs = [];
 
     if (! $lang) {

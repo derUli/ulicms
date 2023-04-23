@@ -9,8 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * Model to view content diffs
  */
-class DiffViewModel
-{
+class DiffViewModel {
     public $html;
 
     public $current_version_date;

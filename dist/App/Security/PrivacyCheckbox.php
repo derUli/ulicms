@@ -14,8 +14,7 @@ use Template;
 /**
  * Handling GDPR / DSGVO privacy checkbox
  */
-class PrivacyCheckbox
-{
+class PrivacyCheckbox {
     public const CHECKBOX_NAME = 'accept_privacy_policy';
 
     private $language;
@@ -24,8 +23,7 @@ class PrivacyCheckbox
      * Constructor
      * @param string $language
      */
-    public function __construct(string $language)
-    {
+    public function __construct(string $language) {
         $this->language = $language;
     }
 
@@ -33,8 +31,7 @@ class PrivacyCheckbox
      * Check if the GDPR checkbox is enabled
      * @return bool
      */
-    public function isEnabled(): bool
-    {
+    public function isEnabled(): bool {
         return (bool)Settings::get(
                     "privacy_policy_checkbox_enable_{$this->language}",
                     'bool'
@@ -45,8 +42,7 @@ class PrivacyCheckbox
      * Get the name of the checkbox input
      * @return string
      */
-    public function getCheckboxName(): string
-    {
+    public function getCheckboxName(): string {
         return self::CHECKBOX_NAME;
     }
 
@@ -54,8 +50,7 @@ class PrivacyCheckbox
      * Check if the checkbox is checked
      * @return bool
      */
-    public function isChecked(): bool
-    {
+    public function isChecked(): bool {
         $value = Request::getVar(
             $this->getCheckboxName(),
             '',
@@ -95,8 +90,7 @@ class PrivacyCheckbox
      * // This method replaces the [checkbox] placeholder with the checkbox input
      * @return string
      */
-    public function render(): string
-    {
+    public function render(): string {
         $checkboxHtml = Input::checkBox(
             $this->getCheckboxName(),
             false,

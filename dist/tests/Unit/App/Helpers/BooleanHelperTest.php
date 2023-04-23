@@ -3,10 +3,8 @@
 use  App\Helpers\BooleanHelper;
 use PHPUnit\Framework\TestCase;
 
-class BooleanHelperTest extends TestCase
-{
-    public function testBool2YesNo(): void
-    {
+class BooleanHelperTest extends TestCase {
+    public function testBool2YesNo(): void {
         $this->assertEquals(get_translation('yes'), BooleanHelper::bool2YesNo(true));
         $this->assertEquals(get_translation('no'), BooleanHelper::bool2YesNo(false));
     }

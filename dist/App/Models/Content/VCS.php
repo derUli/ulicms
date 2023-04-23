@@ -15,8 +15,7 @@ use function db_query;
 
 // Version Control System for pages
 // tracks content changes
-class VCS
-{
+class VCS {
     public static function createRevision(
         int $content_id,
         string $content,
@@ -30,8 +29,7 @@ class VCS
         );
     }
 
-    public static function getRevisionByID(int $history_id): ?object
-    {
+    public static function getRevisionByID(int $history_id): ?object {
         $history_id = $history_id;
         $result = Database::pQuery(
             'SELECT * FROM `{prefix}history` '
@@ -45,8 +43,7 @@ class VCS
         return null;
     }
 
-    public static function restoreRevision(int $history_id): bool
-    {
+    public static function restoreRevision(int $history_id): bool {
         $result = db_query('SELECT * FROM ' . tbname('history') .
                 ' WHERE id = ' . $history_id);
         if (db_num_rows($result) > 0) {

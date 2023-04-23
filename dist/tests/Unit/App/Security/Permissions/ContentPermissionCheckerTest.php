@@ -2,8 +2,7 @@
 
 use App\Security\Permissions\ContentPermissionChecker;
 
-class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
-{
+class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
     private $testUser1;
 
     private $testUser2;
@@ -14,8 +13,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
 
     private $testGroup2;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->testGroup1 = new Group();
         $this->testGroup1->setName('testgroup1');
         $this->testGroup1->addPermission('pages', true);
@@ -73,8 +71,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->testUser3->save();
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         Database::query("delete from `{prefix}content` where slug like 'testpage%'", true);
 
         Database::query("delete from `{prefix}users` where username like 'testuser%'", true);
@@ -84,8 +81,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
     // TODO: we need test cases for any combination of edit restrictions and user and group permissions
     // maybe write a permission matrix table for reference?
     // TODO: Write more test cases for canRead()
-    public function testCanReadReturnsTrue()
-    {
+    public function testCanReadReturnsTrue() {
         $pages = ContentFactory::getAll();
         $checker = new ContentPermissionChecker($this->testUser1->getId());
         foreach ($pages as $page) {
@@ -94,8 +90,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
     }
 
     // No edit restrictions
-    public function testCanWriteWithNoEditRestrictionsReturnsTrue()
-    {
+    public function testCanWriteWithNoEditRestrictionsReturnsTrue() {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
@@ -111,8 +106,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $page->delete();
     }
 
-    public function testCanWriteWithEditRestrictionsReturnsTrue()
-    {
+    public function testCanWriteWithEditRestrictionsReturnsTrue() {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
@@ -130,8 +124,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
     }
 
     // content has edit restrictions, we can edit the content
-    public function testCanWriteWithEditRestrictionsReturnsFalse()
-    {
+    public function testCanWriteWithEditRestrictionsReturnsFalse() {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
@@ -147,8 +140,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $page->delete();
     }
 
-    public function testCanDeleteWithEditRestrictionsReturnsTrue()
-    {
+    public function testCanDeleteWithEditRestrictionsReturnsTrue() {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
@@ -166,8 +158,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
     }
 
     // content has edit restrictions, we can edit the content
-    public function testCanDeleteWithEditRestrictionsReturnsFalse()
-    {
+    public function testCanDeleteWithEditRestrictionsReturnsFalse() {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
@@ -183,8 +174,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $page->delete();
     }
 
-    public function testCanWriteWithEditRestrictionAsAdminReturnsTrue()
-    {
+    public function testCanWriteWithEditRestrictionAsAdminReturnsTrue() {
         $page = new Page();
         $page->slug = 'testpage3';
         $page->language = 'de';
@@ -197,8 +187,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($checker->canWrite($page->getId()));
     }
 
-    public function testCanWriteWithEditRestrictionAsAdminReturnsFalse()
-    {
+    public function testCanWriteWithEditRestrictionAsAdminReturnsFalse() {
         $page = new Page();
         $page->slug = 'testpage3';
         $page->language = 'de';
@@ -211,8 +200,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($checker->canWrite($page->getID()));
     }
 
-    public function testCanWriteWithEditRestrictionAsGroupReturnsTrue()
-    {
+    public function testCanWriteWithEditRestrictionAsGroupReturnsTrue() {
         $page = new Page();
         $page->slug = 'testpage3';
         $page->language = 'de';
@@ -225,8 +213,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($checker->canWrite($page->getId()));
     }
 
-    public function testCanWriteWithEditRestrictionAsGroupReturnsFalse()
-    {
+    public function testCanWriteWithEditRestrictionAsGroupReturnsFalse() {
         $page = new Page();
         $page->slug = 'testpage3';
         $page->language = 'de';

@@ -9,6 +9,5 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
  *
  * @deprecated since UliCMS 2023.3
  */
-abstract class BaseConfig
-{
+abstract class BaseConfig {
 }

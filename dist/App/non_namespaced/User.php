@@ -16,8 +16,7 @@ use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 /**
  * User model
  */
-class User extends Model
-{
+class User extends Model {
     protected $id = null;
 
     private $username = null;
@@ -58,8 +57,7 @@ class User extends Model
      * Constructor
      * @param ?ìnt $id
      */
-    public function __construct(?int $id = null)
-    {
+    public function __construct(?int $id = null) {
         if ($id) {
             $this->loadById($id);
         }
@@ -70,8 +68,7 @@ class User extends Model
      * @param type $id
      * @return void
      */
-    public function loadById($id): void
-    {
+    public function loadById($id): void {
         $sql = 'select * from {prefix}users where id = ?';
         $args = [
             (int)$id
@@ -85,8 +82,7 @@ class User extends Model
      * @param string $name
      * @return void
      */
-    public function loadByUsername(string $name): void
-    {
+    public function loadByUsername(string $name): void {
         $sql = 'select * from {prefix}users where username '
                 . 'COLLATE utf8mb4_general_ci = ?';
         $args = [
@@ -101,8 +97,7 @@ class User extends Model
      * @param string $email
      * @return void
      */
-    public function loadByEmail(string $email): void
-    {
+    public function loadByEmail(string $email): void {
         $sql = 'select * from {prefix}users where email '
                 . 'COLLATE utf8mb4_general_ci = ?';
 
@@ -118,8 +113,7 @@ class User extends Model
      * Load user from session data
      * @return User|null
      */
-    public static function fromSessionData(): ?User
-    {
+    public static function fromSessionData(): ?User {
         return get_user_id() ? new static(get_user_id()) : null;
     }
 
@@ -127,8 +121,7 @@ class User extends Model
      * Converts user to session data
      * @return array|null
      */
-    public function toSessionData(): ?array
-    {
+    public function toSessionData(): ?array {
         return $this->isPersistent() ? [
             'ulicms_login' => $this->getUsername(),
             'lastname' => $this->getLastname(),
@@ -148,8 +141,7 @@ class User extends Model
      * @throws BadMethodCallException
      * @return void
      */
-    public function registerSession(bool $redirect = true): void
-    {
+    public function registerSession(bool $redirect = true): void {
         $sessionData = $this->toSessionData();
 
         if (! is_array($sessionData)) {
@@ -185,8 +177,7 @@ class User extends Model
      * Save user
      * @return void
      */
-    public function save(): void
-    {
+    public function save(): void {
         if ($this->id) {
             $this->update();
         } else {
@@ -200,8 +191,7 @@ class User extends Model
      * @param string $password
      * @return void
      */
-    public function saveAndSendMail(string $password): bool
-    {
+    public function saveAndSendMail(string $password): bool {
         $this->save();
         return $this->sendWelcomeMail($password);
     }
@@ -211,8 +201,7 @@ class User extends Model
      * @param string $password
      * @return bool
      */
-    public function sendWelcomeMail(string $password): bool
-    {
+    public function sendWelcomeMail(string $password): bool {
         $subject = get_translation(
             'new_user_account_at_site',
             [
@@ -230,8 +219,7 @@ class User extends Model
      * @param string $password
      * @return string
      */
-    public function getWelcomeMailText(string $password): string
-    {
+    public function getWelcomeMailText(string $password): string {
         \App\Storages\ViewBag::set('user', $this);
         \App\Storages\ViewBag::set('url', ModuleHelper::getBaseUrl());
         \App\Storages\ViewBag::set('password', $password);
@@ -243,8 +231,7 @@ class User extends Model
      * @param type $result
      * @return void
      */
-    public function fillVars($result = null): void
-    {
+    public function fillVars($result = null): void {
         if (Database::any($result)) {
             $result = Database::fetchAssoc($result);
             foreach ($result as $key => $value) {
@@ -269,8 +256,7 @@ class User extends Model
      * Get id
      * @return int|null
      */
-    public function getId(): ?int
-    {
+    public function getId(): ?int {
         return $this->id;
     }
 
@@ -279,8 +265,7 @@ class User extends Model
      * @param int|null $id
      * @return void
      */
-    public function setId($id): void
-    {
+    public function setId($id): void {
         $this->id = $id;
     }
 
@@ -288,8 +273,7 @@ class User extends Model
      * Get username
      * @return string|null
      */
-    public function getUsername(): ?string
-    {
+    public function getUsername(): ?string {
         return $this->username;
     }
 
@@ -298,8 +282,7 @@ class User extends Model
      * @param string $username
      * @return void
      */
-    public function setUsername(string $username): void
-    {
+    public function setUsername(string $username): void {
         $this->username = $username;
     }
 
@@ -307,8 +290,7 @@ class User extends Model
      * Get lastname
      * @return string|null
      */
-    public function getLastname(): ?string
-    {
+    public function getLastname(): ?string {
         return $this->lastname;
     }
 
@@ -317,8 +299,7 @@ class User extends Model
      * @param string|null $lastname
      * @return void
      */
-    public function setLastname(?string $lastname): void
-    {
+    public function setLastname(?string $lastname): void {
         $this->lastname = $lastname;
     }
 
@@ -326,8 +307,7 @@ class User extends Model
      * Get firstname
      * @return string|null
      */
-    public function getFirstname(): ?string
-    {
+    public function getFirstname(): ?string {
         return $this->firstname;
     }
 
@@ -336,8 +316,7 @@ class User extends Model
      * @param string|null $firstname
      * @return void
      */
-    public function setFirstname(?string $firstname): void
-    {
+    public function setFirstname(?string $firstname): void {
         $this->firstname = $firstname;
     }
 
@@ -345,8 +324,7 @@ class User extends Model
      * Get email address
      * @return string|null
      */
-    public function getEmail(): ?string
-    {
+    public function getEmail(): ?string {
         return $this->email;
     }
 
@@ -355,8 +333,7 @@ class User extends Model
      * @param string|null $email
      * @return void
      */
-    public function setEmail(?string $email): void
-    {
+    public function setEmail(?string $email): void {
         $this->email = $email;
     }
 
@@ -364,8 +341,7 @@ class User extends Model
      * Delete user
      * @return bool
      */
-    public function delete()
-    {
+    public function delete() {
         if ($this->id === null) {
             return false;
         }
@@ -389,8 +365,7 @@ class User extends Model
      * Get hashed password
      * @return string|null
      */
-    public function getPassword(): ?string
-    {
+    public function getPassword(): ?string {
         return $this->password;
     }
 
@@ -399,8 +374,7 @@ class User extends Model
      * @param string|null $password
      * @return void
      */
-    public function setPassword(string $password): void
-    {
+    public function setPassword(string $password): void {
         $this->password = Hash::hashPassword($password);
         $this->password_changed = date('Y-m-d H:i:s');
     }
@@ -409,8 +383,7 @@ class User extends Model
      * Get datetime of last password change
      * @return string|null
      */
-    public function getPasswordChanged(): ?string
-    {
+    public function getPasswordChanged(): ?string {
         return $this->password_changed;
     }
 
@@ -418,8 +391,7 @@ class User extends Model
      * Reset password
      * @return void
      */
-    public function resetPassword(): void
-    {
+    public function resetPassword(): void {
         // Create password reset model
         $passwordReset = new PasswordReset();
 
@@ -440,8 +412,7 @@ class User extends Model
      * Get "Firstname lastname"
      * @return string
      */
-    public function getFullName(): string
-    {
+    public function getFullName(): string {
         return trim("{$this->firstname} {$this->lastname}");
     }
 
@@ -449,8 +420,7 @@ class User extends Model
      * Get full name or username
      * @return string
      */
-    public function getDisplayName(): string
-    {
+    public function getDisplayName(): string {
         $name = ! empty($this->getFullName()) ? $this->getFullName() : $this->getUsername();
         return $name ?? '';
     }
@@ -460,8 +430,7 @@ class User extends Model
      * @param string $password
      * @return bool
      */
-    public function checkPassword(string $password): bool
-    {
+    public function checkPassword(string $password): bool {
         return Hash::hashPassword($password) == $this->getPassword();
     }
 
@@ -469,8 +438,7 @@ class User extends Model
      * Get about me text
      * @return string|null
      */
-    public function getAboutMe(): ?string
-    {
+    public function getAboutMe(): ?string {
         return $this->about_me;
     }
 
@@ -479,8 +447,7 @@ class User extends Model
      * @param string|null $text
      * @return void
      */
-    public function setAboutMe(?string $text): void
-    {
+    public function setAboutMe(?string $text): void {
         $this->about_me = $text;
     }
 
@@ -488,8 +455,7 @@ class User extends Model
      * Get unix timestamp of last action
      * @return int
      */
-    public function getLastAction(): int
-    {
+    public function getLastAction(): int {
         $lastAction = 0;
         if ($this->id !== null) {
             $sql = 'select last_action from {prefix}users where id = ?';
@@ -510,8 +476,7 @@ class User extends Model
      * @param int|null $time
      * @return void
      */
-    public function setLastAction(int $time): void
-    {
+    public function setLastAction(int $time): void {
         if ($this->id === null) {
             return;
         }
@@ -529,8 +494,7 @@ class User extends Model
      *
      * @return ?int
      */
-    public function getPrimaryGroupId()
-    {
+    public function getPrimaryGroupId() {
         return $this->group_id;
     }
 
@@ -539,8 +503,7 @@ class User extends Model
      * @param type $gid
      * @return void
      */
-    public function setPrimaryGroupId($gid): void
-    {
+    public function setPrimaryGroupId($gid): void {
         $this->group_id = $gid;
         $this->group = $gid;
     }
@@ -549,8 +512,7 @@ class User extends Model
      * Get primary group
      * @return ?Group
      */
-    public function getPrimaryGroup()
-    {
+    public function getPrimaryGroup() {
         return $this->group;
     }
 
@@ -559,8 +521,7 @@ class User extends Model
      * @param type $group
      * @return void
      */
-    public function setPrimaryGroup($group): void
-    {
+    public function setPrimaryGroup($group): void {
         $this->group = $group;
         $this->group_id = $group ? $group->getId() : null;
     }
@@ -569,8 +530,7 @@ class User extends Model
      * Get html editor
      * @return string|null
      */
-    public function getHTMLEditor(): ?string
-    {
+    public function getHTMLEditor(): ?string {
         return $this->html_editor;
     }
 
@@ -579,8 +539,7 @@ class User extends Model
      * @param string $editor
      * @return void
      */
-    public function setHTMLEditor(string $editor): void
-    {
+    public function setHTMLEditor(string $editor): void {
         $allowedEditors = [
             HtmlEditor::CKEDITOR,
             HtmlEditor::CODEMIRROR,
@@ -597,8 +556,7 @@ class User extends Model
      * Check if password change is required
      * @return bool
      */
-    public function getRequirePasswordChange(): bool
-    {
+    public function getRequirePasswordChange(): bool {
         return (bool)$this->require_password_change;
     }
 
@@ -607,8 +565,7 @@ class User extends Model
      * @param type $val
      * @return void
      */
-    public function setRequirePasswordChange($val): void
-    {
+    public function setRequirePasswordChange($val): void {
         $this->require_password_change = (bool)$val;
     }
 
@@ -617,8 +574,7 @@ class User extends Model
      * The "admin" flag enables unlimited acccess to the system
      * @return bool
      */
-    public function isAdmin(): bool
-    {
+    public function isAdmin(): bool {
         return (bool)$this->admin;
     }
 
@@ -627,8 +583,7 @@ class User extends Model
      * @param type $val
      * @return void
      */
-    public function setAdmin($val): void
-    {
+    public function setAdmin($val): void {
         $this->admin = (bool)$val;
     }
 
@@ -636,8 +591,7 @@ class User extends Model
      * If account is locked
      * @return bool
      */
-    public function isLocked(): bool
-    {
+    public function isLocked(): bool {
         return (bool)$this->locked;
     }
 
@@ -645,8 +599,7 @@ class User extends Model
      * Set if account is locked
      * @param type $val
      */
-    public function setLocked($val)
-    {
+    public function setLocked($val) {
         $this->locked = (bool)$val;
     }
 
@@ -654,8 +607,7 @@ class User extends Model
      * Get datetime of last login
      * @return type
      */
-    public function getLastLogin()
-    {
+    public function getLastLogin() {
         return $this->last_login;
     }
 
@@ -664,8 +616,7 @@ class User extends Model
      * @param type $val
      * @return void
      */
-    public function setLastLogin($val): void
-    {
+    public function setLastLogin($val): void {
         $this->last_login = $val;
     }
 
@@ -673,8 +624,7 @@ class User extends Model
      * Get failed logins
      * @return int
      */
-    public function getFailedLogins(): int
-    {
+    public function getFailedLogins(): int {
         $failedLogins = 0;
         if ($this->id !== null) {
             $sql = 'select failed_logins from {prefix}users where id = ?';
@@ -694,8 +644,7 @@ class User extends Model
      * Increase failed logins
      * @return void
      */
-    public function increaseFailedLogins(): void
-    {
+    public function increaseFailedLogins(): void {
         if ($this->id === null) {
             return;
         }
@@ -713,8 +662,7 @@ class User extends Model
      * Set failed logins to 0
      * @return bool
      */
-    public function resetFailedLogins(): bool
-    {
+    public function resetFailedLogins(): bool {
         return $this->setFailedLogins(0);
     }
 
@@ -723,8 +671,7 @@ class User extends Model
      * @param int $amount
      * @return bool
      */
-    public function setFailedLogins(int $amount): bool
-    {
+    public function setFailedLogins(int $amount): bool {
         if ($this->id === null) {
             return false;
         }
@@ -743,8 +690,7 @@ class User extends Model
      * Get homepage
      * @return string|null
      */
-    public function getHomepage(): ?string
-    {
+    public function getHomepage(): ?string {
         return $this->homepage;
     }
 
@@ -753,8 +699,7 @@ class User extends Model
      * @param string|null $val
      * @return void
      */
-    public function setHomepage(?string $val): void
-    {
+    public function setHomepage(?string $val): void {
         $this->homepage = (string)$val;
     }
 
@@ -762,8 +707,7 @@ class User extends Model
      * Get default language of this user
      * @return string|null
      */
-    public function getDefaultLanguage(): ?string
-    {
+    public function getDefaultLanguage(): ?string {
         return $this->default_language;
     }
 
@@ -772,8 +716,7 @@ class User extends Model
      * @param string|null $val
      * @return void
      */
-    public function setDefaultLanguage(?string $val): void
-    {
+    public function setDefaultLanguage(?string $val): void {
         $this->default_language = ! empty($val) ? (string)$val : null;
     }
 
@@ -782,8 +725,7 @@ class User extends Model
      * Get avatar for the current user
      * @return string|null
      */
-    public function getAvatar(): ?string
-    {
+    public function getAvatar(): ?string {
         // Fallback "No Avatar" picture
         $avatarUrl = ModuleHelper::getBaseUrl(
             ! is_admin_dir() ?
@@ -825,8 +767,7 @@ class User extends Model
      * @param type $file
      * @return void
      */
-    public function setAvatar($file): void
-    {
+    public function setAvatar($file): void {
         $this->processAvatar($file);
     }
 
@@ -834,8 +775,7 @@ class User extends Model
      * Get secondary groups of a user
      * @return array
      */
-    public function getSecondaryGroups(): array
-    {
+    public function getSecondaryGroups(): array {
         return $this->secondary_groups;
     }
 
@@ -844,8 +784,7 @@ class User extends Model
      * @param array $val
      * @return void
      */
-    public function setSecondaryGroups(array $val): void
-    {
+    public function setSecondaryGroups(array $val): void {
         $this->secondary_groups = $val;
     }
 
@@ -853,8 +792,7 @@ class User extends Model
      * Get all groups including primary and secondary
      * @return array
      */
-    public function getAllGroups(): array
-    {
+    public function getAllGroups(): array {
         $primaryGroup = [$this->getPrimaryGroup()];
         $secondaryGroups = $this->getSecondaryGroups();
 
@@ -867,8 +805,7 @@ class User extends Model
      * Get Group collection
      * @return GroupCollection
      */
-    public function getGroupCollection(): GroupCollection
-    {
+    public function getGroupCollection(): GroupCollection {
         return new GroupCollection($this);
     }
 
@@ -877,8 +814,7 @@ class User extends Model
      * @param type $val
      * @return void
      */
-    public function addSecondaryGroup($val): void
-    {
+    public function addSecondaryGroup($val): void {
         $this->secondary_groups[] = $val;
     }
 
@@ -887,8 +823,7 @@ class User extends Model
      * @param type $val
      * @return void
      */
-    public function removeSecondaryGroup($val): void
-    {
+    public function removeSecondaryGroup($val): void {
         $filtered = [];
         foreach ($this->secondary_groups as $group) {
             if ($group->getID() != $val->getID()) {
@@ -902,8 +837,7 @@ class User extends Model
      * Get PermissionChecker for this user
      * @return PermissionChecker
      */
-    public function getPermissionChecker(): PermissionChecker
-    {
+    public function getPermissionChecker(): PermissionChecker {
         return new PermissionChecker($this->getId());
     }
 
@@ -912,8 +846,7 @@ class User extends Model
      * @param string $permission
      * @return bool
      */
-    public function hasPermission(string $permission): bool
-    {
+    public function hasPermission(string $permission): bool {
         return $this->getPermissionChecker()->hasPermission($permission);
     }
 
@@ -922,8 +855,7 @@ class User extends Model
      * @param array $upload
      * @return bool
      */
-    public function changeAvatar(array $upload): bool
-    {
+    public function changeAvatar(array $upload): bool {
         $extension = pathinfo($upload['name'], PATHINFO_EXTENSION);
         $tmpFile = uniqid() . '.' . $extension;
         $tmpFile = Path::resolve("ULICMS_TMP/{$tmpFile}");
@@ -941,8 +873,7 @@ class User extends Model
      * @param string $inputFile
      * @return void
      */
-    public function processAvatar(string $inputFile): void
-    {
+    public function processAvatar(string $inputFile): void {
         $imagine = ImagineHelper::getImagine();
 
         $size = new Imagine\Image\Box(128, 218);
@@ -959,8 +890,7 @@ class User extends Model
      * Remove avatar of this user
      * @return bool
      */
-    public function removeAvatar(): bool
-    {
+    public function removeAvatar(): bool {
         $generatedAvatar = $this->getProcessedAvatarPath();
         if ($generatedAvatar && is_file($generatedAvatar)) {
             return unlink($generatedAvatar);
@@ -972,8 +902,7 @@ class User extends Model
      * Check if the user has a processed avatar
      * @return bool
      */
-    public function hasProcessedAvatar(): bool
-    {
+    public function hasProcessedAvatar(): bool {
         return
             $this->getProcessedAvatarPath() &&
             is_file($this->getProcessedAvatarPath());
@@ -983,8 +912,7 @@ class User extends Model
      * Check if user is current online
      * @return bool
      */
-    public function isOnline(): bool
-    {
+    public function isOnline(): bool {
         $onlineUsers = self::getOnlineUsers();
 
         foreach ($onlineUsers as $user) {
@@ -999,8 +927,7 @@ class User extends Model
      * Check if this user is current online
      * @return bool
      */
-    public function isCurrent(): bool
-    {
+    public function isCurrent(): bool {
         return $this->getId() && $this->getId() == get_user_id();
     }
 
@@ -1008,8 +935,7 @@ class User extends Model
      * Get online users
      * @return array
      */
-    public static function getOnlineUsers(): array
-    {
+    public static function getOnlineUsers(): array {
         $query = Database::selectAll(
             'users',
             ['id'],
@@ -1027,8 +953,7 @@ class User extends Model
      * Insert user
      * @return void
      */
-    protected function insert(): void
-    {
+    protected function insert(): void {
         $sql = 'insert into {prefix}users (username, lastname, firstname,
                 email, password, about_me, group_id, html_editor,
                 require_password_change, admin,
@@ -1060,8 +985,7 @@ class User extends Model
      * Update user
      * @return void
      */
-    protected function update(): void
-    {
+    protected function update(): void {
         $sql = 'update {prefix}users set username = ?, lastname = ?,
             firstname = ?, email = ?, password = ?, about_me = ?,
             group_id = ?, html_editor = ?,
@@ -1096,8 +1020,7 @@ class User extends Model
      * @param string $avatarImageFile
      * @return string
      */
-    protected function generateAvatar(string $avatarImageFile): string
-    {
+    protected function generateAvatar(string $avatarImageFile): string {
         if (! is_file($avatarImageFile)) {
             $avatar = new InitialAvatar();
             $image = $avatar->name($this->getDisplayName())->
@@ -1121,8 +1044,7 @@ class User extends Model
      * @param type $user_id
      * @return void
      */
-    protected function loadGroups($user_id): void
-    {
+    protected function loadGroups($user_id): void {
         $groups = [];
 
         $sql = 'select `group_id` from `{prefix}user_groups` where user_id = ?';
@@ -1140,8 +1062,7 @@ class User extends Model
      * Save secondary groups of this user
      * @return void
      */
-    protected function saveGroups(): void
-    {
+    protected function saveGroups(): void {
         Database::pQuery(
             'delete from {prefix}user_groups where user_id = ?',
             [
@@ -1168,8 +1089,7 @@ class User extends Model
      * Get path of processed avatar
      * @return string|null
      */
-    protected function getProcessedAvatarPath(): ?string
-    {
+    protected function getProcessedAvatarPath(): ?string {
         return $this->isPersistent() ? Path::resolve(
             'ULICMS_ROOT/content/avatars/user-' .
             $this->getId() . '.png'

@@ -10,8 +10,7 @@ use App\Controllers\Controller;
 use ControllerRegistry;
 use ModuleManager;
 
-class ActionRegistry
-{
+class ActionRegistry {
     private static $actions = [];
 
     private static $assignedControllers = [];
@@ -23,14 +22,12 @@ class ActionRegistry
 
     private static $actionPermissions = [];
 
-    public static function getDefaultCoreActions(): array
-    {
+    public static function getDefaultCoreActions(): array {
         return self::$defaultCoreActions;
     }
 
     // load module backend action pages
-    public static function loadModuleActions(): void
-    {
+    public static function loadModuleActions(): void {
         self::$actions = [];
         $coreActions = self::getDefaultCoreActions();
 
@@ -58,8 +55,7 @@ class ActionRegistry
         self::loadActionPermissions();
     }
 
-    public static function getActionPermission(string $action): ?string
-    {
+    public static function getActionPermission(string $action): ?string {
         $permission = null;
         if (isset(self::$actionPermissions[$action]) &&
                 is_string(self::$actionPermissions[$action])) {
@@ -69,8 +65,7 @@ class ActionRegistry
     }
 
     // load action => controller assignments of modules
-    public static function loadModuleActionAssignment(): void
-    {
+    public static function loadModuleActionAssignment(): void {
         $modules = getAllModules();
         foreach ($modules as $module) {
             $action_controllers = getModuleMeta($module, 'action_controllers');
@@ -91,8 +86,7 @@ class ActionRegistry
     }
 
     // return the controller for this action page
-    public static function getController(): ?Controller
-    {
+    public static function getController(): ?Controller {
         $action = get_action();
         if ($action && isset(self::$assignedControllers[$action])) {
             return ControllerRegistry::get(
@@ -106,8 +100,7 @@ class ActionRegistry
      * Get all actions
      * @return array
      */
-    public static function getActions(): array
-    {
+    public static function getActions(): array {
         return self::$actions;
     }
 
@@ -116,14 +109,12 @@ class ActionRegistry
      * @param string $action
      * @return string|null
      */
-    public static function getAction(string $action): ?string
-    {
+    public static function getAction(string $action): ?string {
         return self::$actions[$action] ?? null;
     }
 
     // load backend action page permission of modules
-    private static function loadActionPermissions(): void
-    {
+    private static function loadActionPermissions(): void {
         $moduleManager = new ModuleManager();
         $modules = $moduleManager->getEnabledModuleNames();
 

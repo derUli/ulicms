@@ -11,10 +11,8 @@ use Database;
 use function tbname;
 
 // This class contains methods that return an array of banners
-class Banners
-{
-    public static function getAll(string $order = 'id'): array
-    {
+class Banners {
+    public static function getAll(string $order = 'id'): array {
         $datasets = [];
         $sql = 'SELECT id FROM ' . tbname('banner') . " ORDER BY {$order}";
         $result = Database::query($sql);
@@ -77,8 +75,7 @@ class Banners
         return $datasets;
     }
 
-    public static function getRandom(): ?Banner
-    {
+    public static function getRandom(): ?Banner {
         $banner = null;
 
         $result = Database::pQuery('SELECT id FROM {prefix}banner

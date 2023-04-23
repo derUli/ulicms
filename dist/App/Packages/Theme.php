@@ -12,8 +12,7 @@ use function getThemeMeta;
 /**
  * This class represents a installed theme
  */
-class Theme
-{
+class Theme {
     private string $name;
 
     /**
@@ -21,8 +20,7 @@ class Theme
      *
      * @param string $name
      */
-    public function __construct(string $name)
-    {
+    public function __construct(string $name) {
         $this->name = $name;
     }
 
@@ -31,8 +29,7 @@ class Theme
      *
      * @return string
      */
-    public function getVersion(): ?string
-    {
+    public function getVersion(): ?string {
         return getThemeMeta($this->name, 'version') ? getThemeMeta($this->name, 'version') : null;
     }
 
@@ -41,8 +38,7 @@ class Theme
      *
      * @return string|null
      */
-    public function getScreenshotFile(): ?string
-    {
+    public function getScreenshotFile(): ?string {
         $screenshotFile = null;
         $screenshotFiles = [
             'screenshot.jpg',
@@ -64,8 +60,7 @@ class Theme
      * Check if this theme has a screeenshot
      * @return bool
      */
-    public function hasScreenshot(): bool
-    {
+    public function hasScreenshot(): bool {
         return $this->getScreenshotFile() !== null;
     }
 }

@@ -13,11 +13,9 @@ use function getModulePath;
 use function str_ends_with;
 
 // loads model files of modules
-class ModelRegistry
-{
+class ModelRegistry {
     // TODO: refactor this and split int into multiple method s
-    public static function loadModuleModels(): void
-    {
+    public static function loadModuleModels(): void {
         $modelRegistry = [];
 
         $moduleManager = new ModuleManager();

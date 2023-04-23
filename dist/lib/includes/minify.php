@@ -16,8 +16,7 @@ use zz\Html\HTMLMinify;
  * Clears the Javascript queue
  * @return void
  */
-function resetScriptQueue(): void
-{
+function resetScriptQueue(): void {
     \App\Storages\Vars::set('script_queue', []);
 }
 
@@ -43,8 +42,7 @@ function optimizeHtml(
     return $html;
 }
 
-function enqueueScriptFile($path): void
-{
+function enqueueScriptFile($path): void {
     if (! \App\Storages\Vars::get('script_queue')) {
         resetScriptQueue();
     }
@@ -54,8 +52,7 @@ function enqueueScriptFile($path): void
     \App\Storages\Vars::set('script_queue', $script_queue);
 }
 
-function setSCSSImportPaths(?array $importPaths = null): void
-{
+function setSCSSImportPaths(?array $importPaths = null): void {
     if ($importPaths == null) {
         $importPaths = [
             Path::resolve('ULICMS_ROOT')
@@ -64,18 +61,15 @@ function setSCSSImportPaths(?array $importPaths = null): void
     \App\Storages\Vars::set('css_include_paths', $importPaths);
 }
 
-function getSCSSImportPaths(): ?array
-{
+function getSCSSImportPaths(): ?array {
     return \App\Storages\Vars::get('css_include_paths');
 }
 
-function unsetSCSSImportPaths(): void
-{
+function unsetSCSSImportPaths(): void {
     \App\Storages\Vars::delete('css_include_paths');
 }
 
-function minifyJs(): string
-{
+function minifyJs(): string {
     $scripts = \App\Storages\Vars::get('script_queue');
     $lastmod = 0;
 
@@ -122,8 +116,7 @@ function minifyJs(): string
     return $bundleUrl;
 }
 
-function minifyCSS(): string
-{
+function minifyCSS(): string {
     $stylesheets = \App\Storages\Vars::get('stylesheet_queue');
     $lastmod = 0;
 
@@ -177,8 +170,7 @@ function minifyCSS(): string
     return $bundleUrl;
 }
 
-function compileSCSS(string $stylesheet): string
-{
+function compileSCSS(string $stylesheet): string {
     $scss = new Compiler();
 
     $importPaths = getSCSSImportPaths();
@@ -198,8 +190,7 @@ function compileSCSS(string $stylesheet): string
     return $scssOutput;
 }
 
-function compileSCSSToFile(string $stylesheet): string
-{
+function compileSCSSToFile(string $stylesheet): string {
     $cssDir = Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets');
 
     if (! is_dir($cssDir)) {
@@ -220,13 +211,11 @@ function compileSCSSToFile(string $stylesheet): string
     return $bundleUrl;
 }
 
-function combinedScriptHtml(): void
-{
+function combinedScriptHtml(): void {
     echo getCombinedScriptHtml();
 }
 
-function getCombinedScriptHtml(): string
-{
+function getCombinedScriptHtml(): string {
     $noMinify = isset($_ENV['NO_MINIFY']) && $_ENV['NO_MINIFY'];
     $html = '';
 
@@ -246,13 +235,11 @@ function getCombinedScriptHtml(): string
 }
 
 // Ab hier Stylesheet Funktionen
-function resetStylesheetQueue(): void
-{
+function resetStylesheetQueue(): void {
     \App\Storages\Vars::set('stylesheet_queue', []);
 }
 
-function enqueueStylesheet(string $path): void
-{
+function enqueueStylesheet(string $path): void {
     if (! \App\Storages\Vars::get('stylesheet_queue')) {
         resetStylesheetQueue();
     }
@@ -262,8 +249,7 @@ function enqueueStylesheet(string $path): void
     \App\Storages\Vars::set('stylesheet_queue', $stylesheet_queue);
 }
 
-function getCombinedStylesheetHTML(): ?string
-{
+function getCombinedStylesheetHTML(): ?string {
     $html = '';
 
     if (! \App\Storages\Vars::get('stylesheet_queue')) {
@@ -295,7 +281,6 @@ function getCombinedStylesheetHTML(): ?string
     return $html;
 }
 
-function combinedStylesheetHtml(): void
-{
+function combinedStylesheetHtml(): void {
     echo getCombinedStylesheetHTML();
 }

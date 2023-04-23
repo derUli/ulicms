@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class VideoController extends \App\Controllers\Controller
-{
-    public function createPost(): void
-    {
+class VideoController extends \App\Controllers\Controller {
+    public function createPost(): void {
         $video_folder = ULICMS_ROOT . '/content/videos';
 
             $mp4_file_value = '';
@@ -96,8 +94,7 @@ class VideoController extends \App\Controllers\Controller
         Response::redirect(ModuleHelper::buildActionURL('videos'));
     }
 
-    public function _updatePost(): bool
-    {
+    public function _updatePost(): bool {
         $name = db_escape($_POST['name']);
         $id = (int)$_POST['id'];
         $ogg_file = db_escape(basename($_POST['ogg_file']));
@@ -115,14 +112,12 @@ class VideoController extends \App\Controllers\Controller
         return Database::getAffectedRows() > 0;
     }
 
-    public function updatePost(): void
-    {
+    public function updatePost(): void {
         $this->_updatePost();
         Response::redirect(ModuleHelper::buildActionURL('videos'));
     }
 
-    public function deletePost(): void
-    {
+    public function deletePost(): void {
         $result = db_query('select ogg_file, webm_file, mp4_file from ' .
                 tbname('videos') . ' where id = ' . (int)$_REQUEST['delete']);
         if (db_num_rows($result) > 0) {

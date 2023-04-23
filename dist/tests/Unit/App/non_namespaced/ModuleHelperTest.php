@@ -1,17 +1,14 @@
 <?php
 
-class ModuleHelperTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         $_SESSION['language'] = 'en';
         require_once getLanguageFilePath('en');
         $_SERVER = [];
         $_SERVER['REQUEST_URI'] = '/other-url.html?param=value';
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         chdir(ULICMS_ROOT);
 
         $_SERVER = [];
@@ -19,8 +16,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         Database::deleteFrom('content', "title like 'Unit Test%'");
     }
 
-    public function testUnderscoreToCamel()
-    {
+    public function testUnderscoreToCamel() {
         $this->assertEquals(
             'myModuleName',
             ModuleHelper::underscoreToCamel('my_module_name')
@@ -35,8 +31,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testBuildModuleRessourcePath()
-    {
+    public function testBuildModuleRessourcePath() {
         $this->assertEquals(
             'content/modules/my_module/js/coolscript.js',
             ModuleHelper::buildModuleRessourcePath(
@@ -53,8 +48,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testBuildAdminURL()
-    {
+    public function testBuildAdminURL() {
         $this->assertEquals(
             '?action=module_settings&module=my_module&var1=hallo&var2=welt',
             ModuleHelper::buildAdminURL(
@@ -68,8 +62,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetFirstPageWithModule()
-    {
+    public function testGetFirstPageWithModule() {
         $_SESSION['language'] = 'de';
         $this->assertEquals(6, ModuleHelper::getFirstPageWithModule()->id);
         $this->assertEquals(6, ModuleHelper::getFirstPageWithModule('fortune2')->id);
@@ -85,42 +78,36 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertNull(ModuleHelper::getFirstPageWithModule('gibts_nicht_modul'));
     }
 
-    public function testIsEmbedModule()
-    {
+    public function testIsEmbedModule() {
         $this->assertTrue(ModuleHelper::isEmbedModule('fortune'));
         $this->assertFalse(ModuleHelper::isEmbedModule('slicknav'));
     }
 
-    public function testGetAllEmbedModule()
-    {
+    public function testGetAllEmbedModule() {
         $embedModules = ModuleHelper::getAllEmbedModules();
         $this->assertTrue(in_array('fortune2', $embedModules));
         $this->assertFalse(in_array('slicknav', $embedModules));
     }
 
-    public function testGetMainController()
-    {
+    public function testGetMainController() {
         $this->assertInstanceOf('Fortune', ModuleHelper::getMainController('fortune2'));
         $this->assertNull(ModuleHelper::getMainController('slicknav'));
         $this->assertNull(ModuleHelper::getMainController('not_a_module'));
     }
 
-    public function testGetMainClass()
-    {
+    public function testGetMainClass() {
         $this->assertInstanceOf('Fortune', ModuleHelper::getMainClass('fortune2'));
         $this->assertNull(ModuleHelper::getMainClass('slicknav'));
         $this->assertNull(ModuleHelper::getMainClass('not_a_module'));
     }
 
-    public function testBuildMethodCall()
-    {
+    public function testBuildMethodCall() {
         $this->assertEquals('sClass=MyClass&sMethod=MyMethod', ModuleHelper::buildMethodCall('MyClass', 'MyMethod'));
         $this->assertEquals('sClass=My_Class&sMethod=My_Method', ModuleHelper::buildMethodCall('My_Class', 'My_Method'));
         $this->assertEquals('sClass=My_Class&sMethod=My_Method&var1=hello&var2=world', ModuleHelper::buildMethodCall('My_Class', 'My_Method', 'var1=hello&var2=world'));
     }
 
-    public function testBuildHTMLAttributesFromArray()
-    {
+    public function testBuildHTMLAttributesFromArray() {
         $this->assertEquals('class="myclass" id="myid" style="border:0"', ModuleHelper::buildHTMLAttributesFromArray([
             'class' => 'myclass',
             'id' => 'myid',
@@ -128,8 +115,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         ]));
     }
 
-    public function testBuildMethodCallFormWithHtmlAttributes()
-    {
+    public function testBuildMethodCallFormWithHtmlAttributes() {
         $html = ModuleHelper::buildMethodCallForm('MyClass', 'MyMethod', [], 'post', [
             'class' => 'myclass',
             'onsubmit' => "return confirm('Do you really want to do that')"
@@ -137,8 +123,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('<form action="index.php" method="post" class="myclass" onsubmit="return confirm(&#039;Do you really want to do that&#039;)">' . get_csrf_token_html() . '<input type="hidden" name="sClass" value="MyClass">' . '<input type="hidden" name="sMethod" value="MyMethod">', $html);
     }
 
-    public function testBuildMethodCallUploadFormWithHtmlAttributes()
-    {
+    public function testBuildMethodCallUploadFormWithHtmlAttributes() {
         $html = ModuleHelper::buildMethodCallUploadForm('MyClass', 'MyMethod', [], 'post', [
             'class' => 'myclass',
             'onsubmit' => "return confirm('Do you really want to do that')"
@@ -146,8 +131,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('<form action="index.php" method="post" class="myclass" onsubmit="return confirm(&#039;Do you really want to do that&#039;)" enctype="multipart/form-data">' . get_csrf_token_html() . '<input type="hidden" name="sClass" value="MyClass">' . '<input type="hidden" name="sMethod" value="MyMethod">', $html);
     }
 
-    public function testDeleteButton()
-    {
+    public function testDeleteButton() {
         $expected = optimizeHtml(
             '<form action="index.php?action=contacts" method="post" class="delete-form"><input type="hidden" name="csrf_token" value="' . get_csrf_token() . '"><input type="hidden" name="delete" value="123"><input type="image" src="admin/gfx/delete.png" alt="Delete" title="Delete"></form>'
         );
@@ -156,8 +140,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         ]));
     }
 
-    public function testBuildQueryString()
-    {
+    public function testBuildQueryString() {
         $data = [
             'foo' => 'bar',
             'baz' => 'boom',
@@ -168,18 +151,15 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('foo=bar&amp;baz=boom&amp;kuh=milch&amp;php=hypertext+processor', ModuleHelper::buildQueryString($data, true));
     }
 
-    public function testBuildMethodCallButton()
-    {
+    public function testBuildMethodCallButton() {
         $this->assertEquals('<form action="index.php" method="post">' . get_csrf_token_html() . '<input type="hidden" name="sClass" value="MyClass"><input type="hidden" name="sMethod" value="myMethod"><button class="btn btn-default" type="submit">Say Hello</button></form>', ModuleHelper::buildMethodCallButton('MyClass', 'myMethod', 'Say Hello'));
     }
 
-    public function testEndForm()
-    {
+    public function testEndForm() {
         $this->assertEquals('</form>', ModuleHelper::endForm());
     }
 
-    public function testGetFullPageURLByID()
-    {
+    public function testGetFullPageURLByID() {
         $_SESSION['language'] = 'de';
         $_SERVER['HTTP_HOST'] = 'company.com';
         $this->assertEquals('http://company.com/willkommen', ModuleHelper::getFullPageURLByID(1));
@@ -191,8 +171,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
 
     }
 
-    public function testGetBaseUrl()
-    {
+    public function testGetBaseUrl() {
         $_SERVER['HTTP_HOST'] = 'company.com';
         $_SERVER['REQUEST_URI'] = '/foo.png';
         $this->assertEquals('http://company.com/', ModuleHelper::getBaseUrl());
@@ -202,8 +181,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('http://company.com/subdir/admin/gfx/logo.png', ModuleHelper::getBaseUrl('/admin/gfx/logo.png'));
     }
 
-    public function testGetBaseUrlInAdminDir()
-    {
+    public function testGetBaseUrlInAdminDir() {
         chdir('admin/');
         $_SERVER['HTTP_HOST'] = 'company.com';
         $_SERVER['REQUEST_URI'] = '/foo.png';
@@ -224,16 +202,14 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
         chdir(ULICMS_ROOT);
     }
 
-    public function testBuildActionUrl()
-    {
+    public function testBuildActionUrl() {
         $this->assertEquals(
             'admin/?action=foobar&hello=world',
             ModuleHelper::buildActionURL('foobar', 'hello=world', true)
         );
     }
 
-    private function getPageWithShortcode(): Page
-    {
+    private function getPageWithShortcode(): Page {
         $page = new Page();
         $page->title = 'Unit Test ' . uniqid();
         $page->slug = 'unit-test-' . uniqid();

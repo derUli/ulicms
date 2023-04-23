@@ -9,8 +9,7 @@ use App\Exceptions\DatabaseException;
 // A list is a paginated set of content
 // filtered by conditions
 // e.g. article archive
-class List_Data extends Model
-{
+class List_Data extends Model {
     public $content_id = null;
 
     public $language = null;
@@ -31,13 +30,11 @@ class List_Data extends Model
 
     public $type = null;
 
-    public function filter(?int $offset = null): array
-    {
+    public function filter(?int $offset = null): array {
         return $this->filterPaginated($offset);
     }
 
-    public function hasMore(int $offset = 0): bool
-    {
+    public function hasMore(int $offset = 0): bool {
         return count(
             $this->filterPaginated(
                 $offset + $this->limit
@@ -47,8 +44,7 @@ class List_Data extends Model
 
     // apply the filter conditions of this list
     // returns array of contents
-    public function filterPaginated(?int $offset = null): array
-    {
+    public function filterPaginated(?int $offset = null): array {
         $limit = $this->use_pagination ? $this->limit : null;
 
         return ContentFactory::getForFilter(
@@ -66,8 +62,7 @@ class List_Data extends Model
 
     // apply the filter conditions of this list
     // returns array of contents
-    public function filterAll(): array
-    {
+    public function filterAll(): array {
         return ContentFactory::getForFilter(
             $this->language,
             $this->category_id,
@@ -79,8 +74,7 @@ class List_Data extends Model
         );
     }
 
-    public function loadByID($id)
-    {
+    public function loadByID($id) {
         $id = (int)$id;
         $result = Database::query('select * from ' . tbname('lists')
                         . " WHERE content_id = {$id}");
@@ -92,8 +86,7 @@ class List_Data extends Model
         $this->content_id = $id ? (int)$id : null;
     }
 
-    public function save()
-    {
+    public function save() {
         if ($this->content_id === null) {
             throw new DatabaseException('no content_id for list set');
         }
@@ -107,13 +100,11 @@ class List_Data extends Model
         }
     }
 
-    public function isPersistent(): bool
-    {
+    public function isPersistent(): bool {
         return $this->content_id >= 1;
     }
 
-    protected function fillVars($data = null)
-    {
+    protected function fillVars($data = null) {
         $this->content_id = $data->content_id ? (int)($data->content_id) : null;
         $this->language = $data->language ?: null;
         $this->category_id = $data->category_id ? (int)($data->category_id) : null;
@@ -126,8 +117,7 @@ class List_Data extends Model
         $this->type = $data->type ?: null;
     }
 
-    protected function create()
-    {
+    protected function create() {
         $content_id = (int)($this->content_id);
 
         if ($this->language === null) {
@@ -185,8 +175,7 @@ class List_Data extends Model
         Database::query($sql);
     }
 
-    protected function update()
-    {
+    protected function update() {
         $content_id = (int)$this->content_id;
 
         if ($this->language === null) {

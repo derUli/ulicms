@@ -2,10 +2,8 @@
 
 use App\Constants\HtmlEditor;
 
-class HomeControllerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class HomeControllerTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         require_once getLanguageFilePath('en');
         Settings::set('installed_at', '1495362918');
 
@@ -16,8 +14,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $_SERVER['REQUEST_URI'] = '/foobar/foo.html';
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         Database::deleteFrom(
             'users',
             "username like 'online-%' or username like 'nicht-online-%'"
@@ -25,8 +22,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $_SERVER = [];
     }
 
-    public function testGetModel()
-    {
+    public function testGetModel() {
         $controller = new HomeController();
         $model = $controller->getModel();
 
@@ -35,8 +31,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         // TODO: Do more asserts, check data
     }
 
-    public function testNewsfeed()
-    {
+    public function testNewsfeed() {
         $controller = new HomeController();
         $html = $controller->_newsfeed();
 
@@ -56,8 +51,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testTopPages()
-    {
+    public function testTopPages() {
         $controller = new HomeController();
         $html = $controller->_topPages();
         $this->assertEquals(
@@ -69,8 +63,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testLastUpdatedPages()
-    {
+    public function testLastUpdatedPages() {
         $controller = new HomeController();
         $html = $controller->_lastUpdatedPages();
         $this->assertEquals(
@@ -82,8 +75,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testOnlineUsers()
-    {
+    public function testOnlineUsers() {
         $this->createTestUsers();
 
         $controller = new HomeController();
@@ -98,8 +90,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testStatistics()
-    {
+    public function testStatistics() {
         $usersCount = count(getUsers());
         $pagesCount = count(ContentFactory::getAll());
 
@@ -113,14 +104,12 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString("<td>{$pagesCount}</td>", $output);
     }
 
-    protected function createTestUsers()
-    {
+    protected function createTestUsers() {
         $this->createOnlineUsers();
         $this->createOfflineUsers();
     }
 
-    protected function createOnlineUsers()
-    {
+    protected function createOnlineUsers() {
         $user1 = new User();
         $user1->setUsername('online-2');
         $user1->setPassword(rand_string(23));
@@ -140,8 +129,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase
         $user2->setLastAction(time() - 10);
     }
 
-    protected function createOfflineUsers()
-    {
+    protected function createOfflineUsers() {
         $user3 = new User();
         $user3->setUsername('nicht-online-1');
         $user3->setPassword(rand_string(23));

@@ -2,15 +2,12 @@
 
 use App\Helpers\TestHelper;
 
-class TestHelperTest extends \PHPUnit\Framework\TestCase
-{
-    public function testIsRunningPHPUnit()
-    {
+class TestHelperTest extends \PHPUnit\Framework\TestCase {
+    public function testIsRunningPHPUnit() {
         $this->assertTrue(TestHelper::isRunningPHPUnit());
     }
 
-    public function testGetOutput()
-    {
+    public function testGetOutput() {
         $output = TestHelper::getOutput(static function() {
             echo 'Hello World!';
         });
@@ -18,8 +15,7 @@ class TestHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Hello World!', $output);
     }
 
-    public function testGetOutputThrowsException()
-    {
+    public function testGetOutputThrowsException() {
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage('Fehler!');
 

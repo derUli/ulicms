@@ -3,12 +3,10 @@
 
 use Spatie\Snapshots\MatchesSnapshots;
 
-class FaviconControllerTest extends \PHPUnit\Framework\TestCase
-{
+class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
     use MatchesSnapshots;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $controller = new FaviconController();
         $file1 = $controller->_getDestination1();
         $file2 = $controller->_getDestination2();
@@ -22,8 +20,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $controller = new FaviconController();
         $file1 = $controller->_getDestination1() . '.bak';
         $file2 = $controller->_getDestination2() . '.bak';
@@ -37,8 +34,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetSizes()
-    {
+    public function testGetSizes() {
         $controller = new FaviconController();
         $sizes = $controller->_getSizes();
         $this->assertCount(2, $sizes);
@@ -46,8 +42,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals([64, 64], $sizes[1]);
     }
 
-    public function testGetSizesWithHighResolution()
-    {
+    public function testGetSizesWithHighResolution() {
         $controller = new FaviconController();
         $sizes = $controller->_getSizes(true);
         $this->assertCount(3, $sizes);
@@ -56,8 +51,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals([128, 128], $sizes[2]);
     }
 
-    public function testGetDestination1()
-    {
+    public function testGetDestination1() {
         $controller = new FaviconController();
 
         $this->assertStringEndsWith(
@@ -66,8 +60,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetDestination2()
-    {
+    public function testGetDestination2() {
         $controller = new FaviconController();
 
         $this->assertStringEndsWith(
@@ -80,8 +73,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testPutAndDeleteFiles()
-    {
+    public function testPutAndDeleteFiles() {
         $source = Path::resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
         $controller = new FaviconController();
         $this->assertTrue(
@@ -98,8 +90,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertFileDoesNotExist($controller->_getDestination2());
     }
 
-    public function testPutAndDeleteFilesHQ()
-    {
+    public function testPutAndDeleteFilesHQ() {
         $source = Path::resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
         $controller = new FaviconController();
         $this->assertTrue(

@@ -12,8 +12,7 @@ $isFm = in_array('fm', $urlParts);
 
 // Don't load this class for Responsive FM
 if (! $isFm) {
-    class Response
-    {
+    class Response {
         public static function sendHttpStatusCodeResultIfAjax(
             int $status = HttpStatusCode::OK,
             ?string $redirect = null,
@@ -109,8 +108,7 @@ if (! $isFm) {
             self::redirect($url, $status);
         }
 
-        public static function sendStatusHeader(?int $nr): bool
-        {
+        public static function sendStatusHeader(?int $nr): bool {
             if (headers_sent()) {
                 return false;
             }
@@ -120,8 +118,7 @@ if (! $isFm) {
         }
 
         // Übersetzung HTTP Status Code => Name
-        public static function getStatusCodeByNumber(int $nr): string
-        {
+        public static function getStatusCodeByNumber(int $nr): string {
             $http_codes = [
                 100 => 'Continue',
                 101 => 'Switching Protocols',
@@ -182,8 +179,7 @@ if (! $isFm) {
             return $nr . ' ' . $http_codes[$nr];
         }
 
-        public static function sendHeader(string $header): bool
-        {
+        public static function sendHeader(string $header): bool {
             if (headers_sent() || is_cli()) {
                 return false;
             }

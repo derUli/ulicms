@@ -13,14 +13,12 @@ use Settings;
 /**
  * This class contains methods to deal with DateTimes
  */
-abstract class DateTimeHelper
-{
+abstract class DateTimeHelper {
     /**
      * Get Current Timezone
      * @return \DateTimeZone
      */
-    public static function getCurrentTimezone(): \DateTimeZone
-    {
+    public static function getCurrentTimezone(): \DateTimeZone {
         return new DateTimeZone(date_default_timezone_get());
     }
 
@@ -28,8 +26,7 @@ abstract class DateTimeHelper
      * Get name of current locale
      * @return string|null
      */
-    public static function getCurrentLocale(): ?string
-    {
+    public static function getCurrentLocale(): ?string {
         return Settings::getLang('locale');
     }
 
@@ -40,8 +37,7 @@ abstract class DateTimeHelper
      *
      * @return string
      */
-    public static function timestampToFormattedDateTime(int $timestamp, int $dateType = IntlDateFormatter::MEDIUM, int $timeType = IntlDateFormatter::MEDIUM): ?string
-    {
+    public static function timestampToFormattedDateTime(int $timestamp, int $dateType = IntlDateFormatter::MEDIUM, int $timeType = IntlDateFormatter::MEDIUM): ?string {
         $timezone = self::getCurrentTimezone();
         $currentLocale = self::getCurrentLocale();
 

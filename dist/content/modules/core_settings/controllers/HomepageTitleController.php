@@ -6,10 +6,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Utils\CacheUtil;
 
-class HomepageTitleController extends \App\Controllers\Controller
-{
-    public function _savePost(): void
-    {
+class HomepageTitleController extends \App\Controllers\Controller {
+    public function _savePost(): void {
         $languages = getAllLanguages();
 
         $languagesCount = count($languages);
@@ -27,8 +25,7 @@ class HomepageTitleController extends \App\Controllers\Controller
         CacheUtil::clearPageCache();
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,

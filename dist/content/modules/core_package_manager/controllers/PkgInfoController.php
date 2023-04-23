@@ -6,10 +6,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Packages\SinPackageInstaller;
 
-class PkgInfoController extends \App\Controllers\Controller
-{
-    public function installPost(): void
-    {
+class PkgInfoController extends \App\Controllers\Controller {
+    public function installPost(): void {
         // TODO: handle incomplete requests and errors
         if (! empty($_REQUEST['file'])) {
             $file = basename($_POST['file']);
@@ -23,8 +21,7 @@ class PkgInfoController extends \App\Controllers\Controller
         }
     }
 
-    public function _installPost($file): bool
-    {
+    public function _installPost($file): bool {
         $path = Path::resolve("ULICMS_TMP/{$file}");
         $pkg = new SinPackageInstaller($path);
         if (is_file($path)) {

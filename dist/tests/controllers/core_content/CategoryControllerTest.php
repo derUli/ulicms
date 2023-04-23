@@ -3,15 +3,12 @@
 use App\Models\Content\Categories;
 use App\Models\Content\Category;
 
-class CategoryControllerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         Database::deleteFrom('categories', "name like 'Unit Test%'");
     }
 
-    public function testCreateCategory()
-    {
+    public function testCreateCategory() {
         $name = 'Unit Test ' . time();
         $description = 'Description ' . time();
         $controller = new CategoryController();
@@ -24,8 +21,7 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($description, $banner->getDescription());
     }
 
-    public function testUpdateCategory()
-    {
+    public function testUpdateCategory() {
         $name = 'Unit Test ' . time();
         $description = 'Description ' . time();
         $createdId = Categories::addCategory($name, $description);
@@ -44,8 +40,7 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('New Description', $banner->getDescription());
     }
 
-    public function testDeleteCategoryReturnsTrue()
-    {
+    public function testDeleteCategoryReturnsTrue() {
         $name = 'Unit Test ' . time();
         $description = 'Description ' . time();
         $createdId = Categories::addCategory($name, $description);
@@ -60,8 +55,7 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     // can't delete "General" category
-    public function testDeleteCategoryReturnsFalse()
-    {
+    public function testDeleteCategoryReturnsFalse() {
         $controller = new CategoryController();
         $success = $controller->_deletePost(1);
 

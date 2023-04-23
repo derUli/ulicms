@@ -19,8 +19,7 @@ use UnexpectedValueException ;
 /**
  * This class is for handling packages
  *  */
-class PackageManager
-{
+class PackageManager {
     /**
      * Check package source for a newer version of a package
      *
@@ -28,8 +27,7 @@ class PackageManager
      *
      * @return string|null
      */
-    public function checkForNewerVersionOfPackage(string $name): ?string
-    {
+    public function checkForNewerVersionOfPackage(string $name): ?string {
         $connector = new PackageSourceConnector();
         $connector->fetch(true);
         return $connector->getVersionOfPackage($name);
@@ -113,8 +111,7 @@ class PackageManager
      *
      * @return array<string>
      */
-    public function getInstalledModules(): array
-    {
+    public function getInstalledModules(): array {
         $availableModules = [];
 
         $moduleFolder = Path::resolve('ULICMS_ROOT/content/modules');
@@ -137,8 +134,7 @@ class PackageManager
      *
      * @return array<string>
      */
-    public function getInstalledThemes(): array
-    {
+    public function getInstalledThemes(): array {
         $themes = [];
         $templateDir = Path::resolve(
             'ULICMS_ROOT/content/templates'
@@ -168,8 +164,7 @@ class PackageManager
      *
      * @return array<string>|null
      */
-    public function getInstalledPackages(string $type = 'modules'): ?array
-    {
+    public function getInstalledPackages(string $type = 'modules'): ?array {
         if ($type === 'modules' || $type === 'module') {
             return $this->getInstalledModules();
         } elseif ($type === 'themes' || $type === 'theme') {

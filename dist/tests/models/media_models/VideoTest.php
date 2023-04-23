@@ -3,15 +3,12 @@
 use App\Models\Content\Category;
 use App\Models\Media\Video;
 
-class VideoTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class VideoTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         require_once getLanguageFilePath('en');
     }
 
-    public function testCreateUpdateAndDelete()
-    {
+    public function testCreateUpdateAndDelete() {
         $video = new Video();
         $video->setName('My Name');
         $video->setMP4File('video.mp4');
@@ -79,8 +76,7 @@ class VideoTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($video->getID());
     }
 
-    public function testVideoHtml()
-    {
+    public function testVideoHtml() {
         $video = new Video();
         $video->setName('My Name');
         $video->setMP4File('video.mp4');
@@ -92,8 +88,7 @@ class VideoTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('<video width="800" height="600" controls><source src="content/videos/video.mp4" type="video/mp4"><source src="content/videos/video.ogv" type="video/ogg"><source src="content/videos/video.webm" type="video/webm">Your browser doesn\'t support HTML 5.<br/><a href="content/videos/video.mp4">But you can download the video here.</a></video>', $video->render());
     }
 
-    public function testGetAll()
-    {
+    public function testGetAll() {
         $savedVideos = [];
         for ($i = 1; $i <= 10; $i++) {
             $video = new Video();
@@ -121,8 +116,7 @@ class VideoTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testLoadByIdNotFound()
-    {
+    public function testLoadByIdNotFound() {
         $video = new Video(PHP_INT_MAX);
         $this->assertNull($video->getID());
     }

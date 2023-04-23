@@ -13,8 +13,7 @@ use Exception;
 /**
  * Migrate database
  */
-class DBMigrator
-{
+class DBMigrator {
     private string $component;
 
     private string $folder;
@@ -22,8 +21,7 @@ class DBMigrator
     // component is an identifier for the module which executes the migrations
     // $folder is the path to an up or down folder
     // containing numbered sql scripts from 001.sql to 999.sql
-    public function __construct(string $component, string $folder)
-    {
+    public function __construct(string $component, string $folder) {
         $this->component = $component;
         $this->folder = $folder;
     }
@@ -33,8 +31,7 @@ class DBMigrator
     * @param string|null $stop last migration to execute, null means execute all
     * @return void
     */
-    public function migrate(?string $stop = null): void
-    {
+    public function migrate(?string $stop = null): void {
         $this->checkVars();
         $files = scandir($this->folder) ?: [];
 
@@ -53,8 +50,7 @@ class DBMigrator
      * @throws SqlException
      * @return void
      */
-    public function executeSqlScript(string $file): void
-    {
+    public function executeSqlScript(string $file): void {
         if (str_ends_with($file, '.sql')) {
             $sql = 'SELECT id from {prefix}dbtrack where component = ? '
                     . 'and name = ?';
@@ -95,8 +91,7 @@ class DBMigrator
      * @throws SqlException
      * @return void
      */
-    public function rollback(?string $stop = null): void
-    {
+    public function rollback(?string $stop = null): void {
         $this->checkVars();
         $files = scandir($this->folder);
         natcasesort($files);
@@ -142,8 +137,7 @@ class DBMigrator
      * Remove migrations of the component from dbtrack
      * @return bool
      */
-    public function resetDBTrack(): bool
-    {
+    public function resetDBTrack(): bool {
         return Database::pQuery('DELETE FROM {prefix}dbtrack '
                         . 'where component = ?', [
                             $this->component
@@ -154,13 +148,11 @@ class DBMigrator
      * Truncate dbtrack table
      * @return void
      */
-    public function resetDBTrackAll(): void
-    {
+    public function resetDBTrackAll(): void {
         Database::truncateTable('dbtrack');
     }
 
-    public function checkVars(): bool
-    {
+    public function checkVars(): bool {
         if (empty($this->component)) {
             throw new Exception('component is null or empty');
         }

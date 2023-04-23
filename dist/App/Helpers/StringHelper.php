@@ -8,11 +8,9 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use Nette\Utils\Strings;
 
-abstract class StringHelper extends Helper
-{
+abstract class StringHelper extends Helper {
     // removes empty lines from a string
-    public static function removeEmptyLinesFromString(string $input): string
-    {
+    public static function removeEmptyLinesFromString(string $input): string {
         return normalizeLN(
             preg_replace(
                 "/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/",
@@ -37,8 +35,7 @@ abstract class StringHelper extends Helper
      *
      * @return string
      */
-    public static function makeLinksClickable(string $text): string
-    {
+    public static function makeLinksClickable(string $text): string {
         return preg_replace(
             '!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i',
             '<a href="$1" rel="nofollow" target="_blank">$1</a>',
@@ -160,8 +157,7 @@ abstract class StringHelper extends Helper
      *
      * @return array<string>
      */
-    public static function splitAndTrim(string $str): array
-    {
+    public static function splitAndTrim(string $str): array {
         return array_map('trim', explode(';', $str));
     }
     }

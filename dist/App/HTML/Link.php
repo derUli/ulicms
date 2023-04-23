@@ -11,8 +11,7 @@ use ModuleHelper;
 /**
  * Utils to build HTML links
  */
-class Link
-{
+class Link {
     /**
      * Generate a <a> tag
      *

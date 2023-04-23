@@ -3,21 +3,17 @@
 use App\Translations\Translation;
 use App\Utils\CacheUtil;
 
-class InfoControllerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class InfoControllerTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         Translation::loadAllModuleLanguageFiles('en');
         CacheUtil::clearCache();
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         CacheUtil::clearCache();
     }
 
-    public function testfetchChangelog()
-    {
+    public function testfetchChangelog() {
         $controller = new InfoController();
         $this->assertStringContainsString(
             'Neues in UliCMS 2020',
@@ -25,8 +21,7 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetComposerLegalInfo()
-    {
+    public function testGetComposerLegalInfo() {
         $controller = new InfoController();
         $legalInfo = $controller->_getComposerLegalInfo();
         $this->assertStringContainsString(
@@ -38,8 +33,7 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThanOrEqual(132000, strlen($legalInfo));
     }
 
-    public function testGetNpmLegalInfo()
-    {
+    public function testGetNpmLegalInfo() {
         $controller = new InfoController();
         $npmLegalData = $controller->_getNpmLegalInfo();
 

@@ -12,8 +12,7 @@ use Dotenv\Dotenv;
 /**
  * Loads a .env configuration file
  */
-class DotEnvLoader
-{
+class DotEnvLoader {
     public const DEFAULT_ENVIRONMENT = 'default';
 
     private string $dir;
@@ -71,10 +70,10 @@ class DotEnvLoader
         $dotenv->load();
         $this->validation($dotenv);
 
-        foreach($_ENV as $key => $value){
+        foreach($_ENV as $key => $value) {
 
             // Convert booleans since dotenv validation does no type castings
-            if($value === 'true' || $value === 'false'){
+            if($value === 'true' || $value === 'false') {
                 $value = $value === 'true';
             }
 
@@ -110,7 +109,7 @@ class DotEnvLoader
     protected static function checkExists(string $dir, string $file): void {
         $path = "{$dir}/{$file}";
 
-        if(! is_file($path)){
+        if(! is_file($path)) {
             throw new FileNotFoundException("Environment file {$file} not found");
         }
     }

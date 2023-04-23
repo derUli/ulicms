@@ -11,8 +11,7 @@ use App\Registries\LoggerRegistry;
  * Default exception handler
  * @param AccessDeniedException $exception
  */
-function exception_handler(Throwable $exception): void
-{
+function exception_handler(Throwable $exception): void {
     defined('EXCEPTION_OCCURRED') || define('EXCEPTION_OCCURRED', true);
 
     $message = $_ENV['DEBUG'] ?

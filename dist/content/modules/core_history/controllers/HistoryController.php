@@ -7,10 +7,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Models\Content\VCS;
 use App\Utils\CacheUtil;
 
-class HistoryController extends \App\Controllers\Controller
-{
-    public function doRestore(): void
-    {
+class HistoryController extends \App\Controllers\Controller {
+    public function doRestore(): void {
         if (isset($_GET['version_id'])) {
             $version_id = (int)$_GET['version_id'];
 
@@ -40,8 +38,7 @@ class HistoryController extends \App\Controllers\Controller
         }
     }
 
-    public function _doRestore(int $version_id): ?object
-    {
+    public function _doRestore(int $version_id): ?object {
         $rev = VCS::getRevisionByID($version_id);
         if ($rev) {
             VCS::restoreRevision($version_id);

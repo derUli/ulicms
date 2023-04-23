@@ -6,12 +6,10 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 // This class contains methods to handle CustomData which is saved
 // as json object in the "content" database table
-class CustomData
-{
+class CustomData {
     private static $defaults = [];
 
-    public static function get(?string $page = null): array
-    {
+    public static function get(?string $page = null): array {
         if (! $page) {
             $page = get_slug();
         }
@@ -30,8 +28,7 @@ class CustomData
         return [];
     }
 
-    public static function set(string $var, $value, ?string $page = null): void
-    {
+    public static function set(string $var, $value, ?string $page = null): void {
         if (! $page) {
             $page = get_slug();
         }
@@ -73,8 +70,7 @@ class CustomData
                 Database::escapeValue($_SESSION['language']) . "'");
     }
 
-    public static function getCustomDataOrSetting(string $name)
-    {
+    public static function getCustomDataOrSetting(string $name) {
         $data = CustomData::get();
         if (is_array($data) && isset($data[$name])) {
             return $data[$name];
@@ -82,21 +78,18 @@ class CustomData
         return Settings::get($name);
     }
 
-    public static function setDefault(string $key, $value): void
-    {
+    public static function setDefault(string $key, $value): void {
         self::$defaults[$key] = $value;
     }
 
-    public static function getDefault(string $key)
-    {
+    public static function getDefault(string $key) {
         if (! isset(self::$defaults[$key])) {
             return null;
         }
         return self::$defaults[$key];
     }
 
-    public static function getDefaultJSON(): string
-    {
+    public static function getDefaultJSON(): string {
         return json_readable_encode(self::$defaults);
     }
 }

@@ -12,8 +12,7 @@ use ModuleHelper;
 /**
  * Utils to generate HTML <script> Tags
  */
-class Script
-{
+class Script {
     /**
      * Generates a <script> tag for file
      *
