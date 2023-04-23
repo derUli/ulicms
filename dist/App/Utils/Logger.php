@@ -6,7 +6,6 @@ namespace App\Utils;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use CMSConfig;
 
 // Wrapper for KLogger
 class Logger {
@@ -14,7 +13,7 @@ class Logger {
 
     private $logger;
 
-    public function __construct(string $path, ?CMSConfig $cmsConfig = null) {
+    public function __construct(string $path) {
 
         $environment = get_environment();
         $this->path = $path;

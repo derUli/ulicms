@@ -39,7 +39,7 @@ class CustomDataTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDefaultReturnsArray(): void {
-        Customdata::setDefault('some_data', '123');
+        CustomData::setDefault('some_data', '123');
         $this->assertEquals(
             '123',
             CustomData::getDefault('some_data')

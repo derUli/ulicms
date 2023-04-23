@@ -5,10 +5,13 @@ use App\Models\Content\Language;
 class LanguageControllerTest extends \PHPUnit\Framework\TestCase {
     private $lang = null;
 
-    private $initialSettings = [];
+    /**
+     * @var array<string, ?string>
+     */
+    private array $initialSettings = [];
 
     protected function setUp(): void {
-        $this->initialDefaultLanguage = [
+        $this->initialSettings = [
             'system_language' => Settings::get('system_language'),
             'default_language' => Settings::get('default_language')
         ];

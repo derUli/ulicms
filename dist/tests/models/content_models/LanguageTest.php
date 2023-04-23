@@ -3,9 +3,9 @@
 use App\Models\Content\Language;
 
 class LanguageTest extends \PHPUnit\Framework\TestCase {
-    private $initialDefaultLanguage;
+    private string $initialDefaultLanguage;
 
-    private $initialDomain2LanguageMapping = null;
+    private ?string $initialDomain2LanguageMapping = null;
 
     protected function setUp(): void {
         $this->initialDefaultLanguage = Settings::get('default_language');

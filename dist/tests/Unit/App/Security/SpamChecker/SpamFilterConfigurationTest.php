@@ -159,7 +159,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
 
         $configuration->setBadwords(new Page());
 
-        $this->assertCount($configuration->getBadwords());
+        $this->assertCount(0, $configuration->getBadwords());
     }
 
     public function testFromSettings(): void {

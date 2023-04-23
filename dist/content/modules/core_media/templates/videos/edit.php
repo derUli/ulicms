@@ -59,7 +59,7 @@ if ($permissionChecker->hasPermission('videos')
             </div>
             <div class="field">
                 <strong class="field-label">
-                    <?php echo translate('video_mp4'); ?>
+                    <?php translate('video_mp4'); ?>
                 </strong>
                 <input name="mp4_file" type="text" readonly
                        value="<?php echo _esc($dataset->mp4_file); ?>">

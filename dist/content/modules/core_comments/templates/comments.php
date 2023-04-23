@@ -10,8 +10,10 @@ $comments = Comment::getAllByStatus(
     CommentStatus::PUBLISHED,
     \App\Storages\Vars::get('content_id')
 );
+
 $last = end($comments);
 reset($comments);
+
 ?>
 <?php echo Template::executeModuleTemplate('core_comments', 'form.php'); ?>
 <?php if (count($comments) > 0) { ?>

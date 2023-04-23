@@ -3,6 +3,12 @@
 use Spatie\Snapshots\MatchesSnapshots;
 
 class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase {
+    
+    /**
+     * @var array<string, ?string>
+     */
+    private array $defaultSettings;
+
     use MatchesSnapshots;
 
     protected function setUp(): void {

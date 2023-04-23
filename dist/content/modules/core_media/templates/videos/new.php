@@ -33,21 +33,21 @@ if ($permissionChecker->hasPermission('videos') && $permissionChecker->hasPermis
         </div>
         <div class="field">
             <strong class="field-label">
-                <?php echo translate('video_ogg'); ?>
+                <?php translate('video_ogg'); ?>
             </strong>
             <input name="ogg_file" type="file" accept=".ogv,video/ogg">
         </div>
         <div class="field">
 
             <strong class="field-label">
-                <?php echo translate('video_webm'); ?>
+                <?php translate('video_webm'); ?>
             </strong>
             <input name="webm_file" type="file" accept=".webm,video/webm">
         </div>
         <div class="field">
 
             <strong class="field-label">
-                <?php echo translate('video_mp4'); ?>
+                <?php translate('video_mp4'); ?>
             </strong>
             <input name="mp4_file" type="file" accept=".mp4,audio/mp4">
         </div>

@@ -13,6 +13,8 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
 
     private $testGroup2;
 
+    private $testGroup3;
+
     protected function setUp(): void {
         $this->testGroup1 = new Group();
         $this->testGroup1->setName('testgroup1');

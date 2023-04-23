@@ -45,9 +45,9 @@ Entfernte API-Methoden:
 * splitAndTrim()
 * convertLineEndingsToLN()
 * bool2YesNo()
+* get_custom_data()
 * set_custom_data()
 * delete_custom_data()
-* get_custom_data()
 
 Entfernte Features:
 * Scroll To Top

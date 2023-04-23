@@ -43,7 +43,7 @@ if ($permissionChecker->hasPermission('audio')
             </div>
             <div class="field">
                 <strong class="field-label">
-                    <?php echo translate('audio_ogg'); ?>
+                    <?php translate('audio_ogg'); ?>
                 </strong>
                 <input name="ogg_file" type="text"
                        value="<?php

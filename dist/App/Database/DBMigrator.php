@@ -62,13 +62,13 @@ class DBMigrator {
                     Database::pQuery($sql, $args, true) : false;
             if (! $result || Database::getNumRows($result) == 0) {
                 $path = $this->folder . '/' . $file;
-                $sql = file_get_contents($path);
+                $sql = (string)file_get_contents($path);
                 $sql = str_ireplace('{prefix}', $_ENV['DB_PREFIX'], $sql);
 
                 $success = Database::multiQuery($sql, true);
 
 
-                while (mysqli_more_results(Database::getConnection())) {
+                while (Database::getConnection() && mysqli_more_results(Database::getConnection())) {
                     mysqli_next_result(Database::getConnection());
                 }
 
@@ -93,7 +93,7 @@ class DBMigrator {
      */
     public function rollback(?string $stop = null): void {
         $this->checkVars();
-        $files = scandir($this->folder);
+        $files = scandir($this->folder) ?: [];
         natcasesort($files);
         $files = array_reverse($files);
         foreach ($files as $file) {
@@ -107,12 +107,12 @@ class DBMigrator {
                 $result = Database::pQuery($sql, $args, true);
                 if (Database::getNumRows($result) > 0) {
                     $path = $this->folder . '/' . $file;
-                    $sql = file_get_contents($path);
+                    $sql = (string)file_get_contents($path);
 
                     $sql = str_ireplace('{prefix}', $_ENV['DB_PREFIX'], $sql);
 
                     $success = Database::multiQuery($sql, true);
-                    while (mysqli_more_results(Database::getConnection())) {
+                    while (Database::getConnection() && mysqli_more_results(Database::getConnection())) {
                         mysqli_next_result(Database::getConnection());
                     }
                     if ($success) {

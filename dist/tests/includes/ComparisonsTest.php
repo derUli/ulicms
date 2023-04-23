@@ -4,6 +4,8 @@ use App\Exceptions\DatasetNotFoundException;
 use App\Packages\PackageManager;
 
 class ComparisonsTest extends \PHPUnit\Framework\TestCase {
+    private ?string $no_mobile_design_on_tablet;
+
     protected function setUp(): void {
         $_SERVER = [];
         $_REQUEST = [];

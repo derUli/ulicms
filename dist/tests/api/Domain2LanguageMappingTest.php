@@ -1,7 +1,7 @@
 <?php
 
 class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase {
-    private $originalMapping;
+    private string $originalMapping;
 
     protected function setUp(): void {
         $_SERVER = [];

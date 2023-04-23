@@ -21,7 +21,7 @@ if ($permissionChecker->hasPermission('favicon')) {
     if (isset($_GET['error'])) {
         ?>
         <div class="alert alert-danger">
-            <?php echo translate(_esc($_GET['error'])); ?>
+            <?php translate(_esc($_GET['error'])); ?>
         </div>
     <?php }
     ?>

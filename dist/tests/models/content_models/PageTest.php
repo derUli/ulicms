@@ -8,9 +8,9 @@ use App\Security\Permissions\PagePermissions;
 class PageTest extends \PHPUnit\Framework\TestCase {
     private $user;
 
-    private $commentsInitialEnabled;
+    private ?string $commentsInitialEnabled;
 
-    private $initialCommentablfeContentTypes;
+    private ?string $initialCommentableContentTypes;
 
     private $ipsum = 'Lorem ipsum dolor sit amet,
 		[module="fortune2"]

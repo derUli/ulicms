@@ -15,15 +15,17 @@ use Template;
 class Input {
     /**
      * Generate text input
+     *
      * @param string $name
-     * @param type $value
+     * @param mixed $value
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array <string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function textBox(
         string $name,
-        $value,
+        mixed $value,
         string $type = 'text',
         array $htmlAttributes = []
     ): string {
@@ -41,16 +43,18 @@ class Input {
 
     /**
      * Generate textarea input
+     *
      * @param string $name
-     * @param type $value
+     * @param mixed $value
      * @param int $rows
      * @param int $cols
-     * @param array $htmlAttributes
+     * @param array <string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function textArea(
         string $name,
-        $value,
+        mixed $value,
         int $rows = 25,
         int $cols = 80,
         array $htmlAttributes = []
@@ -72,16 +76,18 @@ class Input {
 
     /**
      * Generate textarea with HTML editor
+     *
      * @param string $name
-     * @param type $value
+     * @param mixed $value
      * @param int $rows
      * @param int $cols
-     * @param array $htmlAttributes
+     * @param array <string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function editor(
         string $name,
-        $value,
+        mixed $value,
         int $rows = 25,
         int $cols = 80,
         array $htmlAttributes = []
@@ -105,14 +111,16 @@ class Input {
 
     /**
      * Generate password input
+     *
      * @param string $name
-     * @param type $value
-     * @param array $htmlAttributes
+     * @param mixed $value
+     * @param array <string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function password(
         string $name,
-        $value,
+        mixed $value,
         array $htmlAttributes = []
     ): string {
         return self::textBox($name, $value, 'password', $htmlAttributes);
@@ -120,10 +128,12 @@ class Input {
 
     /**
      * Generate file input
+     *
      * @param string $name
      * @param bool $multiple
-     * @param type $accept
-     * @param array $htmlAttributes
+     * @param string|string[]|null $accept
+     * @param array <string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function file(
@@ -154,9 +164,11 @@ class Input {
 
     /**
      * Generate hidden input
+     *
      * @param string $name
-     * @param type $value
-     * @param array $htmlAttributes
+     * @param mixed $value
+     * @param array <string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function hidden(
@@ -169,10 +181,12 @@ class Input {
 
     /**
      * Generate checkbox input
+     *
      * @param string $name
      * @param bool $checked
-     * @param type $value
-     * @param array $htmlAttributes
+     * @param mixed $value
+     * @param array <string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function checkBox(
@@ -189,10 +203,12 @@ class Input {
 
     /**
      * Generate radio button
+     *
      * @param string $name
      * @param bool $checked
-     * @param type $value
-     * @param array $htmlAttributes
+     * @param mixed $value
+     * @param array <string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function radioButton(
@@ -209,11 +225,13 @@ class Input {
 
     /**
      * Generate single select
+     *
      * @param string $name
-     * @param type $value
-     * @param array $options
+     * @param mixed $value
+     * @param ListItem[] $options
      * @param int $size
-     * @param array $htmlAttributes
+     * @param array <string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function singleSelect(
@@ -250,16 +268,18 @@ class Input {
 
     /**
      * Generate multiselect
+     *
      * @param string $name
-     * @param type $value
-     * @param array $options
+     * @param mixed $value
+     * @param ListItem[] $options
      * @param int $size
-     * @param array $htmlAttributes
+     * @param array <string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function multiSelect(
         string $name,
-        $value = null,
+        mixed $value = null,
         array $options = [],
         int $size = 5,
         array $htmlAttributes = []

@@ -142,7 +142,7 @@ if ($permissionChecker->hasPermission('pages')) {
                                 <strong class="field-label">
                                     <?php translate('ALTERNATE_TITLE'); ?> </strong>
                                 <input type="text" name="alternate_title"
-                                       value="<?php esc($row->alternate_title); ?>"> <small><?php echo translate('ALTERNATE_TITLE_INFO'); ?> </small>
+                                       value="<?php esc($row->alternate_title); ?>"> <small><?php translate('ALTERNATE_TITLE_INFO'); ?> </small>
                             </div>
 
                             <div class="field">

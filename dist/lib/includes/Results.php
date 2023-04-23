@@ -13,12 +13,14 @@ use zz\Html\HTMLMinify;
 
 /**
  * Serialize $data as JSON, output it to the client and exit script
- * @param type $data
+ *
+ * @param mixed $data
  * @param int $status
- * @param type $compact
+ * @param bool $compact
+ *
  * @return void
  */
-function JSONResult($data, int $status = 200, $compact = true): void {
+function JSONResult(mixed $data, int $status = 200, bool $compact = true): void {
     $json = Json::encode($data, ! $compact);
 
     RawJSONResult($json, $status);
@@ -26,9 +28,10 @@ function JSONResult($data, int $status = 200, $compact = true): void {
 
 /**
  * Output a json string to the client and exit script
- * @param type $data
+ *
+ * @param string $data
  * @param int $status
- * @param type $compact
+ *
  * @return void
  */
 function RawJSONResult(string $data, int $status = 200): void {
@@ -37,9 +40,11 @@ function RawJSONResult(string $data, int $status = 200): void {
 
 /**
  * Output a HTML string to the client and exit script
+ *
  * @param string $data
  * @param int $status
  * @param int $optimizationLevel
+ *
  * @return void
  */
 function HTMLResult(
@@ -54,9 +59,10 @@ function HTMLResult(
 
 /**
  * Output a plaintext string to the client and exit script
+ *
  * @param string $data
  * @param int $status
- * @param int $optimizationLevel
+ *
  * @return void
  */
 function TextResult(string $data, int $status = 200): void {
@@ -65,9 +71,11 @@ function TextResult(string $data, int $status = 200): void {
 
 /**
  * Output a whatever string to the client and exit script
+ *
  * @param string $data
  * @param int $status
- * @param int $optimizationLevel
+ * @param ?string $type
+ *
  * @return void
  */
 function Result(string $data, int $status = 200, ?string $type = null): void {
@@ -84,7 +92,9 @@ function Result(string $data, int $status = 200, ?string $type = null): void {
 
 /**
  * Output a response without
+ *
  * @param int $status
+ *
  * @return void
  */
 function HTTPStatusCodeResult(
@@ -95,8 +105,10 @@ function HTTPStatusCodeResult(
 
 /**
  * handle exceptions
+ *
  * @param string $message
  * @param int $status
+ *
  * @return void
  */
 function ExceptionResult(string $message, int $status = 500): void {
@@ -119,11 +131,13 @@ function ExceptionResult(string $message, int $status = 500): void {
 
 /**
  * Render backend action result
+ *
  * @param string $action
- * @param type $model
+ * @param mixed $model
+ *
  * @return void
  */
-function ActionResult(string $action, $model = null): void {
+function ActionResult(string $action, mixed $model = null): void {
     $renderer = new BackendPageRenderer($action, $model);
     $renderer->render();
 }

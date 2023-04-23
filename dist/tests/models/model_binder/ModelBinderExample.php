@@ -5,6 +5,8 @@ class ModelBinderExample extends Model {
 
     protected $field2;
 
+    protected $field3;
+
     protected $my_field;
 
     protected $not_mapped;
