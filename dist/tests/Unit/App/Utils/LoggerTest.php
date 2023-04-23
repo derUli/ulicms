@@ -28,6 +28,16 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains('deny from all', array_map('strtolower', \App\Helpers\StringHelper::linesFromFile($htaccessFile)));
     }
 
+    public function testGetPath() {
+        $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'));
+
+        LoggerRegistry::register('test_log', $logger);
+
+        $this->assertStringContainsString('content/log/test_log', $logger->getPath());
+
+        LoggerRegistry::unregister('test_log');
+    }
+
     public function testLogDebug() {
         $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'));
 

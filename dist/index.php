@@ -10,8 +10,6 @@ use App\Storages\Vars;
 use App\Translations\Translation;
 use App\Utils\CacheUtil;
 
-global $connection;
-
 do_event('before_session_start');
 
 // initialize session

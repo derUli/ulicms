@@ -18,6 +18,10 @@ class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase {
             'smtp_user' => Settings::get('smtp_user'),
             'smtp_password' => Settings::get('smtp_password')
         ];
+
+        foreach($this->defaultSettings as $key=> $value){
+            Settings::delete($key);
+        }
     }
 
     protected function tearDown(): void {
@@ -81,26 +85,24 @@ class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testSavePostNothingSet(): void {
-        $_POST = [
-        ];
+        $_POST = [];
 
         $controller = new OtherSettingsController();
         $controller->_savePost();
 
-        $this->assertEquals('internal', Settings::get('email_mode'));
-        $this->assertEmpty(
-            Settings::get('domain_to_language')
-        );
+        $this->assertNull(Settings::get('email_mode'));
+        $this->assertNull(Settings::get('domain_to_language'));
         $this->assertNull(Settings::get('smtp_auth'));
-        $this->assertEmpty(Settings::get('smtp_encryption'));
+        $this->assertNull(Settings::get('smtp_encryption'));
         $this->assertNull(Settings::get('smtp_no_verify_certificate'));
         $this->assertNull(Settings::get('twofactor_authentication'));
         $this->assertNull(Settings::get('no_auto_cron'));
 
-        $this->assertEmpty(Settings::get('smtp_host'));
-        $this->assertEmpty(Settings::get('smtp_port'));
-        $this->assertEmpty(Settings::get('max_failed_logins_items'));
-        $this->assertEmpty(Settings::get('smtp_user'));
-        $this->assertEmpty(Settings::get('smtp_password'));
+        $this->assertNull(Settings::get('smtp_host'));
+        $this->assertNull(Settings::get('smtp_port'));
+        $this->assertNull(Settings::get('max_failed_logins_items'));
+        $this->assertNull(Settings::get('smtp_user'));
+        $this->assertNull(Settings::get('smtp_user'));
+        $this->assertNull(Settings::get('smtp_password'));
     }
 }
