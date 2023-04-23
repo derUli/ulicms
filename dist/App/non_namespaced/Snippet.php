@@ -21,7 +21,7 @@ class Snippet extends Page {
         return 'fas fa-sticky-note';
     }
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null): void {
         parent::fillVars($result);
         $this->type = 'snippet';
         $this->menu = 'not_in_menu';

@@ -11,12 +11,12 @@ class DataTablesHelperTest extends \PHPUnit\Framework\TestCase {
         chdir(Path::resolve('ULICMS_ROOT'));
     }
 
-    public function testGetLanguageFileURLExists() {
+    public function testGetLanguageFileURLExists(): void {
         $this->assertEquals('scripts/datatables/lang/de.lang', DataTablesHelper::getLanguageFileURL('de'));
         $this->assertEquals('scripts/datatables/lang/en.lang', DataTablesHelper::getLanguageFileURL('en'));
     }
 
-    public function testGetlanguageFileNotExists() {
+    public function testGetlanguageFileNotExists(): void {
         $this->assertEquals('scripts/datatables/lang/en.lang', DataTablesHelper::getLanguageFileURL('cn'));
     }
 }

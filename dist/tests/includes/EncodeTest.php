@@ -5,7 +5,7 @@ use Spatie\Snapshots\MatchesSnapshots;
 class EncodeTest extends \PHPUnit\Framework\TestCase {
     use MatchesSnapshots;
 
-    public function testJsonReadableEncode() {
+    public function testJsonReadableEncode(): void {
         $data = [
             'foo' => 'bar',
             'hello' => 'world',

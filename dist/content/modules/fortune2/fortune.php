@@ -63,29 +63,29 @@ class Fortune extends MainClass {
         return $text;
     }
 
-    public function doSomething() {
+    public function doSomething(): void {
         \App\Storages\ViewBag::set('sample_text', get_translation('unknown_request_type'));
     }
 
-    public function doSomethingPost() {
+    public function doSomethingPost(): void {
         \App\Storages\ViewBag::set('sample_text', get_translation('post_request_type'));
     }
 
-    public function doSomethingGet() {
+    public function doSomethingGet(): void {
         \App\Storages\ViewBag::set('sample_text', get_translation('get_request_type'));
     }
 
-    public function showFortune() {
+    public function showFortune(): void {
         ActionResult('fortune', $this->getRandomFortune());
     }
 
-    public function helloWorld() {
+    public function helloWorld(): void {
         echo 'Hello World!';
     }
 
     // Thia is executed before uninstalling this module
     // Use this to clean up data (e.g. drop database tables, delete files)
-    public function uninstall() {
+    public function uninstall(): void {
         Settings::set('fortune2_uninstalled_at', time());
     }
 }

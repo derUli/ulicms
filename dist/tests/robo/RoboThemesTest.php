@@ -9,13 +9,13 @@ class RoboThemesTest extends RoboTestBase {
         $this->runRoboCommand(['cache:clear']);
     }
 
-    public function testThemesList() {
+    public function testThemesList(): void {
         $output = $this->runRoboCommand(['themes:list']);
         $this->assertStringContainsString('2020 1.0.5', $output);
         $this->assertStringContainsString('impro17 2.1.6', $output);
     }
 
-    public function testThemesRemove() {
+    public function testThemesRemove(): void {
         $packageFile = Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/theme-2017-1.1.1.tar.gz'
         );

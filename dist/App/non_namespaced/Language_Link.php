@@ -63,7 +63,7 @@ class Language_Link extends Page {
         return 'fas fa-language';
     }
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null): void {
         parent::fillVars($result);
         $this->link_to_language = $result->link_to_language;
     }

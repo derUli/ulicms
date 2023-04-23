@@ -70,7 +70,7 @@ abstract class CacheUtil {
     /**
      *  Resets cache adapter
      */
-    public static function resetAdapater() {
+    public static function resetAdapater(): void {
         CacheManager::clearInstances();
         self::$adapter = null;
         self::getAdapter(true);

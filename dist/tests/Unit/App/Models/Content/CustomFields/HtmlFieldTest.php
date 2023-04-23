@@ -28,7 +28,7 @@ class HtmlFieldTest extends \PHPUnit\Framework\TestCase {
         $this->testUser->delete();
     }
 
-    public function testRender() {
+    public function testRender(): void {
         $this->testUser->registerSession();
 
         $field = new HtmlField();

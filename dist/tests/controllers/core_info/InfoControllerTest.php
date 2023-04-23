@@ -13,7 +13,7 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase {
         CacheUtil::clearCache();
     }
 
-    public function testfetchChangelog() {
+    public function testfetchChangelog(): void {
         $controller = new InfoController();
         $this->assertStringContainsString(
             'Neues in UliCMS 2020',
@@ -21,7 +21,7 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetComposerLegalInfo() {
+    public function testGetComposerLegalInfo(): void {
         $controller = new InfoController();
         $legalInfo = $controller->_getComposerLegalInfo();
         $this->assertStringContainsString(
@@ -33,7 +33,7 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(132000, strlen($legalInfo));
     }
 
-    public function testGetNpmLegalInfo() {
+    public function testGetNpmLegalInfo(): void {
         $controller = new InfoController();
         $npmLegalData = $controller->_getNpmLegalInfo();
 

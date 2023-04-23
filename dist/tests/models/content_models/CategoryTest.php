@@ -23,7 +23,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase {
         $this->setUp();
     }
 
-    public function testCreateEditAndDeleteCategory() {
+    public function testCreateEditAndDeleteCategory(): void {
         $category = new Category();
         $category->setName(self::name1);
         $category->setDescription(self::description1);
@@ -47,7 +47,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($category->getID());
     }
 
-    public function testSetId() {
+    public function testSetId(): void {
         $category = new Category();
         $category->setID(123);
 

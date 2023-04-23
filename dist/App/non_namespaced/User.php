@@ -599,7 +599,7 @@ class User extends Model {
      * Set if account is locked
      * @param type $val
      */
-    public function setLocked($val) {
+    public function setLocked($val): void {
         $this->locked = (bool)$val;
     }
 

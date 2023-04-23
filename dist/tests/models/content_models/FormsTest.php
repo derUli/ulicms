@@ -5,7 +5,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}forms where name like 'Unit Test%'", true);
     }
 
-    public function testCreateAndDeleteWithEnabled() {
+    public function testCreateAndDeleteWithEnabled(): void {
         $pages = ContentFactory::getAllRegular();
         $page = $pages[0];
         Forms::createForm(
@@ -40,7 +40,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($form);
     }
 
-    public function testCreateAndDeleteWithDisabled() {
+    public function testCreateAndDeleteWithDisabled(): void {
         $pages = ContentFactory::getAllRegular();
         $page = $pages[0];
         Forms::createForm(
@@ -75,7 +75,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($form);
     }
 
-    public function testEditAndDeleteWithEnabled() {
+    public function testEditAndDeleteWithEnabled(): void {
         $pages = ContentFactory::getAllRegular();
         $page1 = $pages[0];
         $page2 = array_pop($pages);
@@ -125,7 +125,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
         Forms::deleteForm($id);
     }
 
-    public function testEditAndDeleteWithDisabled() {
+    public function testEditAndDeleteWithDisabled(): void {
         $pages = ContentFactory::getAllRegular();
         $page1 = $pages[0];
         $page2 = array_pop($pages);
@@ -174,7 +174,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
         Forms::deleteForm($id);
     }
 
-    public function testGetAllForms() {
+    public function testGetAllForms(): void {
         $pages = ContentFactory::getAllRegular();
         $page1 = $pages[0];
 

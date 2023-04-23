@@ -4,22 +4,22 @@ use App\Backend\UliCMSVersion;
 use App\Services\Connectors\PackageSourceConnector;
 
 class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
-    public function testGetCodeName() {
+    public function testGetCodeName(): void {
         $version = new UliCMSVersion();
         $this->assertNotEmpty($version->getCodeName());
     }
 
-    public function testDbSchemaVersionSet() {
+    public function testDbSchemaVersionSet(): void {
         $version = new UliCMSVersion();
         $this->assertNotEmpty(Settings::get('db_schema_version'));
     }
 
-    public function testGetBuildTimestamp() {
+    public function testGetBuildTimestamp(): void {
         $version = new UliCMSVersion();
         $this->assertIsInt($version->getBuildTimestamp());
     }
 
-    public function testGetBuildDate() {
+    public function testGetBuildDate(): void {
         $version = new UliCMSVersion();
 
         $date = $version->getBuildDate();
@@ -27,7 +27,7 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(16, strlen($date));
     }
 
-    public function testModuleVersions() {
+    public function testModuleVersions(): void {
         $modules = getAllModules();
         $ulicmsVersion = (new UliCMSVersion())->getInternalVersionAsString();
 
@@ -47,7 +47,7 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testCompareModuleVersionsWithPackageSource() {
+    public function testCompareModuleVersionsWithPackageSource(): void {
         $modules = getAllModules();
         $connector = new PackageSourceConnector();
         foreach ($modules as $module) {
@@ -69,7 +69,7 @@ class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testgetYear() {
+    public function testgetYear(): void {
         $version = new UliCMSVersion();
         $year = $version->getReleaseYear();
         $this->assertGreaterThanOrEqual(2020, (int)$year);

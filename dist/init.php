@@ -234,7 +234,7 @@ if (isset($_SESSION['session_begin'])) {
 }
 
 register_shutdown_function(
-    static function() {
+    static function(): void {
         do_event('shutdown');
 
         $dbmigratorDropDatabaseOnShutdown = isset($_ENV['DBMIGRATOR_DROP_DATABASE_ON_SHUTDOWN']) && $_ENV['DBMIGRATOR_DROP_DATABASE_ON_SHUTDOWN'];

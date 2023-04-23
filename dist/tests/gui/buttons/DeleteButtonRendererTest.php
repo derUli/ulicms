@@ -25,7 +25,7 @@ class DeleteButtonRendererTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}content where title like 'Test Page%'", true);
     }
 
-    public function testRenderReturnsHtml() {
+    public function testRenderReturnsHtml(): void {
         $this->user->setAdmin(true);
         $this->user->save();
 
@@ -55,7 +55,7 @@ class DeleteButtonRendererTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testRenderReturnsNothing() {
+    public function testRenderReturnsNothing(): void {
         $allGroups = Group::getAll();
 
         $this->user->setAdmin(false);

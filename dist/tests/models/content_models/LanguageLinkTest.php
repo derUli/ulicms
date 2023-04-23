@@ -7,7 +7,7 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase {
         Database::deleteFrom('content', "slug like 'unit_test_%'");
     }
 
-    public function testCreateUpdateAndDeleteLink() {
+    public function testCreateUpdateAndDeleteLink(): void {
         $link = new Language_Link();
         $link->title = 'Unit Test Link';
         $link->slug = 'unit_test_' . uniqid();
@@ -44,7 +44,7 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($this->getEnglishLanguage()->getID(), $loadedLink->link_to_language);
     }
 
-    public function testUpdateCreatesDataset() {
+    public function testUpdateCreatesDataset(): void {
         $link = new Language_Link();
         $link->title = 'Unit Test Link';
         $link->slug = 'unit_test_' . uniqid();
@@ -63,12 +63,12 @@ class LanguageLinkTest extends \PHPUnit\Framework\TestCase {
         $this->assertIsNumeric($link->getID());
     }
 
-    public function testIsRegularReturnsFalse() {
+    public function testIsRegularReturnsFalse(): void {
         $link = new Language_Link();
         $this->assertFalse($link->isRegular());
     }
 
-    public function testSetAndGetLinkedLanguage() {
+    public function testSetAndGetLinkedLanguage(): void {
         $link = new Language_Link();
 
         $language = new Language();

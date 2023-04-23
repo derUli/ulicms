@@ -38,7 +38,7 @@ class FormTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('</form>', Form::endForm());
     }
 
-    public function testDeleteButton() {
+    public function testDeleteButton(): void {
         $actual = Form::deleteButton('https://example.org', ['foo' => 'bar']);
 
         $this->assertStringContainsString('<form action="https://example.org" method="post" class="delete-form">', $actual);

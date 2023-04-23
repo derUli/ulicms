@@ -4,7 +4,7 @@ require_once __DIR__ . '/RoboTestFile.php';
 require_once __DIR__ . '/RoboTestBase.php';
 
 class RoboMaintenanceTest extends RoboTestBase {
-    public function testMaintenanceStatus() {
+    public function testMaintenanceStatus(): void {
         $this->runRoboCommand(['maintenance:on']);
 
         $this->assertStringStartsWith('true', $this->runRoboCommand(['maintenance:status']));

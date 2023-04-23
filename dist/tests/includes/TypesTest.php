@@ -1,12 +1,12 @@
 <?php
 
 class TypesTest extends \PHPUnit\Framework\TestCase {
-    public function testGetUsedPostTypes() {
+    public function testGetUsedPostTypes(): void {
         $postTypes = get_used_post_types();
         $this->assertContains('page', $postTypes);
     }
 
-    public function testGetAvailablePostTypes() {
+    public function testGetAvailablePostTypes(): void {
         $baseTypes = $this->getBaseTypes();
         $availableTypes = get_available_post_types();
 

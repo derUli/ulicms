@@ -60,7 +60,7 @@ class Video_Page extends Page {
         return 'fas fa-film';
     }
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null): void {
         parent::fillVars($result);
         $this->video = $result->video ? (int)$result->video : null;
         $this->text_position = $result->text_position;

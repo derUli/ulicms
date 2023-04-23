@@ -59,18 +59,18 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::delete('id');
     }
 
-    public function testRenderPartialSuccess() {
+    public function testRenderPartialSuccess(): void {
         $this->assertEquals('Hello World!', Template::renderPartial('hello'));
     }
 
-    public function testRenderPartialSuccessWithTheme() {
+    public function testRenderPartialSuccessWithTheme(): void {
         $this->assertEquals('Hello World!', Template::renderPartial(
             'hello',
             'impro17'
         ));
     }
 
-    public function testRenderPartialNotFound() {
+    public function testRenderPartialNotFound(): void {
         try {
             $nothing = Template::renderPartial('nothing', 'impro17');
             $this->fail('FileNotFoundException not thrown');
@@ -79,23 +79,23 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetHtml5Doctype() {
+    public function testGetHtml5Doctype(): void {
         $this->assertEquals('<!doctype html>', Template::getHtml5Doctype());
     }
 
-    public function testHtml5Doctype() {
+    public function testHtml5Doctype(): void {
         ob_start();
         Template::html5Doctype();
         $this->assertEquals('<!doctype html>', ob_get_clean());
     }
 
-    public function testGetYear() {
+    public function testGetYear(): void {
         $this->assertEquals(date('Y'), Template::getYear());
         $this->assertEquals(date('Y'), Template::getYear('Y'));
         $this->assertEquals(date('y'), Template::getYear('y'));
     }
 
-    public function testYear() {
+    public function testYear(): void {
         ob_start();
         Template::year();
         $this->assertEquals(date('Y'), ob_get_clean());
@@ -109,7 +109,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(date('y'), ob_get_clean());
     }
 
-    public function testGetOgHTMLPrefix() {
+    public function testGetOgHTMLPrefix(): void {
         $_SESSION['language'] = 'en';
         $this->assertEquals(
             '<html prefix="og: http://ogp.me/ns#" lang="en">',
@@ -123,7 +123,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         unset($_SESSION['language']);
     }
 
-    public function testGetBaseMetas() {
+    public function testGetBaseMetas(): void {
         $baseMetas = Template::getBaseMetas();
         $this->assertTrue(
             str_contains(
@@ -139,7 +139,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetBaseMetasDisableNoFormatDetection() {
+    public function testGetBaseMetasDisableNoFormatDetection(): void {
         Settings::set('disable_no_format_detection', '1');
         $expected = '<meta name="format-detection" content="telephone=no"/>';
 
@@ -151,7 +151,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(str_contains($baseMetas, $expected));
     }
 
-    public function testGetSiteSloganWithoutLanguage() {
+    public function testGetSiteSloganWithoutLanguage(): void {
         $_SESSION['language'] = 'de';
         $this->assertEquals('SiteSlogan Deutsch', Template::getSiteSlogan());
 
@@ -159,12 +159,12 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('SiteSlogan English', Template::getSiteSlogan());
     }
 
-    public function testGetMottoWithoutLanguage() {
+    public function testGetMottoWithoutLanguage(): void {
         $_SESSION['language'] = 'de';
         $this->assertEquals('SiteSlogan Deutsch', Template::getMotto());
     }
 
-    public function testMottoWithoutLanguage() {
+    public function testMottoWithoutLanguage(): void {
         $_SESSION['language'] = 'de';
 
         ob_start();
@@ -172,16 +172,16 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('SiteSlogan Deutsch', ob_get_clean());
     }
 
-    public function testGetSiteSloganWithExistingLanguage() {
+    public function testGetSiteSloganWithExistingLanguage(): void {
         $_SESSION['language'] = 'fr';
         $this->assertEquals('SiteSlogan General', Template::getSiteSlogan());
     }
 
-    public function testGetSiteSloganWithNotExistingLanguage() {
+    public function testGetSiteSloganWithNotExistingLanguage(): void {
         $this->assertEquals('SiteSlogan General', Template::getSiteSlogan());
     }
 
-    public function testGetjQueryScript() {
+    public function testGetjQueryScript(): void {
         $file = 'node_modules/jquery/dist/jquery.min.js';
         $time = File::getLastChanged($file);
         $expected = '<script src="' . $file . '?time=' . $time .
@@ -189,7 +189,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString($expected, Template::getjQueryScript());
     }
 
-    public function testGetContentReturnsContent() {
+    public function testGetContentReturnsContent(): void {
         $_GET['slug'] = 'lorem_ipsum';
         $_SESSION['language'] = 'de';
         $_GET['REQUEST_URI'] = '/lorem_ipsum.html';
@@ -202,7 +202,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testContentOutputsContent() {
+    public function testContentOutputsContent(): void {
         $_GET['slug'] = 'lorem_ipsum';
         $_SESSION['language'] = 'de';
         $_GET['REQUEST_URI'] = '/lorem_ipsum.html';
@@ -217,7 +217,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetContentReturnsNotFound() {
+    public function testGetContentReturnsNotFound(): void {
         $_GET['slug'] = 'gibts_nicht';
         $_SESSION['language'] = 'de';
         $_GET['REQUEST_URI'] = '/gibts_nicht.html';
@@ -230,7 +230,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetLanguageSelection() {
+    public function testGetLanguageSelection(): void {
         $html = Template::_getLanguageSelection();
         $this->assertTrue(
             str_contains(
@@ -245,7 +245,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         // TODO: Check if there are links in the returned html
     }
 
-    public function testGetLanguageSelectionWithDomain2LanguageMapping() {
+    public function testGetLanguageSelectionWithDomain2LanguageMapping(): void {
         $mappingLines = [
             'example.de=>de',
             'example.co.uk=>en'
@@ -271,12 +271,12 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString('://example.co.uk', $html);
     }
 
-    public function testGetHomepageOwner() {
+    public function testGetHomepageOwner(): void {
         Settings::set('homepage_owner', 'John Doe');
         $this->assertEquals('John Doe', Template::getHomepageOwner());
     }
 
-    public function testHomepageOwner() {
+    public function testHomepageOwner(): void {
         Settings::set('homepage_owner', 'John Doe');
 
         ob_start();
@@ -285,7 +285,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('John Doe', ob_get_clean());
     }
 
-    public function testGetFooterText() {
+    public function testGetFooterText(): void {
         Settings::set('footer_text', '&copy; (C) [year] by John Doe');
 
         $year = date('Y');
@@ -296,7 +296,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testFooter() {
+    public function testFooter(): void {
         ob_start();
         Template::footer();
         $html = ob_get_clean();
@@ -304,7 +304,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString('.js?time=', $html);
     }
 
-    public function testFooterText() {
+    public function testFooterText(): void {
         Settings::set('footer_text', '&copy; (C) [year] by John Doe');
 
         $year = date('Y');
@@ -317,7 +317,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetContentWithPlaceholder() {
+    public function testGetContentWithPlaceholder(): void {
         $manager = new UserManager();
         $users = $manager->getAllUsers();
         $user = $users[0];
@@ -349,7 +349,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetBodyClassesHome() {
+    public function testGetBodyClassesHome(): void {
         $_SESSION['language'] = 'de';
         $_GET['slug'] = get_frontpage();
         $this->assertMatchesRegularExpression(
@@ -361,7 +361,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::delete('active');
     }
 
-    public function testBodyClassesHome() {
+    public function testBodyClassesHome(): void {
         $_SESSION['language'] = 'de';
         $_GET['slug'] = get_frontpage();
 
@@ -377,7 +377,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::delete('active');
     }
 
-    public function testGetBodyClassesError403Active() {
+    public function testGetBodyClassesError403Active(): void {
         $page = new Page();
         $page->title = 'testgetbodyclasses';
         $page->slug = 'testpage-' . uniqid();
@@ -403,7 +403,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::delete('active');
     }
 
-    public function testGetBodyClassesError403CauseAccess() {
+    public function testGetBodyClassesError403CauseAccess(): void {
         $page = new Page();
         $page->title = 'testgetbodyclasses';
         $page->slug = 'testpage-' . uniqid();
@@ -429,7 +429,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::delete('active');
     }
 
-    public function testGetBodyClassesError404() {
+    public function testGetBodyClassesError404(): void {
         $_SESSION['language'] = 'de';
         $_GET['slug'] = 'gibts-nicht';
         $this->assertMatchesRegularExpression(
@@ -441,7 +441,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::delete('active');
     }
 
-    public function testGetBodyClassesMobile() {
+    public function testGetBodyClassesMobile(): void {
         $_SESSION['language'] = 'de';
         $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 5_0' .
                 ' like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) ' .
@@ -459,7 +459,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::delete('active');
     }
 
-    public function testGetBodyClassesDesktop() {
+    public function testGetBodyClassesDesktop(): void {
         $_SESSION['language'] = 'de';
         $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (Windows NT 6.1;' .
                 ' Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)' .
@@ -477,7 +477,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::delete('active');
     }
 
-    public function testGetBodyClassesContainsModule() {
+    public function testGetBodyClassesContainsModule(): void {
         $_SESSION['language'] = 'de';
         $_GET['slug'] = ModuleHelper::getFirstPageWithModule()->slug;
         $this->assertMatchesRegularExpression(
@@ -488,17 +488,17 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::delete('active');
     }
 
-    public function testGetDocType() {
+    public function testGetDocType(): void {
         $this->assertEquals('<!doctype html>', Template::getDoctype());
     }
 
-    public function testDocType() {
+    public function testDocType(): void {
         ob_start();
         Template::doctype();
         $this->assertEquals('<!doctype html>', ob_get_clean());
     }
 
-    public function testOgHTMLPrefix() {
+    public function testOgHTMLPrefix(): void {
         $_SESSION['language'] = 'en';
 
         ob_start();
@@ -518,20 +518,20 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         unset($_SESSION['language']);
     }
 
-    public function testGetBaseMetasForNonExistingPage() {
+    public function testGetBaseMetasForNonExistingPage(): void {
         $_GET['slug'] = 'gibts_echt_nicht';
         $_SESSION['language'] = 'de';
 
         $this->assertNotEmpty(Template::getBaseMetas());
     }
 
-    public function testEditButtonNotLoggedIn() {
+    public function testEditButtonNotLoggedIn(): void {
         ob_start();
         Template::editButton();
         $this->assertEmpty(ob_get_clean());
     }
 
-    public function testGetHeadlineNotFound() {
+    public function testGetHeadlineNotFound(): void {
         $_GET['slug'] = 'gibts_echt_nicht';
         $_SESSION['language'] = 'de';
 
@@ -541,7 +541,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetHeadlineReturnsNull() {
+    public function testGetHeadlineReturnsNull(): void {
         $manager = new UserManager();
         $users = $manager->getAllUsers();
         $user = $users[0];
@@ -569,7 +569,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(Template::getHeadline());
     }
 
-    public function testGetHeadlineReturnsTitle() {
+    public function testGetHeadlineReturnsTitle(): void {
         $manager = new UserManager();
         $users = $manager->getAllUsers();
         $user = $users[0];
@@ -596,7 +596,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('<h1>Titel</h1>', Template::getHeadline());
     }
 
-    public function testGetHeadlineReturnsHeadline() {
+    public function testGetHeadlineReturnsHeadline(): void {
         $manager = new UserManager();
         $users = $manager->getAllUsers();
         $user = $users[0];
@@ -627,7 +627,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testHeadlinePrintsString() {
+    public function testHeadlinePrintsString(): void {
         $pages = ContentFactory::getAllRegular();
 
         $first = $pages[0];
@@ -641,7 +641,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("<h3>{$first->title}</h3>", ob_get_clean());
     }
 
-    public function testComments() {
+    public function testComments(): void {
         $_GET['slug'] = 'gibts_echt_nicht';
         $_SESSION['language'] = 'de';
 
@@ -650,7 +650,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertEmpty(ob_get_clean());
     }
 
-    public function testGetCommentsReturnsHtml() {
+    public function testGetCommentsReturnsHtml(): void {
         $page = $this->getPageWithCommentsEnabled();
 
         $_GET['slug'] = $page->slug;
@@ -666,23 +666,23 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString('Your E-Mail Address', $html);
     }
 
-    public function testGetCommentsReturnsEmptyString() {
+    public function testGetCommentsReturnsEmptyString(): void {
         $_GET['slug'] = 'gibts_echt_nicht';
         $_SESSION['language'] = 'de';
 
         $this->assertEmpty(Template::getComments());
     }
 
-    public function testExecuteDefaultOrOwnTemplateOwnExists() {
+    public function testExecuteDefaultOrOwnTemplateOwnExists(): void {
         $this->assertNotEmpty(Template::executeDefaultOrOwnTemplate('bottom.php'));
     }
 
-    public function testExecuteDefaultOrOwnTemplateWithNonExistingFile() {
+    public function testExecuteDefaultOrOwnTemplateWithNonExistingFile(): void {
         $this->expectException(FileNotFoundException::class);
         Template::executeDefaultOrOwnTemplate('gibts_echt_nicht');
     }
 
-    public function testExecuteModuleTemplateWithNonExisting() {
+    public function testExecuteModuleTemplateWithNonExisting(): void {
         $this->expectException(FileNotFoundException::class);
         Template::executeModuleTemplate(
             'fortune2',
@@ -690,7 +690,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testEscape() {
+    public function testEscape(): void {
         $input = "Hello <script>alert('xss')";
         $expected = 'Hello &lt;script&gt;alert(&#039;xss&#039;)';
 
@@ -699,8 +699,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($expected, ob_get_clean());
     }
 
-    public function testLogoDisabled() {
-        $actual = TestHelper::getOutput(static function() {
+    public function testLogoDisabled(): void {
+        $actual = TestHelper::getOutput(static function(): void {
             Settings::set('logo_disabled', 'yes');
             Template::logo();
         });
@@ -708,7 +708,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
         $this->assertEmpty($actual);
     }
 
-    private function setSiteSlogan() {
+    private function setSiteSlogan(): void {
         Settings::set('site_slogan', 'SiteSlogan General');
         Settings::set('site_slogan_de', 'SiteSlogan Deutsch');
         Settings::set('site_slogan_en', 'SiteSlogan English');

@@ -3,7 +3,7 @@
 use Nette\Utils\Finder;
 
 class SecurityTest extends \PHPUnit\Framework\TestCase {
-    public function testPhpFilesProtected() {
+    public function testPhpFilesProtected(): void {
         $startTime = time();
 
         $skipDirs = [
@@ -54,7 +54,7 @@ class SecurityTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testNewFilePermissions() {
+    public function testNewFilePermissions(): void {
         $testFile = Path::resolve('ULICMS_TMP/' . uniqid() . '.tmp');
 
         file_put_contents($testFile, 'Hello World');
@@ -64,7 +64,7 @@ class SecurityTest extends \PHPUnit\Framework\TestCase {
 
     }
 
-    public function testNewDirectoryPermissions() {
+    public function testNewDirectoryPermissions(): void {
         $testDir = Path::resolve('ULICMS_TMP/' . uniqid() . '.tmp');
         mkdir($testDir);
 

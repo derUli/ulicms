@@ -3,7 +3,7 @@
 use App\Security\SpamChecker\SpamFilterConfiguration;
 
 class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
-    public function testSetSpamfilterEnabled() {
+    public function testSetSpamfilterEnabled(): void {
         $configuration = new SpamFilterConfiguration();
         $this->assertTrue($configuration->getSpamFilterEnabled());
 
@@ -13,7 +13,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($configuration->getSpamFilterEnabled());
     }
 
-    public function testSetRejectRequestsFromBots() {
+    public function testSetRejectRequestsFromBots(): void {
         $configuration = new SpamFilterConfiguration();
         $this->assertFalse($configuration->getRejectRequestsFromBots());
 
@@ -24,7 +24,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($configuration->getRejectRequestsFromBots());
     }
 
-    public function testSetCheckMxOfMailAddress() {
+    public function testSetCheckMxOfMailAddress(): void {
         $configuration = new SpamFilterConfiguration();
         $this->assertFalse($configuration->getCheckmxOfMailAddress());
 
@@ -35,7 +35,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($configuration->getCheckmxOfMailAddress());
     }
 
-    public function testSetDisallowChineseChars() {
+    public function testSetDisallowChineseChars(): void {
         $configuration = new SpamFilterConfiguration();
         $this->assertFalse($configuration->getDisallowChineseChars());
 
@@ -46,7 +46,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($configuration->getDisallowChineseChars());
     }
 
-    public function testSetDisallowCyrillicChars() {
+    public function testSetDisallowCyrillicChars(): void {
         $configuration = new SpamFilterConfiguration();
         $this->assertFalse($configuration->getDisallowCyrillicChars());
 
@@ -57,7 +57,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($configuration->getDisallowCyrillicChars());
     }
 
-    public function testSetDisallowRtlChars() {
+    public function testSetDisallowRtlChars(): void {
         $configuration = new SpamFilterConfiguration();
         $this->assertFalse($configuration->getDisallowRtlChars());
 
@@ -68,7 +68,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($configuration->getDisallowRtlChars());
     }
 
-    public function testSetBlockedCountriesWithString() {
+    public function testSetBlockedCountriesWithString(): void {
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBlockedCountries());
 
@@ -78,7 +78,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains('vn', $configuration->getBlockedCountries());
     }
 
-    public function testSetBlockedCountriesWithNull() {
+    public function testSetBlockedCountriesWithNull(): void {
         $configuration = new SpamFilterConfiguration();
 
         $configuration->setBlockedCountries(['ir, vn']);
@@ -87,7 +87,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, $configuration->getBlockedCountries());
     }
 
-    public function testSetBlockedCountriesWithInvalid() {
+    public function testSetBlockedCountriesWithInvalid(): void {
         $configuration = new SpamFilterConfiguration();
 
         $configuration->setBlockedCountries(['ir, vn']);
@@ -95,7 +95,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $configuration->setBlockedCountries(new Page());
     }
 
-    public function testSetBlockedCountriesWithArray() {
+    public function testSetBlockedCountriesWithArray(): void {
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBlockedCountries());
 
@@ -110,7 +110,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains('vn', $configuration->getBlockedCountries());
     }
 
-    public function testSetBadwordsWithString() {
+    public function testSetBadwordsWithString(): void {
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBadwords());
 
@@ -122,7 +122,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains('bastard', $configuration->getBadwords());
     }
 
-    public function testSetBadwordsWithArray() {
+    public function testSetBadwordsWithArray(): void {
         $configuration = new SpamFilterConfiguration();
         $this->assertCount(0, $configuration->getBadwords());
 
@@ -139,7 +139,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains('bastard', $configuration->getBadwords());
     }
 
-    public function testSetBadwordsWithNull() {
+    public function testSetBadwordsWithNull(): void {
         $configuration = new SpamFilterConfiguration();
         $configuration->setBadwords([
             'fuck',
@@ -152,7 +152,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, $configuration->getBadwords());
     }
 
-    public function testSetBadwordsWithInvalid() {
+    public function testSetBadwordsWithInvalid(): void {
         $configuration = new SpamFilterConfiguration();
 
         $this->expectException(InvalidArgumentException::class);
@@ -162,7 +162,7 @@ class SpamFilterConfigurationTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount($configuration->getBadwords());
     }
 
-    public function testFromSettings() {
+    public function testFromSettings(): void {
         $configuration = SpamFilterConfiguration::fromSettings();
         $this->assertInstanceOf(SpamFilterConfiguration::class, $configuration);
         // TODO: Weitere Asserts durchführen

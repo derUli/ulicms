@@ -9,14 +9,14 @@ class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetMaxImageDimensions() {
+    public function testGetMaxImageDimensions(): void {
         $this->assertEquals(
             [2500, 1667],
             ImageScaleHelper::getMaxImageDimensions()
         );
     }
 
-    public function testScaleDown() {
+    public function testScaleDown(): void {
         ImageScaleHelper::scaleDown(
             $this->getFixturePath(),
             $this->getProcessedPath()

@@ -21,7 +21,7 @@ class DefaultAccessRestrictionsControllerTest extends \PHPUnit\Framework\TestCas
         );
     }
 
-    public function testSavePost() {
+    public function testSavePost(): void {
         $_POST = [
             'only_admins_can_edit' => '1',
             'only_owner_can_edit' => '1',

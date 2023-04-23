@@ -12,7 +12,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
         sureRemoveDir(Path::resolve('ULICMS_LOG/test_log'), true);
     }
 
-    public function testRegisterAndUnregisterLogger() {
+    public function testRegisterAndUnregisterLogger(): void {
         $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'));
         $this->assertTrue(is_dir(Path::resolve('ULICMS_LOG/test_log')));
         LoggerRegistry::register('test_log', $logger);
@@ -22,13 +22,13 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(LoggerRegistry::get('test_log'));
     }
 
-    public function testLogFolderIsProtected() {
+    public function testLogFolderIsProtected(): void {
         $htaccessFile = Path::resolve('ULICMS_LOG/.htaccess');
         $this->assertTrue(is_file($htaccessFile));
         $this->assertContains('deny from all', array_map('strtolower', \App\Helpers\StringHelper::linesFromFile($htaccessFile)));
     }
 
-    public function testGetPath() {
+    public function testGetPath(): void {
         $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'));
 
         LoggerRegistry::register('test_log', $logger);
@@ -38,7 +38,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
         LoggerRegistry::unregister('test_log');
     }
 
-    public function testLogDebug() {
+    public function testLogDebug(): void {
         $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'));
 
         LoggerRegistry::register('test_log', $logger);
@@ -57,7 +57,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
         LoggerRegistry::unregister('test_log');
     }
 
-    public function testLogError() {
+    public function testLogError(): void {
         $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'));
 
         LoggerRegistry::register('test_log', $logger);
@@ -76,7 +76,7 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
         LoggerRegistry::unregister('test_log');
     }
 
-    public function testLogInfo() {
+    public function testLogInfo(): void {
         $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'));
 
         LoggerRegistry::register('test_log', $logger);

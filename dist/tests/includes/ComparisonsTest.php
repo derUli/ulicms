@@ -32,11 +32,11 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 
     // in the test environment this returns always true
     // since the tests are running at the command line
-    public function testIsCli() {
+    public function testIsCli(): void {
         $this->assertTrue(is_cli());
     }
 
-    public function testIsCrawler() {
+    public function testIsCrawler(): void {
         $pkg = new PackageManager();
 
         $useragents = [
@@ -52,36 +52,36 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testIsCrawlerWithoutUseragent() {
+    public function testIsCrawlerWithoutUseragent(): void {
         unset($_SERVER['HTTP_USER_AGENT']);
         $this->assertFalse(
             is_crawler()
         );
     }
 
-    public function testIsCrawlerWithUseragentFromSession() {
+    public function testIsCrawlerWithUseragentFromSession(): void {
         $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
         $this->assertTrue(
             is_crawler()
         );
     }
 
-    public function testIsAdminDirTrue() {
+    public function testIsAdminDirTrue(): void {
         chdir(Path::resolve('ULICMS_ROOT/admin'));
         $this->assertTrue(is_admin_dir());
     }
 
-    public function testIsAdminDirFalse() {
+    public function testIsAdminDirFalse(): void {
         chdir(Path::resolve('ULICMS_ROOT'));
         $this->assertFalse(is_admin_dir());
     }
 
-    public function testIsMaintenanceModeOn() {
+    public function testIsMaintenanceModeOn(): void {
         Settings::set('maintenance_mode', '1');
         $this->assertTrue(is_maintenance_mode());
     }
 
-    public function testIsMaintenanceModeOff() {
+    public function testIsMaintenanceModeOff(): void {
         Settings::set('maintenance_mode', '0');
         $this->assertFalse(is_maintenance_mode());
 
@@ -89,31 +89,31 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_maintenance_mode());
     }
 
-    public function testIsJsonTrue() {
+    public function testIsJsonTrue(): void {
         $validJson = file_get_contents(ModuleHelper::buildModuleRessourcePath('core_content', 'metadata.json'));
         $this->assertTrue(is_json($validJson));
     }
 
-    public function testIsJsonFalse() {
+    public function testIsJsonFalse(): void {
         $invalidJson = file_get_contents(ModuleHelper::buildModuleRessourcePath('core_content', 'lang/de.php'));
         $this->assertFalse(is_json($invalidJson));
     }
 
-    public function testIsDecimalReturnsTrue() {
+    public function testIsDecimalReturnsTrue(): void {
         $this->assertTrue(is_decimal(1.99));
         $this->assertTrue(is_decimal('1.99'));
         $this->assertTrue(is_decimal('0.00'));
         $this->assertTrue(is_decimal('1.00'));
     }
 
-    public function testisDecimalReturnsFalse() {
+    public function testisDecimalReturnsFalse(): void {
         $this->assertFalse(is_decimal(666));
         $this->assertFalse(is_decimal('666'));
         $this->assertFalse(is_decimal('foobar'));
         $this->assertFalse(is_decimal('0'));
     }
 
-    public function testVarIsType() {
+    public function testVarIsType(): void {
         $this->assertTrue(var_is_type(123, 'numeric', true));
         $this->assertTrue(var_is_type(null, 'numeric', false));
         $this->assertFalse(var_is_type(null, 'numeric', true));
@@ -123,25 +123,25 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(var_is_type('nicht leer', 'typ_der_nicht_existiert', true));
     }
 
-    public function testGetByIdThrowsException() {
+    public function testGetByIdThrowsException(): void {
         $this->expectException(DatasetNotFoundException::class);
         ContentFactory::getByID(PHP_INT_MAX);
     }
 
-    public function testIsVersionNumberReturnsTrue() {
+    public function testIsVersionNumberReturnsTrue(): void {
         $this->assertTrue(is_version_number('1.0'));
         $this->assertTrue(is_version_number('123'));
         $this->assertTrue(is_version_number('2.0.3'));
         $this->assertTrue(is_version_number('2.0.3beta'));
     }
 
-    public function testIsVersionNumberReturnsFalse() {
+    public function testIsVersionNumberReturnsFalse(): void {
         $this->assertFalse(is_version_number('keine version'));
         $this->assertFalse(is_version_number('null'));
         $this->assertFalse(is_version_number('beta'));
     }
 
-    public function testIsDesktop() {
+    public function testIsDesktop(): void {
         $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36';
         $this->assertTrue(is_desktop());
 
@@ -155,7 +155,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_desktop());
     }
 
-    public function testIsMobile() {
+    public function testIsMobile(): void {
         $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36';
         $this->assertFalse(is_mobile());
         $this->assertFalse(is_tablet());
@@ -173,7 +173,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(is_tablet());
     }
 
-    public function testOptionNoMobileDesignOnTablet() {
+    public function testOptionNoMobileDesignOnTablet(): void {
         Settings::set('no_mobile_design_on_tablet', 1);
 
         $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (Linux; U; Android 4.2.2; de-de; A1-811 Build/JDQ39) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30';

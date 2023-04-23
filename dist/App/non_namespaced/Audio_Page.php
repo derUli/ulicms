@@ -59,7 +59,7 @@ class Audio_Page extends Page {
         return 'fas fa-volume-up';
     }
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null): void {
         parent::fillVars($result);
         $this->audio = $result->audio;
         $this->text_position = $result->text_position;

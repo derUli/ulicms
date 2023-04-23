@@ -13,13 +13,13 @@ class EncryptionTest extends \PHPUnit\Framework\TestCase {
         Settings::set('password_salt', $this->salt);
     }
 
-    public function testHashPassword() {
+    public function testHashPassword(): void {
         $this->assertEquals(128, strlen(Hash::hashPassword('foobar')));
         $this->assertEquals(128, strlen(Hash::hashPassword('hello world')));
         $this->assertEquals(128, strlen(Hash::hashPassword('topsecret')));
     }
 
-    public function testHashPasswordWithCreateNewSalt() {
+    public function testHashPasswordWithCreateNewSalt(): void {
         Settings::delete('password_salt');
 
         $this->assertNull(Settings::get('password_salt'));

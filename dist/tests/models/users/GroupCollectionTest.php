@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Models\Users\GroupCollection;
 
 class GroupCollectionTest extends \PHPUnit\Framework\TestCase {
-    public function testGetAllowedTags() {
+    public function testGetAllowedTags(): void {
         $user = $this->getTestUser();
         $collection = new GroupCollection($user);
 

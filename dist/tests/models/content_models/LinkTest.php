@@ -5,7 +5,7 @@ class LinkTest extends \PHPUnit\Framework\TestCase {
         Database::deleteFrom('content', "slug like 'unit_test_%'");
     }
 
-    public function testCreateUpdateAndDeleteLink() {
+    public function testCreateUpdateAndDeleteLink(): void {
         $link = new Link();
         $link->title = 'Unit Test Link';
         $link->slug = 'unit_test_' . uniqid();
@@ -42,7 +42,7 @@ class LinkTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('https://www.ulicms.de', $loadedLink->link_url);
     }
 
-    public function testUpdateCreatesDataset() {
+    public function testUpdateCreatesDataset(): void {
         $link = new Link();
         $link->title = 'Unit Test Link';
         $link->slug = 'unit_test_' . uniqid();

@@ -5,7 +5,7 @@ class VideoPageTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
     }
 
-    public function testSetArticle() {
+    public function testSetArticle(): void {
         $videoPage = new Video_Page();
         $videoPage->title = 'Unit Test Article';
         $videoPage->slug = 'unit test';

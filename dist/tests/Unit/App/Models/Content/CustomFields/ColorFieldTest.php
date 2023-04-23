@@ -10,7 +10,7 @@ class ColorFieldTest extends \PHPUnit\Framework\TestCase {
         include_once getLanguageFilePath('en');
     }
 
-    public function testRender() {
+    public function testRender(): void {
         $field = new ColorField();
         $field->name = 'my_field';
         $field->title = 'design';

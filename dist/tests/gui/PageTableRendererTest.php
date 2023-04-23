@@ -8,7 +8,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         include_once getLanguageFilePath('en');
     }
 
-    public function testGetDataReturns3Items() {
+    public function testGetDataReturns3Items(): void {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -21,7 +21,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($data['recordsTotal'], $data['recordsFiltered']);
     }
 
-    public function testGetDataReturnsOther3Items() {
+    public function testGetDataReturnsOther3Items(): void {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -44,7 +44,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($data2['recordsTotal'], $data2['recordsFiltered']);
     }
 
-    public function testGetDataFiltered() {
+    public function testGetDataFiltered(): void {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -61,7 +61,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetDataFilterLanguagesByGroup() {
+    public function testGetDataFilterLanguagesByGroup(): void {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -88,7 +88,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetDataFilterByLanguageAndType() {
+    public function testGetDataFilterByLanguageAndType(): void {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -115,7 +115,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetDataFilterByParentIdNoParent() {
+    public function testGetDataFilterByParentIdNoParent(): void {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -141,7 +141,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetDataFilterByParentIdWithParent() {
+    public function testGetDataFilterByParentIdWithParent(): void {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -173,7 +173,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetDataFilterByCategoryId() {
+    public function testGetDataFilterByCategoryId(): void {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -202,7 +202,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, $nonExistingCategory['data']);
     }
 
-    public function testGetDataFilterByApproved() {
+    public function testGetDataFilterByApproved(): void {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -230,7 +230,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotEquals(count($approvedData['data']), $notApprovedData['data']);
     }
 
-    public function testGetDataFilterByMenu() {
+    public function testGetDataFilterByMenu(): void {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -251,7 +251,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetDataFilterActive() {
+    public function testGetDataFilterActive(): void {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
@@ -286,7 +286,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetDataFilteredWithStart() {
+    public function testGetDataFilteredWithStart(): void {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 

@@ -19,7 +19,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         $dbmigrator->resetDBTrack('dbmigrator_test');
     }
 
-    public function testCheckVarsWithComponentEmpty() {
+    public function testCheckVarsWithComponentEmpty(): void {
         $migrator = new DBMigrator('', '');
 
         $this->expectException('Exception');
@@ -27,7 +27,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         $migrator->checkVars();
     }
 
-    public function testCheckVarsWithFolderEmpty() {
+    public function testCheckVarsWithFolderEmpty(): void {
         $migrator = new DBMigrator('gefüllt', '');
 
         $this->expectException('Exception');
@@ -35,7 +35,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         $migrator->checkVars();
     }
 
-    public function testCheckVarsWithNonExistingFolder() {
+    public function testCheckVarsWithNonExistingFolder(): void {
         $migrator = new DBMigrator('gefüllt', 'dies_ist_ein_nichtordner');
 
         $this->expectException('Exception');
@@ -43,7 +43,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         $migrator->checkVars();
     }
 
-    public function testDBMigratorThrowsNoError() {
+    public function testDBMigratorThrowsNoError(): void {
         $migrator = new DBMigrator(
             'core',
             Path::resolve('ULICMS_ROOT/lib/migrations/up')
@@ -52,7 +52,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($migrator->checkVars());
     }
 
-    public function testResetDBTrack() {
+    public function testResetDBTrack(): void {
         for ($i = 1; $i <= 3; $i++) {
             $sql = 'INSERT INTO {prefix}dbtrack (component, name) '
                     . 'values (?,?)';
@@ -84,7 +84,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testMigrateWithStop() {
+    public function testMigrateWithStop(): void {
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
             Path::resolve(self::DB_MIGRATOR_UP_DIR)
@@ -96,7 +96,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotContains('email', $columns);
     }
 
-    public function testMigrate() {
+    public function testMigrate(): void {
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
             Path::resolve(self::DB_MIGRATOR_UP_DIR)
@@ -108,7 +108,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains('email', $columns);
     }
 
-    public function testRollback() {
+    public function testRollback(): void {
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
             Path::resolve(self::DB_MIGRATOR_UP_DIR)
@@ -126,7 +126,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(Database::tableExists('employees'));
     }
 
-    public function testRollbackWithStop() {
+    public function testRollbackWithStop(): void {
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
             Path::resolve(self::DB_MIGRATOR_UP_DIR)
@@ -146,7 +146,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotContains('email', $columns);
     }
 
-    public function testMigrateThrowsSQLException() {
+    public function testMigrateThrowsSQLException(): void {
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
             Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
@@ -155,7 +155,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         $dbmigrator->migrate();
     }
 
-    public function testRollbackThrowsSQLException() {
+    public function testRollbackThrowsSQLException(): void {
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
             Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
@@ -171,7 +171,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
         $dbmigrator->rollback();
     }
 
-    public function testResetDbTrackAll() {
+    public function testResetDbTrackAll(): void {
         $this->assertGreaterThanOrEqual(
             31,
             Database::getNumRows(

@@ -7,7 +7,7 @@ use Spatie\Snapshots\MatchesSnapshots;
 class StringHelperTest extends \PHPUnit\Framework\TestCase {
     use MatchesSnapshots;
 
-    public function testRemoveEmptyLineFromString() {
+    public function testRemoveEmptyLineFromString(): void {
         $input = file_get_contents(
             Path::resolve('ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.input.txt')
         );
@@ -19,7 +19,7 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testlinesFromFile() {
+    public function testlinesFromFile(): void {
         $lines = StringHelper::linesFromFile(
             $this->getTestFilePath(),
             false,
@@ -35,22 +35,22 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(23, strlen($lines[3]));
     }
 
-    public function testLinesFromFileRemoveEmpty() {
+    public function testLinesFromFileRemoveEmpty(): void {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), false, true, false);
         $this->assertCount(5, $lines);
     }
 
-    public function testLinesFromFileRemoveComments() {
+    public function testLinesFromFileRemoveComments(): void {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), false, false, true);
         $this->assertCount(7, $lines);
     }
 
-    public function testLinesFromFileRemoveCommentsAndEmpty() {
+    public function testLinesFromFileRemoveCommentsAndEmpty(): void {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), false, true, true);
         $this->assertCount(3, $lines);
     }
 
-    public function testLinesFromFileTrim() {
+    public function testLinesFromFileTrim(): void {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), true, false, false);
         $this->assertCount(9, $lines);
         $this->assertFalse(str_starts_with($lines[2], ' '));
@@ -61,7 +61,7 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(21, strlen($lines[3]));
     }
 
-    public function testLinesFromFileTrimRemoveCommentsAndEmpty() {
+    public function testLinesFromFileTrimRemoveCommentsAndEmpty(): void {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), true, true, true);
         $this->assertCount(3, $lines);
         $this->assertFalse(str_starts_with($lines[0], ' '));
@@ -73,12 +73,12 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(21, strlen($lines[1]));
     }
 
-    public function testLinesFromFileNotFound() {
+    public function testLinesFromFileNotFound(): void {
         $lines = StringHelper::linesFromFile('path/this-is-not-a-file', true, true, true);
         $this->assertNull($lines);
     }
 
-    public function testTrimLines() {
+    public function testTrimLines(): void {
         $inputFile = Path::resolve('ULICMS_ROOT/tests/fixtures/trimLines.input.txt');
 
         $actual = StringHelper::trimLines(file_get_contents($inputFile));
@@ -86,7 +86,7 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertMatchesTextSnapshot($actual);
     }
 
-    public function testMakeLinksClickable() {
+    public function testMakeLinksClickable(): void {
         $input = 'Das hier ist ein Text.
 http://www.google.de
 Noch mehr Text http://www.ulicms.de und so weiter.';
@@ -98,12 +98,12 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         $this->assertEquals($expected, StringHelper::makeLinksClickable($input));
     }
 
-    public function testCleanString() {
+    public function testCleanString(): void {
         $this->assertEquals('hello-world', StringHelper::cleanString('Hello World'));
         $this->assertEquals('das-ist-die-grossfraesmaschinenoeffnungstuer', StringHelper::cleanString('Das ist die Großfräsmaschinenöffnungstür.'));
     }
 
-    public function testGetExcerptReturnsShortedString() {
+    public function testGetExcerptReturnsShortedString(): void {
         $this->assertEquals(
             'Lorem Ipsum...',
             StringHelper::getExcerpt(
@@ -114,7 +114,7 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         );
     }
 
-    public function testGetExcerptReturnsFullString() {
+    public function testGetExcerptReturnsFullString(): void {
         $this->assertEquals(
             'Lorem Ipsum sit dor amet usw.',
             StringHelper::getExcerpt(
@@ -125,7 +125,7 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
         );
     }
 
-    public function testSplitAndTrim() {
+    public function testSplitAndTrim(): void {
         $input = 'Max;
         Muster;
         max@muster.de;

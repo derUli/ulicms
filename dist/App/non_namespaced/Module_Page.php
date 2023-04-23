@@ -71,7 +71,7 @@ class Module_Page extends Page {
         return 'fas fa-puzzle-piece';
     }
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null): void {
         parent::fillVars($result);
         $this->module = $result->module;
         $this->text_position = $result->text_position;

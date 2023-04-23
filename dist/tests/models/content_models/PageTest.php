@@ -71,13 +71,13 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::clear();
     }
 
-    public function testGetEmbeddedModulesPage() {
+    public function testGetEmbeddedModulesPage(): void {
         $page = new Page();
         $page->content = $this->ipsum;
         $this->assertEquals(3, count($page->getEmbeddedModules()));
     }
 
-    public function testContainsModuleReturnsTrue() {
+    public function testContainsModuleReturnsTrue(): void {
         $page = new Page();
         $page->content = $this->ipsum;
 
@@ -86,7 +86,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($page->containsModule('hello'));
     }
 
-    public function testContainsModuleReturnsFalse() {
+    public function testContainsModuleReturnsFalse(): void {
         $page = new Page();
         $page->content = 'Hallo Welt';
 
@@ -95,7 +95,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->containsModule('hello'));
     }
 
-    public function testGetEmbeddedModulesModulePage() {
+    public function testGetEmbeddedModulesModulePage(): void {
         $page = new Module_Page();
 
         $page->content = $this->ipsum;
@@ -104,7 +104,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(3, count($page->getEmbeddedModules()));
     }
 
-    public function testDisableShortcodesTrue() {
+    public function testDisableShortcodesTrue(): void {
         $page = new Page();
         $page->title = 'testDisableShortcodesTrue';
         $page->slug = 'testdisableshortcodes';
@@ -122,7 +122,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString('[csrf_token_html]', get_content());
     }
 
-    public function testDisableShortcodesFalse() {
+    public function testDisableShortcodesFalse(): void {
         $page = new Page();
         $page->title = 'testDisableShortcodesFalse';
         $page->slug = 'testdisableshortcodes';
@@ -145,7 +145,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringNotContainsString('[csrf_token_html]', get_content());
     }
 
-    public function testGetShowHeadlineReturnsTrue() {
+    public function testGetShowHeadlineReturnsTrue(): void {
         $page = new Page();
 
         $this->assertTrue($page->getShowHeadline());
@@ -164,7 +164,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($savedPage->getShowHeadline());
     }
 
-    public function testGetShowHeadlineReturnsFalse() {
+    public function testGetShowHeadlineReturnsFalse(): void {
         $page = new Page();
 
         $page->title = 'testDisableShortcodesNull';
@@ -181,7 +181,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($savedPage->getShowHeadline());
     }
 
-    public function testGetHeadlineReturnsTitle() {
+    public function testGetHeadlineReturnsTitle(): void {
         $page = new Page();
         $page->title = 'Originaler Titel';
         $page->slug = 'testdisableshortcodes';
@@ -195,7 +195,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Originaler Titel', $savedPage->getHeadline());
     }
 
-    public function testGetHeadlineReturnsAlternateTitle() {
+    public function testGetHeadlineReturnsAlternateTitle(): void {
         $page = new Page();
 
         $page->title = 'Originaler Titel';
@@ -213,7 +213,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Alternativer Titel', $savedPage->getHeadline());
     }
 
-    public function testDisableShortcodesNull() {
+    public function testDisableShortcodesNull(): void {
         $page = new Page();
         $page->title = 'testDisableShortcodesNull';
         $page->slug = 'testdisableshortcodes';
@@ -235,7 +235,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringNotContainsString('[csrf_token_html]', get_content());
     }
 
-    public function testCreatePageWithCommentsEnabledTrue() {
+    public function testCreatePageWithCommentsEnabledTrue(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -252,7 +252,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($page->comments_enabled);
     }
 
-    public function testCreatePageWithCommentsEnabledFalse() {
+    public function testCreatePageWithCommentsEnabledFalse(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -269,7 +269,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->comments_enabled);
     }
 
-    public function testCreatePageWithCommentsEnabledNull() {
+    public function testCreatePageWithCommentsEnabledNull(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -286,7 +286,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($page->comments_enabled);
     }
 
-    public function testUpdatePageWithCommentsEnabledTrue() {
+    public function testUpdatePageWithCommentsEnabledTrue(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -305,7 +305,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($page->comments_enabled);
     }
 
-    public function testUpdatePageWithCommentsEnabledFalse() {
+    public function testUpdatePageWithCommentsEnabledFalse(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -325,7 +325,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->comments_enabled);
     }
 
-    public function testUpdatePageWithCommentsEnabledNull() {
+    public function testUpdatePageWithCommentsEnabledNull(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -345,19 +345,19 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($page->comments_enabled);
     }
 
-    public function testAreCommentsEnabledPageTrue() {
+    public function testAreCommentsEnabledPageTrue(): void {
         $page = new Page();
         $page->comments_enabled = true;
         $this->assertTrue($page->areCommentsEnabled());
     }
 
-    public function testAreCommentsEnabledPageFalse() {
+    public function testAreCommentsEnabledPageFalse(): void {
         $page = new Page();
         $page->comments_enabled = false;
         $this->assertFalse($page->areCommentsEnabled());
     }
 
-    public function testAreCommentsEnabledWithTypesReturnsTrue() {
+    public function testAreCommentsEnabledWithTypesReturnsTrue(): void {
         Settings::set('comments_enabled', '1');
         Settings::set('commentable_content_types', 'page;article');
 
@@ -365,7 +365,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($page->areCommentsEnabled());
     }
 
-    public function testAreCommentsEnabledWithTypesReturnFalse() {
+    public function testAreCommentsEnabledWithTypesReturnFalse(): void {
         Settings::set('comments_enabled', '1');
         Settings::set('commentable_content_types', 'page;article');
 
@@ -373,7 +373,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->areCommentsEnabled());
     }
 
-    public function testAreCommentsEnabledSettingsTrue() {
+    public function testAreCommentsEnabledSettingsTrue(): void {
         $page = new Page();
         $page->comments_enabled = null;
 
@@ -382,7 +382,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($page->areCommentsEnabled());
     }
 
-    public function testAreCommentsEnabledSettingsFalse() {
+    public function testAreCommentsEnabledSettingsFalse(): void {
         $page = new Page();
         $page->comments_enabled = null;
 
@@ -391,7 +391,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->areCommentsEnabled());
     }
 
-    public function testHasCommentsReturnTrue() {
+    public function testHasCommentsReturnTrue(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -430,7 +430,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($page->hasComments());
     }
 
-    public function testHasCommentsReturnFalse() {
+    public function testHasCommentsReturnFalse(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -444,7 +444,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->hasComments());
     }
 
-    public function testIsDeletedReturnsFalse() {
+    public function testIsDeletedReturnsFalse(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -457,7 +457,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->isDeleted());
     }
 
-    public function testIsDeletedReturnsTrue() {
+    public function testIsDeletedReturnsTrue(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -472,7 +472,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($page->isDeleted());
     }
 
-    public function testCreateDeleted() {
+    public function testCreateDeleted(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -486,7 +486,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($page->isDeleted());
     }
 
-    public function testGetDeletedAtReturnsNull() {
+    public function testGetDeletedAtReturnsNull(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -499,7 +499,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($page->getDeletedAt());
     }
 
-    public function testGetDeletedAtReturnsTimestamp() {
+    public function testGetDeletedAtReturnsTimestamp(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -513,7 +513,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThan(time() - 100, $page->getDeletedAt());
     }
 
-    public function testGetCommentsReturnsArrayWithResults() {
+    public function testGetCommentsReturnsArrayWithResults(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -554,7 +554,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Kommentar 2', $page->getComments('date asc')[1]->getText());
     }
 
-    public function testGetCommentsReturnsEmptyArray() {
+    public function testGetCommentsReturnsEmptyArray(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -568,7 +568,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, $page->getComments());
     }
 
-    public function testGetUrlWithSuffix() {
+    public function testGetUrlWithSuffix(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -587,7 +587,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringEndsWith('foo=bar&hello=world', $url);
     }
 
-    public function testGetUrlWithoutSuffix() {
+    public function testGetUrlWithoutSuffix(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -605,7 +605,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString("{$page->slug}", $url);
     }
 
-    public function testIncludeShortcodeShouldIncludeOtherPages() {
+    public function testIncludeShortcodeShouldIncludeOtherPages(): void {
         $snippet = new Snippet();
         $snippet->title = 'Unit Test ' . time();
         $snippet->slug = 'unit-test-' . time();
@@ -622,7 +622,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('This is even more text', replaceShortcodesWithModules($shortcode));
     }
 
-    public function testIncludeShortcodeShouldNotIncludeItself() {
+    public function testIncludeShortcodeShouldNotIncludeItself(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -640,7 +640,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($shortcode, replaceShortcodesWithModules($shortcode));
     }
 
-    public function testCreatePageWithMetaDescriptionNull() {
+    public function testCreatePageWithMetaDescriptionNull(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -661,7 +661,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($page->robots);
     }
 
-    public function testUpdatePageWithMetaDescriptionNull() {
+    public function testUpdatePageWithMetaDescriptionNull(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -688,7 +688,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($page->meta_keywords);
     }
 
-    public function testCustomDataJsonIsObjectByDefault() {
+    public function testCustomDataJsonIsObjectByDefault(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -704,7 +704,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('{}', $raw->custom_data);
     }
 
-    public function testHasChildrenReturnsTrue() {
+    public function testHasChildrenReturnsTrue(): void {
         $result = Database::pQuery('select parent_id from {prefix}content where '
                         . 'parent_id is not null', [], true);
         $dataset = Database::fetchObject($result);
@@ -713,7 +713,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($page->hasChildren());
     }
 
-    public function testHasChildrenReturnsFalse() {
+    public function testHasChildrenReturnsFalse(): void {
         $page = new Page();
 
         $page->title = 'Unit Test ' . time();
@@ -729,7 +729,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->hasChildren());
     }
 
-    public function testGetChildrenReturnsTrue() {
+    public function testGetChildrenReturnsTrue(): void {
         $result = Database::pQuery('select parent_id from {prefix}content where '
                         . 'parent_id is not null', [], true);
         $dataset = Database::fetchObject($result);
@@ -743,7 +743,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetChildrenReturnsFalse() {
+    public function testGetChildrenReturnsFalse(): void {
         $page = new Page();
 
         $page->title = 'Unit Test ' . time();
@@ -760,7 +760,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, $children);
     }
 
-    public function testGetParentReturnsNull() {
+    public function testGetParentReturnsNull(): void {
         $result = Database::pQuery('select id from {prefix}content where '
                         . 'parent_id is null', [], true);
         $dataset = Database::fetchObject($result);
@@ -769,7 +769,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($page->getParent());
     }
 
-    public function testGetParentReturnsModel() {
+    public function testGetParentReturnsModel(): void {
         $result = Database::pQuery('select parent_id, id from {prefix}content where '
                         . 'parent_id is not null', [], true);
         $dataset = Database::fetchObject($result);
@@ -780,12 +780,12 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, count($page->getParent()->getChildren()));
     }
 
-    public function testGetHistoryNotPersistentReturnsNothing() {
+    public function testGetHistoryNotPersistentReturnsNothing(): void {
         $page = new Page();
         $this->assertCount(0, $page->getHistory());
     }
 
-    public function testGetHistoryWithPersistentReturnsNothing() {
+    public function testGetHistoryWithPersistentReturnsNothing(): void {
         $page = new Page();
 
         $page->title = 'Unit Test ' . time();
@@ -802,7 +802,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, $page->getHistory());
     }
 
-    public function testGetHistoryReturnsChanges() {
+    public function testGetHistoryReturnsChanges(): void {
         $page = new Page();
 
         $page->title = 'Unit Test ' . time();
@@ -823,7 +823,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(3, $page->getHistory());
     }
 
-    public function testIsFrontPageReturnsTrue() {
+    public function testIsFrontPageReturnsTrue(): void {
         $page = new Page();
         $page->title = 'hallo';
         $page->slug = 'unit-test-is-frontpage' . uniqid();
@@ -839,7 +839,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($page->isFrontPage());
     }
 
-    public function testIsFrontPageReturnsFalse() {
+    public function testIsFrontPageReturnsFalse(): void {
         $page = new Page();
         $page->title = 'hallo';
         $page->slug = 'unit-test-not-frontpage' . uniqid();
@@ -854,7 +854,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->isFrontPage());
     }
 
-    public function testIsErrorPage403ReturnsFalse() {
+    public function testIsErrorPage403ReturnsFalse(): void {
         $page = new Page();
         $page->title = 'Unit Test Error Page 403';
         $page->slug = 'unit-test-error-page-403-' . uniqid();
@@ -870,7 +870,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->isErrorPage());
     }
 
-    public function testIsErrorPage404ReturnsFalse() {
+    public function testIsErrorPage404ReturnsFalse(): void {
         $page = new Page();
         $page->title = 'Unit Test Error Page 404';
         $page->slug = 'unit-test-error-page-404-' . uniqid();
@@ -886,7 +886,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->isErrorPage());
     }
 
-    public function testIsErrorPage403ReturnsTrue() {
+    public function testIsErrorPage403ReturnsTrue(): void {
         $page = new Page();
         $page->title = 'Unit Test Error Page 403';
         $page->slug = 'unit-test-error-page-403-' . uniqid();
@@ -906,7 +906,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->makeErrorPage403(false);
     }
 
-    public function testIsErrorPage404ReturnsTrue() {
+    public function testIsErrorPage404ReturnsTrue(): void {
         $page = new Page();
         $page->title = 'Unit Test Error Page 404';
         $page->slug = 'unit-test-error-page-404-' . uniqid();
@@ -926,7 +926,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->makeErrorPage404(false);
     }
 
-    public function testCreateWithApproved0() {
+    public function testCreateWithApproved0(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -953,7 +953,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(1, $page->approved);
     }
 
-    public function testCreateWithoutApproved() {
+    public function testCreateWithoutApproved(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -973,7 +973,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(1, $page->approved);
     }
 
-    public function testCreatePageWithRobots() {
+    public function testCreatePageWithRobots(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -993,7 +993,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('noindex, nofollow', $page->robots);
     }
 
-    public function testLoadByIdThrowsException() {
+    public function testLoadByIdThrowsException(): void {
         $page = new Page();
 
         $this->expectException(DatasetNotFoundException::class);
@@ -1001,7 +1001,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->loadByID(PHP_INT_MAX);
     }
 
-    public function testLoadBySlugAndLanguageThrowsException() {
+    public function testLoadBySlugAndLanguageThrowsException(): void {
         $page = new Page();
 
         $this->expectException(DatasetNotFoundException::class);
@@ -1009,7 +1009,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $page->loadBySlugAndLanguage('erdogan-kokuyor', 'tr');
     }
 
-    public function testSetAndGetPermissions() {
+    public function testSetAndGetPermissions(): void {
         $permissions = new PagePermissions(
             [
                 'group' => true,
@@ -1023,7 +1023,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($permissions, $page->getPermissions());
     }
 
-    public function testUndelete() {
+    public function testUndelete(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -1040,7 +1040,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($page->isDeleted());
     }
 
-    public function testLoadByRequestId() {
+    public function testLoadByRequestId(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();

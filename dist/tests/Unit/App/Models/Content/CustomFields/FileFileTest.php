@@ -10,7 +10,7 @@ class FileFileTest extends \PHPUnit\Framework\TestCase {
         include_once getLanguageFilePath('en');
     }
 
-    public function testRender() {
+    public function testRender(): void {
         $field = new FileFile();
         $field->name = 'my_field';
         $field->title = 'file';

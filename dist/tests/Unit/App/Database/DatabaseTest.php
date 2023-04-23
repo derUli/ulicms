@@ -14,20 +14,20 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         Database::select($_ENV['DB_DATABASE']);
     }
 
-    public function testIsConnectedReturnsTrue() {
+    public function testIsConnectedReturnsTrue(): void {
         $this->assertTrue(Database::isConnected());
     }
 
-    public function testIsSchemaSelectedReturnsTrue() {
+    public function testIsSchemaSelectedReturnsTrue(): void {
         $this->assertTrue(Database::isSchemaSelected());
     }
 
-    public function testIsSchemaSelectedReturnsFalse() {
+    public function testIsSchemaSelectedReturnsFalse(): void {
         Database::select('nothing');
         $this->assertFalse(Database::isSchemaSelected());
     }
 
-    public function testIsConnectedReturnsFalse() {
+    public function testIsConnectedReturnsFalse(): void {
         $oldConnection = Database::getConnection();
 
         Database::setConnection(null);
@@ -37,7 +37,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         Database::setConnection($oldConnection);
     }
 
-    public function testGetAllTables() {
+    public function testGetAllTables(): void {
         $tables = Database::getAllTables();
         $prefix = $_ENV['DB_PREFIX'];
         $this->assertGreaterThanOrEqual(20, count($tables));
@@ -47,23 +47,23 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains("{$prefix}users", $tables);
     }
 
-    public function testGetServerVersion() {
+    public function testGetServerVersion(): void {
         $version = Database::getServerVersion();
         $version = preg_replace('/[^0-9.].*/', '', $version);
         $this->assertTrue(\App\Utils\VersionComparison::compare($version, '5.5.3', '>='));
     }
 
-    public function testAnyReturnsTrue() {
+    public function testAnyReturnsTrue(): void {
         $result = Database::query("select id from {prefix}settings where value <> ''", true);
         $this->assertTrue(Database::any($result));
     }
 
-    public function testAnyReturnsFalse() {
+    public function testAnyReturnsFalse(): void {
         $result = Database::query('select id from {prefix}settings where value <> value', true);
         $this->assertFalse(Database::any($result));
     }
 
-    public function testGetColumnNames() {
+    public function testGetColumnNames(): void {
         $columns = Database::getColumnNames('users', true);
         $this->assertGreaterThanOrEqual(18, count($columns));
         $this->assertContains('username', $columns);
@@ -72,17 +72,17 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains('password', $columns);
     }
 
-    public function testGetNumRowsAny() {
+    public function testGetNumRowsAny(): void {
         $result = Database::query("select id from {prefix}settings where name in ('homepage_title', 'frontpage', 'installed_at')", true);
         $this->assertEquals(3, Database::getNumRows($result));
     }
 
-    public function testGetNumRowsZero() {
+    public function testGetNumRowsZero(): void {
         $result = Database::query("select id from {prefix}settings where name in ('this_is_not_a_setting')", true);
         $this->assertEquals(0, Database::getNumRows($result));
     }
 
-    public function testGetLastError() {
+    public function testGetLastError(): void {
         $this->expectException(SqlException::class);
         // this sql fails always
         $result = Database::query('select devil from hell', true);
@@ -94,7 +94,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringEndsWith("doesn't exist", $error);
     }
 
-    public function testError() {
+    public function testError(): void {
         // this sql fails always
         try {
             $result = Database::query('select devil from hell', true);
@@ -107,7 +107,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetError() {
+    public function testGetError(): void {
         LoggerRegistry::register('sql_log', $this->getSQLLogger());
         try {
             // this sql fails always
@@ -122,12 +122,12 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         LoggerRegistry::unregister('sql_log');
     }
 
-    public function testSelectAll() {
+    public function testSelectAll(): void {
         $allSettings = Database::selectAll('settings');
         $this->assertTrue(Database::any($allSettings));
     }
 
-    public function testDropTable() {
+    public function testDropTable(): void {
         Database::query('CREATE TABLE {prefix}test_table (
                         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                         firstname VARCHAR(30) NOT NULL,
@@ -142,7 +142,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotContains("{$prefix}test_table", Database::getAllTables());
     }
 
-    public function testDropColumn() {
+    public function testDropColumn(): void {
         Database::query('CREATE TABLE {prefix}test_table (
                         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                         firstname VARCHAR(30) NOT NULL,
@@ -158,26 +158,26 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         Database::dropTable('test_table');
     }
 
-    public function testGetClientInfo() {
+    public function testGetClientInfo(): void {
         $this->assertStringStartsWith('mysql', Database::getClientInfo());
     }
 
-    public function testGetClientVersion() {
+    public function testGetClientVersion(): void {
         // https://www.w3schools.com/php/func_mysqli_get_client_version.asp
         $this->assertGreaterThanOrEqual(50000, Database::getClientVersion());
     }
 
-    public function testEscapeName() {
+    public function testEscapeName(): void {
         $this->assertEquals('`alter`', Database::escapeName('alter'));
         $this->assertEquals('`JohnDoe`', Database::escapeName("'JohnDoe'"));
         $this->assertEquals('`JohnDoe`', Database::escapeName('"JohnDoe"'));
     }
 
-    public function testGetConnectionReturnsMysqliObject() {
+    public function testGetConnectionReturnsMysqliObject(): void {
         $this->assertInstanceOf('mysqli', Database::getConnection());
     }
 
-    public function testIsConnectedReturnsNull() {
+    public function testIsConnectedReturnsNull(): void {
         $oldConnection = Database::getConnection();
 
         Database::setConnection(null);
@@ -187,7 +187,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         Database::setConnection($oldConnection);
     }
 
-    public function testGetLastInsertID() {
+    public function testGetLastInsertID(): void {
         Database::query("insert into {prefix}settings (name, value)
                          values
                          ('foo2', 'bar')", true);
@@ -204,7 +204,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         Settings::delete('foo2');
     }
 
-    public function testGetInsertID() {
+    public function testGetInsertID(): void {
         Database::query("insert into {prefix}settings (name, value)
                          values
                          ('foo2', 'bar')", true);
@@ -221,7 +221,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         Settings::delete('foo2');
     }
 
-    public function testGetNumFieldCount() {
+    public function testGetNumFieldCount(): void {
         Database::selectAll('users', ['lastname', 'firstname', 'email']);
         $this->assertEquals(3, Database::getNumFieldCount());
 
@@ -229,7 +229,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(2, Database::getNumFieldCount());
     }
 
-    public function testGetAffectedRows() {
+    public function testGetAffectedRows(): void {
         for ($i = 1; $i <= 13; $i++) {
             Settings::set("test_setting_{$i}", 1);
         }
@@ -237,11 +237,11 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(13, Database::getAffectedRows());
     }
 
-    public function testSelectMinReturnsZero() {
+    public function testSelectMinReturnsZero(): void {
         $this->assertEquals(0, Database::selectMin('settings', 'id', '1 = 0'));
     }
 
-    public function testSelectMinReturnsMin() {
+    public function testSelectMinReturnsMin(): void {
         $min = Database::selectMin('settings', 'id');
         $max = Database::selectMax('settings', 'id');
 
@@ -250,22 +250,22 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertLessThan($max, $min);
     }
 
-    public function testSelectMaxReturnsZero() {
+    public function testSelectMaxReturnsZero(): void {
         $this->assertEquals(0, Database::selectMax('settings', 'id', '1 = 0'));
     }
 
-    public function testSelectMaxReturnsMax() {
+    public function testSelectMaxReturnsMax(): void {
         $min = Database::selectMin('settings', 'id');
         $max = Database::selectMax('settings', 'id');
         $this->assertIsInt($max);
         $this->assertGreaterThan($min, $max);
     }
 
-    public function testSelectAvgReturnsZero() {
+    public function testSelectAvgReturnsZero(): void {
         $this->assertEquals(0, Database::selectAvg('settings', 'id', '1 = 0'));
     }
 
-    public function testSelectAvgReturnsAvg() {
+    public function testSelectAvgReturnsAvg(): void {
         $min = Database::selectMin('settings', 'id');
         $max = Database::selectMax('settings', 'id');
         $avg = Database::selectAvg('settings', 'id');
@@ -275,7 +275,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertLessThan($max, $avg);
     }
 
-    public function testFetchAll() {
+    public function testFetchAll(): void {
         $result = Database::query(
             "select * from {prefix}settings where
         name in
@@ -294,7 +294,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetSqlStrictModeFlags() {
+    public function testGetSqlStrictModeFlags(): void {
         $this->assertCount(6, Database::getSqlStrictModeFlags());
         foreach (Database::getSqlStrictModeFlags() as $flag) {
             $this->assertIsString($flag);
@@ -305,18 +305,18 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testTableExistsReturnsTrue() {
+    public function testTableExistsReturnsTrue(): void {
         $this->assertTrue(Database::tableExists('content'));
         $this->assertTrue(Database::tableExists('settings'), true);
         $this->assertTrue(Database::tableExists(tbname('content'), false));
     }
 
-    public function testTableExistsReturnsFalse() {
+    public function testTableExistsReturnsFalse(): void {
         $this->assertFalse(Database::tableExists('gibts_echt_nicht'));
         $this->assertFalse(Database::tableExists('content', false));
     }
 
-    public function testFetchArray() {
+    public function testFetchArray(): void {
         $query = Database::selectAll('settings');
 
         while ($row = Database::fetchArray($query)) {
@@ -325,7 +325,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testFetchRow() {
+    public function testFetchRow(): void {
         $query = Database::selectAll('settings');
 
         while ($row = Database::fetchRow($query)) {
@@ -335,7 +335,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testFetchSingleOrDefaultReturnsObject() {
+    public function testFetchSingleOrDefaultReturnsObject(): void {
         $query = Database::selectAll('settings', [], ' 1 = 1 limit 1');
 
         $default = new stdClass();
@@ -347,14 +347,14 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotEmpty($row->name);
     }
 
-    public function testFetchFirstReturnsNull() {
+    public function testFetchFirstReturnsNull(): void {
         $query = Database::selectAll('settings', [], '1 = 0');
 
         $row = Database::fetchFirst($query);
         $this->assertNull($row);
     }
 
-    public function testFetchFirstReturnsObject() {
+    public function testFetchFirstReturnsObject(): void {
         $query = Database::selectAll('settings', [], '1=1');
 
         $row = Database::fetchFirst($query);
@@ -363,7 +363,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotEmpty($row->name);
     }
 
-    public function testFetchSingleOrDefaultThrowsException() {
+    public function testFetchSingleOrDefaultThrowsException(): void {
         $query = Database::selectAll('settings', []);
 
         $default = new stdClass();
@@ -374,7 +374,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         Database::fetchSingleOrDefault($query, $default);
     }
 
-    public function testFetchSingleOrDefaultReturnsDefault() {
+    public function testFetchSingleOrDefaultReturnsDefault(): void {
         $query = Database::selectAll('settings', [], '1 = 0');
 
         $default = new stdClass();
@@ -386,32 +386,32 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('default value', $row->name);
     }
 
-    public function testEscapeValueWithFloat() {
+    public function testEscapeValueWithFloat(): void {
         $this->assertEquals(2.99, Database::escapevalue(2.99));
     }
 
-    public function testEscapeValueWithTypeInt() {
+    public function testEscapeValueWithTypeInt(): void {
         $this->assertEquals(2, Database::escapevalue(2.99, DB_TYPE_INT));
     }
 
-    public function testEscapeValueWithTypeFloat() {
+    public function testEscapeValueWithTypeFloat(): void {
         $this->assertEquals(2.0, Database::escapevalue(2, DB_TYPE_FLOAT));
     }
 
-    public function testEscapeValueWithTypeString() {
+    public function testEscapeValueWithTypeString(): void {
         $this->assertEquals('123', Database::escapevalue(123, DB_TYPE_STRING));
     }
 
-    public function testEscapeValueWithTypeBool() {
+    public function testEscapeValueWithTypeBool(): void {
         $this->assertEquals(0, Database::escapevalue(false, DB_TYPE_BOOL));
         $this->assertEquals(1, Database::escapevalue(true, DB_TYPE_BOOL));
     }
 
-    public function testEscapeValueWithTypeOther() {
+    public function testEscapeValueWithTypeOther(): void {
         $this->assertInstanceOf(Page::class, Database::escapevalue(new Page(), PHP_INT_MAX));
     }
 
-    public function testfetchFirstOrDefaultReturnsFirst() {
+    public function testfetchFirstOrDefaultReturnsFirst(): void {
         $query = Database::selectAll('settings', []);
 
         $default = new stdClass();
@@ -423,7 +423,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotEmpty($row->name);
     }
 
-    public function testfetchFirstOrDefaultReturnsDefault() {
+    public function testfetchFirstOrDefaultReturnsDefault(): void {
         $query = Database::selectAll('settings', [], '1 = 0');
 
         $default = new stdClass();
@@ -435,21 +435,21 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('default value', $row->name);
     }
 
-    public function testFetchSingleReturnsNull() {
+    public function testFetchSingleReturnsNull(): void {
         $query = Database::selectAll('settings', [], '1 = 0');
 
         $row = Database::fetchSingle($query);
         $this->assertNull($row);
     }
 
-    public function testFetchSingleThrowsException() {
+    public function testFetchSingleThrowsException(): void {
         $query = Database::selectAll('settings');
 
         $this->expectException(RangeException::class);
         Database::fetchSingle($query);
     }
 
-    public function testFetchSingleReturnsObject() {
+    public function testFetchSingleReturnsObject(): void {
         $query = Database::selectAll('settings', [], '1=1 limit 1');
 
         $row = Database::fetchSingle($query);
@@ -458,11 +458,11 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotEmpty($row->name);
     }
 
-    public function hasMoreResultsReturnsFalse() {
+    public function hasMoreResultsReturnsFalse(): void {
         $this->assertFalse(Database::hasMoreResults());
     }
 
-    public function testCreateSelectAndDropSchema() {
+    public function testCreateSelectAndDropSchema(): void {
         $schema = 'tmp_database_' . uniqid();
         $this->assertTrue(Database::createSchema($schema));
         $this->assertTrue(Database::select($schema));
@@ -475,21 +475,21 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(Database::dropSchema($schema));
     }
 
-    public function testEchoQueriesOutputsSQL() {
+    public function testEchoQueriesOutputsSQL(): void {
         Database::setEchoQueries(true);
         ob_start();
         Database::query("select 'foo' as bar");
         $this->assertEquals("select 'foo' as bar\n", ob_get_clean());
     }
 
-    public function testEchoQueriesOutputsNothing() {
+    public function testEchoQueriesOutputsNothing(): void {
         Database::setEchoQueries(false);
         ob_start();
         Database::query("select 'foo' as bar");
         $this->assertEmpty(ob_get_clean());
     }
 
-    public function testClose() {
+    public function testClose(): void {
         $this->assertTrue(Database::isConnected());
 
         Database::close();
@@ -503,7 +503,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->reconnect();
     }
 
-    public function testConnectFails() {
+    public function testConnectFails(): void {
         Database::close();
 
 
@@ -517,7 +517,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->reconnect();
     }
 
-    public function testMultiQuery() {
+    public function testMultiQuery(): void {
         Database::setEchoQueries(true);
         ob_start();
 
@@ -547,7 +547,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         return new Logger($path);
     }
 
-    private function reconnect($db_strict_mode = null) {
+    private function reconnect($db_strict_mode = null): void {
 
         $db_socket = isset($_ENV['DB_SOCKET']) ? (string)$_ENV['DB_SOCKET'] : ini_get('mysqli.default_socket');
         $db_port = (int)($_ENV['DB_PORT'] ?? ini_get('mysqli.default_port'));

@@ -19,18 +19,18 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
 
     }
 
-    public function testGetWithClassNameReturnsController() {
+    public function testGetWithClassNameReturnsController(): void {
         $this->assertInstanceOf(
             CommentsController::class,
             ControllerRegistry::get('CommentsController')
         );
     }
 
-    public function testGetWithClassNameReturnsNull() {
+    public function testGetWithClassNameReturnsNull(): void {
         $this->assertNull(ControllerRegistry::get('GibtsNichtController'));
     }
 
-    public function testGetWithActionReturnsController() {
+    public function testGetWithActionReturnsController(): void {
         BackendHelper::setAction('audio');
         $this->assertInstanceOf(
             AudioController::class,
@@ -40,7 +40,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         BackendHelper::setAction('home');
     }
 
-    public function testGetWithNonExistingActionReturnsNull() {
+    public function testGetWithNonExistingActionReturnsNull(): void {
         BackendHelper::setAction('pages');
         $this->assertNull(
             ControllerRegistry::get()
@@ -49,20 +49,20 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         BackendHelper::setAction('home');
     }
 
-    public function testGetReturnsNull() {
+    public function testGetReturnsNull(): void {
         BackendHelper::setAction('info');
         $this->assertNull(
             ControllerRegistry::get()
         );
     }
 
-    public function testUserCanCallNotLoggedIn() {
+    public function testUserCanCallNotLoggedIn(): void {
         $this->assertFalse(
             ControllerRegistry::userCanCall('PageController', 'createPost')
         );
     }
 
-    public function testUserCanCallReturnsTrue() {
+    public function testUserCanCallReturnsTrue(): void {
         $user = new User();
         $user->setUsername('testuser-nicht-admin');
         $user->setLastname('Admin');
@@ -77,7 +77,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         unset($_SESSION['login_id']);
     }
 
-    public function testUserCanCallReturnsFalse() {
+    public function testUserCanCallReturnsFalse(): void {
         $user = new User();
         $user->setUsername('testuser-nicht-admin');
         $user->setLastname('Admin');
@@ -92,7 +92,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         unset($_SESSION['login_id']);
     }
 
-    public function testUserCanCallWildCard() {
+    public function testUserCanCallWildCard(): void {
         $user = new User();
         $user->setUsername('testuser-nicht-admin');
         $user->setLastname('Admin');
@@ -112,7 +112,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         unset($_SESSION['login_id']);
     }
 
-    public function testRunMethodsWithNonExistingClassName() {
+    public function testRunMethodsWithNonExistingClassName(): void {
         $_REQUEST['sClass'] = 'GibtsNichtController';
         $_REQUEST['sMethod'] = 'puke';
 
@@ -120,7 +120,7 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         ControllerRegistry::runMethods();
     }
 
-    public function testRunMethods() {
+    public function testRunMethods(): void {
         $_REQUEST['sClass'] = 'Fortune';
         $_REQUEST['sMethod'] = 'helloWorld';
         $_SERVER['REQUEST_METHOD'] = 'GET';

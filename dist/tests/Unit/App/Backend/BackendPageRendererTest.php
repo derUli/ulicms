@@ -9,31 +9,31 @@ class BackendPageRendererTest extends \PHPUnit\Framework\TestCase {
         require_once getLanguageFilePath('en');
     }
 
-    public function testBackendPageConstructorWithAction() {
+    public function testBackendPageConstructorWithAction(): void {
         $renderer = new BackendPageRenderer('foo');
         $this->assertEquals('foo', $renderer->getAction());
     }
 
-    public function testBackendPageConstructorWithActionAndModel() {
+    public function testBackendPageConstructorWithActionAndModel(): void {
         $renderer = new BackendPageRenderer('foo', new Page());
         $this->assertEquals('foo', $renderer->getAction());
         $this->assertInstanceOf(Page::class, BackendPageRenderer::getModel());
     }
 
-    public function testBackendPageSetAction() {
+    public function testBackendPageSetAction(): void {
         $renderer = new BackendPageRenderer('foo');
         $renderer->setAction('bar');
         $this->assertEquals('bar', $renderer->getAction());
     }
 
-    public function testBackendPageSetModel() {
+    public function testBackendPageSetModel(): void {
         $renderer = new BackendPageRenderer('foo');
         BackendPageRenderer::setModel(new User());
         $this->assertInstanceOf(User::class, BackendPageRenderer::getModel());
     }
 
-    public function testOutputMininified() {
-        $output = TestHelper::getOutput(static function() {
+    public function testOutputMininified(): void {
+        $output = TestHelper::getOutput(static function(): void {
             $renderer = new BackendPageRenderer('foo');
             ob_start();
             echo '<div     class="hello"> Hello    World</div>  ';

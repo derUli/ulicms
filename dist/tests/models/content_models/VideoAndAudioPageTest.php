@@ -8,7 +8,7 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
         Database::deleteFrom('content', "slug='audio_page_test' or slug='video_page_test'");
     }
 
-    public function testSetAndGetVideo() {
+    public function testSetAndGetVideo(): void {
         $video = new Video();
         $video->setName('My Name');
         $video->setMP4File('video.mp4');
@@ -47,7 +47,7 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
         $page->delete();
     }
 
-    public function testSetAndGetAudio() {
+    public function testSetAndGetAudio(): void {
         $audio = new Audio();
         $audio->setName('My Name');
         $audio->setMP3File('audio.mp3');

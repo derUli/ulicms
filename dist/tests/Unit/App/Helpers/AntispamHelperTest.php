@@ -18,7 +18,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         Settings::set('spamfilter_enabled', 'yes');
     }
 
-    public function testIsChineseReturnsTrue() {
+    public function testIsChineseReturnsTrue(): void {
         // Only chinese
         $this->assertTrue(AntiSpamHelper::isChinese('这只是一个简单的文字'));
         // Mixed Latin and Chinese
@@ -27,7 +27,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         // korean
     }
 
-    public function testIsChineseReturnsFalse() {
+    public function testIsChineseReturnsFalse(): void {
         // Only Latin
         $this->assertFalse(AntiSpamHelper::isChinese('Deutsche Büchstäben'));
         // korean
@@ -38,7 +38,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(AntiSpamHelper::isChinese(null));
     }
 
-    public function testIsCyrillicReturnsTrue() {
+    public function testIsCyrillicReturnsTrue(): void {
         // Only cyrillic
         $this->assertTrue(AntiSpamHelper::isCyrillic('Это просто простой текст'));
         // Mixed Latin and Cyrillic
@@ -48,7 +48,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(AntiSpamHelper::isCyrillic('Це просто текст'));
     }
 
-    public function testIsCyrillicReturnsFalse() {
+    public function testIsCyrillicReturnsFalse(): void {
         // Only Latin
         $this->assertFalse(AntiSpamHelper::isCyrillic('Deutsche Büchstäben'));
         // korean
@@ -57,14 +57,14 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(AntiSpamHelper::isCyrillic(null));
     }
 
-    public function testIsRtlReturnsTrue() {
+    public function testIsRtlReturnsTrue(): void {
         $this->assertTrue(AntiSpamHelper::isRtl('ایران یک دولت نیست'));
         $this->assertTrue(AntiSpamHelper::isRtl('אין אלוהים.'));
         $this->assertTrue(AntiSpamHelper::isRtl('لا يوجد إله.'));
         $this->assertTrue(AntiSpamHelper::isRtl('לופטים'));
     }
 
-    public function testIsRtlReturnsFalse() {
+    public function testIsRtlReturnsFalse(): void {
         $this->assertFalse(AntiSpamHelper::isRtl('There is no god.'));
         $this->assertFalse(AntiSpamHelper::isRtl('Es gibt keinen Gott.'));
         $this->assertFalse(AntiSpamHelper::isRtl('Немає бога.'));
@@ -77,7 +77,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
      /**
       * @medium
       */
-    public function testIsCountryBlockedReturnsTrue() {
+    public function testIsCountryBlockedReturnsTrue(): void {
         Settings::set('country_blacklist', 'vn,jp,at,tr');
 
         // Vietnam
@@ -96,7 +96,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
     /**
      * @medium
      */
-    public function testIsCountryBlockedReturnsFalse() {
+    public function testIsCountryBlockedReturnsFalse(): void {
         Settings::set('country_blacklist', 'vn,jp,at,tr');
 
         // Germany
@@ -122,48 +122,48 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testContainsBadWordsReturnsWord() {
+    public function testContainsBadWordsReturnsWord(): void {
         $this->assertEquals('viagra', AntiSpamHelper::containsBadwords('Buy cheap Viagra pills.'));
     }
 
-    public function testContainsBadWordsReturnsNull() {
+    public function testContainsBadWordsReturnsNull(): void {
         $this->assertNull(AntiSpamHelper::containsBadwords('This is a clean text without spammy words'));
     }
 
-    public function testContainsBadWordsWithoutInputStringReturnsNull() {
+    public function testContainsBadWordsWithoutInputStringReturnsNull(): void {
         $this->assertNull(AntiSpamHelper::containsBadwords(null));
     }
 
-    public function testIsSpamFilterEnabledReturnsTrue() {
+    public function testIsSpamFilterEnabledReturnsTrue(): void {
         Settings::set('spamfilter_enabled', 'yes');
         $this->assertTrue(AntiSpamHelper::isSpamFilterEnabled());
     }
 
-    public function testIsSpamFilterEnabledReturnsFalse() {
+    public function testIsSpamFilterEnabledReturnsFalse(): void {
         Settings::delete('spamfilter_enabled', 'yes');
         $this->assertFalse(AntiSpamHelper::isSpamFilterEnabled());
     }
 
-    public function testCheckForBotReturnsTrue() {
+    public function testCheckForBotReturnsTrue(): void {
         $this->assertTrue(AntiSpamHelper::checkForBot('libwww-perl/5.65'));
         $this->assertTrue(AntiSpamHelper::checkForBot('Mozilla/4.0 (compatible; Win32; WinHttp.WinHttpRequest.5'));
     }
 
-    public function testCheckForBotWithoutArgumentReturnsTrue() {
+    public function testCheckForBotWithoutArgumentReturnsTrue(): void {
         $_SERVER['HTTP_USER_AGENT'] = 'libwww-perl/5.65';
         $this->assertTrue(AntiSpamHelper::checkForBot());
     }
 
-    public function testCheckForBotWithoutUseragentReturnsTrue() {
+    public function testCheckForBotWithoutUseragentReturnsTrue(): void {
         $this->assertFalse(AntiSpamHelper::checkForBot());
     }
 
-    public function testCheckForBotReturnsFalse() {
+    public function testCheckForBotReturnsFalse(): void {
         $this->assertFalse(AntiSpamHelper::checkForBot('Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'));
         $this->assertFalse(AntiSpamHelper::checkForBot('Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0'));
     }
 
-    public function testCheckMailDomainMxReturnsTrue() {
+    public function testCheckMailDomainMxReturnsTrue(): void {
         // some mail addresses by common freemail providers
         $this->assertTrue(AntiSpamHelper::checkMailDomain('mymail@web.de'));
         $this->assertTrue(AntiSpamHelper::checkMailDomain('mymail@gmx.net'));
@@ -175,7 +175,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(AntiSpamHelper::checkMailDomain('spiegel_online@spiegel.de'));
     }
 
-    public function testCheckMailDomainMxReturnsFalse() {
+    public function testCheckMailDomainMxReturnsFalse(): void {
         // non existing domain
         $this->assertFalse(AntiSpamHelper::checkMailDomain('john.doe@thisisnotadomain.de'));
 

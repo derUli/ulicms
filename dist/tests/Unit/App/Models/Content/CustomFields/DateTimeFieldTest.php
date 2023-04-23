@@ -10,7 +10,7 @@ class DateTimeFieldTest extends \PHPUnit\Framework\TestCase {
         include_once getLanguageFilePath('en');
     }
 
-    public function testRender() {
+    public function testRender(): void {
         $field = new DatetimeField();
         $field->name = 'my_field';
         $field->title = 'date';

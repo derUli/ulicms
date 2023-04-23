@@ -5,7 +5,7 @@ class ArticleTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
     }
 
-    public function testSetArticle() {
+    public function testSetArticle(): void {
         $article = new Article();
         $article->title = 'Unit Test Article';
         $article->slug = 'unit test';
@@ -26,7 +26,7 @@ class ArticleTest extends \PHPUnit\Framework\TestCase {
         $article->save();
     }
 
-    public function testSetArticleWithStringDate() {
+    public function testSetArticleWithStringDate(): void {
         $article = new Article();
         $article->title = 'Unit Test Article';
         $article->slug = 'unit test';
@@ -44,7 +44,7 @@ class ArticleTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(1554588000, $article->article_date);
     }
 
-    public function testUpdateWithoutIdReturnsFalse() {
+    public function testUpdateWithoutIdReturnsFalse(): void {
         $article = new Article();
         $this->assertFalse($article->update());
         $this->assertFalse($article->isPersistent());

@@ -43,7 +43,7 @@ class Comment extends Model {
 
     private $read = false;
 
-    public function loadByID($id) {
+    public function loadByID($id): void {
         $result = Database::selectAll('comments', [], 'id=' . (int)$id);
         if ($result == null || ! Database::any($result)) {
             throw new DatasetNotFoundException('no comment with id ' .
@@ -52,7 +52,7 @@ class Comment extends Model {
         $this->fillVars($result);
     }
 
-    public function fillVars($result = null) {
+    public function fillVars($result = null): void {
         $data = Database::fetchObject($result);
         $this->setID((int)$data->id);
         $this->setContentId((int)$data->content_id);
@@ -67,7 +67,7 @@ class Comment extends Model {
         $this->setRead((bool)$data->read);
     }
 
-    public function delete() {
+    public function delete(): void {
         Database::deleteFrom('comments', 'id = ' . $this->getID());
         $this->setID(null);
     }
@@ -294,7 +294,7 @@ class Comment extends Model {
         $this->read = (bool)$val;
     }
 
-    protected function insert() {
+    protected function insert(): void {
         if (! $this->getDate()) {
             $this->date = time();
         }
@@ -334,7 +334,7 @@ VALUES      ( ?,
         $this->setID(Database::getLastInsertID());
     }
 
-    protected function update() {
+    protected function update(): void {
         Database::pQuery('UPDATE `{prefix}comments` set
                          `content_id` = ?,
                          `author_name` = ?,

@@ -18,7 +18,7 @@ class OneClickUpgradeControllerTest extends \PHPUnit\Framework\TestCase {
 
     public function testAccordionLayout(): void {
 
-        $actual = TestHelper::getOutput(static function() {
+        $actual = TestHelper::getOutput(static function(): void {
         $controller = new OneClickUpgradeController();
         $actual = $controller->accordionLayout();
         });
@@ -27,7 +27,7 @@ class OneClickUpgradeControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testSettings(): void {
-        $actual = TestHelper::getOutput(static function() {
+        $actual = TestHelper::getOutput(static function(): void {
             $_SERVER['REQUEST_METHOD'] = 'GET';
             Settings::set('oneclick_upgrade_channel', 'slow');
 
@@ -41,7 +41,7 @@ class OneClickUpgradeControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testSettingsSave(): void {
-        $actual = TestHelper::getOutput(static function() {
+        $actual = TestHelper::getOutput(static function(): void {
             $_POST['oneclick_upgrade_channel'] = 'fast';
             $_SERVER['REQUEST_METHOD'] = 'POST';
 

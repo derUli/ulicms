@@ -4,14 +4,14 @@ use App\Exceptions\SqlException;
 
 // test for legacy database methods
 class DbFunctionsTest extends \PHPUnit\Framework\TestCase {
-    public function testTbName() {
+    public function testTbName(): void {
         $tableName = tbname('random_table');
 
         $this->assertStringEndsWith('random_table', $tableName);
         $this->assertStringStartsNotWith('random_table', $tableName);
     }
 
-    public function testDbFetchAssoc() {
+    public function testDbFetchAssoc(): void {
         $datasets = Database::selectAll('settings');
         while ($row = db_fetch_assoc($datasets)) {
             $this->assertIsNumeric($row['id']);
@@ -20,7 +20,7 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testDbFetchObject() {
+    public function testDbFetchObject(): void {
         $datasets = Database::selectAll('settings');
         while ($row = db_fetch_object($datasets)) {
             $this->assertIsNumeric($row->id);
@@ -29,17 +29,17 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testDbNumRows() {
+    public function testDbNumRows(): void {
         $datasets = Database::selectAll('settings');
         $this->assertGreaterThanOrEqual(50, db_num_rows($datasets));
     }
 
-    public function testDbQuery() {
+    public function testDbQuery(): void {
         $query = db_query('select id from ' . tbname('settings') . " where name = 'homepage_title' or name = 'site_slogan'");
         $this->assertEquals(2, db_num_rows($query));
     }
 
-    public function testDbError() {
+    public function testDbError(): void {
         try {
             Database::selectAll('gibts_nicht');
         } catch (SqlException $e) {

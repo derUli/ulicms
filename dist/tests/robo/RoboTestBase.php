@@ -20,7 +20,7 @@ class RoboTestBase extends \PHPUnit\Framework\TestCase {
         return isset($_ENV['DBMIGRATOR_DROP_DATABASE_ON_SHUTDOWN']) && $_ENV['DBMIGRATOR_DROP_DATABASE_ON_SHUTDOWN'];
     }
 
-    protected function resetDb() {
+    protected function resetDb(): void {
         $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? StringHelper::splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
         $additionalSql = array_map('trim', $additionalSql);
 

@@ -23,7 +23,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         LoggerRegistry::unregister('exception_log');
     }
 
-    public function testGetAllbyType() {
+    public function testGetAllbyType(): void {
         $types = TypeMapper::getMappings();
         $this->assertGreaterThanOrEqual(11, count($types));
 
@@ -35,7 +35,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllByLanguage() {
+    public function testGetAllByLanguage(): void {
         $languages = getAllLanguages();
 
         foreach ($languages as $language) {
@@ -46,7 +46,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllbyMenu() {
+    public function testGetAllbyMenu(): void {
         $menus = get_all_menus();
 
         foreach ($menus as $menu) {
@@ -57,7 +57,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testThrowsExceptionOnUnknownTypes() {
+    public function testThrowsExceptionOnUnknownTypes(): void {
         $userManager = new UserManager();
         $user = $userManager->getAllUsers()[0];
 
@@ -85,7 +85,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         ContentFactory::getBySlugAndLanguage('test-123', 'de');
     }
 
-    public function testGetAllByParent() {
+    public function testGetAllByParent(): void {
         $result = Database::pQuery('select parent_id from {prefix}content where '
                         . 'parent_id is not null', [], true);
         $dataset = Database::fetchObject($result);
@@ -98,7 +98,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllByParentNoParent() {
+    public function testGetAllByParentNoParent(): void {
         $pages = ContentFactory::getAllByParent(null);
 
         $this->assertGreaterThanOrEqual(1, count($pages));
@@ -107,7 +107,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAll() {
+    public function testGetAll(): void {
         $content = ContentFactory::getAll();
         $result = Database::pQuery('select id from {prefix}content', [], true);
         $this->assertEquals(count($content), Database::getNumRows($result));
@@ -117,7 +117,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllRegular() {
+    public function testGetAllRegular(): void {
         $content = ContentFactory::getAllRegular();
 
         foreach ($content as $page) {
@@ -125,7 +125,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testFilterByEnabled() {
+    public function testFilterByEnabled(): void {
         $elements = [];
 
         $test1 = new Page();
@@ -165,7 +165,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllWithComments() {
+    public function testGetAllWithComments(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -194,7 +194,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, ContentFactory::getAllWithComments());
     }
 
-    public function testFilterByCategory() {
+    public function testFilterByCategory(): void {
         $category1 = new Category();
         $category1->setName('The Test 1 ');
         $category1->save();
@@ -242,7 +242,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(3, $filteredContent);
     }
 
-    public function testFilterByAutor() {
+    public function testFilterByAutor(): void {
         $testUser1 = new User();
         $testUser1->setUsername('testuser1');
         $testUser1->setLastname('Doe');
@@ -296,7 +296,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(4, $filteredContent);
     }
 
-    public function testFilterByLastChangeBy() {
+    public function testFilterByLastChangeBy(): void {
         $testUser1 = new User();
         $testUser1->setUsername('testuser1');
         $testUser1->setLastname('Doe');
@@ -352,7 +352,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(3, $filteredContent);
     }
 
-    public function testGetForFilter() {
+    public function testGetForFilter(): void {
         $contents = ContentFactory::getForFilter(
             'de',
             1,

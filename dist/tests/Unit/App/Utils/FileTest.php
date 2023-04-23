@@ -7,18 +7,18 @@ use Spatie\Snapshots\MatchesSnapshots;
 class FileTest extends \PHPUnit\Framework\TestCase {
     use MatchesSnapshots;
 
-    public function testGetMime() {
+    public function testGetMime(): void {
         $this->assertEquals('text/plain', File::getMime(Path::resolve('ULICMS_ROOT/.htaccess')));
         $this->assertEquals('image/png', File::getMime(Path::resolve('ULICMS_ROOT/admin/gfx/edit.png')));
     }
 
-    public function testGetExtension() {
+    public function testGetExtension(): void {
         $this->assertEquals('pdf', File::getExtension('myfile.pdf'));
         $this->assertEquals('pdf', File::getExtension('myfile.PDF'));
         $this->assertEquals('txt', File::getExtension('foo.txt'));
     }
 
-    public function testFindAllDirs() {
+    public function testFindAllDirs(): void {
         $allFolders = File::findAllDirs('admin');
         $this->assertContains('admin/inc', $allFolders);
         $this->assertContains('admin/fm', $allFolders);
@@ -26,7 +26,7 @@ class FileTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotContains('vendor', $allFolders);
     }
 
-    public function testFindAllFiles() {
+    public function testFindAllFiles(): void {
         $allFiles = File::findAllFiles('admin');
         $this->assertContains('admin/css/modern.scss', $allFiles);
         $this->assertContains('admin/gfx/logo.png', $allFiles);
@@ -34,7 +34,7 @@ class FileTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotContains('init.php', $allFiles);
     }
 
-    public function testToDataUri() {
+    public function testToDataUri(): void {
         $this->assertNull(File::toDataUri('gibtsnicht.txt'));
 
         $this->assertMatchesTextSnapshot(
@@ -46,11 +46,11 @@ class FileTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testDeleteIfExistsWithNonExistingFile() {
+    public function testDeleteIfExistsWithNonExistingFile(): void {
         $this->assertFalse(File::deleteIfExists('diese-datei-existiert-nicht'));
     }
 
-    public function testDeleteIfExistsWithDirectory() {
+    public function testDeleteIfExistsWithDirectory(): void {
         $dirs = Path::resolve('ULICMS_TMP/foo/bar');
 
         $baseDir = Path::resolve('ULICMS_TMP/foo');
@@ -74,7 +74,7 @@ class FileTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(File::deleteIfExists($baseDir));
     }
 
-    public function testDeleteIfExistsWithFile() {
+    public function testDeleteIfExistsWithFile(): void {
         $file = Path::Resolve('ULICMS_TMP/hello');
         file_put_contents($file, 'world');
 
@@ -82,7 +82,7 @@ class FileTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(File::deleteIfExists($file));
     }
 
-    public function testSureRemoveDirIncludingItself() {
+    public function testSureRemoveDirIncludingItself(): void {
         $dirs = Path::resolve('ULICMS_TMP/foo/bar');
 
         $baseDir = Path::resolve('ULICMS_TMP/foo');
@@ -109,7 +109,7 @@ class FileTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(is_dir($baseDir));
     }
 
-    public function testSureRemoveDirWithoutItself() {
+    public function testSureRemoveDirWithoutItself(): void {
         $dirs = Path::resolve('ULICMS_TMP/foo/bar');
 
         $baseDir = Path::resolve('ULICMS_TMP/foo');
@@ -138,11 +138,11 @@ class FileTest extends \PHPUnit\Framework\TestCase {
         sureRemoveDir($baseDir, true);
     }
 
-    public function testGetNewestMtimeNoFiles() {
+    public function testGetNewestMtimeNoFiles(): void {
         $this->assertEquals(0, File::getNewestMtime([]));
     }
 
-    public function testGetNewestMtimeWithFiles() {
+    public function testGetNewestMtimeWithFiles(): void {
         $files = [
             Path::resolve('ULICMS_ROOT/init.php'),
             Path::resolve('ULICMS_ROOT/composer.json'),
@@ -154,7 +154,7 @@ class FileTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual($minimumResult, File::getNewestMtime($files));
     }
 
-    public function testRecurseCopy() {
+    public function testRecurseCopy(): void {
         $source = Path::resolve('ULICMS_ROOT/tests/fixtures');
 
         $destination = Path::resolve('ULICMS_TMP/copy-target');
@@ -168,7 +168,7 @@ class FileTest extends \PHPUnit\Framework\TestCase {
         sureRemoveDir($destination, true);
     }
 
-    public function testGetLastChanged() {
+    public function testGetLastChanged(): void {
         $source = Path::resolve('ULICMS_ROOT/composer.json');
         $lastChanged = File::getLastChanged($source);
         $this->assertGreaterThanOrEqual(1680824251, $lastChanged);

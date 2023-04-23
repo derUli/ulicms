@@ -42,7 +42,7 @@ class Banner extends Model {
         }
     }
 
-    public function loadByID($id) {
+    public function loadByID($id): void {
         $id = (int)$id;
         $result = Database::query('SELECT * FROM `' . tbname('banner') .
                         "` where id = {$id}");
@@ -271,7 +271,7 @@ class Banner extends Model {
         return $this->name;
     }
 
-    public function setName($val) {
+    public function setName($val): void {
         $this->name = $val !== null ? (string)$val : null;
     }
 
@@ -331,7 +331,7 @@ class Banner extends Model {
         return $html;
     }
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null): void {
         $this->id = (int)$result->id;
         $this->name = $result->name;
         $this->link_url = $result->link_url;

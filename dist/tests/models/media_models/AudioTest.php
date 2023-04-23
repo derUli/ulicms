@@ -8,7 +8,7 @@ class AudioTest extends \PHPUnit\Framework\TestCase {
         require_once getLanguageFilePath('en');
     }
 
-    public function testCreateUpdateAndDelete() {
+    public function testCreateUpdateAndDelete(): void {
         $audio = new Audio();
         $audio->setName('My Name');
         $audio->setMP3File('music.mp3');
@@ -59,7 +59,7 @@ class AudioTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($audio->getID());
     }
 
-    public function testAudioHtml() {
+    public function testAudioHtml(): void {
         $audio = new Audio();
         $audio->setName('My Name');
         $audio->setMP3File('music.mp3');
@@ -71,7 +71,7 @@ class AudioTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetAll() {
+    public function testGetAll(): void {
         $savedAudios = [];
 
         for ($i = 1; $i <= 10; $i++) {
@@ -96,7 +96,7 @@ class AudioTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testLoadByIdNotFound() {
+    public function testLoadByIdNotFound(): void {
         $audio = new Audio(PHP_INT_MAX);
         $this->assertNull($audio->getID());
     }

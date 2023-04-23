@@ -11,7 +11,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
         Database::pQuery($sql, $args, true);
     }
 
-    public function testPagePermissionsConstructorDefault() {
+    public function testPagePermissionsConstructorDefault(): void {
         $permissions = new PagePermissions();
         $this->assertFalse($permissions->getEditRestriction('admins'));
         $this->assertFalse($permissions->getEditRestriction('group'));
@@ -19,7 +19,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($permissions->getEditRestriction('others'));
     }
 
-    public function testPagePermissionsConstructorWithArguments() {
+    public function testPagePermissionsConstructorWithArguments(): void {
         $permissions = new PagePermissions([
             'group' => true,
             'others' => false,
@@ -31,7 +31,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($permissions->getEditRestriction('others'));
     }
 
-    public function testPagePermissionsSetEditRestriction() {
+    public function testPagePermissionsSetEditRestriction(): void {
         $permissions = new PagePermissions();
         $permissions->setEditRestriction('others', true);
         $this->assertFalse($permissions->getEditRestriction('admins'));
@@ -40,7 +40,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($permissions->getEditRestriction('others'));
     }
 
-    public function testPagePermissionsgetAll() {
+    public function testPagePermissionsgetAll(): void {
         $permissions = new PagePermissions([
             'group' => true,
             'others' => false,
@@ -52,7 +52,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($all['others']);
     }
 
-    public function testCreatePageWithPermissions() {
+    public function testCreatePageWithPermissions(): void {
         $page = new Page();
         $page->slug = 'page_permission_test';
         $page->title = 'Page Permission Test';
@@ -95,7 +95,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
         $page2->delete();
     }
 
-    public function testSetAndGetEditRestrictionForNonExistingObject() {
+    public function testSetAndGetEditRestrictionForNonExistingObject(): void {
         $page = new Page();
 
         // Der Pumuckl ist nur das Hirngespinst von Meister Eder

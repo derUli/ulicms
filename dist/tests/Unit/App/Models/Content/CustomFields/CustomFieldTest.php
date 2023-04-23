@@ -8,7 +8,7 @@ class CustomFieldTest extends \PHPUnit\Framework\TestCase {
         include_once getLanguageFilePath('en');
     }
 
-    public function testRender() {
+    public function testRender(): void {
         $this->expectException(NotImplementedException::class);
         $customField = new CustomField();
         $customField->render('foobar');

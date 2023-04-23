@@ -8,7 +8,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         require_once ModuleHelper::buildModuleRessourcePath('core_help', 'lang/en.php');
     }
 
-    public function testConstructorWithKeys() {
+    public function testConstructorWithKeys(): void {
         $keys = [
             'help',
             'pages',
@@ -18,7 +18,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($keys, $translation->getKeys());
     }
 
-    public function testGetJs() {
+    public function testGetJs(): void {
         $keys = [
             'help',
             'TRANSLATION_PAGES',
@@ -35,7 +35,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetJsWithVarname() {
+    public function testGetJsWithVarname(): void {
         $keys = [
             'pages_count',
             'pages',
@@ -52,7 +52,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetJsWithVarnameAndWrap() {
+    public function testGetJsWithVarnameAndWrap(): void {
         $keys = [
             'pages_count',
             'pages',
@@ -68,7 +68,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testRender() {
+    public function testRender(): void {
         $keys = [
             'help',
             'pages',
@@ -88,7 +88,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testRenderJs() {
+    public function testRenderJs(): void {
         $keys = [
             'help',
             'pages',
@@ -108,7 +108,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testRenderJsWithVarname() {
+    public function testRenderJsWithVarname(): void {
         $keys = [
             'pages_count',
             'pages',
@@ -127,7 +127,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testRenderJsWithVarnameAndWrap() {
+    public function testRenderJsWithVarnameAndWrap(): void {
         $keys = [
             'pages_count',
             'pages',
@@ -148,7 +148,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testAddKey() {
+    public function testAddKey(): void {
         $keys = [
             'pages_count',
             'pages',
@@ -169,7 +169,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testAddKeys() {
+    public function testAddKeys(): void {
         $keys = [
             'help',
             'pages',
@@ -194,7 +194,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetVarName() {
+    public function testGetVarName(): void {
         $keys = [
             'pages_count',
             'pages',
@@ -204,7 +204,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('UniversalTranslator', $translation->getVarName());
     }
 
-    public function testSetVarName() {
+    public function testSetVarName(): void {
         $keys = [
             'pages_count',
             'pages',
@@ -215,7 +215,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('CrapTranslation', $translation->getVarName());
     }
 
-    public function testRemoveKey() {
+    public function testRemoveKey(): void {
         $keys = [
             'pages_count',
             'pages',
@@ -226,7 +226,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(['pages', 'gibts_nicht'], $translation->getKeys());
     }
 
-    public function testRemoveKeys() {
+    public function testRemoveKeys(): void {
         $keys = [
             'pages_count',
             'pages',

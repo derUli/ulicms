@@ -24,17 +24,17 @@ class ModelBinderExample extends Model {
         'not_mapped' => 'Not mapped'
     ];
 
-    public function setField1($value) {
+    public function setField1($value): void {
         Model::checkValueType($value, 'int');
         $this->field1 = $value;
     }
 
-    public function setField2($value) {
+    public function setField2($value): void {
         Model::checkValueType($value, 'string');
         $this->field2 = $value;
     }
 
-    public function setMyField($value) {
+    public function setMyField($value): void {
         Model::checkValueType($value, 'numeric');
         $this->field3 = $value;
     }
@@ -55,15 +55,15 @@ class ModelBinderExample extends Model {
         return $this->not_mapped;
     }
 
-    public function fillVars($data = null) {
+    public function fillVars($data = null): void {
         $this->bindValues($this->sampleValuesOK);
     }
 
-    public function fillInvalid1() {
+    public function fillInvalid1(): void {
         $this->bindValues($this->invalidValues1);
     }
 
-    public function fillInvalid2() {
+    public function fillInvalid2(): void {
         $this->bindValues($this->invalidValues2);
     }
 }

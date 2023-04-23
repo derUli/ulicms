@@ -22,7 +22,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase {
         $_SERVER = [];
     }
 
-    public function testGetModel() {
+    public function testGetModel(): void {
         $controller = new HomeController();
         $model = $controller->getModel();
 
@@ -31,7 +31,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase {
         // TODO: Do more asserts, check data
     }
 
-    public function testNewsfeed() {
+    public function testNewsfeed(): void {
         $controller = new HomeController();
         $html = $controller->_newsfeed();
 
@@ -51,7 +51,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testTopPages() {
+    public function testTopPages(): void {
         $controller = new HomeController();
         $html = $controller->_topPages();
         $this->assertEquals(
@@ -63,7 +63,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testLastUpdatedPages() {
+    public function testLastUpdatedPages(): void {
         $controller = new HomeController();
         $html = $controller->_lastUpdatedPages();
         $this->assertEquals(
@@ -75,7 +75,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testOnlineUsers() {
+    public function testOnlineUsers(): void {
         $this->createTestUsers();
 
         $controller = new HomeController();
@@ -90,7 +90,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testStatistics() {
+    public function testStatistics(): void {
         $usersCount = count(getUsers());
         $pagesCount = count(ContentFactory::getAll());
 
@@ -104,12 +104,12 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString("<td>{$pagesCount}</td>", $output);
     }
 
-    protected function createTestUsers() {
+    protected function createTestUsers(): void {
         $this->createOnlineUsers();
         $this->createOfflineUsers();
     }
 
-    protected function createOnlineUsers() {
+    protected function createOnlineUsers(): void {
         $user1 = new User();
         $user1->setUsername('online-2');
         $user1->setPassword(rand_string(23));
@@ -129,7 +129,7 @@ class HomeControllerTest extends \PHPUnit\Framework\TestCase {
         $user2->setLastAction(time() - 10);
     }
 
-    protected function createOfflineUsers() {
+    protected function createOfflineUsers(): void {
         $user3 = new User();
         $user3->setUsername('nicht-online-1');
         $user3->setPassword(rand_string(23));

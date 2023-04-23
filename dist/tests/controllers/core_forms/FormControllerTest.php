@@ -20,7 +20,7 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase {
         $_POST = [];
     }
 
-    public function testDeleteReturnsTrue() {
+    public function testDeleteReturnsTrue(): void {
         $id = $this->createTestForm();
         $controller = new FormController();
         $success = $controller->_deletePost($id);
@@ -28,7 +28,7 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($success);
     }
 
-    public function testCreatePostReturnsId() {
+    public function testCreatePostReturnsId(): void {
         $this->setPostVars();
         $controller = new FormController();
         $id = $controller->_createPost();
@@ -36,7 +36,7 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, $id);
     }
 
-    public function testUpdatePostReturnsTrue() {
+    public function testUpdatePostReturnsTrue(): void {
         $this->setPostVars();
 
         $controller = new FormController();
@@ -49,7 +49,7 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($success);
     }
 
-    public function testUpdatePostReturnsFalse() {
+    public function testUpdatePostReturnsFalse(): void {
         $this->setPostVars();
 
         $_POST['id'] = PHP_INT_MAX;
@@ -76,7 +76,7 @@ class FormControllerTest extends \PHPUnit\Framework\TestCase {
         return Database::getInsertID();
     }
 
-    protected function setPostVars() {
+    protected function setPostVars(): void {
         $page = ContentFactory::getAllRegular()[0];
 
         $_POST['name'] = 'Unit Test ' . time();

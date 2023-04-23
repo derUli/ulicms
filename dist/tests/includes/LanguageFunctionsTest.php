@@ -20,14 +20,14 @@ class LanguageFunctionsTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllUsedLanguages() {
+    public function testGetAllUsedLanguages(): void {
         $languages = getAllUsedLanguages();
         $this->assertGreaterThanOrEqual(2, count($languages));
         $this->assertTrue(in_array('de', $languages));
         $this->assertTrue(in_array('en', $languages));
     }
 
-    public function testGetPreferredLanguage() {
+    public function testGetPreferredLanguage(): void {
         $acceptLanguageHeader1 = 'Accept-Language: da, en - gb;
         q = 0.8, en;
         q = 0.7, de;
@@ -41,33 +41,33 @@ class LanguageFunctionsTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('de', get_prefered_language(['de', 'en'], $acceptLanguageHeader2));
     }
 
-    public function testGetLanguageNameByCodeReturnsName() {
+    public function testGetLanguageNameByCodeReturnsName(): void {
         $this->assertEquals('Deutsch', getLanguageNameByCode('de'));
         $this->assertEquals('English', getLanguageNameByCode('en'));
     }
 
-    public function testGetLanguageNameByCodeReturnsCode() {
+    public function testGetLanguageNameByCodeReturnsCode(): void {
         $this->assertEquals(
             'gibts_nicht',
             getLanguageNameByCode('gibts_nicht')
         );
     }
 
-    public function testGetAvailableBackendLanguages() {
+    public function testGetAvailableBackendLanguages(): void {
         $this->assertContains('de', getAvailableBackendLanguages());
         $this->assertContains('en', getAvailableBackendLanguages());
     }
 
-    public function testGetSystemLanguageReturnsFrontendLanguageFromSession() {
+    public function testGetSystemLanguageReturnsFrontendLanguageFromSession(): void {
         $_SESSION['language'] = 'en';
         $this->assertEquals('en', getSystemLanguage());
     }
 
-    public function testGetLanguageFilePath() {
+    public function testGetLanguageFilePath(): void {
         $this->assertStringEndsWith('dist/lang/fr.php', getLanguageFilePath('fr'));
     }
 
-    public function testGetAllLanguagesFiltered() {
+    public function testGetAllLanguagesFiltered(): void {
         $language = new Language();
         $language->loadByLanguageCode('en');
 
@@ -100,7 +100,7 @@ class LanguageFunctionsTest extends \PHPUnit\Framework\TestCase {
         $group->delete();
     }
 
-    public function testGetAllLanguagesNotFiltered() {
+    public function testGetAllLanguagesNotFiltered(): void {
         $languages = getAllLanguages();
         $this->assertGreaterThanOrEqual(1, count($languages));
 
@@ -108,24 +108,24 @@ class LanguageFunctionsTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, count($languages));
     }
 
-    public function testGetSystemLanguageReturnsSystemLanguageFromSession() {
+    public function testGetSystemLanguageReturnsSystemLanguageFromSession(): void {
         $_SESSION['system_language'] = 'de';
         $_SESSION['language'] = 'en';
         $this->assertEquals('de', getSystemLanguage());
     }
 
-    public function testGetSystemLanguageReturnsSystemLanguageFromSetting() {
+    public function testGetSystemLanguageReturnsSystemLanguageFromSetting(): void {
         Settings::set('system_language', 'en');
         $this->assertEquals('en', getSystemLanguage());
     }
 
-    public function testGetSystemLanguageReturnsDe() {
+    public function testGetSystemLanguageReturnsDe(): void {
         Settings::delete('system_language');
 
         $this->assertEquals('de', getSystemLanguage());
     }
 
-    public function testgetCurrentLanguageWithCurrentTrue() {
+    public function testgetCurrentLanguageWithCurrentTrue(): void {
         $this->assertNotEmpty(getCurrentLanguage(true));
         $this->assertNotEmpty(getCurrentLanguage(true));
     }

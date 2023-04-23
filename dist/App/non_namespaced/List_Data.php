@@ -74,7 +74,7 @@ class List_Data extends Model {
         );
     }
 
-    public function loadByID($id) {
+    public function loadByID($id): void {
         $id = (int)$id;
         $result = Database::query('select * from ' . tbname('lists')
                         . " WHERE content_id = {$id}");
@@ -86,7 +86,7 @@ class List_Data extends Model {
         $this->content_id = $id ? (int)$id : null;
     }
 
-    public function save() {
+    public function save(): void {
         if ($this->content_id === null) {
             throw new DatabaseException('no content_id for list set');
         }
@@ -104,7 +104,7 @@ class List_Data extends Model {
         return $this->content_id >= 1;
     }
 
-    protected function fillVars($data = null) {
+    protected function fillVars($data = null): void {
         $this->content_id = $data->content_id ? (int)($data->content_id) : null;
         $this->language = $data->language ?: null;
         $this->category_id = $data->category_id ? (int)($data->category_id) : null;
@@ -117,7 +117,7 @@ class List_Data extends Model {
         $this->type = $data->type ?: null;
     }
 
-    protected function create() {
+    protected function create(): void {
         $content_id = (int)($this->content_id);
 
         if ($this->language === null) {
@@ -175,7 +175,7 @@ class List_Data extends Model {
         Database::query($sql);
     }
 
-    protected function update() {
+    protected function update(): void {
         $content_id = (int)$this->content_id;
 
         if ($this->language === null) {

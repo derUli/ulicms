@@ -3,7 +3,7 @@
 use App\Helpers\ArrayHelper;
 
 class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
-    public function testInsertBeforeReturnsArray() {
+    public function testInsertBeforeReturnsArray(): void {
         $input = [
             'apple',
             'tomato',
@@ -28,7 +28,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ], ArrayHelper::insertBefore($input, 0, 'pineapple'));
     }
 
-    public function testInsertBeforeReturnsThrowsException() {
+    public function testInsertBeforeReturnsThrowsException(): void {
         $input = [
             'apple',
             'tomato',
@@ -42,7 +42,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ArrayHelper::insertBefore($input, PHP_INT_MAX, 'gibts_nicht');
     }
 
-    public function testInsertAfterReturnsArray() {
+    public function testInsertAfterReturnsArray(): void {
         $input = [
             'apple',
             'tomato',
@@ -67,7 +67,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ], ArrayHelper::insertAfter($input, 3, 'pineapple'));
     }
 
-    public function testInsertAfterReturnsThrowsException() {
+    public function testInsertAfterReturnsThrowsException(): void {
         $input = [
             'apple',
             'tomato',
@@ -81,7 +81,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         ArrayHelper::insertAfter($input, PHP_INT_MAX, 'gibts_nicht');
     }
 
-    public function testArrayHasMultipleKeysReturnsTrue() {
+    public function testArrayHasMultipleKeysReturnsTrue(): void {
         $this->assertTrue(
             ArrayHelper::hasMultipleKeys(
                 $this->getArrayTestData(),
@@ -93,7 +93,7 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testArrayHasMultipleKeysReturnsFalse() {
+    public function testArrayHasMultipleKeysReturnsFalse(): void {
         $this->assertFalse(
             ArrayHelper::hasMultipleKeys(
                 $this->getArrayTestData(),

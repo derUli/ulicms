@@ -34,7 +34,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetSizes() {
+    public function testGetSizes(): void {
         $controller = new FaviconController();
         $sizes = $controller->_getSizes();
         $this->assertCount(2, $sizes);
@@ -42,7 +42,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals([64, 64], $sizes[1]);
     }
 
-    public function testGetSizesWithHighResolution() {
+    public function testGetSizesWithHighResolution(): void {
         $controller = new FaviconController();
         $sizes = $controller->_getSizes(true);
         $this->assertCount(3, $sizes);
@@ -51,7 +51,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals([128, 128], $sizes[2]);
     }
 
-    public function testGetDestination1() {
+    public function testGetDestination1(): void {
         $controller = new FaviconController();
 
         $this->assertStringEndsWith(
@@ -60,7 +60,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetDestination2() {
+    public function testGetDestination2(): void {
         $controller = new FaviconController();
 
         $this->assertStringEndsWith(
@@ -73,7 +73,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testPutAndDeleteFiles() {
+    public function testPutAndDeleteFiles(): void {
         $source = Path::resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
         $controller = new FaviconController();
         $this->assertTrue(
@@ -90,7 +90,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFileDoesNotExist($controller->_getDestination2());
     }
 
-    public function testPutAndDeleteFilesHQ() {
+    public function testPutAndDeleteFilesHQ(): void {
         $source = Path::resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
         $controller = new FaviconController();
         $this->assertTrue(

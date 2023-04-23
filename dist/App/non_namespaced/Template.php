@@ -29,7 +29,7 @@ class Template {
         return $str;
     }
 
-    public static function bodyClasses() {
+    public static function bodyClasses(): void {
         echo self::getBodyClasses();
     }
 
@@ -465,7 +465,7 @@ class Template {
         return trim($htmlContent);
     }
 
-    public static function languageSelection() {
+    public static function languageSelection(): void {
         $result = db_query('SELECT language_code, name FROM ' .
                 tbname('languages') . ' ORDER by name');
         echo "<ul class='language_selection'>";

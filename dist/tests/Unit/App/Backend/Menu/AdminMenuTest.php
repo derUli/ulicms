@@ -42,12 +42,12 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase {
         $this->testGroup->delete();
     }
 
-    public function testGetChildren() {
+    public function testGetChildren(): void {
         $menu = new AdminMenu($this->getMenuEntries());
         $this->assertEquals($this->getMenuEntries(), $menu->getChildren());
     }
 
-    public function testSetChildren() {
+    public function testSetChildren(): void {
         $menu = new AdminMenu($this->getMenuEntries());
 
         $menu->setChildren(
@@ -66,18 +66,18 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('foobar', $menu->getChildren()[0]->getIdentifier());
     }
 
-    public function testHasChildrenReturnsTrue() {
+    public function testHasChildrenReturnsTrue(): void {
         $menu = new AdminMenu($this->getMenuEntries());
         $this->assertTrue($menu->hasChildren());
     }
 
-    public function testHasChildrenReturnsFalse() {
+    public function testHasChildrenReturnsFalse(): void {
         $menu = new AdminMenu($this->getMenuEntries());
         $menu->setChildren([]);
         $this->assertFalse($menu->hasChildren());
     }
 
-    public function testRenderAsAdmin() {
+    public function testRenderAsAdmin(): void {
         $inputExpected = file_get_contents(
             Path::resolve(
                 'ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_admin.html'
@@ -89,7 +89,7 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($inputExpected, $menu->render());
     }
 
-    public function testRenderAsUserWithLimitedPermissions() {
+    public function testRenderAsUserWithLimitedPermissions(): void {
         $inputExpected = file_get_contents(
             Path::resolve(
                 'ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_user.html'

@@ -13,7 +13,7 @@ class RoboTest extends RoboTestBase {
     /**
      * @medium
      */
-    public function testTestsRun() {
+    public function testTestsRun(): void {
         if (! $this->shouldDropDbOnShutdown()) {
             $this->markTestSkipped();
         }

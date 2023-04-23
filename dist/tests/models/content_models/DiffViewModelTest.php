@@ -3,7 +3,7 @@
 use App\CoreContent\Models\ViewModels\DiffViewModel;
 
 class DiffViewModelTest extends \PHPUnit\Framework\TestCase {
-    public function testConstructor() {
+    public function testConstructor(): void {
         $model = new DiffViewModel(
             'Foo<strong>Bar</strong>',
             '2019-03-13',

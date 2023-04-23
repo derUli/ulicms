@@ -125,7 +125,7 @@ class SimpleSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetTimezones() {
+    public function testGetTimezones(): void {
         $controller = new SimpleSettingsController();
         $timezones = $controller->getTimezones();
         $this->assertStringContainsString('<option value="Asia/Tokyo">', $timezones);

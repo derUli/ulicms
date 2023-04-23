@@ -12,7 +12,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::delete('css_include_paths');
     }
 
-    public function testScriptQueue() {
+    public function testScriptQueue(): void {
         $filemtime = 0;
         $files = [
             'node_modules/jquery/dist/jquery.js',
@@ -53,7 +53,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, \App\Storages\Vars::get('script_queue'));
     }
 
-    public function testCombinedScriptHTMLDeprecated() {
+    public function testCombinedScriptHTMLDeprecated(): void {
         $files = [
             'node_modules/jquery/dist/jquery.js',
             'admin/scripts/global.js',
@@ -78,7 +78,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, \App\Storages\Vars::get('script_queue'));
     }
 
-    public function testStylesheetQueue() {
+    public function testStylesheetQueue(): void {
         $filemtime = 0;
         $files = [
             'lib/css/core.scss',
@@ -119,7 +119,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, \App\Storages\Vars::get('script_queue'));
     }
 
-    public function testCombinedStylesheetHtml() {
+    public function testCombinedStylesheetHtml(): void {
         $filemtime = 0;
         $files = [
             'lib/css/core.scss',
@@ -142,7 +142,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, \App\Storages\Vars::get('script_queue'));
     }
 
-    public function testMinifySCSSExpectCSS() {
+    public function testMinifySCSSExpectCSS(): void {
         unsetSCSSImportPaths();
         CacheUtil::getAdapter(true)->clear();
         $styles = [
@@ -160,7 +160,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($expected, $real);
     }
 
-    public function testMinifySCSSThrowsException() {
+    public function testMinifySCSSThrowsException(): void {
         unsetSCSSImportPaths();
         CacheUtil::getAdapter(true)->clear();
         $style = 'tests/fixtures/scss/fail.scss';
@@ -183,7 +183,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testSetSCSSImportPathsToNull() {
+    public function testSetSCSSImportPathsToNull(): void {
         $paths = [
             'folder1/foo/bar',
             'folder2/another/folder'
@@ -202,7 +202,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testSetAndGetSCSSImportPaths() {
+    public function testSetAndGetSCSSImportPaths(): void {
         $paths = [
             'folder1/foo/bar',
             'folder2/another/folder'
@@ -216,7 +216,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(getSCSSImportPaths());
     }
 
-    public function testCompileSCSS() {
+    public function testCompileSCSS(): void {
         setSCSSImportPaths(
             [
                 'folder1/foo/bar',
@@ -232,7 +232,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString('span.blog_article_next', $code);
     }
 
-    public function testCompileSCSSToFile() {
+    public function testCompileSCSSToFile(): void {
         sureRemoveDir(
             Path::resolve(
                 'ULICMS_GENERATED_PUBLIC/stylesheets'
@@ -257,7 +257,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString('span.blog_article_next', $code);
     }
 
-    public function testGetAllCombinedHtml() {
+    public function testGetAllCombinedHtml(): void {
         $this->enqeueStuff();
         $html = get_all_combined_html();
 
@@ -271,7 +271,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testAllCombinedHtml() {
+    public function testAllCombinedHtml(): void {
         $this->enqeueStuff();
 
         ob_start();
@@ -288,7 +288,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    private function enqeueStuff() {
+    private function enqeueStuff(): void {
         $files = [
             'node_modules/jquery/dist/jquery.js',
             'admin/scripts/global.js',

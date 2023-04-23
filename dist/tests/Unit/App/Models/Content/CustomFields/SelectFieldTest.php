@@ -7,7 +7,7 @@ use Spatie\Snapshots\MatchesSnapshots;
 class SelectFieldTest extends \PHPUnit\Framework\TestCase {
     use MatchesSnapshots;
 
-    public function testRenderSingleSelectField() {
+    public function testRenderSingleSelectField(): void {
         $field = new SelectField();
         $field->name = 'zip_codes';
         $field->title = 'zip_codes';
@@ -17,7 +17,7 @@ class SelectFieldTest extends \PHPUnit\Framework\TestCase {
         $this->assertMatchesHtmlSnapshot($field->render());
     }
 
-    public function testRenderMultiSelectField() {
+    public function testRenderMultiSelectField(): void {
         $field = new MultiSelectField();
         $field->name = 'zip_codes';
         $field->title = 'zip_codes';

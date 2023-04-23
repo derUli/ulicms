@@ -5,7 +5,7 @@ class AudioPageTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
     }
 
-    public function testSetArticle() {
+    public function testSetArticle(): void {
         $audioPage = new Audio_Page();
         $audioPage->title = 'Unit Test Article';
         $audioPage->slug = 'unit test';

@@ -15,14 +15,14 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase {
         $_SESSION = [];
     }
 
-    public function testReplaceLinks() {
+    public function testReplaceLinks(): void {
         $input = file_get_contents('tests/fixtures/AutoEmbed/input.html');
         $actual = apply_filter($input, 'before_content');
 
         $this->assertMatchesHtmlSnapshot($actual);
     }
 
-    public function testReplaceLinksWithDisableMediaEmbedTrue() {
+    public function testReplaceLinksWithDisableMediaEmbedTrue(): void {
         $page = $this->getTestPage();
 
         set_requested_pagename($page->slug, $page->language);
@@ -36,7 +36,7 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase {
         $page->delete();
     }
 
-    public function testReplaceLinksWithDisableMediaEmbedFalse() {
+    public function testReplaceLinksWithDisableMediaEmbedFalse(): void {
         $page = $this->getTestPage();
 
         set_requested_pagename($page->slug, $page->language);

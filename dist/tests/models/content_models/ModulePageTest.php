@@ -5,7 +5,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
     }
 
-    public function testContainsModuleReturnsTrue() {
+    public function testContainsModuleReturnsTrue(): void {
         $modulePage = new Module_Page();
         $modulePage->title = 'Unit Test Article';
         $modulePage->slug = 'unit test';
@@ -28,7 +28,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($modulePage->containsModule('not_existing'));
     }
 
-    public function testContainsModuleReturnFalse() {
+    public function testContainsModuleReturnFalse(): void {
         $modulePage = new Module_Page();
         $modulePage->title = 'Unit Test Article';
         $modulePage->slug = 'unit test';
@@ -42,7 +42,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($modulePage->containsModule('blog'));
     }
 
-    public function testGetEmbeddedModulesReturnsModules() {
+    public function testGetEmbeddedModulesReturnsModules(): void {
         $module = new Module('fortune2');
 
         $modulePage = new Module_Page();
@@ -70,7 +70,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetEmbeddedModulesReturnsNothing() {
+    public function testGetEmbeddedModulesReturnsNothing(): void {
         $module = new Module('fortune2');
 
         $modulePage = new Module_Page();

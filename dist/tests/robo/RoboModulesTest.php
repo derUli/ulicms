@@ -8,7 +8,7 @@ class RoboModulesTest extends RoboTestBase {
         $this->runRoboCommand(['modules:sync']);
     }
 
-    public function testModulesList() {
+    public function testModulesList(): void {
         $output = $this->runRoboCommand(['modules:list']);
 
         $this->assertEquals(13, substr_count($output, 'core_'));
@@ -17,7 +17,7 @@ class RoboModulesTest extends RoboTestBase {
         }
     }
 
-    public function testModulesListAll() {
+    public function testModulesListAll(): void {
         $output = $this->runRoboCommand(['modules:list', '[all]']);
 
         $this->assertEquals(13, substr_count($output, 'core_'));
@@ -26,7 +26,7 @@ class RoboModulesTest extends RoboTestBase {
         }
     }
 
-    public function testModulesListCore() {
+    public function testModulesListCore(): void {
         $output = $this->runRoboCommand(['modules:list', '[core]']);
         $this->assertStringContainsString('core_', $output);
 
@@ -36,7 +36,7 @@ class RoboModulesTest extends RoboTestBase {
         $this->assertStringNotContainsString('slicknav', $output);
     }
 
-    public function testModulesListExtend() {
+    public function testModulesListExtend(): void {
         $output = $this->runRoboCommand(['modules:list', '[extend]']);
         $this->assertStringNotContainsString('update_manager_dashboard', $output);
         $this->assertStringNotContainsString('core_', $output);
@@ -46,7 +46,7 @@ class RoboModulesTest extends RoboTestBase {
         $this->assertStringContainsString('oneclick_upgrade', $output);
     }
 
-    public function testModulesListPkgSrc() {
+    public function testModulesListPkgSrc(): void {
         $output = $this->runRoboCommand(['modules:list', '[pkgsrc]']);
         $this->assertStringContainsString('update_manager_dashboard', $output);
 
@@ -56,7 +56,7 @@ class RoboModulesTest extends RoboTestBase {
         $this->assertStringNotContainsString('oneclick_upgrade', $output);
     }
 
-    public function testModulesGetPackageVersions() {
+    public function testModulesGetPackageVersions(): void {
         $expected = file_get_contents(
             Path::resolve(
                 'ULICMS_ROOT/tests/fixtures/robo/modulesGetPackageVersions.expected.txt'
@@ -76,7 +76,7 @@ class RoboModulesTest extends RoboTestBase {
         );
     }
 
-    public function testModulesEnableAndDisable() {
+    public function testModulesEnableAndDisable(): void {
         $actual = $this->runRoboCommand(
             [
                 'modules:enable',
@@ -94,7 +94,7 @@ class RoboModulesTest extends RoboTestBase {
         $this->assertEquals('fortune2 0.2.4 (disabled)', $actual);
     }
 
-    public function testModulesToggle() {
+    public function testModulesToggle(): void {
         $this->runRoboCommand(
             [
                 'modules:enable',
@@ -119,7 +119,7 @@ class RoboModulesTest extends RoboTestBase {
         $this->assertEquals('fortune2 0.2.4 (enabled)', $actual);
     }
 
-    public function testModulesRemoveReturnsError() {
+    public function testModulesRemoveReturnsError(): void {
         $actual = $this->runRoboCommand(
             [
                 'modules:remove',

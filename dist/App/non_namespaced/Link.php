@@ -54,7 +54,7 @@ class Link extends Page {
         return 'fas fa-link';
     }
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null): void {
         parent::fillVars($result);
         $this->link_url = $result->link_url;
     }

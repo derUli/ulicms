@@ -3,7 +3,7 @@
 use App\HTML\ListItem;
 
 class ListItemTest extends \PHPUnit\Framework\TestCase {
-    public function testGetHtml() {
+    public function testGetHtml(): void {
         $item = new ListItem('hello_world', 'Hello World!');
         $itemSelected = new ListItem('bye_bye', 'Bye Bye!', true);
 
@@ -17,7 +17,7 @@ class ListItemTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testRender() {
+    public function testRender(): void {
         $item = new ListItem('hello_world', 'Hello World!');
         $itemSelected = new ListItem('bye_bye', 'Bye Bye!', true);
 
@@ -36,7 +36,7 @@ class ListItemTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testToString() {
+    public function testToString(): void {
         $item = new ListItem('hello_world', 'Hello World!');
 
         $this->assertEquals(
@@ -45,31 +45,31 @@ class ListItemTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetSelectedReturnsTrue() {
+    public function testGetSelectedReturnsTrue(): void {
         $item = new ListItem('bye_bye', 'Bye Bye!', true);
         $this->assertTrue($item->getSelected());
     }
 
-    public function testGetSelectedReturnsFalse() {
+    public function testGetSelectedReturnsFalse(): void {
         $item = new ListItem('bye_bye', 'Bye Bye!', false);
         $this->assertFalse($item->getSelected());
     }
 
-    public function testSetAndGetText() {
+    public function testSetAndGetText(): void {
         $item = new ListItem('hello_world', 'Hello World!');
         $item->setText('Bye Bye');
 
         $this->assertEquals('Bye Bye', $item->getText());
     }
 
-    public function testSetAndGetValue() {
+    public function testSetAndGetValue(): void {
         $item = new ListItem('hello_world', 'Hello World!');
         $item->setValue('bye_bye');
 
         $this->assertEquals('bye_bye', $item->getValue());
     }
 
-    public function testSetSelected() {
+    public function testSetSelected(): void {
         $item = new ListItem('bye_bye', 'Bye Bye!', false);
         $item->setSelected(true);
 

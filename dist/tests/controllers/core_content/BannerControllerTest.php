@@ -22,7 +22,7 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testCreateReturnsModel() {
+    public function testCreateReturnsModel(): void {
         $this->setPostVars();
 
         $controller = new BannerController();
@@ -32,7 +32,7 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, $banner->getId());
     }
 
-    public function testUpdateReturnsModel() {
+    public function testUpdateReturnsModel(): void {
         $this->setPostVars();
         $controller = new BannerController();
         $id = $controller->_createPost()->getId();
@@ -46,7 +46,7 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('https://google.com', $banner->getLinkUrl());
     }
 
-    public function testDeletePostReturnsTrue() {
+    public function testDeletePostReturnsTrue(): void {
         $banner = new Banner();
         $banner->setType('html');
         $banner->setHtml('Werbung nervt');
@@ -61,13 +61,13 @@ class BannerControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($banner->isPersistent());
     }
 
-    public function testDeletePostReturnsFalse() {
+    public function testDeletePostReturnsFalse(): void {
         $controller = new BannerController();
         $success = $controller->_deletePost(PHP_INT_MAX);
         $this->assertFalse($success);
     }
 
-    protected function setPostVars() {
+    protected function setPostVars(): void {
         $_POST['banner_name'] = 'Nervige Werbung';
         $_POST['image_url'] = '';
         $_POST['link_url'] = '';

@@ -10,7 +10,7 @@ class MultilineTextFieldTest extends \PHPUnit\Framework\TestCase {
         include_once getLanguageFilePath('en');
     }
 
-    public function testRender() {
+    public function testRender(): void {
         $field = new MultilineTextField();
         $field->name = 'my_field';
         $field->title = 'users';

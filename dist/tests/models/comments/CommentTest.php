@@ -29,7 +29,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $_SESSION = [];
     }
 
-    public function tesSetDateInvalidArgument() {
+    public function tesSetDateInvalidArgument(): void {
         $comment = new Comment();
         try {
             $comment->setDate('foo');
@@ -39,7 +39,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetUnreadCount() {
+    public function testGetUnreadCount(): void {
         $content = ContentFactory::getAll();
         $first = $content[0];
         $second = $content[1];
@@ -61,7 +61,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, Comment::getUnreadCount());
     }
 
-    public function testGetReadCount() {
+    public function testGetReadCount(): void {
         $content = ContentFactory::getAll();
         $first = $content[0];
         $second = $content[1];
@@ -84,7 +84,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, Comment::getReadCount());
     }
 
-    public function testGetAllCount() {
+    public function testGetAllCount(): void {
         $content = ContentFactory::getAll();
         $first = $content[0];
         $second = $content[1];
@@ -124,7 +124,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, Comment::getAllCount());
     }
 
-    public function testIsSpamNull() {
+    public function testIsSpamNull(): void {
         $comment = new Comment();
         $comment->setAuthorName('John Doe');
         $comment->setAuthorEmail('john@doe.de');
@@ -137,7 +137,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($comment->isSpam());
     }
 
-    public function testIsSpamError() {
+    public function testIsSpamError(): void {
         $_POST['my_homepage_url'] = 'http://www.ulicms.de';
 
         $comment = new Comment();
@@ -163,7 +163,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         unset($_POST['my_homepage_url']);
     }
 
-    public function testCreateUpdateAndDelete() {
+    public function testCreateUpdateAndDelete(): void {
         $content = ContentFactory::getAll();
         $first = $content[0];
         $second = $content[1];
@@ -238,7 +238,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetContentWithContentId() {
+    public function testGetContentWithContentId(): void {
         $contents = ContentFactory::getAll();
         $first = $contents[0];
 
@@ -250,12 +250,12 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($first->id, $content->getId());
     }
 
-    public function testGetContentWithNull() {
+    public function testGetContentWithNull(): void {
         $comment = new Comment();
         $this->assertNull($comment->getContent());
     }
 
-    public function testGetAll() {
+    public function testGetAll(): void {
         $contents = ContentFactory::getAll();
         $first = $contents[0];
 
@@ -299,7 +299,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAllByContentId() {
+    public function testGetAllByContentId(): void {
         $contents = ContentFactory::getAll();
         $last = array_pop($contents);
 
@@ -366,7 +366,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Unit Test 4', $comment->getText());
     }
 
-    public function testGetAllcoByStatus() {
+    public function testGetAllcoByStatus(): void {
         $contents = ContentFactory::getAll();
         $last = array_pop($contents);
         $comment = new Comment();
@@ -428,37 +428,37 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testSetUrlWithFullUrl() {
+    public function testSetUrlWithFullUrl(): void {
         $comment = new Comment();
         $comment->setAuthorUrl('https://www.ulicms.de');
         $this->assertEquals('https://www.ulicms.de', $comment->getAuthorUrl());
     }
 
-    public function testSetUrlWithNoUrl() {
+    public function testSetUrlWithNoUrl(): void {
         $comment = new Comment();
         $comment->setAuthorUrl('this is not an url');
         $this->assertNull($comment->getAuthorUrl());
     }
 
-    public function testSetUrlWithIncompleteHttpUrl() {
+    public function testSetUrlWithIncompleteHttpUrl(): void {
         $comment = new Comment();
         $comment->setAuthorUrl('http://');
         $this->assertNull($comment->getAuthorUrl());
     }
 
-    public function testSetUrlWithIncompleteHttpsUrl() {
+    public function testSetUrlWithIncompleteHttpsUrl(): void {
         $comment = new Comment();
         $comment->setAuthorUrl('https://');
         $this->assertNull($comment->getAuthorUrl());
     }
 
-    public function testSetUrlWithIncompleteFtpUrl() {
+    public function testSetUrlWithIncompleteFtpUrl(): void {
         $comment = new Comment();
         $comment->setAuthorUrl('ftp://');
         $this->assertNull($comment->getAuthorUrl());
     }
 
-    public function testCheckIfCommentWithIpExistsTrue() {
+    public function testCheckIfCommentWithIpExistsTrue(): void {
         $content = ContentFactory::getAll();
         $first = $content[0];
 
@@ -485,31 +485,31 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         $comment->delete();
     }
 
-    public function testCheckIfCommentWithIpExistsFalse() {
+    public function testCheckIfCommentWithIpExistsFalse(): void {
         $this->assertFalse(Comment::checkIfCommentWithIpExists('111.111.111.111', CommentStatus::SPAM));
         $this->assertFalse(Comment::checkIfCommentWithIpExists('111.111.111.111', CommentStatus::PUBLISHED));
         $this->assertFalse(Comment::checkIfCommentWithIpExists('111.111.111.111', CommentStatus::PENDING));
     }
 
-    public function testDataWithInvalidValueThrowsException() {
+    public function testDataWithInvalidValueThrowsException(): void {
         $this->expectException('InvalidArgumentException');
         $comment = new Comment();
         $comment->setDate(new UliCMSVersion());
     }
 
-    public function testDeleteIps() {
+    public function testDeleteIps(): void {
         $this->createComments();
         $this->assertEquals(6, Comment::deleteIpsAfter48Hours());
         $this->assertEquals(3, $this->countIpsInDatabase());
     }
 
-    public function testDeleteIpsKeepSpamIps() {
+    public function testDeleteIpsKeepSpamIps(): void {
         $this->createComments();
         $this->assertEquals(3, Comment::deleteIpsAfter48Hours(true));
         $this->assertEquals(6, $this->countIpsInDatabase());
     }
 
-    protected function createComments() {
+    protected function createComments(): void {
         $content = ContentFactory::getAll();
         $first = $content[0];
 
@@ -532,7 +532,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    protected function createComment($contentId, $status, $timestamp) {
+    protected function createComment($contentId, $status, $timestamp): void {
         for ($i = 1; $i <= 3; $i++) {
             $comment = new Comment();
             $comment->setContentId($contentId);

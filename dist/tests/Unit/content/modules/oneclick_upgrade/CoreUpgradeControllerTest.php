@@ -57,13 +57,13 @@ class CoreUpgradeControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($controller->checkForUpgrades());
     }
 
-    public function testRunUpgradeFailsNoPermission() {
+    public function testRunUpgradeFailsNoPermission(): void {
         $controller = new CoreUpgradeController();
         $controller->setCheckUrl('https://channels.ulicms.de/phpunit.json');
         $this->assertFalse($controller->runUpgrade());
     }
 
-    public function testRunUpgradeFailsFileIsNotJson() {
+    public function testRunUpgradeFailsFileIsNotJson(): void {
         $_SERVER['REQUEST_METHOD'] = 'POST';
 
         $controller = new CoreUpgradeController();

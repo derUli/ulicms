@@ -10,7 +10,7 @@ class RoboDatabaseTest extends RoboTestBase {
         }
     }
 
-    public function testCreateAlreadyExists() {
+    public function testCreateAlreadyExists(): void {
         if (! $this->shouldDropDbOnShutdown()) {
             $this->markTestSkipped();
         }

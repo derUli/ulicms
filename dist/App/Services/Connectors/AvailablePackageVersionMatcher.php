@@ -19,7 +19,7 @@ class AvailablePackageVersionMatcher {
         $this->loadData($versionData);
     }
 
-    public function loadData($versionData) {
+    public function loadData($versionData): void {
         $this->versionData = [];
         if ($versionData === null) {
             return;

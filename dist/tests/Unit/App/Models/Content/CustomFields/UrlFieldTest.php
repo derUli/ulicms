@@ -10,7 +10,7 @@ class UrlFieldTest extends \PHPUnit\Framework\TestCase {
         include_once getLanguageFilePath('en');
     }
 
-    public function testRender() {
+    public function testRender(): void {
         $field = new UrlField();
         $field->name = 'my_field';
         $field->title = 'username';

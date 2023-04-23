@@ -41,7 +41,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
         ];
     }
 
-    public function testCreate() {
+    public function testCreate(): void {
         $groups = Group::getAll();
         $groupIds = array_map(static function($value) {
             return $value->getId();
@@ -67,7 +67,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(count($groupIds), $user->getSecondaryGroups());
     }
 
-    public function testCreateWithMail() {
+    public function testCreateWithMail(): void {
         $groups = Group::getAll();
         $groupIds = array_map(static function($value) {
             return $value->getId();
@@ -94,7 +94,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(count($groupIds), $user->getSecondaryGroups());
     }
 
-    public function testDeleteUserReturnsTrue() {
+    public function testDeleteUserReturnsTrue(): void {
         $controller = new UserController();
         $testUser = $this->getTestUser();
         $success = $controller->_deletePost($testUser->getId());
@@ -105,7 +105,7 @@ class UserControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($testUser->isPersistent());
     }
 
-    public function testDeleteUserReturnsFalse() {
+    public function testDeleteUserReturnsFalse(): void {
         $controller = new UserController();
         $success = $controller->_deletePost(PHP_INT_MAX);
         $this->assertFalse($success);

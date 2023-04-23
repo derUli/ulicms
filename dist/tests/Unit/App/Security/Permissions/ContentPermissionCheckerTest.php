@@ -81,7 +81,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
     // TODO: we need test cases for any combination of edit restrictions and user and group permissions
     // maybe write a permission matrix table for reference?
     // TODO: Write more test cases for canRead()
-    public function testCanReadReturnsTrue() {
+    public function testCanReadReturnsTrue(): void {
         $pages = ContentFactory::getAll();
         $checker = new ContentPermissionChecker($this->testUser1->getId());
         foreach ($pages as $page) {
@@ -90,7 +90,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
     }
 
     // No edit restrictions
-    public function testCanWriteWithNoEditRestrictionsReturnsTrue() {
+    public function testCanWriteWithNoEditRestrictionsReturnsTrue(): void {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
@@ -106,7 +106,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $page->delete();
     }
 
-    public function testCanWriteWithEditRestrictionsReturnsTrue() {
+    public function testCanWriteWithEditRestrictionsReturnsTrue(): void {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
@@ -124,7 +124,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
     }
 
     // content has edit restrictions, we can edit the content
-    public function testCanWriteWithEditRestrictionsReturnsFalse() {
+    public function testCanWriteWithEditRestrictionsReturnsFalse(): void {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
@@ -140,7 +140,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $page->delete();
     }
 
-    public function testCanDeleteWithEditRestrictionsReturnsTrue() {
+    public function testCanDeleteWithEditRestrictionsReturnsTrue(): void {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
@@ -158,7 +158,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
     }
 
     // content has edit restrictions, we can edit the content
-    public function testCanDeleteWithEditRestrictionsReturnsFalse() {
+    public function testCanDeleteWithEditRestrictionsReturnsFalse(): void {
         $checker = new ContentPermissionChecker($this->testUser1->getId());
 
         $page = new Page();
@@ -174,7 +174,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $page->delete();
     }
 
-    public function testCanWriteWithEditRestrictionAsAdminReturnsTrue() {
+    public function testCanWriteWithEditRestrictionAsAdminReturnsTrue(): void {
         $page = new Page();
         $page->slug = 'testpage3';
         $page->language = 'de';
@@ -187,7 +187,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($checker->canWrite($page->getId()));
     }
 
-    public function testCanWriteWithEditRestrictionAsAdminReturnsFalse() {
+    public function testCanWriteWithEditRestrictionAsAdminReturnsFalse(): void {
         $page = new Page();
         $page->slug = 'testpage3';
         $page->language = 'de';
@@ -200,7 +200,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($checker->canWrite($page->getID()));
     }
 
-    public function testCanWriteWithEditRestrictionAsGroupReturnsTrue() {
+    public function testCanWriteWithEditRestrictionAsGroupReturnsTrue(): void {
         $page = new Page();
         $page->slug = 'testpage3';
         $page->language = 'de';
@@ -213,7 +213,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($checker->canWrite($page->getId()));
     }
 
-    public function testCanWriteWithEditRestrictionAsGroupReturnsFalse() {
+    public function testCanWriteWithEditRestrictionAsGroupReturnsFalse(): void {
         $page = new Page();
         $page->slug = 'testpage3';
         $page->language = 'de';

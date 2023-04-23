@@ -16,7 +16,7 @@ class ResponseTest extends \PHPUnit\Framework\TestCase {
 
     }
 
-    public function testGetStatusCodeByNumber() {
+    public function testGetStatusCodeByNumber(): void {
         $this->assertEquals('200 OK', Response::getStatusCodeByNumber(200));
         $this->assertEquals('301 Moved Permanently', Response::getStatusCodeByNumber(301));
         $this->assertEquals('302 Found', Response::getStatusCodeByNumber(302));
@@ -26,7 +26,7 @@ class ResponseTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('418 I\'m a teapot', Response::getStatusCodeByNumber(418));
     }
 
-    public function testGetSafeRedirectURL() {
+    public function testGetSafeRedirectURL(): void {
         $this->assertEquals('http://ulicms.de/lorem_ipsum.html', Response::getSafeRedirectURL('http://ulicms.de/lorem_ipsum.html'));
 
         $this->assertEquals('http://ulicms.de/welcome', Response::getSafeRedirectURL('https://google.de'));
@@ -36,12 +36,12 @@ class ResponseTest extends \PHPUnit\Framework\TestCase {
         ]));
     }
 
-    public function testJavascriptRedirect() {
+    public function testJavascriptRedirect(): void {
         $expected = file_get_contents(
             Path::resolve('tests/fixtures/javascriptRedirect.expected.txt')
         );
 
-        $actual = TestHelper::getOutput(static function() {
+        $actual = TestHelper::getOutput(static function(): void {
             Response::javascriptRedirect('https://google.de');
         });
 

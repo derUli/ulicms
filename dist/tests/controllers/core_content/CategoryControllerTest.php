@@ -8,7 +8,7 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
         Database::deleteFrom('categories', "name like 'Unit Test%'");
     }
 
-    public function testCreateCategory() {
+    public function testCreateCategory(): void {
         $name = 'Unit Test ' . time();
         $description = 'Description ' . time();
         $controller = new CategoryController();
@@ -21,7 +21,7 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($description, $banner->getDescription());
     }
 
-    public function testUpdateCategory() {
+    public function testUpdateCategory(): void {
         $name = 'Unit Test ' . time();
         $description = 'Description ' . time();
         $createdId = Categories::addCategory($name, $description);
@@ -40,7 +40,7 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('New Description', $banner->getDescription());
     }
 
-    public function testDeleteCategoryReturnsTrue() {
+    public function testDeleteCategoryReturnsTrue(): void {
         $name = 'Unit Test ' . time();
         $description = 'Description ' . time();
         $createdId = Categories::addCategory($name, $description);
@@ -55,7 +55,7 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     // can't delete "General" category
-    public function testDeleteCategoryReturnsFalse() {
+    public function testDeleteCategoryReturnsFalse(): void {
         $controller = new CategoryController();
         $success = $controller->_deletePost(1);
 

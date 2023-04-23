@@ -8,7 +8,7 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
         Settings::delete('my_setting_en');
     }
 
-    public function testSettingsNew() {
+    public function testSettingsNew(): void {
         Settings::delete('example_setting');
         $this->assertEquals(false, Settings::get('example_setting'));
 
@@ -25,7 +25,7 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(false, Settings::get('example_setting'));
     }
 
-    public function testMappingStringToArray() {
+    public function testMappingStringToArray(): void {
         $mappingString = "company.de => de\r\n" .
                 "#This is a comment => This should be ignored\r\n" .
                 "company.co.uk => en \r\n" .
@@ -39,7 +39,7 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(isset($mapped['#This is a comment']));
     }
 
-    public function testGetAndSetLang() {
+    public function testGetAndSetLang(): void {
         $manager = new UserManager();
         $users = $manager->getAllUsers();
         $firstUser = $users[0];
@@ -56,7 +56,7 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Angelsächisch', Settings::getLang('my_setting', 'en'));
     }
 
-    public function testGetAndSetLanguageSetting() {
+    public function testGetAndSetLanguageSetting(): void {
         Settings::setLanguageSetting('my_setting', 'Lampukisch');
         Settings::setLanguageSetting('my_setting', 'Germanisch', 'de');
         Settings::setLanguageSetting('my_setting', 'Angelsächisch', 'en');
@@ -67,21 +67,21 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Angelsächisch', Settings::getLanguageSetting('my_setting', 'en'));
     }
 
-    public function testConvertVarTypeStr() {
+    public function testConvertVarTypeStr(): void {
         $this->assertIsString(Settings::convertVar(2.12, 'str'));
     }
 
-    public function testConvertVarTypeInt() {
+    public function testConvertVarTypeInt(): void {
         $this->assertIsInt(Settings::convertVar(2.12, 'int'));
         $this->assertEquals(2, Settings::convertVar(2.12, 'int'));
     }
 
-    public function testConvertVarTypeFloat() {
+    public function testConvertVarTypeFloat(): void {
         $this->assertIsFloat(Settings::convertVar(666, 'float'));
         $this->assertIsFloat(Settings::convertVar(0, 'float'));
     }
 
-    public function testConvertVarTypeBool() {
+    public function testConvertVarTypeBool(): void {
         $this->assertEquals(1, Settings::convertVar(666, 'bool'));
         $this->assertEquals(0, Settings::convertVar(0, 'bool'));
 
@@ -92,7 +92,7 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(0, Settings::convertVar('', 'bool'));
     }
 
-    public function testGetAllSettings() {
+    public function testGetAllSettings(): void {
         $settings = Settings::getAll();
 
         $this->assertGreaterThanOrEqual(50, count($settings));

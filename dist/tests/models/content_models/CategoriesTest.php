@@ -12,7 +12,7 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testAddUpdateAndDeleteCategory() {
+    public function testAddUpdateAndDeleteCategory(): void {
         $name = 'Test Category ' . uniqid();
         $description = uniqid();
         $id = Categories::addCategory($name, $description);
@@ -35,7 +35,7 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(Categories::getCategoryDescriptionById($id));
     }
 
-    public function testGetAllCategories() {
+    public function testGetAllCategories(): void {
         $categories = Categories::getAllCategories('id');
         $this->assertGreaterThanOrEqual(0, count($categories));
         foreach ($categories as $category) {
@@ -45,7 +45,7 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Allgemein', $categories[0]->getName());
     }
 
-    public function testGetHTMLSelectWithAllowNullWithoutDefault() {
+    public function testGetHTMLSelectWithAllowNullWithoutDefault(): void {
         $this->assertStringContainsString(
             "<option value='0' selected='selected'>[" .
             get_translation('every') . ']</option>',
@@ -53,7 +53,7 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetHTMLSelectWithAllowNullWithDefault() {
+    public function testGetHTMLSelectWithAllowNullWithDefault(): void {
         $this->assertStringContainsString(
             "<option value='0'>[" . get_translation('every') .
             ']</option>',
@@ -61,14 +61,14 @@ class CategoriesTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetHTMLSelectWithCustomFieldName() {
+    public function testGetHTMLSelectWithCustomFieldName(): void {
         $this->assertStringContainsString(
             "<select name='my_field_name' id='my_field_name' size='1'",
             Categories::getHTMLSelect(1, true, 'my_field_name')
         );
     }
 
-    public function testGetHTMLSelectWithoutCustomFieldName() {
+    public function testGetHTMLSelectWithoutCustomFieldName(): void {
         $this->assertStringContainsString(
             "<select name='category_id' id='category_id' size='1'",
             Categories::getHTMLSelect(1, true)

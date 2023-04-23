@@ -26,7 +26,7 @@ class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase {
         uninstall_module('hello_world');
     }
 
-    public function testInstallPostReturnsTrue() {
+    public function testInstallPostReturnsTrue(): void {
         $controller = new PkgInfoController();
         $success = $controller->_installPost('hello_world-10.sin');
         $this->assertTrue($success);
@@ -36,7 +36,7 @@ class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertContains('hello_world', getAllModules());
     }
 
-    public function testInstallPostReturnsFalse() {
+    public function testInstallPostReturnsFalse(): void {
         $controller = new PkgInfoController();
         $success = $controller->_installPost('gibtsnicht');
         $this->assertFalse($success);

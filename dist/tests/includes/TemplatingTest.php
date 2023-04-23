@@ -54,40 +54,40 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         ], true);
     }
 
-    public function testGetSlugWithSlugSet() {
+    public function testGetSlugWithSlugSet(): void {
         $_GET['slug'] = 'foobar';
         $this->assertEquals('foobar', get_slug());
         $this->cleanUp();
     }
 
-    public function testGetSlugWithoutSlug() {
+    public function testGetSlugWithoutSlug(): void {
         $this->cleanUp();
         $this->assertEquals(get_frontpage(), get_slug());
     }
 
-    public function testGetSlugWithNull() {
+    public function testGetSlugWithNull(): void {
         $_GET['slug'] = null;
         $this->assertEquals(get_frontpage(), get_slug());
     }
 
-    public function testGetSlugWithEmptyString() {
+    public function testGetSlugWithEmptyString(): void {
         $_GET['slug'] = '';
         $this->assertEquals(get_frontpage(), get_slug());
     }
 
-    public function testIsHomeTrue() {
+    public function testIsHomeTrue(): void {
         $_GET['slug'] = get_frontpage();
         $this->assertTrue(is_home());
         $this->cleanUp();
     }
 
-    public function testIsHomeFalse() {
+    public function testIsHomeFalse(): void {
         $_GET['slug'] = 'nothome';
         $this->assertFalse(is_home());
         $this->cleanUp();
     }
 
-    public function testGetType() {
+    public function testGetType(): void {
         $content1 = new Module_Page();
         $content1->title = 'Unit Test ' . uniqid();
         $content1->slug = 'unit-test-' . uniqid();
@@ -149,20 +149,20 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testSetRequestedPageName() {
+    public function testSetRequestedPageName(): void {
         set_requested_pagename('my-slug', 'en');
         $this->assertEquals('my-slug', get_slug());
         $this->assertEquals('en', Request::getVar('language'));
     }
 
-    public function testSetRequestedPageNameWithoutLanguage() {
+    public function testSetRequestedPageNameWithoutLanguage(): void {
         set_requested_pagename('my-slug');
 
         $this->assertEquals('my-slug', get_slug());
         $this->assertEquals('de', $_SESSION['language']);
     }
 
-    public function testGetMenu() {
+    public function testGetMenu(): void {
         $_SESSION['language'] = 'en';
         $html = get_menu('top', null, false);
         $this->assertStringContainsString('<ul', $html);
@@ -183,7 +183,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testMenu() {
+    public function testMenu(): void {
         $_SESSION['language'] = 'en';
 
         ob_start();
@@ -206,13 +206,13 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringNotContainsString('Willkommen', $html);
     }
 
-    public function testHtml5Doctype() {
+    public function testHtml5Doctype(): void {
         ob_start();
         html5_doctype();
         $this->assertEquals('<!doctype html>', ob_get_clean());
     }
 
-    public function testOgHTMLPrefix() {
+    public function testOgHTMLPrefix(): void {
         $_SESSION['language'] = 'en';
 
         ob_start();
@@ -232,7 +232,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetOgHTMLPrefix() {
+    public function testGetOgHTMLPrefix(): void {
         $_SESSION['language'] = 'en';
         $this->assertEquals(
             '<html prefix="og: http://ogp.me/ns#" lang="en">',
@@ -246,11 +246,11 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         unset($_SESSION['language']);
     }
 
-    public function testGetHtml5Doctype() {
+    public function testGetHtml5Doctype(): void {
         $this->assertEquals('<!doctype html>', get_html5_doctype());
     }
 
-    public function testYear() {
+    public function testYear(): void {
         ob_start();
         year();
         $output = ob_get_clean();
@@ -258,14 +258,14 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(4, strlen($output));
     }
 
-    public function testGetBaseMetas() {
+    public function testGetBaseMetas(): void {
         $baseMetas = get_base_metas();
 
         $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
         $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
     }
 
-    public function testBaseMetas() {
+    public function testBaseMetas(): void {
         ob_start();
         base_metas();
         $baseMetas = ob_get_clean();
@@ -274,7 +274,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
     }
 
-    public function testHead() {
+    public function testHead(): void {
         ob_start();
         html_head();
         $baseMetas = ob_get_clean();
@@ -283,13 +283,13 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
     }
 
-    public function testGetHead() {
+    public function testGetHead(): void {
         $baseMetas = get_html_head();
         $this->assertTrue(str_contains($baseMetas, '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>'));
         $this->assertTrue(str_contains($baseMetas, '<meta charset="utf-8"/>'));
     }
 
-    public function testBodyClassesDesktop() {
+    public function testBodyClassesDesktop(): void {
         $_SESSION['language'] = 'de';
         $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (Windows NT 6.1;' .
                 ' Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)' .
@@ -312,7 +312,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::delete('active');
     }
 
-    public function testCMSReleaseYear() {
+    public function testCMSReleaseYear(): void {
         ob_start();
         cms_release_year();
         $year = ob_get_clean();
@@ -324,12 +324,12 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertLessThan(2038, $year);
     }
 
-    public function testGetTextPositionWithNonExistingPageReturnsBefore() {
+    public function testGetTextPositionWithNonExistingPageReturnsBefore(): void {
         $_GET['slug'] = 'gibts-echt-nicht';
         $this->assertEquals('before', get_text_position());
     }
 
-    public function testGetMotto() {
+    public function testGetMotto(): void {
         $slogan1 = get_motto();
 
         $this->assertNotEmpty($slogan1);
@@ -345,7 +345,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($slogan1, $slogan2);
     }
 
-    public function testHomepageOwner() {
+    public function testHomepageOwner(): void {
         Settings::set('homepage_owner', 'John Doe');
 
         ob_start();
@@ -353,7 +353,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('John Doe', ob_get_clean());
     }
 
-    public function testRandomBanner() {
+    public function testRandomBanner(): void {
         $this->createTestBanners();
 
         ob_start();
@@ -375,7 +375,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->fail('Test failed');
     }
 
-    public function testLanguageSelection() {
+    public function testLanguageSelection(): void {
         ob_start();
         language_selection();
         $html = ob_get_clean();
@@ -393,13 +393,13 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         // TODO: Check if there are links in the returned html
     }
 
-    public function testHomepageTitle() {
+    public function testHomepageTitle(): void {
         ob_start();
         homepage_title();
         $this->assertNotEmpty(ob_get_clean());
     }
 
-    public function testOgTags() {
+    public function testOgTags(): void {
         ob_start();
         og_tags();
         $html = ob_get_clean();
@@ -430,7 +430,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         return $user;
     }
 
-    public function testGetCacheControl() {
+    public function testGetCacheControl(): void {
         $article = new Article();
         $article->title = 'Unit Test Article';
         $article->slug = 'unit-test-' . uniqid();
@@ -450,11 +450,11 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('force', get_cache_control());
     }
 
-    public function testGetTextPosition() {
+    public function testGetTextPosition(): void {
         $this->assertStringContainsString('before', get_text_position());
     }
 
-    public function testGetArticleMeta() {
+    public function testGetArticleMeta(): void {
         $article = new Article();
         $article->title = 'Unit Test Article';
         $article->slug = 'unit-test-' . uniqid();
@@ -482,7 +482,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Das ist der Ausschnitt', $article_meta->excerpt);
     }
 
-    public function testGetOgData() {
+    public function testGetOgData(): void {
         $article = new Article();
         $article->title = 'Unit Test Article';
         $article->slug = 'unit-test-' . uniqid();
@@ -522,7 +522,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetAccess() {
+    public function testGetAccess(): void {
         $article = new Article();
         $article->title = 'Unit Test Article';
         $article->slug = 'unit-test-' . uniqid();
@@ -554,7 +554,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetRedirection() {
+    public function testGetRedirection(): void {
         $link = new Link();
         $link->title = 'Unit Test Article';
         $link->slug = 'unit-test-' . uniqid();
@@ -575,7 +575,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('https://www.ulicms.de', get_redirection());
     }
 
-    public function testGetTheme() {
+    public function testGetTheme(): void {
         $article = new Article();
         $article->title = 'Unit Test Article';
         $article->slug = 'unit-test-' . uniqid();
@@ -602,7 +602,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('2020', get_theme());
     }
 
-    public function testGetCategory() {
+    public function testGetCategory(): void {
         $article = new Article();
         $article->title = 'Unit Test Article';
         $article->slug = 'unit-test-' . uniqid();
@@ -630,11 +630,11 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEmpty(get_category());
     }
 
-    public function testGetTypeNotFound() {
+    public function testGetTypeNotFound(): void {
         $this->assertNull(get_type('gibts_echt_nicht', 'de'));
     }
 
-    public function testGetMetaDescriptionFromPage() {
+    public function testGetMetaDescriptionFromPage(): void {
         $article = $this->getArticleWithMetaData();
 
         $_GET['slug'] = $article->slug;
@@ -643,7 +643,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Bla Bla usw.', get_meta_description());
     }
 
-    public function testMetaDescriptionFromPage() {
+    public function testMetaDescriptionFromPage(): void {
         $article = $this->getArticleWithMetaData();
 
         $_GET['slug'] = $article->slug;
@@ -654,7 +654,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Bla Bla usw.', ob_get_clean());
     }
 
-    public function testGetParentReturnsId() {
+    public function testGetParentReturnsId(): void {
         $article = $this->getArticleWithMetaData();
 
         $_GET['slug'] = $article->slug;
@@ -663,7 +663,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(1, get_parent());
     }
 
-    public function testGetParentReturnsNull() {
+    public function testGetParentReturnsNull(): void {
         $article = $this->getArticleWithMetaData();
         $article->parent_id = null;
         $article->save();
@@ -674,13 +674,13 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(get_parent());
     }
 
-    public function testGetFrontpage() {
+    public function testGetFrontpage(): void {
         unset($_SESSION['language']);
         $this->assertIsString(get_frontpage());
         $this->assertNotEmpty(get_frontpage());
     }
 
-    public function testTitleReturnsTitle() {
+    public function testTitleReturnsTitle(): void {
         $article = $this->getArticleWithMetaData();
 
         $_GET['slug'] = $article->slug;
@@ -692,7 +692,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Unit Test Article', ob_get_clean());
     }
 
-    public function testTitleReturnsAlternateTitle() {
+    public function testTitleReturnsAlternateTitle(): void {
         $article = $this->getArticleWithMetaData();
         $article->alternate_title = 'Alternativer Titel';
         $article->save();
@@ -711,7 +711,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Alternativer Titel', ob_get_clean());
     }
 
-    public function testParentItemContainsCurrentPageWithNullReturnsTrue() {
+    public function testParentItemContainsCurrentPageWithNullReturnsTrue(): void {
         set_requested_pagename('glueckskeks', 'de');
         $page = ContentFactory::getBySlugAndLanguage('module', 'de');
 
@@ -722,13 +722,13 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testParentItemContainsCurrentPageWithNullReturnsFalse() {
+    public function testParentItemContainsCurrentPageWithNullReturnsFalse(): void {
         $this->assertFalse(
             parent_item_contains_current_page(null)
         );
     }
 
-    private function cleanUp() {
+    private function cleanUp(): void {
         \App\Storages\Vars::delete('title');
         \App\Storages\Vars::delete('headline');
         \App\Storages\Vars::delete('page');
@@ -738,7 +738,7 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%'", true);
     }
 
-    private function createTestBanners() {
+    private function createTestBanners(): void {
         for ($i = 1; $i < 20; $i++) {
             $banner = new Banner();
             $banner->setType('html');

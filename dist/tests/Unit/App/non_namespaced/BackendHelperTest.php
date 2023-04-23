@@ -5,26 +5,26 @@ class BackendHelperTest extends \PHPUnit\Framework\TestCase {
         require_once getLanguageFilePath('en');
     }
 
-    public function testSetAndGetActionIsSetGet() {
+    public function testSetAndGetActionIsSetGet(): void {
         $_SERVER['REQUEST_METHOD'] = 'GET';
         BackendHelper::setAction('pages');
         $this->assertEquals('pages', BackendHelper::getAction());
         unset($_REQUEST['action']);
     }
 
-    public function testSetAndGetActionIsSetPost() {
+    public function testSetAndGetActionIsSetPost(): void {
         $_SERVER['REQUEST_METHOD'] = 'POST';
         BackendHelper::setAction('home');
         $this->assertEquals('home', BackendHelper::getAction());
         unset($_REQUEST['action']);
     }
 
-    public function testGetActionIsNotSet() {
+    public function testGetActionIsNotSet(): void {
         unset($_REQUEST['action']);
         $this->assertEquals('home', BackendHelper::getAction());
     }
 
-    public function testEnqueueEditorScripts() {
+    public function testEnqueueEditorScripts(): void {
         ob_start();
         BackendHelper::enqueueEditorScripts();
         ob_get_clean();
@@ -34,7 +34,7 @@ class BackendHelperTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetCKEditorSkins() {
+    public function testGetCKEditorSkins(): void {
         $skins = BackendHelper::getCKEditorSkins();
 
         $this->assertGreaterThanOrEqual(1, count($skins));

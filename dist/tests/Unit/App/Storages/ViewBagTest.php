@@ -13,7 +13,7 @@ class ViewBagTest extends \PHPUnit\Framework\TestCase {
        ViewBag::clear();
     }
 
-    public function testSetAndGet() {
+    public function testSetAndGet(): void {
         $this->assertEquals('bar',ViewBag::get('foo'));
         $this->assertEquals('world',ViewBag::get('hello'));
 
@@ -21,14 +21,14 @@ class ViewBagTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('you',ViewBag::get('hello'));
     }
 
-    public function testDelete() {
+    public function testDelete(): void {
         $this->assertEquals('bar',ViewBag::get('foo'));
 
        ViewBag::delete('foo');
         $this->assertNull(\App\Storages\ViewBag::get('foo'));
     }
 
-    public function testClear() {
+    public function testClear(): void {
         for($i = 0; $i < 100; $i++) {
             ViewBag::set("foo_{$i}", $i);
         }

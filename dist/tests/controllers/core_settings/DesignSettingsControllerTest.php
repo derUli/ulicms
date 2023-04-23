@@ -32,7 +32,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function test_generateSCSS() {
+    public function test_generateSCSS(): void {
         $controller = ControllerRegistry::get(DesignSettingsController::class);
         $scss = $controller->_generateSCSS();
         $this->assertGreaterThanOrEqual(5, substr_count($scss, "\n"));
@@ -41,7 +41,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(12, $lines);
     }
 
-    public function test_generateSCSSToFile() {
+    public function test_generateSCSSToFile(): void {
         $this->cleanUpFiles();
         $controller = ControllerRegistry::get(DesignSettingsController::class);
         $file = $controller->_generateSCSSToFile();
@@ -59,7 +59,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function test_generateSCSSInConstructor() {
+    public function test_generateSCSSInConstructor(): void {
         $this->cleanUpFiles();
 
         $file = Path::resolve('ULICMS_GENERATED_PRIVATE/design_variables.scss');
@@ -73,12 +73,12 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetFontFamilys() {
+    public function testGetFontFamilys(): void {
         $controller = new DesignSettingsController();
         $this->assertMatchesJsonSnapshot($controller->getFontFamilys());
     }
 
-    public function testGetThemePreviewReturnsPath() {
+    public function testGetThemePreviewReturnsPath(): void {
         $controller = new DesignSettingsController();
         $this->assertEquals(
             'content/templates/impro17/screenshot.jpg',
@@ -86,12 +86,12 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testThemePreviewReturnsNull() {
+    public function testThemePreviewReturnsNull(): void {
         $controller = new DesignSettingsController();
         $this->assertNull($controller->_themePreview('nothing'));
     }
 
-    public function testSetDefaultTheme() {
+    public function testSetDefaultTheme(): void {
         $controller = new DesignSettingsController();
         $this->assertNotEquals('foobar', Settings::get('theme'));
 
@@ -99,7 +99,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('foobar', Settings::get('theme'));
     }
 
-    public function testSetDefaultMobileThemeWithTheme() {
+    public function testSetDefaultMobileThemeWithTheme(): void {
         $controller = new DesignSettingsController();
         $this->assertNotEquals('foobar', Settings::get('theme'));
 
@@ -107,21 +107,21 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('foobar', Settings::get('mobile_theme'));
     }
 
-    public function testSetDefaultMobileThemeWithNull() {
+    public function testSetDefaultMobileThemeWithNull(): void {
         $controller = new DesignSettingsController();
         $controller->_setDefaultMobileTheme('foobar');
         $controller->_setDefaultMobileTheme('foobar');
         $this->assertNull(Settings::get('mobile_theme'));
     }
 
-    public function testGetFontSizes() {
+    public function testGetFontSizes(): void {
         $controller = new DesignSettingsController();
         $sizes = $controller->getFontSizes();
         $this->assertCount(75, $sizes);
         $this->assertContains('14px', $sizes);
     }
 
-    private function cleanUpFiles() {
+    private function cleanUpFiles(): void {
         $filesToDelete = [
             'ULICMS_GENERATED_PRIVATE/design_variables.scss'
         ];

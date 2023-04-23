@@ -27,7 +27,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         Settings::set('oneclick_upgrade_channel', $this->oneclick_upgrade_channel);
     }
 
-    public function testCreateAndEditModule1() {
+    public function testCreateAndEditModule1(): void {
         $manager = new ModuleManager();
 
         $module = new Module();
@@ -83,7 +83,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(in_array(self::sampleName2, $allModules));
     }
 
-    public function testInitialSync() {
+    public function testInitialSync(): void {
         $manager = new ModuleManager();
 
         Database::query('truncate table {prefix}modules', true);
@@ -93,7 +93,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(count(getAllModules()), count($manager->getAllModules()));
     }
 
-    public function testGetDisabledModuleNames() {
+    public function testGetDisabledModuleNames(): void {
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
@@ -111,7 +111,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testRemoveDeletedModules() {
+    public function testRemoveDeletedModules(): void {
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
@@ -126,7 +126,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotContains('wurde_geloescht', $moduleManager->getAllModuleNames());
     }
 
-    public function testUpdateModuleVersion() {
+    public function testUpdateModuleVersion(): void {
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
@@ -142,7 +142,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('3.3.7', $module->getVersion());
     }
 
-    public function testInitModulesDefaultSettings() {
+    public function testInitModulesDefaultSettings(): void {
         Settings::delete('oneclick_upgrade_channel');
 
         $this->assertNull(Settings::get('oneclick_upgrade_channel'));
@@ -153,7 +153,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('slow', Settings::get('oneclick_upgrade_channel'));
     }
 
-    public function testGetDependencies() {
+    public function testGetDependencies(): void {
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 
@@ -163,7 +163,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetDependentModules() {
+    public function testGetDependentModules(): void {
         $moduleManager = new ModuleManager();
         $moduleManager->sync();
 

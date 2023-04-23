@@ -50,7 +50,7 @@ class Image_Page extends Page {
         return 'far fa-images';
     }
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null): void {
         parent::fillVars($result);
         $this->image_url = $result->image_url;
         $this->text_position = $result->text_position;

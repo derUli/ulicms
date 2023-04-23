@@ -107,7 +107,7 @@ class ModuleManager {
     }
 
     // remove modules from database which aren't installed anymore
-    protected function removeDeletedModules() {
+    protected function removeDeletedModules(): void {
         $realModules = getAllModules();
 
         $dataBaseModules = $this->getAllModuleNames();
@@ -121,7 +121,7 @@ class ModuleManager {
     }
 
     // add new modules to database
-    protected function addNewModules() {
+    protected function addNewModules(): void {
         $realModules = getAllModules();
         $dataBaseModules = $this->getAllModuleNames();
 

@@ -3,7 +3,7 @@
 use App\CoreContent\UIUtils;
 
 class UIUtilsTest extends \PHPUnit\Framework\TestCase {
-    public function testGetRobotsListItems() {
+    public function testGetRobotsListItems(): void {
         $items = UIUtils::getRobotsListItems();
 
         $this->assertCount(5, $items);

@@ -55,7 +55,7 @@ class LanguageControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($controller->_deletePost());
     }
 
-    public function testDefaultLanguage() {
+    public function testDefaultLanguage(): void {
         $this->assertNotEquals('it', Settings::get('system_language'));
         $this->assertNotEquals('it', Settings::get('default_language'));
 

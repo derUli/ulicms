@@ -40,7 +40,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testSplitHeaders() {
+    public function testSplitHeaders(): void {
         $headers = '';
         $headers .= "From: info@company.com\n";
         $headers .= "Reply-To: reply@company.com\n";
@@ -57,7 +57,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('My Cool Mailer', $parsed['X-Mailer']);
     }
 
-    public function testGetPHPMailer() {
+    public function testGetPHPMailer(): void {
         $mailer = Mailer::getPHPMailer();
         $this->assertInstanceOf(PHPMailer::class, $mailer);
         $this->assertTrue(in_array($mailer->SMTPSecure, [
@@ -70,7 +70,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($mailer->SMTPAuth);
     }
 
-    public function testGetPHPMailerWithEmailMode() {
+    public function testGetPHPMailerWithEmailMode(): void {
         $mailer = $this->setUpPhpMailer();
         $this->assertEquals(
             [
@@ -95,12 +95,12 @@ class MailerTest extends \PHPUnit\Framework\TestCase {
         ]));
     }
 
-    public function testEmailModes() {
+    public function testEmailModes(): void {
         $this->assertEquals('internal', EmailModes::INTERNAL);
         $this->assertEquals('phpmailer', EmailModes::PHPMAILER);
     }
 
-    public function testSendWithPHPMailer() {
+    public function testSendWithPHPMailer(): void {
         $headers = "X-Mailer: Der Gerät\n";
         $headers .= "Reply-To: antwort@adresse.invalid\n";
         $headers .= 'Content-Type: text/html';
@@ -110,7 +110,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetMailLogger() {
+    public function testGetMailLogger(): void {
         $logFunction = Mailer::getMailLogger();
 
         $this->assertIsCallable($logFunction);

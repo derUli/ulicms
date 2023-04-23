@@ -28,7 +28,7 @@ class Language extends Model {
         return $this->getLanguageCode();
     }
 
-    public function fillVars($result = null) {
+    public function fillVars($result = null): void {
         if ($result && Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
             $this->id = $result->id;
@@ -41,7 +41,7 @@ class Language extends Model {
         }
     }
 
-    public function loadById($id) {
+    public function loadById($id): void {
         $args = [
             $id
         ];
@@ -67,15 +67,15 @@ class Language extends Model {
         return $this->language_code;
     }
 
-    public function setName($val) {
+    public function setName($val): void {
         $this->name = $val !== null ? (string)$val : null;
     }
 
-    public function setLanguageCode($val) {
+    public function setLanguageCode($val): void {
         $this->language_code = $val !== null ? (string)$val : null;
     }
 
-    public function save() {
+    public function save(): void {
         if ($this->id === null) {
             $this->insert();
         } else {
@@ -83,7 +83,7 @@ class Language extends Model {
         }
     }
 
-    public function delete() {
+    public function delete(): void {
         if ($this->id !== null) {
             $sql = 'DELETE FROM `{prefix}languages` where id = ?';
             $args = [
@@ -136,7 +136,7 @@ class Language extends Model {
         return $url;
     }
 
-    protected function insert() {
+    protected function insert(): void {
         $sql = 'INSERT INTO `{prefix}languages` (name, language_code) '
                 . 'values (?,?)';
         $args = [
@@ -147,7 +147,7 @@ class Language extends Model {
         $this->id = Database::getLastInsertID();
     }
 
-    protected function update() {
+    protected function update(): void {
         $sql = 'UPDATE `{prefix}languages` set name = ?, language_code = ? '
                 . 'where id = ?';
         $args = [

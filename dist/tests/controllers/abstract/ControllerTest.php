@@ -19,7 +19,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase {
         Database::deleteFrom('users', "username like 'testuser-%'");
     }
 
-    public function testCallNonExistingMethod() {
+    public function testCallNonExistingMethod(): void {
         $controller = new PageController();
 
         $_REQUEST['sClass'] = PageController::class;
@@ -30,7 +30,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase {
         $controller->runCommand();
     }
 
-    public function testCallExistingPostMethodAccessDenied() {
+    public function testCallExistingPostMethodAccessDenied(): void {
         $controller = new PageController();
 
         $_REQUEST['sClass'] = PageController::class;
@@ -40,7 +40,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase {
         $controller->runCommand();
     }
 
-    public function testCallExistingMethodAccessDenied() {
+    public function testCallExistingMethodAccessDenied(): void {
         $controller = new PageController();
 
         $_REQUEST['sClass'] = PageController::class;
@@ -50,7 +50,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase {
         $controller->runCommand();
     }
 
-    public function testCallPostMethod() {
+    public function testCallPostMethod(): void {
         $user = $this->getAdminUser();
         $_SESSION['login_id'] = $user->getId();
 
@@ -67,7 +67,7 @@ class ControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testCallHeadMethod() {
+    public function testCallHeadMethod(): void {
         $user = $this->getAdminUser();
         $_SESSION['login_id'] = $user->getId();
 

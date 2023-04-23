@@ -5,7 +5,7 @@
  *
  */
 class PathTest extends \PHPUnit\Framework\TestCase {
-    public function testNormalize() {
+    public function testNormalize(): void {
         $this->assertStringContainsString(
             DIRECTORY_SEPARATOR,
             Path::normalize('..\foo\bar\file.txt')
@@ -17,7 +17,7 @@ class PathTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testResolve() {
+    public function testResolve(): void {
         $this->assertStringEndsWith(
             '/content/log/exception_log/foo.log',
             Path::resolve('ULICMS_LOG/exception_log/foo.log')

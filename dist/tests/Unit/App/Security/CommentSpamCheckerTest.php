@@ -15,14 +15,14 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
         $_POST = [];
     }
 
-    public function testConstructor() {
+    public function testConstructor(): void {
         $configuration = new SpamFilterConfiguration();
         $comment = new Comment();
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertCount(0, $checker->getErrors());
     }
 
-    public function testSpamWithNonEmptyHoneypotField() {
+    public function testSpamWithNonEmptyHoneypotField(): void {
         $configuration = new SpamFilterConfiguration();
 
         $comment = new Comment();
@@ -45,7 +45,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
         unset($_POST['my_homepage_url']);
     }
 
-    public function testSpamWithBadwords() {
+    public function testSpamWithBadwords(): void {
         $configuration = new SpamFilterConfiguration();
         $configuration->setBadwords([
             'Shit',
@@ -73,7 +73,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('The field "Comment Text" contains the not allowed word "Shit".', $error1->message);
     }
 
-    public function testSpamWithInvalidMxEntry() {
+    public function testSpamWithInvalidMxEntry(): void {
         $configuration = new SpamFilterConfiguration();
         $configuration->setCheckMxOfMailAddress(true);
 
@@ -91,7 +91,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('The domain of your e-Mail address has no valid MX entry. Please verify that your e-Mail address in valid.', $error->message);
     }
 
-    public function testWithBotUseragent() {
+    public function testWithBotUseragent(): void {
         $configuration = new SpamFilterConfiguration();
         $configuration->setRejectRequestsFromBots(true);
 
@@ -110,7 +110,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('You look like a bot. Bots are not allowed to send messages on this website.', $error->message);
     }
 
-    public function testSpamWithChineseChars() {
+    public function testSpamWithChineseChars(): void {
         $configuration = new SpamFilterConfiguration();
         $configuration->setDisallowChineseChars(true);
 
@@ -133,7 +133,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Chinese chars are not allowed!', $error1->message);
     }
 
-    public function testSpamWithCyrillicChars() {
+    public function testSpamWithCyrillicChars(): void {
         $configuration = new SpamFilterConfiguration();
         $configuration->setDisallowCyrillicChars(true);
 
@@ -156,7 +156,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Cyrillic chars are not allowed!', $error1->message);
     }
 
-    public function testSpamWithRtlChars() {
+    public function testSpamWithRtlChars(): void {
         $configuration = new SpamFilterConfiguration();
         $configuration->setDisallowRtlChars(true);
 
@@ -179,7 +179,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Right-To-Left languages are not allowed!', $error1->message);
     }
 
-    public function testWithBlockedCountries() {
+    public function testWithBlockedCountries(): void {
         $configuration = new SpamFilterConfiguration();
 
         $configuration->setBlockedCountries([
@@ -205,7 +205,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals("Access to this function for your country is blocked!\nYour hostname: static.vnpt.vn", $error->message);
     }
 
-    public function testSpamfilterDisabled() {
+    public function testSpamfilterDisabled(): void {
         $configuration = new SpamFilterConfiguration();
         $configuration->setSpamFilterEnabled(false);
 
@@ -224,7 +224,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
         unset($_POST['my_homepage_url']);
     }
 
-    public function testNoSpamWithAllOptions() {
+    public function testNoSpamWithAllOptions(): void {
         $configuration = new SpamFilterConfiguration();
         $configuration->setSpamFilterEnabled(true);
         $configuration->setBadwords('shit', 'fuck', 'crap');

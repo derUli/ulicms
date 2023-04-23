@@ -27,17 +27,17 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testIsEnabledReturnsTrue() {
+    public function testIsEnabledReturnsTrue(): void {
         Settings::set('twofactor_authentication', 'twofactor_authentication');
         $this->assertTrue(TwoFactorAuthentication::isEnabled());
     }
 
-    public function testIsEnabledReturnsFalse() {
+    public function testIsEnabledReturnsFalse(): void {
         Settings::delete('twofactor_authentication');
         $this->assertFalse(TwoFactorAuthentication::isEnabled());
     }
 
-    public function testConstructor() {
+    public function testConstructor(): void {
         Settings::set('twofactor_authentication', 'twofactor_authentication');
         Settings::delete('ga_secret');
         $this->assertNull(Settings::get('ga_secret'));
@@ -47,7 +47,7 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(Settings::get('ga_secret'), $auth->getSecret());
     }
 
-    public function testGenerateSecret() {
+    public function testGenerateSecret(): void {
         $auth = new TwoFactorAuthentication();
         $oldSecret = $auth->getSecret();
 
@@ -56,13 +56,13 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotEquals($oldSecret, $changedSecret);
     }
 
-    public function testGetSecret() {
+    public function testGetSecret(): void {
         $auth = new TwoFactorAuthentication();
         $this->assertIsString($auth->getSecret());
         $this->assertEquals(Settings::get('ga_secret'), $auth->getSecret());
     }
 
-    public function testGetCode() {
+    public function testGetCode(): void {
         Settings::set('twofactor_authentication', 'twofactor_authentication');
         $auth = new TwoFactorAuthentication();
 
@@ -71,7 +71,7 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(6, strlen($code));
     }
 
-    public function testCheckCodeReturnsTrue() {
+    public function testCheckCodeReturnsTrue(): void {
         Settings::set('twofactor_authentication', 'twofactor_authentication');
         $auth = new TwoFactorAuthentication();
         $code = $auth->getCode();
@@ -79,14 +79,14 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($auth->checkCode($code));
     }
 
-    public function testCheckCodeReturnsFalse() {
+    public function testCheckCodeReturnsFalse(): void {
         Settings::set('twofactor_authentication', 'twofactor_authentication');
         $auth = new TwoFactorAuthentication();
 
         $this->assertFalse($auth->checkCode('123456'));
     }
 
-    public function testEnable() {
+    public function testEnable(): void {
         Settings::delete('twofactor_authentication');
 
         $this->assertFalse(TwoFactorAuthentication::isEnabled());
@@ -94,7 +94,7 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(TwoFactorAuthentication::isEnabled());
     }
 
-    public function testDisable() {
+    public function testDisable(): void {
         Settings::delete('twofactor_authentication');
 
         TwoFactorAuthentication::enable();
@@ -103,7 +103,7 @@ class TwoFactorAuthenticationTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(TwoFactorAuthentication::isEnabled());
     }
 
-    public function testToggle() {
+    public function testToggle(): void {
         Settings::delete('twofactor_authentication');
 
         $this->assertFalse(TwoFactorAuthentication::isEnabled());

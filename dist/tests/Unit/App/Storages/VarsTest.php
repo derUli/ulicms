@@ -13,7 +13,7 @@ class VarsTest extends \PHPUnit\Framework\TestCase {
         Vars::clear();
     }
 
-    public function testSetAndGet() {
+    public function testSetAndGet(): void {
         $this->assertEquals('bar', Vars::get('foo'));
         $this->assertEquals('world', Vars::get('hello'));
 
@@ -21,14 +21,14 @@ class VarsTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('you', Vars::get('hello'));
     }
 
-    public function testDelete() {
+    public function testDelete(): void {
         $this->assertEquals('bar', Vars::get('foo'));
 
         Vars::delete('foo');
         $this->assertNull(Vars::get('foo'));
     }
 
-    public function testClear() {
+    public function testClear(): void {
         for($i = 0; $i < 100; $i++) {
             Vars::set("foo_{$i}", $i);
         }

@@ -6,7 +6,7 @@ class ContentListTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
     }
 
-    public function testCreateContentList() {
+    public function testCreateContentList(): void {
         $contentList = new Content_List();
         $contentList->title = 'Unit Test Article';
         $contentList->slug = 'unit test';

@@ -21,27 +21,27 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $module->enable();
     }
 
-    public function testHasAdminPageReturnsTrue() {
+    public function testHasAdminPageReturnsTrue(): void {
         $module = new Module('fortune2');
         $this->assertTrue($module->hasAdminPage());
     }
 
-    public function testHasAdminPageReturnsFalse() {
+    public function testHasAdminPageReturnsFalse(): void {
         $module = new Module('core_users');
         $this->assertFalse($module->hasAdminPage());
     }
 
-    public function testisEmbedModuleReturnsTrue() {
+    public function testisEmbedModuleReturnsTrue(): void {
         $module = new Module('fortune2');
         $this->assertTrue($module->isEmbedModule());
     }
 
-    public function testisEmbedModuleReturnsFalse() {
+    public function testisEmbedModuleReturnsFalse(): void {
         $module = new Module('core_users');
         $this->assertFalse($module->isEmbedModule());
     }
 
-    public function testCreateUpdateAndDeleteModule() {
+    public function testCreateUpdateAndDeleteModule(): void {
         $module = new Module();
         $module->setName('my_awesome_module');
         $module->setVersion('1.0');
@@ -81,7 +81,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($module->getVersion());
     }
 
-    public function testToggleEnabled() {
+    public function testToggleEnabled(): void {
         $module = new Module('fortune2');
         $module->toggleEnabled();
         $this->assertFalse($module->isEnabled());
@@ -97,30 +97,30 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($module->isEnabled());
     }
 
-    public function testIsInstalledReturnsTrue() {
+    public function testIsInstalledReturnsTrue(): void {
         $module = new Module('core_content');
         $this->assertTrue($module->isInstalled());
     }
 
-    public function testIsInstalledReturnsFalse() {
+    public function testIsInstalledReturnsFalse(): void {
         $module = new Module('not_existing_module');
         $this->assertFalse($module->isInstalled());
     }
 
-    public function testGetShortcodeReturnsShortcode() {
+    public function testGetShortcodeReturnsShortcode(): void {
         $module = new Module();
         $module->setName('hello_world');
         $this->assertEquals('[module=hello_world]', $module->getShortCode());
     }
 
-    public function testGetShortcodeReturnsNull() {
+    public function testGetShortcodeReturnsNull(): void {
         $module = new Module();
         $this->assertNull(
             $module->getShortCode()
         );
     }
 
-    public function testGetDependentModules() {
+    public function testGetDependentModules(): void {
         $module = new Module('core_content');
 
         $this->assertContains(
@@ -129,17 +129,17 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testhasUninstallEventReturnsTrue() {
+    public function testhasUninstallEventReturnsTrue(): void {
         $module = new Module('fortune2');
         $this->assertTrue($module->hasUninstallEvent());
     }
 
-    public function testhasUninstallEventReturnsFalse() {
+    public function testhasUninstallEventReturnsFalse(): void {
         $module = new Module('core_content');
         $this->assertFalse($module->hasUninstallEvent());
     }
 
-    public function testUninstallReturnsTrue() {
+    public function testUninstallReturnsTrue(): void {
         $module = new Module('fortune2');
         $this->assertTrue($module->uninstall());
 

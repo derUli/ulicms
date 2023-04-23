@@ -38,7 +38,7 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testDeleteLogo() {
+    public function testDeleteLogo(): void {
         $controller = new LogoController();
         $this->assertEquals('no', Settings::get('logo_disabled'));
         $this->assertTrue($controller->_deleteLogo());
@@ -48,18 +48,18 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($controller->_deleteLogo());
     }
 
-    public function testHasLogoReturnsTrue() {
+    public function testHasLogoReturnsTrue(): void {
         $controller = new LogoController();
         $this->assertTrue($controller->_hasLogo());
     }
 
-    public function testHasLogoReturnsFalse() {
+    public function testHasLogoReturnsFalse(): void {
         $controller = new LogoController();
         $controller->_deleteLogo();
         $this->assertFalse($controller->_hasLogo());
     }
 
-    public function testBuildFileName() {
+    public function testBuildFileName(): void {
         $controller = new LogoController();
 
         $fileName = $controller->_buildFileName(
@@ -69,7 +69,7 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('61edbeb9410bc87763cebc93fbba8335.jpg', $fileName);
     }
 
-    public function testBuildFilePath() {
+    public function testBuildFilePath(): void {
         $controller = new LogoController();
 
         $filePath = $controller->_buildFilePath(

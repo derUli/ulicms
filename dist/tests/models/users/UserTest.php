@@ -59,7 +59,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->setLastAction(0);
     }
 
-    public function testCreateAndDeleteUser() {
+    public function testCreateAndDeleteUser(): void {
         $user = new User();
         $user->setUsername('max_muster');
         $user->setFirstname('Max');
@@ -136,7 +136,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($user->getId());
     }
 
-    public function testLoadByUsernameCaseInsensitive() {
+    public function testLoadByUsernameCaseInsensitive(): void {
         $user = new User();
         $user->setUsername('paul.panzer');
         $user->setLastname('Panzer');
@@ -154,7 +154,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
-    public function testLoadByEmailCaseInsensitive() {
+    public function testLoadByEmailCaseInsensitive(): void {
         $user = new User();
         $user->setUsername('paul.panzer');
         $user->setLastname('Panzer');
@@ -172,7 +172,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
-    public function testGetWelcomeMailText() {
+    public function testGetWelcomeMailText(): void {
         $user = new User();
         $user->setUsername('john.doe');
         $user->setLastname('Doe');
@@ -189,7 +189,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString('Password: secret', $message);
     }
 
-    public function testLoadByEmail() {
+    public function testLoadByEmail(): void {
         $user = new User();
         $user->setUsername('john-doe');
         $user->setFirstname('John');
@@ -208,7 +208,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
-    public function testCheckPasswordReturnsTrue() {
+    public function testCheckPasswordReturnsTrue(): void {
         $user = new User();
         $user->setPassword('topsecretpassword');
 
@@ -217,7 +217,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
-    public function testCheckPasswordReturnsFalse() {
+    public function testCheckPasswordReturnsFalse(): void {
         $user = new User();
         $user->setPassword('topsecretpassword');
         $this->assertFalse($user->checkPassword('falschesPassW0rt'));
@@ -225,7 +225,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
-    public function testFromSessionDataWithInvalidIdReturnsEmptyUser() {
+    public function testFromSessionDataWithInvalidIdReturnsEmptyUser(): void {
         $_SESSION['login_id'] = PHP_INT_MAX;
         $userFromSession = User::fromSessionData();
         $this->assertInstanceOf(User::class, $userFromSession);
@@ -233,12 +233,12 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($userFromSession->getUsername());
     }
 
-    public function testFromSessionDataWithoutSessionReturnsNull() {
+    public function testFromSessionDataWithoutSessionReturnsNull(): void {
         $userFromSession = User::fromSessionData();
         $this->assertNull($userFromSession);
     }
 
-    public function testFromSessionDataReturnsUser() {
+    public function testFromSessionDataReturnsUser(): void {
         $manager = new UserManager();
         $users = $manager->getLockedUsers(false);
         $user = $users[0];
@@ -259,7 +259,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testRegisterSessionRegistersSession() {
+    public function testRegisterSessionRegistersSession(): void {
         $manager = new UserManager();
         $users = $manager->getLockedUsers(false);
         $user = $users[0];
@@ -271,18 +271,18 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertNotNull(session_id());
     }
 
-    public function testRegisterSessionThrowError() {
+    public function testRegisterSessionThrowError(): void {
         $this->expectException(BadMethodCallException::class);
         $user = new User();
         $user->registerSession();
     }
 
-    public function testToSessionDataReturnsNull() {
+    public function testToSessionDataReturnsNull(): void {
         $user = new User();
         $this->assertNull($user->toSessionData());
     }
 
-    public function testToSessionDataReturnsArray() {
+    public function testToSessionDataReturnsArray(): void {
         $manager = new UserManager();
         $users = $manager->getLockedUsers(false);
         $user = $users[0];
@@ -295,7 +295,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($user->getLastname(), $sessionData['lastname']);
     }
 
-    public function testGetAllGroupsReturnsEmptyArray() {
+    public function testGetAllGroupsReturnsEmptyArray(): void {
         $user = new User();
         $user->setUsername('john-doe');
         $user->setFirstname('John');
@@ -309,7 +309,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
-    public function testGetAllGroupsReturnsGroups() {
+    public function testGetAllGroupsReturnsGroups(): void {
         $user = new User();
         $user->setUsername('john-doe');
         $user->setFirstname('John');
@@ -352,7 +352,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
-    public function testGetPasswordChanged() {
+    public function testGetPasswordChanged(): void {
         $user = new User();
         $user->setPassword('top-secret');
         $this->assertMatchesRegularExpression(
@@ -361,7 +361,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testSetAndGetLastAction() {
+    public function testSetAndGetLastAction(): void {
         $user = new User();
         $user->setUsername('john-doe');
         $user->setFirstname('John');
@@ -385,7 +385,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
-    public function testRemoveSecondaryGroup() {
+    public function testRemoveSecondaryGroup(): void {
         $group1 = new Group();
         $group1->setName('Group1');
         $group1->setId(123);
@@ -408,7 +408,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testSetHtmlEditorToNonSupported() {
+    public function testSetHtmlEditorToNonSupported(): void {
         $this->expectException(InvalidArgumentException::class);
         $user = new User();
 
@@ -417,7 +417,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->setHTMLEditor('super_editor');
     }
 
-    public function testIncreaseAndResetFailedLogins() {
+    public function testIncreaseAndResetFailedLogins(): void {
         $user = new User();
         $user->setUsername('john-doe');
         $user->setFirstname('John');
@@ -445,7 +445,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
-    public function testResetPassword() {
+    public function testResetPassword(): void {
         $user = new User();
         $user->setUsername('john-doe');
         $user->setFirstname('John');
@@ -475,19 +475,19 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
-    public function testGetFullNameReturnsFullName() {
+    public function testGetFullNameReturnsFullName(): void {
         $user = new User();
         $user->setFirstname('John');
         $user->setLastname('Doe');
         $this->assertEquals('John Doe', $user->getFullName());
     }
 
-    public function testGetFullNameReturnsEmptyString() {
+    public function testGetFullNameReturnsEmptyString(): void {
         $user = new User();
         $this->assertEmpty($user->getFullName());
     }
 
-    public function testGetDisplayNameReturnsFullName() {
+    public function testGetDisplayNameReturnsFullName(): void {
         $user = new User();
         $user->setFirstname('John');
         $user->setLastname('Doe');
@@ -495,32 +495,32 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('John Doe', $user->getDisplayName());
     }
 
-    public function testGetDisplayNameReturnsUsername() {
+    public function testGetDisplayNameReturnsUsername(): void {
         $user = new User();
         $user->setUsername('johndoe');
         $this->assertEquals('johndoe', $user->getDisplayName());
     }
 
-    public function testGetDisplayNameReturnsFirstName() {
+    public function testGetDisplayNameReturnsFirstName(): void {
         $user = new User();
         $user->setFirstname('John');
         $user->setUsername('johndoe');
         $this->assertEquals('John', $user->getDisplayName());
     }
 
-    public function testGetDisplayNameReturnsLastName() {
+    public function testGetDisplayNameReturnsLastName(): void {
         $user = new User();
         $user->setLastname('Doe');
         $user->setUsername('johndoe');
         $this->assertEquals('Doe', $user->getDisplayName());
     }
 
-    public function testGetDisplayNameReturnsEmptyString() {
+    public function testGetDisplayNameReturnsEmptyString(): void {
         $user = new User();
         $this->assertEquals('', $user->getFullName());
     }
 
-    public function testGetAvatarReturnsFallback() {
+    public function testGetAvatarReturnsFallback(): void {
         $user = new User();
         $this->assertStringEndsWith(
             'admin/gfx/no_avatar.png',
@@ -528,7 +528,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetPermissionCheckerReturnsTrue() {
+    public function testGetPermissionCheckerReturnsTrue(): void {
         $user = new User();
         $user->setUsername('john-doe');
         $user->setFirstname('John');
@@ -544,19 +544,19 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user->delete();
     }
 
-    public function testGetPermissionCheckerReturnsFalse() {
+    public function testGetPermissionCheckerReturnsFalse(): void {
         $user = new User();
 
         $permissionChecker = $user->getPermissionChecker();
         $this->assertFalse($permissionChecker->hasPermission('design'));
     }
 
-    public function testHasPermissionReturnsFalse() {
+    public function testHasPermissionReturnsFalse(): void {
         $user = new User();
         $this->assertFalse($user->hasPermission('design'));
     }
 
-    public function testProcessAvatar() {
+    public function testProcessAvatar(): void {
         $inputFile = Path::resolve(
             'ULICMS_ROOT/admin/gfx/apple-touch-icon-120x120.png'
         );
@@ -589,7 +589,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($user->hasProcessedAvatar());
     }
 
-    public function testGetGroupCollection() {
+    public function testGetGroupCollection(): void {
         $user = $this->getTestUser();
         $collection = $user->getGroupCollection();
         $this->assertInstanceOf(GroupCollection::class, $collection);
@@ -600,7 +600,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testIsCurrentReturnsTrue() {
+    public function testIsCurrentReturnsTrue(): void {
         $_SESSION['login_id'] = 123;
 
         $user = new User();
@@ -609,7 +609,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($user->isCurrent());
     }
 
-    public function testIsCurrentReturnsFalse() {
+    public function testIsCurrentReturnsFalse(): void {
         $_SESSION['login_id'] = PHP_INT_MAX;
 
         $user = new User();
@@ -618,7 +618,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($user->isCurrent());
     }
 
-    public function testIsOnlineReturnsTrue() {
+    public function testIsOnlineReturnsTrue(): void {
         $user = $this->getFirstUser();
 
         $user->setLastAction(time());
@@ -626,7 +626,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($user->isOnline());
     }
 
-    public function testIsOnlineReturnsFalse() {
+    public function testIsOnlineReturnsFalse(): void {
         $user = $this->getFirstUser();
         $user->setLastAction(12);
         $this->assertFalse($user->isOnline());

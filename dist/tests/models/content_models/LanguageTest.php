@@ -26,12 +26,12 @@ class LanguageTest extends \PHPUnit\Framework\TestCase {
         Settings::set('domain_to_language', $this->initialDomain2LanguageMapping);
     }
 
-    public function testGetAllLanguages() {
+    public function testGetAllLanguages(): void {
         $list = Language::getAllLanguages();
         $this->assertEquals(2, count($list));
     }
 
-    public function testLoadLanguage() {
+    public function testLoadLanguage(): void {
         $lang = new Language();
         $this->assertNull($lang->getId());
         $this->assertNull($lang->getName());
@@ -42,7 +42,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Deutsch', $lang->getName());
     }
 
-    public function testCreateLanguage() {
+    public function testCreateLanguage(): void {
         $lang = new Language();
         $lang->setName('Lampukisch');
         $lang->setLanguageCode('lp');
@@ -70,7 +70,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($lang->getID());
     }
 
-    public function testIsDefaultLanguage() {
+    public function testIsDefaultLanguage(): void {
         $lang = new Language();
         $lang->loadByLanguageCode('de');
         $this->assertTrue($lang->isDefaultLanguage());
@@ -80,33 +80,33 @@ class LanguageTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($lang->isDefaultLanguage());
     }
 
-    public function testIsCurrentLanguageReturnsTrue() {
+    public function testIsCurrentLanguageReturnsTrue(): void {
         $_SESSION['language'] = 'de';
         $lang = new Language();
         $lang->loadByLanguageCode('de');
         $this->assertTrue($lang->isCurrentLanguage());
     }
 
-    public function testIsCurrentLanguageReturnsFalse() {
+    public function testIsCurrentLanguageReturnsFalse(): void {
         $_SESSION['language'] = 'de';
         $lang = new Language();
         $lang->loadByLanguageCode('en');
         $this->assertFalse($lang->isCurrentLanguage());
     }
 
-    public function testToString() {
+    public function testToString(): void {
         $lang = new Language();
         $lang->setLanguageCode('fr');
         $this->assertEquals('fr', (string)$lang);
     }
 
-    public function testGetLanguageLinkReturnsRelative() {
+    public function testGetLanguageLinkReturnsRelative(): void {
         $lang = new Language();
         $lang->setLanguageCode('fr');
         $this->assertEquals('./?language=fr', $lang->getLanguageLink());
     }
 
-    public function testGetLanguageLinkReturnsAbsolute() {
+    public function testGetLanguageLinkReturnsAbsolute(): void {
         $mappingLines = [
             'example.de=>de',
             'example.co.uk=>en'
@@ -121,7 +121,7 @@ class LanguageTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('http://example.co.uk', $lang->getLanguageLink());
     }
 
-    public function testFillVars() {
+    public function testFillVars(): void {
         $lang = new Language();
         $lang->fillVars(null);
         $this->assertNull($lang->getLanguageCode());

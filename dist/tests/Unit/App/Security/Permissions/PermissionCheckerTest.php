@@ -68,17 +68,17 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->testGroup3->delete();
     }
 
-    public function testConstructorWithUserId() {
+    public function testConstructorWithUserId(): void {
         $checker = new PermissionChecker(123);
         $this->assertEquals(123, $checker->getUserId());
     }
 
-    public function testFromCurrentUser() {
+    public function testFromCurrentUser(): void {
         $checker = PermissionChecker::fromCurrentUser();
         $this->assertFalse($checker->hasPermission('foobar'));
     }
 
-    public function testSetUserId() {
+    public function testSetUserId(): void {
         $checker = new PermissionChecker();
         $this->assertNull($checker->getUserId());
         $checker->setUserId(666);
@@ -87,7 +87,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull($checker->getUserId());
     }
 
-    public function testHasPermissionWithUserReturnsTrue() {
+    public function testHasPermissionWithUserReturnsTrue(): void {
         $permissionChecker = new PermissionChecker($this->testUser->getId());
         $this->assertTrue($permissionChecker->hasPermission('info'));
         $this->assertTrue($permissionChecker->hasPermission('pages'));
@@ -95,27 +95,27 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($permissionChecker->hasPermission('design'));
     }
 
-    public function testUserHasPermissionWithUserReturnsTrue() {
+    public function testUserHasPermissionWithUserReturnsTrue(): void {
         $this->assertTrue($this->testUser->hasPermission('info'));
         $this->assertTrue($this->testUser->hasPermission('pages'));
         $this->assertTrue($this->testUser->hasPermission('files'));
         $this->assertTrue($this->testUser->hasPermission('design'));
     }
 
-    public function testUserHasPermissionWithUserReturnsFalse() {
+    public function testUserHasPermissionWithUserReturnsFalse(): void {
         $this->assertFalse($this->testUser->hasPermission('settings_simple'));
         $this->assertFalse($this->testUser->hasPermission('other'));
         $this->assertFalse($this->testUser->hasPermission('audio'));
         $this->assertFalse($this->testUser->hasPermission('non_eixsting_permission'));
     }
 
-    public function testUserGetPermissionCheckerInstanceOfPermissionChecker() {
+    public function testUserGetPermissionCheckerInstanceOfPermissionChecker(): void {
         $this->assertInstanceOf(PermissionChecker::class, $this->testUser->getPermissionChecker());
         $this->assertEquals($this->testUser->getId(), $this->testUser->getPermissionChecker()
             ->getUserId());
     }
 
-    public function testHasPermissionWithUserReturnsFalse() {
+    public function testHasPermissionWithUserReturnsFalse(): void {
         $permissionChecker = new PermissionChecker($this->testUser->getId());
         $this->assertFalse($permissionChecker->hasPermission('settings_simple'));
         $this->assertFalse($permissionChecker->hasPermission('other'));
@@ -123,7 +123,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($permissionChecker->hasPermission('non_eixsting_permission'));
     }
 
-    public function testGetLanguages() {
+    public function testGetLanguages(): void {
         $permissionChecker = new PermissionChecker($this->testUser->getId());
         $languages = $permissionChecker->getLanguages();
         $language = $languages[0];
@@ -132,17 +132,17 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('en', $language->getLanguageCode());
     }
 
-    public function testHasPermissionWithoutUser() {
+    public function testHasPermissionWithoutUser(): void {
         $checker = new PermissionChecker(null);
         $this->assertFalse($checker->hasPermission('info'));
     }
 
-    public function testHasPermissionWithNonExistingUser() {
+    public function testHasPermissionWithNonExistingUser(): void {
         $checker = new PermissionChecker(PHP_INT_MAX);
         $this->assertFalse($checker->hasPermission('info'));
     }
 
-    public function testNoPerms() {
+    public function testNoPerms(): void {
         ob_start();
         noPerms();
         $this->assertStringContainsString(

@@ -65,7 +65,7 @@ excerpt = ? where id = ?';
         return 'far fa-newspaper';
     }
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null): void {
         parent::fillVars($result);
 
         // article metadata

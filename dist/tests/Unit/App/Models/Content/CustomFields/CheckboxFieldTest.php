@@ -10,7 +10,7 @@ class CheckboxFieldTest extends \PHPUnit\Framework\TestCase {
         include_once getLanguageFilePath('en');
     }
 
-    public function testRender() {
+    public function testRender(): void {
         $field = new CheckboxField();
         $field->name = 'my_field';
         $field->title = 'enabld';

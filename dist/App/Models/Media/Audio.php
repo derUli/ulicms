@@ -55,7 +55,7 @@ class Audio extends Model {
         return $datasets;
     }
 
-    public function loadById($id) {
+    public function loadById($id): void {
         $result = Database::pQuery('select * from `{prefix}audio` '
                         . 'where id = ?', [
                             (int)$id
@@ -114,7 +114,7 @@ class Audio extends Model {
         $this->category = is_numeric($val) ? new Category($val) : null;
     }
 
-    public function setCategory(?Category $val) {
+    public function setCategory(?Category $val): void {
         $this->category = $val instanceof Category ? $val : null;
         $this->category_id = $val instanceof Category ? $val->getID() : null;
     }
@@ -172,7 +172,7 @@ class Audio extends Model {
         return $html;
     }
 
-    protected function fillVars($result = null) {
+    protected function fillVars($result = null): void {
         if ($result) {
             $result = Database::fetchSingle($result);
             $this->setID($result->id);

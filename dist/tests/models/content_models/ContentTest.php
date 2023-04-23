@@ -7,7 +7,7 @@ class ContentTest extends \PHPUnit\Framework\TestCase {
         AbstractContent::emptyTrash();
     }
 
-    public function testEmptyTrash() {
+    public function testEmptyTrash(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -28,12 +28,12 @@ class ContentTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(0, $deleted);
     }
 
-    public function testGetChildrenWithoutId() {
+    public function testGetChildrenWithoutId(): void {
         $page = new Page();
         $this->assertCount(0, $page->getChildren());
     }
 
-    public function testGetIcon() {
+    public function testGetIcon(): void {
         $types = TypeMapper::getMappings();
         foreach ($types as $type => $class) {
             $model = new $class();

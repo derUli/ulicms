@@ -39,7 +39,7 @@ class PerformanceSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('0', Settings::get('lazy_loading_iframe'));
     }
 
-    public function testClearCache() {
+    public function testClearCache(): void {
         $controller = new PerformanceSettingsController();
         $controller->_clearCache();
 

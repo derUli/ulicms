@@ -8,26 +8,26 @@ class RoboDbMigratorTest extends RoboTestBase {
         Database::dropTable('employees');
     }
 
-    public function testDbMigratorList() {
+    public function testDbMigratorList(): void {
         $output = $this->runRoboCommand(['dbmigrator:list', 'core']);
         $this->assertStringContainsString('021.sql', $output);
         $this->assertStringContainsString('001.sql', $output);
         $this->assertGreaterThanOrEqual(21, substr_count($output, 'core'));
     }
 
-    public function testMigrate() {
+    public function testMigrate(): void {
         $this->migrateUp();
         $this->migrateDown();
     }
 
-    public function testMigrateFails() {
+    public function testMigrateFails(): void {
         $dir = Path::resolve('ULICMS_ROOT/tests/fixtures/failed_migrations');
         $this->migrateUpFails($dir);
         $this->migrateDownFails($dir);
         $this->resetDbTrack($dir);
     }
 
-    public function testDbMigratorReset() {
+    public function testDbMigratorReset(): void {
         if (! $this->shouldDropDbOnShutdown()) {
             $this->markTestSkipped();
         }
@@ -43,7 +43,7 @@ class RoboDbMigratorTest extends RoboTestBase {
         );
     }
 
-    protected function migrateUp() {
+    protected function migrateUp(): void {
         $dir = Path::resolve('ULICMS_ROOT/tests/fixtures/migrations');
         $output = $this->runRoboCommand(['dbmigrator:up', 'robo_test', $dir]);
 
@@ -59,7 +59,7 @@ class RoboDbMigratorTest extends RoboTestBase {
         $this->assertTrue(Database::tableExists('employees'));
     }
 
-    protected function migrateDown() {
+    protected function migrateDown(): void {
         $dir = Path::resolve('ULICMS_ROOT/tests/fixtures/migrations');
         $output = $this->runRoboCommand(['dbmigrator:down', 'robo_test', $dir]);
 
@@ -75,7 +75,7 @@ class RoboDbMigratorTest extends RoboTestBase {
         $this->assertFalse(Database::tableExists('employees'));
     }
 
-    protected function migrateUpFails(string $dir) {
+    protected function migrateUpFails(string $dir): void {
         $output = $this->runRoboCommand(['dbmigrator:up', 'robo_test', $dir]);
 
         $this->assertStringContainsString(
@@ -84,7 +84,7 @@ class RoboDbMigratorTest extends RoboTestBase {
         );
     }
 
-    protected function migrateDownFails(string $dir) {
+    protected function migrateDownFails(string $dir): void {
         $output = $this->runRoboCommand(['dbmigrator:down', 'robo_test', $dir]);
 
         $this->assertStringContainsString(
@@ -93,7 +93,7 @@ class RoboDbMigratorTest extends RoboTestBase {
         );
     }
 
-    protected function resetDbTrack(string $dir) {
+    protected function resetDbTrack(string $dir): void {
         $output = $this->runRoboCommand(['dbmigrator:reset', 'robo_test']);
         $this->assertStringContainsString('DELETE FROM', $output);
         $this->assertStringContainsString("where component = 'robo_test'", $output);

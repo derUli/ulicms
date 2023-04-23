@@ -19,7 +19,7 @@ class OtherSettingsControllerTest extends \PHPUnit\Framework\TestCase {
             'smtp_password' => Settings::get('smtp_password')
         ];
 
-        foreach($this->defaultSettings as $key=> $value){
+        foreach($this->defaultSettings as $key => $value) {
             Settings::delete($key);
         }
     }

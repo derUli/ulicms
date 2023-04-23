@@ -12,7 +12,7 @@ class RoboSettingsTest extends RoboTestBase {
         Settings::delete('');
     }
 
-    public function testSettingsList() {
+    public function testSettingsList(): void {
         Settings::set('', '');
         Settings::set('foo2', '');
         $output = $this->runRoboCommand(['settings:list']);
@@ -30,18 +30,18 @@ class RoboSettingsTest extends RoboTestBase {
         }
     }
 
-    public function testSettingsPrintsString() {
+    public function testSettingsPrintsString(): void {
         Settings::set('foo1', 'Hello World');
         $output = $this->runRoboCommand(['settings:get', 'foo1']);
         $this->assertStringContainsString('Hello World', $output);
     }
 
-    public function testSettingsPrintsNull() {
+    public function testSettingsPrintsNull(): void {
         $output = $this->runRoboCommand(['settings:get', 'gibts_nicht']);
         $this->assertStringContainsString(DefaultValues::NULL_VALUE, $output);
     }
 
-    public function testSettingsSetToValue() {
+    public function testSettingsSetToValue(): void {
         $this->runRoboCommand(
             [
                 'settings:set',

@@ -31,7 +31,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetDefaultStatusExpectPending() {
+    public function testGetDefaultStatusExpectPending(): void {
         $controller = new CommentsController();
         Settings::set('comments_must_be_approved', '1');
         $this->assertEquals(
@@ -40,7 +40,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetDefaultStatusExpectPublished() {
+    public function testGetDefaultStatusExpectPublished(): void {
         Settings::delete('comments_must_be_approved');
 
         $controller = new CommentsController();
@@ -50,7 +50,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetResultsNoResults() {
+    public function testGetResultsNoResults(): void {
         $controller = new CommentsController();
         $this->assertCount(
             0,
@@ -76,14 +76,14 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetDefaultLimit() {
+    public function testGetDefaultLimit(): void {
         Settings::set('comments_default_limit', '123');
 
         $controller = new CommentsController();
         $this->assertEquals(123, $controller->_getDefaultLimit());
     }
 
-    public function testGetCommentTextReturnstext() {
+    public function testGetCommentTextReturnstext(): void {
         $page = $this->getTestComment();
         $controller = new CommentsController();
         $commentText = $controller->_getCommentText($page->getID());
@@ -97,14 +97,14 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testGetCommentTextReturnsNull() {
+    public function testGetCommentTextReturnsNull(): void {
         $controller = new CommentsController();
         $commentText = $controller->_getCommentText(PHP_INT_MAX);
 
         $this->assertNull($commentText);
     }
 
-    public function testFilterComments() {
+    public function testFilterComments(): void {
         $page = $this->getTestComment();
         $controller = new CommentsController();
 
@@ -116,7 +116,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertCount(1, $comments);
     }
 
-    public function testDoActionThrowsException() {
+    public function testDoActionThrowsException(): void {
         $controller = new CommentsController();
 
         $this->expectException(NotImplementedException::class);
@@ -124,7 +124,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         $controller->_doAction($comment, 'do_magic');
     }
 
-    public function testDoActionPublish() {
+    public function testDoActionPublish(): void {
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
@@ -134,7 +134,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($updatedComment->isRead());
     }
 
-    public function testDoActionUnpublish() {
+    public function testDoActionUnpublish(): void {
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
@@ -143,7 +143,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(CommentStatus::PENDING, $updatedComment->getStatus());
     }
 
-    public function testDoActionMarkAsSpam() {
+    public function testDoActionMarkAsSpam(): void {
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
@@ -152,7 +152,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(CommentStatus::SPAM, $updatedComment->getStatus());
     }
 
-    public function testDoActionMarkAsRead() {
+    public function testDoActionMarkAsRead(): void {
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
@@ -161,7 +161,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($updatedComment->isRead());
     }
 
-    public function testDoActionsMarkAsRead() {
+    public function testDoActionsMarkAsRead(): void {
         $controller = new CommentsController();
 
         $commentIds = [
@@ -176,7 +176,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testDoActionMarkAsUnread() {
+    public function testDoActionMarkAsUnread(): void {
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();
@@ -185,7 +185,7 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($updatedComment->isRead());
     }
 
-    public function testDoActionDelete() {
+    public function testDoActionDelete(): void {
         $controller = new CommentsController();
 
         $comment = $this->getTestComment();

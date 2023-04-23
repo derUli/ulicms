@@ -39,7 +39,7 @@ function translation(string $name, array $placeholders = []): void {
     echo get_translation($name, $placeholders);
 }
 
-function translate(string $name, array $placeholders = []) {
+function translate(string $name, array $placeholders = []): void {
     translation($name, $placeholders);
 }
 

@@ -18,13 +18,13 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
         Database::query("DELETE FROM `{prefix}categories` where name like 'Testkategorie %'", true);
     }
 
-    public function testGetByCategoryExpectEmptyResult() {
+    public function testGetByCategoryExpectEmptyResult(): void {
         $result = Banners::getByCategory(PHP_INT_MAX);
         $this->assertIsArray($result);
         $this->assertCount(0, $result);
     }
 
-    public function testGetByCategoryExpectArrayOfBanners() {
+    public function testGetByCategoryExpectArrayOfBanners(): void {
         $category1 = new Category();
         $category1->setName('Testkategorie ' . uniqid());
         $category1->save();
@@ -66,7 +66,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetByTypeExpectArrayOfBanners() {
+    public function testGetByTypeExpectArrayOfBanners(): void {
         $gifBanners = Banners::getByType('gif');
 
         $this->assertGreaterThanOrEqual(1, $gifBanners);
@@ -82,7 +82,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetByLanguageExpectArrayOfBanners() {
+    public function testGetByLanguageExpectArrayOfBanners(): void {
         $category1 = new Category();
         $category1->setName('Testkategorie ' . uniqid());
         $category1->save();
@@ -120,7 +120,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetAll() {
+    public function testGetAll(): void {
         $banners = Banners::getAll();
         $this->assertIsArray($banners);
         $this->assertGreaterThanOrEqual(1, count($banners));
@@ -130,7 +130,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testGetRandom() {
+    public function testGetRandom(): void {
         $_SESSION['language'] = 'de';
 
         for ($i = 1; $i < 5; $i++) {
