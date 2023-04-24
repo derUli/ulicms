@@ -215,7 +215,7 @@ function containsModule(?string $page = null, ?string $module = null): bool {
     }
 
     $result = Database::query('SELECT content, module, `type` FROM ' .
-            tbname('content') . " WHERE slug = '" . db_escape($page) . "'");
+            tbname('content') . " WHERE slug = '" . Database::escapeValue($page) . "'");
 
     if (! Database::any($result)) {
         return $containsModule;

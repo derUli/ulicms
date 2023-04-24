@@ -427,7 +427,7 @@ class Template {
                 Database::query('UPDATE ' . tbname('content') .
                         " SET views = views + 1 WHERE slug='" .
                         Database::escapeValue(get_slug()) .
-                        "' AND language='" . db_escape(getFrontendLanguage())
+                        "' AND language='" . Database::escapeValue(getFrontendLanguage())
                         . "'");
             }
         } elseif (is_404()) {

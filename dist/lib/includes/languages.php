@@ -121,7 +121,7 @@ function setLanguageByDomain(): bool {
 function getLanguageNameByCode(string $code): string {
     $result = Database::query(
         'SELECT name FROM `' . tbname('languages') .
-        "` WHERE language_code = '" . db_escape($code) . "'"
+        "` WHERE language_code = '" . Database::escapeValue($code) . "'"
     );
     $retval = $code;
     if (Database::getNumRows($result) > 0) {

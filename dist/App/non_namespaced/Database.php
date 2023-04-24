@@ -393,7 +393,7 @@ class Database {
     public static function escapeName(string $name): string {
         $name = str_replace("'", '', $name);
         $name = str_replace('"', '', $name);
-        $name = '`' . db_escape($name) . '`';
+        $name = '`' . Database::escapeValue($name) . '`';
         return $name;
     }
 

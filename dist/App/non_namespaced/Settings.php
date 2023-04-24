@@ -45,7 +45,7 @@ class Settings extends MemstaticCached {
         }
 
         $value = null;
-        $key = db_escape($key);
+        $key = Database::escapeValue($key);
         $result = Database::query('SELECT name, value FROM ' . tbname('settings') .
                 " WHERE name='{$key}'");
         if (Database::getNumRows($result) > 0) {
@@ -107,9 +107,9 @@ class Settings extends MemstaticCached {
     ): void {
         static::setToCache($key, $value);
 
-        $key = db_escape($key);
+        $key = Database::escapeValue($key);
         $originalValue = static::convertVar($value, $type);
-        $value = db_escape($originalValue);
+        $value = Database::escapeValue($originalValue);
         $result = Database::query('SELECT id FROM ' . tbname('settings') .
                 " WHERE name='{$key}'");
         if (Database::getNumRows($result) > 0) {
@@ -124,7 +124,7 @@ class Settings extends MemstaticCached {
     // Remove an configuration variable
     public static function delete(string $key): bool {
         static::deleteFromCache($key);
-        $key = db_escape($key);
+        $key = Database::escapeValue($key);
         Database::query('DELETE FROM ' . tbname('settings') . " WHERE name='{$key}'");
         return Database::getAffectedRows() > 0;
     }

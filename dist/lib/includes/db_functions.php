@@ -17,15 +17,3 @@ define('DB_TYPE_BOOL', 4);
 function tbname(string $name): string {
     return $_ENV['DB_PREFIX'] . $name;
 }
-
-/**
- * Escape strings for sql queries
- *
- * @param mixed $value
- * @param ?string $type
- *
- * @return string
- */
-function db_escape($value, ?string $type = null): string {
-    return Database::escapeValue($value, $type);
-}

@@ -9,10 +9,10 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Constants\EmailModes;
 use App\Registries\LoggerRegistry;
 use Closure;
+use Database;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Settings;
-use Database;
 
 /**
  * Send Mails
@@ -60,8 +60,8 @@ class Mailer {
         // TODO: Make a method for this sql statement
         $insert_sql = 'INSERT INTO ' . tbname('mails') .
                 " (headers, `to`, subject, body) VALUES ('" .
-                db_escape($headers) . "', '" . db_escape($to) . "', '" .
-                db_escape($subject) . "', '" . db_escape($message) . "')";
+                Database::escapeValue($headers) . "', '" . Database::escapeValue($to) . "', '" .
+                Database::escapeValue($subject) . "', '" . Database::escapeValue($message) . "')";
         Database::query($insert_sql);
 
         return self::sendWithPHPMailer(

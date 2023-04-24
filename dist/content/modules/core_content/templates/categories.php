@@ -20,7 +20,7 @@ if (! $permissionChecker->hasPermission('categories')) {
         'created',
         'updated'
     ])) {
-        $order = db_escape($_GET['order']);
+        $order = Database::escapeValue($_GET['order']);
     } else {
         $order = 'id';
     }

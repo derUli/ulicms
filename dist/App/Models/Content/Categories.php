@@ -6,8 +6,8 @@ namespace App\Models\Content;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+use Database;
 
-use function db_escape;
 use function get_translation;
 
 // methods for manipulating categories
@@ -59,7 +59,7 @@ class Categories {
                         _esc($cat->getName()) . '</option>';
             } else {
                 $html .= "<option value='" . $cat->getId() .
-                        "'>" . db_escape($cat->getName()) . '</option>';
+                        "'>" . Database::escapeValue($cat->getName()) . '</option>';
             }
         }
 

@@ -27,14 +27,14 @@ class Forms {
         $target_page_id,
         $enabled
     ) {
-        $name = db_escape($name);
+        $name = Database::escapeValue($name);
         $enabled = (int)$enabled;
-        $email_to = db_escape($email_to);
-        $subject = db_escape($subject);
+        $email_to = Database::escapeValue($email_to);
+        $subject = Database::escapeValue($subject);
         $category_id = (int)$category_id;
-        $fields = db_escape($fields);
-        $required_fields = db_escape($required_fields);
-        $mail_from_field = db_escape($mail_from_field);
+        $fields = Database::escapeValue($fields);
+        $required_fields = Database::escapeValue($required_fields);
+        $mail_from_field = Database::escapeValue($mail_from_field);
         $target_page_id = (int)$target_page_id;
         $created = time();
         $updated = time();
@@ -52,14 +52,14 @@ class Forms {
     }
 
     public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled) {
-        $name = db_escape($name);
+        $name = Database::escapeValue($name);
         $enabled = (int)$enabled;
-        $email_to = db_escape($email_to);
-        $subject = db_escape($subject);
+        $email_to = Database::escapeValue($email_to);
+        $subject = Database::escapeValue($subject);
         $category_id = (int)$category_id;
-        $fields = db_escape($fields);
-        $required_fields = db_escape($required_fields);
-        $mail_from_field = db_escape($mail_from_field);
+        $fields = Database::escapeValue($fields);
+        $required_fields = Database::escapeValue($required_fields);
+        $mail_from_field = Database::escapeValue($mail_from_field);
         $target_page_id = (int)$target_page_id;
         $updated = time();
         $id = (int)$id;

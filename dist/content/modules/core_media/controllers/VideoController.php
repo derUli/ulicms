@@ -71,11 +71,11 @@ class VideoController extends \App\Controllers\Controller {
                 }
             }
 
-            $name = db_escape($_POST['name']);
+            $name = Database::escapeValue($_POST['name']);
             $category_id = (int)$_POST['category_id'];
-            $ogg_file_value = db_escape($ogg_file_value);
-            $webm_file_value = db_escape($webm_file_value);
-            $mp4_file_value = db_escape($mp4_file_value);
+            $ogg_file_value = Database::escapeValue($ogg_file_value);
+            $webm_file_value = Database::escapeValue($webm_file_value);
+            $mp4_file_value = Database::escapeValue($mp4_file_value);
 
             $width = (int)$_POST['width'];
             $height = (int)$_POST['height'];
@@ -95,11 +95,11 @@ class VideoController extends \App\Controllers\Controller {
     }
 
     public function _updatePost(): bool {
-        $name = db_escape($_POST['name']);
+        $name = Database::escapeValue($_POST['name']);
         $id = (int)$_POST['id'];
-        $ogg_file = db_escape(basename($_POST['ogg_file']));
-        $webm_file = db_escape(basename($_POST['webm_file']));
-        $mp4_file = db_escape(basename($_POST['mp4_file']));
+        $ogg_file = Database::escapeValue(basename($_POST['ogg_file']));
+        $webm_file = Database::escapeValue(basename($_POST['webm_file']));
+        $mp4_file = Database::escapeValue(basename($_POST['mp4_file']));
         $width = (int)$_POST['width'];
         $height = (int)$_POST['height'];
         $updated = time();

@@ -8,8 +8,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use Database;
 
-use function db_escape;
-
 // Version Control System for pages
 // tracks content changes
 class VCS {
@@ -48,7 +46,7 @@ class VCS {
             $row = Database::fetchObject($result);
             $content_id = (int)$row->content_id;
             $lastmodified = time();
-            $content = db_escape($row->content);
+            $content = Database::escapeValue($row->content);
             return Database::query('UPDATE ' . tbname('content') .
                     " SET content='{$content}', lastmodified = {$lastmodified} "
                     . "where id = {$content_id}");

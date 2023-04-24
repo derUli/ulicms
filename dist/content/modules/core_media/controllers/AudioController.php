@@ -54,10 +54,10 @@ class AudioController extends \App\Controllers\Controller {
             }
         }
 
-        $name = db_escape($_POST['name']);
+        $name = Database::escapeValue($_POST['name']);
         $category_id = (int)$_POST['category_id'];
-        $ogg_file_value = db_escape($ogg_file_value);
-        $mp3_file_value = db_escape($mp3_file_value);
+        $ogg_file_value = Database::escapeValue($ogg_file_value);
+        $mp3_file_value = Database::escapeValue($mp3_file_value);
         $timestamp = time();
 
         if (! empty($ogg_file_value) || ! empty($mp3_file_value)) {
@@ -71,10 +71,10 @@ class AudioController extends \App\Controllers\Controller {
     }
 
     public function _updatePost(): bool {
-        $name = db_escape($_POST['name']);
+        $name = Database::escapeValue($_POST['name']);
         $id = (int)$_POST['id'];
-        $ogg_file = db_escape(basename($_POST['ogg_file']));
-        $mp3_file = db_escape(basename($_POST['mp3_file']));
+        $ogg_file = Database::escapeValue(basename($_POST['ogg_file']));
+        $mp3_file = Database::escapeValue(basename($_POST['mp3_file']));
         $updated = time();
         $category_id = (int)$_POST['category_id'];
         Database::query('UPDATE ' . tbname('audio') . " SET name='{$name}', "

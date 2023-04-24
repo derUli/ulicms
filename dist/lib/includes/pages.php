@@ -69,11 +69,11 @@ function getAllPages(
         if (! $menu) {
             $result = Database::query('SELECT * FROM `' . tbname('content') .
                     "` WHERE `deleted_at` IS NULL AND language ='" .
-                    db_escape($lang) . "' ORDER BY {$order}");
+                    Database::escapeValue($lang) . "' ORDER BY {$order}");
         } else {
             $result = Database::query('SELECT * FROM `' . tbname('content') .
                     "` WHERE `deleted_at` IS NULL AND language ='" .
-                    db_escape($lang) . "' and menu = '" .
+                    Database::escapeValue($lang) . "' and menu = '" .
                     Database::escapeValue($menu) . "' ORDER BY {$order}");
         }
     }
@@ -100,7 +100,7 @@ function getAllSlugs(?string $lang = null): array {
     } else {
         $result = Database::query('SELECT slug,id FROM `' . tbname('content') .
                 '` WHERE `deleted_at` IS NULL  AND link_url '
-                . "NOT LIKE '#%' AND language ='" . db_escape($lang) .
+                . "NOT LIKE '#%' AND language ='" . Database::escapeValue($lang) .
                 "' ORDER BY slug");
     }
     while ($row = Database::fetchObject($result)) {
