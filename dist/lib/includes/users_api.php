@@ -58,7 +58,7 @@ function changePassword(string $password, ?int $userId) {
 function getUserByName(string $name): ?array {
     $result = Database::query('SELECT * FROM ' . tbname('users') .
                     " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
-    if (db_num_rows($result) > 0) {
+    if (Database::getNumRows($result) > 0) {
         return  Database::fetchAssoc($result);
     }
     return null;
@@ -72,7 +72,7 @@ function getUserByName(string $name): ?array {
 function getUserById($id): ?array {
     $result = Database::query('SELECT * FROM ' . tbname('users') .
                     ' WHERE id = ' . (int)$id);
-    if (db_num_rows($result) > 0) {
+    if (Database::getNumRows($result) > 0) {
         return  Database::fetchAssoc($result);
     }
     return null;

@@ -32,6 +32,7 @@ class AudioController extends \App\Controllers\Controller {
         }
 
         $ogg_file_value = '';
+
         // ogg
         if (! empty($_FILES ['ogg_file'] ['name'])) {
             $ogg_file = time() . '-' . $_FILES ['ogg_file'] ['name'];
@@ -41,6 +42,7 @@ class AudioController extends \App\Controllers\Controller {
                 'application/ogg',
                 'video/ogg'
             ];
+
             if (in_array($ogg_type, $ogg_allowed_mime_type)) {
                 $target = $audio_folder . '/' . $ogg_file;
                 if (move_uploaded_file(
@@ -92,7 +94,7 @@ class AudioController extends \App\Controllers\Controller {
         $result = db_query('select ogg_file, mp3_file from ' .
                 tbname('audio') . ' where id = ' .
                 (int)$_REQUEST['delete']);
-        if (db_num_rows($result) > 0) {
+        if (Database::getNumRows($result) > 0) {
             $dataset = db_fetch_object($result);
             $filepath = ULICMS_ROOT . '/content/audio/' .
                     basename($dataset->ogg_file);

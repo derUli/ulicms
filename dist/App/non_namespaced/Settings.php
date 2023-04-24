@@ -48,7 +48,7 @@ class Settings extends MemstaticCached {
         $key = db_escape($key);
         $result = db_query('SELECT name, value FROM ' . tbname('settings') .
                 " WHERE name='{$key}'");
-        if (db_num_rows($result) > 0) {
+        if (Database::getNumRows($result) > 0) {
             while ($row = db_fetch_object($result)) {
                 static::setToCache($row->name, $row->value);
                 $value = static::convertVar($row->value, $type);
@@ -112,7 +112,7 @@ class Settings extends MemstaticCached {
         $value = db_escape($originalValue);
         $result = db_query('SELECT id FROM ' . tbname('settings') .
                 " WHERE name='{$key}'");
-        if (db_num_rows($result) > 0) {
+        if (Database::getNumRows($result) > 0) {
             db_query('UPDATE ' . tbname('settings') . " SET value='{$value}' "
                     . "WHERE name='{$key}'");
         } else {

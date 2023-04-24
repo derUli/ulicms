@@ -11,7 +11,7 @@ if ($permissionChecker->hasPermission('videos')
         && $permissionChecker->hasPermission('videos_edit')) {
     $id = (int)$_REQUEST['id'];
     $result = db_query('SELECT * FROM ' . tbname('videos') . " WHERE id = {$id}");
-    if (db_num_rows($result) > 0) {
+    if (Database::getNumRows($result) > 0) {
         $dataset = db_fetch_object($result);
         ?>
         <div class="field">

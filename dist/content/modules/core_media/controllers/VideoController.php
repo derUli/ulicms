@@ -120,7 +120,7 @@ class VideoController extends \App\Controllers\Controller {
     public function deletePost(): void {
         $result = db_query('select ogg_file, webm_file, mp4_file from ' .
                 tbname('videos') . ' where id = ' . (int)$_REQUEST['delete']);
-        if (db_num_rows($result) > 0) {
+        if (Database::getNumRows($result) > 0) {
             // OGG
             $dataset = db_fetch_object($result);
             $filepath = ULICMS_ROOT . '/content/videos/' .

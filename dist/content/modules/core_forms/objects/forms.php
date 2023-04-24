@@ -9,7 +9,7 @@ class Forms {
     public static function getFormByID($id) {
         $retval = null;
         $result = db_query('select * from `' . tbname('forms') . '` WHERE id = ' . (int)$id);
-        if (db_num_rows($result) > 0) {
+        if (Database::getNumRows($result) > 0) {
             $retval = Database::fetchAssoc($result);
         }
 
@@ -80,7 +80,7 @@ class Forms {
         $retval = [];
         $result = db_query('select * from `' . tbname('forms') .
                 '` ORDER BY id');
-        if (db_num_rows($result) > 0) {
+        if (Database::getNumRows($result) > 0) {
             while ($row = Database::fetchAssoc($result)) {
                 $retval[] = $row;
             }

@@ -7,7 +7,7 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 function getPageSlugByID(?int $id): ?string {
     $result = db_query('SELECT slug, id FROM `' . tbname('content')
             . '` where id=' . (int)$id);
-    if (db_num_rows($result) > 0) {
+    if (Database::getNumRows($result) > 0) {
         $row = db_fetch_object($result);
         return $row->slug;
     }
@@ -18,7 +18,7 @@ function getPageByID(int $id): ?object {
     $id = (int)$id;
     $result = db_query('SELECT * FROM ' . tbname('content') .
             ' where id = ' . $id);
-    if (db_num_rows($result) > 0) {
+    if (Database::getNumRows($result) > 0) {
         return db_fetch_object($result);
     }
     return null;
@@ -27,7 +27,7 @@ function getPageByID(int $id): ?object {
 function getPageTitleByID(?int $id): string {
     $result = db_query('SELECT title, id FROM `' . tbname('content')
             . '` where id=' . (int)$id);
-    if (db_num_rows($result) > 0) {
+    if (Database::getNumRows($result) > 0) {
         $row = db_fetch_object($result);
         return $row->title;
     }

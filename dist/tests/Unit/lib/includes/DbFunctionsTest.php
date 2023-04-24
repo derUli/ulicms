@@ -20,14 +20,9 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testDbNumRows(): void {
-        $datasets = Database::selectAll('settings');
-        $this->assertGreaterThanOrEqual(50, db_num_rows($datasets));
-    }
-
     public function testDbQuery(): void {
         $query = db_query('select id from ' . tbname('settings') . " where name = 'homepage_title' or name = 'site_slogan'");
-        $this->assertEquals(2, db_num_rows($query));
+        $this->assertEquals(2, Database::getNumRows($query));
     }
 
     public function testDbError(): void {

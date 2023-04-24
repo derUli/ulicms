@@ -9,8 +9,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use Database;
 
 use function db_escape;
-use function db_fetch_object;
-use function db_num_rows;
 use function db_query;
 
 // Version Control System for pages
@@ -46,8 +44,9 @@ class VCS {
     public static function restoreRevision(int $history_id): bool {
         $result = db_query('SELECT * FROM ' . tbname('history') .
                 ' WHERE id = ' . $history_id);
-        if (db_num_rows($result) > 0) {
-            $row = db_fetch_object($result);
+
+        if (Database::getNumRows($result) > 0) {
+            $row = Database::fetchObject($result);
             $content_id = (int)$row->content_id;
             $lastmodified = time();
             $content = db_escape($row->content);
@@ -66,7 +65,7 @@ class VCS {
         $result = db_query('SELECT * FROM ' . tbname('history')
                 . ' WHERE content_id = ' . $content_id . ' ORDER BY ' . $order);
         $retval = [];
-        while ($row = db_fetch_object($result)) {
+        while ($row = Database::fetchObject($result)) {
             $retval[] = $row;
         }
         return $retval;

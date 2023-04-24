@@ -51,6 +51,7 @@ Entfernte API-Methoden:
 * set_custom_data()
 * delete_custom_data()
 * db_fetch_assoc()
+* db_num_rows()
 
 Entfernte Features:
 * Scroll To Top

@@ -19,7 +19,7 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
 
     $result = db_query($sql);
 
-    if (db_num_rows($result) == 0) {
+    if (Database::getNumRows($result) == 0) {
         return $html;
     }
 
