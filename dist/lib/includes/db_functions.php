@@ -14,10 +14,6 @@ function db_query(string $query) {
     return Database::query($query);
 }
 
-function db_fetch_assoc(?mysqli_result $result) {
-    return Database::fetchAssoc($result);
-}
-
 function db_fetch_object(?mysqli_result $result) {
     return Database::fetchObject($result);
 }
@@ -27,15 +23,24 @@ function db_num_rows(mysqli_result $result): ?int {
 }
 
 /**
- * prepend the table prefix to a database table name
+ * Prepend the table prefix to a database table name
+ *
  * @param string $name
+ *
  * @return string
  */
 function tbname(string $name): string {
     return $_ENV['DB_PREFIX'] . $name;
 }
 
-// Abstraktion für Escapen von Werten
+/**
+ * Escape strings for sql queries
+ *
+ * @param mixed $value
+ * @param ?string $type
+ *
+ * @return string
+ */
 function db_escape($value, ?string $type = null): string {
     return Database::escapeValue($value, $type);
 }

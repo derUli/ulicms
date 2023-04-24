@@ -78,7 +78,7 @@ function getAllPages(
         }
     }
     $returnvalues = [];
-    while ($row = db_fetch_assoc($result)) {
+    while ($row = Database::fetchAssoc($result)) {
         if (! $exclude_hash_links || ($exclude_hash_links
                 && $row['type'] !== 'link' && $row['type'] !== 'node'
                 && $row['type'] !== 'language_link')) {

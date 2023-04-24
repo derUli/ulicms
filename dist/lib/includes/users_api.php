@@ -14,7 +14,7 @@ function getUsers(): array {
     $users = [];
     $result = Database::query('SELECT id, username FROM ' . tbname('users') .
                     ' ORDER by username');
-    while ($row = db_fetch_assoc($result)) {
+    while ($row = Database::fetchAssoc($result)) {
         $users[] = $row;
     }
 
@@ -59,7 +59,7 @@ function getUserByName(string $name): ?array {
     $result = Database::query('SELECT * FROM ' . tbname('users') .
                     " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
     if (db_num_rows($result) > 0) {
-        return db_fetch_assoc($result);
+        return  Database::fetchAssoc($result);
     }
     return null;
 }
@@ -73,7 +73,7 @@ function getUserById($id): ?array {
     $result = Database::query('SELECT * FROM ' . tbname('users') .
                     ' WHERE id = ' . (int)$id);
     if (db_num_rows($result) > 0) {
-        return db_fetch_assoc($result);
+        return  Database::fetchAssoc($result);
     }
     return null;
 }

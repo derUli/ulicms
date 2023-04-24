@@ -10,7 +10,7 @@ class Forms {
         $retval = null;
         $result = db_query('select * from `' . tbname('forms') . '` WHERE id = ' . (int)$id);
         if (db_num_rows($result) > 0) {
-            $retval = db_fetch_assoc($result);
+            $retval = Database::fetchAssoc($result);
         }
 
         return $retval;
@@ -81,7 +81,7 @@ class Forms {
         $result = db_query('select * from `' . tbname('forms') .
                 '` ORDER BY id');
         if (db_num_rows($result) > 0) {
-            while ($row = db_fetch_assoc($result)) {
+            while ($row = Database::fetchAssoc($result)) {
                 $retval[] = $row;
             }
         }

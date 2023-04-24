@@ -115,7 +115,7 @@ function get_og_data($slug = ''): ?array {
             tbname('content') . " WHERE slug='" . db_escape($slug) .
             "' AND language='" . db_escape(getFrontendLanguage()) . "'");
     if (db_num_rows($result) > 0) {
-        $data = db_fetch_assoc($result);
+        $data = Database::fetchAssoc($result);
     }
     return $data;
 }
@@ -641,7 +641,7 @@ function parent_item_contains_current_page(?int $id): bool {
     $r = db_query($sql);
 
     $data = [];
-    while ($row = db_fetch_assoc($r)) {
+    while ($row = Database::fetchAssoc($r)) {
         $data[] = $row;
     }
 
@@ -802,7 +802,7 @@ function get_page(?string $slug = ''): ?array {
     }
     $result = db_query('SELECT * FROM ' . tbname('content') . " WHERE slug='" . db_escape($slug) . "' AND language='" . db_escape(getFrontendLanguage()) . "'");
     if (db_num_rows($result) > 0) {
-        $dataset = db_fetch_assoc($result);
+        $dataset = Database::fetchAssoc($result);
         \App\Storages\Vars::set('page_' . $slug, $dataset);
         return $dataset;
     }
