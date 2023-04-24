@@ -84,7 +84,7 @@ if ($permissionChecker->hasPermission('users') && $permissionChecker->hasPermiss
                     echo 'selected';
                 }
                 ?>>
-                                <?php echo _esc($group->getName()); ?>
+                                <?php esc($group->getName()); ?>
                     </option>
                 <?php }
             ?>
@@ -96,10 +96,10 @@ if ($permissionChecker->hasPermission('users') && $permissionChecker->hasPermiss
             </strong>
             <select name="secondary_groups[]" multiple>
                 <?php
-            foreach ($allGroups as $key => $value) {
+            foreach ($groups as $group) {
                 ?>
-                    <option value="<?php echo $key; ?>">
-                        <?php echo _esc($value); ?>
+                    <option value="<?php echo $group->getId(); ?>">
+                        <?php esc($group->getName()); ?>
                     </option>
                 <?php }
             ?>
