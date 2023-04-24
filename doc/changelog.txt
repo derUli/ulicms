@@ -4,7 +4,7 @@ Neue Features:
 * Dotenv Konfiguration
 * Schriftart-Vorschau bei Änderung der Schriftgröße und der Textfarbe
 * Neue Robo-Tasks
-* Installer prüft nun, ob ULICMS_ROOT beschreibbar ist
+* Installer prüft, ob ULICMS_ROOT beschreibbar ist
 
 Fehlerkorrekturen:
 * Warnings wenn man update.php von der Kommandozeile aufruft korrigiert
@@ -50,6 +50,7 @@ Entfernte API-Methoden:
 * get_custom_data()
 * set_custom_data()
 * delete_custom_data()
+* db_fetch_assoc()
 
 Entfernte Features:
 * Scroll To Top

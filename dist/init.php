@@ -261,7 +261,7 @@ if (! is_ssl() && $enforce_https) {
     exit();
 }
 
-\App\Storages\Vars::set('disabledModules', $moduleManager->getDisabledModuleNames());
+Vars::set('disabledModules', $moduleManager->getDisabledModuleNames());
 
 ModelRegistry::loadModuleModels();
 

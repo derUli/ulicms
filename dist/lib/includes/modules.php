@@ -221,7 +221,7 @@ function containsModule(?string $page = null, ?string $module = null): bool {
         return $containsModule;
     }
 
-    $dataset = db_fetch_assoc($result);
+    $dataset = Database::fetchAssoc($result);
     $content = $dataset['content'];
     $content = str_replace('&quot;', '"', $content);
 

@@ -36,11 +36,10 @@ do_event('before_set_locale_by_language');
 setLocaleByLanguage();
 do_event('after_set_locale_by_language');
 
-// TODO: Move this to class
-// if the user is logged in then update the time of
-// last action on every request
+// If is logged in update last action
 if (is_logged_in()) {
-    db_query('UPDATE ' . tbname('users') . ' SET last_action = ' . time() . ' WHERE id = ' . get_user_id());
+    $user = new User(get_user_id());
+    $user->setLastAction(time());
 }
 
 send_header('Content-Type: text/html; charset=UTF-8');
