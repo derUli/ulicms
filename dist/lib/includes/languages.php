@@ -120,7 +120,7 @@ function setLanguageByDomain(): bool {
 
 function getLanguageNameByCode(string $code): string {
     $result = Database::query(
-        'SELECT name FROM `' . tbname('languages') .
+        'SELECT name FROM `' . Database::tableName('languages') .
         "` WHERE language_code = '" . Database::escapeValue($code) . "'"
     );
     $retval = $code;
@@ -158,7 +158,7 @@ function getCurrentLanguage($current = false): string {
         return \App\Storages\Vars::get('current_language_' . strbool($current));
     }
     if ($current) {
-        $result = Database::query('SELECT language FROM ' . tbname('content') .
+        $result = Database::query('SELECT language FROM ' . Database::tableName('content') .
                 " WHERE slug='" . get_slug() . "'");
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
@@ -193,7 +193,7 @@ function getAllLanguages($filtered = false): array {
     if (\App\Storages\Vars::get('all_languages') !== null) {
         return \App\Storages\Vars::get('all_languages');
     }
-    $result = Database::query('SELECT language_code FROM `' . tbname('languages') .
+    $result = Database::query('SELECT language_code FROM `' . Database::tableName('languages') .
             '` ORDER BY language_code');
 
     while ($row = Database::fetchObject($result)) {

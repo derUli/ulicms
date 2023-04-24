@@ -44,7 +44,7 @@ class Banner extends Model {
 
     public function loadByID($id): void {
         $id = (int)$id;
-        $result = Database::query('SELECT * FROM `' . tbname('banner') .
+        $result = Database::query('SELECT * FROM `' . Database::tableName('banner') .
                         "` where id = {$id}");
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
@@ -72,7 +72,7 @@ class Banner extends Model {
     }
 
     public function insert() {
-        $sql = 'INSERT INTO ' . tbname('banner') . '(name, link_url, image_url, '
+        $sql = 'INSERT INTO ' . Database::tableName('banner') . '(name, link_url, image_url, '
                 . 'category_id, type, html, language, date_from, date_to, '
                 . 'enabled) values (';
         if ($this->name === null) {
@@ -135,7 +135,7 @@ class Banner extends Model {
         if ($this->id === null) {
             return $this->create();
         }
-        $sql = 'UPDATE ' . tbname('banner') . ' set ';
+        $sql = 'UPDATE ' . Database::tableName('banner') . ' set ';
 
         if ($this->name === null) {
             $sql .= 'name=NULL, ';
@@ -302,7 +302,7 @@ class Banner extends Model {
     public function delete() {
         $retval = false;
         if ($this->id !== null) {
-            $sql = 'DELETE from ' . tbname('banner') . ' where id = ' .
+            $sql = 'DELETE from ' . Database::tableName('banner') . ' where id = ' .
                     $this->id;
             $retval = Database::Query($sql);
             $this->id = null;

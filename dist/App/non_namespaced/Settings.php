@@ -46,7 +46,7 @@ class Settings extends MemstaticCached {
 
         $value = null;
         $key = Database::escapeValue($key);
-        $result = Database::query('SELECT name, value FROM ' . tbname('settings') .
+        $result = Database::query('SELECT name, value FROM ' . Database::tableName('settings') .
                 " WHERE name='{$key}'");
         if (Database::getNumRows($result) > 0) {
             while ($row = Database::fetchObject($result)) {
@@ -110,13 +110,13 @@ class Settings extends MemstaticCached {
         $key = Database::escapeValue($key);
         $originalValue = static::convertVar($value, $type);
         $value = Database::escapeValue($originalValue);
-        $result = Database::query('SELECT id FROM ' . tbname('settings') .
+        $result = Database::query('SELECT id FROM ' . Database::tableName('settings') .
                 " WHERE name='{$key}'");
         if (Database::getNumRows($result) > 0) {
-            Database::query('UPDATE ' . tbname('settings') . " SET value='{$value}' "
+            Database::query('UPDATE ' . Database::tableName('settings') . " SET value='{$value}' "
                     . "WHERE name='{$key}'");
         } else {
-            Database::query('INSERT INTO ' . tbname('settings') . ' (name, value) '
+            Database::query('INSERT INTO ' . Database::tableName('settings') . ' (name, value) '
                     . "VALUES('{$key}', '{$value}')");
         }
     }
@@ -125,7 +125,7 @@ class Settings extends MemstaticCached {
     public static function delete(string $key): bool {
         static::deleteFromCache($key);
         $key = Database::escapeValue($key);
-        Database::query('DELETE FROM ' . tbname('settings') . " WHERE name='{$key}'");
+        Database::query('DELETE FROM ' . Database::tableName('settings') . " WHERE name='{$key}'");
         return Database::getAffectedRows() > 0;
     }
 

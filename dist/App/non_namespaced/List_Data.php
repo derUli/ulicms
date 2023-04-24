@@ -76,7 +76,7 @@ class List_Data extends Model {
 
     public function loadByID($id): void {
         $id = (int)$id;
-        $result = Database::query('select * from ' . tbname('lists')
+        $result = Database::query('select * from ' . Database::tableName('lists')
                         . " WHERE content_id = {$id}");
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
@@ -91,7 +91,7 @@ class List_Data extends Model {
             throw new DatabaseException('no content_id for list set');
         }
         $id = (int)($this->content_id);
-        $result = Database::query('select * from ' . tbname('lists')
+        $result = Database::query('select * from ' . Database::tableName('lists')
                         . " WHERE content_id = {$id}");
         if (Database::getNumRows($result) > 0) {
             $this->update();
@@ -166,7 +166,7 @@ class List_Data extends Model {
         if ((int)($this->limit) > 0) {
             $limit = (int)($this->limit);
         }
-        $sql = 'INSERT INTO ' . tbname('lists') .
+        $sql = 'INSERT INTO ' . Database::tableName('lists') .
                 ' (content_id, language, category_id, menu, parent_id, '
                 . '`order_by`, `order_direction`, `limit`, `use_pagination`, '
                 . "`type`) values ({$content_id}, {$language},
@@ -227,7 +227,7 @@ class List_Data extends Model {
 
         $use_pagination = (int)($this->use_pagination);
 
-        $sql = 'UPDATE ' . tbname('lists') . " set language = {$language},
+        $sql = 'UPDATE ' . Database::tableName('lists') . " set language = {$language},
 		category_id = {$category_id}, menu = {$menu},"
                 . "parent_id = {$parent_id}, `order_by` = {$order_by},"
                 . "`order_direction` = '{$order_direction}', `limit` = {$limit},"

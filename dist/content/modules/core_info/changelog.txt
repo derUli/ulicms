@@ -15,6 +15,7 @@ Entfernte Features:
 Neue API-Methoden:
 * StringHelper::splitAndTrim()
 * BooleanHelper::bool2YesNo()
+* Database::tableName()
 
 API-Änderungen:
 * Controller in Namespace App\Controllers verschoben
@@ -55,6 +56,7 @@ Entfernte API-Methoden:
 * db_fetch_object()
 * db_query()
 * db_escape()
+* tbname()
 
 Entfernte Features:
 * Scroll To Top

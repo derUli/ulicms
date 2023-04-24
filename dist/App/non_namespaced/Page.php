@@ -102,7 +102,7 @@ class Page extends AbstractContent {
     public function loadBySlugAndLanguage($name, $language) {
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
-        $result = Database::query('SELECT * FROM `' . tbname('content') .
+        $result = Database::query('SELECT * FROM `' . Database::tableName('content') .
                         "` where `slug` = '{$name}' and "
                         . "`language` = '{$language}'");
         if (Database::getNumRows($result) > 0) {
@@ -124,7 +124,7 @@ class Page extends AbstractContent {
     }
 
     public function create() {
-        $sql = 'INSERT INTO `' . tbname('content') . '` (slug, title,
+        $sql = 'INSERT INTO `' . Database::tableName('content') . '` (slug, title,
             alternate_title, target, category_id,
 				content, language, menu_image, active,
                                 approved, created,
@@ -250,7 +250,7 @@ class Page extends AbstractContent {
 
         $category_id = $this->category_id ? (int)$this->category_id : 'null';
 
-        $sql = 'UPDATE ' . tbname('content') . ' ';
+        $sql = 'UPDATE ' . Database::tableName('content') . ' ';
 
         $sql .= "set slug='" . Database::escapeValue($this->slug) . "',";
         $sql .= "title='" . Database::escapeValue($this->title) . "',";

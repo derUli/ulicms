@@ -8,13 +8,11 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use Database;
 
-use function tbname;
-
 // This class contains methods that return an array of banners
 class Banners {
     public static function getAll(string $order = 'id'): array {
         $datasets = [];
-        $sql = 'SELECT id FROM ' . tbname('banner') . " ORDER BY {$order}";
+        $sql = 'SELECT id FROM ' . Database::tableName('banner') . " ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
             $banner = new Banner();
@@ -30,7 +28,7 @@ class Banners {
     ): array {
         $datasets = [];
         $language = Database::escapeValue($language);
-        $sql = 'SELECT id FROM ' . tbname('banner') .
+        $sql = 'SELECT id FROM ' . Database::tableName('banner') .
                 " WHERE language = '{$language}' ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -47,7 +45,7 @@ class Banners {
     ): array {
         $category_id = (int)$category_id;
         $datasets = [];
-        $sql = 'SELECT id FROM ' . tbname('banner') .
+        $sql = 'SELECT id FROM ' . Database::tableName('banner') .
                 " WHERE `category_id` = {$category_id} ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -64,7 +62,7 @@ class Banners {
     ): array {
         $type = Database::escapeValue($type);
         $datasets = [];
-        $sql = 'SELECT id FROM ' . tbname('banner') .
+        $sql = 'SELECT id FROM ' . Database::tableName('banner') .
                 " WHERE `type` = '{$type}' ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {

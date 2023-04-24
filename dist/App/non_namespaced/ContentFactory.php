@@ -23,7 +23,7 @@ class ContentFactory {
 
     public static function getByID(int $id): ?AbstractContent {
         $result = Database::query('SELECT `id`, `type` FROM `' .
-                        tbname('content') . '` where id = ' . $id);
+                        Database::tableName('content') . '` where id = ' . $id);
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
             return self::getContentObjectByID($dataset);
@@ -38,7 +38,7 @@ class ContentFactory {
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
         $result = Database::query('SELECT id, `type` FROM `' .
-                        tbname('content') . "` where `slug` = '{$name}' "
+                        Database::tableName('content') . "` where `slug` = '{$name}' "
                         . "and `language` = '{$language}'");
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
@@ -50,7 +50,7 @@ class ContentFactory {
 
     public static function getAll(string $order = 'id'): array {
         $datasets = [];
-        $sql = 'SELECT id, `type` FROM ' . tbname('content') .
+        $sql = 'SELECT id, `type` FROM ' . Database::tableName('content') .
                 " ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -61,7 +61,7 @@ class ContentFactory {
 
     public static function getAllRegular(string $order = 'id'): array {
         $datasets = [];
-        $sql = 'SELECT id, `type` FROM ' . tbname('content') .
+        $sql = 'SELECT id, `type` FROM ' . Database::tableName('content') .
                 " where type not in ('link', 'language_link', 'node') ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -76,7 +76,7 @@ class ContentFactory {
     ): array {
         $datasets = [];
         $language = Database::escapeValue($language);
-        $sql = 'SELECT id, `type` FROM ' . tbname('content') .
+        $sql = 'SELECT id, `type` FROM ' . Database::tableName('content') .
                 " where `language` = '{$language}' ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -116,7 +116,7 @@ class ContentFactory {
     ): array {
         $menu = Database::escapeValue($menu);
         $datasets = [];
-        $sql = 'SELECT id, `type` FROM ' . tbname('content') .
+        $sql = 'SELECT id, `type` FROM ' . Database::tableName('content') .
                 " where `menu` = '{$menu}' ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -131,7 +131,7 @@ class ContentFactory {
     ): array {
         $type = Database::escapeValue($type);
         $datasets = [];
-        $sql = 'SELECT id, `type` FROM ' . tbname('content')
+        $sql = 'SELECT id, `type` FROM ' . Database::tableName('content')
                 . " where `type` = '{$type}' ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -165,7 +165,7 @@ class ContentFactory {
         ?int $offset = null
     ): array {
         $datasets = [];
-        $sql = 'select id, `type` from ' . tbname('content') .
+        $sql = 'select id, `type` from ' . Database::tableName('content') .
                 ' where active = 1 and deleted_at is null and ';
 
         if ($language !== null && $language !== '') {
@@ -223,7 +223,7 @@ class ContentFactory {
         $menu = Database::escapeValue($menu);
         $language = Database::escapeValue($language);
         $datasets = [];
-        $sql = 'SELECT id, `type` FROM ' . tbname('content') .
+        $sql = 'SELECT id, `type` FROM ' . Database::tableName('content') .
                 " where `menu` = '{$menu}' and language = '{$language}' "
                 . "ORDER BY {$order}";
 

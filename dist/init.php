@@ -70,7 +70,7 @@ if(! is_file($oldConfigFile) && ! is_file($newConfigFile) && is_file($installerF
 $loader = DotEnvLoader::fromEnvironment(ULICMS_ROOT, get_environment());
 $loader->load();
 
-if (PHP_SAPI !== 'cli') {
+if (! is_cli()) {
     set_exception_handler('exception_handler');
 }
 

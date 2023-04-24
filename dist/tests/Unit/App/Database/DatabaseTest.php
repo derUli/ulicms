@@ -308,7 +308,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     public function testTableExistsReturnsTrue(): void {
         $this->assertTrue(Database::tableExists('content'));
         $this->assertTrue(Database::tableExists('settings'), true);
-        $this->assertTrue(Database::tableExists(tbname('content'), false));
+        $this->assertTrue(Database::tableExists(Database::tableName('content'), false));
     }
 
     public function testTableExistsReturnsFalse(): void {

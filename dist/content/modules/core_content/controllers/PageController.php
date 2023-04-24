@@ -386,7 +386,7 @@ class PageController extends \App\Controllers\Controller {
         $slug = Database::escapeValue($slug);
         $language = Database::escapeValue($language);
 
-        $sql = 'SELECT id FROM ' . tbname('content') .
+        $sql = 'SELECT id FROM ' . Database::tableName('content') .
                 " where slug='{$slug}' and language = '{$language}' ";
         if ($id > 0) {
             $sql .= "and id <> {$id}";

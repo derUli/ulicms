@@ -8,6 +8,13 @@ use App\Database\DBMigrator;
 use App\Exceptions\SqlException;
 use App\Registries\LoggerRegistry;
 
+// Type constants
+// TODO: Move to constants enum
+define('DB_TYPE_INT', 1);
+define('DB_TYPE_FLOAT', 2);
+define('DB_TYPE_STRING', 3);
+define('DB_TYPE_BOOL', 4);
+
 // this class provides an abstraction for database access
 // and many helpful utility methods to do database stuff
 class Database {
@@ -226,7 +233,7 @@ class Database {
         bool $prefix = true
     ): bool {
         if ($prefix) {
-            $table = tbname($table);
+            $table = self::tableName($table);
         }
 
         if (! self::tableExists($table, false)) {
@@ -249,7 +256,7 @@ class Database {
         bool $prefix = true
     ) {
         if ($prefix) {
-            $table = tbname($table);
+            $table = self::tableName($table);
         }
 
         $table = self::escapeName($table);
@@ -273,7 +280,7 @@ class Database {
         bool $prefix = true
     ) {
         if ($prefix) {
-            $table = tbname($table);
+            $table = self::tableName($table);
         }
 
         $table = self::escapeName($table);
@@ -297,7 +304,7 @@ class Database {
         bool $prefix = true
     ) {
         if ($prefix) {
-            $table = tbname($table);
+            $table = self::tableName($table);
         }
 
         $table = self::escapeName($table);
@@ -320,7 +327,7 @@ class Database {
         bool $prefix = true
     ): bool {
         if ($prefix) {
-            $table = tbname($table);
+            $table = self::tableName($table);
         }
         $table = self::escapeName($table);
 
@@ -338,7 +345,7 @@ class Database {
         bool $prefix = true
     ): bool {
         if ($prefix) {
-            $table = tbname($table);
+            $table = self::tableName($table);
         }
 
         $table = self::escapeName($table);
@@ -351,7 +358,7 @@ class Database {
         bool $prefix = true
     ): bool {
         if ($prefix) {
-            $table = tbname($table);
+            $table = self::tableName($table);
         }
 
         $column = self::escapeName($column);
@@ -368,7 +375,7 @@ class Database {
         string $order = ''
     ): ?mysqli_result {
         if ($replacePrefix) {
-            $table = tbname($table);
+            $table = self::tableName($table);
         }
         $table = self::escapeName($table);
 
@@ -496,7 +503,7 @@ class Database {
         string $table,
         bool $prefix = true
     ): bool {
-        $tableName = $prefix ? tbname($table) : $table;
+        $tableName = $prefix ? self::tableName($table) : $table;
         return in_array($tableName, self::getAllTables());
     }
 
@@ -542,7 +549,7 @@ class Database {
     ): array {
         $retval = [];
         if ($prefix) {
-            $table = tbname($table);
+            $table = self::tableName($table);
         }
         $result = Database::query("SELECT * FROM {$table} limit 1");
         $fields_num = self::getNumFieldCount();
@@ -625,5 +632,16 @@ class Database {
     // used for multi queries
     public static function storeResult(): mysqli_result {
         return mysqli_store_result(self::$connection);
+    }
+
+    /**
+     * Prepend the table prefix to a database table name
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    public static function tableName(string $name): string {
+        return $_ENV['DB_PREFIX'] . $name;
     }
 }

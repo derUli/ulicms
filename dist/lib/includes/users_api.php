@@ -12,7 +12,7 @@ use App\Security\TwoFactorAuthentication;
  */
 function getUsers(): array {
     $users = [];
-    $result = Database::query('SELECT id, username FROM ' . tbname('users') .
+    $result = Database::query('SELECT id, username FROM ' . Database::tableName('users') .
                     ' ORDER by username');
     while ($row = Database::fetchAssoc($result)) {
         $users[] = $row;
@@ -26,7 +26,7 @@ function getUsers(): array {
  * @return array
  */
 function getUsersOnline(): array {
-    $users_online = Database::query('SELECT username FROM ' . tbname('users') . ' WHERE last_action > ' . (time() - 300) . ' ORDER BY username');
+    $users_online = Database::query('SELECT username FROM ' . Database::tableName('users') . ' WHERE last_action > ' . (time() - 300) . ' ORDER BY username');
     $retval = [];
     while ($row = Database::fetchObject($users_online)) {
         $retval[] = $row->username;
@@ -56,7 +56,7 @@ function changePassword(string $password, ?int $userId) {
  * @return array|null
  */
 function getUserByName(string $name): ?array {
-    $result = Database::query('SELECT * FROM ' . tbname('users') .
+    $result = Database::query('SELECT * FROM ' . Database::tableName('users') .
                     " WHERE username='" . Database::escapeValue($name, DB_TYPE_STRING) . "'");
     if (Database::getNumRows($result) > 0) {
         return  Database::fetchAssoc($result);
@@ -70,7 +70,7 @@ function getUserByName(string $name): ?array {
  * @return array|null
  */
 function getUserById($id): ?array {
-    $result = Database::query('SELECT * FROM ' . tbname('users') .
+    $result = Database::query('SELECT * FROM ' . Database::tableName('users') .
                     ' WHERE id = ' . (int)$id);
     if (Database::getNumRows($result) > 0) {
         return  Database::fetchAssoc($result);

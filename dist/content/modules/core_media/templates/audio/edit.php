@@ -10,7 +10,7 @@ $permissionChecker = PermissionChecker::fromCurrentUser();
 if ($permissionChecker->hasPermission('audio')
         && $permissionChecker->hasPermission('audio_edit')) {
     $id = (int)$_REQUEST['id'];
-    $result = Database::query('SELECT * FROM ' . tbname('audio') . " WHERE id = {$id}");
+    $result = Database::query('SELECT * FROM ' . Database::tableName('audio') . " WHERE id = {$id}");
     if (Database::getNumRows($result) > 0) {
         $dataset = Database::fetchObject($result);
         ?><p>

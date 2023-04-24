@@ -21,7 +21,7 @@ if (isset($_GET['filter_category'])) {
     $_SESSION['filter_category'] = (int)$_GET['filter_category'];
 }
 
-$sql = 'SELECT id, name, mp3_file, ogg_file FROM ' . tbname('audio') . ' ';
+$sql = 'SELECT id, name, mp3_file, ogg_file FROM ' . Database::tableName('audio') . ' ';
 if ($_SESSION['filter_category'] > 0) {
     $sql .= ' where category_id = ' . $_SESSION['filter_category'] . ' ';
 }

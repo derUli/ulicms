@@ -228,7 +228,7 @@ class Template {
         if (! $id) {
             return str_replace('%title%', get_title(null, true), $format);
         }
-        $sql = 'SELECT show_headline FROM ' . tbname('content') .
+        $sql = 'SELECT show_headline FROM ' . Database::tableName('content') .
                 " where id = {$id}";
         $result = Database::query($sql);
         $dataset = Database::fetchObject($result);
@@ -424,7 +424,7 @@ class Template {
             );
 
             if (! is_logged_in()) {
-                Database::query('UPDATE ' . tbname('content') .
+                Database::query('UPDATE ' . Database::tableName('content') .
                         " SET views = views + 1 WHERE slug='" .
                         Database::escapeValue(get_slug()) .
                         "' AND language='" . Database::escapeValue(getFrontendLanguage())
@@ -467,7 +467,7 @@ class Template {
 
     public static function languageSelection(): void {
         $result = Database::query('SELECT language_code, name FROM ' .
-                tbname('languages') . ' ORDER by name');
+                Database::tableName('languages') . ' ORDER by name');
         echo "<ul class='language_selection'>";
         while ($row = Database::fetchObject($result)) {
             $domain = getDomainByLanguage($row->language_code);

@@ -112,7 +112,7 @@ function get_og_data($slug = ''): ?array {
     $data = null;
 
     $result = Database::query('SELECT og_title, og_image, og_description FROM ' .
-            tbname('content') . " WHERE slug='" . Database::escapeValue($slug) .
+            Database::tableName('content') . " WHERE slug='" . Database::escapeValue($slug) .
             "' AND language='" . Database::escapeValue(getFrontendLanguage()) . "'");
     if (Database::getNumRows($result) > 0) {
         $data = Database::fetchAssoc($result);
@@ -140,7 +140,7 @@ function get_ID(): ?int {
 
     $dataset = null;
 
-    $sql = 'SELECT `id` FROM ' . tbname('content') .
+    $sql = 'SELECT `id` FROM ' . Database::tableName('content') .
             " WHERE slug='" . Database::escapeValue($page) .
             "'  AND language='" . Database::escapeValue(getFrontendLanguage()) . "'";
     $result = Database::query($sql);
@@ -161,7 +161,7 @@ function is_active(): bool {
 
     $dataset = true;
 
-    $sql = 'SELECT `active` FROM ' . tbname('content')
+    $sql = 'SELECT `active` FROM ' . Database::tableName('content')
             . " WHERE slug='" . Database::escapeValue($page) . "'  AND language='" .
             Database::escapeValue(getFrontendLanguage()) . "'";
     $result = Database::query($sql);
@@ -211,7 +211,7 @@ function get_article_meta(?string $page = null): ?object {
     $sql = 'SELECT `article_author_name`, `article_author_email`, CASE WHEN '
             . '`article_date` is not null then UNIX_TIMESTAMP(article_date) '
             . 'else null end as article_date, `article_image`, '
-            . '`excerpt` FROM ' . tbname('content') .
+            . '`excerpt` FROM ' . Database::tableName('content') .
             " WHERE slug='" . Database::escapeValue($page) .
             "'  AND language='" .
             Database::escapeValue(getFrontendLanguage()) . "'";
@@ -233,7 +233,7 @@ function get_cache_control(): string {
     $page = get_slug();
 
     $cacheControl = 'auto';
-    $sql = 'SELECT `cache_control` FROM ' . tbname('content') .
+    $sql = 'SELECT `cache_control` FROM ' . Database::tableName('content') .
             " WHERE slug='" . Database::escapeValue($page) . "'  AND language='" .
             Database::escapeValue(getFrontendLanguage()) . "'";
     $result = Database::query($sql);
@@ -252,7 +252,7 @@ function get_text_position(): string {
     $page = get_slug();
 
     $dataset = null;
-    $sql = 'SELECT `text_position` FROM ' . tbname('content') .
+    $sql = 'SELECT `text_position` FROM ' . Database::tableName('content') .
             " WHERE slug='" . Database::escapeValue($page) .
             "'  AND language='" . Database::escapeValue(getFrontendLanguage()) . "'";
     $result = Database::query($sql);
@@ -271,7 +271,7 @@ function get_parent(?string $page = null): ?int {
         $page = get_slug();
     }
     $parent_id = null;
-    $sql = 'SELECT `parent_id` FROM ' . tbname('content') . " WHERE slug='"
+    $sql = 'SELECT `parent_id` FROM ' . Database::tableName('content') . " WHERE slug='"
             . Database::escapeValue($page) . "'  AND language='" .
             Database::escapeValue(getFrontendLanguage()) . "'";
     $result = Database::query($sql);
@@ -288,7 +288,7 @@ function get_access(?string $page = null): array {
         $page = get_slug();
     }
 
-    $sql = 'SELECT `access` FROM ' . tbname('content') .
+    $sql = 'SELECT `access` FROM ' . Database::tableName('content') .
             " WHERE slug='" . Database::escapeValue($page) .
             "'  AND language='" . Database::escapeValue(getFrontendLanguage()) . "'";
     $result = Database::query($sql);
@@ -304,7 +304,7 @@ function get_redirection(?string $page = null): ?string {
     if (! $page) {
         $page = get_slug();
     }
-    $sql = 'SELECT `link_url` FROM ' . tbname('content') .
+    $sql = 'SELECT `link_url` FROM ' . Database::tableName('content') .
             " WHERE slug='" . Database::escapeValue($page) . "'  AND language='" .
             Database::escapeValue(getFrontendLanguage()) . "' and type='link'";
     $result = Database::query($sql);
@@ -334,7 +334,7 @@ function get_theme(?string $page = null): ?string {
     }
 
     if (is_200()) {
-        $sql = 'SELECT `theme` FROM ' . tbname('content') . " WHERE slug='" .
+        $sql = 'SELECT `theme` FROM ' . Database::tableName('content') . " WHERE slug='" .
                 Database::escapeValue($page) . "'  AND language='" .
                 Database::escapeValue(getFrontendLanguage()) . "'";
         $result = Database::query($sql);
@@ -398,7 +398,7 @@ function homepage_title(): void {
 
 function get_meta_description(?string $ipage = null): string {
     $ipage = isset($_GET['slug']) ? Database::escapeValue($_GET['slug']) : '';
-    $result = Database::query('SELECT meta_description FROM ' . tbname('content') .
+    $result = Database::query('SELECT meta_description FROM ' . Database::tableName('content') .
             " WHERE slug='{$ipage}' AND language='" .
             Database::escapeValue(getFrontendLanguage()) . "'");
 
@@ -470,7 +470,7 @@ function get_title(?string $slug = null, bool $headline = false): string {
 
     $slug = isset($_GET['slug']) ? Database::escapeValue($_GET['slug']) : '';
     $result = Database::query('SELECT alternate_title, title FROM ' .
-            tbname('content') . " WHERE slug='{$slug}' AND language='" .
+            Database::tableName('content') . " WHERE slug='{$slug}' AND language='" .
             Database::escapeValue(getFrontendLanguage()) . "'");
 
     if (Database::getNumRows($result) > 0) {
@@ -637,7 +637,7 @@ function parent_item_contains_current_page(?int $id): bool {
     }
     $id = (int)$id;
     $language = $_SESSION['language'];
-    $sql = 'SELECT id, slug, parent_id FROM ' . tbname('content') . " WHERE language = '{$language}' AND active = 1 AND `deleted_at` IS NULL";
+    $sql = 'SELECT id, slug, parent_id FROM ' . Database::tableName('content') . " WHERE language = '{$language}' AND active = 1 AND `deleted_at` IS NULL";
     $r = Database::query($sql);
 
     $data = [];
@@ -664,7 +664,7 @@ function get_menu(
     $name = Database::escapeValue($name);
     $language = $_SESSION['language'];
     $sql = 'SELECT id, slug, access, link_url, title, '
-            . 'alternate_title, menu_image, target, type, link_to_language, position FROM ' . tbname('content') . " WHERE menu='{$name}' AND language = '{$language}' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent_id ";
+            . 'alternate_title, menu_image, target, type, link_to_language, position FROM ' . Database::tableName('content') . " WHERE menu='{$name}' AND language = '{$language}' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent_id ";
 
     if ($parent_id === null) {
         $sql .= ' IS NULL ';
@@ -800,7 +800,7 @@ function get_page(?string $slug = ''): ?array {
     if (\App\Storages\Vars::get('page_' . $slug)) {
         return \App\Storages\Vars::get('page_' . $slug);
     }
-    $result = Database::query('SELECT * FROM ' . tbname('content') . " WHERE slug='" . Database::escapeValue($slug) . "' AND language='" . Database::escapeValue(getFrontendLanguage()) . "'");
+    $result = Database::query('SELECT * FROM ' . Database::tableName('content') . " WHERE slug='" . Database::escapeValue($slug) . "' AND language='" . Database::escapeValue(getFrontendLanguage()) . "'");
     if (Database::getNumRows($result) > 0) {
         $dataset = Database::fetchAssoc($result);
         \App\Storages\Vars::set('page_' . $slug, $dataset);

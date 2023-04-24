@@ -51,7 +51,7 @@ if ($empty_trash_days === false) {
 
 // Papierkorb für Seiten Cronjob
 $empty_trash_timestamp = $empty_trash_days * (60 * 60 * 24);
-Database::query('DELETE FROM ' . tbname('content') . ' WHERE ' . time() .
+Database::query('DELETE FROM ' . Database::tableName('content') . ' WHERE ' . time() .
                 " -  `deleted_at` > {$empty_trash_timestamp}") || exit(Database::getLastError());
 
 // Cronjobs der Module

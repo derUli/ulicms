@@ -58,7 +58,7 @@ class Mailer {
         // UliCMS speichert seit UliCMS 9.0.1 E-Mails, die das System versendet hat
         // in der Datenbank
         // TODO: Make a method for this sql statement
-        $insert_sql = 'INSERT INTO ' . tbname('mails') .
+        $insert_sql = 'INSERT INTO ' . Database::tableName('mails') .
                 " (headers, `to`, subject, body) VALUES ('" .
                 Database::escapeValue($headers) . "', '" . Database::escapeValue($to) . "', '" .
                 Database::escapeValue($subject) . "', '" . Database::escapeValue($message) . "')";

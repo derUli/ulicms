@@ -8,7 +8,7 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
     $html = '';
     $name = Database::escapeValue($name);
     $language = $_SESSION['language'];
-    $sql = 'SELECT id, slug, access, link_url, title, alternate_title, menu_image, target, type, position FROM ' . tbname('content') . " WHERE menu='{$name}' AND language = '{$language}' AND active = 1 AND `deleted_at` IS NULL AND parent_id ";
+    $sql = 'SELECT id, slug, access, link_url, title, alternate_title, menu_image, target, type, position FROM ' . Database::tableName('content') . " WHERE menu='{$name}' AND language = '{$language}' AND active = 1 AND `deleted_at` IS NULL AND parent_id ";
 
     if ($parent_id === null) {
         $sql .= ' IS NULL ';

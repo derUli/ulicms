@@ -84,7 +84,6 @@
             "lib/includes/Results.php",
             "lib/includes/comparisons.php",
             "lib/includes/csrf_token.php",
-            "lib/includes/db_functions.php",
             "lib/includes/designs.php",
             "lib/includes/encode.php",
             "lib/includes/environment.php",

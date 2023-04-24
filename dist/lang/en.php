@@ -394,7 +394,7 @@ add_translation('LOG', 'Log');
 add_translation('IP_ADDRESSES', 'IP Addresses');
 add_translation('LOG_IP_ADDRESSES', 'Save IP addresses of comment authors.');
 add_translation('LOG_IP_ADDRESSES_NOTICE', '<strong>Warning!</strong><br>This is maybe a problem with the privacy policy law.');
-add_translation('LOG_IP_INFORMATION', 'The log will be saved in database table ' . tbname('log') . '. You can view it using an database administration tool like phpMyAdmin or sql_console.');
+add_translation('LOG_IP_INFORMATION', 'The log will be saved in database table ' . Database::tableName('log') . '. You can view it using an database administration tool like phpMyAdmin or sql_console.');
 
 // HTML Editor
 add_translation('HTML_EDITOR', 'HTML Editor');

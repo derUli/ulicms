@@ -14,17 +14,17 @@ class HomeController extends \App\Controllers\Controller {
         $dataset = Database::fetchObject($result);
         $model->contentCount = $dataset->amount;
 
-        $topPages = Database::query('SELECT language, slug, title, `views` FROM ' . tbname('content') . " WHERE deleted_at is null and type <> 'node' ORDER BY `views` DESC LIMIT 5", false);
+        $topPages = Database::query('SELECT language, slug, title, `views` FROM ' . Database::tableName('content') . " WHERE deleted_at is null and type <> 'node' ORDER BY `views` DESC LIMIT 5", false);
         while ($row = Database::fetchObject($topPages)) {
             $model->topPages[] = $row;
         }
 
-        $lastModfiedPages = Database::query('SELECT language, slug, title, lastmodified, case when lastchangeby is not null and lastchangeby > 0 then lastchangeby else author_id end as lastchangeby FROM ' . tbname('content') . "  WHERE deleted_at is null and type <> 'node'  ORDER BY lastmodified DESC LIMIT 5", false);
+        $lastModfiedPages = Database::query('SELECT language, slug, title, lastmodified, case when lastchangeby is not null and lastchangeby > 0 then lastchangeby else author_id end as lastchangeby FROM ' . Database::tableName('content') . "  WHERE deleted_at is null and type <> 'node'  ORDER BY lastmodified DESC LIMIT 5", false);
         while ($row = Database::fetchObject($lastModfiedPages)) {
             $model->lastModfiedPages[] = $row;
         }
 
-        $adminsQuery = Database::query('SELECT id, username FROM ' . tbname('users'));
+        $adminsQuery = Database::query('SELECT id, username FROM ' . Database::tableName('users'));
         while ($row = Database::fetchObject($adminsQuery)) {
             $admins[$row->id] = $row->username;
         }

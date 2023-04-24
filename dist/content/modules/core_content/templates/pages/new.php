@@ -18,7 +18,7 @@ use function App\HTML\icon;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();
 $parent_id = Request::getVar('parent_id', null, 'int');
-$groups = Database::query('SELECT id, name from ' . tbname('groups'));
+$groups = Database::query('SELECT id, name from ' . Database::tableName('groups'));
 
 if (
     $permissionChecker->hasPermission('pages') &&
@@ -28,9 +28,9 @@ if (
     $cols = Database::getColumnNames('content');
 
     // FIXME: No SQL in Views
-    $sql = 'SELECT id, name FROM ' . tbname('videos');
+    $sql = 'SELECT id, name FROM ' . Database::tableName('videos');
     $videos = Database::query($sql);
-    $sql = 'SELECT id, name FROM ' . tbname('audio');
+    $sql = 'SELECT id, name FROM ' . Database::tableName('audio');
     $audios = Database::query($sql);
 
     $pages_approve_own = $permissionChecker->hasPermission('pages_approve_own');

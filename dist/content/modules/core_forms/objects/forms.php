@@ -8,7 +8,7 @@ use App\Utils\Mailer;
 class Forms {
     public static function getFormByID($id) {
         $retval = null;
-        $result = Database::query('select * from `' . tbname('forms') . '` WHERE id = ' . (int)$id);
+        $result = Database::query('select * from `' . Database::tableName('forms') . '` WHERE id = ' . (int)$id);
         if (Database::getNumRows($result) > 0) {
             $retval = Database::fetchAssoc($result);
         }
@@ -65,7 +65,7 @@ class Forms {
         $id = (int)$id;
 
         return Database::query(
-            'UPDATE `' . tbname('forms') . "` set name='{$name}', "
+            'UPDATE `' . Database::tableName('forms') . "` set name='{$name}', "
             . "email_to = '{$email_to}', subject = '{$subject}', "
             . "category_id = {$category_id}, fields = '{$fields}', "
             . "required_fields = '{$required_fields}', "
@@ -78,7 +78,7 @@ class Forms {
 
     public static function getAllForms() {
         $retval = [];
-        $result = Database::query('select * from `' . tbname('forms') .
+        $result = Database::query('select * from `' . Database::tableName('forms') .
                 '` ORDER BY id');
         if (Database::getNumRows($result) > 0) {
             while ($row = Database::fetchAssoc($result)) {
@@ -178,6 +178,6 @@ class Forms {
 
     public static function deleteForm($id) {
         $id = (int)$id;
-        return Database::query('DELETE FROM ' . tbname('forms') . " WHERE id = {$id}");
+        return Database::query('DELETE FROM ' . Database::tableName('forms') . " WHERE id = {$id}");
     }
 }

@@ -18,7 +18,7 @@ use function App\HTML\imageTag;
 if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermission('users_edit')) || ($_GET['id'] == $_SESSION['login_id'])) {
     $id = (int)$_GET['id'];
     $languages = getAvailableBackendLanguages();
-    $result = Database::query('SELECT * FROM ' . tbname('users') . " WHERE id='{$id}'");
+    $result = Database::query('SELECT * FROM ' . Database::tableName('users') . " WHERE id='{$id}'");
     $user = new User($id);
     $secondaryGroups = $user->getSecondaryGroups();
     $secondaryGroupIds = [];
