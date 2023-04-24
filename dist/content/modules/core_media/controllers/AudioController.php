@@ -61,7 +61,7 @@ class AudioController extends \App\Controllers\Controller {
         $timestamp = time();
 
         if (! empty($ogg_file_value) || ! empty($mp3_file_value)) {
-            db_query('INSERT INTO ' . tbname('audio') .
+            Database::query('INSERT INTO ' . tbname('audio') .
                     ' (name, ogg_file, mp3_file, created, category_id, '
                     . "`updated`) VALUES ('{$name}', '{$ogg_file_value}', "
                     . "'{$mp3_file_value}', {$timestamp}, {$category_id}, "
@@ -77,7 +77,7 @@ class AudioController extends \App\Controllers\Controller {
         $mp3_file = db_escape(basename($_POST['mp3_file']));
         $updated = time();
         $category_id = (int)$_POST['category_id'];
-        db_query('UPDATE ' . tbname('audio') . " SET name='{$name}', "
+        Database::query('UPDATE ' . tbname('audio') . " SET name='{$name}', "
                 . "ogg_file='{$ogg_file}', mp3_file='{$mp3_file}', "
                 . "category_id = {$category_id}, `updated` = {$updated} "
                 . "where id = {$id}");
@@ -91,7 +91,7 @@ class AudioController extends \App\Controllers\Controller {
     }
 
     public function deletePost(): void {
-        $result = db_query('select ogg_file, mp3_file from ' .
+        $result = Database::query('select ogg_file, mp3_file from ' .
                 tbname('audio') . ' where id = ' .
                 (int)$_REQUEST['delete']);
         if (Database::getNumRows($result) > 0) {
@@ -108,7 +108,7 @@ class AudioController extends \App\Controllers\Controller {
                 @unlink($filepath);
             }
 
-            db_query('DELETE FROM ' . tbname('audio') . ' where id = ' .
+            Database::query('DELETE FROM ' . tbname('audio') . ' where id = ' .
                     $_REQUEST['delete']);
         }
         Response::redirect(ModuleHelper::buildActionURL('videos'));

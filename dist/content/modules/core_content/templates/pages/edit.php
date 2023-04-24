@@ -25,7 +25,7 @@ if ($permissionChecker->hasPermission('pages')) {
 
     // FIXME: Die SQL Statements in einen Controller bzw. Model auslagern.
     $page = (int)$_GET['page'];
-    $result = db_query('SELECT * FROM ' . tbname('content') . " WHERE id='{$page}'");
+    $result = Database::query('SELECT * FROM ' . tbname('content') . " WHERE id='{$page}'");
 
     $allThemes = getAllThemes();
 
@@ -40,7 +40,7 @@ if ($permissionChecker->hasPermission('pages')) {
     $users = getUsers();
 
     $groups = Group::getAll();
-    $groupsSql = db_query('SELECT id, name from ' . tbname('groups'));
+    $groupsSql = Database::query('SELECT id, name from ' . tbname('groups'));
 
     $pages_change_owner = $permissionChecker->hasPermission('pages_change_owner');
 

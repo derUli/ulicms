@@ -53,6 +53,7 @@ Entfernte API-Methoden:
 * db_fetch_assoc()
 * db_num_rows()
 * db_fetch_object()
+* db_query()
 
 Entfernte Features:
 * Scroll To Top

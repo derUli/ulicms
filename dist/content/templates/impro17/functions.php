@@ -17,7 +17,7 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
     }
     $sql .= ' ORDER by ' . $order;
 
-    $result = db_query($sql);
+    $result = Database::query($sql);
 
     if (Database::getNumRows($result) == 0) {
         return $html;

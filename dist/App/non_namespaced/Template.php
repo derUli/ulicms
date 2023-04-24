@@ -424,7 +424,7 @@ class Template {
             );
 
             if (! is_logged_in()) {
-                db_query('UPDATE ' . tbname('content') .
+                Database::query('UPDATE ' . tbname('content') .
                         " SET views = views + 1 WHERE slug='" .
                         Database::escapeValue(get_slug()) .
                         "' AND language='" . db_escape(getFrontendLanguage())
@@ -466,7 +466,7 @@ class Template {
     }
 
     public static function languageSelection(): void {
-        $result = db_query('SELECT language_code, name FROM ' .
+        $result = Database::query('SELECT language_code, name FROM ' .
                 tbname('languages') . ' ORDER by name');
         echo "<ul class='language_selection'>";
         while ($row = Database::fetchObject($result)) {

@@ -27,7 +27,7 @@ if ($_SESSION['filter_category'] > 0) {
 }
 $sql .= ' ORDER by id';
 
-$all_audio = db_query($sql);
+$all_audio = Database::query($sql);
 
 if ($permissionChecker->hasPermission('audio')) {
     ?>

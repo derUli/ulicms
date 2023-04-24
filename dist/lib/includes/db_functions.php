@@ -7,13 +7,6 @@ define('DB_TYPE_FLOAT', 2);
 define('DB_TYPE_STRING', 3);
 define('DB_TYPE_BOOL', 4);
 
-// database api functions
-// all functions in this file are deprecated you should
-// use the Database class instead.
-function db_query(string $query) {
-    return Database::query($query);
-}
-
 /**
  * Prepend the table prefix to a database table name
  *

@@ -82,7 +82,7 @@ class VideoController extends \App\Controllers\Controller {
             $timestamp = time();
 
             if (! empty($ogg_file_value) || ! empty($mp4_file_value) || ! empty($webm_file_value)) {
-                db_query('INSERT INTO ' . tbname('videos') .
+                Database::query('INSERT INTO ' . tbname('videos') .
                         ' (name, ogg_file, webm_file, mp4_file, width, '
                         . 'height, created, category_id, `updated`) '
                         . "VALUES ('{$name}', '{$ogg_file_value}', "
@@ -104,7 +104,7 @@ class VideoController extends \App\Controllers\Controller {
         $height = (int)$_POST['height'];
         $updated = time();
         $category_id = (int)$_POST['category_id'];
-        db_query('UPDATE ' . tbname('videos') . " SET name='{$name}', "
+        Database::query('UPDATE ' . tbname('videos') . " SET name='{$name}', "
                 . "ogg_file='{$ogg_file}', mp4_file='{$mp4_file}', "
                 . "webm_file='{$webm_file}', width={$width}, height={$height}, "
                 . "category_id = {$category_id}, `updated` = {$updated} "
@@ -118,7 +118,7 @@ class VideoController extends \App\Controllers\Controller {
     }
 
     public function deletePost(): void {
-        $result = db_query('select ogg_file, webm_file, mp4_file from ' .
+        $result = Database::query('select ogg_file, webm_file, mp4_file from ' .
                 tbname('videos') . ' where id = ' . (int)$_REQUEST['delete']);
         if (Database::getNumRows($result) > 0) {
             // OGG
@@ -143,7 +143,7 @@ class VideoController extends \App\Controllers\Controller {
                 @unlink($filepath);
             }
 
-            db_query('DELETE FROM ' . tbname('videos') . ' where id = ' .
+            Database::query('DELETE FROM ' . tbname('videos') . ' where id = ' .
                 (int)$_REQUEST['delete']);
         }
         Response::redirect(ModuleHelper::buildActionURL('videos'));

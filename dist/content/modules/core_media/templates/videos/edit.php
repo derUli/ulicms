@@ -10,7 +10,7 @@ $permissionChecker = PermissionChecker::fromCurrentUser();
 if ($permissionChecker->hasPermission('videos')
         && $permissionChecker->hasPermission('videos_edit')) {
     $id = (int)$_REQUEST['id'];
-    $result = db_query('SELECT * FROM ' . tbname('videos') . " WHERE id = {$id}");
+    $result = Database::query('SELECT * FROM ' . tbname('videos') . " WHERE id = {$id}");
     if (Database::getNumRows($result) > 0) {
         $dataset = Database::fetchObject($result);
         ?>

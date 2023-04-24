@@ -12,6 +12,7 @@ use Closure;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Settings;
+use Database;
 
 /**
  * Send Mails
@@ -61,7 +62,7 @@ class Mailer {
                 " (headers, `to`, subject, body) VALUES ('" .
                 db_escape($headers) . "', '" . db_escape($to) . "', '" .
                 db_escape($subject) . "', '" . db_escape($message) . "')";
-        db_query($insert_sql);
+        Database::query($insert_sql);
 
         return self::sendWithPHPMailer(
             $to,

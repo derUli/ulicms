@@ -28,7 +28,7 @@ if ($_SESSION['filter_category'] > 0) {
 }
 $sql .= ' ORDER by id';
 
-$all_videos = db_query($sql);
+$all_videos = Database::query($sql);
 
 if ($permissionChecker->hasPermission('videos')) {
     ?>

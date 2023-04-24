@@ -18,7 +18,7 @@ use function App\HTML\icon;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();
 $parent_id = Request::getVar('parent_id', null, 'int');
-$groups = db_query('SELECT id, name from ' . tbname('groups'));
+$groups = Database::query('SELECT id, name from ' . tbname('groups'));
 
 if (
     $permissionChecker->hasPermission('pages') &&
