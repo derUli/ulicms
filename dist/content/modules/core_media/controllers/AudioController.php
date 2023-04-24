@@ -95,7 +95,7 @@ class AudioController extends \App\Controllers\Controller {
                 tbname('audio') . ' where id = ' .
                 (int)$_REQUEST['delete']);
         if (Database::getNumRows($result) > 0) {
-            $dataset = db_fetch_object($result);
+            $dataset = Database::fetchObject($result);
             $filepath = ULICMS_ROOT . '/content/audio/' .
                     basename($dataset->ogg_file);
             if (! empty($dataset->ogg_file) && is_file($filepath)) {

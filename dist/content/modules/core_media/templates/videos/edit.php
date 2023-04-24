@@ -12,7 +12,7 @@ if ($permissionChecker->hasPermission('videos')
     $id = (int)$_REQUEST['id'];
     $result = db_query('SELECT * FROM ' . tbname('videos') . " WHERE id = {$id}");
     if (Database::getNumRows($result) > 0) {
-        $dataset = db_fetch_object($result);
+        $dataset = Database::fetchObject($result);
         ?>
         <div class="field">
             <a href="<?php echo ModuleHelper::buildActionURL('videos'); ?>"

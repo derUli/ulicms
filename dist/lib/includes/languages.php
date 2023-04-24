@@ -125,7 +125,7 @@ function getLanguageNameByCode(string $code): string {
     );
     $retval = $code;
     if (Database::getNumRows($result) > 0) {
-        $dataset = db_fetch_object($result);
+        $dataset = Database::fetchObject($result);
         $retval = $dataset->name;
     }
 
@@ -161,7 +161,7 @@ function getCurrentLanguage($current = false): string {
         $result = db_query('SELECT language FROM ' . tbname('content') .
                 " WHERE slug='" . get_slug() . "'");
         if (Database::getNumRows($result) > 0) {
-            $dataset = db_fetch_object($result);
+            $dataset = Database::fetchObject($result);
             $language = $dataset->language;
             \App\Storages\Vars::set('current_language_' . strbool($current), $language);
         }
@@ -196,7 +196,7 @@ function getAllLanguages($filtered = false): array {
     $result = db_query('SELECT language_code FROM `' . tbname('languages') .
             '` ORDER BY language_code');
 
-    while ($row = db_fetch_object($result)) {
+    while ($row = Database::fetchObject($result)) {
         $languageCodes[] = $row->language_code;
     }
     \App\Storages\Vars::set('all_languages', $languageCodes);

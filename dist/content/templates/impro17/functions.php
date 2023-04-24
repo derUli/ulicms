@@ -36,7 +36,7 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
         $html .= "<ul class='" . $classes . "'>\n";
     }
 
-    while ($row = db_fetch_object($result)) {
+    while ($row = Database::fetchObject($result)) {
         if (checkAccess($row->access)) {
             $containsCurrentItem = parent_item_contains_current_page($row->id);
 

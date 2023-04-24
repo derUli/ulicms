@@ -469,7 +469,7 @@ class Template {
         $result = db_query('SELECT language_code, name FROM ' .
                 tbname('languages') . ' ORDER by name');
         echo "<ul class='language_selection'>";
-        while ($row = db_fetch_object($result)) {
+        while ($row = Database::fetchObject($result)) {
             $domain = getDomainByLanguage($row->language_code);
             if ($domain) {
                 echo '<li>' . "<a href='http://" . $domain . "'>" .

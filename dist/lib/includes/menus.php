@@ -11,7 +11,7 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 function get_all_used_menus(): array {
     $retval = [];
     $result = Database::query('select menu from {prefix}content group by menu', true);
-    while ($row = db_fetch_object($result)) {
+    while ($row = Database::fetchObject($result)) {
         $retval[] = $row->menu;
     }
     return $retval;

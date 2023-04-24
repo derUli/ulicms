@@ -14,10 +14,6 @@ function db_query(string $query) {
     return Database::query($query);
 }
 
-function db_fetch_object(?mysqli_result $result) {
-    return Database::fetchObject($result);
-}
-
 /**
  * Prepend the table prefix to a database table name
  *

@@ -8,7 +8,7 @@ function getPageSlugByID(?int $id): ?string {
     $result = db_query('SELECT slug, id FROM `' . tbname('content')
             . '` where id=' . (int)$id);
     if (Database::getNumRows($result) > 0) {
-        $row = db_fetch_object($result);
+        $row = Database::fetchObject($result);
         return $row->slug;
     }
     return null;
@@ -19,7 +19,7 @@ function getPageByID(int $id): ?object {
     $result = db_query('SELECT * FROM ' . tbname('content') .
             ' where id = ' . $id);
     if (Database::getNumRows($result) > 0) {
-        return db_fetch_object($result);
+        return  Database::fetchObject($result);
     }
     return null;
 }
@@ -28,7 +28,7 @@ function getPageTitleByID(?int $id): string {
     $result = db_query('SELECT title, id FROM `' . tbname('content')
             . '` where id=' . (int)$id);
     if (Database::getNumRows($result) > 0) {
-        $row = db_fetch_object($result);
+        $row = Database::fetchObject($result);
         return $row->title;
     }
     return '[' . get_translation('none') . ']';
@@ -39,7 +39,7 @@ function getAllPagesWithTitle(): array {
     $result = db_query('SELECT slug, id, title FROM `' . tbname('content') .
             '` WHERE `deleted_at` IS NULL ORDER BY slug');
     $returnvalues = [];
-    while ($row = db_fetch_object($result)) {
+    while ($row = Database::fetchObject($result)) {
         $a = [
             $row->title,
             $row->slug
@@ -103,7 +103,7 @@ function getAllSlugs(?string $lang = null): array {
                 . "NOT LIKE '#%' AND language ='" . db_escape($lang) .
                 "' ORDER BY slug");
     }
-    while ($row = db_fetch_object($result)) {
+    while ($row = Database::fetchObject($result)) {
         $slugs[] = $row->slug;
     }
 

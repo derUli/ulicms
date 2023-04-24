@@ -76,7 +76,7 @@ if ($permissionChecker->hasPermission('audio')) {
             </thead>
             <tbody>
                 <?php
-                while ($row = db_fetch_object($all_audio)) {
+                while ($row = Database::fetchObject($all_audio)) {
                     ?>
                     <tr id="dataset-<?php echo $row->id; ?>">
                         <td><?php echo $row->id; ?>

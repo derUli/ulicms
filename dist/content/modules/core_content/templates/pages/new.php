@@ -749,7 +749,7 @@ if (
                     <option value="mobile"><?php translate('mobile_devices'); ?></option>
                     <option value="desktop"><?php translate('desktop_computers'); ?></option>
                     <?php
-                    while ($row = db_fetch_object($groups)) {
+                    while ($row = Database::fetchObject($groups)) {
                         echo '<option value="' . $row->id . '">' . _esc($row->name) . '</option>';
                     }
     ?>

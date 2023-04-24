@@ -49,7 +49,7 @@ class Settings extends MemstaticCached {
         $result = db_query('SELECT name, value FROM ' . tbname('settings') .
                 " WHERE name='{$key}'");
         if (Database::getNumRows($result) > 0) {
-            while ($row = db_fetch_object($result)) {
+            while ($row = Database::fetchObject($result)) {
                 static::setToCache($row->name, $row->value);
                 $value = static::convertVar($row->value, $type);
             }

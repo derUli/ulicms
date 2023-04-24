@@ -49,7 +49,7 @@ if ($permissionChecker->hasPermission('pages')) {
     $pages_approve_own = $permissionChecker->hasPermission('pages_approve_own');
     $pages_approve_others = $permissionChecker->hasPermission('pages_approve_others');
 
-    while ($row = db_fetch_object($result)) {
+    while ($row = Database::fetchObject($result)) {
         $list_data = new List_Data($row->id);
         $is_owner = $row->author_id == get_user_id();
 
@@ -1139,7 +1139,7 @@ if ($permissionChecker->hasPermission('pages')) {
             }
             ?>><?php translate('desktop_computers'); ?></option>
                                         <?php
-                    while ($row2 = db_fetch_object($groupsSql)) {
+                    while ($row2 = Database::fetchObject($groupsSql)) {
                         if (in_array((string)$row2->id, $access)) {
                             echo '<option value="' . $row2->id . '" selected>' . _esc($row2->name) . '</option>';
                         } else {

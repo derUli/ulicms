@@ -11,15 +11,6 @@ class DbFunctionsTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringStartsNotWith('random_table', $tableName);
     }
 
-    public function testDbFetchObject(): void {
-        $datasets = Database::selectAll('settings');
-        while ($row = db_fetch_object($datasets)) {
-            $this->assertIsNumeric($row->id);
-            $this->assertNotEmpty($row->name);
-            $this->assertIsString($row->value);
-        }
-    }
-
     public function testDbQuery(): void {
         $query = db_query('select id from ' . tbname('settings') . " where name = 'homepage_title' or name = 'site_slogan'");
         $this->assertEquals(2, Database::getNumRows($query));

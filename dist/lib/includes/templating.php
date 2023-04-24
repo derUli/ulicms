@@ -145,7 +145,7 @@ function get_ID(): ?int {
             "'  AND language='" . db_escape(getFrontendLanguage()) . "'";
     $result = db_query($sql);
     if (Database::getNumRows($result) > 0) {
-        $dataset = db_fetch_object($result);
+        $dataset = Database::fetchObject($result);
         $dataset = (int)$dataset->id;
     }
     \App\Storages\Vars::set('id', $dataset);
@@ -167,7 +167,7 @@ function is_active(): bool {
     $result = db_query($sql);
 
     if (Database::getNumRows($result) > 0) {
-        $dataset = db_fetch_object($result);
+        $dataset = Database::fetchObject($result);
         $dataset = (bool)$dataset->active;
     }
 
@@ -240,7 +240,7 @@ function get_cache_control(): string {
     $dataset = null;
 
     if ($result && Database::getNumRows($result) > 0) {
-        $dataset = db_fetch_object($result);
+        $dataset = Database::fetchObject($result);
         $cacheControl = $dataset->cache_control ?: $cacheControl;
     }
     $cacheControl = apply_filter($cacheControl, 'get_cache_control');
@@ -257,7 +257,7 @@ function get_text_position(): string {
             "'  AND language='" . db_escape(getFrontendLanguage()) . "'";
     $result = db_query($sql);
     if (Database::getNumRows($result) > 0) {
-        $dataset = db_fetch_object($result);
+        $dataset = Database::fetchObject($result);
         $dataset = $dataset->text_position;
     }
     if (empty($dataset)) {
@@ -276,7 +276,7 @@ function get_parent(?string $page = null): ?int {
             db_escape(getFrontendLanguage()) . "'";
     $result = db_query($sql);
     if (Database::getNumRows($result) > 0) {
-        $dataset = db_fetch_object($result);
+        $dataset = Database::fetchObject($result);
         $parent_id = $dataset->parent_id ? (int)$dataset->parent_id : null;
     }
     return $parent_id;
@@ -293,7 +293,7 @@ function get_access(?string $page = null): array {
             "'  AND language='" . db_escape(getFrontendLanguage()) . "'";
     $result = db_query($sql);
     if (Database::getNumRows($result) > 0) {
-        $dataset = db_fetch_object($result);
+        $dataset = Database::fetchObject($result);
         $access = explode(',', $dataset->access);
     }
 
@@ -311,7 +311,7 @@ function get_redirection(?string $page = null): ?string {
 
     $redirection = null;
     if (Database::getNumRows($result) > 0) {
-        $dataset = db_fetch_object($result);
+        $dataset = Database::fetchObject($result);
         if (! empty($dataset->link_url) && null !== $dataset->link_url) {
             $redirection = $dataset->link_url;
         }
@@ -339,7 +339,7 @@ function get_theme(?string $page = null): ?string {
                 db_escape(getFrontendLanguage()) . "'";
         $result = db_query($sql);
         if ($result && Database::getNumRows($result) > 0) {
-            $data = db_fetch_object($result);
+            $data = Database::fetchObject($result);
             if ($data->theme) {
                 $theme = $data->theme;
             }
@@ -403,7 +403,7 @@ function get_meta_description(?string $ipage = null): string {
             db_escape(getFrontendLanguage()) . "'");
 
     if (Database::getNumRows($result) > 0) {
-        while ($row = db_fetch_object($result)) {
+        while ($row = Database::fetchObject($result)) {
             if (! empty($row->meta_description)) {
                 return $row->meta_description;
             }
@@ -474,7 +474,7 @@ function get_title(?string $slug = null, bool $headline = false): string {
             db_escape(getFrontendLanguage()) . "'");
 
     if (Database::getNumRows($result) > 0) {
-        while ($row = db_fetch_object($result)) {
+        while ($row = Database::fetchObject($result)) {
             if ($headline && isset($row->alternate_title) && ! empty($row->alternate_title)) {
                 $title = $row->alternate_title;
             } else {
@@ -691,7 +691,7 @@ function get_menu(
         $html .= "<ul class='" . $classes . "'>\n";
     }
 
-    while ($row = db_fetch_object($result)) {
+    while ($row = Database::fetchObject($result)) {
         if (checkAccess($row->access)) {
             $containsCurrentItem = parent_item_contains_current_page((int)$row->id);
 

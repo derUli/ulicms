@@ -12,7 +12,7 @@ if ($permissionChecker->hasPermission('audio')
     $id = (int)$_REQUEST['id'];
     $result = db_query('SELECT * FROM ' . tbname('audio') . " WHERE id = {$id}");
     if (Database::getNumRows($result) > 0) {
-        $dataset = db_fetch_object($result);
+        $dataset = Database::fetchObject($result);
         ?><p>
             <a href="<?php echo ModuleHelper::buildActionURL('audio'); ?>"
                class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>

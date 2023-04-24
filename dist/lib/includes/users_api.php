@@ -28,7 +28,7 @@ function getUsers(): array {
 function getUsersOnline(): array {
     $users_online = Database::query('SELECT username FROM ' . tbname('users') . ' WHERE last_action > ' . (time() - 300) . ' ORDER BY username');
     $retval = [];
-    while ($row = db_fetch_object($users_online)) {
+    while ($row = Database::fetchObject($users_online)) {
         $retval[] = $row->username;
     }
     return $retval;
