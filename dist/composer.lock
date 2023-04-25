@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bc6f4343eb3dd6cea088744b7dad3a2",
+    "content-hash": "156860e2ff631911d764b76978b96e06",
     "packages": [
         {
             "name": "chrisjean/php-ico",
@@ -8840,14 +8840,15 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=8.1",
-        "ext-mysqli": "*",
+        "ext-curl": "*",
+        "ext-dom": "*",
         "ext-gd": "*",
+        "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
+        "ext-mysqli": "*",
         "ext-openssl": "*",
-        "ext-dom": "*",
-        "ext-libxml": "*",
-        "ext-intl": "*"
+        "ext-libxml": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"
