@@ -73,7 +73,7 @@ class SessionManager extends \App\Controllers\Controller {
             $user->setRequirePasswordChange(1);
             $user->save();
             $token = $reset->deleteToken($_REQUEST['token']);
-            register_session(getUserById($user_id));
+            register_session(getUserById((int)$user_id));
         } else {
             TextResult(get_translation('invalid_token'), 404);
         }

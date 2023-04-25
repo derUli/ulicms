@@ -14,6 +14,7 @@ use zz\Html\HTMLMinify;
 
 /**
  * Clears the Javascript queue
+ *
  * @return void
  */
 function resetScriptQueue(): void {
@@ -22,8 +23,10 @@ function resetScriptQueue(): void {
 
 /**
  * Minify HTML
+ *
  * @param string $html
  * @param int $level
+ *
  * @return string
  */
 function optimizeHtml(
@@ -42,7 +45,7 @@ function optimizeHtml(
     return $html;
 }
 
-function enqueueScriptFile($path): void {
+function enqueueScriptFile(string $path): void {
     if (! \App\Storages\Vars::get('script_queue')) {
         resetScriptQueue();
     }
@@ -52,6 +55,13 @@ function enqueueScriptFile($path): void {
     \App\Storages\Vars::set('script_queue', $script_queue);
 }
 
+/**
+ * Set SCSS import paths
+ *
+ * @param ?string[] $importPaths
+ *
+ * @return void
+ */
 function setSCSSImportPaths(?array $importPaths = null): void {
     if ($importPaths == null) {
         $importPaths = [
@@ -61,10 +71,21 @@ function setSCSSImportPaths(?array $importPaths = null): void {
     \App\Storages\Vars::set('css_include_paths', $importPaths);
 }
 
+
+/**
+ * Get SCSS import paths
+ *
+ * @return ?string[]
+ */
 function getSCSSImportPaths(): ?array {
     return \App\Storages\Vars::get('css_include_paths');
 }
 
+/**
+ * Unset SCSS import paths
+ *
+ * @return void
+ */
 function unsetSCSSImportPaths(): void {
     \App\Storages\Vars::delete('css_include_paths');
 }
@@ -174,7 +195,8 @@ function compileSCSS(string $stylesheet): string {
     $scss = new Compiler();
 
     $importPaths = getSCSSImportPaths();
-    $scssInput = file_get_contents($stylesheet);
+    $scssInput = file_get_contents($stylesheet) ?: '';
+
     if (is_array($importPaths)) {
         $scss->setImportPaths($importPaths);
     } else {

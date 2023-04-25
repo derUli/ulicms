@@ -66,10 +66,10 @@ function getUserByName(string $name): ?array {
 
 /**
  * Get a user by id
- * @param type $id
+ * @param int $id
  * @return array|null
  */
-function getUserById($id): ?array {
+function getUserById(int $id): ?array {
     $result = Database::query('SELECT * FROM ' . Database::tableName('users') .
                     ' WHERE id = ' . (int)$id);
     if (Database::getNumRows($result) > 0) {

@@ -38,7 +38,7 @@ if ($permissionChecker->hasPermission('pages')) {
                         <td><a href="<?php echo $view_diff_link; ?>" class="btn btn-info"
                                target="_blank"><i class="fas fa-eye"></i> <?php translate('view_diff'); ?></a></td>
                         <td><?php
-                            $user = getUserById($revision->user_id);
+                            $user = getUserById((int)$revision->user_id);
                     if ($user && isset($user ['username'])) {
                         esc($user ['username']);
                     }

@@ -6,7 +6,8 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 
 /**
  * Get all menus that have content
- * @return array
+ *
+ * @return array<string>
  */
 function get_all_used_menus(): array {
     $retval = [];
@@ -17,7 +18,14 @@ function get_all_used_menus(): array {
     return $retval;
 }
 
-// Gibt die Identifier aller Menüs zurück.
+/**
+ * Get all menus
+ *
+ * @param bool $only_used
+ * @param bool $read_theme_menus
+ *
+ * @return array<string>
+ */
 function get_all_menus(
     bool $only_used = false,
     bool $read_theme_menus = true
