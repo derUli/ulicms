@@ -16,7 +16,6 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
         Database::query("delete from {prefix}users where username like 'testuser-%'", true);
         unset($_REQUEST['sClass'], $_REQUEST['sMethod'], $_SERVER['REQUEST_METHOD']);
 
-
     }
 
     public function testGetWithClassNameReturnsController(): void {

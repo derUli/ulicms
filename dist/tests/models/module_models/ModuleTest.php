@@ -1,6 +1,5 @@
 <?php
 
-
 class ModuleTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
         $manager = new ModuleManager();

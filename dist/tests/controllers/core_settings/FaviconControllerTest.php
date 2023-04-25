@@ -1,6 +1,5 @@
 <?php
 
-
 use Spatie\Snapshots\MatchesSnapshots;
 
 class FaviconControllerTest extends \PHPUnit\Framework\TestCase {

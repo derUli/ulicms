@@ -15,7 +15,6 @@ class EncodeTest extends \PHPUnit\Framework\TestCase {
             'null' => null
         ];
 
-
         $this->assertMatchesTextSnapshot(
             json_readable_encode($data)
         );

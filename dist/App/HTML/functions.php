@@ -37,7 +37,6 @@ function imageTag(string $file, array $htmlAttributes = []): string {
     return "<img {$attribHTML}>";
 }
 
-
 /**
  * Generates a link that looks like a button
  *

@@ -54,7 +54,6 @@ class LogoController extends \App\Controllers\Controller {
             do_event('after_upload_logo');
         }
 
-
         Response::redirect(ModuleHelper::buildActionURL('logo'));
     }
 

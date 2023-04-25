@@ -1,6 +1,5 @@
 <?php
 
-
 class DesignTest extends \PHPUnit\Framework\TestCase {
     public function testGetThemeMeta(): void {
         $meta = getThemeMeta('impro17');

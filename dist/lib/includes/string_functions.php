@@ -25,7 +25,6 @@ function sanitize_headers(array &$array): void {
     }
 }
 
-
 function _unesc(string $string): string {
     return html_entity_decode($string, ENT_COMPAT, 'UTF-8');
 }

@@ -16,7 +16,6 @@ use App\Models\Media\Video;
 function replaceAudioTags(string $txt): string {
     $audio_dir = 'content/audio/';
 
-
     // TODO: Use Regex
     $contains = str_contains($txt, '[audio id=')  ;
 

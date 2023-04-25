@@ -649,7 +649,6 @@ class FtpClient implements Countable {
                     }
                 }
 
-
                 if (substr($path, 0, 2) == './') {
                     $path = substr($path, 2);
                 }
@@ -755,12 +754,6 @@ class FtpClient implements Countable {
             ];
 
             unset($chunks[0], $chunks[1], $chunks[2], $chunks[3], $chunks[4], $chunks[5], $chunks[6], $chunks[7]);
-
-
-
-
-
-
 
             $item['name'] = implode(' ', $chunks);
 

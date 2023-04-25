@@ -70,7 +70,6 @@ if (! $isFm) {
             $safeHosts = null
         ): string {
 
-
             if (is_array($safeHosts) && count($safeHosts) >= 1) {
                 $safeHosts = $safeHosts;
             } elseif (isset($_ENV['SAFE_HOSTS'])) {

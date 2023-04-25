@@ -448,7 +448,6 @@ class Template {
             return get_translation('no_content');
         }
 
-
         $htmlContent = $content->content;
         $htmlContent = apply_filter($htmlContent, 'before_content');
 

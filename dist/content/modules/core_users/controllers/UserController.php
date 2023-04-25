@@ -130,7 +130,6 @@ class UserController extends \App\Controllers\Controller {
                 $user->removeAvatar();
             }
 
-
             if (! $permissionChecker->hasPermission('users')) {
                 Response::redirect('index.php');
             } else {

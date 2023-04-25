@@ -1,6 +1,5 @@
 <?php
 
-
 class MenuTest extends \PHPUnit\Framework\TestCase {
     public function testGetAllUsedMenus(): void {
         $menus = get_all_used_menus();

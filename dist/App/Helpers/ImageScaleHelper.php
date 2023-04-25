@@ -37,8 +37,6 @@ abstract class ImageScaleHelper extends Helper {
             }
         }
 
-
-
         return [$width, $height];
     }
 

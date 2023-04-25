@@ -157,7 +157,6 @@ if (
         $default_language = Settings::get('default_language');
     }
 
-
     $languagesCount = count($languages);
 
     for ($j = 0; $j < $languagesCount; $j++) {

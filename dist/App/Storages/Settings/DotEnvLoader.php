@@ -41,7 +41,6 @@ class DotEnvLoader {
     public static function fromEnvironment(string $dir, string $environment): self {
         $file = static::envFilenameFromEnvironment($environment);
 
-
         static::checkExists($dir, $file);
 
         return new self($dir, $file);

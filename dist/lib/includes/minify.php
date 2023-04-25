@@ -71,7 +71,6 @@ function setSCSSImportPaths(?array $importPaths = null): void {
     \App\Storages\Vars::set('css_include_paths', $importPaths);
 }
 
-
 /**
  * Get SCSS import paths
  *

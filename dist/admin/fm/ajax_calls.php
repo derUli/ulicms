@@ -22,7 +22,6 @@ if (isset($_SESSION['RF']['language']) && is_file('lang/' . basename($_SESSION['
     exit;
 }
 
-
 //check $_GET['file']
 if (isset($_GET['file']) && ! checkRelativePath($_GET['file'])) {
     response(trans('wrong path') . AddErrorLocation())->send();
@@ -34,7 +33,6 @@ if (isset($_POST['path']) && ! checkRelativePath($_POST['path'])) {
     response(trans('wrong path') . AddErrorLocation())->send();
     exit;
 }
-
 
 $ftp = ftp_con($config);
 
@@ -225,7 +223,6 @@ if (isset($_GET['action'])) {
                 $ftp->putAll($base_folder, '/' . $config['ftp_base_folder'] . $config['upload_dir'] . fix_dirname($_POST['path']), FTP_BINARY);
                 deleteDir($base_folder);
             }
-
 
             break;
         case 'media_preview':
@@ -449,7 +446,6 @@ if (isset($_GET['action'])) {
                             (($perms & 0x0200) ? 't' : 'x') :
                             (($perms & 0x0200) ? 'T' : '-'));
             }
-
 
             $ret = '<div id="files_permission_start">
             <form id="chmod_form">

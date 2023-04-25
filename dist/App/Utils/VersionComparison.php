@@ -46,7 +46,6 @@ abstract class VersionComparison {
             return true;
         }
 
-
         if ($operator === '<' && $splitted1 < $splitted2) {
             return true;
         }

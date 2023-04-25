@@ -6,7 +6,6 @@ namespace App\Models\Content\Types;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-
 class DefaultContentTypes {
     private static $types = [];
 

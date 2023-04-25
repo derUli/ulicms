@@ -1,6 +1,5 @@
 <?php
 
-
 class RequestFunctionsTest extends \PHPUnit\Framework\TestCase {
     public function testGetActionIsSet(): void {
         $_REQUEST['action'] = 'pages';

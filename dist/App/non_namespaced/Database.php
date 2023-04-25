@@ -539,7 +539,6 @@ class Database {
             }
                 return $value;
 
-
     }
 
     // returns a list of all tables of a table

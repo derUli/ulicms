@@ -57,7 +57,6 @@ if (Request::getVar('run_cron')) {
     TextResult('Finished cron at ' . DateTimeHelper::timestampToFormattedDateTime(time()), HttpStatusCode::OK);
 }
 
-
 $slug = strtolower($_GET['slug'] ?? '');
 $slugParts = explode('.', $slug);
 

@@ -59,7 +59,6 @@ class DesignSettingsController extends \App\Controllers\Controller {
             Settings::set('default_font', $font);
         }
 
-
         Settings::set('font_size', $_REQUEST['font_size']);
         Settings::set('ckeditor_skin', $_REQUEST['ckeditor_skin']);
 
@@ -118,7 +117,6 @@ class DesignSettingsController extends \App\Controllers\Controller {
 
             $fonts[$name] = implode(', ', $fontStack);
         }
-
 
         $fonts = apply_filter($fonts, 'fonts_filter');
 

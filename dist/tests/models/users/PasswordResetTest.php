@@ -21,8 +21,6 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase {
         $this->cleanUp();
         unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI']);
 
-
-
     }
 
     public function testAddToken(): void {

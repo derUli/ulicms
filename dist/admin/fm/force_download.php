@@ -40,7 +40,6 @@ $file_name = $info['basename'];
 $file_ext = $info['extension'];
 $file_path = $path . $name;
 
-
 // make sure the file exists
 if ($ftp) {
     header('Content-Type: application/octet-stream');
@@ -56,7 +55,6 @@ if ($ftp) {
     $size = filesize($file_path);
     $file_name = rawurldecode($file_name);
 
-
     if (function_exists('mime_content_type')) {
         $mime_type = mime_content_type($file_path);
     } elseif (function_exists('finfo_open')) {
@@ -65,7 +63,6 @@ if ($ftp) {
     } else {
         $mime_type = get_file_mime_type($file_path);
     }
-
 
     @ob_end_clean();
     if (ini_get('zlib.output_compression')) {

@@ -16,6 +16,7 @@ Neue API-Methoden:
 * StringHelper::splitAndTrim()
 * BooleanHelper::bool2YesNo()
 * Database::tableName()
+* LoggerRegistry::getAll()
 
 API-Änderungen:
 * Controller in Namespace App\Controllers verschoben

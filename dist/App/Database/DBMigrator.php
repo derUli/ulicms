@@ -67,11 +67,9 @@ class DBMigrator {
 
                 $success = Database::multiQuery($sql, true);
 
-
                 while (Database::getConnection() && mysqli_more_results(Database::getConnection())) {
                     mysqli_next_result(Database::getConnection());
                 }
-
 
                 if ($success) {
                     $sql = 'INSERT INTO {prefix}dbtrack (component, name) '

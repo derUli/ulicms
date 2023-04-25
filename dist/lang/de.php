@@ -345,7 +345,6 @@ add_translation('DO_UPDATE', 'Update durchführen');
 add_translation('NONE', 'Keine');
 add_translation('MOBILE_DESIGN', 'Design für Mobilgeräte');
 
-
 add_translation('ACTION_NOT_FOUND', 'Die aufgerufene Aktion ist nicht vorhanden.');
 
 // Login

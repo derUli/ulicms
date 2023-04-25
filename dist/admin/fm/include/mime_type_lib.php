@@ -171,7 +171,6 @@ $mime_types = [
     'application/vnd.ms-powerpoint.slideshow.macroEnabled.12' => 'ppsm',
 ];
 
-
 if (! function_exists('get_extension_from_mime')) {
     function get_extension_from_mime($mime) {
         global $mime_types;
@@ -238,7 +237,6 @@ if (! function_exists('get_file_mime_type')) {
     }
 }
 
-
 /********************
  * The following code can be used to test the function.
  * First put a plain text file named "test.txt" and a
@@ -251,7 +249,6 @@ if (! function_exists('get_file_mime_type')) {
  * Run the code with this command:
  * php mime_type_lib.php
  ********************/
-
 
 /* REMOVE ME TO TEST
 echo get_file_mime_type( 'test.txt' ) . "\n";

@@ -327,7 +327,6 @@ if (isset($_GET['action'])) {
             $action = $_SESSION['RF']['clipboard_action'];
             $data = $_SESSION['RF']['clipboard'];
 
-
             if ($ftp) {
                 if ($_POST['path'] != '') {
                     $path .= DIRECTORY_SEPARATOR;

@@ -44,7 +44,6 @@ function getModulePath($module, $abspath = false): string {
         $module_folder = '../content/modules/';
     }
 
-
     return $module_folder . $module . '/';
 }
 

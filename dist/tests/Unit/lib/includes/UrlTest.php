@@ -52,8 +52,6 @@ class UrlTest extends \PHPUnit\Framework\TestCase {
 
          unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI']);
 
-
-
      }
 
     public function testGetCurrentURL(): void {
@@ -67,14 +65,10 @@ class UrlTest extends \PHPUnit\Framework\TestCase {
 
         unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI'], $_SERVER['HTTPS']);
 
-
-
-
     }
 
      public function testBuildSEOUrlWithoutAnythingNoPageSpecified(): void {
          unset($_GET['slug'], $_GET['html']);
-
 
          $this->assertEquals('./', buildSEOUrl());
      }

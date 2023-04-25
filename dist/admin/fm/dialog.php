@@ -113,7 +113,6 @@ if (($ftp && ! $ftp->isDir(
     $rfm_subfolder = '';
 }
 
-
 $cur_dir = $config['upload_dir'] . $rfm_subfolder . $subdir;
 $cur_dir_thumb = $config['thumbs_upload_dir'] . $rfm_subfolder . $subdir;
 $thumbs_path = $config['thumbs_base_path'] . $rfm_subfolder . $subdir;
@@ -886,7 +885,6 @@ function dateSort($x, $y) {
     return $greater ? 1 : -1;
 }
 
-
 function sizeSort($x, $y) {
     global $descending;
 
@@ -1258,7 +1256,6 @@ if ($config['show_language_selection']) { ?>
             echo 'list-view' . $view; ?>" id="main-item-container">
                 <?php
 
-
                 foreach ($files as $file_array) {
                     $file = $file_array['file'];
                     if ($file == '.' || (substr(
@@ -1434,7 +1431,6 @@ if ($config['show_language_selection']) { ?>
                     </li>
                     <?php
                 }
-
 
                 $files_prevent_duplicate = [];
                 foreach ($files

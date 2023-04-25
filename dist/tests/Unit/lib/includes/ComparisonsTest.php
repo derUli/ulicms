@@ -10,7 +10,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $_SERVER = [];
         $_REQUEST = [];
 
-
         $this->no_mobile_design_on_tablet = Settings::get('no_mobile_design_on_tablet');
         Settings::delete('no_mobile_design_on_tablet');
     }
@@ -23,7 +22,6 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
 
         Settings::set('maintenance_mode', '0');
         chdir(Path::resolve('ULICMS_ROOT'));
-
 
         if ($this->no_mobile_design_on_tablet) {
             Settings::set('no_mobile_design_on_tablet', 1);

@@ -37,13 +37,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
         unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['HTTPS'], $_SERVER['REQUEST_URI'], $_GET['slug'], $_SESSION['login_id'], $_SESSION['language']);
 
-
-
-
-
-
-
-
         App\Utils\Session\sessionDestroy();
 
         Database::deleteFrom('users', "username like 'testuser_%'");

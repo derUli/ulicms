@@ -1,17 +1,9 @@
 <?php
 
-
 class RequestTest extends \PHPUnit\Framework\TestCase {
     protected function tearDown(): void {
         require_once getLanguageFilePath('en');
         unset($_SERVER['HTTP_HOST'], $_SERVER['HTTP_REFERRER'], $_SERVER['HTTP_USER_AGENT'], $_SERVER['REQUEST_URI'], $_SERVER['SERVER_PORT'], $_SERVER['REMOTE_ADDR'], $_SERVER['REMOTE_ADDR'], $_SERVER['X_FORWARDED'], $_SERVER['HTTP_X_FORWARDED_HOST']);
-
-
-
-
-
-
-
 
     }
 

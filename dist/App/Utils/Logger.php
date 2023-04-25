@@ -6,7 +6,6 @@ namespace App\Utils;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-
 // Wrapper for KLogger
 class Logger {
     private $path;

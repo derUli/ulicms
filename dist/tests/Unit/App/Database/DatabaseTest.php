@@ -467,7 +467,6 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(Database::createSchema($schema));
         $this->assertTrue(Database::select($schema));
 
-
         $this->assertTrue(
             Database::select($_ENV['DB_DATABASE'])
         );
@@ -505,7 +504,6 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
 
     public function testConnectFails(): void {
         Database::close();
-
 
         $db_socket = isset($_ENV['DB_SOCKET']) ? (string)$_ENV['DB_SOCKET'] : ini_get('mysqli.default_socket');
         $db_port = (int)($_ENV['DB_PORT'] ?? ini_get('mysqli.default_port'));

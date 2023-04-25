@@ -803,7 +803,6 @@ class PageController extends \App\Controllers\Controller {
             $model->image_url = Request::getVar('image_url', null, 'str');
         }
 
-
         if ($model instanceof Article) {
             $model->article_author_name = Request::getVar(
                 'article_author_name'
@@ -819,7 +818,6 @@ class PageController extends \App\Controllers\Controller {
 
             $model->excerpt = Request::getVar('excerpt');
         }
-
 
         $permissionObjects = ['admins', 'group', 'owner', 'others'];
         foreach ($permissionObjects as $object) {

@@ -171,9 +171,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI'], $_SERVER['HTTPS']);
 
-
-
-
     }
 
     public function testGetBaseFolderUrlWithFilenameInUrlAndHttpsAndAlternativePort(): void {
@@ -186,9 +183,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('https://example.org:8080/foobar', getBaseFolderURL());
 
         unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI'], $_SERVER['HTTPS']);
-
-
-
 
     }
 

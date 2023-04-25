@@ -380,8 +380,6 @@ class UploadHandler {
                 $magicianObj->saveImage($targetFile);
             }
 
-
-
             $thumbResult = create_img($targetFile, $targetFileThumb, 122, 91);
 
             if ($thumbResult !== true) {

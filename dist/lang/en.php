@@ -363,7 +363,6 @@ add_translation('ULICMS_NEWS', 'News about UliCMS');
 add_translation('POSTED_ON_DATE', 'Posted on %s');
 add_translation('UNDER_MAINTENANCE', '<h1>Briefly unavailable for scheduled maintenance. Check back in a minute.</h1>');
 
-
 // Videos
 add_translation('VIDEOS', 'Videos');
 add_translation('UPLOAD_VIDEO', 'Upload a Video');

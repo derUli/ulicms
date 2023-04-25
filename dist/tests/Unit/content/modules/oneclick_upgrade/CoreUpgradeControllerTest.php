@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 class CoreUpgradeControllerTest extends \PHPUnit\Framework\TestCase {
     protected function tearDown(): void {
         unset($_SERVER['REQUEST_METHOD']);

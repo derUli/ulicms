@@ -156,7 +156,6 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
             $this->assertEquals(1, $element->active);
         }
 
-
         $disabled = ContentFactory::filterByEnabled($elements, false);
         $this->assertCount(2, $disabled);
 

@@ -51,7 +51,6 @@ class Form {
                     Template::getEscape($value) . '">';
         }
 
-
         return $html;
     }
 
@@ -91,7 +90,6 @@ class Form {
                 . '>';
         $html .= $buttonText . '</button>';
         $html .= '</form>';
-
 
         return $html;
     }

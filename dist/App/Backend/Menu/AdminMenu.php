@@ -6,7 +6,6 @@ namespace App\Backend\Menu;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-
 /**
  * This class renders the admin menu
  */

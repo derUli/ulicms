@@ -1,6 +1,5 @@
 <?php
 
-
 class PageFunctionsTest extends \PHPUnit\Framework\TestCase {
     public function testGetPageSlugByID(): void {
         $allPages = ContentFactory::getAll();

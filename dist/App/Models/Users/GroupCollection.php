@@ -41,7 +41,6 @@ class GroupCollection {
         // extract tag names
         preg_match_all('/<([a-z]+)>/i', $tagString, $tags);
 
-
         // If there are matches get it
         $tags = count($tags) > 1 ? $tags[1] : [];
 

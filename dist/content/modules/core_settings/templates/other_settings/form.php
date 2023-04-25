@@ -9,7 +9,6 @@ use App\Translations\JSTranslation;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();
 
-
 if (! $permissionChecker->hasPermission('other')) {
     noPerms();
 } else {

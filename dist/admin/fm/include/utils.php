@@ -81,7 +81,6 @@ if (! function_exists('trans')) {
     }
 }
 
-
 function checkRelativePathPartial($path) {
     return ! (str_contains($path, '../')
         || str_contains($path, './')
@@ -246,7 +245,6 @@ function duplicate_file($old_path, $name, $ftp = null, $config = null) {
     }
 }
 
-
 /**
  * Rename file
  *
@@ -278,11 +276,9 @@ function rename_file($old_path, $name, $ftp = null, $config = null) {
     }
 }
 
-
 function url_exists($url) {
     return ! (! $fp = curl_init($url));
 }
-
 
 function tempdir() {
     $tempfile = tempnam(sys_get_temp_dir(), '');
@@ -294,7 +290,6 @@ function tempdir() {
         return $tempfile;
     }
 }
-
 
 /**
  * Rename directory
@@ -550,7 +545,6 @@ function check_files_extensions_on_path($path, $ext) {
     }
 }
 
-
 /**
  * Check file extension
  *
@@ -575,7 +569,6 @@ function check_file_extension($extension, $config) {
 
     return $check;
 }
-
 
 /**
  * Get file extension present in PHAR file
@@ -611,7 +604,6 @@ function fix_get_params($str) {
     return strip_tags(preg_replace("/[^a-zA-Z0-9\.\[\]_| -]/", '', $str));
 }
 
-
 /**
  * Check extension
  *
@@ -624,9 +616,6 @@ function check_extension($extension, $config) {
     $extension = fix_strtolower($extension);
     return ! ((! $config['ext_blacklist'] && ! in_array($extension, $config['ext'])) || ($config['ext_blacklist'] && in_array($extension, $config['ext_blacklist'])));
 }
-
-
-
 
 /**
  * Sanitize filename
@@ -884,7 +873,6 @@ function new_thumbnails_creation($targetPath, $targetFile, $name, $current_path,
     return $all_ok;
 }
 
-
 /**
  * Get a remote file, using whichever mechanism is enabled
  *
@@ -1007,9 +995,6 @@ function rcopy($source, $destination, $is_rec = false) {
         }
     }
 }
-
-
-
 
 /**
  * recursivly renames everything

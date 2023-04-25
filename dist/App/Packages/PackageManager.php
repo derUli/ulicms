@@ -77,7 +77,6 @@ class PackageManager {
             $phar = new PharData($file);
             $phar->extractTo(ULICMS_ROOT, null, true);
 
-
             $postInstallScripts = [
                 Path::Resolve('ULICMS_ROOT/post-install.php'),
                 Path::Resolve('ULICMS_TMP/post-install.php')
