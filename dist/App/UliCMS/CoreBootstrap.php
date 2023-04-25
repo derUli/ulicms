@@ -18,10 +18,13 @@ use ModuleManager;
 use Nette\Utils\FileSystem;
 use Path;
 use Settings;
+use User;
 
 use function App\Utils\Session\sessionDestroy;
 use function App\Utils\Session\sessionName;
+use function App\Utils\Session\sessionStart;
 use function do_event;
+use function is_debug_mode;
 use function send_header;
 
 /**
@@ -37,11 +40,6 @@ class CoreBootstrap {
      */
     public function __construct(string $rootDir) {
         $this->rootDir = $rootDir;
-    }
-
-    public function init(): void {
-
-        // TOODO:
     }
 
     /**
@@ -92,13 +90,11 @@ class CoreBootstrap {
         $loader = DotEnvLoader::fromEnvironment($this->rootDir, get_environment());
         $loader->load();
 
-        if ($_ENV['DEBUG']) {
-            ini_set('display_errors', 1);
-            error_reporting(E_ALL);
-        } else {
-            ini_set('display_errors', 0);
-            error_reporting(0);
-        }
+        $displayErrors = (int)is_debug_mode();
+        $errorReporting = is_debug_mode() ? E_ALL : 0;
+
+        ini_set('display_errors', $displayErrors);
+        error_reporting($errorReporting);
 
         // Set default umask for PHP created files
         if(isset($_ENV['UMASK'])) {
@@ -225,7 +221,7 @@ class CoreBootstrap {
     }
 
     /**
-     * Handle session
+     * Handle user session
      *
      * @return void
      */
@@ -243,6 +239,19 @@ class CoreBootstrap {
             }
 
             $_SESSION['session_begin'] = time();
+        }
+
+        do_event('before_session_start');
+
+        // initialize session
+        sessionStart();
+
+        do_event('after_session_start');
+
+        // If is logged in update last action
+        if (is_logged_in()) {
+            $user = new User(get_user_id());
+            $user->setLastAction(time());
         }
     }
 
@@ -268,7 +277,5 @@ class CoreBootstrap {
                 }
             }
         );
-
-
     }
 }

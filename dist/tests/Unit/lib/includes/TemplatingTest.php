@@ -25,7 +25,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         $_SERVER['SERVER_PORT'] = '80';
         $_SERVER['HTTP_HOST'] = 'example.org';
         $_SERVER['REQUEST_URI'] = '/foobar/foo.html';
-        App\Utils\Session\sessionStart();
     }
 
     protected function tearDown(): void {

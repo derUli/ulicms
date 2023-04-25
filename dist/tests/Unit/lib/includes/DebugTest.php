@@ -14,4 +14,8 @@ class DebugTest extends \PHPUnit\Framework\TestCase {
             $output
         );
     }
+
+    public function testIsDebugMode(): void {
+        $this->assertIsBool(is_debug_mode());
+    }
 }

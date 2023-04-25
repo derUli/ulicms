@@ -6,10 +6,6 @@ require_once '../init.php';
 use App\Backend\BackendPageRenderer;
 use App\Translations\Translation;
 
-App\Utils\Session\sessionStart();
-
-do_event('after_session_start');
-
 do_event('before_set_language_by_domain');
 setLanguageByDomain();
 do_event('after_set_language_by_domain');
@@ -35,12 +31,6 @@ if (is_logged_in() && Request::isPost() && ! check_csrf_token()) {
 do_event('before_set_locale_by_language');
 setLocaleByLanguage();
 do_event('after_set_locale_by_language');
-
-// If is logged in update last action
-if (is_logged_in()) {
-    $user = new User(get_user_id());
-    $user->setLastAction(time());
-}
 
 send_header('Content-Type: text/html; charset=UTF-8');
 

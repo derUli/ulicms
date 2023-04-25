@@ -10,13 +10,6 @@ use App\Storages\Vars;
 use App\Translations\Translation;
 use App\Utils\CacheUtil;
 
-do_event('before_session_start');
-
-// initialize session
-App\Utils\Session\sessionStart();
-
-do_event('after_session_start');
-
 setLanguageByDomain();
 
 $languages = getAllLanguages();

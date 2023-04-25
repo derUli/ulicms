@@ -30,3 +30,12 @@ function exception_handler(Throwable $exception): void {
 
     esc("{$message}\n");
 }
+
+/**
+ * Check if debug mode is enabled
+ *
+ * @return bool
+ */
+function is_debug_mode(): bool {
+    return isset($_ENV['DEBUG']) && $_ENV['DEBUG'];
+}
