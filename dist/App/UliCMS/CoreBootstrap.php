@@ -256,6 +256,29 @@ class CoreBootstrap {
     }
 
     /**
+     * Should enforce https:// URLs
+     *
+     * @return bool
+     */
+    public function shouldRedirectToSSL(): bool {
+        return Settings::get('enforce_https') !== null;
+    }
+
+    /**
+     * Do redirect to https://
+     *
+     * @return void
+     */
+    public function enforceSSL(): void {
+        if(! is_ssl()) {
+            return;
+        }
+
+        send_header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+        exit();
+    }
+
+    /**
      * Register shutdown function
      *
      * @return void

@@ -289,7 +289,9 @@ $config
         'anonymous_classes_opening_brace' => 'same_line',
         'allow_single_line_empty_anonymous_classes' => true,
         'allow_single_line_anonymous_functions' => true
-        ]
+    ],
+    // Removes extra blank lines and/or blank lines following configuration.
+    'no_extra_blank_lines' => ['tokens' => ['extra']]
     ]);
 
 return $config->setFinder(

@@ -15,6 +15,10 @@ class LoggerRegistry {
         self::$loggers[$name] = $logger;
     }
 
+    public static function getAll(): array {
+        return self::$loggers;
+    }
+
     public static function get(string $name): ?Logger {
         return (isset(self::$loggers[$name])) ? self::$loggers[$name] : null;
     }

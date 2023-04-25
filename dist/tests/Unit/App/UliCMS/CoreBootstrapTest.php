@@ -1,7 +1,9 @@
 <?php
 
+use App\Registries\LoggerRegistry;
 use App\Storages\Vars;
 use App\UliCMS\CoreBootstrap;
+use App\Utils\Logger;
 use PHPUnit\Framework\TestCase;
 
 class CoreBootstraptest extends TestCase {
@@ -43,5 +45,24 @@ class CoreBootstraptest extends TestCase {
 
         $this->assertIsInt(umask());
         $this->assertIsBool(is_debug_mode());
+    }
+
+    public function testShouldRedirectToSSL(): void {
+        $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
+
+        $this->assertFalse($coreBootstrap->shouldRedirectToSSL());
+    }
+
+    public function testInitLoggers(): void {
+        $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
+        $coreBootstrap->initLoggers();
+
+        $loggers = LoggerRegistry::getAll();
+
+        $this->assertIsArray($loggers);
+
+        foreach($loggers as $logger) {
+            $this->assertInstanceOf(Logger::class, $logger);
+        }
     }
 }

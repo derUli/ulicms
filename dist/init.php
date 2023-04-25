@@ -105,7 +105,7 @@ if (! $select) {
     throw new SqlException('<h1>Database ' . $_ENV['DB_DATABASE'] . ' doesn\'t exist.</h1>');
 }
 
-// Preload all settings
+// Preload all settings for performance reasons
 Settings::getAll();
 
 // Run this code only after first call after update
@@ -128,12 +128,9 @@ define('DEFAULT_CONTENT_TYPE', $_ENV['DEFAULT_CONTENT_TYPE']);
 
 $enforce_https = Settings::get('enforce_https');
 
-if (! is_ssl() && $enforce_https) {
-    send_header('Location: https://' . $_SERVER['HTTP_HOST'] .
-            $_SERVER['REQUEST_URI']);
-    exit();
+if ($coreBootstrap->shouldRedirectToSSL()) {
+    $coreBootstrap->enforceSSL();
 }
-
 
 $moduleManager = new ModuleManager();
 Vars::set('disabledModules', $moduleManager->getDisabledModuleNames());
