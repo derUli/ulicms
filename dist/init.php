@@ -1,11 +1,11 @@
 <?php
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 // use this constant at the end
 // of the page load procedure to measure site performance
 define('START_TIME', microtime(true));
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 if (! defined('CORE_COMPONENT')) {
     throw new Exception('Core Component is not defined');
@@ -42,10 +42,9 @@ use App\Registries\LoggerRegistry;
 use App\Registries\ModelRegistry;
 use App\Storages\Settings\DotEnvLoader;
 use App\Storages\Vars;
+use App\UliCMS\CoreBootstrap;
 use App\Utils\Logger;
 use Nette\Utils\FileSystem;
-
-// TODO: refactor Bootstrap to a new UliCMSBoostrap Class which is splitted into methods
 
 // load composer packages
 $composerAutoloadFile = ULICMS_ROOT . '/vendor/autoload.php';
@@ -56,23 +55,20 @@ if (is_file($composerAutoloadFile)) {
     exit('Could not find autoloader. Run \'composer install\'.\n');
 }
 
-Vars::set('http_headers', []);
+if (! is_cli()) {
+    set_exception_handler('exception_handler');
+}
 
-$oldConfigFile = ULICMS_ROOT . '/CMSConfig.php';
-$newConfigFile = DotEnvLoader::envFilenameFromEnvironment(get_environment());
-$installerFile = ULICMS_ROOT . '/installer/index.php';
+$coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
+$coreBootstrap->initStorages();
 
 // If there is no new or old config redirect to installer
-if(! is_file($oldConfigFile) && ! is_file($newConfigFile) && is_file($installerFile)) {
-    Response::redirect('installer');
+if(! $coreBootstrap->checkConfigExists() && $coreBootstrap->getInstallerUrl()) {
+    Response::redirect($coreBootstrap->getInstallerUrl());
 }
 
 $loader = DotEnvLoader::fromEnvironment(ULICMS_ROOT, get_environment());
 $loader->load();
-
-if (! is_cli()) {
-    set_exception_handler('exception_handler');
-}
 
 // Set default umask for PHP created files
 if(isset($_ENV['UMASK'])) {
