@@ -121,7 +121,7 @@ def main():
     os.chdir(main_dir)
 
     # Remove all non dev composer packages
-    os.system('composer install --no-dev')
+    os.system('composer install --no-dev --prefer-dist  --optimize-autoloader')
 
     # Remove all non dev npm packages
     os.system('npm install --omit=dev')    
