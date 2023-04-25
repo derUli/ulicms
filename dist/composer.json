@@ -35,7 +35,7 @@
         "ext-mbstring": "*",
         "ext-mysqli": "*",
         "ext-openssl": "*",
-        "ext-libxml": "*",
+        "ext-xml": "*",
         "phpfastcache/phpfastcache": "*",
         "phpgangsta/googleauthenticator": "dev-master",
         "katzgrau/klogger": "dev-master",
