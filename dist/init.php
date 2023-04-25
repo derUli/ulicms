@@ -113,43 +113,15 @@ if($coreBootstrap->isFreshDeploy()) {
     $coreBootstrap->postDeployUpdate();
 }
 
+$coreBootstrap->registerShutdownFunction();
 $coreBootstrap->initLocale();
+$coreBootstrap->handleSession();
 
-App\Utils\Session\sessionName(Settings::get('session_name'));
 define('CACHE_PERIOD', (int)Settings::get('cache_period'));
-date_default_timezone_set(Settings::get('timezone'));
 
 if (isset($_GET['output_stylesheets'])) {
     getCombinedStylesheets();
 }
-
-// Session abgelaufen
-if (isset($_SESSION['session_begin'])) {
-    $session_timeout = 60 * Settings::get('session_timeout');
-    if (time() - $_SESSION['session_begin'] > $session_timeout) {
-        App\Utils\Session\sessionDestroy();
-        send_header('Location: ./');
-        exit();
-    }
-        $_SESSION['session_begin'] = time();
-}
-
-register_shutdown_function(
-    static function(): void {
-        do_event('shutdown');
-
-        $dbmigratorDropDatabaseOnShutdown = isset($_ENV['DBMIGRATOR_DROP_DATABASE_ON_SHUTDOWN']) && $_ENV['DBMIGRATOR_DROP_DATABASE_ON_SHUTDOWN'];
-
-        if ($dbmigratorDropDatabaseOnShutdown) {
-            if (is_cli()) {
-                Database::setEchoQueries(true);
-            }
-
-            Database::dropSchema($_ENV['DB_DATABASE']);
-            Database::setEchoQueries(false);
-        }
-    }
-);
 
 define('DEFAULT_MENU', $_ENV['DEFAULT_MENU']);
 define('DEFAULT_CONTENT_TYPE', $_ENV['DEFAULT_CONTENT_TYPE']);

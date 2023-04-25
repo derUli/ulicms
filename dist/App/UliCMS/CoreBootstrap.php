@@ -13,10 +13,16 @@ use App\Registries\LoggerRegistry;
 use App\Storages\Settings\DotEnvLoader;
 use App\Storages\Vars;
 use App\Utils\Logger;
+use Database;
 use ModuleManager;
 use Nette\Utils\FileSystem;
 use Path;
 use Settings;
+
+use function App\Utils\Session\sessionDestroy;
+use function App\Utils\Session\sessionName;
+use function do_event;
+use function send_header;
 
 /**
  * This classes initialized UliCMS Core
@@ -214,6 +220,55 @@ class CoreBootstrap {
             array_unshift($locale, LC_ALL);
             @call_user_func_array('setlocale', $locale);
         }
+
+        date_default_timezone_set(Settings::get('timezone'));
+    }
+
+    /**
+     * Handle session
+     *
+     * @return void
+     */
+    public function handleSession(): void {
+        sessionName(Settings::get('session_name'));
+
+        // Session abgelaufen
+        if (isset($_SESSION['session_begin'])) {
+            $session_timeout = 60 * Settings::get('session_timeout');
+
+            if (time() - $_SESSION['session_begin'] > $session_timeout) {
+                sessionDestroy();
+                send_header('Location: ./');
+                exit();
+            }
+
+            $_SESSION['session_begin'] = time();
+        }
+    }
+
+    /**
+     * Register shutdown function
+     *
+     * @return void
+     */
+    public function registerShutdownFunction(): void {
+        register_shutdown_function(
+            static function(): void {
+                do_event('shutdown');
+
+                $dbmigratorDropDatabaseOnShutdown = isset($_ENV['DBMIGRATOR_DROP_DATABASE_ON_SHUTDOWN']) && $_ENV['DBMIGRATOR_DROP_DATABASE_ON_SHUTDOWN'];
+
+                if ($dbmigratorDropDatabaseOnShutdown) {
+                    if (is_cli()) {
+                        Database::setEchoQueries(true);
+                    }
+
+                    Database::dropSchema($_ENV['DB_DATABASE']);
+                    Database::setEchoQueries(false);
+                }
+            }
+        );
+
 
     }
 }
