@@ -30,21 +30,15 @@ define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
 define('ULICMS_CACHE_BASE', ULICMS_CONTENT . '/cache');
 define('ULICMS_CACHE', ULICMS_CACHE_BASE . '/legacy');
 
-use App\Backend\UliCMSVersion;
-use App\Constants\DateTimeConstants;
 use App\Exceptions\ConnectionFailedException;
 use App\Exceptions\SqlException;
 use App\Helpers\StringHelper;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
 use App\Registries\HelperRegistry;
-use App\Registries\LoggerRegistry;
 use App\Registries\ModelRegistry;
-use App\Storages\Settings\DotEnvLoader;
 use App\Storages\Vars;
 use App\UliCMS\CoreBootstrap;
-use App\Utils\Logger;
-use Nette\Utils\FileSystem;
 
 // load composer packages
 $composerAutoloadFile = ULICMS_ROOT . '/vendor/autoload.php';
@@ -68,61 +62,8 @@ if(! $coreBootstrap->checkConfigExists() && $coreBootstrap->getInstallerUrl()) {
 }
 
 $coreBootstrap->loadEnvFile();
-
-// Create required directories
-$createDirectories = [
-    ULICMS_TMP,
-    ULICMS_CACHE_BASE,
-    ULICMS_CACHE,
-    ULICMS_LOG,
-    ULICMS_GENERATED_PUBLIC,
-    ULICMS_GENERATED_PRIVATE,
-];
-
-foreach($createDirectories as $dir) {
-    if(! is_dir($dir)) {
-        FileSystem::createDir($dir);
-    }
-}
-
-$htaccessForLogFolderSource = ULICMS_ROOT . '/lib/htaccess-deny-all.txt';
-
-// Put .htaccess deny from all to this directories
-$secureDirectories =
-[
-    ULICMS_TMP,
-    ULICMS_LOG,
-    ULICMS_GENERATED_PRIVATE
-];
-
-foreach($secureDirectories as $dir) {
-    $htaccessFile = "{$dir}/.htaccess";
-
-    if (! is_file($htaccessFile)) {
-        FileSystem::copy($htaccessForLogFolderSource, $htaccessFile);
-    }
-}
-
-if (isset($_ENV['EXCEPTION_LOGGING']) && $_ENV['EXCEPTION_LOGGING']) {
-    LoggerRegistry::register(
-        'exception_log',
-        new Logger(Path::resolve('ULICMS_LOG/exception_log'))
-    );
-}
-
-if (isset($_ENV['QUERY_LOGGING']) && $_ENV['QUERY_LOGGING']) {
-    LoggerRegistry::register(
-        'sql_log',
-        new Logger(Path::resolve('ULICMS_LOG/sql_log'))
-    );
-}
-
-if (isset($_ENV['PHPMAILER_LOGGING']) && $_ENV['PHPMAILER_LOGGING']) {
-    LoggerRegistry::register(
-        'phpmailer_log',
-        new Logger(Path::resolve('ULICMS_LOG/phpmailer_log'))
-    );
-}
+$coreBootstrap->createDirectories();
+$coreBootstrap->initLoggers();
 
 $db_socket = isset($_ENV['DB_SOCKET']) ? (string)$_ENV['DB_SOCKET'] : ini_get('mysqli.default_socket');
 $db_port = (int)($_ENV['DB_PORT'] ?? ini_get('mysqli.default_port'));
@@ -141,7 +82,6 @@ if (! $connection) {
     throw new ConnectionFailedException('Can\'t connect to Database.');
 }
 
-$autoMigrate = isset($_ENV['DBMIGRATOR_AUTO_MIGRATE']) && $_ENV['DBMIGRATOR_AUTO_MIGRATE'];
 $autoMigrate = isset($_ENV['DBMIGRATOR_AUTO_MIGRATE']) && $_ENV['DBMIGRATOR_AUTO_MIGRATE'];
 $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? StringHelper::splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
 $additionalSql = array_map('trim', $additionalSql);
@@ -168,51 +108,30 @@ if (! $select) {
 // Preload all settings
 Settings::getAll();
 
-$initialized = Settings::get('initialized');
-
-$moduleManager = new ModuleManager();
-
-$version = new UliCMSVersion();
-$buildTimestamp = (string)$version->getBuildTimestamp();
-
 // Run this code only after first call after update
-if($initialized !== $buildTimestamp) {
-    Settings::set('initialized', $buildTimestamp);
-    $moduleManager->sync();
-
-    Settings::register('session_name', uniqid() . '_SESSION');
-    Settings::register('cache_period', (string)DateTimeConstants::ONE_DAY_IN_SECONDS);
+if($coreBootstrap->isFreshDeploy()) {
+    $coreBootstrap->postDeployUpdate();
 }
 
+$coreBootstrap->initLocale();
+
 App\Utils\Session\sessionName(Settings::get('session_name'));
-
 define('CACHE_PERIOD', (int)Settings::get('cache_period'));
-
 date_default_timezone_set(Settings::get('timezone'));
 
 if (isset($_GET['output_stylesheets'])) {
     getCombinedStylesheets();
 }
 
-$locale = Settings::get('locale');
-
-if ($locale) {
-    $locale = StringHelper::splitAndTrim($locale);
-    array_unshift($locale, LC_ALL);
-    @call_user_func_array('setlocale', $locale);
-}
-
-$session_timeout = 60 * Settings::get('session_timeout');
-
 // Session abgelaufen
 if (isset($_SESSION['session_begin'])) {
+    $session_timeout = 60 * Settings::get('session_timeout');
     if (time() - $_SESSION['session_begin'] > $session_timeout) {
         App\Utils\Session\sessionDestroy();
         send_header('Location: ./');
         exit();
     }
         $_SESSION['session_begin'] = time();
-
 }
 
 register_shutdown_function(
@@ -243,10 +162,11 @@ if (! is_ssl() && $enforce_https) {
     exit();
 }
 
+
+$moduleManager = new ModuleManager();
 Vars::set('disabledModules', $moduleManager->getDisabledModuleNames());
 
 ModelRegistry::loadModuleModels();
-
 TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
