@@ -1,8 +1,24 @@
 <?php
 
+use App\Helpers\TestHelper;
 use Nette\Utils\Finder;
 
 class SecurityTest extends \PHPUnit\Framework\TestCase {
+    /**
+     * @large
+     */
+    public function testPhpSyntaxCheck(): void {
+        foreach(Finder::findFiles(['*.php'])->from('.') as $name => $file) {
+            $path = $file->getRealPath();
+
+            if(str_contains($path, 'vendor')) {
+                continue;
+            }
+
+            $this->assertTrue(TestHelper::checkPhpSyntax($path), "{$path} has invalid syntax");
+        }
+    }
+
     public function testPhpFilesProtected(): void {
         $startTime = time();
 

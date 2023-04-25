@@ -8,6 +8,7 @@ use App\Constants\DefaultValues;
 use App\Database\DBMigrator;
 use App\Helpers\DateTimeHelper;
 use App\Helpers\StringHelper;
+use App\Helpers\TestHelper;
 use App\Packages\PackageManager;
 use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
@@ -695,6 +696,24 @@ class RoboFile extends Tasks {
     public function buildPhpCsFixer(): void {
        system('vendor/bin/robo build:php-cs-fixer');
     }
+
+    /**
+     * Check all php files for syntax errors
+     *
+     * @return void
+     */
+    public function buildCheckPhpSyntax(): void {
+        $this->initUliCMS();
+
+        foreach(Finder::findFiles(['*.php'])->from('.') as $name => $file) {
+            $path = $file->getRealPath();
+
+            if(! TestHelper::checkPhpSyntax($path)) {
+                $this->writeln("{$path} has invalid syntax");
+            }
+        }
+
+     }
 
     /**
      * Copy changelog to core_info module

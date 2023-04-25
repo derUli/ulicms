@@ -46,4 +46,17 @@ abstract class TestHelper extends Helper {
     public static function isWindowsServer(): bool {
         return defined('PHP_WINDOWS_VERSION_MAJOR');
     }
+
+    /**
+     * Check if a PHP file has valid syntax
+     *
+     * @param string $file
+     *
+     * @return bool
+     */
+    public static function checkPhpSyntax(string $file): bool {
+
+        exec("php -l \"{$file}\"", result_code: $resultCode);
+        return $resultCode === 0;
+    }
 }

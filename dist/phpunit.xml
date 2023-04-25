@@ -16,7 +16,7 @@
       timeoutForSmallTests="5"
       timeoutForMediumTests="10"
       beStrictAboutOutputDuringTests="true"
-      timeoutForLargeTests="30"
+      timeoutForLargeTests="60"
       cacheDirectory=".phpunit.cache"
       backupStaticProperties="false"
       requireCoverageMetadata="false"
