@@ -67,21 +67,7 @@ if(! $coreBootstrap->checkConfigExists() && $coreBootstrap->getInstallerUrl()) {
     Response::redirect($coreBootstrap->getInstallerUrl());
 }
 
-$loader = DotEnvLoader::fromEnvironment(ULICMS_ROOT, get_environment());
-$loader->load();
-
-// Set default umask for PHP created files
-if(isset($_ENV['UMASK'])) {
-    umask((string)$_ENV['UMASK']);
-}
-
-if ($_ENV['DEBUG']) {
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-} else {
-    ini_set('display_errors', 0);
-    error_reporting(0);
-}
+$coreBootstrap->loadEnvFile();
 
 // Create required directories
 $createDirectories = [
