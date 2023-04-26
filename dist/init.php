@@ -1,5 +1,13 @@
 <?php
 
+use App\Exceptions\SqlException;
+use App\Helpers\StringHelper;
+use App\Models\Content\TypeMapper;
+use App\Models\Content\Types\DefaultContentTypes;
+use App\Registries\HelperRegistry;
+use App\Registries\ModelRegistry;
+use App\UliCMS\CoreBootstrap;
+
 // use this constant at the end
 // of the page load procedure to measure site performance
 define('START_TIME', microtime(true));
@@ -30,16 +38,6 @@ define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
 define('ULICMS_CACHE_BASE', ULICMS_CONTENT . '/cache');
 define('ULICMS_CACHE', ULICMS_CACHE_BASE . '/legacy');
 
-use App\Exceptions\ConnectionFailedException;
-use App\Exceptions\SqlException;
-use App\Helpers\StringHelper;
-use App\Models\Content\TypeMapper;
-use App\Models\Content\Types\DefaultContentTypes;
-use App\Registries\HelperRegistry;
-use App\Registries\ModelRegistry;
-use App\Storages\Vars;
-use App\UliCMS\CoreBootstrap;
-
 // load composer packages
 $composerAutoloadFile = ULICMS_ROOT . '/vendor/autoload.php';
 
@@ -49,38 +47,19 @@ if (is_file($composerAutoloadFile)) {
     exit('Could not find autoloader. Run \'composer install\'.\n');
 }
 
-if (! is_cli()) {
-    set_exception_handler('exception_handler');
-}
-
 $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
-$coreBootstrap->initStorages();
+$coreBootstrap->setExceptionHandler();
 
 // If there is no new or old config redirect to installer
 if(! $coreBootstrap->checkConfigExists() && $coreBootstrap->getInstallerUrl()) {
     Response::redirect($coreBootstrap->getInstallerUrl());
 }
 
+$coreBootstrap->initStorages();
 $coreBootstrap->loadEnvFile();
 $coreBootstrap->createDirectories();
 $coreBootstrap->initLoggers();
-
-$db_socket = isset($_ENV['DB_SOCKET']) ? (string)$_ENV['DB_SOCKET'] : ini_get('mysqli.default_socket');
-$db_port = (int)($_ENV['DB_PORT'] ?? ini_get('mysqli.default_port'));
-$db_strict_mode = isset($_ENV['DB_STRICT_MODE']) && $_ENV['DB_STRICT_MODE'];
-
-@$connection = Database::connect(
-    $_ENV['DB_SERVER'],
-    $_ENV['DB_USER'],
-    $_ENV['DB_PASSWORD'],
-    $db_port,
-    $db_socket,
-    $db_strict_mode
-);
-
-if (! $connection) {
-    throw new ConnectionFailedException('Can\'t connect to Database.');
-}
+$coreBootstrap->connectDatabase();
 
 $autoMigrate = isset($_ENV['DBMIGRATOR_AUTO_MIGRATE']) && $_ENV['DBMIGRATOR_AUTO_MIGRATE'];
 $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? StringHelper::splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
@@ -119,16 +98,10 @@ $coreBootstrap->handleSession();
 
 define('CACHE_PERIOD', (int)Settings::get('cache_period'));
 
-if (isset($_GET['output_stylesheets'])) {
-    getCombinedStylesheets();
-}
-
+// If setting enforce_https is set redirect http:// to https:///
 if ($coreBootstrap->shouldRedirectToSSL()) {
     $coreBootstrap->enforceSSL();
 }
-
-$moduleManager = new ModuleManager();
-Vars::set('disabledModules', $moduleManager->getDisabledModuleNames());
 
 ModelRegistry::loadModuleModels();
 TypeMapper::loadMapping();
