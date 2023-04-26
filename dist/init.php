@@ -26,17 +26,6 @@ const CORE_COMPONENT_PHPUNIT = 'phpunit';
 
 // Define path constants
 define('ULICMS_ROOT', dirname(__FILE__));
-define('ULICMS_CONTENT', ULICMS_ROOT . '/content');
-define('ULICMS_TMP', ULICMS_CONTENT . '/tmp');
-define('ULICMS_LOG', ULICMS_CONTENT . '/log');
-define('ULICMS_GENERATED_PUBLIC', ULICMS_CONTENT . '/generated/public');
-define('ULICMS_GENERATED_PRIVATE', ULICMS_CONTENT . '/generated/private');
-/**
- * @deprecated since UliCMS 2023.3
- */
-define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
-define('ULICMS_CACHE_BASE', ULICMS_CONTENT . '/cache');
-define('ULICMS_CACHE', ULICMS_CACHE_BASE . '/legacy');
 
 // load composer packages
 $composerAutoloadFile = ULICMS_ROOT . '/vendor/autoload.php';
@@ -49,6 +38,7 @@ if (is_file($composerAutoloadFile)) {
 
 $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
 $coreBootstrap->setExceptionHandler();
+$coreBootstrap->definePathConstants();
 
 // If there is no new or old config redirect to installer
 if(! $coreBootstrap->checkConfigExists() && $coreBootstrap->getInstallerUrl()) {

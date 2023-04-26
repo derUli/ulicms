@@ -47,4 +47,17 @@ abstract class DateTimeHelper {
 
         return $formatter->format($timestamp) ? $formatter->format($timestamp) : null;
     }
+
+    /**
+     * Check if a string is a valid timezone
+     *
+     * timezone_identifiers_list() requires PHP >= 5.2
+     *
+     * @param string $timezone
+     *
+     * @return bool
+     */
+    public static function isValidTimezone($timezone) {
+        return in_array($timezone, timezone_identifiers_list());
+    }
 }

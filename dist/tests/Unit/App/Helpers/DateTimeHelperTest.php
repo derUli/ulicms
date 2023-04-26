@@ -25,4 +25,12 @@ class DateTimeHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringStartsWith('22.12.2009', $datetimeString);
         $this->assertStringEndsWith(':32:11', $datetimeString);
     }
+
+    public function testIsValidTimezoneReturnsTrue(): void {
+        $this->assertTrue(DateTimeHelper::isValidTimezone('Europe/London'));
+    }
+
+    public function testIsValidTimezoneReturnsFalse(): void {
+        $this->assertFalse(DateTimeHelper::isValidTimezone('Asia/Lampukistan'));
+    }
 }

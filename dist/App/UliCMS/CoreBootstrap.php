@@ -47,6 +47,25 @@ class CoreBootstrap {
     }
 
     /**
+     * Define other path constants
+     *
+     * @return void
+     */
+    public function definePathConstants(): void {
+        defined('ULICMS_CONTENT') || define('ULICMS_CONTENT', "{$this->rootDir}/content");
+        defined('ULICMS_TMP') || define('ULICMS_TMP', ULICMS_CONTENT . '/tmp');
+        defined('ULICMS_LOG') || define('ULICMS_LOG', ULICMS_CONTENT . '/log');
+        defined('ULICMS_GENERATED_PUBLIC') || define('ULICMS_GENERATED_PUBLIC', ULICMS_CONTENT . '/generated/public');
+        defined('ULICMS_GENERATED_PRIVATE') || define('ULICMS_GENERATED_PRIVATE', ULICMS_CONTENT . '/generated/private');
+        /**
+         * @deprecated since UliCMS 2023.3
+         */
+        defined('ULICMS_CONFIGURATIONS') || define('ULICMS_CONFIGURATIONS', ULICMS_CONTENT . '/configurations');
+        defined('ULICMS_CACHE_BASE') || define('ULICMS_CACHE_BASE', ULICMS_CONTENT . '/cache');
+        defined('ULICMS_CACHE') || define('ULICMS_CACHE', ULICMS_CACHE_BASE . '/legacy');
+    }
+
+    /**
      * Set exception handler
      *
      * @return callable
@@ -323,6 +342,7 @@ class CoreBootstrap {
      * Connect to database
      *
      * @throws ConnectionFailedException
+     *
      * @return ?mysqli
      */
     public function connectDatabase(): ?mysqli {
@@ -346,6 +366,6 @@ class CoreBootstrap {
             throw new ConnectionFailedException('Can\'t connect to Database.');
         }
 
-        return @$connection;
+        return $connection;
     }
 }

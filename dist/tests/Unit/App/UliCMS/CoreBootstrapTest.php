@@ -1,12 +1,22 @@
 <?php
 
+use App\Helpers\DateTimeHelper;
 use App\Registries\LoggerRegistry;
 use App\Storages\Vars;
 use App\UliCMS\CoreBootstrap;
 use App\Utils\Logger;
+use Nette\Utils\FileSystem;
 use PHPUnit\Framework\TestCase;
 
 class CoreBootstraptest extends TestCase {
+    protected function setUp(): void {
+        FileSystem::delete(ULICMS_TMP);
+    }
+
+    protected function tearDown(): void {
+        FileSystem::createDir(ULICMS_TMP);
+    }
+
     public function testCheckConfigExists(): void {
         $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
         $this->assertTrue($coreBootstrap->checkConfigExists());
@@ -64,5 +74,27 @@ class CoreBootstraptest extends TestCase {
         foreach($loggers as $logger) {
             $this->assertInstanceOf(Logger::class, $logger);
         }
+    }
+
+    public function testDefinePathConstants(): void {
+        $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
+        $coreBootstrap->definePathConstants();
+
+        $this->assertDirectoryExists(ULICMS_CONTENT);
+    }
+
+    public function testInitLocale(): void {
+        $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
+        $coreBootstrap->initLocale();
+
+        $this->assertTrue(DateTimeHelper::isValidTimezone(date_default_timezone_get()));
+    }
+
+    public function testCreateDirectories(): void {
+        $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
+        $coreBootstrap->createDirectories();
+
+        $this->assertDirectoryExists(ULICMS_TMP);
+        $this->assertFileExists(Path::resolve('ULICMS_GENERATED_PRIVATE/.htaccess'));
     }
 }
