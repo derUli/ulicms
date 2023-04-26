@@ -39,7 +39,7 @@ class Page extends AbstractContent {
 
     public $views = 0;
 
-    public $menu = DEFAULT_MENU;
+    public $menu;
 
     public $position = 0;
 
@@ -76,6 +76,8 @@ class Page extends AbstractContent {
     private $permissions;
 
     public function __construct($id = null) {
+        $this->menu = $_ENV['DEFAULT_MENU'];
+
         if ($this->custom_data === null) {
             $this->custom_data = [];
         }

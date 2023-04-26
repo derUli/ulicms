@@ -123,11 +123,6 @@ if (isset($_GET['output_stylesheets'])) {
     getCombinedStylesheets();
 }
 
-define('DEFAULT_MENU', $_ENV['DEFAULT_MENU']);
-define('DEFAULT_CONTENT_TYPE', $_ENV['DEFAULT_CONTENT_TYPE']);
-
-$enforce_https = Settings::get('enforce_https');
-
 if ($coreBootstrap->shouldRedirectToSSL()) {
     $coreBootstrap->enforceSSL();
 }

@@ -123,7 +123,7 @@ if (
                     <input type="radio" name="type" id="type_<?php echo $type; ?>"
                            value="<?php echo $type; ?>"
                            <?php
-                           if ($type == DEFAULT_CONTENT_TYPE) {
+                           if ($type == $_ENV['DEFAULT_CONTENT_TYPE']) {
                                echo 'checked';
                            }
                 ?>> 
@@ -185,7 +185,7 @@ if (
                 ?>
                             <option value="<?php echo $menu; ?>"
                             <?php
-                            if ($menu == DEFAULT_MENU) {
+                            if ($menu == $_ENV['DEFAULT_MENU']) {
                                 echo 'selected';
                             }
                 ?>>
