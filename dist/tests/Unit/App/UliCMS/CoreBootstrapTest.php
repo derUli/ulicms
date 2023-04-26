@@ -17,6 +17,12 @@ class CoreBootstraptest extends TestCase {
         FileSystem::createDir(ULICMS_TMP);
     }
 
+    public function testSetExceptionHandler() {
+        $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
+
+        $this->assertNull($coreBootstrap->setExceptionHandler());
+    }
+
     public function testCheckConfigExists(): void {
         $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
         $this->assertTrue($coreBootstrap->checkConfigExists());
