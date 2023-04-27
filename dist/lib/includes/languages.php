@@ -9,7 +9,8 @@ use App\Security\Permissions\PermissionChecker;
 use Negotiation\LanguageNegotiator;
 
 /**
- * Get all languages that have  content
+ * Get all languages that have content
+ *
  * @return array
  */
 function getAllUsedLanguages(): array {
@@ -25,8 +26,10 @@ function getAllUsedLanguages(): array {
 
 /**
  * Get prefered language based on Accept-Language http Header
+ *
  * @param array $priorities
  * @param string|null $http_accept_language
+ *
  * @return type
  */
 function get_prefered_language(
@@ -39,13 +42,20 @@ function get_prefered_language(
 
 /**
  * Get path to a UliCMS core language file
+ *
  * @param string $lang
+ *
  * @return string
  */
 function getLanguageFilePath(string $lang = 'de'): string {
     return ULICMS_ROOT . '/lang/' . $lang . '.php';
 }
 
+/**
+ * Get available backend languages
+ *
+ * @return string[]
+ */
 function getAvailableBackendLanguages(): array {
     $langdir = ULICMS_ROOT . '/lang/';
     $list = scandir($langdir);

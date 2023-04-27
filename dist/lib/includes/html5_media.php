@@ -9,6 +9,7 @@ use App\Models\Media\Video;
 
 /**
  * Replaces audio tags with rendered html5 audio elements
+ *
  * @param string $txt
  *
  * @return string
@@ -43,7 +44,9 @@ function replaceAudioTags(string $txt): string {
 
 /**
  * Replaces video tags with html5 video elements
+ *
  * @param string $txt
+ *
  * @return string
  */
 function replaceVideoTags(string $txt): string {
