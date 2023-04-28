@@ -6,6 +6,7 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 
 /**
  * Returns path to minified jQuery
+ *
  * @return string
  */
 function get_jquery_url(): string {

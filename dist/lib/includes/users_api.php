@@ -8,6 +8,7 @@ use App\Security\TwoFactorAuthentication;
 
 /**
  * Gets id and username of all users
+ *
  * @return array
  */
 function getUsers(): array {
@@ -23,6 +24,7 @@ function getUsers(): array {
 
 /**
  * Gets the usernames of all users whose last action was less than 5 minutes ago
+ *
  * @return array
  */
 function getUsersOnline(): array {
@@ -36,8 +38,10 @@ function getUsersOnline(): array {
 
 /**
  * Changes the password of a user
+ *
  * @param string $password
  * @param int|null $userId
+ *
  * @return bool
  */
 function changePassword(string $password, ?int $userId) {
@@ -66,7 +70,9 @@ function getUserByName(string $name): ?array {
 
 /**
  * Get a user by id
+ *
  * @param int $id
+ *
  * @return array|null
  */
 function getUserById(int $id): ?array {
@@ -80,6 +86,7 @@ function getUserById(int $id): ?array {
 
 /**
  * Gets the id of the currently logged in user or
+ *
  * @return int
  */
 function get_user_id(): ?int {
@@ -88,6 +95,7 @@ function get_user_id(): ?int {
 
 /**
  * Gets the primary group id of the currentlogy logged in user
+ *
  * @return int|null
  */
 function get_group_id(): ?int {
@@ -96,7 +104,9 @@ function get_group_id(): ?int {
 
 /**
  * Checks if a user with the given username exists
+ *
  * @param string $name
+ *
  * @return bool
  */
 function user_exists(string $name): bool {
@@ -107,8 +117,10 @@ function user_exists(string $name): bool {
 
 /**
  * Registers a session for the given user
+ *
  * @param array $user
  * @param bool $redirect
+ *
  * @return void
  */
 function register_session(array $user, bool $redirect = true): void {
@@ -117,9 +129,11 @@ function register_session(array $user, bool $redirect = true): void {
 }
 /**
  * Validates a user login
+ *
  * @param string $username
  * @param string $password
  * @param string|null $token
+ *
  * @return array|null
  */
 function validate_login(
@@ -173,6 +187,7 @@ function validate_login(
 
 /**
  * Checks if a user is logged in
+ *
  * @return bool
  */
 function is_logged_in(): bool {
@@ -181,6 +196,7 @@ function is_logged_in(): bool {
 
 /**
  * Gets the configured HTML editor for the currently logged in user or default
+ *
  * @return string
  */
 function get_html_editor(): string {

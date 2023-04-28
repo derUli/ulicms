@@ -44,11 +44,11 @@ def main():
     source_dir = os.path.dirname(__file__)
 
     ignore = [
-        '.gitignore'
+        '.gitignore',
         '*.py',
         '.env',
         '.env.foobar',
-        '.env.test'
+        '.env.test',
         '.git',
         '.gitignore',
         '.php-cs-fixer.cache',
@@ -80,10 +80,12 @@ def main():
     os.chdir('..')
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
+
     if args.delete and os.path.exists(target):
         print('Folder exists. Truncating.')
         shutil.rmtree(target)
     print('copying files')
+
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
     installer_aus_folder = os.path.join(target, 'dist', 'installer.aus')
     installer_folder = os.path.join(target, 'dist', 'installer')

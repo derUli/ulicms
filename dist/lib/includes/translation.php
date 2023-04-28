@@ -70,11 +70,3 @@ function register_translation(string $key, string $value): void {
 
     defined($key) || define($key, $value);
 }
-
-function getFrontendLanguage() {
-    $domainLanguage = get_domain() ?
-            getDomainByLanguage(get_domain()) : null;
-    $fallbackLanguage = $domainLanguage ?: Settings::get('language');
-
-    return $_SESSION['language'] ?? $fallbackLanguage;
-}

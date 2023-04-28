@@ -25,8 +25,6 @@ if (! isset($_SESSION['language'])) {
     $_SESSION['language'] = Settings::get('default_language');
 }
 
-setLocaleByLanguage();
-
 if (in_array($_SESSION['language'], $languages) && is_file(getLanguageFilePath($_SESSION['language']))) {
     require_once getLanguageFilePath($_SESSION['language']);
 } elseif (is_file(getLanguageFilePath('en'))) {

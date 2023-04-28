@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
-use App\Helpers\StringHelper;
 use App\Security\Permissions\PermissionChecker;
 use Negotiation\LanguageNegotiator;
 
@@ -142,24 +141,6 @@ function getLanguageNameByCode(string $code): string {
     return $retval;
 }
 
-function setLocaleByLanguage(): array {
-    $locale = [];
-
-    $var = (is_admin_dir() && isset($_SESSION['system_language'])) ?
-            'locale_' . $_SESSION['system_language'] :
-            'locale_' . getFrontendLanguage();
-
-    $localeSetting = Settings::get($var) ?: Settings::get('locale');
-
-    if ($localeSetting) {
-        $locale = StringHelper::splitAndTrim($localeSetting);
-        array_unshift($locale, LC_ALL);
-    }
-
-    @call_user_func_array('setlocale', $locale);
-    return $locale;
-}
-
 // Returns the language code of the current language
 // If $current is true returns language of the current page
 // else it returns $_SESSION['language'];
@@ -181,7 +162,14 @@ function getCurrentLanguage($current = false): string {
         return basename($_SESSION['language']);
     }
         return basename(Settings::get('default_language'));
+}
 
+function getFrontendLanguage() {
+    $domainLanguage = get_domain() ?
+            getDomainByLanguage(get_domain()) : null;
+    $fallbackLanguage = $domainLanguage ?: Settings::get('language');
+
+    return $_SESSION['language'] ?? $fallbackLanguage;
 }
 
 // Sprachcodes abfragen und als Array zurück geben

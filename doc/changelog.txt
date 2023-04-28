@@ -58,6 +58,7 @@ Entfernte API-Methoden:
 * db_query()
 * db_escape()
 * tbname()
+* setLocaleByLanguage()
 
 Entfernte Features:
 * Scroll To Top

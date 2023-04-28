@@ -245,14 +245,20 @@ class CoreBootstrap {
      * @return void
      */
     public function initLocale(): void {
-        $locale = Settings::get('locale');
+        $locale = [];
 
-        if ($locale) {
-            $locale = StringHelper::splitAndTrim($locale);
+        $var = (is_admin_dir() && isset($_SESSION['system_language'])) ?
+                'locale_' . $_SESSION['system_language'] :
+                'locale_' . getFrontendLanguage();
+
+        $localeSetting = Settings::get($var) ?: Settings::get('locale');
+
+        if ($localeSetting) {
+            $locale = StringHelper::splitAndTrim($localeSetting);
             array_unshift($locale, LC_ALL);
-            @call_user_func_array('setlocale', $locale);
         }
 
+        @call_user_func_array('setlocale', $locale);
         date_default_timezone_set(Settings::get('timezone'));
     }
 
