@@ -7,7 +7,7 @@ namespace App\UliCMS;
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Backend\UliCMSVersion;
-use App\Constants\DateTimeConstants;
+use App\Constants\DateTime;
 use App\Exceptions\ConnectionFailedException;
 use App\Exceptions\SqlException;
 use App\Helpers\StringHelper;
@@ -297,7 +297,7 @@ class CoreBootstrap {
         $moduleManager->sync();
 
         Settings::register('session_name', uniqid() . '_SESSION');
-        Settings::register('cache_period', (string)DateTimeConstants::ONE_DAY_IN_SECONDS);
+        Settings::register('cache_period', (string)DateTime::ONE_DAY_IN_SECONDS);
 
         $version = new UliCMSVersion();
         $buildTimestamp = (string)$version->getBuildTimestamp();

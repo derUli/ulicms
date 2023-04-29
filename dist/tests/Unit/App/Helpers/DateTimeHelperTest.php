@@ -1,6 +1,6 @@
 <?php
 
-use App\Constants\DateTimeConstants;
+use App\Constants\DateTime;
 use App\Helpers\DateTimeHelper;
 
 class DateTimeHelperTest extends \PHPUnit\Framework\TestCase {
@@ -17,7 +17,7 @@ class DateTimeHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testTimestampToFormattedDateTime(): void {
-        $fourtyYears = DateTimeConstants::ONE_DAY_IN_SECONDS * 365 * 40;
+        $fourtyYears = DateTime::ONE_DAY_IN_SECONDS * 365 * 40;
         $thirtyTwoMinutes = 60 * 32;
         $elevenSeconds = 11;
         $datetimeString = DateTimeHelper::timestampToFormattedDateTime($fourtyYears + $thirtyTwoMinutes + $elevenSeconds);
