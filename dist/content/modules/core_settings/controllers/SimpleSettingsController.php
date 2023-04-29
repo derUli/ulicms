@@ -4,19 +4,25 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+use App\Storages\Settings\MaintenanceMode;
 use App\Utils\CacheUtil;
 use jessedp\Timezones\Timezones;
 
 class SimpleSettingsController extends \App\Controllers\Controller {
     public function _savePost(): void {
+
         do_event('before_safe_simple_settings');
         Settings::set('homepage_owner', $_POST['homepage_owner']);
         Settings::set('language', $_POST['language']);
         Settings::set('visitors_can_register', (int)isset($_POST['visitors_can_register']));
-        Settings::set(
-            'maintenance_mode',
-            (int)isset($_POST['maintenance_mode'])
-        );
+
+        // Maintenance Mode
+        if(isset($_POST['maintenance_mode'])) {
+            MaintenanceMode::getInstance()->enable();
+        } else {
+            MaintenanceMode::getInstance()->disable();
+        }
+
         Settings::set('email', $_POST['email']);
         Settings::set('timezone', $_POST['timezone']);
         Settings::set('robots', $_POST['robots']);
