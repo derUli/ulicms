@@ -9,11 +9,17 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Backend\UliCMSVersion;
 use App\Constants\DateTimeConstants;
 use App\Exceptions\ConnectionFailedException;
+use App\Exceptions\SqlException;
 use App\Helpers\StringHelper;
+use App\Models\Content\TypeMapper;
+use App\Models\Content\Types\DefaultContentTypes;
+use App\Registries\HelperRegistry;
 use App\Registries\LoggerRegistry;
+use App\Registries\ModelRegistry;
 use App\Storages\Settings\DotEnvLoader;
 use App\Storages\Vars;
 use App\Utils\Logger;
+use ControllerRegistry;
 use Database;
 use ModuleManager;
 use mysqli;
@@ -44,6 +50,66 @@ class CoreBootstrap {
      */
     public function __construct(string $rootDir) {
         $this->rootDir = $rootDir;
+    }
+
+    /** Init UliCMS */
+    public function init(): void {
+        $this->setExceptionHandler();
+        $this->definePathConstants();
+
+        // If there is no new or old config redirect to installer
+        if(! $this->checkConfigExists() && $this->getInstallerUrl()) {
+            Response::redirect($this->getInstallerUrl());
+        }
+
+        $this->initStorages();
+        $this->loadEnvFile();
+        $this->createDirectories();
+        $this->initLoggers();
+        $this->connectDatabase();
+
+        if ($this->isAutomigrateEnabled()) {
+            $select = $this->autoMigrate();
+        }
+
+        $select = $this->selectDatabase();
+
+        Database::setEchoQueries(false);
+
+        if (! $select) {
+            throw new SqlException('<h1>Database ' . $_ENV['DB_DATABASE'] . ' doesn\'t exist.</h1>');
+        }
+
+        // Preload all settings for performance reasons
+        Settings::getAll();
+
+        // Run this code only after first call after update
+        if($this->isFreshDeploy()) {
+            $this->postDeployUpdate();
+        }
+
+        $this->registerShutdownFunction();
+        $this->initLocale();
+        $this->handleSession();
+
+        define('CACHE_PERIOD', (int)Settings::get('cache_period'));
+
+        // If setting enforce_https is set redirect http:// to https:///
+        if ($this->shouldRedirectToSSL()) {
+            $this->enforceSSL();
+        }
+
+        ModelRegistry::loadModuleModels();
+        TypeMapper::loadMapping();
+        HelperRegistry::loadModuleHelpers();
+        ControllerRegistry::loadModuleControllers();
+
+        do_event('before_init');
+        do_event('init');
+        do_event('after_init');
+
+        DefaultContentTypes::initTypes();
+
     }
 
     /**

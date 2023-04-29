@@ -1,10 +1,5 @@
 <?php
 
-use App\Exceptions\SqlException;
-use App\Models\Content\TypeMapper;
-use App\Models\Content\Types\DefaultContentTypes;
-use App\Registries\HelperRegistry;
-use App\Registries\ModelRegistry;
 use App\UliCMS\CoreBootstrap;
 
 // use this constant at the end
@@ -36,58 +31,4 @@ if (is_file($composerAutoloadFile)) {
 }
 
 $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
-$coreBootstrap->setExceptionHandler();
-$coreBootstrap->definePathConstants();
-
-// If there is no new or old config redirect to installer
-if(! $coreBootstrap->checkConfigExists() && $coreBootstrap->getInstallerUrl()) {
-    Response::redirect($coreBootstrap->getInstallerUrl());
-}
-
-$coreBootstrap->initStorages();
-$coreBootstrap->loadEnvFile();
-$coreBootstrap->createDirectories();
-$coreBootstrap->initLoggers();
-$coreBootstrap->connectDatabase();
-
-if ($coreBootstrap->isAutomigrateEnabled()) {
-    $select = $coreBootstrap->autoMigrate();
-}
-
-$select = $coreBootstrap->selectDatabase();
-
-Database::setEchoQueries(false);
-
-if (! $select) {
-    throw new SqlException('<h1>Database ' . $_ENV['DB_DATABASE'] . ' doesn\'t exist.</h1>');
-}
-
-// Preload all settings for performance reasons
-Settings::getAll();
-
-// Run this code only after first call after update
-if($coreBootstrap->isFreshDeploy()) {
-    $coreBootstrap->postDeployUpdate();
-}
-
-$coreBootstrap->registerShutdownFunction();
-$coreBootstrap->initLocale();
-$coreBootstrap->handleSession();
-
-define('CACHE_PERIOD', (int)Settings::get('cache_period'));
-
-// If setting enforce_https is set redirect http:// to https:///
-if ($coreBootstrap->shouldRedirectToSSL()) {
-    $coreBootstrap->enforceSSL();
-}
-
-ModelRegistry::loadModuleModels();
-TypeMapper::loadMapping();
-HelperRegistry::loadModuleHelpers();
-ControllerRegistry::loadModuleControllers();
-
-do_event('before_init');
-do_event('init');
-do_event('after_init');
-
-DefaultContentTypes::initTypes();
+$coreBootstrap->init();
