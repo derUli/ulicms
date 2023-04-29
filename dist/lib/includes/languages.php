@@ -164,6 +164,11 @@ function getCurrentLanguage($current = false): string {
         return basename(Settings::get('default_language'));
 }
 
+/**
+ * Get current frontend language or default langauge
+ *
+ * @return string
+ */
 function getFrontendLanguage() {
     $domainLanguage = get_domain() ?
             getDomainByLanguage(get_domain()) : null;
