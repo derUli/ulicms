@@ -66,9 +66,6 @@ Settings::set('db_schema_version', $versionNumber);
 // Clear Cache
 CacheUtil::clearCache();
 
-// Disable maintenance mode
-Settings::set('maintenance_mode', '0');
-
 // The line below will be uncommented by the mk-upgrade-package.py deploy script
 // The script will delete itself after execution.
 // @unlink ("update.php");

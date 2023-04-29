@@ -13,6 +13,7 @@ use App\Packages\PackageManager;
 use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
 use App\Storages\Settings\ConfigurationToDotEnvConverter;
+use App\Storages\Settings\MaintenanceMode;
 use App\Utils\CacheUtil;
 use App\Utils\File;
 use Nette\IOException;
@@ -155,7 +156,8 @@ class RoboFile extends Tasks {
      */
     public function maintenanceOn(): void {
         $this->initUliCMS();
-        Settings::set('maintenance_mode', '1');
+
+        MaintenanceMode::getInstance()->enable();
     }
 
     /**
@@ -165,7 +167,7 @@ class RoboFile extends Tasks {
      */
     public function maintenanceOff(): void {
         $this->initUliCMS();
-        Settings::set('maintenance_mode', '0');
+        MaintenanceMode::getInstance()->disable();
     }
 
     /**
@@ -176,7 +178,9 @@ class RoboFile extends Tasks {
     public function maintenanceStatus(): void {
         $this->initUliCMS();
 
-        $this->writeln(strbool(is_maintenance_mode()));
+        $this->writeln(
+            strbool(MaintenanceMode::getInstance()->isEnabled())
+        );
     }
 
     /**

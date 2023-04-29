@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
+use App\Storages\Settings\MaintenanceMode;
 use Detection\MobileDetect;
 use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use Nette\Utils\Json;
@@ -93,11 +94,7 @@ function is_mobile(): bool {
  * @return bool
  */
 function is_maintenance_mode(): bool {
-    if (! is_string(Settings::get('maintenance_mode'))) {
-        return false;
-    }
-
-    return (bool)Settings::get('maintenance_mode');
+    return MaintenanceMode::getInstance()->isEnabled();
 }
 
 /**
