@@ -25,7 +25,9 @@ use ModuleManager;
 use mysqli;
 use Nette\Utils\FileSystem;
 use Path;
+use Response;
 use Settings;
+use Throwable;
 use User;
 
 use function App\Utils\Session\sessionDestroy;
@@ -41,6 +43,9 @@ use function send_header;
 class CoreBootstrap {
     private string $rootDir;
 
+    /**
+     * @var (callable(Throwable): void)|null
+     */
     private $exceptionHandler;
 
     /**
@@ -134,7 +139,7 @@ class CoreBootstrap {
     /**
      * Set exception handler
      *
-     * @return callable
+     * @return (callable(Throwable): void)|null
      */
     public function setExceptionHandler() {
         if(! is_cli()) {
@@ -422,7 +427,7 @@ class CoreBootstrap {
         $dbUser = $_ENV['DB_USER'];
         $dbPassword = $_ENV['DB_PASSWORD'];
         $dbPort = (int)($_ENV['DB_PORT'] ?? ini_get('mysqli.default_port'));
-        $dbSocket = isset($_ENV['DB_SOCKET']) ? (string)$_ENV['DB_SOCKET'] : ini_get('mysqli.default_socket');
+        $dbSocket = isset($_ENV['DB_SOCKET']) ? (string)$_ENV['DB_SOCKET'] : (string)ini_get('mysqli.default_socket');
         $dbStrictMode = isset($_ENV['DB_STRICT_MODE']) && $_ENV['DB_STRICT_MODE'];
 
         $connection = Database::connect(
