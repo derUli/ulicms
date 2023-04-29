@@ -104,8 +104,13 @@ class CoreBootstraptest extends TestCase {
         $this->assertFileExists(Path::resolve('ULICMS_GENERATED_PRIVATE/.htaccess'));
     }
 
-    public function testIsAutomigrateEnabled() {
+    public function testIsAutomigrateEnabled(): void {
         $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
         $this->assertIsBool($coreBootstrap->isAutomigrateEnabled());
+    }
+
+    public function testSelectDatabase(): void {
+        $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
+        $this->assertTrue($coreBootstrap->selectDatabase());
     }
 }

@@ -377,8 +377,38 @@ class CoreBootstrap {
 
     /**
      * Check if automigrate is enabled
+     *
+     * @return bool
      */
     public function isAutomigrateEnabled(): bool {
         return isset($_ENV['DBMIGRATOR_AUTO_MIGRATE']) && $_ENV['DBMIGRATOR_AUTO_MIGRATE'];
+    }
+
+    /**
+     * Do automigrate
+     *
+     * @return bool
+     */
+    public function autoMigrate(): bool {
+        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? StringHelper::splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
+        $additionalSql = array_map('trim', $additionalSql);
+
+        if (is_cli()) {
+            Database::setEchoQueries(true);
+        }
+
+        return Database::setupSchemaAndSelect(
+            $_ENV['DB_DATABASE'],
+            $additionalSql
+        );
+    }
+
+    /**
+     * Select database
+     *
+     * @return bool
+     */
+    public function selectDatabase(): bool {
+        return Database::select($_ENV['DB_DATABASE']);
     }
 }

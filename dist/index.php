@@ -32,8 +32,8 @@ if (in_array($_SESSION['language'], $languages) && is_file(getLanguageFilePath($
 }
 
 Translation::loadAllModuleLanguageFiles($_SESSION['language']);
-
 Translation::loadCurrentThemeLanguageFiles($_SESSION['language']);
+
 do_event('custom_lang_' . $_SESSION['language']);
 
 if (Request::isPost()) {

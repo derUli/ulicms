@@ -1,7 +1,6 @@
 <?php
 
 use App\Exceptions\SqlException;
-use App\Helpers\StringHelper;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
 use App\Registries\HelperRegistry;
@@ -52,20 +51,10 @@ $coreBootstrap->initLoggers();
 $coreBootstrap->connectDatabase();
 
 if ($coreBootstrap->isAutomigrateEnabled()) {
-    $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? StringHelper::splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
-    $additionalSql = array_map('trim', $additionalSql);
-
-    if (is_cli()) {
-        Database::setEchoQueries(true);
-    }
-
-    $select = Database::setupSchemaAndSelect(
-        $_ENV['DB_DATABASE'],
-        $additionalSql
-    );
-} else {
-    $select = Database::select($_ENV['DB_DATABASE']);
+    $select = $coreBootstrap->autoMigrate();
 }
+
+$select = $coreBootstrap->selectDatabase();
 
 Database::setEchoQueries(false);
 
