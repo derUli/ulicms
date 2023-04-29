@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
-use App\Constants\ModuleEventConstants;
+use App\Constants\ModuleEvent;
 use App\Security\PrivacyCheckbox;
 
 function getModuleMeta($module, $attrib = null) {
@@ -28,7 +28,7 @@ function getModuleMeta($module, $attrib = null) {
 
 function do_event(
     string $name,
-    string $runs = ModuleEventConstants::RUNS_ONCE
+    string $runs = ModuleEvent::RUNS_ONCE
 ): void {
     $modules = getAllModules();
     $disabledModules = \App\Storages\Vars::get('disabledModules') ?? [];
@@ -52,13 +52,13 @@ function do_event(
         if ($controller && method_exists($controller, $escapedName)) {
             echo $controller->{$escapedName}();
         } elseif (is_file($file1)) {
-            if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
+            if ($runs === ModuleEvent::RUNS_MULTIPLE) {
                 require $file1;
             } else {
                 require_once $file1;
             }
         } elseif (is_file($file2)) {
-            if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
+            if ($runs === ModuleEvent::RUNS_MULTIPLE) {
                 require $file1;
             } else {
                 require_once $file2;
