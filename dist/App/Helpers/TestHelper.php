@@ -6,6 +6,7 @@ namespace App\Helpers;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+use App\Constants\Component;
 use Closure;
 use Exception;
 
@@ -18,7 +19,7 @@ abstract class TestHelper extends Helper {
      * @return bool
      */
     public static function isRunningPHPUnit(): bool {
-        return CORE_COMPONENT === CORE_COMPONENT_PHPUNIT;
+        return CORE_COMPONENT === Component::PHPUNIT;
     }
 
     /**

@@ -162,7 +162,6 @@ abstract class CacheUtil {
             // TODO: Prüfen, ob die Performance mit Apcu besser als mit Files ist
             // 'Apcu' => extension_loaded('apcu') && ini_get('apc.enabled'),
             'Files' => true,
-            // 'Files' => CORE_COMPONENT !== CORE_COMPONENT_PHPUNIT
         ];
 
         foreach ($drivers as $name => $driverAvailable) {

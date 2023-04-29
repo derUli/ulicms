@@ -13,11 +13,6 @@ if (! defined('CORE_COMPONENT')) {
     throw new Exception('Core Component is not defined');
 }
 
-// Define static constants
-const CORE_COMPONENT_FRONTEND = 'frontend';
-const CORE_COMPONENT_ADMIN = 'admin';
-const CORE_COMPONENT_PHPUNIT = 'phpunit';
-
 // Define path constants
 define('ULICMS_ROOT', dirname(__FILE__));
 
