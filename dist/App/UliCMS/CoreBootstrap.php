@@ -374,4 +374,11 @@ class CoreBootstrap {
 
         return $connection;
     }
+
+    /**
+     * Check if automigrate is enabled
+     */
+    public function isAutomigrateEnabled(): bool {
+        return isset($_ENV['DBMIGRATOR_AUTO_MIGRATE']) && $_ENV['DBMIGRATOR_AUTO_MIGRATE'];
+    }
 }

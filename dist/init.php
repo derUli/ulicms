@@ -51,11 +51,10 @@ $coreBootstrap->createDirectories();
 $coreBootstrap->initLoggers();
 $coreBootstrap->connectDatabase();
 
-$autoMigrate = isset($_ENV['DBMIGRATOR_AUTO_MIGRATE']) && $_ENV['DBMIGRATOR_AUTO_MIGRATE'];
-$additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? StringHelper::splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
-$additionalSql = array_map('trim', $additionalSql);
+if ($coreBootstrap->isAutomigrateEnabled()) {
+    $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? StringHelper::splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
+    $additionalSql = array_map('trim', $additionalSql);
 
-if ($autoMigrate) {
     if (is_cli()) {
         Database::setEchoQueries(true);
     }

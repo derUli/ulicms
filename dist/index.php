@@ -94,11 +94,13 @@ if (is_maintenance_mode()) {
     send_header('Status: 503 Service Temporarily Unavailable');
     send_header('Retry-After: 60');
     send_header('Content-Type: text/html; charset=utf-8');
+
     if (is_file(getTemplateDirPath($theme) . 'maintenance.php')) {
         require_once getTemplateDirPath($theme) . 'maintenance.php';
     } else {
         exit(get_translation('UNDER_MAINTENANCE'));
     }
+
     do_event('after_maintenance_message');
     exit();
 }
