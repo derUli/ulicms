@@ -61,6 +61,7 @@ Entfernte API-Methoden:
 * tbname()
 * setLocaleByLanguage()
 * getLanguageByDomain()
+* get_prefered_language()
 
 ===== Neues in UliCMS 2023.2 =====
 

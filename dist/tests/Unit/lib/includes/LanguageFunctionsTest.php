@@ -27,20 +27,6 @@ class LanguageFunctionsTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(in_array('en', $languages));
     }
 
-    public function testGetPreferredLanguage(): void {
-        $acceptLanguageHeader1 = 'Accept-Language: da, en - gb;
-        q = 0.8, en;
-        q = 0.7, de;
-        q = 0.5';
-        $this->assertEquals('en', get_prefered_language(['de', 'en'], $acceptLanguageHeader1));
-
-        $acceptLanguageHeader2 = 'Accept-Language: da, en - gb;
-        q = 0.8, en;
-        q = 0.7, de;
-        q = 0.9';
-        $this->assertEquals('de', get_prefered_language(['de', 'en'], $acceptLanguageHeader2));
-    }
-
     public function testGetLanguageNameByCodeReturnsName(): void {
         $this->assertEquals('Deutsch', getLanguageNameByCode('de'));
         $this->assertEquals('English', getLanguageNameByCode('en'));

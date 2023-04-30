@@ -46,7 +46,6 @@
         "deruli/html-minifier": "master-dev",
         "scssphp/scssphp": "*",
         "chrisjean/php-ico": "*",
-        "willdurand/negotiation": "*",
         "matthiasmullie/minify": "*",
         "rakit/validation": "*",
         "nesbot/carbon": "*",

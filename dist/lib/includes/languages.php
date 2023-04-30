@@ -5,12 +5,11 @@ declare(strict_types=1);
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
 use App\Security\Permissions\PermissionChecker;
-use Negotiation\LanguageNegotiator;
 
 /**
  * Get all languages that have content
  *
- * @return array
+ * @return string[]
  */
 function getAllUsedLanguages(): array {
     $languages = [];
@@ -21,22 +20,6 @@ function getAllUsedLanguages(): array {
         $languages[] = $row->language;
     }
     return $languages;
-}
-
-/**
- * Get prefered language based on Accept-Language http Header
- *
- * @param array $priorities
- * @param string|null $http_accept_language
- *
- * @return type
- */
-function get_prefered_language(
-    array $priorities,
-    ?string $http_accept_language
-) {
-    $negotiator = new LanguageNegotiator();
-    return $negotiator->getBest($http_accept_language, $priorities)->getType();
 }
 
 /**
