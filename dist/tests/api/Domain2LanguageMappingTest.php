@@ -17,14 +17,6 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase {
         Settings::set('domain_to_language', $this->originalMapping);
     }
 
-    public function testGetLanguageByDomain(): void {
-        $this->assertEquals('de', getLanguageByDomain('www.domain.de'));
-        $this->assertEquals('en', getLanguageByDomain('domain.com'));
-        $this->assertEquals('fr', getLanguageByDomain('domain.fr'));
-        $this->assertEquals('it', getLanguageByDomain('domain.it'));
-        $this->assertNull(getLanguageByDomain('domain.cn'));
-    }
-
     public function testGetDomainBylanguage(): void {
         $this->assertEquals('www.domain.de', getDomainByLanguage('de'));
         $this->assertEquals('domain.com', getDomainByLanguage('en'));

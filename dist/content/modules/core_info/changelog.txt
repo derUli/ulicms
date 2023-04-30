@@ -11,6 +11,7 @@ Fehlerkorrekturen:
 
 Entfernte Features:
 * Veraltete HTTP Security Header entfernt (X-XSS-Protection, Expect-CT, Referrer-Policy)
+* Scroll To Top
 
 Neue API-Methoden:
 * StringHelper::splitAndTrim()
@@ -59,9 +60,7 @@ Entfernte API-Methoden:
 * db_escape()
 * tbname()
 * setLocaleByLanguage()
-
-Entfernte Features:
-* Scroll To Top
+* getLanguageByDomain()
 
 ===== Neues in UliCMS 2023.2 =====
 

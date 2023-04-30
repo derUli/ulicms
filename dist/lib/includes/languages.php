@@ -97,17 +97,6 @@ function getDomainByLanguage($givenLanguage): ?string {
     return null;
 }
 
-function getLanguageByDomain($givenDomain): ?string {
-    $domainMapping = Settings::get('domain_to_language');
-    $domainMapping = Settings::mappingStringToArray($domainMapping);
-    foreach ($domainMapping as $domain => $language) {
-        if ($givenDomain == $domain) {
-            return $language;
-        }
-    }
-    return null;
-}
-
 function setLanguageByDomain(): bool {
     $domainMapping = Settings::get('domain_to_language');
     $domainMapping = Settings::mappingStringToArray($domainMapping);
