@@ -25,6 +25,9 @@
               "url": "https://github.com/deruli/fetcher"
             }    
     ],
+    "config": {
+        "platform-check": true
+    },
     "require": {
         "php": ">=8.1",
         "ext-curl": "*",
