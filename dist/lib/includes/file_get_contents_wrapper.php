@@ -10,17 +10,6 @@ use App\Utils\CacheUtil;
 use Fetcher\Fetcher;
 
 /**
- * Check if a given variable is an URL
- *
- * @deprecated since 2023.3
- * @param mixed $url
- * @return bool
- */
-function is_url(mixed $url): bool {
-    return is_string($url) ? Fetcher::isUrl($url) : false;
-}
-
-/**
  * Retrieves an URL by curl if available or by file_get_contents
  *
  * @deprecated since 2023.3
@@ -37,7 +26,7 @@ function file_get_contents_wrapper(
 ): ?string {
     $content = null;
 
-    if (! is_url($url)) {
+    if (! Fetcher::isUrl($url)) {
         return is_file($url) ? (string)file_get_contents($url) : null;
     }
 

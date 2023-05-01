@@ -62,6 +62,7 @@ Entfernte API-Methoden:
 * setLocaleByLanguage()
 * getLanguageByDomain()
 * get_prefered_language()
+* is_url()
 
 ===== Neues in UliCMS 2023.2 =====
 

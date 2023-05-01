@@ -44,21 +44,6 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public function testIsURLReturnsTrue(): void {
-        $this->assertTrue(is_url('http://example.org'));
-        $this->assertTrue(is_url('https://www.ulicms.de'));
-        $this->assertTrue(is_url('ftp://ftp.hostserver.de/pub/OpenBSD/'));
-    }
-
-    public function testIsURLReturnsFalse(): void {
-        $this->assertFalse(is_url('/var/www/html'));
-        $this->assertFalse(is_url('C:\\xampp\\htdocs'));
-        $this->assertFalse(is_url('http://'));
-        $this->assertFalse(is_url('https://'));
-        $this->assertFalse(is_url('ftp://'));
-        $this->assertFalse(is_url(null));
-    }
-
     // curl_url_exists supports only http / https
     // and is used by url_exists if php curl module is installed
     public function testCurlUrlExistsReturnsTrue(): void {
