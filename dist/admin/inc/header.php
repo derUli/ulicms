@@ -121,12 +121,7 @@ if (get_action()) {
             <?php
         do_event('after_backend_header');
 ?>
-        <div
-            class="container main <?php
-if (get_action()) {
-    echo 'action-' . Template::getEscape(get_action());
-}
-?>">
+        <div class="container main">
             <div class="row menubar">
                 <div class="col-xs-7">
                     <a

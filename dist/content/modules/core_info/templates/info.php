@@ -67,7 +67,7 @@ if (! $admin_logo) {
     is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"
                       title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
 </div>
-<div class="row">
+<div class="row btngroup-info">
     <div class="col col-xs-12 col-lg-2 ">
         <a href="http://www.ulicms.de" target="_blank" class="btn btn-info"
         role="button"><i class="fa fa-globe" aria-hidden="true"></i> UliCMS
