@@ -54,16 +54,3 @@ function file_get_contents_wrapper(
 
     return $content;
 }
-
-/**
- * Check if an URL exists
- *
- * @deprecated since 2023.3
- * @param string $url
- * @return bool
- */
-function curl_url_exists(string $url): bool {
-    $fetcher = new Fetcher($url);
-
-    return $fetcher->exists();
-}
