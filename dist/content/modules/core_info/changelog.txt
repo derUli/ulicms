@@ -63,6 +63,7 @@ Entfernte API-Methoden:
 * getLanguageByDomain()
 * get_prefered_language()
 * is_url()
+* curl_url_exists()
 
 ===== Neues in UliCMS 2023.2 =====
 
