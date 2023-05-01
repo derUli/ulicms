@@ -23,7 +23,7 @@ function sureRemoveDir(string $dir, bool $deleteMe = true): void {
  * @return void
  */
 function recurse_copy(string $src, string $dst): void {
-    $dir = opendir($src);
+    $dir = opendir($src) ?: null;
 
     if(! is_dir($dst)) {
         mkdir($dst, 0777, true);

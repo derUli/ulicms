@@ -57,7 +57,7 @@ function changePassword(string $password, ?int $userId) {
 /**
  * Gets a user by username
  * @param string $name
- * 
+ *
  * @return array|null
  */
 function getUserByName(string $name): ?array {

@@ -72,7 +72,7 @@ $formatExtensions = [
 $slugExtension = count($slugParts) > 1 ? end($slugParts) : null;
 
 if (in_array($slugExtension, $formatExtensions)) {
-    $newUrl = str_replace(".{$slugExtension}", '', Request::getRequestUri());
+    $newUrl = str_replace(".{$slugExtension}", '', Request::getRequestUri() ?? '');
     Response::redirect($newUrl, HttpStatusCode::MOVED_PERMANENTLY);
 }
 

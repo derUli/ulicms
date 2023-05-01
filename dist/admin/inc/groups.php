@@ -15,6 +15,7 @@ if (! $permissionChecker->hasPermission('groups')) {
     $modified = false;
     $created = false;
     $removed = false;
+    $name = null;
 
     if (isset($_POST['add_group'])) {
         $all_permissions = ACL::getDefaultACL(false);

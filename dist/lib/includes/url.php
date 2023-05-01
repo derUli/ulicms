@@ -55,7 +55,7 @@ function getBaseFolderURL(?string $suffix = null): string {
     $s = empty($_SERVER['HTTPS']) ? '' : (($_SERVER['HTTPS'] == 'on') ?
             's' : '');
     $sp = strtolower($_SERVER['SERVER_PROTOCOL']);
-    $protocol = substr($sp, 0, strpos($sp, '/')) . $s;
+    $protocol = substr($sp, 0, strpos($sp, '/') ?: 0) . $s;
     $port = ($_SERVER['SERVER_PORT'] == '80'
             || $_SERVER['SERVER_PORT'] == '443') ?
             '' : (':' . $_SERVER['SERVER_PORT']);
@@ -91,16 +91,16 @@ function getCurrentURL(): string {
  */
 function buildSEOUrl(
     ?string $page = null,
-    ?string $redirection = null,
-    // TODO: Obsoleten Parameter $format entfernen
-    ?string $format = null
-) {
+    ?string $redirection = null
+): string {
     if ($redirection) {
         return $redirection;
     }
+
     if (! $page) {
         $page = get_slug();
     }
+
     if ($page === get_frontpage()) {
         return './';
     }

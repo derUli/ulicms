@@ -50,7 +50,7 @@ if (count($groups) > 0) {
                 <?php
                 foreach ($groups as $group) {
                     $id = $group->getId();
-                    $name = $group->getName();
+                    $name = $group->getName() ?? '';
 
                     ?>
                     <tr id="dataset-<?php echo $id; ?>">
