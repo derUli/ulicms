@@ -20,7 +20,6 @@ use Jfcherng\Diff\Differ;
 use Jfcherng\Diff\DiffHelper;
 use Jfcherng\Diff\Renderer\RendererConstant;
 use Rakit\Validation\Validator;
-use zz\Html\HTMLMinify;
 
 use function App\HTML\stringContainsHtml;
 
@@ -401,11 +400,7 @@ class PageController extends \App\Controllers\Controller {
         $parent_id = Request::getVar('mparent', null, 'int');
 
         $html = $this->_filterParentPages($lang, $menu, $parent_id);
-        HTMLResult(
-            $html,
-            HttpStatusCode::OK,
-            HTMLMinify::OPTIMIZATION_ADVANCED
-        );
+        HTMLResult($html);
     }
 
     // FIXME: There should be no html code in controller

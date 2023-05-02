@@ -44,9 +44,11 @@ class HomeController extends \App\Controllers\Controller {
         $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
         ];
+
         $HTMLMinify = new HTMLMinify($html, $options);
         $html = $HTMLMinify->process();
         $html = StringHelper::removeEmptyLinesFromString($html);
+
         return $html;
     }
 
@@ -75,6 +77,7 @@ class HomeController extends \App\Controllers\Controller {
         $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
         ];
+
         $HTMLMinify = new HTMLMinify($html, $options);
         return $HTMLMinify->process();
     }
@@ -90,6 +93,7 @@ class HomeController extends \App\Controllers\Controller {
         $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
         ];
+
         $HTMLMinify = new HTMLMinify($html, $options);
         return $HTMLMinify->process();
     }

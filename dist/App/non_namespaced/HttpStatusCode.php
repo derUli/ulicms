@@ -7,7 +7,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * HTTP status codes
  */
-class HttpStatusCode {
+abstract class HttpStatusCode {
     public const __default = self::OK;
 
     public const SWITCHING_PROTOCOLS = 101;

@@ -110,6 +110,7 @@ class Forms {
                     $html = Template::executeDefaultOrOwnTemplate(
                         'exception.php'
                     );
+
                     HTMLResult($html, HttpStatusCode::BAD_REQUEST);
                 }
             }

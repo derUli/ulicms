@@ -6,7 +6,6 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 
 use App\Constants\DefaultValues;
 use App\Database\DBMigrator;
-use App\Helpers\DateTimeHelper;
 use App\Helpers\StringHelper;
 use App\Helpers\TestHelper;
 use App\Packages\PackageManager;
@@ -634,20 +633,7 @@ class RoboFile extends Tasks {
     public function cron(): void {
         $this->initUliCMS();
 
-        do_event('before_cron');
-        require 'lib/cron.php';
-        do_event('after_cron');
-
-        $timezone = DateTimeHelper::getCurrentTimezone();
-        $currentLocale = DateTimeHelper::getCurrentLocale();
-
-        $formatter = new IntlDateFormatter($currentLocale, IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM, $timezone);
-        $pattern = str_replace(',', '', $formatter->getPattern());
-        $formatter->setPattern($pattern);
-
-        $formatedCurrentTime = $formatter->format(time());
-
-        $this->writeln('Finished cron at ' . $formatedCurrentTime);
+        do_event('cron');
     }
 
     /**

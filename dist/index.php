@@ -1,10 +1,9 @@
-<?php
+<<?php
 
 const CORE_COMPONENT = 'frontend';
 
 require_once dirname(__FILE__) . '/init.php';
 
-use App\Helpers\DateTimeHelper;
 use App\Models\Content\Language;
 use App\Storages\Vars;
 use App\Translations\Translation;
@@ -45,14 +44,11 @@ if (Request::isPost()) {
     }
 }
 
-// call domain.de/?run_cron=1 with curl or a similiar tool
-// to automatically execute cronjobs
+// Call domain.de/?run_cron=1 with curl or a similiar tool to automatically execute cronjobs
 if (Request::getVar('run_cron')) {
-    do_event('before_cron');
-    require 'lib/cron.php';
-    do_event('after_cron');
+    do_event('cron');
 
-    TextResult('Finished cron at ' . DateTimeHelper::timestampToFormattedDateTime(time()), HttpStatusCode::OK);
+    HTTPStatusCodeResult(HttpStatusCode::NO_CONTENT);
 }
 
 $slug = strtolower($_GET['slug'] ?? '');
@@ -197,17 +193,13 @@ if (CacheUtil::isCacheEnabled() && Request::isGet() && ! Vars::getNoCache()) {
 }
 
 $uid = CacheUtil::getCurrentUid();
-if ($cacheAdapter && $cacheAdapter->get($uid)) {
-    echo $cacheAdapter->get($uid);
 
-    if (Settings::get('no_auto_cron')) {
-        exit();
+if ($cacheAdapter && $cacheAdapter->get($uid)) {
+    if (! (bool)Settings::get('no_auto_cron')) {
+        do_event('cron');
     }
 
-    do_event('before_cron');
-    @require 'lib/cron.php';
-    do_event('after_cron');
-    exit();
+    exit($cacheAdapter->get($uid));
 }
 
 if ($cacheAdapter || Settings::get('minify_html')) {
@@ -282,12 +274,10 @@ if ($cacheAdapter || Settings::get('minify_html')) {
     }
 }
 
-// Wenn no_auto_cron gesetzt ist, dann muss cron.php
+// Wenn no_auto_cron gesetzt ist, dann muss cron
 // manuell ausgeführt bzw. aufgerufen werden
-if (! Settings::get('no_auto_cron')) {
-    do_event('before_cron');
-    require 'lib/cron.php';
-    do_event('after_cron');
+if (! (bool)Settings::get('no_auto_cron')) {
+    do_event('cron');
 }
 
 exit();

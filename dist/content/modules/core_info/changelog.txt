@@ -8,6 +8,7 @@ Neue Features:
 
 Fehlerkorrekturen:
 * Warnings wenn man update.php von der Kommandozeile aufruft korrigiert
+* Fehler in Cronjobs korrigiert
 
 Entfernte Features:
 * Veraltete HTTP Security Header entfernt (X-XSS-Protection, Expect-CT, Referrer-Policy)

@@ -12,7 +12,6 @@ use App\HTML as HTML;
 use App\Models\Content\Comment;
 use App\Security\PrivacyCheckbox;
 use App\Utils\CacheUtil;
-use zz\Html\HTMLMinify;
 
 class CommentsController extends MainClass {
     public function beforeHtml(): void {
@@ -102,10 +101,12 @@ class CommentsController extends MainClass {
     public function getCommentText(): void {
         $id = Request::getVar('id', 0, 'int');
         $text = $this->_getCommentText($id);
+
         if ($text) {
-            HtmlResult($text, HttpStatusCode::OK, HTMLMinify::OPTIMIZATION_ADVANCED);
+            HtmlResult($text);
         }
-        HTMLResult(get_translation('not_found'), 404);
+
+        HTMLResult(get_translation('not_found'), HttpStatusCode::NOT_FOUND);
     }
 
     public function _getCommentText(int $id): ?string {
@@ -249,11 +250,11 @@ class CommentsController extends MainClass {
     public function cron() {
         // Delete ip addresses of comments after 48 hours to be GDPR compliant
         if (Settings::get('delete_ips_after_48_hours')) {
-        // Optional keep stored ip addresses of spam comments
-        $keep_spam_ips = (bool)Settings::get('keep_spam_ips');
+            // Optional keep stored ip addresses of spam comments
+            $keep_spam_ips = (bool)Settings::get('keep_spam_ips');
 
-        Comment::deleteIpsAfter48Hours($keep_spam_ips);
-    }
+            Comment::deleteIpsAfter48Hours($keep_spam_ips);
+        }
 
     }
 }

@@ -35,6 +35,7 @@ function check_form_timestamp(): void {
             'contact_form_refused_spam_mails',
             Settings::get('contact_form_refused_spam_mails') + 1
         );
-        HTMLResult('Spam detected based on timestamp.', 400);
+
+        HTMLResult('Spam detected based on timestamp.', HttpStatusCode::FORBIDDEN);
     }
 }

@@ -50,7 +50,7 @@ function RawJSONResult(string $data, int $status = 200): void {
 function HTMLResult(
     string $data,
     int $status = 200,
-    int $optimizationLevel = HTMLMinify::OPTIMIZATION_SIMPLE
+    int $optimizationLevel = HTMLMinify::OPTIMIZATION_ADVANCED
 ): void {
     $optimizedHtml = optimizeHtml($data, $optimizationLevel);
 

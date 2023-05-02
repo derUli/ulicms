@@ -7,7 +7,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Controllers\MainClass;
 use App\Services\Connectors\PackageSourceConnector;
 use Fetcher\Fetcher;
-use zz\Html\HTMLMinify;
 
 use function App\HTML\text;
 
@@ -26,7 +25,9 @@ class PackageController extends MainClass {
             TextResult(get_translation('not_found'));
             return;
         }
+
         $html = $this->_getModuleInfo($name);
+
         HTMLResult($html);
     }
 
@@ -171,11 +172,7 @@ class PackageController extends MainClass {
 
     public function availablePackages(): void {
         $html = $this->_availablePackages();
-        HtmlResult(
-            $html,
-            HttpStatusCode::OK,
-            HTMLMinify::OPTIMIZATION_ADVANCED
-        );
+        HtmlResult($html);
     }
 
     public function _availablePackages(): string {

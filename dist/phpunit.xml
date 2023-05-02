@@ -46,7 +46,6 @@
             <directory>tests</directory>
             <directory>admin</directory>
             <file>phpunit_init.php</file>
-            <file>index.php</file>
             <file>update.php</file>
          </exclude>
       </source>
