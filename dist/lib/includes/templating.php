@@ -327,8 +327,10 @@ function get_theme(?string $page = null): ?string {
     if (\App\Storages\Vars::get('theme_' . $page) !== null) {
         return \App\Storages\Vars::get('theme_' . $page);
     }
+
     $theme = Settings::get('theme');
     $mobile_theme = Settings::get('mobile_theme');
+
     if ($mobile_theme && is_mobile()) {
         $theme = $mobile_theme;
     }
@@ -345,6 +347,7 @@ function get_theme(?string $page = null): ?string {
             }
         }
     }
+
     $theme = apply_filter($theme, 'theme');
     \App\Storages\Vars::set('theme_' . $page, $theme);
     return $theme;

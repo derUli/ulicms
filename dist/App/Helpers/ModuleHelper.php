@@ -8,15 +8,12 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\RequestMethod;
 use App\Controllers\Controller;
-use App\Helpers\Helper;
 use App\HTML\Form;
-use App\Models\Content\Language;
-use Template;
+use ContentFactory;
+use ControllerRegistry;
 use Database;
 use Path;
-use ControllerRegistry;
-use ContentFactory;
-use Language_Link;
+use Template;
 
 abstract class ModuleHelper extends Helper {
     // builds an url to the main backend GUI of a module

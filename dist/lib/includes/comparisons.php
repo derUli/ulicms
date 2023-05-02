@@ -48,15 +48,6 @@ function is_admin_dir(): bool {
 }
 
 /**
- * Checks by useragent if the client is a desktop computer
- *
- * @return bool
- */
-function is_desktop(): bool {
-    return ! is_mobile();
-}
-
-/**
  * Checks by useragent if the client is a crawler
  *
  * @param string|null $useragent
@@ -79,7 +70,7 @@ function is_mobile(): bool {
     $mobileDetect = new MobileDetect();
     $result = $mobileDetect->isMobile();
 
-    if (Settings::get('no_mobile_design_on_tablet') &&
+    if ((bool)Settings::get('no_mobile_design_on_tablet') &&
             $result &&
             $mobileDetect->isTablet()) {
         $result = false;

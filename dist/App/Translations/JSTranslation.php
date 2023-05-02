@@ -6,8 +6,6 @@ namespace App\Translations;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use ModuleHelper;
-
 // Makes translation strings avaiable for Javascript
 class JSTranslation {
     private $keys = [];

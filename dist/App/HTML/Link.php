@@ -6,8 +6,6 @@ namespace App\HTML;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use ModuleHelper;
-
 /**
  * Utils to build HTML links
  */

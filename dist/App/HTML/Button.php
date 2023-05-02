@@ -7,7 +7,6 @@ namespace App\HTML;
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\ButtonType;
-use ModuleHelper;
 
 /**
  * This class contains helper methods to build Bootstrap buttons

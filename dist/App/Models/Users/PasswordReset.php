@@ -8,7 +8,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Utils\Mailer;
 use Database;
-use ModuleHelper;
 use SessionManager;
 use Settings;
 use Template;

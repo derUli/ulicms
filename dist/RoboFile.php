@@ -646,6 +646,7 @@ class RoboFile extends Tasks {
         $this->buildCopyChangelog();
         $this->buildLicenses();
         $this->buildDeleteBullshit();
+        $this->buildPhpCsFixer();
     }
 
     /**
@@ -685,7 +686,7 @@ class RoboFile extends Tasks {
      * @return void
      */
     public function buildPhpCsFixer(): void {
-        system('vendor/bin/robo build:php-cs-fixer');
+        system('vendor/bin/php-cs-fixer fix');
     }
 
     /**

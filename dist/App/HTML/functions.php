@@ -7,8 +7,8 @@ namespace App\HTML;
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
 use App\Exceptions\FileNotFoundException;
+use App\Helpers\ModuleHelper;
 use App\Utils\File;
-use ModuleHelper;
 
 /**
  * Replaces HTML entities and replaces linebreaks with <br>
@@ -33,7 +33,7 @@ function imageTag(string $file, array $htmlAttributes = []): string {
     if (! isset($htmlAttributes['src'])) {
         $htmlAttributes['src'] = $file;
     }
-    $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+    $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
     return "<img {$attribHTML}>";
 }
 
@@ -93,7 +93,7 @@ function link(
         $text = _esc($text);
     }
 
-    $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+    $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
 
     return "<a {$attribHTML}>{$text}</a>";
 }
@@ -113,7 +113,7 @@ function icon(string $classes, array $htmlAttributes = []): string {
         $htmlAttributes['class'] = "{$classes} {$htmlAttributes['class']}";
     }
 
-    $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+    $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
     return "<i {$attribHTML}></i>";
 }
 

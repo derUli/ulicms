@@ -15,7 +15,6 @@ use Database;
 use Fetcher\Fetcher;
 use InvalidArgumentException;
 use Model;
-use ModuleHelper;
 
 // TODO: Comment public static functions
 // This class is a comment model class
