@@ -93,24 +93,6 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(count(getAllModules()), count($manager->getAllModules()));
     }
 
-    public function testGetDisabledModuleNames(): void {
-        $moduleManager = new ModuleManager();
-        $moduleManager->sync();
-
-        $module = new Module('fortune2');
-        $module->disable();
-
-        $manager = new ModuleManager();
-        $this->assertContains('fortune2', $manager->getDisabledModuleNames());
-
-        $module->enable();
-
-        $this->assertNotContains(
-            'fortune2',
-            $manager->getDisabledModuleNames()
-        );
-    }
-
     public function testRemoveDeletedModules(): void {
         $moduleManager = new ModuleManager();
         $moduleManager->sync();

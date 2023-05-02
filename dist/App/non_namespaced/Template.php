@@ -535,7 +535,7 @@ class Template {
     }
 
     public static function getFooterText(): string {
-        return replaceShortcodesWithModules(Settings::get('footer_text'), true);
+        return replaceShortcodesWithModules(Settings::get('footer_text'));
     }
 
     public static function footerText(): void {

@@ -30,23 +30,21 @@ function do_event(
     string $name,
     string $runs = ModuleEvent::RUNS_ONCE
 ): void {
-    $modules = getAllModules();
-    $disabledModules = \App\Storages\Vars::get('disabledModules') ?? [];
-    $modulesCount = count($modules);
+    $manager = new ModuleManager();
+    $modules = $manager->getEnabledModuleNames();
 
-    for ($hook_i = 0; $hook_i < $modulesCount; $hook_i++) {
-        if (in_array($modules[$hook_i], $disabledModules)) {
-            continue;
-        }
-        $file1 = getModulePath($modules[$hook_i], true) .
-                $modules[$hook_i] . '_' . $name . '.php';
-        $file2 = getModulePath($modules[$hook_i], true) .
+    foreach($modules as $module) {
+        $file1 = getModulePath($module, true) .
+                $module . '_' . $name . '.php';
+        $file2 = getModulePath($module, true) .
                 'hooks/' . $name . '.php';
-        $main_class = getModuleMeta($modules[$hook_i], 'main_class');
+        $main_class = getModuleMeta($module, 'main_class');
         $controller = null;
+
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
         }
+
         ob_start();
         $escapedName = ModuleHelper::underscoreToCamel($name);
         if ($controller && method_exists($controller, $escapedName)) {
@@ -82,17 +80,11 @@ function stringContainsShortCodes(string $content, ?string $module = null): bool
 // replace Shortcodes with modules
 function replaceShortcodesWithModules(
     string $string,
-    bool $replaceOther = true
 ): string {
-    $string = $replaceOther ? replaceOtherShortCodes($string) : $string;
+    $manager = new ModuleManager();
+    $modules = $manager->getEnabledModuleNames();
 
-    $allModules = ModuleHelper::getAllEmbedModules();
-    $disabledModules = \App\Storages\Vars::get('disabledModules') ?? [];
-
-    foreach ($allModules as $module) {
-        if (in_array($module, $disabledModules) || ! stringContainsShortCodes($string, $module)) {
-            continue;
-        }
+    foreach ($modules as $module) {
         $stringToReplace1 = '[module="' . $module . '"]';
         $stringToReplace2 = '[module=&quot;' . $module . '&quot;]';
         $stringToReplace3 = '[module=' . $module . ']';
@@ -107,17 +99,14 @@ function replaceShortcodesWithModules(
         }
 
         $main_class = getModuleMeta($module, 'main_class');
-        $controller = null;
-        if ($main_class) {
-            $controller = ControllerRegistry::get($main_class);
-        }
+        $controller = $main_class ? ControllerRegistry::get($main_class) : null;
+
+        $html_output = '';
+
         if ($controller && method_exists($controller, 'render')) {
             $html_output = $controller->render();
         } elseif (function_exists($module . '_render')) {
             $html_output = call_user_func($module . '_render');
-        } else {
-            throw new BadMethodCallException("Module {$module} "
-                            . 'has no render() method');
         }
 
         $string = str_replace($stringToReplace1, $html_output, $string);
@@ -126,6 +115,8 @@ function replaceShortcodesWithModules(
         $string = str_replace($stringToReplace3, $html_output, $string);
         $string = str_replace('[title]', get_title(), $string);
     }
+
+    $string = replaceOtherShortCodes($string);
     $string = replaceVideoTags($string);
     $string = replaceAudioTags($string);
 

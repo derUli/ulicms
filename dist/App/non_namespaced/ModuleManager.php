@@ -29,18 +29,6 @@ class ModuleManager {
         return $modules;
     }
 
-    public function getDisabledModuleNames(): array {
-        $modules = [];
-        $sql = 'select name from {prefix}modules where enabled = 0';
-        $result = Database::query($sql, true);
-
-        while ($row = Database::fetchObject($result)) {
-            $modules [] = $row->name;
-        }
-
-        return $modules;
-    }
-
     public function getAllModuleNames(?string $source = null): array {
         $modules = [];
         $sql = 'select name from {prefix}modules';
@@ -111,6 +99,7 @@ class ModuleManager {
         $realModules = getAllModules();
 
         $dataBaseModules = $this->getAllModuleNames();
+
         // Nicht mehr vorhandene Module entfernen
         foreach ($dataBaseModules as $dbModule) {
             if (! in_array($dbModule, $realModules)) {
@@ -174,7 +163,7 @@ class ModuleManager {
         $module = new Module($realModule);
         if ($module->getVersion() !== $version) {
             $module->setVersion($version);
+            $module->save();
         }
-        $module->save();
     }
 }

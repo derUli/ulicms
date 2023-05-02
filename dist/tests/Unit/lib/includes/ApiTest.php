@@ -244,7 +244,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testReplaceShortcodesWithModulesWithOther(): void {
         $inputString = 'Foo [year] Bar [module=fortune2]';
-        $processedInput = replaceShortcodesWithModules($inputString, true);
+        $processedInput = replaceShortcodesWithModules($inputString);
 
         $this->assertStringStartsWith(
             'Foo ' . date('Y') . ' Bar ',
@@ -267,7 +267,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
             '[module=&quot;fortune2&quot;]'
         ];
         foreach ($formats as $format) {
-            $html = replaceShortcodesWithModules($format, false);
+            $html = replaceShortcodesWithModules($format);
             $this->assertNotEquals($format, $html);
             $this->assertGreaterThan(strlen($format), strlen($html));
         }
@@ -278,15 +278,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
             '[module=gibts_nicht]',
             replaceShortcodesWithModules('[module=gibts_nicht]')
         );
-    }
-
-    public function testReplaceShortcodesWithModulesWithoutOther(): void {
-        $inputString = 'Foo [year] Bar [module=fortune2]';
-        $processedInput = replaceShortcodesWithModules($inputString, false);
-
-        $this->assertStringStartsWith('Foo [year] Bar ', $processedInput);
-        $this->assertStringEndsNotWith('[module=fortune2]', $processedInput);
-        $this->assertGreaterThan(strlen($inputString) + 10, strlen($processedInput));
     }
 
     public function testReplaceOtherShortcodes(): void {
