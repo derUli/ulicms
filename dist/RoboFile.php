@@ -704,7 +704,46 @@ class RoboFile extends Tasks {
                 $this->writeln("{$path} has invalid syntax");
             }
         }
+    }
 
+    /**
+     * Generate hooks.json
+     *
+     * @return void
+     */
+    public function buildUpdateEvents(): void {
+        $this->initUliCMS();
+
+        $events = [];
+        foreach(Finder::findFiles(['*.php'])->from('.') as $name => $file) {
+            $path = $file->getRealPath();
+
+            $content = file_get_contents($path);
+            preg_match_all('/do_event\(.+\);/im', $content, $matches);
+
+            $matches = ($matches[0]);
+
+            foreach($matches as $match) {
+                $name = $match;
+                $name = str_replace('do_event', '', $name);
+                $name = str_replace('(', '', $name);
+                $name = str_replace(')', '', $name);
+                $name = str_replace("'", '', $name);
+                $name = str_replace('"', '', $name);
+                $name = str_replace(';', '', $name);
+
+                $events[] = $name;
+            }
+        }
+
+        $events = array_map(static function($event) {
+            return \App\Helpers\ModuleHelper::underscoreToCamel($event);
+        }, $events);
+
+        $events = array_unique($events);
+        natcasesort($events);
+
+        $this->writeln(json_encode(array_values($events)));
     }
 
     /**

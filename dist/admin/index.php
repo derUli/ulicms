@@ -27,10 +27,6 @@ if (is_logged_in() && Request::isPost() && ! check_csrf_token()) {
     ExceptionResult('Invalid CSRF Token', HttpStatusCode::FORBIDDEN);
 }
 
-// set locale for date formats and other stuff
-do_event('before_set_locale_by_language');
-do_event('after_set_locale_by_language');
-
 send_header('Content-Type: text/html; charset=UTF-8');
 
 // run controller methods if called
