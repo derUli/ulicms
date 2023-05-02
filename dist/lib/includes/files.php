@@ -10,6 +10,7 @@ use App\Utils\File;
  * Deletes a directory including its content
  * @param string $dir
  * @param bool $deleteMe
+ *
  * @return void
  */
 function sureRemoveDir(string $dir, bool $deleteMe = true): void {
@@ -20,6 +21,7 @@ function sureRemoveDir(string $dir, bool $deleteMe = true): void {
  * Recursively copy directory
  * @param string $src
  * @param string $dst
+ *
  * @return void
  */
 function recurse_copy(string $src, string $dst): void {

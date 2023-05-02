@@ -255,7 +255,11 @@ function getCombinedScriptHtml(): string {
     return $html;
 }
 
-// Ab hier Stylesheet Funktionen
+/**
+ * Clear stylesheet queue
+ *
+ * @return void
+ */
 function resetStylesheetQueue(): void {
     \App\Storages\Vars::set('stylesheet_queue', []);
 }

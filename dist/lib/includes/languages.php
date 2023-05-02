@@ -120,6 +120,7 @@ function getCurrentLanguage($current = false): string {
     if (\App\Storages\Vars::get('current_language_' . strbool($current))) {
         return \App\Storages\Vars::get('current_language_' . strbool($current));
     }
+
     if ($current) {
         $result = Database::query('SELECT language FROM ' . Database::tableName('content') .
                 " WHERE slug='" . get_slug() . "'");
@@ -133,6 +134,7 @@ function getCurrentLanguage($current = false): string {
     if (isset($_SESSION['language'])) {
         return basename($_SESSION['language']);
     }
+
     return basename(Settings::get('default_language'));
 }
 

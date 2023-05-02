@@ -69,6 +69,7 @@ Entfernte API-Methoden:
 * curl_url_exists()
 * is_desktop()
 * ModuleManager::getDisabledModuleNames()
+* Path::normalize()
 
 ===== Neues in UliCMS 2023.2 =====
 

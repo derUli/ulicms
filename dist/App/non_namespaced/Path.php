@@ -6,17 +6,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 class Path {
     /**
-     * Normalize path
-     * @param string $path
-     * @return string
-     */
-    public static function normalize(string $path): string {
-        $path = str_replace('\\', DIRECTORY_SEPARATOR, $path);
-        $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
-        return $path;
-    }
-
-    /**
      * Resolves a path including placeholder constants such as ULICMS_ROOT
      * @param string $path
      * @return string
@@ -53,6 +42,7 @@ class Path {
         $path = str_ireplace('ULICMS_LOG', ULICMS_LOG, $path);
         $path = str_ireplace('\\', '/', $path);
         $path = rtrim($path, '/');
+
         return $path;
     }
 }
