@@ -190,15 +190,7 @@ abstract class ModuleHelper extends Helper {
 
         $page_id = $page_id ?? get_id();
 
-        if (! $page_id) {
-            return null;
-        }
-
         $page = ContentFactory::getByID($page_id);
-
-        if ($page->id === null) {
-            return null;
-        }
 
         if ($page instanceof Language_Link) {
             $language = new Language($page->link_to_language);
