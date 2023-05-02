@@ -707,7 +707,7 @@ class RoboFile extends Tasks {
     }
 
     /**
-     * Generate hooks.json
+     * Generate events.json
      *
      * @return void
      */

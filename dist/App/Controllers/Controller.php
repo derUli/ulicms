@@ -32,7 +32,7 @@ abstract class Controller {
     public function __construct() {
         // add all hooks to blacklist
         // blacklisted methods can not be remote called as action
-        $file = Path::resolve('ULICMS_ROOT/lib/hooks.json');
+        $file = Path::resolve('ULICMS_ROOT/lib/events.json');
 
         /**
          * Load hooks from Json to prevent direct access to protected public controller methods
