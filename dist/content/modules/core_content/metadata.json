@@ -34,8 +34,10 @@
     "controllers": {
         "PageController": "controllers/PageController.php",
         "CategoryController": "controllers/CategoryController.php",
-        "BannerController": "controllers/BannerController.php"
+        "BannerController": "controllers/BannerController.php",        
+        "CoreContentController": "controllers/CoreContentController.php"
     },
+    "main_class": "CoreContentController",
     "objects": {
         "UliCMS\\CoreContent\\Models\\ViewModels\\DiffViewModel": "models/DiffViewModel.php",
         "UliCMS\\CoreContent\\PageTableRenderer": "utils/PageTableRenderer.php",

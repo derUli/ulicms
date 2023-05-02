@@ -245,4 +245,15 @@ class CommentsController extends MainClass {
 
         return $comment;
     }
+
+    public function cron() {
+        // Delete ip addresses of comments after 48 hours to be GDPR compliant
+        if (Settings::get('delete_ips_after_48_hours')) {
+        // Optional keep stored ip addresses of spam comments
+        $keep_spam_ips = (bool)Settings::get('keep_spam_ips');
+
+        Comment::deleteIpsAfter48Hours($keep_spam_ips);
+    }
+
+    }
 }
