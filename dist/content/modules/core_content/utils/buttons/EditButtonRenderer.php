@@ -11,7 +11,6 @@ use Template;
 use User;
 
 use function App\HTML\icon;
-
 use function App\HTML\Link;
 
 class EditButtonRenderer {

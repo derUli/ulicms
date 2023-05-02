@@ -22,7 +22,7 @@ $composerAutoloadFile = ULICMS_ROOT . '/vendor/autoload.php';
 if (is_file($composerAutoloadFile)) {
     require_once $composerAutoloadFile;
 } else {
-    exit('Could not find autoloader. Run \'composer install\'.\n');
+    exit("Could not find autoloader. Run \"composer install\".\n");
 }
 
 $coreBootstrap = new CoreBootstrap(ULICMS_ROOT);
