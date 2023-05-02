@@ -5,7 +5,7 @@ use App\Translations\JSTranslation;
 class JSTranslationTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
         require_once getLanguageFilePath('en');
-        require_once ModuleHelper::buildModuleRessourcePath('core_help', 'lang/en.php');
+        require_once \App\Helpers\ModuleHelper::buildModuleRessourcePath('core_help', 'lang/en.php');
     }
 
     public function testConstructorWithKeys(): void {

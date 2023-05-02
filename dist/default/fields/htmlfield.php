@@ -22,7 +22,7 @@ if ($value === null) {
           echo 'required';
       }
 ?>
-              <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>><?php Template::escape($value); ?></textarea>
+              <?php echo \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>><?php Template::escape($value); ?></textarea>
               <?php if ($field->helpText) { ?>
         <small><?php translate($field->helpText); ?></small>
     <?php } ?>

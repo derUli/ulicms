@@ -18,7 +18,7 @@ if (! $permissionChecker->hasPermission('install_packages')) {
     ?>
     <p>
         <a
-            href="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, 'redirectToPackageView'); ?>"
+            href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(PackageController::class, 'redirectToPackageView'); ?>"
             class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php translate('back'); ?></a>
     </p>
     <h1><?php translate('install'); ?></h1>
@@ -94,7 +94,7 @@ if (! $permissionChecker->hasPermission('install_packages')) {
             ?>
             <p>
                 <a
-                    href="<?php echo ModuleHelper::buildActionURL('available_modules'); ?>"
+                    href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('available_modules'); ?>"
                     class="btn btn-default"><i class="fas fa-box"></i>
                     <?php translate('install_another_package'); ?></a>
             </p>

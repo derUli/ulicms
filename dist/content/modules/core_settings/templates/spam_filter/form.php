@@ -8,7 +8,7 @@ use App\Translations\JSTranslation;
 ?>
 <p>
     <a
-        href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
+        href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_categories'); ?>"
         class="btn btn-default btn-back is-not-ajax"><i class="fas fa-arrow-left"></i> <?php translate('back'); ?></a>
 </p>
 <h1><?php translate('spamfilter'); ?></h1>
@@ -19,7 +19,7 @@ $permissionChecker = PermissionChecker::fromCurrentUser();
 if ($permissionChecker->hasPermission('spam_filter')) {
     ?>
     <form id="spamfilter_settings" name="?action=spam_filter" method="post">
-        <?php echo ModuleHelper::buildMethodCallForm('SpamFilterController', 'save'); ?>
+        <?php echo \App\Helpers\ModuleHelper::buildMethodCallForm('SpamFilterController', 'save'); ?>
         <div class="checkbox">
             <label for="spamfilter_enabled"> <input type="checkbox"
                                                     id="spamfilter_enabled" name="spamfilter_enabled"
@@ -117,7 +117,7 @@ if ($permissionChecker->hasPermission('spam_filter')) {
     $jsTranslation = new JSTranslation([], 'SettingsTranslation');
     $jsTranslation->addKey('changes_were_saved');
     $jsTranslation->render();
-    enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/spam_filter.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/spam_filter.js'));
     combinedScriptHtml();
 } else {
     noPerms();

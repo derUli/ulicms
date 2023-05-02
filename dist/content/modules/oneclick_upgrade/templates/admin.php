@@ -42,7 +42,7 @@ use function App\HTML\text;
 </form>
 <?php
 enqueueScriptFile(
-    ModuleHelper::buildRessourcePath(
+    \App\Helpers\ModuleHelper::buildRessourcePath(
         'oneclick_upgrade',
         'js/settings.js'
     )

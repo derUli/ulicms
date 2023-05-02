@@ -40,7 +40,7 @@ class Button {
             $htmlAttributes['class'] = ButtonType::TYPE_BASIC;
         }
 
-        $attributesHtml = ModuleHelper::buildHTMLAttributesFromArray(
+        $attributesHtml = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray(
             $htmlAttributes
         );
 

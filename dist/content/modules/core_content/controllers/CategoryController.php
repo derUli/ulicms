@@ -18,7 +18,7 @@ class CategoryController extends \App\Controllers\Controller {
         // TODO: validate required fields
         Categories::addCategory($name, $description);
 
-        Response::redirect(ModuleHelper::buildActionURL('categories'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('categories'));
     }
 
     public function _createPost(string $name, string $description): ?int {
@@ -33,7 +33,7 @@ class CategoryController extends \App\Controllers\Controller {
         // TODO: validate required fields
         Categories::updateCategory($id, $name, $description);
 
-        Response::redirect(ModuleHelper::buildActionURL('categories'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('categories'));
     }
 
     public function _updatePost(int $id, string $name, string $description): ?int {
@@ -47,7 +47,7 @@ class CategoryController extends \App\Controllers\Controller {
             Categories::deleteCategory($del);
         }
 
-        Response::redirect(ModuleHelper::buildActionURL('categories'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('categories'));
     }
 
     public function _deletePost($id): bool {

@@ -14,7 +14,7 @@ $permissionChecker = PermissionChecker::fromCurrentUser();
 if ($permissionChecker->hasPermission('favicon')) {
     ?>
     <p>
-        <a href="<?php echo ModuleHelper::buildActionURL('design'); ?>"
+        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('design'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </p>
     <?php
@@ -58,7 +58,7 @@ if ($permissionChecker->hasPermission('favicon')) {
                                     class="btn btn-default"
                                     id="delete-favicon"
                                     data-url="<?php
-                echo ModuleHelper::buildMethodCallUrl(
+                echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
                     FaviconController::class,
                     'deleteFavicon'
                 );
@@ -126,7 +126,7 @@ if ($permissionChecker->hasPermission('favicon')) {
     $translation->render();
 
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
+        \App\Helpers\ModuleHelper::buildRessourcePath(
             'core_settings',
             'js/favicon.js'
         )

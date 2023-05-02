@@ -89,10 +89,10 @@ if ($permissionChecker->hasPermission('pages')) {
             </div>
             <div class="pageform" style="display: none">
                 <div class="top-bar">
-                    <a href="<?php echo ModuleHelper::buildActionURL('pages'); ?>"
+                    <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('pages'); ?>"
                        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
                        <?php
-                       echo ModuleHelper::buildMethodCallButton('PageController', 'delete', '<i class="fas fa-trash"></i> ' . get_translation('delete'), [
+                       echo \App\Helpers\ModuleHelper::buildMethodCallButton('PageController', 'delete', '<i class="fas fa-trash"></i> ' . get_translation('delete'), [
                            'class' => 'btn btn-danger',
                            'type' => 'submit'
                        ], [
@@ -101,15 +101,15 @@ if ($permissionChecker->hasPermission('pages')) {
                            'class' => 'pull-right delete-form page-delete-form'
                        ]);
             ?>
-                       <?php echo ModuleHelper::endForm(); ?>
+                       <?php echo \App\Helpers\ModuleHelper::endForm(); ?>
                 </div>
                 <?php
-                echo ModuleHelper::buildMethodCallForm('PageController', 'edit', [], 'post', [
+                echo \App\Helpers\ModuleHelper::buildMethodCallForm('PageController', 'edit', [], 'post', [
                     'id' => 'pageform-edit',
                     'class' => 'pageform main-form edit-page-form',
-                    'data-get-content-types-url' => ModuleHelper::buildMethodCallUrl(PageController::class, 'getContentTypes'),
-                    'data-slug-free-url' => ModuleHelper::buildMethodCallUrl(PageController::class, 'nextFreeSlug'),
-                    'data-parent-pages-url' => ModuleHelper::buildMethodCallUrl(PageController::class, 'filterParentPages')
+                    'data-get-content-types-url' => \App\Helpers\ModuleHelper::buildMethodCallUrl(PageController::class, 'getContentTypes'),
+                    'data-slug-free-url' => \App\Helpers\ModuleHelper::buildMethodCallUrl(PageController::class, 'nextFreeSlug'),
+                    'data-parent-pages-url' => \App\Helpers\ModuleHelper::buildMethodCallUrl(PageController::class, 'filterParentPages')
                 ]);
             ?>
                 <input type="hidden" name="edit_page" value="edit_page"> <input
@@ -790,7 +790,7 @@ if ($permissionChecker->hasPermission('pages')) {
                 echo ' selected';
             }
             ?>>[<?php translate('none'); ?>]</option>
-                                            <?php foreach (ModuleHelper::getAllEmbedModules() as $module) { ?>
+                                            <?php foreach (\App\Helpers\ModuleHelper::getAllEmbedModules() as $module) { ?>
                                         <option value="<?php echo $module; ?>"
                                         <?php
                 if ($module == $row->module) {
@@ -1040,7 +1040,7 @@ if ($permissionChecker->hasPermission('pages')) {
                 ?>
                                 <div class="field">
                                     <a
-                                        href="<?php esc(ModuleHelper::buildMethodCallUrl(CommentsController::class, 'filterComments', "content_id={$row->id}")); ?>"
+                                        href="<?php esc(\App\Helpers\ModuleHelper::buildMethodCallUrl(CommentsController::class, 'filterComments', "content_id={$row->id}")); ?>"
                                         class="btn btn-default" target="_blank"><i class="fa fa-comments"></i> <?php translate('comments_manage'); ?></a>
                                 </div>
                             <?php }
@@ -1205,10 +1205,10 @@ if ($permissionChecker->hasPermission('pages')) {
 
             \App\Helpers\BackendHelper::enqueueEditorScripts();
 
-            enqueueScriptFile(ModuleHelper::buildRessourcePath('core_content', 'js/pages/form.js'));
+            enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_content', 'js/pages/form.js'));
 
             combinedScriptHtml();
-            echo ModuleHelper::endForm();
+            echo \App\Helpers\ModuleHelper::endForm();
             ?>
             </div>
             <?php

@@ -20,7 +20,7 @@ if ($commentableContentTypeSettings) {
 }
 ?>
 <a
-    href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
+    href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_categories'); ?>"
     class="btn btn-default btn-back is-not-ajax">
     <i class="fa fa-arrow-left"></i> <?php translate('back'); ?>
 </a>
@@ -32,7 +32,7 @@ if ($commentableContentTypeSettings) {
     </div>
 <?php } ?>
 <?php
-echo ModuleHelper::buildMethodCallForm(
+echo \App\Helpers\ModuleHelper::buildMethodCallForm(
     CommunitySettingsController::class,
     'save',
     [],
@@ -78,14 +78,14 @@ echo App\HTML\Input::checkBox(
         <i class="fa fa-save"></i> <?php translate('save'); ?></button>
 </div>
 <?php
-echo ModuleHelper::endForm();
+echo \App\Helpers\ModuleHelper::endForm();
 
 $translation = new JSTranslation();
 $translation->addKey('changes_were_saved');
 $translation->render();
 
 enqueueScriptFile(
-    ModuleHelper::buildRessourcePath(
+    \App\Helpers\ModuleHelper::buildRessourcePath(
         'core_settings',
         'js/community_settings.js'
     )

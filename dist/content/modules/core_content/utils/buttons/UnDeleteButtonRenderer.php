@@ -38,7 +38,7 @@ class UnDeleteButtonRenderer {
                 '%title%' => getPageTitleByID($pageId)
             ]
         );
-        $actionUrl = ModuleHelper::buildMethodCallUrl(
+        $actionUrl = \App\Helpers\ModuleHelper::buildMethodCallUrl(
             PageController::class,
             'undelete',
             "id={$pageId}csrf_token=" . get_csrf_token()

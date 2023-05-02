@@ -50,7 +50,7 @@ if (! $permissionChecker->hasPermission('performance_settings')) {
 
     <a
         href="<?php
-        echo ModuleHelper::buildActionURL(
+        echo \App\Helpers\ModuleHelper::buildActionURL(
             'settings_categories'
         );
     ?>"
@@ -59,7 +59,7 @@ if (! $permissionChecker->hasPermission('performance_settings')) {
         <?php translate('back'); ?></a>
     <a
         href="<?php
-    echo ModuleHelper::buildMethodCallUrl(
+    echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
         'PerformanceSettingsController',
         'clearCache'
     );
@@ -70,7 +70,7 @@ if (! $permissionChecker->hasPermission('performance_settings')) {
 
     <h2><?php translate('performance'); ?></h2>
     <?php
-    echo ModuleHelper::buildMethodCallForm(
+    echo \App\Helpers\ModuleHelper::buildMethodCallForm(
         'PerformanceSettingsController',
         'save',
         [],
@@ -167,14 +167,14 @@ if (! $permissionChecker->hasPermission('performance_settings')) {
         </button>
     </div>
     <?php
-    echo ModuleHelper::endForm();
+    echo \App\Helpers\ModuleHelper::endForm();
 
     $translation = new JSTranslation();
     $translation->addKey('changes_were_saved');
     $translation->render();
 
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
+        \App\Helpers\ModuleHelper::buildRessourcePath(
             'core_settings',
             'js/performance.js'
         )

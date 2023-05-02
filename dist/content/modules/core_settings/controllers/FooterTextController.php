@@ -16,7 +16,7 @@ class FooterTextController extends \App\Controllers\Controller {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('design')
+            \App\Helpers\ModuleHelper::buildActionURL('design')
         );
     }
 }

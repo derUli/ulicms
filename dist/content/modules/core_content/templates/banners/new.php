@@ -13,7 +13,7 @@ if ($permissionChecker->hasPermission('banners')
     ?>
 
     <?php
-    echo ModuleHelper::buildMethodCallForm(
+    echo \App\Helpers\ModuleHelper::buildMethodCallForm(
         'BannerController',
         'create',
         [],
@@ -24,7 +24,7 @@ if ($permissionChecker->hasPermission('banners')
     );
     ?>
     <div class="field">
-        <a href="<?php echo ModuleHelper::buildActionURL('banner'); ?>"
+        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('banner'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
             <?php translate('back'); ?></a>
     </div>
@@ -126,7 +126,7 @@ if ($permissionChecker->hasPermission('banners')
             <?php translate('save'); ?></button>
     </div>
     <?php
-    echo ModuleHelper::endForm();
+    echo \App\Helpers\ModuleHelper::endForm();
 } else {
     noPerms();
 }

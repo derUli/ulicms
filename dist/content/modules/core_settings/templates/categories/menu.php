@@ -48,7 +48,7 @@ if ($permissionChecker->hasPermission('settings_simple')
             if ($permissionChecker->hasPermission('performance_settings')) {
                 ?>
             <a
-                href="<?php echo ModuleHelper::buildActionURL('performance_settings'); ?>"
+                href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('performance_settings'); ?>"
                 class="btn btn-default is-not-ajax"><i class="fas fa-tools"></i> <?php translate('performance'); ?></a> 
             <?php }
             ?>
@@ -56,7 +56,7 @@ if ($permissionChecker->hasPermission('settings_simple')
             if ($permissionChecker->hasPermission('community_settings')) {
                 ?>
             <a
-                href="<?php echo ModuleHelper::buildActionURL('community_settings'); ?>"
+                href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('community_settings'); ?>"
                 class="btn btn-default is-not-ajax"><i class="fas fa-tools"></i> <?php translate('comments'); ?></a> 
             <?php }
             ?>

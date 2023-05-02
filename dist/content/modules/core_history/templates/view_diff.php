@@ -12,7 +12,7 @@ if ($permissionChecker->hasPermission('pages')) {
     <p>
         <a
             href="<?php
-            echo ModuleHelper::buildActionURL(
+            echo \App\Helpers\ModuleHelper::buildActionURL(
                 'restore_version',
                 'content_id=' .
                                                                                 $diff->content_id
@@ -38,7 +38,7 @@ if ($permissionChecker->hasPermission('pages')) {
     <p>
         <a
             href="<?php
-        echo ModuleHelper::buildMethodCallUrl(
+        echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
             'HistoryController',
             'doRestore',
             'version_id=' .

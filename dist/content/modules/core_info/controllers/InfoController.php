@@ -36,7 +36,7 @@ class InfoController extends MainClass {
     }
 
     public function _getChangelogContent(): array {
-        $file = ModuleHelper::buildModuleRessourcePath(
+        $file = \App\Helpers\ModuleHelper::buildModuleRessourcePath(
             'core_info',
             'changelog.txt'
         );

@@ -38,7 +38,7 @@ class DeleteButtonRenderer {
                 '%title%' => getPageTitleByID($pageId)
             ]
         );
-        $actionUrl = ModuleHelper::buildMethodCallUrl(
+        $actionUrl = \App\Helpers\ModuleHelper::buildMethodCallUrl(
             PageController::class,
             'delete',
             "id={$pageId}&csrf_token=" . get_csrf_token()

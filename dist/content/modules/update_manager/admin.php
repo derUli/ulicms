@@ -51,7 +51,7 @@ function update_manager_admin(): void {
     </form>
     <?php
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
+        \App\Helpers\ModuleHelper::buildRessourcePath(
             'update_manager',
             'scripts/update_manager.js'
         )

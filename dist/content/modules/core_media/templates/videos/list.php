@@ -115,7 +115,7 @@ if ($permissionChecker->hasPermission('videos')) {
         </table>
     </div>
     <?php
-    enqueueScriptFile(ModuleHelper::buildModuleRessourcePath('core_media', 'js/video.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildModuleRessourcePath('core_media', 'js/video.js'));
     combinedScriptHtml();
     ?>
     <?php

@@ -14,7 +14,7 @@ if ($permissionChecker->hasPermission('users') && $permissionChecker->hasPermiss
     $ref = _esc(Request::getVar('ref', 'home'));
     ?>
     <div class="btn-toolbar">
-        <a href="<?php echo ModuleHelper::buildActionURL('admins'); ?>"
+        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('admins'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </div>
     <form action="index.php?sClass=UserController&sMethod=create"
@@ -162,7 +162,7 @@ if ($permissionChecker->hasPermission('users') && $permissionChecker->hasPermiss
     $translation->addKey('passwords_not_equal');
     $translation->render();
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
+        \App\Helpers\ModuleHelper::buildRessourcePath(
             'core_users',
             'js/users.js'
         )

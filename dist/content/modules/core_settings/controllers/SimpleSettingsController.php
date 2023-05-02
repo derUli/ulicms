@@ -43,7 +43,7 @@ class SimpleSettingsController extends \App\Controllers\Controller {
 
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('settings_simple')
+            \App\Helpers\ModuleHelper::buildActionURL('settings_simple')
         );
     }
 

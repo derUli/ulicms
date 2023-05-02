@@ -21,12 +21,12 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     }
     ?>
     <p>
-        <a href="<?php echo ModuleHelper::buildActionURL('settings_simple'); ?>"
+        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_simple'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </p>
     <h1><?php translate('homepage_title'); ?></h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm('HomepageTitleController', 'save', [], 'post', [
+    echo \App\Helpers\ModuleHelper::buildMethodCallForm('HomepageTitleController', 'save', [], 'post', [
         'id' => 'homepage_title_settings'
     ]);
     ?>
@@ -59,13 +59,13 @@ if ($permissionChecker->hasPermission('settings_simple')) {
         </tr>
     </table>
     <?php
-    echo ModuleHelper::endForm();
+    echo \App\Helpers\ModuleHelper::endForm();
 
     $translation = new JSTranslation();
     $translation->addKey('changes_were_saved');
     $translation->render();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/homepage_title.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/homepage_title.js'));
     combinedScriptHtml();
 } else {
     noPerms();

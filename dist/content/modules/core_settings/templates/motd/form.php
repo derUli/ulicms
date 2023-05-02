@@ -12,7 +12,7 @@ if ($permissionChecker->hasPermission('motd')) {
     ?>
     <div class="field">
         <a
-            href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
+            href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_categories'); ?>"
             class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </div>
     <h2><?php translate('motd'); ?></h2>
@@ -26,7 +26,7 @@ if ($permissionChecker->hasPermission('motd')) {
     <?php }
     ?>
     <?php
-    echo ModuleHelper::buildMethodCallForm('MOTDController', 'save', [], 'post', [
+    echo \App\Helpers\ModuleHelper::buildMethodCallForm('MOTDController', 'save', [], 'post', [
         'id' => 'motd_form'
     ]);
     ?>
@@ -72,9 +72,9 @@ if ($permissionChecker->hasPermission('motd')) {
 
     \App\Helpers\BackendHelper::enqueueEditorScripts();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/motd.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/motd.js'));
     combinedScriptHtml();
-    echo ModuleHelper::endForm();
+    echo \App\Helpers\ModuleHelper::endForm();
 } else {
     noPerms();
 }

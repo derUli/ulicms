@@ -21,12 +21,12 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     }
     ?>
     <p>
-        <a href="<?php echo ModuleHelper::buildActionURL('settings_simple'); ?>"
+        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_simple'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </p>
     <h1><?php get_translation('meta_description'); ?></h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm('MetaDescriptionController', 'save', [], 'post', [
+    echo \App\Helpers\ModuleHelper::buildMethodCallForm('MetaDescriptionController', 'save', [], 'post', [
         'id' => 'meta_description_settings'
     ]);
     ?>
@@ -63,13 +63,13 @@ if ($permissionChecker->hasPermission('settings_simple')) {
         </tr>
     </table>
     <?php
-    echo ModuleHelper::endForm();
+    echo \App\Helpers\ModuleHelper::endForm();
 
     $translation = new JSTranslation();
     $translation->addKey('changes_were_saved');
     $translation->render();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/meta_description.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/meta_description.js'));
     combinedScriptHtml();
 } else {
     noPerms();

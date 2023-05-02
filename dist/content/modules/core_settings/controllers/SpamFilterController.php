@@ -69,7 +69,7 @@ class SpamFilterController extends \App\Controllers\Controller {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('spam_filter')
+            \App\Helpers\ModuleHelper::buildActionURL('spam_filter')
         );
     }
 }

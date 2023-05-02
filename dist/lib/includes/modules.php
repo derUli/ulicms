@@ -8,7 +8,7 @@ use App\Constants\ModuleEvent;
 use App\Security\PrivacyCheckbox;
 
 function getModuleMeta($module, $attrib = null) {
-    $metadata_file = ModuleHelper::buildModuleRessourcePath(
+    $metadata_file = \App\Helpers\ModuleHelper::buildModuleRessourcePath(
         $module,
         'metadata.json',
         true
@@ -46,7 +46,7 @@ function do_event(
         }
 
         ob_start();
-        $escapedName = ModuleHelper::underscoreToCamel($name);
+        $escapedName = \App\Helpers\ModuleHelper::underscoreToCamel($name);
         if ($controller && method_exists($controller, $escapedName)) {
             echo $controller->{$escapedName}();
         } elseif (is_file($file1)) {

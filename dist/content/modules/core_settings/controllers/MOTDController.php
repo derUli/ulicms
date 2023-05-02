@@ -24,9 +24,9 @@ class MOTDController extends \App\Controllers\Controller {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL(
+            \App\Helpers\ModuleHelper::buildActionURL(
                 'motd',
-                ModuleHelper::buildQueryString(
+                \App\Helpers\ModuleHelper::buildQueryString(
                     [
                         'save' => '1',
                         'language' => Request::getVar('language')

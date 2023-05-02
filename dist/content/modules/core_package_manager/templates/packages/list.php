@@ -12,7 +12,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
     $manager = new ModuleManager();
     $manager->sync();
     $modules = $manager->getAllModules();
-    $anyEmbedModules = count(ModuleHelper::getAllEmbedModules()) > 0;
+    $anyEmbedModules = count(\App\Helpers\ModuleHelper::getAllEmbedModules()) > 0;
     ?>
 
     <div class="btn-toolbar">
@@ -54,7 +54,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                     ?>
                     <tr>
                         <td><a
-                                href="<?php esc(ModuleHelper::buildAdminURL($module->getName())); ?>"
+                                href="<?php esc(\App\Helpers\ModuleHelper::buildAdminURL($module->getName())); ?>"
                                 class="<?php esc($btnClass); ?>"
                                 <?php
                                 if (! $hasAdminPage || ! $isEnabled) {
@@ -89,11 +89,11 @@ if ($permissionChecker->hasPermission('list_packages')) {
                             <div class="btn-toolbar">
                                 <span class="btn btn-info btn-sm remote-alert icon"
                                       title="<?php translate('info'); ?>"
-                                      data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, 'getModuleInfo', "name={$module->getName()}"); ?>"><i
+                                      data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(PackageController::class, 'getModuleInfo', "name={$module->getName()}"); ?>"><i
                                         class="fas fa-info-circle"></i> </span>
                                     <?php
                                 $canToggleModule = (getModuleMeta($module->getName(), 'source') !== 'core' && $permissionChecker->hasPermission('enable_disable_module'));
-                    echo ModuleHelper::buildMethodCallForm(PackageController::class, 'toggleModule', [
+                    echo \App\Helpers\ModuleHelper::buildMethodCallForm(PackageController::class, 'toggleModule', [
                         'name' => $module->getName()
                     ], RequestMethod::POST, [
                         'class' => 'inline-block toggle-module-form',
@@ -120,10 +120,10 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                 echo 'display:none';
                             }
                     ?>" title="<?php translate('enable_module'); ?>"><?php translate('off'); ?></button>
-                                        <?php echo ModuleHelper::endForm(); ?>
+                                        <?php echo \App\Helpers\ModuleHelper::endForm(); ?>
                                         <?php
                     if ($permissionChecker->hasPermission('remove_packages') && getModuleMeta($module->getName(), 'source') !== 'core') {
-                        echo ModuleHelper::buildMethodCallForm(PackageController::class, 'uninstallModule', [
+                        echo \App\Helpers\ModuleHelper::buildMethodCallForm(PackageController::class, 'uninstallModule', [
                             'name' => $module->getName()
                         ], RequestMethod::POST, [
                             'class' => 'inline-block uninstall-form',
@@ -137,7 +137,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </button>
                                     <?php
-                                    echo ModuleHelper::endForm();
+                                    echo \App\Helpers\ModuleHelper::endForm();
                     }
                     ?>
                             </div>
@@ -186,7 +186,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                     title="<?php translate('set_as_default_theme'); ?>"
                                     data-theme="<?php esc($theme); ?>"
                                     data-url="<?php
-                        echo ModuleHelper::buildMethodCallUrl(
+                        echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
                             DesignSettingsController::class,
                             'setDefaultTheme',
                             "name={$theme}"
@@ -205,7 +205,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                     title="<?php translate('set_as_mobile_default_theme'); ?>"
                                     data-theme="<?php esc($theme); ?>"
                                     data-url="<?php
-                        echo ModuleHelper::buildMethodCallUrl(
+                        echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
                             DesignSettingsController::class,
                             'setDefaultMobileTheme',
                             "name={$theme}"
@@ -217,7 +217,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                 <span class="btn btn-info btn-sm remote-alert icon"
                                       title="<?php translate('info'); ?>"
                                       data-url="<?php
-                      echo ModuleHelper::buildMethodCallUrl(
+                      echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
                           'PackageController',
                           'getThemeInfo',
                           "name={$theme}"
@@ -231,7 +231,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                     <span class="btn btn-info btn-sm remote-alert icon"
                                           title="<?php translate('show_preview'); ?>"
                                           data-url="<?php
-                                          echo ModuleHelper::buildMethodCallUrl(
+                                          echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
                                               DesignSettingsController::class,
                                               'themePreview',
                                               "theme={$theme}"
@@ -244,7 +244,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                 ?>
                                 <?php
                                 if ($permissionChecker->hasPermission('remove_packages') && getModuleMeta($module->getName(), 'source') !== 'core') {
-                                    echo ModuleHelper::buildMethodCallForm(PackageController::class, 'uninstallTheme', [
+                                    echo \App\Helpers\ModuleHelper::buildMethodCallForm(PackageController::class, 'uninstallTheme', [
                                         'name' => $theme
                                     ], RequestMethod::POST, [
                                         'class' => 'inline-block uninstall-form',
@@ -258,7 +258,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </button>
                                     <?php
-                                    echo ModuleHelper::endForm();
+                                    echo \App\Helpers\ModuleHelper::endForm();
                                 }
                     ?>
                             </div>
@@ -270,7 +270,7 @@ if ($permissionChecker->hasPermission('list_packages')) {
         </table>
     </div>
     <?php
-    enqueueScriptFile(ModuleHelper::buildRessourcePath(PackageController::MODULE_NAME, 'js/list.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath(PackageController::MODULE_NAME, 'js/list.js'));
     combinedScriptHtml();
     ?>
     <?php

@@ -15,7 +15,7 @@ class PackageController extends MainClass {
 
     public function afterSessionStart(): void {
         if (\App\Helpers\BackendHelper::getAction() == 'modules') {
-            Response::redirect(ModuleHelper::buildActionURL('packages'));
+            Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('packages'));
         }
     }
 
@@ -102,7 +102,7 @@ class PackageController extends MainClass {
     public function redirectToPackageView(): void {
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('packages')
+            \App\Helpers\ModuleHelper::buildActionURL('packages')
         );
     }
 

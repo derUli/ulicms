@@ -14,7 +14,7 @@ if ($permissionChecker->hasPermission('audio')
     if (Database::getNumRows($result) > 0) {
         $dataset = Database::fetchObject($result);
         ?><p>
-            <a href="<?php echo ModuleHelper::buildActionURL('audio'); ?>"
+            <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('audio'); ?>"
                class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
                 <?php translate('back'); ?></a>
         </p>

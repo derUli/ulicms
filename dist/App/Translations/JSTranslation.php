@@ -67,7 +67,7 @@ class JSTranslation {
             if (str_starts_with($key, 'TRANSLATION_')) {
                 $key = substr($key, 12);
             }
-            $jsName = ucfirst(ModuleHelper::underscoreToCamel(strtolower($key)));
+            $jsName = ucfirst(\App\Helpers\ModuleHelper::underscoreToCamel(strtolower($key)));
             $key = strtoupper($key);
             $value = get_translation($key);
             $value = str_replace('"', '\\"', $value);

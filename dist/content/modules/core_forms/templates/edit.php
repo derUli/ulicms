@@ -17,13 +17,13 @@ if (! $permissionChecker->hasPermission('forms') || ! $permissionChecker->hasPer
     if ($form) {
         ?>
         <div class="field">
-            <a href="<?php echo ModuleHelper::buildActionURL('forms'); ?>"
+            <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('forms'); ?>"
                class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
                 <?php translate('back'); ?></a>
         </div>
         <h1><?php translate('edit_form'); ?></h1>
         <?php
-        echo ModuleHelper::buildMethodCallForm(
+        echo \App\Helpers\ModuleHelper::buildMethodCallForm(
             'FormController',
             'update'
         );
@@ -136,6 +136,6 @@ if (! $permissionChecker->hasPermission('forms') || ! $permissionChecker->hasPer
             </button>
         </div>
         <?php
-        echo ModuleHelper::endForm();
+        echo \App\Helpers\ModuleHelper::endForm();
     }
 }

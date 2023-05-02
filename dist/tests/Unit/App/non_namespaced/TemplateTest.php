@@ -479,7 +479,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetBodyClassesContainsModule(): void {
         $_SESSION['language'] = 'de';
-        $_GET['slug'] = ModuleHelper::getFirstPageWithModule()->slug;
+        $_GET['slug'] = \App\Helpers\ModuleHelper::getFirstPageWithModule()->slug;
         $this->assertMatchesRegularExpression(
             '/page-id-\d+ (.+)containsModule/',
             Template::getBodyClasses()

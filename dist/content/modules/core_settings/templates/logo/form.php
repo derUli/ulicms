@@ -20,7 +20,7 @@ if ($permissionChecker->hasPermission('logo')) {
     ?>
     <p>
         <a
-            href="<?php echo ModuleHelper::buildActionURL('design'); ?>"
+            href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('design'); ?>"
             class="btn btn-default btn-back is-not-ajax">
             <i class="fa fa-arrow-left"></i> 
             <?php translate('back'); ?>
@@ -60,7 +60,7 @@ if ($permissionChecker->hasPermission('logo')) {
                                         class="btn btn-default"
                                         id="delete-logo"
                                         data-url="<?php
-                                        echo ModuleHelper::buildMethodCallUrl(
+                                        echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
                                             LogoController::class,
                                             'deleteLogo'
                                         );
@@ -106,7 +106,7 @@ if ($permissionChecker->hasPermission('logo')) {
     $translation->render();
 
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
+        \App\Helpers\ModuleHelper::buildRessourcePath(
             'core_settings',
             'js/logo.js'
         )

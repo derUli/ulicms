@@ -52,7 +52,7 @@ abstract class BackendHelper extends Helper {
         if (get_html_editor() == HtmlEditor::CKEDITOR) {
             echo Script::fromFile('ckeditor/ckeditor.js');
 
-            enqueueScriptFile(ModuleHelper::buildRessourcePath(
+            enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath(
                 'core_content',
                 'js/pages/init-ckeditor.js'
             ));
@@ -82,7 +82,7 @@ abstract class BackendHelper extends Helper {
             '../node_modules/codemirror-minified/mode/css/css.js'
         );
 
-        enqueueScriptFile(ModuleHelper::buildRessourcePath(
+        enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath(
             'core_content',
             'js/pages/init-codemirror.js'
         ));

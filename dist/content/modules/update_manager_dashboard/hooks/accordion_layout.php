@@ -11,7 +11,7 @@ if ($permissionChecker->hasPermission('install_packages')) {
         <h2 class="accordion-header"><?php translate('update_manager'); ?></h2>
         <div class="accordion-content">
             <p><?php translate('PACKAGE_UPDATES_ARE_AVAILABLE'); ?></p> <a
-                href="<?php echo ModuleHelper::buildAdminURL('update_manager'); ?>" class="btn btn-info"><?php translate('show_available_updates'); ?>
+                href="<?php echo \App\Helpers\ModuleHelper::buildAdminURL('update_manager'); ?>" class="btn btn-info"><?php translate('show_available_updates'); ?>
             </a>
         </div>
     </div>

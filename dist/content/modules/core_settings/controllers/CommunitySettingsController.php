@@ -37,7 +37,7 @@ class CommunitySettingsController extends \App\Controllers\Controller {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL(
+            \App\Helpers\ModuleHelper::buildActionURL(
                 'community_settings',
                 'save=1'
             )

@@ -16,7 +16,7 @@ if ($permissionChecker->hasPermission('open_graph')) {
     }
     ?>
     <p>
-        <a href="<?php echo ModuleHelper::buildActionURL('settings_simple'); ?>"
+        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_simple'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </p>
     <h1><?php translate('open_graph'); ?></h1>
@@ -26,7 +26,7 @@ if ($permissionChecker->hasPermission('open_graph')) {
     );
     ?>
     <?php
-    echo ModuleHelper::buildMethodCallForm('OpenGraphController', 'save', [], 'post', [
+    echo \App\Helpers\ModuleHelper::buildMethodCallForm('OpenGraphController', 'save', [], 'post', [
         'id' => 'open_graph'
     ]);
     ?>
@@ -64,13 +64,13 @@ if ($permissionChecker->hasPermission('open_graph')) {
         </tr>
     </table>
     <?php
-    echo ModuleHelper::endForm();
+    echo \App\Helpers\ModuleHelper::endForm();
 
     $translation = new JSTranslation();
     $translation->addKey('changes_were_saved');
     $translation->render();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/open_graph.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/open_graph.js'));
     combinedScriptHtml();
 } else {
     noPerms();

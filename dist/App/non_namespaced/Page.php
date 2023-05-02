@@ -460,7 +460,7 @@ class Page extends AbstractContent {
 
     // returns the url of this page
     public function getUrl(?string $suffix = null): string {
-        return ModuleHelper::getFullPageURLByID($this->id, $suffix);
+        return \App\Helpers\ModuleHelper::getFullPageURLByID($this->id, $suffix);
     }
 
     public function checkAccess(): ?string {

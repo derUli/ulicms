@@ -32,7 +32,7 @@ class ErrorPagesController extends \App\Controllers\Controller {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('error_pages')
+            \App\Helpers\ModuleHelper::buildActionURL('error_pages')
         );
     }
 }

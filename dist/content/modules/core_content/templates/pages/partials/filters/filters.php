@@ -8,7 +8,7 @@ $show_filters = Settings::get('user/' . get_user_id() . '/show_filters');
     class="filter-wrapper"
     data-parent-pages-url="<?php
     echo
-    ModuleHelper::buildMethodCallUrl(
+    \App\Helpers\ModuleHelper::buildMethodCallUrl(
         PageController::class,
         'getParentSelection',
         'no_id=1'
@@ -17,7 +17,7 @@ $show_filters = Settings::get('user/' . get_user_id() . '/show_filters');
     >
     <div class="checkbox">
         <label><input type="checkbox" class="js-switch" name="show_filters" id="show_filters"
-                      value="1" data-url="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, 'toggleFilters'); ?>"
+                      value="1" data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(PageController::class, 'toggleFilters'); ?>"
                       <?php
                   if ($show_filters) {
                       echo 'checked';

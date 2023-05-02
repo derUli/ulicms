@@ -11,7 +11,7 @@ class FormController extends \App\Controllers\Controller {
 
     public function createPost(): void {
         $this->_createPost();
-        Response::redirect(ModuleHelper::buildActionURL('forms'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('forms'));
     }
 
     public function _createPost(): ?int {
@@ -42,7 +42,7 @@ class FormController extends \App\Controllers\Controller {
 
     public function updatePost(): void {
         $this->_updatePost();
-        Response::redirect(ModuleHelper::buildActionURL('forms'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('forms'));
     }
 
     public function _updatePost(): bool {
@@ -78,7 +78,7 @@ class FormController extends \App\Controllers\Controller {
     public function deletePost(): void {
         $id = Request::getVar('del', 0, 'int');
         $this->_deletePost($id);
-        Response::redirect(ModuleHelper::buildActionURL('forms'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('forms'));
     }
 
     public function _deletePost(int $id): bool {

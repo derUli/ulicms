@@ -54,7 +54,7 @@ class LogoController extends \App\Controllers\Controller {
             do_event('after_upload_logo');
         }
 
-        Response::redirect(ModuleHelper::buildActionURL('logo'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('logo'));
     }
 
     public function _deleteLogo(): bool {
@@ -81,7 +81,7 @@ class LogoController extends \App\Controllers\Controller {
             $success ?
                     HttpStatusCode::OK :
                     HttpStatusCode::INTERNAL_SERVER_ERROR,
-            ModuleHelper::buildActionURL('logo')
+            \App\Helpers\ModuleHelper::buildActionURL('logo')
         );
     }
 

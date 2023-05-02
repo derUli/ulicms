@@ -130,7 +130,7 @@ if (get_ID()) {
 
 if (isset($_GET['goid'])) {
     $goid = (int)$_GET['goid'];
-    $url = ModuleHelper::getFullPageURLByID($goid);
+    $url = \App\Helpers\ModuleHelper::getFullPageURLByID($goid);
     if ($url) {
         Response::redirect($url, 301);
     } else {

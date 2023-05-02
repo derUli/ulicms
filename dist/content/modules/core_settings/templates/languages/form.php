@@ -13,11 +13,11 @@ if ($permissionChecker->hasPermission('languages')) {
     ?>
     <p>
         <a
-            href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
+            href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_categories'); ?>"
             class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </p>
     <h2><?php translate('languages'); ?></h2>
-    <?php echo ModuleHelper::buildMethodCallForm('LanguageController', 'create'); ?>
+    <?php echo \App\Helpers\ModuleHelper::buildMethodCallForm('LanguageController', 'create'); ?>
     <div class="scroll">
         <table style="border: 0">
             <tr>
@@ -34,7 +34,7 @@ if ($permissionChecker->hasPermission('languages')) {
                 <i class="fa fa-plus"></i> <?php translate('add_language'); ?></button>
         </div>
     </div>
-    <?php echo ModuleHelper::endForm(); ?>
+    <?php echo \App\Helpers\ModuleHelper::endForm(); ?>
 
     <?php
     if (count($languages) > 0) {
@@ -72,10 +72,10 @@ if ($permissionChecker->hasPermission('languages')) {
                                     ?>
                                     <a class="btn btn-primary btn-make-default"
                                        href="<?php
-                                       echo ModuleHelper::buildMethodCallUrl(
+                                       echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
                                            'LanguageController',
                                            'setDefaultLanguage',
-                                           ModuleHelper::buildQueryString(
+                                           \App\Helpers\ModuleHelper::buildQueryString(
                                                ['default' => $language->getLanguageCode()
                                                ]
                                            )
@@ -98,8 +98,8 @@ if ($permissionChecker->hasPermission('languages')) {
                             </td>
                             <td>
                                 <?php
-                                echo ModuleHelper::deleteButton(
-                                    ModuleHelper::buildMethodCallUrl(LanguageController::class, 'delete'),
+                                echo \App\Helpers\ModuleHelper::deleteButton(
+                                    \App\Helpers\ModuleHelper::buildMethodCallUrl(LanguageController::class, 'delete'),
                                     ['id' => $language->getID()]
                                 );
                         ?>
@@ -112,7 +112,7 @@ if ($permissionChecker->hasPermission('languages')) {
         </div>
         <?php
         enqueueScriptFile(
-            ModuleHelper::buildModuleRessourcePath(
+            \App\Helpers\ModuleHelper::buildModuleRessourcePath(
                 'core_settings',
                 'js/languages.js'
             )

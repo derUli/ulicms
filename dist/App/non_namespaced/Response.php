@@ -44,10 +44,10 @@ if (! $isFm) {
             $status = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
             if ($controller == null) {
-                self::redirect(ModuleHelper::buildActionURL($action), $status);
+                self::redirect(\App\Helpers\ModuleHelper::buildActionURL($action), $status);
             }
             self::redirect(
-                ModuleHelper::buildMethodCallUrl(
+                \App\Helpers\ModuleHelper::buildMethodCallUrl(
                     $controller,
                     $action
                 ),
@@ -90,9 +90,9 @@ if (! $isFm) {
                         ),
                         getCurrentLanguage()
                     );
-                    $url = ModuleHelper::getFullPageURLByID($page->id);
+                    $url = \App\Helpers\ModuleHelper::getFullPageURLByID($page->id);
                 } catch (Exception $e) {
-                    $url = ModuleHelper::getBaseUrl();
+                    $url = \App\Helpers\ModuleHelper::getBaseUrl();
                 }
             }
             return $url;

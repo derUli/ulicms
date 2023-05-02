@@ -123,7 +123,7 @@ if ($permissionChecker->hasPermission('banners')) {
     </div>
     <?php
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
+        \App\Helpers\ModuleHelper::buildRessourcePath(
             'core_content',
             'js/banners.js'
         )

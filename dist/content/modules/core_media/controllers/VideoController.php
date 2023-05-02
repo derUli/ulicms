@@ -91,7 +91,7 @@ class VideoController extends \App\Controllers\Controller {
                     . "{$timestamp});");
         }
 
-        Response::redirect(ModuleHelper::buildActionURL('videos'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('videos'));
     }
 
     public function _updatePost(): bool {
@@ -114,7 +114,7 @@ class VideoController extends \App\Controllers\Controller {
 
     public function updatePost(): void {
         $this->_updatePost();
-        Response::redirect(ModuleHelper::buildActionURL('videos'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('videos'));
     }
 
     public function deletePost(): void {
@@ -146,6 +146,6 @@ class VideoController extends \App\Controllers\Controller {
             Database::query('DELETE FROM ' . Database::tableName('videos') . ' where id = ' .
                 (int)$_REQUEST['delete']);
         }
-        Response::redirect(ModuleHelper::buildActionURL('videos'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('videos'));
     }
 }

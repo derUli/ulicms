@@ -33,7 +33,7 @@ function imageTag(string $file, array $htmlAttributes = []): string {
     if (! isset($htmlAttributes['src'])) {
         $htmlAttributes['src'] = $file;
     }
-    $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+    $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
     return "<img {$attribHTML}>";
 }
 
@@ -93,7 +93,7 @@ function link(
         $text = _esc($text);
     }
 
-    $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+    $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
 
     return "<a {$attribHTML}>{$text}</a>";
 }
@@ -113,7 +113,7 @@ function icon(string $classes, array $htmlAttributes = []): string {
         $htmlAttributes['class'] = "{$classes} {$htmlAttributes['class']}";
     }
 
-    $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+    $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
     return "<i {$attribHTML}></i>";
 }
 

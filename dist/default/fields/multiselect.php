@@ -27,7 +27,7 @@ if ($value === null) {
         echo 'required';
     }
 ?>
-            <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>>
+            <?php echo \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>>
                 <?php foreach ($options as $optionValue => $optionTitle) { ?>
             <option value="<?php Template::escape($optionValue); ?>"
             <?php

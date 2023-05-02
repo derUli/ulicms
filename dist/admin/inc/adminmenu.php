@@ -55,7 +55,7 @@ $entries[] = new MenuEntry(
 $entries[] = new MenuEntry(
     '<i class="fas fa-box"></i> '
     . get_translation('packages'),
-    ModuleHelper::buildActionURL('packages'),
+    \App\Helpers\ModuleHelper::buildActionURL('packages'),
     'packages',
     'list_packages'
 );
@@ -101,7 +101,7 @@ $entries[] = new MenuEntry(
     false,
     true
 );
-$logoutUrl = ModuleHelper::buildMethodCallUrl(
+$logoutUrl = \App\Helpers\ModuleHelper::buildMethodCallUrl(
     SessionManager::class,
     'logout'
 );

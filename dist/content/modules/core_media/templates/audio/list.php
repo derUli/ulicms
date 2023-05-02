@@ -124,7 +124,7 @@ if ($permissionChecker->hasPermission('audio')) {
     </div>
     <?php
     enqueueScriptFile(
-        ModuleHelper::buildModuleRessourcePath(
+        \App\Helpers\ModuleHelper::buildModuleRessourcePath(
             'core_media',
             'js/audio.js'
         )

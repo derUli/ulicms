@@ -83,7 +83,7 @@ class OtherSettingsController extends \App\Controllers\Controller {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('other_settings')
+            \App\Helpers\ModuleHelper::buildActionURL('other_settings')
         );
     }
 }

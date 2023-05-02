@@ -92,7 +92,7 @@ class Module {
     }
 
     public function hasAdminPage(): bool {
-        $controller = ModuleHelper::getMainController($this->name);
+        $controller = \App\Helpers\ModuleHelper::getMainController($this->name);
         return
             is_file(getModuleAdminFilePath($this->name)) ||
             is_file(getModuleAdminFilePath2($this->name)) ||
@@ -104,7 +104,7 @@ class Module {
     }
 
     public function isEmbedModule(): bool {
-        return ModuleHelper::isEmbedModule($this->name);
+        return \App\Helpers\ModuleHelper::isEmbedModule($this->name);
     }
 
     public function getShortCode(): ?string {
@@ -158,7 +158,7 @@ class Module {
         $uninstallScript2 = getModuleUninstallScriptPath2($name, true);
 
         // Uninstall Script ausführen, sofern vorhanden
-        $mainController = ModuleHelper::getMainController($name);
+        $mainController = \App\Helpers\ModuleHelper::getMainController($name);
         return ($mainController &&
                 method_exists($mainController, 'uninstall')) ||
                 is_file($uninstallScript1) ||

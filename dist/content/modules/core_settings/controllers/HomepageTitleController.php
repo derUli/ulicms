@@ -29,7 +29,7 @@ class HomepageTitleController extends \App\Controllers\Controller {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('homepage_title')
+            \App\Helpers\ModuleHelper::buildActionURL('homepage_title')
         );
     }
 }

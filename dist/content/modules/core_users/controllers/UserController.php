@@ -55,7 +55,7 @@ class UserController extends \App\Controllers\Controller {
 
     public function createPost(): void {
         $this->_createPost();
-        Response::redirect(ModuleHelper::buildActionURL('admins'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('admins'));
     }
 
     public function updatePost(): void {
@@ -133,7 +133,7 @@ class UserController extends \App\Controllers\Controller {
             if (! $permissionChecker->hasPermission('users')) {
                 Response::redirect('index.php');
             } else {
-                Response::redirect(ModuleHelper::buildActionURL('admins'));
+                Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('admins'));
             }
         }
         ExceptionResult(get_translation('forbidden'), HttpStatusCode::FORBIDDEN);
@@ -143,7 +143,7 @@ class UserController extends \App\Controllers\Controller {
         $id = Request::getVar('id', 0, 'int');
 
         $this->_deletePost($id);
-        Response::redirect(ModuleHelper::buildActionURL('admins'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('admins'));
     }
 
     public function _deletePost(int $id): bool {

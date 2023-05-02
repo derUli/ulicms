@@ -102,7 +102,7 @@ if (! $admin_logo) {
         </a>
     </div>
     <div class="col col-xs-12 col-lg-2">
-        <a href="<?php echo ModuleHelper::buildActionURL('legal_composer'); ?>" 
+        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('legal_composer'); ?>" 
         class="btn btn-info is-ajax"
         data-url="">
             <i class="fas fa-file-contract"></i>

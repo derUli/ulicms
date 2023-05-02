@@ -13,7 +13,7 @@ if ($permissionChecker->hasPermission('pages')) {
     ?>
     <p>
         <a
-            href="<?php echo ModuleHelper::buildActionURL('pages_edit', 'page=' . $content_id); ?>"
+            href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('pages_edit', 'page=' . $content_id); ?>"
             class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </p>
     <h1><?php translate('versions'); ?></h1>
@@ -45,7 +45,7 @@ if ($permissionChecker->hasPermission('pages')) {
                     ?></td>
                         <td><?php echo $revision->date; ?></td>
                         <td><a
-                                href="<?php echo ModuleHelper::buildMethodCallUrl('HistoryController', 'doRestore', 'version_id=' . $revision->id); ?>"
+                                href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('HistoryController', 'doRestore', 'version_id=' . $revision->id); ?>"
                                 class="btn btn-danger"
                                 onclick="return confirm('<?php translate('ask_for_restore'); ?>');"><i class="fas fa-undo"></i>
                                 <?php translate('restore'); ?></a>

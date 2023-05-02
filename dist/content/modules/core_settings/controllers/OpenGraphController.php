@@ -19,7 +19,7 @@ class OpenGraphController extends \App\Controllers\Controller {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('open_graph')
+            \App\Helpers\ModuleHelper::buildActionURL('open_graph')
         );
     }
 }

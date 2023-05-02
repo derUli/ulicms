@@ -15,7 +15,7 @@ class BannerController extends \App\Controllers\Controller {
 
     public function createPost(): void {
         $this->_createPost();
-        Response::redirect(ModuleHelper::buildActionURL('banner'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('banner'));
     }
 
     public function _createPost(): Banner {
@@ -45,7 +45,7 @@ class BannerController extends \App\Controllers\Controller {
     public function updatePost(): void {
         $this->_updatePost();
 
-        Response::redirect(ModuleHelper::buildActionURL('banner'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('banner'));
     }
 
     public function _updatePost(): Banner {
@@ -80,7 +80,7 @@ class BannerController extends \App\Controllers\Controller {
 
         $this->_deletePost($id);
         // Todo: handle errors
-        Response::redirect(ModuleHelper::buildActionURL('banner'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('banner'));
     }
 
     public function _deletePost(int $id): bool {

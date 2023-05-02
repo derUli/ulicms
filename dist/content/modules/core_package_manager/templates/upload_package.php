@@ -16,7 +16,7 @@ if (! $permissionChecker->hasPermission('install_packages')) {
 } else {
     ?>
     <p>
-        <a href="<?php echo ModuleHelper::buildActionURL('install_method'); ?>"
+        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('install_method'); ?>"
            class="btn btn-default btn-back is-ajax">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
             <?php translate('back'); ?></a>

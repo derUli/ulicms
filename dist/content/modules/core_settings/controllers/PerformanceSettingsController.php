@@ -31,7 +31,7 @@ class PerformanceSettingsController extends \App\Controllers\Controller {
 
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionUrl(
+            \App\Helpers\ModuleHelper::buildActionUrl(
                 'performance_settings',
                 'save=1'
             )
@@ -50,7 +50,7 @@ class PerformanceSettingsController extends \App\Controllers\Controller {
         $this->_clearCache();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('performance_settings')
+            \App\Helpers\ModuleHelper::buildActionURL('performance_settings')
         );
     }
 }

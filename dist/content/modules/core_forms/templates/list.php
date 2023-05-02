@@ -71,8 +71,8 @@ if (! $permissionChecker->hasPermission('forms')) {
                             </td>
                             <td class="text-center">
                                 <?php
-                                echo ModuleHelper::deleteButton(
-                                    ModuleHelper::buildMethodCallUrl(
+                                echo \App\Helpers\ModuleHelper::deleteButton(
+                                    \App\Helpers\ModuleHelper::buildMethodCallUrl(
                                         'FormController',
                                         'delete'
                                     ),

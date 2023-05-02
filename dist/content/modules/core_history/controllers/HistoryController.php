@@ -18,7 +18,7 @@ class HistoryController extends \App\Controllers\Controller {
                 CacheUtil::clearPageCache();
 
                 Response::redirect(
-                    ModuleHelper::buildActionURL(
+                    \App\Helpers\ModuleHelper::buildActionURL(
                         'pages_edit',
                         'page=' . $revision->content_id
                     )

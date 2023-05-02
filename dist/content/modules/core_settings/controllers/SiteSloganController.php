@@ -29,7 +29,7 @@ class SiteSloganController extends \App\Controllers\Controller {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('site_slogan')
+            \App\Helpers\ModuleHelper::buildActionURL('site_slogan')
         );
     }
 }

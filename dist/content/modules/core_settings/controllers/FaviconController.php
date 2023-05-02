@@ -64,12 +64,12 @@ class FaviconController extends \App\Controllers\Controller {
 
                 CacheUtil::clearPageCache();
 
-                Response::redirect(ModuleHelper::buildActionURL('favicon'));
+                Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('favicon'));
             }
 
             // Show error if uploaded file is not an image
             Response::redirect(
-                ModuleHelper::buildActionURL(
+                \App\Helpers\ModuleHelper::buildActionURL(
                     'favicon',
                     'error=UPLOAD_WRONG_FILE_FORMAT'
                 )
@@ -119,7 +119,7 @@ class FaviconController extends \App\Controllers\Controller {
             $success ?
                     HttpStatusCode::OK :
                     HttpStatusCode::INTERNAL_SERVER_ERROR,
-            ModuleHelper::buildActionURL('favicon')
+            \App\Helpers\ModuleHelper::buildActionURL('favicon')
         );
     }
 

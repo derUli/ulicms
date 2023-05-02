@@ -221,7 +221,7 @@ class User extends Model {
      */
     public function getWelcomeMailText(string $password): string {
         \App\Storages\ViewBag::set('user', $this);
-        \App\Storages\ViewBag::set('url', ModuleHelper::getBaseUrl());
+        \App\Storages\ViewBag::set('url', \App\Helpers\ModuleHelper::getBaseUrl());
         \App\Storages\ViewBag::set('password', $password);
         return Template::executeDefaultOrOwnTemplate('email/user_welcome.php');
     }
@@ -727,7 +727,7 @@ class User extends Model {
      */
     public function getAvatar(): ?string {
         // Fallback "No Avatar" picture
-        $avatarUrl = ModuleHelper::getBaseUrl(
+        $avatarUrl = \App\Helpers\ModuleHelper::getBaseUrl(
             ! is_admin_dir() ?
             '/admin/gfx/no_avatar.png' : '/gfx/no_avatar.png'
         );

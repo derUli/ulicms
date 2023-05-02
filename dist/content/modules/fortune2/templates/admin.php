@@ -17,7 +17,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 </form>
 <br />
 <form
-    action="<?php Template::escape(ModuleHelper::buildAdminURL('fortune2', 'sClass=Fortune&sMethod=doSomething')); ?>"
+    action="<?php Template::escape(\App\Helpers\ModuleHelper::buildAdminURL('fortune2', 'sClass=Fortune&sMethod=doSomething')); ?>"
     method="post">
         <?php csrf_token_html(); ?>
     <button type="submit" class="btn btn-default">POST</button>

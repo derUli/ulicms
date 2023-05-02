@@ -10,7 +10,7 @@ $q = $_GET['q'] ?? '';
 
 $modules = getAllModules();
 $hasSearch = in_array('extended_search', $modules);
-$searchPage = ModuleHelper::getFirstPageWithModule('extended_search');
+$searchPage = \App\Helpers\ModuleHelper::getFirstPageWithModule('extended_search');
 
 html5_doctype();
 og_html_prefix();

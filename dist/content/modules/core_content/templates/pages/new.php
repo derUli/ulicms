@@ -41,7 +41,7 @@ if (
         <?php require 'inc/loadspinner.php'; ?>
     </div>
     <?php
-    echo ModuleHelper::buildMethodCallForm(
+    echo \App\Helpers\ModuleHelper::buildMethodCallForm(
         'PageController',
         'create',
         [],
@@ -51,15 +51,15 @@ if (
             'id' => 'pageform',
             'style' => 'display:none',
             'class' => 'pageform main-form new-page-form',
-            'data-get-content-types-url' => ModuleHelper::buildMethodCallUrl(
+            'data-get-content-types-url' => \App\Helpers\ModuleHelper::buildMethodCallUrl(
                 PageController::class,
                 'getContentTypes'
             ),
-            'data-slug-free-url' => ModuleHelper::buildMethodCallUrl(
+            'data-slug-free-url' => \App\Helpers\ModuleHelper::buildMethodCallUrl(
                 PageController::class,
                 'nextFreeSlug'
             ),
-            'data-parent-pages-url' => ModuleHelper::buildMethodCallUrl(
+            'data-parent-pages-url' => \App\Helpers\ModuleHelper::buildMethodCallUrl(
                 PageController::class,
                 'filterParentPages'
             )
@@ -67,7 +67,7 @@ if (
     );
     ?>
     <p>
-        <a href="<?php echo ModuleHelper::buildActionURL('pages'); ?>"
+        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('pages'); ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
             <?php translate('back'); ?></a>
     </p>
@@ -596,7 +596,7 @@ if (
                     <select
                         name="module">
                         <option value="null">[<?php translate('none'); ?>]</option>
-                        <?php foreach (ModuleHelper::getAllEmbedModules() as $module) { ?>
+                        <?php foreach (\App\Helpers\ModuleHelper::getAllEmbedModules() as $module) { ?>
                             <option value="<?php echo $module; ?>"><?php echo $module; ?></option>
     <?php } ?>
                     </select>
@@ -786,11 +786,11 @@ if (
 
     \App\Helpers\BackendHelper::enqueueEditorScripts();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath('core_content', 'js/pages/form.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_content', 'js/pages/form.js'));
 
     combinedScriptHtml();
 
-    echo ModuleHelper::endForm();
+    echo \App\Helpers\ModuleHelper::endForm();
 } else {
     noPerms();
 }

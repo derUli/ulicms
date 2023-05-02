@@ -39,7 +39,7 @@ if ($login_welcome_text) {
     <?php translate('please_authenticate'); ?>
 </h3>
 <?php
-echo ModuleHelper::buildMethodCallForm(
+echo \App\Helpers\ModuleHelper::buildMethodCallForm(
     'SessionManager',
     'login',
     [],
@@ -104,7 +104,7 @@ if (! empty($_REQUEST['go'])) {
         </td>
     </tr>
 </table>
-<?php echo ModuleHelper::endForm(); ?>
+<?php echo \App\Helpers\ModuleHelper::endForm(); ?>
 <?php
 if ($error) {
     ?>

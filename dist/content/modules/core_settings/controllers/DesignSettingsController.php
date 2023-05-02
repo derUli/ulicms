@@ -191,7 +191,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
 
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('packages')
+            \App\Helpers\ModuleHelper::buildActionURL('packages')
         );
     }
 
@@ -205,7 +205,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
 
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('packages')
+            \App\Helpers\ModuleHelper::buildActionURL('packages')
         );
     }
 

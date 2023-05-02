@@ -67,7 +67,7 @@ function uninstall_module(string $name, string $type = 'module'): bool {
                 $uninstall_script2 = getModuleUninstallScriptPath2($name, true);
 
                 // Uninstall Script ausführen, sofern vorhanden
-                $mainController = ModuleHelper::getMainController($name);
+                $mainController = \App\Helpers\ModuleHelper::getMainController($name);
                 if ($mainController
                         && method_exists($mainController, 'uninstall')) {
                     $mainController->uninstall();

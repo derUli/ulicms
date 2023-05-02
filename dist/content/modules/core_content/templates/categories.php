@@ -138,7 +138,7 @@ if (! $permissionChecker->hasPermission('categories')) {
             </table>
         </div>
         <?php
-        enqueueScriptFile(ModuleHelper::buildRessourcePath('core_content', 'js/categories.js'));
+        enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_content', 'js/categories.js'));
         combinedScriptHtml();
         ?>
         <?php
@@ -146,14 +146,14 @@ if (! $permissionChecker->hasPermission('categories')) {
         if ($permissionChecker->hasPermission('categories_create')) {
             ?>
             <div class="btn-toolbar">
-                <a href="<?php echo ModuleHelper::buildActionURL('categories'); ?>"
+                <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('categories'); ?>"
                    class="btn btn-default btn-back is-not-ajax">
                     <i class="fa fa-arrow-left"></i>
                     <?php translate('back'); ?></a>
             </div>
             <h2><?php translate('create_category'); ?></h2>
             <?php
-            echo ModuleHelper::buildMethodCallForm(
+            echo \App\Helpers\ModuleHelper::buildMethodCallForm(
                 'CategoryController',
                 'create'
             );
@@ -185,21 +185,21 @@ if (! $permissionChecker->hasPermission('categories')) {
                     <?php translate('save'); ?>
                 </button>
             </div>
-            <?php echo ModuleHelper::endForm(); ?><?php
+            <?php echo \App\Helpers\ModuleHelper::endForm(); ?><?php
         } else {
             noPerms();
         }
     } elseif (isset($_GET['edit'])) {
         if ($permissionChecker->hasPermission('categories_edit')) {
             ?><div class="btn-toolbar">
-                <a href="<?php echo ModuleHelper::buildActionURL('categories'); ?>"
+                <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('categories'); ?>"
                    class="btn btn-default btn-back is-not-ajax">
                     <i class="fa fa-arrow-left"></i>
                     <?php translate('back'); ?></a>
             </div>
             <h2><?php translate('edit_category'); ?></h2>
             <?php
-            echo ModuleHelper::buildMethodCallForm(
+            echo \App\Helpers\ModuleHelper::buildMethodCallForm(
                 'CategoryController',
                 'update'
             );

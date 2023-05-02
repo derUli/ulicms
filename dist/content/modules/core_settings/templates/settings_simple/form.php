@@ -17,12 +17,12 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     ?>
     <p>
         <a
-            href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
+            href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_categories'); ?>"
             class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </p>
     <h2><?php translate('general_settings'); ?></h2>
     <?php
-    echo ModuleHelper::buildMethodCallForm('SimpleSettingsController', 'save', [], 'post', [
+    echo \App\Helpers\ModuleHelper::buildMethodCallForm('SimpleSettingsController', 'save', [], 'post', [
         'id' => 'settings_simple'
     ]);
     ?>
@@ -159,13 +159,13 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     <input type="hidden" name="save_settings" value="save_settings">
     
     <?php
-    echo ModuleHelper::endForm();
+    echo \App\Helpers\ModuleHelper::endForm();
 
     $translation = new JSTranslation();
     $translation->addKey('changes_were_saved');
     $translation->render();
 
-    enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/settings_simple.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/settings_simple.js'));
     combinedScriptHtml();
 } else {
     noPerms();

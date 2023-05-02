@@ -68,7 +68,7 @@ if (count($groups) > 0) {
                             ?>
                             </td>
                             <td><a
-                                    href="<?php echo ModuleHelper::buildActionURL('admins', 'admins_filter_group=' . $id); ?>" 
+                                    href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('admins', 'admins_filter_group=' . $id); ?>" 
                                     class="is-not-ajax"
                                     ><img
                                         src="gfx/preview.png" title="<?php translate('show_users'); ?>"

@@ -15,14 +15,14 @@ if ($permissionChecker->hasPermission('default_access_restrictions_edit')) {
     $only_others_can_edit = (int)(Settings::get('only_others_can_edit'));
     ?>
     <p>
-        <a href="<?php echo ModuleHelper::buildActionURL('other_settings'); ?>"
+        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('other_settings'); ?>"
            class="btn btn-default btn-back is-not-ajax">
             <i class="fa fa-arrow-left"></i> <?php translate('back'); ?>
         </a>
     </p>
     <h1><?php translate('DEFAULT_ACCESS_RESTRICTIONS'); ?></h1>
     <?=
-    ModuleHelper::buildMethodCallForm(
+    \App\Helpers\ModuleHelper::buildMethodCallForm(
         'DefaultAccessRestrictionsController',
         'save',
         [],
@@ -93,11 +93,11 @@ if ($permissionChecker->hasPermission('default_access_restrictions_edit')) {
         </p>
         <?php
     }
-    echo ModuleHelper::endForm();
+    echo \App\Helpers\ModuleHelper::endForm();
     $translation = new JSTranslation();
     $translation->addKey('changes_were_saved');
     $translation->render();
-    enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/default_edit_restrictions.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/default_edit_restrictions.js'));
     combinedScriptHtml();
 } else {
     noPerms();

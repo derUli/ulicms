@@ -37,7 +37,7 @@ class Input {
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
         return "<input {$attribHTML}>";
     }
 
@@ -67,7 +67,7 @@ class Input {
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         $escapedValue = Template::getEscape($value);
 
@@ -253,7 +253,7 @@ class Input {
             $attributes['id'] = $name;
         }
 
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         $html = "<select {$attribHTML}>";
         foreach ($options as $option) {
@@ -291,7 +291,7 @@ class Input {
         foreach ($htmlAttributes as $key => $val) {
             $attributes[$key] = $val;
         }
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         $html = "<select {$attribHTML} multiple>";
         foreach ($options as $option) {

@@ -35,14 +35,14 @@ if (! $permissionChecker->hasPermission('design')) {
     ?>
     <p>
         <a
-            href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
+            href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_categories'); ?>"
             class="btn btn-default btn-back is-not-ajax"><i class="fas fa-arrow-left"></i> <?php translate('back'); ?></a>
     </p>
     <h1>
         <?php translate('design'); ?>
     </h1>
     <?php
-    echo ModuleHelper::buildMethodCallForm('DesignSettingsController', 'save', [], 'post', [
+    echo \App\Helpers\ModuleHelper::buildMethodCallForm('DesignSettingsController', 'save', [], 'post', [
         'id' => 'designForm'
     ]);
     ?>
@@ -67,7 +67,7 @@ if (! $permissionChecker->hasPermission('design')) {
                             }
              ?>
                                     data-preview-url="<?php
-                     echo ModuleHelper::buildMethodCallUrl(
+                     echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
                          DesignSettingsController::class,
                          'themePreview',
                          "theme={$th}"
@@ -112,7 +112,7 @@ if (! $permissionChecker->hasPermission('design')) {
         }
         ?>
                                         data-preview-url="<?php
-                echo ModuleHelper::buildMethodCallUrl(
+                echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
                     DesignSettingsController::class,
                     'themePreview',
                     "theme={$th}"
@@ -266,10 +266,10 @@ if (! $permissionChecker->hasPermission('design')) {
             <i class="fas fa-save"></i> <?php translate('save_changes'); ?></button>
     </p>
     <?php
-    echo ModuleHelper::endForm();
+    echo \App\Helpers\ModuleHelper::endForm();
     $translation = new JSTranslation();
     $translation->addKey('changes_were_saved');
     $translation->render();
-    enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/design.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/design.js'));
     combinedScriptHtml();
 }

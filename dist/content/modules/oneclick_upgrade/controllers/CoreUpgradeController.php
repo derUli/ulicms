@@ -114,7 +114,7 @@ class CoreUpgradeController extends \App\Controllers\Controller {
         try {
             $data = file_get_contents_wrapper($jsonData->file, false, $jsonData->hashsum);
         } catch (CorruptDownloadException $e) {
-            Response::redirect(ModuleHelper::buildActionURL('CorruptedDownloadError'));
+            Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('CorruptedDownloadError'));
         }
 
         if ($data) {

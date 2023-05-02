@@ -124,7 +124,7 @@ if ($permissionChecker->hasPermission('users')) {
                                 echo '<td class="hide-on-mobile">';
                                 $id = $user->getPrimaryGroupId();
                                 if ($id && $permissionChecker->hasPermission('groups_edit')) {
-                                    $url = ModuleHelper::buildActionURL('groups', "edit={$id}");
+                                    $url = \App\Helpers\ModuleHelper::buildActionURL('groups', "edit={$id}");
                                     echo '<a href="' . Template::getEscape($url) . '" class="is-not-ajax">';
                                 }
                                 esc($groupName);
@@ -162,7 +162,7 @@ $translation = new JSTranslation(
 $translation->render();
 
 enqueueScriptFile(
-    ModuleHelper::buildRessourcePath(
+    \App\Helpers\ModuleHelper::buildRessourcePath(
         'core_users',
         'js/list.js'
     )

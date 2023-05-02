@@ -48,7 +48,7 @@ if ($permissionChecker->hasPermission('dashboard')) {
             <h2 class="accordion-header"><?php translate('unfinished_package_installations'); ?></h2>
             <div class="accordion-content">
                 <a
-                    href="<?php echo ModuleHelper::buildActionURL('do_post_install'); ?>">
+                    href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('do_post_install'); ?>">
                     <?php translate('there_are_unfinished_package_installations'); ?></a>
             </div>
         <?php }
@@ -57,7 +57,7 @@ if ($permissionChecker->hasPermission('dashboard')) {
     if (! Settings::get('disable_ulicms_newsfeed')) {
         ?>
             <div class="has-ajax-content"
-                 data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, 'newsfeed'); ?>">
+                 data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(HomeController::class, 'newsfeed'); ?>">
 
                 <h2 class="accordion-header" >
                     <?php translate('ulicms_news'); ?></h2>
@@ -74,7 +74,7 @@ if ($permissionChecker->hasPermission('dashboard')) {
                     <label>
                         <input name="show_positions" id="show_positions" type="checkbox"
                                class="js-switch"
-                               data-url="<?php esc(ModuleHelper::buildMethodCallUrl(PageController::class, 'toggleShowPositions')); ?>" value="1"
+                               data-url="<?php esc(\App\Helpers\ModuleHelper::buildMethodCallUrl(PageController::class, 'toggleShowPositions')); ?>" value="1"
                                <?php
                            if (Settings::get('user/' . get_user_id() . '/show_positions')) {
                                echo 'checked';
@@ -85,7 +85,7 @@ if ($permissionChecker->hasPermission('dashboard')) {
                 </form>
             </div>
         <?php } ?>
-        <div class="has-ajax-content" data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, 'statistics'); ?>">
+        <div class="has-ajax-content" data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(HomeController::class, 'statistics'); ?>">
             <h2 class="accordion-header">
                 <?php translate('statistics'); ?>
             </h2>
@@ -93,7 +93,7 @@ if ($permissionChecker->hasPermission('dashboard')) {
                 <?php require 'inc/loadspinner.php'; ?>
             </div>
         </div>
-        <div class="has-ajax-content always-update" data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, 'onlineUsers'); ?>">
+        <div class="has-ajax-content always-update" data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(HomeController::class, 'onlineUsers'); ?>">
             <h2 class="accordion-header">
                 <?php translate('online_now'); ?>
             </h2>
@@ -101,7 +101,7 @@ if ($permissionChecker->hasPermission('dashboard')) {
                 <?php require 'inc/loadspinner.php'; ?>
             </div>
         </div>
-        <div class="has-ajax-content" data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, 'topPages'); ?>">
+        <div class="has-ajax-content" data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(HomeController::class, 'topPages'); ?>">
             <h2 class="accordion-header">
                 <?php translate('top_pages'); ?>
             </h2>
@@ -109,7 +109,7 @@ if ($permissionChecker->hasPermission('dashboard')) {
                 <?php require 'inc/loadspinner.php'; ?>
             </div>
         </div>
-        <div class="has-ajax-content" data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, 'lastUpdatedPages'); ?>">
+        <div class="has-ajax-content" data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(HomeController::class, 'lastUpdatedPages'); ?>">
             <h2 class="accordion-header"><?php translate('last_changes'); ?></h2>
             <div class="accordion-content">
                 <?php require 'inc/loadspinner.php'; ?>
@@ -118,7 +118,7 @@ if ($permissionChecker->hasPermission('dashboard')) {
         <?php do_event('accordion_layout'); ?>
     </div>
     <?php
-    enqueueScriptFile(ModuleHelper::buildModuleRessourcePath('core_home', 'js/dashboard.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildModuleRessourcePath('core_home', 'js/dashboard.js'));
     combinedScriptHtml();
 } else {
     noPerms();

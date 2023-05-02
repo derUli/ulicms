@@ -29,7 +29,7 @@ class FrontPageSettingsController extends \App\Controllers\Controller {
         // if called by ajax return no content to improve performance
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('frontpage_settings')
+            \App\Helpers\ModuleHelper::buildActionURL('frontpage_settings')
         );
     }
 }

@@ -34,10 +34,10 @@ class Form {
     ): string {
         $html = '';
         $attribhtml = ! empty(
-            ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)
+            \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes)
         ) ?
                 ' ' .
-                ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes) :
+                \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes) :
                 '';
         $html .= '<form action="index.php" method="' . $requestMethod . '"'
                 . $attribhtml . '>';
@@ -78,7 +78,7 @@ class Form {
         array $formAttributes = [],
         string $requestMethod = RequestMethod::POST
     ): string {
-        $html = ModuleHelper::buildMethodCallForm(
+        $html = \App\Helpers\ModuleHelper::buildMethodCallForm(
             $sClass,
             $sMethod,
             $otherVars,
@@ -86,7 +86,7 @@ class Form {
             $formAttributes
         );
         $html .= '<button ' .
-                ModuleHelper::buildHTMLAttributesFromArray($buttonAttributes)
+                \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($buttonAttributes)
                 . '>';
         $html .= $buttonText . '</button>';
         $html .= '</form>';
@@ -116,7 +116,7 @@ class Form {
 
         $htmlAttributes['class'] = trim('delete-form ' . $htmlAttributes['class']);
 
-        $htmlAttributesString = ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
+        $htmlAttributesString = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($htmlAttributes);
         $attribHtml = '';
 
         if (! empty($htmlAttributesString)) {

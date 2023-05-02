@@ -51,7 +51,7 @@ function get_og_tags(?string $slug = null): string {
         }
 
         if (! empty($og_image) && ! str_starts_with($og_image, 'http')) {
-            $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, '/');
+            $og_image = \App\Helpers\ModuleHelper::getBaseUrl() . ltrim($og_image, '/');
         }
         $page = get_page($slug);
         if (empty($og_image) &&
@@ -59,7 +59,7 @@ function get_og_tags(?string $slug = null): string {
             $og_image = ltrim($page['article_image'], '/');
         }
         if (! empty($og_image) && ! str_starts_with($og_image, 'http')) {
-            $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, '/');
+            $og_image = \App\Helpers\ModuleHelper::getBaseUrl() . ltrim($og_image, '/');
         }
         if (null === $og_description || empty($og_description)) {
             $og_description = get_meta_description();
@@ -522,7 +522,7 @@ function apply_filter($text, string $type) {
         if ($main_class) {
             $controller = ControllerRegistry::get($main_class);
         }
-        $escapedName = ModuleHelper::underscoreToCamel($type . '_filter');
+        $escapedName = \App\Helpers\ModuleHelper::underscoreToCamel($type . '_filter');
         if ($controller && method_exists($controller, $escapedName)) {
             $text = $controller->{$escapedName}($text);
         } elseif (is_file($module_content_filter_file1)) {

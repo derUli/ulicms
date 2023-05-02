@@ -26,7 +26,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
         $secondaryGroupIds[] = $group->getID();
     }
 
-    $backUrl = $permissionChecker->hasPermission('users_edit') ? ModuleHelper::buildActionURL('admins') : ModuleHelper::buildActionURL('home');
+    $backUrl = $permissionChecker->hasPermission('users_edit') ? \App\Helpers\ModuleHelper::buildActionURL('admins') : \App\Helpers\ModuleHelper::buildActionURL('home');
     ?>
     <div class="btn-toolbar">
         <a href="<?php echo $backUrl; ?>"
@@ -46,7 +46,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
         ?>
         </div>
         <?php
-        echo ModuleHelper::buildMethodCallUploadForm(
+        echo \App\Helpers\ModuleHelper::buildMethodCallUploadForm(
             UserController::class,
             'update',
             [],
@@ -307,7 +307,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
                 <?php translate('save'); ?></button>
         </div>
         <?php
-        echo ModuleHelper::endForm();
+        echo \App\Helpers\ModuleHelper::endForm();
         break;
     }
     ?>
@@ -317,7 +317,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
     $translation->render();
 
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
+        \App\Helpers\ModuleHelper::buildRessourcePath(
             'core_users',
             'js/form.js'
         )

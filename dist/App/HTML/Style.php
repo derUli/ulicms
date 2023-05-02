@@ -41,7 +41,7 @@ class Style {
         foreach ($htmlAttributes as $key => $value) {
             $attributes[$key] = $value;
         }
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         if (! empty($attribHTML)) {
             $attribHTML = ' ' . $attribHTML;
@@ -71,7 +71,7 @@ class Style {
         foreach ($htmlAttributes as $key => $value) {
             $attributes[$key] = $value;
         }
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         if (! empty($attribHTML)) {
             $attribHTML = ' ' . $attribHTML;

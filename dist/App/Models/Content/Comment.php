@@ -119,7 +119,7 @@ class Comment extends Model {
 
     public function getCommentUrl(): ?string {
         return $this->content_id ?
-                ModuleHelper::getFullPageURLByID($this->content_id)
+                \App\Helpers\ModuleHelper::getFullPageURLByID($this->content_id)
                 . "#comment-{$this->id}" : null;
     }
 

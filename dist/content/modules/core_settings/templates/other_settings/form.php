@@ -30,13 +30,13 @@ if (! $permissionChecker->hasPermission('other')) {
     $qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation('ULICMS_LOGIN_AT') . ' ' . get_domain(), $ga_secret);
     ?>
     <?php
-    echo ModuleHelper::buildMethodCallForm('OtherSettingsController', 'save', [], 'post', [
+    echo \App\Helpers\ModuleHelper::buildMethodCallForm('OtherSettingsController', 'save', [], 'post', [
         'id' => 'other_settings',
         'autocomplete' => 'off'
     ]);
     ?>
     <a
-        href="<?php echo ModuleHelper::buildActionURL('settings_categories'); ?>"
+        href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_categories'); ?>"
         class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     <div id="accordion-container" class="voffset3">
         <h2 class="accordion-header">
@@ -102,7 +102,7 @@ if (! $permissionChecker->hasPermission('other')) {
                 <h2><?php translate('DEFAULT_ACCESS_RESTRICTIONS'); ?></h2>
                 <a
                     href="<?php
-                    echo ModuleHelper::buildActionURL(
+                    echo \App\Helpers\ModuleHelper::buildActionURL(
                         'default_access_restrictions'
                     );
                 ?>"
@@ -253,14 +253,14 @@ if (! $permissionChecker->hasPermission('other')) {
         <?php translate('save_changes'); ?>
     </button>
     <?php
-    echo ModuleHelper::endForm();
+    echo \App\Helpers\ModuleHelper::endForm();
 
     $translation = new JSTranslation();
     $translation->addKey('changes_were_saved');
     $translation->render();
 
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
+        \App\Helpers\ModuleHelper::buildRessourcePath(
             'core_settings',
             'js/other_settings.js'
         )

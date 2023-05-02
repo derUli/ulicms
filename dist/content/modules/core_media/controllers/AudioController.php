@@ -67,7 +67,7 @@ class AudioController extends \App\Controllers\Controller {
                     . "'{$mp3_file_value}', {$timestamp}, {$category_id}, "
                     . "{$timestamp});");
         }
-        Response::redirect(ModuleHelper::buildActionURL('audio'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('audio'));
     }
 
     public function _updatePost(): bool {
@@ -87,7 +87,7 @@ class AudioController extends \App\Controllers\Controller {
 
     public function updatePost(): void {
         $this->_updatePost();
-        Response::redirect(ModuleHelper::buildActionURL('audio'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('audio'));
     }
 
     public function deletePost(): void {
@@ -111,6 +111,6 @@ class AudioController extends \App\Controllers\Controller {
             Database::query('DELETE FROM ' . Database::tableName('audio') . ' where id = ' .
                     $_REQUEST['delete']);
         }
-        Response::redirect(ModuleHelper::buildActionURL('videos'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('videos'));
     }
 }

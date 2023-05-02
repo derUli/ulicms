@@ -79,7 +79,7 @@ class PasswordReset {
             $url .= '/admin';
         }
 
-        $url .= '/' . ModuleHelper::buildMethodCallUrl(
+        $url .= '/' . \App\Helpers\ModuleHelper::buildMethodCallUrl(
             SessionManager::class,
             'resetPassword',
             "token={$token}"

@@ -33,7 +33,7 @@ class Link {
         foreach ($htmlAttributes as $key => $value) {
             $attributes [$key] = $value;
         }
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         return "<a {$attribHTML}>" . $text . '</a>';
     }
@@ -55,7 +55,7 @@ class Link {
         ?string $suffix = null,
         array $htmlAttributes = []
     ): string {
-        $url = ModuleHelper::buildActionURL($action, $suffix, true);
+        $url = \App\Helpers\ModuleHelper::buildActionURL($action, $suffix, true);
 
         return self::link($url, $text, $htmlAttributes);
     }

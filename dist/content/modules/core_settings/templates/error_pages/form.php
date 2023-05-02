@@ -15,7 +15,7 @@ $errorCodes = [
 ?>
 <p>
     <a
-        href="<?php echo ModuleHelper::buildActionURL('settings_simple'); ?>"
+        href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_simple'); ?>"
         class="btn btn-default btn-back is-not-ajax"><i class= "fa fa-arrow-left"></i>
             <?php translate('back');
 ?></a>
@@ -23,7 +23,7 @@ $errorCodes = [
 
 <h1><?php translate('error_pages'); ?></h1>
 <?php
-echo ModuleHelper::buildMethodCallForm(
+echo \App\Helpers\ModuleHelper::buildMethodCallForm(
     ErrorPagesController::class,
     'save',
     [],
@@ -83,11 +83,11 @@ echo ModuleHelper::buildMethodCallForm(
     <?php translate('save'); ?>
 </button>
 <?php
-echo ModuleHelper::endForm();
+echo \App\Helpers\ModuleHelper::endForm();
 
 $translation = new JSTranslation();
 $translation->addKey('changes_were_saved');
 $translation->render();
 
-enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/error_pages.js'));
+enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/error_pages.js'));
 combinedScriptHtml();

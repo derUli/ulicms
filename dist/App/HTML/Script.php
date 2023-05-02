@@ -49,7 +49,7 @@ class Script {
             $attributes[$key] = $value;
         }
 
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         if (! empty($attribHTML)) {
             $attribHTML = ' ' . $attribHTML;
@@ -84,7 +84,7 @@ class Script {
         foreach ($htmlAttributes as $key => $value) {
             $attributes[$key] = $value;
         }
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         if (! empty($attribHTML)) {
             $attribHTML = ' ' . $attribHTML;

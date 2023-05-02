@@ -7,8 +7,8 @@ use App\Security\SpamChecker\SpamFilterConfiguration;
 class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
         require_once getLanguageFilePath('en');
-        require_once ModuleHelper::buildModuleRessourcePath('core_comments', 'lang/en.php');
-        require_once ModuleHelper::buildModuleRessourcePath('core_forms', 'lang/en.php');
+        require_once \App\Helpers\ModuleHelper::buildModuleRessourcePath('core_comments', 'lang/en.php');
+        require_once \App\Helpers\ModuleHelper::buildModuleRessourcePath('core_forms', 'lang/en.php');
     }
 
     protected function tearDown(): void {

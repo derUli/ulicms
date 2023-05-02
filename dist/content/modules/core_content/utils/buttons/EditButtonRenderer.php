@@ -30,7 +30,7 @@ class EditButtonRenderer {
 
         $icon = icon('fas fa-pencil-alt fa-2x');
 
-        $url = ModuleHelper::buildActionURL('pages_edit', "page={$pageId}");
+        $url = \App\Helpers\ModuleHelper::buildActionURL('pages_edit', "page={$pageId}");
         $link = link($url, $icon, true);
         \App\Storages\ViewBag::set('button', $link);
 

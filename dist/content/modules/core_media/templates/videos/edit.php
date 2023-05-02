@@ -15,7 +15,7 @@ if ($permissionChecker->hasPermission('videos')
         $dataset = Database::fetchObject($result);
         ?>
         <div class="field">
-            <a href="<?php echo ModuleHelper::buildActionURL('videos'); ?>"
+            <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('videos'); ?>"
                class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
                 <?php translate('back'); ?></a>
         </div>

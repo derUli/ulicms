@@ -24,7 +24,7 @@ if ($value === null) {
        echo 'required';
    }
 ?>
-           <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>>
+           <?php echo \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>>
            <?php if ($field->helpText) { ?>
         <small><?php translate($field->helpText); ?></small>
     <?php } ?>

@@ -60,12 +60,12 @@ if ($permissionChecker->hasPermission('install_packages')) {
                                 <td>
                                     <a href="#" class="btn btn-info btn-sm remote-alert"
                                        title="<?php translate('info'); ?>"
-                                       data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, 'getPackageLicense', "name={$package->name}"); ?>">
+                                       data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(PackageController::class, 'getPackageLicense', "name={$package->name}"); ?>">
                                         <i class="fas fa-balance-scale"></i>
                                         <?php translate('license'); ?></a>
                                 </td>
                                 <td>
-                                    <a href="<?php esc(ModuleHelper::buildActionURL('install_modules', "packages={$package->name}-{$package->version}")); ?>"
+                                    <a href="<?php esc(\App\Helpers\ModuleHelper::buildActionURL('install_modules', "packages={$package->name}-{$package->version}")); ?>"
                                        data-name="<?php esc("{$package->name} {$package->version}"); ?>"
                                        class="btn btn-primary btn-install">
                                         <i class="fas fa-download"></i> <?php translate('install'); ?>

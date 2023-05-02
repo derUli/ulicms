@@ -32,7 +32,7 @@ $notSelectedButton = 'btn btn-default';
      aria-label="Toolbar with button groups">
          <?php foreach ($icons as $action => $cssClass) { ?>
         <div class="btn-group" role="group">
-            <a href="<?php echo ModuleHelper::buildActionURL($action); ?>"
+            <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL($action); ?>"
                class="<?php
                echo $action == $currentAction ?
                        $selectedButton : $notSelectedButton;

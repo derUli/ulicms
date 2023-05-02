@@ -116,7 +116,7 @@ if (get_action()) {
         data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>"
         data-ckeditor-skin="<?php esc(Settings::get('ckeditor_skin')); ?>"
         data-csrf-token="<?php esc(get_csrf_token()); ?>"
-        data-ckeditor-links-action-url="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, 'getCKEditorLinkList'); ?>"
+        data-ckeditor-links-action-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(PageController::class, 'getCKEditorLinkList'); ?>"
         >
             <?php
         do_event('after_backend_header');
@@ -141,7 +141,7 @@ if (get_action()) {
                         <div class="row pull-right top-right-icons">
                             <div class="<?php esc($colClass); ?>">
                                 <a href="#" class="has-pointer" id="menu-clear-cache"
-                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl('PerformanceSettingsController', 'clearCache', 'clear_cache=1'); ?>"
+                                   data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PerformanceSettingsController', 'clearCache', 'clear_cache=1'); ?>"
                                    title="<?php translate('clear_cache'); ?>"
                                    data-placement="bottom" 
                                    >
@@ -154,7 +154,7 @@ if (get_action()) {
                     ?>
                                 <div class="<?php esc($colClass); ?>">
                                     <div class="comment-counter">
-                                        <a href="<?php echo ModuleHelper::buildActionURL('comments_manage'); ?>"
+                                        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('comments_manage'); ?>"
                                            title="<?php translate('comments'); ?>"
                                            data-placement="bottom" 
                                            >

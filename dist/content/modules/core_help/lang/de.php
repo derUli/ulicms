@@ -9,7 +9,7 @@ add_translation('UNKNOWN_TOPIC', 'Unbekanntes Thema');
 add_translation(
     'PATCH_INSTALL_HELP',
     file_get_contents(
-        ModuleHelper::buildModuleRessourcePath(
+        \App\Helpers\ModuleHelper::buildModuleRessourcePath(
             'core_help',
             'docs/de/patch_install_help.html',
             true

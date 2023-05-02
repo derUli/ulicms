@@ -40,7 +40,7 @@ if ($permissionChecker->hasPermission('pages')) {
                             class="fa fa-plus"></i> <?php translate('create_page'); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <a href="<?php echo ModuleHelper::buildMethodCallUrl('PageController', 'recycleBin'); ?>" class="btn btn-default is-not-ajax"><i
+                    <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'recycleBin'); ?>" class="btn btn-default is-not-ajax"><i
                             class="fa fa-trash"></i> <?php translate('recycle_bin'); ?></a>
                 </div>
             </div>
@@ -49,7 +49,7 @@ if ($permissionChecker->hasPermission('pages')) {
             <div class="row">
                 <div class="col-xs-6">
                     <a href="<?php
-                    echo ModuleHelper::buildMethodCallUrl(
+                    echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
                         PageController::class,
                         'emptyTrash'
                     );
@@ -59,7 +59,7 @@ if ($permissionChecker->hasPermission('pages')) {
                             class="fas fa-broom"></i> <?php translate('empty_recycle_bin'); ?></a>
                 </div>
                 <div class="col-xs-6 text-right">
-                    <a href="<?php echo ModuleHelper::buildMethodCallUrl('PageController', 'pages'); ?>" class="btn btn-default is-not-ajax"><i
+                    <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'pages'); ?>" class="btn btn-default is-not-ajax"><i
                             class="fas fa-book"></i> <?php translate('pages'); ?></a>
                 </div>
             </div>
@@ -71,7 +71,7 @@ if ($permissionChecker->hasPermission('pages')) {
             id="btn-go-up"
             style="display: none"
             data-url="<?php
-            echo ModuleHelper::buildMethodCallUrl(
+            echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
                 PageController::class,
                 'getParentPageId'
             );
@@ -81,7 +81,7 @@ if ($permissionChecker->hasPermission('pages')) {
         </a>
         <div class="scroll voffset3">
             <table class="tablesorter dataset-list"
-                   data-url="<?php echo ModuleHelper::buildMethodCallUrl('PageController', 'getPages'); ?>">
+                   data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'getPages'); ?>">
                 <thead>
                     <tr style="font-weight: bold;">
                         <th><?php translate('title'); ?>
@@ -115,7 +115,7 @@ if ($permissionChecker->hasPermission('pages')) {
 
     <?php
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
+        \App\Helpers\ModuleHelper::buildRessourcePath(
             'core_content',
             'js/pages/list.js'
         )

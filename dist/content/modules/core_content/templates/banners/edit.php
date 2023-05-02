@@ -23,12 +23,12 @@ if ($permissionChecker->hasPermission('banners')
     if ($row) {
         ?>
         <div class="field">
-            <a href="<?php echo ModuleHelper::buildActionURL('banner'); ?>"
+            <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('banner'); ?>"
                class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
                 <?php translate('back'); ?></a>
         </div>
         <?php
-        echo ModuleHelper::buildMethodCallForm(
+        echo \App\Helpers\ModuleHelper::buildMethodCallForm(
             'BannerController',
             'update',
             [],

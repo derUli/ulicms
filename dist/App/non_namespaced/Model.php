@@ -60,7 +60,7 @@ class Model {
     public function bindValues($values = []) {
         $values = (array)$values;
         foreach ($values as $key => $value) {
-            $camelCaseVar = ModuleHelper::underscoreToCamel($key);
+            $camelCaseVar = \App\Helpers\ModuleHelper::underscoreToCamel($key);
             $method = 'set' . ucfirst($camelCaseVar);
             // if a setter method exists, call it
             if (method_exists($this, $method)) {
@@ -128,7 +128,7 @@ class Model {
 
         $vars = $reflection->getProperties();
         foreach ($vars as $property) {
-            $camelCaseVar = ModuleHelper::underscoreToCamel(
+            $camelCaseVar = \App\Helpers\ModuleHelper::underscoreToCamel(
                 $property->getName()
             );
             $method = 'get' . ucfirst($camelCaseVar);
