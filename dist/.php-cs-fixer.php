@@ -280,6 +280,8 @@ $config
     'modernize_strpos' => true,
     // Putting blank lines between use statement groups.
     'blank_line_between_import_groups' => true,
+    // Code MUST use configured indentation type.
+    'indentation_type'=> true,
     // Curly braces must be placed as configured.
     'curly_braces_position' => [
         'control_structures_opening_brace' => 'same_line',
