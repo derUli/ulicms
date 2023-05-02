@@ -39,5 +39,5 @@ ControllerRegistry::runMethods();
 do_event('after_backend_run_methods');
 
 // render backend page
-$renderer = new BackendPageRenderer(BackendHelper::getAction());
+$renderer = new BackendPageRenderer(\App\Helpers\BackendHelper::getAction());
 $renderer->render();

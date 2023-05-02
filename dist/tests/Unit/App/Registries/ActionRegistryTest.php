@@ -11,7 +11,7 @@ class ActionRegistryTest extends \PHPUnit\Framework\TestCase {
     }
 
     protected function tearDown(): void {
-        BackendHelper::setAction('home');
+        \App\Helpers\BackendHelper::setAction('home');
     }
 
     public function testGetDefaultCoreActions(): void {
@@ -25,13 +25,13 @@ class ActionRegistryTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetControllerReturnsControllerName(): void {
-        BackendHelper::setAction('videos');
+        \App\Helpers\BackendHelper::setAction('videos');
         $this->assertInstanceOf(
             VideoController::class,
             ActionRegistry::getController()
         );
 
-        BackendHelper::setAction('home');
+        \App\Helpers\BackendHelper::setAction('home');
         $this->assertInstanceOf(
             HomeController::class,
             ActionRegistry::getController()
@@ -39,7 +39,7 @@ class ActionRegistryTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetControllerReturnsNull(): void {
-        BackendHelper::setAction('my_little_pony');
+        \App\Helpers\BackendHelper::setAction('my_little_pony');
         $this->assertNull(ActionRegistry::getController());
     }
 
@@ -49,7 +49,7 @@ class ActionRegistryTest extends \PHPUnit\Framework\TestCase {
             HistoryController::class
         );
 
-        BackendHelper::setAction('foobar');
+        \App\Helpers\BackendHelper::setAction('foobar');
         $this->assertInstanceOf(HistoryController::class, ActionRegistry::getController());
     }
 

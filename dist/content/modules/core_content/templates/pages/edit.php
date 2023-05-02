@@ -1203,7 +1203,7 @@ if ($permissionChecker->hasPermission('pages')) {
 
             enqueueScriptFile('../node_modules/slug/slug.js');
 
-            BackendHelper::enqueueEditorScripts();
+            \App\Helpers\BackendHelper::enqueueEditorScripts();
 
             enqueueScriptFile(ModuleHelper::buildRessourcePath('core_content', 'js/pages/form.js'));
 

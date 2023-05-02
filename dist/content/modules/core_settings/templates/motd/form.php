@@ -70,7 +70,7 @@ if ($permissionChecker->hasPermission('motd')) {
     $translation->addKey('changes_were_saved');
     $translation->render();
 
-    BackendHelper::enqueueEditorScripts();
+    \App\Helpers\BackendHelper::enqueueEditorScripts();
 
     enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/motd.js'));
     combinedScriptHtml();

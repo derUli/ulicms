@@ -5,7 +5,7 @@ declare(strict_types=1);
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
 function get_action(): string {
-    return BackendHelper::getAction();
+    return \App\Helpers\BackendHelper::getAction();
 }
 
 /**

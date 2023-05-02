@@ -6,7 +6,7 @@ use App\HTML\Input;
 use App\HTML\ListItem;
 use App\Security\Permissions\PermissionChecker;
 
-$skins = BackendHelper::getCKEditorSkins();
+$skins = \App\Helpers\BackendHelper::getCKEditorSkins();
 
 $skinItems = [];
 foreach ($skins as $skin) {

@@ -30,26 +30,26 @@ class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetWithActionReturnsController(): void {
-        BackendHelper::setAction('audio');
+        \App\Helpers\BackendHelper::setAction('audio');
         $this->assertInstanceOf(
             AudioController::class,
             ControllerRegistry::get()
         );
 
-        BackendHelper::setAction('home');
+        \App\Helpers\BackendHelper::setAction('home');
     }
 
     public function testGetWithNonExistingActionReturnsNull(): void {
-        BackendHelper::setAction('pages');
+        \App\Helpers\BackendHelper::setAction('pages');
         $this->assertNull(
             ControllerRegistry::get()
         );
 
-        BackendHelper::setAction('home');
+        \App\Helpers\BackendHelper::setAction('home');
     }
 
     public function testGetReturnsNull(): void {
-        BackendHelper::setAction('info');
+        \App\Helpers\BackendHelper::setAction('info');
         $this->assertNull(
             ControllerRegistry::get()
         );

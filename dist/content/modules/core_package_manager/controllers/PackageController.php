@@ -15,7 +15,7 @@ class PackageController extends MainClass {
     public const MODULE_NAME = 'core_package_manager';
 
     public function afterSessionStart(): void {
-        if (BackendHelper::getAction() == 'modules') {
+        if (\App\Helpers\BackendHelper::getAction() == 'modules') {
             Response::redirect(ModuleHelper::buildActionURL('packages'));
         }
     }

@@ -160,7 +160,7 @@ if ($permissionChecker->hasPermission('privacy_settings')) {
     $translation->addKey('changes_were_saved');
     $translation->render();
 
-    BackendHelper::enqueueEditorScripts();
+    \App\Helpers\BackendHelper::enqueueEditorScripts();
     enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/privacy.js'));
     combinedScriptHtml();
     echo ModuleHelper::endForm();

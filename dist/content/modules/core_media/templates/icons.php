@@ -4,7 +4,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Security\Permissions\PermissionChecker;
 
-$currentAction = BackendHelper::getAction();
+$currentAction = \App\Helpers\BackendHelper::getAction();
 $icons = [
     'files' => 'fa fa-file',
     'videos' => 'fa fa-file-video',

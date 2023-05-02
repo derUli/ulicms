@@ -7,26 +7,26 @@ class BackendHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function testSetAndGetActionIsSetGet(): void {
         $_SERVER['REQUEST_METHOD'] = 'GET';
-        BackendHelper::setAction('pages');
-        $this->assertEquals('pages', BackendHelper::getAction());
+        \App\Helpers\BackendHelper::setAction('pages');
+        $this->assertEquals('pages', \App\Helpers\BackendHelper::getAction());
         unset($_REQUEST['action']);
     }
 
     public function testSetAndGetActionIsSetPost(): void {
         $_SERVER['REQUEST_METHOD'] = 'POST';
-        BackendHelper::setAction('home');
-        $this->assertEquals('home', BackendHelper::getAction());
+        \App\Helpers\BackendHelper::setAction('home');
+        $this->assertEquals('home', \App\Helpers\BackendHelper::getAction());
         unset($_REQUEST['action']);
     }
 
     public function testGetActionIsNotSet(): void {
         unset($_REQUEST['action']);
-        $this->assertEquals('home', BackendHelper::getAction());
+        $this->assertEquals('home', \App\Helpers\BackendHelper::getAction());
     }
 
     public function testEnqueueEditorScripts(): void {
         ob_start();
-        BackendHelper::enqueueEditorScripts();
+        \App\Helpers\BackendHelper::enqueueEditorScripts();
         ob_get_clean();
         $this->assertStringContainsString(
             '<script src="content/generated/public/scripts/',
@@ -35,7 +35,7 @@ class BackendHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetCKEditorSkins(): void {
-        $skins = BackendHelper::getCKEditorSkins();
+        $skins = \App\Helpers\BackendHelper::getCKEditorSkins();
 
         $this->assertGreaterThanOrEqual(1, count($skins));
         $this->assertContains('moono-lisa', $skins);

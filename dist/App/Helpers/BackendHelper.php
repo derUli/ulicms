@@ -2,12 +2,19 @@
 
 declare(strict_types=1);
 
+namespace App\Helpers;
+
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\HtmlEditor;
-use App\Helpers\Helper;
 use App\HTML\Script;
 use App\Utils\File;
+use ModuleHelper;
+use Path;
+use Request;
+
+use function enqueueScriptFile;
+use function get_html_editor;
 
 /**
  * Backend utilities
@@ -83,7 +90,7 @@ abstract class BackendHelper extends Helper {
 
    /**
     * Get CKEditor Skin.
-    * @return array
+    * @return string[]
     */
     public static function getCKEditorSkins(): array {
         $skins = [];

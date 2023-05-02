@@ -196,7 +196,7 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         $menuEntry = $this->constructMenuEntryWithoutChildren();
         $menuEntry->setNewWindow(false);
 
-        BackendHelper::setAction('say_hello');
+        \App\Helpers\BackendHelper::setAction('say_hello');
 
         $inputExpected = file_get_contents(
             Path::resolve(
