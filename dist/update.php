@@ -22,31 +22,31 @@ try {
     if(is_file($oldConfigFile) && ! is_file($newConfigFile)) {
         require $oldConfigFile;
 
-    $oldConfig = new CMSConfig();
+        $oldConfig = new CMSConfig();
 
-    $converter = new ConfigurationToDotEnvConverter($oldConfig);
+        $converter = new ConfigurationToDotEnvConverter($oldConfig);
 
-    // If conversion successful
-    if($converter->writeEnvFile()) {
+        // If conversion successful
+        if($converter->writeEnvFile()) {
 
-        // Prepend required variable APP_ENV to .env file
-        $fileContent = file_get_contents($newConfigFile);
-        $fileContent = "APP_ENV={$appEnv}" . PHP_EOL . $fileContent;
-        file_put_contents($newConfigFile, $fileContent);
+            // Prepend required variable APP_ENV to .env file
+            $fileContent = file_get_contents($newConfigFile);
+            $fileContent = "APP_ENV={$appEnv}" . PHP_EOL . $fileContent;
+            file_put_contents($newConfigFile, $fileContent);
 
-        @unlink($oldConfigFile);
+            @unlink($oldConfigFile);
 
-        // CLI: Tell the user to run update.php again
-        if (is_cli()) {
-            exit('Configuration file converted. Please run update.php again.' . PHP_EOL);
+            // CLI: Tell the user to run update.php again
+            if (is_cli()) {
+                exit('Configuration file converted. Please run update.php again.' . PHP_EOL);
+            }
+
+            // Web: Execute update.php again
+            Response::redirect('update.php');
+        } else {
+            // If conversion failed
+            exit('Converting configuration file failed.');
         }
-
-        // Web: Execute update.php again
-        Response::redirect('update.php');
-    } else {
-        // If conversion failed
-        exit('Converting configuration file failed.');
-    }
     }
     // All other exceptions
     exit($e->getMessage());

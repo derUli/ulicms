@@ -187,14 +187,14 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
             <select name="secondary_groups[]" multiple>
                 <?php
                     foreach ($groups as $group) {
-                    ?>
+                        ?>
                     <option
                         value="<?php echo $group->getID(); ?>"
                         <?php echo in_array($group->getID(), $secondaryGroupIds) ? 'selected' : ''; ?>>
                             <?php esc($group->getName()); ?>
                     </option>
                 <?php }
-                ?>
+                    ?>
             </select>
             </div>
         <?php }

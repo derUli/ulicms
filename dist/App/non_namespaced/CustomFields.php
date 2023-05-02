@@ -47,14 +47,14 @@ class CustomFields {
                         . 'where id = ?';
                 return Database::pQuery($sql, $args, true);
             }
-                $args = [
-                    $value,
-                    $name,
-                    $content_id
-                ];
-                $sql = 'UPDATE {prefix}custom_fields set value = ? '
-                        . 'where name = ? and content_id = ?';
-                return Database::pQuery($sql, $args, true);
+            $args = [
+                $value,
+                $name,
+                $content_id
+            ];
+            $sql = 'UPDATE {prefix}custom_fields set value = ? '
+                    . 'where name = ? and content_id = ?';
+            return Database::pQuery($sql, $args, true);
 
         } elseif ($value !== null) {
             $args = [

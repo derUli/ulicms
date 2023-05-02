@@ -333,8 +333,8 @@ class PageController extends \App\Controllers\Controller {
             Settings::delete($settingsName);
             return false;
         }
-            Settings::set($settingsName, '1');
-            return true;
+        Settings::set($settingsName, '1');
+        return true;
 
     }
 
@@ -522,8 +522,8 @@ class PageController extends \App\Controllers\Controller {
             Settings::delete($settingsName);
             return false;
         }
-            Settings::set($settingsName, '1');
-            return true;
+        Settings::set($settingsName, '1');
+        return true;
 
     }
 

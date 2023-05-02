@@ -533,7 +533,7 @@ if (isset($_GET['action'])) {
                     response(trans('Lang_Not_Found') . AddErrorLocation())->send();
                     exit;
                 }
-                    $_SESSION['RF']['language'] = $choosen_lang;
+                $_SESSION['RF']['language'] = $choosen_lang;
 
             }
 

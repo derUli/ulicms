@@ -248,8 +248,8 @@ class RoboFile extends Tasks {
                     . ' successfully installed');
             return;
         }
-            $this->writeln('Installation of package '
-                    . basename($file) . ' failed.');
+        $this->writeln('Installation of package '
+                . basename($file) . ' failed.');
 
         if ($pkg instanceof SinPackageInstaller) {
             foreach ($pkg->getErrors() as $error) {
@@ -659,12 +659,13 @@ class RoboFile extends Tasks {
         foreach(Finder::find(
             [
                 '.DS_STORE',
+                '.DS_Store',
                 'thumbs.db',
                 '.thumbs',
                 'tmp',
                 '*.pyc'
             ]
-            )->from('.') as $name => $file) {
+        )->from('.') as $name => $file) {
             $filesToDelete[] = $file->getRealPath();
         }
 
@@ -684,7 +685,7 @@ class RoboFile extends Tasks {
      * @return void
      */
     public function buildPhpCsFixer(): void {
-       system('vendor/bin/robo build:php-cs-fixer');
+        system('vendor/bin/robo build:php-cs-fixer');
     }
 
     /**
@@ -703,7 +704,7 @@ class RoboFile extends Tasks {
             }
         }
 
-     }
+    }
 
     /**
      * Copy changelog to core_info module

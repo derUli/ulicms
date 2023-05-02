@@ -160,4 +160,4 @@ abstract class StringHelper extends Helper {
     public static function splitAndTrim(string $str): array {
         return array_map('trim', explode(';', $str));
     }
-    }
+}

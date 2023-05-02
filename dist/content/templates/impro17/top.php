@@ -22,10 +22,10 @@ og_html_prefix();
           href="<?php echo getModulePath('bootstrap'); ?>css/bootstrap.min.css">
 <?php
     base_metas();
-    og_tags();
+og_tags();
 
-    enqueueStylesheet(getTemplateDirPath('impro17') . 'style.scss');
-    combinedStylesheetHtml();
+enqueueStylesheet(getTemplateDirPath('impro17') . 'style.scss');
+combinedStylesheetHtml();
 ?>
 </head>
 <body class="<?php body_classes(); ?>">

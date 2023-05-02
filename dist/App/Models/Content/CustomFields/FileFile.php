@@ -16,7 +16,7 @@ class FileFile extends CustomField {
         ViewBag::set('field_name', $this->contentType !== null ?
                         $this->contentType . '_' . $this->name : $this->name);
 
-       ViewBag::set('fm_type', 'files');
+        ViewBag::set('fm_type', 'files');
 
         return Template::executeDefaultOrOwnTemplate('fields/file.php');
     }

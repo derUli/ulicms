@@ -87,22 +87,22 @@ class DotEnvLoader {
      */
     public function validation(DotEnv $dotenv): void {
         // App Environment
-         $dotenv->required('APP_ENV')->notEmpty();
+        $dotenv->required('APP_ENV')->notEmpty();
 
-         // Database stuff
-         $dotenv->required('DB_SERVER')->notEmpty();
-         $dotenv->required('DB_USER')->notEmpty();
-         $dotenv->required('DB_PASSWORD');
-         $dotenv->required('DB_DATABASE')->notEmpty();
-         $dotenv->required('DB_PREFIX')->notEmpty();
+        // Database stuff
+        $dotenv->required('DB_SERVER')->notEmpty();
+        $dotenv->required('DB_USER')->notEmpty();
+        $dotenv->required('DB_PASSWORD');
+        $dotenv->required('DB_DATABASE')->notEmpty();
+        $dotenv->required('DB_PREFIX')->notEmpty();
 
-         // Debugging stuff
-         $dotenv->required('DEBUG')->isBoolean();
-         $dotenv->required('EXCEPTION_LOGGING')->isBoolean();
+        // Debugging stuff
+        $dotenv->required('DEBUG')->isBoolean();
+        $dotenv->required('EXCEPTION_LOGGING')->isBoolean();
 
-         // CMS defaults stuff
-         $dotenv->required('DEFAULT_CONTENT_TYPE');
-         $dotenv->required('DEFAULT_MENU')->notEmpty();
+        // CMS defaults stuff
+        $dotenv->required('DEFAULT_CONTENT_TYPE');
+        $dotenv->required('DEFAULT_MENU')->notEmpty();
     }
 
     protected static function checkExists(string $dir, string $file): void {

@@ -73,7 +73,7 @@ class RoboBuildTest extends RoboTestBase {
                 'tmp',
                 '*.pyc'
             ])->collect();
-            $this->assertCount(0, $collectedAfter);
+        $this->assertCount(0, $collectedAfter);
     }
 
     public function testBuildOptimizeSVG(): void {

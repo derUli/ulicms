@@ -31,9 +31,9 @@ class FTPClient {
             $this->logMessage('Attempted to connect to ' . $server . ' for user ' . $ftpUser, true);
             return false;
         }
-            $this->logMessage('Connected to ' . $server . ', for user ' . $ftpUser);
-            $this->loginOk = true;
-            return true;
+        $this->logMessage('Connected to ' . $server . ', for user ' . $ftpUser);
+        $this->loginOk = true;
+        return true;
 
     }
 
@@ -43,9 +43,9 @@ class FTPClient {
             $this->logMessage('Directory "' . $directory . '" created successfully');
             return true;
         }
-            // *** ...Else, FAIL.
-            $this->logMessage('Failed creating directory "' . $directory . '"');
-            return false;
+        // *** ...Else, FAIL.
+        $this->logMessage('Failed creating directory "' . $directory . '"');
+        return false;
 
     }
 
@@ -54,8 +54,8 @@ class FTPClient {
             $this->logMessage('Current directory is now: ' . ftp_pwd($this->connectionId));
             return true;
         }
-            $this->logMessage('Couldn\'t change directory');
-            return false;
+        $this->logMessage('Couldn\'t change directory');
+        return false;
 
     }
 

@@ -693,7 +693,7 @@ function fix_strtoupper($str) {
     if (function_exists('mb_strtoupper')) {
         return mb_strtoupper($str);
     }
-        return strtoupper($str);
+    return strtoupper($str);
 
 }
 
@@ -708,7 +708,7 @@ function fix_strtolower($str) {
     if (function_exists('mb_strtoupper')) {
         return mb_strtolower($str);
     }
-        return strtolower($str);
+    return strtolower($str);
 
 }
 
@@ -719,7 +719,7 @@ function fix_path($path, $config) {
     if ($tmp_path != '') {
         return $tmp_path . DIRECTORY_SEPARATOR . $str;
     }
-        return $str;
+    return $str;
 
 }
 

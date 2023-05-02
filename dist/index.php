@@ -169,20 +169,20 @@ $cache_control = get_cache_control();
 switch ($cache_control) {
     case 'auto':
     case 'force':
-       Vars::setNoCache(false);
+        Vars::setNoCache(false);
         break;
     case 'no_cache':
-       Vars::setNoCache(true);
+        Vars::setNoCache(true);
         break;
 }
 
 if ($hasModule) {
-   Vars::setNoCache(false);
+    Vars::setNoCache(false);
 }
 
 // Kein Caching wenn man eingeloggt ist
 if (is_logged_in() && get_cache_control() === 'auto') {
-   Vars::setNoCache(true);
+    Vars::setNoCache(true);
 }
 
 do_event('before_html');

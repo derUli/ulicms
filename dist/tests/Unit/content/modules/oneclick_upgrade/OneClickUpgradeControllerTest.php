@@ -19,8 +19,8 @@ class OneClickUpgradeControllerTest extends \PHPUnit\Framework\TestCase {
     public function testAccordionLayout(): void {
 
         $actual = TestHelper::getOutput(static function(): void {
-        $controller = new OneClickUpgradeController();
-        $actual = $controller->accordionLayout();
+            $controller = new OneClickUpgradeController();
+            $actual = $controller->accordionLayout();
         });
 
         $this->assertEmpty($actual);

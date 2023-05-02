@@ -282,6 +282,8 @@ $config
     'blank_line_between_import_groups' => true,
     // Code MUST use configured indentation type.
     'indentation_type'=> true,
+    // Each statement must be indented.
+    'statement_indentation' => true,
     // Curly braces must be placed as configured.
     'curly_braces_position' => [
         'control_structures_opening_brace' => 'same_line',

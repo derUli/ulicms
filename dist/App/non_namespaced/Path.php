@@ -26,7 +26,7 @@ class Path {
 
         $path = str_ireplace(
             'ULICMS_ROOT',
-                ULICMS_ROOT,
+            ULICMS_ROOT,
             $path
         );
         $path = str_ireplace('ULICMS_CONFIGURATIONS', ULICMS_CONFIGURATIONS, $path);
@@ -41,7 +41,7 @@ class Path {
         );
         $path = str_ireplace(
             'ULICMS_GENERATED_PRIVATE',
-             ULICMS_GENERATED_PRIVATE,
+            ULICMS_GENERATED_PRIVATE,
             $path
         );
 

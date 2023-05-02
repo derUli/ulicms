@@ -11,10 +11,10 @@ class Node extends Link {
 
     public $link_url = '#';
 
-     /**
-      * Get css classes for Font Awesome icon
-      * @return string
-      */
+    /**
+     * Get css classes for Font Awesome icon
+     * @return string
+     */
     public function getIcon(): string {
         return 'far fa-folder';
     }

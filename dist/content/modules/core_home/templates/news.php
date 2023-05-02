@@ -11,7 +11,7 @@ if (! Settings::get('disable_ulicms_newsfeed')) {
     $feeds['en'] = 'https://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en';
 
     if (isset($_SESSION['system_language'], $feeds[$_SESSION['system_language']])
-            ) {
+    ) {
         $feed_url = $feeds[$_SESSION['system_language']];
     } else {
         $feed_url = $feeds['en'];

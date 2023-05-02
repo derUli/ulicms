@@ -59,7 +59,7 @@ class Banner extends Model {
         if ($this->id != null) {
             $retval = $this->update();
         }
-            $retval = $this->create();
+        $retval = $this->create();
 
         return $retval;
     }

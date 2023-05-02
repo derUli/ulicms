@@ -33,9 +33,9 @@ class PrivacyCheckbox {
      */
     public function isEnabled(): bool {
         return (bool)Settings::get(
-                    "privacy_policy_checkbox_enable_{$this->language}",
-                    'bool'
-                );
+            "privacy_policy_checkbox_enable_{$this->language}",
+            'bool'
+        );
     }
 
     /**

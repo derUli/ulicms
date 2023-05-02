@@ -806,8 +806,8 @@ function get_page(?string $slug = ''): ?array {
         \App\Storages\Vars::set('page_' . $slug, $dataset);
         return $dataset;
     }
-        \App\Storages\Vars::set('page_' . $slug, null);
-        return null;
+    \App\Storages\Vars::set('page_' . $slug, null);
+    return null;
 
 }
 

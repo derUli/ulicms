@@ -12,11 +12,11 @@ $isWritable = is_writable(ULICMS_ROOT);
 
         echo TRANSLATION_IS_WRITABLE . ' ';
 
-        if ($isWritable) {
-            echo '<i class="fa fa-check text-green" aria-hidden="true"></i>';
-        } else {
-            echo '<i class="fa fa-exclamation-triangle text-red" aria-hidden="true"></i>';
-        }
+if ($isWritable) {
+    echo '<i class="fa fa-check text-green" aria-hidden="true"></i>';
+} else {
+    echo '<i class="fa fa-exclamation-triangle text-red" aria-hidden="true"></i>';
+}
 ?>
     </li>
 </ul>

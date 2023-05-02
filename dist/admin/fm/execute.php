@@ -238,11 +238,11 @@ if (isset($_GET['action'])) {
                     response(trans('File_Save_Error') . AddErrorLocation())->send();
                     exit;
                 }
-                    if (is_function_callable('chmod') !== false) {
-                        chmod($path . $name, 0644);
-                    }
-                    response(trans('File_Save_OK'))->send();
-                    exit;
+                if (is_function_callable('chmod') !== false) {
+                    chmod($path . $name, 0644);
+                }
+                response(trans('File_Save_OK'))->send();
+                exit;
 
             }
 
@@ -486,8 +486,8 @@ if (isset($_GET['action'])) {
                     response(trans('File_Save_Error') . AddErrorLocation())->send();
                     exit;
                 }
-                    response(trans('File_Save_OK'))->send();
-                    exit;
+                response(trans('File_Save_OK'))->send();
+                exit;
 
             }
 

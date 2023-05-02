@@ -58,7 +58,7 @@ class Database {
 
         // Catch connection exceptions to prevent PHPUnit log from being spammed
         try {
-          self::$connection = mysqli_connect($server, $user, $password, '', $port, $socket);
+            self::$connection = mysqli_connect($server, $user, $password, '', $port, $socket);
         } catch(mysqli_sql_exception $e) {
             self::$connection = null;
             return null;
@@ -522,22 +522,22 @@ class Database {
             } elseif (is_bool($value)) {
                 return (int)$value;
             }
-                return mysqli_real_escape_string(self::$connection, $value);
+            return mysqli_real_escape_string(self::$connection, $value);
 
         }
-            if ($type === DB_TYPE_INT) {
-                return (int)$value;
-            } elseif ($type === DB_TYPE_FLOAT) {
-                return (float)$value;
-            } elseif ($type === DB_TYPE_STRING) {
-                return mysqli_real_escape_string(
-                    self::$connection,
-                    (string)$value
-                );
-            } elseif ($type === DB_TYPE_BOOL) {
-                return (int)$value;
-            }
-                return $value;
+        if ($type === DB_TYPE_INT) {
+            return (int)$value;
+        } elseif ($type === DB_TYPE_FLOAT) {
+            return (float)$value;
+        } elseif ($type === DB_TYPE_STRING) {
+            return mysqli_real_escape_string(
+                self::$connection,
+                (string)$value
+            );
+        } elseif ($type === DB_TYPE_BOOL) {
+            return (int)$value;
+        }
+        return $value;
 
     }
 
