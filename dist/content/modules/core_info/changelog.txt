@@ -46,6 +46,7 @@ API-Änderungen:
 * UrlField in Namespace App\Models\Content\CustomFields verschoben
 * Methode sanitize() in sanitize_headers() umbenannt
 * BackendHelper in Namespace App\Helpers verschoben
+* ModuleHelper in Namespace App\Helpers verschoben
 
 Entfernte API-Methoden:
 * getStringLengthInBytes()
