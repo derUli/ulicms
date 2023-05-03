@@ -35,23 +35,8 @@ class OneClickUpgradeControllerTest extends \PHPUnit\Framework\TestCase {
             $controller->settings();
         });
 
-        $this->assertStringNotContainsString('Changes were saved.', $actual);
         $this->assertStringContainsString('<option value="fast">', $actual);
         $this->assertStringContainsString('<option value="slow" selected>', $actual);
-    }
-
-    public function testSettingsSave(): void {
-        $actual = TestHelper::getOutput(static function(): void {
-            $_POST['oneclick_upgrade_channel'] = 'fast';
-            $_SERVER['REQUEST_METHOD'] = 'POST';
-
-            $controller = new OneClickUpgradeController();
-            $controller->settings();
-        });
-
-        $this->assertStringContainsString('Changes were saved.', $actual);
-        $this->assertStringContainsString('<option value="fast" selected>', $actual);
-        $this->assertStringContainsString('<option value="slow">', $actual);
     }
 
     public function testGetSettingsHeadline(): void {

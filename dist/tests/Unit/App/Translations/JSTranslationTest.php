@@ -1,11 +1,13 @@
 <?php
 
 use App\Translations\JSTranslation;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class JSTranslationTest extends \PHPUnit\Framework\TestCase {
+    use MatchesSnapshots;
+
     protected function setUp(): void {
         require_once getLanguageFilePath('en');
-        require_once \App\Helpers\ModuleHelper::buildModuleRessourcePath('core_help', 'lang/en.php');
     }
 
     public function testConstructorWithKeys(): void {
@@ -26,13 +28,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         ];
         $translation = new JSTranslation($keys);
 
-        $this->assertEquals(
-            file_get_contents(
-                ULICMS_ROOT .
-                '/tests/fixtures/JSTranslation/JSTranslation1.html'
-            ),
-            $translation->getJS()
-        );
+        $this->assertMatchesHtmlSnapshot($translation->getJS());
     }
 
     public function testGetJsWithVarname(): void {
@@ -43,13 +39,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         ];
         $translation = new JSTranslation($keys, 'ThisIsNotGoogleTranslator');
 
-        $this->assertEquals(
-            file_get_contents(
-                ULICMS_ROOT .
-                '/tests/fixtures/JSTranslation/JSTranslation2.html'
-            ),
-            $translation->getJS()
-        );
+        $this->assertMatchesHtmlSnapshot($translation->getJS());
     }
 
     public function testGetJsWithVarnameAndWrap(): void {
@@ -60,12 +50,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         ];
         $translation = new JSTranslation($keys, 'ThisIsNotGoogleTranslator');
 
-        $this->assertEquals(
-            file_get_contents(
-                ULICMS_ROOT . '/tests/fixtures/JSTranslation/JSTranslation3.html'
-            ),
-            $translation->getJS('<script id="my-script">{code}</script>')
-        );
+        $this->assertMatchesHtmlSnapshot($translation->getJS('<script id="my-script">{code}</script>'));
     }
 
     public function testRender(): void {
@@ -79,13 +64,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         $translation->render();
         $output = ob_get_clean();
 
-        $this->assertEquals(
-            file_get_contents(
-                ULICMS_ROOT .
-                '/tests/fixtures/JSTranslation/JSTranslation1.html'
-            ),
-            $output
-        );
+        $this->assertMatchesHtmlSnapshot($output);
     }
 
     public function testRenderJs(): void {
@@ -99,13 +78,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         $translation->renderJS();
         $output = ob_get_clean();
 
-        $this->assertEquals(
-            file_get_contents(
-                ULICMS_ROOT .
-                '/tests/fixtures/JSTranslation/JSTranslation1.html'
-            ),
-            $output
-        );
+        $this->assertMatchesHtmlSnapshot($output);
     }
 
     public function testRenderJsWithVarname(): void {
@@ -118,13 +91,8 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         ob_start();
         $translation->renderJS();
         $output = ob_get_clean();
-        $this->assertEquals(
-            $output,
-            file_get_contents(
-                ULICMS_ROOT .
-                '/tests/fixtures/JSTranslation/JSTranslation2.html'
-            )
-        );
+
+        $this->assertMatchesHtmlSnapshot($output);
     }
 
     public function testRenderJsWithVarnameAndWrap(): void {
@@ -139,13 +107,7 @@ class JSTranslationTest extends \PHPUnit\Framework\TestCase {
         $translation->renderJS('<script id="my-script">{code}</script>');
         $output = ob_get_clean();
 
-        $this->assertEquals(
-            $output,
-            file_get_contents(
-                ULICMS_ROOT .
-                '/tests/fixtures/JSTranslation/JSTranslation3.html'
-            )
-        );
+        $this->assertMatchesHtmlSnapshot($output);
     }
 
     public function testAddKey(): void {

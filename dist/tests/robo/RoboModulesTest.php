@@ -11,7 +11,7 @@ class RoboModulesTest extends RoboTestBase {
     public function testModulesList(): void {
         $output = $this->runRoboCommand(['modules:list']);
 
-        $this->assertEquals(13, substr_count($output, 'core_'));
+        $this->assertEquals(12, substr_count($output, 'core_'));
         foreach (getAllModules() as $module) {
             $this->assertStringContainsString($module, $output);
         }
@@ -20,7 +20,7 @@ class RoboModulesTest extends RoboTestBase {
     public function testModulesListAll(): void {
         $output = $this->runRoboCommand(['modules:list', '[all]']);
 
-        $this->assertEquals(13, substr_count($output, 'core_'));
+        $this->assertEquals(12, substr_count($output, 'core_'));
         foreach (getAllModules() as $module) {
             $this->assertStringContainsString($module, $output);
         }

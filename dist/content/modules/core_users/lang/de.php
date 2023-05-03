@@ -11,3 +11,8 @@ add_translation('avatar_image', 'Avatar Grafik');
 add_translation('avatar_upload_failed', 'Avatar Upload fehlgeschlagen.');
 add_translation('show_in_original_size', 'In Originalgröße anzeigen');
 add_translation('delete_avatar', 'Avatar entfernen');
+add_translation(
+    'HELP_IS_ADMIN',
+    'Diese Option deaktiviert alle Zugriffsbeschränkungen für '
+    . 'diesen Nutzer. Er hat somit vollen Zugriff auf das System.'
+);

@@ -18,7 +18,7 @@ class RoboPackageTest extends RoboTestBase {
     public function testPackagesList(): void {
         $output = $this->runRoboCommand(['packages:list']);
 
-        $this->assertEquals(13, substr_count($output, 'core_'));
+        $this->assertEquals(12, substr_count($output, 'core_'));
 
         $this->assertStringContainsString('2020 1.0.5', $output);
         $this->assertStringContainsString('impro17 2.1.6', $output);
