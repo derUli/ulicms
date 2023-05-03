@@ -337,7 +337,6 @@ div.diff {
 
 div#pkglist,
 div#loadpkg,
-div#message-page-edit,
 .loading {
     display: none;
 }
@@ -698,7 +697,7 @@ h1, h2, h3, h4, h5, h6 {
     word-break: break-word
 }
 
-#msgcontainer {
+#loading-container {
     margin-top: 10px;
 }
 

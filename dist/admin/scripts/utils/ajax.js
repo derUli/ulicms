@@ -48,7 +48,7 @@ const bindAjaxLinks = (root) => {
 };
 
 const ajaxGoTo = (url) => {
-    $("#main-backend-content, #message").hide();
+    $("#main-backend-content").hide();
     $("#main-content-loadspinner").show();
     const contentContainer = $("#content-container");
     $(contentContainer).load(url, (response, status, xhr) => {
@@ -93,11 +93,11 @@ const initRemoteAlerts = (rootElement) => {
 
 const ajaxLoadSpinner = {
     show: () => {
-        $("#main-content-loadspinner, #message").show();
+        $("#main-content-loadspinner").show();
         $("#main-backend-content").hide();
     },
     hide: () => {
-        $("#main-content-loadspinner, #message").hide();
+        $("#main-content-loadspinner").hide();
         $("#main-backend-content").show();
     }
 }

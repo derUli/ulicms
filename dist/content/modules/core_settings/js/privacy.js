@@ -37,9 +37,6 @@ $(() => {
 
     $("#privacy-form").ajaxForm(
         {
-            beforeSubmit: () => {
-                $("#message").html("");
-            },
             // FIXME: this is copy and paste code
             // move this to a util method
             beforeSerialize: () => {

@@ -5,6 +5,8 @@ Neue Features:
 * Schriftart-Vorschau bei Änderung der Schriftgröße und der Textfarbe
 * Neue Robo-Tasks
 * Installer prüft, ob ULICMS_ROOT beschreibbar ist
+* Verbesserungen in den Datenschutz-Einstellungen
+* Nutze überall VanillaToast
 
 Fehlerkorrekturen:
 * Warnings wenn man update.php von der Kommandozeile aufruft korrigiert

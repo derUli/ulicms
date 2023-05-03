@@ -37,7 +37,7 @@ $passwordSecurityTranslation = new JSTranslation(
 );
 $passwordSecurityTranslation->render();
 ?>
-<div id="msgcontainer">
+<div id="loading-container">
     <img
         id="loading"
         src="gfx/loading.gif"

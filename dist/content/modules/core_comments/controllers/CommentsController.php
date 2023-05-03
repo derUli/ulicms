@@ -8,11 +8,11 @@ use App\Constants\CommentStatus;
 use App\Controllers\MainClass;
 use App\Exceptions\DatasetNotFoundException;
 use App\Exceptions\NotImplementedException;
+use App\Helpers\ModuleHelper;
 use App\HTML as HTML;
 use App\Models\Content\Comment;
 use App\Security\PrivacyCheckbox;
 use App\Utils\CacheUtil;
-use App\Helpers\ModuleHelper;
 
 class CommentsController extends MainClass {
     public function beforeHtml(): void {

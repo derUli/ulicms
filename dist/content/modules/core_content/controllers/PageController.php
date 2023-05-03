@@ -9,6 +9,7 @@ use App\Constants\LinkTarget;
 use App\CoreContent\Models\ViewModels\DiffViewModel;
 use App\CoreContent\PageTableRenderer;
 use App\Exceptions\DatasetNotFoundException;
+use App\Helpers\ModuleHelper;
 use App\HTML\ListItem;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
@@ -20,7 +21,6 @@ use Jfcherng\Diff\Differ;
 use Jfcherng\Diff\DiffHelper;
 use Jfcherng\Diff\Renderer\RendererConstant;
 use Rakit\Validation\Validator;
-use App\Helpers\ModuleHelper;
 
 use function App\HTML\stringContainsHtml;
 

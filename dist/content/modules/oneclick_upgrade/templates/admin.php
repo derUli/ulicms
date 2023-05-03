@@ -3,12 +3,12 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Storages\ViewBag;
-
+use App\Translations\JSTranslation;
 use function App\HTML\text;
 
 ?>
 <form action="<?php echo getModuleAdminSelfPath(); ?>"
-        method="post">
+        method="post" class="ajax-form">
             <?php csrf_token_html(); ?>
     <div>
         <label for="oneclick_upgrade_channel"><?php translate('channel'); ?></label><br />
@@ -41,6 +41,12 @@ use function App\HTML\text;
         <i class="fa fa-save"></i> <?php translate('save'); ?></button>
 </form>
 <?php
+
+
+$translation = new JSTranslation();
+$translation->addKey('changes_were_saved');
+$translation->render();
+
 enqueueScriptFile(
     \App\Helpers\ModuleHelper::buildRessourcePath(
         'oneclick_upgrade',
