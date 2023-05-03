@@ -4,6 +4,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Storages\ViewBag;
 use App\Translations\JSTranslation;
+
 use function App\HTML\text;
 
 ?>
@@ -41,7 +42,6 @@ use function App\HTML\text;
         <i class="fa fa-save"></i> <?php translate('save'); ?></button>
 </form>
 <?php
-
 
 $translation = new JSTranslation();
 $translation->addKey('changes_were_saved');
