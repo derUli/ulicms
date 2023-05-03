@@ -5,7 +5,6 @@ $(() => {
     $("#footer_text_form").ajaxForm(
             {
                 beforeSubmit: () => {
-                    $("#message").html("");
                     $("#loading").show();
                 },
                 beforeSerialize: () => {
@@ -15,8 +14,7 @@ $(() => {
                 },
                 success: () => {
                     $("#loading").hide();
-                    $("#message")
-                            .html(`<span style="color:green;">${Translation.ChangesWasSaved}</span>`);
+                    vanillaToast.success(Translation.ChangesWereSaved);
                 }
             });
 });

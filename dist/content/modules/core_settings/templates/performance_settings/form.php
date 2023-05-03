@@ -76,7 +76,8 @@ if (! $permissionChecker->hasPermission('performance_settings')) {
         [],
         RequestMethod::POST,
         [
-            'id' => 'form'
+            'id' => 'form',
+            'class' => 'ajax-form'
         ]
     );
     ?>
@@ -176,7 +177,7 @@ if (! $permissionChecker->hasPermission('performance_settings')) {
     enqueueScriptFile(
         \App\Helpers\ModuleHelper::buildRessourcePath(
             'core_settings',
-            'js/performance.js'
+            'js/ajax_form.js'
         )
     );
     combinedScriptHtml();

@@ -20,6 +20,7 @@ use Jfcherng\Diff\Differ;
 use Jfcherng\Diff\DiffHelper;
 use Jfcherng\Diff\Renderer\RendererConstant;
 use Rakit\Validation\Validator;
+use App\Helpers\ModuleHelper;
 
 use function App\HTML\stringContainsHtml;
 

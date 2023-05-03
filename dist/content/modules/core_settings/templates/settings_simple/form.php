@@ -23,7 +23,8 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     <h2><?php translate('general_settings'); ?></h2>
     <?php
     echo \App\Helpers\ModuleHelper::buildMethodCallForm('SimpleSettingsController', 'save', [], 'post', [
-        'id' => 'settings_simple'
+        'id' => 'settings_simple',
+        'class' => 'ajax-form'
     ]);
     ?>
     <table>
@@ -114,7 +115,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     if (Settings::get('robots') == 'noindex,nofollow') {
         ?>
 
-                        <option value="index,follow"><?php translate('EARCH_ENGINES_INDEX'); ?></option>
+                        <option value="index,follow"><?php translate('SEARCH_ENGINES_INDEX'); ?></option>
                         <option value="noindex,nofollow" selected><?php translate('SEARCH_ENGINES_NOINDEX'); ?></option>
 
                         <?php
@@ -165,7 +166,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     $translation->addKey('changes_were_saved');
     $translation->render();
 
-    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/settings_simple.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/ajax_form.js'));
     combinedScriptHtml();
 } else {
     noPerms();

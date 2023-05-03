@@ -43,7 +43,8 @@ if (! $permissionChecker->hasPermission('design')) {
     </h1>
     <?php
     echo \App\Helpers\ModuleHelper::buildMethodCallForm('DesignSettingsController', 'save', [], 'post', [
-        'id' => 'designForm'
+        'id' => 'designForm',
+        'class' => 'ajax-form'
     ]);
     ?>
     <div class="scroll">
@@ -271,5 +272,6 @@ if (! $permissionChecker->hasPermission('design')) {
     $translation->addKey('changes_were_saved');
     $translation->render();
     enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/design.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/ajax_form.js'));
     combinedScriptHtml();
 }

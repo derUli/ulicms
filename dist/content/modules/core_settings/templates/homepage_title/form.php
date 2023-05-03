@@ -27,7 +27,8 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     <h1><?php translate('homepage_title'); ?></h1>
     <?php
     echo \App\Helpers\ModuleHelper::buildMethodCallForm('HomepageTitleController', 'save', [], 'post', [
-        'id' => 'homepage_title_settings'
+        'id' => 'homepage_title_settings',
+        'class' => 'ajax-form'
     ]);
     ?>
     <table>
@@ -65,7 +66,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     $translation->addKey('changes_were_saved');
     $translation->render();
 
-    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/homepage_title.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/ajax_form.js'));
     combinedScriptHtml();
 } else {
     noPerms();

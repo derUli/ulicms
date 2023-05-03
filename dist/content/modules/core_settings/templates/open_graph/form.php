@@ -27,7 +27,8 @@ if ($permissionChecker->hasPermission('open_graph')) {
     ?>
     <?php
     echo \App\Helpers\ModuleHelper::buildMethodCallForm('OpenGraphController', 'save', [], 'post', [
-        'id' => 'open_graph'
+        'id' => 'open_graph',
+        'class' => 'ajax-form'
     ]);
     ?>
     <table style="border: 0px;">
@@ -71,6 +72,7 @@ if ($permissionChecker->hasPermission('open_graph')) {
     $translation->render();
 
     enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/open_graph.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/ajax_form.js'));
     combinedScriptHtml();
 } else {
     noPerms();

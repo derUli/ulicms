@@ -30,7 +30,8 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     </h1>
     <?php
     echo \App\Helpers\ModuleHelper::buildMethodCallForm('SiteSloganController', 'save', [], 'post', [
-        'id' => 'site_slogan_settings'
+        'id' => 'site_slogan_settings',
+        'class' => 'ajax-form'
     ]);
     ?>
     <table>
@@ -73,7 +74,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     enqueueScriptFile(
         \App\Helpers\ModuleHelper::buildRessourcePath(
             'core_settings',
-            'js/site_slogan.js'
+            'js/ajax_form.js'
         )
     );
     combinedScriptHtml();

@@ -132,7 +132,8 @@ if ($permissionChecker->hasPermission('privacy_settings')) {
     ?>>
                 </div>
             </div>
-            <div class="field">
+            <div class="field" id="privacy_policy_keep_spam_ips_container" 
+                style="<?php echo $delete_ips_after_48_hours ? 'display:block' : 'display:none'; ?>"> 
                 <div class="field-label">
                     <label for="keep_spam_ips">
                         <?php translate('keep_spam_ips'); ?>

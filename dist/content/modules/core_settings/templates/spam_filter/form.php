@@ -18,7 +18,7 @@ $permissionChecker = PermissionChecker::fromCurrentUser();
 
 if ($permissionChecker->hasPermission('spam_filter')) {
     ?>
-    <form id="spamfilter_settings" name="?action=spam_filter" method="post">
+    <form id="spamfilter_settings" name="?action=spam_filter" method="post" class="ajax-form">
         <?php echo \App\Helpers\ModuleHelper::buildMethodCallForm('SpamFilterController', 'save'); ?>
         <div class="checkbox">
             <label for="spamfilter_enabled"> <input type="checkbox"
@@ -114,10 +114,11 @@ if ($permissionChecker->hasPermission('spam_filter')) {
     </form>
 
     <?php
-    $jsTranslation = new JSTranslation([], 'SettingsTranslation');
+    $jsTranslation = new JSTranslation();
     $jsTranslation->addKey('changes_were_saved');
     $jsTranslation->render();
     enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/spam_filter.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/ajax_form.js'));
     combinedScriptHtml();
 } else {
     noPerms();

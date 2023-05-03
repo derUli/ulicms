@@ -28,7 +28,8 @@ if ($permissionChecker->hasPermission('default_access_restrictions_edit')) {
         [],
         RequestMethod::POST,
         [
-            'id' => 'default_edit_restrictions'
+            'id' => 'default_edit_restrictions',
+            'class' => 'ajax-form'
         ]
     );
     ?>
@@ -86,18 +87,11 @@ if ($permissionChecker->hasPermission('default_access_restrictions_edit')) {
             <i class="fa fa-save"></i> <?php translate('save_changes'); ?></button>
     </div>
     <?php
-    if (Request::getVar('submit_form')) {
-        ?>
-        <p style="color: green" class="voffset3">
-            <?php translate('changes_were_saved'); ?>
-        </p>
-        <?php
-    }
     echo \App\Helpers\ModuleHelper::endForm();
     $translation = new JSTranslation();
     $translation->addKey('changes_were_saved');
     $translation->render();
-    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/default_edit_restrictions.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/ajax_form.js'));
     combinedScriptHtml();
 } else {
     noPerms();

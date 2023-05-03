@@ -29,7 +29,8 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
     [],
     RequestMethod::POST,
     [
-        'id' => 'error_pages_form'
+        'id' => 'error_pages_form',
+        'class' => 'ajax-form'
     ]
 );
 ?>
@@ -89,5 +90,5 @@ $translation = new JSTranslation();
 $translation->addKey('changes_were_saved');
 $translation->render();
 
-enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/error_pages.js'));
+enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/ajax_form.js'));
 combinedScriptHtml();

@@ -27,7 +27,8 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     <h1><?php get_translation('meta_description'); ?></h1>
     <?php
     echo \App\Helpers\ModuleHelper::buildMethodCallForm('MetaDescriptionController', 'save', [], 'post', [
-        'id' => 'meta_description_settings'
+        'id' => 'meta_description_settings',
+        'class' => 'ajax-form'
     ]);
     ?>
     <table style="border: 0">
@@ -69,7 +70,7 @@ if ($permissionChecker->hasPermission('settings_simple')) {
     $translation->addKey('changes_were_saved');
     $translation->render();
 
-    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/meta_description.js'));
+    enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/ajax_form.js'));
     combinedScriptHtml();
 } else {
     noPerms();

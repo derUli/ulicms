@@ -12,6 +12,7 @@ use App\HTML as HTML;
 use App\Models\Content\Comment;
 use App\Security\PrivacyCheckbox;
 use App\Utils\CacheUtil;
+use App\Helpers\ModuleHelper;
 
 class CommentsController extends MainClass {
     public function beforeHtml(): void {

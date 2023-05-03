@@ -1176,7 +1176,6 @@ if ($permissionChecker->hasPermission('pages')) {
                     <?php }
             ?>	</div>
                 <div class="inPageMessage">
-                    <div id="message-page-edit" class="inPageMessage"></div>
                     <img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
                 </div>
                 <div class="row">

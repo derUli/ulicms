@@ -38,7 +38,8 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
     [],
     RequestMethod::POST,
     [
-        'id' => 'community_settings_form'
+        'id' => 'community_settings_form',
+        'class' => 'ajax-form'
     ]
 );
 ?>
@@ -87,7 +88,7 @@ $translation->render();
 enqueueScriptFile(
     \App\Helpers\ModuleHelper::buildRessourcePath(
         'core_settings',
-        'js/community_settings.js'
+        'js/ajax_form.js'
     )
 );
 combinedScriptHtml();

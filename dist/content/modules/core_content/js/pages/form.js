@@ -49,8 +49,6 @@ $(() => {
     // AJAX submit page edit form
     $(".edit-page-form").ajaxForm({
         beforeSubmit: () => {
-            $("#message-page-edit").html("");
-            $("#message-page-edit").hide();
             $(".loading").show();
         },
         beforeSerialize: () => {
@@ -59,12 +57,8 @@ $(() => {
         },
         success: () => {
             $(".loading").hide();
-            $("#message-page-edit").html(
-                    `<span style="color:green;">
-                        ${Translation.PageSaved}
-                     </span>`
-                    );
-            $("#message-page-edit").show();
+
+            vanillaToast.success(Translation.PageSaved);
         }
     });
 

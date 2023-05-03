@@ -80,6 +80,11 @@ function getDomainByLanguage($givenLanguage): ?string {
     return null;
 }
 
+/**
+ * Set language by domain (Domain2Language Mapping)
+ *
+ * @return bool
+ */
 function setLanguageByDomain(): bool {
     $domainMapping = Settings::get('domain_to_language');
     $domainMapping = Settings::mappingStringToArray($domainMapping);

@@ -70,21 +70,4 @@ $(() => {
             (event) => {
         loadThemePreview($(event.currentTarget));
     });
-
-    // ajax form submit
-    $("#designForm").ajaxForm(
-            {
-                beforeSubmit: () => {
-                    $("#message").html("");
-                    $("#msgcontainer, #loading").show();
-                },
-                success: () => {
-                    $("#loading").hide();
-                    $("#message").html(
-                            `<span style="color:green;">
-                    ${Translation.ChangesWasSaved}
-        </span>`);
-                    $("#msgcontainer, #loading").hide();
-                }
-            });
 });
