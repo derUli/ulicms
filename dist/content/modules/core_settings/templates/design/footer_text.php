@@ -38,6 +38,8 @@ $translation = new JSTranslation();
 $translation->addKey('changes_were_saved');
 $translation->render();
 
+\App\Helpers\BackendHelper::enqueueEditorScripts();
+
 enqueueScriptFile(
     \App\Helpers\ModuleHelper::buildRessourcePath(
         'core_settings',
