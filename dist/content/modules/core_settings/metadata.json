@@ -39,7 +39,11 @@
         "other_settings": "other",
         "meta_description": "settings_simple",
         "frontpage_settings": "settings_simple",
-        "settings_simple": "settings_simple"
+        "settings_simple": "settings_simple",
+        "homepage_title": "settings_simple",
+        "languages": "languages",
+        "design": "design",
+        "open_graph": "open_graph"
     },
     "custom_acl": [
         "privacy_settings",
