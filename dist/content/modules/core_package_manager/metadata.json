@@ -17,6 +17,11 @@
         "packages": "templates/packages/list.php",
         "available_modules": "templates/packages/available.php"
     },
+    "action_permissions": {
+        "sin_package_install_ok": "install_packages",
+        "install_method": "install_packages",
+        "upload_package": "install_packages"
+    },
     "objects": {
         "ModuleInfoViewModel": "objects/ModuleInfoViewModel.php",
         "ThemeInfoViewModel": "objects/ThemeInfoViewModel.php"
