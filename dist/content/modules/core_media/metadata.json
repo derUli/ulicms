@@ -24,7 +24,11 @@
     },
     "action_permissions" : {
         "videos": "videos",
+        "edit_video": "videos_edit",
+        "add_video": "videos_create",
         "audio": "audio",
+        "add_audio": "audio_create",
+        "edit_audio": "audio_edit",
         "files": "files"
     },
     "controllers": {

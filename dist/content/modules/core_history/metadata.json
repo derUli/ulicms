@@ -6,6 +6,10 @@
         "view_diff": "templates/view_diff.php",
         "restore_version": "templates/restore_version.php"
     },
+    "action_permissions": {
+        "view_diff": "pages",
+        "restore_version": "pages"
+    },
     "controllers": {
         "HistoryController": "controllers/HistoryController.php"
     },
