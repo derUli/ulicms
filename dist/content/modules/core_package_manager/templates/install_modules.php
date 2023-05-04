@@ -2,9 +2,9 @@
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use App\Backend\UliCMSVersion;
 use App\Packages\PackageManager;
 use App\Security\Permissions\PermissionChecker;
+use App\UliCMS\UliCMSVersion;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();
 

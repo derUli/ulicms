@@ -1,9 +1,9 @@
 <?php
 
-use App\Backend\UliCMSVersion;
 use App\Constants\CommentStatus;
 use App\Exceptions\DatasetNotFoundException;
 use App\Models\Content\Comment;
+use App\UliCMS\UliCMSVersion;
 use App\Utils\CacheUtil;
 
 class CommentTest extends \PHPUnit\Framework\TestCase {

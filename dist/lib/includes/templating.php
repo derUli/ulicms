@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
-use App\Backend\UliCMSVersion;
 use App\Exceptions\DatasetNotFoundException;
 use App\Models\Content\Categories;
 use App\Models\Content\Language;
 use App\Security\Permissions\PermissionChecker;
+use App\UliCMS\UliCMSVersion;
 use App\Utils\File;
 
 function html5_doctype(): void {

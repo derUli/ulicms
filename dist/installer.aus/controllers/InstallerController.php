@@ -2,8 +2,8 @@
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use App\Backend\UliCMSVersion;
 use App\Storages\Settings\DotEnvLoader;
+use App\UliCMS\UliCMSVersion;
 
 // TODO: Make it work without this
 mysqli_report(MYSQLI_REPORT_OFF);

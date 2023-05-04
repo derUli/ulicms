@@ -2,10 +2,10 @@
 
 const CORE_COMPONENT = 'update';
 
-use App\Backend\UliCMSVersion;
 use App\Database\DBMigrator;
 use App\Storages\Settings\ConfigurationToDotEnvConverter;
 use App\Storages\Settings\DotEnvLoader;
+use App\UliCMS\UliCMSVersion;
 use App\Utils\CacheUtil;
 
 $rootDir = dirname(__FILE__);

@@ -1,7 +1,7 @@
 <?php
 
-use App\Backend\UliCMSVersion;
 use App\Services\Connectors\PackageSourceConnector;
+use App\UliCMS\UliCMSVersion;
 
 class UliCMSVersionTest extends \PHPUnit\Framework\TestCase {
     public function testGetCodeName(): void {

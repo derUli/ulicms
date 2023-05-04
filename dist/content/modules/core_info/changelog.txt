@@ -49,6 +49,7 @@ API-Änderungen:
 * Methode sanitize() in sanitize_headers() umbenannt
 * BackendHelper in Namespace App\Helpers verschoben
 * ModuleHelper in Namespace App\Helpers verschoben
+* UliCMSVersion in Namespace App\UliCMS verschoben
 
 Entfernte API-Methoden:
 * getStringLengthInBytes()

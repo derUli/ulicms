@@ -6,7 +6,6 @@ namespace App\UliCMS;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use App\Backend\UliCMSVersion;
 use App\Constants\DateTime;
 use App\Exceptions\ConnectionFailedException;
 use App\Exceptions\SqlException;

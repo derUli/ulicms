@@ -25,7 +25,7 @@ class RoboTest extends RoboTestBase {
         $actual = $this->runRoboCommand(
             [
                 'tests:run',
-                'tests/Unit/App/Backend/UliCMSVersionTest.php'
+                'tests/Unit/App/UliCMS/UliCMSVersionTest.php'
             ]
         );
 

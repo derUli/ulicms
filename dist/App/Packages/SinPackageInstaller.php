@@ -6,7 +6,7 @@ namespace App\Packages;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use App\Backend\UliCMSVersion;
+use App\UliCMS\UliCMSVersion;
 use App\Utils\File;
 use App\Utils\VersionComparison;
 use Database;
