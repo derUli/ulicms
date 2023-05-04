@@ -29,7 +29,8 @@
         "performance_settings": "performance_settings",
         "community_settings": "community_settings",
         "footer_text": "footer_text",
-        "error_pages": "error_pages"
+        "error_pages": "error_pages",
+        "site_slogan": "settings_simple"
     },
     "custom_acl": [
         "privacy_settings",
