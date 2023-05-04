@@ -48,7 +48,7 @@ function optimizeHtml(
 /**
  * Add script to minify queue
  * @param string $path
- * 
+ *
  * @return void
  */
 function enqueueScriptFile(string $path): void {

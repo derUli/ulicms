@@ -24,7 +24,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
 );
 ?>
 <p>
-    <textarea name="footer_text" data-mimetype="text/html"
+    <textarea name="footer_text" id="footer_text" data-mimetype="text/html"
               class="<?php esc(get_html_editor()); ?>"><?php esc(Settings::get('footer_text')); ?></textarea>
 </p>
 <p>
