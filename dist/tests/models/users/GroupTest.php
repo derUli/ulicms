@@ -35,7 +35,7 @@ class GroupTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($oldID, $group->getId());
         $this->assertEquals('bla', $group->getName());
         $this->assertTrue(is_array($group->getPermissions()));
-        $this->assertGreaterThanOrEqual(62, count($group->getPermissions()));
+        $this->assertGreaterThanOrEqual(61, count($group->getPermissions()));
 
         $group->setName('Hello');
         $group->save();
