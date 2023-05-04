@@ -14,15 +14,18 @@
             ],
     "actions": {
         "media": "templates/media.php",
-        "images": "templates/filemanager.php",
         "files": "templates/filemanager.php",
-        "flash": "templates/filemanager.php",
         "videos": "templates/videos/list.php",
         "add_video": "templates/videos/new.php",
         "edit_video": "templates/videos/edit.php",
         "audio": "templates/audio/list.php",
         "add_audio": "templates/audio/new.php",
         "edit_audio": "templates/audio/edit.php"
+    },
+    "action_permissions" : {
+        "videos": "videos",
+        "audio": "audio",
+        "files": "files"
     },
     "controllers": {
         "VideoController": "controllers/VideoController.php",
