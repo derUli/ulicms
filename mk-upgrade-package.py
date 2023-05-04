@@ -144,7 +144,7 @@ def main():
     else:
         print('No update.php found')
 
-    version_file = os.path.join(target, 'dist', 'App', 'Backend', 'UliCMSVersion.php')
+    version_file = os.path.join(target, 'dist', 'App', 'UliCMS', 'UliCMSVersion.php')
 
     print('set build date...')
 
