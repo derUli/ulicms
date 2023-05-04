@@ -64,8 +64,8 @@ if (is_file(Path::resolve('ULICMS_ROOT/update.php'))) {
         '<i class="fas fa-sync"></i> '
         . get_translation('update'),
         '?action=system_update',
-        'update_system',
-        'update_system',
+        'system_update',
+        'system_update',
         [],
         false,
         true

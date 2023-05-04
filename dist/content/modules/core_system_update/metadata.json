@@ -4,10 +4,14 @@
     "embed": false,
     "custom_acl":
             [
-                "update_system",
+                "system_update",
                 "patch_management"
             ],
     "actions": {
         "system_update": "templates/system_update.php"
+    },
+    
+    "action_permissions": {
+        "system_update": "system_update"
     }
 }

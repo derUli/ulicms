@@ -6,7 +6,7 @@ use App\Security\Permissions\PermissionChecker;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();
 
-if ($permissionChecker->hasPermission('update_system')) {
+if ($permissionChecker->hasPermission('system_update')) {
     ?>
     <h1><?php translate('run_post_install_script'); ?></h1>
     <?php

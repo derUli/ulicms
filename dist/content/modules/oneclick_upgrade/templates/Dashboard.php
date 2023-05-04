@@ -11,7 +11,7 @@ $permissionChecker = PermissionChecker::fromCurrentUser();
  */
 $controller = ControllerRegistry::get('CoreUpgradeController');
 
-if ($controller && $permissionChecker->hasPermission('update_system')) {
+if ($controller && $permissionChecker->hasPermission('system_update')) {
     $version = $controller->checkForUpgrades();
 
     if ($version) {

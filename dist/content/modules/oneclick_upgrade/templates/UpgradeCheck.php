@@ -7,7 +7,7 @@ use App\UliCMS\UliCMSVersion;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();
 
-if ($permissionChecker->hasPermission('update_system')) {
+if ($permissionChecker->hasPermission('system_update')) {
     $version = new UliCMSVersion();
     $currentVersion = $version->getInternalVersionAsString();
     $newVersion = ControllerRegistry::get()->checkForUpgrades() ?: $currentVersion;

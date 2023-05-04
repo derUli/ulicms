@@ -30,7 +30,11 @@
         "community_settings": "community_settings",
         "footer_text": "footer_text",
         "error_pages": "error_pages",
-        "site_slogan": "settings_simple"
+        "site_slogan": "settings_simple",
+        "spam_filter": "spam_filter",
+        "logo": "logo",
+        "favicon": "favicon",
+        "default_access_restrictions": "default_access_restrictions_edit"
     },
     "custom_acl": [
         "privacy_settings",

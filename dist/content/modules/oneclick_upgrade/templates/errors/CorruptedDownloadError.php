@@ -6,7 +6,7 @@ use App\Security\Permissions\PermissionChecker;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();
 
-if ($permissionChecker->hasPermission('update_system')) {
+if ($permissionChecker->hasPermission('system_update')) {
     ?>
     <div class="alert alert-danger">
         <strong><?php translate('error'); ?>!</strong> <?php translate('corrupted_download'); ?>
