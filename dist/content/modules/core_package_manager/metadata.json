@@ -20,7 +20,9 @@
     "action_permissions": {
         "sin_package_install_ok": "install_packages",
         "install_method": "install_packages",
-        "upload_package": "install_packages"
+        "upload_package": "install_packages",
+        "available_modules": "install_packages",
+        "install_modules": "install_packages"
     },
     "objects": {
         "ModuleInfoViewModel": "objects/ModuleInfoViewModel.php",
