@@ -34,7 +34,8 @@
         "spam_filter": "spam_filter",
         "logo": "logo",
         "favicon": "favicon",
-        "default_access_restrictions": "default_access_restrictions_edit"
+        "default_access_restrictions": "default_access_restrictions_edit",
+        "other_settings": "other"
     },
     "custom_acl": [
         "privacy_settings",

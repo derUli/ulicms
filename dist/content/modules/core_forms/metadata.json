@@ -19,6 +19,11 @@
         "forms_new": "templates/new.php",
         "forms_edit": "templates/edit.php"
     },
+    "action_permissions": {
+        "forms": "forms",
+        "forms_new": "forms_create",
+        "forms_edit": "forms_edit"
+    },
     "objects": {
         "Forms": "objects/forms.php"
     },
