@@ -45,6 +45,12 @@ function optimizeHtml(
     return $html;
 }
 
+/**
+ * Add script to minify queue
+ * @param string $path
+ * 
+ * @return void
+ */
 function enqueueScriptFile(string $path): void {
     if (! \App\Storages\Vars::get('script_queue')) {
         resetScriptQueue();
