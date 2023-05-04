@@ -11,6 +11,10 @@
         "UpgradeCheck": "templates/UpgradeCheck.php",
         "CorruptedDownloadError": "templates/errors/CorruptedDownloadError.php"
     },
+    "action_permissions": {
+        "UpgradeCheck": "system_update",
+        "CorruptedDownloadError": "system_update"
+    },
     "action_controllers": {
         "UpgradeCheck": "CoreUpgradeController"
     },

@@ -33,9 +33,13 @@
         "site_slogan": "settings_simple",
         "spam_filter": "spam_filter",
         "logo": "logo",
+        "motd": "motd",
         "favicon": "favicon",
         "default_access_restrictions": "default_access_restrictions_edit",
-        "other_settings": "other"
+        "other_settings": "other",
+        "meta_description": "settings_simple",
+        "frontpage_settings": "settings_simple",
+        "settings_simple": "settings_simple"
     },
     "custom_acl": [
         "privacy_settings",
