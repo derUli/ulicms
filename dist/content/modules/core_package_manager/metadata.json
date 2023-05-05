@@ -23,7 +23,9 @@
         "upload_package": "install_packages",
         "available_modules": "install_packages",
         "install_modules": "install_packages",
-        "do_post_install": "system_update"
+        "do_post_install": "system_update",
+        "packages": "list_packages",
+        "pkginfo": "install_packages"
     },
     "objects": {
         "ModuleInfoViewModel": "objects/ModuleInfoViewModel.php",
