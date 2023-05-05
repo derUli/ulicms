@@ -37,7 +37,8 @@
         "banner_edit": "banners_edit",
         "pages": "pages",
         "pages_new": "pages_create",
-        "pages_edit": "pages"
+        "pages_edit": "pages",
+        "categories": "categories"
     },
     "controllers": {
         "PageController": "controllers/PageController.php",
