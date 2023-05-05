@@ -31,6 +31,12 @@
         "banner_new": "templates/banners/new.php",
         "banner_edit": "templates/banners/edit.php"
     },
+    "action_permissions": {
+        "banner": "banners",
+        "banner_new": "banners_create",
+        "banner_edit": "banners_edit",
+        "pages": "pages"
+    },
     "controllers": {
         "PageController": "controllers/PageController.php",
         "CategoryController": "controllers/CategoryController.php",

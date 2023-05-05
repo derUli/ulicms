@@ -5,7 +5,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Helpers\DateTimeHelper;
 use App\Helpers\NumberFormatHelper;
 use App\Packages\SinPackageInstaller;
-use App\Security\Permissions\PermissionChecker;
 
 if (! empty($_REQUEST['file']) && str_ends_with($_REQUEST['file'], '.sin')) {
     $tempfile = Path::resolve('ULICMS_TMP/' . basename($_REQUEST['file']));
