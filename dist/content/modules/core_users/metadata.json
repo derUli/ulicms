@@ -16,6 +16,10 @@
         "admin_new": "templates/users/new.php",
         "admin_edit": "templates/users/edit.php"
     },
+    "action_permissions": {
+        "admins": "users",
+        "admin_new": "users_create"
+    },
     "controllers": {
         "UserController": "controllers/UserController.php",
         "SessionManager": "controllers/SessionManager.php",

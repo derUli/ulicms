@@ -9,6 +9,9 @@
     "actions": {
         "home": "templates/home.php"
     },
+    "action_permissions": {
+        "home": "dashboard"
+    },
     "controllers": {
         "HomeController": "controllers/HomeController.php"
     },
