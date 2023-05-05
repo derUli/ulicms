@@ -5,11 +5,14 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 // TODO: This is old code before the switch to MVC architecture
 // This should be rewritten with MVC pattern and using partial views
 use App\HTML\Alert;
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
 use function App\HTML\icon;
 
 $controller = ControllerRegistry::get(PageController::class);
+
+$permissionChecker = PermissionChecker::fromCurrentUser();
 
 $show_filters = Settings::get('user/' . get_user_id() . '/show_filters');
 
@@ -32,8 +35,12 @@ echo Template::executeModuleTemplate(
     <?php if ($controller->_getPagesListView() === 'default') { ?>
         <div class="row">
             <div class="col-xs-6">
+                <?php
+                if($permissionChecker->hasPermission('pages_create')) {
+                    ?>
                 <a href="index.php?action=pages_new" class="btn btn-primary is-not-ajax"><i
                         class="fa fa-plus"></i> <?php translate('create_page'); ?></a>
+                        <?php } ?> 
             </div>
             <div class="col-xs-6 text-right">
                 <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'recycleBin'); ?>" class="btn btn-default is-not-ajax"><i
