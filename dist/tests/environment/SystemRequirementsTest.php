@@ -9,7 +9,7 @@ class SystemRequirementsTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testRootDirWritable() {
+    public function testRootDirWritable(): void {
         $this->assertDirectoryIsWritable(ULICMS_ROOT);
     }
 
@@ -21,9 +21,9 @@ class SystemRequirementsTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(TestHelper::isRunningPHPUnit());
     }
 
-    private function getMySQLVersion() {
+    private function getMySQLVersion(): string {
         $version = Database::getServerVersion();
-        $version = preg_replace('/[^0-9.].*/', '', $version);
-        return $version;
+        $version = preg_replace('/[^0-9.].*/', '', (string)$version);
+        return (string)$version;
     }
 }

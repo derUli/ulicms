@@ -62,7 +62,7 @@
         "jfcherng/php-diff": "^6.13",
         "jessedp/php-timezones": "*",
         "nette/utils": "^4.0",
-        "deruli/fetcher": "*",
+        "deruli/fetcher": "^0.0.1",
         "vlucas/phpdotenv": "^5.5"
     },
     "require-dev": {
