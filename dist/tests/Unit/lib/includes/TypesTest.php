@@ -15,7 +15,12 @@ class TypesTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    private function getBaseTypes() {
+    /**
+     * Get base types
+     *
+     * @return string[]
+     */
+    private function getBaseTypes(): array {
         $baseTypes = [
             'page',
             'article',
