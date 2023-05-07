@@ -101,7 +101,10 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals($inputExpected, $menu->render());
     }
 
-    private function getMenuEntries() {
+    /**
+     * @return MenuEntry[]
+     */
+    private function getMenuEntries(): array {
         return [
             new MenuEntry(
                 'Say Hello',

@@ -196,7 +196,6 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
         $contentList->slug = 'unit test';
         $contentList->menu = 'none';
         $contentList->language = 'de';
-        $contentList->article_date = 1413821696;
         $contentList->author_id = 1;
         $contentList->group_id = 1;
         $contentList->save();
@@ -239,7 +238,6 @@ class ListDataTest extends \PHPUnit\Framework\TestCase {
         $contentList->slug = 'unit test';
         $contentList->menu = 'none';
         $contentList->language = 'de';
-        $contentList->article_date = 1413821696;
         $contentList->author_id = 1;
         $contentList->group_id = 1;
         $contentList->save();

@@ -11,7 +11,6 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
         $modulePage->slug = 'unit test';
         $modulePage->menu = 'none';
         $modulePage->language = 'de';
-        $modulePage->article_date = 1413821696;
         $modulePage->author_id = 1;
         $modulePage->group_id = 1;
         $modulePage->module = 'blog';
