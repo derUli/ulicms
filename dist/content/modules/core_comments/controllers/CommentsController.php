@@ -190,6 +190,7 @@ class CommentsController extends MainClass {
         // It's inpossible to append an anchor to the url on a http redirect
         // a javascript in fx.js performs the jump to the anchor
         $referrer = Request::getVar('referrer');
+
         if (! str_contains($referrer, 'jumpto=comments')) {
             if (! str_contains($referrer, '?')) {
                 $referrer .= '?';
@@ -248,7 +249,7 @@ class CommentsController extends MainClass {
         return $comment;
     }
 
-    public function cron() {
+    public function cron(): void {
         // Delete ip addresses of comments after 48 hours to be GDPR compliant
         if (Settings::get('delete_ips_after_48_hours')) {
             // Optional keep stored ip addresses of spam comments
