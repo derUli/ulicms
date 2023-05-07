@@ -308,13 +308,4 @@ class BannerTest extends \PHPUnit\Framework\TestCase {
 
         $banner->delete();
     }
-
-    private function createTestBanners(): void {
-        for ($i = 1; $i < 20; $i++) {
-            $banner = new Banner();
-            $banner->setType('html');
-            $banner->setHtml(self::HTML_TEXT1);
-            $banner->save();
-        }
-    }
 }
