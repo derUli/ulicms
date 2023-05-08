@@ -104,6 +104,13 @@ function setLanguageByDomain(): bool {
     return false;
 }
 
+/**
+ * Get language name by code
+ *
+ * @param string $code
+ *
+ * @return string
+ */
 function getLanguageNameByCode(string $code): string {
     $result = Database::query(
         'SELECT name FROM `' . Database::tableName('languages') .

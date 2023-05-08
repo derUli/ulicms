@@ -22,6 +22,7 @@ class DiffViewModel {
 
     /**
      * Construct
+     *
      * @param string $html
      * @param string $current_version_date
      * @param string $old_version_date
