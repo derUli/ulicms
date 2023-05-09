@@ -47,6 +47,7 @@ function optimizeHtml(
 
 /**
  * Add script to minify queue
+ *
  * @param string $path
  *
  * @return void
@@ -95,6 +96,11 @@ function unsetSCSSImportPaths(): void {
     \App\Storages\Vars::delete('css_include_paths');
 }
 
+/**
+ * Minify javascript and returns bundle Url
+ *
+ * @return string
+ */
 function minifyJs(): string {
     $scripts = \App\Storages\Vars::get('script_queue');
     $lastmod = 0;
