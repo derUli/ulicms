@@ -148,6 +148,11 @@ function minifyJs(): string {
     return $bundleUrl;
 }
 
+/**
+ * Minify CSS and returns bundle Url
+ *
+ * @return string
+ */
 function minifyCSS(): string {
     $stylesheets = \App\Storages\Vars::get('stylesheet_queue');
     $lastmod = 0;
