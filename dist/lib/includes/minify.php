@@ -207,6 +207,14 @@ function minifyCSS(): string {
     return $bundleUrl;
 }
 
+/**
+ * Compile SCSS file to string
+ *
+ * @param string $stylesheet
+ *
+ * @return string
+ *
+ */
 function compileSCSS(string $stylesheet): string {
     $scss = new Compiler();
 
