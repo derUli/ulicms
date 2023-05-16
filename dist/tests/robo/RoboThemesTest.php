@@ -12,7 +12,7 @@ class RoboThemesTest extends RoboTestBase {
     public function testThemesList(): void {
         $output = $this->runRoboCommand(['themes:list']);
         $this->assertStringContainsString('2020 1.0.5', $output);
-        $this->assertStringContainsString('impro17 2.1.6', $output);
+        $this->assertStringContainsString('impro17 2.1.7', $output);
     }
 
     public function testThemesRemove(): void {
