@@ -82,7 +82,7 @@ $logoStoragePath = ULICMS_ROOT . '/content/images/' . Settings::get('logo_image'
             <td width="480"><strong><?php translate('upload_new_logo'); ?>
                 </strong></td>
             <td>
-                <input name="logo_upload_file" type="file" accept="<?php echo ImagineHelper::ACCEPT_MIMES; ?>">
+                <input name="logo_upload_file" type="file" accept="<?php echo ImagineHelper::ACCEPT_MIMES; ?>" class="form-control">
             </td>
         </tr>
         <tr>

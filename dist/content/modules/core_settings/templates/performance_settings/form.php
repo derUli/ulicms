@@ -105,7 +105,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
                 <?php translate('CACHE_VALIDATION_DURATION'); ?>
             </div>
             <div class="inputWrapper">
-                <input type="number" name="cache_period" min="0" max="20160"
+                <input type="number" name="cache_period" min="0" max="20160" class="form-control"
                         value="<?php echo $cache_period; ?>">
                         <?php translate('minutes'); ?>
             </div>

@@ -18,11 +18,11 @@ $languages = Language::getAllLanguages();
     <table style="border: 0">
         <tr>
             <td><strong><?php translate('language_shortcode'); ?>*</strong></td>
-            <td><input type="text" name="language_code" maxlength="6" required></td>
+            <td><input type="text" name="language_code" maxlength="6" required class="form-control"></td>
         </tr>
         <tr>
             <td style="width: 100px;"><strong><?php translate('full_name'); ?>*</strong></td>
-            <td><input type="text" name="name" maxlength="100" required></td>
+            <td><input type="text" name="name" maxlength="100" required  class="form-control"></td>
         </tr>
     </table>
     <div>

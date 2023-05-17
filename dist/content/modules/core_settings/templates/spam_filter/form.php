@@ -36,12 +36,12 @@ use App\Translations\JSTranslation;
         <p>
             <label for="spamfilter_words_blacklist"><?php translate('blacklist'); ?></label><br />
             <textarea name="spamfilter_words_blacklist"
-                        id="spamfilter_words_blacklist" rows=10 cols=40><?php esc(Settings::get('spamfilter_words_blacklist')); ?></textarea>
+                        id="spamfilter_words_blacklist" rows=10 cols=40 class="form-control"><?php esc(Settings::get('spamfilter_words_blacklist')); ?></textarea>
             <small><?php translate('min_time_to_fill_form_help'); ?></small>
         </p>
         <label for="country_blacklist"><?php translate('spam_countries'); ?></label>
         <input type="text" name="country_blacklist" id="country_blacklist"
-                value="<?php esc(Settings::get('country_blacklist')); ?>">
+                value="<?php esc(Settings::get('country_blacklist')); ?>" class="form-control">
         <div class="checkbox">
             <label for="disallow_chinese_chars"> <input type="checkbox"
                                                         name="disallow_chinese_chars" id="disallow_chinese_chars"
@@ -96,7 +96,7 @@ use App\Translations\JSTranslation;
         <p>
             <label for="min_time_to_fill_form"><?php translate('min_time_to_fill_form'); ?></label><br />
             <input type="number" name="min_time_to_fill_form"
-                    id="min_time_to_fill_form" step="any" min="0"
+                    id="min_time_to_fill_form" step="any" min="0" class="form-control"
                     max="<?php esc(PHP_INT_MAX); ?>"
                     value="<?php esc(Settings::get('min_time_to_fill_form', 'int')); ?>">
         </p>

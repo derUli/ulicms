@@ -90,6 +90,7 @@ if (is_file($favicon_path)) {
                     id="high_resolution"
                     name="high_resolution"
                     value="high_resolution"
+                    class="js-switch"
                     >
             </td>
         </tr>
@@ -101,6 +102,7 @@ if (is_file($favicon_path)) {
                     name="favicon_upload_file"
                     type="file"
                     required
+                    class="form-control"
                     accept="<?php echo ImagineHelper::ACCEPT_MIMES; ?>"
                     >
                 <br /></td>

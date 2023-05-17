@@ -41,7 +41,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('SiteSloganController', 'sav
         <div class="form-group">
             <label for="site_slogan_<?php esc($lang); ?>"><?php esc(getLanguageNameByCode($lang)); ?></label>
             
-            <input name="site_slogan_<?php esc($lang); ?>" id="site_slogan_<?php esc($lang); ?>" value="<?php esc($site_slogans[$lang]); ?>">
+            <input name="site_slogan_<?php esc($lang); ?>" id="site_slogan_<?php esc($lang); ?>" value="<?php esc($site_slogans[$lang]); ?>" class="form-control">
         </div>
             <?php }
     ?>

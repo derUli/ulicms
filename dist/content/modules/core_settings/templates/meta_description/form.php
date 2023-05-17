@@ -45,7 +45,7 @@ for ($n = 0; $n < $languageCount; $n++) {
             </td>
             <td><input
                     name="meta_description_<?php esc($lang); ?>"
-                    value="<?php esc($meta_descriptions[$lang]); ?>"></td>
+                    value="<?php esc($meta_descriptions[$lang]); ?>" class="form-control"></td>
         </tr>
     <?php }
 ?>

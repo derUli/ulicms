@@ -42,7 +42,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('OpenGraphController', 'save
             ?>
             <div class="voffset2">
                 <input type="text" id="og_image" name="og_image" readonly="readonly"
-                        value="<?php esc($og_image); ?>"
+                        value="<?php esc($og_image); ?>" class="form-control"
                         style="cursor: pointer" />
             </div>
             <div class="voffset2">
