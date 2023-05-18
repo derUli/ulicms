@@ -17,7 +17,7 @@ use App\Registries\LoggerRegistry;
 function exception_handler(Throwable $exception): void {
     defined('EXCEPTION_OCCURRED') || define('EXCEPTION_OCCURRED', true);
 
-    $message = $_ENV['DEBUG'] ?
+    $message = isset($_ENV['DEBUG']) && $_ENV['DEBUG'] ?
             $exception : 'An error occurred! See exception_log for details. 😞';
     $logger = LoggerRegistry::get('exception_log');
 
