@@ -38,32 +38,38 @@
 	deny from all
 </files>
 
-# Deny access to composer executable file
+# Deny access to file
 <files composer.json>
 	order allow,deny
 	deny from all
 </files>
 
-# Deny access to composer executable file
+# Deny access to file
 <files composer.lock>
 	order allow,deny
 	deny from all
 </files>
 
-# Deny access to composer executable file
+# Deny access to file
 <files package.json>
 	order allow,deny
 	deny from all
 </files>
 
-# Deny access to composer executable file
+# Deny access to file
 <files package.lock>
 	order allow,deny
 	deny from all
 </files>
 
-# Deny access to metadata.json file
+# Deny access to file
 <files metadata.json>
+	order allow,deny
+	deny from all
+</files>
+
+# Deny access to file
+<files manage>
 	order allow,deny
 	deny from all
 </files>
