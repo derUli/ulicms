@@ -1,2 +1,2 @@
-#!/usr/bin/env sh
-php vendor/bin/phpunit tests
+#!/bin/bash
+php vendor/bin/phpunit "$@"
