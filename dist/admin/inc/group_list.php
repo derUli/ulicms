@@ -1,4 +1,8 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
 if (isset($_REQUEST['standard'])) {
@@ -6,8 +10,8 @@ if (isset($_REQUEST['standard'])) {
     Settings::set('default_acl_group', $standard);
 }
 
-$permissionChecker = new ACL();
-$groups = $permissionChecker->getAllGroups();
+$permissionChecker = PermissionChecker::fromCurrentUser();
+$groups = Group::getAll();
 
 $default_acl_group = (int)Settings::get('default_acl_group');
 
@@ -36,22 +40,22 @@ if (count($groups) > 0) {
                     <th style="min-width: 200px;"><strong><?php translate('name'); ?> </strong></th>
                     <?php if ($permissionChecker->hasPermission('groups_edit')) { ?>
                         <th><strong><?php translate('standard'); ?> </strong></th>
-                        <td class="no-sort"></td>
-                        <td class="no-sort"></td>
-                        <td class="no-sort"></td>
+                        <th class="no-sort"><?php translate('view'); ?></td>
+                        <th class="no-sort"><?php translate('edit');?></td>
+                        <th class="no-sort"><?php translate('delete'); ?></td>
                     <?php } ?>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                foreach ($groups as $id => $name) {
+                foreach ($groups as $group) {
+                    $id = $group->getId();
+                    $name = $group->getName() ?? '';
+
                     ?>
                     <tr id="dataset-<?php echo $id; ?>">
-                        <td><?php echo $id; ?>
-                        </td>
-                        <td><?php echo $name; ?>
-                        </td>
-
+                        <td><?php esc($id); ?></td>
+                        <td><?php esc($name); ?></td>
                         <?php if ($permissionChecker->hasPermission('groups_edit')) { ?>
                             <td><?php
                                 if ($default_acl_group === $id) {
@@ -64,7 +68,7 @@ if (count($groups) > 0) {
                             ?>
                             </td>
                             <td><a
-                                    href="<?php echo ModuleHelper::buildActionURL('admins', 'admins_filter_group=' . $id); ?>" 
+                                    href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('admins', 'admins_filter_group=' . $id); ?>" 
                                     class="is-not-ajax"
                                     ><img
                                         src="gfx/preview.png" title="<?php translate('show_users'); ?>"
@@ -96,11 +100,8 @@ if (count($groups) > 0) {
                                 </form></td>
                         <?php } ?>
                     </tr>
-
-
                 <?php }
                 ?>
-
             </tbody>
         </table>
     </div>

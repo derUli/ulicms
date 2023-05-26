@@ -1,11 +1,9 @@
 <?php
 
-class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase
-{
+class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase {
     private $defaultSettings = [];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->defaultSettings = [
             'spamfilter_enabled' => Settings::get('spamfilter_enabled'),
             'country_blacklist' => Settings::get('country_blacklist'),
@@ -19,8 +17,7 @@ class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_POST = [];
 
         foreach ($this->defaultSettings as $key => $value) {
@@ -28,8 +25,7 @@ class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSavePostWithValues(): void
-    {
+    public function testSavePostWithValues(): void {
         $_POST = [
             'spamfilter_enabled' => 'yes',
             'country_blacklist' => 'de,en',
@@ -85,8 +81,7 @@ class SpamFilterControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testSavePostWithoutValues(): void
-    {
+    public function testSavePostWithoutValues(): void {
         $_POST = [
             'spamfilter_enabled' => 'no'
         ];

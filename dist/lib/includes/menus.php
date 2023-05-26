@@ -2,22 +2,30 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 /**
  * Get all menus that have content
- * @return array
+ *
+ * @return array<string>
  */
-function get_all_used_menus(): array
-{
+function get_all_used_menus(): array {
     $retval = [];
-    $result = db_query('select menu from ' . tbname('content') .
-            ' group by menu');
-    while ($row = db_fetch_object($result)) {
+    $result = Database::query('select menu from {prefix}content group by menu', true);
+    while ($row = Database::fetchObject($result)) {
         $retval[] = $row->menu;
     }
     return $retval;
 }
 
-// Gibt die Identifier aller Menüs zurück.
+/**
+ * Get all menus
+ *
+ * @param bool $only_used
+ * @param bool $read_theme_menus
+ *
+ * @return array<string>
+ */
 function get_all_menus(
     bool $only_used = false,
     bool $read_theme_menus = true

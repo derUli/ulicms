@@ -1,8 +1,10 @@
 <?php
 
-use App\Security\PermissionChecker;
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-$currentAction = BackendHelper::getAction();
+use App\Security\Permissions\PermissionChecker;
+
+$currentAction = \App\Helpers\BackendHelper::getAction();
 $icons = [
     'pages' => 'fas fa-book',
     'comments_manage' => 'fa fa-comment',
@@ -35,14 +37,14 @@ $notSelectedButton = 'btn btn-default';
 <div class="btn-toolbar" role="toolbar"
      aria-label="Toolbar with button groups">
     <div class="btn-group" role="group">
-        <a href="<?php echo ModuleHelper::buildActionURL('contents'); ?>"
+        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('contents'); ?>"
            class="btn btn-default btn-back is-ajax"
            ><i class="fa fa-arrow-left"></i>
             <?php translate('back'); ?></a>
     </div>
     <?php foreach ($icons as $action => $cssClass) { ?>
         <div class="btn-group" role="group">
-            <a href="<?php echo ModuleHelper::buildActionURL($action); ?>"
+            <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL($action); ?>"
                class="<?php
                echo $action == $currentAction ?
                        $selectedButton : $notSelectedButton;

@@ -1,15 +1,19 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Constants\CommentStatus;
 use App\Helpers\DateTimeHelper;
 use App\Models\Content\Comment;
 
 $comments = Comment::getAllByStatus(
     CommentStatus::PUBLISHED,
-    Vars::get('content_id')
+    \App\Storages\Vars::get('content_id')
 );
+
 $last = end($comments);
 reset($comments);
+
 ?>
 <?php echo Template::executeModuleTemplate('core_comments', 'form.php'); ?>
 <?php if (count($comments) > 0) { ?>

@@ -2,21 +2,19 @@
 
 declare(strict_types=1);
 
-class FormController extends Controller
-{
-    public function __construct()
-    {
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+class FormController extends \App\Controllers\Controller {
+    public function __construct() {
         parent::__construct();
     }
 
-    public function createPost(): void
-    {
+    public function createPost(): void {
         $this->_createPost();
-        Response::redirect(ModuleHelper::buildActionURL('forms'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('forms'));
     }
 
-    public function _createPost(): ?int
-    {
+    public function _createPost(): ?int {
         $name = $_POST['name'];
         $enabled = $_POST['enabled'];
         $email_to = $_POST['email_to'];
@@ -42,14 +40,12 @@ class FormController extends Controller
         return Database::getLastInsertID();
     }
 
-    public function updatePost(): void
-    {
+    public function updatePost(): void {
         $this->_updatePost();
-        Response::redirect(ModuleHelper::buildActionURL('forms'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('forms'));
     }
 
-    public function _updatePost(): bool
-    {
+    public function _updatePost(): bool {
         $id = $_POST['id'];
         $name = $_POST['name'];
         $enabled = $_POST['enabled'];
@@ -79,15 +75,13 @@ class FormController extends Controller
         return $affectedRows > 0;
     }
 
-    public function deletePost(): void
-    {
+    public function deletePost(): void {
         $id = Request::getVar('del', 0, 'int');
         $this->_deletePost($id);
-        Response::redirect(ModuleHelper::buildActionURL('forms'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('forms'));
     }
 
-    public function _deletePost(int $id): bool
-    {
+    public function _deletePost(int $id): bool {
         return Forms::deleteForm($id);
     }
 }

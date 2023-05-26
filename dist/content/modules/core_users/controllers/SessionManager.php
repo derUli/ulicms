@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Models\Users\PasswordReset;
 use App\Utils\CacheUtil;
 
-class SessionManager extends Controller
-{
-    public function login(): void
-    {
+class SessionManager extends \App\Controllers\Controller {
+    public function login(): void {
         $user = new User();
         $user->loadByUsername($_POST['user']);
 
@@ -48,12 +48,11 @@ class SessionManager extends Controller
         }
     }
 
-    public function logout(): void
-    {
+    public function logout(): void {
         $id = $_SESSION['login_id'];
 
         // set user state to offline
-        db_query('UPDATE ' . tbname('users') . " SET last_action = 0 WHERE id = {$id}");
+        Database::query('UPDATE ' . Database::tableName('users') . " SET last_action = 0 WHERE id = {$id}");
         $url = apply_filter('index.php', 'logout_url');
         // throw the session to /dev/null
         App\Utils\Session\sessionDestroy();
@@ -62,8 +61,7 @@ class SessionManager extends Controller
         exit();
     }
 
-    public function resetPassword(): void
-    {
+    public function resetPassword(): void {
         if (! isset($_REQUEST['token'])) {
             ExceptionResult('A token is required');
         }
@@ -71,11 +69,11 @@ class SessionManager extends Controller
         $token = $reset->getTokenByTokenString($_REQUEST['token']);
         if ($token) {
             $user_id = $token->user_id;
-            $user = new User($user_id);
+            $user = new User((int)$user_id);
             $user->setRequirePasswordChange(1);
             $user->save();
             $token = $reset->deleteToken($_REQUEST['token']);
-            register_session(getUserById($user_id));
+            register_session(getUserById((int)$user_id));
         } else {
             TextResult(get_translation('invalid_token'), 404);
         }

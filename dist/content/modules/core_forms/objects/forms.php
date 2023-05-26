@@ -1,16 +1,16 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Helpers\AntiSpamHelper;
 use App\Utils\Mailer;
 
-class Forms
-{
-    public static function getFormByID($id)
-    {
+class Forms {
+    public static function getFormByID($id) {
         $retval = null;
-        $result = db_query('select * from `' . tbname('forms') . '` WHERE id = ' . (int)$id);
-        if (db_num_rows($result) > 0) {
-            $retval = db_fetch_assoc($result);
+        $result = Database::query('select * from `' . Database::tableName('forms') . '` WHERE id = ' . (int)$id);
+        if (Database::getNumRows($result) > 0) {
+            $retval = Database::fetchAssoc($result);
         }
 
         return $retval;
@@ -27,14 +27,14 @@ class Forms
         $target_page_id,
         $enabled
     ) {
-        $name = db_escape($name);
+        $name = Database::escapeValue($name);
         $enabled = (int)$enabled;
-        $email_to = db_escape($email_to);
-        $subject = db_escape($subject);
+        $email_to = Database::escapeValue($email_to);
+        $subject = Database::escapeValue($subject);
         $category_id = (int)$category_id;
-        $fields = db_escape($fields);
-        $required_fields = db_escape($required_fields);
-        $mail_from_field = db_escape($mail_from_field);
+        $fields = Database::escapeValue($fields);
+        $required_fields = Database::escapeValue($required_fields);
+        $mail_from_field = Database::escapeValue($mail_from_field);
         $target_page_id = (int)$target_page_id;
         $created = time();
         $updated = time();
@@ -51,22 +51,21 @@ class Forms
         return Database::query($sql, true);
     }
 
-    public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled)
-    {
-        $name = db_escape($name);
+    public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled) {
+        $name = Database::escapeValue($name);
         $enabled = (int)$enabled;
-        $email_to = db_escape($email_to);
-        $subject = db_escape($subject);
+        $email_to = Database::escapeValue($email_to);
+        $subject = Database::escapeValue($subject);
         $category_id = (int)$category_id;
-        $fields = db_escape($fields);
-        $required_fields = db_escape($required_fields);
-        $mail_from_field = db_escape($mail_from_field);
+        $fields = Database::escapeValue($fields);
+        $required_fields = Database::escapeValue($required_fields);
+        $mail_from_field = Database::escapeValue($mail_from_field);
         $target_page_id = (int)$target_page_id;
         $updated = time();
         $id = (int)$id;
 
-        return db_query(
-            'UPDATE `' . tbname('forms') . "` set name='{$name}', "
+        return Database::query(
+            'UPDATE `' . Database::tableName('forms') . "` set name='{$name}', "
             . "email_to = '{$email_to}', subject = '{$subject}', "
             . "category_id = {$category_id}, fields = '{$fields}', "
             . "required_fields = '{$required_fields}', "
@@ -77,13 +76,12 @@ class Forms
         );
     }
 
-    public static function getAllForms()
-    {
+    public static function getAllForms() {
         $retval = [];
-        $result = db_query('select * from `' . tbname('forms') .
+        $result = Database::query('select * from `' . Database::tableName('forms') .
                 '` ORDER BY id');
-        if (db_num_rows($result) > 0) {
-            while ($row = db_fetch_assoc($result)) {
+        if (Database::getNumRows($result) > 0) {
+            while ($row = Database::fetchAssoc($result)) {
                 $retval[] = $row;
             }
         }
@@ -91,8 +89,7 @@ class Forms
         return $retval;
     }
 
-    public static function submitForm($id)
-    {
+    public static function submitForm($id) {
         $retval = false;
         $form = self::getFormByID($id);
         if ($form) {
@@ -104,7 +101,7 @@ class Forms
             foreach ($required_fields as $field) {
                 $fieldName = $fields[$field] ?? $field;
                 if (! (isset($_POST[$field]) && ! empty($_POST[$field]))) {
-                    ViewBag::set('exception', get_translation(
+                    \App\Storages\ViewBag::set('exception', get_translation(
                         'please_fill_all_required_fields',
                         [
                             '%field%' => _esc($fieldName)
@@ -113,6 +110,7 @@ class Forms
                     $html = Template::executeDefaultOrOwnTemplate(
                         'exception.php'
                     );
+
                     HTMLResult($html, HttpStatusCode::BAD_REQUEST);
                 }
             }
@@ -162,7 +160,8 @@ class Forms
                     ] : [
                         Settings::get('email')
                     ];
-            sanitize($mail_from);
+
+            sanitize_headers($mail_from);
 
             $headers = 'From: ' . $mail_from[0] . "\n";
             $headers .= 'Content-Type: text/html; charset=utf-8';
@@ -178,9 +177,8 @@ class Forms
         return $retval;
     }
 
-    public static function deleteForm($id)
-    {
+    public static function deleteForm($id) {
         $id = (int)$id;
-        return db_query('DELETE FROM ' . tbname('forms') . " WHERE id = {$id}");
+        return Database::query('DELETE FROM ' . Database::tableName('forms') . " WHERE id = {$id}");
     }
 }

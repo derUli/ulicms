@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Utils\File;
-use ModuleHelper;
 
 /**
  * Utils to generate HTML <script> Tags
  */
-class Script
-{
+class Script {
     /**
      * Generates a <script> tag for file
+     *
      * @param string $file
      * @param bool $async
      * @param bool $defer
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function fromFile(
@@ -48,7 +48,7 @@ class Script
             $attributes[$key] = $value;
         }
 
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         if (! empty($attribHTML)) {
             $attribHTML = ' ' . $attribHTML;
@@ -59,10 +59,12 @@ class Script
 
     /**
      * Generates a inline <script> tag
+     *
      * @param string|null $code
      * @param bool $async
      * @param bool $defer
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function fromString(
@@ -81,7 +83,7 @@ class Script
         foreach ($htmlAttributes as $key => $value) {
             $attributes[$key] = $value;
         }
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         if (! empty($attribHTML)) {
             $attribHTML = ' ' . $attribHTML;

@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use ChrisUllyott\FileSize;
 use DateTime;
 use Westsworld\TimeAgo;
+use Westsworld\TimeAgo\Language;
 
 /**
  * Utils to deal with number values such as size units and timestamps
  */
-class NumberFormatHelper extends Helper
-{
+abstract class NumberFormatHelper extends Helper {
     public const SQL_DATE_WITH_SECONDS = 'Y-m-d H:i:s';
 
     public const SQL_DATE_WITHOUT_SECONDS = 'Y-m-d H:i';
@@ -24,8 +24,7 @@ class NumberFormatHelper extends Helper
      * @param float $bytes
      * @return string
      */
-    public static function formatSizeUnits(float $bytes): string
-    {
+    public static function formatSizeUnits(float $bytes): string {
         $size = new FileSize("{$bytes} Bytes");
         return $size->asAuto();
     }
@@ -49,8 +48,7 @@ class NumberFormatHelper extends Helper
      * @param int $time
      * @return string
      */
-    public static function formatTime(int $time): string
-    {
+    public static function formatTime(int $time): string {
         $dateTime = new DateTime();
         $dateTime->setTimestamp($time);
 
@@ -60,8 +58,14 @@ class NumberFormatHelper extends Helper
 
         // If there is a translation class for the current language use it
         // else it will fallback to english as default
+        /**
+         * @var Language|null
+         */
         $language = null;
         if (class_exists($translationClass)) {
+            /**
+             * @var Language|null
+             */
             $language = new $translationClass();
         }
 

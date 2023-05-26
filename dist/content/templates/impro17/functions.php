@@ -1,11 +1,14 @@
 <?php
 
-function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true, $order = 'position')
-{
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Security\Permissions\PermissionChecker;
+
+function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true, $order = 'position') {
     $html = '';
-    $name = db_escape($name);
+    $name = Database::escapeValue($name);
     $language = $_SESSION['language'];
-    $sql = 'SELECT id, slug, access, link_url, title, alternate_title, menu_image, target, type, position FROM ' . tbname('content') . " WHERE menu='{$name}' AND language = '{$language}' AND active = 1 AND `deleted_at` IS NULL AND parent_id ";
+    $sql = 'SELECT id, slug, access, link_url, title, alternate_title, menu_image, target, type, position FROM ' . Database::tableName('content') . " WHERE menu='{$name}' AND language = '{$language}' AND active = 1 AND `deleted_at` IS NULL AND parent_id ";
 
     if ($parent_id === null) {
         $sql .= ' IS NULL ';
@@ -14,9 +17,9 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
     }
     $sql .= ' ORDER by ' . $order;
 
-    $result = db_query($sql);
+    $result = Database::query($sql);
 
-    if (db_num_rows($result) == 0) {
+    if (Database::getNumRows($result) == 0) {
         return $html;
     }
 
@@ -33,7 +36,7 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
         $html .= "<ul class='" . $classes . "'>\n";
     }
 
-    while ($row = db_fetch_object($result)) {
+    while ($row = Database::fetchObject($result)) {
         if (checkAccess($row->access)) {
             $containsCurrentItem = parent_item_contains_current_page($row->id);
 
@@ -51,7 +54,7 @@ function jumbotron_get_menu($name = 'top', $parent_id = null, $recursive = true,
             $title = $row->title;
             // Show page positions in menu if user has the "pages_show_positions" permission.
             if (is_logged_in()) {
-                $acl = new ACL();
+                $acl = new PermissionChecker(get_user_id());
                 $settingsName = 'user/' . get_user_id() . '/show_positions';
 
                 if ($acl->hasPermission('pages_show_positions') && Settings::get($settingsName)) {

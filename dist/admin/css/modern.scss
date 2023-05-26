@@ -73,16 +73,6 @@ button,
     }
 }
 
-#scroll-to-top {
-    position: fixed;
-    bottom: 5px;
-    right: 20px;
-    padding: 0;
-    display: none;
-    font-size: 32px;
-    z-index: 5;
-}
-
 button:disabled, .disabled {
     cursor: not-allowed;
     pointer-events: all !important;
@@ -347,7 +337,6 @@ div.diff {
 
 div#pkglist,
 div#loadpkg,
-div#message-page-edit,
 .loading {
     display: none;
 }
@@ -540,6 +529,18 @@ div#login-welcome-text {
     width:100%;
 }
 
+
+.btngroup-info {
+    .btn-info {
+        margin-top: 15px;
+
+        @media only screen and (max-width: 820px) {
+            width: 100%;
+            padding: 15px;
+        }
+    }
+}
+
 #page-list {
     .dataTables_wrapper {
         margin-bottom: 40px;
@@ -696,7 +697,7 @@ h1, h2, h3, h4, h5, h6 {
     word-break: break-word
 }
 
-#msgcontainer {
+#loading-container {
     margin-top: 10px;
 }
 
@@ -755,7 +756,9 @@ input[type="checkbox"] {
 
 @media only screen and (min-width: 375px) {
     .btn-group .btn {
+
         margin-right: 10px;
+
         &:last-child {
             margin-right: 0;
         }
@@ -1017,7 +1020,10 @@ iframe.fm {
 
 
 .changelog {
+
     line-height: 2;
+    word-break: break-word;
+
     h3{
         padding-top: 10px;
         &:not(:first-child) {

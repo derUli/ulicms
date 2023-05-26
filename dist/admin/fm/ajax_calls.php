@@ -22,7 +22,6 @@ if (isset($_SESSION['RF']['language']) && is_file('lang/' . basename($_SESSION['
     exit;
 }
 
-
 //check $_GET['file']
 if (isset($_GET['file']) && ! checkRelativePath($_GET['file'])) {
     response(trans('wrong path') . AddErrorLocation())->send();
@@ -34,7 +33,6 @@ if (isset($_POST['path']) && ! checkRelativePath($_POST['path'])) {
     response(trans('wrong path') . AddErrorLocation())->send();
     exit;
 }
-
 
 $ftp = ftp_con($config);
 
@@ -226,7 +224,6 @@ if (isset($_GET['action'])) {
                 deleteDir($base_folder);
             }
 
-
             break;
         case 'media_preview':
             if (isset($_GET['file'])) {
@@ -314,7 +311,7 @@ if (isset($_GET['action'])) {
                 });
             </script>
 
-            <?php } elseif (in_array(strtolower($info['extension']), $config['ext_video'])){	?>
+            <?php } elseif (in_array(strtolower($info['extension']), $config['ext_video'])) {	?>
 
             <script>
                 $(document).ready(function () {
@@ -450,7 +447,6 @@ if (isset($_GET['action'])) {
                             (($perms & 0x0200) ? 'T' : '-'));
             }
 
-
             $ret = '<div id="files_permission_start">
             <form id="chmod_form">
                 <table class="table file-perms-table">
@@ -537,7 +533,7 @@ if (isset($_GET['action'])) {
                     response(trans('Lang_Not_Found') . AddErrorLocation())->send();
                     exit;
                 }
-                    $_SESSION['RF']['language'] = $choosen_lang;
+                $_SESSION['RF']['language'] = $choosen_lang;
 
             }
 

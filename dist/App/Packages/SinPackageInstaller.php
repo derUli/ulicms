@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Packages;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use App\Backend\UliCMSVersion;
+use App\UliCMS\UliCMSVersion;
 use App\Utils\File;
 use App\Utils\VersionComparison;
 use Database;
@@ -15,8 +15,7 @@ use Path;
 /**
  * Util to install Simple Install packages.
  */
-class SinPackageInstaller
-{
+class SinPackageInstaller {
     private $file = null;
 
     private $errors = [];
@@ -27,8 +26,7 @@ class SinPackageInstaller
      * Constructor
      * @param string $file
      */
-    public function __construct(string $file)
-    {
+    public function __construct(string $file) {
         if (! empty($file)) {
             $this->file = $file;
         }
@@ -38,8 +36,7 @@ class SinPackageInstaller
      * Load package data
      * @return array
      */
-    public function loadPackage(): array
-    {
+    public function loadPackage(): array {
         // If already loaded
         if ($this->packageData) {
             return $this->packageData;
@@ -59,8 +56,7 @@ class SinPackageInstaller
      * Extract archive data
      * @return string
      */
-    public function extractArchive(): string
-    {
+    public function extractArchive(): string {
         $path = Path::resolve('ULICMS_TMP/package-' . $this->getProperty('id')
                         . '-' . $this->getProperty('version') . '.tar.gz');
         $data = $this->loadPackage();
@@ -77,8 +73,7 @@ class SinPackageInstaller
      * @param bool $clear_cache
      * @return bool
      */
-    public function installPackage(bool $clear_cache = true): bool
-    {
+    public function installPackage(bool $clear_cache = true): bool {
         if ($this->isInstallable()) {
             $path = $this->extractArchive();
             $pkg = new PackageManager();
@@ -96,8 +91,7 @@ class SinPackageInstaller
      * Get size of package data payload
      * @return int
      */
-    public function getSize(): int
-    {
+    public function getSize(): int {
         $data = $this->loadPackage();
         $decoded = base64_decode($data['data']);
         return mb_strlen($decoded, '8bit');
@@ -108,8 +102,7 @@ class SinPackageInstaller
      * @param string $name
      * @return type
      */
-    public function getProperty(string $name)
-    {
+    public function getProperty(string $name) {
         $data = $this->loadPackage();
         if (isset($data[$name]) && ! empty(
             $data[$name]
@@ -124,8 +117,7 @@ class SinPackageInstaller
      * Get installation errors
      * @return array
      */
-    public function getErrors(): array
-    {
+    public function getErrors(): array {
         return $this->errors;
     }
 
@@ -133,8 +125,7 @@ class SinPackageInstaller
      * Check if package is installable
      * @return bool
      */
-    public function isInstallable(): bool
-    {
+    public function isInstallable(): bool {
         $this->errors = [];
         $installed_modules = getAllModules();
         $data = $this->loadPackage();

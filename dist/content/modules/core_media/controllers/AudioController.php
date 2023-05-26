@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-class AudioController extends Controller
-{
-    public function createPost(): void
-    {
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+class AudioController extends \App\Controllers\Controller {
+    public function createPost(): void {
         $mp3_file_value = '';
         $audio_folder = ULICMS_ROOT . '/content/audio';
         // mp3
@@ -32,6 +32,7 @@ class AudioController extends Controller
         }
 
         $ogg_file_value = '';
+
         // ogg
         if (! empty($_FILES ['ogg_file'] ['name'])) {
             $ogg_file = time() . '-' . $_FILES ['ogg_file'] ['name'];
@@ -41,6 +42,7 @@ class AudioController extends Controller
                 'application/ogg',
                 'video/ogg'
             ];
+
             if (in_array($ogg_type, $ogg_allowed_mime_type)) {
                 $target = $audio_folder . '/' . $ogg_file;
                 if (move_uploaded_file(
@@ -52,31 +54,30 @@ class AudioController extends Controller
             }
         }
 
-        $name = db_escape($_POST['name']);
+        $name = Database::escapeValue($_POST['name']);
         $category_id = (int)$_POST['category_id'];
-        $ogg_file_value = db_escape($ogg_file_value);
-        $mp3_file_value = db_escape($mp3_file_value);
+        $ogg_file_value = Database::escapeValue($ogg_file_value);
+        $mp3_file_value = Database::escapeValue($mp3_file_value);
         $timestamp = time();
 
         if (! empty($ogg_file_value) || ! empty($mp3_file_value)) {
-            db_query('INSERT INTO ' . tbname('audio') .
+            Database::query('INSERT INTO ' . Database::tableName('audio') .
                     ' (name, ogg_file, mp3_file, created, category_id, '
                     . "`updated`) VALUES ('{$name}', '{$ogg_file_value}', "
                     . "'{$mp3_file_value}', {$timestamp}, {$category_id}, "
                     . "{$timestamp});");
         }
-        Response::redirect(ModuleHelper::buildActionURL('audio'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('audio'));
     }
 
-    public function _updatePost(): bool
-    {
-        $name = db_escape($_POST['name']);
+    public function _updatePost(): bool {
+        $name = Database::escapeValue($_POST['name']);
         $id = (int)$_POST['id'];
-        $ogg_file = db_escape(basename($_POST['ogg_file']));
-        $mp3_file = db_escape(basename($_POST['mp3_file']));
+        $ogg_file = Database::escapeValue(basename($_POST['ogg_file']));
+        $mp3_file = Database::escapeValue(basename($_POST['mp3_file']));
         $updated = time();
         $category_id = (int)$_POST['category_id'];
-        db_query('UPDATE ' . tbname('audio') . " SET name='{$name}', "
+        Database::query('UPDATE ' . Database::tableName('audio') . " SET name='{$name}', "
                 . "ogg_file='{$ogg_file}', mp3_file='{$mp3_file}', "
                 . "category_id = {$category_id}, `updated` = {$updated} "
                 . "where id = {$id}");
@@ -84,19 +85,17 @@ class AudioController extends Controller
         return Database::getAffectedRows() > 0;
     }
 
-    public function updatePost(): void
-    {
+    public function updatePost(): void {
         $this->_updatePost();
-        Response::redirect(ModuleHelper::buildActionURL('audio'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('audio'));
     }
 
-    public function deletePost(): void
-    {
-        $result = db_query('select ogg_file, mp3_file from ' .
-                tbname('audio') . ' where id = ' .
+    public function deletePost(): void {
+        $result = Database::query('select ogg_file, mp3_file from ' .
+                Database::tableName('audio') . ' where id = ' .
                 (int)$_REQUEST['delete']);
-        if (db_num_rows($result) > 0) {
-            $dataset = db_fetch_object($result);
+        if (Database::getNumRows($result) > 0) {
+            $dataset = Database::fetchObject($result);
             $filepath = ULICMS_ROOT . '/content/audio/' .
                     basename($dataset->ogg_file);
             if (! empty($dataset->ogg_file) && is_file($filepath)) {
@@ -109,9 +108,9 @@ class AudioController extends Controller
                 @unlink($filepath);
             }
 
-            db_query('DELETE FROM ' . tbname('audio') . ' where id = ' .
+            Database::query('DELETE FROM ' . Database::tableName('audio') . ' where id = ' .
                     $_REQUEST['delete']);
         }
-        Response::redirect(ModuleHelper::buildActionURL('videos'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('videos'));
     }
 }

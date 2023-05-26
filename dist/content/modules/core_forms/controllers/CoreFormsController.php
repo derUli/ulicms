@@ -2,19 +2,18 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Helpers\AntiSpamHelper;
 
-class CoreFormsController extends Controller
-{
-    public function _incSpamCount(): int
-    {
+class CoreFormsController extends \App\Controllers\Controller {
+    public function _incSpamCount(): int {
         $newCount = Settings::get('contact_form_refused_spam_mails') + 1;
         Settings::set('contact_form_refused_spam_mails', $newCount);
         return $newCount;
     }
 
-    public function _spamCheck(): ?string
-    {
+    public function _spamCheck(): ?string {
         if (Settings::get('spamfilter_enabled') == 'yes') {
             // check if honeypot field is filled
             if (! empty($_POST['my_homepage_url'])) {
@@ -73,8 +72,7 @@ class CoreFormsController extends Controller
         return null;
     }
 
-    public function beforeHttpHeader(): void
-    {
+    public function beforeHttpHeader(): void {
         if (! empty(
             Request::getVar('submit-cms-form')
         ) && Request::isPost()) {

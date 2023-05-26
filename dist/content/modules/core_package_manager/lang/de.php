@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 add_translation('download_of_x_failed', 'Download von %item% fehlgeschlagen.');
 add_translation('switch_view', 'Ansicht wechseln');
 add_translation('source', 'Quelle');

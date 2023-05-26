@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class Link extends Page
-{
+class Link extends Page {
     public $link_url = '';
 
     public $type = 'link';
 
-    public function save()
-    {
+    public function save() {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -22,8 +20,7 @@ class Link extends Page
         return $retval;
     }
 
-    public function update()
-    {
+    public function update() {
         $result = null;
         if ($this->id === null) {
             return $this->create();
@@ -45,8 +42,7 @@ class Link extends Page
      * This applies to any default contents except Link, Language_Link and Node
      * @return bool
      */
-    public function isRegular(): bool
-    {
+    public function isRegular(): bool {
         return false;
     }
 
@@ -54,13 +50,11 @@ class Link extends Page
       * Get css classes for Font Awesome icon
       * @return string
       */
-    public function getIcon(): string
-    {
+    public function getIcon(): string {
         return 'fas fa-link';
     }
 
-    protected function fillVars($result = null)
-    {
+    protected function fillVars($result = null): void {
         parent::fillVars($result);
         $this->link_url = $result->link_url;
     }

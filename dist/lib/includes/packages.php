@@ -2,18 +2,20 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 use App\Packages\PackageManager;
+use App\Security\Permissions\PermissionChecker;
 use App\Utils\CacheUtil;
 
 /**
  * Get list of all installed modules
  * @return array
  */
-function getAllModules(): array
-{
+function getAllModules(): array {
     // Check if cached
-    if (Vars::get('allModules')) {
-        return Vars::get('allModules');
+    if (\App\Storages\Vars::get('allModules')) {
+        return \App\Storages\Vars::get('allModules');
     }
 
     // Fetch installed modules
@@ -21,7 +23,7 @@ function getAllModules(): array
     $modules = $pkg->getInstalledPackages('modules');
 
     // Save installed modules in cache
-    Vars::set('allModules', $modules);
+    \App\Storages\Vars::set('allModules', $modules);
     return $modules;
 }
 
@@ -29,8 +31,7 @@ function getAllModules(): array
  * Get list of installed themes
  * @return array
  */
-function getAllThemes(): array
-{
+function getAllThemes(): array {
     $pkg = new PackageManager();
     return $pkg->getInstalledPackages('themes');
 }
@@ -42,9 +43,9 @@ function getAllThemes(): array
  * @param string $type
  * @return bool
  */
-function uninstall_module(string $name, string $type = 'module'): bool
-{
-    $acl = new ACL();
+function uninstall_module(string $name, string $type = 'module'): bool {
+    $acl = new PermissionChecker(get_user_id());
+
     if (! $acl->hasPermission('install_packages') && ! is_cli()) {
         return false;
     }
@@ -66,7 +67,7 @@ function uninstall_module(string $name, string $type = 'module'): bool
                 $uninstall_script2 = getModuleUninstallScriptPath2($name, true);
 
                 // Uninstall Script ausführen, sofern vorhanden
-                $mainController = ModuleHelper::getMainController($name);
+                $mainController = \App\Helpers\ModuleHelper::getMainController($name);
                 if ($mainController
                         && method_exists($mainController, 'uninstall')) {
                     $mainController->uninstall();

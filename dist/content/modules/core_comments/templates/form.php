@@ -1,9 +1,11 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Constants\CommentStatus;
 use App\Security\PrivacyCheckbox;
 
-if (Vars::get('comments_enabled')) {
+if (\App\Storages\Vars::get('comments_enabled')) {
     ?>
     <?php
     $comment_published = Request::getVar('comment_published');
@@ -37,7 +39,7 @@ if (Vars::get('comments_enabled')) {
     <h3><?php translate('write_a_comment'); ?></h3>
     <div class="comments">
         <?php
-        echo ModuleHelper::buildMethodCallForm(
+        echo \App\Helpers\ModuleHelper::buildMethodCallForm(
             CommentsController::class,
             'postComment',
             [],
@@ -50,7 +52,7 @@ if (Vars::get('comments_enabled')) {
         <?php
     echo App\HTML\Input::hidden(
         'content_id',
-        Vars::get('content_id')
+        \App\Storages\Vars::get('content_id')
     );
     ?>
 
@@ -125,5 +127,5 @@ if (Vars::get('comments_enabled')) {
         </p>
     </div>
     <?php
-    echo ModuleHelper::endForm();
+    echo \App\Helpers\ModuleHelper::endForm();
 }

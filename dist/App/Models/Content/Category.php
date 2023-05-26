@@ -4,28 +4,25 @@ declare(strict_types=1);
 
 namespace App\Models\Content;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use Database;
 use mysqli_result;
 
-class Category
-{
+class Category {
     private $id = null;
 
     private $name = null;
 
     private $description = null;
 
-    public function __construct(?int $id = null)
-    {
+    public function __construct(?int $id = null) {
         if ($id) {
             $this->loadByID($id);
         }
     }
 
-    public function loadByID(int $id): void
-    {
+    public function loadByID(int $id): void {
         $sql = 'select * from {prefix}categories where id = ?';
         $args = [
             (int)$id
@@ -34,8 +31,7 @@ class Category
         $this->fillVars($result);
     }
 
-    public function fillVars(?mysqli_result $result): void
-    {
+    public function fillVars(?mysqli_result $result): void {
         $this->id = null;
         $this->name = null;
         $this->description = null;
@@ -48,8 +44,7 @@ class Category
         }
     }
 
-    public function save(): void
-    {
+    public function save(): void {
         if ($this->id) {
             $this->update();
         } else {
@@ -57,8 +52,7 @@ class Category
         }
     }
 
-    public function delete(): void
-    {
+    public function delete(): void {
         if ($this->id) {
             $sql = 'delete from {prefix}categories where id = ?';
             $args = [
@@ -69,8 +63,7 @@ class Category
         }
     }
 
-    public static function getAll(string $order = 'id'): array
-    {
+    public static function getAll(string $order = 'id'): array {
         $datasets = [];
         $sql = "select id from `{prefix}categories` order by {$order}";
         $result = Database::query($sql, true);
@@ -80,38 +73,31 @@ class Category
         return $datasets;
     }
 
-    public function getID(): ?int
-    {
+    public function getID(): ?int {
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
+    public function getName(): ?string {
         return $this->name;
     }
 
-    public function getDescription(): ?string
-    {
+    public function getDescription(): ?string {
         return $this->description;
     }
 
-    public function setID(?int $val): void
-    {
+    public function setID(?int $val): void {
         $this->id = $val !== null ? (int)$val : null;
     }
 
-    public function setName(?string $val): void
-    {
+    public function setName(?string $val): void {
         $this->name = $val !== null ? (string)$val : null;
     }
 
-    public function setDescription(?string $val): void
-    {
+    public function setDescription(?string $val): void {
         $this->description = $val !== null ? (string)$val : null;
     }
 
-    protected function insert(): void
-    {
+    protected function insert(): void {
         $sql = 'INSERT INTO `{prefix}categories` (name, description) '
                 . 'values (?, ?)';
         $args = [
@@ -122,8 +108,7 @@ class Category
         $this->id = Database::getLastInsertID();
     }
 
-    protected function update(): void
-    {
+    protected function update(): void {
         $sql = 'update `{prefix}categories` set name = ?, '
                 . 'description = ? where id = ?';
         $args = [

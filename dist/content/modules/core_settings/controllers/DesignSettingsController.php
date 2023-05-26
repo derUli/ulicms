@@ -2,29 +2,26 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Packages\Theme;
 use App\Utils\CacheUtil;
 
-class DesignSettingsController extends Controller
-{
-    protected $generatedSCSS;
+class DesignSettingsController extends \App\Controllers\Controller {
+    protected string $generatedSCSS;
 
-    private $moduleName = 'core_settings';
-
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         // generate scss file for design settings if it doesn't exist.
         $this->generatedSCSS = Path::resolve(
-            'ULICMS_GENERATED/design_variables.scss'
+            'ULICMS_GENERATED_PRIVATE/design_variables.scss'
         );
         if (! is_file($this->generatedSCSS)) {
             $this->_generateSCSSToFile();
         }
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         if (isset($_REQUEST['no_mobile_design_on_tablet'])) {
             Settings::set(
                 'no_mobile_design_on_tablet',
@@ -62,11 +59,10 @@ class DesignSettingsController extends Controller
             Settings::set('default_font', $font);
         }
 
-
         Settings::set('font_size', $_REQUEST['font_size']);
         Settings::set('ckeditor_skin', $_REQUEST['ckeditor_skin']);
 
-        if (Settings::get('header_background_color') != $_REQUEST['header_background_color']
+        if (Settings::get('header_background_color') !== $_REQUEST['header_background_color']
         ) {
             Settings::set(
                 'header_background_color',
@@ -74,15 +70,15 @@ class DesignSettingsController extends Controller
             );
         }
 
-        if (Settings::get('body_text_color') != $_REQUEST['body_text_color']) {
+        if (Settings::get('body_text_color') !== $_REQUEST['body_text_color']) {
             Settings::set('body_text_color', $_REQUEST['body_text_color']);
         }
 
-        if (Settings::get('title_format') != $_REQUEST['title_format']) {
+        if (Settings::get('title_format') !== $_REQUEST['title_format']) {
             Settings::set('title_format', $_REQUEST['title_format']);
         }
 
-        if (Settings::get('body_background_color') != $_REQUEST['body_background_color']
+        if (Settings::get('body_background_color') !== $_REQUEST['body_background_color']
         ) {
             Settings::set(
                 'body_background_color',
@@ -93,25 +89,24 @@ class DesignSettingsController extends Controller
         CacheUtil::clearPageCache();
 
         $this->_generateSCSSToFile();
-        sureRemoveDir(Path::resolve('ULICMS_CACHE/stylesheets'), false);
+        sureRemoveDir(Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets'), false);
 
         HTTPStatusCodeResult(HttpStatusCode::OK);
     }
 
     /**
      * Get font family selection for design settings
-     * @global type $fonts
-     * @return array
+     *
+     * @return array<string, string>
      */
-    public function getFontFamilys(): array
-    {
+    public function getFontFamilys(): array {
         $fonts = [];
 
         $fontStackFile = Path::resolve(
             'ULICMS_ROOT/node_modules/system-font-stacks/index.json'
         );
 
-        $fontIndex = json_decode(file_get_contents($fontStackFile), true);
+        $fontIndex = json_decode(file_get_contents($fontStackFile) ?: '', true);
 
         foreach ($fontIndex as $index => $fontStack) {
             $name = $fontStack[0];
@@ -123,7 +118,6 @@ class DesignSettingsController extends Controller
             $fonts[$name] = implode(', ', $fontStack);
         }
 
-
         $fonts = apply_filter($fonts, 'fonts_filter');
 
         uksort($fonts, 'strnatcasecmp');
@@ -131,8 +125,7 @@ class DesignSettingsController extends Controller
         return $fonts;
     }
 
-    public function themePreview(): void
-    {
+    public function themePreview(): void {
         $themeName = Request::getVar('theme', null, 'str');
 
         if (! $themeName) {
@@ -155,15 +148,13 @@ class DesignSettingsController extends Controller
         HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
     }
 
-    public function _themePreview(string $themeName): ?string
-    {
+    public function _themePreview(string $themeName): ?string {
         $theme = new Theme($themeName);
         $screenshot = $theme->getScreenshotFile();
         return $screenshot;
     }
 
-    public function _generateSCSS(): ?string
-    {
+    public function _generateSCSS(): ?string {
         $settings = [
             'header-background-color' => Settings::get('header_background_color'),
             'body-text-color' => Settings::get('body_text_color'),
@@ -182,8 +173,7 @@ class DesignSettingsController extends Controller
         return $output;
     }
 
-    public function _generateSCSSToFile(): ?string
-    {
+    public function _generateSCSSToFile(): ?string {
         $scss = $this->_generateSCSS();
 
         if ($scss) {
@@ -194,36 +184,32 @@ class DesignSettingsController extends Controller
         return null;
     }
 
-    public function setDefaultTheme(): void
-    {
+    public function setDefaultTheme(): void {
         $theme = Request::getVar('name');
         $this->_setDefaultTheme($theme);
         Settings::set('theme', $theme);
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HTTPStatusCode::OK,
-            ModuleHelper::buildActionURL('packages')
+            HttpStatusCode::OK,
+            \App\Helpers\ModuleHelper::buildActionURL('packages')
         );
     }
 
-    public function _setDefaultTheme(?string $theme): void
-    {
+    public function _setDefaultTheme(?string $theme): void {
         Settings::set('theme', $theme);
     }
 
-    public function setDefaultMobileTheme(): void
-    {
+    public function setDefaultMobileTheme(): void {
         $theme = Request::getVar('name');
         $this->_setDefaultMobileTheme($theme);
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HTTPStatusCode::OK,
-            ModuleHelper::buildActionURL('packages')
+            HttpStatusCode::OK,
+            \App\Helpers\ModuleHelper::buildActionURL('packages')
         );
     }
 
-    public function _setDefaultMobileTheme(?string $theme): void
-    {
+    public function _setDefaultMobileTheme(?string $theme): void {
         if ($theme !== Settings::get('mobile_theme')) {
             Settings::set('mobile_theme', $theme);
         } else {
@@ -231,13 +217,15 @@ class DesignSettingsController extends Controller
         }
     }
 
-    public function getFontSizes(): array
-    {
+    /**
+     * Get font size selections for dropdown
+     * @return string[]
+     */
+    public function getFontSizes(): array {
         $sizes = [];
         for ($i = 6; $i <= 80; $i++) {
             $sizes[] = $i . 'px';
         }
-        do_event('custom_font_sizes');
 
         $sizes = apply_filter($sizes, 'font_sizes');
         return $sizes;

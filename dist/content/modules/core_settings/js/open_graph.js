@@ -12,17 +12,4 @@ const openMenuImageSelectWindow = (target) => {
 
 $(() => {
     $("#og_image").click((event) => openMenuImageSelectWindow(event.target))
-    $("#open_graph").ajaxForm(
-            {
-                beforeSubmit: () => {
-                    $("#message").html("");
-                    $("#loading").show();
-                },
-                success: () => {
-                    $("#loading").hide();
-                    // FIXME: localize this string
-                    $("#message")
-                            .html(`<span style="color:green;">${Translation.ChangesWasSaved}</span>`);
-                }
-            });
 });

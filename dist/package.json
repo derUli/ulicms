@@ -20,5 +20,8 @@
         "zenscroll": "*"
     },
     "license": "The BSD License",
-    "private": true
+    "private": true,
+    "devDependencies": {
+        "license-report": "^6.3.0"
+    }
 }

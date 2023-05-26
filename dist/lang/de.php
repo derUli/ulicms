@@ -1,7 +1,12 @@
 <?php
 
-// Dashboard (Willkommen)
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 define('LOADED_LANGUAGE_FILE', 'de');
+
+// Dashboard (Willkommen)
 add_translation('MOTD', 'Nachricht des Tages');
 add_translation('STATISTICS', 'Statistiken');
 add_translation('ONLINE_NOW', 'Jetzt online sind');
@@ -172,7 +177,7 @@ add_translation('PLEASE_SELECT_FILETYPE', 'Bitte wählen Sie einen Dateityp aus'
 // Vorlagen
 add_translation('TEMPLATE_INFO_TEXT', 'Hier können Sie das Aussehen Ihrer Website durch Templates anpassen. Bitte vorsichtig beim Bearbeiten sein, wegen des enthaltenen PHP-Codes. Am Besten sollte diese Aufgabe von einem Profi übernommen werden.');
 add_translation('PLEASE_SELECT_TEMPLATE', 'Bitte wählen Sie ein Template aus:');
-add_translation('CHANGES_WAS_SAVED', 'Die Änderungen wurden gespeichert.');
+add_translation('CHANGES_WERE_SAVED', 'Die Änderungen wurden gespeichert.');
 
 add_translation('INSTALL_PACKAGE', 'Paket installieren');
 add_translation('INSTALLED_MODULES', 'Installierte Module');
@@ -340,7 +345,6 @@ add_translation('DO_UPDATE', 'Update durchführen');
 add_translation('NONE', 'Keine');
 add_translation('MOBILE_DESIGN', 'Design für Mobilgeräte');
 
-
 add_translation('ACTION_NOT_FOUND', 'Die aufgerufene Aktion ist nicht vorhanden.');
 
 // Login
@@ -463,9 +467,6 @@ add_translation('MOBILE_DEVICES', 'Mobile Geräte');
 add_translation('DESKTOP_COMPUTERS', 'Arbeitsplatz Rechner');
 
 add_translation('DELETE_IPS_AFTER_48_HOURS', 'IP-Adressen nach 48 Stunden löschen');
-
-add_translation('LOGIN_FROM_IP_NOT_ALLOWED', 'Der Zugriff von Ihrer IP-Adresse ist nicht erlaubt.<br/>
-Bitte kontaktieren Sie Ihren Systemadministrator, dass er Ihre IP-Adresse zur Whitelist hinzufügt.');
 
 // Open Graph
 add_translation('OPEN_GRAPH', 'Open Graph');

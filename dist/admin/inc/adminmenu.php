@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Backend\Menu\AdminMenu;
 use App\Backend\Menu\MenuEntry;
 
@@ -52,7 +55,7 @@ $entries[] = new MenuEntry(
 $entries[] = new MenuEntry(
     '<i class="fas fa-box"></i> '
     . get_translation('packages'),
-    ModuleHelper::buildActionURL('packages'),
+    \App\Helpers\ModuleHelper::buildActionURL('packages'),
     'packages',
     'list_packages'
 );
@@ -61,8 +64,8 @@ if (is_file(Path::resolve('ULICMS_ROOT/update.php'))) {
         '<i class="fas fa-sync"></i> '
         . get_translation('update'),
         '?action=system_update',
-        'update_system',
-        'update_system',
+        'system_update',
+        'system_update',
         [],
         false,
         true
@@ -98,7 +101,7 @@ $entries[] = new MenuEntry(
     false,
     true
 );
-$logoutUrl = ModuleHelper::buildMethodCallUrl(
+$logoutUrl = \App\Helpers\ModuleHelper::buildMethodCallUrl(
     SessionManager::class,
     'logout'
 );

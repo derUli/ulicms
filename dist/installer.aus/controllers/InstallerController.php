@@ -1,15 +1,17 @@
 <?php
 
-use App\Backend\UliCMSVersion;
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Storages\Settings\DotEnvLoader;
+use App\UliCMS\UliCMSVersion;
 
 // TODO: Make it work without this
 mysqli_report(MYSQLI_REPORT_OFF);
 
-class InstallerController
-{
-    public static function getStep()
-    {
+class InstallerController {
+    public static function getStep() {
         $step = 1;
+
         if (isset($_REQUEST['step']) && ! empty($_REQUEST['step'])) {
             $step = (int)$_REQUEST['step'];
         }
@@ -20,8 +22,7 @@ class InstallerController
         return $step;
     }
 
-    public static function initSessionVars()
-    {
+    public static function initSessionVars(): void {
         $vars = [
             'mysql_user',
             'mysql_host',
@@ -36,6 +37,7 @@ class InstallerController
             'admin_firstname',
             'install_demodata'
         ];
+
         foreach ($vars as $var) {
             if (! isset($_SESSION[$var])) {
                 $_SESSION[$var] = '';
@@ -54,37 +56,32 @@ class InstallerController
         }
     }
 
-    public static function loadLanguageFile($lang)
-    {
+    public static function loadLanguageFile($lang): void {
         include_once 'lang/' . $lang . '.php';
         include_once 'lang/all.php';
     }
 
-    public static function getLanguage()
-    {
+    public static function getLanguage() {
         if (isset($_SESSION['language']) && ! empty($_SESSION['language'])) {
             return basename($_SESSION['language']);
         }
-            $_SESSION['language'] = 'en';
-            return 'en';
+        $_SESSION['language'] = 'en';
+        return 'en';
 
     }
 
-    public static function getTitle()
-    {
+    public static function getTitle() {
         return constant('TRANSLATION_TITLE_STEP_' . self::getStep());
     }
 
-    public static function getFooter()
-    {
+    public static function getFooter() {
         $version = new UliCMSVersion();
         return '&copy; 2011 - ' . $version->getReleaseYear() .
                 ' by <a href="http://www.ulicms.de" '
                 . 'target="_blank">UliCMS</a>';
     }
 
-    public static function submitAdminData()
-    {
+    public static function submitAdminData(): void {
         $_SESSION['admin_password'] = $_POST['admin_password'];
         $_SESSION['admin_user'] = $_POST['admin_user'];
         $_SESSION['admin_email'] = $_POST['admin_email'];
@@ -93,8 +90,7 @@ class InstallerController
         header('Location: index.php?step=7');
     }
 
-    public static function submitTryConnect()
-    {
+    public static function submitTryConnect(): void {
         @$connection = mysqli_connect(
             $_POST['servername'],
             $_POST['loginname'],
@@ -137,8 +133,7 @@ class InstallerController
         $_SESSION['mysql_prefix'] = $_POST['mysql_prefix'];
     }
 
-    public static function submitInstall()
-    {
+    public static function submitInstall(): void {
         @set_time_limit(60 * 10); // 10 Minuten
 
         if (! isset($_SESSION['install_index'])) {
@@ -269,56 +264,42 @@ class InstallerController
         $_SESSION['install_index'] += 1;
     }
 
-    public static function submitCreateConfig()
-    {
-        $template_path = 'templates/CMSConfig.tpl';
-        $content = file_get_contents($template_path);
-        $content = str_replace(
-            '{prefix}',
-            $_SESSION['mysql_prefix'],
-            $content
-        );
-        $content = str_replace(
-            '{mysql_host}',
-            $_SESSION['mysql_host'],
-            $content
-        );
-        $content = str_replace(
-            '{mysql_user}',
-            $_SESSION['mysql_user'],
-            $content
-        );
-        $content = str_replace(
-            '{mysql_password}',
-            $_SESSION['mysql_password'],
-            $content
-        );
-        $content = str_replace(
-            '{mysql_database}',
-            $_SESSION['mysql_database'],
-            $content
-        );
+    public static function submitCreateConfig(): void {
 
-        copy(ULICMS_ROOT . '/lib/CMSConfigSample.php', ULICMS_ROOT . '/CMSConfig.php');
+        $targetConfig = ULICMS_ROOT . '/.env';
 
-        $defaultConfigFile = ULICMS_ROOT . '/content/configurations/default.php';
+        $loader = DotEnvLoader::fromEnvironment(ULICMS_ROOT, 'example');
+        $loader->load();
 
-        $configurationDir = dirname($defaultConfigFile);
-        if (! is_dir($configurationDir)) {
-            mkdir($configurationDir);
+        $_ENV['APP_ENV'] = 'default';
+
+        // Database credentials
+        $_ENV['DB_PREFIX'] = $_SESSION['mysql_prefix'];
+        $_ENV['DB_SERVER'] = $_SESSION['mysql_host'];
+        $_ENV['DB_USER'] = $_SESSION['mysql_user'];
+        $_ENV['DB_PASSWORD'] = $_SESSION['mysql_password'];
+        $_ENV['DB_DATABASE'] = $_SESSION['mysql_database'];
+
+        $dotEnvContent = '';
+        foreach($_ENV as $key => $value) {
+
+            if(is_bool($value)) {
+                $value = strbool($value);
+            }
+
+            $dotEnvContent .= "{$key}={$value}" . PHP_EOL;
         }
 
-        if (file_put_contents($defaultConfigFile, $content)) {
+        if (file_put_contents($targetConfig, $dotEnvContent)) {
             echo '<!--ok-->';
         } else {
             echo '<!--failed-->' . TRANSLATION_WRITE_CMS_CONFIG_FAILED;
             echo '<p><textarea rows=10 class="form-control" readonly>' .
-            htmlspecialchars($content) . '</textarea></p>';
+            htmlspecialchars($dotEnvContent) . '</textarea></p>';
         }
     }
 
-    public static function submitDemodata()
-    {
+    public static function submitDemodata(): void {
         if (isset($_REQUEST['install_demodata'])) {
             $_SESSION['install_demodata'] = 'yes';
         } else {
@@ -328,8 +309,7 @@ class InstallerController
         header('Location: index.php?step=8');
     }
 
-    public static function SureRemoveDir($dir, $DeleteMe)
-    {
+    public static function SureRemoveDir($dir, $DeleteMe): void {
         if (! $dh = @opendir($dir)) {
             return;
         }
@@ -348,8 +328,7 @@ class InstallerController
         }
     }
 
-    public static function submitLoginToBackend()
-    {
+    public static function submitLoginToBackend(): void {
         $installerDir = '../installer';
         if (is_dir($installerDir)) {
             @sureRemoveDir($installerDir, true);

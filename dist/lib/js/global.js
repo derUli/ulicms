@@ -1,5 +1,4 @@
 /* global DocumentTouch, Translation */
-
 $(() => {
     // delete form handling with confirmation
     $("form.delete-form").submit(() =>
@@ -16,7 +15,7 @@ const isTouchDevice = () => {
     const mq = (query) => {
         return window.matchMedia(query).matches;
     };
-    if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+    if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
         return true;
     }
 

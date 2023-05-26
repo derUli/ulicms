@@ -10,12 +10,12 @@ if ($_SESSION['RF']['verify'] != 'RESPONSIVEfilemanager') {
     exit;
 }
 
-if (! checkRelativePath($_POST['path']) || strpos($_POST['path'], '/') === 0) {
+if (! checkRelativePath($_POST['path']) || str_starts_with($_POST['path'], '/')) {
     response(trans('wrong path') . AddErrorLocation(), 400)->send();
     exit;
 }
 
-if (strpos($_POST['name'], '/') !== false) {
+if (str_contains($_POST['name'], '/')) {
     response(trans('wrong path') . AddErrorLocation(), 400)->send();
     exit;
 }
@@ -40,7 +40,6 @@ $file_name = $info['basename'];
 $file_ext = $info['extension'];
 $file_path = $path . $name;
 
-
 // make sure the file exists
 if ($ftp) {
     header('Content-Type: application/octet-stream');
@@ -56,7 +55,6 @@ if ($ftp) {
     $size = filesize($file_path);
     $file_name = rawurldecode($file_name);
 
-
     if (function_exists('mime_content_type')) {
         $mime_type = mime_content_type($file_path);
     } elseif (function_exists('finfo_open')) {
@@ -65,7 +63,6 @@ if ($ftp) {
     } else {
         $mime_type = get_file_mime_type($file_path);
     }
-
 
     @ob_end_clean();
     if (ini_get('zlib.output_compression')) {

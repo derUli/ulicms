@@ -1,4 +1,9 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Security\Permissions\PermissionChecker;
+
 $module = basename($_GET['module']);
 
 $admin_file_path = getModuleAdminFilePath($module);
@@ -10,7 +15,7 @@ if ($main_class) {
     $controller = ControllerRegistry::get($main_class);
 }
 
-$disabledModules = Vars::get('disabledModules') ?? [];
+$disabledModules = \App\Storages\Vars::get('disabledModules') ?? [];
 if ((! is_file($admin_file_path) && ! is_file($admin_file_path2) && ! ($controller && method_exists($controller, 'settings')) || in_array($module, $disabledModules))) {
     ?>
     <div class="alert alert-danger"><?php translate('this_module_has_no_settings'); ?></div>
@@ -33,7 +38,7 @@ if ((! is_file($admin_file_path) && ! is_file($admin_file_path2) && ! ($controll
         echo "<h1>{$capitalized_module_name}  " . get_translation('settings') . '</h1>';
     }
 
-    $permissionChecker = new ACL();
+    $permissionChecker = PermissionChecker::fromCurrentUser();
     $admin_permission = getModuleMeta($module, 'admin_permission');
 
     if ($admin_permission) {

@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Constants;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 /**
  * Bootstrap 3.x Button Styles
  */
-class ButtonType
-{
+abstract class ButtonType {
     public const BUTTON_BUTTON = 'button';
 
     public const BUTTON_SUBMIT = 'submit';

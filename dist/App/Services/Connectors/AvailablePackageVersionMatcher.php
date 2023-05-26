@@ -2,27 +2,24 @@
 
 namespace App\Services\Connectors;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Helpers\ArrayHelper;
 
 use function is_version_number;
 
-class AvailablePackageVersionMatcher
-{
+class AvailablePackageVersionMatcher {
     private $versionData = [];
 
     /**
      * Constructor
-     * @param type $versionData
+     * @param $versionData
      */
-    public function __construct($versionData = null)
-    {
+    public function __construct($versionData = null) {
         $this->loadData($versionData);
     }
 
-    public function loadData($versionData)
-    {
+    public function loadData($versionData): void {
         $this->versionData = [];
         if ($versionData === null) {
             return;
@@ -51,8 +48,7 @@ class AvailablePackageVersionMatcher
         }
     }
 
-    public function getAllVersions(): array
-    {
+    public function getAllVersions(): array {
         $releases = $this->versionData;
 
         usort($releases, static function($a, $b) {
@@ -73,8 +69,7 @@ class AvailablePackageVersionMatcher
         return $releases;
     }
 
-    public function getCompatibleVersions(?string $ulicmsVersion = null): array
-    {
+    public function getCompatibleVersions(?string $ulicmsVersion = null): array {
         $allReleases = $this->getAllVersions();
         $suitableReleases = [];
 

@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App\CoreContent\Partials;
 
-use function App\HTML\icon;
-use function App\HTML\Link;
-use App\Security\ContentPermissionChecker;
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Security\Permissions\ContentPermissionChecker;
 use ContentFactory;
 use Template;
-
 use User;
-use ViewBag;
 
-class ViewButtonRenderer
-{
+use function App\HTML\icon;
+
+use function App\HTML\Link;
+
+class ViewButtonRenderer {
     public const MODULE_NAME = 'core_content';
 
-    public function render(int $pageId, User $user)
-    {
+    public function render(int $pageId, User $user) {
         $permitted = true;
 
         $content = ContentFactory::getByID($pageId);
@@ -37,7 +37,7 @@ class ViewButtonRenderer
 
         $url = "../?goid={$pageId}";
         $link = link($url, $icon, true);
-        ViewBag::set('button', $link);
+        \App\Storages\ViewBag::set('button', $link);
 
         $templateFile = Template::executeModuleTemplate(
             self::MODULE_NAME,

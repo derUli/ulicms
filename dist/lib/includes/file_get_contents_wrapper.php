@@ -2,76 +2,46 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 use App\Exceptions\CorruptDownloadException;
 use App\Security\Hash;
 use App\Utils\CacheUtil;
-
-// die Funktionalität von file_get_contents
-// mit dem Curl-Modul umgesetzt
-function file_get_contents_curl(string $url): ?string
-{
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_USERAGENT, ULICMS_USERAGENT);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-
-    // Set curl to return the data instead of printing it to the browser.
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_URL, $url);
-
-    $data = curl_exec($ch) ?? null;
-
-    if (curl_getinfo($ch, CURLINFO_HTTP_CODE) != 200 && curl_getinfo($ch, CURLINFO_HTTP_CODE) != 304 && curl_getinfo($ch, CURLINFO_HTTP_CODE) != 302) {
-        $data = null;
-    }
-
-    curl_close($ch);
-    return $data;
-}
-
-/**
- * Check if a given variable is an URL
- * @param mixed $url
- * @return bool
- */
-function is_url(mixed $url): bool
-{
-    return filter_var($url, FILTER_VALIDATE_URL) !== false;
-}
+use Fetcher\Fetcher;
 
 /**
  * Retrieves an URL by curl if available or by file_get_contents
+ *
+ * @deprecated since 2023.3
  * @param string $url
- * @param bool $no_cache
- * @param type $checksum
- * @throws CorruptDownloadException
+ * @param bool $noCache
+ * @param string|null $checksum
+ *
  * @return string|null
  */
 function file_get_contents_wrapper(
     string $url,
     bool $noCache = false,
-    $checksum = null
+    ?string $checksum = null
 ): ?string {
     $content = null;
 
-    if (! is_url($url)) {
-        return is_file($url) ? file_get_contents($url) : null;
+    if (! Fetcher::isUrl($url)) {
+        return is_file($url) ? (string)file_get_contents($url) : null;
     }
 
     $cacheItemId = Hash::hashCacheIdentifier($url);
 
     $cacheAdapter = ! $noCache ? CacheUtil::getAdapter(true) : null;
 
-    if ($cacheAdapter && $cacheAdapter->has($cacheItemId)) {
+    if ($cacheAdapter && is_string($cacheAdapter->get($cacheItemId))) {
         return $cacheAdapter->get($cacheItemId);
     }
 
-    $content = file_get_contents_curl($url);
+    $fetcher = new Fetcher($url);
+    $content = $fetcher->fetch();
 
-    if (
-        $content &&
-        ! empty($checksum) &&
-        md5($content) !== strtolower($checksum)
+    if ($content && ! empty($checksum) && md5($content) !== strtolower($checksum)
     ) {
         throw new CorruptDownloadException(
             "Download of {$url} - Checksum validation failed"
@@ -83,27 +53,4 @@ function file_get_contents_wrapper(
     }
 
     return $content;
-}
-
-/**
- * Check if an URL exists
- * @param string $url
- * @return bool
- */
-function curl_url_exists(string $url): bool
-{
-    $timeout = 10;
-    $ch = curl_init();
-    // HTTP request is 'HEAD' too make this method fast
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'HEAD');
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
-    curl_setopt($ch, CURLOPT_USERAGENT, ULICMS_USERAGENT);
-
-    curl_exec($ch);
-
-    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    return $http_code >= 200 && $http_code < 400;
 }

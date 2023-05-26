@@ -2,12 +2,10 @@
 
 use App\Models\Users\PasswordReset;
 
-class PasswordResetTest extends \PHPUnit\Framework\TestCase
-{
+class PasswordResetTest extends \PHPUnit\Framework\TestCase {
     private $testUserId;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $manager = new UserManager();
         $this->testUserId = (int)$manager->getAllUsers()[0]->getId();
 
@@ -19,17 +17,13 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $this->cleanUp();
         unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI']);
 
-
-
     }
 
-    public function testAddToken()
-    {
+    public function testAddToken(): void {
         $passwordReset = new PasswordReset();
         $this->assertCount(
             0,
@@ -49,8 +43,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
     }
 
-    public function testGetPasswordResetLink()
-    {
+    public function testGetPasswordResetLink(): void {
         $passwordReset = new PasswordReset();
         $token = $passwordReset->addToken($this->testUserId);
 
@@ -63,8 +56,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
     }
 
-    public function testGetAllTokensReturnsTokens()
-    {
+    public function testGetAllTokensReturnsTokens(): void {
         $passwordReset = new PasswordReset();
         for ($i = 1; $i < 4; $i++) {
             $passwordReset->addToken(1);
@@ -75,15 +67,13 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
     }
 
-    public function testGetAllTokensReturnsEmptyArray()
-    {
+    public function testGetAllTokensReturnsEmptyArray(): void {
         Database::truncateTable('password_reset');
         $passwordReset = new PasswordReset();
         $this->assertCount(0, $passwordReset->getAllTokens());
     }
 
-    public function testGetAllTokensByUserId()
-    {
+    public function testGetAllTokensByUserId(): void {
         $passwordReset = new PasswordReset();
         for ($i = 1; $i < 4; $i++) {
             $passwordReset->addToken(1);
@@ -101,8 +91,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
     }
 
-    public function testGetTokenByTokenString()
-    {
+    public function testGetTokenByTokenString(): void {
         $passwordReset = new PasswordReset();
         $tokenString1 = $passwordReset->addToken($this->testUserId);
         $tokenString2 = $passwordReset->addToken($this->testUserId);
@@ -120,8 +109,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
     }
 
-    public function testDeleteToken()
-    {
+    public function testDeleteToken(): void {
         $passwordReset = new PasswordReset();
 
         $token = $passwordReset->addToken($this->testUserId);
@@ -132,8 +120,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($passwordReset->getTokenByTokenString($token));
     }
 
-    private function cleanUp()
-    {
+    private function cleanUp(): void {
         Database::truncateTable('password_reset');
     }
 }

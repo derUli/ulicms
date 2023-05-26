@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Packages;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\PackageTypes;
 use App\Services\Connectors\PackageSourceConnector;
@@ -19,15 +19,15 @@ use UnexpectedValueException ;
 /**
  * This class is for handling packages
  *  */
-class PackageManager
-{
+class PackageManager {
     /**
      * Check package source for a newer version of a package
+     *
      * @param string $name
+     *
      * @return string|null
      */
-    public function checkForNewerVersionOfPackage(string $name): ?string
-    {
+    public function checkForNewerVersionOfPackage(string $name): ?string {
         $connector = new PackageSourceConnector();
         $connector->fetch(true);
         return $connector->getVersionOfPackage($name);
@@ -35,9 +35,11 @@ class PackageManager
 
     /**
      * Check if a package is installed
+     *
      * @param string $package
      * @param string $type
      * @throws BadMethodCallException
+     *
      * @return bool
      */
     public function isInstalled(
@@ -59,8 +61,10 @@ class PackageManager
 
     /**
      * Install a package from file
+     *
      * @param string $file
      * @param bool $clear_cache
+     *
      * @return bool
      */
     public function installPackage(
@@ -72,7 +76,6 @@ class PackageManager
             // Paket entpacken
             $phar = new PharData($file);
             $phar->extractTo(ULICMS_ROOT, null, true);
-
 
             $postInstallScripts = [
                 Path::Resolve('ULICMS_ROOT/post-install.php'),
@@ -104,10 +107,10 @@ class PackageManager
 
     /**
      * Get installed modules
-     * @return array
+     *
+     * @return array<string>
      */
-    public function getInstalledModules(): array
-    {
+    public function getInstalledModules(): array {
         $availableModules = [];
 
         $moduleFolder = Path::resolve('ULICMS_ROOT/content/modules');
@@ -127,10 +130,10 @@ class PackageManager
 
     /**
      * Get installed themes
-     * @return array
+     *
+     * @return array<string>
      */
-    public function getInstalledThemes(): array
-    {
+    public function getInstalledThemes(): array {
         $themes = [];
         $templateDir = Path::resolve(
             'ULICMS_ROOT/content/templates'
@@ -154,12 +157,13 @@ class PackageManager
 
     /**
      * Get installed packages
+     *
      * @param string $type
      * @throws BadMethodCallException
-     * @return array|null
+     *
+     * @return array<string>|null
      */
-    public function getInstalledPackages(string $type = 'modules'): ?array
-    {
+    public function getInstalledPackages(string $type = 'modules'): ?array {
         if ($type === 'modules' || $type === 'module') {
             return $this->getInstalledModules();
         } elseif ($type === 'themes' || $type === 'theme') {

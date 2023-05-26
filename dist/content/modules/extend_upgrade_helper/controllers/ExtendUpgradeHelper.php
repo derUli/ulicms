@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Services\Connectors\AvailablePackageVersionMatcher;
 
-class ExtendUpgradeHelper extends Controller
-{
-    public function getModules(): array
-    {
+class ExtendUpgradeHelper extends \App\Controllers\Controller {
+    public function getModules(): array {
         $modulesFromExtend = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
@@ -27,8 +27,7 @@ class ExtendUpgradeHelper extends Controller
         return $modulesFromExtend;
     }
 
-    protected function checkForUpdates(string $name, ?string $version): bool
-    {
+    protected function checkForUpdates(string $name, ?string $version): bool {
         if (! $version) {
             return false;
         }

@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Helpers\DataTablesHelper;
 use App\Models\Content\Comment;
 
@@ -16,7 +18,7 @@ if (! is_file($select2TranslationFile)) {
     $select2Language = 'en';
 }
 
-$permissionChecker = new App\Security\PermissionChecker(get_user_id());
+$permissionChecker = new App\Security\Permissions\PermissionChecker(get_user_id());
 ?>
 <!DOCTYPE html>
 <html data-select2-language="<?php esc($select2Language); ?>">
@@ -77,10 +79,10 @@ require 'inc/touch_icons.php';
       $styles[] = '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 $styles[] = '../node_modules/codemirror-minified/lib/codemirror.css';
 $styles[] = '../node_modules/vanilla-toast/vanilla-toast.css';
-$styles[] = 'css/modern.scss';
 $styles[] = '../node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css';
 $styles[] = '../node_modules/select2/dist/css/select2.min.css';
 $styles[] = '../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css';
+$styles[] = 'css/modern.scss';
 
 $styles = apply_filter($styles, 'admin_head_styles');
 
@@ -114,17 +116,12 @@ if (get_action()) {
         data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>"
         data-ckeditor-skin="<?php esc(Settings::get('ckeditor_skin')); ?>"
         data-csrf-token="<?php esc(get_csrf_token()); ?>"
-        data-ckeditor-links-action-url="<?php echo ModuleHelper::buildMethodCallUrl(PageController::class, 'getCKEditorLinkList'); ?>"
+        data-ckeditor-links-action-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(PageController::class, 'getCKEditorLinkList'); ?>"
         >
             <?php
         do_event('after_backend_header');
 ?>
-        <div
-            class="container main <?php
-if (get_action()) {
-    echo 'action-' . Template::getEscape(get_action());
-}
-?>">
+        <div class="container main">
             <div class="row menubar">
                 <div class="col-xs-7">
                     <a
@@ -144,7 +141,7 @@ if (get_action()) {
                         <div class="row pull-right top-right-icons">
                             <div class="<?php esc($colClass); ?>">
                                 <a href="#" class="has-pointer" id="menu-clear-cache"
-                                   data-url="<?php echo ModuleHelper::buildMethodCallUrl('PerformanceSettingsController', 'clearCache', 'clear_cache=1'); ?>"
+                                   data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PerformanceSettingsController', 'clearCache', 'clear_cache=1'); ?>"
                                    title="<?php translate('clear_cache'); ?>"
                                    data-placement="bottom" 
                                    >
@@ -157,7 +154,7 @@ if (get_action()) {
                     ?>
                                 <div class="<?php esc($colClass); ?>">
                                     <div class="comment-counter">
-                                        <a href="<?php echo ModuleHelper::buildActionURL('comments_manage'); ?>"
+                                        <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('comments_manage'); ?>"
                                            title="<?php translate('comments'); ?>"
                                            data-placement="bottom" 
                                            >

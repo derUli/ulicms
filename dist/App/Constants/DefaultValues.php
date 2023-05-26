@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Constants;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 /**
  * Default Values
  */
-class DefaultValues
-{
+abstract class DefaultValues {
     public const ALLOWED_TAGS = '<a>' .
             '<abbr>' .
             '<address>' .

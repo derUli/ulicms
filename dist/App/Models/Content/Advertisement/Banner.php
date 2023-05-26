@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Content\Advertisement;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Exceptions\DatasetNotFoundException;
 use Database;
@@ -13,8 +13,7 @@ use Model;
 use Template;
 
 // advertisement banners can be html codes or classic gif banners
-class Banner extends Model
-{
+class Banner extends Model {
     protected $id = null;
 
     private $name = null;
@@ -37,17 +36,15 @@ class Banner extends Model
 
     private $date_to = null;
 
-    public function __construct($id = null)
-    {
+    public function __construct($id = null) {
         if ($id) {
             $this->loadByID($id);
         }
     }
 
-    public function loadByID($id)
-    {
+    public function loadByID($id): void {
         $id = (int)$id;
-        $result = Database::query('SELECT * FROM `' . tbname('banner') .
+        $result = Database::query('SELECT * FROM `' . Database::tableName('banner') .
                         "` where id = {$id}");
         if (Database::getNumRows($result) > 0) {
             $result = Database::fetchObject($result);
@@ -57,28 +54,25 @@ class Banner extends Model
         }
     }
 
-    public function save()
-    {
+    public function save() {
         $retval = false;
         if ($this->id != null) {
             $retval = $this->update();
         }
-            $retval = $this->create();
+        $retval = $this->create();
 
         return $retval;
     }
 
-    public function create()
-    {
+    public function create() {
         if ($this->id != null) {
             return $this->update();
         }
         return $this->insert();
     }
 
-    public function insert()
-    {
-        $sql = 'INSERT INTO ' . tbname('banner') . '(name, link_url, image_url, '
+    public function insert() {
+        $sql = 'INSERT INTO ' . Database::tableName('banner') . '(name, link_url, image_url, '
                 . 'category_id, type, html, language, date_from, date_to, '
                 . 'enabled) values (';
         if ($this->name === null) {
@@ -137,12 +131,11 @@ class Banner extends Model
         return $result;
     }
 
-    public function update()
-    {
+    public function update() {
         if ($this->id === null) {
             return $this->create();
         }
-        $sql = 'UPDATE ' . tbname('banner') . ' set ';
+        $sql = 'UPDATE ' . Database::tableName('banner') . ' set ';
 
         if ($this->name === null) {
             $sql .= 'name=NULL, ';
@@ -200,13 +193,11 @@ class Banner extends Model
         return Database::query($sql);
     }
 
-    public function getId(): ?int
-    {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function setDateFrom($val): void
-    {
+    public function setDateFrom($val): void {
         if ($val === null || is_string($val)) {
             $this->date_from = $val;
         } elseif (is_numeric($val)) {
@@ -218,8 +209,7 @@ class Banner extends Model
         }
     }
 
-    public function setDateTo($val): void
-    {
+    public function setDateTo($val): void {
         if ($val === null || is_string($val)) {
             $this->date_to = $val;
         } elseif (is_numeric($val)) {
@@ -231,8 +221,7 @@ class Banner extends Model
         }
     }
 
-    public function setType(string $type): void
-    {
+    public function setType(string $type): void {
         $allowedTypes = [
             'gif',
             'html'
@@ -242,96 +231,78 @@ class Banner extends Model
         }
     }
 
-    public function getType(): string
-    {
+    public function getType(): string {
         return $this->type;
     }
 
-    public function getHtml(): ?string
-    {
+    public function getHtml(): ?string {
         return $this->html;
     }
 
-    public function setHtml(?string $val): void
-    {
+    public function setHtml(?string $val): void {
         $this->html = $val !== null ? (string)$val : null;
     }
 
-    public function getDateFrom(): ?string
-    {
+    public function getDateFrom(): ?string {
         return $this->date_from;
     }
 
-    public function getDateTo(): ?string
-    {
+    public function getDateTo(): ?string {
         return $this->date_to;
     }
 
-    public function getCategoryId(): ?int
-    {
+    public function getCategoryId(): ?int {
         return $this->category_id;
     }
 
-    public function setCategoryId(?int $val): void
-    {
+    public function setCategoryId(?int $val): void {
         $this->category_id = is_numeric($val) ? (int)$val : null;
     }
 
-    public function getLanguage(): ?string
-    {
+    public function getLanguage(): ?string {
         return $this->language;
     }
 
-    public function setLanguage(?string $val): void
-    {
+    public function setLanguage(?string $val): void {
         $this->language = $val !== null ? (string)$val : null;
     }
 
-    public function getName(): ?string
-    {
+    public function getName(): ?string {
         return $this->name;
     }
 
-    public function setName($val)
-    {
+    public function setName($val): void {
         $this->name = $val !== null ? (string)$val : null;
     }
 
-    public function getImageUrl(): ?string
-    {
+    public function getImageUrl(): ?string {
         return $this->image_url;
     }
 
-    public function setImageUrl(?string $val): void
-    {
+    public function setImageUrl(?string $val): void {
         $this->image_url = $val !== null ? (string)$val : null;
     }
 
-    public function getLinkUrl(): ?string
-    {
+    public function getLinkUrl(): ?string {
         return $this->link_url;
     }
 
-    public function setLinkUrl(?string $val): void
-    {
+    public function setLinkUrl(?string $val): void {
         $this->link_url = $val !== null ? (string)$val : null;
     }
 
-    public function getEnabled(): bool
-    {
+    public function getEnabled(): bool {
         return $this->enabled;
     }
 
-    public function setEnabled(bool $val): void
-    {
+    public function setEnabled(bool $val): void {
         $this->enabled = (bool)$val;
     }
 
-    public function delete()
-    {
+    public function delete() {
         $retval = false;
         if ($this->id !== null) {
-            $sql = 'DELETE from ' . tbname('banner') . ' where id = ' .
+            $sql = 'DELETE from ' . Database::tableName('banner') . ' where id = ' .
                     $this->id;
             $retval = Database::Query($sql);
             $this->id = null;
@@ -339,8 +310,7 @@ class Banner extends Model
         return $retval;
     }
 
-    public function render(): string
-    {
+    public function render(): string {
         $html = '';
 
         switch ($this->getType()) {
@@ -361,8 +331,7 @@ class Banner extends Model
         return $html;
     }
 
-    protected function fillVars($result = null)
-    {
+    protected function fillVars($result = null): void {
         $this->id = (int)$result->id;
         $this->name = $result->name;
         $this->link_url = $result->link_url;

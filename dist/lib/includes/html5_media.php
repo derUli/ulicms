@@ -2,21 +2,23 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 use App\Models\Media\Audio;
 use App\Models\Media\Video;
 
 /**
  * Replaces audio tags with rendered html5 audio elements
+ *
  * @param string $txt
- * @return string|null
+ *
+ * @return string
  */
-function replaceAudioTags(string $txt): ?string
-{
+function replaceAudioTags(string $txt): string {
     $audio_dir = 'content/audio/';
 
-
     // TODO: Use Regex
-    $contains = strpos($txt, '[audio id=') !== false;
+    $contains = str_contains($txt, '[audio id=')  ;
 
     // If there is no [audio=XXX] in page return
     if (! $contains) {
@@ -42,15 +44,16 @@ function replaceAudioTags(string $txt): ?string
 
 /**
  * Replaces video tags with html5 video elements
+ *
  * @param string $txt
+ *
  * @return string
  */
-function replaceVideoTags(string $txt): string
-{
+function replaceVideoTags(string $txt): string {
     $video_dir = 'content/videos/';
 
     // TODO: Use Regex
-    $contains = strpos($txt, '[video id=') !== false;
+    $contains = str_contains($txt, '[video id=')  ;
 
     // If there is no [video=XXX] in page return
     if (! $contains) {

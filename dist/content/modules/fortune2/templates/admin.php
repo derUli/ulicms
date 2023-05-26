@@ -1,3 +1,6 @@
+<?php
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+?>
 <form action="index.php" method="get">
     <input type="hidden" name="action" value="module_settings"> <input
         type="hidden" name="module" value="fortune2">
@@ -14,12 +17,12 @@
 </form>
 <br />
 <form
-    action="<?php Template::escape(ModuleHelper::buildAdminURL('fortune2', 'sClass=Fortune&sMethod=doSomething')); ?>"
+    action="<?php Template::escape(\App\Helpers\ModuleHelper::buildAdminURL('fortune2', 'sClass=Fortune&sMethod=doSomething')); ?>"
     method="post">
         <?php csrf_token_html(); ?>
     <button type="submit" class="btn btn-default">POST</button>
 </form>
 <br />
-<code><?php if (ViewBag::get('sample_text')) { ?>
-        <?php Template::escape(ViewBag::get('sample_text')); ?>
+<code><?php if (\App\Storages\ViewBag::get('sample_text')) { ?>
+        <?php Template::escape(\App\Storages\ViewBag::get('sample_text')); ?>
     <?php } ?></code>

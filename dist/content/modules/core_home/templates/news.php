@@ -1,16 +1,17 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Helpers\DateTimeHelper;
 
 if (! Settings::get('disable_ulicms_newsfeed')) {
-    App\Utils\Session\sessionStart();
     $rss = new DOMDocument();
     $feeds = [];
     $feeds['de'] = 'https://www.ulicms.de/blog_rss.php?s=aktuelles&lang=de';
     $feeds['en'] = 'https://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en';
 
     if (isset($_SESSION['system_language'], $feeds[$_SESSION['system_language']])
-            ) {
+    ) {
         $feed_url = $feeds[$_SESSION['system_language']];
     } else {
         $feed_url = $feeds['en'];

@@ -1,6 +1,9 @@
 <?php
-$field = ViewBag::get('field');
-$value = ViewBag::get('field_value');
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+$field = \App\Storages\ViewBag::get('field');
+$value = \App\Storages\ViewBag::get('field_value');
 if ($value === null) {
     $value = $field->defaultValue;
 }
@@ -13,14 +16,14 @@ if ($value === null) {
         }
 ?></strong>
     <input type="email"
-           name="<?php Template::escape(ViewBag::get('field_name')); ?>"
+           name="<?php Template::escape(\App\Storages\ViewBag::get('field_name')); ?>"
            value="<?php Template::escape($value); ?>"
            <?php
    if ($field->required) {
        echo 'required';
    }
 ?>
-           <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>>
+           <?php echo \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>>
            <?php if ($field->helpText) { ?>
         <small><?php translate($field->helpText); ?></small>
     <?php } ?>

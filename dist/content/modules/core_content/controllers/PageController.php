@@ -1,17 +1,20 @@
 <?php
+
 declare(strict_types=1);
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants;
 use App\Constants\LinkTarget;
 use App\CoreContent\Models\ViewModels\DiffViewModel;
 use App\CoreContent\PageTableRenderer;
 use App\Exceptions\DatasetNotFoundException;
+use App\Helpers\ModuleHelper;
 use App\HTML\ListItem;
-use function App\HTML\stringContainsHtml;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
 use App\Models\Content\VCS;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 use App\Security\XSSProtection;
 use App\Utils\CacheUtil;
 use Jfcherng\Diff\Differ;
@@ -19,43 +22,36 @@ use Jfcherng\Diff\DiffHelper;
 use Jfcherng\Diff\Renderer\RendererConstant;
 use Rakit\Validation\Validator;
 
-use zz\Html\HTMLMinify;
+use function App\HTML\stringContainsHtml;
 
-class PageController extends Controller
-{
+class PageController extends \App\Controllers\Controller {
     public const MODULE_NAME = 'core_content';
 
-    public function _getPagesListView(): string
-    {
+    public function _getPagesListView(): string {
         return $_SESSION['pages_list_view'] ?? 'default';
     }
 
-    public function recycleBin(): void
-    {
+    public function recycleBin(): void {
         $this->_recycleBin();
         $url = ModuleHelper::buildActionURL('pages');
         Response::redirect($url);
     }
 
-    public function _recycleBin(): void
-    {
+    public function _recycleBin(): void {
         $_SESSION['pages_list_view'] = 'recycle_bin';
     }
 
-    public function pages(): void
-    {
+    public function pages(): void {
         $this->_pages();
         $url = ModuleHelper::buildActionURL('pages');
         Response::redirect($url);
     }
 
-    public function _pages(): void
-    {
+    public function _pages(): void {
         $_SESSION['pages_list_view'] = 'default';
     }
 
-    public function createPost(): void
-    {
+    public function createPost(): void {
         $model = $this->_createPost();
         if ($model && $model->isPersistent()) {
             Response::redirect(
@@ -69,8 +65,7 @@ class PageController extends Controller
         Response::redirect(ModuleHelper::buildActionURL('pages'));
     }
 
-    public function _createPost(): ?Content
-    {
+    public function _createPost(): ?AbstractContent {
         $permissionChecker = new PermissionChecker(get_user_id());
         $model = TypeMapper::getModel(Request::getVar('type'));
 
@@ -89,8 +84,7 @@ class PageController extends Controller
         return null;
     }
 
-    public function editPost(): void
-    {
+    public function editPost(): void {
         $success = $this->_editPost();
 
         $id = Request::getVar('page_id', null, 'int');
@@ -107,8 +101,7 @@ class PageController extends Controller
         );
     }
 
-    public function _editPost(): bool
-    {
+    public function _editPost(): bool {
         $permissionChecker = new PermissionChecker(get_user_id());
         $model = TypeMapper::getModel(Request::getVar('type'));
         if (! $model) {
@@ -134,8 +127,7 @@ class PageController extends Controller
         return ! $model->hasChanges();
     }
 
-    public function undeletePost(): void
-    {
+    public function undeletePost(): void {
         $id = Request::getVar('id', null, 'int');
         do_event('before_undelete_page');
 
@@ -157,13 +149,12 @@ class PageController extends Controller
         }
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HTTPStatusCode::OK,
+            HttpStatusCode::OK,
             ModuleHelper::buildActionURL('pages')
         );
     }
 
-    public function _undeletePost(int $id): bool
-    {
+    public function _undeletePost(int $id): bool {
         try {
             $content = ContentFactory::getByID($id);
         } catch (DatasetNotFoundException $e) {
@@ -178,8 +169,7 @@ class PageController extends Controller
         return ! $content->isDeleted();
     }
 
-    public function deletePost(): void
-    {
+    public function deletePost(): void {
         $id = Request::getVar('id', null, 'int');
         do_event('before_delete_page');
 
@@ -201,13 +191,12 @@ class PageController extends Controller
         }
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HTTPStatusCode::OK,
+            HttpStatusCode::OK,
             ModuleHelper::buildActionURL('pages')
         );
     }
 
-    public function _deletePost(int $id): bool
-    {
+    public function _deletePost(int $id): bool {
         try {
             $content = ContentFactory::getByID($id);
         } catch (DatasetNotFoundException $e) {
@@ -222,29 +211,25 @@ class PageController extends Controller
         return $content->isDeleted();
     }
 
-    public function emptyTrash(): void
-    {
+    public function emptyTrash(): void {
         $this->_emptyTrash();
         Response::redirect(ModuleHelper::buildActionURL('pages'));
     }
 
-    public function _emptyTrash(): void
-    {
+    public function _emptyTrash(): void {
         do_event('before_empty_trash');
-        Content::emptyTrash();
+        AbstractContent::emptyTrash();
         do_event('after_empty_trash');
 
         CacheUtil::clearPageCache();
     }
 
-    public function getContentTypes(): void
-    {
+    public function getContentTypes(): void {
         $json = $this->_getContentTypes();
         RawJSONResult($json);
     }
 
-    public function _getContentTypes(): string
-    {
+    public function _getContentTypes(): string {
         return json_encode(
             DefaultContentTypes::getAll(),
             JSON_UNESCAPED_SLASHES
@@ -338,26 +323,23 @@ class PageController extends Controller
         );
     }
 
-    public function toggleShowPositions(): void
-    {
+    public function toggleShowPositions(): void {
         $this->_toggleShowPositions();
         HTTPStatusCodeResult(HttpStatusCode::OK);
     }
 
-    public function _toggleShowPositions(): bool
-    {
+    public function _toggleShowPositions(): bool {
         $settingsName = 'user/' . get_user_id() . '/show_positions';
         if (Settings::get($settingsName)) {
             Settings::delete($settingsName);
             return false;
         }
-            Settings::set($settingsName, '1');
-            return true;
+        Settings::set($settingsName, '1');
+        return true;
 
     }
 
-    public function nextFreeSlug(): void
-    {
+    public function nextFreeSlug(): void {
         $slug = $_REQUEST['slug'];
         $language = $_REQUEST['language'];
         $id = isset($_REQUEST['id']) ?
@@ -404,7 +386,7 @@ class PageController extends Controller
         $slug = Database::escapeValue($slug);
         $language = Database::escapeValue($language);
 
-        $sql = 'SELECT id FROM ' . tbname('content') .
+        $sql = 'SELECT id FROM ' . Database::tableName('content') .
                 " where slug='{$slug}' and language = '{$language}' ";
         if ($id > 0) {
             $sql .= "and id <> {$id}";
@@ -413,18 +395,13 @@ class PageController extends Controller
         return Database::getNumRows($result) <= 0;
     }
 
-    public function filterParentPages(): void
-    {
+    public function filterParentPages(): void {
         $lang = $_REQUEST['mlang'];
         $menu = $_REQUEST['mmenu'];
         $parent_id = Request::getVar('mparent', null, 'int');
 
         $html = $this->_filterParentPages($lang, $menu, $parent_id);
-        HTMLResult(
-            $html,
-            HttpStatusCode::OK,
-            HTMLMinify::OPTIMIZATION_ADVANCED
-        );
+        HTMLResult($html);
     }
 
     // FIXME: There should be no html code in controller
@@ -447,7 +424,7 @@ class PageController extends Controller
                 echo 'selected';
             }
             ?>>
-                    <?php echo esc($page['title']); ?>
+                    <?php esc($page['title']); ?>
 
                 <?php if (! Request::getVar('no_id')) {
                     ?>
@@ -461,15 +438,13 @@ class PageController extends Controller
         return ob_get_clean();
     }
 
-    public function getPages(): void
-    {
+    public function getPages(): void {
         $data = $this->_getPages();
         $json = json_encode($data, JSON_UNESCAPED_SLASHES);
         RawJSONResult($json);
     }
 
-    public function _getPages(): array
-    {
+    public function _getPages(): array {
         $start = Request::getVar('start', 0, 'int');
         $length = Request::getVar('length', 25, 'int');
         $draw = Request::getVar('draw', 1, 'int');
@@ -497,8 +472,7 @@ class PageController extends Controller
         return $data;
     }
 
-    public function _validateInput(): ?string
-    {
+    public function _validateInput(): ?string {
         $validator = new Validator();
         $validation = $validator->make($_POST + $_FILES, [
             'slug' => 'required',
@@ -530,36 +504,31 @@ class PageController extends Controller
 
     // this is used for the Link feature of the CKEditor
     // The user can select an internal page from a dropdown list for linking
-    public function getCKEditorLinkList(): void
-    {
+    public function getCKEditorLinkList(): void {
         $data = $this->_getCKEditorLinkList();
         JSONResult($data, HttpStatusCode::OK, true);
     }
 
-    public function _getCKEditorLinkList(): array
-    {
+    public function _getCKEditorLinkList(): array {
         return getAllPagesWithTitle();
     }
 
-    public function toggleFilters(): void
-    {
+    public function toggleFilters(): void {
         JSONResult($this->_toggleFilters());
     }
 
-    public function _toggleFilters(): bool
-    {
+    public function _toggleFilters(): bool {
         $settingsName = 'user/' . get_user_id() . '/show_filters';
         if (Settings::get($settingsName)) {
             Settings::delete($settingsName);
             return false;
         }
-            Settings::set($settingsName, '1');
-            return true;
+        Settings::set($settingsName, '1');
+        return true;
 
     }
 
-    public function _getLanguageSelection(): array
-    {
+    public function _getLanguageSelection(): array {
         $languages = getAllUsedLanguages();
 
         $selectItems = [];
@@ -581,8 +550,7 @@ class PageController extends Controller
         return $selectItems;
     }
 
-    public function _getTypeSelection(): array
-    {
+    public function _getTypeSelection(): array {
         $types = get_used_post_types();
         $selectItems = [];
         $selectItems[] = new ListItem(null, '[' . get_translation('all') . ']');
@@ -597,8 +565,7 @@ class PageController extends Controller
         return $selectItems;
     }
 
-    public function _getMenuSelection(): array
-    {
+    public function _getMenuSelection(): array {
         $menus = get_all_used_menus();
         $selectItems = [];
         $selectItems[] = new ListItem(null, '[' . get_translation('all') . ']');
@@ -613,8 +580,7 @@ class PageController extends Controller
         return $selectItems;
     }
 
-    public function _getCategorySelection(): array
-    {
+    public function _getCategorySelection(): array {
         $selectItems = [];
         $selectItems[] = new ListItem(null, '[' . get_translation('all') . ']');
 
@@ -667,8 +633,7 @@ class PageController extends Controller
         return $parentIds;
     }
 
-    public function getParentSelection(): void
-    {
+    public function getParentSelection(): void {
         $language = Request::getVar('language', null, 'str');
         $menu = Request::getVar('menu', null, 'str');
 
@@ -696,18 +661,18 @@ class PageController extends Controller
         return implode('', $selectItems);
     }
 
-    public function getParentPageId(): object
-    {
+    public function getParentPageId(): void {
         $id = Request::getVar('id', 0, 'int');
+
         try {
             JSONResult($this->_getParentPageId($id));
         } catch (DatasetNotFoundException $e) {
             HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
         }
+
     }
 
-    public function _getParentPageId(int $pageId): object
-    {
+    public function _getParentPageId(int $pageId): object {
         $page = ContentFactory::getByID($pageId);
 
         $obj = new stdClass();
@@ -715,8 +680,7 @@ class PageController extends Controller
         return $obj;
     }
 
-    public function _getBooleanSelection(): array
-    {
+    public function _getBooleanSelection(): array {
         return [
             new ListItem(null, '[' . get_translation('all') . ']'),
             new ListItem('1', get_translation('yes')),
@@ -835,7 +799,6 @@ class PageController extends Controller
             $model->image_url = Request::getVar('image_url', null, 'str');
         }
 
-
         if ($model instanceof Article) {
             $model->article_author_name = Request::getVar(
                 'article_author_name'
@@ -851,7 +814,6 @@ class PageController extends Controller
 
             $model->excerpt = Request::getVar('excerpt');
         }
-
 
         $permissionObjects = ['admins', 'group', 'owner', 'others'];
         foreach ($permissionObjects as $object) {
@@ -954,16 +916,14 @@ class PageController extends Controller
         }
     }
 
-    protected function validateInput(): void
-    {
+    protected function validateInput(): void {
         $validationErrors = $this->_validateInput();
         if ($validationErrors) {
             ExceptionResult($validationErrors, HttpStatusCode::UNPROCESSABLE_ENTITY);
         }
     }
 
-    protected function _getGroupAssignedLanguages(): array
-    {
+    protected function _getGroupAssignedLanguages(): array {
         $permissionChecker = new PermissionChecker(get_user_id());
         return array_map(
             static function($lang) {

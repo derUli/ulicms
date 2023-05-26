@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Helpers\DateTimeHelper;
 
 require_once getTemplateDirPath(get_theme()) . '/top.php';

@@ -4,27 +4,28 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use Exception;
 
 /**
  * This class contains utilities to deal with arrays
  */
-class ArrayHelper extends Helper
-{
+abstract class ArrayHelper extends Helper {
     /**
      * inserts an item before an index to an array
-     * @param array $input
+     *
+     * @param array<mixed> $input
      * @param int $index
-     * @param type $element
+     * @param mixed $element
      * @throws Exception
-     * @return array
+     *
+     * @return array<mixed>
      */
     public static function insertBefore(
         array $input,
         int $index,
-        $element
+        mixed $element
     ): array {
         if (! array_key_exists($index, $input)) {
             throw new Exception('Index not found');
@@ -45,11 +46,13 @@ class ArrayHelper extends Helper
 
     /**
      * inserts an item after an index to an array
-     * @param array $input
+     *
+     * @param array<mixed> $input
      * @param int $index
-     * @param type $element
+     * @param mixed $element
      * @throws Exception
-     * @return array
+     *
+     * @return array<mixed>
      */
     public static function insertAfter(
         array $input,
@@ -75,12 +78,11 @@ class ArrayHelper extends Helper
 
     /**
      * Checks if an array has a list of keys
-     * @param array|null $input
-     * @param array $keys
+     * @param array<mixed>|null $input
+     * @param string[] $keys
      * @return bool
      */
-    public static function hasMultipleKeys(?array $input, array $keys): bool
-    {
+    public static function hasMultipleKeys(?array $input, array $keys): bool {
         if (! $input) {
             return false;
         }

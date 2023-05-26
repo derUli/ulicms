@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Exceptions\DatasetNotFoundException;
 use App\Exceptions\UnknownContentTypeException;
 use App\Models\Content\TypeMapper;
 use App\Registries\LoggerRegistry;
 
 // this class contains methods to return one content model or an array of multiple content datasets
-class ContentFactory
-{
+class ContentFactory {
     // this methods returns the model of the current page
-    public static function getCurrentPage(): ?Content
-    {
+    public static function getCurrentPage(): ?AbstractContent {
         $slug = get_slug();
         $language = getCurrentLanguage(true);
         return ContentFactory::getBySlugAndLanguage(
@@ -21,10 +21,9 @@ class ContentFactory
         );
     }
 
-    public static function getByID(int $id): ?Content
-    {
+    public static function getByID(int $id): ?AbstractContent {
         $result = Database::query('SELECT `id`, `type` FROM `' .
-                        tbname('content') . '` where id = ' . $id);
+                        Database::tableName('content') . '` where id = ' . $id);
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
             return self::getContentObjectByID($dataset);
@@ -35,11 +34,11 @@ class ContentFactory
     public static function getBySlugAndLanguage(
         string $name,
         string $language
-    ): ?Content {
+    ): ?AbstractContent {
         $name = Database::escapeValue($name);
         $language = Database::escapeValue($language);
         $result = Database::query('SELECT id, `type` FROM `' .
-                        tbname('content') . "` where `slug` = '{$name}' "
+                        Database::tableName('content') . "` where `slug` = '{$name}' "
                         . "and `language` = '{$language}'");
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
@@ -49,10 +48,9 @@ class ContentFactory
                         . "{$name} and {$language}");
     }
 
-    public static function getAll(string $order = 'id'): array
-    {
+    public static function getAll(string $order = 'id'): array {
         $datasets = [];
-        $sql = 'SELECT id, `type` FROM ' . tbname('content') .
+        $sql = 'SELECT id, `type` FROM ' . Database::tableName('content') .
                 " ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -61,10 +59,9 @@ class ContentFactory
         return $datasets;
     }
 
-    public static function getAllRegular(string $order = 'id'): array
-    {
+    public static function getAllRegular(string $order = 'id'): array {
         $datasets = [];
-        $sql = 'SELECT id, `type` FROM ' . tbname('content') .
+        $sql = 'SELECT id, `type` FROM ' . Database::tableName('content') .
                 " where type not in ('link', 'language_link', 'node') ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -79,7 +76,7 @@ class ContentFactory
     ): array {
         $datasets = [];
         $language = Database::escapeValue($language);
-        $sql = 'SELECT id, `type` FROM ' . tbname('content') .
+        $sql = 'SELECT id, `type` FROM ' . Database::tableName('content') .
                 " where `language` = '{$language}' ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -119,7 +116,7 @@ class ContentFactory
     ): array {
         $menu = Database::escapeValue($menu);
         $datasets = [];
-        $sql = 'SELECT id, `type` FROM ' . tbname('content') .
+        $sql = 'SELECT id, `type` FROM ' . Database::tableName('content') .
                 " where `menu` = '{$menu}' ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -134,7 +131,7 @@ class ContentFactory
     ): array {
         $type = Database::escapeValue($type);
         $datasets = [];
-        $sql = 'SELECT id, `type` FROM ' . tbname('content')
+        $sql = 'SELECT id, `type` FROM ' . Database::tableName('content')
                 . " where `type` = '{$type}' ORDER BY {$order}";
         $result = Database::query($sql);
         while ($row = Database::fetchObject($result)) {
@@ -143,8 +140,7 @@ class ContentFactory
         return $datasets;
     }
 
-    public static function getAllWithComments(string $order = 'title'): array
-    {
+    public static function getAllWithComments(string $order = 'title'): array {
         $datasets = [];
         $sql = 'select type, a.id from {prefix}content a inner join '
                 . '{prefix}comments c on c.content_id = a.id group by '
@@ -169,7 +165,7 @@ class ContentFactory
         ?int $offset = null
     ): array {
         $datasets = [];
-        $sql = 'select id, `type` from ' . tbname('content') .
+        $sql = 'select id, `type` from ' . Database::tableName('content') .
                 ' where active = 1 and deleted_at is null and ';
 
         if ($language !== null && $language !== '') {
@@ -199,7 +195,7 @@ class ContentFactory
 
         $order_by = Database::escapeName($order_by);
 
-        if ($order_direction != 'desc') {
+        if ($order_direction !== 'desc') {
             $order_direction = 'asc';
         }
         $sql .= " order by {$order_by} {$order_direction}";
@@ -227,7 +223,7 @@ class ContentFactory
         $menu = Database::escapeValue($menu);
         $language = Database::escapeValue($language);
         $datasets = [];
-        $sql = 'SELECT id, `type` FROM ' . tbname('content') .
+        $sql = 'SELECT id, `type` FROM ' . Database::tableName('content') .
                 " where `menu` = '{$menu}' and language = '{$language}' "
                 . "ORDER BY {$order}";
 
@@ -290,8 +286,7 @@ class ContentFactory
         return $result;
     }
 
-    private static function getContentObjectByID(object $row): ?Content
-    {
+    private static function getContentObjectByID(object $row): ?AbstractContent {
         $retval = null;
         $type = $row->type;
         $mappings = TypeMapper::getMappings();

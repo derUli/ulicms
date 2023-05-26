@@ -1,11 +1,9 @@
 <?php
 
-class MetaDescriptionControllerTest extends \PHPUnit\Framework\TestCase
-{
+class MetaDescriptionControllerTest extends \PHPUnit\Framework\TestCase {
     private $defaultSettings = [];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->defaultSettings = [
             'default_language' => Settings::get('default_language'),
             'meta_description_de' => Settings::get('meta_description_de'),
@@ -14,8 +12,7 @@ class MetaDescriptionControllerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_POST = [];
 
         foreach ($this->defaultSettings as $key => $value) {
@@ -23,8 +20,7 @@ class MetaDescriptionControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSavePost(): void
-    {
+    public function testSavePost(): void {
         $_POST['meta_description_de'] = 'Die Meta Beschreibung';
         $_POST['meta_description_en'] = 'The Meta Description';
         Settings::set('default_language', 'en');

@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 add_translation('INSTALLATION', 'Installation');
 add_translation('TITLE_STEP_1', 'Sprache auswählen');
 add_translation('TITLE_STEP_2', 'Lizenzbedingungen akzeptieren');
@@ -38,8 +40,8 @@ add_translation('MYSQL_PREFIX', 'MySQL Präfix');
 add_translation('INSTALL_DEMO_DATA', 'Installiere zusätzliche Demodaten');
 add_translation('INSTALL_X_OF_Y', 'Installiere Datei %x% von %y%');
 add_translation('BUILD_DATABASE', 'Datenbank aufbauen');
-add_translation('CREATE_CMS_CONFIG_PHP', 'Erstelle CMSConfig.php');
-add_translation('WRITE_CMS_CONFIG_FAILED', 'Speichern der CMSConfig.php fehlgeschlagen.<br/>' . 'Bitte erstellen Sie die Datei CMSConfig.php und fügen Sie den folgenden Code darin ein.');
+add_translation('CREATE_CMS_CONFIG_PHP', 'Erstelle .env');
+add_translation('WRITE_CMS_CONFIG_FAILED', 'Speichern der .env fehlgeschlagen.<br/>' . 'Bitte erstellen Sie die Datei .env und fügen Sie den folgenden Inhalt darin ein.');
 add_translation('LAST_STEP', 'Dies ist der letzte Schritt der Installation.<br/>'
         . 'Bitte löschen Sie den "installer" Ordner von ihrem Server.<br/>'
         . 'Danach können Sie sich in UliCMS einloggen.');
@@ -49,5 +51,6 @@ add_translation('ACCEPT_LICNSE', 'Lizenz akzeptieren');
 add_translation('NEXT', 'Weiter');
 add_translation('THIS_PROCEDUDRE_WILL_TAKE_SOME_MINUTES', 'Dieser Vorgang kann einige Minuten dauern.');
 
-add_translation('TRANSLATION_PHP_MODULES', 'PHP Module');
 add_translation('TRANSLATION_PHP_VERSION', 'PHP >=');
+add_translation('TRANSLATION_IS_WRITABLE', 'ULICMS_ROOT ist beschreibbar');
+add_translation('TRANSLATION_PHP_MODULE', 'PHP Modul');

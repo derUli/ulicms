@@ -4,28 +4,24 @@ declare(strict_types=1);
 
 namespace App\Models\Users;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Utils\Mailer;
 use Database;
-use ModuleHelper;
 use SessionManager;
 use Settings;
 use Template;
-use ViewBag;
 
 /**
  * Reset admin user password
  */
-class PasswordReset
-{
+class PasswordReset {
     /**
      * Insert token to database
      * @param int $user_id
      * @return string
      */
-    public function addToken(int $user_id): string
-    {
+    public function addToken(int $user_id): string {
         $token = md5(uniqid() . (string)$user_id);
         $sql = 'INSERT INTO {prefix}password_reset (token, user_id) ' .
                 'values (?, ?)';
@@ -55,10 +51,10 @@ class PasswordReset
         string $firstname,
         string $lastname
     ): void {
-        ViewBag::set('url', $this->getPasswordResetLink($token));
-        ViewBag::set('firstname', $firstname);
-        ViewBag::set('lastname', $lastname);
-        ViewBag::set('ip', $ip);
+        \App\Storages\ViewBag::set('url', $this->getPasswordResetLink($token));
+        \App\Storages\ViewBag::set('firstname', $firstname);
+        \App\Storages\ViewBag::set('lastname', $lastname);
+        \App\Storages\ViewBag::set('ip', $ip);
 
         $message = Template::executeDefaultOrOwnTemplate('email/password_reset');
         $subject = get_translation('reset_password_subject');
@@ -74,8 +70,7 @@ class PasswordReset
      * @param string $token
      * @return string
      */
-    public function getPasswordResetLink(string $token): string
-    {
+    public function getPasswordResetLink(string $token): string {
         $url = getBaseFolderURL();
         $url = rtrim($url, '/');
 
@@ -83,7 +78,7 @@ class PasswordReset
             $url .= '/admin';
         }
 
-        $url .= '/' . ModuleHelper::buildMethodCallUrl(
+        $url .= '/' . \App\Helpers\ModuleHelper::buildMethodCallUrl(
             SessionManager::class,
             'resetPassword',
             "token={$token}"
@@ -95,8 +90,7 @@ class PasswordReset
      * Get all tokens
      * @return array
      */
-    public function getAllTokens(): array
-    {
+    public function getAllTokens(): array {
         $tokens = [];
         $result = Database::selectAll('password_reset');
 
@@ -112,8 +106,7 @@ class PasswordReset
      * @param int $user_id
      * @return array
      */
-    public function getAllTokensByUserId(int $user_id): array
-    {
+    public function getAllTokensByUserId(int $user_id): array {
         $tokens = [];
 
         $result = Database::selectAll(
@@ -133,8 +126,7 @@ class PasswordReset
      * @param string $token
      * @return object|null
      */
-    public function getTokenByTokenString(string $token): ?object
-    {
+    public function getTokenByTokenString(string $token): ?object {
         $sql = 'select * from {prefix}password_reset where token = ?';
 
         $args = [
@@ -155,8 +147,7 @@ class PasswordReset
      * @param string $token
      * @return void
      */
-    public function deleteToken(string $token): void
-    {
+    public function deleteToken(string $token): void {
         $sql = 'delete from {prefix}password_reset where token = ?';
         $args = [
             (string)$token

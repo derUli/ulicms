@@ -3,25 +3,23 @@
 $(document).ready(() => {
     const body = $("body");
 
-    $.ajaxSetup(
-            {
-                cache: false,
-                beforeSend: (jqXHR, settings) => {
-                    // set url to get in the general error handler
-                    jqXHR.url = settings.url;
-                },
-                error: (jqXHR) => {
-                    const errorMessage =
-                            `Error requesting ${jqXHR.url} - ${jqXHR.status} ${jqXHR.statusText}`;
-                    console.error(errorMessage);
-                    vanillaToast.error(errorMessage);
-                }
-            }
-    );
+    $.ajaxSetup({
+        cache: false,
+        beforeSend: (jqXHR, settings) => {
+            // set url to get in the general error handler
+            jqXHR.url = settings.url;
+        },
+        error: (jqXHR) => {
+            const errorMessage =
+                `Error requesting ${jqXHR.url} - ${jqXHR.status} ${jqXHR.statusText}`;
+            console.error(errorMessage);
+            vanillaToast.error(errorMessage);
+        }
+    });
 
     const token = $(body).data("csrf-token");
     $.ajaxPrefilter((options, originalOptions, jqXHR) => {
-        if (options.type.toLowerCase() === "post") {
+        if(options.type.toLowerCase() === "post") {
             // initialize `data` to empty string if it does not exist
             options.data = options.data || "";
             // add leading ampersand if `data` is non-empty
@@ -42,15 +40,14 @@ $(() => {
 
     // toggle hamburger menu
     $("#menu-toggle").click((e) => {
-        if ($(e.currentTarget).hasClass('is-open')) {
+        if($(e.currentTarget).hasClass('is-open')) {
             $(".mainmenu").slideUp();
             $(e.currentTarget).removeClass("is-open");
         } else {
             $(".mainmenu").slideDown();
             $(e.currentTarget).addClass("is-open");
         }
-    }
-    );
+    });
 
     bindAjaxLinks(body);
 
@@ -62,14 +59,14 @@ $(() => {
 
         // if there is no state this history entry
         // was a full page reload
-        if (!state) {
+        if(!state) {
             ajaxLoadSpinner.show();
             location.replace(document.location);
             return;
         }
         // if this page was loaded by ajax
         // use ajax again
-        if (typeof state.ajaxUrl === 'string') {
+        if(typeof state.ajaxUrl === 'string') {
             console.log('go back to', state.ajaxUrl);
             ajaxGoTo(state.ajaxUrl);
             return;
@@ -105,19 +102,19 @@ $(() => {
     $(".select-on-click").click((event) => {
         const target = event.target;
         copyTextToClipboard(
-                target.value,
-                () => vanillaToast.success(GlobalTranslation.CopiedToClipboardSuccess),
-                () => {
-            vanillaToast.error(GlobalTranslation.CopiedToClipboardFailed);
-            target.select();
-        }
+            target.value,
+            () => vanillaToast.success(GlobalTranslation.CopiedToClipboardSuccess),
+            () => {
+                vanillaToast.error(GlobalTranslation.CopiedToClipboardFailed);
+                target.select();
+            }
         );
     });
 
     // Disabled a link-buttons must not be clickable
     $("a").click((event) => {
         const target = $(event.currentTarget);
-        if ((target.hasClass("disabled") || target.attr("disabled")) && target.attr("href").length > 1) {
+        if((target.hasClass("disabled") || target.attr("disabled")) && target.attr("href").length > 1) {
             event.preventDefault();
         }
     });
@@ -137,18 +134,18 @@ $(() => {
     addCssClassToInputs($(body));
 
     // override save shortcut to trigger submit button
-    if ($("form button[type=submit], form input[type=submit]").length) {
+    if($("form button[type=submit], form input[type=submit]").length) {
         document.addEventListener(
-                "keydown",
-                (e) => {
-            if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)
-                    && e.keyCode === 83) {
-                e.preventDefault();
-                $("form button[type=submit], form input[type=submit]")
+            "keydown",
+            (e) => {
+                if((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) &&
+                    e.keyCode === 83) {
+                    e.preventDefault();
+                    $("form button[type=submit], form input[type=submit]")
                         .last()
                         .click();
-            }
-        }, false);
+                }
+            }, false);
     }
 
     $("input[type=checkbox].select-all").change(selectAllChecked);
@@ -158,7 +155,7 @@ $(() => {
     $("input[type=checkbox]").each((index, target) => {
         const item = $(target).data("select-all-checkbox");
         const group = $(target).data("checkbox-group");
-        if (item !== null && group !== null) {
+        if(item !== null && group !== null) {
             checkSelectAllIfAllChecked(item, group);
         }
     });
@@ -166,9 +163,9 @@ $(() => {
     // scroll to the given anchor
     const params = new URLSearchParams(location.search);
     const jumpTo = params.get('jumpto');
-    if (jumpTo && jumpTo.length > 0) {
+    if(jumpTo && jumpTo.length > 0) {
         const anchor = document.querySelector(`#${jumpTo}`);
-        if (anchor) {
+        if(anchor) {
             zenscroll.to(anchor);
         }
     }
@@ -190,7 +187,6 @@ $(() => {
         step: 30
     });
 
-
     // User has to confirm logout
     $("a.backend-menu-item-logout").click((event) => {
         event.preventDefault();
@@ -199,35 +195,17 @@ $(() => {
 
         const url = $(event.target).attr("href");
         bootbox.confirm(`${MenuTranslation.Logout}?`, (result) => {
-            if (result) {
+            if(result) {
                 location.href = url;
             }
         });
     });
 
-    // show a scroll-to-top arrow
-    // if the scroll viewport isn't at top of the page
-    $(window).scroll(() => {
-        if ($(window).scrollTop() > 0) {
-            $("#scroll-to-top").fadeIn();
-        } else {
-            $("#scroll-to-top").fadeOut();
-        }
-    });
-
-    // scroll to top arrow at bottom right
-    $("#scroll-to-top").click((event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        zenscroll.toY(0);
-    });
-
-
     $.fn.toggleVisibility = function (state) {
         return this.each(function () {
             $(this).css("visibility", state ? "visible" :
-                    (state === false ? "hidden" :
-                            $(this).css("visibility") === "hidden" ? "visible" : "hidden"));
+                (state === false ? "hidden" :
+                    $(this).css("visibility") === "hidden" ? "visible" : "hidden"));
         });
     };
 

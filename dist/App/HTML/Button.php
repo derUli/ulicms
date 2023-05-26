@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\ButtonType;
-use ModuleHelper;
 
 /**
  * This class contains helper methods to build Bootstrap buttons
  * See https://getbootstrap.com/docs/3.3/components/
  */
-class Button
-{
+class Button {
     /**
-     * Generates Button
+     * Generate Button
+     *
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
+     *
      * @param bool $allowHtml
+     *
      * @return string
      */
     public static function button(
@@ -38,7 +39,7 @@ class Button
             $htmlAttributes['class'] = ButtonType::TYPE_BASIC;
         }
 
-        $attributesHtml = ModuleHelper::buildHTMLAttributesFromArray(
+        $attributesHtml = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray(
             $htmlAttributes
         );
 
@@ -46,11 +47,14 @@ class Button
     }
 
     /**
-     * Generates default button
+     * Generate default button
+     *
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
+     *
      * @param bool $allowHtml
+     *
      * @return string
      */
     public static function default(
@@ -67,11 +71,13 @@ class Button
     }
 
     /**
-     * Generates primary button
+     * Generate primary button
+     *
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
      * @param bool $allowHtml
+     *
      * @return string
      */
     public static function primary(
@@ -88,12 +94,14 @@ class Button
     }
 
     /**
-     * Generates success button
+     * Generate success button
+     *
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
      * @param bool $allowHtml
-     * @return type
+     *
+     * @return string
      */
     public static function success(
         string $text,
@@ -109,11 +117,13 @@ class Button
     }
 
     /**
-     * Generates info button
+     * Generate info button
+     *
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
      * @param bool $allowHtml
+     *
      * @return string
      */
     public static function info(
@@ -130,11 +140,13 @@ class Button
     }
 
     /**
-     * Generates warning button
+     * Generate warning button
+     *
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
      * @param bool $allowHtml
+     *
      * @return string
      */
     public static function warning(
@@ -151,11 +163,13 @@ class Button
     }
 
     /**
-     * Generates danger button
+     * Generate danger button
+     *
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
      * @param bool $allowHtml
+     *
      * @return string
      */
     public static function danger(
@@ -172,11 +186,13 @@ class Button
     }
 
     /**
-     * Generates link button
+     * Generate link button
+     *
      * @param string $text
      * @param string $type
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
      * @param bool $allowHtml
+     *
      * @return string
      */
     public static function link(

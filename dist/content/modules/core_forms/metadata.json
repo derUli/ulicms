@@ -1,5 +1,5 @@
 {
-    "version": "2023.2",
+    "version": "2023.3",
     "source": "core",
     "embed": false,
     "shy": false,
@@ -18,6 +18,11 @@
         "forms": "templates/list.php",
         "forms_new": "templates/new.php",
         "forms_edit": "templates/edit.php"
+    },
+    "action_permissions": {
+        "forms": "forms",
+        "forms_new": "forms_create",
+        "forms_edit": "forms_edit"
     },
     "objects": {
         "Forms": "objects/forms.php"

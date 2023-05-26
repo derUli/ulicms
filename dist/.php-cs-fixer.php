@@ -1,5 +1,7 @@
 <?php
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 $config = new PhpCsFixer\Config();
 
 $config
@@ -57,7 +59,7 @@ $config
     // There should not be an empty `return` statement at the end of a function.
     'no_useless_return' => true,
     // Ordering `use` statements.
-    'ordered_imports' => true,
+    'ordered_imports' => ['imports_order' => ['class', 'function', 'const'], 'sort_algorithm' => 'alpha'],
     // Arrays should be formatted like function/method arguments, without leading or trailing single line space.
     'trim_array_spaces' => true,
     // There should not be space before or after object operators `->` and `?->`.
@@ -270,13 +272,35 @@ $config
     'no_break_comment' => ['comment_text'=>'Intentionally fall through'],
     // Write conditions in Yoda style (`true`), non-Yoda style (`['equal' => false, 'identical' => false, 'less_and_greater' => false]`) or ignore those conditions (`null`) based on configuration.
     'yoda_style' => false,
+    // Add leading \ before function invocation to speed up resolving.
     'native_function_invocation' => false,
+    // Replace non multibyte-safe functions with corresponding mb function.
+    'mb_str_functions' => false,
+    // Replace strpos() calls with str_starts_with() or str_contains() if possible.
+    'modernize_strpos' => true,
+    // Putting blank lines between use statement groups.
+    'blank_line_between_import_groups' => true,
+    // Code MUST use configured indentation type.
+    'indentation_type'=> true,
+    // Each statement must be indented.
+    'statement_indentation' => true,
+    // Curly braces must be placed as configured.
+    'curly_braces_position' => [
+        'control_structures_opening_brace' => 'same_line',
+        'functions_opening_brace' => 'same_line',
+        'anonymous_functions_opening_brace' => 'same_line',
+        'classes_opening_brace' => 'same_line',
+        'anonymous_classes_opening_brace' => 'same_line',
+        'allow_single_line_empty_anonymous_classes' => true,
+        'allow_single_line_anonymous_functions' => true
+    ],
+    // Removes extra blank lines and/or blank lines following configuration.
+    'no_extra_blank_lines' => ['tokens' => ['extra']]
     ]);
 
 return $config->setFinder(
     PhpCsFixer\Finder::create()
     ->in(__DIR__)
-        ->exclude(__DIR__ .'fm')
-        ->exclude(__DIR__ .'configurations')
+        ->exclude(__DIR__ .'/admin/fm')
         ->exclude(__DIR__ .'/vendor')
 );

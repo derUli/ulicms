@@ -3,34 +3,34 @@
 require_once __DIR__ . '/RoboTestFile.php';
 require_once __DIR__ . '/RoboTestBase.php';
 
-class RoboTest extends RoboTestBase
-{
-    protected function tearDown(): void
-    {
+class RoboTest extends RoboTestBase {
+    protected function tearDown(): void {
         if ($this->shouldDropDbOnShutdown()) {
             $this->resetDb();
         }
     }
 
-    public function testTestsRun()
-    {
+    /**
+     * @medium
+     */
+    public function testTestsRun(): void {
         if (! $this->shouldDropDbOnShutdown()) {
             $this->markTestSkipped();
         }
 
-        $cfg = new CMSConfig();
-        Database::dropSchema($cfg->db_database);
+        Database::dropSchema($_ENV['DB_DATABASE']);
 
-        putenv('ULICMS_ENVIRONMENT=' . get_environment());
+        putenv('APP_ENV=' . get_environment());
 
         $actual = $this->runRoboCommand(
             [
                 'tests:run',
-                'tests/environment/UliCMSVersionTest.php'
+                'tests/Unit/App/UliCMS/UliCMSVersionTest.php'
             ]
         );
+
         $this->assertStringContainsString(
-            'OK (7 tests, 47 assertions)',
+            'OK (7 tests, 45 assertions)',
             $actual
         );
     }

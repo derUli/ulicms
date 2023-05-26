@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace App\Models\Content;
 
-use Database;
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use function db_escape;
-use function db_fetch_object;
-use function db_num_rows;
-use function db_query;
+use Database;
 
 // Version Control System for pages
 // tracks content changes
-class VCS
-{
+class VCS {
     public static function createRevision(
         int $content_id,
         string $content,
@@ -28,8 +24,7 @@ class VCS
         );
     }
 
-    public static function getRevisionByID(int $history_id): ?object
-    {
+    public static function getRevisionByID(int $history_id): ?object {
         $history_id = $history_id;
         $result = Database::pQuery(
             'SELECT * FROM `{prefix}history` '
@@ -43,16 +38,16 @@ class VCS
         return null;
     }
 
-    public static function restoreRevision(int $history_id): bool
-    {
-        $result = db_query('SELECT * FROM ' . tbname('history') .
+    public static function restoreRevision(int $history_id): bool {
+        $result = Database::query('SELECT * FROM ' . Database::tableName('history') .
                 ' WHERE id = ' . $history_id);
-        if (db_num_rows($result) > 0) {
-            $row = db_fetch_object($result);
+
+        if (Database::getNumRows($result) > 0) {
+            $row = Database::fetchObject($result);
             $content_id = (int)$row->content_id;
             $lastmodified = time();
-            $content = db_escape($row->content);
-            return db_query('UPDATE ' . tbname('content') .
+            $content = Database::escapeValue($row->content);
+            return Database::query('UPDATE ' . Database::tableName('content') .
                     " SET content='{$content}', lastmodified = {$lastmodified} "
                     . "where id = {$content_id}");
         }
@@ -64,10 +59,10 @@ class VCS
         string $order = 'date DESC'
     ): array {
         $content_id = (int)$content_id;
-        $result = db_query('SELECT * FROM ' . tbname('history')
+        $result = Database::query('SELECT * FROM ' . Database::tableName('history')
                 . ' WHERE content_id = ' . $content_id . ' ORDER BY ' . $order);
         $retval = [];
-        while ($row = db_fetch_object($result)) {
+        while ($row = Database::fetchObject($result)) {
             $retval[] = $row;
         }
         return $retval;

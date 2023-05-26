@@ -5,33 +5,28 @@ declare(strict_types=1);
 require_once 'RoboFile.php';
 require_once __DIR__ . '/RoboTestFile.php';
 
-abstract class RoboTestBase extends \PHPUnit\Framework\TestCase
-{
-    protected function runRoboCommand(array $command): string
-    {
+use App\Helpers\StringHelper;
+
+class RoboTestBase extends \PHPUnit\Framework\TestCase {
+    protected function runRoboCommand(array $command): string {
         $runner = new Robo\Runner(RoboTestFile::class);
-        array_unshift($command, 'vendor/bin/robo');
+        array_unshift($command, Path::resolve('ULICMS_ROOT/vendor/bin/robo'));
         ob_start();
         $runner->execute($command);
         return trim(ob_get_clean());
     }
 
-    protected function shouldDropDbOnShutdown(): bool
-    {
-        $cfg = new CMSConfig();
-        return isset($cfg->dbmigrator_drop_database_on_shutdown) &&
-                $cfg->dbmigrator_drop_database_on_shutdown;
+    protected function shouldDropDbOnShutdown(): bool {
+        return isset($_ENV['DBMIGRATOR_DROP_DATABASE_ON_SHUTDOWN']) && $_ENV['DBMIGRATOR_DROP_DATABASE_ON_SHUTDOWN'];
     }
 
-    protected function resetDb()
-    {
-        $cfg = new CMSConfig();
-        $additionalSql = is_array($cfg->dbmigrator_initial_sql_files) ?
-                $cfg->dbmigrator_initial_sql_files : [];
+    protected function resetDb(): void {
+        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? StringHelper::splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
+        $additionalSql = array_map('trim', $additionalSql);
 
-        Database::dropSchema($cfg->db_database);
+        Database::dropSchema($_ENV['DB_DATABASE']);
         Database::setupSchemaAndSelect(
-            $cfg->db_database,
+            $_ENV['DB_DATABASE'],
             $additionalSql
         );
     }

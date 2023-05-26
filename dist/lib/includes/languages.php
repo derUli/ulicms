@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-use App\Security\PermissionChecker;
-use Negotiation\LanguageNegotiator;
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
+use App\Security\Permissions\PermissionChecker;
 
 /**
- * Get all languages that have  content
- * @return array
+ * Get all languages that have content
+ *
+ * @return string[]
  */
-function getAllUsedLanguages(): array
-{
+function getAllUsedLanguages(): array {
     $languages = [];
     $sql = 'select language from `{prefix}content` where active = 1 '
             . 'group by language order by language';
@@ -22,31 +23,22 @@ function getAllUsedLanguages(): array
 }
 
 /**
- * Get prefered language based on Accept-Language http Header
- * @param array $priorities
- * @param string|null $http_accept_language
- * @return type
- */
-function get_prefered_language(
-    array $priorities,
-    ?string $http_accept_language
-) {
-    $negotiator = new LanguageNegotiator();
-    return $negotiator->getBest($http_accept_language, $priorities)->getType();
-}
-
-/**
  * Get path to a UliCMS core language file
+ *
  * @param string $lang
+ *
  * @return string
  */
-function getLanguageFilePath(string $lang = 'de'): string
-{
+function getLanguageFilePath(string $lang = 'de'): string {
     return ULICMS_ROOT . '/lang/' . $lang . '.php';
 }
 
-function getAvailableBackendLanguages(): array
-{
+/**
+ * Get available backend languages
+ *
+ * @return string[]
+ */
+function getAvailableBackendLanguages(): array {
     $langdir = ULICMS_ROOT . '/lang/';
     $list = scandir($langdir);
     sort($list);
@@ -61,8 +53,7 @@ function getAvailableBackendLanguages(): array
     return $retval;
 }
 
-function getSystemLanguage(): string
-{
+function getSystemLanguage(): string {
     if (isset($_SESSION['system_language'])) {
         $lang = $_SESSION['system_language'];
     } elseif (isset($_SESSION['language'])) {
@@ -78,8 +69,7 @@ function getSystemLanguage(): string
     return $lang;
 }
 
-function getDomainByLanguage($givenLanguage): ?string
-{
+function getDomainByLanguage($givenLanguage): ?string {
     $domainMapping = Settings::get('domain_to_language');
     $domainMapping = Settings::mappingStringToArray($domainMapping);
     foreach ($domainMapping as $domain => $language) {
@@ -90,20 +80,12 @@ function getDomainByLanguage($givenLanguage): ?string
     return null;
 }
 
-function getLanguageByDomain($givenDomain): ?string
-{
-    $domainMapping = Settings::get('domain_to_language');
-    $domainMapping = Settings::mappingStringToArray($domainMapping);
-    foreach ($domainMapping as $domain => $language) {
-        if ($givenDomain == $domain) {
-            return $language;
-        }
-    }
-    return null;
-}
-
-function setLanguageByDomain(): bool
-{
+/**
+ * Set language by domain (Domain2Language Mapping)
+ *
+ * @return bool
+ */
+function setLanguageByDomain(): bool {
     $domainMapping = Settings::get('domain_to_language');
     $domainMapping = Settings::mappingStringToArray($domainMapping);
 
@@ -122,68 +104,67 @@ function setLanguageByDomain(): bool
     return false;
 }
 
-function getLanguageNameByCode(string $code): string
-{
-    $result = db_query(
-        'SELECT name FROM `' . tbname('languages') .
-        "` WHERE language_code = '" . db_escape($code) . "'"
+/**
+ * Get language name by code
+ *
+ * @param string $code
+ *
+ * @return string
+ */
+function getLanguageNameByCode(string $code): string {
+    $result = Database::query(
+        'SELECT name FROM `' . Database::tableName('languages') .
+        "` WHERE language_code = '" . Database::escapeValue($code) . "'"
     );
     $retval = $code;
-    if (db_num_rows($result) > 0) {
-        $dataset = db_fetch_object($result);
+    if (Database::getNumRows($result) > 0) {
+        $dataset = Database::fetchObject($result);
         $retval = $dataset->name;
     }
 
     return $retval;
 }
 
-function setLocaleByLanguage(): array
-{
-    $locale = [];
-
-    $var = (is_admin_dir() && isset($_SESSION['system_language'])) ?
-            'locale_' . $_SESSION['system_language'] :
-            'locale_' . getFrontendLanguage();
-
-    $localeSetting = Settings::get($var) ?: Settings::get('locale');
-
-    if ($localeSetting) {
-        $locale = splitAndTrim($localeSetting);
-        array_unshift($locale, LC_ALL);
-    }
-
-    @call_user_func_array('setlocale', $locale);
-    return $locale;
-}
-
 // Returns the language code of the current language
 // If $current is true returns language of the current page
 // else it returns $_SESSION['language'];
-function getCurrentLanguage($current = false): string
-{
-    if (Vars::get('current_language_' . strbool($current))) {
-        return Vars::get('current_language_' . strbool($current));
+function getCurrentLanguage($current = false): string {
+    if (\App\Storages\Vars::get('current_language_' . strbool($current))) {
+        return \App\Storages\Vars::get('current_language_' . strbool($current));
     }
+
     if ($current) {
-        $result = db_query('SELECT language FROM ' . tbname('content') .
+        $result = Database::query('SELECT language FROM ' . Database::tableName('content') .
                 " WHERE slug='" . get_slug() . "'");
-        if (db_num_rows($result) > 0) {
-            $dataset = db_fetch_object($result);
+        if (Database::getNumRows($result) > 0) {
+            $dataset = Database::fetchObject($result);
             $language = $dataset->language;
-            Vars::set('current_language_' . strbool($current), $language);
+            \App\Storages\Vars::set('current_language_' . strbool($current), $language);
         }
     }
 
     if (isset($_SESSION['language'])) {
         return basename($_SESSION['language']);
     }
-        return basename(Settings::get('default_language'));
 
+    return basename(Settings::get('default_language'));
+}
+
+/**
+ * Get current frontend language or default langauge
+ *
+ * @return string
+ */
+function getFrontendLanguage() {
+    $domainLanguage = get_domain() ?
+            getDomainByLanguage(get_domain()) : null;
+    $fallbackLanguage = $domainLanguage ?: Settings::get('language');
+
+    return $_SESSION['language'] ?? $fallbackLanguage;
 }
 
 // Sprachcodes abfragen und als Array zurück geben
-function getAllLanguages($filtered = false): array
-{
+function getAllLanguages($filtered = false): array {
     $languageCodes = [];
 
     if ($filtered) {
@@ -198,15 +179,15 @@ function getAllLanguages($filtered = false): array
         }
     }
 
-    if (Vars::get('all_languages') !== null) {
-        return Vars::get('all_languages');
+    if (\App\Storages\Vars::get('all_languages') !== null) {
+        return \App\Storages\Vars::get('all_languages');
     }
-    $result = db_query('SELECT language_code FROM `' . tbname('languages') .
+    $result = Database::query('SELECT language_code FROM `' . Database::tableName('languages') .
             '` ORDER BY language_code');
 
-    while ($row = db_fetch_object($result)) {
+    while ($row = Database::fetchObject($result)) {
         $languageCodes[] = $row->language_code;
     }
-    Vars::set('all_languages', $languageCodes);
+    \App\Storages\Vars::set('all_languages', $languageCodes);
     return $languageCodes;
 }

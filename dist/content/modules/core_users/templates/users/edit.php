@@ -1,18 +1,24 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Constants\HtmlEditor;
 use App\Constants\RequestMethod;
 use App\Helpers\DateTimeHelper;
-use function App\HTML\imageTag;
 use App\HTML\Input;
-
+use App\Security\Permissions\PermissionChecker;
 use App\Translations\JSTranslation;
 
-$permissionChecker = new ACL();
+$groups = Group::getAll('name');
+
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
+use function App\HTML\imageTag;
+
 if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermission('users_edit')) || ($_GET['id'] == $_SESSION['login_id'])) {
     $id = (int)$_GET['id'];
     $languages = getAvailableBackendLanguages();
-    $result = db_query('SELECT * FROM ' . tbname('users') . " WHERE id='{$id}'");
+    $result = Database::query('SELECT * FROM ' . Database::tableName('users') . " WHERE id='{$id}'");
     $user = new User($id);
     $secondaryGroups = $user->getSecondaryGroups();
     $secondaryGroupIds = [];
@@ -20,14 +26,14 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
         $secondaryGroupIds[] = $group->getID();
     }
 
-    $backUrl = $permissionChecker->hasPermission('users_edit') ? ModuleHelper::buildActionURL('admins') : ModuleHelper::buildActionURL('home');
+    $backUrl = $permissionChecker->hasPermission('users_edit') ? \App\Helpers\ModuleHelper::buildActionURL('admins') : \App\Helpers\ModuleHelper::buildActionURL('home');
     ?>
     <div class="btn-toolbar">
         <a href="<?php echo $backUrl; ?>"
            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </div>
     <?php
-    while ($row = db_fetch_object($result)) {
+    while ($row = Database::fetchObject($result)) {
         ?>
         <div class="field voffset2">
             <?php
@@ -40,7 +46,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
         ?>
         </div>
         <?php
-        echo ModuleHelper::buildMethodCallUploadForm(
+        echo \App\Helpers\ModuleHelper::buildMethodCallUploadForm(
             UserController::class,
             'update',
             [],
@@ -145,10 +151,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
             </div>
         </div>
         <?php
-        $permissionChecker = new ACL();
         if ($permissionChecker->hasPermission('users')) {
-            $allGroups = $permissionChecker->getAllGroups();
-            asort($allGroups);
             ?>
             <div class="field">
                 <strong class="field-label">
@@ -162,36 +165,36 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
                     }
             ?>>[<?php translate('none'); ?>]</option>
                             <?php
-                    foreach ($allGroups as $key => $value) {
+                    foreach ($groups as $group) {
                         ?>
                         <option
-                            value="<?php echo $key; ?>"
+                            value="<?php echo $group->getID(); ?>"
                             <?php
-                            if ((int)($row->group_id) == $key) {
+                            if ((int)($row->group_id) == $group->getID()) {
                                 echo 'selected';
                             }
                         ?>>
-                                <?php esc($value); ?>
+                                <?php esc($group->getName()); ?>
                         </option>
                     <?php }
                     ?>
                 </select>
             </div>
-            <div class="field"
+            <div class="field">
                  <strong class="field-label">
                      <?php translate('secondary_groups'); ?>
             </strong>
             <select name="secondary_groups[]" multiple>
                 <?php
-                foreach ($allGroups as $key => $value) {
-                    ?>
+                    foreach ($groups as $group) {
+                        ?>
                     <option
-                        value="<?php echo $key; ?>"
-                        <?php echo in_array($key, $secondaryGroupIds) ? 'selected' : ''; ?>>
-                            <?php echo _esc($value); ?>
+                        value="<?php echo $group->getID(); ?>"
+                        <?php echo in_array($group->getID(), $secondaryGroupIds) ? 'selected' : ''; ?>>
+                            <?php esc($group->getName()); ?>
                     </option>
                 <?php }
-                ?>
+                    ?>
             </select>
             </div>
         <?php }
@@ -304,7 +307,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
                 <?php translate('save'); ?></button>
         </div>
         <?php
-        echo ModuleHelper::endForm();
+        echo \App\Helpers\ModuleHelper::endForm();
         break;
     }
     ?>
@@ -314,7 +317,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
     $translation->render();
 
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
+        \App\Helpers\ModuleHelper::buildRessourcePath(
             'core_users',
             'js/form.js'
         )

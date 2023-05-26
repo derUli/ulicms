@@ -1,10 +1,12 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\HTML\Link;
 
-$model = ViewBag::get('model');
+$model = \App\Storages\ViewBag::get('model');
 ?>
-<?php $model = ViewBag::get('model'); ?>
+<?php $model = \App\Storages\ViewBag::get('model'); ?>
 <h3><?php esc($model->name); ?></h3>
 <?php if ($model->version) { ?>
 

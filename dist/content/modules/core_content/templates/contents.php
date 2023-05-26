@@ -1,5 +1,11 @@
 <?php
-$permissionChecker = new ACL();
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Security\Permissions\PermissionChecker;
+
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('pages')
         || $permissionChecker->hasPermission('banners')
         || $permissionChecker->hasPermission('categories')

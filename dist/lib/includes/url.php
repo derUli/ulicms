@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 /**
  * Returns path to minified jQuery
+ *
  * @return string
  */
-function get_jquery_url(): string
-{
+function get_jquery_url(): string {
     $url = 'node_modules/jquery/dist/jquery.min.js';
     $url = apply_filter($url, 'jquery_url');
     return $url;
@@ -15,11 +17,12 @@ function get_jquery_url(): string
 
 /**
  * Gets absolute shortlink URL in the foramt https://example.org/?goid=123
- * @param type $id
+ *
+ * @param int $id
+ *
  * @return string|null
  */
-function get_shortlink($id = null): ?string
-{
+function get_shortlink(?int $id = null): ?string {
     $shortlink = null;
     $id = $id ?: get_ID();
 
@@ -33,10 +36,10 @@ function get_shortlink($id = null): ?string
 
 /**
  * Gets canonciel URL for current page
+ *
  * @return string
  */
-function get_canonical(): string
-{
+function get_canonical(): string {
     $canonical = getBaseFolderURL() . '/';
     if (! is_home()) {
         $canonical .= buildSEOUrl();
@@ -48,12 +51,11 @@ function get_canonical(): string
 
 // TODO: this code works but looks like shit
 // rewrite this method
-function getBaseFolderURL(?string $suffix = null): string
-{
+function getBaseFolderURL(?string $suffix = null): string {
     $s = empty($_SERVER['HTTPS']) ? '' : (($_SERVER['HTTPS'] == 'on') ?
             's' : '');
     $sp = strtolower($_SERVER['SERVER_PROTOCOL']);
-    $protocol = substr($sp, 0, strpos($sp, '/')) . $s;
+    $protocol = substr($sp, 0, strpos($sp, '/') ?: 0) . $s;
     $port = ($_SERVER['SERVER_PORT'] == '80'
             || $_SERVER['SERVER_PORT'] == '443') ?
             '' : (':' . $_SERVER['SERVER_PORT']);
@@ -74,8 +76,7 @@ function getBaseFolderURL(?string $suffix = null): string
 
 // This Returns the current full URL
 // for example: http://www.homepage.de/news?single=title
-function getCurrentURL(): string
-{
+function getCurrentURL(): string {
     return getBaseFolderURL(get_request_uri());
 }
 
@@ -90,16 +91,16 @@ function getCurrentURL(): string
  */
 function buildSEOUrl(
     ?string $page = null,
-    ?string $redirection = null,
-    // TODO: Obsoleten Parameter $format entfernen
-    ?string $format = null
-) {
+    ?string $redirection = null
+): string {
     if ($redirection) {
         return $redirection;
     }
+
     if (! $page) {
         $page = get_slug();
     }
+
     if ($page === get_frontpage()) {
         return './';
     }

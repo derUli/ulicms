@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace App\Translations;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 /**
  * This class contains util methods for translation stuff
  */
-class Translation
-{
+class Translation {
     /**
      * Load languages files of all modules
      * @param string $lang
      * @return void
      */
-    public static function loadAllModuleLanguageFiles(string $lang): void
-    {
+    public static function loadAllModuleLanguageFiles(string $lang): void {
         $modules = getAllModules();
 
         foreach ($modules as $module) {
@@ -45,8 +43,7 @@ class Translation
      * @param string $lang
      * @return void
      */
-    public static function loadCurrentThemeLanguageFiles(string $lang): void
-    {
+    public static function loadCurrentThemeLanguageFiles(string $lang): void {
         $files = [
             getTemplateDirPath(get_theme(), true) . "/lang/{$lang}.php",
             getTemplateDirPath(get_theme(), true) . '/lang/en.php'

@@ -2,20 +2,22 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
+use App\Exceptions\AccessDeniedException;
 use App\Registries\LoggerRegistry;
 
 /**
  * Default exception handler
- * @param AccessDeniedException $exception
+ *
+ * @param Throwable $exception
+ *
+ * @return void
  */
-function exception_handler(Throwable $exception): void
-{
+function exception_handler(Throwable $exception): void {
     defined('EXCEPTION_OCCURRED') || define('EXCEPTION_OCCURRED', true);
 
-    $cfg = class_exists('CMSConfig') ? new CMSConfig() : null;
-    $debug = isset($cfg->debug) ? (bool)$cfg->debug : true;
-
-    $message = $debug ?
+    $message = isset($_ENV['DEBUG']) && $_ENV['DEBUG'] ?
             $exception : 'An error occurred! See exception_log for details. 😞';
     $logger = LoggerRegistry::get('exception_log');
 
@@ -26,10 +28,14 @@ function exception_handler(Throwable $exception): void
     $httpStatus = $exception instanceof AccessDeniedException ?
             HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
 
-    if (function_exists('HTMLResult') && class_exists('Template') && ! headers_sent() && function_exists('get_theme')) {
-        ViewBag::set('exception', nl2br(_esc($exception)));
-        HTMLResult(Template::executeDefaultOrOwnTemplate('exception.php'), $httpStatus);
-    }
+    esc("{$message}\n");
+}
 
-    echo "{$message}\n";
+/**
+ * Check if debug mode is enabled
+ *
+ * @return bool
+ */
+function is_debug_mode(): bool {
+    return isset($_ENV['DEBUG']) && $_ENV['DEBUG'];
 }

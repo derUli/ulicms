@@ -3,16 +3,13 @@
 use App\Models\Content\Categories;
 use App\Models\Media\Audio;
 
-class AudioControllerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class AudioControllerTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         $_POST = [];
         Database::deleteFrom('audio', "name like 'test-audio-%'", true);
     }
 
-    public function testUpdatePostReturnsTrue(): void
-    {
+    public function testUpdatePostReturnsTrue(): void {
         $categories = Categories::getAllCategories();
         $first = $categories[0];
 
@@ -42,8 +39,7 @@ class AudioControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($first->getId(), $audio->getCategoryId());
     }
 
-    public function testUpdatePostReturnsFalse(): void
-    {
+    public function testUpdatePostReturnsFalse(): void {
         $_POST = [
             'name' => 'test-audio-2',
             'mp3_file' => 'test-audio-2.mp3',

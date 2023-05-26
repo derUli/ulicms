@@ -4,19 +4,24 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use Request;
 use Settings;
-
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
 
 /**
  * Class with methods for checking comments for spam
  */
-class AntiSpamHelper extends Helper
-{
-    // checking if this Country is blocked by spamfilter
-    // blocking works by the domain extension of the client's
-    // hostname
+abstract class AntiSpamHelper extends Helper {
+    /**
+     * Checking if this Country is blocked by spamfilter
+     * blocking works by the domain extension of the client's Hostname
+     *
+     * @param ?string $ip
+     * @param ?array<string> $country_blacklist
+     *
+     * @return bool
+     */
     public static function isCountryBlocked(
         ?string $ip = null,
         ?array $country_blacklist = null
@@ -36,7 +41,7 @@ class AntiSpamHelper extends Helper
             return false;
         }
 
-        @$hostname = gethostbyaddr($ip);
+        @$hostname = gethostbyaddr((string)$ip);
 
         if (! $hostname || $hostname === $ip) {
             return false;
@@ -61,8 +66,7 @@ class AntiSpamHelper extends Helper
      * @param string|null $str
      * @return bool
      */
-    public static function isChinese(?string $str): bool
-    {
+    public static function isChinese(?string $str): bool {
         if (! $str) {
             return false;
         }
@@ -75,8 +79,7 @@ class AntiSpamHelper extends Helper
      * @param string|null $str
      * @return bool
      */
-    public static function isCyrillic(?string $str): bool
-    {
+    public static function isCyrillic(?string $str): bool {
         if (! $str) {
             return false;
         }
@@ -89,8 +92,7 @@ class AntiSpamHelper extends Helper
      * @param string|null $str
      * @return bool
      */
-    public static function isRtl(?string $str): bool
-    {
+    public static function isRtl(?string $str): bool {
         if (! $str) {
             return false;
         }
@@ -101,14 +103,16 @@ class AntiSpamHelper extends Helper
 
     /**
      * Check if the string contains forbidden words
+     *
      * @param string|null $str
-     * @param array $words_blacklist
-     * @return type
+     * @param array<string> $words_blacklist
+     *
+     * @return ?string
      */
     public static function containsBadwords(
         ?string $str,
         ?array $words_blacklist = null
-    ) {
+    ): ?string {
         if (! $str) {
             return null;
         }
@@ -127,7 +131,7 @@ class AntiSpamHelper extends Helper
         $wordCount = count($words_blacklist);
         for ($i = 0; $i < $wordCount; $i++) {
             $word = strtolower($words_blacklist[$i]);
-            if (strpos(strtolower($str), $word) !== false) {
+            if (str_contains(strtolower($str), $word)) {
                 return $words_blacklist[$i];
             }
         }
@@ -139,8 +143,7 @@ class AntiSpamHelper extends Helper
      * Check if the spam filter is enabled
      * @return bool
      */
-    public static function isSpamFilterEnabled(): bool
-    {
+    public static function isSpamFilterEnabled(): bool {
         return Settings::get('spamfilter_enabled') == 'yes';
     }
 
@@ -149,8 +152,7 @@ class AntiSpamHelper extends Helper
      * @param string|null $useragent
      * @return bool
      */
-    public static function checkForBot(?string $useragent = null): bool
-    {
+    public static function checkForBot(?string $useragent = null): bool {
         $useragent = $useragent ?? Request::getUserAgent();
 
         return is_crawler($useragent);
@@ -162,10 +164,10 @@ class AntiSpamHelper extends Helper
     // please note that this function returns also true if
     // you send an email to a nonexisting user on a valid domain.
     // Use this function with care
-    public static function checkMailDomain(string $email): bool
-    {
+    public static function checkMailDomain(string $email): bool {
         $domain = strstr($email, '@');
-        $domain = remove_prefix($domain, '@');
+        $domain = remove_prefix((string)$domain, '@');
+
         // In some cases getmxrr() would return a result for an invalid domain
         // if there is no additional dot at the end
         $domain = ! str_ends_with($domain, '.') ? $domain . '.' : $domain;

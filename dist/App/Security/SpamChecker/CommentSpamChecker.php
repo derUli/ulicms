@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\Security\SpamChecker;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Helpers\AntiSpamHelper;
 
 use App\Models\Content\Comment;
 use Request;
 
-class CommentSpamChecker implements ISpamChecker
-{
+class CommentSpamChecker implements SpamCheckerInterface {
     private $comment;
 
     private $spamFilterConfiguration;
@@ -29,18 +28,15 @@ class CommentSpamChecker implements ISpamChecker
         $this->spamFilterConfiguration = $spamFilterConfiguration;
     }
 
-    public function clearErrors(): void
-    {
+    public function clearErrors(): void {
         $this->errors = [];
     }
 
-    public function isSpam(): bool
-    {
+    public function isSpam(): bool {
         return count($this->errors) > 0;
     }
 
-    public function doSpamCheck(): bool
-    {
+    public function doSpamCheck(): bool {
         $this->clearErrors();
 
         // Abort here if the spam filter is disabled
@@ -191,8 +187,7 @@ class CommentSpamChecker implements ISpamChecker
         return $this->isSpam();
     }
 
-    public function getErrors(): array
-    {
+    public function getErrors(): array {
         return $this->errors;
     }
 }

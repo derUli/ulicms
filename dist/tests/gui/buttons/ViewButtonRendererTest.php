@@ -2,12 +2,10 @@
 
 use App\CoreContent\Partials\ViewButtonRenderer;
 
-class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
-{
+class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase {
     private $user;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $user = new User();
         $user->setUsername('paul.panzer');
         $user->setLastname('Panzer');
@@ -19,14 +17,12 @@ class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
         $this->user = $user;
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $this->user->delete();
         Database::query("delete from {prefix}content where title like 'Test Page%'", true);
     }
 
-    public function testRenderReturnsHtml()
-    {
+    public function testRenderReturnsHtml(): void {
         $allGroups = Group::getAll();
 
         $page = new Page();
@@ -53,8 +49,7 @@ class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testRenderNonRegularReturnsNothing()
-    {
+    public function testRenderNonRegularReturnsNothing(): void {
         $allGroups = Group::getAll();
 
         $page = new Node();
@@ -72,8 +67,7 @@ class ViewButtonRendererTest extends \PHPUnit\Framework\TestCase
         ));
     }
 
-    public function testRenderCanNotReadReturnsNothing()
-    {
+    public function testRenderCanNotReadReturnsNothing(): void {
         $allGroups = Group::getAll();
 
         $page = new Page();

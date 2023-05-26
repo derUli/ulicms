@@ -1,1 +1,2 @@
-php vendor/bin/phpunit tests
+#!/bin/bash
+php vendor/bin/phpunit "$@"

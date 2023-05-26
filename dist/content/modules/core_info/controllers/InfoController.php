@@ -1,13 +1,12 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Controllers\MainClass;
 use Michelf\MarkdownExtra;
 
-class InfoController extends MainClass
-{
-    public const CHANGELOG_URL = 'https://raw.githubusercontent.com/derUli/ulicms/master/doc/changelog.txt';
-
-    public function _fetchChangelog()
-    {
+class InfoController extends MainClass {
+    public function _fetchChangelog() {
         $lines = $this->_getChangelogContent();
         $lines = array_map('trim', $lines);
         $lines = array_map('_esc', $lines);
@@ -36,22 +35,18 @@ class InfoController extends MainClass
         return $text ? trim($text) : get_translation('fetch_failed');
     }
 
-    public function _getChangelogContent(): array
-    {
-        $file = ModuleHelper::buildModuleRessourcePath(
+    public function _getChangelogContent(): array {
+        $file = \App\Helpers\ModuleHelper::buildModuleRessourcePath(
             'core_info',
             'changelog.txt'
         );
 
-        $content = is_file($file) ?
-                file_get_contents($file) :
-                file_get_contents_wrapper(self::CHANGELOG_URL);
+        $content = file_get_contents($file);
 
         return explode("\n", $content);
     }
 
-    public function _getComposerLegalInfo(): string
-    {
+    public function _getComposerLegalInfo(): string {
         $legalFile = Path::resolve('ULICMS_ROOT/licenses.md');
         $lastModified = filemtime($legalFile);
 
@@ -82,8 +77,7 @@ class InfoController extends MainClass
         return $parsed;
     }
 
-    public function _getNpmLegalInfo(): array
-    {
+    public function _getNpmLegalInfo(): array {
         $legalJson = file_get_contents(
             Path::resolve('ULICMS_ROOT/licenses.json')
         );

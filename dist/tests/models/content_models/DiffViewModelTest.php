@@ -2,10 +2,8 @@
 
 use App\CoreContent\Models\ViewModels\DiffViewModel;
 
-class DiffViewModelTest extends \PHPUnit\Framework\TestCase
-{
-    public function testConstructor()
-    {
+class DiffViewModelTest extends \PHPUnit\Framework\TestCase {
+    public function testConstructor(): void {
         $model = new DiffViewModel(
             'Foo<strong>Bar</strong>',
             '2019-03-13',

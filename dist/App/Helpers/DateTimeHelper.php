@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use DateTimeZone;
 use IntlDateFormatter;
@@ -13,14 +13,12 @@ use Settings;
 /**
  * This class contains methods to deal with DateTimes
  */
-class DateTimeHelper
-{
+abstract class DateTimeHelper {
     /**
      * Get Current Timezone
      * @return \DateTimeZone
      */
-    public static function getCurrentTimezone(): \DateTimeZone
-    {
+    public static function getCurrentTimezone(): \DateTimeZone {
         return new DateTimeZone(date_default_timezone_get());
     }
 
@@ -28,8 +26,7 @@ class DateTimeHelper
      * Get name of current locale
      * @return string|null
      */
-    public static function getCurrentLocale(): ?string
-    {
+    public static function getCurrentLocale(): ?string {
         return Settings::getLang('locale');
     }
 
@@ -37,10 +34,10 @@ class DateTimeHelper
      * Format integer timestamp user readable
      * Format integer timestamp
      * @param int $timestamp
+     *
      * @return string
      */
-    public static function timestampToFormattedDateTime(int $timestamp, int $dateType = IntlDateFormatter::MEDIUM, int $timeType = IntlDateFormatter::MEDIUM): string
-    {
+    public static function timestampToFormattedDateTime(int $timestamp, int $dateType = IntlDateFormatter::MEDIUM, int $timeType = IntlDateFormatter::MEDIUM): ?string {
         $timezone = self::getCurrentTimezone();
         $currentLocale = self::getCurrentLocale();
 
@@ -48,6 +45,19 @@ class DateTimeHelper
         $pattern = str_replace(',', '', $formatter->getPattern());
         $formatter->setPattern($pattern);
 
-        return $formatter->format($timestamp);
+        return $formatter->format($timestamp) ? $formatter->format($timestamp) : null;
+    }
+
+    /**
+     * Check if a string is a valid timezone
+     *
+     * timezone_identifiers_list() requires PHP >= 5.2
+     *
+     * @param string $timezone
+     *
+     * @return bool
+     */
+    public static function isValidTimezone($timezone) {
+        return in_array($timezone, timezone_identifiers_list());
     }
 }

@@ -1,15 +1,17 @@
 <?php
 
-use App\Helpers\NumberFormatHelper;
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-$permissionChecker = new ACL();
+use App\Helpers\NumberFormatHelper;
 
 $controller = ControllerRegistry::get('HomeController');
 $model = $controller->getModel();
+
+$installed_at = Settings::get('installed_at');
+
 ?>
 <table>
     <?php
-    $installed_at = Settings::get('installed_at');
 if ($installed_at) {
     $formatted = NumberFormatHelper::formatTime($installed_at);
     ?>
@@ -34,7 +36,7 @@ if ($installed_at) {
 if (Settings::get('contact_form_refused_spam_mails')) {
     ?>
         <tr>
-            <td><?php echo translate('BLOCKED_SPAM_MAILS'); ?></td>
+            <td><?php translate('BLOCKED_SPAM_MAILS'); ?></td>
             <td><?php echo Settings::get('contact_form_refused_spam_mails'); ?></td>
         </tr>
         <?php

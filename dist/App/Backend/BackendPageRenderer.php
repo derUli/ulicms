@@ -4,33 +4,30 @@ declare(strict_types=1);
 
 namespace App\Backend;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Helpers\StringHelper;
 use App\Registries\ActionRegistry;
-use App\Security\PermissionChecker;
+use App\Security\Permissions\PermissionChecker;
 use Request;
 use Settings;
 use Template;
-use Vars;
 use zz\Html\HTMLMinify;
 
 /**
  * This class renders a backend page
  */
-class BackendPageRenderer
-{
-    private $action;
+class BackendPageRenderer {
+    private string $action;
 
-    private static $model;
+    private static mixed $model;
 
     /**
      * Constructor
-     * @param type $action
-     * @param type $model
+     * @param string $action
+     * @param mixed $model
      */
-    public function __construct(string $action, mixed $model = null)
-    {
+    public function __construct(string $action, mixed $model = null) {
         $this->action = $action;
 
         self::$model = $model;
@@ -40,8 +37,7 @@ class BackendPageRenderer
      * Gets the action
      * @return string
      */
-    public function getAction(): string
-    {
+    public function getAction(): string {
         return $this->action;
     }
 
@@ -50,8 +46,7 @@ class BackendPageRenderer
      * @param string $action
      * @return void
      */
-    public function setAction(string $action): void
-    {
+    public function setAction(string $action): void {
         $this->action = $action;
     }
 
@@ -59,8 +54,7 @@ class BackendPageRenderer
      * Gets the model
      * @return mixed
      */
-    public static function getModel(): mixed
-    {
+    public static function getModel(): mixed {
         return self::$model;
     }
 
@@ -69,8 +63,7 @@ class BackendPageRenderer
      * @param mixed $model
      * @return void`
      */
-    public static function setModel(mixed $model): void
-    {
+    public static function setModel(mixed $model): void {
         self::$model = $model;
     }
 
@@ -78,8 +71,7 @@ class BackendPageRenderer
      * Renders a backend page outputs it and runs cron events
      * @return void
      */
-    public function render(): void
-    {
+    public function render(): void {
         if (Settings::get('minify_html')) {
             ob_start();
         }
@@ -112,13 +104,13 @@ class BackendPageRenderer
      * Outputs minified HTML
      * @return void
      */
-    public function outputMinified(): void
-    {
+    public function outputMinified(): void {
         $generatedHtml = ob_get_clean();
         $options = [
             'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
         ];
-        $HTMLMinify = new HTMLMinify($generatedHtml, $options);
+
+        $HTMLMinify = new HTMLMinify((string)$generatedHtml, $options);
         $generatedHtml = $HTMLMinify->process();
         $generatedHtml = StringHelper::removeEmptyLinesFromString(
             $generatedHtml
@@ -131,8 +123,7 @@ class BackendPageRenderer
      * Run cron events of modules
      * @return void
      */
-    public function doCronEvents(): void
-    {
+    public function doCronEvents(): void {
         do_event('before_admin_cron');
         do_event('admin_cron');
         do_event('after_admin_cron');
@@ -144,8 +135,7 @@ class BackendPageRenderer
      * @param bool $onlyContent
      * @return void
      */
-    protected function handleNotLoggedIn(bool $onlyContent = false): void
-    {
+    protected function handleNotLoggedIn(bool $onlyContent = false): void {
         ActionRegistry::loadModuleActions();
         $actions = ActionRegistry::getActions();
 
@@ -154,7 +144,7 @@ class BackendPageRenderer
                 $this->getAction()
             );
             if ($action_permission && $action_permission === '*') {
-                Vars::set('action_filename', $actions[$this->getAction()]);
+                \App\Storages\Vars::set('action_filename', $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(
                     'backend/container.php'
                 );
@@ -181,8 +171,7 @@ class BackendPageRenderer
      * @param bool $onlyContent
      * @return void
      */
-    protected function handleLoggedIn(bool $onlyContent = false): void
-    {
+    protected function handleLoggedIn(bool $onlyContent = false): void {
         $permissionChecker = new PermissionChecker(get_user_id());
 
         if (! $onlyContent) {
@@ -200,12 +189,8 @@ class BackendPageRenderer
             $requiredPermission = ActionRegistry::getActionPermission(
                 $this->getAction()
             );
-            if (! $requiredPermission
-                    || (
-                        $requiredPermission
-                        && $permissionChecker->hasPermission($requiredPermission))
-            ) {
-                Vars::set('action_filename', $actions[$this->getAction()]);
+            if (($requiredPermission && $permissionChecker->hasPermission($requiredPermission)) || ! $requiredPermission) {
+                \App\Storages\Vars::set('action_filename', $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(
                     'backend/container.php'
                 );

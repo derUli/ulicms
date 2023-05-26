@@ -2,15 +2,12 @@
 
 use App\Models\Content\TypeMapper;
 
-class ContentTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
-        Content::emptyTrash();
+class ContentTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
+        AbstractContent::emptyTrash();
     }
 
-    public function testEmptyTrash()
-    {
+    public function testEmptyTrash(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -22,23 +19,21 @@ class ContentTest extends \PHPUnit\Framework\TestCase
         $page->save();
         $page->delete();
 
-        $deleted = Content::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
+        $deleted = AbstractContent::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
         $this->assertGreaterThanOrEqual(1, count($deleted));
 
-        Content::emptyTrash();
+        AbstractContent::emptyTrash();
 
-        $deleted = Content::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
+        $deleted = AbstractContent::getAllDatasets('content', 'Page', 'id', 'deleted_at is not null');
         $this->assertCount(0, $deleted);
     }
 
-    public function testGetChildrenWithoutId()
-    {
+    public function testGetChildrenWithoutId(): void {
         $page = new Page();
         $this->assertCount(0, $page->getChildren());
     }
 
-    public function testGetIcon()
-    {
+    public function testGetIcon(): void {
         $types = TypeMapper::getMappings();
         foreach ($types as $type => $class) {
             $model = new $class();

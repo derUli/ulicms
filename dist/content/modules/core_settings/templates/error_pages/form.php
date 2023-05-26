@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Constants\RequestMethod;
 use App\HTML\Input;
 use App\HTML\ListItem;
@@ -13,7 +15,7 @@ $errorCodes = [
 ?>
 <p>
     <a
-        href="<?php echo ModuleHelper::buildActionURL('settings_simple'); ?>"
+        href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_simple'); ?>"
         class="btn btn-default btn-back is-not-ajax"><i class= "fa fa-arrow-left"></i>
             <?php translate('back');
 ?></a>
@@ -21,13 +23,14 @@ $errorCodes = [
 
 <h1><?php translate('error_pages'); ?></h1>
 <?php
-echo ModuleHelper::buildMethodCallForm(
+echo \App\Helpers\ModuleHelper::buildMethodCallForm(
     ErrorPagesController::class,
     'save',
     [],
     RequestMethod::POST,
     [
-        'id' => 'error_pages_form'
+        'id' => 'error_pages_form',
+        'class' => 'ajax-form'
     ]
 );
 ?>
@@ -81,11 +84,11 @@ echo ModuleHelper::buildMethodCallForm(
     <?php translate('save'); ?>
 </button>
 <?php
-echo ModuleHelper::endForm();
+echo \App\Helpers\ModuleHelper::endForm();
 
 $translation = new JSTranslation();
-$translation->addKey('changes_was_saved');
+$translation->addKey('changes_were_saved');
 $translation->render();
 
-enqueueScriptFile(ModuleHelper::buildRessourcePath('core_settings', 'js/error_pages.js'));
+enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath('core_settings', 'js/ajax_form.js'));
 combinedScriptHtml();

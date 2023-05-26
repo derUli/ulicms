@@ -1,11 +1,9 @@
 <?php
 
-class FrontPageSettingsControllerTest extends \PHPUnit\Framework\TestCase
-{
+class FrontPageSettingsControllerTest extends \PHPUnit\Framework\TestCase {
     private $defaultSettings = [];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->defaultSettings = [
             'default_language' => Settings::get('default_language'),
             'frontpage' => Settings::get('frontpage_de'),
@@ -14,8 +12,7 @@ class FrontPageSettingsControllerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_POST = [];
 
         foreach ($this->defaultSettings as $key => $value) {
@@ -23,8 +20,7 @@ class FrontPageSettingsControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSavePost(): void
-    {
+    public function testSavePost(): void {
         $_POST['frontpage_de'] = 'willkommen';
         $_POST['frontpage_en'] = 'welcome';
         Settings::set('default_language', 'en');

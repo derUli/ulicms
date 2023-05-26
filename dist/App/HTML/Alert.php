@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 /**
  * This class contains helper methods to build Bootstrap alerts
  * See https://getbootstrap.com/docs/3.3/components/#alerts
  */
-class Alert
-{
+class Alert {
     /**
      * Generate Bootstrap alert
+     *
      * @param string $text
      * @param string $cssClasses
      * @param bool $allowHtml
+     *
      * @return string
      */
     public static function alert(
@@ -32,9 +33,11 @@ class Alert
 
     /**
      * Generate Bootstrap info style alert
+     *
      * @param string $text
      * @param string $cssClasses
      * @param bool $allowHtml
+     *
      * @return string
      */
     public static function info(
@@ -47,9 +50,11 @@ class Alert
 
     /**
      * Generate Bootstrap danger style alert
-     * @param type $text
+     *
+     * @param string $text
      * @param string $cssClasses
      * @param bool $allowHtml
+     *
      * @return string
      */
     public static function danger(
@@ -62,9 +67,11 @@ class Alert
 
     /**
      * Generate Bootstrap warning style alert
+     *
      * @param string $text
      * @param string $cssClasses
      * @param bool $allowHtml
+     *
      * @return string
      */
     public static function warning(
@@ -77,9 +84,11 @@ class Alert
 
     /**
      * Generate Bootstrap success style alert
+     *
      * @param string $text
      * @param string $cssClasses
      * @param bool $allowHtml
+     *
      * @return string
      */
     public static function success(

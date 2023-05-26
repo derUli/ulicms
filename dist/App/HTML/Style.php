@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Utils\File;
-use ModuleHelper;
 
 /**
  * Utils to generate <style> tags
  */
-class Style
-{
+class Style {
     /**
      * Generates a <link> tag for a stylesheet file
+     *
+     * @param string $href
+     * @param ?string $media
+     * @param array<string, string> $htmlAttributes
+     *
+     * @return string
      */
     public static function fromExternalFile(
         string $href,
@@ -36,7 +40,7 @@ class Style
         foreach ($htmlAttributes as $key => $value) {
             $attributes[$key] = $value;
         }
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         if (! empty($attribHTML)) {
             $attribHTML = ' ' . $attribHTML;
@@ -47,9 +51,11 @@ class Style
 
     /**
      * Generates a <script> tag from string
+     *
      * @param string|null $code
      * @param string|null $media
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function fromString(
@@ -64,7 +70,7 @@ class Style
         foreach ($htmlAttributes as $key => $value) {
             $attributes[$key] = $value;
         }
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         if (! empty($attribHTML)) {
             $attribHTML = ' ' . $attribHTML;

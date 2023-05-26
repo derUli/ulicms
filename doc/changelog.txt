@@ -1,3 +1,80 @@
+===== Neues in UliCMS 2023.3 =====
+
+Neue Features:
+* Dotenv Konfiguration
+* Schriftart-Vorschau bei Änderung der Schriftgröße und der Textfarbe
+* Neue Robo-Tasks
+* Installer prüft, ob ULICMS_ROOT beschreibbar ist
+* Verbesserungen in den Datenschutz-Einstellungen
+* Nutze überall VanillaToast
+
+Fehlerkorrekturen:
+* Warnings wenn man update.php von der Kommandozeile aufruft korrigiert
+* Fehler in Cronjobs korrigiert
+* HTML-Editor für die Bearbeitung der Footertext aktiviert
+
+Entfernte Features:
+* Veraltete HTTP Security Header entfernt (X-XSS-Protection, Expect-CT, Referrer-Policy)
+* Scroll To Top
+
+Neue API-Methoden:
+* StringHelper::splitAndTrim()
+* BooleanHelper::bool2YesNo()
+* Database::tableName()
+* LoggerRegistry::getAll()
+
+API-Änderungen:
+* Controller in Namespace App\Controllers verschoben
+* MainClass in Namespace App\Controllers verschoben
+* ACL in Namespace App\Security\Permissions verschoben
+* PermissionChecker in Namespace App\Security\Permissions verschoben
+* ContentPermissionChecker in Namespace App\Security\Permissions verschoben
+* IDatasetPermissionChecker in Namespace App\Security\Permissions verschoben
+* ViewBag in Namespace App\Storages verschoben
+* Vars in Namespace App\Storages verschoben
+* CheckboxField in Namespace App\Models\Content\CustomFields verschoben
+* ColorField in Namespace App\Models\Content\CustomFields verschoben
+* CustomField in Namespace App\Models\Content\CustomFields verschoben
+* DatetimeField in Namespace App\Models\Content\CustomFields verschoben
+* EmailField in Namespace App\Models\Content\CustomFields verschoben
+* FileFile in Namespace App\Models\Content\CustomFields verschoben
+* FileImage in Namespace App\Models\Content\CustomFields verschoben
+* HtmlField in Namespace App\Models\Content\CustomFields verschoben
+* MonthField in Namespace App\Models\Content\CustomFields verschoben
+* MultiSelectField in Namespace App\Models\Content\CustomFields verschoben
+* MultilineTextField in Namespace App\Models\Content\CustomFields verschoben
+* NumberField in Namespace App\Models\Content\CustomFields verschoben
+* SelectField in Namespace App\Models\Content\CustomFields verschoben
+* TextField in Namespace App\Models\Content\CustomFields verschoben
+* UrlField in Namespace App\Models\Content\CustomFields verschoben
+* Methode sanitize() in sanitize_headers() umbenannt
+* BackendHelper in Namespace App\Helpers verschoben
+* ModuleHelper in Namespace App\Helpers verschoben
+* UliCMSVersion in Namespace App\UliCMS verschoben
+
+Entfernte API-Methoden:
+* getStringLengthInBytes()
+* splitAndTrim()
+* convertLineEndingsToLN()
+* bool2YesNo()
+* get_custom_data()
+* set_custom_data()
+* delete_custom_data()
+* db_fetch_assoc()
+* db_num_rows()
+* db_fetch_object()
+* db_query()
+* db_escape()
+* tbname()
+* setLocaleByLanguage()
+* getLanguageByDomain()
+* get_prefered_language()
+* is_url()
+* curl_url_exists()
+* is_desktop()
+* ModuleManager::getDisabledModuleNames()
+* Path::normalize()
+
 ===== Neues in UliCMS 2023.2 =====
 
 Neue Features:

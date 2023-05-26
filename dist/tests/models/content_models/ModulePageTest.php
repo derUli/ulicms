@@ -1,20 +1,16 @@
 <?php
 
-class ModulePageTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class ModulePageTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         Database::query("delete from {prefix}content where title like 'Unit Test%'", true);
     }
 
-    public function testContainsModuleReturnsTrue()
-    {
+    public function testContainsModuleReturnsTrue(): void {
         $modulePage = new Module_Page();
         $modulePage->title = 'Unit Test Article';
         $modulePage->slug = 'unit test';
         $modulePage->menu = 'none';
         $modulePage->language = 'de';
-        $modulePage->article_date = 1413821696;
         $modulePage->author_id = 1;
         $modulePage->group_id = 1;
         $modulePage->module = 'blog';
@@ -31,8 +27,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($modulePage->containsModule('not_existing'));
     }
 
-    public function testContainsModuleReturnFalse()
-    {
+    public function testContainsModuleReturnFalse(): void {
         $modulePage = new Module_Page();
         $modulePage->title = 'Unit Test Article';
         $modulePage->slug = 'unit test';
@@ -46,8 +41,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($modulePage->containsModule('blog'));
     }
 
-    public function testGetEmbeddedModulesReturnsModules()
-    {
+    public function testGetEmbeddedModulesReturnsModules(): void {
         $module = new Module('fortune2');
 
         $modulePage = new Module_Page();
@@ -75,8 +69,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetEmbeddedModulesReturnsNothing()
-    {
+    public function testGetEmbeddedModulesReturnsNothing(): void {
         $module = new Module('fortune2');
 
         $modulePage = new Module_Page();

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 use App\Exceptions\SCSSCompileException;
 use App\HTML\Script;
 use App\HTML\Style;
@@ -12,17 +14,19 @@ use zz\Html\HTMLMinify;
 
 /**
  * Clears the Javascript queue
+ *
  * @return void
  */
-function resetScriptQueue(): void
-{
-    Vars::set('script_queue', []);
+function resetScriptQueue(): void {
+    \App\Storages\Vars::set('script_queue', []);
 }
 
 /**
  * Minify HTML
+ *
  * @param string $html
  * @param int $level
+ *
  * @return string
  */
 function optimizeHtml(
@@ -41,40 +45,64 @@ function optimizeHtml(
     return $html;
 }
 
-function enqueueScriptFile($path): void
-{
-    if (! Vars::get('script_queue')) {
+/**
+ * Add script to minify queue
+ *
+ * @param string $path
+ *
+ * @return void
+ */
+function enqueueScriptFile(string $path): void {
+    if (! \App\Storages\Vars::get('script_queue')) {
         resetScriptQueue();
     }
-    $script_queue = Vars::get('script_queue');
+    $script_queue = \App\Storages\Vars::get('script_queue');
     $script_queue[] = $path;
 
-    Vars::set('script_queue', $script_queue);
+    \App\Storages\Vars::set('script_queue', $script_queue);
 }
 
-function setSCSSImportPaths(?array $importPaths = null): void
-{
+/**
+ * Set SCSS import paths
+ *
+ * @param ?string[] $importPaths
+ *
+ * @return void
+ */
+function setSCSSImportPaths(?array $importPaths = null): void {
     if ($importPaths == null) {
         $importPaths = [
             Path::resolve('ULICMS_ROOT')
         ];
     }
-    Vars::set('css_include_paths', $importPaths);
+    \App\Storages\Vars::set('css_include_paths', $importPaths);
 }
 
-function getSCSSImportPaths(): ?array
-{
-    return Vars::get('css_include_paths');
+/**
+ * Get SCSS import paths
+ *
+ * @return ?string[]
+ */
+function getSCSSImportPaths(): ?array {
+    return \App\Storages\Vars::get('css_include_paths');
 }
 
-function unsetSCSSImportPaths(): void
-{
-    Vars::delete('css_include_paths');
+/**
+ * Unset SCSS import paths
+ *
+ * @return void
+ */
+function unsetSCSSImportPaths(): void {
+    \App\Storages\Vars::delete('css_include_paths');
 }
 
-function minifyJs(): string
-{
-    $scripts = Vars::get('script_queue');
+/**
+ * Minify javascript and returns bundle Url
+ *
+ * @return string
+ */
+function minifyJs(): string {
+    $scripts = \App\Storages\Vars::get('script_queue');
     $lastmod = 0;
 
     $minifier = new Minify\JS();
@@ -91,13 +119,13 @@ function minifyJs(): string
     }
 
     $cacheId = Hash::hashCacheIdentifier((implode(';', $scripts)) . $lastmod);
-    $jsDir = Path::resolve('ULICMS_CACHE/scripts');
+    $jsDir = Path::resolve('ULICMS_GENERATED_PUBLIC/scripts');
 
     if (! is_dir($jsDir)) {
         mkdir($jsDir, 0777, true);
     }
     $jsUrl = ! is_admin_dir() ?
-            'content/cache/legacy/scripts' : '../content/cache/legacy/scripts';
+            'content/generated/public/scripts' : '../content/generated/public/scripts';
 
     $bundleFile = "{$jsDir}/{$cacheId}.js";
     $bundleUrl = "{$jsUrl}/{$cacheId}.js";
@@ -120,9 +148,13 @@ function minifyJs(): string
     return $bundleUrl;
 }
 
-function minifyCSS(): string
-{
-    $stylesheets = Vars::get('stylesheet_queue');
+/**
+ * Minify CSS and returns bundle Url
+ *
+ * @return string
+ */
+function minifyCSS(): string {
+    $stylesheets = \App\Storages\Vars::get('stylesheet_queue');
     $lastmod = 0;
 
     $minifier = new Minify\CSS();
@@ -140,13 +172,14 @@ function minifyCSS(): string
 
     $cacheId = Hash::hashCacheIdentifier((implode(';', $stylesheets)) . $lastmod);
 
-    $cssDir = Path::resolve('ULICMS_CACHE/stylesheets');
+    $cssDir = Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets');
 
     if (! is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);
     }
+
     $cssUrl = ! is_admin_dir() ?
-            'content/cache/legacy/stylesheets' : '../content/cache/legacy/stylesheets';
+            'content/generated/public/stylesheets' : '../content/generated/public/stylesheets';
 
     $bundleFile = "{$cssDir}/{$cacheId}.css";
     $bundleUrl = "{$cssUrl}/{$cacheId}.css";
@@ -174,12 +207,20 @@ function minifyCSS(): string
     return $bundleUrl;
 }
 
-function compileSCSS(string $stylesheet): string
-{
+/**
+ * Compile SCSS file to string
+ *
+ * @param string $stylesheet
+ *
+ * @return string
+ *
+ */
+function compileSCSS(string $stylesheet): string {
     $scss = new Compiler();
 
     $importPaths = getSCSSImportPaths();
-    $scssInput = file_get_contents($stylesheet);
+    $scssInput = file_get_contents($stylesheet) ?: '';
+
     if (is_array($importPaths)) {
         $scss->setImportPaths($importPaths);
     } else {
@@ -195,9 +236,8 @@ function compileSCSS(string $stylesheet): string
     return $scssOutput;
 }
 
-function compileSCSSToFile(string $stylesheet): string
-{
-    $cssDir = Path::resolve('ULICMS_CACHE/stylesheets');
+function compileSCSSToFile(string $stylesheet): string {
+    $cssDir = Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets');
 
     if (! is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);
@@ -208,7 +248,7 @@ function compileSCSSToFile(string $stylesheet): string
     $cacheId = Hash::hashCacheIdentifier($stylesheet . filemtime($stylesheet));
 
     $cssUrl = ! is_admin_dir() ?
-            'content/cache/legacy/stylesheets' : '../content/cache/legacy/stylesheets';
+            'content/generated/public/stylesheets' : '../content/generated/public/stylesheets';
 
     $bundleFile = "{$cssDir}/{$cacheId}.css";
     $bundleUrl = "{$cssUrl}/{$cacheId}.css";
@@ -217,19 +257,19 @@ function compileSCSSToFile(string $stylesheet): string
     return $bundleUrl;
 }
 
-function combinedScriptHtml(): void
-{
+function combinedScriptHtml(): void {
     echo getCombinedScriptHtml();
 }
 
-function getCombinedScriptHtml(): string
-{
+function getCombinedScriptHtml(): string {
+    $noMinify = isset($_ENV['NO_MINIFY']) && $_ENV['NO_MINIFY'];
     $html = '';
-    $cfg = new CMSConfig();
-    if (isset($cfg->no_minify) && $cfg->no_minify) {
-        foreach (Vars::get('script_queue') as $script) {
+
+    if ($noMinify) {
+        foreach (\App\Storages\Vars::get('script_queue') as $script) {
             $html .= Script::fromFile($script);
         }
+
         resetScriptQueue();
         return $html;
     }
@@ -240,34 +280,38 @@ function getCombinedScriptHtml(): string
     return $html;
 }
 
-// Ab hier Stylesheet Funktionen
-function resetStylesheetQueue(): void
-{
-    Vars::set('stylesheet_queue', []);
+/**
+ * Clear stylesheet queue
+ *
+ * @return void
+ */
+function resetStylesheetQueue(): void {
+    \App\Storages\Vars::set('stylesheet_queue', []);
 }
 
-function enqueueStylesheet(string $path): void
-{
-    if (! Vars::get('stylesheet_queue')) {
+function enqueueStylesheet(string $path): void {
+    if (! \App\Storages\Vars::get('stylesheet_queue')) {
         resetStylesheetQueue();
     }
-    $stylesheet_queue = Vars::get('stylesheet_queue');
+    $stylesheet_queue = \App\Storages\Vars::get('stylesheet_queue');
     $stylesheet_queue[] = $path;
 
-    Vars::set('stylesheet_queue', $stylesheet_queue);
+    \App\Storages\Vars::set('stylesheet_queue', $stylesheet_queue);
 }
 
-function getCombinedStylesheetHTML(): ?string
-{
+function getCombinedStylesheetHTML(): ?string {
     $html = '';
 
-    $cfg = new CMSConfig();
-    if (! Vars::get('stylesheet_queue')) {
+    if (! \App\Storages\Vars::get('stylesheet_queue')) {
         return null;
     }
-    if (isset($cfg->no_minify) && ($cfg->no_minify)) {
-        foreach (Vars::get('stylesheet_queue') as $stylesheet) {
+
+    $noMinify = isset($_ENV['NO_MINIFY']) && $_ENV['NO_MINIFY'];
+
+    if ($noMinify) {
+        foreach (\App\Storages\Vars::get('stylesheet_queue') as $stylesheet) {
             $type = pathinfo($stylesheet, PATHINFO_EXTENSION);
+
             if ($type == 'css') {
                 $html .= Style::fromExternalFile($stylesheet);
             } elseif ($type == 'scss') {
@@ -276,6 +320,7 @@ function getCombinedStylesheetHTML(): ?string
                 );
             }
         }
+
         resetStylesheetQueue();
         return $html;
     }
@@ -286,7 +331,6 @@ function getCombinedStylesheetHTML(): ?string
     return $html;
 }
 
-function combinedStylesheetHtml(): void
-{
+function combinedStylesheetHtml(): void {
     echo getCombinedStylesheetHTML();
 }

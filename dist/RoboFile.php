@@ -2,14 +2,22 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 use App\Constants\DefaultValues;
 use App\Database\DBMigrator;
-use App\Exceptions\SqlException;
-use App\Helpers\DateTimeHelper;
+use App\Helpers\StringHelper;
+use App\Helpers\TestHelper;
 use App\Packages\PackageManager;
 use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
+use App\Storages\Settings\ConfigurationToDotEnvConverter;
+use App\Storages\Settings\MaintenanceMode;
 use App\Utils\CacheUtil;
+use App\Utils\File;
+use Nette\IOException;
+use Nette\Utils\FileSystem;
+use Nette\Utils\Finder;
 use Robo\Tasks;
 
 /**
@@ -17,82 +25,122 @@ use Robo\Tasks;
  *
  * @see http://robo.li/
  */
-class RoboFile extends Tasks
-{
-    public function __construct()
-    {
+class RoboFile extends Tasks {
+    /**
+     * Constructor
+     */
+    public function __construct() {
         if (! defined('CORE_COMPONENT')) {
             define('CORE_COMPONENT', 'robo');
         }
-
-        $this->initUliCMS();
     }
 
     /**
-     * shows the UliCMS release version
+     * Show the UliCMS release version
+     *
+     * @return void
      */
-    public function version(): void
-    {
+    public function version(): void {
         $this->writeln(cms_version());
     }
 
     /**
-     * truncates the history database table
+     * Show the current environment
+     *
+     * @return void
      */
-    public function truncateHistory(): void
-    {
+    public function environment(): void {
+        $this->writeln(get_environment());
+    }
+
+    /**
+     * Show the umask
+     *
+     * @return void
+     */
+    public function umask(): void {
+        $this->initUliCMS();
+        $umask = str_pad(
+            decoct(umask()),
+            4,
+            '0',
+            STR_PAD_LEFT
+        );
+        $this->writeln($umask);
+    }
+
+    /**
+     * Truncate the history database table
+     *
+     * @return void
+     */
+    public function truncateHistory(): void {
+        $this->initUliCMS();
+
         Database::truncateTable('history');
     }
 
     /**
-     * truncates the mails database table
+     * Truncate the mails database table
+     *
+     * @return void
      */
-    public function truncateMails(): void
-    {
+    public function truncateMails(): void {
+        $this->initUliCMS();
         Database::truncateTable('mails');
     }
 
     /**
-     * truncates the mails database table
+     * Truncate the mails database table
+     *
+     * @return void
      */
-    public function cacheClear(): void
-    {
+    public function cacheClear(): void {
+        $this->initUliCMS();
         CacheUtil::clearCache();
     }
 
     /**
      * List all settings
+     *
+     * @return void
      */
-    public function settingsList(): void
-    {
+    public function settingsList(): void {
+        $this->initUliCMS();
+
         // show all settings
         $settings = Settings::getAll();
         foreach ($settings as $setting) {
-            if (empty($setting->name)) {
-                continue;
-            }
             $this->writeln("{$setting->name}: {$setting->value}");
         }
     }
 
     /**
-     * shows the value of a setting
+     * Show the value of a setting
+     *
      * @param string $settingsName settings identifier name
+     *
+     * @return void
      */
-    public function settingsGet($settingsName): void
-    {
+    public function settingsGet($settingsName): void {
+        $this->initUliCMS();
+
         $value = Settings::get($settingsName) !== null ?
                 Settings::get($settingsName) : DefaultValues::NULL_VALUE;
         $this->writeln($value);
     }
 
     /**
-     * sets the value of a setting
+     * Set the value of a setting
+     *
      * @param string $settingsName settings identifier name
      * @param string $value value to set
+     *
+     * @return void
      */
-    public function settingsSet($settingsName, $value): void
-    {
+    public function settingsSet($settingsName, $value): void {
+        $this->initUliCMS();
+
         if (strtoupper($value) !== DefaultValues::NULL_VALUE) {
             Settings::set($settingsName, $value);
         } else {
@@ -101,69 +149,92 @@ class RoboFile extends Tasks
     }
 
     /**
-     * Enables the maintenance mode
+     * Enable the maintenance mode
+     *
+     * @return void
      */
-    public function maintenanceOn()
-    {
-        Settings::set('maintenance_mode', '1');
+    public function maintenanceOn(): void {
+        $this->initUliCMS();
+
+        MaintenanceMode::getInstance()->enable();
     }
 
     /**
-     * Disables the maintenance mode
+     * Disable the maintenance mode
+     *
+     * @return void
      */
-    public function maintenanceOff()
-    {
-        Settings::set('maintenance_mode', '0');
+    public function maintenanceOff(): void {
+        $this->initUliCMS();
+        MaintenanceMode::getInstance()->disable();
     }
 
     /**
-     * Shows the status of maintenance mode
+     * Show the status of maintenance mode
+     *
+     * @return void
      */
-    public function maintenanceStatus()
-    {
-        $this->writeln(strbool(is_maintenance_mode()));
+    public function maintenanceStatus(): void {
+        $this->initUliCMS();
+
+        $this->writeln(
+            strbool(MaintenanceMode::getInstance()->isEnabled())
+        );
     }
 
     /**
-     * examines a *.sin SimpleInstall v2 package file
+     * Examine a *.sin SimpleInstall v2 package file
+     *
      * @param string $file path to *.sin package file
+     *
+     * @return void
      */
-    public function packageExamine(string $file)
-    {
+    public function packageExamine(string $file): void {
+        $this->initUliCMS();
+
         if (! is_file($file)) {
             $this->writeln('File ' . basename($file) . ' not found!');
             return;
         }
-        $json = json_decode(file_get_contents($file), true);
-        ksort($json);
 
-        $this->showPageKeys($json);
+        $packageData = (array)json_decode(file_get_contents($file) ?: '', true);
+        ksort($packageData);
+
+        $this->showPackageKeys($packageData);
     }
 
     /**
-     * list all installed packages
+     * List all installed packages
+     *
+     * @return void
      */
-    public function packagesList()
-    {
+    public function packagesList(): void {
+        $this->initUliCMS();
+
         $this->writeln('Modules:');
         $this->modulesList([]);
         $this->writeln('');
         $this->writeln('Themes:');
-        $this->themesList([]);
+        $this->themesList();
     }
 
     /**
-     * installs a SimpleInstall v1 or SimpleInstall v2 package
+     * Install a SimpleInstall v1 or SimpleInstall v2 package
+     *
      * @param string $file path to *.sin or *.tar.gz package file
+     *
+     * @return void
      */
-    public function packageInstall($file): void
-    {
+    public function packageInstall($file): void {
+        $this->initUliCMS();
+
         if (! is_file($file)) {
             $this->writeln("Can't open {$file}. File doesn't exists.");
             return;
         }
 
         $result = false;
+        $pkg = null;
 
         if (str_ends_with($file, '.tar.gz')) {
             $pkg = new PackageManager();
@@ -177,8 +248,8 @@ class RoboFile extends Tasks
                     . ' successfully installed');
             return;
         }
-            $this->writeln('Installation of package '
-                    . basename($file) . ' failed.');
+        $this->writeln('Installation of package '
+                . basename($file) . ' failed.');
 
         if ($pkg instanceof SinPackageInstaller) {
             foreach ($pkg->getErrors() as $error) {
@@ -189,10 +260,14 @@ class RoboFile extends Tasks
 
     /**
      * List all installed modules and their version numbers
-     * @param string $modules one or more modules
+     *
+     * @param string[] $modules one or more modules
+     *
+     * @return void
      */
-    public function modulesList(array $modules)
-    {
+    public function modulesList(array $modules): void {
+        $this->initUliCMS();
+
         $modules = count($modules) ?
                 $this->replaceModulePlaceholders($modules) : getAllModules();
         if (count($modules) > 0) {
@@ -204,11 +279,15 @@ class RoboFile extends Tasks
     }
 
     /**
-     * toggles one or more modules
-     * @param array $modules one or more modules
+     * Toggle one or more modules
+     *
+     * @param string[] $modules one or more modules
+     *
+     * @return void
      */
-    public function modulesToggle(array $modules)
-    {
+    public function modulesToggle(array $modules): void {
+        $this->initUliCMS();
+
         $modules = $this->replaceModulePlaceholders($modules);
 
         foreach ($modules as $name) {
@@ -220,11 +299,15 @@ class RoboFile extends Tasks
     }
 
     /**
-     * enables one or more modules
-     * @param array $modules one or more modules
+     * Enables one or more modules
+     *
+     * @param string[] $modules one or more modules#
+     *
+     * @return void
      */
-    public function modulesEnable(array $modules)
-    {
+    public function modulesEnable(array $modules): void {
+        $this->initUliCMS();
+
         $modules = $this->replaceModulePlaceholders($modules);
 
         foreach ($modules as $name) {
@@ -236,11 +319,15 @@ class RoboFile extends Tasks
     }
 
     /**
-     * disables one or more modules
-     * @param array $modules one or more modules
+     * Disable one or more modules
+     *
+     * @param string[] $modules one or more modules
+     *
+     * @return void
      */
-    public function modulesDisable(array $modules)
-    {
+    public function modulesDisable(array $modules): void {
+        $this->initUliCMS();
+
         $modules = $this->replaceModulePlaceholders($modules);
 
         $manager = new ModuleManager();
@@ -253,11 +340,15 @@ class RoboFile extends Tasks
     }
 
     /**
-     * Uninstalls one or more modules
-     * @param array $modules one or more modules
+     * Uninstall one or more modules
+     *
+     * @param string[] $modules one or more modules
+     *
+     * @return void
      */
-    public function modulesRemove(array $modules)
-    {
+    public function modulesRemove(array $modules): void {
+        $this->initUliCMS();
+
         foreach ($modules as $module) {
             if (uninstall_module($module, 'module')) {
                 $this->writeln("Package {$module} removed.");
@@ -268,16 +359,20 @@ class RoboFile extends Tasks
     }
 
     /**
-     * get available versions of a module from eXtend
-     * @param array $modules one or more modules
+     * Get available versions of a module from eXtend
+     *
+     * @param string[] $modules one or more modules
+     *
+     * @return void
      */
-    public function modulesGetPackageVersions(array $modules)
-    {
+    public function modulesGetPackageVersions(array $modules): void {
+        $this->initUliCMS();
+
         $modules = $this->replaceModulePlaceholders($modules);
 
         foreach ($modules as $module) {
             $url = "https://extend.ulicms.de/{$module}.json";
-            $json = file_get_contents_wrapper($url, true);
+            $json = file_get_contents_wrapper($url, true) ?? '';
             $data = json_decode($json, true);
             $releases = $data['data'];
             $checker = new AvailablePackageVersionMatcher($releases);
@@ -289,9 +384,12 @@ class RoboFile extends Tasks
 
     /**
      * List all installed themes and their version numbers
+     *
+     * @return void
      */
-    public function themesList()
-    {
+    public function themesList(): void {
+        $this->initUliCMS();
+
         $theme = getAllThemes();
         if (count($theme) > 0) {
             $themesCount = count($theme);
@@ -307,11 +405,15 @@ class RoboFile extends Tasks
     }
 
     /**
-     * Uninstalls one or more themes
-     * @param array $themes one or more themes
+     * Uninstall one or more themes
+     *
+     * @param string[] $themes one or more themes
+     *
+     * @return void
      */
-    public function themesRemove(array $themes)
-    {
+    public function themesRemove(array $themes): void {
+        $this->initUliCMS();
+
         foreach ($themes as $theme) {
             if (uninstall_module($theme, 'theme')) {
                 $this->writeln("Package {$theme} removed.");
@@ -323,16 +425,21 @@ class RoboFile extends Tasks
 
     /**
      * Run sql migrations
+     *
      * @param string $component name of the component
      * @param string $directory path to migrations directory
      * @param string $stop path to migrations directory
+     *
+     * @return void
      */
     public function dbmigratorUp(
         string $component,
         string $directory,
         ?string $stop = null
     ): void {
-        $folder = Path::resolve($directory . '/up');
+        $this->initUliCMS();
+
+        $folder = (string)Path::resolve($directory . '/up');
 
         $migrator = new DBMigrator($component, $folder);
         try {
@@ -347,15 +454,20 @@ class RoboFile extends Tasks
 
     /**
      * Run sql migrations
+     *
      * @param string $component name of the component
      * @param string $directory path to migrations directory
      * @param string $stop path to migrations directory
+     *
+     * @return void
      */
     public function dbmigratorDown(
         string $component,
         string $directory,
         ?string $stop = null
     ): void {
+        $this->initUliCMS();
+
         $folder = Path::resolve($directory . '/down');
 
         $migrator = new DBMigrator($component, $folder);
@@ -370,14 +482,18 @@ class RoboFile extends Tasks
     }
 
     /**
-     * reset dbtrack table
-     * @param string $component name of the component
+     * Reset dbtrack table
+     *
+     * @param ?string $component name of the component
+     *
+     * @return void
      */
-    public function dbmigratorReset(?string $component = null): void
-    {
+    public function dbmigratorReset(?string $component = null): void {
+        $this->initUliCMS();
+
         Database::setEchoQueries(true);
 
-        $migrator = new DBMigrator($component ?: '[all]', getcwd());
+        $migrator = new DBMigrator($component ?: '[all]', (string)getcwd());
         if ($component) {
             $migrator->resetDBTrack();
         } else {
@@ -388,11 +504,15 @@ class RoboFile extends Tasks
     }
 
     /**
-     * list all applied sql migrations
+     * List all applied sql migrations
+     *
      * @param string $component name of the component
+     *
+     * @return void
      */
-    public function dbmigratorList(?string $component = null): void
-    {
+    public function dbmigratorList(?string $component = null): void {
+        $this->initUliCMS();
+
         $where = $component ? "component='" .
                 Database::escapeValue($component) . "'" : '1=1';
         $result = Database::query('Select component, name, date from {prefix}dbtrack '
@@ -404,33 +524,37 @@ class RoboFile extends Tasks
 
     /**
      * Sync installed modules with database
+     *
+     * @return void
      */
-    public function modulesSync(): void
-    {
+    public function modulesSync(): void {
+        $this->initUliCMS();
+
         $modules = new ModuleManager();
         $modules->sync();
     }
 
     /**
      * Run PHPUnit Tests
+     *
      * @param string $testFile test file to run
+     *
+     * @return void
      */
-    public function testsRun(string $testFile = '')
-    {
+    public function testsRun(string $testFile = ''): void {
         $command = 'vendor/bin/phpunit';
-        if (DIRECTORY_SEPARATOR === '\\') {
-            $command = str_replace('/', '\\', $command);
-        }
 
         system("{$command} {$testFile}");
     }
 
     /**
      * Run PHPUnit Tests and update snapshots
+     *
      * @param string $testFile test file to run
+     *
+     * @return void
      */
-    public function testsUpdateSnapshots(string $testFile = '')
-    {
+    public function testsUpdateSnapshots(string $testFile = ''): void {
         $command = 'vendor/bin/phpunit -d --update-snapshots';
         if (DIRECTORY_SEPARATOR === '\\') {
             $command = str_replace('/', '\\', $command);
@@ -440,50 +564,60 @@ class RoboFile extends Tasks
     }
 
     /**
-     * Creates the application's database
+     * Create the application's database
+     *
+     * @return void
      */
-    public function dbCreate()
-    {
+    public function dbCreate(): void {
+        $this->initUliCMS();
+
         Database::setEchoQueries(true);
-        $cfg = new CMSConfig();
-        Database::createSchema($cfg->db_database);
-        Database::select($cfg->db_database);
+
+        Database::createSchema($_ENV['DB_DATABASE']);
+        Database::select($_ENV['DB_DATABASE']);
     }
 
     /**
      * Drop and recreate the application's database
+     *
+     * @return void
      */
-    public function dbMigrate()
-    {
+    public function dbMigrate(): void {
+        $this->initUliCMS();
+
         Database::setEchoQueries(true);
 
-        $cfg = new CMSConfig();
-        $additionalSql = is_array($cfg->dbmigrator_initial_sql_files) ?
-                $cfg->dbmigrator_initial_sql_files : [];
+        $additionalSql = isset($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) ? StringHelper::splitAndTrim($_ENV['DBMIGRATOR_INITIAL_SQL_FILES']) : [];
+        $additionalSql = array_map('trim', $additionalSql);
 
         Database::setupSchemaAndSelect(
-            $cfg->db_database,
+            $_ENV['DB_DATABASE'],
             $additionalSql
         );
     }
 
     /**
-     * Drops the application's database
+     * Drop the application's database
+     *
+     * @return void
      */
-    public function dbDrop()
-    {
-        $cfg = new CMSConfig();
+    public function dbDrop(): void {
+        $this->initUliCMS();
+
         Database::setEchoQueries(true);
         if (Database::isConnected()) {
-            Database::dropSchema($cfg->db_database);
+            Database::dropSchema($_ENV['DB_DATABASE']);
         }
     }
 
     /**
-     * Creates and migrates the application's database
+     * Create and migrate the application's database
+     *
+     * @return void
      */
-    public function dbReset()
-    {
+    public function dbReset(): void {
+        $this->initUliCMS();
+
         Database::setEchoQueries(true);
 
         $this->dbDrop();
@@ -493,49 +627,366 @@ class RoboFile extends Tasks
 
     /**
      * Execute cronjobs
+     *
+     * @return void
      */
-    public function cron()
-    {
-        do_event('before_cron');
-        require 'lib/cron.php';
-        do_event('after_cron');
+    public function cron(): void {
+        $this->initUliCMS();
 
-        $timezone = DateTimeHelper::getCurrentTimezone();
-        $currentLocale = DateTimeHelper::getCurrentLocale();
-
-        $formatter = new IntlDateFormatter($currentLocale, IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM, $timezone);
-        $pattern = str_replace(',', '', $formatter->getPattern());
-        $formatter->setPattern($pattern);
-
-        $formatedCurrentTime = $formatter->format(time());
-
-        $this->writeln('finished cron at ' . $formatedCurrentTime);
+        do_event('cron');
     }
 
-    protected function initUliCMS()
-    {
+    /**
+     * Prepare build
+     *
+     * @return void
+     */
+    public function buildPrepare(): void {
+        $this->initUliCMS();
+        $this->buildCopyChangelog();
+        $this->buildLicenses();
+        $this->buildDeleteBullshit();
+        $this->buildPhpCsFixer();
+    }
+
+    /**
+     * Delete bullshit files such as .DS_STORE, thumbs.db
+     *
+     * @return void
+     */
+    public function buildDeleteBullshit(): void {
+        $filesToDelete = [];
+
+        foreach(Finder::find(
+            [
+                '.DS_STORE',
+                '.DS_Store',
+                'thumbs.db',
+                '.thumbs',
+                'tmp',
+                '*.pyc'
+            ]
+        )->from('.') as $name => $file) {
+            $filesToDelete[] = $file->getRealPath();
+        }
+
+        foreach($filesToDelete as $file) {
+            try {
+                FileSystem::delete($file);
+            }
+            catch(IOException $e) {
+                $this->writeln('Errror ' . $file);
+            }
+        }
+    }
+
+    /**
+     * Run php-cs-fiyer
+     *
+     * @return void
+     */
+    public function buildPhpCsFixer(): void {
+        system('vendor/bin/php-cs-fixer fix');
+    }
+
+    /**
+     * Check all php files for syntax errors
+     *
+     * @return void
+     */
+    public function buildCheckPhpSyntax(): void {
+        $this->initUliCMS();
+
+        foreach(Finder::findFiles(['*.php'])->from('.') as $name => $file) {
+            $path = $file->getRealPath();
+
+            if(! TestHelper::checkPhpSyntax($path)) {
+                $this->writeln("{$path} has invalid syntax");
+            }
+        }
+    }
+
+    /**
+     * Generate events.json
+     *
+     * @return void
+     */
+    public function buildUpdateEvents(): void {
+        $this->initUliCMS();
+
+        $events = [];
+        foreach(Finder::findFiles(['*.php'])->from('.') as $name => $file) {
+            $path = $file->getRealPath();
+
+            $content = file_get_contents($path);
+            preg_match_all('/do_event\(.+\);/im', $content, $matches);
+
+            $matches = ($matches[0]);
+
+            foreach($matches as $match) {
+                $name = $match;
+                $name = str_replace('do_event', '', $name);
+                $name = str_replace('(', '', $name);
+                $name = str_replace(')', '', $name);
+                $name = str_replace("'", '', $name);
+                $name = str_replace('"', '', $name);
+                $name = str_replace(';', '', $name);
+
+                $events[] = $name;
+            }
+        }
+
+        $events = array_map(static function($event) {
+            return \App\Helpers\ModuleHelper::underscoreToCamel($event);
+        }, $events);
+
+        $events = array_unique($events);
+        natcasesort($events);
+
+        $this->writeln(json_encode(array_values($events)));
+    }
+
+    /**
+     * Copy changelog to core_info module
+     *
+     * @return void
+     */
+    public function buildCopyChangelog(): void {
+        $this->initUliCMS();
+        FileSystem::copy(ULICMS_ROOT . '/../doc/changelog.txt', ULICMS_CONTENT . '/modules/core_info/changelog.txt', true);
+    }
+
+    /**
+     * Generate license files
+     *
+     * @return void
+     */
+    public function buildLicenses(): void {
+        system('vendor/bin/php-legal-licenses generate --hide-version');
+        system('node_modules/.bin/license-report --only=prod --output=json > licenses.json');
+    }
+
+    /**
+     * Optimize resources
+     */
+    public function buildOptimizeResources(): void {
+        $this->buildCleanupVendor();
+        $this->buildCleanupNodeModules();
+        $this->buildOptimizeSvg();
+        $this->buildMinifyCSS();
+        $this->buildMinifyJSON();
+        $this->buildMinifyHTML();
+    }
+
+     /**
+      * Optimize all svg files
+      * @return void
+      */
+    public function buildOptimizeSvg(): void {
+        $files = [];
+
+        foreach(Finder::findFiles(['*.svg'])->from('.') as $name => $file) {
+            $files[] = $file->getRealPath();
+        }
+
+        $files = array_unique($files);
+        $files = array_filter($files, static function($file) {
+            return ! str_contains($file, 'fixtures');
+        });
+
+        foreach($files as $file) {
+            $args = [
+                '--multipass',
+                $file,
+                '-o',
+                $file
+            ];
+
+            $cmd = 'svgo ' . implode(' ', $args);
+
+            system($cmd);
+        }
+    }
+
+    /**
+     * Cleanup vendor directory
+     *
+     * @return void
+     */
+    public function buildCleanupVendor(): void {
+        $this->cleanUpDirectory('vendor');
+    }
+
+    /**
+     * Cleanup node_modules directory
+     *
+     * @return void
+     */
+    public function buildCleanupNodeModules(): void {
+        $this->cleanUpDirectory('node_modules');
+    }
+
+    /**
+     * Minify CSS files
+     *
+     * @return void
+     */
+    public function buildMinifyCSS(): void {
+
+        system('minifyall -e css');
+    }
+
+    /**
+     * Minify JSON files
+     *
+     * @return void
+     */
+    public function buildMinifyJSON(): void {
+
+        system('minifyall -e json,cjson');
+    }
+
+    /**
+     * Minify HTML files
+     *
+     * @return void
+     */
+    public function buildMinifyHTML(): void {
+        system('minifyall -e html');
+    }
+
+    /**
+     * Converts an old BaseConfig to .env file format
+     *
+     * @return void
+     */
+    public function dotenvFromConfig(): void {
+        $this->initUliCMS();
+
+        $cfg = new CMSConfig();
+        $converter = new ConfigurationToDotEnvConverter($cfg);
+        $attributes = $converter->convertToArray();
+
+        foreach($attributes as $key => $value) {
+            $this->writeln("{$key}={$value}");
+        }
+
+        $converter->writeEnvFile();
+    }
+
+    /**
+     * Clean up directory
+     *
+     * @param string $directory
+     *
+     * @return void
+     */
+    protected function cleanUpDirectory(string $directory = 'vendor'): void {
+
+        $patterns = [
+            'test',
+            'tests',
+            'doc',
+            'docs',
+            '.github',
+            '.gitignore',
+            '*.bat',
+            'CODE_OF_CONDUCT.md',
+            'CONTRIBUTING.md',
+            'CHANGELOG.md',
+            'Contributors.md',
+            'phpunit.xml',
+            'phpunit.xml.*',
+            '.phpunit.*',
+            '.php-cs-fixer.*',
+            '.travis.yml',
+            '.styleci',
+            '.coveralls.yml',
+            '.gitattributes',
+            'README.md',
+            '.psalm',
+            '.settings',
+            '.editorconfig',
+            '.project',
+            '.stylelintrc',
+            '.circleci',
+            '.commitlintrc.json',
+            '.husky',
+            '.vscode'
+        ];
+
+        $size = 0;
+        $files = 0;
+        $filesToDelete = [];
+
+        $searchResult = Finder::find($patterns)->from($directory)->collect();
+
+        foreach($searchResult as $file) {
+
+            $path = $file->getRealPath();
+            $files += 1;
+            $size += $file->getSize();
+
+            if(! in_array($path, $filesToDelete)) {
+                $filesToDelete[] = $path;
+            }
+        }
+
+        foreach($filesToDelete as $file) {
+            try {
+                FileSystem::delete($file);
+            }
+            catch(IOException $e) {
+                $this->writeln('Errror ' . $file);
+            }
+        }
+    }
+
+    /**
+     * Init UliCMS
+     *
+     * @return void
+     */
+    protected function initUliCMS(): void {
         try {
             $this->initCore();
-        } catch (SqlException $e) {
+        } catch (Exception $e) {
+            // If initialization failed, initialize at least ULICMS_ROOT
+            // to pass direct access preventions
+            if (! defined('ULICMS_ROOT')) {
+                define('ULICMS_ROOT', dirname(__FILE__));
+            }
+
             $this->showException($e);
         }
     }
 
-    protected function showException(Exception $e)
-    {
+    /**
+     * Show exception
+     *
+     * @param Exception $e
+     *
+     * @return void
+     */
+    protected function showException(Exception $e): void {
         $this->writeln($e->getMessage());
     }
 
-    protected function initCore()
-    {
+    protected function initCore(): void {
         if (! defined('ULICMS_ROOT')) {
             require dirname(__FILE__) . '/init.php';
             require_once getLanguageFilePath('en');
         }
     }
 
-    private function showPageKeys($json)
-    {
+    /**
+     * Show package keys
+     *
+     * @param array $json
+     *
+     * @return void
+     */
+    private function showPackageKeys(array $json): void {
         $skipAttributes = [
             'data',
             'screenshot'
@@ -554,8 +1005,14 @@ class RoboFile extends Tasks
         }
     }
 
-    private function getModuleInfo(string $name): string
-    {
+    /**
+     * Get module information
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    private function getModuleInfo(string $name): string {
         $version = getModuleMeta($name, 'version');
         $line = $name;
 
@@ -568,8 +1025,14 @@ class RoboFile extends Tasks
         return $line;
     }
 
-    private function replaceModulePlaceholders(array $modules): array
-    {
+    /**
+     * Replace module placeholder strings
+     *
+     * @param string[] $modules
+     *
+     * @return string[]
+     */
+    private function replaceModulePlaceholders(array $modules): array {
         $manager = new ModuleManager();
         $manager->sync();
         $outModules = [];

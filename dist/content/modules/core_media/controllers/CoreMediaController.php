@@ -2,29 +2,49 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Controllers\MainClass;
 use MediaEmbed\MediaEmbed;
 
-class CoreMediaController extends MainClass
-{
-    public function beforeContentFilter(string $input): string
-    {
+/**
+ * This controller handles media replacement
+ */
+class CoreMediaController extends MainClass {
+    /**
+     * This is applied to content by event
+     *
+     * @param string $input HTML input string
+     *
+     * @return string Processed HTML string
+     */
+    public function beforeContentFilter(string $input): string {
         $data = CustomData::get();
 
+        // Check if media replacement is not disabled in CustomData JSON
         $mediaEmbedEnabled = ! (
             $data && isset($data['disable_media_embed']) &&
             $data['disable_media_embed']
         );
 
+        // Replace links with embedded media
         $input = $mediaEmbedEnabled && ! empty($input) ?
                 $this->_replaceLinks($input) : $input;
+
+        // Add loading="lazy" to HTML elements
         $input = $this->_addLazyLoad($input);
 
         return $input;
     }
 
-    // This method replaces links to media services like youtube with embedded media
-    public function _replaceLinks(string $input): string
-    {
+    /**
+     * Replace links with embedded codes
+     *
+     * @param string $input HTML input string
+     *
+     * @return string Processed HTML string
+     */
+    public function _replaceLinks(string $input): string {
         if (empty($input)) {
             return $input;
         }
@@ -35,14 +55,23 @@ class CoreMediaController extends MainClass
         @$dom->loadHTML($content);
 
         $linksToReplace = $this->collectLinks($dom);
+
         foreach ($linksToReplace as $link) {
             $link->oldNode->parentNode->replaceChild($link->newNode, $link->oldNode);
         }
-        return $this->getBodyContent($dom->saveHTML());
+
+        $savedHtml = $dom->saveHTML() ?: $input;
+        return $this->getBodyContent($savedHtml);
     }
 
-    protected function _addLazyload($input)
-    {
+    /**
+     * Add HTML5 lazy loading to elements
+     *
+     * @param string $input HTML input string
+     *
+     * @return string Processed HTML string
+     */
+    protected function _addLazyload(string $input): string {
         if (empty($input)) {
             return $input;
         }
@@ -51,6 +80,7 @@ class CoreMediaController extends MainClass
         $dom = new DOMDocument();
         @$dom->loadHTML($input);
 
+        // Apply lazy loading to images if enabled
         if (Settings::get('lazy_loading_img', 'bool')) {
             foreach ($dom->getElementsByTagName('img') as $node) {
                 if (! $node->getAttribute('loading')) {
@@ -59,6 +89,7 @@ class CoreMediaController extends MainClass
             }
         }
 
+        // Apply lazy loading to iframes if enabled
         if (Settings::get('lazy_loading_iframe', 'bool')) {
             foreach ($dom->getElementsByTagName('iframe') as $node) {
                 if (! $node->getAttribute('loading')) {
@@ -67,6 +98,7 @@ class CoreMediaController extends MainClass
             }
         }
 
+        $savedHtml = $dom->saveHTML() ?: $input;
 
         $newHtml = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace([
             '<html>',
@@ -78,14 +110,18 @@ class CoreMediaController extends MainClass
             '',
             '',
             ''
-        ], $dom->saveHTML()));
-        return $newHtml;
+        ], $savedHtml));
+        return $newHtml ?? '';
     }
 
-    // this method collect all embedable links and return it including
-    // a replacement node containg the embed element
-    protected function collectLinks(DOMDocument $dom): array
-    {
+    /**
+     * Collect all links in DOMDocument
+     *
+     * @param DOMDocument $dom
+     *
+     * @return array
+     */
+    protected function collectLinks(DOMDocument $dom): array {
         $elements = $dom->getElementsByTagName('a');
         $linksToReplace = [];
 
@@ -107,11 +143,16 @@ class CoreMediaController extends MainClass
         return $linksToReplace;
     }
 
-    // saveHTML() on DOMDocument returns a full valid html document
-    // This method extracts the content of the body
-    protected function getBodyContent(string $html): string
-    {
-        return preg_replace('/^<!DOCTYPE.+?>/', '', str_replace([
+    /**
+     *  saveHTML() on DOMDocument returns a full valid html document
+     *  However we need only the content of <body>
+     *
+     * @param string $html HTML input
+     *
+     * @return string content of <body>
+     */
+    protected function getBodyContent(string $html): string {
+        $match = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace([
             '<html>',
             '</html>',
             '<body>',
@@ -122,11 +163,18 @@ class CoreMediaController extends MainClass
             '',
             ''
         ], $html));
+
+        return $match ? $match : $html;
     }
 
-    // This method retrieves the embed code for an URL
-    protected function embedCodeFromUrl(string $url): ?string
-    {
+    /**
+     * Generated embed code from Url
+     *
+     * @param string $url
+     *
+     * @return ?string HTML embed code or null
+     */
+    protected function embedCodeFromUrl(string $url): ?string {
         $mediaEmbed = new MediaEmbed();
         $mediaObject = $mediaEmbed->parseUrl($url);
         if ($mediaObject) {
@@ -138,19 +186,34 @@ class CoreMediaController extends MainClass
         return null;
     }
 
-    // This method creates a dom node from an html element
+    /**
+     * This method converts a HTML string to a DOMElement
+     *
+     * @param string $str HTML string
+     * @param DOMDocument $dom DomDocument to use
+     *
+     * @return DOMElement
+     */
     protected function createElementFromHTML(
         string $str,
         DOMDocument $dom
     ): DOMElement {
+        // Since a root element is required, create a <span> and append the embed HTML code inside
         $element = $dom->createElement('span');
         $this->appendHTML($element, $str);
+
         return $element;
     }
 
-    // This method appends html code to a DOMElement
-    protected function appendHTML(DOMNode $parent, string $html): void
-    {
+    /**
+     * Append raw HTML code to a DOMDocument
+     *
+     * @param DOMNode $parent DOMNode to use
+     * @param string $html HTML String to apply
+     *
+     * @return void
+     */
+    protected function appendHTML(DOMNode $parent, string $html): void {
         $tmpDoc = new DOMDocument();
         $tmpDoc->loadHTML($html);
         foreach ($tmpDoc->getElementsByTagName('body')->item(0)->childNodes as $node) {

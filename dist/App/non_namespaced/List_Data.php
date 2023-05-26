@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Exceptions\DatabaseException;
 
 // A list is a paginated set of content
 // filtered by conditions
 // e.g. article archive
-class List_Data extends Model
-{
+class List_Data extends Model {
     public $content_id = null;
 
     public $language = null;
@@ -31,13 +30,11 @@ class List_Data extends Model
 
     public $type = null;
 
-    public function filter(?int $offset = null): array
-    {
+    public function filter(?int $offset = null): array {
         return $this->filterPaginated($offset);
     }
 
-    public function hasMore(int $offset = 0): bool
-    {
+    public function hasMore(int $offset = 0): bool {
         return count(
             $this->filterPaginated(
                 $offset + $this->limit
@@ -47,8 +44,7 @@ class List_Data extends Model
 
     // apply the filter conditions of this list
     // returns array of contents
-    public function filterPaginated(?int $offset = null): array
-    {
+    public function filterPaginated(?int $offset = null): array {
         $limit = $this->use_pagination ? $this->limit : null;
 
         return ContentFactory::getForFilter(
@@ -66,8 +62,7 @@ class List_Data extends Model
 
     // apply the filter conditions of this list
     // returns array of contents
-    public function filterAll(): array
-    {
+    public function filterAll(): array {
         return ContentFactory::getForFilter(
             $this->language,
             $this->category_id,
@@ -79,10 +74,9 @@ class List_Data extends Model
         );
     }
 
-    public function loadByID($id)
-    {
+    public function loadByID($id): void {
         $id = (int)$id;
-        $result = Database::query('select * from ' . tbname('lists')
+        $result = Database::query('select * from ' . Database::tableName('lists')
                         . " WHERE content_id = {$id}");
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
@@ -92,13 +86,12 @@ class List_Data extends Model
         $this->content_id = $id ? (int)$id : null;
     }
 
-    public function save()
-    {
+    public function save(): void {
         if ($this->content_id === null) {
             throw new DatabaseException('no content_id for list set');
         }
         $id = (int)($this->content_id);
-        $result = Database::query('select * from ' . tbname('lists')
+        $result = Database::query('select * from ' . Database::tableName('lists')
                         . " WHERE content_id = {$id}");
         if (Database::getNumRows($result) > 0) {
             $this->update();
@@ -107,13 +100,11 @@ class List_Data extends Model
         }
     }
 
-    public function isPersistent(): bool
-    {
+    public function isPersistent(): bool {
         return $this->content_id >= 1;
     }
 
-    protected function fillVars($data = null)
-    {
+    protected function fillVars($data = null): void {
         $this->content_id = $data->content_id ? (int)($data->content_id) : null;
         $this->language = $data->language ?: null;
         $this->category_id = $data->category_id ? (int)($data->category_id) : null;
@@ -126,8 +117,7 @@ class List_Data extends Model
         $this->type = $data->type ?: null;
     }
 
-    protected function create()
-    {
+    protected function create(): void {
         $content_id = (int)($this->content_id);
 
         if ($this->language === null) {
@@ -176,7 +166,7 @@ class List_Data extends Model
         if ((int)($this->limit) > 0) {
             $limit = (int)($this->limit);
         }
-        $sql = 'INSERT INTO ' . tbname('lists') .
+        $sql = 'INSERT INTO ' . Database::tableName('lists') .
                 ' (content_id, language, category_id, menu, parent_id, '
                 . '`order_by`, `order_direction`, `limit`, `use_pagination`, '
                 . "`type`) values ({$content_id}, {$language},
@@ -185,8 +175,7 @@ class List_Data extends Model
         Database::query($sql);
     }
 
-    protected function update()
-    {
+    protected function update(): void {
         $content_id = (int)$this->content_id;
 
         if ($this->language === null) {
@@ -238,7 +227,7 @@ class List_Data extends Model
 
         $use_pagination = (int)($this->use_pagination);
 
-        $sql = 'UPDATE ' . tbname('lists') . " set language = {$language},
+        $sql = 'UPDATE ' . Database::tableName('lists') . " set language = {$language},
 		category_id = {$category_id}, menu = {$menu},"
                 . "parent_id = {$parent_id}, `order_by` = {$order_by},"
                 . "`order_direction` = '{$order_direction}', `limit` = {$limit},"

@@ -1,10 +1,15 @@
 <?php
-$field = ViewBag::get('field');
-$value = ViewBag::get('field_value');
-$options = Viewbag::get('field_options') ?: [];
-if ($value === null) {
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+$field = \App\Storages\ViewBag::get('field');
+$value = \App\Storages\ViewBag::get('field_value');
+$options = \App\Storages\ViewBag::get('field_options') ?: [];
+
+if ($value === null && isset($field->defaultValue)) {
     $value = $field->defaultValue;
 }
+
 ?>
 <div class="custom-field field"
      data-field-name="<?php Template::escape($field->name); ?>">
@@ -13,17 +18,17 @@ if ($value === null) {
             echo '*';
         }
 ?></strong>
-    <select name="<?php Template::escape(ViewBag::get('field_name')); ?>"
+    <select name="<?php Template::escape(\App\Storages\ViewBag::get('field_name')); ?>"
     <?php
     if ($field->required) {
         echo 'required';
     }
 ?>
-            <?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>>
+            <?php echo \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes); ?>>
                 <?php foreach ($options as $optionValue => $optionTitle) { ?>
             <option value="<?php Template::escape($optionValue); ?>"
             <?php
-        if ($optionValue == $value) {
+        if ($optionValue === $value) {
             echo 'selected';
         }
                     ?>><?php

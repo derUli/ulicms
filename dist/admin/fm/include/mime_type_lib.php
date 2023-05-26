@@ -171,24 +171,24 @@ $mime_types = [
     'application/vnd.ms-powerpoint.slideshow.macroEnabled.12' => 'ppsm',
 ];
 
-
 if (! function_exists('get_extension_from_mime')) {
-    function get_extension_from_mime($mime)
-    {
+    function get_extension_from_mime($mime) {
         global $mime_types;
-        if (strpos($mime, ';') !== false) {
+
+        if (str_contains($mime, ';')) {
             $mime = substr($mime, 0, strpos($mime, ';'));
         }
+
         if (isset($mime_types[$mime])) {
             return $mime_types[$mime];
         }
+
         return '';
     }
 }
 
 if (! function_exists('get_file_mime_type')) {
-    function get_file_mime_type($filename, $debug = false)
-    {
+    function get_file_mime_type($filename, $debug = false) {
         if (function_exists('finfo_open') && function_exists('finfo_file') && function_exists('finfo_close')) {
             $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
             $mime_type = finfo_file($fileinfo, $filename);
@@ -237,7 +237,6 @@ if (! function_exists('get_file_mime_type')) {
     }
 }
 
-
 /********************
  * The following code can be used to test the function.
  * First put a plain text file named "test.txt" and a
@@ -250,7 +249,6 @@ if (! function_exists('get_file_mime_type')) {
  * Run the code with this command:
  * php mime_type_lib.php
  ********************/
-
 
 /* REMOVE ME TO TEST
 echo get_file_mime_type( 'test.txt' ) . "\n";

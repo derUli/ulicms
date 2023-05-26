@@ -4,36 +4,34 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Helpers\TestHelper;
 use ControllerRegistry;
 use DesignSettingsController;
-use function do_event;
-use function get_request_uri;
-use function getCurrentLanguage;
-use function is_crawler;
-use function is_mobile;
-use function is_tablet;
-
 use ModuleManager;
 use Path;
 use Phpfastcache\CacheManager;
 use Phpfastcache\Config\ConfigurationOption;
 use Phpfastcache\Helper\Psr16Adapter;
 use Settings;
+
+use function do_event;
+use function get_request_uri;
+use function getCurrentLanguage;
+use function is_crawler;
+use function is_mobile;
+use function is_tablet;
 use function strbool;
 use function sureRemoveDir;
 
-class CacheUtil
-{
+abstract class CacheUtil {
     private static $adapter;
 
     // returns a Psr16 cache adapter if caching is enabled
     // or $force is true
     // else returns null
-    public static function getAdapter(bool $force = false): ?Psr16Adapter
-    {
+    public static function getAdapter(bool $force = false): ?Psr16Adapter {
         if (! self::isCacheEnabled() && ! $force) {
             return null;
         }
@@ -63,8 +61,7 @@ class CacheUtil
      * Get the name of the Phpfastcache Driver
      * @return string
      */
-    public static function getDriverName(): string
-    {
+    public static function getDriverName(): string {
         $driver = self::getBestMatchingDriver();
 
         return apply_filter($driver, 'cache_driver_name');
@@ -73,8 +70,7 @@ class CacheUtil
     /**
      *  Resets cache adapter
      */
-    public static function resetAdapater()
-    {
+    public static function resetAdapater(): void {
         CacheManager::clearInstances();
         self::$adapter = null;
         self::getAdapter(true);
@@ -84,8 +80,7 @@ class CacheUtil
      * Check if page cache is enabled
      * @return bool
      */
-    public static function isCacheEnabled(): bool
-    {
+    public static function isCacheEnabled(): bool {
         return ! Settings::get('cache_disabled') && ! is_logged_in();
     }
 
@@ -93,9 +88,9 @@ class CacheUtil
      * Clear page cache
      * @return void
      */
-    public static function clearPageCache(): void
-    {
-        $adapter = self::getAdapter();
+    public static function clearPageCache(): void {
+        $adapter = self::getAdapter(true);
+
         if ($adapter) {
             $adapter->clear();
         }
@@ -105,14 +100,8 @@ class CacheUtil
      *  Clear general cache
      * @return void
      */
-    public static function clearCache(): void
-    {
+    public static function clearCache(): void {
         do_event('before_clear_cache');
-
-        // clear opcache if available
-        if (function_exists('opcache_reset')) {
-            opcache_reset();
-        }
 
         self::clearPageCache();
 
@@ -126,6 +115,7 @@ class CacheUtil
         $designSettingsController = ControllerRegistry::get(
             DesignSettingsController::class
         );
+
         $designSettingsController->_generateSCSSToFile();
 
         do_event('after_clear_cache');
@@ -135,8 +125,7 @@ class CacheUtil
      * Get cache expiration
      * @return int
      */
-    public static function getCachePeriod(): int
-    {
+    public static function getCachePeriod(): int {
         return (int)Settings::get('cache_period');
     }
 
@@ -145,8 +134,7 @@ class CacheUtil
      * Get uid for current page
      * @return string
      */
-    public static function getCurrentUid(): string
-    {
+    public static function getCurrentUid(): string {
         return 'fullpage-cache-' . md5(get_request_uri()
                         . getCurrentLanguage() . strbool(is_mobile())
                         . strbool(is_crawler()) . strbool(is_tablet()));
@@ -157,8 +145,7 @@ class CacheUtil
      * @param bool $removeDir
      * @return void
      */
-    public static function clearAvatars(bool $removeDir = false): void
-    {
+    public static function clearAvatars(bool $removeDir = false): void {
         $path = Path::resolve('ULICMS_CONTENT/avatars');
         File::sureRemoveDir($path, $removeDir);
     }
@@ -167,8 +154,7 @@ class CacheUtil
      * Get best matching supported Phpfastcache driver
      * @return string
      */
-    protected static function getBestMatchingDriver(): string
-    {
+    protected static function getBestMatchingDriver(): string {
         $driver = 'Devnull';
 
         $drivers = [
@@ -176,7 +162,6 @@ class CacheUtil
             // TODO: Prüfen, ob die Performance mit Apcu besser als mit Files ist
             // 'Apcu' => extension_loaded('apcu') && ini_get('apc.enabled'),
             'Files' => true,
-            // 'Files' => CORE_COMPONENT !== CORE_COMPONENT_PHPUNIT
         ];
 
         foreach ($drivers as $name => $driverAvailable) {

@@ -1,12 +1,11 @@
 <?php
 
-define('RESPONSIVE_FM', true);
-
 define('CORE_COMPONENT', 'admin');
 
 require_once '../../init.php';
 
 use App\Helpers\ImageScaleHelper;
+use App\Security\Permissions\PermissionChecker;
 
 $dimensions = ImageScaleHelper::getMaxImageDimensions();
 $version = '9.14.0';
@@ -15,7 +14,7 @@ if (session_id() == '') {
     session_start();
 }
 
-$acl = new ACL();
+$acl = new PermissionChecker(get_user_id());
 $permissions = ['files'];
 
 $isPermitted = false;

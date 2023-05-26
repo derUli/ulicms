@@ -1,6 +1,6 @@
 <?php
 
-use function App\HTML\icon;
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use  App\Translations\JSTranslation;
 
@@ -37,7 +37,7 @@ $passwordSecurityTranslation = new JSTranslation(
 );
 $passwordSecurityTranslation->render();
 ?>
-<div id="msgcontainer">
+<div id="loading-container">
     <img
         id="loading"
         src="gfx/loading.gif"
@@ -51,9 +51,6 @@ $passwordSecurityTranslation->render();
 </div>
 <?php do_event('admin_copyright_footer_left'); ?>
 </div>
-<a href="#" id="scroll-to-top" class="has-pointer">
-    <?php echo icon('fas fa-arrow-circle-up'); ?>
-</a>
 <?php do_event('backend_footer'); ?>
 </body>
 </html>

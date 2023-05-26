@@ -2,15 +2,12 @@
 
 use App\Models\Content\VCS;
 
-class HistoryControllerTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class HistoryControllerTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         Database::deleteFrom('content', "slug like 'unit-test-%'");
     }
 
-    public function testDoRestoreReturnsRevision()
-    {
+    public function testDoRestoreReturnsRevision(): void {
         $testPage = $this->createTestPage();
         $this->createHistories($testPage);
 
@@ -32,23 +29,20 @@ class HistoryControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($testPage->content, 'Some Text 2');
     }
 
-    public function testDoRestoreReturnsNull()
-    {
+    public function testDoRestoreReturnsNull(): void {
         $historyController = new HistoryController();
         $restoredRevision = $historyController->_doRestore(PHP_INT_MAX);
         $this->assertNull($restoredRevision);
     }
 
-    public function getTestUser(): User
-    {
+    public function getTestUser(): User {
         $manager = new UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
         $user->save();
         return $user;
     }
 
-    private function createTestPage(): Page
-    {
+    private function createTestPage(): Page {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -61,8 +55,7 @@ class HistoryControllerTest extends \PHPUnit\Framework\TestCase
         return $page;
     }
 
-    private function createHistories(Page $page)
-    {
+    private function createHistories(Page $page): void {
         $testUser = $this->getTestUser();
         VCS::createRevision($page->getID(), $page->content, $testUser->getId());
         $page->content = 'Some Text 2';

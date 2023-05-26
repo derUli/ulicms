@@ -1,6 +1,6 @@
 {
     "source": "core",
-    "version": "2023.2",
+    "version": "2023.3",
     "embed": false,
     "actions": {
         "settings_simple": "templates/settings_simple/form.php",
@@ -29,7 +29,21 @@
         "performance_settings": "performance_settings",
         "community_settings": "community_settings",
         "footer_text": "footer_text",
-        "error_pages": "error_pages"
+        "error_pages": "error_pages",
+        "site_slogan": "settings_simple",
+        "spam_filter": "spam_filter",
+        "logo": "logo",
+        "motd": "motd",
+        "favicon": "favicon",
+        "default_access_restrictions": "default_access_restrictions_edit",
+        "other_settings": "other",
+        "meta_description": "settings_simple",
+        "frontpage_settings": "settings_simple",
+        "settings_simple": "settings_simple",
+        "homepage_title": "settings_simple",
+        "languages": "languages",
+        "design": "design",
+        "open_graph": "open_graph"
     },
     "custom_acl": [
         "privacy_settings",

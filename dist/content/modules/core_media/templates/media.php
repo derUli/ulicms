@@ -1,5 +1,11 @@
 <?php
-$permissionChecker = new ACL();
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Security\Permissions\PermissionChecker;
+
+$permissionChecker = PermissionChecker::fromCurrentUser();
+
 if ($permissionChecker->hasPermission('videos') ||
         $permissionChecker->hasPermission('audio') ||
         $permissionChecker->hasPermission('files')) {

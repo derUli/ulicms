@@ -1,3 +1,6 @@
+<?php
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,8 +9,8 @@
         <style>
 <?php
         readfile(Path::resolve('ULICMS_ROOT/lib/css/core.scss'));
-        readfile(Path::resolve('ULICMS_ROOT/admin/css/modern.scss'));
-        ?> body {
+readfile(Path::resolve('ULICMS_ROOT/admin/css/modern.scss'));
+?> body {
                 padding: 10px;
             }
         </style>
@@ -16,7 +19,7 @@
     <body>
         <h1><?php translate('error'); ?></h1>
         <blockquote>
-            <?php echo ViewBag::get('exception'); ?>
+            <?php echo \App\Storages\ViewBag::get('exception'); ?>
         </blockquote>
     </body>
 </html>

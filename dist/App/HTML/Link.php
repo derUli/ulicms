@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
-
-use ModuleHelper;
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 /**
  * Utils to build HTML links
  */
-class Link
-{
+class Link {
     /**
      * Generate a <a> tag
+     *
      * @param string $href
      * @param string $text
-     * @param array $htmlAttributes
+     * @param array<string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function link(
@@ -32,17 +31,20 @@ class Link
         foreach ($htmlAttributes as $key => $value) {
             $attributes [$key] = $value;
         }
-        $attribHTML = ModuleHelper::buildHTMLAttributesFromArray($attributes);
+        $attribHTML = \App\Helpers\ModuleHelper::buildHTMLAttributesFromArray($attributes);
 
         return "<a {$attribHTML}>" . $text . '</a>';
     }
 
     /**
      * Returns a link to an action
+     *
      * @param string $action
      * @param string $text
      * @param string|null $suffix
-     * @param array $htmlAttributes
+     *
+     * @param array<string, string> $htmlAttributes
+     *
      * @return string
      */
     public static function actionLink(
@@ -51,7 +53,7 @@ class Link
         ?string $suffix = null,
         array $htmlAttributes = []
     ): string {
-        $url = ModuleHelper::buildActionURL($action, $suffix, true);
+        $url = \App\Helpers\ModuleHelper::buildActionURL($action, $suffix, true);
 
         return self::link($url, $text, $htmlAttributes);
     }

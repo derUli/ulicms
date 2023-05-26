@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
@@ -13,18 +13,19 @@ use Settings;
 /**
  * Utils to scale down image uploads
  */
-class ImageScaleHelper extends Helper
-{
+abstract class ImageScaleHelper extends Helper {
     /**
      * Get maximum allowed size dimension for images
-     * @return array|null
+     * @return int[]
      */
-    public static function getMaxImageDimensions(): ?array
-    {
+    public static function getMaxImageDimensions(): array {
         $dimensions = null;
         $scale = strtolower(Settings::get('max_image_dimensions') ?? '');
 
         $explodedScale = explode('x', $scale);
+
+        $width = PHP_INT_MAX;
+        $height = PHP_INT_MAX;
 
         if (count($explodedScale) === 2) {
             if (! empty($explodedScale[0])) {
@@ -36,11 +37,7 @@ class ImageScaleHelper extends Helper
             }
         }
 
-        if ($width && $height) {
-            $dimensions = [$width, $height];
-        }
-
-        return $dimensions;
+        return [$width, $height];
     }
 
     /**
@@ -63,7 +60,7 @@ class ImageScaleHelper extends Helper
             $size = new Box($dimensions[0], $dimensions[1]);
             $mode = ImageInterface::THUMBNAIL_INSET;
 
-            $imagine->open($file)
+            $imagine?->open($file)
                 ->thumbnail($size, $mode)
                 ->save($outputFile ?: $file);
 

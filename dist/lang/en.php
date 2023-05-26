@@ -1,6 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 define('LOADED_LANGUAGE_FILE', 'en');
+
 // Dashboard (Willkommen)
 add_translation('MOTD', 'Message of the Day');
 add_translation('STATISTICS', 'Statistics');
@@ -171,7 +176,7 @@ add_translation('PLEASE_SELECT_FILETYPE', 'Plese select a file type');
 // Vorlagen
 add_translation('TEMPLATE_INFO_TEXT', 'You can edit your website templates here. Please be careful, because of the contained PHP code.');
 add_translation('PLEASE_SELECT_TEMPLATE', 'please select a template');
-add_translation('CHANGES_WAS_SAVED', 'Changes was saved.');
+add_translation('CHANGES_WERE_SAVED', 'Changes were saved.');
 
 add_translation('INSTALL_PACKAGE', 'Install package');
 add_translation('INSTALLED_MODULES', 'Installed modules');
@@ -358,7 +363,6 @@ add_translation('ULICMS_NEWS', 'News about UliCMS');
 add_translation('POSTED_ON_DATE', 'Posted on %s');
 add_translation('UNDER_MAINTENANCE', '<h1>Briefly unavailable for scheduled maintenance. Check back in a minute.</h1>');
 
-
 // Videos
 add_translation('VIDEOS', 'Videos');
 add_translation('UPLOAD_VIDEO', 'Upload a Video');
@@ -389,7 +393,7 @@ add_translation('LOG', 'Log');
 add_translation('IP_ADDRESSES', 'IP Addresses');
 add_translation('LOG_IP_ADDRESSES', 'Save IP addresses of comment authors.');
 add_translation('LOG_IP_ADDRESSES_NOTICE', '<strong>Warning!</strong><br>This is maybe a problem with the privacy policy law.');
-add_translation('LOG_IP_INFORMATION', 'The log will be saved in database table ' . tbname('log') . '. You can view it using an database administration tool like phpMyAdmin or sql_console.');
+add_translation('LOG_IP_INFORMATION', 'The log will be saved in database table ' . Database::tableName('log') . '. You can view it using an database administration tool like phpMyAdmin or sql_console.');
 
 // HTML Editor
 add_translation('HTML_EDITOR', 'HTML Editor');
@@ -465,8 +469,6 @@ add_translation('MOBILE_DEVICES', 'Mobile Devices');
 add_translation('DESKTOP_COMPUTERS', 'Desktop PCs');
 
 add_translation('DELETE_IPS_AFTER_48_HOURS', 'Delete IP addresses after 48 hours');
-add_translation('LOGIN_FROM_IP_NOT_ALLOWED', 'Access from your ip address is not allowed.<br/>
-Please ask your system administrator to add your ip address to whitelist.');
 
 // Open Graph
 add_translation('OPEN_GRAPH', 'Open Graph');

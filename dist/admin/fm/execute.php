@@ -48,8 +48,7 @@ while ($cycle && $i < $max_cycles) {
     $path = fix_dirname($path) . '/';
 }
 
-function returnPaths($_path, $_name, $config)
-{
+function returnPaths($_path, $_name, $config) {
     global $ftp;
     $path = $config['current_path'] . $_path;
     $path_thumb = $config['thumbs_base_path'] . $_path;
@@ -60,7 +59,7 @@ function returnPaths($_path, $_name, $config)
     }
     if ($_name) {
         $name = fix_filename($_name, $config);
-        if (strpos($name, '../') !== false || strpos($name, '..\\') !== false) {
+        if (str_contains($name, '../') || str_contains($name, '..\\')) {
             response(trans('wrong name') . AddErrorLocation())->send();
             exit;
         }
@@ -196,7 +195,7 @@ if (isset($_GET['action'])) {
             }
 
             // check if user supplied extension
-            if (strpos($name, '.') === false) {
+            if (! str_contains($name, '.')) {
                 response(trans('No_Extension') . ' ' . sprintf(trans('Valid_Extensions'), implode(', ', $config['editable_text_file_exts'])) . AddErrorLocation())->send();
                 exit;
             }
@@ -239,11 +238,11 @@ if (isset($_GET['action'])) {
                     response(trans('File_Save_Error') . AddErrorLocation())->send();
                     exit;
                 }
-                    if (is_function_callable('chmod') !== false) {
-                        chmod($path . $name, 0644);
-                    }
-                    response(trans('File_Save_OK'))->send();
-                    exit;
+                if (is_function_callable('chmod') !== false) {
+                    chmod($path . $name, 0644);
+                }
+                response(trans('File_Save_OK'))->send();
+                exit;
 
             }
 
@@ -328,7 +327,6 @@ if (isset($_GET['action'])) {
             $action = $_SESSION['RF']['clipboard_action'];
             $data = $_SESSION['RF']['clipboard'];
 
-
             if ($ftp) {
                 if ($_POST['path'] != '') {
                     $path .= DIRECTORY_SEPARATOR;
@@ -352,7 +350,7 @@ if (isset($_GET['action'])) {
             }
 
             // user wants to paste folder to it's own sub folder.. baaaah.
-            if (is_dir($data['path']) && strpos($path, $data['path']) !== false) {
+            if (is_dir($data['path']) && str_contains($path, $data['path'])) {
                 response()->send();
                 exit;
             }
@@ -488,8 +486,8 @@ if (isset($_GET['action'])) {
                     response(trans('File_Save_Error') . AddErrorLocation())->send();
                     exit;
                 }
-                    response(trans('File_Save_OK'))->send();
-                    exit;
+                response(trans('File_Save_OK'))->send();
+                exit;
 
             }
 

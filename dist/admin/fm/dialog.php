@@ -59,7 +59,7 @@ if (checkRelativePath($subdir_path)) {
 }
 
 if ($subdir == '') {
-    if (! empty($_COOKIE['last_position']) && strpos($_COOKIE['last_position'], '.') === false) {
+    if (! empty($_COOKIE['last_position']) && ! str_contains($_COOKIE['last_position'], '.')) {
         $subdir = trim($_COOKIE['last_position']);
     }
 }
@@ -94,8 +94,8 @@ if (! isset($_SESSION['RF']['subfolder'])) {
 $rfm_subfolder = '';
 
 if (! empty($_SESSION['RF']['subfolder'])
-    && strpos($_SESSION['RF']['subfolder'], '/') !== 0
-    && strpos($_SESSION['RF']['subfolder'], '.') === false
+    && ! str_starts_with($_SESSION['RF']['subfolder'], '/')
+    && ! str_contains($_SESSION['RF']['subfolder'], '.')
 ) {
     $rfm_subfolder = $_SESSION['RF']['subfolder'];
 }
@@ -112,7 +112,6 @@ if (($ftp && ! $ftp->isDir(
     $subdir = '';
     $rfm_subfolder = '';
 }
-
 
 $cur_dir = $config['upload_dir'] . $rfm_subfolder . $subdir;
 $cur_dir_thumb = $config['thumbs_upload_dir'] . $rfm_subfolder . $subdir;
@@ -860,8 +859,7 @@ foreach ($files as $k => $file) {
     }
 }
 
-function filenameSort($x, $y)
-{
+function filenameSort($x, $y) {
     global $descending;
 
     if ($x['is_dir'] !== $y['is_dir']) {
@@ -874,8 +872,7 @@ function filenameSort($x, $y)
     return $greater ? 1 : -1;
 }
 
-function dateSort($x, $y)
-{
+function dateSort($x, $y) {
     global $descending;
 
     if ($x['is_dir'] !== $y['is_dir']) {
@@ -888,9 +885,7 @@ function dateSort($x, $y)
     return $greater ? 1 : -1;
 }
 
-
-function sizeSort($x, $y)
-{
+function sizeSort($x, $y) {
     global $descending;
 
     if ($x['is_dir'] !== $y['is_dir']) {
@@ -903,8 +898,7 @@ function sizeSort($x, $y)
     return $greater ? 1 : -1;
 }
 
-function extensionSort($x, $y)
-{
+function extensionSort($x, $y) {
     global $descending;
 
     if ($x['is_dir'] !== $y['is_dir']) {
@@ -1262,7 +1256,6 @@ if ($config['show_language_selection']) { ?>
             echo 'list-view' . $view; ?>" id="main-item-container">
                 <?php
 
-
                 foreach ($files as $file_array) {
                     $file = $file_array['file'];
                     if ($file == '.' || (substr(
@@ -1438,7 +1431,6 @@ if ($config['show_language_selection']) { ?>
                     </li>
                     <?php
                 }
-
 
                 $files_prevent_duplicate = [];
                 foreach ($files

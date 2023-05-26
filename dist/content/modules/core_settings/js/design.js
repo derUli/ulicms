@@ -46,19 +46,21 @@ const loadThemePreview = (selectField) => {
 
 
 const updateFontPreview = () => {
-    const fontFamily = $("select#default_font").val();
-    const fontSize = $("select#font_size").val();
+    const fontFamily = $('select#default_font').val();
+    const fontSize = $('select#font_size').val();
+    const fontColor = $('input#body_text_color').val();
 
     $("#font-preview").css(
             {
                 fontFamily: fontFamily,
-                fontSize: fontSize
+                fontSize: fontSize,
+                color: fontColor
             }
     );
 };
 
 $(() => {
-    $("select#default_font, select#font-size").change(updateFontPreview);
+    $('select#default_font, select#font_size, input#body_text_color').on('change', updateFontPreview);
 
     updateFontPreview();
 
@@ -68,21 +70,4 @@ $(() => {
             (event) => {
         loadThemePreview($(event.currentTarget));
     });
-
-    // ajax form submit
-    $("#designForm").ajaxForm(
-            {
-                beforeSubmit: () => {
-                    $("#message").html("");
-                    $("#msgcontainer, #loading").show();
-                },
-                success: () => {
-                    $("#loading").hide();
-                    $("#message").html(
-                            `<span style="color:green;">
-                    ${Translation.ChangesWasSaved}
-        </span>`);
-                    $("#msgcontainer, #loading").hide();
-                }
-            });
 });

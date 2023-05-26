@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Packages\PackageManager;
 
-class UpdateManager
-{
-    public static function getAllUpdateablePackages(): array
-    {
+class UpdateManager {
+    public static function getAllUpdateablePackages(): array {
         $pkg = new PackageManager();
         $retval = [];
         $modules = getAllModules();

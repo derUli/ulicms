@@ -2,21 +2,17 @@
 
 use App\Models\Content\Types\DefaultContentTypes;
 
-class DefaultContentTypesTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class DefaultContentTypesTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         DefaultContentTypes::initTypes();
     }
 
-    public function testGetAll()
-    {
+    public function testGetAll(): void {
         $types = DefaultContentTypes::getAll();
         $this->assertGreaterThanOrEqual(11, count($types));
     }
 
-    public function testGetExistingReturnsObject()
-    {
+    public function testGetExistingReturnsObject(): void {
         $typePage = DefaultContentTypes::get('page');
         $this->assertCount(13, $typePage->show);
         $this->assertContains('.menu-stuff', $typePage->show);
@@ -28,13 +24,11 @@ class DefaultContentTypesTest extends \PHPUnit\Framework\TestCase
         $this->assertContains('#article-image', $typeArticle->show);
     }
 
-    public function testGetNonExistingReturnsNull()
-    {
+    public function testGetNonExistingReturnsNull(): void {
         $this->assertNull(DefaultContentTypes::get('gibts_nicht'));
     }
 
-    public function testToJson()
-    {
+    public function testToJson(): void {
         $this->assertEquals(
             file_get_contents(
                 Path::resolve(

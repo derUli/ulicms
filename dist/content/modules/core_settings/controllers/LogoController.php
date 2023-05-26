@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Helpers\ImageScaleHelper;
 use App\Utils\CacheUtil;
 use App\Utils\File;
 
-class LogoController extends Controller
-{
+class LogoController extends \App\Controllers\Controller {
     public function _buildFileName(
         string $filename,
         string $originalName
@@ -25,8 +26,7 @@ class LogoController extends Controller
                 $this->_buildFileName($filename, $originalName);
     }
 
-    public function upload(): void
-    {
+    public function upload(): void {
         // Logo Upload
         if (! empty($_FILES['logo_upload_file']['name'])) {
             $logo_upload = $_FILES['logo_upload_file'];
@@ -54,12 +54,10 @@ class LogoController extends Controller
             do_event('after_upload_logo');
         }
 
-
-        Response::redirect(ModuleHelper::buildActionURL('logo'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('logo'));
     }
 
-    public function _deleteLogo(): bool
-    {
+    public function _deleteLogo(): bool {
         $logoImage = Settings::get('logo_image');
         $path = ULICMS_ROOT . "/content/images/{$logoImage}";
 
@@ -74,22 +72,20 @@ class LogoController extends Controller
         return true;
     }
 
-    public function deleteLogo(): void
-    {
+    public function deleteLogo(): void {
         $success = $this->_deleteLogo();
-        if ($succes) {
+        if ($success) {
             CacheUtil::clearPageCache();
         }
         Response::sendHttpStatusCodeResultIfAjax(
             $success ?
                     HttpStatusCode::OK :
                     HttpStatusCode::INTERNAL_SERVER_ERROR,
-            ModuleHelper::buildActionURL('logo')
+            \App\Helpers\ModuleHelper::buildActionURL('logo')
         );
     }
 
-    public function _hasLogo(): bool
-    {
+    public function _hasLogo(): bool {
         return ! empty(Settings::get('logo_image')) &&
                 Settings::get('logo_disabled') !== 'yes';
     }

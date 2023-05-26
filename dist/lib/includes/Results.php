@@ -4,6 +4,8 @@
 
 declare(strict_types=1);
 
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
 use App\Backend\BackendPageRenderer;
 use App\Helpers\TestHelper;
 use Nette\Utils\Json;
@@ -11,13 +13,14 @@ use zz\Html\HTMLMinify;
 
 /**
  * Serialize $data as JSON, output it to the client and exit script
- * @param type $data
+ *
+ * @param mixed $data
  * @param int $status
- * @param type $compact
+ * @param bool $compact
+ *
  * @return void
  */
-function JSONResult($data, int $status = 200, $compact = true): void
-{
+function JSONResult(mixed $data, int $status = 200, bool $compact = true): void {
     $json = Json::encode($data, ! $compact);
 
     RawJSONResult($json, $status);
@@ -25,27 +28,29 @@ function JSONResult($data, int $status = 200, $compact = true): void
 
 /**
  * Output a json string to the client and exit script
- * @param type $data
+ *
+ * @param string $data
  * @param int $status
- * @param type $compact
+ *
  * @return void
  */
-function RawJSONResult(string $data, int $status = 200): void
-{
+function RawJSONResult(string $data, int $status = 200): void {
     Result($data, $status, 'application/json');
 }
 
 /**
  * Output a HTML string to the client and exit script
+ *
  * @param string $data
  * @param int $status
  * @param int $optimizationLevel
+ *
  * @return void
  */
 function HTMLResult(
     string $data,
     int $status = 200,
-    int $optimizationLevel = HTMLMinify::OPTIMIZATION_SIMPLE
+    int $optimizationLevel = HTMLMinify::OPTIMIZATION_ADVANCED
 ): void {
     $optimizedHtml = optimizeHtml($data, $optimizationLevel);
 
@@ -54,27 +59,28 @@ function HTMLResult(
 
 /**
  * Output a plaintext string to the client and exit script
+ *
  * @param string $data
  * @param int $status
- * @param int $optimizationLevel
+ *
  * @return void
  */
-function TextResult(string $data, int $status = 200): void
-{
+function TextResult(string $data, int $status = 200): void {
     Result($data, $status, 'text/plain; charset=utf-8');
 }
 
 /**
  * Output a whatever string to the client and exit script
+ *
  * @param string $data
  * @param int $status
- * @param int $optimizationLevel
+ * @param ?string $type
+ *
  * @return void
  */
-function Result(string $data, int $status = 200, ?string $type = null): void
-{
+function Result(string $data, int $status = 200, ?string $type = null): void {
     Response::sendStatusHeader($status);
-    $size = getStringLengthInBytes($data);
+    $size = strlen($data);
 
     if ($type) {
         send_header("Content-Type: {$type}");
@@ -86,7 +92,9 @@ function Result(string $data, int $status = 200, ?string $type = null): void
 
 /**
  * Output a response without
+ *
  * @param int $status
+ *
  * @return void
  */
 function HTTPStatusCodeResult(
@@ -97,16 +105,17 @@ function HTTPStatusCodeResult(
 
 /**
  * handle exceptions
+ *
  * @param string $message
  * @param int $status
+ *
  * @return void
  */
-function ExceptionResult(string $message, int $status = 500): void
-{
-    ViewBag::set('exception', nl2br($message));
+function ExceptionResult(string $message, int $status = 500): void {
+    \App\Storages\ViewBag::set('exception', nl2br($message));
     $content = Template::executeDefaultOrOwnTemplate('exception.php');
 
-    $size = getStringLengthInBytes($content);
+    $size = strlen($content);
     if (! TestHelper::isRunningPHPUnit()) {
         send_header($_SERVER['SERVER_PROTOCOL'] . ' '
                 . Response::getStatusCodeByNumber((int)$status));
@@ -122,12 +131,13 @@ function ExceptionResult(string $message, int $status = 500): void
 
 /**
  * Render backend action result
+ *
  * @param string $action
- * @param type $model
+ * @param mixed $model
+ *
  * @return void
  */
-function ActionResult(string $action, $model = null): void
-{
+function ActionResult(string $action, mixed $model = null): void {
     $renderer = new BackendPageRenderer($action, $model);
     $renderer->render();
 }

@@ -2,14 +2,12 @@
 
 use App\CoreContent\Partials\DeleteButtonRenderer;
 
-class DeleteButtonRendererTest extends \PHPUnit\Framework\TestCase
-{
+class DeleteButtonRendererTest extends \PHPUnit\Framework\TestCase {
     private $user;
 
     private $group;
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $user = new User();
         $user->setUsername('paul.panzer');
         $user->setLastname('Panzer');
@@ -21,15 +19,13 @@ class DeleteButtonRendererTest extends \PHPUnit\Framework\TestCase
         $this->user = $user;
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $this->user->delete();
 
         Database::query("delete from {prefix}content where title like 'Test Page%'", true);
     }
 
-    public function testRenderReturnsHtml()
-    {
+    public function testRenderReturnsHtml(): void {
         $this->user->setAdmin(true);
         $this->user->save();
 
@@ -59,8 +55,7 @@ class DeleteButtonRendererTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testRenderReturnsNothing()
-    {
+    public function testRenderReturnsNothing(): void {
         $allGroups = Group::getAll();
 
         $this->user->setAdmin(false);

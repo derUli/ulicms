@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 add_translation('FORTUNE', 'Fortune Cookie');
 add_translation('MY_SETTINGS_PAGE', 'My Settings Page');
 add_translation('HELLO_WORLD', 'Hello World!');

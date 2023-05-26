@@ -1,11 +1,12 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use function App\HTML\icon;
 
 define('MODULE_ADMIN_HEADLINE', get_translation('extend_upgrade_helper'));
 
-function extend_upgrade_helper_admin()
-{
+function extend_upgrade_helper_admin(): void {
     $controller = ControllerRegistry::get('ExtendUpgradeHelper');
     $modules = $controller->getModules();
     ?>

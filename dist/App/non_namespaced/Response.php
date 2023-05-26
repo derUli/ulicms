@@ -2,19 +2,27 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-if (! defined('RESPONSIVE_FM')) {
-    class Response
-    {
+// This file conflicts with PHP Responsive FM
+$url = $_SERVER['REQUEST_URI'] ?? '';
+$urlParts = explode('/' , $url);
+
+$isFm = in_array('fm', $urlParts);
+
+// Don't load this class for Responsive FM
+if (! $isFm) {
+    class Response {
         public static function sendHttpStatusCodeResultIfAjax(
-            int $status = HTTPStatusCode::OK,
+            int $status = HttpStatusCode::OK,
             ?string $redirect = null,
             int $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
+
             if (Request::isAjaxRequest()) {
                 HTTPStatusCodeResult($status);
             }
+
             if ($redirect) {
                 self::redirect($redirect, $redirectStatus);
             }
@@ -36,10 +44,10 @@ if (! defined('RESPONSIVE_FM')) {
             $status = HttpStatusCode::MOVED_TEMPORARILY
         ): void {
             if ($controller == null) {
-                self::redirect(ModuleHelper::buildActionURL($action), $status);
+                self::redirect(\App\Helpers\ModuleHelper::buildActionURL($action), $status);
             }
             self::redirect(
-                ModuleHelper::buildMethodCallUrl(
+                \App\Helpers\ModuleHelper::buildMethodCallUrl(
                     $controller,
                     $action
                 ),
@@ -61,11 +69,12 @@ if (! defined('RESPONSIVE_FM')) {
             string $url,
             $safeHosts = null
         ): string {
-            $cfg = new CMSConfig();
+
             if (is_array($safeHosts) && count($safeHosts) >= 1) {
                 $safeHosts = $safeHosts;
-            } elseif (isset($cfg->safe_hosts) && is_array($cfg->safe_hosts)) {
-                $safeHosts = $cfg->safe_hosts;
+            } elseif (isset($_ENV['SAFE_HOSTS'])) {
+                $safeHosts = explode('; ', $_ENV['SAFE_HOSTS']);
+                $safeHosts = array_map('trim', $safeHosts);
             } else {
                 $safeHosts = [
                     get_http_host()
@@ -81,9 +90,9 @@ if (! defined('RESPONSIVE_FM')) {
                         ),
                         getCurrentLanguage()
                     );
-                    $url = ModuleHelper::getFullPageURLByID($page->id);
+                    $url = \App\Helpers\ModuleHelper::getFullPageURLByID($page->id);
                 } catch (Exception $e) {
-                    $url = ModuleHelper::getBaseUrl();
+                    $url = \App\Helpers\ModuleHelper::getBaseUrl();
                 }
             }
             return $url;
@@ -98,8 +107,7 @@ if (! defined('RESPONSIVE_FM')) {
             self::redirect($url, $status);
         }
 
-        public static function sendStatusHeader(?int $nr): bool
-        {
+        public static function sendStatusHeader(?int $nr): bool {
             if (headers_sent()) {
                 return false;
             }
@@ -109,8 +117,7 @@ if (! defined('RESPONSIVE_FM')) {
         }
 
         // Übersetzung HTTP Status Code => Name
-        public static function getStatusCodeByNumber(int $nr): string
-        {
+        public static function getStatusCodeByNumber(int $nr): string {
             $http_codes = [
                 100 => 'Continue',
                 101 => 'Switching Protocols',
@@ -171,8 +178,7 @@ if (! defined('RESPONSIVE_FM')) {
             return $nr . ' ' . $http_codes[$nr];
         }
 
-        public static function sendHeader(string $header): bool
-        {
+        public static function sendHeader(string $header): bool {
             if (headers_sent() || is_cli()) {
                 return false;
             }

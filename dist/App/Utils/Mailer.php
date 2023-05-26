@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\EmailModes;
 use App\Registries\LoggerRegistry;
 use Closure;
+use Database;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Settings;
@@ -16,15 +17,13 @@ use Settings;
 /**
  * Send Mails
  */
-class Mailer
-{
+class Mailer {
     /**
      * Split mail header string to array
      * @param string $headers
      * @return array
      */
-    public static function splitHeaders(string $headers): array
-    {
+    public static function splitHeaders(string $headers): array {
         $header_array = [];
         $lines = normalizeLN($headers, "\n");
         $lines = explode("\n", $lines);
@@ -59,11 +58,11 @@ class Mailer
         // UliCMS speichert seit UliCMS 9.0.1 E-Mails, die das System versendet hat
         // in der Datenbank
         // TODO: Make a method for this sql statement
-        $insert_sql = 'INSERT INTO ' . tbname('mails') .
+        $insert_sql = 'INSERT INTO ' . Database::tableName('mails') .
                 " (headers, `to`, subject, body) VALUES ('" .
-                db_escape($headers) . "', '" . db_escape($to) . "', '" .
-                db_escape($subject) . "', '" . db_escape($message) . "')";
-        db_query($insert_sql);
+                Database::escapeValue($headers) . "', '" . Database::escapeValue($to) . "', '" .
+                Database::escapeValue($subject) . "', '" . Database::escapeValue($message) . "')";
+        Database::query($insert_sql);
 
         return self::sendWithPHPMailer(
             $to,
@@ -78,9 +77,8 @@ class Mailer
      * Get mail logger
      * @return Closure
      */
-    public static function getMailLogger(): Closure
-    {
-        return static function($str, $level) {
+    public static function getMailLogger(): Closure {
+        return static function($str, $level): void {
             $logger = LoggerRegistry::get('phpmailer_log');
             if ($logger) {
                 $logger->debug($str);
@@ -166,8 +164,7 @@ class Mailer
      * @param PHPMailer $mailer
      * @return PHPMailer
      */
-    protected static function setPHPMailerAttributes(PHPMailer $mailer): PHPMailer
-    {
+    protected static function setPHPMailerAttributes(PHPMailer $mailer): PHPMailer {
         $mailer->SMTPSecure = Settings::get('smtp_encryption');
 
         // Disable verification of ssl certificates

@@ -18,6 +18,5 @@ namespace FtpClient;
  * @inheritDoc
  * @author Nicolas Tallefourtane <dev@nicolab.net>
  */
-class FtpException extends \Exception
-{
+class FtpException extends \Exception {
 }

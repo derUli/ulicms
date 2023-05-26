@@ -10,7 +10,6 @@
 
 <IfModule mod_deflate.c>
 	AddOutputFilterByType DEFLATE application/javascript
-	AddOutputFilterByType DEFLATE application/rss+xml
 	AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
 	AddOutputFilterByType DEFLATE application/x-font
 	AddOutputFilterByType DEFLATE application/x-font-opentype
@@ -33,38 +32,44 @@
 	AddOutputFilterByType DEFLATE text/xml
 </IfModule>
 
-# Deny access to CMSConfig.php file
-<files CMSConfig.php>
+# Deny access to files starting with a dot
+<files .*>
 	order allow,deny
 	deny from all
 </files>
 
-# Deny access to cms-config.php file
-<files cms-config.php>
-	order allow,deny
-	deny from all
-</files>
-
-# Deny access to composer executable file
-<files composer>
-	order allow,deny
-	deny from all
-</files>
-
-# Deny access to composer executable file
+# Deny access to file
 <files composer.json>
 	order allow,deny
 	deny from all
 </files>
 
-# Deny access to composer executable file
+# Deny access to file
+<files composer.lock>
+	order allow,deny
+	deny from all
+</files>
+
+# Deny access to file
 <files package.json>
 	order allow,deny
 	deny from all
 </files>
 
-# Deny access to metadata.json file
+# Deny access to file
+<files package.lock>
+	order allow,deny
+	deny from all
+</files>
+
+# Deny access to file
 <files metadata.json>
+	order allow,deny
+	deny from all
+</files>
+
+# Deny access to file
+<files manage>
 	order allow,deny
 	deny from all
 </files>

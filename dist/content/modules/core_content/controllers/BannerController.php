@@ -2,25 +2,23 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Exceptions\DatasetNotFoundException;
 use App\Models\Content\Advertisement\Banner;
 use App\Utils\CacheUtil;
 
-class BannerController extends Controller
-{
-    public function __construct()
-    {
+class BannerController extends \App\Controllers\Controller {
+    public function __construct() {
         parent::__construct();
     }
 
-    public function createPost(): void
-    {
+    public function createPost(): void {
         $this->_createPost();
-        Response::redirect(ModuleHelper::buildActionURL('banner'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('banner'));
     }
 
-    public function _createPost(): Banner
-    {
+    public function _createPost(): Banner {
         do_event('before_create_banner');
 
         $banner = new Banner();
@@ -35,7 +33,7 @@ class BannerController extends Controller
         $banner->setDateTo(stringOrNull($_POST['date_to']));
 
         $banner->setEnabled((bool)$_POST['enabled']);
-        $banner->setLanguage($_POST['language'] != 'all' ? $_POST['language'] : null);
+        $banner->setLanguage($_POST['language'] !== 'all' ? $_POST['language'] : null);
         $banner->save();
 
         do_event('after_create_banner');
@@ -44,15 +42,13 @@ class BannerController extends Controller
         return $banner;
     }
 
-    public function updatePost(): void
-    {
+    public function updatePost(): void {
         $this->_updatePost();
 
-        Response::redirect(ModuleHelper::buildActionURL('banner'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('banner'));
     }
 
-    public function _updatePost(): Banner
-    {
+    public function _updatePost(): Banner {
         $id = (int)$_POST['id'];
 
         do_event('before_edit_banner');
@@ -69,7 +65,7 @@ class BannerController extends Controller
         $banner->setDateTo(stringOrNull($_POST['date_to']));
 
         $banner->setEnabled((bool)$_POST['enabled']);
-        $banner->setLanguage($_POST['language'] != 'all' ? $_POST['language'] : null);
+        $banner->setLanguage($_POST['language'] !== 'all' ? $_POST['language'] : null);
         $banner->save();
 
         do_event('after_edit_banner');
@@ -79,17 +75,15 @@ class BannerController extends Controller
         return $banner;
     }
 
-    public function deletePost(): void
-    {
+    public function deletePost(): void {
         $id = Request::getVar('banner', 0, 'int');
 
         $this->_deletePost($id);
         // Todo: handle errors
-        Response::redirect(ModuleHelper::buildActionURL('banner'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('banner'));
     }
 
-    public function _deletePost(int $id): bool
-    {
+    public function _deletePost(int $id): bool {
         try {
             $banner = new Banner($id);
         } catch (DatasetNotFoundException $e) {

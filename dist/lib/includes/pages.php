@@ -2,46 +2,44 @@
 
 declare(strict_types=1);
 
-function getPageSlugByID(?int $id): ?string
-{
-    $result = db_query('SELECT slug, id FROM `' . tbname('content')
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
+function getPageSlugByID(?int $id): ?string {
+    $result = Database::query('SELECT slug, id FROM `' . Database::tableName('content')
             . '` where id=' . (int)$id);
-    if (db_num_rows($result) > 0) {
-        $row = db_fetch_object($result);
+    if (Database::getNumRows($result) > 0) {
+        $row = Database::fetchObject($result);
         return $row->slug;
     }
     return null;
 }
 
-function getPageByID(int $id): ?object
-{
+function getPageByID(int $id): ?object {
     $id = (int)$id;
-    $result = db_query('SELECT * FROM ' . tbname('content') .
+    $result = Database::query('SELECT * FROM ' . Database::tableName('content') .
             ' where id = ' . $id);
-    if (db_num_rows($result) > 0) {
-        return db_fetch_object($result);
+    if (Database::getNumRows($result) > 0) {
+        return  Database::fetchObject($result);
     }
     return null;
 }
 
-function getPageTitleByID(?int $id): string
-{
-    $result = db_query('SELECT title, id FROM `' . tbname('content')
+function getPageTitleByID(?int $id): string {
+    $result = Database::query('SELECT title, id FROM `' . Database::tableName('content')
             . '` where id=' . (int)$id);
-    if (db_num_rows($result) > 0) {
-        $row = db_fetch_object($result);
+    if (Database::getNumRows($result) > 0) {
+        $row = Database::fetchObject($result);
         return $row->title;
     }
     return '[' . get_translation('none') . ']';
 }
 
 // Get slugs of all pages
-function getAllPagesWithTitle(): array
-{
-    $result = db_query('SELECT slug, id, title FROM `' . tbname('content') .
+function getAllPagesWithTitle(): array {
+    $result = Database::query('SELECT slug, id, title FROM `' . Database::tableName('content') .
             '` WHERE `deleted_at` IS NULL ORDER BY slug');
     $returnvalues = [];
-    while ($row = db_fetch_object($result)) {
+    while ($row = Database::fetchObject($result)) {
         $a = [
             $row->title,
             $row->slug
@@ -60,30 +58,30 @@ function getAllPages(
 ): array {
     if (! $lang) {
         if (! $menu) {
-            $result = db_query('SELECT * FROM `' . tbname('content') .
+            $result = Database::query('SELECT * FROM `' . Database::tableName('content') .
                     "` WHERE `deleted_at` IS NULL ORDER BY {$order}");
         } else {
-            $result = db_query('SELECT * FROM `' . tbname('content') .
+            $result = Database::query('SELECT * FROM `' . Database::tableName('content') .
                     "` WHERE `deleted_at` IS NULL and menu = '" .
                     Database::escapeValue($menu) . "' ORDER BY {$order}");
         }
     } else {
         if (! $menu) {
-            $result = db_query('SELECT * FROM `' . tbname('content') .
+            $result = Database::query('SELECT * FROM `' . Database::tableName('content') .
                     "` WHERE `deleted_at` IS NULL AND language ='" .
-                    db_escape($lang) . "' ORDER BY {$order}");
+                    Database::escapeValue($lang) . "' ORDER BY {$order}");
         } else {
-            $result = db_query('SELECT * FROM `' . tbname('content') .
+            $result = Database::query('SELECT * FROM `' . Database::tableName('content') .
                     "` WHERE `deleted_at` IS NULL AND language ='" .
-                    db_escape($lang) . "' and menu = '" .
+                    Database::escapeValue($lang) . "' and menu = '" .
                     Database::escapeValue($menu) . "' ORDER BY {$order}");
         }
     }
     $returnvalues = [];
-    while ($row = db_fetch_assoc($result)) {
+    while ($row = Database::fetchAssoc($result)) {
         if (! $exclude_hash_links || ($exclude_hash_links
-                && $row['type'] != 'link' && $row['type'] != 'node'
-                && $row['type'] != 'language_link')) {
+                && $row['type'] !== 'link' && $row['type'] !== 'node'
+                && $row['type'] !== 'language_link')) {
             $returnvalues[] = $row;
         }
     }
@@ -92,21 +90,20 @@ function getAllPages(
 }
 
 // Get slugs of all pages
-function getAllSlugs(?string $lang = null): array
-{
+function getAllSlugs(?string $lang = null): array {
     $slugs = [];
 
     if (! $lang) {
-        $result = db_query('SELECT slug,id FROM `' . tbname('content') .
+        $result = Database::query('SELECT slug,id FROM `' . Database::tableName('content') .
                 '` WHERE `deleted_at` IS NULL AND link_url '
                 . "NOT LIKE '#%' ORDER BY slug");
     } else {
-        $result = db_query('SELECT slug,id FROM `' . tbname('content') .
+        $result = Database::query('SELECT slug,id FROM `' . Database::tableName('content') .
                 '` WHERE `deleted_at` IS NULL  AND link_url '
-                . "NOT LIKE '#%' AND language ='" . db_escape($lang) .
+                . "NOT LIKE '#%' AND language ='" . Database::escapeValue($lang) .
                 "' ORDER BY slug");
     }
-    while ($row = db_fetch_object($result)) {
+    while ($row = Database::fetchObject($result)) {
         $slugs[] = $row->slug;
     }
 

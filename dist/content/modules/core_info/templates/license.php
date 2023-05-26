@@ -1,9 +1,12 @@
 <?php
-use App\Backend\UliCMSVersion;
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\UliCMS\UliCMSVersion;
 
 $version = new UliCMSVersion();
 ?>
-<a href="<?php echo ModuleHelper::buildActionURL('info'); ?>"
+<a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('info'); ?>"
    class="btn btn-default btn-back is-ajax"
    ><i class="fa fa-arrow-left"></i>
     <?php translate('back'); ?></a>

@@ -4,19 +4,10 @@ const CORE_COMPONENT = 'frontend';
 
 require_once dirname(__FILE__) . '/init.php';
 
-use App\Helpers\DateTimeHelper;
 use App\Models\Content\Language;
+use App\Storages\Vars;
 use App\Translations\Translation;
 use App\Utils\CacheUtil;
-
-global $connection;
-
-do_event('before_session_start');
-
-// initialize session
-App\Utils\Session\sessionStart();
-
-do_event('after_session_start');
 
 setLanguageByDomain();
 
@@ -33,8 +24,6 @@ if (! isset($_SESSION['language'])) {
     $_SESSION['language'] = Settings::get('default_language');
 }
 
-setLocaleByLanguage();
-
 if (in_array($_SESSION['language'], $languages) && is_file(getLanguageFilePath($_SESSION['language']))) {
     require_once getLanguageFilePath($_SESSION['language']);
 } elseif (is_file(getLanguageFilePath('en'))) {
@@ -42,29 +31,25 @@ if (in_array($_SESSION['language'], $languages) && is_file(getLanguageFilePath($
 }
 
 Translation::loadAllModuleLanguageFiles($_SESSION['language']);
-
 Translation::loadCurrentThemeLanguageFiles($_SESSION['language']);
+
 do_event('custom_lang_' . $_SESSION['language']);
 
 if (Request::isPost()) {
     if (! check_csrf_token()) {
-        exit('This is probably a CSRF attack!');
+        exit('Invalid CSRF token');
     }
     if (Settings::get('min_time_to_fill_form', 'int') > 0) {
         check_form_timestamp();
     }
 }
 
-// call domain.de/?run_cron=1 with curl or a similiar tool
-// to automatically execute cronjobs
+// Call domain.de/?run_cron=1 with curl or a similiar tool to automatically execute cronjobs
 if (Request::getVar('run_cron')) {
-    do_event('before_cron');
-    require 'lib/cron.php';
-    do_event('after_cron');
+    do_event('cron');
 
-    TextResult('finished cron at ' . DateTimeHelper::timestampToFormattedDateTime(time()), HttpStatusCode::OK);
+    HTTPStatusCodeResult(HttpStatusCode::NO_CONTENT);
 }
-
 
 $slug = strtolower($_GET['slug'] ?? '');
 $slugParts = explode('.', $slug);
@@ -83,7 +68,7 @@ $formatExtensions = [
 $slugExtension = count($slugParts) > 1 ? end($slugParts) : null;
 
 if (in_array($slugExtension, $formatExtensions)) {
-    $newUrl = str_replace(".{$slugExtension}", '', Request::getRequestUri());
+    $newUrl = str_replace(".{$slugExtension}", '', Request::getRequestUri() ?? '');
     Response::redirect($newUrl, HttpStatusCode::MOVED_PERMANENTLY);
 }
 
@@ -105,16 +90,18 @@ if (is_maintenance_mode()) {
     send_header('Status: 503 Service Temporarily Unavailable');
     send_header('Retry-After: 60');
     send_header('Content-Type: text/html; charset=utf-8');
+
     if (is_file(getTemplateDirPath($theme) . 'maintenance.php')) {
         require_once getTemplateDirPath($theme) . 'maintenance.php';
     } else {
         exit(get_translation('UNDER_MAINTENANCE'));
     }
+
     do_event('after_maintenance_message');
     exit();
 }
 
-setSCSSImportPaths([ULICMS_GENERATED]);
+setSCSSImportPaths([ULICMS_GENERATED_PRIVATE]);
 
 do_event('before_http_header');
 
@@ -143,7 +130,7 @@ if (get_ID()) {
 
 if (isset($_GET['goid'])) {
     $goid = (int)$_GET['goid'];
-    $url = ModuleHelper::getFullPageURLByID($goid);
+    $url = \App\Helpers\ModuleHelper::getFullPageURLByID($goid);
     if ($url) {
         Response::redirect($url, 301);
     } else {
@@ -194,8 +181,8 @@ if ($hasModule) {
 }
 
 // Kein Caching wenn man eingeloggt ist
-if (is_logged_in() && get_cache_control() == 'auto') {
-    Vars::setNoCache(false);
+if (is_logged_in() && get_cache_control() === 'auto') {
+    Vars::setNoCache(true);
 }
 
 do_event('before_html');
@@ -204,23 +191,21 @@ $cacheAdapter = null;
 if (CacheUtil::isCacheEnabled() && Request::isGet() && ! Vars::getNoCache()) {
     $cacheAdapter = CacheUtil::getAdapter();
 }
-$uid = CacheUtil::getCurrentUid();
-if ($cacheAdapter && $cacheAdapter->get($uid)) {
-    echo $cacheAdapter->get($uid);
 
-    if (Settings::get('no_auto_cron')) {
-        exit();
+$uid = CacheUtil::getCurrentUid();
+
+if ($cacheAdapter && $cacheAdapter->get($uid)) {
+    if (! (bool)Settings::get('no_auto_cron')) {
+        do_event('cron');
     }
 
-    do_event('before_cron');
-    @require 'lib/cron.php';
-    do_event('after_cron');
-    exit();
+    exit($cacheAdapter->get($uid));
 }
 
 if ($cacheAdapter || Settings::get('minify_html')) {
     ob_start();
 }
+
 $top_files = [
     'type/' . get_type() . '/oben.php',
     'type/' . get_type() . '/top.php',
@@ -238,7 +223,7 @@ foreach ($top_files as $file) {
 
 do_event('before_content');
 $text_position = get_text_position();
-if ($text_position == 'after') {
+if ($text_position === 'after') {
     Template::outputContentElement();
 }
 
@@ -248,12 +233,11 @@ if (! (is_array($disable_functions) && in_array('output_content', $disable_funct
     content();
 }
 
-if ($text_position == 'before') {
+if ($text_position === 'before') {
     Template::outputContentElement();
 }
 
 do_event('after_content');
-
 do_event('before_edit_button');
 
 if (! (is_array($disable_functions) && in_array('edit_button', $disable_functions))) {
@@ -280,7 +264,7 @@ do_event('after_html');
 
 if ($cacheAdapter || Settings::get('minify_html')) {
     $generatedHtml = ob_get_clean();
-    $generatedHtml = normalizeLN($generatedHtml, "\n");
+    $generatedHtml = normalizeLN($generatedHtml, PHP_EOL);
     $generatedHtml = optimizeHtml($generatedHtml);
 
     echo $generatedHtml;
@@ -290,12 +274,10 @@ if ($cacheAdapter || Settings::get('minify_html')) {
     }
 }
 
-// Wenn no_auto_cron gesetzt ist, dann muss cron.php
+// Wenn no_auto_cron gesetzt ist, dann muss cron
 // manuell ausgeführt bzw. aufgerufen werden
-if (! Settings::get('no_auto_cron')) {
-    do_event('before_cron');
-    require 'lib/cron.php';
-    do_event('after_cron');
+if (! (bool)Settings::get('no_auto_cron')) {
+    do_event('cron');
 }
 
 exit();

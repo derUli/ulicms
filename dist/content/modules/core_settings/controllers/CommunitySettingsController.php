@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Utils\CacheUtil;
 
-class CommunitySettingsController extends Controller
-{
-    public function _savePost(): void
-    {
+class CommunitySettingsController extends \App\Controllers\Controller {
+    public function _savePost(): void {
         if (Request::getVar('comments_enabled')) {
             Settings::set('comments_enabled', '1');
         } else {
@@ -33,12 +33,11 @@ class CommunitySettingsController extends Controller
         CacheUtil::clearPageCache();
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL(
+            \App\Helpers\ModuleHelper::buildActionURL(
                 'community_settings',
                 'save=1'
             )

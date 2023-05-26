@@ -1,11 +1,9 @@
 <?php
 
-class PrivacyControllerTest extends \PHPUnit\Framework\TestCase
-{
+class PrivacyControllerTest extends \PHPUnit\Framework\TestCase {
     private $defaultSettings = [];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->defaultSettings = [
             'privacy_policy_checkbox_enable_en' => Settings::get('privacy_policy_checkbox_enable_en'),
             'log_ip' => Settings::get('log_ip'),
@@ -15,8 +13,7 @@ class PrivacyControllerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_POST = [];
 
         foreach ($this->defaultSettings as $key => $value) {
@@ -24,8 +21,7 @@ class PrivacyControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSavePostAllSet(): void
-    {
+    public function testSavePostAllSet(): void {
         $_POST = [
             'language' => 'en',
             'privacy_policy_checkbox_enable' => '1',
@@ -64,8 +60,7 @@ class PrivacyControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testSavePostNothingSet(): void
-    {
+    public function testSavePostNothingSet(): void {
         $_POST = [
             'language' => 'en'
         ];

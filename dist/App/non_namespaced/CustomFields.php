@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 // This class contains methods to manipulate CustomFields
 // defined by modules
-class CustomFields
-{
+class CustomFields {
     public static function set(
         string $name,
         $value,
@@ -48,14 +47,14 @@ class CustomFields
                         . 'where id = ?';
                 return Database::pQuery($sql, $args, true);
             }
-                $args = [
-                    $value,
-                    $name,
-                    $content_id
-                ];
-                $sql = 'UPDATE {prefix}custom_fields set value = ? '
-                        . 'where name = ? and content_id = ?';
-                return Database::pQuery($sql, $args, true);
+            $args = [
+                $value,
+                $name,
+                $content_id
+            ];
+            $sql = 'UPDATE {prefix}custom_fields set value = ? '
+                    . 'where name = ? and content_id = ?';
+            return Database::pQuery($sql, $args, true);
 
         } elseif ($value !== null) {
             $args = [

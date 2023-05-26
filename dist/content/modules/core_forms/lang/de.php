@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 add_translation('honeypot_is_not_empty', 'Das Honigtopf-Feld ist nicht leer!');
 
 add_translation(

@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class UserManager
-{
-    public function getUsersByGroupId(?int $gid, ?string $order = 'id'): array
-    {
+class UserManager {
+    public function getUsersByGroupId(?int $gid, ?string $order = 'id'): array {
         $users = [];
         $sql = "select id from {prefix}users where `group_id` = ? order by {$order}";
         $args = [
@@ -15,18 +13,17 @@ class UserManager
         ];
         $result = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($result)) {
-            $users[] = new User($row->id);
+            $users[] = new User((int)$row->id);
         }
         return $users;
     }
 
-    public function getAllUsers(string $order = 'id'): array
-    {
+    public function getAllUsers(string $order = 'id'): array {
         $users = [];
         $sql = "select id from {prefix}users order by {$order}";
         $result = Database::Query($sql, true);
         while ($row = Database::fetchObject($result)) {
-            $users[] = new User($row->id);
+            $users[] = new User((int)$row->id);
         }
         return $users;
     }
@@ -43,7 +40,7 @@ class UserManager
         ];
         $result = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($result)) {
-            $users[] = new User($row->id);
+            $users[] = new User((int)$row->id);
         }
         return $users;
     }

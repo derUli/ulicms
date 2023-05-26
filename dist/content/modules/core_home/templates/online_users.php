@@ -1,8 +1,10 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use function App\HTML\imageTag;
 
-$users = ViewBag::get('users');
+$users = \App\Storages\ViewBag::get('users');
 ?>
 <div class="online-users">
     <?php foreach ($users as $user) { ?>

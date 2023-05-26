@@ -2,24 +2,26 @@
 
 declare(strict_types=1);
 
-use App\Backend\UliCMSVersion;
+class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
+
+use App\UliCMS\UliCMSVersion;
 
 /**
  * Returns the version number of UliCMS Core
+ *
  * @return string
  */
-function cms_version(): string
-{
+function cms_version(): string {
     $v = new UliCMSVersion();
     return implode('.', $v->getInternalVersion());
 }
 
 /**
  * Gets the UliCMS configuration environment
+ *
  * @return string
  */
-function get_environment(): string
-{
-    return getenv('ULICMS_ENVIRONMENT') ?
-            getenv('ULICMS_ENVIRONMENT') : 'default';
+function get_environment(): string {
+    return getenv('APP_ENV') ?
+            getenv('APP_ENV') : 'default';
 }

@@ -1,8 +1,10 @@
 <?php
 
-use App\Security\PermissionChecker;
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-$currentAction = BackendHelper::getAction();
+use App\Security\Permissions\PermissionChecker;
+
+$currentAction = \App\Helpers\BackendHelper::getAction();
 $icons = [
     'admins' => 'fa fa-user',
     'groups' => 'fa fa-users'
@@ -30,7 +32,7 @@ $notSelectedButton = 'btn btn-default';
      aria-label="Toolbar with button groups">
          <?php foreach ($icons as $action => $cssClass) { ?>
         <div class="btn-group" role="group">
-            <a href="<?php echo ModuleHelper::buildActionURL($action); ?>"
+            <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL($action); ?>"
                class="<?php
                echo $action == $currentAction ?
                        $selectedButton : $notSelectedButton;

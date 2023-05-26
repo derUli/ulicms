@@ -2,15 +2,12 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 /**
  * HTTP status codes
  */
-class HttpStatusCode
-{
-    public const __default = self::OK;
-
+abstract class HttpStatusCode {
     public const SWITCHING_PROTOCOLS = 101;
 
     public const OK = 200;

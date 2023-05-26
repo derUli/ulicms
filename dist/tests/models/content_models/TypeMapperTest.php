@@ -2,15 +2,12 @@
 
 use App\Models\Content\TypeMapper;
 
-class TypeMapperTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp(): void
-    {
+class TypeMapperTest extends \PHPUnit\Framework\TestCase {
+    protected function setUp(): void {
         TypeMapper::loadMapping();
     }
 
-    public function testGetMappings()
-    {
+    public function testGetMappings(): void {
         $types = TypeMapper::getMappings();
         $this->assertGreaterThanOrEqual(11, count($types));
 
@@ -21,8 +18,7 @@ class TypeMapperTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetModelReturnsModel()
-    {
+    public function testGetModelReturnsModel(): void {
         $types = TypeMapper::getMappings();
         $this->assertGreaterThanOrEqual(11, count($types));
 
@@ -33,8 +29,7 @@ class TypeMapperTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetModelReturnsNull()
-    {
+    public function testGetModelReturnsNull(): void {
         $this->assertNull(TypeMapper::getModel('magic_page'));
     }
 }

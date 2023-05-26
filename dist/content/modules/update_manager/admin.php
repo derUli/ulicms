@@ -1,9 +1,11 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 define('MODULE_ADMIN_HEADLINE', get_translation('update_manager'));
 define('MODULE_ADMIN_REQUIRED_PERMISSION', 'install_packages');
 
-function update_manager_admin()
-{
+function update_manager_admin(): void {
     $updates = UpdateManager::getAllUpdateablePackages();
     $i = 0;
     ?>
@@ -49,7 +51,7 @@ function update_manager_admin()
     </form>
     <?php
     enqueueScriptFile(
-        ModuleHelper::buildRessourcePath(
+        \App\Helpers\ModuleHelper::buildRessourcePath(
             'update_manager',
             'scripts/update_manager.js'
         )

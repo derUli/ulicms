@@ -1,11 +1,9 @@
 <?php
 
-class CommunitySettingsControllerTest extends \PHPUnit\Framework\TestCase
-{
+class CommunitySettingsControllerTest extends \PHPUnit\Framework\TestCase {
     private $defaultSettings = [];
 
-    protected function setUp(): void
-    {
+    protected function setUp(): void {
         $this->defaultSettings = [
             'comments_enabled ' => Settings::get('comments_enabled'),
             'comments_must_be_approved' => Settings::get('comments_must_be_approved'),
@@ -13,8 +11,7 @@ class CommunitySettingsControllerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function tearDown(): void
-    {
+    protected function tearDown(): void {
         $_POST = [];
 
         foreach ($this->defaultSettings as $key => $value) {
@@ -22,8 +19,7 @@ class CommunitySettingsControllerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSavePostShouldSave(): void
-    {
+    public function testSavePostShouldSave(): void {
         $_POST['comments_enabled'] = '1';
         $_POST['comments_must_be_approved'] = '1';
         $_POST['commentable_content_types'] = ['page', 'article'];
@@ -48,8 +44,7 @@ class CommunitySettingsControllerTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testSavePostShoulDelete(): void
-    {
+    public function testSavePostShoulDelete(): void {
         Settings::set('default_language', 'en');
 
         $controller = new CommunitySettingsController();

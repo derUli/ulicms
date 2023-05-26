@@ -1,11 +1,11 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Packages\PackageManager;
 
-class UpdateManagerDashboard
-{
-    public static function anyUpdateAvailable()
-    {
+class UpdateManagerDashboard {
+    public static function anyUpdateAvailable() {
         $pkg = new PackageManager();
         $modules = getAllModules();
         if (count($modules) > 0) {

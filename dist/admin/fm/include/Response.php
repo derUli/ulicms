@@ -7,8 +7,7 @@
  *
  * @package Filemanager
  */
-class Response
-{
+class Response {
     public const HTTP_CONTINUE = 100;
 
     public const HTTP_SWITCHING_PROTOCOLS = 101;
@@ -235,8 +234,7 @@ class Response
      * @param  int    $statusCode
      * @param  array  $headers
      */
-    public function __construct($content = '', $statusCode = 200, $headers = [])
-    {
+    public function __construct($content = '', $statusCode = 200, $headers = []) {
         $this->setContent($content);
         $this->setStatusCode($statusCode);
         $this->headers = $headers;
@@ -254,8 +252,7 @@ class Response
      *
      * @see prepare()
      */
-    public function __toString()
-    {
+    public function __toString() {
         return
             sprintf('HTTP/%s %s %s', $this->version, $this->statusCode, $this->statusText) . "\r\n" .
             $this->headers . "\r\n" .
@@ -268,8 +265,7 @@ class Response
      * @param  mixed  $content
      * @return $this
      */
-    public function setContent($content)
-    {
+    public function setContent($content) {
         if ($content instanceof ArrayObject || is_array($content)) {
             $this->headers['Content-Type'] = ['application/json'];
 
@@ -294,8 +290,7 @@ class Response
      *
      * @api
      */
-    public function setStatusCode($code, $text = null)
-    {
+    public function setStatusCode($code, $text = null) {
         $this->statusCode = $code = (int)$code;
         if ($this->isInvalid()) {
             throw new InvalidArgumentException(sprintf('The HTTP status code "%s" is not valid.', $code));
@@ -326,8 +321,7 @@ class Response
      *
      * @api
      */
-    public function isInvalid()
-    {
+    public function isInvalid() {
         return $this->statusCode < 100 || $this->statusCode >= 600;
     }
 
@@ -339,8 +333,7 @@ class Response
      * @param bool $replace
      * @return $this
      */
-    public function header($key, $value, $replace = true)
-    {
+    public function header($key, $value, $replace = true) {
         if (empty($this->headers[$key])) {
             $this->headers[$key] = [];
         }
@@ -360,8 +353,7 @@ class Response
      *
      * @api
      */
-    public function send()
-    {
+    public function send() {
         $this->sendHeaders();
         $this->sendContent();
 
@@ -377,8 +369,7 @@ class Response
      *
      * @return Response
      */
-    public function sendContent()
-    {
+    public function sendContent() {
         echo $this->content;
 
         return $this;
@@ -389,8 +380,7 @@ class Response
      *
      * @return Response
      */
-    public function sendHeaders()
-    {
+    public function sendHeaders() {
         // headers have already been sent by the developer
         if (headers_sent()) {
             return $this;

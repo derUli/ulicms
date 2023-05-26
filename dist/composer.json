@@ -19,18 +19,26 @@
         {
             "url": "https://github.com/derUli/html-minifier",
             "type": "git"
-        }
+        },
+            {
+              "type": "git",
+              "url": "https://github.com/deruli/fetcher"
+            }    
     ],
+    "config": {
+        "platform-check": true
+    },
     "require": {
         "php": ">=8.1",
-        "ext-mysqli": "*",
+        "ext-curl": "*",
+        "ext-dom": "*",
         "ext-gd": "*",
+        "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
+        "ext-mysqli": "*",
         "ext-openssl": "*",
-        "ext-dom": "*",
-        "ext-libxml": "*",
-        "ext-intl": "*",
+        "ext-xml": "*",
         "phpfastcache/phpfastcache": "*",
         "phpgangsta/googleauthenticator": "dev-master",
         "katzgrau/klogger": "dev-master",
@@ -38,11 +46,9 @@
         "deruli/html-minifier": "master-dev",
         "scssphp/scssphp": "*",
         "chrisjean/php-ico": "*",
-        "willdurand/negotiation": "*",
         "matthiasmullie/minify": "*",
         "rakit/validation": "*",
         "nesbot/carbon": "*",
-        "symfony/polyfill-mbstring": "*",
         "dereuromark/media-embed": "*",
         "jimmiw/php-time-ago": "*",
         "consolidation/robo": "*",
@@ -55,16 +61,25 @@
         "mobiledetect/mobiledetectlib": "^3.74",
         "jfcherng/php-diff": "^6.13",
         "jessedp/php-timezones": "*",
-        "nette/utils": "^4.0"
+        "nette/utils": "^4.0",
+        "deruli/fetcher": "^0.0.1",
+        "vlucas/phpdotenv": "^5.5"
     },
     "require-dev": {
         "spatie/phpunit-snapshot-assertions": "*",
         "phpunit/phpunit": "*",
         "friendsofphp/php-cs-fixer": "*",
         "overtrue/phplint": "*",
-        "phpstan/phpstan": "^1.9"
+        "phpstan/phpstan": "^1.9",
+        "comcast/php-legal-licenses": "^1.2"
     },
     "autoload": {
+        "psr-4": {
+            "": [
+                ".",
+                "App/non_namespaced"
+            ]
+        },
         "files": [
             "App/Utils/Session/Session.php",
             "App/HTML/functions.php",
@@ -72,8 +87,6 @@
             "lib/includes/Results.php",
             "lib/includes/comparisons.php",
             "lib/includes/csrf_token.php",
-            "lib/includes/custom_data.php",
-            "lib/includes/db_functions.php",
             "lib/includes/designs.php",
             "lib/includes/encode.php",
             "lib/includes/environment.php",

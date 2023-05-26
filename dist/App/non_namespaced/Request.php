@@ -2,19 +2,16 @@
 
 declare(strict_types=1);
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\RequestMethod;
 
-class Request
-{
-    public static function getPort(): ?int
-    {
+class Request {
+    public static function getPort(): ?int {
         return isset($_SERVER['SERVER_PORT']) ? (int)$_SERVER['SERVER_PORT'] : null;
     }
 
-    public static function getProtocol(?string $suffix = null): string
-    {
+    public static function getProtocol(?string $suffix = null): string {
         $protocol = self::isSSL() ? 'https://' : 'http://';
 
         if (! empty($suffix)) {
@@ -59,13 +56,11 @@ class Request
         return $value;
     }
 
-    public static function hasVar(string $name): bool
-    {
+    public static function hasVar(string $name): bool {
         return isset($_POST[$name]) || isset($_GET[$name]);
     }
 
-    public static function getMethod(): ?string
-    {
+    public static function getMethod(): ?string {
         return isset($_SERVER['REQUEST_METHOD']) ?
                 strtolower($_SERVER['REQUEST_METHOD']) : null;
     }
@@ -74,8 +69,7 @@ class Request
      * Check if this is a GET request
      * @return bool
      */
-    public static function isGet(): bool
-    {
+    public static function isGet(): bool {
         return self::getMethod() == RequestMethod::GET;
     }
 
@@ -83,8 +77,7 @@ class Request
      * Check if this is a POST request
      * @return bool
      */
-    public static function isPost(): bool
-    {
+    public static function isPost(): bool {
         return self::getMethod() == RequestMethod::POST;
     }
 
@@ -92,13 +85,11 @@ class Request
      * Check if this is a HEAD request
      * @return bool
      */
-    public static function isHead(): bool
-    {
+    public static function isHead(): bool {
         return self::getMethod() == RequestMethod::HEAD;
     }
 
-    public static function isSSL(): bool
-    {
+    public static function isSSL(): bool {
         return (
             ! empty($_SERVER['HTTPS']) &&
             $_SERVER['HTTPS'] !== 'off') ||
@@ -107,8 +98,7 @@ class Request
                 );
     }
 
-    public static function getIp(): ?string
-    {
+    public static function getIp(): ?string {
         $proxy_headers = self::getProxyHeaders();
         foreach ($proxy_headers as $proxy_header) {
             if (isset($_SERVER[$proxy_header])) {
@@ -121,8 +111,7 @@ class Request
         return $_SERVER['REMOTE_ADDR'] ?? null;
     }
 
-    public static function isHeaderSent(string $header, ?array $headers = null): bool
-    {
+    public static function isHeaderSent(string $header, ?array $headers = null): bool {
         $headers = ! $headers ? headers_list() : $headers;
         $header = trim($header, ': ');
         $result = false;
@@ -136,22 +125,19 @@ class Request
         return $result;
     }
 
-    public static function isAjaxRequest(): bool
-    {
+    public static function isAjaxRequest(): bool {
         return ! empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
                 strtolower(
                     $_SERVER['HTTP_X_REQUESTED_WITH']
                 ) == 'xmlhttprequest';
     }
 
-    public static function getDomain(): ?string
-    {
+    public static function getDomain(): ?string {
         return $_SERVER['HTTP_HOST'] ??
                 null;
     }
 
-    public static function getReferrer(): ?string
-    {
+    public static function getReferrer(): ?string {
         $referrer = null;
         if (isset($_SERVER['HTTP_REFERER'])) {
             $referrer = $_SERVER['HTTP_REFERER'];
@@ -159,18 +145,15 @@ class Request
         return $referrer;
     }
 
-    public static function getUserAgent(): ?string
-    {
+    public static function getUserAgent(): ?string {
         return $_SERVER['HTTP_USER_AGENT'] ?? null;
     }
 
-    public static function getRequestUri(): ?string
-    {
+    public static function getRequestUri(): ?string {
         return $_SERVER['REQUEST_URI'] ?? null;
     }
 
-    private static function getProxyHeaders(): array
-    {
+    private static function getProxyHeaders(): array {
         return [
             'CLIENT_IP',
             'FORWARDED',

@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 add_translation('EMPTY_RECYCLE_BIN', 'Papierkorb leeren');
 add_translation('WANNA_EMPTY_TRASH', 'Möchten Sie den Papierkorb leeren?');
 

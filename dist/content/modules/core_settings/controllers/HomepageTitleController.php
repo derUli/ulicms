@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Utils\CacheUtil;
 
-class HomepageTitleController extends Controller
-{
-    public function _savePost(): void
-    {
+class HomepageTitleController extends \App\Controllers\Controller {
+    public function _savePost(): void {
         $languages = getAllLanguages();
 
         $languagesCount = count($languages);
@@ -25,12 +25,11 @@ class HomepageTitleController extends Controller
         CacheUtil::clearPageCache();
     }
 
-    public function savePost(): void
-    {
+    public function savePost(): void {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
             HttpStatusCode::OK,
-            ModuleHelper::buildActionURL('homepage_title')
+            \App\Helpers\ModuleHelper::buildActionURL('homepage_title')
         );
     }
 }

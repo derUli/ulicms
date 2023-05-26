@@ -1,18 +1,16 @@
 <?php
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Models\Content\Language;
 
 // Links to another language
-class Language_Link extends Page
-{
+class Language_Link extends Page {
     public $link_to_language = null;
 
     public $type = 'language_link';
 
-    public function save()
-    {
+    public function save() {
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
@@ -23,8 +21,7 @@ class Language_Link extends Page
         return $retval;
     }
 
-    public function update()
-    {
+    public function update() {
         $result = null;
         if ($this->id === null) {
             return $this->create();
@@ -40,13 +37,11 @@ class Language_Link extends Page
         return $result;
     }
 
-    public function getLinkedLanguage(): ?Language
-    {
+    public function getLinkedLanguage(): ?Language {
         return $this->link_to_language ? new Language($this->link_to_language) : null;
     }
 
-    public function setLinkedLanguage(?Language $language): void
-    {
+    public function setLinkedLanguage(?Language $language): void {
         $this->link_to_language = $language ? $language->getID() : null;
     }
 
@@ -56,8 +51,7 @@ class Language_Link extends Page
      * This applies to any default contents except Link, Language_Link and Node
      * @return bool
      */
-    public function isRegular(): bool
-    {
+    public function isRegular(): bool {
         return false;
     }
 
@@ -65,13 +59,11 @@ class Language_Link extends Page
       * Get css classes for Font Awesome icon
       * @return string
       */
-    public function getIcon(): string
-    {
+    public function getIcon(): string {
         return 'fas fa-language';
     }
 
-    protected function fillVars($result = null)
-    {
+    protected function fillVars($result = null): void {
         parent::fillVars($result);
         $this->link_to_language = $result->link_to_language;
     }

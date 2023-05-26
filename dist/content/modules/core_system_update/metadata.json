@@ -1,13 +1,15 @@
 {
     "source": "core",
-    "version": "2023.2",
+    "version": "2023.3",
     "embed": false,
     "custom_acl":
             [
-                "update_system",
-                "patch_management"
+                "system_update"
             ],
     "actions": {
         "system_update": "templates/system_update.php"
+    },
+    "action_permissions": {
+        "system_update": "system_update"
     }
 }

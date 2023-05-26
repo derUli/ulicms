@@ -1,4 +1,7 @@
 <?php
+
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 $id = get_ID();
 if ($id !== null) {
     $list = new List_Data($id);

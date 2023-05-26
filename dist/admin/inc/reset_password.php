@@ -1,5 +1,7 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Models\Users\PasswordReset;
 
 if (Settings::get('disable_password_reset')) {
@@ -15,7 +17,7 @@ if (Settings::get('disable_password_reset')) {
         if ($user) {
             $passwordReset = new PasswordReset();
             $token = $passwordReset->addToken($user['id']);
-            $passwordReset->sendMail($token, $user['email'], get_ip(), $user['firstname'], $user['lastname']);
+            $passwordReset->sendMail($token, $user['email'], get_ip() ?? '', $user['firstname'], $user['lastname']);
             $message = get_translation('PASSWORD_RESET_SUCCESSFUL');
             $color = 'success';
         } else {

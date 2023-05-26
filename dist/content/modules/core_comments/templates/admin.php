@@ -1,11 +1,13 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Backend\BackendPageRenderer;
 use App\Constants\CommentStatus;
 use App\HTML\Input;
 use App\HTML\ListItem;
 
-$controller = ModuleHelper::getMainController('core_comments');
+$controller = \App\Helpers\ModuleHelper::getMainController('core_comments');
 $defaultStatus = $controller->_getDefaultStatus();
 
 $selectedStatus = Request::getVar('status', $defaultStatus, 'str');
@@ -60,7 +62,7 @@ $actionSelect = [
 
 <h1><?php translate('comments_manage'); ?></h1>
 <?php
-echo ModuleHelper::buildMethodCallForm(
+echo \App\Helpers\ModuleHelper::buildMethodCallForm(
     CommentsController::class,
     'filterComments',
     [],
@@ -94,9 +96,9 @@ echo Input::textBox('limit', $limit, 'number', [
     <button type="submit" class="btn btn-primary">
         <i class="fas fa-search"></i> <?php translate('search'); ?></button>
 </div>
-<?php echo ModuleHelper::endForm(); ?>
+<?php echo \App\Helpers\ModuleHelper::endForm(); ?>
 <?php
-echo ModuleHelper::buildMethodCallForm(
+echo \App\Helpers\ModuleHelper::buildMethodCallForm(
     CommentsController::class,
     'doAction',
     [
@@ -178,7 +180,7 @@ echo ModuleHelper::buildMethodCallForm(
                                 class="has-pointer comment-link ajax-alert"
                                 data-url="<?php
                         echo
-                        ModuleHelper::buildMethodCallUrl(
+                        \App\Helpers\ModuleHelper::buildMethodCallUrl(
                             CommentsController::class,
                             'getCommentText',
                             'id=' . $comment->getID()
@@ -204,8 +206,8 @@ echo ModuleHelper::buildMethodCallForm(
     </div>
 </div>
 <?php
-echo ModuleHelper::endForm();
-enqueueScriptFile(ModuleHelper::buildRessourcePath(
+echo \App\Helpers\ModuleHelper::endForm();
+enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath(
     'core_comments',
     'js/admin.js'
 ));

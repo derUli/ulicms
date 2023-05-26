@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace App\Registries;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use ModuleManager;
 
 use function getModuleMeta;
-
 use function getModulePath;
-use ModuleManager;
 use function str_ends_with;
 
 // loads model files of modules
-class ModelRegistry
-{
+class ModelRegistry {
     // TODO: refactor this and split int into multiple method s
-    public static function loadModuleModels(): void
-    {
+    public static function loadModuleModels(): void {
         $modelRegistry = [];
 
         $moduleManager = new ModuleManager();

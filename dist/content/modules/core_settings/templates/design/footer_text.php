@@ -1,17 +1,19 @@
 <?php
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Constants\RequestMethod;
 use App\Translations\JSTranslation;
 
 ?>
 <p>
     <a
-        href="<?php echo ModuleHelper::buildActionURL('design'); ?>"
+        href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('design'); ?>"
         class="btn btn-default btn-back is-not-ajax"><i class="fas fa-arrow-left"></i> <?php translate('back'); ?></a>
 </p>
 <h1><?php translate('edit_footer_text'); ?></h1>
 <?php
-echo ModuleHelper::buildMethodCallForm(
+echo \App\Helpers\ModuleHelper::buildMethodCallForm(
     FooterTextController::class,
     'save',
     [],
@@ -22,7 +24,7 @@ echo ModuleHelper::buildMethodCallForm(
 );
 ?>
 <p>
-    <textarea name="footer_text" data-mimetype="text/html"
+    <textarea name="footer_text" id="footer_text" data-mimetype="text/html"
               class="<?php esc(get_html_editor()); ?>"><?php esc(Settings::get('footer_text')); ?></textarea>
 </p>
 <p>
@@ -30,14 +32,16 @@ echo ModuleHelper::buildMethodCallForm(
         <?php translate('save'); ?></button>
 </p>
 <?php
-echo ModuleHelper::endForm();
+echo \App\Helpers\ModuleHelper::endForm();
 
 $translation = new JSTranslation();
-$translation->addKey('changes_was_saved');
+$translation->addKey('changes_were_saved');
 $translation->render();
 
+\App\Helpers\BackendHelper::enqueueEditorScripts();
+
 enqueueScriptFile(
-    ModuleHelper::buildRessourcePath(
+    \App\Helpers\ModuleHelper::buildRessourcePath(
         'core_settings',
         'js/footer_text.js'
     )

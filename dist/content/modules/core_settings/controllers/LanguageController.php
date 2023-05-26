@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-use function App\HTML\stringContainsHtml;
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\Models\Content\Language;
 use App\Utils\CacheUtil;
-
 use Rakit\Validation\Validator;
 
-class LanguageController extends Controller
-{
-    public function _createPost(): Language
-    {
+use function App\HTML\stringContainsHtml;
+
+class LanguageController extends \App\Controllers\Controller {
+    public function _createPost(): Language {
         $this->validateInput();
 
         $name = Request::getVar('name', null, 'str');
@@ -29,20 +29,17 @@ class LanguageController extends Controller
         return $language;
     }
 
-    public function createPost(): void
-    {
+    public function createPost(): void {
         $this->_createPost();
-        Response::redirect(ModuleHelper::buildActionURL('languages'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('languages'));
     }
 
-    public function setDefaultLanguage(): void
-    {
+    public function setDefaultLanguage(): void {
         $this->_setDefaultLanguage();
-        Response::redirect(ModuleHelper::buildActionURL('languages'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('languages'));
     }
 
-    public function _setDefaultLanguage(): void
-    {
+    public function _setDefaultLanguage(): void {
         do_event('before_set_default_language');
 
         $default = Request::getVar('default', null, 'str');
@@ -55,8 +52,7 @@ class LanguageController extends Controller
         CacheUtil::clearPageCache();
     }
 
-    public function _deletePost(): bool
-    {
+    public function _deletePost(): bool {
         $id = Request::getVar('id', null, 'int');
         do_event('before_delete_language');
 
@@ -71,8 +67,7 @@ class LanguageController extends Controller
         return ! $language->isPersistent();
     }
 
-    public function deletePost(): void
-    {
+    public function deletePost(): void {
         if (! $this->_deletePost()) {
             ExceptionResult(
                 get_translation('not_found'),
@@ -80,11 +75,10 @@ class LanguageController extends Controller
             );
         }
 
-        Response::redirect(ModuleHelper::buildActionURL('languages'));
+        Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('languages'));
     }
 
-    protected function validateInput(): void
-    {
+    protected function validateInput(): void {
         // Fix for security issue CVE-2019-11398
         if (stringContainsHtml($_POST['name'])
                 || stringContainsHtml($_POST['language_code'])) {

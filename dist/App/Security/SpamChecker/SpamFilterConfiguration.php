@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Security\SpamChecker;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Helpers\AntiSpamHelper;
 use InvalidArgumentException;
 use Settings;
 
-class SpamFilterConfiguration
-{
+class SpamFilterConfiguration {
     private $spamfilterEnabled = true;
 
     private $badwords = [];
@@ -29,8 +28,7 @@ class SpamFilterConfiguration
     private $checkMxOfMailAddress = false;
 
     // load configuration from settings
-    public static function fromSettings(): SpamFilterConfiguration
-    {
+    public static function fromSettings(): SpamFilterConfiguration {
         $settings = new SpamFilterConfiguration();
         $settings->setSpamFilterEnabled(AntiSpamHelper::isSpamFilterEnabled());
         $settings->setBadwords(
@@ -58,23 +56,19 @@ class SpamFilterConfiguration
         return $settings;
     }
 
-    public function getSpamFilterEnabled(): bool
-    {
+    public function getSpamFilterEnabled(): bool {
         return $this->spamfilterEnabled;
     }
 
-    public function setSpamFilterEnabled(bool $val): void
-    {
+    public function setSpamFilterEnabled(bool $val): void {
         $this->spamfilterEnabled = (bool)$val;
     }
 
-    public function getBadwords(): array
-    {
+    public function getBadwords(): array {
         return $this->badwords;
     }
 
-    public function setBadwords($val): void
-    {
+    public function setBadwords($val): void {
         if (is_string($val)) {
             $this->badwords = \App\Helpers\StringHelper::linesFromString($val);
         } elseif (is_array($val)) {
@@ -87,13 +81,11 @@ class SpamFilterConfiguration
         }
     }
 
-    public function getBlockedCountries(): array
-    {
+    public function getBlockedCountries(): array {
         return $this->blockedCountries;
     }
 
-    public function setBlockedCountries($val): void
-    {
+    public function setBlockedCountries($val): void {
         if (is_string($val)) {
             $countries = explode(',', $val);
             $countries = array_map('trim', $countries);
@@ -110,53 +102,43 @@ class SpamFilterConfiguration
         }
     }
 
-    public function getDisallowChineseChars(): bool
-    {
+    public function getDisallowChineseChars(): bool {
         return $this->disallowChineseChars;
     }
 
-    public function setDisallowChineseChars(bool $val): void
-    {
+    public function setDisallowChineseChars(bool $val): void {
         $this->disallowChineseChars = (bool)$val;
     }
 
-    public function getDisallowCyrillicChars(): bool
-    {
+    public function getDisallowCyrillicChars(): bool {
         return $this->disallowCyrillicChars;
     }
 
-    public function setDisallowCyrillicChars(bool $val): void
-    {
+    public function setDisallowCyrillicChars(bool $val): void {
         $this->disallowCyrillicChars = (bool)$val;
     }
 
-    public function getDisallowRtlChars(): bool
-    {
+    public function getDisallowRtlChars(): bool {
         return $this->disallowRtlChars;
     }
 
-    public function setDisallowRtlChars(bool $val): void
-    {
+    public function setDisallowRtlChars(bool $val): void {
         $this->disallowRtlChars = (bool)$val;
     }
 
-    public function getRejectRequestsFromBots(): bool
-    {
+    public function getRejectRequestsFromBots(): bool {
         return $this->rejectRequestsFromBots;
     }
 
-    public function setRejectRequestsFromBots(bool $val): void
-    {
+    public function setRejectRequestsFromBots(bool $val): void {
         $this->rejectRequestsFromBots = (bool)$val;
     }
 
-    public function getCheckMxOfMailAddress(): bool
-    {
+    public function getCheckMxOfMailAddress(): bool {
         return $this->checkMxOfMailAddress;
     }
 
-    public function setCheckMxOfMailAddress(bool $val): void
-    {
+    public function setCheckMxOfMailAddress(bool $val): void {
         $this->checkMxOfMailAddress = (bool)$val;
     }
 }

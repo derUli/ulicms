@@ -95,7 +95,6 @@ try {
         }
     }
 
-
     if ($config['mime_extension_rename']) {
         $info = pathinfo($_FILES['files']['name'][0]);
         $mime_type = $_FILES['files']['type'][0];

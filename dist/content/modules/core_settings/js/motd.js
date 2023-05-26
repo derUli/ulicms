@@ -10,7 +10,6 @@ $(() => {
     $("#motd_form").ajaxForm(
             {
                 beforeSubmit: () => {
-                    $("#message").html("");
                     $("#loading").show();
                 },
                 // FIXME: this is copy and paste code
@@ -22,10 +21,7 @@ $(() => {
                 },
                 success: () => {
                     $("#loading").hide();
-                    $("#message").html(
-                            "<span style=\"color:green;\">"
-                            + Translation.ChangesWasSaved + "</span>");
-                    $("#loading").hide();
+                    vanillaToast.success(Translation.ChangesWereSaved);
                 }
             });
 });

@@ -4,26 +4,27 @@ declare(strict_types=1);
 
 namespace App\CoreContent;
 
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
 use App\CoreContent\Partials\DeleteButtonRenderer;
 use App\CoreContent\Partials\EditButtonRenderer;
 use App\CoreContent\Partials\UnDeleteButtonRenderer;
 use App\CoreContent\Partials\ViewButtonRenderer;
-use function App\HTML\icon;
-use function App\HTML\link;
+use App\Helpers\BooleanHelper;
 use App\Models\Content\TypeMapper;
 use ContentFactory;
-
 use Database;
 use User;
 
-class PageTableRenderer
-{
+use function App\HTML\icon;
+use function App\HTML\link;
+
+class PageTableRenderer {
     public const MODULE_NAME = 'core_content';
 
     private $user;
 
-    public function __construct($user = null)
-    {
+    public function __construct($user = null) {
         $this->user = ! $user ? User::fromSessionData() : $user;
     }
 
@@ -157,8 +158,7 @@ class PageTableRenderer
         return $result;
     }
 
-    protected function buildFilterSQL($where, $filters): string
-    {
+    protected function buildFilterSQL($where, $filters): string {
         if (isset($filters['type']) && ! empty($filters['type'])) {
             $where .= " and type ='" .
                     Database::escapeValue($filters['type']) .
@@ -209,8 +209,7 @@ class PageTableRenderer
     }
 
     // fetch all datasets of mysqli result
-    protected function fetchResults(\mysqli_result $results, User $user)
-    {
+    protected function fetchResults(\mysqli_result $results, User $user) {
         $filteredResults = [];
 
         while ($row = Database::fetchObject($results)) {
@@ -221,8 +220,7 @@ class PageTableRenderer
     }
 
     // builds an array which is used to show table data in frontend
-    protected function pageDatasetsToResponse(object $dataset, User $user)
-    {
+    protected function pageDatasetsToResponse(object $dataset, User $user) {
         $viewButtonRenderer = new ViewButtonRenderer();
         $editButtonRenderer = new EditButtonRenderer();
 
@@ -263,7 +261,7 @@ class PageTableRenderer
             _esc(get_translation($dataset->menu)),
             _esc($dataset->position),
             _esc(getPageTitleByID((int)$dataset->parent_id)),
-            bool2YesNo((bool)$dataset->active),
+            BooleanHelper::bool2YesNo((bool)$dataset->active),
             $viewButton,
             $editButton,
             ! $dataset->deleted_at ? $deleteButton : $undeleteButton

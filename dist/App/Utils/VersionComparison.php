@@ -2,13 +2,12 @@
 
 namespace App\Utils;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 /**
  * Utils for version number comparisons
  */
-class VersionComparison
-{
+abstract class VersionComparison {
     /**
      * Compares two version numbers using the given operator
      * @param string|null $version1
@@ -47,7 +46,6 @@ class VersionComparison
             return true;
         }
 
-
         if ($operator === '<' && $splitted1 < $splitted2) {
             return true;
         }
@@ -61,8 +59,7 @@ class VersionComparison
      * @param array $splitted2
      * @return array
      */
-    public static function fillUpVersionNumbers(array $splitted1, array $splitted2): array
-    {
+    public static function fillUpVersionNumbers(array $splitted1, array $splitted2): array {
         if (count($splitted1) === count($splitted2)) {
             return [$splitted1, $splitted2];
         }

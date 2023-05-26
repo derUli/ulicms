@@ -1,3 +1,6 @@
+<?php
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+?>
 <form role="form" id="admin-login" method="post"
       action="index.php?submit_form=AdminData">
     <div class="form-group">

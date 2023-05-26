@@ -1,3 +1,6 @@
+<?php
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+?>
 <div class="alert alert-warning">
     <?php echo TRANSLATION_THIS_PROCEDUDRE_WILL_TAKE_SOME_MINUTES; ?></p>
 </div>

@@ -1,6 +1,8 @@
 <?php
 
-use App\Security\PermissionChecker;
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Security\Permissions\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 ?>
@@ -9,6 +11,9 @@ $permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission('settings_simple')
         || $permissionChecker->hasPermission('design')
         || $permissionChecker->hasPermission('spam_filter')
+        || $permissionChecker->hasPermission('privacy_settings')
+        || $permissionChecker->hasPermission('performance_settings')
+        || $permissionChecker->hasPermission('community_settings')
         || $permissionChecker->hasPermission('cache')
         || $permissionChecker->hasPermission('motd')
         || $permissionChecker->hasPermission('logo')
@@ -46,7 +51,7 @@ if ($permissionChecker->hasPermission('settings_simple')
             if ($permissionChecker->hasPermission('performance_settings')) {
                 ?>
             <a
-                href="<?php echo ModuleHelper::buildActionURL('performance_settings'); ?>"
+                href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('performance_settings'); ?>"
                 class="btn btn-default is-not-ajax"><i class="fas fa-tools"></i> <?php translate('performance'); ?></a> 
             <?php }
             ?>
@@ -54,7 +59,7 @@ if ($permissionChecker->hasPermission('settings_simple')
             if ($permissionChecker->hasPermission('community_settings')) {
                 ?>
             <a
-                href="<?php echo ModuleHelper::buildActionURL('community_settings'); ?>"
+                href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('community_settings'); ?>"
                 class="btn btn-default is-not-ajax"><i class="fas fa-tools"></i> <?php translate('comments'); ?></a> 
             <?php }
             ?>

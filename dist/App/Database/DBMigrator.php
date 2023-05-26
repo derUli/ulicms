@@ -4,27 +4,24 @@ declare(strict_types=1);
 
 namespace App\Database;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Exceptions\SqlException;
-use CMSConfig;
 use Database;
 use Exception;
 
 /**
  * Migrate database
  */
-class DBMigrator
-{
-    private $component = null;
+class DBMigrator {
+    private string $component;
 
-    private $folder = null;
+    private string $folder;
 
     // component is an identifier for the module which executes the migrations
     // $folder is the path to an up or down folder
     // containing numbered sql scripts from 001.sql to 999.sql
-    public function __construct(string $component, string $folder)
-    {
+    public function __construct(string $component, string $folder) {
         $this->component = $component;
         $this->folder = $folder;
     }
@@ -34,10 +31,10 @@ class DBMigrator
     * @param string|null $stop last migration to execute, null means execute all
     * @return void
     */
-    public function migrate(?string $stop = null): void
-    {
+    public function migrate(?string $stop = null): void {
         $this->checkVars();
-        $files = scandir($this->folder);
+        $files = scandir($this->folder) ?: [];
+
         natcasesort($files);
         foreach ($files as $file) {
             $this->executeSqlScript($file);
@@ -53,8 +50,7 @@ class DBMigrator
      * @throws SqlException
      * @return void
      */
-    public function executeSqlScript(string $file): void
-    {
+    public function executeSqlScript(string $file): void {
         if (str_ends_with($file, '.sql')) {
             $sql = 'SELECT id from {prefix}dbtrack where component = ? '
                     . 'and name = ?';
@@ -66,17 +62,14 @@ class DBMigrator
                     Database::pQuery($sql, $args, true) : false;
             if (! $result || Database::getNumRows($result) == 0) {
                 $path = $this->folder . '/' . $file;
-                $sql = file_get_contents($path);
-                $cfg = new CMSConfig();
-                $sql = str_ireplace('{prefix}', $cfg->db_prefix, $sql);
+                $sql = (string)file_get_contents($path);
+                $sql = str_ireplace('{prefix}', $_ENV['DB_PREFIX'], $sql);
 
                 $success = Database::multiQuery($sql, true);
 
-
-                while (mysqli_more_results(Database::getConnection())) {
+                while (Database::getConnection() && mysqli_more_results(Database::getConnection())) {
                     mysqli_next_result(Database::getConnection());
                 }
-
 
                 if ($success) {
                     $sql = 'INSERT INTO {prefix}dbtrack (component, name) '
@@ -96,10 +89,9 @@ class DBMigrator
      * @throws SqlException
      * @return void
      */
-    public function rollback(?string $stop = null): void
-    {
+    public function rollback(?string $stop = null): void {
         $this->checkVars();
-        $files = scandir($this->folder);
+        $files = scandir($this->folder) ?: [];
         natcasesort($files);
         $files = array_reverse($files);
         foreach ($files as $file) {
@@ -113,11 +105,12 @@ class DBMigrator
                 $result = Database::pQuery($sql, $args, true);
                 if (Database::getNumRows($result) > 0) {
                     $path = $this->folder . '/' . $file;
-                    $sql = file_get_contents($path);
-                    $cfg = new CMSConfig();
-                    $sql = str_ireplace('{prefix}', $cfg->db_prefix, $sql);
+                    $sql = (string)file_get_contents($path);
+
+                    $sql = str_ireplace('{prefix}', $_ENV['DB_PREFIX'], $sql);
+
                     $success = Database::multiQuery($sql, true);
-                    while (mysqli_more_results(Database::getConnection())) {
+                    while (Database::getConnection() && mysqli_more_results(Database::getConnection())) {
                         mysqli_next_result(Database::getConnection());
                     }
                     if ($success) {
@@ -142,8 +135,7 @@ class DBMigrator
      * Remove migrations of the component from dbtrack
      * @return bool
      */
-    public function resetDBTrack(): bool
-    {
+    public function resetDBTrack(): bool {
         return Database::pQuery('DELETE FROM {prefix}dbtrack '
                         . 'where component = ?', [
                             $this->component
@@ -154,13 +146,11 @@ class DBMigrator
      * Truncate dbtrack table
      * @return void
      */
-    public function resetDBTrackAll(): void
-    {
+    public function resetDBTrackAll(): void {
         Database::truncateTable('dbtrack');
     }
 
-    public function checkVars(): bool
-    {
+    public function checkVars(): bool {
         if (empty($this->component)) {
             throw new Exception('component is null or empty');
         }

@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace App\HTML;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use Template;
 
 /**
  * Represents a list item in a singleSelect() or multiSelect()
  */
-class ListItem
-{
-    private $value;
+class ListItem {
+    private mixed $value;
 
-    private $text;
+    private string $text;
 
-    private $selected;
+    private bool $selected;
 
     /**
      * Constructor
-     * @param type $value
-     * @param type $text
+     *
+     * @param mixed $value
+     * @param string $text
      * @param bool $selected
+     *
      */
-    public function __construct($value, $text, bool $selected = false)
-    {
+    public function __construct($value, string $text, bool $selected = false) {
         $this->value = $value;
         $this->text = $text;
         $this->selected = $selected;
@@ -34,19 +34,78 @@ class ListItem
 
     /**
      * ListItem to string
+     *
      * @return string
      */
-    public function __toString(): string
-    {
+    public function __toString(): string {
         return $this->getHtml();
     }
 
     /**
-     * Get option as HTML
+     * Get value
+     *
+     * @return mixed
+     */
+    public function getValue() {
+        return $this->value;
+    }
+
+    /**
+     * Get text
+     *
      * @return string
      */
-    public function getHtml(): string
-    {
+    public function getText(): string {
+        return $this->text;
+    }
+
+    /**
+     * Get selected item
+     *
+     * @return bool
+     */
+    public function getSelected(): bool {
+        return $this->selected;
+    }
+
+    /**
+     * Set value
+     *
+     * @param mixed $val
+     * @return void
+     */
+    public function setValue(mixed $val): void {
+        $this->value = $val;
+    }
+
+    /**
+     * Set text
+     *
+     * @param string $val
+     *
+     * @return void
+     */
+    public function setText(string $val): void {
+        $this->text = $val;
+    }
+
+    /**
+     * Set selected
+     *
+     * @param bool $val
+     *
+     * @return void
+     */
+    public function setSelected(bool $val): void {
+        $this->selected = $val;
+    }
+
+    /**
+     * Get option as HTML
+     *
+     * @return string
+     */
+    public function getHtml(): string {
         if ($this->selected) {
             return '<option value="' . Template::getEscape($this->value) .
                     '" selected>' . Template::getEscape($this->text) . '</option>';
@@ -57,66 +116,10 @@ class ListItem
 
     /**
      * Output element as HTML
+     *
      * @return void
      */
-    public function render(): void
-    {
+    public function render(): void {
         echo $this->getHtml();
-    }
-
-    /**
-     * Get value
-     * @return type
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * Get text
-     * @return type
-     */
-    public function getText()
-    {
-        return $this->text;
-    }
-
-    /**
-     * Get selected item
-     * @return bool
-     */
-    public function getSelected(): bool
-    {
-        return $this->selected;
-    }
-
-    /**
-     * Set value
-     * @param type $val
-     */
-    public function setValue($val)
-    {
-        $this->value = $val !== null ? (string)$val : null;
-    }
-
-    /**
-     * Set text
-     * @param type $val
-     * @return void
-     */
-    public function setText($val): void
-    {
-        $this->text = $val !== null ? (string)$val : null;
-    }
-
-    /**
-     * Set selected
-     * @param bool $val
-     * @return void
-     */
-    public function setSelected(bool $val): void
-    {
-        $this->selected = $val;
     }
 }

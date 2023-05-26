@@ -2,16 +2,13 @@
 
 use App\Models\Content\VCS;
 
-class VCSTest extends \PHPUnit\Framework\TestCase
-{
-    protected function tearDown(): void
-    {
+class VCSTest extends \PHPUnit\Framework\TestCase {
+    protected function tearDown(): void {
         Database::deleteFrom('content', "slug like '%unit-test-%'");
         Database::deleteFrom('history', "content like '%Text%'");
     }
 
-    public function testGetRevisionByContentIdReturnsRevision()
-    {
+    public function testGetRevisionByContentIdReturnsRevision(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();
@@ -36,18 +33,15 @@ class VCSTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(1, $revision->user_id);
     }
 
-    public function testGetRevisionByIdReturnsNull()
-    {
+    public function testGetRevisionByIdReturnsNull(): void {
         $this->assertNull(VCS::getRevisionByID(PHP_INT_MAX));
     }
 
-    public function testRestoreRevisionNotExistingReturnsFalse()
-    {
+    public function testRestoreRevisionNotExistingReturnsFalse(): void {
         $this->assertFalse(VCS::restoreRevision(PHP_INT_MAX));
     }
 
-    public function testRestoreRevisionReturnsTrue()
-    {
+    public function testRestoreRevisionReturnsTrue(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
         $page->slug = 'unit-test-' . time();

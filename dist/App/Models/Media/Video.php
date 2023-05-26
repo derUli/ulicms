@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace App\Models\Media;
 
-defined('ULICMS_ROOT') || exit('no direct script access allowed');
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use function _esc;
 use App\Models\Content\Category;
 use App\Utils\File;
 use Database;
-use function get_translation;
-
 use Model;
 use Path;
 
+use function _esc;
+use function get_translation;
+
 // html5 format support of browser are different
 // UliCMS allows *.mp4, *.ogv and *.webm file uploads for video
-class Video extends Model
-{
+class Video extends Model {
     public const VIDEO_DIR = 'content/videos/';
 
     private $name = null;
@@ -41,8 +40,7 @@ class Video extends Model
 
     private $height = null;
 
-    public function __construct($id = null)
-    {
+    public function __construct($id = null) {
         if ($id !== null) {
             $this->loadById($id);
         } else {
@@ -51,8 +49,7 @@ class Video extends Model
         }
     }
 
-    public static function getAll(string $order = 'id'): array
-    {
+    public static function getAll(string $order = 'id'): array {
         $datasets = [];
         $sql = "SELECT id FROM {prefix}videos ORDER BY {$order}";
         $result = Database::query($sql, true);
@@ -62,8 +59,7 @@ class Video extends Model
         return $datasets;
     }
 
-    public function loadById($id): void
-    {
+    public function loadById($id): void {
         $result = Database::pQuery('select * from `{prefix}videos` '
                         . 'where id = ?', [
                             (int)$id
@@ -74,82 +70,67 @@ class Video extends Model
         $this->fillVars($result);
     }
 
-    public function getName(): ?string
-    {
+    public function getName(): ?string {
         return $this->name;
     }
 
-    public function getMp4File(): ?string
-    {
+    public function getMp4File(): ?string {
         return $this->mp4_file;
     }
 
-    public function getOggFile(): ?string
-    {
+    public function getOggFile(): ?string {
         return $this->ogg_file;
     }
 
-    public function getWebmFile(): ?string
-    {
+    public function getWebmFile(): ?string {
         return $this->webm_file;
     }
 
-    public function setMp4File(?string $val): void
-    {
+    public function setMp4File(?string $val): void {
         $this->mp4_file = is_string($val) ? $val : null;
     }
 
-    public function setOggFile(?string $val): void
-    {
+    public function setOggFile(?string $val): void {
         $this->ogg_file = is_string($val) ? $val : null;
     }
 
-    public function setWebmFile(?string $val): void
-    {
+    public function setWebmFile(?string $val): void {
         $this->webm_file = is_string($val) ? $val : null;
     }
 
-    public function getCategoryId(): ?int
-    {
+    public function getCategoryId(): ?int {
         return $this->category_id;
     }
 
-    public function getCategory(): ?Category
-    {
+    public function getCategory(): ?Category {
         return $this->category;
     }
 
-    public function getCreated(): int
-    {
+    public function getCreated(): int {
         return (int)$this->created;
     }
 
-    public function getUpdated(): ?int
-    {
+    public function getUpdated(): ?int {
         return $this->updated !== null ?
                 (int)$this->updated : null;
     }
 
-    public function setName(?string $val): void
-    {
+    public function setName(?string $val): void {
         $this->name = ! empty($val) ?
                 (string)$val : null;
     }
 
-    public function setCategoryId(?int $val): void
-    {
+    public function setCategoryId(?int $val): void {
         $this->category_id = is_numeric($val) ? (int)$val : null;
         $this->category = is_numeric($val) ? new Category($val) : null;
     }
 
-    public function setCategory(?Category $val): void
-    {
+    public function setCategory(?Category $val): void {
         $this->category = $val instanceof Category ? $val : null;
         $this->category_id = $val instanceof Category ? $val->getID() : null;
     }
 
-    public function delete(bool $deletePhysical = true): void
-    {
+    public function delete(bool $deletePhysical = true): void {
         if ($this->getId()) {
             if ($deletePhysical) {
                 if ($this->getMp4File()) {
@@ -186,8 +167,7 @@ class Video extends Model
     }
 
     // render HTML5 <video> tag
-    public function render(): string
-    {
+    public function render(): string {
         $videoDir = $this->getVideoDir();
 
         $html = '<video width="' . $this->width . '" height="' .
@@ -219,28 +199,23 @@ class Video extends Model
         return $html;
     }
 
-    public function getWidth(): ?int
-    {
+    public function getWidth(): ?int {
         return $this->width;
     }
 
-    public function getHeight(): ?int
-    {
+    public function getHeight(): ?int {
         return $this->height;
     }
 
-    public function setWidth(?int $val): void
-    {
+    public function setWidth(?int $val): void {
         $this->width = $val;
     }
 
-    public function setHeight(?int $val): void
-    {
+    public function setHeight(?int $val): void {
         $this->height = $val;
     }
 
-    protected function fillVars($result = null): void
-    {
+    protected function fillVars($result = null): void {
         if ($result) {
             $result = Database::fetchSingle($result);
             $this->setID((int)$result->id);
@@ -268,8 +243,7 @@ class Video extends Model
         }
     }
 
-    protected function insert(): void
-    {
+    protected function insert(): void {
         $this->created = time();
         $this->updated = $this->created;
         $args = [
@@ -291,8 +265,7 @@ class Video extends Model
         $this->setID(Database::getLastInsertID());
     }
 
-    protected function update(): void
-    {
+    protected function update(): void {
         $this->updated = time();
         $args = [
             $this->name,
@@ -313,8 +286,7 @@ class Video extends Model
         Database::pQuery($sql, $args, true);
     }
 
-    protected function getVideoDir(): string
-    {
+    protected function getVideoDir(): string {
         return self::VIDEO_DIR;
     }
 }

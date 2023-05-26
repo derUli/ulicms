@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace App\CoreContent\Partials;
 
-use function App\HTML\icon;
-use function App\HTML\Link;
-use App\Security\ContentPermissionChecker;
-use ModuleHelper;
+defined('ULICMS_ROOT') || exit('No direct script access allowed');
+
+use App\Security\Permissions\ContentPermissionChecker;
 use PageController;
 use Template;
-
 use User;
-use ViewBag;
 
-class DeleteButtonRenderer
-{
+use function App\HTML\icon;
+
+use function App\HTML\Link;
+
+class DeleteButtonRenderer {
     public const MODULE_NAME = 'core_content';
 
-    public function render(int $pageId, User $user)
-    {
+    public function render(int $pageId, User $user) {
         $permitted = true;
 
         // check edit permissions
@@ -38,7 +37,7 @@ class DeleteButtonRenderer
                 '%title%' => getPageTitleByID($pageId)
             ]
         );
-        $actionUrl = ModuleHelper::buildMethodCallUrl(
+        $actionUrl = \App\Helpers\ModuleHelper::buildMethodCallUrl(
             PageController::class,
             'delete',
             "id={$pageId}&csrf_token=" . get_csrf_token()
@@ -50,7 +49,7 @@ class DeleteButtonRenderer
             'class' => 'delete-icon'
         ];
         $link = link($url, $icon, true, null, $attributes);
-        ViewBag::set('button', $link);
+        \App\Storages\ViewBag::set('button', $link);
 
         return $permitted ? Template::executeModuleTemplate(
             self::MODULE_NAME,

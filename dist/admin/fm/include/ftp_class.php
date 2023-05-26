@@ -1,7 +1,6 @@
 <?php
 
-class FTPClient
-{
+class FTPClient {
     // *** Class variables
     private $connectionId;
 
@@ -9,17 +8,14 @@ class FTPClient
 
     private $messageArray = [];
 
-    public function __construct()
-    {
+    public function __construct() {
     }
 
-    public function getMessages()
-    {
+    public function getMessages() {
         return $this->messageArray;
     }
 
-    public function connect($server, $ftpUser, $ftpPassword, $isPassive = false)
-    {
+    public function connect($server, $ftpUser, $ftpPassword, $isPassive = false) {
         // *** Set up basic connection
         $this->connectionId = ftp_connect($server);
 
@@ -35,38 +31,35 @@ class FTPClient
             $this->logMessage('Attempted to connect to ' . $server . ' for user ' . $ftpUser, true);
             return false;
         }
-            $this->logMessage('Connected to ' . $server . ', for user ' . $ftpUser);
-            $this->loginOk = true;
-            return true;
+        $this->logMessage('Connected to ' . $server . ', for user ' . $ftpUser);
+        $this->loginOk = true;
+        return true;
 
     }
 
-    public function makeDir($directory)
-    {
+    public function makeDir($directory) {
         // *** If creating a directory is successful...
         if (ftp_mkdir($this->connectionId, $directory)) {
             $this->logMessage('Directory "' . $directory . '" created successfully');
             return true;
         }
-            // *** ...Else, FAIL.
-            $this->logMessage('Failed creating directory "' . $directory . '"');
-            return false;
+        // *** ...Else, FAIL.
+        $this->logMessage('Failed creating directory "' . $directory . '"');
+        return false;
 
     }
 
-    public function changeDir($directory)
-    {
+    public function changeDir($directory) {
         if (ftp_chdir($this->connectionId, $directory)) {
             $this->logMessage('Current directory is now: ' . ftp_pwd($this->connectionId));
             return true;
         }
-            $this->logMessage('Couldn\'t change directory');
-            return false;
+        $this->logMessage('Couldn\'t change directory');
+        return false;
 
     }
 
-    public function getDirListing($directory = '.', $parameters = '-la')
-    {
+    public function getDirListing($directory = '.', $parameters = '-la') {
         echo shell_exec('whoami') . ' is who i am </br>';
         echo 'Current directory is now: ' . ftp_pwd($this->connectionId) . '</br>';
 
@@ -76,8 +69,7 @@ class FTPClient
         return $contentsArray;
     }
 
-    private function logMessage($message)
-    {
+    private function logMessage($message) {
         $this->messageArray[] = $message;
     }
 }
