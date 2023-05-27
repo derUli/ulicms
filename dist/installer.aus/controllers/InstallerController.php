@@ -268,6 +268,8 @@ class InstallerController {
 
         $targetConfig = ULICMS_ROOT . '/.env';
 
+        $_ENV = [];
+
         $loader = DotEnvLoader::fromEnvironment(ULICMS_ROOT, 'example');
         $loader->load();
 
