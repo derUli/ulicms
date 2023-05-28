@@ -29,7 +29,11 @@ class Database {
         self::$echoQueries = $echoQueries;
     }
 
-    // force MySQL into strict mode
+    /**
+     * Get MySQL strict mode flags
+     * 
+     * @return string[]
+     */
     public static function getSqlStrictModeFlags(): array {
         return [
             'ONLY_FULL_GROUP_BY',
