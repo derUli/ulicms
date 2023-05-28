@@ -17,7 +17,7 @@ class ControllerRegistry {
     public static function loadModuleControllers(): void {
         $controllerRegistry = [];
 
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $modules = $moduleManager->getEnabledModuleNames();
 
         foreach ($modules as $module) {

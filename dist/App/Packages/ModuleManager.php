@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+namespace App\Packages;
+
+use Database;
+use Module;
+use Settings;
+
+use function getModuleMeta;
+
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 class ModuleManager {

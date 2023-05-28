@@ -11,7 +11,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
     use MatchesSnapshots;
 
     protected function setUp(): void {
-        $manager = new ModuleManager();
+        $manager = new \App\Packages\ModuleManager();
         $manager->sync();
 
         ModelRegistry::loadModuleModels();

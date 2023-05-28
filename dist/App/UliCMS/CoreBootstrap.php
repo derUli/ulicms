@@ -20,7 +20,6 @@ use App\Storages\Vars;
 use App\Utils\Logger;
 use ControllerRegistry;
 use Database;
-use ModuleManager;
 use mysqli;
 use Nette\Utils\FileSystem;
 use Path;
@@ -297,7 +296,7 @@ class CoreBootstrap {
      * @return void
      */
     public function postDeployUpdate() {
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
         Settings::register('session_name', uniqid() . '_SESSION');

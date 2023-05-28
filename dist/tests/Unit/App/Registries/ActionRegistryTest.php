@@ -4,7 +4,7 @@ use App\Registries\ActionRegistry;
 
 class ActionRegistryTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
         ActionRegistry::loadModuleActions();

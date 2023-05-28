@@ -30,7 +30,7 @@ function do_event(
     string $name,
     string $runs = ModuleEvent::RUNS_ONCE
 ): void {
-    $manager = new ModuleManager();
+    $manager = new \App\Packages\ModuleManager();
     $modules = $manager->getEnabledModuleNames();
 
     foreach($modules as $module) {
@@ -81,7 +81,7 @@ function stringContainsShortCodes(string $content, ?string $module = null): bool
 function replaceShortcodesWithModules(
     string $string,
 ): string {
-    $manager = new ModuleManager();
+    $manager = new \App\Packages\ModuleManager();
     $modules = $manager->getEnabledModuleNames();
 
     foreach ($modules as $module) {

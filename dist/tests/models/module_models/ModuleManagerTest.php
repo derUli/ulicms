@@ -18,7 +18,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
     }
 
     protected function tearDown(): void {
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
         $module = new Module('fortune2');
@@ -28,7 +28,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testCreateAndEditModule1(): void {
-        $manager = new ModuleManager();
+        $manager = new \App\Packages\ModuleManager();
 
         $module = new Module();
         $module->setName(self::sampleName1);
@@ -84,7 +84,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testInitialSync(): void {
-        $manager = new ModuleManager();
+        $manager = new \App\Packages\ModuleManager();
 
         Database::query('truncate table {prefix}modules', true);
         $this->assertEquals(0, count($manager->getAllModules()));
@@ -94,7 +94,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testRemoveDeletedModules(): void {
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
         $module = new Module();
@@ -109,7 +109,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testUpdateModuleVersion(): void {
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
         $module = new Module('bootstrap');
@@ -129,14 +129,14 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertNull(Settings::get('oneclick_upgrade_channel'));
 
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
         $this->assertEquals('slow', Settings::get('oneclick_upgrade_channel'));
     }
 
     public function testGetDependencies(): void {
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
         $this->assertContains(
@@ -146,7 +146,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDependentModules(): void {
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
         $this->assertContains(

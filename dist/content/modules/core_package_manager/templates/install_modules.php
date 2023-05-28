@@ -79,7 +79,7 @@ if (! $pkg_src) {
             }
         }
 
-        $manager = new ModuleManager();
+        $manager = new \App\Packages\ModuleManager();
         $manager->sync();
 
         // Disabled because this caused issues

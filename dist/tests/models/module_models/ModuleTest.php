@@ -2,7 +2,7 @@
 
 class ModuleTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
-        $manager = new ModuleManager();
+        $manager = new \App\Packages\ModuleManager();
         $manager->sync();
         $this->backupFortune2();
 
@@ -13,7 +13,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
 
     protected function tearDown(): void {
         $this->restoreFortune2();
-        $manager = new ModuleManager();
+        $manager = new \App\Packages\ModuleManager();
         $manager->sync();
 
         $module = new Module('core_comments');

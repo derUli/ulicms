@@ -4,7 +4,7 @@ use App\Registries\ModelRegistry;
 
 class ModelRegistryTest extends \PHPUnit\Framework\TestCase {
     public function setUp(): void {
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
     }
 

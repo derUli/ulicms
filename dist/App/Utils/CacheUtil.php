@@ -9,7 +9,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Helpers\TestHelper;
 use ControllerRegistry;
 use DesignSettingsController;
-use ModuleManager;
 use Path;
 use Phpfastcache\CacheManager;
 use Phpfastcache\Config\ConfigurationOption;
@@ -109,7 +108,7 @@ abstract class CacheUtil {
         sureRemoveDir(Path::resolve('ULICMS_TMP'), false);
 
         // Sync modules table in database with modules folder
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
         $designSettingsController = ControllerRegistry::get(

@@ -9,7 +9,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     private $initialSettings = [];
 
     protected function setUp(): void {
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
         ControllerRegistry::loadModuleControllers();
 

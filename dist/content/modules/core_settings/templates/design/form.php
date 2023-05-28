@@ -28,7 +28,7 @@ $font_size = Settings::get('font_size');
 $ckeditor_skin = Settings::get('ckeditor_skin');
 $font_sizes = $controller->getFontSizes();
 $no_mobile_design_on_tablet = Settings::get('no_mobile_design_on_tablet');
-$modManager = new ModuleManager();
+$modManager = new \App\Packages\ModuleManager();
 ?>
 <p>
     <a

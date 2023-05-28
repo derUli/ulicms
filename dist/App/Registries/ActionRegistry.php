@@ -8,7 +8,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Controllers\Controller;
 use ControllerRegistry;
-use ModuleManager;
 
 class ActionRegistry {
     private static $actions = [];
@@ -35,7 +34,7 @@ class ActionRegistry {
             self::$actions[$key] = ULICMS_ROOT . "/admin/{$value}";
         }
 
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $modules = $moduleManager->getEnabledModuleNames();
 
         foreach ($modules as $module) {
@@ -115,7 +114,7 @@ class ActionRegistry {
 
     // load backend action page permission of modules
     private static function loadActionPermissions(): void {
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $modules = $moduleManager->getEnabledModuleNames();
 
         foreach ($modules as $module) {

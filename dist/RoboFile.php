@@ -330,7 +330,7 @@ class RoboFile extends Tasks {
 
         $modules = $this->replaceModulePlaceholders($modules);
 
-        $manager = new ModuleManager();
+        $manager = new \App\Packages\ModuleManager();
         $manager->sync();
         foreach ($modules as $name) {
             $module = new Module($name);
@@ -530,7 +530,7 @@ class RoboFile extends Tasks {
     public function modulesSync(): void {
         $this->initUliCMS();
 
-        $modules = new ModuleManager();
+        $modules = new \App\Packages\ModuleManager();
         $modules->sync();
     }
 
@@ -1033,7 +1033,7 @@ class RoboFile extends Tasks {
      * @return string[]
      */
     private function replaceModulePlaceholders(array $modules): array {
-        $manager = new ModuleManager();
+        $manager = new \App\Packages\ModuleManager();
         $manager->sync();
         $outModules = [];
 

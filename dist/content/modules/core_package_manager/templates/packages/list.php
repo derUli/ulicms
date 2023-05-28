@@ -8,7 +8,7 @@ use App\Security\Permissions\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
 
-$manager = new ModuleManager();
+$manager = new \App\Packages\ModuleManager();
 $manager->sync();
 $modules = $manager->getAllModules();
 $anyEmbedModules = count(\App\Helpers\ModuleHelper::getAllEmbedModules()) > 0;

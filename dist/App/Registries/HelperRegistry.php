@@ -6,8 +6,6 @@ namespace App\Registries;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use ModuleManager;
-
 use function getModuleMeta;
 use function getModulePath;
 
@@ -17,7 +15,7 @@ class HelperRegistry {
     // refactor it and split it into multiple small methods
     public static function loadModuleHelpers(): void {
         $helperRegistry = [];
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $modules = $moduleManager->getEnabledModuleNames();
 
         foreach ($modules as $module) {

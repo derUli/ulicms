@@ -10,8 +10,6 @@ namespace App\Models\Content;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use ModuleManager;
-
 use function getModuleMeta;
 
 // this class maps the values in the "type" column of the
@@ -44,7 +42,7 @@ class TypeMapper {
 
     // custom modules may load their own content type models
     public static function loadMapping(): void {
-        $manager = new ModuleManager();
+        $manager = new \App\Packages\ModuleManager();
         $modules = $manager->getEnabledModuleNames();
         foreach ($modules as $module) {
             $mappings = getModuleMeta($module, 'type_classes') ?? [];

@@ -4,7 +4,7 @@ use App\Registries\ActionRegistry;
 
 class ControllerRegistryTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
-        $moduleManager = new ModuleManager();
+        $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
         ControllerRegistry::loadModuleControllers();

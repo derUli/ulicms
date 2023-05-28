@@ -69,7 +69,7 @@ class Module {
 
     public function getMissingDependencies(): array {
         $result = [];
-        $manager = new ModuleManager();
+        $manager = new \App\Packages\ModuleManager();
         $dependencies = $manager->getDependencies($this->name);
         $enabledMods = $manager->getEnabledModuleNames();
         foreach ($dependencies as $dependency) {
@@ -113,7 +113,7 @@ class Module {
 
     public function getDependentModules(): array {
         $result = [];
-        $manager = new ModuleManager();
+        $manager = new \App\Packages\ModuleManager();
         $enabledMods = $manager->getEnabledModuleNames();
         $dependent = $manager->getDependentModules($this->getName());
 
