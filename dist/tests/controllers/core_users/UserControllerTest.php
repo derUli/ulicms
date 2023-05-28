@@ -2,7 +2,7 @@
 
 class UserControllerTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $_SESSION = [

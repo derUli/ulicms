@@ -29,7 +29,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $_GET = [];
         $_SESSION = [];
 
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
         $user->setSecondaryGroups([]);
         $user->save();
@@ -156,7 +156,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function getTestUser(): User {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $german = new Language();
@@ -629,7 +629,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
         $page->group_id = 1;
         $page->save();
 
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
 
         $user = $manager->getAllUsers()[0];
         VCS::createRevision($page->getID(), 'New Text', $user->getId());

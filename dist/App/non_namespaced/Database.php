@@ -31,7 +31,7 @@ class Database {
 
     /**
      * Get MySQL strict mode flags
-     * 
+     *
      * @return string[]
      */
     public static function getSqlStrictModeFlags(): array {
@@ -410,10 +410,6 @@ class Database {
 
     public static function getLastInsertID(): ?int {
         return mysqli_insert_id(self::$connection);
-    }
-
-    public static function getInsertID(): ?int {
-        return self::getLastInsertID();
     }
 
     // Fetch Row in diversen Datentypen

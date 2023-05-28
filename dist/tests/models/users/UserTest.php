@@ -234,7 +234,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testFromSessionDataReturnsUser(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $users = $manager->getLockedUsers(false);
         $user = $users[0];
 
@@ -255,7 +255,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testRegisterSessionRegistersSession(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $users = $manager->getLockedUsers(false);
         $user = $users[0];
 
@@ -278,7 +278,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testToSessionDataReturnsArray(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $users = $manager->getLockedUsers(false);
         $user = $users[0];
         $sessionData = $user->toSessionData();
@@ -646,7 +646,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
     }
 
     protected function getFirstUser(): User {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         return $manager->getAllUsers()[0];
     }
 }

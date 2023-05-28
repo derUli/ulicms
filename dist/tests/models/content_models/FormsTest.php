@@ -19,7 +19,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
             (int)$page->id,
             true
         );
-        $id = Database::getInsertID();
+        $id = Database::getLastInsertID();
         $form = Forms::getFormByID($id);
         $this->assertEquals($id, $form['id']);
         $this->assertEquals('Unit Test 1', $form['name']);
@@ -54,7 +54,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
             (int)$page->id,
             false
         );
-        $id = Database::getInsertID();
+        $id = Database::getLastInsertID();
         $form = Forms::getFormByID($id);
         $this->assertEquals($id, $form['id']);
         $this->assertEquals('Unit Test 2', $form['name']);
@@ -91,7 +91,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
             (int)$page1->id,
             false
         );
-        $id = Database::getInsertID();
+        $id = Database::getLastInsertID();
 
         Forms::editForm(
             $id,
@@ -140,7 +140,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
             (int)$page1->id,
             true
         );
-        $id = Database::getInsertID();
+        $id = Database::getLastInsertID();
 
         Forms::editForm(
             $id,
@@ -189,7 +189,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
             (int)$page1->id,
             false
         );
-        $id1 = Database::getInsertID();
+        $id1 = Database::getLastInsertID();
         Forms::createForm(
             'Unit Test 2',
             'max@muster.de',
@@ -202,7 +202,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase {
             false
         );
 
-        $id2 = Database::getInsertID();
+        $id2 = Database::getLastInsertID();
 
         $forms = Forms::getAllForms();
         $this->assertGreaterThanOrEqual(2, count($forms));

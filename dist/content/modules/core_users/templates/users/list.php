@@ -16,7 +16,7 @@ if (! isset($_SESSION['admins_filter_group'])) {
 if (Request::getVar('admins_filter_group') !== null) {
     $_SESSION['admins_filter_group'] = Request::getVar('admins_filter_group', 0, 'int');
 }
-$manager = new UserManager();
+$manager = new \App\Models\Users\UserManager();
 if ($_SESSION['admins_filter_group'] > 0) {
     $users = $manager->getUsersByGroupId($_SESSION['admins_filter_group']);
 } else {

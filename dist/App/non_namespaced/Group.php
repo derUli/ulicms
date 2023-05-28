@@ -296,7 +296,7 @@ class Group {
      * @return User[]
      */
     public function getUsers(string $order = 'id'): array {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         return $manager->getUsersByGroupId($this->getId(), $order);
     }
 
@@ -331,7 +331,7 @@ class Group {
         ];
         $result = Database::pQuery($sql, $args, true);
         if ($result) {
-            $id = Database::getInsertID();
+            $id = Database::getLastInsertID();
             $this->id = $id;
             $this->saveLanguages();
         }

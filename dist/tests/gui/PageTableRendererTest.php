@@ -9,7 +9,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDataReturns3Items(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $renderer = new PageTableRenderer($user);
@@ -22,7 +22,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDataReturnsOther3Items(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $renderer = new PageTableRenderer($user);
@@ -45,7 +45,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDataFiltered(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $renderer = new PageTableRenderer($user);
@@ -62,7 +62,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDataFilterLanguagesByGroup(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $allDataRenderer = new PageTableRenderer($user);
@@ -89,7 +89,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDataFilterByLanguageAndType(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $renderer = new PageTableRenderer($user);
@@ -116,7 +116,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDataFilterByParentIdNoParent(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $renderer = new PageTableRenderer($user);
@@ -142,7 +142,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDataFilterByParentIdWithParent(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $renderer = new PageTableRenderer($user);
@@ -174,7 +174,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDataFilterByCategoryId(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $renderer = new PageTableRenderer($user);
@@ -203,7 +203,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDataFilterByApproved(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $renderer = new PageTableRenderer($user);
@@ -231,7 +231,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDataFilterByMenu(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $renderer = new PageTableRenderer($user);
@@ -252,7 +252,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDataFilterActive(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $renderer = new PageTableRenderer($user);
@@ -287,7 +287,7 @@ class PageTableRendererTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetDataFilteredWithStart(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
 
         $renderer = new PageTableRenderer($user);

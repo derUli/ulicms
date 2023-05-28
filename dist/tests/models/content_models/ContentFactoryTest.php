@@ -58,7 +58,7 @@ class ContentFactoryTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testThrowsExceptionOnUnknownTypes(): void {
-        $userManager = new UserManager();
+        $userManager = new \App\Models\Users\UserManager();
         $user = $userManager->getAllUsers()[0];
 
         $group = Group::getAll()[0];

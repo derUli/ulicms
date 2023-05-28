@@ -6,7 +6,7 @@ class PasswordResetTest extends \PHPUnit\Framework\TestCase {
     private $testUserId;
 
     protected function setUp(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $this->testUserId = (int)$manager->getAllUsers()[0]->getId();
 
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';

@@ -19,7 +19,7 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
         $video->setHeight(480);
         $video->save();
 
-        $userManager = new UserManager();
+        $userManager = new \App\Models\Users\UserManager();
         $userId = $userManager->getAllUsers()[0]->getId();
         $groupId = Group::getAll()[0]->getId();
 
@@ -54,7 +54,7 @@ class VideoAndAudioPageTest extends \PHPUnit\Framework\TestCase {
         $audio->setCategoryId(1);
         $audio->save();
 
-        $userManager = new UserManager();
+        $userManager = new \App\Models\Users\UserManager();
         $userId = $userManager->getAllUsers()[0]->getId();
         $groupId = Group::getAll()[0]->getId();
 

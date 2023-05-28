@@ -318,7 +318,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetContentWithPlaceholder(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $users = $manager->getAllUsers();
         $user = $users[0];
         $user_id = $user->getId();
@@ -542,7 +542,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetHeadlineReturnsNull(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $users = $manager->getAllUsers();
         $user = $users[0];
         $user_id = $user->getId();
@@ -570,7 +570,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetHeadlineReturnsTitle(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $users = $manager->getAllUsers();
         $user = $users[0];
         $user_id = $user->getId();
@@ -597,7 +597,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetHeadlineReturnsHeadline(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $users = $manager->getAllUsers();
         $user = $users[0];
         $user_id = $user->getId();
@@ -716,7 +716,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase {
     }
 
     private function getPageWithCommentsEnabled() {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $users = $manager->getAllUsers();
         $user = $users[0];
         $user_id = $user->getId();

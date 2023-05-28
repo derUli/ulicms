@@ -21,7 +21,7 @@ class PageTest extends \PHPUnit\Framework\TestCase {
     private $savedSettings = [];
 
     protected function setUp(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $users = $manager->getAllUsers();
         $this->user = $users[0];
 

@@ -36,7 +36,7 @@ class HistoryControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function getTestUser(): User {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $user = $manager->getAllUsers('admin desc')[0];
         $user->save();
         return $user;

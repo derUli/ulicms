@@ -204,23 +204,6 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
         Settings::delete('foo2');
     }
 
-    public function testGetInsertID(): void {
-        Database::query("insert into {prefix}settings (name, value)
-                         values
-                         ('foo2', 'bar')", true);
-
-        $lastInsertId = Database::getInsertID();
-        $this->assertNotNull($lastInsertId);
-
-        $result = Database::selectAll('settings', [
-            'id'
-        ], "name = 'foo2'");
-        $dataset = Database::fetchObject($result);
-        $this->assertEquals($dataset->id, $lastInsertId);
-
-        Settings::delete('foo2');
-    }
-
     public function testGetNumFieldCount(): void {
         Database::selectAll('users', ['lastname', 'firstname', 'email']);
         $this->assertEquals(3, Database::getNumFieldCount());

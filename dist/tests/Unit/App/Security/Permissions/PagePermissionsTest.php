@@ -58,7 +58,7 @@ class PagePermissionsTest extends \PHPUnit\Framework\TestCase {
         $page->title = 'Page Permission Test';
         $page->language = 'en';
 
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $users = $manager->getAllUsers();
         $firstUser = $users[0];
 

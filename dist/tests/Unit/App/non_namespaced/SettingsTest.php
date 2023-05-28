@@ -39,7 +39,7 @@ class SettingsTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetAndSetLang(): void {
-        $manager = new UserManager();
+        $manager = new \App\Models\Users\UserManager();
         $users = $manager->getAllUsers();
         $firstUser = $users[0];
 
