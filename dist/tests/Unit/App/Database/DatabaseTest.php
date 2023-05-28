@@ -40,7 +40,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase {
     public function testGetAllTables(): void {
         $tables = Database::getAllTables();
         $prefix = $_ENV['DB_PREFIX'];
-        $this->assertGreaterThanOrEqual(20, count($tables));
+        $this->assertGreaterThanOrEqual(19, count($tables));
 
         $this->assertContains("{$prefix}content", $tables);
         $this->assertContains("{$prefix}settings", $tables);

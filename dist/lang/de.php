@@ -33,7 +33,6 @@ add_translation('WELCOME', 'Willkommen');
 
 add_translation('CONTENTS', 'Inhalte');
 add_translation('PAGES', 'Seiten');
-add_translation('ADVERTISEMENTS', 'Werbebanner');
 add_translation('CATEGORIES', 'Kategorien');
 add_translation('IMPORT', 'Import');
 add_translation('EXPORT', 'Export');
@@ -114,19 +113,6 @@ add_translation('NO_PERMISSIONS', 'Sie haben nicht die Berechtigung, um auf dies
 
 add_translation('YES', 'Ja');
 add_translation('NO', 'Nein');
-
-// Banner
-add_translation('ADD_ADVERTISEMENT', 'Banner hinzufügen');
-add_translation('CANT_DELETE_ADMIN', 'Der Admin kann nicht gelöscht werden.');
-add_translation('ADVERTISEMENT_INFOTEXT', 'Hier können Sie die Werbebanner für Ihre Internetseite verwalten.');
-add_translation('GIF_BANNER', 'GIF Banner');
-add_translation('HTML_BANNER', 'HTML Banner');
-add_translation('BANNERTEXT', 'Bannertext');
-add_translation('IMAGE_URL', 'Bild-URL');
-add_translation('LINK_URL', 'Link-URL');
-add_translation('HTML', 'HTML');
-add_translation('ADD_BANNER', 'Banner hinzufügen');
-add_translation('PREVIEW', 'Vorschau');
 
 // Benutzer
 add_translation('USERS_INFOTEXT', 'Hier können Sie die Benutzer Ihrer Homepage verwalten und die Passwörter ändern.');

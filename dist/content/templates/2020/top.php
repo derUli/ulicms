@@ -82,9 +82,6 @@ if (count($pages)) {
                 ?>
             <?php }
 ?>
-            <div class="advertisement">
-                <?php random_banner(); ?>
-            </div>
         </div>
         <?php
         $color = 0;

@@ -3,6 +3,9 @@
 API-Änderungen:
 * ModuleManager in Namespace App\Packages verschoben
 
+Entfernte Features:
+* Banner
+
 ===== Neues in UliCMS 2023.3 =====
 
 Neue Features:

@@ -24,8 +24,7 @@ $entries[] = new MenuEntry(
     'contents',
     [
         'pages',
-        'forms',
-        'banners'
+        'forms'
     ],
     [],
     false,

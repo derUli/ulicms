@@ -14,9 +14,6 @@
                 "pages_show_positions",
                 "pages_edit_permissions",
                 "default_access_restrictions_edit",
-                "banners",
-                "banners_create",
-                "banners_edit",
                 "categories",
                 "categories_create",
                 "categories_edit"
@@ -26,15 +23,9 @@
         "pages": "templates/pages/list.php",
         "pages_new": "templates/pages/new.php",
         "pages_edit": "templates/pages/edit.php",
-        "categories": "templates/categories.php",
-        "banner": "templates/banners/list.php",
-        "banner_new": "templates/banners/new.php",
-        "banner_edit": "templates/banners/edit.php"
+        "categories": "templates/categories.php"
     },
     "action_permissions": {
-        "banner": "banners",
-        "banner_new": "banners_create",
-        "banner_edit": "banners_edit",
         "pages": "pages",
         "pages_new": "pages_create",
         "pages_edit": "pages",
@@ -43,7 +34,6 @@
     "controllers": {
         "PageController": "controllers/PageController.php",
         "CategoryController": "controllers/CategoryController.php",
-        "BannerController": "controllers/BannerController.php",        
         "CoreContentController": "controllers/CoreContentController.php"
     },
     "main_class": "CoreContentController",
@@ -71,9 +61,6 @@
         "PageController::getCKEditorLinkList": "",
         "CategoryController::createPost": "categories_create",
         "CategoryController::updatePost": "categories_edit",
-        "CategoryController::deletePost": "categories",
-        "BannerController::deletePost": "banners",
-        "BannerController::createPost": "banners",
-        "BannerController::updatePost": "banners"
+        "CategoryController::deletePost": "categories"
     }
 }

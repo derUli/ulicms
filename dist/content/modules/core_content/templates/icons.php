@@ -9,7 +9,6 @@ $icons = [
     'pages' => 'fas fa-book',
     'comments_manage' => 'fa fa-comment',
     'forms' => 'fab fa-wpforms',
-    'banner' => 'fas fa-bullhorn',
     'categories' => 'fa fa-list-alt'
 ];
 
@@ -18,7 +17,6 @@ $icons = array_filter($icons, static function($cssClass, $action) {
         'pages' => 'pages',
         'comments_manage' => 'comments_manage',
         'forms' => 'forms',
-        'banner' => 'banners',
         'categories' => 'categories'
     ];
 

@@ -23,7 +23,6 @@ add_translation(
 add_translation('date_from', 'Date from');
 add_translation('date_to', 'Date to');
 
-add_translation('banner', get_translation('advertisements'));
 add_translation('page_type', 'Page Type');
 
 add_translation('go_up', 'Go Up');

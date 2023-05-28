@@ -7,7 +7,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Exceptions\DatasetNotFoundException;
 use App\Exceptions\FileNotFoundException;
 use App\HTML\Script;
-use App\Models\Content\Advertisement\Banners;
 use App\Security\Permissions\PermissionChecker;
 use App\Storages\Vars;
 use App\Utils\File;
@@ -33,11 +32,11 @@ class Template {
         echo self::getBodyClasses();
     }
 
+    /**
+     * @deprecated since 2023.4
+     */
     public static function randomBanner(): void {
-        $banner = Banners::getRandom();
-        if ($banner) {
-            echo $banner->render();
-        }
+
     }
 
     public static function outputContentElement(): void {

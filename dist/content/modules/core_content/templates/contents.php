@@ -6,11 +6,11 @@ use App\Security\Permissions\PermissionChecker;
 
 $permissionChecker = PermissionChecker::fromCurrentUser();
 
-if ($permissionChecker->hasPermission('pages')
-        || $permissionChecker->hasPermission('banners')
-        || $permissionChecker->hasPermission('categories')
-        || $permissionChecker->hasPermission('export')
-        || $permissionChecker->hasPermission('forms')) {
+if (
+    $permissionChecker->hasPermission('pages')
+    || $permissionChecker->hasPermission('categories')
+    || $permissionChecker->hasPermission('forms')
+) {
     ?>
     <h2><?php translate('contents'); ?></h2>
     <strong><?php translate('select_content_type'); ?> </strong>
@@ -25,8 +25,7 @@ if ($permissionChecker->hasPermission('pages')
                     class="fas fa-book"></i> <?php translate('pages'); ?></a>
 
         <?php }
-        ?>
-        <?php
+
         if ($permissionChecker->hasPermission('comments_manage')) {
             ?>
             <a href="?action=comments_manage"
@@ -35,8 +34,7 @@ if ($permissionChecker->hasPermission('pages')
                     class="fa fa-comments" aria-hidden="true"></i>
                 <?php translate('comments'); ?></a>
         <?php }
-        ?>
-        <?php
+
         if ($permissionChecker->hasPermission('forms')) {
             ?><a href='?action=forms'
                class="btn btn-default is-not-ajax voffset2"
@@ -45,24 +43,15 @@ if ($permissionChecker->hasPermission('pages')
                 <?php translate('forms'); ?></a> 
             <?php
         }
-        if ($permissionChecker->hasPermission('banners')) {
-            ?>
-            <a href="index.php?action=banner"
-               class="btn btn-default is-not-ajax voffset2"
-               ><i
-                    class="fas fa-bullhorn"></i>
-                <?php translate('advertisements'); ?></a>
 
-            <?php
-        }
-        if ($permissionChecker->hasPermission('categories')) {
-            ?>
+    if ($permissionChecker->hasPermission('categories')) {
+        ?>
             <a href="index.php?action=categories"
                class="btn btn-default is-not-ajax voffset2"><i
                     class="fa fa-list-alt" aria-hidden="true"></i>
                 <?php translate('categories'); ?></a>
             <?php }
-        ?>
+    ?>
     </div>
     <?php
     do_event('content_type_list_entry');

@@ -33,7 +33,6 @@ add_translation('WELCOME', 'Welcome');
 
 add_translation('CONTENTS', 'Contents');
 add_translation('PAGES', 'Pages');
-add_translation('ADVERTISEMENTS', 'Advertisements');
 add_translation('CATEGORIES', 'Categories');
 add_translation('IMPORT', 'Import');
 add_translation('EXPORT', 'Export');
@@ -113,19 +112,6 @@ add_translation('NO_PERMISSIONS', 'Access denied.');
 
 add_translation('YES', 'Yes');
 add_translation('NO', 'No');
-
-// Banner
-add_translation('ADD_ADVERTISEMENT', 'Create banner');
-add_translation('CANT_DELETE_ADMIN', "Can\'t delete admin user");
-add_translation('ADVERTISEMENT_INFOTEXT', 'Here you can manage advertisements.');
-add_translation('GIF_BANNER', 'GIF Banner');
-add_translation('HTML_BANNER', 'HTML Banner');
-add_translation('BANNERTEXT', 'Banner text');
-add_translation('IMAGE_URL', 'Image URL');
-add_translation('LINK_URL', 'Link URL');
-add_translation('HTML', 'HTML');
-add_translation('ADD_BANNER', 'Add Banner');
-add_translation('PREVIEW', 'Preview');
 
 // Benutzer
 add_translation('USERS_INFOTEXT', 'You can create, edit and delete users here.');

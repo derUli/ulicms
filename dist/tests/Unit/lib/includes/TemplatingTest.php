@@ -1,7 +1,6 @@
 <?php
 
 use App\Constants\HtmlEditor;
-use App\Models\Content\Advertisement\Banner;
 
 class TemplatingTest extends \PHPUnit\Framework\TestCase {
     public const HTML_TEXT1 = 'My first Banner HTML';
@@ -41,9 +40,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
 
         Database::deleteFrom('users', "username like 'testuser_%'");
         Database::deleteFrom('content', "slug like 'unit-test%'");
-        Database::pQuery('DELETE FROM `{prefix}banner` where html like ?', [
-            self::HTML_TEXT1 . '%',
-        ], true);
     }
 
     public function testGetSlugWithSlugSet(): void {
@@ -343,28 +339,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         ob_start();
         homepage_owner();
         $this->assertEquals('John Doe', ob_get_clean());
-    }
-
-    public function testRandomBanner(): void {
-        $this->createTestBanners();
-
-        ob_start();
-        random_banner();
-        $banner1 = ob_get_clean();
-        $this->assertNotEmpty($banner1);
-
-        for ($i = 0; $i <= 3; $i++) {
-            ob_start();
-            random_banner();
-            $banner2 = ob_get_clean();
-
-            if ($banner2 !== $banner1) {
-                $this->assertNotEmpty($banner2);
-                return;
-            }
-        }
-
-        $this->fail('Test failed');
     }
 
     public function testLanguageSelection(): void {
@@ -728,17 +702,6 @@ class TemplatingTest extends \PHPUnit\Framework\TestCase {
         \App\Storages\Vars::delete('cache_control');
 
         Database::query("delete from {prefix}content where slug = 'testdisableshortcodes' or title like 'Unit Test%'", true);
-    }
-
-    private function createTestBanners(): void {
-        for ($i = 1; $i < 20; $i++) {
-            $banner = new Banner();
-            $banner->setType('html');
-            $banner->setHtml(
-                self::HTML_TEXT1 . ' ' . uniqid()
-            );
-            $banner->save();
-        }
     }
 
     private function getArticleWithMetaData(): Article {

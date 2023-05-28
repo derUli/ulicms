@@ -22,8 +22,6 @@ add_translation(
 add_translation('date_from', 'Datum von');
 add_translation('date_to', 'Datum bis');
 
-add_translation('banner', get_translation('advertisements'));
-
 add_translation('page_type', 'Seitentyp');
 
 add_translation('go_up', 'Nach oben');

@@ -16,9 +16,9 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertGreaterThan(1, $id);
 
-        $banner = new Category($id);
-        $this->assertEquals($name, $banner->getName());
-        $this->assertEquals($description, $banner->getDescription());
+        $category = new Category($id);
+        $this->assertEquals($name, $category->getName());
+        $this->assertEquals($description, $category->getDescription());
     }
 
     public function testUpdateCategory(): void {
@@ -35,9 +35,9 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertGreaterThan(1, $updatedId);
 
-        $banner = new Category($createdId);
-        $this->assertEquals('Unit Test New Name', $banner->getName());
-        $this->assertEquals('New Description', $banner->getDescription());
+        $category = new Category($createdId);
+        $this->assertEquals('Unit Test New Name', $category->getName());
+        $this->assertEquals('New Description', $category->getDescription());
     }
 
     public function testDeleteCategoryReturnsTrue(): void {

@@ -7,9 +7,6 @@ use App\Translations\JSTranslation;
 Template::comments();
 
 ?>
-<div class="advertisement">
-    <?php random_banner(); ?>
-</div>
 </main>
 </div>
 <footer class="footer">
