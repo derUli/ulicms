@@ -16,7 +16,7 @@ class CoreUpgradeControllerTest extends \PHPUnit\Framework\TestCase {
     public function testGenerateCheckUrl(): void {
         $controller = new CoreUpgradeController();
 
-        $this->assertEquals('https://channels.ulicms.de/2023.3/slow.json', $controller->getCheckUrl());
+        $this->assertEquals('https://channels.ulicms.de/2023.4/slow.json', $controller->getCheckUrl());
     }
 
     public function testSetCheckUrl(): void {

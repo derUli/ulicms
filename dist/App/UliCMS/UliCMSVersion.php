@@ -18,7 +18,7 @@ class UliCMSVersion {
 
     public const BUILD_DATE = 0; // {InsertBuildDate}
 
-    public const VERSION_NUMBER = [2023, 3];
+    public const VERSION_NUMBER = [2023, 4];
 
     /**
      * Returns the release year
