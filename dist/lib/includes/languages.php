@@ -53,6 +53,11 @@ function getAvailableBackendLanguages(): array {
     return $retval;
 }
 
+/**
+ * Get system language
+ *
+ * @return string
+ */
 function getSystemLanguage(): string {
     if (isset($_SESSION['system_language'])) {
         $lang = $_SESSION['system_language'];
@@ -69,11 +74,18 @@ function getSystemLanguage(): string {
     return $lang;
 }
 
-function getDomainByLanguage($givenLanguage): ?string {
+/**
+ * Get domain by language
+ *
+ * @param ?string $givenLanguage
+ *
+ * @return ?string
+ */
+function getDomainByLanguage(?string $givenLanguage): ?string {
     $domainMapping = Settings::get('domain_to_language');
     $domainMapping = Settings::mappingStringToArray($domainMapping);
     foreach ($domainMapping as $domain => $language) {
-        if ($givenLanguage == $language) {
+        if ($givenLanguage === $language) {
             return $domain;
         }
     }

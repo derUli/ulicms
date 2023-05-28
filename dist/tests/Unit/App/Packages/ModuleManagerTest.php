@@ -9,7 +9,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
 
     public const sampleVersion2 = '2.0';
 
-    private $oneclick_upgrade_channel;
+    private ?string $oneclick_upgrade_channel;
 
     protected function setUp(): void {
         $this->oneclick_upgrade_channel = Settings::get('oneclick_upgrade_channel');

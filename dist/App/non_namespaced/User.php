@@ -55,6 +55,7 @@ class User extends Model {
 
     /**
      * Constructor
+     *
      * @param ?ìnt $id
      */
     public function __construct(?int $id = null) {
@@ -65,7 +66,9 @@ class User extends Model {
 
     /**
      * Load user by id
+     *
      * @param type $id
+     *
      * @return void
      */
     public function loadById($id): void {
@@ -79,7 +82,9 @@ class User extends Model {
 
     /**
      * Load user by username
+     *
      * @param string $name
+     *
      * @return void
      */
     public function loadByUsername(string $name): void {
@@ -94,7 +99,9 @@ class User extends Model {
 
     /**
      * Load user by email
+     *
      * @param string $email
+     *
      * @return void
      */
     public function loadByEmail(string $email): void {
@@ -111,6 +118,7 @@ class User extends Model {
 
     /**
      * Load user from session data
+     *
      * @return User|null
      */
     public static function fromSessionData(): ?User {
@@ -137,8 +145,11 @@ class User extends Model {
 
     /**
      * Register a session from this user
+     *
      * @param bool $redirect Redirect after login
+     *
      * @throws BadMethodCallException
+     *
      * @return void
      */
     public function registerSession(bool $redirect = true): void {
@@ -175,6 +186,7 @@ class User extends Model {
 
     /**
      * Save user
+     *
      * @return void
      */
     public function save(): void {
@@ -188,7 +200,9 @@ class User extends Model {
 
     /**
      * Create a new user and send welcome mail
+     *
      * @param string $password
+     *
      * @return void
      */
     public function saveAndSendMail(string $password): bool {
@@ -198,7 +212,9 @@ class User extends Model {
 
     /**
      * Send welcome mail to user
+     *
      * @param string $password
+     *
      * @return bool
      */
     public function sendWelcomeMail(string $password): bool {
@@ -216,7 +232,9 @@ class User extends Model {
 
     /**
      * Get text for welcome mail
+     *
      * @param string $password
+     *
      * @return string
      */
     public function getWelcomeMailText(string $password): string {
@@ -228,7 +246,9 @@ class User extends Model {
 
     /**
      * Fil vars from database
+     *
      * @param type $result
+     *
      * @return void
      */
     public function fillVars($result = null): void {
@@ -254,6 +274,7 @@ class User extends Model {
 
     /**
      * Get id
+     *
      * @return int|null
      */
     public function getId(): ?int {
@@ -262,7 +283,9 @@ class User extends Model {
 
     /**
      * Set id
+     *
      * @param int|null $id
+     *
      * @return void
      */
     public function setId($id): void {
@@ -271,6 +294,7 @@ class User extends Model {
 
     /**
      * Get username
+     *
      * @return string|null
      */
     public function getUsername(): ?string {
@@ -279,7 +303,9 @@ class User extends Model {
 
     /**
      * Set username
+     *
      * @param string $username
+     *
      * @return void
      */
     public function setUsername(string $username): void {
@@ -288,6 +314,7 @@ class User extends Model {
 
     /**
      * Get lastname
+     *
      * @return string|null
      */
     public function getLastname(): ?string {
@@ -296,7 +323,9 @@ class User extends Model {
 
     /**
      * Set lastname
+     *
      * @param string|null $lastname
+     *
      * @return void
      */
     public function setLastname(?string $lastname): void {
@@ -305,6 +334,7 @@ class User extends Model {
 
     /**
      * Get firstname
+     *
      * @return string|null
      */
     public function getFirstname(): ?string {
@@ -313,7 +343,9 @@ class User extends Model {
 
     /**
      * Set firstname
+     *
      * @param string|null $firstname
+     *
      * @return void
      */
     public function setFirstname(?string $firstname): void {
@@ -322,6 +354,7 @@ class User extends Model {
 
     /**
      * Get email address
+     *
      * @return string|null
      */
     public function getEmail(): ?string {
@@ -330,7 +363,9 @@ class User extends Model {
 
     /**
      * Set email address
+     *
      * @param string|null $email
+     *
      * @return void
      */
     public function setEmail(?string $email): void {
@@ -339,6 +374,7 @@ class User extends Model {
 
     /**
      * Delete user
+     *
      * @return bool
      */
     public function delete() {
@@ -363,6 +399,7 @@ class User extends Model {
 
     /**
      * Get hashed password
+     *
      * @return string|null
      */
     public function getPassword(): ?string {
@@ -371,7 +408,9 @@ class User extends Model {
 
     /**
      * Set password
+     *
      * @param string|null $password
+     *
      * @return void
      */
     public function setPassword(string $password): void {
@@ -381,6 +420,7 @@ class User extends Model {
 
     /**
      * Get datetime of last password change
+     *
      * @return string|null
      */
     public function getPasswordChanged(): ?string {
@@ -389,6 +429,7 @@ class User extends Model {
 
     /**
      * Reset password
+     *
      * @return void
      */
     public function resetPassword(): void {
@@ -410,6 +451,7 @@ class User extends Model {
 
     /**
      * Get "Firstname lastname"
+     *
      * @return string
      */
     public function getFullName(): string {
@@ -418,6 +460,7 @@ class User extends Model {
 
     /**
      * Get full name or username
+     *
      * @return string
      */
     public function getDisplayName(): string {
@@ -427,7 +470,9 @@ class User extends Model {
 
     /**
      * Check password
+     *
      * @param string $password
+     *
      * @return bool
      */
     public function checkPassword(string $password): bool {
@@ -436,6 +481,7 @@ class User extends Model {
 
     /**
      * Get about me text
+     *
      * @return string|null
      */
     public function getAboutMe(): ?string {
@@ -444,7 +490,9 @@ class User extends Model {
 
     /**
      * Set about me text
+     *
      * @param string|null $text
+     *
      * @return void
      */
     public function setAboutMe(?string $text): void {
@@ -453,6 +501,7 @@ class User extends Model {
 
     /**
      * Get unix timestamp of last action
+     *
      * @return int
      */
     public function getLastAction(): int {
@@ -473,7 +522,9 @@ class User extends Model {
 
     /**
      * Update last action of this user
+     *
      * @param int|null $time
+     *
      * @return void
      */
     public function setLastAction(int $time): void {
@@ -500,16 +551,19 @@ class User extends Model {
 
     /**
      * Set primary group
-     * @param type $gid
+     *
+     * @param int $gid
+     *
      * @return void
      */
     public function setPrimaryGroupId($gid): void {
-        $this->group_id = $gid;
+        $this->group_id = (int)$gid;
         $this->group = $gid;
     }
 
     /**
      * Get primary group
+     *
      * @return ?Group
      */
     public function getPrimaryGroup() {
@@ -518,7 +572,9 @@ class User extends Model {
 
     /**
      * Set primary group
+     *
      * @param type $group
+     *
      * @return void
      */
     public function setPrimaryGroup($group): void {
@@ -528,6 +584,7 @@ class User extends Model {
 
     /**
      * Get html editor
+     *
      * @return string|null
      */
     public function getHTMLEditor(): ?string {
@@ -536,7 +593,9 @@ class User extends Model {
 
     /**
      * Set html editor
+     *
      * @param string $editor
+     *
      * @return void
      */
     public function setHTMLEditor(string $editor): void {
@@ -554,6 +613,7 @@ class User extends Model {
 
     /**
      * Check if password change is required
+     *
      * @return bool
      */
     public function getRequirePasswordChange(): bool {
@@ -562,7 +622,9 @@ class User extends Model {
 
     /**
      * Set require_password_change
+     *
      * @param type $val
+     *
      * @return void
      */
     public function setRequirePasswordChange($val): void {
@@ -572,6 +634,7 @@ class User extends Model {
     /**
      * Check if the "admin" flag is set
      * The "admin" flag enables unlimited acccess to the system
+     *
      * @return bool
      */
     public function isAdmin(): bool {
@@ -580,7 +643,9 @@ class User extends Model {
 
     /**
      * Set the "admin" flag which enables unlimited access to the system
+     *
      * @param type $val
+     *
      * @return void
      */
     public function setAdmin($val): void {
@@ -589,6 +654,7 @@ class User extends Model {
 
     /**
      * If account is locked
+     *
      * @return bool
      */
     public function isLocked(): bool {
@@ -597,7 +663,8 @@ class User extends Model {
 
     /**
      * Set if account is locked
-     * @param type $val
+     *
+     * @param int $val
      */
     public function setLocked($val): void {
         $this->locked = (bool)$val;
@@ -605,6 +672,7 @@ class User extends Model {
 
     /**
      * Get datetime of last login
+     *
      * @return type
      */
     public function getLastLogin() {
@@ -613,7 +681,9 @@ class User extends Model {
 
     /**
      * Set datetime of last login
+     *
      * @param type $val
+     *
      * @return void
      */
     public function setLastLogin($val): void {
@@ -622,6 +692,7 @@ class User extends Model {
 
     /**
      * Get failed logins
+     *
      * @return int
      */
     public function getFailedLogins(): int {
@@ -642,6 +713,7 @@ class User extends Model {
 
     /**
      * Increase failed logins
+     *
      * @return void
      */
     public function increaseFailedLogins(): void {
@@ -660,6 +732,7 @@ class User extends Model {
 
     /**
      * Set failed logins to 0
+     *
      * @return bool
      */
     public function resetFailedLogins(): bool {
@@ -668,7 +741,9 @@ class User extends Model {
 
     /**
      * Set failed logins
+     *
      * @param int $amount
+     *
      * @return bool
      */
     public function setFailedLogins(int $amount): bool {
@@ -688,6 +763,7 @@ class User extends Model {
 
     /**
      * Get homepage
+     *
      * @return string|null
      */
     public function getHomepage(): ?string {
@@ -696,7 +772,9 @@ class User extends Model {
 
     /**
      * Set homepage
+     *
      * @param string|null $val
+     *
      * @return void
      */
     public function setHomepage(?string $val): void {
@@ -705,6 +783,7 @@ class User extends Model {
 
     /**
      * Get default language of this user
+     *
      * @return string|null
      */
     public function getDefaultLanguage(): ?string {
@@ -713,7 +792,9 @@ class User extends Model {
 
     /**
      * Set default language
+     *
      * @param string|null $val
+     *
      * @return void
      */
     public function setDefaultLanguage(?string $val): void {
@@ -723,6 +804,7 @@ class User extends Model {
     /**
      *
      * Get avatar for the current user
+     *
      * @return string|null
      */
     public function getAvatar(): ?string {
@@ -764,15 +846,18 @@ class User extends Model {
 
     /**
      * Set avatar
-     * @param type $file
+     *
+     * @param string $file
+     *
      * @return void
      */
-    public function setAvatar($file): void {
+    public function setAvatar(string $file): void {
         $this->processAvatar($file);
     }
 
     /**
      * Get secondary groups of a user
+     *
      * @return array
      */
     public function getSecondaryGroups(): array {
@@ -781,7 +866,9 @@ class User extends Model {
 
     /**
      * Set secondary groups of a user
+     *
      * @param array $val
+     *
      * @return void
      */
     public function setSecondaryGroups(array $val): void {
@@ -790,6 +877,7 @@ class User extends Model {
 
     /**
      * Get all groups including primary and secondary
+     *
      * @return array
      */
     public function getAllGroups(): array {
@@ -803,6 +891,7 @@ class User extends Model {
 
     /**
      * Get Group collection
+     *
      * @return GroupCollection
      */
     public function getGroupCollection(): GroupCollection {
@@ -811,7 +900,9 @@ class User extends Model {
 
     /**
      * Add secondary group
+     *
      * @param type $val
+     *
      * @return void
      */
     public function addSecondaryGroup($val): void {
@@ -820,7 +911,9 @@ class User extends Model {
 
     /**
      * Remove secondary group
+     *
      * @param type $val
+     *
      * @return void
      */
     public function removeSecondaryGroup($val): void {
@@ -835,6 +928,7 @@ class User extends Model {
 
     /**
      * Get PermissionChecker for this user
+     *
      * @return PermissionChecker
      */
     public function getPermissionChecker(): PermissionChecker {
@@ -843,7 +937,9 @@ class User extends Model {
 
     /**
      * Check if the user has a permission
+     *
      * @param string $permission
+     *
      * @return bool
      */
     public function hasPermission(string $permission): bool {
@@ -852,7 +948,9 @@ class User extends Model {
 
     /**
      * Change avatar image from upload
+     *
      * @param array $upload
+     *
      * @return bool
      */
     public function changeAvatar(array $upload): bool {
@@ -870,7 +968,9 @@ class User extends Model {
 
     /**
      * Resize / convert avatar
+     *
      * @param string $inputFile
+     *
      * @return void
      */
     public function processAvatar(string $inputFile): void {
@@ -888,6 +988,7 @@ class User extends Model {
 
     /**
      * Remove avatar of this user
+     *
      * @return bool
      */
     public function removeAvatar(): bool {
@@ -900,6 +1001,7 @@ class User extends Model {
 
     /**
      * Check if the user has a processed avatar
+     *
      * @return bool
      */
     public function hasProcessedAvatar(): bool {
@@ -910,6 +1012,7 @@ class User extends Model {
 
     /**
      * Check if user is current online
+     *
      * @return bool
      */
     public function isOnline(): bool {
@@ -925,6 +1028,7 @@ class User extends Model {
 
     /**
      * Check if this user is current online
+     *
      * @return bool
      */
     public function isCurrent(): bool {
@@ -933,6 +1037,7 @@ class User extends Model {
 
     /**
      * Get online users
+     *
      * @return array
      */
     public static function getOnlineUsers(): array {
@@ -951,6 +1056,7 @@ class User extends Model {
 
     /**
      * Insert user
+     *
      * @return void
      */
     protected function insert(): void {
@@ -983,6 +1089,7 @@ class User extends Model {
 
     /**
      * Update user
+     *
      * @return void
      */
     protected function update(): void {
@@ -1017,7 +1124,9 @@ class User extends Model {
      * Generates an avatar based on the the capitals of the users
      * firstname and lastname.
      *  The file is cached for performance reasons
+     *
      * @param string $avatarImageFile
+     *
      * @return string
      */
     protected function generateAvatar(string $avatarImageFile): string {
@@ -1041,7 +1150,9 @@ class User extends Model {
 
     /**
      * Load groups secondary groups of this user
+     *
      * @param type $user_id
+     *
      * @return void
      */
     protected function loadGroups($user_id): void {
@@ -1060,6 +1171,7 @@ class User extends Model {
 
     /**
      * Save secondary groups of this user
+     *
      * @return void
      */
     protected function saveGroups(): void {
@@ -1087,6 +1199,7 @@ class User extends Model {
 
     /**
      * Get path of processed avatar
+     *
      * @return string|null
      */
     protected function getProcessedAvatarPath(): ?string {
