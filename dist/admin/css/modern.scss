@@ -36,6 +36,8 @@ html {
 }
 
 body {
+    padding-right: 0 !important;
+
     background-color: $default-background-color;
     font-family: $default-font;
     font-size: $default-font-size;
