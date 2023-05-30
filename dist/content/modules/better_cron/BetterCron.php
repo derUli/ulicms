@@ -10,16 +10,31 @@ use App\Helpers\ModuleHelper;
 use content\modules\convert_to_seconds\ConvertToSeconds;
 use content\modules\convert_to_seconds\TimeUnit;
 
-// This module provides methods to run functions in a regular interval
+/**
+ * Provides utils to execute methods in an interval
+ */
 class BetterCron extends MainClass {
-    public static $currentTime = null;
+    public static ?int $currentTime = null;
 
+    /**
+     * Register cronjobs after HTML output
+     *
+     * @return void
+     */
     public function afterHtml(): void {
         do_event('register_cronjobs');
     }
 
-    // Run a method every X seconds
-    public static function seconds(string $job, int $seconds, $callback): void {
+    /**
+     * Run a method any X seconds
+     *
+     * @param string $job
+     * @param int $seconds
+     * @param mixed $callback
+     *
+     * @return void
+     */
+    public static function seconds(string $job, int $seconds, mixed $callback): void {
         if (! is_string($callback) && ! is_callable($callback)) {
             throw new BadMethodCallException(
                 "Callback of job {$job} is not callable"
@@ -51,7 +66,15 @@ class BetterCron extends MainClass {
         }
     }
 
-    // Run a method every X minutes
+    /**
+     * Run a method any X minutes
+     *
+     * @param string $job
+     * @param int $minutes
+     * @param mixed $callback
+     *
+     * @return void
+     */
     public static function minutes(string $job, int $minutes, $callback): void {
         self::seconds(
             $job,
@@ -60,7 +83,15 @@ class BetterCron extends MainClass {
         );
     }
 
-    // Run a method every X hours
+    /**
+     * Run a method any X hours
+     *
+     * @param string $job
+     * @param int $hours
+     * @param mixed $callback
+     *
+     * @return void
+     */
     public static function hours(string $job, int $hours, $callback): void {
         self::seconds(
             $job,
@@ -69,16 +100,32 @@ class BetterCron extends MainClass {
         );
     }
 
-    // Run a method every X days
-    public static function days(string $job, int $hours, $callback): void {
+    /**
+     * Run a method any X days
+     *
+     * @param string $job
+     * @param int $days
+     * @param mixed $callback
+     *
+     * @return void
+     */
+    public static function days(string $job, int $days, $callback): void {
         self::seconds(
             $job,
-            ConvertToSeconds::convertToSeconds($hours, TimeUnit::DAYS),
+            ConvertToSeconds::convertToSeconds($days, TimeUnit::DAYS),
             $callback
         );
     }
 
-    // Run a method every X weeks
+    /**
+     * Run a method any X weeks
+     *
+     * @param string $job
+     * @param int $weeks
+     * @param mixed $callback
+     *
+     * @return void
+     */
     public static function weeks(string $job, int $weeks, $callback): void {
         self::seconds(
             $job,
@@ -87,7 +134,15 @@ class BetterCron extends MainClass {
         );
     }
 
-    // Run a method every X months
+    /**
+     * Run a method any X months
+     *
+     * @param string $job
+     * @param int $months
+     * @param mixed $callback
+     *
+     * @return void
+     */
     public static function months(string $job, int $months, $callback): void {
         self::seconds(
             $job,
@@ -96,7 +151,15 @@ class BetterCron extends MainClass {
         );
     }
 
-    // Run a method every X years
+    /**
+     * Run a method any X years
+     *
+     * @param string $job
+     * @param int $years
+     * @param mixed $callback
+     *
+     * @return void
+     */
     public static function years(string $job, int $years, $callback): void {
         self::seconds(
             $job,
@@ -105,6 +168,15 @@ class BetterCron extends MainClass {
         );
     }
 
+    /**
+     * Run a method any X decades
+     *
+     * @param string $job
+     * @param int $decades
+     * @param mixed $callback
+     *
+     * @return void
+     */
     public static function decades(string $job, int $decades, $callback): void {
         self::seconds(
             $job,
@@ -113,7 +185,13 @@ class BetterCron extends MainClass {
         );
     }
 
-    // update the last run date of a cronjob
+    /**
+     * update the last run date of a cronjob
+     *
+     * @param string $name
+     *
+     * @return void
+     */
     public static function updateLastRun(string $name): void {
         // if this job exists update in database do an sql update else
         // an sql insert
@@ -142,8 +220,11 @@ class BetterCron extends MainClass {
         );
     }
 
-    // get all cronjobs in database as array of
-    // name => timestamp
+    /**
+     * Get all cronjobs in database as array of name => timestamp
+     *
+     * @return array<string, int>
+     */
     public static function getAllCronjobs(): array {
         $cronjobs = [];
         $query = Database::query(
@@ -152,23 +233,34 @@ class BetterCron extends MainClass {
             true
         );
         while ($row = Database::fetchObject($query)) {
-            $cronjobs[$row->name] = (int)($row->last_run);
+            $cronjobs[(string)$row->name] = (int)($row->last_run);
         }
         return $cronjobs;
     }
 
-    // Settins page
+    /**
+     * Render settings page html
+     *
+     * @return string
+     */
     public function settings(): string {
         return Template::executeModuleTemplate('better_cron', 'list.php');
     }
 
-    // As the method name says translates the headline for the module's settings
-    // page
+    /**
+     * Get headline for admin settings page
+     *
+     * @return string
+     */
     public function getSettingsHeadline(): string {
         return get_translation('cronjobs');
     }
 
-    // before uninstall rollback migrations (Drop cronjobs Table)
+    /**
+     * Before uninstall drop better_cron table
+     *
+     * @return void
+     */
     public function uninstall(): void {
         $migrator = new DBMigrator(
             'package/better_cron',
@@ -177,19 +269,38 @@ class BetterCron extends MainClass {
         $migrator->rollback();
     }
 
-    public function testCallback() {
+    /**
+     * Callback for unit tests
+     *
+     * @return void
+     */
+    public function testCallback(): void {
         if (is_cli()) {
             echo 'foo';
         }
     }
 
-    public function registerCronjobs() {
+    /**
+     * Register cronjobs
+     * Only used for unit tests
+     *
+     * @return void
+     */
+    public function registerCronjobs(): void {
         if (is_cli()) {
             defined('CRONJOBS_REGISTERED') || define('CRONJOBS_REGISTERED', true);
         }
     }
 
-    protected static function executeStringCallback(string $callback, $job) {
+    /**
+     * Execute string callback
+     *
+     * @param string $callback
+     * @param mixed $job
+     *
+     * @return void
+     */
+    protected static function executeStringCallback(string $callback, mixed $job): void {
         // Callback can be a controller method name as string
         // e.g. MyController::myMethod
         if (str_contains($callback, '::')) {
@@ -201,6 +312,14 @@ class BetterCron extends MainClass {
         }
     }
 
+    /**
+     * Execute callback function
+     *
+     * @param string $callback
+     * @param string $job
+     *
+     * @return  void
+     */
     protected static function executeCallbackFunction(string $callback, string $job): void {
         if (function_exists($callback)) {
             // update last run for this job before running it
@@ -214,8 +333,15 @@ class BetterCron extends MainClass {
         }
     }
 
-    // parse a string in the format MyController::myMethod and call
-    // a controller action (if it exists)
+    /**
+     * parse a string in the format MyController::myMethod and call
+     * a controller action (if it exists)
+     *
+     * @param string $callback
+     * @param string $job
+     *
+     * @return void     *
+     */
     protected static function executeControllerCallback(string $callback, string $job): void {
         $args = explode('::', $callback);
         $sClass = $args[0];
@@ -232,9 +358,14 @@ class BetterCron extends MainClass {
         }
     }
 
-    // returns the timestamp when did a job run the last time
-    // if not run yet return 0 (year 1970)
-    private static function getLastRun($name): int {
+    /**
+     * Get last run time of a cronjob
+     *
+     * @param string $name
+     *
+     * @return int
+     */
+    private static function getLastRun(string $name): int {
         $last_run = 0;
 
         $query = Database::pQuery(
