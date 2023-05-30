@@ -1,0 +1,16 @@
+{
+    "source": "extend",
+    "version": "1.6",
+    "embed": false,
+    "controllers": {
+        "BetterCron": "BetterCron.php"
+    },
+    "main_class": "BetterCron",
+    "custom_acl": [
+        "better_cron_list"
+    ],
+    "admin_permission": "better_cron_list",
+    "dependencies": [
+        "convert_to_seconds"
+    ]
+}
