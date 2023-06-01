@@ -100,7 +100,8 @@ class SinPackageInstaller {
     /**
      * Get json property if is set
      * @param string $name
-     * @return type
+     *
+     * @return string|bool|null|int|float
      */
     public function getProperty(string $name) {
         $data = $this->loadPackage();

@@ -673,20 +673,20 @@ class User extends Model {
     /**
      * Get datetime of last login
      *
-     * @return type
+     * @return int
      */
-    public function getLastLogin() {
-        return $this->last_login;
+    public function getLastLogin(): ?int {
+        return $this->last_login !== null ? (int)$this->last_login : null;
     }
 
     /**
      * Set datetime of last login
      *
-     * @param type $val
+     * @param ?int $val
      *
      * @return void
      */
-    public function setLastLogin($val): void {
+    public function setLastLogin(?int $val): void {
         $this->last_login = $val;
     }
 
