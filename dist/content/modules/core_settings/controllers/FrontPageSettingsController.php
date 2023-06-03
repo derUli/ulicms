@@ -28,7 +28,7 @@ class FrontPageSettingsController extends \App\Controllers\Controller {
         $this->_savePost();
         // if called by ajax return no content to improve performance
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
+            \App\Constants\HttpStatusCode::OK,
             \App\Helpers\ModuleHelper::buildActionURL('frontpage_settings')
         );
     }

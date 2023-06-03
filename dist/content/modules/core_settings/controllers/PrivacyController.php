@@ -59,7 +59,7 @@ class PrivacyController extends \App\Controllers\Controller {
         $language = basename(Request::getVar('language', null, 'str'));
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
+            \App\Constants\HttpStatusCode::OK,
             \App\Helpers\ModuleHelper::buildActionURL(
                 'privacy_settings',
                 "save=1&language={$language}"

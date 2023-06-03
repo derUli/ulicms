@@ -48,7 +48,7 @@ if (Request::isPost()) {
 if (Request::getVar('run_cron')) {
     do_event('cron');
 
-    HTTPStatusCodeResult(HttpStatusCode::NO_CONTENT);
+    HTTPStatusCodeResult(\App\Constants\HttpStatusCode::NO_CONTENT);
 }
 
 $slug = strtolower($_GET['slug'] ?? '');
@@ -69,7 +69,7 @@ $slugExtension = count($slugParts) > 1 ? end($slugParts) : null;
 
 if (in_array($slugExtension, $formatExtensions)) {
     $newUrl = str_replace(".{$slugExtension}", '', Request::getRequestUri() ?? '');
-    Response::redirect($newUrl, HttpStatusCode::MOVED_PERMANENTLY);
+    Response::redirect($newUrl, \App\Constants\HttpStatusCode::MOVED_PERMANENTLY);
 }
 
 $status = check_status();

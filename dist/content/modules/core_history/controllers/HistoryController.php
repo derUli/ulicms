@@ -25,14 +25,14 @@ class HistoryController extends \App\Controllers\Controller {
                 );
             } else {
                 ExceptionResult(
-                    get_translation('not_found', HttpStatusCode::NOT_FOUND)
+                    get_translation('not_found', \App\Constants\HttpStatusCode::NOT_FOUND)
                 );
             }
         } else {
             ExceptionResult(
                 get_translation(
                     'UNPROCESSABLE_ENTITY',
-                    HttpStatusCode::UNPROCESSABLE_ENTITY
+                    \App\Constants\HttpStatusCode::UNPROCESSABLE_ENTITY
                 )
             );
         }

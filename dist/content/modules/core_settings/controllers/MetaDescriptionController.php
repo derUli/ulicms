@@ -28,7 +28,7 @@ class MetaDescriptionController extends \App\Controllers\Controller {
     public function savePost(): void {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
+            \App\Constants\HttpStatusCode::OK,
             \App\Helpers\ModuleHelper::buildActionURL('meta_description')
         );
     }

@@ -14,9 +14,9 @@ $isFm = in_array('fm', $urlParts);
 if (! $isFm) {
     class Response {
         public static function sendHttpStatusCodeResultIfAjax(
-            int $status = HttpStatusCode::OK,
+            int $status = \App\Constants\HttpStatusCode::OK,
             ?string $redirect = null,
-            int $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY
+            int $redirectStatus = \App\Constants\HttpStatusCode::MOVED_TEMPORARILY
         ): void {
 
             if (Request::isAjaxRequest()) {
@@ -31,7 +31,7 @@ if (! $isFm) {
         // Weiterleitung per Location header;
         public static function redirect(
             string $url = 'http://www.ulicms.de',
-            int $status = HttpStatusCode::MOVED_TEMPORARILY
+            int $status = \App\Constants\HttpStatusCode::MOVED_TEMPORARILY
         ): void {
             self::sendStatusHeader($status);
             send_header('Location: ' . $url);
@@ -41,7 +41,7 @@ if (! $isFm) {
         public static function redirectToAction(
             string $action,
             ?string $controller = null,
-            $status = HttpStatusCode::MOVED_TEMPORARILY
+            $status = \App\Constants\HttpStatusCode::MOVED_TEMPORARILY
         ): void {
             if ($controller == null) {
                 self::redirect(\App\Helpers\ModuleHelper::buildActionURL($action), $status);

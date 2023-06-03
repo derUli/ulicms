@@ -83,7 +83,7 @@ class UserController extends \App\Controllers\Controller {
 
             $user = new User($id);
             if (! $user->getId() == $id) {
-                ExceptionResult(get_translation('not_found'), HttpStatusCode::NOT_FOUND);
+                ExceptionResult(get_translation('not_found'), \App\Constants\HttpStatusCode::NOT_FOUND);
             }
 
             $user->setLastname($lastname);
@@ -136,7 +136,7 @@ class UserController extends \App\Controllers\Controller {
                 Response::redirect(\App\Helpers\ModuleHelper::buildActionURL('admins'));
             }
         }
-        ExceptionResult(get_translation('forbidden'), HttpStatusCode::FORBIDDEN);
+        ExceptionResult(get_translation('forbidden'), \App\Constants\HttpStatusCode::FORBIDDEN);
     }
 
     public function deletePost(): void {

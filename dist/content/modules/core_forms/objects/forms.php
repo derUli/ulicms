@@ -111,7 +111,7 @@ class Forms {
                         'exception.php'
                     );
 
-                    HTMLResult($html, HttpStatusCode::BAD_REQUEST);
+                    HTMLResult($html, \App\Constants\HttpStatusCode::BAD_REQUEST);
                 }
             }
             $html = '<!DOCTYPE html>';
@@ -148,7 +148,7 @@ class Forms {
                     Settings::get('check_mx_of_mail_address') && ! AntiSpamHelper::checkMailDomain($email_from)) {
                 ExceptionResult(
                     get_translation('mail_address_has_invalid_mx_entry'),
-                    HttpStatusCode::BAD_REQUEST
+                    \App\Constants\HttpStatusCode::BAD_REQUEST
                 );
             }
 

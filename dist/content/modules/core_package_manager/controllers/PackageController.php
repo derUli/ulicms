@@ -101,7 +101,7 @@ class PackageController extends MainClass {
 
     public function redirectToPackageView(): void {
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
+            \App\Constants\HttpStatusCode::OK,
             \App\Helpers\ModuleHelper::buildActionURL('packages')
         );
     }
@@ -117,7 +117,7 @@ class PackageController extends MainClass {
                     '%name%' => $name
                 ]
             );
-            ExceptionResult($errorMessage, HttpStatusCode::INTERNAL_SERVER_ERROR);
+            ExceptionResult($errorMessage, \App\Constants\HttpStatusCode::INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -136,7 +136,7 @@ class PackageController extends MainClass {
             ]);
             ExceptionResult(
                 $errorMessage,
-                HttpStatusCode::INTERNAL_SERVER_ERROR
+                \App\Constants\HttpStatusCode::INTERNAL_SERVER_ERROR
             );
         }
     }
@@ -185,13 +185,13 @@ class PackageController extends MainClass {
     public function getPackageLicense(): void {
         $name = Request::getVar('name');
         if (! $name) {
-            HTTPStatusCodeResult(HttpStatusCode::UNPROCESSABLE_ENTITY);
+            HTTPStatusCodeResult(\App\Constants\HttpStatusCode::UNPROCESSABLE_ENTITY);
         }
 
         $license = $this->_getPackageLicense($name);
 
         if (! $license) {
-            HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
+            HTTPStatusCodeResult(\App\Constants\HttpStatusCode::NOT_FOUND);
         }
         HTMLResult($license);
     }

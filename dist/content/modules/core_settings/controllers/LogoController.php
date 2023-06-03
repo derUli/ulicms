@@ -79,8 +79,8 @@ class LogoController extends \App\Controllers\Controller {
         }
         Response::sendHttpStatusCodeResultIfAjax(
             $success ?
-                    HttpStatusCode::OK :
-                    HttpStatusCode::INTERNAL_SERVER_ERROR,
+                    \App\Constants\HttpStatusCode::OK :
+                    \App\Constants\HttpStatusCode::INTERNAL_SERVER_ERROR,
             \App\Helpers\ModuleHelper::buildActionURL('logo')
         );
     }

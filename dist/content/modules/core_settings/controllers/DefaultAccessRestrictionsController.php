@@ -27,7 +27,7 @@ class DefaultAccessRestrictionsController extends \App\Controllers\Controller {
     public function savePost(): void {
         $this->_savePost();
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
+            \App\Constants\HttpStatusCode::OK,
             \App\Helpers\ModuleHelper::buildActionURL(
                 'default_access_restrictions',
                 'submit_form=1'

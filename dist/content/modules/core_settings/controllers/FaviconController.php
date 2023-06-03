@@ -117,8 +117,8 @@ class FaviconController extends \App\Controllers\Controller {
         $success = $this->_deleteFavicon();
         Response::sendHttpStatusCodeResultIfAjax(
             $success ?
-                    HttpStatusCode::OK :
-                    HttpStatusCode::INTERNAL_SERVER_ERROR,
+                    \App\Constants\HttpStatusCode::OK :
+                    \App\Constants\HttpStatusCode::INTERNAL_SERVER_ERROR,
             \App\Helpers\ModuleHelper::buildActionURL('favicon')
         );
     }

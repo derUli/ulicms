@@ -24,7 +24,7 @@ Translation::loadAllModuleLanguageFiles($syslang);
 
 // Cross-Site-Request-Forgery Protection
 if (is_logged_in() && Request::isPost() && ! check_csrf_token()) {
-    ExceptionResult('Invalid CSRF Token', HttpStatusCode::FORBIDDEN);
+    ExceptionResult('Invalid CSRF Token', \App\Constants\HttpStatusCode::FORBIDDEN);
 }
 
 send_header('Content-Type: text/html; charset=UTF-8');

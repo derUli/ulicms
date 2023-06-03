@@ -26,7 +26,7 @@ function exception_handler(Throwable $exception): void {
     }
 
     $httpStatus = $exception instanceof AccessDeniedException ?
-            HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
+            \App\Constants\HttpStatusCode::FORBIDDEN : \App\Constants\HttpStatusCode::INTERNAL_SERVER_ERROR;
 
     esc("{$message}\n");
 }

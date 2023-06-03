@@ -107,7 +107,7 @@ class CommentsController extends MainClass {
             HtmlResult($text);
         }
 
-        HTMLResult(get_translation('not_found'), HttpStatusCode::NOT_FOUND);
+        HTMLResult(get_translation('not_found'), \App\Constants\HttpStatusCode::NOT_FOUND);
     }
 
     public function _getCommentText(int $id): ?string {

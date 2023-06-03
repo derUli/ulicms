@@ -6,6 +6,7 @@ Entfernte Features:
 API-Änderungen:
 * ModuleManager in Namespace App\Packages verschoben
 * UserManager in Namespace App\Models\Users verschoben
+* HttpStatusCode in Namespace App\Constants verschoben
 
 Entfernte API-Methoden:
 * Database::getInsertID()

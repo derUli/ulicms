@@ -80,7 +80,7 @@ class CoreFormsController extends \App\Controllers\Controller {
             $spamCheck = $this->_spamCheck();
 
             if ($spamCheck) {
-                HTMLResult($spamCheck, HttpStatusCode::FORBIDDEN);
+                HTMLResult($spamCheck, \App\Constants\HttpStatusCode::FORBIDDEN);
             }
 
             $form_id = Request::getVar('submit-cms-form', null, 'int');

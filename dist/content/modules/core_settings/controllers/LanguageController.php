@@ -71,7 +71,7 @@ class LanguageController extends \App\Controllers\Controller {
         if (! $this->_deletePost()) {
             ExceptionResult(
                 get_translation('not_found'),
-                HttpStatusCode::NOT_FOUND
+                \App\Constants\HttpStatusCode::NOT_FOUND
             );
         }
 
@@ -100,7 +100,7 @@ class LanguageController extends \App\Controllers\Controller {
                 $html .= $error;
             }
             $html .= '</ul>';
-            ExceptionResult($html, HttpStatusCode::UNPROCESSABLE_ENTITY);
+            ExceptionResult($html, \App\Constants\HttpStatusCode::UNPROCESSABLE_ENTITY);
         }
     }
 }

@@ -91,7 +91,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
         $this->_generateSCSSToFile();
         sureRemoveDir(Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets'), false);
 
-        HTTPStatusCodeResult(HttpStatusCode::OK);
+        HTTPStatusCodeResult(\App\Constants\HttpStatusCode::OK);
     }
 
     /**
@@ -129,7 +129,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
         $themeName = Request::getVar('theme', null, 'str');
 
         if (! $themeName) {
-            HTTPStatusCodeResult(HttpStatusCode::UNPROCESSABLE_ENTITY);
+            HTTPStatusCodeResult(\App\Constants\HttpStatusCode::UNPROCESSABLE_ENTITY);
         }
 
         $screenshot = $this->_themePreview($themeName);
@@ -145,7 +145,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
             );
         }
 
-        HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
+        HTTPStatusCodeResult(\App\Constants\HttpStatusCode::NOT_FOUND);
     }
 
     public function _themePreview(string $themeName): ?string {
@@ -190,7 +190,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
         Settings::set('theme', $theme);
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
+            \App\Constants\HttpStatusCode::OK,
             \App\Helpers\ModuleHelper::buildActionURL('packages')
         );
     }
@@ -204,7 +204,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
         $this->_setDefaultMobileTheme($theme);
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
+            \App\Constants\HttpStatusCode::OK,
             \App\Helpers\ModuleHelper::buildActionURL('packages')
         );
     }

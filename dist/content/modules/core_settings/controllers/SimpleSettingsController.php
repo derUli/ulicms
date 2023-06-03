@@ -42,7 +42,7 @@ class SimpleSettingsController extends \App\Controllers\Controller {
         $this->_savePost();
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
+            \App\Constants\HttpStatusCode::OK,
             \App\Helpers\ModuleHelper::buildActionURL('settings_simple')
         );
     }

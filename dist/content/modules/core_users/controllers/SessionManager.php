@@ -43,7 +43,7 @@ class SessionManager extends \App\Controllers\Controller {
         } else {
             // If login failed
             // send unauthorized header
-            Response::sendStatusHeader(HttpStatusCode::UNAUTHORIZED);
+            Response::sendStatusHeader(\App\Constants\HttpStatusCode::UNAUTHORIZED);
             do_event('login_failed');
         }
     }
@@ -57,7 +57,7 @@ class SessionManager extends \App\Controllers\Controller {
         // throw the session to /dev/null
         App\Utils\Session\sessionDestroy();
         // redirect to the logout Url
-        Response::redirect($url, HttpStatusCode::MOVED_TEMPORARILY);
+        Response::redirect($url, \App\Constants\HttpStatusCode::MOVED_TEMPORARILY);
         exit();
     }
 

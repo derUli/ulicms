@@ -94,7 +94,7 @@ class PageController extends \App\Controllers\Controller {
         );
 
         $httpStatus = $success ?
-                HttpStatusCode::OK : HttpStatusCode::UNPROCESSABLE_ENTITY;
+                \App\Constants\HttpStatusCode::OK : \App\Constants\HttpStatusCode::UNPROCESSABLE_ENTITY;
         Response::sendHttpStatusCodeResultIfAjax(
             $httpStatus,
             $url
@@ -134,7 +134,7 @@ class PageController extends \App\Controllers\Controller {
         if (! $id) {
             ExceptionResult(
                 get_translation('not_found'),
-                HttpStatusCode::UNPROCESSABLE_ENTITY
+                \App\Constants\HttpStatusCode::UNPROCESSABLE_ENTITY
             );
             return;
         }
@@ -142,14 +142,14 @@ class PageController extends \App\Controllers\Controller {
         if (! $this->_undeletePost($id)) {
             ExceptionResult(
                 get_translation('not_found'),
-                HttpStatusCode::NOT_FOUND
+                \App\Constants\HttpStatusCode::NOT_FOUND
             );
 
             return;
         }
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
+            \App\Constants\HttpStatusCode::OK,
             ModuleHelper::buildActionURL('pages')
         );
     }
@@ -176,7 +176,7 @@ class PageController extends \App\Controllers\Controller {
         if (! $id) {
             ExceptionResult(
                 get_translation('not_found'),
-                HttpStatusCode::UNPROCESSABLE_ENTITY
+                \App\Constants\HttpStatusCode::UNPROCESSABLE_ENTITY
             );
             return;
         }
@@ -184,14 +184,14 @@ class PageController extends \App\Controllers\Controller {
         if (! $this->_deletePost($id)) {
             ExceptionResult(
                 get_translation('not_found'),
-                HttpStatusCode::NOT_FOUND
+                \App\Constants\HttpStatusCode::NOT_FOUND
             );
 
             return;
         }
 
         Response::sendHttpStatusCodeResultIfAjax(
-            HttpStatusCode::OK,
+            \App\Constants\HttpStatusCode::OK,
             ModuleHelper::buildActionURL('pages')
         );
     }
@@ -325,7 +325,7 @@ class PageController extends \App\Controllers\Controller {
 
     public function toggleShowPositions(): void {
         $this->_toggleShowPositions();
-        HTTPStatusCodeResult(HttpStatusCode::OK);
+        HTTPStatusCodeResult(\App\Constants\HttpStatusCode::OK);
     }
 
     public function _toggleShowPositions(): bool {
@@ -506,7 +506,7 @@ class PageController extends \App\Controllers\Controller {
     // The user can select an internal page from a dropdown list for linking
     public function getCKEditorLinkList(): void {
         $data = $this->_getCKEditorLinkList();
-        JSONResult($data, HttpStatusCode::OK, true);
+        JSONResult($data, \App\Constants\HttpStatusCode::OK, true);
     }
 
     public function _getCKEditorLinkList(): array {
@@ -667,7 +667,7 @@ class PageController extends \App\Controllers\Controller {
         try {
             JSONResult($this->_getParentPageId($id));
         } catch (DatasetNotFoundException $e) {
-            HTTPStatusCodeResult(HttpStatusCode::NOT_FOUND);
+            HTTPStatusCodeResult(\App\Constants\HttpStatusCode::NOT_FOUND);
         }
 
     }
@@ -919,7 +919,7 @@ class PageController extends \App\Controllers\Controller {
     protected function validateInput(): void {
         $validationErrors = $this->_validateInput();
         if ($validationErrors) {
-            ExceptionResult($validationErrors, HttpStatusCode::UNPROCESSABLE_ENTITY);
+            ExceptionResult($validationErrors, \App\Constants\HttpStatusCode::UNPROCESSABLE_ENTITY);
         }
     }
 
