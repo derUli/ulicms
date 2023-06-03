@@ -2,6 +2,7 @@
 
 Sicherheit:
 * Remote Code Execution in Avatar-Upload gefixt
+* Fehlende Berechtigungsprüfungen für UsersController gefixt
 
 Entfernte Features:
 * Banner

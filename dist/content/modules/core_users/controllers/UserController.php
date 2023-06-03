@@ -36,7 +36,7 @@ class UserController extends \App\Controllers\Controller {
         $user->setLocked($locked);
         $user->setPrimaryGroupId($group_id);
         $user->setRequirePasswordChange($require_password_change);
-        $secondary_groups = $_POST['secondary_groups'];
+        $secondary_groups = $_POST['secondary_groups'] ?? [];
 
         $user->setSecondaryGroups([]);
         if (is_array($secondary_groups)) {

@@ -25,7 +25,7 @@
         "SessionManager": "controllers/SessionManager.php",
         "RegistrationController": "controllers/RegistrationController.php"
     },
-    "controllers_function_permissions": {
+    "controller_function_permissions": {
         "UserController::deletePost": "users",
         "UserController::createPost": "users_create",
         "UserController::updatePost": "users_edit"
