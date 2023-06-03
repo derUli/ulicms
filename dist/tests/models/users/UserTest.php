@@ -551,7 +551,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($user->hasPermission('design'));
     }
 
-    public function testProcessAvatar(): void {
+    public function testProcessAvatarReturnsTrue(): void {
         $inputFile = Path::resolve(
             'ULICMS_ROOT/admin/gfx/apple-touch-icon-120x120.png'
         );
@@ -582,6 +582,11 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($user->hasProcessedAvatar());
         $this->assertTrue($user->removeAvatar());
         $this->assertFalse($user->hasProcessedAvatar());
+    }
+
+    public function testProcessAvatarReturnsFalse(): void {
+        $user = new User();
+        $this->assertFalse($user->processAvatar('foobar'));
     }
 
     public function testGetGroupCollection(): void {
@@ -625,6 +630,16 @@ class UserTest extends \PHPUnit\Framework\TestCase {
         $user = $this->getFirstUser();
         $user->setLastAction(12);
         $this->assertFalse($user->isOnline());
+    }
+
+    public function testChangeAvatar(): void {
+        $user = new User();
+        $upload = [
+            'tmp_name' => uniqid(),
+            'name' => 'foo'
+        ];
+
+        $this->assertFalse($user->changeAvatar($upload));
     }
 
     protected function getTestUser(): User {
