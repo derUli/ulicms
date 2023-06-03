@@ -556,12 +556,10 @@ class User extends Model {
      *
      * @return void
      */
-    public function setPrimaryGroupId($gid): void {
-        if(! $gid) {
-            return;
-        }
-        $this->group_id = (int)$gid;
-        $this->group = new Group((int)$gid);
+    public function setPrimaryGroupId(?int $gid): void {
+
+        $this->group_id = $gid;
+        $this->group = new Group($gid);
     }
 
     /**
