@@ -954,16 +954,17 @@ class User extends Model {
      * @return bool
      */
     public function changeAvatar(array $upload): bool {
+        $success = false;
         $extension = pathinfo($upload['name'], PATHINFO_EXTENSION);
         $tmpFile = uniqid() . '.' . $extension;
         $tmpFile = Path::resolve("ULICMS_TMP/{$tmpFile}");
 
         if (move_uploaded_file($upload['tmp_name'], $tmpFile)) {
-            $this->processAvatar($tmpFile);
+            $success = $this->processAvatar($tmpFile);
             unlink($tmpFile);
-            return true;
+            return $success;
         }
-        return false;
+        return $success;
     }
 
     /**
@@ -971,9 +972,9 @@ class User extends Model {
      *
      * @param string $inputFile
      *
-     * @return void
+     * @return bool
      */
-    public function processAvatar(string $inputFile): void {
+    public function processAvatar(string $inputFile): bool {
         $imagine = ImagineHelper::getImagine();
 
         $size = new Imagine\Image\Box(128, 218);
@@ -981,9 +982,15 @@ class User extends Model {
 
         $generatedAvatar = $this->getProcessedAvatarPath();
 
-        $imagine->open($inputFile)
-            ->thumbnail($size, $mode)
-            ->save($generatedAvatar);
+        try {
+            $imagine->open($inputFile)
+                ->thumbnail($size, $mode)
+                ->save($generatedAvatar);
+        } catch(Throwable $e) {
+            return false;
+        }
+
+        return is_file($generatedAvatar);
     }
 
     /**
