@@ -14,7 +14,9 @@ abstract class DataTablesHelper extends Helper {
      * Returns a path to DataTables lang file based on $lang
      * If there is no translation for the given language returns path
      * to english translation
+     *
      * @param string $lang Language Code
+     *
      * @return string Path to language file
      */
     public static function getLanguageFileURL(string $lang): string {

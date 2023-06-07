@@ -42,8 +42,10 @@ abstract class ImageScaleHelper extends Helper {
 
     /**
      * Scale down huge images to make them fit max_image_dimensions
+     *
      * @param string $file
      * @param string|null $outputFile
+     *
      * @return bool
      */
     public static function scaleDown(

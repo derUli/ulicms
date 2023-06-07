@@ -33,6 +33,7 @@ abstract class DateTimeHelper {
     /**
      * Format integer timestamp user readable
      * Format integer timestamp
+     *
      * @param int $timestamp
      *
      * @return string

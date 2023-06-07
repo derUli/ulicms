@@ -18,9 +18,9 @@ abstract class ImagineHelper extends Helper {
 
     /**
      * Get Imagine instance
-     * @return AbstractImagine|null
+     * @return AbstractImagine
      */
-    public static function getImagine(): ?AbstractImagine {
+    public static function getImagine(): AbstractImagine {
         return new Imagine();
     }
 }

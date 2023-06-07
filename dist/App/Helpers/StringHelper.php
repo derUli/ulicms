@@ -139,7 +139,14 @@ abstract class StringHelper extends Helper {
         return $lines;
     }
 
-    // trims all lines of string
+    /**
+     * Trim lines of multiline string
+     *
+     * @param string $str
+     * @param $newline
+     *
+     * @return string
+     */
     public static function trimLines(
         string $str,
         string $newline = PHP_EOL
