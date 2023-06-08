@@ -6,7 +6,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $manager->sync();
         $this->backupFortune2();
 
-        $module = new Module('core_comments');
+        $module = new \App\Models\Packages\Module('core_comments');
         $module->enable();
         Settings::delete('fortune2_uninstalled_at');
     }
@@ -16,37 +16,37 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $manager = new \App\Packages\ModuleManager();
         $manager->sync();
 
-        $module = new Module('core_comments');
+        $module = new \App\Models\Packages\Module('core_comments');
         $module->enable();
     }
 
     public function testHasAdminPageReturnsTrue(): void {
-        $module = new Module('fortune2');
+        $module = new \App\Models\Packages\Module('fortune2');
         $this->assertTrue($module->hasAdminPage());
     }
 
     public function testHasAdminPageReturnsFalse(): void {
-        $module = new Module('core_users');
+        $module = new \App\Models\Packages\Module('core_users');
         $this->assertFalse($module->hasAdminPage());
     }
 
     public function testisEmbedModuleReturnsTrue(): void {
-        $module = new Module('fortune2');
+        $module = new \App\Models\Packages\Module('fortune2');
         $this->assertTrue($module->isEmbedModule());
     }
 
     public function testisEmbedModuleReturnsFalse(): void {
-        $module = new Module('core_users');
+        $module = new \App\Models\Packages\Module('core_users');
         $this->assertFalse($module->isEmbedModule());
     }
 
     public function testCreateUpdateAndDeleteModule(): void {
-        $module = new Module();
+        $module = new \App\Models\Packages\Module();
         $module->setName('my_awesome_module');
         $module->setVersion('1.0');
         $module->save();
 
-        $module = new Module('my_awesome_module');
+        $module = new \App\Models\Packages\Module('my_awesome_module');
         $this->assertEquals('my_awesome_module', $module->getName());
         $this->assertEquals('1.0', $module->getVersion());
         $this->assertFalse($module->isEnabled());
@@ -54,7 +54,7 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $module->setVersion('1.1');
         $module->save();
 
-        $module = new Module('my_awesome_module');
+        $module = new \App\Models\Packages\Module('my_awesome_module');
 
         $this->assertEquals('my_awesome_module', $module->getName());
         $this->assertEquals('1.1', $module->getVersion());
@@ -63,11 +63,11 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $module->enable();
         $this->assertTrue($module->isEnabled());
 
-        $module = new Module('my_awesome_module');
+        $module = new \App\Models\Packages\Module('my_awesome_module');
         $this->assertTrue($module->isEnabled());
         $module->disable();
 
-        $module = new Module('my_awesome_module');
+        $module = new \App\Models\Packages\Module('my_awesome_module');
         $this->assertFalse($module->isEnabled());
 
         $this->assertTrue($module->delete());
@@ -75,52 +75,52 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         // can't delete an already deleted dataset
         $this->assertNull($module->delete());
 
-        $module = new Module('my_awesome_module');
+        $module = new \App\Models\Packages\Module('my_awesome_module');
         $this->assertNull($module->getName());
         $this->assertNull($module->getVersion());
     }
 
     public function testToggleEnabled(): void {
-        $module = new Module('fortune2');
+        $module = new \App\Models\Packages\Module('fortune2');
         $module->toggleEnabled();
         $this->assertFalse($module->isEnabled());
 
-        $module = new Module('fortune2');
+        $module = new \App\Models\Packages\Module('fortune2');
         $this->assertFalse($module->isEnabled());
 
         $module->toggleEnabled();
 
         $this->assertTrue($module->isEnabled());
 
-        $module = new Module('fortune2');
+        $module = new \App\Models\Packages\Module('fortune2');
         $this->assertTrue($module->isEnabled());
     }
 
     public function testIsInstalledReturnsTrue(): void {
-        $module = new Module('core_content');
+        $module = new \App\Models\Packages\Module('core_content');
         $this->assertTrue($module->isInstalled());
     }
 
     public function testIsInstalledReturnsFalse(): void {
-        $module = new Module('not_existing_module');
+        $module = new \App\Models\Packages\Module('not_existing_module');
         $this->assertFalse($module->isInstalled());
     }
 
     public function testGetShortcodeReturnsShortcode(): void {
-        $module = new Module();
+        $module = new \App\Models\Packages\Module();
         $module->setName('hello_world');
         $this->assertEquals('[module=hello_world]', $module->getShortCode());
     }
 
     public function testGetShortcodeReturnsNull(): void {
-        $module = new Module();
+        $module = new \App\Models\Packages\Module();
         $this->assertNull(
             $module->getShortCode()
         );
     }
 
     public function testGetDependentModules(): void {
-        $module = new Module('core_content');
+        $module = new \App\Models\Packages\Module('core_content');
 
         $this->assertContains(
             'core_comments',
@@ -129,17 +129,17 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testhasUninstallEventReturnsTrue(): void {
-        $module = new Module('fortune2');
+        $module = new \App\Models\Packages\Module('fortune2');
         $this->assertTrue($module->hasUninstallEvent());
     }
 
     public function testhasUninstallEventReturnsFalse(): void {
-        $module = new Module('core_content');
+        $module = new \App\Models\Packages\Module('core_content');
         $this->assertFalse($module->hasUninstallEvent());
     }
 
     public function testUninstallReturnsTrue(): void {
-        $module = new Module('fortune2');
+        $module = new \App\Models\Packages\Module('fortune2');
         $this->assertTrue($module->uninstall());
 
         $fortune2_uninstalled_at = Settings::get(

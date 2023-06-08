@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+namespace App\Models\Packages;
+
+use Database;
+
+use function getModuleMeta;
+use function getModuleUninstallScriptPath;
+use function getModuleUninstallScriptPath2;
+
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 class Module {

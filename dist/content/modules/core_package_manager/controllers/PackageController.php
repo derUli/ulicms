@@ -152,7 +152,7 @@ class PackageController extends MainClass {
     }
 
     public function _toggleModule(string $name) {
-        $module = new Module($name);
+        $module = new \App\Models\Packages\Module($name);
         $oldState = $module->isEnabled();
         $newState = false;
         if ($oldState) {

@@ -291,7 +291,7 @@ class RoboFile extends Tasks {
         $modules = $this->replaceModulePlaceholders($modules);
 
         foreach ($modules as $name) {
-            $module = new Module($name);
+            $module = new \App\Models\Packages\Module($name);
 
             $module->toggleEnabled();
             $this->writeln($this->getModuleInfo($name));
@@ -311,7 +311,7 @@ class RoboFile extends Tasks {
         $modules = $this->replaceModulePlaceholders($modules);
 
         foreach ($modules as $name) {
-            $module = new Module($name);
+            $module = new \App\Models\Packages\Module($name);
 
             $module->enable();
             $this->writeln($this->getModuleInfo($name));
@@ -333,7 +333,7 @@ class RoboFile extends Tasks {
         $manager = new \App\Packages\ModuleManager();
         $manager->sync();
         foreach ($modules as $name) {
-            $module = new Module($name);
+            $module = new \App\Models\Packages\Module($name);
             $module->disable();
             $this->writeln($this->getModuleInfo($name));
         }
@@ -1019,7 +1019,7 @@ class RoboFile extends Tasks {
         if ($version !== null) {
             $line .= " {$version}";
         }
-        $module = new Module($name);
+        $module = new \App\Models\Packages\Module($name);
         $status = $module->isEnabled() ? 'enabled' : 'disabled';
         $line .= " ({$status})";
         return $line;

@@ -19,7 +19,7 @@ class ModuleManager {
         $result = Database::query($sql, true);
 
         while ($row = Database::fetchObject($result)) {
-            $modules [] = new Module($row->name);
+            $modules [] = new \App\Models\Packages\Module($row->name);
         }
 
         return $modules;
@@ -111,7 +111,7 @@ class ModuleManager {
         // Nicht mehr vorhandene Module entfernen
         foreach ($dataBaseModules as $dbModule) {
             if (! in_array($dbModule, $realModules)) {
-                $module = new Module($dbModule);
+                $module = new \App\Models\Packages\Module($dbModule);
                 $module->delete();
             }
         }
@@ -131,7 +131,7 @@ class ModuleManager {
                 $this->updateModuleVersion($version, $realModule);
                 continue;
             }
-            $module = new Module();
+            $module = new \App\Models\Packages\Module();
             $module->setName($realModule);
             $module->setVersion($version);
             $module->save();
@@ -168,7 +168,7 @@ class ModuleManager {
         ?string $version,
         string $realModule
     ): void {
-        $module = new Module($realModule);
+        $module = new \App\Models\Packages\Module($realModule);
         if ($module->getVersion() !== $version) {
             $module->setVersion($version);
             $module->save();

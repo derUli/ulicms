@@ -21,7 +21,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
-        $module = new Module('fortune2');
+        $module = new \App\Models\Packages\Module('fortune2');
         $module->enable();
 
         Settings::set('oneclick_upgrade_channel', $this->oneclick_upgrade_channel);
@@ -30,7 +30,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
     public function testCreateAndEditModule1(): void {
         $manager = new \App\Packages\ModuleManager();
 
-        $module = new Module();
+        $module = new \App\Models\Packages\Module();
         $module->setName(self::sampleName1);
         $module->setVersion(self::sampleVersion1);
         $module->save();
@@ -39,28 +39,28 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertTrue(in_array(self::sampleName1, $allModules));
 
-        $module = new Module(self::sampleName1);
+        $module = new \App\Models\Packages\Module(self::sampleName1);
         $this->assertEquals(self::sampleName1, $module->getName());
         $this->assertEquals(self::sampleVersion1, $module->getVersion());
         $this->assertFalse($module->isEnabled());
         $module->setVersion(self::sampleVersion2);
         $module->save();
 
-        $module = new Module(self::sampleName1);
+        $module = new \App\Models\Packages\Module(self::sampleName1);
         $this->assertEquals(self::sampleVersion2, $module->getVersion());
         $module->enable();
 
-        $module = new Module(self::sampleName1);
+        $module = new \App\Models\Packages\Module(self::sampleName1);
 
         $this->assertTrue($module->isEnabled());
         $module->disable();
 
-        $module = new Module(self::sampleName1);
+        $module = new \App\Models\Packages\Module(self::sampleName1);
         $this->assertFalse($module->isEnabled());
 
-        $module = new Module(self::sampleName1);
+        $module = new \App\Models\Packages\Module(self::sampleName1);
 
-        $module = new Module();
+        $module = new \App\Models\Packages\Module();
         $module->setName(self::sampleName2);
         $module->setVersion(self::sampleVersion2);
         $module->save();
@@ -70,13 +70,13 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(in_array(self::sampleName1, $allModules));
         $this->assertTrue(in_array(self::sampleName2, $allModules));
 
-        $module = new Module(self::sampleName1);
+        $module = new \App\Models\Packages\Module(self::sampleName1);
         $module->delete();
 
         $allModules = $manager->getAllModuleNames();
         $this->assertFalse(in_array(self::sampleName1, $allModules));
 
-        $module = new Module(self::sampleName2);
+        $module = new \App\Models\Packages\Module(self::sampleName2);
         $module->delete();
 
         $allModules = $manager->getAllModuleNames();
@@ -97,7 +97,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
-        $module = new Module();
+        $module = new \App\Models\Packages\Module();
         $module->setName('wurde_geloescht');
         $module->setVersion('1.0');
         $module->save();
@@ -112,7 +112,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         $moduleManager = new \App\Packages\ModuleManager();
         $moduleManager->sync();
 
-        $module = new Module('bootstrap');
+        $module = new \App\Models\Packages\Module('bootstrap');
         $module->setVersion('1.0');
         $module->save();
 
@@ -120,7 +120,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
 
         $moduleManager->sync();
 
-        $module = new Module('bootstrap');
+        $module = new \App\Models\Packages\Module('bootstrap');
         $this->assertEquals('3.3.7', $module->getVersion());
     }
 

@@ -23,7 +23,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
 
     protected function tearDown(): void {
         \App\Storages\Vars::delete('allModules');
-        $module = new Module('fortune2');
+        $module = new \App\Models\Packages\Module('fortune2');
         $module->enable();
 
         \App\Storages\ViewBag::delete('model');
@@ -109,7 +109,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testToggleModule(): void {
-        $module = new Module('fortune2');
+        $module = new \App\Models\Packages\Module('fortune2');
         $module->disable();
 
         $controller = new PackageController();

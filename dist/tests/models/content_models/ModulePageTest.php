@@ -42,7 +42,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetEmbeddedModulesReturnsModules(): void {
-        $module = new Module('fortune2');
+        $module = new \App\Models\Packages\Module('fortune2');
 
         $modulePage = new Module_Page();
         $modulePage->title = 'Unit Test Article';
@@ -70,7 +70,7 @@ class ModulePageTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetEmbeddedModulesReturnsNothing(): void {
-        $module = new Module('fortune2');
+        $module = new \App\Models\Packages\Module('fortune2');
 
         $modulePage = new Module_Page();
         $modulePage->title = 'Unit Test Article';

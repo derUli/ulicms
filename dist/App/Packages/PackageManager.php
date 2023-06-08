@@ -11,7 +11,6 @@ use App\Services\Connectors\PackageSourceConnector;
 use App\Utils\CacheUtil;
 use App\Utils\File;
 use BadMethodCallException;
-use Module;
 use Path;
 use PharData;
 use UnexpectedValueException ;
@@ -48,7 +47,7 @@ class PackageManager {
     ): bool {
         switch ($type) {
             case PackageTypes::TYPE_MODULE:
-                $module = new Module($package);
+                $module = new \App\Models\Packages\Module($package);
                 return $module->isInstalled();
             case PackageTypes::TYPE_THEME:
                 return in_array($package, getAllThemes());
