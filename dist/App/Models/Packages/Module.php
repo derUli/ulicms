@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Packages;
 
+use App\Helpers\ModuleHelper;
+use App\Packages\ModuleManager;
 use Database;
 
 use function getModuleMeta;
@@ -77,7 +79,7 @@ class Module {
 
     public function getMissingDependencies(): array {
         $result = [];
-        $manager = new \App\Packages\ModuleManager();
+        $manager = new ModuleManager();
         $dependencies = $manager->getDependencies($this->name);
         $enabledMods = $manager->getEnabledModuleNames();
         foreach ($dependencies as $dependency) {
@@ -100,7 +102,7 @@ class Module {
     }
 
     public function hasAdminPage(): bool {
-        $controller = \App\Helpers\ModuleHelper::getMainController($this->name);
+        $controller = ModuleHelper::getMainController($this->name);
         return
             is_file(getModuleAdminFilePath($this->name)) ||
             is_file(getModuleAdminFilePath2($this->name)) ||
@@ -112,7 +114,7 @@ class Module {
     }
 
     public function isEmbedModule(): bool {
-        return \App\Helpers\ModuleHelper::isEmbedModule($this->name);
+        return ModuleHelper::isEmbedModule($this->name);
     }
 
     public function getShortCode(): ?string {
@@ -121,7 +123,7 @@ class Module {
 
     public function getDependentModules(): array {
         $result = [];
-        $manager = new \App\Packages\ModuleManager();
+        $manager = new ModuleManager();
         $enabledMods = $manager->getEnabledModuleNames();
         $dependent = $manager->getDependentModules($this->getName());
 
@@ -166,7 +168,7 @@ class Module {
         $uninstallScript2 = getModuleUninstallScriptPath2($name, true);
 
         // Uninstall Script ausführen, sofern vorhanden
-        $mainController = \App\Helpers\ModuleHelper::getMainController($name);
+        $mainController = ModuleHelper::getMainController($name);
         return ($mainController &&
                 method_exists($mainController, 'uninstall')) ||
                 is_file($uninstallScript1) ||
