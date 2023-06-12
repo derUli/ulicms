@@ -215,6 +215,14 @@ foreach ($font_sizes as $size) {
                         value="<?php echo _esc(Settings::get('body_text_color')); ?>"></td>
         </tr>
         <tr>
+            <td><strong><?php translate('link_color'); ?> </strong></td>
+            <td><input name="link_color" id="link_color"
+                        class="jscolor {
+                            hash:true,caps:true
+                        }"
+                        value="<?php echo _esc(Settings::get('link_color')); ?>"></td>
+        </tr>
+        <tr>
             <td><strong><?php translate('BACKGROUNDCOLOR'); ?> </strong></td>
             <td><input name="body_background_color"
                         class="jscolor {

@@ -14,6 +14,12 @@ body{
     color: $body-text-color;
     line-height: 1.5em;
     -webkit-overflow-scrolling: touch;
+
+    a, a:link, a:visited, a:hover, a:active {
+        &:not(.btn){
+            color: $link-color;
+        }
+    }
 }
 
 .onepage-pagination{

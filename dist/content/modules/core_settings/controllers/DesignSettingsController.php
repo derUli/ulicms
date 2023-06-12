@@ -74,6 +74,10 @@ class DesignSettingsController extends \App\Controllers\Controller {
             Settings::set('body_text_color', $_REQUEST['body_text_color']);
         }
 
+        if (Settings::get('link_color') !== $_REQUEST['link_color']) {
+            Settings::set('link_color', $_REQUEST['link_color']);
+        }
+
         if (Settings::get('title_format') !== $_REQUEST['title_format']) {
             Settings::set('title_format', $_REQUEST['title_format']);
         }
@@ -158,6 +162,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
         $settings = [
             'header-background-color' => Settings::get('header_background_color'),
             'body-text-color' => Settings::get('body_text_color'),
+            'link-color' => Settings::get('link_color'),
             'body-background-color' => Settings::get('body_background_color'),
             'default-font' => Settings::get('default_font'),
             'font-size' => Settings::get('font_size')

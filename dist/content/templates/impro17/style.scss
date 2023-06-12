@@ -24,14 +24,6 @@ body{
     margin-bottom: $default-vertical-margin;
 }
 
-.rss-icon a {
-    color: #ff6600;
-}
-
-.rss-icon a:hover {
-    text-decoration: none;
-}
-
 .page_older_newer {
     margin-top: 40px;
     margin-bottom: 100px;
@@ -76,6 +68,12 @@ main,
 header,
 footer {
     display: block;
+    
+    a, a:link, a:visited, a:hover, a:active {
+        &:not(.btn){
+            color: $link-color;
+        }
+    }
 }
 
 html {

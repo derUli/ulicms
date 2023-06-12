@@ -200,6 +200,7 @@ add_translation('FONT_FAMILY', 'Font Family');
 add_translation('FONT_SIZE', 'Font Size');
 add_translation('HEADER_BACKGROUNDCOLOR', 'Header background color');
 add_translation('FONT_COLOR', 'Font Color');
+add_translation('LINK_COLOR', 'Link Color');
 add_translation('BACKGROUNDCOLOR', 'Background color');
 add_translation('TITLE_FORMAT', 'Page title format');
 

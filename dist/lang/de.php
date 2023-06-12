@@ -201,6 +201,7 @@ add_translation('FONT_FAMILY', 'Schriftart');
 add_translation('FONT_SIZE', 'Schriftgröße');
 add_translation('HEADER_BACKGROUNDCOLOR', 'Kopfzeile Hintergrundfarbe');
 add_translation('FONT_COLOR', 'Schriftfarbe');
+add_translation('LINK_COLOR', 'Linkfarbe');
 add_translation('BACKGROUNDCOLOR', 'Hintergrundfarbe');
 add_translation('TITLE_FORMAT', 'Seitentitel Format');
 
