@@ -1,0 +1,1 @@
+INSERT INTO `{prefix}settings` (`name`, `value`) VALUES('link_color', '#337AB7');
