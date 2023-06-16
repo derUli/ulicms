@@ -177,7 +177,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
                         </p>
                         <p>
                             <span
-                                class="has-pointer comment-link ajax-alert"
+                                class="has-pointer ajax-alert"
                                 data-url="<?php
                         echo
                         \App\Helpers\ModuleHelper::buildMethodCallUrl(

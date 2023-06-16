@@ -13,6 +13,7 @@
 
 
 @import "actions/core_home/home.scss";
+@import "actions/core_media/files.scss";
 @import "actions/core_info/changelog.scss";
 @import "actions/core_package_manager/pkginfo.scss";
 
@@ -79,12 +80,6 @@ a:not(.btn) {
     overflow-x: auto;
     overflow-y: visible;
 }
-
-div#footer {
-    text-align: center;
-    margin-top: 10px;
-}
-
 
 div.diff {
     background-color: $default-background-color;
@@ -245,10 +240,6 @@ form#edit-user {
     background-color: $background-color-4;
 }
 
-.btn-margin {
-    margin-right: 10px;
-}
-
 .delete-form {
     display: inline-block;
 }
@@ -332,14 +323,6 @@ pre,
     }
 }
 
-.comment-link {
-    font-weight: 500;
-
-    &:hover{
-        text-decoration: underline;
-    }
-}
-
 #designForm {
     .preview {
         img {
@@ -347,14 +330,4 @@ pre,
             max-width: 100%;
         }
     }
-}
-
-iframe.fm {
-    border: 0;
-    width: 100%;
-    height: calc(100vh - 290px);
-}
-
-#vanilla-toast {
-    font-size: 1em;
 }
