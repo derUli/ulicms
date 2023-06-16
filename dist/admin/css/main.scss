@@ -4,6 +4,7 @@
 @import "accordion.scss";
 @import "modal.scss";
 @import "table.scss";
+@import "text.scss";
 
 // impulse based scrolling on touch devices (e.g. iPad)
 // see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
@@ -138,14 +139,6 @@ img.responsive-image,
     border: 1px solid #eee;
     height: auto !important;
     overflow: hidden;
-}
-
-.text-red {
-    color: $red-color;
-}
-
-.text-green {
-    color: $green-color;
 }
 
 img {
