@@ -5,6 +5,7 @@
 @import "modal.scss";
 @import "table.scss";
 @import "text.scss";
+@import "menu.scss"; 
 
 // impulse based scrolling on touch devices (e.g. iPad)
 // see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
@@ -19,7 +20,6 @@ html {
 
 body {
     padding-right: 0 !important;
-
     background-color: $default-background-color;
     font-family: $default-font;
     font-size: $default-font-size;
@@ -77,17 +77,6 @@ fieldset[disabled] {
     min-width: 180px;
 }
 
-.top-right-icons {
-    a {
-        font-size: 30px;
-        color: $color-2 !important;
-    }
-}
-
-.menubar {
-    margin-bottom: 10px;
-}
-
 #backend-logo{
     display: inline-block;
 }
@@ -127,7 +116,6 @@ fieldset[disabled] {
     width: 38px;
 }
 
-img.responsive-image,
 #ulicms-feed img
 {
     max-width: 100%;
@@ -324,35 +312,11 @@ div#login-welcome-text {
     padding: 20px;
 }
 
-.menu-container {
-    #menu-toggle {
-        i {
-            transition: transform .4s ease-in-out;
-        }
-
-        /* Rotate Hamburger Menu Icon on open */
-        &.is-open {
-            i {
-                transform: rotate(90deg);
-            }
-        }
-
-    }
-
-    text-align: right;
-
-    img {
-        height: 30px;
-        margin-top: 5px;
-    }
-}
-
 .main {
     margin-top: 10px;
     margin-bottom: 20px;
     width:100%;
 }
-
 
 .btngroup-info {
     .btn-info {
@@ -387,71 +351,6 @@ form#edit-user {
     border: none;
 }
 
-.mainmenu {
-    background-color: $background-color-8;
-    color: $color-9;
-    display: none;
-    margin-bottom: 10px;
-
-    ul {
-        li {
-            margin-bottom:0;
-
-            .fa {
-                width: 40px;
-            }
-
-            .far {
-                width: 40px;
-            }
-
-            .fas {
-                width: 40px;
-            }
-        }
-
-        list-style: none;
-        margin: 0;
-        padding: 0;
-
-        a {
-            display: block;
-            color: $color-9;
-            font-size: 24px;
-            padding-top: 15px;
-            padding-bottom: 15px;
-            padding-left: 20px;
-            padding-right: 20px;
-            text-decoration: none;
-
-
-            &:focus {
-                color: $color-9;
-            }
-
-            &:active {
-                display: block;
-                font-size: 24px;
-                padding-top: 15px;
-                padding-bottom: 15px;
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            &:hover {
-                text-decoration: none;
-                background-color: $background-color-4;
-                color: white !important;
-            }
-        }
-
-        a.active {
-            text-decoration: none;
-            background-color: $background-color-4;
-        }
-    }
-}
-
 .has-help {
     cursor: help;
     margin-left: 5px;
@@ -474,16 +373,6 @@ form#edit-user {
     .field-label {
         display: block;
     }
-}
-
-#menu-clear-cache {
-    display: inline-block;
-    width: 37.5px;
-}
-
-#menu-clear-cache-loading {
-    display: inline-block;
-    width: 37.5px;
 }
 
 h1, h2, h3, h4, h5, h6 {
