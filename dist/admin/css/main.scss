@@ -9,6 +9,7 @@
 @import "selection.scss"; 
 @import "mouse-pointer.scss";
 @import "border.scss";
+@import "form.scss";
 
 
 @import "actions/core_home/home.scss";
@@ -35,23 +36,6 @@ body {
     margin: 0;
     padding: 0;
     -ms-overflow-style: scrollbar;
-}
-
-input, select, checkbox, radio, textarea {
-    &:invalid{
-        border-color: red !important;
-    }
-}
-
-.form-control[disabled],
-.form-control[readonly] {
-    background-color: $default-disable-background-color;
-}
-
-fieldset[disabled] {
-    .form-control {
-        background-color: $default-disable-background-color;
-    }
 }
 
 .actions {
@@ -90,19 +74,6 @@ a:not(.btn) {
     width: 38px;
 }
 
-#ulicms-feed img
-{
-    max-width: 100%;
-    height: auto;
-}
-
-.CodeMirror {
-    margin-bottom: 0;
-    border: 1px solid #eee;
-    height: auto !important;
-    overflow: hidden;
-}
-
 .scroll,
 .CodeMirror-scroll {
     overflow-x: auto;
@@ -114,29 +85,6 @@ div#footer {
     margin-top: 10px;
 }
 
-input[type="button"],
-input[type="submit"],
-input[type="reset"],
-button {
-    background-color: $background-color-4;
-    color: $color-9;
-    padding: 10px;
-}
-
-input:not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="radio"]):not([type="checkbox"]):not([type="image"]),
-select, textarea {
-    width: 100%;
-}
-
-select, textarea {
-    border: solid 1px #ededed;
-}
-
-textarea {
-    &#code,  &#content  {
-        height: auto;
-    }
-}
 
 div.diff {
     background-color: $default-background-color;
@@ -188,21 +136,9 @@ label, .label {
     border-radius: 0 !important;
 }
 
-input[type="image"] {
-    border: none;
-}
-
 img.small-preview-image {
     max-width: 300px !important;
     height: auto !important;
-}
-
-form#site-form {
-    margin-bottom: 20px;
-}
-
-form#login-form {
-    margin-bottom: 5px;
 }
 
 .toggle.btn {
@@ -251,6 +187,14 @@ div#login-welcome-text {
     }
 }
 
+form#site-form {
+    margin-bottom: 20px;
+}
+
+form#login-form {
+    margin-bottom: 5px;
+}
+
 form#edit-user {
     .checkbox.block {
         margin-bottom: 5px;
@@ -286,11 +230,6 @@ form#edit-user {
     margin-top: 10px;
 }
 
-input[type="radio"],
-input[type="checkbox"] {
-    margin-right: 5px;
-}
-
 @media only screen and (min-width: 375px) {
     .btn-group .btn {
 
@@ -312,24 +251,6 @@ input[type="checkbox"] {
 
 .delete-form {
     display: inline-block;
-}
-
-.select2-container {
-    .select2-selection--single {
-        min-height: 34px !important;
-    }
-
-    .select2-selection--multiple {
-        min-height: 46px !important;
-    }
-
-    .select2-selection__rendered {
-        line-height: 31px !important;
-    }
-
-    .select2-selection__arrow {
-        min-height: 34px !important;
-    }
 }
 
 .filter-wrapper {
@@ -389,18 +310,6 @@ pre,
         position: absolute;
         top: 0;
         left: 0;
-    }
-}
-
-.nav-tabs, .nav-pills {
-    a {
-        border-radius: 0 !important;
-    }
-}
-
-.pager {
-    * {
-        border-radius: 0 !important;
     }
 }
 

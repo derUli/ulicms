@@ -1,0 +1,74 @@
+input, select, checkbox, radio, textarea {
+    &:invalid{
+        border-color: red !important;
+    }
+}
+
+.form-control[disabled],
+.form-control[readonly] {
+    background-color: $default-disable-background-color;
+}
+
+fieldset[disabled] {
+    .form-control {
+        background-color: $default-disable-background-color;
+    }
+}
+
+.CodeMirror {
+    margin-bottom: 0;
+    border: 1px solid #eee;
+    height: auto !important;
+    overflow: hidden;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+    background-color: $background-color-4;
+    color: $color-9;
+    padding: 10px;
+}
+
+input:not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="radio"]):not([type="checkbox"]):not([type="image"]),
+select, textarea {
+    width: 100%;
+}
+
+select, textarea {
+    border: solid 1px #ededed;
+}
+
+textarea {
+    &#code,  &#content  {
+        height: auto;
+    }
+}
+
+input[type="image"] {
+    border: none;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.select2-container {
+    .select2-selection--single {
+        min-height: 34px !important;
+    }
+
+    .select2-selection--multiple {
+        min-height: 46px !important;
+    }
+
+    .select2-selection__rendered {
+        line-height: 31px !important;
+    }
+
+    .select2-selection__arrow {
+        min-height: 34px !important;
+    }
+}
