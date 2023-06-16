@@ -370,11 +370,6 @@ function body_classes(): void {
     echo Template::getBodyClasses();
 }
 
-// Einen zufälligen Banner aus der Datenbank ausgeben
-function random_banner(): void {
-    Template::randomBanner();
-}
-
 function logo(): void {
     Template::logo();
 }
