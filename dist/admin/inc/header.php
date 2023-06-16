@@ -123,7 +123,7 @@ if (get_action()) {
 ?>
         <div class="container-fluid main">
             <div class="row menubar">
-                <div class="col col-7">
+                <div class="col col-7 col-sm-8 col-md-9">
                     <a
                         href="../"
                         title="<?php translate('goto_frontend'); ?>"
@@ -131,14 +131,14 @@ if (get_action()) {
                         data-placement="bottom" 
                         ><img
                             src="<?php Template::escape($admin_logo); ?>" alt="UliCMS"
-                            class="img-responsive"></a>
+                            class="img-fluid"></a>
                 </div>
-                <div class="col col-5 menu-container">
+                <div class="col col-5 col-sm-4 col-md-3 menu-container">
                     <?php
         if (is_logged_in()) {
             $colClass = $permissionChecker->hasPermission('comments_manage') ? 'col col-4' : 'col col-6';
             ?>
-                        <div class="row pull-right top-right-icons">
+                        <div class="row float-end top-right-icons">
                             <div class="<?php esc($colClass); ?>">
                                 <a href="#" class="has-pointer" id="menu-clear-cache"
                                    data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PerformanceSettingsController', 'clearCache', 'clear_cache=1'); ?>"

@@ -68,7 +68,7 @@ if (! empty($_REQUEST['file']) && str_ends_with($_REQUEST['file'], '.sin')) {
                 <tr>
                     <td></td>
                     <td><img src="data:<?php esc($screenshot); ?>"
-                                alt="Screenshot" class="img-responsive"></td>
+                                alt="Screenshot" class="img-fluid"></td>
                 </tr>
             <?php }
             ?>

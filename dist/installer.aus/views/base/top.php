@@ -14,7 +14,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
               href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
     </head>
     <body>
-        <div class="fluid-container" id="root-container">
+        <div class="container" id="root-container">
             <div class="row">
                 <div class="col col-sm-12" id="header">
                     <p>

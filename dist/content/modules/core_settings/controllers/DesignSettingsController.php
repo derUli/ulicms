@@ -139,7 +139,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
                 App\HTML\imageTag(
                     $screenshot,
                     [
-                        'class' => 'img-responsive theme-preview'
+                        'class' => 'img-fluid theme-preview'
                     ]
                 )
             );

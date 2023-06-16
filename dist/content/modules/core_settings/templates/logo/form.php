@@ -44,7 +44,7 @@ $logoStoragePath = ULICMS_ROOT . '/content/images/' . Settings::get('logo_image'
                                 $logoUrl,
                                 [
                                     'alt' => Settings::get('homepage_title'),
-                                    'class' => 'img-responsive'
+                                    'class' => 'img-fluid'
                                 ]
                             );
                             ?>
