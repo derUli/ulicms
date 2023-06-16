@@ -6,3 +6,21 @@
         pointer-events: none;
     }
 }
+
+// pointer mouse cursor
+.has-pointer,
+input.fm,
+input.fm,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="image"],
+button,
+.select-on-click {
+    cursor: pointer
+}
+
+button:disabled, .disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
