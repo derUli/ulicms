@@ -7,11 +7,13 @@
 @import "text.scss";
 @import "menu.scss"; 
 @import "selection.scss"; 
+@import "mouse-pointer.scss";
+@import "border.scss";
+
+
 @import "actions/core_home/home.scss";
 @import "actions/core_info/changelog.scss";
 @import "actions/core_package_manager/pkginfo.scss";
-@import "mouse-pointer.scss";
-@import "border.scss";
 
 // impulse based scrolling on touch devices (e.g. iPad)
 // see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
