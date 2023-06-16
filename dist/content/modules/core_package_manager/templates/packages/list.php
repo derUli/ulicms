@@ -63,7 +63,7 @@ $anyEmbedModules = count(\App\Helpers\ModuleHelper::getAllEmbedModules()) > 0;
                             data-btn-for="<?php esc($module->getName()); ?>"><i
                                 class="fas fa-tools"></i> <?php esc($module->getName()); ?> </a>
                             <?php if (! $userIsPermitted && $hasAdminPage) { ?>
-                            <i class="fas fa-lock pull-right"
+                            <i class="fas fa-lock float-end "
                                 title="<?php translate('no_permission'); ?>"></i>
                             <?php } ?>
                     </td>

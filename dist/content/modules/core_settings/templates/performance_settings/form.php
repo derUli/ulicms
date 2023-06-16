@@ -61,7 +61,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
     'clearCache'
 );
 ?>"
-    class="btn btn-warning pull-right">
+    class="btn btn-warning float-end ">
     <i class="fas fa-broom"></i>
     <?php translate('clear_cache'); ?></a>
 

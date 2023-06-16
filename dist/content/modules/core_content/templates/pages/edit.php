@@ -97,7 +97,7 @@ while ($row = Database::fetchObject($result)) {
                     ], [
                         'page' => $row->id
                     ], [
-                        'class' => 'pull-right delete-form page-delete-form'
+                        'class' => 'float-end  delete-form page-delete-form'
                     ]);
         ?>
                     <?php echo \App\Helpers\ModuleHelper::endForm(); ?>

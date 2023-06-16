@@ -47,7 +47,7 @@ $scripts = [
     'scripts/global.js',
     '../node_modules/bootstrap/dist/js/bootstrap.min.js',
     '../node_modules/select2/dist/js/select2.min.js',
-    '../node_modules/bootbox/dist/bootbox.min.js',
+    '../node_modules/bootbox/dist/bootbox.all.min.js',
     $select2TranslationFile,
     '../node_modules/datatables/media/js/jquery.dataTables.min.js',
     '../node_modules/zenscroll/zenscroll-min.js',

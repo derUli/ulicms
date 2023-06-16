@@ -87,6 +87,10 @@ body.modal-open {
 }
 
 .bootbox.modal {
+    .modal-header{
+        display: none;
+    }
+
     .modal-headline {
         font-size: 18px;
         font-weight: bold;
@@ -275,6 +279,7 @@ textarea {
 table {
     width: 100%;
 }
+
 
 table.tablesorter {
     width: 100%;

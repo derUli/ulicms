@@ -130,7 +130,7 @@ if (Settings::get('visitors_can_register') === 'on' || Settings::get('visitors_c
     <?php
 if (! Settings::get('disable_password_reset')) {
     ?>
-    <a href="?reset_password" class="btn btn-light pull-right voffset2"><i
+    <a href="?reset_password" class="btn btn-light float-end voffset2"><i
             class="fa fa-lock"></i> <?php translate('reset_password'); ?></a>
     <?php
 }

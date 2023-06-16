@@ -43,7 +43,7 @@ echo Template::executeModuleTemplate(
                         <?php } ?> 
             </div>
             <div class="col col-6 text-right">
-                <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'recycleBin'); ?>" class="btn btn-light is-not-ajax"><i
+                <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'recycleBin'); ?>" class="btn btn-light is-not-ajax float-end"><i
                         class="fa fa-trash"></i> <?php translate('recycle_bin'); ?></a>
             </div>
         </div>
@@ -61,8 +61,8 @@ echo Template::executeModuleTemplate(
                     class="btn btn-primary"><i
                         class="fas fa-broom"></i> <?php translate('empty_recycle_bin'); ?></a>
             </div>
-            <div class="col col-6 text-right">
-                <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'pages'); ?>" class="btn btn-light is-not-ajax"><i
+            <div class="col col-6">
+                <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'pages'); ?>" class="btn btn-light is-not-ajax float-end"><i
                         class="fas fa-book"></i> <?php translate('pages'); ?></a>
             </div>
         </div>
