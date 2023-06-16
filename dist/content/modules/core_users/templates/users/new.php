@@ -25,13 +25,13 @@ $ref = _esc(Request::getVar('ref', 'home'));
         <input type="text" required="required" name="username" value="">
     </div>
     <div class="row field">
-        <div class="col-xs-12 col-md-6">
+        <div class="col col-12 col-md-6">
             <strong class="field-label">
                 <?php translate('firstname'); ?>
             </strong>
             <input type="text" name="firstname" value="">
         </div>
-        <div class="col-xs-12 col-md-6">
+        <div class="col col-12 col-md-6">
             <strong class="field-label">
                 <?php translate('lastname'); ?>
             </strong> <input
@@ -45,7 +45,7 @@ $ref = _esc(Request::getVar('ref', 'home'));
         <input type="email" name="email" value="">
     </div>
     <div class="row field">
-        <div class="col-xs-12 col-md-6">
+        <div class="col col-12 col-md-6">
             <strong class="field-label">
                 <?php translate('password'); ?>*
             </strong>
@@ -53,7 +53,7 @@ $ref = _esc(Request::getVar('ref', 'home'));
                     class="password-security-check"
                     id="password" value="" autocomplete="new-password">
         </div>
-        <div class="col-xs-12 col-md-6">
+        <div class="col col-12 col-md-6">
             <strong class="field-label">
                 <?php translate('password_repeat'); ?>*
             </strong>

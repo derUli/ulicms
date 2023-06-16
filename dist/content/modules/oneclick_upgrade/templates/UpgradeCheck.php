@@ -24,19 +24,19 @@ if (isset($json->release_notes)) {
         method="post">
             <?php csrf_token_html(); ?>
     <div class="row">
-        <div class="col-xs-6 text-left">
+        <div class="col col-6 text-left">
             <strong><?php translate('installed_version'); ?></strong>
         </div>
-        <div class="col-xs-6 text-right">
+        <div class="col col-6 text-right">
             <?php Template::escape($currentVersion); ?>
         </div>
 
     </div>
     <div class="row">
-        <div class="col-xs-6 text-left">
+        <div class="col col-6 text-left">
             <strong><?php translate('available_version'); ?></strong>
         </div>
-        <div class="col-xs-6 text-right"><?php Template::escape($newVersion); ?></div>
+        <div class="col col-6 text-right"><?php Template::escape($newVersion); ?></div>
     </div>
     <?php if ($release_notes) { ?>
         <h2><?php translate('release_notes'); ?></h2>

@@ -121,9 +121,9 @@ if (get_action()) {
             <?php
         do_event('after_backend_header');
 ?>
-        <div class="container main">
+        <div class="container-fluid main">
             <div class="row menubar">
-                <div class="col-xs-7">
+                <div class="col col-7">
                     <a
                         href="../"
                         title="<?php translate('goto_frontend'); ?>"
@@ -133,10 +133,10 @@ if (get_action()) {
                             src="<?php Template::escape($admin_logo); ?>" alt="UliCMS"
                             class="img-responsive"></a>
                 </div>
-                <div class="col-xs-5 menu-container">
+                <div class="col col-5 menu-container">
                     <?php
         if (is_logged_in()) {
-            $colClass = $permissionChecker->hasPermission('comments_manage') ? 'col-xs-4' : 'col-xs-6';
+            $colClass = $permissionChecker->hasPermission('comments_manage') ? 'col col-4' : 'col col-6';
             ?>
                         <div class="row pull-right top-right-icons">
                             <div class="<?php esc($colClass); ?>">

@@ -70,19 +70,19 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
 );
 ?>
 <div class="row">
-    <div class="col-xs-12 col-lg-4">
+    <div class="col col--12 col-lg-4">
         <label for="status"><?php translate('status'); ?></label>
         <?php
         echo Input::singleSelect('status', $selectedStatus, $stati, 1);
 ?>
     </div>
-    <div class="col-xs-12 col-lg-4">
+    <div class="col col--12 col-lg-4">
         <label for="status"><?php translate('contents'); ?></label>
         <?php
 echo Input::singleSelect('content_id', $content_id, $contentSelect, 1);
 ?>
     </div>
-    <div class="col-xs-12 col-lg-4">
+    <div class="col col--12 col-lg-4">
         <label for="status"><?php translate('limit_results'); ?></label>
         <?php
 echo Input::textBox('limit', $limit, 'number', [
@@ -194,12 +194,12 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
     </table>
 </div>
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col col--6">
         <?php
         echo Input::singleSelect('action', '', $actionSelect, 1);
 ?>
     </div>
-    <div class="col-xs-6">
+    <div class="col col--6">
         <button type="submit" class="btn btn-primary">
             <i class="fas fa-running"></i>
             <?php translate('do_action'); ?></button>

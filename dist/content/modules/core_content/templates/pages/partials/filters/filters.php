@@ -35,7 +35,7 @@ $show_filters = Settings::get('user/' . get_user_id() . '/show_filters');
     }
 ?>">
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col col-6">
                 <?php
             echo Template::executeModuleTemplate(
                 'core_content',
@@ -44,7 +44,7 @@ $show_filters = Settings::get('user/' . get_user_id() . '/show_filters');
 ?>
 
             </div>
-            <div class="col-xs-6">
+            <div class="col col-6">
                 <?php
 echo Template::executeModuleTemplate(
     'core_content',
@@ -55,7 +55,7 @@ echo Template::executeModuleTemplate(
         </div>
 
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col col-6">
                 <?php
 echo Template::executeModuleTemplate(
     'core_content',
@@ -63,7 +63,7 @@ echo Template::executeModuleTemplate(
 );
 ?>
             </div>
-            <div class="col-xs-6">
+            <div class="col col-6">
                 <?php
 echo Template::executeModuleTemplate(
     'core_content',
@@ -74,7 +74,7 @@ echo Template::executeModuleTemplate(
         </div>
 
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col col-6">
                 <?php
 echo Template::executeModuleTemplate(
     'core_content',
@@ -82,7 +82,7 @@ echo Template::executeModuleTemplate(
 );
 ?>
             </div>
-            <div class="col-xs-6">
+            <div class="col col-6">
                 <?php
 echo Template::executeModuleTemplate(
     'core_content',
@@ -93,7 +93,7 @@ echo Template::executeModuleTemplate(
         </div>
 
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col col-6">
                 <?php
 echo Template::executeModuleTemplate(
     'core_content',

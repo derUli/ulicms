@@ -34,7 +34,7 @@ echo Template::executeModuleTemplate(
 <div id="page-list">
     <?php if ($controller->_getPagesListView() === 'default') { ?>
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col col-6">
                 <?php
                 if($permissionChecker->hasPermission('pages_create')) {
                     ?>
@@ -42,7 +42,7 @@ echo Template::executeModuleTemplate(
                         class="fa fa-plus"></i> <?php translate('create_page'); ?></a>
                         <?php } ?> 
             </div>
-            <div class="col-xs-6 text-right">
+            <div class="col col-6 text-right">
                 <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'recycleBin'); ?>" class="btn btn-default is-not-ajax"><i
                         class="fa fa-trash"></i> <?php translate('recycle_bin'); ?></a>
             </div>
@@ -50,7 +50,7 @@ echo Template::executeModuleTemplate(
     <?php } elseif ($controller->_getPagesListView() === 'recycle_bin') {
         ?>
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col col-6">
                 <a href="<?php
                 echo \App\Helpers\ModuleHelper::buildMethodCallUrl(
                     PageController::class,
@@ -61,7 +61,7 @@ echo Template::executeModuleTemplate(
                     class="btn btn-primary"><i
                         class="fas fa-broom"></i> <?php translate('empty_recycle_bin'); ?></a>
             </div>
-            <div class="col-xs-6 text-right">
+            <div class="col col-6 text-right">
                 <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'pages'); ?>" class="btn btn-default is-not-ajax"><i
                         class="fas fa-book"></i> <?php translate('pages'); ?></a>
             </div>
