@@ -8,7 +8,6 @@ API-Änderungen:
 * ...
 
 Entfernte API-Methoden:
-
 * Template::randomBanner()
 * random_banner()
 
