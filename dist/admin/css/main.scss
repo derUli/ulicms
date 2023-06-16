@@ -148,7 +148,8 @@ img {
     border: $green-color 1px solid;
 }
 
-.scroll {
+.scroll,
+.CodeMirror-scroll {
     overflow-x: auto;
     overflow-y: visible;
 }
@@ -181,7 +182,6 @@ textarea {
         height: auto;
     }
 }
-
 
 p {
     width: 100%;
@@ -226,11 +226,6 @@ div.inPageMessage {
     bottom: 10px;
     right: 10px;
     display: none;
-}
-
-.CodeMirror-scroll {
-    overflow-y: hidden;
-    overflow-x: auto;
 }
 
 div.help {
