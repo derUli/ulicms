@@ -94,6 +94,11 @@ fieldset[disabled] {
     }
 }
 
+a {
+    text-decoration: none;
+    color: $default-text-color;
+}
+
 .toggle-module-form {
     .btn {
         min-width: 58px;
@@ -309,11 +314,6 @@ form#edit-user {
     }
 }
 
-#accordion-container {
-    padding:0;
-    border: none;
-}
-
 .has-help {
     cursor: help;
     margin-left: 5px;
@@ -351,10 +351,6 @@ h1, h2, h3, h4, h5, h6 {
 input[type="radio"],
 input[type="checkbox"] {
     margin-right: 5px;
-}
-
-.margin-left-10 {
-    margin-left:10px !important;
 }
 
 @media only screen and (min-width: 375px) {

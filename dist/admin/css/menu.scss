@@ -37,7 +37,6 @@
             padding-bottom: 15px;
             padding-left: 20px;
             padding-right: 20px;
-            text-decoration: none;
 
 
             &:focus {
@@ -61,7 +60,6 @@
         }
 
         a.active {
-            text-decoration: none;
             background-color: $background-color-4;
         }
     }
