@@ -99,8 +99,10 @@ if (! empty($_REQUEST['go'])) {
     <tr>
         <td></td>
         <td class="text-center">
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-sign-in-alt"></i> <?php translate('login'); ?></button>
+            <div class="voffset2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> <?php translate('login'); ?></button>
+            </div>
         </td>
     </tr>
 </table>

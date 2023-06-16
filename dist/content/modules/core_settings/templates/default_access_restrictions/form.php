@@ -38,7 +38,7 @@ $only_others_can_edit = (int)(Settings::get('only_others_can_edit'));
                 if ($only_admins_can_edit) {
                     echo 'checked';
                 }
-?>><?php translate('admins'); ?></label>
+?>> <?php translate('admins'); ?></label>
 </div>
 <div class="checkbox">
     <label>

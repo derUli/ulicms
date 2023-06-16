@@ -9,7 +9,7 @@
       stopOnError="true"
       stopOnWarning="false"
       stopOnFailure="true"
-      stopOnIncomplete="true"
+      stopOnIncomplete="false"
       stopOnSkipped="true"
       stopOnRisky="true"
       defaultTimeLimit="5"

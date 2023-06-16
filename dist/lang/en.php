@@ -69,6 +69,7 @@ add_translation('OTHER', 'Other Settings');
 add_translation('DESIGN_SETTINGS', 'Design');
 
 add_translation('INFO', 'Info');
+add_translation('HELP', 'Help');
 add_translation('LOGOUT', 'Logout');
 
 // Profil bearbeiten

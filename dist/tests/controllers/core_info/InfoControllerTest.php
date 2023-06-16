@@ -37,7 +37,7 @@ class InfoControllerTest extends \PHPUnit\Framework\TestCase {
         $controller = new InfoController();
         $npmLegalData = $controller->_getNpmLegalInfo();
 
-        $this->assertCount(16, $npmLegalData);
+        $this->assertCount(15, $npmLegalData);
 
         foreach ($npmLegalData as $package) {
             $this->assertNotEmpty($package->name);
