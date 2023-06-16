@@ -87,7 +87,7 @@ while ($row = Database::fetchObject($result)) {
             <?php require 'inc/loadspinner.php'; ?>
         </div>
         <div class="pageform" style="display: none">
-            <div class="top-bar">
+            <div>
                 <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('pages'); ?>"
                     class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
                     <?php
@@ -105,7 +105,7 @@ while ($row = Database::fetchObject($result)) {
             <?php
             echo \App\Helpers\ModuleHelper::buildMethodCallForm('PageController', 'edit', [], 'post', [
                 'id' => 'pageform-edit',
-                'class' => 'pageform main-form edit-page-form',
+                'class' => 'pageform main-form edit-page-form voffset2',
                 'data-get-content-types-url' => \App\Helpers\ModuleHelper::buildMethodCallUrl(PageController::class, 'getContentTypes'),
                 'data-slug-free-url' => \App\Helpers\ModuleHelper::buildMethodCallUrl(PageController::class, 'nextFreeSlug'),
                 'data-parent-pages-url' => \App\Helpers\ModuleHelper::buildMethodCallUrl(PageController::class, 'filterParentPages')
