@@ -1,0 +1,8 @@
+// not allowed mouse cursor
+.has-not-allowed {
+    cursor: not-allowed !important;
+
+    * {
+        pointer-events: none;
+    }
+}
