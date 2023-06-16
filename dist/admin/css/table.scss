@@ -1,0 +1,93 @@
+table {
+    width: 100%;
+}
+
+table.tablesorter {
+    width: 100%;
+    margin-top: 10px;
+    tbody {
+        tr.normal-row {
+            td {
+                background: #888 !important;
+            }
+        }
+
+        tr.alt-row {
+            td {
+                background: #555 !important;
+            }
+        }
+    }
+}
+
+#page-list {
+    .dataTables_wrapper {
+        margin-bottom: 40px;
+    }
+}
+
+.dataTables_wrapper, form{
+    i.type-icon {
+        min-width: 20px;
+        position: relative;
+        top: 1px;
+        text-align: center;
+        margin-right: 2px;
+    }
+}
+
+
+table.dataTable {
+    // for reasons there is always a horizontal scrollbar in Firefox
+    // if we don't subtract 2px
+    // what the hell are these 2px?!
+    width: calc(100% - 2px) !important;
+    position: relative;
+    top: 5px;
+
+    tbody, thead {
+        th, td {
+            padding: 3px !important;
+        }
+
+    }
+
+    tr.unread {
+        background-color: #fcf8e3;
+    }
+
+    .no-sort {
+        background: none !important;
+        cursor: default;
+    }
+}
+
+.dataTables_wrapper {
+    .dataTables_processing {
+        z-index: 30;
+        background: none;
+    }
+
+    .dataTables_filter {
+        input {
+            margin-left: 0 !important;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .dataTables_length,
+    .dataTables_filter {
+        label {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    table.tablesorter {
+        .header {
+            background-image: none !important;
+        }
+    }
+}
