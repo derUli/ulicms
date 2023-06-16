@@ -7,7 +7,8 @@
 @import "text.scss";
 @import "menu.scss"; 
 @import "selection.scss"; 
-@import "actions/changelog.scss";
+@import "actions/core_info/changelog.scss";
+@import "actions/core_package_manager/pkginfo.scss";
 @import "mouse-pointer.scss";
 @import "border.scss";
 
@@ -197,10 +198,6 @@ form#site-form {
     margin-bottom: 20px;
 }
 
-div#site-switcher-container {
-    display: none;
-}
-
 form#login-form {
     margin-bottom: 5px;
 }
@@ -222,14 +219,6 @@ div#login-welcome-text {
 .error-field {
     background-color: $red-color !important;
     color: $color-9 !important;
-}
-
-.license-agreement {
-    overflow: auto;
-    height: 200px;
-    border: 1px solid #eee;
-    background-color: $background-color-3;
-    padding: 20px;
 }
 
 .main {
