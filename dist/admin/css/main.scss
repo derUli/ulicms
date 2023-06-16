@@ -6,6 +6,7 @@
 @import "table.scss";
 @import "text.scss";
 @import "menu.scss"; 
+@import "selection.scss"; 
 
 // impulse based scrolling on touch devices (e.g. iPad)
 // see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
@@ -75,10 +76,6 @@ fieldset[disabled] {
 
 .actions {
     min-width: 180px;
-}
-
-#backend-logo{
-    display: inline-block;
 }
 
 .btn-toolbar {
@@ -238,16 +235,6 @@ label, .label {
     border-radius: 0 !important;
 }
 
-&::-moz-selection {
-    color: $color-5;
-    background: #335599;
-}
-
-&::selection {
-    color: $color-5;
-    background: #335599;
-}
-
 input[type="image"] {
     border: none;
 }
@@ -281,10 +268,6 @@ div#login-welcome-text {
     border: solid 1px #ededed;
     padding: 10px;
     background-color: $odd-background-color;
-}
-
-.list-show {
-    display: none;
 }
 
 .error-field {
@@ -345,7 +328,7 @@ form#edit-user {
 }
 
 #main-content-loadspinner {
-    display:none
+    display: none;
 }
 
 .main-content {
@@ -369,10 +352,6 @@ h1, h2, h3, h4, h5, h6 {
     word-break: break-word;
 }
 
-.break-word {
-    word-break: break-word
-}
-
 #loading-container {
     margin-top: 10px;
 }
@@ -381,7 +360,6 @@ input[type="radio"],
 input[type="checkbox"] {
     margin-right: 5px;
 }
-
 
 .margin-left-10 {
     margin-left:10px !important;
@@ -400,10 +378,6 @@ input[type="checkbox"] {
 
 .btn-primary {
     background-color: $background-color-4;
-}
-
-.normal-weight {
-    font-weight: normal;
 }
 
 .btn-margin {

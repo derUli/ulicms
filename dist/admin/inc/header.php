@@ -125,7 +125,6 @@ if (get_action()) {
                     <a
                         href="../"
                         title="<?php translate('goto_frontend'); ?>"
-                        id="backend-logo"
                         data-placement="bottom" 
                         ><img
                             src="<?php Template::escape($admin_logo); ?>" alt="UliCMS"
