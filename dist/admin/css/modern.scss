@@ -213,40 +213,6 @@ img {
     overflow-y: visible;
 }
 
-a {
-    &:not(.btn) {
-        color: $color-8;
-        text-decoration: none;
-        font-weight: 500;
-    }
-
-    &:visited {
-        &:not(.btn) {
-            color: $color-8;
-            text-decoration: none;
-            font-weight: 500;
-        }
-    }
-
-    &:focus {
-        &:not(.btn) {
-            color: $color-8;
-            text-decoration: none;
-            font-weight: 500;
-        }
-    }
-
-    &:hover {
-        color: $color-8;
-        text-decoration: underline;
-    }
-
-    &:active {
-        color: $color-8;
-        text-decoration: underline;
-    }
-}
-
 div#footer {
     text-align: center;
     margin-top: 10px;
@@ -490,7 +456,6 @@ div#login-welcome-text {
 }
 
 .menu-container {
-
     #menu-toggle {
         i {
             transition: transform .4s ease-in-out;
@@ -604,19 +569,10 @@ form#edit-user {
             padding-bottom: 15px;
             padding-left: 20px;
             padding-right: 20px;
+            text-decoration: none;
 
-            &:visited {
-                display: block;
-                color: $color-9;
-                font-size: 24px;
-                padding-top: 15px;
-                padding-bottom: 15px;
-                padding-left: 20px;
-                padding-right: 20px;
-            }
 
             &:focus {
-                text-decoration: none;
                 color: $color-9;
             }
 
