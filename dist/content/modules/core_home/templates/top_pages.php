@@ -5,13 +5,16 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 $controller = ControllerRegistry::get('HomeController');
 $model = $controller->getModel();
 ?>
-<table>
-    <tr style="font-weight: bold;">
-        <td><?php translate('title'); ?>
-        </td>
-        <td><?php translate('views'); ?>
-        </td>
+<table class="table">
+    <thead>
+    <tr>
+        <th><?php translate('title'); ?>
+        </th>
+        <th><?php translate('views'); ?>
+        </th>
     </tr>
+</thead>
+<tbody>
     <?php
     foreach ($model->topPages as $row) {
         $domain = getDomainByLanguage($row->language);
@@ -24,9 +27,10 @@ $model = $controller->getModel();
         <tr>
             <td><a href="<?php echo $url; ?>"
                    target="_blank"><?php esc($row->title); ?></a></td>
-            <td align="right"><?php echo $row->views; ?></td>
+            <td class="text-right"><?php echo $row->views; ?></td>
             <?php
     }
 ?>
     </tr>
+</tbody>
 </table>

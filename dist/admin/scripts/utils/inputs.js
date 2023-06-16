@@ -77,33 +77,6 @@ const initSelect2 = (container) => {
 };
 
 /**
- * Init bootstrap toggle switches
- * @param {type} container
- * @returns {undefined}
- */
-const initBootstrapToggle = (container) => {
-    
-    // Toggle switches for some checkboxes
-    $(container).find(".js-switch").bootstrapToggle({
-        on: MenuTranslation.On,
-        off: MenuTranslation.Off
-    });
-
-    // bootstrap-toggle doesn't react to click on the label of a toggle switch
-    // This is a long standing issue that is still not fixed.
-    // https://github.com/minhur/bootstrap-toggle/issues/23
-    // just wrap the clickable text in an element with this css class
-    // to make it clickable
-    $(container).find(".js-switch-label").click((event) => {
-        const target = $(event.target);
-        const theSwitch = target.closest('.checkbox').find(".js-switch");
-        if (theSwitch && theSwitch.length) {
-            theSwitch.bootstrapToggle('toggle');
-        }
-    });
-};
-
-/**
  * Init password security meter
  * @param {type} container
  * @returns {undefined}

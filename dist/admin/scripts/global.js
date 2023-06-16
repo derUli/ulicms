@@ -171,7 +171,6 @@ $(() => {
     }
 
     initSelect2(body);
-    initBootstrapToggle(body);
 
     $.datetimepicker.setLocale(language);
 

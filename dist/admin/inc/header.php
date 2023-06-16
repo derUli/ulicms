@@ -46,7 +46,6 @@ $scripts = [
     'scripts/utils/editors.js',
     'scripts/global.js',
     '../node_modules/bootstrap/dist/js/bootstrap.min.js',
-    '../node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js',
     '../node_modules/select2/dist/js/select2.min.js',
     '../node_modules/bootbox/dist/bootbox.min.js',
     $select2TranslationFile,
@@ -79,7 +78,6 @@ require 'inc/touch_icons.php';
       $styles[] = '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 $styles[] = '../node_modules/codemirror-minified/lib/codemirror.css';
 $styles[] = '../node_modules/vanilla-toast/vanilla-toast.css';
-$styles[] = '../node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css';
 $styles[] = '../node_modules/select2/dist/css/select2.min.css';
 $styles[] = '../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css';
 $styles[] = 'css/modern.scss';
