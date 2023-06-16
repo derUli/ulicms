@@ -9,6 +9,7 @@
 @import "selection.scss"; 
 @import "actions/changelog.scss";
 @import "mouse-pointer.scss";
+@import "border.scss";
 
 // impulse based scrolling on touch devices (e.g. iPad)
 // see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
@@ -116,18 +117,6 @@ a:not(.btn) {
     overflow: hidden;
 }
 
-img {
-    border: 0;
-}
-
-.border-red {
-    border: $red-color 1px solid;
-}
-
-.border-green {
-    border: $green-color 1px solid;
-}
-
 .scroll,
 .CodeMirror-scroll {
     overflow-x: auto;
@@ -161,11 +150,6 @@ textarea {
     &#code,  &#content  {
         height: auto;
     }
-}
-
-p {
-    width: 100%;
-    line-height: 1.5em;
 }
 
 div.diff {
