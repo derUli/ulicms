@@ -7,6 +7,7 @@
 @import "text.scss";
 @import "menu.scss"; 
 @import "selection.scss"; 
+@import "actions/changelog.scss"; 
 
 // impulse based scrolling on touch devices (e.g. iPad)
 // see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
@@ -94,7 +95,7 @@ fieldset[disabled] {
     }
 }
 
-a {
+a:not(.btn) {
     text-decoration: none;
     color: $default-text-color;
 }
@@ -524,17 +525,4 @@ iframe.fm {
 
 #vanilla-toast {
     font-size: 1em;
-}
-
-.changelog {
-    line-height: 2;
-    word-break: break-word;
-
-    h3{
-        padding-top: 10px;
-        &:not(:first-child) {
-            margin-top: 10px;
-            border-top: 1px solid #e8e8e8;
-        }
-    }
 }
