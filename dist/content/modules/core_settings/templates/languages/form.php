@@ -10,7 +10,7 @@ $languages = Language::getAllLanguages();
 <p>
     <a
         href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_categories'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
+        class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
 </p>
 <h2><?php translate('languages'); ?></h2>
 <?php echo \App\Helpers\ModuleHelper::buildMethodCallForm('LanguageController', 'create'); ?>

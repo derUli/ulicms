@@ -89,7 +89,7 @@ while ($row = Database::fetchObject($result)) {
         <div class="pageform" style="display: none">
             <div class="top-bar">
                 <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('pages'); ?>"
-                    class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
+                    class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
                     <?php
                     echo \App\Helpers\ModuleHelper::buildMethodCallButton('PageController', 'delete', '<i class="fas fa-trash"></i> ' . get_translation('delete'), [
                         'class' => 'btn btn-danger',
@@ -397,7 +397,7 @@ while ($row = Database::fetchObject($result)) {
                                     style="cursor: pointer" /> <a href="#"
                                     onclick="$('#menu_image').val('');
                                                         return false;"
-                                    class="btn btn-default voffset2">
+                                    class="btn btn-light voffset2">
                                 <i class="fa fa-eraser"></i> <?php translate('clear'); ?> </a>
                         </div>
                     </div>
@@ -551,7 +551,7 @@ while ($row = Database::fetchObject($result)) {
                                         style="cursor: pointer" /> <a href="#"
                                         onclick="$('#og_image').val('');
                                                             return false;"
-                                        class="btn btn-default voffset2">
+                                        class="btn btn-light voffset2">
                                     <i class="fa fa-eraser"></i>
                                     <?php translate('clear'); ?>
                             </div>
@@ -866,7 +866,7 @@ while ($row = Database::fetchObject($result)) {
                                     style="cursor: pointer" /> <a href="#"
                                     onclick="$('#image_url').val('');
                                                         return false;"
-                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i>
+                                    class="btn btn-light voffset2"><i class="fa fa-eraser"></i>
                                         <?php translate('clear'); ?>
                             </a>
                         </div>
@@ -910,7 +910,7 @@ while ($row = Database::fetchObject($result)) {
                                     style="cursor: pointer" maxlength="255" /> <a href="#"
                                     onclick="$('#article_image').val('');
                                                         return false;"
-                                    class="btn btn-default voffset2">
+                                    class="btn btn-light voffset2">
                                 <i class="fa fa-eraser"></i>
                                 <?php translate('clear'); ?></a>
                         </div>
@@ -1040,7 +1040,7 @@ while ($row = Database::fetchObject($result)) {
                             <div class="field">
                                 <a
                                     href="<?php esc(\App\Helpers\ModuleHelper::buildMethodCallUrl(CommentsController::class, 'filterComments', "content_id={$row->id}")); ?>"
-                                    class="btn btn-default" target="_blank"><i class="fa fa-comments"></i> <?php translate('comments_manage'); ?></a>
+                                    class="btn btn-light" target="_blank"><i class="fa fa-comments"></i> <?php translate('comments_manage'); ?></a>
                             </div>
                         <?php }
         ?>

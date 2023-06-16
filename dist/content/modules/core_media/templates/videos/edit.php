@@ -12,7 +12,7 @@ if (Database::getNumRows($result) > 0) {
     ?>
     <div class="field">
         <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('videos'); ?>"
-            class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
+            class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
             <?php translate('back'); ?></a>
     </div>
     <h1><?php translate('UPLOAD_VIDEO'); ?></h1>

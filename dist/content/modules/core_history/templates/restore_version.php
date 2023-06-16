@@ -10,7 +10,7 @@ $revisions = VCS::getRevisionsByContentID($content_id);
 <p>
     <a
         href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('pages_edit', 'page=' . $content_id); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
+        class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
 </p>
 <h1><?php translate('versions'); ?></h1>
 <div class="scroll">

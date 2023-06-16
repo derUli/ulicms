@@ -34,7 +34,7 @@ class ButtonTest extends \PHPUnit\Framework\TestCase {
 
     public function testButtonDefault(): void {
         $this->assertEquals(
-            '<button class="btn btn-default" type="submit">Do Something</button>',
+            '<button class="btn btn-light" type="submit">Do Something</button>',
             Button::default('Do Something')
         );
     }

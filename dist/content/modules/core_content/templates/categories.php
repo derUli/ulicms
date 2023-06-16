@@ -41,7 +41,7 @@ if (! isset($_GET['add']) && ! isset($_GET['edit'])
     ?>
     <div class="field">
         <a href="?action=categories&add"
-            class="btn btn-default is-ajax"
+            class="btn btn-light is-ajax"
             ><i
                 class="fa fa-plus"></i>
             <?php translate('create_category'); ?></a>
@@ -144,7 +144,7 @@ if (count($categories) > 0 && ! isset($_GET['add']) && ! isset($_GET['edit'])) {
         ?>
         <div class="btn-toolbar">
             <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('categories'); ?>"
-                class="btn btn-default btn-back is-not-ajax">
+                class="btn btn-light btn-back is-not-ajax">
                 <i class="fa fa-arrow-left"></i>
                 <?php translate('back'); ?></a>
         </div>
@@ -190,7 +190,7 @@ if (count($categories) > 0 && ! isset($_GET['add']) && ! isset($_GET['edit'])) {
     if ($permissionChecker->hasPermission('categories_edit')) {
         ?><div class="btn-toolbar">
             <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('categories'); ?>"
-                class="btn btn-default btn-back is-not-ajax">
+                class="btn btn-light btn-back is-not-ajax">
                 <i class="fa fa-arrow-left"></i>
                 <?php translate('back'); ?></a>
         </div>

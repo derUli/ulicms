@@ -20,7 +20,7 @@ if (
             ?>
             <a
                 href="index.php?action=pages"
-                class="btn btn-default is-not-ajax"
+                class="btn btn-light is-not-ajax"
                 ><i
                     class="fas fa-book"></i> <?php translate('pages'); ?></a>
 
@@ -29,7 +29,7 @@ if (
         if ($permissionChecker->hasPermission('comments_manage')) {
             ?>
             <a href="?action=comments_manage"
-               class="btn btn-default is-not-ajax voffset2"
+               class="btn btn-light is-not-ajax voffset2"
                ><i
                     class="fa fa-comments" aria-hidden="true"></i>
                 <?php translate('comments'); ?></a>
@@ -37,7 +37,7 @@ if (
 
         if ($permissionChecker->hasPermission('forms')) {
             ?><a href='?action=forms'
-               class="btn btn-default is-not-ajax voffset2"
+               class="btn btn-light is-not-ajax voffset2"
                ><i
                     class="fab fa-wpforms" aria-hidden="true"></i>
                 <?php translate('forms'); ?></a> 
@@ -47,7 +47,7 @@ if (
     if ($permissionChecker->hasPermission('categories')) {
         ?>
             <a href="index.php?action=categories"
-               class="btn btn-default is-not-ajax voffset2"><i
+               class="btn btn-light is-not-ajax voffset2"><i
                     class="fa fa-list-alt" aria-hidden="true"></i>
                 <?php translate('categories'); ?></a>
             <?php }

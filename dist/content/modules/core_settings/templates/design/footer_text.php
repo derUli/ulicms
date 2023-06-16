@@ -9,7 +9,7 @@ use App\Translations\JSTranslation;
 <p>
     <a
         href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('design'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fas fa-arrow-left"></i> <?php translate('back'); ?></a>
+        class="btn btn-light btn-back is-not-ajax"><i class="fas fa-arrow-left"></i> <?php translate('back'); ?></a>
 </p>
 <h1><?php translate('edit_footer_text'); ?></h1>
 <?php

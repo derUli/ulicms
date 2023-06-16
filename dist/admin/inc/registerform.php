@@ -47,7 +47,7 @@ if (Settings::get('visitors_can_register') == 'off' || ! Settings::get('visitors
     ?>
     <?php do_event('before_register_form_title'); ?>
     <p>
-        <a href="./" class="btn btn-default btn-back is-not-ajax">
+        <a href="./" class="btn btn-light btn-back is-not-ajax">
             <i class="fa fa-arrow-left"></i>
             <?php translate('back_to_login'); ?></a>
     </p>

@@ -25,7 +25,7 @@ $specialLabels = [
 ];
 
 $selectedButton = 'btn btn-primary';
-$notSelectedButton = 'btn btn-default';
+$notSelectedButton = 'btn btn-light';
 ?>
 
 <div class="btn-toolbar" role="toolbar"

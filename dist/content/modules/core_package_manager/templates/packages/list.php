@@ -49,7 +49,7 @@ $anyEmbedModules = count(\App\Helpers\ModuleHelper::getAllEmbedModules()) > 0;
                         );
                 $btnClass = ($hasAdminPage && $userIsPermitted) ?
                         'btn btn-primary' :
-                        'btn btn-default disabled has-no-settings';
+                        'btn btn-light disabled has-no-settings';
                 ?>
                 <tr>
                     <td><a

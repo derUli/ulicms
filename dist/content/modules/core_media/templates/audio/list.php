@@ -42,7 +42,7 @@ $all_audio = Database::query($sql);
 <?php if ($permissionChecker->hasPermission('audio_create')) { ?>
     <div class="voffset2">
         <a href="index.php?action=add_audio"
-            class="btn btn-default"><i class="fa fa-upload"></i>
+            class="btn btn-light"><i class="fa fa-upload"></i>
                 <?php
                 translate('upload_audio');
     ?></a>

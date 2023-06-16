@@ -16,7 +16,7 @@ $forms = Forms::getAllForms();
     <p>
         <a
             href="index.php?action=forms_new"
-            class="btn btn-default is-ajax"
+            class="btn btn-light is-ajax"
             ><i
                 class="fa fa-plus"></i> <?php translate('create_form'); ?></a>
     </p>

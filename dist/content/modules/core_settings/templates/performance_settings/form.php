@@ -51,7 +51,7 @@ if (Request::getVar('save')) {
         'settings_categories'
     );
 ?>"
-    class="btn btn-default btn-back is-not-ajax">
+    class="btn btn-light btn-back is-not-ajax">
     <i class="fas fa-arrow-left"></i>
     <?php translate('back'); ?></a>
 <a

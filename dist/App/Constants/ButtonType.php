@@ -18,7 +18,7 @@ abstract class ButtonType {
 
     public const TYPE_BASIC = 'btn';
 
-    public const TYPE_DEFAULT = 'btn btn-default';
+    public const TYPE_DEFAULT = 'btn btn-light';
 
     public const TYPE_PRIMARY = 'btn btn-primary';
 

@@ -17,7 +17,7 @@ foreach ($allSettings as $option) {
 <p>
     <a
         href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_categories'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
+        class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
 </p>
 <h2><?php translate('general_settings'); ?></h2>
 <?php
@@ -29,7 +29,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('SimpleSettingsController', 
 <table>
     <tr>
         <td><strong><?php translate('homepage_title'); ?></strong></td>
-        <td><a href="index.php?action=homepage_title" class="btn btn-default is-not-ajax"
+        <td><a href="index.php?action=homepage_title" class="btn btn-light is-not-ajax"
                 >
                 <i
                     class="fa fa-edit"></i> <?php translate('edit'); ?>
@@ -39,7 +39,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('SimpleSettingsController', 
         <td><strong><?php translate('site_slogan'); ?></strong></td>
         <td><a
                 href="index.php?action=site_slogan"
-                class="btn btn-default is-not-ajax"
+                class="btn btn-light is-not-ajax"
                 ><i
                     class="fa fa-edit"></i> <?php translate('edit'); ?></a></td>
     </tr>
@@ -56,14 +56,14 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('SimpleSettingsController', 
     <tr>
         <td><strong><?php translate('frontpage'); ?></strong></td>
         <td><a href="index.php?action=frontpage_settings"
-                class="btn btn-default is-not-ajax"><i class="fa fa-edit"></i> <?php translate('edit'); ?></a></td>
+                class="btn btn-light is-not-ajax"><i class="fa fa-edit"></i> <?php translate('edit'); ?></a></td>
     </tr>
     <?php if ($permissionChecker->hasPermission('error_pages')) {
         ?>
         <tr>
             <td><strong><?php translate('error_pages'); ?></strong></td>
             <td><a href="index.php?action=error_pages"
-                    class="btn btn-default is-not-ajax"><i class="fa fa-edit"></i> <?php translate('edit'); ?></a></td>
+                    class="btn btn-light is-not-ajax"><i class="fa fa-edit"></i> <?php translate('edit'); ?></a></td>
         </tr>
     <?php }
     ?>
@@ -134,7 +134,7 @@ if (Settings::get('robots') == 'noindex,nofollow') {
     <tr>
         <td><strong><?php translate('description'); ?></strong></td>
         <td><a href="index.php?action=meta_description"
-                class="btn btn-default is-not-ajax"><i class="fa fa-edit"></i> <?php translate('edit'); ?></a></td>
+                class="btn btn-light is-not-ajax"><i class="fa fa-edit"></i> <?php translate('edit'); ?></a></td>
     </tr>
     <?php
     if ($permissionChecker->hasPermission('open_graph')) {
@@ -142,7 +142,7 @@ if (Settings::get('robots') == 'noindex,nofollow') {
         <tr>
             <td><strong><?php translate('open_graph'); ?>
                 </strong></td>
-            <td><a href="index.php?action=open_graph" class="btn btn-default is-not-ajax"><i
+            <td><a href="index.php?action=open_graph" class="btn btn-light is-not-ajax"><i
                         class="fa fa-edit"></i> <?php translate('edit'); ?></a></td>
         </tr>
     <?php }

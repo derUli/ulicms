@@ -12,7 +12,7 @@ $ref = _esc(Request::getVar('ref', 'home'));
 ?>
 <div class="btn-toolbar">
     <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('admins'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
+        class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
 </div>
 <form action="index.php?sClass=UserController&sMethod=create"
         method="post" id="edit-user" class="voffset2">

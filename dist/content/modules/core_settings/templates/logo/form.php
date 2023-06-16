@@ -15,7 +15,7 @@ $logoStoragePath = ULICMS_ROOT . '/content/images/' . Settings::get('logo_image'
 <p>
     <a
         href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('design'); ?>"
-        class="btn btn-default btn-back is-not-ajax">
+        class="btn btn-light btn-back is-not-ajax">
         <i class="fa fa-arrow-left"></i> 
         <?php translate('back'); ?>
     </a>
@@ -51,7 +51,7 @@ $logoStoragePath = ULICMS_ROOT . '/content/images/' . Settings::get('logo_image'
                             <div class="voffset2">
                                 <button
                                     type="button"
-                                    class="btn btn-default"
+                                    class="btn btn-light"
                                     id="delete-logo"
                                     data-url="<?php
                                     echo \App\Helpers\ModuleHelper::buildMethodCallUrl(

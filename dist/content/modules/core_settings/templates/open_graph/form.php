@@ -13,7 +13,7 @@ if (! empty($og_image) && ! str_starts_with($og_image, 'http')) {
 ?>
 <p>
     <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_simple'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
+        class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
 </p>
 <h1><?php translate('open_graph'); ?></h1>
 <?php
@@ -47,7 +47,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('OpenGraphController', 'save
             </div>
             <div class="voffset2">
                 <a href="#" onclick="$('#og_image').val('');return false;"
-                    class="btn btn-default"><i class="fa fa-eraser"></i> <?php translate('clear'); ?>
+                    class="btn btn-light"><i class="fa fa-eraser"></i> <?php translate('clear'); ?>
                 </a>
             </div>
         </td>

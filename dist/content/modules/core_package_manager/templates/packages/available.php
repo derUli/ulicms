@@ -7,7 +7,7 @@ use App\Translations\JSTranslation;
 ?>
 <p>
     <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('install_method'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php translate('back'); ?></a>
+        class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php translate('back'); ?></a>
 </p>
 <h1><?php translate('available_packages'); ?></h1>
 <div id="loadpkg">

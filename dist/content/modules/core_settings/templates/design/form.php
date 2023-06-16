@@ -33,7 +33,7 @@ $modManager = new \App\Packages\ModuleManager();
 <p>
     <a
         href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_categories'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fas fa-arrow-left"></i> <?php translate('back'); ?></a>
+        class="btn btn-light btn-back is-not-ajax"><i class="fas fa-arrow-left"></i> <?php translate('back'); ?></a>
 </p>
 <h1>
     <?php translate('design'); ?>
@@ -231,7 +231,7 @@ foreach ($font_sizes as $size) {
                 </td>
                 <td>
 
-                    <a href="index.php?action=logo" class="btn btn-default is-not-ajax"><i
+                    <a href="index.php?action=logo" class="btn btn-light is-not-ajax"><i
                             class="fas fa-tools"></i> <?php translate('upload_new_logo'); ?></a>
                 </td></tr>
         <?php }
@@ -241,7 +241,7 @@ foreach ($font_sizes as $size) {
             ?>
             <tr>
                 <td><strong><?php translate('favicon'); ?></strong></td>
-                <td><a href="index.php?action=favicon" class="btn btn-default is-not-ajax"><i
+                <td><a href="index.php?action=favicon" class="btn btn-light is-not-ajax"><i
                             class="fas fa-file-image"></i> <?php translate('upload_new_favicon'); ?></a>
                 </td>
             </tr>
@@ -252,7 +252,7 @@ foreach ($font_sizes as $size) {
             ?>
             <tr>
                 <td><strong><?php translate('footer'); ?></strong></td>
-                <td><a href="index.php?action=footer_text" class="btn btn-default is-not-ajax"><i class="fas fa-edit"></i> <?php translate('edit_footer_text'); ?></a>
+                <td><a href="index.php?action=footer_text" class="btn btn-light is-not-ajax"><i class="fas fa-edit"></i> <?php translate('edit_footer_text'); ?></a>
                 </td>
             </tr>
         <?php }

@@ -33,9 +33,9 @@ if ($value === null) {
                readonly>
     </div>
     <div class="field">
-        <a href="#" class="btn btn-default clear-field"
+        <a href="#" class="btn btn-light clear-field"
            data-for="#field-<?php Template::escape(\App\Storages\ViewBag::get('field_name')); ?>"
-           class="btn btn-default"><i class="fa fa-eraser"></i> <?php translate('clear'); ?></a>
+           class="btn btn-light"><i class="fa fa-eraser"></i> <?php translate('clear'); ?></a>
         <?php if ($field->helpText) { ?>
             <small><?php translate($field->helpText); ?></small>
         <?php } ?>

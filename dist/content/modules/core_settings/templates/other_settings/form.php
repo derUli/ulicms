@@ -34,7 +34,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('OtherSettingsController', '
 ?>
 <a
     href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_categories'); ?>"
-    class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
+    class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
 <div id="accordion-container" class="voffset3">
     <h2 class="accordion-header">
         <?php translate('DOMAIN2LANGUAGE_MAPPING'); ?>
@@ -103,7 +103,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('OtherSettingsController', '
                     'default_access_restrictions'
                 );
             ?>"
-                class="btn btn-default is-not-ajax"
+                class="btn btn-light is-not-ajax"
                 > <i class="fas fa-tools"></i>
                 <?php translate('view'); ?></a>
         <?php }

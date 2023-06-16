@@ -15,13 +15,13 @@ $icons = array_filter($icons, static function($cssClass, $action) {
     return $permissionChecker->hasPermission($action);
 }, ARRAY_FILTER_USE_BOTH);
 $selectedButton = 'btn btn-primary';
-$notSelectedButton = 'btn btn-default';
+$notSelectedButton = 'btn btn-light';
 ?>
 <div class="btn-toolbar" role="toolbar"
      aria-label="Toolbar with button groups">
     <div class="btn-group" role="group">
         <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('media'); ?>"
-           class="btn btn-default btn-back is-ajax"><i
+           class="btn btn-light btn-back is-ajax"><i
                 class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
     </div>
     <?php foreach ($icons as $action => $cssClass) { ?>

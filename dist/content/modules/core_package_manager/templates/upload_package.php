@@ -11,7 +11,7 @@ use App\Packages\PackageManager;
 ?>
 <p>
     <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('install_method'); ?>"
-        class="btn btn-default btn-back is-ajax">
+        class="btn btn-light btn-back is-ajax">
         <i class="fa fa-arrow-left" aria-hidden="true"></i>
         <?php translate('back'); ?></a>
 </p>

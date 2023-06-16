@@ -23,7 +23,7 @@ $user = User::fromSessionData();
 <p>
     <a
         href="?action=admin_edit&id=<?php echo get_user_id(); ?>&ref=home"
-        class="btn btn-default is-not-ajax"
+        class="btn btn-light is-not-ajax"
         ><i class="fas fa-user"></i> <?php translate('edit_profile'); ?></a>
 </p>
 <div id="accordion-container">

@@ -32,7 +32,7 @@ if (! empty($_REQUEST['file']) && str_ends_with($_REQUEST['file'], '.sin')) {
         ?>
         <p>
             <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('upload_package'); ?>"
-                class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
+                class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
         </p>
         <h1><?php esc($id); ?></h1>
         <table>

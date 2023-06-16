@@ -25,7 +25,7 @@ if (isset($_REQUEST['sort']) && in_array($_REQUEST['sort'], [
 
 <?php if ($permissionChecker->hasPermission('groups_create')) { ?>
     <div class="btn-toolbar field">
-        <a href="?action=groups&add=add" class="btn btn-default is-not-ajax"> <i
+        <a href="?action=groups&add=add" class="btn btn-light is-not-ajax"> <i
                 class="fa fa-plus"></i> <?php translate('create_group'); ?></a>
     </div>
 <?php } ?>

@@ -11,7 +11,7 @@ use function App\HTML\imageTag;
 ?>
 <p>
     <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('design'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
+        class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
 </p>
 <?php
 if (isset($_GET['error'])) {
@@ -51,7 +51,7 @@ if (is_file($favicon_path)) {
                         <div class="voffset2">
                             <button
                                 type="button"
-                                class="btn btn-default"
+                                class="btn btn-light"
                                 id="delete-favicon"
                                 data-url="<?php
             echo \App\Helpers\ModuleHelper::buildMethodCallUrl(

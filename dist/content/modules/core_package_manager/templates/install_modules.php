@@ -13,7 +13,7 @@ $pkg = new PackageManager();
 <p>
     <a
         href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(PackageController::class, 'redirectToPackageView'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php translate('back'); ?></a>
+        class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php translate('back'); ?></a>
 </p>
 <h1><?php translate('install'); ?></h1>
 <?php
@@ -89,7 +89,7 @@ if (! $pkg_src) {
         <p>
             <a
                 href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('available_modules'); ?>"
-                class="btn btn-default"><i class="fas fa-box"></i>
+                class="btn btn-light"><i class="fas fa-box"></i>
                 <?php translate('install_another_package'); ?></a>
         </p>
         <?php

@@ -305,7 +305,7 @@ abstract class ModuleHelper extends Helper {
         string $sMethod,
         string $buttonText,
         array $buttonAttributes = [
-            'class' => 'btn btn-default',
+            'class' => 'btn btn-light',
             'type' => 'submit'
         ],
         array $otherVars = [],

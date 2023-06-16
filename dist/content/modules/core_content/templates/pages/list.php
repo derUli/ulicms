@@ -43,7 +43,7 @@ echo Template::executeModuleTemplate(
                         <?php } ?> 
             </div>
             <div class="col col-6 text-right">
-                <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'recycleBin'); ?>" class="btn btn-default is-not-ajax"><i
+                <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'recycleBin'); ?>" class="btn btn-light is-not-ajax"><i
                         class="fa fa-trash"></i> <?php translate('recycle_bin'); ?></a>
             </div>
         </div>
@@ -62,7 +62,7 @@ echo Template::executeModuleTemplate(
                         class="fas fa-broom"></i> <?php translate('empty_recycle_bin'); ?></a>
             </div>
             <div class="col col-6 text-right">
-                <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'pages'); ?>" class="btn btn-default is-not-ajax"><i
+                <a href="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'pages'); ?>" class="btn btn-light is-not-ajax"><i
                         class="fas fa-book"></i> <?php translate('pages'); ?></a>
             </div>
         </div>
@@ -70,7 +70,7 @@ echo Template::executeModuleTemplate(
     ?>
     <a
         href="#"
-        class="btn btn-default voffset3"
+        class="btn btn-light voffset3"
         id="btn-go-up"
         style="display: none"
         data-url="<?php

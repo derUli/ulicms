@@ -12,7 +12,7 @@ $editor = get_html_editor();
 <div class="field">
     <a
         href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('settings_categories'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
+        class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i> <?php translate('back'); ?></a>
 </div>
 <h2><?php translate('motd'); ?></h2>
 <?php

@@ -7,7 +7,7 @@ use App\Models\Content\Categories;
 ?>
 <div class="btn-toolbar">
     <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('audio'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
+        class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
         <?php translate('back'); ?></a>
 </div>
 <h1><?php translate('UPLOAD_AUDIO'); ?>

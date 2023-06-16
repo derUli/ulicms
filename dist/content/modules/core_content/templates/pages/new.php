@@ -65,7 +65,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
 ?>
 <p>
     <a href="<?php echo \App\Helpers\ModuleHelper::buildActionURL('pages'); ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
+        class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
         <?php translate('back'); ?></a>
 </p>
 <input type="hidden" name="add" value="add">
@@ -310,7 +310,7 @@ foreach ($pages as $key => $page) {
                     readonly="readonly" class="fm"
                     value="" style="cursor: pointer" /> <a href="#"
                     onclick="$('#menu_image').val('');return false;"
-                    class="btn btn-default voffset2" class="btn btn-default"><i
+                    class="btn btn-light voffset2" class="btn btn-light"><i
                     class="fa fa-eraser"></i> <?php translate('clear'); ?>
             </a>
         </div>
@@ -426,7 +426,7 @@ echo Input::singleSelect(
                             style="cursor: pointer" /> <a href="#"
                             onclick="$('#og_image').val('');
                                         return false;"
-                            class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate('clear'); ?></a>
+                            class="btn btn-light voffset2"><i class="fa fa-eraser"></i> <?php translate('clear'); ?></a>
                 </div>
             </div>
         </div>
@@ -641,7 +641,7 @@ foreach ($pages as $key => $page) {
                     readonly="readonly" class="fm"
                     value="" style="cursor: pointer" /> <a href="#"
                     onclick="$('#menu_image').val('');return false;"
-                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate('clear'); ?>
+                    class="btn btn-light voffset2"><i class="fa fa-eraser"></i> <?php translate('clear'); ?>
             </a>
         </div>
     </div>
@@ -672,7 +672,7 @@ foreach ($pages as $key => $page) {
                         value="" style="cursor: pointer" maxlength="255" /> <a href="#"
                         onclick="$('#article_image').val('');
                                     return false;"
-                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate('clear'); ?></a>
+                        class="btn btn-light voffset2"><i class="fa fa-eraser"></i> <?php translate('clear'); ?></a>
             </div>
         </div>
     </div>

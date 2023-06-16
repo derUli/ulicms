@@ -123,14 +123,14 @@ if (Settings::get('visitors_can_register') === 'on' || Settings::get('visitors_c
             echo 'go=' . _esc($_REQUEST['go']);
         }
     ?>"
-        class="btn btn-default voffset2"><i class="fas fa-user-plus"></i> <?php translate('register'); ?></a>
+        class="btn btn-light voffset2"><i class="fas fa-user-plus"></i> <?php translate('register'); ?></a>
         <?php
 }
 ?>
     <?php
 if (! Settings::get('disable_password_reset')) {
     ?>
-    <a href="?reset_password" class="btn btn-default pull-right voffset2"><i
+    <a href="?reset_password" class="btn btn-light pull-right voffset2"><i
             class="fa fa-lock"></i> <?php translate('reset_password'); ?></a>
     <?php
 }

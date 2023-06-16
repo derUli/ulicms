@@ -12,7 +12,7 @@ $diff = ControllerRegistry::get('PageController')->_diffContents();
             'content_id=' . $diff->content_id
         );
 ?>"
-        class="btn btn-default btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
+        class="btn btn-light btn-back is-not-ajax"><i class="fa fa-arrow-left"></i>
         <?php translate('back'); ?></a>
 </p>
 <h1><?php translate('diff'); ?></h1>

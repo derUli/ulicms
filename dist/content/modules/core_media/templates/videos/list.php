@@ -42,7 +42,7 @@ $all_videos = Database::query($sql);
 </div>
 <?php if ($permissionChecker->hasPermission('videos_create')) { ?>
     <div class="voffset2">
-        <a href="index.php?action=add_video" class="btn btn-default"> <i
+        <a href="index.php?action=add_video" class="btn btn-light"> <i
                 class="fas fa-upload"></i> <?php
                 translate('upload_video');
     ?></a>

@@ -31,7 +31,7 @@ class FormTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringContainsString('<form action="index.php" method="post">', $actual);
         $this->assertStringContainsString('<input type="hidden" name="sClass" value="FooClass">', $actual);
         $this->assertStringContainsString('<input type="hidden" name="sMethod" value="FooMethod">', $actual);
-        $this->assertStringContainsString('<button class="btn btn-default" type="submit">Hello World</button>', $actual);
+        $this->assertStringContainsString('<button class="btn btn-light" type="submit">Hello World</button>', $actual);
     }
 
     public function testEndform(): void {

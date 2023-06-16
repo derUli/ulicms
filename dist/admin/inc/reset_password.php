@@ -26,7 +26,7 @@ if (Settings::get('disable_password_reset')) {
     }
     ?>
     <p>
-        <a href="./" class="btn btn-default btn-back is-not-ajax"><i
+        <a href="./" class="btn btn-light btn-back is-not-ajax"><i
                 class="fa fa-arrow-left"></i> <?php translate('back_to_login'); ?></a>
     </p>
     <h1>

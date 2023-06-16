@@ -22,7 +22,7 @@ if ($permissionChecker->hasPermission('videos') ||
         ?>
         <a
             href="index.php?action=files"
-            class="btn btn-default is-ajax"
+            class="btn btn-light is-ajax"
             ><i
                 class="fas fa-file"></i> <?php translate('files'); ?>
         </a>
@@ -33,7 +33,7 @@ if ($permissionChecker->hasPermission('videos') ||
     <?php
     if ($permissionChecker->hasPermission('videos')) {
         ?>
-        <a href="index.php?action=videos" class="btn btn-default is-not-ajax"><i
+        <a href="index.php?action=videos" class="btn btn-light is-not-ajax"><i
                 class="fas fa-file-video"></i> <?php translate('videos'); ?>
         </a>
         <br />
@@ -43,7 +43,7 @@ if ($permissionChecker->hasPermission('videos') ||
     <?php
     if ($permissionChecker->hasPermission('audio')) {
         ?>
-        <a href="index.php?action=audio" class="btn btn-default is-not-ajax"> <i
+        <a href="index.php?action=audio" class="btn btn-light is-not-ajax"> <i
                 class="fas fa-file-audio"></i> <?php translate('audio'); ?>
         </a>
         <?php
