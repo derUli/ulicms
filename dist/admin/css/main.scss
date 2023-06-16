@@ -1,4 +1,5 @@
 @import "vars.scss";
+@import "basic.scss";
 @import "spacer.scss";
 @import "comment-counter.scss";
 @import "accordion.scss";
@@ -21,22 +22,6 @@
 // see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
 * {
     -webkit-overflow-scrolling: touch !important;
-}
-
-html {
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-}
-
-body {
-    padding-right: 0 !important;
-    background-color: $default-background-color;
-    font-family: $default-font;
-    font-size: $default-font-size;
-    color: $default-text-color;
-    margin: 0;
-    padding: 0;
-    -ms-overflow-style: scrollbar;
 }
 
 .actions {
