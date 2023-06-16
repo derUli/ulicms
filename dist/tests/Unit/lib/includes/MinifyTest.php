@@ -84,7 +84,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             'lib/css/core.scss',
             'node_modules/bootstrap/dist/css/bootstrap.css',
             'node_modules/bootstrap/dist/css/bootstrap-theme.css',
-            'admin/css/modern.scss'
+            'admin/css/main.scss'
         ];
 
         foreach ($files as $file) {
@@ -125,7 +125,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             'lib/css/core.scss',
             'node_modules/bootstrap/dist/css/bootstrap.css',
             'node_modules/bootstrap/dist/css/bootstrap-theme.css',
-            'admin/css/modern.scss'
+            'admin/css/main.scss'
         ];
 
         foreach ($files as $file) {
@@ -302,7 +302,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             'lib/css/core.scss',
             'node_modules/bootstrap/dist/css/bootstrap.css',
             'node_modules/bootstrap/dist/css/bootstrap-theme.css',
-            'admin/css/modern.scss'
+            'admin/css/main.scss'
         ];
         foreach ($files as $file) {
             enqueueStylesheet($file);

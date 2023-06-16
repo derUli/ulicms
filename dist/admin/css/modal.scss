@@ -1,0 +1,21 @@
+// For some reasons Bootbox adds padding-right as inline when opening a modal.
+// This causes the page content to shift to the left while the modal is open.
+body.modal-open {
+    padding-right: 0 !important;
+}
+
+.bootbox.modal {
+    .modal-header{
+        display: none;
+    }
+
+    .modal-headline {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    hr {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+}

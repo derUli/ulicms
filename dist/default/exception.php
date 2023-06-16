@@ -9,7 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
         <style>
 <?php
         readfile(Path::resolve('ULICMS_ROOT/lib/css/core.scss'));
-readfile(Path::resolve('ULICMS_ROOT/admin/css/modern.scss'));
+readfile(Path::resolve('ULICMS_ROOT/admin/css/main.scss'));
 ?> body {
                 padding: 10px;
             }

@@ -1,0 +1,26 @@
+/* Comment counter */
+.comment-counter {
+    position:relative;
+
+    a {
+        display:block;
+    }
+
+    .fa-comments {
+        z-index:1;
+
+    }
+
+    .count {
+        display:inline-block;
+        position:absolute;
+        right:0;
+        top:0;
+        background-color: $red-color;
+        color: white;
+        z-index:2;
+        border-radius: 5px;
+        padding: 0 6px;
+        font-size: 0.35em;
+    }
+}

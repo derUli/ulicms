@@ -80,7 +80,7 @@ $styles[] = '../node_modules/codemirror-minified/lib/codemirror.css';
 $styles[] = '../node_modules/vanilla-toast/vanilla-toast.css';
 $styles[] = '../node_modules/select2/dist/css/select2.min.css';
 $styles[] = '../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css';
-$styles[] = 'css/modern.scss';
+$styles[] = 'css/main.scss';
 
 $styles = apply_filter($styles, 'admin_head_styles');
 

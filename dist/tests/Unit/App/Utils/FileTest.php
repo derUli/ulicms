@@ -28,7 +28,7 @@ class FileTest extends \PHPUnit\Framework\TestCase {
 
     public function testFindAllFiles(): void {
         $allFiles = File::findAllFiles('admin');
-        $this->assertContains('admin/css/modern.scss', $allFiles);
+        $this->assertContains('admin/css/main.scss', $allFiles);
         $this->assertContains('admin/gfx/logo.png', $allFiles);
         $this->assertNotContains('admin/.git', $allFiles);
         $this->assertNotContains('init.php', $allFiles);
