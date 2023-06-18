@@ -1,0 +1,20 @@
+div.diff {
+    background-color: $default-background-color;
+    display: block;
+    padding: 20px;
+    border: 1px dotted blue;
+    word-wrap: break-word;
+    font-family: $code-font;
+
+    del {
+        color: $red-color;
+        background: #fdd;
+        text-decoration: none;
+    }
+
+    ins {
+        color: $green-color;
+        background: #efecec;
+        text-decoration: none;
+    }
+}

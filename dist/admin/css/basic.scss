@@ -1,3 +1,9 @@
+// impulse based scrolling on touch devices (e.g. iPad)
+// see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
+* {
+    -webkit-overflow-scrolling: touch !important;
+}
+
 html {
     overflow-y: scroll;
     scroll-behavior: smooth;

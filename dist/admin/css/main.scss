@@ -12,17 +12,11 @@
 @import "border.scss";
 @import "form.scss";
 
-
 @import "actions/core_home/home.scss";
+@import "actions/core_history/view_diff.scss";
 @import "actions/core_media/files.scss";
 @import "actions/core_info/changelog.scss";
 @import "actions/core_package_manager/pkginfo.scss";
-
-// impulse based scrolling on touch devices (e.g. iPad)
-// see https://developer.mozilla.org/de/docs/Web/CSS/-webkit-overflow-scrolling
-* {
-    -webkit-overflow-scrolling: touch !important;
-}
 
 .actions {
     min-width: 180px;
@@ -64,27 +58,6 @@ a:not(.btn) {
 .CodeMirror-scroll {
     overflow-x: auto;
     overflow-y: visible;
-}
-
-div.diff {
-    background-color: $default-background-color;
-    display: block;
-    padding: 20px;
-    border: 1px dotted blue;
-    word-wrap: break-word;
-    font-family: $code-font;
-
-    del {
-        color: $red-color;
-        background: #fdd;
-        text-decoration: none;
-    }
-
-    ins {
-        color: $green-color;
-        background: #efecec;
-        text-decoration: none;
-    }
 }
 
 div#pkglist,
