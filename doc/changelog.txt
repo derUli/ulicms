@@ -1,17 +1,7 @@
-===== Neues in UliCMS 2024.1 =====
+===== Neues in UliCMS 2023.4 =====
 
 Neue Features:
 * Admin-Bereich auf Bootstrap 5 umgestellt.
-
-API-Änderungen:
-* TODO: Weitere Klassen in Namespaces verschieben
-* ...
-
-Entfernte API-Methoden:
-* Template::randomBanner()
-* random_banner()
-
-===== Neues in UliCMS 2023.4 =====
 
 Sicherheit:
 * Remote Code Execution in Avatar-Upload gefixt
@@ -28,6 +18,8 @@ API-Änderungen:
 
 Entfernte API-Methoden:
 * Database::getInsertID()
+* Template::randomBanner()
+* random_banner()
 
 ===== Neues in UliCMS 2023.3 =====
 
