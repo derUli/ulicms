@@ -24,3 +24,9 @@ a:not(.btn) {
     text-decoration: none;
     color: $default-text-color;
 }
+
+.scroll,
+.CodeMirror-scroll {
+    overflow-x: auto;
+    overflow-y: visible;
+}
