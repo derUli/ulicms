@@ -45,7 +45,7 @@ $scripts = [
     'scripts/utils/clipboard.js',
     'scripts/utils/editors.js',
     'scripts/global.js',
-    '../node_modules/bootstrap/dist/js/bootstrap.min.js',
+    '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
     '../node_modules/select2/dist/js/select2.min.js',
     '../node_modules/bootbox/dist/bootbox.all.min.js',
     $select2TranslationFile,

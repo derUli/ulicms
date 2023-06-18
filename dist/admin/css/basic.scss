@@ -19,3 +19,8 @@ body {
     padding: 0;
     -ms-overflow-style: scrollbar;
 }
+
+a:not(.btn) {
+    text-decoration: none;
+    color: $default-text-color;
+}
