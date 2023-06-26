@@ -21,7 +21,7 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
         $_REQUEST = [];
 
         Settings::set('maintenance_mode', '0');
-        chdir(Path::resolve('ULICMS_ROOT'));
+        chdir(\App\Utils\Path::resolve('ULICMS_ROOT'));
 
         if ($this->no_mobile_design_on_tablet) {
             Settings::set('no_mobile_design_on_tablet', 1);
@@ -67,12 +67,12 @@ class ComparisonsTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testIsAdminDirTrue(): void {
-        chdir(Path::resolve('ULICMS_ROOT/admin'));
+        chdir(\App\Utils\Path::resolve('ULICMS_ROOT/admin'));
         $this->assertTrue(is_admin_dir());
     }
 
     public function testIsAdminDirFalse(): void {
-        chdir(Path::resolve('ULICMS_ROOT'));
+        chdir(\App\Utils\Path::resolve('ULICMS_ROOT'));
         $this->assertFalse(is_admin_dir());
     }
 

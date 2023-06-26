@@ -114,14 +114,14 @@ class Database {
         if ($selected) {
             $migrator = new DBMigrator(
                 'core',
-                Path::resolve('ULICMS_ROOT/lib/migrations/up')
+                \App\Utils\Path::resolve('ULICMS_ROOT/lib/migrations/up')
             );
             $migrator->migrate();
             foreach ($otherScripts as $script) {
-                $fullPath = Path::resolve($script);
+                $fullPath = \App\Utils\Path::resolve($script);
                 $migrator = new DBMigrator(dirname($fullPath), dirname($fullPath));
 
-                $migrator->executeSqlScript(Path::resolve(basename($fullPath)));
+                $migrator->executeSqlScript(\App\Utils\Path::resolve(basename($fullPath)));
             }
         }
 

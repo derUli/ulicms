@@ -51,10 +51,10 @@ class Audio_Page extends Page {
         $this->audio = $audio ? $audio->getID() : null;
     }
 
-     /**
-      * Get css classes for Font Awesome icon
-      * @return string
-      */
+    /**
+     * Get css classes for Font Awesome icon
+     * @return string
+     */
     public function getIcon(): string {
         return 'fas fa-volume-up';
     }

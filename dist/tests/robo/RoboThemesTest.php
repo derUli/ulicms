@@ -16,7 +16,7 @@ class RoboThemesTest extends RoboTestBase {
     }
 
     public function testThemesRemove(): void {
-        $packageFile = Path::resolve(
+        $packageFile = \App\Utils\Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/theme-2017-1.1.1.tar.gz'
         );
         $this->runRoboCommand(

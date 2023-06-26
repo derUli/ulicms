@@ -33,7 +33,7 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testImageTagInlineWithoutAnything(): void {
-        $imagePath = Path::resolve('ULICMS_ROOT/admin/gfx/logo.png');
+        $imagePath = \App\Utils\Path::resolve('ULICMS_ROOT/admin/gfx/logo.png');
 
         $this->assertMatchesHtmlSnapshot(imageTagInline($imagePath));
     }
@@ -44,7 +44,7 @@ class HtmlFunctionsTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testImageTagInlineWithHtmlAttributes(): void {
-        $imagePath = Path::resolve('ULICMS_ROOT/admin/gfx/logo.png');
+        $imagePath = \App\Utils\Path::resolve('ULICMS_ROOT/admin/gfx/logo.png');
 
         $this->assertMatchesHtmlSnapshot(
             imageTagInline(

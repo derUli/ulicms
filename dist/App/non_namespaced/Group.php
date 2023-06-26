@@ -75,11 +75,11 @@ class Group {
         }
     }
 
-   /**
-    * Get the primary group id of the current user
-    *
-    * @return int|null
-    */
+    /**
+     * Get the primary group id of the current user
+     *
+     * @return int|null
+     */
     public static function getCurrentGroupId(): ?int {
         return $_SESSION['group_id'] ?? null;
     }

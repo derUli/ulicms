@@ -47,10 +47,10 @@ class InfoController extends MainClass {
     }
 
     public function _getComposerLegalInfo(): string {
-        $legalFile = Path::resolve('ULICMS_ROOT/licenses.md');
+        $legalFile = \App\Utils\Path::resolve('ULICMS_ROOT/licenses.md');
         $lastModified = filemtime($legalFile);
 
-        $cacheFile = Path::resolve("ULICMS_CACHE/legal-{$lastModified}.html");
+        $cacheFile = \App\Utils\Path::resolve("ULICMS_CACHE/legal-{$lastModified}.html");
 
         if (is_file($cacheFile)) {
             return file_get_contents($cacheFile);
@@ -79,7 +79,7 @@ class InfoController extends MainClass {
 
     public function _getNpmLegalInfo(): array {
         $legalJson = file_get_contents(
-            Path::resolve('ULICMS_ROOT/licenses.json')
+            \App\Utils\Path::resolve('ULICMS_ROOT/licenses.json')
         );
 
         return json_decode($legalJson);

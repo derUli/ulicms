@@ -9,7 +9,7 @@ class RoboPackageTest extends RoboTestBase {
     }
 
     protected function tearDown(): void {
-        $moduleDir = Path::resolve('ULICMS_ROOT/content/modules/hello_world');
+        $moduleDir = \App\Utils\Path::resolve('ULICMS_ROOT/content/modules/hello_world');
         if (is_dir($moduleDir)) {
             sureRemoveDir($moduleDir);
         }
@@ -25,12 +25,12 @@ class RoboPackageTest extends RoboTestBase {
     }
 
     public function testPackageExamineReturnsData(): void {
-        $packageFile = Path::resolve(
+        $packageFile = \App\Utils\Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/lock_inactive_users-1.0.1.sin'
         );
 
         $expected = file_get_contents(
-            Path::resolve(
+            \App\Utils\Path::resolve(
                 'ULICMS_ROOT/tests/fixtures/packages/packageExamine.expected.txt'
             )
         );
@@ -58,7 +58,7 @@ class RoboPackageTest extends RoboTestBase {
     }
 
     public function testPackageInstallWithSinFile(): void {
-        $packageFile = Path::resolve(
+        $packageFile = \App\Utils\Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/hello_world-1.0.sin'
         );
         $installOutput = $this->runRoboCommand(
@@ -82,7 +82,7 @@ class RoboPackageTest extends RoboTestBase {
     }
 
     public function testPackageInstallWithTarGzFile(): void {
-        $packageFile = Path::resolve(
+        $packageFile = \App\Utils\Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/hello_world-1.0.tar.gz'
         );
         $installOutput = $this->runRoboCommand(
@@ -98,7 +98,7 @@ class RoboPackageTest extends RoboTestBase {
     }
 
     public function testPackageInstallReturnsError(): void {
-        $packageFile = Path::resolve(
+        $packageFile = \App\Utils\Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/error-1.0.sin'
         );
         $output = $this->runRoboCommand(

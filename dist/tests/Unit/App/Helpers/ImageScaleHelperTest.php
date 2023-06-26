@@ -37,10 +37,10 @@ class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     protected function getFixturePath(): string {
-        return Path::resolve('ULICMS_ROOT/tests/fixtures/huge-image.jpg');
+        return \App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/huge-image.jpg');
     }
 
     protected function getProcessedPath(): string {
-        return Path::resolve('ULICMS_TMP/scaled-image.jpg');
+        return \App\Utils\Path::resolve('ULICMS_TMP/scaled-image.jpg');
     }
 }

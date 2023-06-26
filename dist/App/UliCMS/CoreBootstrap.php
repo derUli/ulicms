@@ -257,21 +257,21 @@ class CoreBootstrap {
         if (isset($_ENV['EXCEPTION_LOGGING']) && $_ENV['EXCEPTION_LOGGING']) {
             LoggerRegistry::register(
                 'exception_log',
-                new Logger(Path::resolve('ULICMS_LOG/exception_log'))
+                new Logger(\App\Utils\Path::resolve('ULICMS_LOG/exception_log'))
             );
         }
 
         if (isset($_ENV['QUERY_LOGGING']) && $_ENV['QUERY_LOGGING']) {
             LoggerRegistry::register(
                 'sql_log',
-                new Logger(Path::resolve('ULICMS_LOG/sql_log'))
+                new Logger(\App\Utils\Path::resolve('ULICMS_LOG/sql_log'))
             );
         }
 
         if (isset($_ENV['PHPMAILER_LOGGING']) && $_ENV['PHPMAILER_LOGGING']) {
             LoggerRegistry::register(
                 'phpmailer_log',
-                new Logger(Path::resolve('ULICMS_LOG/phpmailer_log'))
+                new Logger(\App\Utils\Path::resolve('ULICMS_LOG/phpmailer_log'))
             );
         }
     }

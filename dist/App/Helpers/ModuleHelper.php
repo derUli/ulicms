@@ -108,10 +108,10 @@ abstract class ModuleHelper extends Helper {
         $retval = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
-            $noembedfile1 = Path::Resolve(
+            $noembedfile1 = \App\Utils\Path::Resolve(
                 "ULICMS_ROOT/content/modules/{$module}/.noembed"
             );
-            $noembedfile2 = Path::Resolve(
+            $noembedfile2 = \App\Utils\Path::Resolve(
                 "ULICMS_ROOT/content/modules/{$module}/noembed.txt"
             );
 
@@ -149,10 +149,10 @@ abstract class ModuleHelper extends Helper {
     // returns true if $module offers an embed shortcode
     public static function isEmbedModule(string $module): bool {
         $retval = true;
-        $noembedfile1 = Path::Resolve(
+        $noembedfile1 = \App\Utils\Path::Resolve(
             "ULICMS_ROOT/content/modules/{$module}/.noembed"
         );
-        $noembedfile2 = Path::Resolve(
+        $noembedfile2 = \App\Utils\Path::Resolve(
             "ULICMS_ROOT/content/modules/{$module}/noembed.txt"
         );
 

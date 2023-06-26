@@ -7,7 +7,7 @@ class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase {
         $_SERVER = [];
 
         $this->originalMapping = Settings::get('domain_to_language');
-        $testData = file_get_contents(Path::resolve('ULICMS_ROOT/tests/fixtures/domain2language.txt'));
+        $testData = file_get_contents(\App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/domain2language.txt'));
         Settings::set('domain_to_language', $testData);
     }
 

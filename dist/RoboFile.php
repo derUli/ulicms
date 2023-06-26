@@ -14,7 +14,6 @@ use App\Services\Connectors\AvailablePackageVersionMatcher;
 use App\Storages\Settings\ConfigurationToDotEnvConverter;
 use App\Storages\Settings\MaintenanceMode;
 use App\Utils\CacheUtil;
-use App\Utils\File;
 use Nette\IOException;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Finder;
@@ -439,7 +438,7 @@ class RoboFile extends Tasks {
     ): void {
         $this->initUliCMS();
 
-        $folder = (string)Path::resolve($directory . '/up');
+        $folder = (string)\App\Utils\Path::resolve($directory . '/up');
 
         $migrator = new DBMigrator($component, $folder);
         try {
@@ -468,7 +467,7 @@ class RoboFile extends Tasks {
     ): void {
         $this->initUliCMS();
 
-        $folder = Path::resolve($directory . '/down');
+        $folder = \App\Utils\Path::resolve($directory . '/down');
 
         $migrator = new DBMigrator($component, $folder);
         try {
@@ -778,10 +777,10 @@ class RoboFile extends Tasks {
         $this->buildMinifyHTML();
     }
 
-     /**
-      * Optimize all svg files
-      * @return void
-      */
+    /**
+     * Optimize all svg files
+     * @return void
+     */
     public function buildOptimizeSvg(): void {
         $files = [];
 

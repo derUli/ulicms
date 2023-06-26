@@ -9,7 +9,7 @@ function getTemplateDirPath(
     bool $abspath = false
 ): string {
     if ($abspath) {
-        $templateDir = Path::resolve(
+        $templateDir = \App\Utils\Path::resolve(
             'ULICMS_ROOT/content/templates/'
         ) . '/';
     } elseif (is_admin_dir()) {
@@ -31,7 +31,7 @@ function getModuleAdminSelfPath(): string {
 
 function getModulePath($module, $abspath = false): string {
     if ($abspath) {
-        return Path::resolve(
+        return \App\Utils\Path::resolve(
             "ULICMS_ROOT/content/modules/{$module}"
         ) . '/';
     }

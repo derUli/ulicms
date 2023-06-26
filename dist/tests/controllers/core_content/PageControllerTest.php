@@ -233,7 +233,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
 
         $actual = $controller->_getContentTypes();
         $expected = file_get_contents(
-            Path::resolve('ULICMS_ROOT/tests/fixtures/getContentTypes.expected.json')
+            \App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/getContentTypes.expected.json')
         );
 
         $this->assertEquals(normalizeLN($expected), normalizeLN($actual));

@@ -43,7 +43,7 @@ class PerformanceSettingsControllerTest extends \PHPUnit\Framework\TestCase {
         $controller = new PerformanceSettingsController();
         $controller->_clearCache();
 
-        $files = File::findAllFiles(Path::resolve('ULICMS_CACHE'));
+        $files = File::findAllFiles(\App\Utils\Path::resolve('ULICMS_CACHE'));
 
         $this->assertCount(0, $files);
     }

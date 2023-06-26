@@ -163,7 +163,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     protected function installTheme2017(): void {
-        $packageFile = Path::resolve(
+        $packageFile = \App\Utils\Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/theme-2017-1.1.1.tar.gz'
         );
 
@@ -174,7 +174,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     protected function installHelloWorld(): void {
-        $packageFile = Path::resolve(
+        $packageFile = \App\Utils\Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/hello_world-1.0.sin'
         );
 

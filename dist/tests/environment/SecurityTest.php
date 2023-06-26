@@ -71,7 +71,7 @@ class SecurityTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testNewFilePermissions(): void {
-        $testFile = Path::resolve('ULICMS_TMP/' . uniqid() . '.tmp');
+        $testFile = \App\Utils\Path::resolve('ULICMS_TMP/' . uniqid() . '.tmp');
 
         file_put_contents($testFile, 'Hello World');
 
@@ -81,7 +81,7 @@ class SecurityTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testNewDirectoryPermissions(): void {
-        $testDir = Path::resolve('ULICMS_TMP/' . uniqid() . '.tmp');
+        $testDir = \App\Utils\Path::resolve('ULICMS_TMP/' . uniqid() . '.tmp');
         mkdir($testDir);
 
         $testFile = $testDir . '/' . uniqid() . '.tmp';

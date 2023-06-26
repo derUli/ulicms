@@ -100,8 +100,8 @@ class CoreUpgradeController extends \App\Controllers\Controller {
 
         $jsonData = $this->getJSON();
 
-        $tmpDir = Path::resolve('ULICMS_TMP/upgrade');
-        $tmpArchive = Path::resolve("{$tmpDir}/upgrade.zip");
+        $tmpDir = \App\Utils\Path::resolve('ULICMS_TMP/upgrade');
+        $tmpArchive = \App\Utils\Path::resolve("{$tmpDir}/upgrade.zip");
 
         if (is_dir($tmpDir)) {
             FileSystem::delete($tmpDir, true);
@@ -126,7 +126,7 @@ class CoreUpgradeController extends \App\Controllers\Controller {
                 $zip->close();
             }
 
-            $upgradeCodeDir = Path::resolve("{$tmpDir}/dist");
+            $upgradeCodeDir = \App\Utils\Path::resolve("{$tmpDir}/dist");
             if (is_dir($upgradeCodeDir)) {
                 recurse_copy($upgradeCodeDir, ULICMS_ROOT);
                 FileSystem::delete($tmpDir);

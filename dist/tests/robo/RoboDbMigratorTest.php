@@ -21,7 +21,7 @@ class RoboDbMigratorTest extends RoboTestBase {
     }
 
     public function testMigrateFails(): void {
-        $dir = Path::resolve('ULICMS_ROOT/tests/fixtures/failed_migrations');
+        $dir = \App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/failed_migrations');
         $this->migrateUpFails($dir);
         $this->migrateDownFails($dir);
         $this->resetDbTrack($dir);
@@ -44,7 +44,7 @@ class RoboDbMigratorTest extends RoboTestBase {
     }
 
     protected function migrateUp(): void {
-        $dir = Path::resolve('ULICMS_ROOT/tests/fixtures/migrations');
+        $dir = \App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/migrations');
         $output = $this->runRoboCommand(['dbmigrator:up', 'robo_test', $dir]);
 
         $this->assertStringContainsString(
@@ -60,7 +60,7 @@ class RoboDbMigratorTest extends RoboTestBase {
     }
 
     protected function migrateDown(): void {
-        $dir = Path::resolve('ULICMS_ROOT/tests/fixtures/migrations');
+        $dir = \App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/migrations');
         $output = $this->runRoboCommand(['dbmigrator:down', 'robo_test', $dir]);
 
         $this->assertStringContainsString(

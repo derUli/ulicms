@@ -58,7 +58,7 @@ class RoboModulesTest extends RoboTestBase {
 
     public function testModulesGetPackageVersions(): void {
         $expected = file_get_contents(
-            Path::resolve(
+            \App\Utils\Path::resolve(
                 'ULICMS_ROOT/tests/fixtures/robo/modulesGetPackageVersions.expected.txt'
             )
         );

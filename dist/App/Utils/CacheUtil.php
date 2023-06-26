@@ -40,7 +40,7 @@ abstract class CacheUtil {
         }
 
         $cacheConfig = [
-            'path' => Path::resolve('ULICMS_CACHE_BASE'),
+            'path' => \App\Utils\Path::resolve('ULICMS_CACHE_BASE'),
             'defaultTtl' => self::getCachePeriod()
         ];
 
@@ -104,8 +104,8 @@ abstract class CacheUtil {
 
         self::clearPageCache();
 
-        sureRemoveDir(Path::resolve('ULICMS_CACHE'), false);
-        sureRemoveDir(Path::resolve('ULICMS_TMP'), false);
+        sureRemoveDir(\App\Utils\Path::resolve('ULICMS_CACHE'), false);
+        sureRemoveDir(\App\Utils\Path::resolve('ULICMS_TMP'), false);
 
         // Sync modules table in database with modules folder
         $moduleManager = new \App\Packages\ModuleManager();
@@ -145,7 +145,7 @@ abstract class CacheUtil {
      * @return void
      */
     public static function clearAvatars(bool $removeDir = false): void {
-        $path = Path::resolve('ULICMS_CONTENT/avatars');
+        $path = \App\Utils\Path::resolve('ULICMS_CONTENT/avatars');
         File::sureRemoveDir($path, $removeDir);
     }
 

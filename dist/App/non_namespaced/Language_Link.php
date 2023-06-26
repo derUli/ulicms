@@ -55,10 +55,10 @@ class Language_Link extends Page {
         return false;
     }
 
-     /**
-      * Get css classes for Font Awesome icon
-      * @return string
-      */
+    /**
+     * Get css classes for Font Awesome icon
+     * @return string
+     */
     public function getIcon(): string {
         return 'fas fa-language';
     }

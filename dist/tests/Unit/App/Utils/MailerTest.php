@@ -13,7 +13,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
         LoggerRegistry::register(
             'phpmailer_log',
-            new Logger(Path::resolve('ULICMS_LOG/phpmailer_log'))
+            new Logger(\App\Utils\Path::resolve('ULICMS_LOG/phpmailer_log'))
         );
 
         $settingKeys = [

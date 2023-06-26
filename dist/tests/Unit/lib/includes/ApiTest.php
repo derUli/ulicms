@@ -22,7 +22,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         CacheUtil::clearCache();
 
-        $avatarsDirectory = Path::resolve('ULICMS_ROOT/content/avatars/');
+        $avatarsDirectory = \App\Utils\Path::resolve('ULICMS_ROOT/content/avatars/');
         if (! is_dir($avatarsDirectory)) {
             mkdir($avatarsDirectory, 0777, true);
         }
@@ -34,7 +34,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     }
 
     protected function tearDown(): void {
-        chdir(Path::resolve('ULICMS_ROOT'));
+        chdir(\App\Utils\Path::resolve('ULICMS_ROOT'));
 
         foreach ($this->initialSettings as $key => $value) {
             Settings::set($key, $value);
@@ -72,7 +72,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
     public function cleanUp(): void {
         unset($_REQUEST['action']);
         Settings::set('maintenance_mode', '0');
-        chdir(Path::resolve('ULICMS_ROOT'));
+        chdir(\App\Utils\Path::resolve('ULICMS_ROOT'));
     }
 
     public function testAddTranslation(): void {

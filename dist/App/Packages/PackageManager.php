@@ -77,8 +77,8 @@ class PackageManager {
             $phar->extractTo(ULICMS_ROOT, null, true);
 
             $postInstallScripts = [
-                Path::Resolve('ULICMS_ROOT/post-install.php'),
-                Path::Resolve('ULICMS_TMP/post-install.php')
+                \App\Utils\Path::Resolve('ULICMS_ROOT/post-install.php'),
+                \App\Utils\Path::Resolve('ULICMS_TMP/post-install.php')
             ];
 
             foreach ($postInstallScripts as $script) {
@@ -112,7 +112,7 @@ class PackageManager {
     public function getInstalledModules(): array {
         $availableModules = [];
 
-        $moduleFolder = Path::resolve('ULICMS_ROOT/content/modules');
+        $moduleFolder = \App\Utils\Path::resolve('ULICMS_ROOT/content/modules');
         $moduleDirectories = File::findAllDirs($moduleFolder);
 
         natcasesort($moduleDirectories);
@@ -134,7 +134,7 @@ class PackageManager {
      */
     public function getInstalledThemes(): array {
         $themes = [];
-        $templateDir = Path::resolve(
+        $templateDir = \App\Utils\Path::resolve(
             'ULICMS_ROOT/content/templates'
         ) . '/';
 

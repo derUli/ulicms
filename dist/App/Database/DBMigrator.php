@@ -26,11 +26,11 @@ class DBMigrator {
         $this->folder = $folder;
     }
 
-   /** Run migrations
-    *
-    * @param string|null $stop last migration to execute, null means execute all
-    * @return void
-    */
+    /** Run migrations
+     *
+     * @param string|null $stop last migration to execute, null means execute all
+     * @return void
+     */
     public function migrate(?string $stop = null): void {
         $this->checkVars();
         $files = scandir($this->folder) ?: [];

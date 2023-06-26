@@ -198,12 +198,12 @@ class Settings extends MemstaticCached {
         return $result;
     }
 
-     /**
-      * Store setting in cache
-      * @param string $key
-      * @param type $value
-      * @return bool
-      */
+    /**
+     * Store setting in cache
+     * @param string $key
+     * @param type $value
+     * @return bool
+     */
     protected static function setToCache(string $key, $value): bool {
         $valueToStore = $value !== null ? $value : DefaultValues::NULL_VALUE;
         return parent::setToCache($key, $valueToStore);

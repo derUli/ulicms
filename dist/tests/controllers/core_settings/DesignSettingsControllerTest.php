@@ -62,7 +62,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
     public function test_generateSCSSInConstructor(): void {
         $this->cleanUpFiles();
 
-        $file = Path::resolve('ULICMS_GENERATED_PRIVATE/design_variables.scss');
+        $file = \App\Utils\Path::resolve('ULICMS_GENERATED_PRIVATE/design_variables.scss');
         $this->assertFileDoesNotExist($file);
 
         $controller = new DesignSettingsController();
@@ -126,7 +126,7 @@ class DesignSettingsControllerTest extends \PHPUnit\Framework\TestCase {
             'ULICMS_GENERATED_PRIVATE/design_variables.scss'
         ];
         foreach ($filesToDelete as $file) {
-            $file = Path::resolve($file);
+            $file = \App\Utils\Path::resolve($file);
             File::deleteIfExists($file);
         }
     }

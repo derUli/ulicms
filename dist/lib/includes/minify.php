@@ -72,7 +72,7 @@ function enqueueScriptFile(string $path): void {
 function setSCSSImportPaths(?array $importPaths = null): void {
     if ($importPaths == null) {
         $importPaths = [
-            Path::resolve('ULICMS_ROOT')
+            \App\Utils\Path::resolve('ULICMS_ROOT')
         ];
     }
     \App\Storages\Vars::set('css_include_paths', $importPaths);
@@ -119,7 +119,7 @@ function minifyJs(): string {
     }
 
     $cacheId = Hash::hashCacheIdentifier((implode(';', $scripts)) . $lastmod);
-    $jsDir = Path::resolve('ULICMS_GENERATED_PUBLIC/scripts');
+    $jsDir = \App\Utils\Path::resolve('ULICMS_GENERATED_PUBLIC/scripts');
 
     if (! is_dir($jsDir)) {
         mkdir($jsDir, 0777, true);
@@ -172,7 +172,7 @@ function minifyCSS(): string {
 
     $cacheId = Hash::hashCacheIdentifier((implode(';', $stylesheets)) . $lastmod);
 
-    $cssDir = Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets');
+    $cssDir = \App\Utils\Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets');
 
     if (! is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);
@@ -237,7 +237,7 @@ function compileSCSS(string $stylesheet): string {
 }
 
 function compileSCSSToFile(string $stylesheet): string {
-    $cssDir = Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets');
+    $cssDir = \App\Utils\Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets');
 
     if (! is_dir($cssDir)) {
         mkdir($cssDir, 0777, true);

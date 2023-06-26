@@ -9,23 +9,23 @@ class UrlTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('node_modules/jquery/dist/jquery.min.js', get_jquery_url());
     }
 
-        public function testGetShortlink(): void {
-            $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
-            $_SERVER['SERVER_PORT'] = '443';
-            $_SERVER['HTTPS'] = 'on';
-            $_SERVER['HTTP_HOST'] = 'example.org';
-            $_SERVER['REQUEST_URI'] = '/foobar/foo';
+    public function testGetShortlink(): void {
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = '443';
+        $_SERVER['HTTPS'] = 'on';
+        $_SERVER['HTTP_HOST'] = 'example.org';
+        $_SERVER['REQUEST_URI'] = '/foobar/foo';
 
-            $pages = ContentFactory::getAll();
+        $pages = ContentFactory::getAll();
 
-            $expected = '/?goid=' . $pages[0]->getId();
-            $shortlink = get_shortlink($pages[0]->getId());
+        $expected = '/?goid=' . $pages[0]->getId();
+        $shortlink = get_shortlink($pages[0]->getId());
 
-            $this->assertEquals(
-                'https://example.org/foobar/?goid=1',
-                $shortlink
-            );
-        }
+        $this->assertEquals(
+            'https://example.org/foobar/?goid=1',
+            $shortlink
+        );
+    }
 
     public function testGetCanonical(): void {
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
@@ -42,17 +42,17 @@ class UrlTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-     public function testGetBaseFolderUrlWithoutFilename(): void {
-         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
-         $_SERVER['SERVER_PORT'] = '80';
-         $_SERVER['HTTP_HOST'] = 'example.org';
-         $_SERVER['REQUEST_URI'] = '/foobar/';
+    public function testGetBaseFolderUrlWithoutFilename(): void {
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['SERVER_PORT'] = '80';
+        $_SERVER['HTTP_HOST'] = 'example.org';
+        $_SERVER['REQUEST_URI'] = '/foobar/';
 
-         $this->assertEquals('http://example.org/foobar', getBaseFolderURL());
+        $this->assertEquals('http://example.org/foobar', getBaseFolderURL());
 
-         unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI']);
+        unset($_SERVER['SERVER_PROTOCOL'], $_SERVER['HTTP_HOST'], $_SERVER['SERVER_PORT'], $_SERVER['REQUEST_URI']);
 
-     }
+    }
 
     public function testGetCurrentURL(): void {
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
@@ -67,11 +67,11 @@ class UrlTest extends \PHPUnit\Framework\TestCase {
 
     }
 
-     public function testBuildSEOUrlWithoutAnythingNoPageSpecified(): void {
-         unset($_GET['slug'], $_GET['html']);
+    public function testBuildSEOUrlWithoutAnythingNoPageSpecified(): void {
+        unset($_GET['slug'], $_GET['html']);
 
-         $this->assertEquals('./', buildSEOUrl());
-     }
+        $this->assertEquals('./', buildSEOUrl());
+    }
 
     public function testBuildSEOUrlWithoutAnything(): void {
         set_requested_pagename('hello_world');
@@ -96,7 +96,7 @@ class UrlTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testBuildSEOUrlInAdminDir(): void {
-        chdir(Path::resolve('ULICMS_ROOT/admin'));
+        chdir(\App\Utils\Path::resolve('ULICMS_ROOT/admin'));
 
         $this->assertEquals(
             '../foobar',

@@ -24,7 +24,7 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase {
 
     public function testFileGetContentsWrapperWithLocalPath(): void {
         $fileContent = file_get_contents_wrapper(
-            Path::resolve(
+            \App\Utils\Path::resolve(
                 'ULICMS_ROOT/tests/fixtures/lorem_ipsum.txt'
             )
         );

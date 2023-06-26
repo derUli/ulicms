@@ -17,7 +17,7 @@ class RoboBuildTest extends RoboTestBase {
         FileSystem::delete('.DS_STORE');
         FileSystem::createDir(ULICMS_TMP);
 
-        chdir(Path::Resolve('ULICMS_ROOT'));
+        chdir(\App\Utils\Path::Resolve('ULICMS_ROOT'));
 
         parent::tearDown();
     }
@@ -77,7 +77,7 @@ class RoboBuildTest extends RoboTestBase {
     }
 
     public function testBuildOptimizeSVG(): void {
-        chdir(Path::resolve('ULICMS_ROOT/vendor'));
+        chdir(\App\Utils\Path::resolve('ULICMS_ROOT/vendor'));
 
         $actual = $this->runRoboCommand(['build:optimize-svg']);
 

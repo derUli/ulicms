@@ -74,9 +74,9 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse(AntiSpamHelper::isRtl(null));
     }
 
-     /**
-      * @medium
-      */
+    /**
+     * @medium
+     */
     public function testIsCountryBlockedReturnsTrue(): void {
         Settings::set('country_blacklist', 'vn,jp,at,tr');
 

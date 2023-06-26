@@ -816,7 +816,7 @@ class User extends Model {
         );
 
         // Avatar directory
-        $userAvatarDirectory = Path::resolve('ULICMS_CONTENT/avatars');
+        $userAvatarDirectory = \App\Utils\Path::resolve('ULICMS_CONTENT/avatars');
 
         // Create avatar directory if not exists
         if (! is_dir($userAvatarDirectory)) {
@@ -826,10 +826,10 @@ class User extends Model {
         // If there is a display name (Firstname Lastname)
         if (is_dir($userAvatarDirectory) && $this->getDisplayName()) {
             // Custom avatar
-            $avatarImageFile1 = Path::Resolve("{$userAvatarDirectory}/user-" .
+            $avatarImageFile1 = \App\Utils\Path::Resolve("{$userAvatarDirectory}/user-" .
                             $this->getId() . '.png');
             // Auto generated avatar based on the name of the user
-            $avatarImageFile2 = Path::Resolve("{$userAvatarDirectory}/" .
+            $avatarImageFile2 = \App\Utils\Path::Resolve("{$userAvatarDirectory}/" .
                             md5($this->getDisplayName()) . '.png');
 
             // relative URL to file
@@ -958,7 +958,7 @@ class User extends Model {
         $success = false;
         $extension = pathinfo($upload['name'], PATHINFO_EXTENSION);
         $tmpFile = uniqid() . '.' . $extension;
-        $tmpFile = Path::resolve("ULICMS_TMP/{$tmpFile}");
+        $tmpFile = \App\Utils\Path::resolve("ULICMS_TMP/{$tmpFile}");
 
         if (move_uploaded_file($upload['tmp_name'], $tmpFile)) {
             $success = $this->processAvatar($tmpFile);
@@ -1211,7 +1211,7 @@ class User extends Model {
      * @return string|null
      */
     protected function getProcessedAvatarPath(): ?string {
-        return $this->isPersistent() ? Path::resolve(
+        return $this->isPersistent() ? \App\Utils\Path::resolve(
             'ULICMS_ROOT/content/avatars/user-' .
             $this->getId() . '.png'
         ) : null;

@@ -13,7 +13,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
     public function __construct() {
         parent::__construct();
         // generate scss file for design settings if it doesn't exist.
-        $this->generatedSCSS = Path::resolve(
+        $this->generatedSCSS = \App\Utils\Path::resolve(
             'ULICMS_GENERATED_PRIVATE/design_variables.scss'
         );
         if (! is_file($this->generatedSCSS)) {
@@ -89,7 +89,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
         CacheUtil::clearPageCache();
 
         $this->_generateSCSSToFile();
-        sureRemoveDir(Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets'), false);
+        sureRemoveDir(\App\Utils\Path::resolve('ULICMS_GENERATED_PUBLIC/stylesheets'), false);
 
         HTTPStatusCodeResult(\App\Constants\HttpStatusCode::OK);
     }
@@ -102,7 +102,7 @@ class DesignSettingsController extends \App\Controllers\Controller {
     public function getFontFamilys(): array {
         $fonts = [];
 
-        $fontStackFile = Path::resolve(
+        $fontStackFile = \App\Utils\Path::resolve(
             'ULICMS_ROOT/node_modules/system-font-stacks/index.json'
         );
 

@@ -57,7 +57,7 @@ class SinPackageInstaller {
      * @return string
      */
     public function extractArchive(): string {
-        $path = Path::resolve('ULICMS_TMP/package-' . $this->getProperty('id')
+        $path = \App\Utils\Path::resolve('ULICMS_TMP/package-' . $this->getProperty('id')
                         . '-' . $this->getProperty('version') . '.tar.gz');
         $data = $this->loadPackage();
 

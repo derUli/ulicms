@@ -261,7 +261,7 @@ class imageLib {
         }
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function __destruct() {
         if (is_resource($this->imageResized) || $this->imageResized instanceof \GdImage) {
@@ -378,7 +378,7 @@ class imageLib {
         }
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function cropImage($newWidth, $newHeight, $cropPos = 'm') {
         // Author:     Jarrod Oberto
@@ -411,11 +411,11 @@ class imageLib {
   Presets
      *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
-//
-// Preset are pre-defined templates you can apply to your image.
-//
-// These are inteded to be applied to thumbnail images.
-//
+    //
+    // Preset are pre-defined templates you can apply to your image.
+    //
+    // These are inteded to be applied to thumbnail images.
+    //
 
     public function borderPreset($preset) {
         switch ($preset) {
@@ -1384,7 +1384,7 @@ class imageLib {
         imagecopy($im, $stamp, $x, $y, 0, 0, imagesx($stamp), imagesy($stamp));
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function reset() {
         //
@@ -1398,7 +1398,7 @@ class imageLib {
         $this->__construct($this->fileName);
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function saveImage($savePath, $imageQuality = '100') {
         // Author:     Jarrod Oberto
@@ -1502,7 +1502,7 @@ class imageLib {
         }
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function displayImage($fileType = 'jpg', $imageQuality = '100') {
         // Author:     Jarrod Oberto
@@ -1560,14 +1560,14 @@ class imageLib {
         //imagedestroy($this->imageResized);
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function setTransparency($bool) {
         // Sep 2011
         $this->keepTransparency = $bool;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function setFillColor($value) {
         // Sep 2011
@@ -1584,14 +1584,14 @@ class imageLib {
         $this->fillColorArray = $colorArray;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function setCropFromTop($value) {
         // Sep 2011
         $this->cropFromTopPercent = $value;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function testGDInstalled() {
         // Author:     Jarrod Oberto
@@ -1611,7 +1611,7 @@ class imageLib {
         return $gdInstalled;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function testEXIFInstalled() {
         // Author:     Jarrod Oberto
@@ -1631,7 +1631,7 @@ class imageLib {
         return $exifInstalled;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function testIsImage($image) {
         // Author:     Jarrod Oberto
@@ -1651,7 +1651,7 @@ class imageLib {
         return $fileIsImage;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function testFunct() {
         // Author:     Jarrod Oberto
@@ -1665,7 +1665,7 @@ class imageLib {
         echo $this->height;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function setForceStretch($value) {
         // Author:     Jarrod Oberto
@@ -1679,7 +1679,7 @@ class imageLib {
         $this->forceStretch = $value;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function setFile($fileName) {
         // Author:     Jarrod Oberto
@@ -1693,7 +1693,7 @@ class imageLib {
         self::__construct($fileName);
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function getFileName() {
         // Author:     Jarrod Oberto
@@ -1707,31 +1707,31 @@ class imageLib {
         return $this->fileName;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function getHeight() {
         return $this->height;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function getWidth() {
         return $this->width;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function getOriginalHeight() {
         return $this->heightOriginal;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function getOriginalWidth() {
         return $this->widthOriginal;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     public function getErrors() {
         // Author:     Jarrod Oberto
@@ -1772,7 +1772,7 @@ class imageLib {
         return substr($haystack, 0, strlen($needle)) == $needle;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     protected function formatColor($value) {
         // Author:     Jarrod Oberto
@@ -1812,7 +1812,7 @@ class imageLib {
         return $rgbArray;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function initialise() {
         $this->psdReaderPath = dirname(__FILE__) . '/classPhpPsdReader.php';
@@ -1822,7 +1822,7 @@ class imageLib {
         $this->isInterlace = false;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function keepTransparancy($width, $height, $im) {
         // Author:     Jarrod Oberto
@@ -1845,7 +1845,7 @@ class imageLib {
         }
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function crop($optimalWidth, $optimalHeight, $newWidth, $newHeight, $cropPos) {
         // Author:     Jarrod Oberto
@@ -1874,7 +1874,7 @@ class imageLib {
         $this->height = $newHeight;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function getCropPlacing($optimalWidth, $optimalHeight, $newWidth, $newHeight, $pos = 'm') {
         //
@@ -1965,7 +1965,7 @@ class imageLib {
         return ['x' => $cropStartX, 'y' => $cropStartY];
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function getDimensions($newWidth, $newHeight, $option) {
         // Author:     Jarrod Oberto
@@ -2023,7 +2023,7 @@ class imageLib {
         return ['optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight];
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function getSizeByFixedHeight($newWidth, $newHeight) {
         // *** If forcing is off...
@@ -2042,7 +2042,7 @@ class imageLib {
         return ['optimalWidth' => $newWidth, 'optimalHeight' => $newHeight];
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function getSizeByFixedWidth($newWidth, $newHeight) {
         // *** If forcing is off...
@@ -2061,7 +2061,7 @@ class imageLib {
         return ['optimalWidth' => $newWidth, 'optimalHeight' => $newHeight];
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function getSizeByAuto($newWidth, $newHeight) {
         // Author:     Jarrod Oberto
@@ -2121,7 +2121,7 @@ class imageLib {
         return ['optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight];
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function getOptimalCrop($newWidth, $newHeight) {
         // Author:     Jarrod Oberto
@@ -2176,7 +2176,7 @@ class imageLib {
         return ['optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight];
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function sharpen() {
         // Author:     Jarrod Oberto
@@ -2226,7 +2226,7 @@ class imageLib {
         ];
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function findSharp($orig, $final) {
         // Author:     Ryan Rud (http://adryrun.com)
@@ -2246,7 +2246,7 @@ class imageLib {
         return max(round($result), 0);
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function prepOption($option) {
         // Author:     Jarrod Oberto
@@ -2513,7 +2513,7 @@ class imageLib {
         file_put_contents('iptc.jpg', $image_string);
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function iptc_maketag($rec, $dat, $val) {
         // Author:   Thies C. Arntzen
@@ -2745,7 +2745,7 @@ class imageLib {
         return true;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function openImage($file) {
         // Author:     Jarrod Oberto
@@ -2801,7 +2801,7 @@ class imageLib {
         return $img;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function checkInterlaceImage($isEnabled) {
         // jpg will use progressive (they don't use interace)
@@ -2980,7 +2980,7 @@ class imageLib {
         return $BITMAPFILEHEADER . $BITMAPINFOHEADER . $BMP;
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function GetPixelColor(&$img, $x, $y) {
         // Author:     James Heinrich
@@ -2997,7 +2997,7 @@ class imageLib {
         return @imagecolorsforindex($img, @imagecolorat($img, $x, $y));
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 
     private function LittleEndian2String($number, $minbytes = 1) {
         // Author:     James Heinrich
@@ -3181,7 +3181,7 @@ class imageLib {
 
     }
 
-//# --------------------------------------------------------
+    //# --------------------------------------------------------
 }
 
 /*

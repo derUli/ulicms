@@ -134,21 +134,21 @@ class Video extends Model {
         if ($this->getId()) {
             if ($deletePhysical) {
                 if ($this->getMp4File()) {
-                    $file = Path::resolve(
+                    $file = \App\Utils\Path::resolve(
                         'ULICMS_ROOT/content/videos/' .
                         basename($this->getMP4File())
                     );
                     File::deleteIfExists($file);
                 }
                 if ($this->getOggFile()) {
-                    $file = Path::resolve(
+                    $file = \App\Utils\Path::resolve(
                         'ULICMS_ROOT/content/videos/' .
                         basename($this->getOggFile())
                     );
                     File::deleteIfExists($file);
                 }
                 if ($this->getWebmFile()) {
-                    $file = Path::resolve(
+                    $file = \App\Utils\Path::resolve(
                         'ULICMS_ROOT/content/videos/' .
                         basename($this->getWebmFile())
                     );

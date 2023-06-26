@@ -84,6 +84,6 @@ class LogoControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     protected function getFixturePath(): string {
-        return Path::Resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
+        return \App\Utils\Path::Resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
     }
 }

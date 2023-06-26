@@ -8,8 +8,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
         <title><?php translate('error'); ?></title>
         <style>
 <?php
-        readfile(Path::resolve('ULICMS_ROOT/lib/css/core.scss'));
-readfile(Path::resolve('ULICMS_ROOT/admin/css/main.scss'));
+        readfile(\App\Utils\Path::resolve('ULICMS_ROOT/lib/css/core.scss'));
+readfile(\App\Utils\Path::resolve('ULICMS_ROOT/admin/css/main.scss'));
 ?> body {
                 padding: 10px;
             }

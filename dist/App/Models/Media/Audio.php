@@ -123,14 +123,14 @@ class Audio extends Model {
         if ($this->getId()) {
             if ($deletePhysical) {
                 if ($this->getMP3File()) {
-                    $file = Path::resolve(
+                    $file = \App\Utils\Path::resolve(
                         'ULICMS_ROOT/content/audio/' .
                                     basename($this->getMP3File())
                     );
                     File::deleteIfExists($file);
                 }
                 if ($this->getOggFile()) {
-                    $file = Path::resolve(
+                    $file = \App\Utils\Path::resolve(
                         'ULICMS_ROOT/content/audio/' .
                                     basename($this->getOggFile())
                     );

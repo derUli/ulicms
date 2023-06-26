@@ -158,13 +158,13 @@ class MenuEntry {
         $this->children[] = $children;
     }
 
-     /**
-      * Add children
-      *
-      * @param MenuEntry[] $children
-      *
-      * @return void
-      */
+    /**
+     * Add children
+     *
+     * @param MenuEntry[] $children
+     *
+     * @return void
+     */
     public function addChildren(array $children): void {
         foreach($children as $child) {
             $this->addChild($child);

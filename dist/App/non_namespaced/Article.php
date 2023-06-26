@@ -57,10 +57,10 @@ excerpt = ? where id = ?';
         return Database::pQuery($sql, $args, true);
     }
 
-     /**
-      * Get css classes for Font Awesome icon
-      * @return string
-      */
+    /**
+     * Get css classes for Font Awesome icon
+     * @return string
+     */
     public function getIcon(): string {
         return 'far fa-newspaper';
     }

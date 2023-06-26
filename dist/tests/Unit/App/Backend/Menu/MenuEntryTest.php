@@ -173,7 +173,7 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         $menuEntry->setNewWindow(false);
 
         $inputExpected = file_get_contents(
-            Path::resolve(
+            \App\Utils\Path::resolve(
                 'ULICMS_ROOT/tests/fixtures/menu/menu_entry/render.html'
             )
         );
@@ -185,7 +185,7 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         $menuEntry->setNewWindow(true);
 
         $inputExpected = file_get_contents(
-            Path::resolve(
+            \App\Utils\Path::resolve(
                 'ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_with_new_window.html'
             )
         );
@@ -199,7 +199,7 @@ class MenuEntryTest extends \PHPUnit\Framework\TestCase {
         \App\Helpers\BackendHelper::setAction('say_hello');
 
         $inputExpected = file_get_contents(
-            Path::resolve(
+            \App\Utils\Path::resolve(
                 'ULICMS_ROOT/tests/fixtures/menu/menu_entry/render_current_page.html'
             )
         );

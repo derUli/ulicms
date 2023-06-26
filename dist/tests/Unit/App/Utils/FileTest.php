@@ -8,8 +8,8 @@ class FileTest extends \PHPUnit\Framework\TestCase {
     use MatchesSnapshots;
 
     public function testGetMime(): void {
-        $this->assertEquals('text/plain', File::getMime(Path::resolve('ULICMS_ROOT/.htaccess')));
-        $this->assertEquals('image/png', File::getMime(Path::resolve('ULICMS_ROOT/admin/gfx/edit.png')));
+        $this->assertEquals('text/plain', File::getMime(\App\Utils\Path::resolve('ULICMS_ROOT/.htaccess')));
+        $this->assertEquals('image/png', File::getMime(\App\Utils\Path::resolve('ULICMS_ROOT/admin/gfx/edit.png')));
     }
 
     public function testGetExtension(): void {
@@ -38,11 +38,11 @@ class FileTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(File::toDataUri('gibtsnicht.txt'));
 
         $this->assertMatchesTextSnapshot(
-            File::toDataUri(Path::resolve('ULICMS_ROOT/admin/gfx/logo.png'))
+            File::toDataUri(\App\Utils\Path::resolve('ULICMS_ROOT/admin/gfx/logo.png'))
         );
 
         $this->assertMatchesTextSnapshot(
-            File::toDataUri(Path::resolve('ULICMS_ROOT/tests/fixtures/hello-original.txt'), 'application/inf')
+            File::toDataUri(\App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/hello-original.txt'), 'application/inf')
         );
     }
 
@@ -51,9 +51,9 @@ class FileTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testDeleteIfExistsWithDirectory(): void {
-        $dirs = Path::resolve('ULICMS_TMP/foo/bar');
+        $dirs = \App\Utils\Path::resolve('ULICMS_TMP/foo/bar');
 
-        $baseDir = Path::resolve('ULICMS_TMP/foo');
+        $baseDir = \App\Utils\Path::resolve('ULICMS_TMP/foo');
 
         mkdir($dirs, 0777, true);
 
@@ -75,7 +75,7 @@ class FileTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testDeleteIfExistsWithFile(): void {
-        $file = Path::Resolve('ULICMS_TMP/hello');
+        $file = \App\Utils\Path::Resolve('ULICMS_TMP/hello');
         file_put_contents($file, 'world');
 
         $this->assertTrue(File::deleteIfExists($file));
@@ -83,9 +83,9 @@ class FileTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testSureRemoveDirIncludingItself(): void {
-        $dirs = Path::resolve('ULICMS_TMP/foo/bar');
+        $dirs = \App\Utils\Path::resolve('ULICMS_TMP/foo/bar');
 
-        $baseDir = Path::resolve('ULICMS_TMP/foo');
+        $baseDir = \App\Utils\Path::resolve('ULICMS_TMP/foo');
 
         mkdir($dirs, 0777, true);
 
@@ -110,9 +110,9 @@ class FileTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testSureRemoveDirWithoutItself(): void {
-        $dirs = Path::resolve('ULICMS_TMP/foo/bar');
+        $dirs = \App\Utils\Path::resolve('ULICMS_TMP/foo/bar');
 
-        $baseDir = Path::resolve('ULICMS_TMP/foo');
+        $baseDir = \App\Utils\Path::resolve('ULICMS_TMP/foo');
 
         mkdir($dirs, 0777, true);
 
@@ -144,9 +144,9 @@ class FileTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetNewestMtimeWithFiles(): void {
         $files = [
-            Path::resolve('ULICMS_ROOT/init.php'),
-            Path::resolve('ULICMS_ROOT/composer.json'),
-            Path::resolve('ULICMS_ROOT/lib/css/core.scss')
+            \App\Utils\Path::resolve('ULICMS_ROOT/init.php'),
+            \App\Utils\Path::resolve('ULICMS_ROOT/composer.json'),
+            \App\Utils\Path::resolve('ULICMS_ROOT/lib/css/core.scss')
         ];
 
         $minimumResult = mktime(0, 0, 0, 1, 1, 2019);
@@ -155,9 +155,9 @@ class FileTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testRecurseCopy(): void {
-        $source = Path::resolve('ULICMS_ROOT/tests/fixtures');
+        $source = \App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures');
 
-        $destination = Path::resolve('ULICMS_TMP/copy-target');
+        $destination = \App\Utils\Path::resolve('ULICMS_TMP/copy-target');
 
         recurse_copy($source, $destination);
 
@@ -169,7 +169,7 @@ class FileTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testGetLastChanged(): void {
-        $source = Path::resolve('ULICMS_ROOT/composer.json');
+        $source = \App\Utils\Path::resolve('ULICMS_ROOT/composer.json');
         $lastChanged = File::getLastChanged($source);
         $this->assertGreaterThanOrEqual(1680824251, $lastChanged);
     }

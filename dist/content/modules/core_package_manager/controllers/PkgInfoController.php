@@ -22,7 +22,7 @@ class PkgInfoController extends \App\Controllers\Controller {
     }
 
     public function _installPost($file): bool {
-        $path = Path::resolve("ULICMS_TMP/{$file}");
+        $path = \App\Utils\Path::resolve("ULICMS_TMP/{$file}");
         $pkg = new SinPackageInstaller($path);
         if (is_file($path)) {
             return $pkg->installPackage();

@@ -6,7 +6,7 @@ class CoreUpgradeControllerTest extends \PHPUnit\Framework\TestCase {
     protected function tearDown(): void {
         unset($_SERVER['REQUEST_METHOD']);
 
-        $testFile = Path::resolve('ULICMS_ROOT/upgrade-check.txt');
+        $testFile = \App\Utils\Path::resolve('ULICMS_ROOT/upgrade-check.txt');
 
         if(is_file($testFile)) {
             unlink($testFile);
@@ -76,6 +76,6 @@ class CoreUpgradeControllerTest extends \PHPUnit\Framework\TestCase {
         $controller = new CoreUpgradeController();
         $controller->setCheckUrl('https://channels.ulicms.de/phpunit.json');
         $this->assertTrue($controller->runUpgrade(true));
-        $this->assertFileExists(Path::resolve('ULICMS_ROOT/upgrade-check.txt'));
+        $this->assertFileExists(\App\Utils\Path::resolve('ULICMS_ROOT/upgrade-check.txt'));
     }
 }

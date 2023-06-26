@@ -46,7 +46,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
     public function testDBMigratorThrowsNoError(): void {
         $migrator = new DBMigrator(
             'core',
-            Path::resolve('ULICMS_ROOT/lib/migrations/up')
+            \App\Utils\Path::resolve('ULICMS_ROOT/lib/migrations/up')
         );
 
         $this->assertTrue($migrator->checkVars());
@@ -87,7 +87,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
     public function testMigrateWithStop(): void {
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
-            Path::resolve(self::DB_MIGRATOR_UP_DIR)
+            \App\Utils\Path::resolve(self::DB_MIGRATOR_UP_DIR)
         );
         $dbmigrator->migrate('001.sql');
 
@@ -99,7 +99,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
     public function testMigrate(): void {
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
-            Path::resolve(self::DB_MIGRATOR_UP_DIR)
+            \App\Utils\Path::resolve(self::DB_MIGRATOR_UP_DIR)
         );
         $dbmigrator->migrate();
 
@@ -111,7 +111,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
     public function testRollback(): void {
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
-            Path::resolve(self::DB_MIGRATOR_UP_DIR)
+            \App\Utils\Path::resolve(self::DB_MIGRATOR_UP_DIR)
         );
         $dbmigrator->migrate();
 
@@ -119,7 +119,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
 
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
-            Path::resolve(self::DB_MIGRATOR_DOWN_DIR)
+            \App\Utils\Path::resolve(self::DB_MIGRATOR_DOWN_DIR)
         );
         $dbmigrator->rollback();
 
@@ -129,7 +129,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
     public function testRollbackWithStop(): void {
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
-            Path::resolve(self::DB_MIGRATOR_UP_DIR)
+            \App\Utils\Path::resolve(self::DB_MIGRATOR_UP_DIR)
         );
         $dbmigrator->migrate();
 
@@ -137,7 +137,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
 
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
-            Path::resolve(self::DB_MIGRATOR_DOWN_DIR)
+            \App\Utils\Path::resolve(self::DB_MIGRATOR_DOWN_DIR)
         );
         $dbmigrator->rollback('002.sql');
 
@@ -149,7 +149,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
     public function testMigrateThrowsSQLException(): void {
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
-            Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
+            \App\Utils\Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
         );
         $this->expectException(SqlException::class);
         $dbmigrator->migrate();
@@ -158,13 +158,13 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
     public function testRollbackThrowsSQLException(): void {
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
-            Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
+            \App\Utils\Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
         );
         $dbmigrator->migrate('001.sql');
 
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
-            Path::resolve(self::DB_MIGRATOR_FAILED_DOWN_DIR)
+            \App\Utils\Path::resolve(self::DB_MIGRATOR_FAILED_DOWN_DIR)
         );
 
         $this->expectException(SqlException::class);
@@ -181,7 +181,7 @@ class DBMigratorTest extends \PHPUnit\Framework\TestCase {
 
         $dbmigrator = new DBMigrator(
             'dbmigrator_test',
-            Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
+            \App\Utils\Path::resolve(self::DB_MIGRATOR_FAILED_UP_DIR)
         );
 
         $dbmigrator->resetDBTrackAll();

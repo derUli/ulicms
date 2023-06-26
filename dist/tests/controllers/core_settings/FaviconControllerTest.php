@@ -73,7 +73,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testPutAndDeleteFiles(): void {
-        $source = Path::resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
+        $source = \App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
         $controller = new FaviconController();
         $this->assertTrue(
             $controller->_placeFiles($source, $controller->_getSizes())
@@ -90,7 +90,7 @@ class FaviconControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testPutAndDeleteFilesHQ(): void {
-        $source = Path::resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
+        $source = \App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/cat.jpg');
         $controller = new FaviconController();
         $this->assertTrue(
             $controller->_placeFiles($source, $controller->_getSizes(true))

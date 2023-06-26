@@ -4,11 +4,11 @@ class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
         \App\Storages\Vars::delete('allModules');
 
-        $source = Path::resolve(
+        $source = \App\Utils\Path::resolve(
             'ULICMS_ROOT/tests/fixtures/packages/hello_world-1.0.sin'
         );
 
-        $destination = Path::resolve(
+        $destination = \App\Utils\Path::resolve(
             'ULICMS_TMP/hello_world-10.sin'
         );
 
@@ -16,7 +16,7 @@ class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase {
     }
 
     protected function tearDown(): void {
-        $destination = Path::resolve(
+        $destination = \App\Utils\Path::resolve(
             'ULICMS_TMP/hello_world-10.sin'
         );
         if (is_file($destination)) {

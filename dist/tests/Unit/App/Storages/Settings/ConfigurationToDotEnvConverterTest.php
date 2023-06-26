@@ -15,7 +15,7 @@ class ConfigurationToDotEnvConverterTest extends TestCase {
     protected function setUp(): void {
         parent::setUp();
 
-        $this->envFile = Path::resolve('ULICMS_ROOT/.env.foobar');
+        $this->envFile = \App\Utils\Path::resolve('ULICMS_ROOT/.env.foobar');
     }
 
     protected function tearDown(): void {
@@ -80,18 +80,18 @@ class ConfigurationToDotEnvConverterTest extends TestCase {
         $this->assertMatchesFileSnapshot($this->envFile);
     }
 
-   protected function getCMSConfig(): CMSConfig {
+    protected function getCMSConfig(): CMSConfig {
 
-       require_once ULICMS_ROOT . '/tests/fixtures/CMSConfig.php';
-       $config = new CMSConfig();
+        require_once ULICMS_ROOT . '/tests/fixtures/CMSConfig.php';
+        $config = new CMSConfig();
 
-       $rc = new \ReflectionClass($config);
+        $rc = new \ReflectionClass($config);
 
-       $config->db_user = 'myUser';
-       $config->debug = true;
-       $config->exception_logging = false;
-       $config->dbmigrator_drop_database_on_shutdown = true;
+        $config->db_user = 'myUser';
+        $config->debug = true;
+        $config->exception_logging = false;
+        $config->dbmigrator_drop_database_on_shutdown = true;
 
-       return $config;
-   }
+        return $config;
+    }
 }

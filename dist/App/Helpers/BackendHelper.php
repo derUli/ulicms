@@ -87,13 +87,13 @@ abstract class BackendHelper extends Helper {
         ));
     }
 
-   /**
-    * Get CKEditor Skin.
-    * @return string[]
-    */
+    /**
+     * Get CKEditor Skin.
+     * @return string[]
+     */
     public static function getCKEditorSkins(): array {
         $skins = [];
-        $dir = Path::resolve('ULICMS_ROOT/admin/ckeditor/skins');
+        $dir = \App\Utils\Path::resolve('ULICMS_ROOT/admin/ckeditor/skins');
         $folders = File::findAllDirs($dir);
 
         foreach ($folders as $folder) {

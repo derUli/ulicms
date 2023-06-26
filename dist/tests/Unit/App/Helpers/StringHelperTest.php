@@ -9,9 +9,9 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function testRemoveEmptyLineFromString(): void {
         $input = file_get_contents(
-            Path::resolve('ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.input.txt')
+            \App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.input.txt')
         );
-        $expected = normalizeLN(file_get_contents(Path::resolve('ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.expected.txt')), "\n");
+        $expected = normalizeLN(file_get_contents(\App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/removeEmptyLinesFromString.expected.txt')), "\n");
 
         $this->assertEquals(
             $expected,
@@ -79,7 +79,7 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testTrimLines(): void {
-        $inputFile = Path::resolve('ULICMS_ROOT/tests/fixtures/trimLines.input.txt');
+        $inputFile = \App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/trimLines.input.txt');
 
         $actual = StringHelper::trimLines(file_get_contents($inputFile));
 
@@ -138,6 +138,6 @@ Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">htt
     }
 
     private function getTestFilePath() {
-        return Path::resolve('ULICMS_ROOT/tests/fixtures/lines.txt');
+        return \App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/lines.txt');
     }
 }

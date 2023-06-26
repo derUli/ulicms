@@ -7,7 +7,7 @@ use App\Helpers\NumberFormatHelper;
 use App\Packages\SinPackageInstaller;
 
 if (! empty($_REQUEST['file']) && str_ends_with($_REQUEST['file'], '.sin')) {
-    $tempfile = Path::resolve('ULICMS_TMP/' . basename($_REQUEST['file']));
+    $tempfile = \App\Utils\Path::resolve('ULICMS_TMP/' . basename($_REQUEST['file']));
     if (is_file($tempfile)) {
         $pkg = new SinPackageInstaller($tempfile);
         $installable = $pkg->isInstallable();

@@ -48,10 +48,10 @@ abstract class Cached {
         return $adapter->delete($cacheUid);
     }
 
-      /**
-       * Delete setting from cache
-       * @return bool
-       */
+    /**
+     * Delete setting from cache
+     * @return bool
+     */
     protected static function clearCache(): bool {
         $adapter = static::getCacheAdapter();
         return $adapter->clear();

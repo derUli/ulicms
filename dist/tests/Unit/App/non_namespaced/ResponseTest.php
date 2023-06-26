@@ -37,7 +37,7 @@ class ResponseTest extends \PHPUnit\Framework\TestCase {
 
     public function testJavascriptRedirect(): void {
         $expected = file_get_contents(
-            Path::resolve('tests/fixtures/javascriptRedirect.expected.txt')
+            \App\Utils\Path::resolve('tests/fixtures/javascriptRedirect.expected.txt')
         );
 
         $actual = TestHelper::getOutput(static function(): void {

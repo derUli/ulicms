@@ -5,16 +5,16 @@ use App\Utils\Logger;
 
 class LoggerTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
-        sureRemoveDir(Path::resolve('ULICMS_LOG/test_log'), true);
+        sureRemoveDir(\App\Utils\Path::resolve('ULICMS_LOG/test_log'), true);
     }
 
     protected function tearDown(): void {
-        sureRemoveDir(Path::resolve('ULICMS_LOG/test_log'), true);
+        sureRemoveDir(\App\Utils\Path::resolve('ULICMS_LOG/test_log'), true);
     }
 
     public function testRegisterAndUnregisterLogger(): void {
-        $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'));
-        $this->assertTrue(is_dir(Path::resolve('ULICMS_LOG/test_log')));
+        $logger = new Logger(\App\Utils\Path::resolve('ULICMS_LOG/test_log'));
+        $this->assertTrue(is_dir(\App\Utils\Path::resolve('ULICMS_LOG/test_log')));
         LoggerRegistry::register('test_log', $logger);
         $this->assertInstanceOf(Logger::class, LoggerRegistry::get('test_log'));
 
@@ -23,13 +23,13 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testLogFolderIsProtected(): void {
-        $htaccessFile = Path::resolve('ULICMS_LOG/.htaccess');
+        $htaccessFile = \App\Utils\Path::resolve('ULICMS_LOG/.htaccess');
         $this->assertTrue(is_file($htaccessFile));
         $this->assertContains('deny from all', array_map('strtolower', \App\Helpers\StringHelper::linesFromFile($htaccessFile)));
     }
 
     public function testGetPath(): void {
-        $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'));
+        $logger = new Logger(\App\Utils\Path::resolve('ULICMS_LOG/test_log'));
 
         LoggerRegistry::register('test_log', $logger);
 
@@ -39,11 +39,11 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testLogDebug(): void {
-        $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'));
+        $logger = new Logger(\App\Utils\Path::resolve('ULICMS_LOG/test_log'));
 
         LoggerRegistry::register('test_log', $logger);
 
-        $file = Path::resolve('ULICMS_LOG/test_log/' . get_environment() . '_' . date('Y-m-d') . '.log');
+        $file = \App\Utils\Path::resolve('ULICMS_LOG/test_log/' . get_environment() . '_' . date('Y-m-d') . '.log');
 
         $log_test_token = 'Test ' . uniqid();
         $logger->debug($log_test_token);
@@ -58,11 +58,11 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testLogError(): void {
-        $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'));
+        $logger = new Logger(\App\Utils\Path::resolve('ULICMS_LOG/test_log'));
 
         LoggerRegistry::register('test_log', $logger);
 
-        $file = Path::resolve('ULICMS_LOG/test_log/' . get_environment() . '_' . date('Y-m-d') . '.log');
+        $file = \App\Utils\Path::resolve('ULICMS_LOG/test_log/' . get_environment() . '_' . date('Y-m-d') . '.log');
 
         $log_test_token = 'Test ' . uniqid();
         $logger->error($log_test_token);
@@ -77,11 +77,11 @@ class LoggerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testLogInfo(): void {
-        $logger = new Logger(Path::resolve('ULICMS_LOG/test_log'));
+        $logger = new Logger(\App\Utils\Path::resolve('ULICMS_LOG/test_log'));
 
         LoggerRegistry::register('test_log', $logger);
 
-        $file = Path::resolve('ULICMS_LOG/test_log/' . get_environment() . '_' . date('Y-m-d') . '.log');
+        $file = \App\Utils\Path::resolve('ULICMS_LOG/test_log/' . get_environment() . '_' . date('Y-m-d') . '.log');
 
         $log_test_token = 'Test ' . uniqid();
         $logger->info($log_test_token);

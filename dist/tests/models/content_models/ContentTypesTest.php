@@ -40,20 +40,20 @@ class ContentTypesTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-       private function getBaseTypes() {
-           $baseTypes = [
-               'page',
-               'article',
-               'snippet',
-               'list',
-               'link',
-               'language_link',
-               'node',
-               'image',
-               'module',
-               'video',
-               'audio'
-           ];
-           return $baseTypes;
-       }
+    private function getBaseTypes() {
+        $baseTypes = [
+            'page',
+            'article',
+            'snippet',
+            'list',
+            'link',
+            'language_link',
+            'node',
+            'image',
+            'module',
+            'video',
+            'audio'
+        ];
+        return $baseTypes;
+    }
 }

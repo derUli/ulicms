@@ -79,7 +79,7 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase {
 
     public function testRenderAsAdmin(): void {
         $inputExpected = file_get_contents(
-            Path::resolve(
+            \App\Utils\Path::resolve(
                 'ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_admin.html'
             )
         );
@@ -91,7 +91,7 @@ class AdminMenuTest extends \PHPUnit\Framework\TestCase {
 
     public function testRenderAsUserWithLimitedPermissions(): void {
         $inputExpected = file_get_contents(
-            Path::resolve(
+            \App\Utils\Path::resolve(
                 'ULICMS_ROOT/tests/fixtures/menu/admin_menu/render_as_user.html'
             )
         );

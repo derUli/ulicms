@@ -77,11 +77,11 @@ abstract class AbstractContent extends Model {
         return count($this->getChildren()) > 0;
     }
 
-     /**
-      * Get css classes for Font Awesome icon
-      *
-      * @return string
-      */
+    /**
+     * Get css classes for Font Awesome icon
+     *
+     * @return string
+     */
     public function getIcon(): string {
         return 'far fa-file-alt';
     }

@@ -224,7 +224,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             ]
         );
         $code = compileSCSS(
-            Path::resolve(
+            \App\Utils\Path::resolve(
                 'ULICMS_ROOT/lib/css/core.scss'
             )
         );
@@ -234,7 +234,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
 
     public function testCompileSCSSToFile(): void {
         sureRemoveDir(
-            Path::resolve(
+            \App\Utils\Path::resolve(
                 'ULICMS_GENERATED_PUBLIC/stylesheets'
             )
         );
@@ -245,7 +245,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             ]
         );
         $filename = compileSCSSToFile(
-            Path::resolve(
+            \App\Utils\Path::resolve(
                 'ULICMS_ROOT/lib/css/core.scss'
             )
         );

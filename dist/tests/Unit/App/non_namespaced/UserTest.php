@@ -552,7 +552,7 @@ class UserTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testProcessAvatarReturnsTrue(): void {
-        $inputFile = Path::resolve(
+        $inputFile = \App\Utils\Path::resolve(
             'ULICMS_ROOT/admin/gfx/apple-touch-icon-120x120.png'
         );
 

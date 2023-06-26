@@ -2,7 +2,7 @@
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-if (is_file(Path::resolve('ULICMS_ROOT/update.php'))) {
+if (is_file(\App\Utils\Path::resolve('ULICMS_ROOT/update.php'))) {
     ?>
 
     <div class="alert alert-danger">
