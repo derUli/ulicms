@@ -12,7 +12,6 @@ use App\HTML\Form;
 use ContentFactory;
 use ControllerRegistry;
 use Database;
-use Path;
 use Template;
 
 abstract class ModuleHelper extends Helper {

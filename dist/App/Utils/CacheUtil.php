@@ -9,7 +9,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Helpers\TestHelper;
 use ControllerRegistry;
 use DesignSettingsController;
-use Path;
 use Phpfastcache\CacheManager;
 use Phpfastcache\Config\ConfigurationOption;
 use Phpfastcache\Helper\Psr16Adapter;

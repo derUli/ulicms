@@ -22,7 +22,6 @@ use ControllerRegistry;
 use Database;
 use mysqli;
 use Nette\Utils\FileSystem;
-use Path;
 use Response;
 use Settings;
 use Throwable;

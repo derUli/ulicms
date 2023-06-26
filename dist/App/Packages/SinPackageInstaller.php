@@ -10,7 +10,6 @@ use App\UliCMS\UliCMSVersion;
 use App\Utils\File;
 use App\Utils\VersionComparison;
 use Database;
-use Path;
 
 /**
  * Util to install Simple Install packages.

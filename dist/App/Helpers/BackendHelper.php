@@ -9,7 +9,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Constants\HtmlEditor;
 use App\HTML\Script;
 use App\Utils\File;
-use Path;
 use Request;
 
 use function enqueueScriptFile;

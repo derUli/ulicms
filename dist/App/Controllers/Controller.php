@@ -10,7 +10,6 @@ use App\Exceptions\AccessDeniedException;
 use BadMethodCallException;
 use ControllerRegistry;
 use Nette\Utils\Json;
-use Path;
 use ReflectionMethod;
 use Request;
 
