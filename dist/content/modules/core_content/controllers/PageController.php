@@ -20,8 +20,8 @@ use App\Utils\CacheUtil;
 use Jfcherng\Diff\Differ;
 use Jfcherng\Diff\DiffHelper;
 use Jfcherng\Diff\Renderer\RendererConstant;
-use Rakit\Validation\Validator;
 use Nette\Utils\Strings;
+use Rakit\Validation\Validator;
 
 use function App\HTML\stringContainsHtml;
 
@@ -69,10 +69,11 @@ class PageController extends \App\Controllers\Controller {
 
     public function _createPost(): ?AbstractContent {
         $permissionChecker = new PermissionChecker(get_user_id());
-        
-        $title = Request::getVar('title', '','str');
-        $language = !empty($_SESSION['filter_language']) ? $_SESSION['filter_language'] : Settings::get('default_language');
-        
+
+        $title = Request::getVar('title');
+        $language = ! empty(Request::getVar('language')) ?
+            Request::getVar('language') : Settings::get('default_language');
+
         $slug = $this->_nextFreeSlug(
             Strings::webalize($title),
             $language,
@@ -571,6 +572,7 @@ class PageController extends \App\Controllers\Controller {
                 $language,
                 getLanguageNameByCode($language)
             );
+
             if (count($userLanguages) && ! in_array($language, $userLanguages)) {
                 continue;
             }

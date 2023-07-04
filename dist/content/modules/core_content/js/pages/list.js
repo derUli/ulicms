@@ -5,6 +5,7 @@ function onCreatePage(event) {
     event.stopPropagation();
 
     const url = $(event.target).data('url');
+    const language = $('#filter_language').val();
 
     bootbox.prompt(`${Translation.PageTitle}:`,
     (title) => {
@@ -18,7 +19,8 @@ function onCreatePage(event) {
         }
         
         const data = {
-            title: title
+            title: title,
+            language: language
         };
 
         $.ajax({
