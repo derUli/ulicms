@@ -5,10 +5,6 @@ body.modal-open {
 }
 
 .bootbox.modal {
-    .modal-header{
-        display: none;
-    }
-
     .modal-headline {
         font-size: 18px;
         font-weight: bold;
@@ -17,5 +13,11 @@ body.modal-open {
     hr {
         margin-bottom: 10px;
         margin-top: 10px;
+    }
+}
+
+.bootbox-alert, .bootbox-confirm {
+    .modal-header{
+        display: none;
     }
 }

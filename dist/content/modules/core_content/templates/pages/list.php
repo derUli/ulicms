@@ -38,7 +38,7 @@ echo Template::executeModuleTemplate(
                 <?php
                 if($permissionChecker->hasPermission('pages_create')) {
                     ?>
-                <a href="index.php?action=pages_new" class="btn btn-primary is-not-ajax"><i
+                <a href="#" class="btn btn-primary" id="page-new"><i
                         class="fa fa-plus"></i> <?php translate('create_page'); ?></a>
                         <?php } ?> 
             </div>
@@ -95,7 +95,6 @@ echo Template::executeModuleTemplate(
                     </th>
                     <th><?php translate('parent_id'); ?>
                     </th>
-
                     <th><?php translate('activated'); ?>
                     </th>
                     <td class="no-sort text-center"><?php translate('view'); ?>
@@ -126,6 +125,7 @@ enqueueScriptFile(
 combinedScriptHtml();
 $translation = new JSTranslation();
 $translation->addKey('ask_for_delete');
+$translation->addKey('enter_title');
 $translation->addKey('wanna_empty_trash');
 $translation->addKey('reset_filters');
 $translation->renderJS();

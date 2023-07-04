@@ -1,5 +1,22 @@
 /* global Translation, bootbox */
 
+function onCreatePage(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    bootbox.prompt(Translation.EnterTitle,
+    (result) => {
+        console.log('result', result);
+        if(result === null){
+            return;
+        }
+
+        if(!result.length)
+            onCreatePage(event);
+            return;
+        });
+}
+
 $(() => {
     // init filters
     if (localStorage.getItem('pageFilters') === null) {
@@ -8,6 +25,8 @@ $(() => {
                 JSON.stringify(buildFiltersObject())
                 );
     }
+
+    $("#page-new").click(onCreatePage);
 
     $("#btn-go-up").click((event) => {
         event.preventDefault();
