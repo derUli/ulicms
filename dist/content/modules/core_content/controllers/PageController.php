@@ -71,6 +71,8 @@ class PageController extends \App\Controllers\Controller {
         $permissionChecker = new PermissionChecker(get_user_id());
 
         $title = Request::getVar('title');
+        $menu = Request::getVar('menu');
+        
         $language = ! empty(Request::getVar('language')) ?
             Request::getVar('language') : Settings::get('default_language');
 
