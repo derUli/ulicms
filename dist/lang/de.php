@@ -104,7 +104,7 @@ add_translation('CATEGORIES_INFOTEXT', 'Hier können Sie Kategorien anlegen, in 
 add_translation('DELETE', 'Löschen');
 add_translation('EDIT', 'Bearbeiten');
 add_translation('ASK_FOR_DELETE', 'Wirklich löschen?');
-add_translation('SAVE_CHANGES', 'Änderungen speichern');
+add_translation('SAVE_CHANGES', 'Speichern');
 add_translation('CATEGORY', 'Kategorie');
 add_translation('PLEASE_SELECT', 'Bitte auswählen');
 add_translation('RECYCLE_BIN', 'Papierkorb');
