@@ -835,7 +835,7 @@ class PageController extends \App\Controllers\Controller {
                 Request::getVar('comments_enabled', false, 'bool') : null;
 
         $model->show_headline = Request::getVar('show_headline', 1, 'bool');
-        $model->group_id = $groupId ?: get_group_id();
+        $model->group_id = $groupId ?: Group::getCurrentGroupId();
 
         do_event('before_create_page');
 

@@ -97,10 +97,12 @@ function get_user_id(): ?int {
 /**
  * Gets the primary group id of the currentlogy logged in user
  *
+ * @deprecated since 2023.4
+ *
  * @return int|null
  */
 function get_group_id(): ?int {
-    return isset($_SESSION['group_id']) ? (int)$_SESSION['group_id'] : null;
+    return Group::getCurrentGroupId();
 }
 
 /**
