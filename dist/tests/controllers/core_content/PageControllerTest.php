@@ -454,13 +454,7 @@ class PageControllerTest extends \PHPUnit\Framework\TestCase {
     public function testCreatePostReturnsNull(): void {
         $_SESSION['login_id'] = PHP_INT_MAX;
 
-        $_POST['title'] = 'foobar';
-        $_POST['slug'] = 'unit-test-foobar';
-        $_POST['type'] = 'no_type';
-        $_POST['content'] = '<p>Foo Content</p>';
-        $_POST['position'] = '123';
-        $_POST['menu'] = 'not_in_menu';
-        $_POST['language'] = 'de';
+        $_POST['title'] = '';
 
         $controller = new PageController();
         $content = $controller->_createPost();

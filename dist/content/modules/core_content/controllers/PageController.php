@@ -68,11 +68,25 @@ class PageController extends \App\Controllers\Controller {
     }
 
     public function _createPost(): ?AbstractContent {
+        $validator = new Validator();
+        $validation = $validator->make($_POST + $_FILES, [
+            'title' => 'required'
+        ]);
+
+        $validation->validate();
+
+        if($validation->fails()) {
+            return null;
+        }
+
         $permissionChecker = new PermissionChecker(get_user_id());
 
         $title = Request::getVar('title');
+        $type = Request::getVar('type', 'page', 'str');
         $menu = Request::getVar('menu');
-        
+        $category_id = Request::getVar('category_id', 0, 'int');
+        $parent_id = Request::getVar('parent_id', '', 'str');
+
         $language = ! empty(Request::getVar('language')) ?
             Request::getVar('language') : Settings::get('default_language');
 
@@ -82,12 +96,25 @@ class PageController extends \App\Controllers\Controller {
             0
         );
 
-        $model = new Page();
+        $model = TypeMapper::getModel($type);
+
         $model->title = $title;
         $model->slug = $slug;
-        $model->language = $language;
         $model->content = '';
         $model->comments_enabled = true;
+
+        if(! empty($menu)) {
+            $model->menu = $menu;
+        }
+
+        if(is_numeric($category_id)) {
+            $model->category_id = (int)$category_id;
+        }
+
+        // TODO: Fix this
+        if(is_numeric($parent_id)) {
+            $model->parent_id = (int)$parent_id;
+        }
 
         $model->author_id = get_user_id();
         $model->group_id = get_group_id();

@@ -6,10 +6,14 @@ function onCreatePage(event) {
 
     const url = $(event.target).data('url');
     const language = $('#filter_language').val();
+    const category_id = $('#filter_category').val();
+    const parent_id = $('#filter_parent').val();
+    const type = $('#filter_type').val();
+    const menu = $('#filter_menu').val();
 
     bootbox.prompt(`${Translation.PageTitle}:`,
     (title) => {
-        if(title === null){
+        if(title === null) {
             return;
         }
 
@@ -20,7 +24,11 @@ function onCreatePage(event) {
         
         const data = {
             title: title,
-            language: language
+            language: language,
+            category_id: category_id,
+            menu: menu,
+            parent_id: parent_id,
+            type: type
         };
 
         $.ajax({
@@ -33,9 +41,7 @@ function onCreatePage(event) {
             },
             error: (xhr, status, error) =>
                 bootbox.alert(error)
-        });
-
-        
+        });        
     });
 }
 
