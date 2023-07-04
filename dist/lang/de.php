@@ -124,7 +124,7 @@ add_translation('SEND_LOGINDATA_BY_MAIL', 'Die Zugangsdaten per E-Mail senden');
 
 // Seitenverwaltung
 add_translation('PAGES_INFOTEXT', 'Hier können Sie die einzelnen Seiten Ihrer Homepage bearbeiten oder löschen.');
-add_translation('CREATE_PAGE', 'Seite verfassen');
+add_translation('CREATE_PAGE', 'Seite erstellen');
 add_translation('FILTER_BY_LANGUAGE', 'Nach Sprache filtern');
 add_translation('STATUS', 'Status');
 add_translation('RECOVER', 'Wiederherstellen');
