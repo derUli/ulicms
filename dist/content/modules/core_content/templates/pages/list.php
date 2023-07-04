@@ -14,8 +14,6 @@ $controller = ControllerRegistry::get(PageController::class);
 
 $permissionChecker = PermissionChecker::fromCurrentUser();
 
-$show_filters = Settings::get('user/' . get_user_id() . '/show_filters');
-
 echo Template::executeModuleTemplate('core_content', 'icons.php');
 ?>
 <h2><?php translate('pages'); ?></h2>
@@ -38,7 +36,7 @@ echo Template::executeModuleTemplate(
                 <?php
                 if($permissionChecker->hasPermission('pages_create')) {
                     ?>
-                <a href="#" class="btn btn-primary" id="page-new"><i
+                <a href="#" class="btn btn-primary" id="page-new" data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl('PageController', 'create'); ?>"><i
                         class="fa fa-plus"></i> <?php translate('create_page'); ?></a>
                         <?php } ?> 
             </div>
@@ -125,7 +123,7 @@ enqueueScriptFile(
 combinedScriptHtml();
 $translation = new JSTranslation();
 $translation->addKey('ask_for_delete');
-$translation->addKey('enter_title');
+$translation->addKey('page_title');
 $translation->addKey('wanna_empty_trash');
 $translation->addKey('reset_filters');
 $translation->renderJS();

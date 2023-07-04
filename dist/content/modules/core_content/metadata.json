@@ -21,13 +21,11 @@
     "actions": {
         "contents": "templates/contents.php",
         "pages": "templates/pages/list.php",
-        "pages_new": "templates/pages/new.php",
         "pages_edit": "templates/pages/edit.php",
         "categories": "templates/categories.php"
     },
     "action_permissions": {
         "pages": "pages",
-        "pages_new": "pages_create",
         "pages_edit": "pages",
         "categories": "categories"
     },

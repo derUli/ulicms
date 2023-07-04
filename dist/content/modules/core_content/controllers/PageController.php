@@ -21,6 +21,7 @@ use Jfcherng\Diff\Differ;
 use Jfcherng\Diff\DiffHelper;
 use Jfcherng\Diff\Renderer\RendererConstant;
 use Rakit\Validation\Validator;
+use Nette\Utils\Strings;
 
 use function App\HTML\stringContainsHtml;
 
@@ -53,25 +54,54 @@ class PageController extends \App\Controllers\Controller {
 
     public function createPost(): void {
         $model = $this->_createPost();
+
         if ($model && $model->isPersistent()) {
-            Response::redirect(
-                ModuleHelper::buildActionURL(
+            JSONResult([
+                'url' => ModuleHelper::buildActionURL(
                     'pages_edit',
                     "page={$model->getID()}"
                 )
-            );
+            ]);
         }
 
-        Response::redirect(ModuleHelper::buildActionURL('pages'));
+        // TODO: Error handling
     }
 
     public function _createPost(): ?AbstractContent {
         $permissionChecker = new PermissionChecker(get_user_id());
-        $model = TypeMapper::getModel(Request::getVar('type'));
+        
+        $title = Request::getVar('title', '','str');
+        $language = !empty($_SESSION['filter_language']) ? $_SESSION['filter_language'] : Settings::get('default_language');
+        
+        $slug = $this->_nextFreeSlug(
+            Strings::webalize($title),
+            $language,
+            0
+        );
 
-        if ($model) {
-            $this->_fillAndSaveModel($model, $permissionChecker);
+        $model = new Page();
+        $model->title = $title;
+        $model->slug = $slug;
+        $model->language = $language;
+        $model->content = '';
+        $model->comments_enabled = true;
+
+        $model->author_id = get_user_id();
+        $model->group_id = get_group_id();
+
+        $permissionObjects = ['admins', 'group', 'owner', 'others'];
+        foreach ($permissionObjects as $object) {
+            $permission = (bool)Settings::get(
+                "only_{$object}_can_edit",
+                'int'
+            );
+            $model->getPermissions()->setEditRestriction(
+                $object,
+                (bool)$permission
+            );
         }
+
+        $model->save();
 
         do_event('after_create_page');
 

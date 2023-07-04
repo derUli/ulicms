@@ -4,17 +4,37 @@ function onCreatePage(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    bootbox.prompt(Translation.EnterTitle,
-    (result) => {
-        console.log('result', result);
-        if(result === null){
+    const url = $(event.target).data('url');
+
+    bootbox.prompt(`${Translation.PageTitle}:`,
+    (title) => {
+        if(title === null){
             return;
         }
 
-        if(!result.length)
+        if(!title.length){
             onCreatePage(event);
             return;
+        }
+        
+        const data = {
+            title: title
+        };
+
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'POST',
+            success: (response) => {
+                console.log(response);
+                location.href = response.url;
+            },
+            error: (xhr, status, error) =>
+                bootbox.alert(error)
         });
+
+        
+    });
 }
 
 $(() => {
