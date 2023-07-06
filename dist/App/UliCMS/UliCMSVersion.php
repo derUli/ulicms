@@ -12,7 +12,7 @@ use App\Helpers\DateTimeHelper;
  * Provides information about the UliCMS release version
  */
 class UliCMSVersion {
-    public const CODE_NAME = 'Smelling Anteater';
+    public const CODE_NAME = 'Gnawing Viscacha';
 
     public const RELEASE_YEAR = 2023;
 
