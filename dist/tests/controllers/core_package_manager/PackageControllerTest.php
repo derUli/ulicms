@@ -58,7 +58,7 @@ class PackageControllerTest extends \PHPUnit\Framework\TestCase {
 
         $this->assertGreaterThanOrEqual(3, substr_count($output, '<tr>'));
 
-        $this->assertStringContainsString('bootstrap-3.3.7', $output);
+        $this->assertStringContainsString('bootstrap-3.4.1', $output);
         $this->assertStringContainsString('slicknav-1.0.10', $output);
     }
 

@@ -8,7 +8,7 @@ CKEDITOR.editorConfig = function (config) {
     // config.language = 'de';
     // Bootstrap soll eingebunden werden
     config.contentsCss = [CKEDITOR.basePath + 'contents.css',
-        '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'];
+        '//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'];
     config.ShiftEnterMode = 'p';
 
     // allow all html tags

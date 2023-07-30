@@ -121,7 +121,7 @@ class ModuleManagerTest extends \PHPUnit\Framework\TestCase {
         $moduleManager->sync();
 
         $module = new \App\Models\Packages\Module('bootstrap');
-        $this->assertEquals('3.3.7', $module->getVersion());
+        $this->assertEquals('3.4.1', $module->getVersion());
     }
 
     public function testInitModulesDefaultSettings(): void {

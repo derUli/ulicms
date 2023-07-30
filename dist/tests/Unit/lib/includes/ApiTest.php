@@ -100,7 +100,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $meta = getModuleMeta('bootstrap');
         $this->assertIsArray($meta);
-        $this->assertEquals('3.3.7', $meta['version']);
+        $this->assertEquals('3.4.1', $meta['version']);
         $this->assertEquals(false, $meta['embed']);
     }
 
