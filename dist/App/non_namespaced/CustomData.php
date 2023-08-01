@@ -71,7 +71,7 @@ class CustomData {
     }
 
     public static function getCustomDataOrSetting(string $name) {
-        $data = CustomData::get();
+        $data = self::get();
         if (is_array($data) && isset($data[$name])) {
             return $data[$name];
         }
