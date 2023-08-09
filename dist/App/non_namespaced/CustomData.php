@@ -10,9 +10,7 @@ class CustomData {
     private static $defaults = [];
 
     public static function get(?string $page = null): array {
-        if (! $page) {
-            $page = get_slug();
-        }
+        $page = $page ?? get_slug();
 
         $language = getCurrentLanguage();
 
@@ -29,9 +27,8 @@ class CustomData {
     }
 
     public static function set(string $var, $value, ?string $page = null): void {
-        if (! $page) {
-            $page = get_slug();
-        }
+        $page = $page ?? get_slug();
+
         $data = self::get($page);
         $data[$var] = $value;
 
@@ -48,9 +45,7 @@ class CustomData {
         ?string $var = null,
         ?string $page = null
     ): void {
-        if (! $page) {
-            $page = get_slug();
-        }
+        $page = $page ?? get_slug();
 
         $data = self::get($page);
         if ($data === null || ! $var) {
@@ -72,6 +67,7 @@ class CustomData {
 
     public static function getCustomDataOrSetting(string $name) {
         $data = self::get();
+
         if (is_array($data) && isset($data[$name])) {
             return $data[$name];
         }
