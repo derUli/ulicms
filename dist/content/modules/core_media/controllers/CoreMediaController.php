@@ -19,7 +19,7 @@ class CoreMediaController extends MainClass {
      * @return string Processed HTML string
      */
     public function beforeContentFilter(string $input): string {
-        $data = CustomData::get();
+        $data = App\Models\Content\CustomData::get();
 
         // Check if media replacement is not disabled in CustomData JSON
         $mediaEmbedEnabled = ! (

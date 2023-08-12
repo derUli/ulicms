@@ -3,7 +3,7 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 $site_slogan = get_site_slogan();
-$data = CustomData::get();
+$data = App\Models\Content\CustomData::get();
 $site_slogan = $data['site_slogan'] ?? get_site_slogan();
 
 $q = $_GET['q'] ?? '';

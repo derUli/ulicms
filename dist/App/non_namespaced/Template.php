@@ -452,7 +452,7 @@ class Template {
 
         $htmlContent = apply_filter($htmlContent, 'after_content');
 
-        $data = CustomData::get();
+        $data = App\Models\Content\CustomData::get();
         // it's possible to disable shortcodes for a page
         // define "disable_shortcodes in custom data / json
         if (! (isset($data['disable_shortcodes']) && $data['disable_shortcodes'])) {

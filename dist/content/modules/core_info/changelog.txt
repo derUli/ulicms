@@ -1,3 +1,8 @@
+===== Neues in UliCMS 2024.1 =====
+
+API-Änderungen:
+* CustomData in Namespace App\Packages verschoben
+
 ===== Neues in UliCMS 2023.4 =====
 
 Neue Features:

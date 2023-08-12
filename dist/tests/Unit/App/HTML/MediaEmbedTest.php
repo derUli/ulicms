@@ -26,7 +26,7 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase {
         $page = $this->getTestPage();
 
         set_requested_pagename($page->slug, $page->language);
-        CustomData::set('disable_media_embed', true);
+        App\Models\Content\CustomData::set('disable_media_embed', true);
 
         $input = file_get_contents('tests/fixtures/AutoEmbed/input.html');
         $actual = apply_filter($input, 'before_content');
@@ -40,7 +40,7 @@ class MediaEmbedTest extends \PHPUnit\Framework\TestCase {
         $page = $this->getTestPage();
 
         set_requested_pagename($page->slug, $page->language);
-        CustomData::set('disable_media_embed', false);
+        App\Models\Content\CustomData::set('disable_media_embed', false);
 
         $input = file_get_contents('tests/fixtures/AutoEmbed/input.html');
         $actual = apply_filter($input, 'before_content');

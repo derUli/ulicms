@@ -7,42 +7,42 @@ class CustomDataTest extends \PHPUnit\Framework\TestCase {
     }
 
     protected function tearDown(): void {
-        CustomData::delete('my_value');
+        App\Models\Content\CustomData::delete('my_value');
         unset($_GET['slug'], $_SESSION['language']);
 
     }
 
     public function testGetCustomDataOrSetting(): void {
         Settings::set('my_value', 'text1');
-        $this->assertEquals('text1', CustomData::getCustomDataOrSetting('my_value'));
-        CustomData::set('my_value', 'text2');
-        $this->assertEquals('text2', CustomData::getCustomDataOrSetting('my_value'));
-        CustomData::delete('my_value');
-        $this->assertEquals('text1', CustomData::getCustomDataOrSetting('my_value'));
+        $this->assertEquals('text1', App\Models\Content\CustomData::getCustomDataOrSetting('my_value'));
+        App\Models\Content\CustomData::set('my_value', 'text2');
+        $this->assertEquals('text2', App\Models\Content\CustomData::getCustomDataOrSetting('my_value'));
+        App\Models\Content\CustomData::delete('my_value');
+        $this->assertEquals('text1', App\Models\Content\CustomData::getCustomDataOrSetting('my_value'));
     }
 
     public function testGetReturnsEmpty(): void {
         $this->assertEquals(
             [],
-            CustomData::get('gibts_echt_nicht')
+            App\Models\Content\CustomData::get()
         );
     }
 
     public function testGetDefaultJSON(): void {
-        $json = CustomData::getDefaultJSON();
+        $json = App\Models\Content\CustomData::getDefaultJSON();
         $this->assertNotEmpty($json);
         $this->assertTrue(is_json($json));
     }
 
     public function testGetDefaultReturnsEmptyArray(): void {
-        $this->assertNull(CustomData::getDefault('unknown_type'));
+        $this->assertNull(App\Models\Content\CustomData::getDefault('unknown_type'));
     }
 
     public function testGetDefaultReturnsArray(): void {
-        CustomData::setDefault('some_data', '123');
+        App\Models\Content\CustomData::setDefault('some_data', '123');
         $this->assertEquals(
             '123',
-            CustomData::getDefault('some_data')
+            App\Models\Content\CustomData::getDefault('some_data')
         );
     }
 }

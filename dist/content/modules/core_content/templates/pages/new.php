@@ -757,7 +757,7 @@ foreach ($pages as $key => $page) {
                 <strong class="field-label"><?php translate('custom_data_json'); ?></strong>
                 <textarea name="custom_data" style="width: 100%; height: 200px;"
                             cols=80 rows=10
-                            class="codemirror" data-mimetype="application/json" data-validate="json"><?php esc(CustomData::getDefaultJSON()); ?></textarea>
+                            class="codemirror" data-mimetype="application/json" data-validate="json"><?php esc(App\Models\Content\CustomData::getDefaultJSON()); ?></textarea>
             </div>
         </div>
     </div>
