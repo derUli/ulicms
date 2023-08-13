@@ -43,6 +43,14 @@ class CustomData {
         return (array)$customData;
     }
 
+    /**
+     * Set CustomData attribute for current page
+     *
+     * @param string $var
+     * @param mixed $value
+     *
+     * @return void
+     */
     public static function set(string $var, mixed $value): void {
         $page = get_slug();
 
@@ -59,6 +67,13 @@ class CustomData {
                 Database::escapeValue($_SESSION['language']) . "'";
     }
 
+    /**
+     * Remove CustomData attribute from current page
+     *
+     * @param ?string $var
+     *
+     * @return void
+     */
     public static function delete(
         ?string $var = null
     ): void {
@@ -98,6 +113,7 @@ class CustomData {
         if (! isset(self::$defaults[$key])) {
             return null;
         }
+
         return self::$defaults[$key];
     }
 
