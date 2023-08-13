@@ -41,10 +41,10 @@ class CustomData {
         return [];
     }
 
-    public static function set(string $var, $value): void {
+    public static function set(string $var, mixed $value): void {
         $page = get_slug();
 
-        $data = self::get($page);
+        $data = self::get();
         $data[$var] = $value;
 
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
@@ -62,10 +62,8 @@ class CustomData {
     ): void {
         $page = get_slug();
 
-        $data = self::get($page);
-        if ($data === null || ! $var) {
-            $data = [];
-        }
+        $data = self::get();
+
         // Wenn $var gesetzt ist, nur $var aus custom_data löschen
         if ($var && isset($data[$var])) {
             unset($data[$var]);
@@ -80,7 +78,7 @@ class CustomData {
                 Database::escapeValue($_SESSION['language']) . "'");
     }
 
-    public static function getCustomDataOrSetting(string $name) {
+    public static function getCustomDataOrSetting(string $name): mixed {
         $data = self::get();
 
         if (is_array($data) && isset($data[$name])) {
@@ -90,11 +88,11 @@ class CustomData {
         return Settings::get($name);
     }
 
-    public static function setDefault(string $key, $value): void {
+    public static function setDefault(string $key, mixed $value): void {
         self::$defaults[$key] = $value;
     }
 
-    public static function getDefault(string $key) {
+    public static function getDefault(string $key): mixed {
         if (! isset(self::$defaults[$key])) {
             return null;
         }
