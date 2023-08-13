@@ -27,6 +27,8 @@ class CustomData {
         $page = get_slug();
         $language = getCurrentLanguage();
 
+        $customData = [];
+
         $sql = 'SELECT `custom_data` FROM ' . Database::tableName('content') .
                 " WHERE slug='" . Database::escapeValue($page) .
                 "' AND language='" .
@@ -35,10 +37,10 @@ class CustomData {
 
         if (Database::getNumRows($result) > 0) {
             $dataset = Database::fetchObject($result);
-            return isset($dataset->custom_data) && is_json($dataset->custom_data) ? json_decode($dataset->custom_data, true) : [];
+            $customData = isset($dataset->custom_data) && is_json($dataset->custom_data) ? json_decode($dataset->custom_data, true) : [];
         }
 
-        return [];
+        return (array)$customData;
     }
 
     public static function set(string $var, mixed $value): void {
