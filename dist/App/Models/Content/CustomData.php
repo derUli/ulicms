@@ -117,6 +117,11 @@ class CustomData {
         return self::$defaults[$key];
     }
 
+    /**
+     * Get default JSON
+     *
+     * @return string
+     */
     public static function getDefaultJSON(): string {
         return json_readable_encode(self::$defaults);
     }
