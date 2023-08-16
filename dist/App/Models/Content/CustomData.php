@@ -109,6 +109,13 @@ class CustomData {
         self::$defaults[$key] = $value;
     }
 
+    /**
+     * Get default value for JSON attribute
+     *
+     * @param string $key
+     *
+     * @return mixed
+     */
     public static function getDefault(string $key): mixed {
         if (! isset(self::$defaults[$key])) {
             return null;
