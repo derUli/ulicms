@@ -759,7 +759,7 @@ class User extends Model {
         ];
         Database::pQuery($sql, $args, true);
 
-        return Database::getAffectedRows($amount) > 0;
+        return Database::getAffectedRows() > 0;
     }
 
     /**

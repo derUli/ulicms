@@ -95,6 +95,13 @@ class CustomData {
                 Database::escapeValue($_SESSION['language']) . "'");
     }
 
+    /**
+     * Get custom data attribute if exists or setting
+     *
+     * @param $name
+     *
+     * @return mixed
+     */
     public static function getCustomDataOrSetting(string $name): mixed {
         $data = self::get();
 
@@ -105,6 +112,14 @@ class CustomData {
         return Settings::get($name);
     }
 
+    /**
+     * Set default value for JSON attribute
+     *
+     * @param string $key
+     * @param mixed $value
+     *
+     * @return void
+     */
     public static function setDefault(string $key, mixed $value): void {
         self::$defaults[$key] = $value;
     }
