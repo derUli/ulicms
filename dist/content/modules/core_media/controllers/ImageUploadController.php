@@ -8,6 +8,7 @@ use App\Helpers\ImageScaleHelper;
 use App\Security\Hash;
 use App\Utils\File;
 use App\Utils\Path;
+use Nette\Utils\FileSystem;
 
 /**
  * Image Upload Handler for CKEditor 5
@@ -20,6 +21,14 @@ class ImageUploadController extends \App\Controllers\Controller {
      * @return void
      */
     public function uploadPost(): void {
+        $datePath = date('Y') . '/' . date('m') . '/' . date('d');
+
+        $baseDir = Path::Resolve('ULICMS_CONTENT/images/' . $datePath);
+
+        if(! is_dir($baseDir)) {
+            FileSystem::createDir($baseDir);
+        }
+
         $upload = $_FILES['upload'] ?? null;
         $urls = [];
 
@@ -45,8 +54,8 @@ class ImageUploadController extends \App\Controllers\Controller {
 
             $targetFilename = "{$hash}-{$width}.{$extension}";
 
-            $targetPath = Path::Resolve("ULICMS_CONTENT/images/{$targetFilename}");
-            $url = "/content/images/{$targetFilename}";
+            $targetPath = "{$baseDir}/{$targetFilename}";
+            $url = "/content/images/{$datePath}/{$targetFilename}";
 
             $scaled = ImageScaleHelper::scaleDown($tmpPath, $targetPath);
 
