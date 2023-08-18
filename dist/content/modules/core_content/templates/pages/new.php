@@ -317,7 +317,7 @@ foreach ($pages as $key => $page) {
     </div>
     <div class="typedep" id="tab-link" style="display: none;">
         <div class="field">
-            <h2 class="accordion-header"><?php translate('link_url'); ?></h2>
+            <h2 class="accordion-header"><?php translate('link'); ?></h2>
             <div class="accordion-content">
                 <strong class="field-label">
 <?php translate('link_url'); ?>

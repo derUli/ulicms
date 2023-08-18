@@ -637,6 +637,7 @@ add_translation('ALLOWABLE_TAGS', 'Zulässige Tags');
 add_translation('ALLOWABLE_TAGS_HELP', 'Leer = alle Tags erlaubt');
 add_translation('SHOW_USERS', 'Benutzer anzeigen');
 add_translation('DEFAULT_LANGUAGE', 'Standardsprache');
+add_translation('LINK_URL', 'Link-URL');
 
 // Link to language
 add_translation('LANGUAGE_LINK', 'Link zu Sprache');

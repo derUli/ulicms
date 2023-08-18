@@ -11,6 +11,47 @@ $(() => {
 
     const ckeditorSettings = {
         language: $('html').data('select2-language'),
+        removePlugins: ['MediaEmbed'],
+        toolbar: {
+            items: [
+                'heading',
+                '|',
+                'fontFamily',
+                'fontSize',
+                'fontColor',
+                'fontBackgroundColor',
+                '|',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'subscript',
+                'superscript',
+                'code',
+                '|',
+                'alignment',
+                '|',
+                'bulletedList',
+                'numberedList',
+                '|',
+                'indent',
+                'outdent',
+                '|',
+                'horizontalLine',
+                'codeBlock',
+                'blockQuote',
+                'insertTable',
+                '|',
+                'link',
+                'uploadImage',
+                '|',
+                'undo',
+                'redo',
+                'findAndReplace'
+            ]
+        },
+        
+        shouldNotGroupWhenFull: true,
         simpleUpload: {
             // The URL that the images are uploaded to.
             uploadUrl: $('body').data('image-upload-url'),

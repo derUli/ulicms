@@ -642,6 +642,7 @@ add_translation('DEFAULT_LANGUAGE', 'Default Language');
 
 // Link to language
 add_translation('LANGUAGE_LINK', 'Link to Language');
+add_translation('LINK_URL', 'Link URL');
 
 add_translation('BACK', 'Back');
 add_translation('OPEN', 'Open');

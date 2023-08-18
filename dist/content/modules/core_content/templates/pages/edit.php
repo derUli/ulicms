@@ -403,7 +403,7 @@ while ($row = Database::fetchObject($result)) {
                     </div>
                 </div>
                 <div class="typedep" id="tab-link">
-                    <h2 class="accordion-header"><?php translate('link_url'); ?></h2>
+                    <h2 class="accordion-header"><?php translate('link'); ?></h2>
                     <div class="accordion-content">
                         <div class="field">
                             <strong class="field-label">
