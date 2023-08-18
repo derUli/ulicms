@@ -137,7 +137,7 @@ class User extends Model {
             'email' => $this->getEmail(),
             'login_id' => $this->getId(),
             'require_password_change' => $this->getRequirePasswordChange(),
-            'group_id' => (int)$this->getPrimaryGroupId(),
+            'group_id' => $this->getPrimaryGroupId(),
             'logged_in' => true,
             'session_begin' => time()
         ] : null;
@@ -545,8 +545,8 @@ class User extends Model {
      *
      * @return ?int
      */
-    public function getPrimaryGroupId(): ?int {
-        return $this->group_id;
+    public function getPrimaryGroupId() {
+        return (int)$this->group_id;
     }
 
     /**
@@ -759,7 +759,7 @@ class User extends Model {
         ];
         Database::pQuery($sql, $args, true);
 
-        return Database::getAffectedRows() > 0;
+        return Database::getAffectedRows($amount) > 0;
     }
 
     /**
