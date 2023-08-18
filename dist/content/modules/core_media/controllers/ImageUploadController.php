@@ -21,10 +21,14 @@ class ImageUploadController extends \App\Controllers\Controller {
      * @return void
      */
     public function uploadPost(): void {
+        // Path scheme:
+        // ULICMS_CONTENT/images/2023-08-18/3313298010-1920.jpeg
         $datePath = date('Y') . '/' . date('m') . '/' . date('d');
 
         $baseDir = Path::Resolve('ULICMS_CONTENT/images/' . $datePath);
+        $baseUrl = "/content/images/{$datePath}";
 
+        // Create directory
         if(! is_dir($baseDir)) {
             FileSystem::createDir($baseDir);
         }
@@ -32,37 +36,47 @@ class ImageUploadController extends \App\Controllers\Controller {
         $upload = $_FILES['upload'] ?? null;
         $urls = [];
 
+        // If called without file abort here
         if(! $upload) {
             $response = [
-                'error' => get_translation('error_no_file_uploaded')
+                'error' => [
+                    'message' => get_translation('error_no_file_uploaded')
+                ]
             ];
 
             JSONResult($response);
         }
 
+        // Uploaded file path
         $tmpPath = $upload['tmp_name'];
         $originalFilename = $upload['name'];
         $extension = File::getExtension($originalFilename);
 
+        // Calculate hash
         $fileContent = file_get_contents($tmpPath);
+        $hash = Hash::hashCacheIdentifier((string)$fileContent);
 
-        $hash = Hash::hashCacheIdentifier($fileContent);
+        // Get dimensions for responsive images
+        $dimensions = ImageScaleHelper::getSrcSetDimensions();
 
-        $dimension = ImageScaleHelper::getSrcSetDimensions();
+        foreach($dimensions as $width => $size) {
 
-        foreach($dimension as $width => $size) {
-
+            // Target path and url
             $targetFilename = "{$hash}-{$width}.{$extension}";
-
             $targetPath = "{$baseDir}/{$targetFilename}";
-            $url = "/content/images/{$datePath}/{$targetFilename}";
+            $url = "{$baseUrl}/{$targetFilename}";
 
+            // Scale image
             $scaled = ImageScaleHelper::scaleDown($tmpPath, $targetPath);
 
+            // If scaling image failed return error
             if(! $scaled) {
                 $response = [
-                    'error' => get_translation('error_scaling_failed')
+                    'error' => [
+                        'message' => get_translation('error_scaling_failed')
+                    ]
                 ];
+
                 JSONResult($response);
             }
 
@@ -78,6 +92,5 @@ class ImageUploadController extends \App\Controllers\Controller {
         ];
 
         JSONResult($response);
-
     }
 }
