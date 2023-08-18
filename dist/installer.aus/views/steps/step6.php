@@ -35,7 +35,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
             value="<?php echo htmlspecialchars($_SESSION['admin_lastname']); ?>"
             required>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-3">
         <label for="text"><?php echo TRANSLATION_ADMIN_FIRSTNAME; ?>*</label> <input
             type="text" class="form-control" name="admin_firstname"
             id="admin_firstname"

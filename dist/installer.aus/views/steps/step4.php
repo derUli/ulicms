@@ -8,7 +8,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 <h3>
     <?php echo TRANSLATION_PERMISSION; ?>
 </h3>
-<p>
+<div class="mb-3">
     <img
         class="img-fluid"
         src="media/chmod_<?php
@@ -16,7 +16,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 ?>.png"
         alt="<?php echo TRANSLATION_PERMISSIONS2; ?>"
         title="<?php echo TRANSLATION_PERMISSIONS2; ?>" border="1" />
-</p>
+</div>
 
 <p>
     <a href="index.php?step=5" class="btn btn-primary"><i class="fas fa-check"></i> <?php echo TRANSLATION_NEXT; ?></a>

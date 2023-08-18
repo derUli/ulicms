@@ -1,12 +1,15 @@
 ===== Neues in UliCMS 2024.1 =====
 
+Neue Features:
+* Installer auf Bootstrap 5 umgestellt
+
 API-Änderungen:
 * CustomData in Namespace App\Packages verschoben
 
 ===== Neues in UliCMS 2023.4 =====
 
 Neue Features:
-* Admin-Bereich auf Bootstrap 5 umgestellt.
+* Admin-Bereich auf Bootstrap 5 umgestellt
 
 Sicherheit:
 * Remote Code Execution in Avatar-Upload gefixt

@@ -1,17 +1,13 @@
 <?php
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
-?>
-<?php
 
 $isWritable = is_writable(ULICMS_ROOT);
 ?>
 
-<ul>
+<ul class="mb-3">
     <li>
     <?php
-
         echo TRANSLATION_IS_WRITABLE . ' ';
-
 if ($isWritable) {
     echo '<i class="fa fa-check text-green" aria-hidden="true"></i>';
 } else {

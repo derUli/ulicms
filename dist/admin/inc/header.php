@@ -121,7 +121,7 @@ if (get_action()) {
 ?>
         <div class="container-fluid main">
             <div class="row menubar">
-                <div class="col col-7 col-sm-8 col-md-9">
+                <div class="col col-7 col-md-8 col-md-9">
                     <a
                         href="../"
                         title="<?php translate('goto_frontend'); ?>"
@@ -130,7 +130,7 @@ if (get_action()) {
                             src="<?php Template::escape($admin_logo); ?>" alt="UliCMS"
                             class="img-fluid"></a>
                 </div>
-                <div class="col col-5 col-sm-4 col-md-3 menu-container">
+                <div class="col col-5 col-md-4 col-md-3 menu-container">
                     <?php
         if (is_logged_in()) {
             $colClass = $permissionChecker->hasPermission('comments_manage') ? 'col col-4' : 'col col-6';

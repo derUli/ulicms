@@ -8,7 +8,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title><?php echo InstallerController::getTitle(); ?> - <?php echo APPLICATION_TITLE; ?> </title>
         <link rel="stylesheet" type="text/css"
-              href="../content/modules/bootstrap/css/bootstrap.min.css" />
+              href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="media/style.css" />
         <link rel="stylesheet"
               href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
@@ -16,7 +16,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
     <body>
         <div class="container" id="root-container">
             <div class="row">
-                <div class="col col-sm-12" id="header">
+                <div class="col col-12 col-md-12" id="header">
                     <p>
                         <img src="../admin/gfx/logo.png" alt="UliCMS">
                     </p>
@@ -26,7 +26,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
                 </div>
             </div>
             <div class="row" id="my-container">
-                <div class="col col-sm-4" id="steps">
+                <div class="col col-12 col-md-4" id="steps">
                     <ol id="navigation">
                         <?php for ($i = 1; $i <= 10; $i++) { ?>
                             <li><a href="index.php?step=<?php echo $i; ?>"
@@ -39,5 +39,5 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
                         <?php } ?>
                     </ol>
                 </div>
-                <div class="col col-sm-8" id="main">
+                <div class="col col-12 col-md-8" id="main">
                     <h1><?php echo InstallerController::getTitle(); ?></h1>

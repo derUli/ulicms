@@ -4,10 +4,9 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 <?php $license = htmlspecialchars(file_get_contents('license.txt')); ?>
 <p>You have to read and accept the license conditions to use this
     software:</p>
-<p>
+<div class="form-group mb-3">
     <textarea id="license" rows="10" cols="80" readonly><?php echo $license; ?></textarea>
-</p>
-
+</div>
 <p>
     <a href="?step=3" class="btn btn-primary"><i class="fas fa-check"></i> <?php echo TRANSLATION_ACCEPT_LICNSE; ?></a>
 </p>

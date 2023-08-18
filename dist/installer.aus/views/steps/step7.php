@@ -3,7 +3,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 ?>
 <form role="form" method="post" action="index.php?submit_form=Demodata">
 
-    <div class="form-group">
+    <div class="form-group mb-3">
         <div class="checkbox">
             <label><input type="checkbox" value="yes" name="install_demodata"
                           id="install_demodata"
