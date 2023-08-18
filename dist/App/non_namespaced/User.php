@@ -137,7 +137,7 @@ class User extends Model {
             'email' => $this->getEmail(),
             'login_id' => $this->getId(),
             'require_password_change' => $this->getRequirePasswordChange(),
-            'group_id' => $this->getPrimaryGroupId(),
+            'group_id' => (int)$this->getPrimaryGroupId(),
             'logged_in' => true,
             'session_begin' => time()
         ] : null;
@@ -545,7 +545,7 @@ class User extends Model {
      *
      * @return ?int
      */
-    public function getPrimaryGroupId() {
+    public function getPrimaryGroupId(): ?int {
         return $this->group_id;
     }
 
