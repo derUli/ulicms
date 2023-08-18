@@ -1,6 +1,8 @@
 ===== Neues in UliCMS 2024.1 =====
 
 Neue Features:
+
+* CKEditor 5
 * Installer auf Bootstrap 5 umgestellt
 
 API-Änderungen:

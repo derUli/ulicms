@@ -53,8 +53,13 @@ function get_csrf_token(): string {
  * @return bool
  */
 function check_csrf_token(): bool {
-    if (! isset($_REQUEST['csrf_token'])) {
-        return false;
+    $csrfToken = null;
+
+    if(isset($_REQUEST['csrf_token'])) {
+        $csrfToken = $_REQUEST['csrf_token'];
+    } elseif(isset($_SERVER['HTTP_X_CSRF_TOKEN'])) {
+        $csrfToken = $_SERVER['HTTP_X_CSRF_TOKEN'];
     }
-    return $_REQUEST['csrf_token'] == $_SESSION['csrf_token'];
+
+    return $csrfToken && $csrfToken === $_SESSION['csrf_token'];
 }

@@ -11,25 +11,19 @@ $(() => {
 
     const ckeditorSettings = {
         removePlugins: ['MediaEmbed'],
-        toolbar: [
-            "heading",
-            "|",
-            "bold",
-            "italic",
-            "link",
-            "bulletedList",
-            "numberedList",
-            "|",
-            "indent",
-            "outdent",
-            "|",
-            "codeBlock",
-            "blockQuote",
-            "insertTable",
-            "mediaEmbed",
-            "undo",
-            "redo"
-        ]
+        simpleUpload: {
+            // The URL that the images are uploaded to.
+            uploadUrl: $('body').data('image-upload-url'),
+            
+            // Enable the XMLHttpRequest.withCredentials property if required.
+            withCredentials: true,
+  
+            // Headers sent along with the XMLHttpRequest to the upload server.
+            headers: {
+              "X-CSRF-TOKEN": $('body').data('csrf-token'),
+              // Authorization: "Bearer <JSON Web Token>"
+            }
+          }
     };
 
     document.querySelectorAll('textarea.ckeditor').forEach((element, index) => {

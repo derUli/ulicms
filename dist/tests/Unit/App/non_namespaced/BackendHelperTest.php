@@ -33,11 +33,4 @@ class BackendHelperTest extends \PHPUnit\Framework\TestCase {
             getCombinedScriptHtml()
         );
     }
-
-    public function testGetCKEditorSkins(): void {
-        $skins = \App\Helpers\BackendHelper::getCKEditorSkins();
-
-        $this->assertGreaterThanOrEqual(1, count($skins));
-        $this->assertContains('moono-lisa', $skins);
-    }
 }

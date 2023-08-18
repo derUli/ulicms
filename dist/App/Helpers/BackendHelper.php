@@ -8,7 +8,6 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\HtmlEditor;
 use App\HTML\Script;
-use App\Utils\File;
 use Request;
 
 use function enqueueScriptFile;
@@ -48,7 +47,7 @@ abstract class BackendHelper extends Helper {
     public static function enqueueEditorScripts(): void {
         // ckeditor is huge so embed it only if this is the user'S preferred html editor
         if (get_html_editor() == HtmlEditor::CKEDITOR) {
-            echo Script::fromFile('../node_modules/ckeditor5-build-classic-dna/build/ckeditor.js');
+            echo Script::fromFile('../node_modules/ckeditor5-classic-plus/build/ckeditor.js');
 
             enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath(
                 'core_content',
@@ -84,23 +83,5 @@ abstract class BackendHelper extends Helper {
             'core_content',
             'js/pages/init-codemirror.js'
         ));
-    }
-
-    /**
-     * Get CKEditor Skin.
-     * @return string[]
-     */
-    public static function getCKEditorSkins(): array {
-        $skins = [];
-        $dir = \App\Utils\Path::resolve('ULICMS_ROOT/admin/ckeditor/skins');
-        $folders = File::findAllDirs($dir);
-
-        foreach ($folders as $folder) {
-            $cssFile = "{$folder}/editor.css";
-            if (is_file($cssFile)) {
-                $skins[] = basename($folder);
-            }
-        }
-        return $skins;
     }
 }

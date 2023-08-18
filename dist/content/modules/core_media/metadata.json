@@ -34,7 +34,8 @@
     "controllers": {
         "VideoController": "controllers/VideoController.php",
         "AudioController": "controllers/AudioController.php",
-        "CoreMediaController": "controllers/CoreMediaController.php"
+        "CoreMediaController": "controllers/CoreMediaController.php",
+        "ImageUploadController": "controllers/ImageUploadController.php"
     },
     "main_class": "CoreMediaController",
     "action_controllers": {
@@ -47,6 +48,7 @@
         "VideoController::createPost": "videos_create",
         "AudioController::deletePost": "audio",
         "AudioController::createPost": "audio_create",
-        "AudioController::updatePost": "audio_edit"
+        "AudioController::updatePost": "audio_edit",
+        "ImageUploadController:uploadPost": "files"
     }
 }

@@ -1,0 +1,1 @@
+ DELETE FROM `{prefix}settings` where name = 'ckeditor_skin';

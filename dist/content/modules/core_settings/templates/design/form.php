@@ -2,16 +2,7 @@
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use App\HTML\Input;
-use App\HTML\ListItem;
 use App\Security\Permissions\PermissionChecker;
-
-$skins = \App\Helpers\BackendHelper::getCKEditorSkins();
-
-$skinItems = [];
-foreach ($skins as $skin) {
-    $skinItems[] = new ListItem($skin, $skin);
-}
 
 $controller = ControllerRegistry::get();
 use App\Translations\JSTranslation;
@@ -25,7 +16,6 @@ $mobile_theme = Settings::get('mobile_theme');
 $default_font = Settings::get('default_font');
 $title_format = Settings::get('title_format');
 $font_size = Settings::get('font_size');
-$ckeditor_skin = Settings::get('ckeditor_skin');
 $font_sizes = $controller->getFontSizes();
 $no_mobile_design_on_tablet = Settings::get('no_mobile_design_on_tablet');
 $modManager = new \App\Packages\ModuleManager();
@@ -137,19 +127,6 @@ foreach ($allThemes as $th) {
                             echo ' checked';
                         }
 ?>></td>
-        </tr>
-        <tr>
-            <td><strong><?php translate('editor_skin'); ?> </strong></td>
-            <td>
-                <?php
-                echo Input::singleSelect(
-                    'ckeditor_skin',
-                    $ckeditor_skin,
-                    $skinItems
-                );
-?>
-            </td>
-
         </tr>
         <tr>
             <td><strong><?php translate('font_family'); ?> </strong></td>
