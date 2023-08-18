@@ -3,6 +3,7 @@
 Neue Features:
 
 * CKEditor 5
+* Responsive Images
 * Installer auf Bootstrap 5 umgestellt
 
 API-Änderungen:
