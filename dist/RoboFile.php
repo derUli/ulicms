@@ -981,7 +981,7 @@ class RoboFile extends Tasks {
     /**
      * Show package keys
      *
-     * @param array $json
+     * @param array<string, mixed> $json
      *
      * @return void
      */
