@@ -11,7 +11,6 @@ use App\Helpers\TestHelper;
 use App\Packages\PackageManager;
 use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
-use App\Storages\Settings\ConfigurationToDotEnvConverter;
 use App\Storages\Settings\MaintenanceMode;
 use App\Utils\CacheUtil;
 use Nette\IOException;
@@ -852,25 +851,6 @@ class RoboFile extends Tasks {
      */
     public function buildMinifyHTML(): void {
         system('minifyall -e html');
-    }
-
-    /**
-     * Converts an old BaseConfig to .env file format
-     *
-     * @return void
-     */
-    public function dotenvFromConfig(): void {
-        $this->initUliCMS();
-
-        $cfg = new CMSConfig();
-        $converter = new ConfigurationToDotEnvConverter($cfg);
-        $attributes = $converter->convertToArray();
-
-        foreach($attributes as $key => $value) {
-            $this->writeln("{$key}={$value}");
-        }
-
-        $converter->writeEnvFile();
     }
 
     /**
