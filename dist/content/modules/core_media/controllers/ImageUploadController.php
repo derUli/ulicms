@@ -23,7 +23,11 @@ class ImageUploadController extends \App\Controllers\Controller {
         $upload = $_FILES['upload'] ?? null;
 
         if(! $upload) {
-            ExceptionResult('No file uploaded');
+            $response = [
+                'error' => get_translation('error_no_file_uploaded')
+            ];
+
+            JSONResult($response);
         }
 
         $tmpPath = $upload['tmp_name'];
@@ -48,7 +52,11 @@ class ImageUploadController extends \App\Controllers\Controller {
             JSONResult($response);
         }
 
-        ExceptionResult('Scaling failed');
+        $response = [
+            'error' => get_translation('error_scaling_failed')
+        ];
+            
+        JSONResult($response);
 
     }
 }

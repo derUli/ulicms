@@ -10,7 +10,7 @@ const CKCHANGED = (event) => {
 $(() => {
 
     const ckeditorSettings = {
-        removePlugins: ['MediaEmbed'],
+        language: $('html').data('select2-language'),
         simpleUpload: {
             // The URL that the images are uploaded to.
             uploadUrl: $('body').data('image-upload-url'),

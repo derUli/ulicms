@@ -42,6 +42,7 @@ abstract class ImageScaleHelper extends Helper {
         return $dimensions;
     }
 
+
     /**
      * Scale down huge images to make them fit max_image_dimensions
      *
