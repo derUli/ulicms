@@ -12,7 +12,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 /**
  * This class parses custom data JSON
  */
-class CustomData {
+abstract class CustomData {
     /**
      * @var array<string, mixed>
      */
