@@ -9,6 +9,8 @@ Neue Features:
 API-Änderungen:
 * CustomData in Namespace App\Packages verschoben
 
+Sonstige Änderungen:
+* max_image_dimensions auf 1920x1080 geändert
 ===== Neues in UliCMS 2023.4 =====
 
 Neue Features:
