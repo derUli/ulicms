@@ -546,7 +546,7 @@ class User extends Model {
      * @return ?int
      */
     public function getPrimaryGroupId(): ?int {
-        return $this->group_id;
+        return (int)$this->group_id;
     }
 
     /**
