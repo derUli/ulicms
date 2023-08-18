@@ -11,7 +11,7 @@ class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetMaxImageDimensions(): void {
         $this->assertEquals(
-            [2500, 1667],
+            [1920, 1080],
             ImageScaleHelper::getMaxImageDimensions()
         );
     }
@@ -32,18 +32,17 @@ class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase {
         $imagine = new Imagine\Gd\Imagine();
         $image = $imagine->open($this->getProcessedPath());
         $size = $image->getSize();
-        $this->assertEquals(1667, $size->getWidth());
-        $this->assertEquals(1667, $size->getHeight());
+        $this->assertEquals(1080, $size->getWidth());
+        $this->assertEquals(1080, $size->getHeight());
     }
 
     public function testGetSrcSetDimensions(): void {
         $dimensions = ImageScaleHelper::getSrcSetDimensions();
 
-        $this->assertEquals([2500, 1667], $dimensions['default']);
-        $this->assertEquals([2500, 1667], $dimensions['2500']);
-        $this->assertEquals([1250, 833], $dimensions['1250']);
-        $this->assertEquals([625, 416], $dimensions['625']);
-        $this->assertEquals([312, 208], $dimensions['312']);
+        $this->assertEquals([1920, 1080], $dimensions['default']);
+        $this->assertEquals([1920, 1080], $dimensions['1920']);
+        $this->assertEquals([960, 540], $dimensions['960']);
+        $this->assertEquals([480, 270], $dimensions['480']);
     }
 
     protected function getFixturePath(): string {

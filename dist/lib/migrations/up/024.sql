@@ -3,5 +3,5 @@ INSERT INTO `{prefix}settings`
              value) 
 VALUES (
     'max_image_dimensions', 
-    '2500x1667'
+    '1920x1080'
 )

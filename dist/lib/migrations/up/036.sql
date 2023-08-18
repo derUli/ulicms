@@ -1,0 +1,1 @@
+ UPDATE `{prefix}settings` SET value='1920x1080' where name = 'max_image_dimensions' and value = '2500x1667';
