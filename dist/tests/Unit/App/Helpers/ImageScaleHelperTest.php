@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\ImageScaleHelper;
+use App\Utils\Path;
 
 class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase {
     protected function tearDown(): void {
@@ -43,6 +44,42 @@ class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals([1920, 1080], $dimensions['1920']);
         $this->assertEquals([960, 540], $dimensions['960']);
         $this->assertEquals([480, 270], $dimensions['480']);
+    }
+
+    public function testGetQualitySettingsJpg(): void {
+        $this->assertEquals(
+            80,
+            ImageScaleHelper::getQualitySettings(
+                Path::resolve('ULICMS_ROOT/tests/fixtures/cat.jpg')
+            )['jpeg_quality']
+        );
+    }
+
+    public function testGetQualitySettingsPng(): void {
+        $this->assertEquals(
+            9,
+            ImageScaleHelper::getQualitySettings(
+                Path::resolve('ULICMS_ROOT/admin/gfx/no_avatar.png')
+            )['png_compression_level']
+        );
+    }
+
+    public function testGetQualitySettingsWebp(): void {
+        $this->assertEquals(
+            80,
+            ImageScaleHelper::getQualitySettings(
+                Path::resolve('ULICMS_ROOT/tests/fixtures/test.webp')
+            )['webp_quality']
+        );
+    }
+
+    public function testGetQualitySettingsNoImage(): void {
+        $this->assertEquals(
+            [],
+            ImageScaleHelper::getQualitySettings(
+                Path::resolve('ULICMS_ROOT/index.php')
+            )
+        );
     }
 
     protected function getFixturePath(): string {

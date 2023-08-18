@@ -6,6 +6,7 @@ namespace App\Helpers;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+use App\Utils\File;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
 use Settings;
@@ -93,16 +94,45 @@ abstract class ImageScaleHelper extends Helper {
         if ($dimensions) {
             $imagine = ImagineHelper::getImagine();
 
-            $size = new Box($dimensions[0], $dimensions[1]);
+            $size = new Box((int)$dimensions[0], (int)$dimensions[1]);
             $mode = ImageInterface::THUMBNAIL_INSET;
 
-            $imagine?->open($file)
+            $qualitySettings = static::getQualitySettings($file);
+
+            $imagine->open($file)
                 ->thumbnail($size, $mode)
-                ->save($outputFile ?: $file);
+                ->save($outputFile ?: $file, $qualitySettings);
 
             $scaled = true;
         }
 
         return $scaled;
+    }
+
+    /**
+     * Get quality settings array for file
+     *
+     * @return array<string, int>
+     */
+    public static function getQualitySettings(string $file): array {
+        $mimeType = File::getMime($file);
+
+        switch($mimeType) {
+            case 'image/jpeg':
+                return [
+                    'jpeg_quality' => (int)Settings::get('image_compression_jpeg')
+                ];
+            case 'image/png':
+                return [
+                    'png_compression_level' => (int)Settings::get('image_compression_png')
+                ];
+            case 'image/webp':
+                return [
+                    'webp_quality' => (int)Settings::get('image_compression_webp')
+                ];
+            default:
+                return [];
+        }
+
     }
 }
