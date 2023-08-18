@@ -39,8 +39,12 @@ body {
     padding-bottom: 30px;
 }
 
-a.current-item {
-    font-weight: bold;
+a {
+    text-decoration: none;
+
+    &.current-item {
+        font-weight: bold;
+    }
 }
 
 #footer {
