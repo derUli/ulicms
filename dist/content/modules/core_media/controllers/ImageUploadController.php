@@ -38,8 +38,6 @@ class ImageUploadController extends \App\Controllers\Controller {
         $targetPath = Path::Resolve("ULICMS_CONTENT/images/{$targetFilename}");
         $url = "/content/images/{$targetFilename}";
 
-        // TODO: Scale down image
-
         $scaled = ImageScaleHelper::scaleDown($tmpPath, $targetPath);
 
         if($scaled) {
