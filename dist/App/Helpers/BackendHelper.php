@@ -48,7 +48,7 @@ abstract class BackendHelper extends Helper {
     public static function enqueueEditorScripts(): void {
         // ckeditor is huge so embed it only if this is the user'S preferred html editor
         if (get_html_editor() == HtmlEditor::CKEDITOR) {
-            echo Script::fromFile('ckeditor/ckeditor.js');
+            echo Script::fromFile('../node_modules/ckeditor5-build-classic-dna/build/ckeditor.js');
 
             enqueueScriptFile(\App\Helpers\ModuleHelper::buildRessourcePath(
                 'core_content',

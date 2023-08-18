@@ -8,53 +8,40 @@ const CKCHANGED = (event) => {
 };
 
 $(() => {
-    for (name in CKEDITOR.instances) {
-        const id = CKEDITOR.instances[name].element.getId();
-        CKEDITOR.instances[name].destroy();
-        const editor = CKEDITOR.replace(id,
-                {
-                    skin: $("body").data("ckeditor-skin")
-                }
-        );
-        editor.on("instanceReady", ({editor}) =>
-        {
-            // update ckeditor height if the height
-            // was saved in the local storage
-            const ckeditorHeight = localStorage.getItem("ckeditorHeight");
-            if (ckeditorHeight) {
-                editor.resize('100%', ckeditorHeight, true);
-            }
-            // save editor height on resize
-            editor.on('resize', (event) => {
-                localStorage.setItem(
-                        "ckeditorHeight",
-                        event.data.contentsHeight
-                        );
-            });
-            editor.document.on("keyup", CKCHANGED);
-            editor.document.on("paste", CKCHANGED);
 
-            editor.document.on('keydown', (event) =>
-            {
-                if (event.data.$.keyCode === 17)
-                    isCtrl = true;
-                if (event.data.$.keyCode === 83 && isCtrl === true)
-                {
-                    //The preventDefault() call prevents the browser's
-                    //save popup to appear.
-                    //The try statement fixes a weird IE error.
-                    try {
-                        event.data.$.preventDefault();
-                    } catch (err) {
-                    }
-                    $("form").last().find("button[type=submit]").click();
-                    //Call to your save function
+    const ckeditorSettings = {
+        removePlugins: ['MediaEmbed'],
+        toolbar: [
+            "heading",
+            "|",
+            "bold",
+            "italic",
+            "link",
+            "bulletedList",
+            "numberedList",
+            "|",
+            "indent",
+            "outdent",
+            "|",
+            "codeBlock",
+            "blockQuote",
+            "insertTable",
+            "mediaEmbed",
+            "undo",
+            "redo"
+        ]
+    };
 
-                    return false;
-                }
-            });
-        });
-    }
+    document.querySelectorAll('textarea.ckeditor').forEach((element, index) => {
+        ClassicEditor
+        .create( element, ckeditorSettings )
+        .catch( error => {
+            bootbox.alert(error);
+            console.error( error );
+        } );
+
+    });
+
 
     $('form').each(function (i, n) {
         $('input', n).change(() => {
