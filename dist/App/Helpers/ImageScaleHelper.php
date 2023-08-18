@@ -50,19 +50,22 @@ abstract class ImageScaleHelper extends Helper {
     public static function getSrcSetDimensions(?array $dimensions = null): array {
         $srcSets = [];
 
-        $iterations = 3;
+        $iterations = 4;
         $dimensions = $dimensions ?? static::getMaxImageDimensions();
-
-        $srcSets[] = $dimensions;
 
         $width = $dimensions[0];
         $height = $dimensions[1];
 
         for($i = 1; $i <= $iterations; $i++) {
-            $width = $width / 2;
-            $height = $height / 2;
 
             $srcSets[(int)$width] = [(int)$width, (int)$height];
+
+            if(! isset($srcSets['default'])) {
+                $srcSets['default'] = [(int)$width, (int)$height];
+            }
+
+            $width = $width / 2;
+            $height = $height / 2;
         }
 
         return apply_filter($srcSets, 'image_srcset_dimensions');

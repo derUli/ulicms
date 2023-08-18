@@ -36,6 +36,16 @@ class ImageScaleHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals(1667, $size->getHeight());
     }
 
+    public function testGetSrcSetDimensions(): void {
+        $dimensions = ImageScaleHelper::getSrcSetDimensions();
+
+        $this->assertEquals([2500, 1667], $dimensions['default']);
+        $this->assertEquals([2500, 1667], $dimensions['2500']);
+        $this->assertEquals([1250, 833], $dimensions['1250']);
+        $this->assertEquals([625, 416], $dimensions['625']);
+        $this->assertEquals([312, 208], $dimensions['312']);
+    }
+
     protected function getFixturePath(): string {
         return \App\Utils\Path::resolve('ULICMS_ROOT/tests/fixtures/huge-image.jpg');
     }
