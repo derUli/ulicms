@@ -37,9 +37,8 @@ abstract class ImageScaleHelper extends Helper {
             }
         }
 
-        
         $dimensions = apply_filter([$width, $height], 'image_max_dimensions');
-        
+
         return $dimensions;
     }
 
