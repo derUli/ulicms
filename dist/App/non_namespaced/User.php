@@ -545,8 +545,8 @@ class User extends Model {
      *
      * @return ?int
      */
-    public function getPrimaryGroupId() {
-        return $this->group_id;
+    public function getPrimaryGroupId(): ?int {
+        return (int)$this->group_id;
     }
 
     /**
@@ -759,7 +759,7 @@ class User extends Model {
         ];
         Database::pQuery($sql, $args, true);
 
-        return Database::getAffectedRows() > 0;
+        return Database::getAffectedRows($amount) > 0;
     }
 
     /**

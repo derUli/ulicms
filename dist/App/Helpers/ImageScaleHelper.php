@@ -37,7 +37,9 @@ abstract class ImageScaleHelper extends Helper {
             }
         }
 
-        return [$width, $height];
+        $dimensions = apply_filter([$width, $height], 'image_max_dimensions');
+
+        return $dimensions;
     }
 
     /**
@@ -45,14 +47,17 @@ abstract class ImageScaleHelper extends Helper {
      *
      * @param string $file
      * @param string|null $outputFile
+     * @param array<number>|null $dimensions
      *
      * @return bool
      */
     public static function scaleDown(
         string $file,
-        ?string $outputFile = null
+        ?string $outputFile = null,
+        ?array $dimensions = null
+
     ): bool {
-        $dimensions = ImageScaleHelper::getMaxImageDimensions();
+        $dimensions = $dimensions?? ImageScaleHelper::getMaxImageDimensions();
 
         $scaled = false;
 
