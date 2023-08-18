@@ -14,11 +14,11 @@ use App\Helpers\DateTimeHelper;
 class UliCMSVersion {
     public const CODE_NAME = 'Gnawing Viscacha';
 
-    public const RELEASE_YEAR = 2023;
+    public const RELEASE_YEAR = 2024;
 
     public const BUILD_DATE = 0; // {InsertBuildDate}
 
-    public const VERSION_NUMBER = [2023, 4];
+    public const VERSION_NUMBER = [2024, 1];
 
     /**
      * Returns the release year
