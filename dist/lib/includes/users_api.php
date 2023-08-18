@@ -101,8 +101,8 @@ function get_user_id(): ?int {
  *
  * @return int|null
  */
-function get_group_id(): ?int {
-    return Group::getCurrentGroupId();
+function get_group_id(): int {
+    return (int)Group::getCurrentGroupId();
 }
 
 /**

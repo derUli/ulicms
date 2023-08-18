@@ -3,11 +3,14 @@
 Neue Features:
 
 * CKEditor 5
+* Responsive Images
 * Installer auf Bootstrap 5 umgestellt
 
 API-Änderungen:
 * CustomData in Namespace App\Packages verschoben
 
+Sonstige Änderungen:
+* max_image_dimensions auf 1920x1080 geändert
 ===== Neues in UliCMS 2023.4 =====
 
 Neue Features:

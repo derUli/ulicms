@@ -81,7 +81,7 @@ class Group {
      * @return int|null
      */
     public static function getCurrentGroupId(): ?int {
-        return (int)$_SESSION['group_id'] ?? null;
+        return (int)($_SESSION['group_id'] ?? null);
     }
 
     /**
@@ -93,6 +93,7 @@ class Group {
         if (self::getCurrentGroupId()) {
             return new self(self::getCurrentGroupId());
         }
+
         return null;
     }
 

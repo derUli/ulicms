@@ -83,7 +83,6 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $files = [
             'lib/css/core.scss',
             'node_modules/bootstrap/dist/css/bootstrap.css',
-            'node_modules/bootstrap/dist/css/bootstrap-theme.css',
             'admin/css/main.scss'
         ];
 
@@ -94,14 +93,10 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             }
         }
 
-        $this->assertCount(4, \App\Storages\Vars::get('stylesheet_queue'));
+        $this->assertCount(3, \App\Storages\Vars::get('stylesheet_queue'));
         $this->assertEquals(
             'node_modules/bootstrap/dist/css/bootstrap.css',
             \App\Storages\Vars::get('stylesheet_queue')[1]
-        );
-        $this->assertEquals(
-            'node_modules/bootstrap/dist/css/bootstrap-theme.css',
-            \App\Storages\Vars::get('stylesheet_queue')[2]
         );
 
         resetStylesheetQueue();
@@ -124,7 +119,6 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $files = [
             'lib/css/core.scss',
             'node_modules/bootstrap/dist/css/bootstrap.css',
-            'node_modules/bootstrap/dist/css/bootstrap-theme.css',
             'admin/css/main.scss'
         ];
 
@@ -301,7 +295,6 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $files = [
             'lib/css/core.scss',
             'node_modules/bootstrap/dist/css/bootstrap.css',
-            'node_modules/bootstrap/dist/css/bootstrap-theme.css',
             'admin/css/main.scss'
         ];
         foreach ($files as $file) {
