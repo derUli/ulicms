@@ -583,7 +583,7 @@ class User extends Model
      */
     public function getPrimaryGroupId()
     {
-        return $this->group_id;
+        return (int)$this->group_id;
     }
 
     /**
