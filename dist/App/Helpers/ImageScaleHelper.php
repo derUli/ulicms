@@ -37,11 +37,36 @@ abstract class ImageScaleHelper extends Helper {
             }
         }
 
-        $dimensions = array_values(apply_filter([$width, $height], 'image_max_dimensions'));
-
-        return $dimensions;
+        return array_values(apply_filter([$width, $height], 'image_max_dimensions'));
     }
 
+    /**
+     * Calculate src set dimensions
+     *
+     * @param array<number>|null $dimensions
+     *
+     * @return array<int[]>
+     */
+    public static function getSrcSetDimensions(?array $dimensions = null): array {
+        $srcSets = [];
+
+        $iterations = 3;
+        $dimensions = $dimensions ?? static::getMaxImageDimensions();
+
+        $srcSets[] = $dimensions;
+
+        $width = $dimensions[0];
+        $height = $dimensions[1];
+
+        for($i = 1; $i <= $iterations; $i++) {
+            $width = $width / 2;
+            $height = $height / 2;
+
+            $srcSets[(int)$width] = [(int)$width, (int)$height];
+        }
+
+        return apply_filter($srcSets, 'image_srcset_dimensions');
+    }
 
     /**
      * Scale down huge images to make them fit max_image_dimensions

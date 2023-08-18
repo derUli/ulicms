@@ -21,6 +21,7 @@ class ImageUploadController extends \App\Controllers\Controller {
      */
     public function uploadPost(): void {
         $upload = $_FILES['upload'] ?? null;
+        $urls = [];
 
         if(! $upload) {
             $response = [
@@ -37,25 +38,36 @@ class ImageUploadController extends \App\Controllers\Controller {
         $fileContent = file_get_contents($tmpPath);
 
         $hash = Hash::hashCacheIdentifier($fileContent);
-        $targetFilename = "{$hash}.{$extension}";
 
-        $targetPath = Path::Resolve("ULICMS_CONTENT/images/{$targetFilename}");
-        $url = "/content/images/{$targetFilename}";
+        $dimension = ImageScaleHelper::getSrcSetDimensions();
 
-        $scaled = ImageScaleHelper::scaleDown($tmpPath, $targetPath);
+        foreach($dimension as $width => $size) {
 
-        if($scaled) {
-            $response = [
-                'url' => $url
-            ];
+            $targetFilename = "{$hash}-{$width}.{$extension}";
 
-            JSONResult($response);
+            $targetPath = Path::Resolve("ULICMS_CONTENT/images/{$targetFilename}");
+            $url = "/content/images/{$targetFilename}";
+
+            $scaled = ImageScaleHelper::scaleDown($tmpPath, $targetPath);
+
+            if(! $scaled) {
+                $response = [
+                    'error' => get_translation('error_scaling_failed')
+                ];
+                JSONResult($response);
+            }
+
+            if(! isset($urls['default'])) {
+                $urls['default'] = $url;
+            }
+
+            $urls[$width] = $url;
         }
 
         $response = [
-            'error' => get_translation('error_scaling_failed')
+            'urls' => $urls,
         ];
-            
+
         JSONResult($response);
 
     }
