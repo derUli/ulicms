@@ -20,7 +20,7 @@ class Template {
         $str .= (is_403() ? 'error403 ' : '');
         $str .= ((is_404() || is_403()) ? 'errorPage ' : 'page ');
         $str .= (is_mobile() ? 'mobile ' : 'desktop ');
-        $str .= (containsModule(get_slug()) ?
+        $str .= (containsModule() ?
                 ' containsModule ' : '');
 
         $str = trim($str);

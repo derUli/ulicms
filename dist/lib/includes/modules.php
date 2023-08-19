@@ -26,23 +26,40 @@ function getModuleMeta($module, $attrib = null) {
     return $attrib ? $json[$attrib] : $json;
 }
 
-function apply_filter($text, string $type) {
+/**
+ * Executes a filter and returns processed value
+ *
+ * @param mixed $input input value
+ * @param string $type filter name
+ *
+ * @return mixed output value
+ */
+function apply_filter(mixed $input, string $type): mixed {
+    $output = $input;
     $manager = new ModuleManager();
     $modules = $manager->getEnabledModuleNames();
 
     foreach($modules as $module) {
-        $main_class = getModuleMeta($module, 'main_class');
-        $controller = $main_class ? ControllerRegistry::get($main_class) : null;
+        $mainClass = getModuleMeta($module, 'main_class');
+        $controller = $mainClass ? ControllerRegistry::get($mainClass) : null;
 
         $escapedName = \App\Helpers\ModuleHelper::underscoreToCamel($type . '_filter');
+
         if ($controller && method_exists($controller, $escapedName)) {
-            $text = $controller->{$escapedName}($text);
+            $output = $controller->{$escapedName}($output);
         }
     }
 
-    return $text;
+    return $output;
 }
 
+/**
+ * Executes an event
+ *
+ * @param string $name filter name
+ *
+ * @return void
+ */
 function do_event(
     string $name
 ): void {
@@ -57,12 +74,15 @@ function do_event(
             $controller = ControllerRegistry::get($main_class);
         }
 
-        ob_start();
+        // Convert snailcase to camelcase method name
         $escapedName = \App\Helpers\ModuleHelper::underscoreToCamel($name);
+
+        // If the module implements this event execute it, catch the outputs and minify it
         if ($controller && method_exists($controller, $escapedName)) {
+            ob_start();
             echo $controller->{$escapedName}();
+            echo optimizeHtml(ob_get_clean());
         }
-        echo optimizeHtml(ob_get_clean());
     }
 }
 
@@ -185,19 +205,18 @@ function replaceOtherShortCodes(string $string): string {
 }
 
 // Check if site contains a module
-function containsModule(?string $page = null, ?string $module = null): bool {
+
+function containsModule(?string $module = null): bool {
     $containsModule = false;
 
-    if ($page === null) {
-        $page = get_slug();
-    }
+    $slug = get_slug();
 
-    if (\App\Storages\Vars::get('page_' . $page . '_contains_' . $module) !== null) {
-        return \App\Storages\Vars::get('page_' . $page . '_contains_' . $module);
+    if (\App\Storages\Vars::get('page_' . $slug . '_contains_' . $module) !== null) {
+        return \App\Storages\Vars::get('page_' . $slug . '_contains_' . $module);
     }
 
     $result = Database::query('SELECT content, module, `type` FROM ' .
-            Database::tableName('content') . " WHERE slug = '" . Database::escapeValue($page) . "'");
+            Database::tableName('content') . " WHERE slug = '" . Database::escapeValue($slug) . "'");
 
     if (! Database::any($result)) {
         return $containsModule;
@@ -216,6 +235,6 @@ function containsModule(?string $page = null, ?string $module = null): bool {
         $containsModule = true;
     }
 
-    \App\Storages\Vars::set('page_' . $page . '_contains_' . $module, $containsModule);
+    \App\Storages\Vars::set('page_' . $slug . '_contains_' . $module, $containsModule);
     return $containsModule;
 }

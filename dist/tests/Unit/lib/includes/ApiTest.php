@@ -284,7 +284,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertStringMatchesFormat('Foo %d Bar [module=fortune2]', replaceOtherShortCodes('Foo [year] Bar [module=fortune2]'));
     }
 
-    public function testContainsModuleWithoutArgumentsReturnsTrue(): void {
+    public function testContainsModuleReturnsTrue(): void {
         $page = new Module_Page();
         $page->title = 'Unit Test ' . uniqid();
         $page->slug = 'unit-test-' . uniqid();
@@ -302,23 +302,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue(containsModule());
     }
 
-    public function testContainsModuleReturnsTrue(): void {
-        $page = new Module_Page();
-        $page->title = 'Unit Test ' . uniqid();
-        $page->slug = 'unit-test-' . uniqid();
-        $page->menu = 'none';
-        $page->language = 'de';
-        $page->article_date = 1413821696;
-        $page->author_id = 1;
-        $page->group_id = 1;
-        $page->module = 'fortune2';
-        $page->content = 'Hello World';
-        $page->save();
-
-        $_SESSION['language'] = 'de';
-        $this->assertTrue(containsModule($page->slug));
-    }
-
     public function testContainsModuleReturnsFalse(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . uniqid();
@@ -331,11 +314,12 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $page->save();
 
         $_SESSION['language'] = 'de';
+        $_GET['slug'] = $page->slug;
 
-        $this->assertFalse(containsModule($page->slug));
+        $this->assertFalse(containsModule());
     }
 
-    public function testContainsModuleWithModulePageAndNameReturnsTrue(): void {
+    public function testContainsSpecificModuleReturnsTrue(): void {
         $page = new Module_Page();
         $page->title = 'Unit Test ' . uniqid();
         $page->slug = 'unit-test-' . uniqid();
@@ -349,26 +333,12 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $page->save();
 
         $_SESSION['language'] = 'de';
-        $this->assertTrue(containsModule($page->slug, 'fortune2'));
+        $_GET['slug'] = $page->slug;
+
+        $this->assertTrue(containsModule('fortune2'));
     }
 
-    public function testContainsModuleWithShortcodeAndNameReturnsTrue(): void {
-        $page = new Page();
-        $page->title = 'Unit Test ' . uniqid();
-        $page->slug = 'unit-test-' . uniqid();
-        $page->menu = 'none';
-        $page->language = 'de';
-        $page->article_date = 1413821696;
-        $page->author_id = 1;
-        $page->group_id = 1;
-        $page->content = 'Hello [module=fortune2] World';
-        $page->save();
-
-        $_SESSION['language'] = 'de';
-        $this->assertTrue(containsModule($page->slug, 'fortune2'));
-    }
-
-    public function testContainsModuleWithNameReturnsFalse(): void {
+    public function testContainsSpecificModuleReturnsFalse(): void {
         $page = new Page();
         $page->title = 'Unit Test ' . uniqid();
         $page->slug = 'unit-test-' . uniqid();
@@ -382,7 +352,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
         $_SESSION['language'] = 'de';
 
-        $this->assertFalse(containsModule($page->slug, 'nicht_enthalten'));
+        $_GET['slug'] = $page->slug;
+        $this->assertFalse(containsModule('core_content'));
     }
 
     public function testVarDumpStrReturnsStringWithOneVar(): void {
