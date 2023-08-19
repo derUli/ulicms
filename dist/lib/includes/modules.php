@@ -98,8 +98,6 @@ function replaceShortcodesWithModules(
 
         if ($controller && method_exists($controller, 'render')) {
             $html_output = $controller->render();
-        } elseif (function_exists($module . '_render')) {
-            $html_output = call_user_func($module . '_render');
         }
 
         foreach($embedCodeVariants as $embedCodeVariant) {

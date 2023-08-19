@@ -78,8 +78,11 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(\App\Helpers\ModuleHelper::getFirstPageWithModule('gibts_nicht_modul'));
     }
 
-    public function testIsEmbedModule(): void {
-        $this->assertTrue(\App\Helpers\ModuleHelper::isEmbedModule('fortune'));
+    public function testIsEmbedModuleReturnsTrue(): void {
+        $this->assertTrue(\App\Helpers\ModuleHelper::isEmbedModule('fortune2'));
+    }
+
+    public function testIsEmbedModuleReturnsFalse(): void {
         $this->assertFalse(\App\Helpers\ModuleHelper::isEmbedModule('slicknav'));
     }
 

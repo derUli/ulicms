@@ -107,21 +107,7 @@ abstract class ModuleHelper extends Helper {
         $retval = [];
         $modules = getAllModules();
         foreach ($modules as $module) {
-            $noembedfile1 = \App\Utils\Path::Resolve(
-                "ULICMS_ROOT/content/modules/{$module}/.noembed"
-            );
-            $noembedfile2 = \App\Utils\Path::Resolve(
-                "ULICMS_ROOT/content/modules/{$module}/noembed.txt"
-            );
-
-            $embed_attrib = true;
-
-            $meta_attr = getModuleMeta($module, 'embed');
-            if (is_bool($meta_attr)) {
-                $embed_attrib = $meta_attr;
-            }
-
-            if (! is_file($noembedfile1) && ! is_file($noembedfile2) && $embed_attrib) {
+            if (static::isEmbedModule($module)) {
                 $retval[] = $module;
             }
         }
@@ -147,25 +133,7 @@ abstract class ModuleHelper extends Helper {
 
     // returns true if $module offers an embed shortcode
     public static function isEmbedModule(string $module): bool {
-        $retval = true;
-        $noembedfile1 = \App\Utils\Path::Resolve(
-            "ULICMS_ROOT/content/modules/{$module}/.noembed"
-        );
-        $noembedfile2 = \App\Utils\Path::Resolve(
-            "ULICMS_ROOT/content/modules/{$module}/noembed.txt"
-        );
-
-        $embed_attrib = true;
-
-        $meta_attr = getModuleMeta($module, 'embed');
-        if (is_bool($meta_attr)) {
-            $embed_attrib = $meta_attr;
-        }
-
-        if (is_file($noembedfile1) || is_file($noembedfile2) || ! $embed_attrib) {
-            $retval = false;
-        }
-        return $retval;
+        return (bool)getModuleMeta($module, 'embed');
     }
 
     // returns the absolute url to UliCMS
