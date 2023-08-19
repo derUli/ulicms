@@ -30,26 +30,16 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('FrontPageSettingsController
     'class' => 'ajax-form'
 ]);
 ?>
-<table>
-    <tr>
-        <td><strong><?php translate('language'); ?>
-            </strong></td>
-        <td><strong><?php translate('frontpage'); ?>
-            </strong></td>
-    </tr>
     <?php
     for ($n = 0; $n < $languagesCount; $n++) {
         $lang = $languages[$n];
         ?>
-        <tr>
-            <td>
-                <?php esc(getLanguageNameByCode($lang)); ?>
-            </td>
-            <td><select
-                    name = "frontpage_<?php esc($lang); ?>"
-                    size = "1">
-                        <?php
-                        $pages = getAllPages($lang, 'title', true);
+      
+      <div class="mb-3">
+        <label for="<?php echo "field_{$n}";?>" class="form-label"><?php esc(getLanguageNameByCode($lang)); ?></label>
+  <select name="frontpage_<?php esc($lang); ?>" id="<?php echo "field_{$n}";?>" size="1" class="form-control select2">
+        <?php
+            $pages = getAllPages($lang, 'title', true);
         $pageCount = count($pages);
         for ($i = 0; $i < $pageCount; $i++) {
             if ($pages[$i]['slug'] == $frontpages[$lang]) {
@@ -59,18 +49,18 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('FrontPageSettingsController
             }
         }
         ?>
-                </select></td>
-        </tr>
+</select>
+
+
+</div>
+     
     <?php }
     ?>
-    <tr>
-        <td></td>
-        <td class="text-center">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-save"></i> <?php translate('save_changes'); ?></button>
-        </td>
-    </tr>
-</table>
+
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-save"></i> <?php translate('save_changes'); ?>
+        </button>
+
 <?php
 echo \App\Helpers\ModuleHelper::endForm();
 
