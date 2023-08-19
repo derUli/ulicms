@@ -52,6 +52,11 @@ class ImageUploadController extends \App\Controllers\Controller {
         $originalFilename = $upload['name'];
         $extension = File::getExtension($originalFilename);
 
+        // Experimental Feature: always use WebP
+        if((bool)Settings::get('image_use_webp')){
+            $extension = 'webp';
+        }
+
         // Calculate hash
         $fileContent = file_get_contents($tmpPath);
         $hash = Hash::hashCacheIdentifier((string)$fileContent);
