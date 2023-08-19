@@ -27,35 +27,29 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('HomepageTitleController', '
     'class' => 'ajax-form'
 ]);
 ?>
-<table>
-    <tr>
-        <td style="min-width: 100px;"><strong><?php translate('language'); ?>
-            </strong></td>
-        <td><strong><?php translate('title'); ?>
-            </strong></td>
-    </tr>
+
+<div class="row">
+
     <?php
     $languageCount = count($languages);
 for ($n = 0; $n < $languageCount; $n++) {
     $lang = $languages[$n];
     ?>
-        <tr>
-            <td><?php esc(getLanguageNameByCode($lang)); ?></td>
-            <td><input
-                    name="homepage_title_<?php esc($lang); ?>"
-                    value="<?php esc($homepage_titles[$lang]); ?>"></td>
-        </tr>
+
+<div class="mb-3">
+  <label for="<?php echo "title{$n}";?>" class="form-label"><?php esc(getLanguageNameByCode($lang)); ?></label>
+  <input id="<?php echo "title{$n}";?>" name="homepage_title_<?php esc($lang); ?>" value="<?php esc($homepage_titles[$lang]); ?>" class="form-control">
+</div>
     <?php }
 ?>
-    <tr>
-        <td></td>
-        <td class="text-center">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-save"></i> <?php translate('save_changes'); ?></button>
-        </td>
-    </tr>
-</table>
+
+</div>
+<button type="submit" class="btn btn-primary">
+    <i class="fa fa-save"></i> <?php translate('save_changes'); ?>
+</button>
+
 <?php
+
 echo \App\Helpers\ModuleHelper::endForm();
 
 $translation = new JSTranslation();
