@@ -42,7 +42,7 @@ combinedStylesheetHtml();
 
             <div id="mobile-nav"></div>
             <?php
-  if (! containsModule(null, 'extended_search') && $hasSearch && $searchPage) {
+  if (! containsModule('extended_search') && $hasSearch && $searchPage) {
       ?>
                 <form id="search-form-head" method="get"
                       action="<?php Template::escape(buildSEOURL($searchPage->slug)); ?>">

@@ -205,21 +205,15 @@ function replaceOtherShortCodes(string $string): string {
 }
 
 // Check if site contains a module
-
 function containsModule(?string $module = null): bool {
-    $containsModule = false;
 
     $slug = get_slug();
-
-    if (\App\Storages\Vars::get('page_' . $slug . '_contains_' . $module) !== null) {
-        return \App\Storages\Vars::get('page_' . $slug . '_contains_' . $module);
-    }
 
     $result = Database::query('SELECT content, module, `type` FROM ' .
             Database::tableName('content') . " WHERE slug = '" . Database::escapeValue($slug) . "'");
 
     if (! Database::any($result)) {
-        return $containsModule;
+        return false;
     }
 
     $dataset = Database::fetchAssoc($result);
@@ -229,12 +223,9 @@ function containsModule(?string $module = null): bool {
     // TODO: Refactor this
     if ($dataset['module'] !== null && ! empty($dataset['module']) && $dataset['type'] == 'module') {
         if (! $module || ($module && $dataset['module'] == $module)) {
-            $containsModule = true;
+            return true;
         }
-    } elseif (stringContainsShortCodes($content, $module)) {
-        $containsModule = true;
     }
 
-    \App\Storages\Vars::set('page_' . $slug . '_contains_' . $module, $containsModule);
-    return $containsModule;
+    return (bool)(stringContainsShortCodes($content, $module));
 }
