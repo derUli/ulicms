@@ -27,38 +27,27 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('MetaDescriptionController',
     'class' => 'ajax-form'
 ]);
 ?>
-<table style="border: 0">
-    <tr>
-        <td style="min-width: 100px;"><strong><?php translate('language'); ?>
-            </strong></td>
-        <td><strong><?php translate('meta_description'); ?>
-            </strong></td>
-    </tr>
-    <?php
+</p>
+<h1>
+    <?php translate('meta_description'); ?>
+</h1>
+<?php
     $languageCount = count($languages);
 for ($n = 0; $n < $languageCount; $n++) {
     $lang = $languages[$n];
     ?>
-        <tr>
-            <td>
-                <?php esc(getLanguageNameByCode($lang)); ?>
-            </td>
-            <td><input
-                    name="meta_description_<?php esc($lang); ?>"
-                    value="<?php esc($meta_descriptions[$lang]); ?>" class="form-control"></td>
-        </tr>
+        <div class="mb-3">
+  <label for="<?php echo "field_{$n}";?>" class="form-label"><?php esc(getLanguageNameByCode($lang)); ?></label>
+  <input name="meta_description_<?php esc($lang); ?>" id="<?php echo "field_{$n}";?>" value="<?php esc($meta_descriptions[$lang]); ?>" class="form-control">
+</div>
+
+
     <?php }
 ?>
-    <tr>
-        <td></td>
-        <td class="text-center">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-save"></i>
-                <?php translate('save_changes'); ?>
-            </button>
-        </td>
-    </tr>
-</table>
+<button type="submit" class="btn btn-primary">
+<i class="fa fa-save"></i>
+<?php translate('save_changes'); ?>
+        
 <?php
 echo \App\Helpers\ModuleHelper::endForm();
 
