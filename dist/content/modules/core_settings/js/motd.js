@@ -12,13 +12,6 @@ $(() => {
                 beforeSubmit: () => {
                     $("#loading").show();
                 },
-                // FIXME: this is copy and paste code
-                // move this to a util method
-                beforeSerialize: () => {
-                    /* Before serialize */
-                    updateCKEditors();
-                    return true;
-                },
                 success: () => {
                     $("#loading").hide();
                     vanillaToast.success(Translation.ChangesWereSaved);

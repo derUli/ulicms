@@ -23,11 +23,6 @@ $(() => {
                 beforeSubmit: () => {
                     $("#loading").show();
                 },
-                beforeSerialize: () => {
-                    /* Before serialize */
-                    updateCKEditors();
-                    return true;
-                },
                 success: () => {
                     $("#loading").hide();
                     vanillaToast.success(Translation.ChangesWereSaved);

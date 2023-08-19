@@ -3,7 +3,3 @@ const refreshCodeMirrors = () => {
         el.CodeMirror.refresh()
     );
 };
-
-const updateCKEditors = () => {
- // TODO: Check if this is obsolete
-};

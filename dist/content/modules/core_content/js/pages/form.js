@@ -51,10 +51,6 @@ $(() => {
         beforeSubmit: () => {
             $(".loading").show();
         },
-        beforeSerialize: () => {
-            updateCKEditors();
-            return true;
-        },
         success: () => {
             $(".loading").hide();
 
