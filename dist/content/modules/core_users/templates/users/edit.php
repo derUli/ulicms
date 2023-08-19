@@ -78,7 +78,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
                             'delete_avatar',
                             false,
                             '1',
-                            ['class' => 'js-switch']
+                            ['class' => 'form-check-input']
                         );
                 ?><?php translate('delete_avatar'); ?>
                     </label>
@@ -229,7 +229,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
         <div class="checkbox block">
             <label>
                 <input type="checkbox" value="1"
-                       class="js-switch"
+                       class="form-check-input"
                        <?php
                if ($row->require_password_change) {
                    echo 'checked';
@@ -242,7 +242,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
             ?>
             <div class="checkbox block field">
                 <label> <input type="checkbox" value="1" name="admin" id="admin"
-                               class="js-switch"
+                               class="form-check-input"
                                <?php
                                if ($row->admin) {
                                    echo 'checked';
@@ -259,7 +259,7 @@ if (($permissionChecker->hasPermission('users') && $permissionChecker->hasPermis
             <div class="checkbox block">
                 <label> <input type="checkbox" value="1" name="locked"
                                id="locked"
-                               class="js-switch"
+                               class="form-check-input"
                                <?php
             if ($row->locked) {
                 echo 'checked';

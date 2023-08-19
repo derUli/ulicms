@@ -91,7 +91,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
             </div>
             <div class="inputWrapper">
                 <input type="checkbox" id="cache_enabled" name="cache_enabled"
-                        class="js-switch"
+                        class="form-check-input"
                         value="cache_enabled"
                         <?php
                         if ($cache_enabled) {

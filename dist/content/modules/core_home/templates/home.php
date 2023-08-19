@@ -71,7 +71,7 @@ if (! Settings::get('disable_ulicms_newsfeed')) {
             <form action="#" class="checkbox">
                 <label>
                     <input name="show_positions" id="show_positions" type="checkbox"
-                            class="js-switch"
+                            class="form-check-input"
                             data-url="<?php esc(\App\Helpers\ModuleHelper::buildMethodCallUrl(PageController::class, 'toggleShowPositions')); ?>" value="1"
                             <?php
                         if (Settings::get('user/' . get_user_id() . '/show_positions')) {

@@ -16,14 +16,14 @@ $show_filters = Settings::get('user/' . get_user_id() . '/show_filters');
 ?>"
     >
     <div class="checkbox">
-        <label><input type="checkbox" class="js-switch" name="show_filters" id="show_filters"
+        <label><input type="checkbox" class="form-check-input" name="show_filters" id="show_filters"
                       value="1" data-url="<?php echo \App\Helpers\ModuleHelper::buildMethodCallUrl(PageController::class, 'toggleFilters'); ?>"
                       <?php
                   if ($show_filters) {
                       echo 'checked';
                   }
 ?>>
-            <span class="js-switch-label">
+            <span class="form-check-input-label">
                 <?php translate('show_filters'); ?>
             </span>
         </label>

@@ -51,7 +51,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
                 'comments_enabled',
                 (bool)Settings::get('comments_enabled'),
                 '1',
-                ['class' => 'js-switch']
+                ['class' => 'form-check-input']
             );
 ?><?php translate('comments_enabled'); ?></label>
     </div>
@@ -63,7 +63,7 @@ echo App\HTML\Input::checkBox(
     'comments_must_be_approved',
     (bool)Settings::get('comments_must_be_approved'),
     '1',
-    ['class' => 'js-switch']
+    ['class' => 'form-check-input']
 );
 ?><?php translate('comments_must_be_approved'); ?></label>
     </div>

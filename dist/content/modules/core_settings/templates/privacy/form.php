@@ -70,7 +70,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
         <div class="field">
             <input type="checkbox" id="privacy_policy_checkbox_enable"
                     name="privacy_policy_checkbox_enable" value="1"
-                    class="js-switch"
+                    class="form-check-input"
                     <?php
                     if ($privacy_policy_checkbox_enable) {
                         echo 'checked';
@@ -99,7 +99,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
             </div>
             <div class="inputWrapper">
                 <input type="checkbox" id="log_ip" name="log_ip"
-                        class="js-switch"
+                        class="form-check-input"
                         <?php
     if ($log_ip) {
         echo 'checked ';
@@ -120,7 +120,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
             <div class="inputWrapper">
                 <input type="checkbox" id="delete_ips_after_48_hours"
                         name="delete_ips_after_48_hours"
-                        class="js-switch"
+                        class="form-check-input"
                         <?php
 if ($delete_ips_after_48_hours) {
     echo 'checked ';
@@ -137,7 +137,7 @@ if ($delete_ips_after_48_hours) {
             </div>
             <div class="inputWrapper">
                 <input type="checkbox" id="keep_spam_ips" name="keep_spam_ips"
-                        class="js-switch"
+                        class="form-check-input"
                         <?php
 if ($keep_spam_ips) {
     echo 'checked ';

@@ -76,7 +76,7 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('OtherSettingsController', '
             <div class="inputWrapper">
                 <input type="checkbox" id="twofactor_authentication"
                         name="twofactor_authentication"
-                        class="js-switch"
+                        class="form-check-input"
                         <?php
                 if ($twofactor_authentication) {
                     echo 'checked ';
@@ -192,7 +192,7 @@ if ($smtp_encryption == 'tls') {
                     <div class="field">
                         <input type="checkbox" id="smtp_no_verify_certificate"
 
-                                class="js-switch"
+                                class="form-check-input"
                                 name="smtp_no_verify_certificate"
 
                                 <?php
@@ -212,7 +212,7 @@ if ($smtp_encryption == 'tls') {
                 <div class="inputWrapper">
                     <input type="checkbox" id="smtp_auth" name="smtp_auth"
 
-                            class="js-switch"
+                            class="form-check-input"
                             <?php
                             if ($smtp_auth) {
                                 echo ' checked="checked"';

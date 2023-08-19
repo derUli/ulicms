@@ -9,6 +9,7 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Utils\File;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
+use Imagine\Image\BoxInterface;
 use Settings;
 
 /**
@@ -107,6 +108,15 @@ abstract class ImageScaleHelper extends Helper {
         }
 
         return $scaled;
+    }
+
+
+    public static function getImageSize(string $file): BoxInterface {
+        $imagine = ImagineHelper::getImagine();
+        $image = $imagine->open($file);        
+
+        return $image->getSize();
+
     }
 
     /**

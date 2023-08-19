@@ -107,17 +107,17 @@ $ref = _esc(Request::getVar('ref', 'home'));
             <input type="checkbox" value="1"
                     name="require_password_change"
                     id="require_password_change"
-                    class="js-switch"><?php translate('REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN'); ?> </label>
+                    class="form-check-input"><?php translate('REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN'); ?> </label>
     </div>
     <div class="checkbox block">
         <label><input type="checkbox" id="send_mail" name="send_mail"
                         value="sendmail"
-                        class="js-switch">
+                        class="form-check-input">
             <?php translate('SEND_LOGINDATA_BY_MAIL'); ?></label>
     </div>
     <div class="checkbox block">
         <label><input type="checkbox" value="1" name="admin" id="admin"
-                        class="js-switch">
+                        class="form-check-input">
             <?php translate('is_admin'); ?> </label>
         <span class="has-help"
                 onclick="$('div#is_admin').slideToggle()">
@@ -130,7 +130,7 @@ $ref = _esc(Request::getVar('ref', 'home'));
     <div class="checkbox block">
         <div class="field">
             <label><input type="checkbox" value="1" name="locked" id="locked"
-                            class="js-switch">
+                            class="form-check-input">
                 <?php translate('locked'); ?> </label>
         </div>
     </div>

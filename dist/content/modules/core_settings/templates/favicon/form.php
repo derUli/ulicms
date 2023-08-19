@@ -90,7 +90,7 @@ if (is_file($favicon_path)) {
                     id="high_resolution"
                     name="high_resolution"
                     value="high_resolution"
-                    class="js-switch"
+                    class="form-check-input"
                     >
             </td>
         </tr>

@@ -33,7 +33,7 @@ $only_others_can_edit = (int)(Settings::get('only_others_can_edit'));
     <label>
         <input type="checkbox" name="only_admins_can_edit"
                 id="only_admins_can_edit" value="1"
-                class="js-switch"
+                class="form-check-input"
                 <?php
                 if ($only_admins_can_edit) {
                     echo 'checked';
@@ -44,7 +44,7 @@ $only_others_can_edit = (int)(Settings::get('only_others_can_edit'));
     <label>
         <input type="checkbox" name="only_group_can_edit"
                 id="only_group_can_edit" value="1"
-                class="js-switch"
+                class="form-check-input"
                 <?php
 if ($only_group_can_edit) {
     echo 'checked';
@@ -56,7 +56,7 @@ if ($only_group_can_edit) {
     <label>
         <input type="checkbox" name="only_owner_can_edit"
                 id="only_owner_can_edit" value="1"
-                class="js-switch"
+                class="form-check-input"
                 <?php
 if ($only_owner_can_edit) {
     echo 'checked';
@@ -69,7 +69,7 @@ if ($only_owner_can_edit) {
     <label>
         <input type="checkbox" name="only_others_can_edit"
                 id="only_others_can_edit" value="1"
-                class="js-switch"
+                class="form-check-input"
                 <?php
 if ($only_others_can_edit) {
     echo 'checked';

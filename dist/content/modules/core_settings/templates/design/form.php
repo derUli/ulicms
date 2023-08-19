@@ -120,7 +120,7 @@ foreach ($allThemes as $th) {
         <tr>
             <td><strong><?php translate('no_mobile_design_on_tablet'); ?> </strong></td>
             <td><input type="checkbox" name="no_mobile_design_on_tablet"
-                        class="js-switch"
+                        class="form-check-input"
 
                         <?php
                         if ($no_mobile_design_on_tablet) {

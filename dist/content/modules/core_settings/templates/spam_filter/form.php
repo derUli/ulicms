@@ -17,7 +17,7 @@ use App\Translations\JSTranslation;
     <div class="checkbox">
         <label for="spamfilter_enabled"> <input type="checkbox"
                                                 id="spamfilter_enabled" name="spamfilter_enabled"
-                                                class="js-switch"
+                                                class="form-check-input"
                                                 <?php
                                                 if (Settings::get('spamfilter_enabled') == 'yes') {
                                                     echo ' checked';
@@ -45,7 +45,7 @@ use App\Translations\JSTranslation;
         <div class="checkbox">
             <label for="disallow_chinese_chars"> <input type="checkbox"
                                                         name="disallow_chinese_chars" id="disallow_chinese_chars"
-                                                        class="js-switch"
+                                                        class="form-check-input"
                                                         <?php
                                                     if (Settings::get('disallow_chinese_chars')) {
                                                         echo ' checked="checked"';
@@ -55,7 +55,7 @@ use App\Translations\JSTranslation;
         </div>
         <div class="checkbox">
             <label for="disallow_cyrillic_chars"> <input type="checkbox"
-                                                            class="js-switch"
+                                                            class="form-check-input"
 
                                                             name="disallow_cyrillic_chars" id="disallow_cyrillic_chars"
                                                             <?php
@@ -67,7 +67,7 @@ use App\Translations\JSTranslation;
         </div>
         <div class="checkbox">
             <label for="disallow_rtl_chars"> <input type="checkbox"
-                                                    class="js-switch"
+                                                    class="form-check-input"
                                                     name="disallow_rtl_chars" id="disallow_rtl_chars"
                                                     <?php
                                             if (Settings::get('disallow_rtl_chars')) {
@@ -79,12 +79,12 @@ use App\Translations\JSTranslation;
         <div class="checkbox">
             <label><input name="reject_requests_from_bots" type="checkbox"
                             value=""
-                            class="js-switch"
+                            class="form-check-input"
                             <?php echo Settings::get('reject_requests_from_bots') ? 'checked' : ''; ?>> <?php translate('reject_requests_from_bots'); ?></label>
         </div>
         <div class="checkbox">
             <label for="check_mx_of_mail_address"> <input type="checkbox"
-                                                            class="js-switch"
+                                                            class="form-check-input"
                                                             name="check_mx_of_mail_address" id="check_mx_of_mail_address"
                                                             <?php
         if (Settings::get('check_mx_of_mail_address')) {
