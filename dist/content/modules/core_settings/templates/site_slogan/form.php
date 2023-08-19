@@ -38,13 +38,11 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('SiteSloganController', 'sav
         $lang = $languages[$n];
         ?>
         
-        <div class="form-group">
-            <label for="site_slogan_<?php esc($lang); ?>"><?php esc(getLanguageNameByCode($lang)); ?></label>
-            
-            <input name="site_slogan_<?php esc($lang); ?>" id="site_slogan_<?php esc($lang); ?>" value="<?php esc($site_slogans[$lang]); ?>" class="form-control">
-        </div>
-            <?php }
-    ?>
+        <div class="mb-3">
+  <label for="<?php echo "field_{$n}";?>" class="form-label"><?php esc(getLanguageNameByCode($lang)); ?></label>
+  <input name="site_slogan_<?php esc($lang); ?>" id="<?php echo "field_{$n}";?>" value="<?php esc($site_slogans[$lang]); ?>" class="form-control">
+</div>
+    <?php } ?>
 
     <button type="submit" class="btn btn-primary">
         <i class="fa fa-save"></i> 

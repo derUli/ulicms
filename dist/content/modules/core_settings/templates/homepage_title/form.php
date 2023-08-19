@@ -28,22 +28,18 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm('HomepageTitleController', '
 ]);
 ?>
 
-<div class="row">
-
-    <?php
+<?php
     $languageCount = count($languages);
 for ($n = 0; $n < $languageCount; $n++) {
     $lang = $languages[$n];
     ?>
 
 <div class="mb-3">
-  <label for="<?php echo "title{$n}";?>" class="form-label"><?php esc(getLanguageNameByCode($lang)); ?></label>
-  <input id="<?php echo "title{$n}";?>" name="homepage_title_<?php esc($lang); ?>" value="<?php esc($homepage_titles[$lang]); ?>" class="form-control">
+  <label for="<?php echo "field_{$n}";?>" class="form-label"><?php esc(getLanguageNameByCode($lang)); ?></label>
+  <input id="<?php echo "field_{$n}";?>" name="homepage_title_<?php esc($lang); ?>" value="<?php esc($homepage_titles[$lang]); ?>" class="form-control">
 </div>
     <?php }
 ?>
-
-</div>
 <button type="submit" class="btn btn-primary">
     <i class="fa fa-save"></i> <?php translate('save_changes'); ?>
 </button>
