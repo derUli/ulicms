@@ -20,8 +20,8 @@ class RoboPackageTest extends RoboTestBase {
 
         $this->assertEquals(12, substr_count($output, 'core_'));
 
-        $this->assertStringContainsString('2020 1.0.6', $output);
-        $this->assertStringContainsString('impro17 2.1.7', $output);
+        $this->assertStringContainsString('2020 1.0.7', $output);
+        $this->assertStringContainsString('impro17 2.1.8', $output);
     }
 
     public function testPackageExamineReturnsData(): void {
