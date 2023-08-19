@@ -5,6 +5,7 @@ declare(strict_types=1);
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
 use App\Constants\ModuleEvent;
+use App\Packages\ModuleManager;
 use App\Security\PrivacyCheckbox;
 
 function getModuleMeta($module, $attrib = null) {
@@ -24,6 +25,44 @@ function getModuleMeta($module, $attrib = null) {
         return null;
     }
     return $attrib ? $json[$attrib] : $json;
+}
+
+function apply_filter($text, string $type) {
+    $manager = new ModuleManager();
+    $modules = $manager->getEnabledModuleNames();
+
+    foreach($modules as $module) {
+        $module_content_filter_file1 = getModulePath($module, true)
+                . $module . '_' . $type . '_filter.php';
+        $module_content_filter_file2 = getModulePath($module, true)
+                . 'filters/' . $type . '.php';
+
+        $main_class = getModuleMeta($module, 'main_class');
+        $controller = null;
+        if ($main_class) {
+            $controller = ControllerRegistry::get($main_class);
+        }
+
+        $escapedName = \App\Helpers\ModuleHelper::underscoreToCamel($type . '_filter');
+        if ($controller && method_exists($controller, $escapedName)) {
+            $text = $controller->{$escapedName}($text);
+        } elseif (is_file($module_content_filter_file1)) {
+            require_once $module_content_filter_file1;
+            if (function_exists($module . '_' . $type . '_filter')) {
+                $text = call_user_func($module . '_' . $type .
+                        '_filter', $text);
+            }
+
+        } elseif (is_file($module_content_filter_file2)) {
+            require_once $module_content_filter_file2;
+            if (function_exists($module . '_' . $type . '_filter')) {
+                $text = call_user_func($module . '_' . $type .
+                        '_filter', $text);
+            }
+        }
+    }
+
+    return $text;
 }
 
 function do_event(
