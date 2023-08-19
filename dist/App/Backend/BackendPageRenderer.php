@@ -143,6 +143,7 @@ class BackendPageRenderer {
             $action_permission = ActionRegistry::getActionPermission(
                 $this->getAction()
             );
+
             if ($action_permission && $action_permission === '*') {
                 \App\Storages\Vars::set('action_filename', $actions[$this->getAction()]);
                 echo Template::executeDefaultOrOwnTemplate(
