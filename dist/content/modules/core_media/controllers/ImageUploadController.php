@@ -53,7 +53,7 @@ class ImageUploadController extends \App\Controllers\Controller {
         $extension = File::getExtension($originalFilename);
 
         // Experimental Feature: always use WebP
-        if((bool)Settings::get('image_use_webp')){
+        if((bool)Settings::get('image_use_webp')) {
             $extension = 'webp';
         }
 
