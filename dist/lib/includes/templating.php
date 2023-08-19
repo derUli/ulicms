@@ -501,46 +501,6 @@ function get_headline(?string $ipage = null): string {
     return get_title($ipage, true);
 }
 
-function apply_filter($text, string $type) {
-    $modules = getAllModules();
-    $disabledModules = \App\Storages\Vars::get('disabledModules') ?? [];
-
-    $modulesCount = count($modules);
-    for ($i = 0; $i < $modulesCount; $i++) {
-        if (in_array($modules[$i], $disabledModules)) {
-            continue;
-        }
-        $module_content_filter_file1 = getModulePath($modules[$i], true)
-                . $modules[$i] . '_' . $type . '_filter.php';
-        $module_content_filter_file2 = getModulePath($modules[$i], true)
-                . 'filters/' . $type . '.php';
-
-        $main_class = getModuleMeta($modules[$i], 'main_class');
-        $controller = null;
-        if ($main_class) {
-            $controller = ControllerRegistry::get($main_class);
-        }
-        $escapedName = \App\Helpers\ModuleHelper::underscoreToCamel($type . '_filter');
-        if ($controller && method_exists($controller, $escapedName)) {
-            $text = $controller->{$escapedName}($text);
-        } elseif (is_file($module_content_filter_file1)) {
-            require_once $module_content_filter_file1;
-            if (function_exists($modules[$i] . '_' . $type . '_filter')) {
-                $text = call_user_func($modules[$i] . '_' . $type .
-                        '_filter', $text);
-            }
-        } elseif (is_file($module_content_filter_file2)) {
-            require_once $module_content_filter_file2;
-            if (function_exists($modules[$i] . '_' . $type . '_filter')) {
-                $text = call_user_func($modules[$i] . '_' . $type .
-                        '_filter', $text);
-            }
-        }
-    }
-
-    return $text;
-}
-
 function get_site_slogan(): string {
     return Template::getSiteSlogan();
 }
