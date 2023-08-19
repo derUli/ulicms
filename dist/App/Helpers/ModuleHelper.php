@@ -105,7 +105,10 @@ abstract class ModuleHelper extends Helper {
     // get the names of all modules, that are embeddable
     public static function getAllEmbedModules(): array {
         $retval = [];
-        $modules = getAllModules();
+
+        $manager = new \App\Packages\ModuleManager();
+        $modules = $manager->getEnabledModuleNames();
+
         foreach ($modules as $module) {
             if (static::isEmbedModule($module)) {
                 $retval[] = $module;

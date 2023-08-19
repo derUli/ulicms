@@ -1,0 +1,10 @@
+{
+    "version": "1.0",
+    "source": "extend",
+    "embed": false,
+    "shy": false,
+    "main_class": "WebpController",
+    "controllers": {
+        "WebpController": "controllers/WebpController.php"
+    }
+}

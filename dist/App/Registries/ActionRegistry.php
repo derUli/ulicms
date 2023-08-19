@@ -65,7 +65,9 @@ class ActionRegistry {
 
     // load action => controller assignments of modules
     public static function loadModuleActionAssignment(): void {
-        $modules = getAllModules();
+        $manager = new \App\Packages\ModuleManager();
+        $modules = $manager->getEnabledModuleNames();
+
         foreach ($modules as $module) {
             $action_controllers = getModuleMeta($module, 'action_controllers');
             if (! $action_controllers) {

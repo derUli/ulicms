@@ -16,7 +16,8 @@ class Translation {
      * @return void
      */
     public static function loadAllModuleLanguageFiles(string $lang): void {
-        $modules = getAllModules();
+        $manager = new \App\Packages\ModuleManager();
+        $modules = $manager->getEnabledModuleNames();
 
         foreach ($modules as $module) {
             $currentLanguageFile = getModulePath($module, true) . '/lang/' .
