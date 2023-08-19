@@ -36,17 +36,10 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
 ?>
 <?php foreach ($errorCodes as $code => $error) {
     ?>
+    
+    <div class="mb-3">
     <h3><?php esc("{$error} (Status {$code})"); ?></h3>
-    <table class="tablesorter">
-        <thead>
-            <tr>
-                <th>
-                    <?php translate('language'); ?>
-                </th>
-                <th style="width: 50%"><?php translate('page'); ?></th>
-            </tr>
-        </thead>
-        <tbody>
+    
             <?php
             foreach (getAllLanguages() as $language) {
                 $pages = getAllPages($language, 'title', true);
@@ -58,24 +51,22 @@ echo \App\Helpers\ModuleHelper::buildMethodCallForm(
                     );
                 }
                 ?>
-                <tr>
-                    <td>
-                        <?php esc(getLanguageNameByCode($language)); ?></td>
-                    <td>
+              <div class="mb-3">
+                    <label for="<?php echo "error_page[{$code}][{$language}]";?>" class="form-label"><?php esc(getLanguageNameByCode($language)); ?></label>
                         <?php
                         echo Input::singleSelect(
                             "error_page[{$code}][{$language}]",
                             Settings::getLanguageSetting("error_page_{$code}", $language),
-                            $items
+                            $items,
+                            1,
+                            [
+                                'id' => "error_page[{$code}][{$language}]"
+                            ]
                         );
                 ?>
-
-                    </td>
-                </tr>
-            <?php }
-            ?>
-        </tbody>
-    </table>
+                        </div>
+                        <?php } ?>
+    </div>
     <?php
 }
 ?>

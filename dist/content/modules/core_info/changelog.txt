@@ -5,9 +5,10 @@ Neue Features:
 * CKEditor 5
 * Responsive Images
 * Installer auf Bootstrap 5 umgestellt
+* WebP
 
 API-Änderungen:
-* CustomData in Namespace App\Packages verschoben
+* CustomData in Namespace App\Model\Content verschoben
 
 Sonstige Änderungen:
 * max_image_dimensions auf 1920x1080 geändert
