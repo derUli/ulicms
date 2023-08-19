@@ -21,6 +21,7 @@
       backupStaticProperties="false"
       requireCoverageMetadata="false"
       enforceTimeLimit="true"
+      displayDetailsOnTestsThatTriggerWarnings="true"
    >
       <coverage>
          <report>

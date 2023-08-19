@@ -83,7 +83,7 @@ class RoboModulesTest extends RoboTestBase {
                 'fortune2'
             ]
         );
-        $this->assertEquals('fortune2 0.2.5 (enabled)', $actual);
+        $this->assertEquals('fortune2 0.2.6 (enabled)', $actual);
 
         $actual = $this->runRoboCommand(
             [
@@ -91,7 +91,7 @@ class RoboModulesTest extends RoboTestBase {
                 'fortune2'
             ]
         );
-        $this->assertEquals('fortune2 0.2.5 (disabled)', $actual);
+        $this->assertEquals('fortune2 0.2.6 (disabled)', $actual);
     }
 
     public function testModulesToggle(): void {
@@ -108,7 +108,7 @@ class RoboModulesTest extends RoboTestBase {
                 'fortune2'
             ]
         );
-        $this->assertEquals('fortune2 0.2.5 (disabled)', $actual);
+        $this->assertEquals('fortune2 0.2.6 (disabled)', $actual);
 
         $actual = $this->runRoboCommand(
             [
@@ -116,7 +116,7 @@ class RoboModulesTest extends RoboTestBase {
                 'fortune2'
             ]
         );
-        $this->assertEquals('fortune2 0.2.5 (enabled)', $actual);
+        $this->assertEquals('fortune2 0.2.6 (enabled)', $actual);
     }
 
     public function testModulesRemoveReturnsError(): void {
