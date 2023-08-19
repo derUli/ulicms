@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
-use App\Constants\ModuleEvent;
 use App\Packages\ModuleManager;
 use App\Security\PrivacyCheckbox;
 
@@ -32,33 +31,12 @@ function apply_filter($text, string $type) {
     $modules = $manager->getEnabledModuleNames();
 
     foreach($modules as $module) {
-        $module_content_filter_file1 = getModulePath($module, true)
-                . $module . '_' . $type . '_filter.php';
-        $module_content_filter_file2 = getModulePath($module, true)
-                . 'filters/' . $type . '.php';
-
         $main_class = getModuleMeta($module, 'main_class');
-        $controller = null;
-        if ($main_class) {
-            $controller = ControllerRegistry::get($main_class);
-        }
+        $controller = $main_class ? ControllerRegistry::get($main_class) : null;
 
         $escapedName = \App\Helpers\ModuleHelper::underscoreToCamel($type . '_filter');
         if ($controller && method_exists($controller, $escapedName)) {
             $text = $controller->{$escapedName}($text);
-        } elseif (is_file($module_content_filter_file1)) {
-            require_once $module_content_filter_file1;
-            if (function_exists($module . '_' . $type . '_filter')) {
-                $text = call_user_func($module . '_' . $type .
-                        '_filter', $text);
-            }
-
-        } elseif (is_file($module_content_filter_file2)) {
-            require_once $module_content_filter_file2;
-            if (function_exists($module . '_' . $type . '_filter')) {
-                $text = call_user_func($module . '_' . $type .
-                        '_filter', $text);
-            }
         }
     }
 
@@ -66,17 +44,12 @@ function apply_filter($text, string $type) {
 }
 
 function do_event(
-    string $name,
-    string $runs = ModuleEvent::RUNS_ONCE
+    string $name
 ): void {
     $manager = new \App\Packages\ModuleManager();
     $modules = $manager->getEnabledModuleNames();
 
     foreach($modules as $module) {
-        $file1 = getModulePath($module, true) .
-                $module . '_' . $name . '.php';
-        $file2 = getModulePath($module, true) .
-                'hooks/' . $name . '.php';
         $main_class = getModuleMeta($module, 'main_class');
         $controller = null;
 
@@ -88,18 +61,6 @@ function do_event(
         $escapedName = \App\Helpers\ModuleHelper::underscoreToCamel($name);
         if ($controller && method_exists($controller, $escapedName)) {
             echo $controller->{$escapedName}();
-        } elseif (is_file($file1)) {
-            if ($runs === ModuleEvent::RUNS_MULTIPLE) {
-                require $file1;
-            } else {
-                require_once $file1;
-            }
-        } elseif (is_file($file2)) {
-            if ($runs === ModuleEvent::RUNS_MULTIPLE) {
-                require $file1;
-            } else {
-                require_once $file2;
-            }
         }
         echo optimizeHtml(ob_get_clean());
     }
@@ -124,18 +85,11 @@ function replaceShortcodesWithModules(
     $modules = $manager->getEnabledModuleNames();
 
     foreach ($modules as $module) {
-        $stringToReplace1 = '[module="' . $module . '"]';
-        $stringToReplace2 = '[module=&quot;' . $module . '&quot;]';
-        $stringToReplace3 = '[module=' . $module . ']';
-
-        $module_mainfile_path = getModuleMainFilePath($module);
-        $module_mainfile_path2 = getModuleMainFilePath2($module);
-
-        if (is_file($module_mainfile_path)) {
-            require_once $module_mainfile_path;
-        } elseif (is_file($module_mainfile_path2)) {
-            require_once $module_mainfile_path2;
-        }
+        $embedCodeVariants = [
+            '[module="' . $module . '"]',
+            '[module=&quot;' . $module . '&quot;]',
+            '[module=' . $module . ']'
+        ];
 
         $main_class = getModuleMeta($module, 'main_class');
         $controller = $main_class ? ControllerRegistry::get($main_class) : null;
@@ -148,10 +102,10 @@ function replaceShortcodesWithModules(
             $html_output = call_user_func($module . '_render');
         }
 
-        $string = str_replace($stringToReplace1, $html_output, $string);
-        $string = str_replace($stringToReplace2, $html_output, $string);
+        foreach($embedCodeVariants as $embedCodeVariant) {
+            $string = str_replace($embedCodeVariants, $html_output, $string);
+        }
 
-        $string = str_replace($stringToReplace3, $html_output, $string);
         $string = str_replace('[title]', get_title(), $string);
     }
 
