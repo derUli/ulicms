@@ -7,7 +7,15 @@ class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script acce
 use App\Packages\ModuleManager;
 use App\Security\PrivacyCheckbox;
 
-function getModuleMeta($module, $attrib = null) {
+/**
+ * Returns metadata from a module
+ *
+ * @param string $module The module name
+ * @param ?string $attrib return a specific attribute
+ *
+ * @return mixed array from Json file or the value of the given $attrib
+ */
+function getModuleMeta(string $module, ?string $attrib = null): mixed {
     $metadata_file = \App\Helpers\ModuleHelper::buildModuleRessourcePath(
         $module,
         'metadata.json',
