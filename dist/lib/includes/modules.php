@@ -24,7 +24,7 @@ function getModuleMeta($module, $attrib = null) {
     if ($attrib && ! isset($json[$attrib])) {
         return null;
     }
-    
+
     return $attrib ? $json[$attrib] : $json;
 }
 
