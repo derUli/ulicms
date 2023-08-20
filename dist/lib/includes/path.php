@@ -50,17 +50,3 @@ function getModulePath($module, $abspath = false): string {
 function getModuleAdminFilePath($module): string {
     return getModulePath($module, true) . 'admin.php';
 }
-
-function getModuleUninstallScriptPath(
-    string $module,
-    bool $abspath = true
-): string {
-    return getModulePath($module, $abspath) . $module . '_uninstall.php';
-}
-
-function getModuleUninstallScriptPath2(
-    string $module,
-    bool $abspath = true
-): string {
-    return getModulePath($module, $abspath) . 'uninstall.php';
-}

@@ -9,8 +9,6 @@ use App\Packages\ModuleManager;
 use Database;
 
 use function getModuleMeta;
-use function getModuleUninstallScriptPath;
-use function getModuleUninstallScriptPath2;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
@@ -163,15 +161,9 @@ class Module {
 
     public function hasUninstallEvent(): bool {
         $name = $this->name;
-        $uninstallScript1 = getModuleUninstallScriptPath($name, true);
-        $uninstallScript2 = getModuleUninstallScriptPath2($name, true);
-
         // Uninstall Script ausführen, sofern vorhanden
         $mainController = ModuleHelper::getMainController($name);
-        return ($mainController &&
-                method_exists($mainController, 'uninstall')) ||
-                is_file($uninstallScript1) ||
-                is_file($uninstallScript2);
+        return $mainController && method_exists($mainController, 'uninstall');
     }
 
     public function delete(): ?bool {

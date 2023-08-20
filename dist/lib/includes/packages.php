@@ -63,19 +63,14 @@ function uninstall_module(string $name, string $type = 'module'): bool {
 
             // Modul-Ordner entfernen
             if (is_dir($moduleDir)) {
-                $uninstall_script = getModuleUninstallScriptPath($name, true);
-                $uninstall_script2 = getModuleUninstallScriptPath2($name, true);
 
                 // Uninstall Script ausführen, sofern vorhanden
                 $mainController = \App\Helpers\ModuleHelper::getMainController($name);
-                if ($mainController
-                        && method_exists($mainController, 'uninstall')) {
+
+                if ($mainController && method_exists($mainController, 'uninstall')) {
                     $mainController->uninstall();
-                } elseif (is_file($uninstall_script)) {
-                    require $uninstall_script;
-                } elseif (is_file($uninstall_script2)) {
-                    require $uninstall_script2;
                 }
+
                 sureRemoveDir($moduleDir, true);
                 CacheUtil::clearCache();
                 return ! is_dir($moduleDir);

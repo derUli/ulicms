@@ -13,6 +13,8 @@ API-Änderungen:
 Entfernte API-Methoden:
 * custom_acl als Event entfernt
 * getModuleAdminFilePath2()
+* getModuleUninstallScriptPath()
+* getModuleUninstallScriptPath2()
 
 Sonstige Änderungen:
 * max_image_dimensions auf 1920x1080 geändert

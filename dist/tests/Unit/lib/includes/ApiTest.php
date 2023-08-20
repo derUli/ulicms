@@ -399,14 +399,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('Angelsächisch', Settings::getLang('my_setting', 'en'));
     }
 
-    public function testGetModuleUninstallScriptPath(): void {
-        $this->assertStringEndsWith('content/modules/my_module/my_module_uninstall.php', getModuleUninstallScriptPath('my_module'));
-    }
-
-    public function testGetModuleUninstallScriptPath2(): void {
-        $this->assertStringEndsWith('content/modules/my_module/uninstall.php', getModuleUninstallScriptPath2('my_module'));
-    }
-
     // XXX: Whats the purpose of this method?
     public function testGetModuleAdminSelfPath(): void {
         $_SERVER['REQUEST_URI'] = '/foo/?bar="hello"';
