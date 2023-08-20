@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
+use App\Models\Packages\Module;
 use App\Packages\ModuleManager;
 use App\Security\PrivacyCheckbox;
 
@@ -16,24 +17,9 @@ use App\Security\PrivacyCheckbox;
  * @return mixed array from Json file or the value of the given $attrib
  */
 function getModuleMeta(string $module, ?string $attrib = null): mixed {
-    $metadata_file = \App\Helpers\ModuleHelper::buildModuleRessourcePath(
-        $module,
-        'metadata.json',
-        true
-    );
+    $module = new Module($module);
 
-    if (! is_file($metadata_file)) {
-        return null;
-    }
-
-    $data = file_get_contents($metadata_file);
-    $json = json_decode($data, true);
-
-    if ($attrib && ! isset($json[$attrib])) {
-        return null;
-    }
-
-    return $attrib ? $json[$attrib] : $json;
+    return $module->getMeta($attrib);
 }
 
 /**

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models\Packages;
 
-use App\Helpers\ModuleHelper;
+use App\Controllers\Controller;
 use App\Packages\ModuleManager;
+use ControllerRegistry;
 use Database;
-
-use function getModuleMeta;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
@@ -21,6 +20,7 @@ class Module {
 
     public function __construct(?string $name = null) {
         if ($name) {
+            $this->name = $name;
             $this->loadByName($name);
         }
     }
@@ -88,52 +88,59 @@ class Module {
         return $result;
     }
 
-    public function isInstalled(): bool {
-        if (! $this->getName()) {
-            return false;
-        }
-        return getModuleMeta($this->getName()) !== null;
-    }
-
     public function isMissingDependencies(): bool {
         return count($this->getMissingDependencies()) > 0;
     }
 
+    /**
+     * Returns metadata from a module
+     *
+     * @param ?string $attrib return a specific attribute
+     *
+     * @return mixed array from Json file or the value of the given $attrib
+     */
+    public function getMeta(?string $attrib = null): mixed {
+        $metadata_file = \App\Helpers\ModuleHelper::buildModuleRessourcePath(
+            $this->name,
+            'metadata.json',
+            true
+        );
+
+        if (! is_file($metadata_file)) {
+            return null;
+        }
+
+        $data = file_get_contents($metadata_file);
+        $json = json_decode($data, true);
+
+        if ($attrib && ! isset($json[$attrib])) {
+            return null;
+        }
+
+        return $attrib ? $json[$attrib] : $json;
+    }
+
     public function hasAdminPage(): bool {
-        $controller = ModuleHelper::getMainController($this->name);
+        $controller = $this->getMainController();
         return
             is_file(getModuleAdminFilePath($this->name)) ||
             ($controller && method_exists($controller, 'settings')) ||
             (
-                getModuleMeta($this->name, 'main_class')
+                $this->getMeta('main_class')
             ) &&
-            getModuleMeta($this->name, 'admin_permission');
+            $this->getMeta($this->name, 'admin_permission');
     }
 
     public function isEmbedModule(): bool {
-        return ModuleHelper::isEmbedModule($this->name);
+        return (bool)$this->getMeta('embed');
+    }
+
+    public function isInstalled(): bool {
+        return $this->getMeta() !== null;
     }
 
     public function getShortCode(): ?string {
         return $this->getName() ? "[module={$this->getName()}]" : null;
-    }
-
-    public function getDependentModules(): array {
-        $result = [];
-        $manager = new ModuleManager();
-        $enabledMods = $manager->getEnabledModuleNames();
-        $dependent = $manager->getDependentModules($this->getName());
-
-        foreach ($dependent as $dep) {
-            if (in_array($dep, $enabledMods)) {
-                $result [] = $dep;
-            }
-        }
-        return $result;
-    }
-
-    public function hasDependentModules(): bool {
-        return count($this->getDependentModules()) > 0;
     }
 
     public function disable(): void {
@@ -159,10 +166,28 @@ class Module {
         $this->version = $version;
     }
 
+    public function getDependentModules(): array {
+        $result = [];
+        $manager = new ModuleManager();
+        $enabledMods = $manager->getEnabledModuleNames();
+        $dependent = $manager->getDependentModules($this->getName());
+
+        foreach ($dependent as $dep) {
+            if (in_array($dep, $enabledMods)) {
+                $result [] = $dep;
+            }
+        }
+        return $result;
+    }
+
+    public function hasDependentModules(): bool {
+        return count($this->getDependentModules()) > 0;
+    }
+
     public function hasUninstallEvent(): bool {
         $name = $this->name;
         // Uninstall Script ausführen, sofern vorhanden
-        $mainController = ModuleHelper::getMainController($name);
+        $mainController = $this->getMainController();
         return $mainController && method_exists($mainController, 'uninstall');
     }
 
@@ -184,6 +209,18 @@ class Module {
 
     public function uninstall(): bool {
         return uninstall_module($this->getName(), 'module');
+    }
+
+    // returns an instance of the MainClass of a module
+    public function getMainController(): ?Controller {
+        $controller = null;
+        $mainClass = $this->getMeta('main_class');
+
+        if ($mainClass) {
+            $controller = ControllerRegistry::get($mainClass);
+        }
+
+        return $controller;
     }
 
     protected function insert(): bool {

@@ -9,8 +9,8 @@ defined('ULICMS_ROOT') || exit('No direct script access allowed');
 use App\Constants\RequestMethod;
 use App\Controllers\Controller;
 use App\HTML\Form;
+use App\Models\Packages\Module;
 use ContentFactory;
-use ControllerRegistry;
 use Database;
 use Template;
 
@@ -119,24 +119,14 @@ abstract class ModuleHelper extends Helper {
 
     // returns an instance of the MainClass of a module
     public static function getMainController(string $module): ?Controller {
-        $controller = null;
-        $mainClass = getModuleMeta($module, 'main_class');
-
-        if ($mainClass) {
-            $controller = ControllerRegistry::get($mainClass);
-        }
-
-        return $controller;
-    }
-
-    // alias for getMainController()
-    public static function getMainClass(string $module): ?Controller {
-        return self::getMainController($module);
+        $module = new Module($module);
+        return $module->getMainController();
     }
 
     // returns true if $module offers an embed shortcode
     public static function isEmbedModule(string $module): bool {
-        return (bool)getModuleMeta($module, 'embed');
+        $module = new Module($module);
+        return $module->isEmbedModule();
     }
 
     // returns the absolute url to UliCMS

@@ -98,12 +98,6 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase {
         $this->assertNull(\App\Helpers\ModuleHelper::getMainController('not_a_module'));
     }
 
-    public function testGetMainClass(): void {
-        $this->assertInstanceOf('Fortune', \App\Helpers\ModuleHelper::getMainClass('fortune2'));
-        $this->assertNull(\App\Helpers\ModuleHelper::getMainClass('slicknav'));
-        $this->assertNull(\App\Helpers\ModuleHelper::getMainClass('not_a_module'));
-    }
-
     public function testBuildMethodCall(): void {
         $this->assertEquals('sClass=MyClass&sMethod=MyMethod', \App\Helpers\ModuleHelper::buildMethodCall('MyClass', 'MyMethod'));
         $this->assertEquals('sClass=My_Class&sMethod=My_Method', \App\Helpers\ModuleHelper::buildMethodCall('My_Class', 'My_Method'));
