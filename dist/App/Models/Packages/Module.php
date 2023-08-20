@@ -12,12 +12,17 @@ use Database;
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 class Module {
-    private $name = null;
+    private ?string $name = null;
 
-    private $version = null;
+    private ?string $version = null;
 
-    private $enabled = 0;
+    private bool $enabled = false;
 
+    /**
+     * Constructor
+     *
+     * @param ?string $name
+     */
     public function __construct(?string $name = null) {
         if ($name) {
             $this->name = $name;
@@ -25,12 +30,19 @@ class Module {
         }
     }
 
+    /**
+     * Load module from database
+     *
+     * @param string $name
+     */
     public function loadByName(string $name): bool {
         $sql = 'select * from {prefix}modules where name = ?';
         $args = [
             $name
         ];
         $result = Database::pQuery($sql, $args, true);
+
+        /** @var object{name: string, version: string, enabled: bool}|null */
         $dataset = Database::fetchSingle($result);
 
         if ($dataset) {
@@ -70,11 +82,15 @@ class Module {
 
     public function enable(): void {
         if (! $this->isMissingDependencies()) {
-            $this->enabled = 1;
+            $this->enabled = true;
             $this->save();
         }
     }
 
+    /**
+     * Get missing dependencies
+     * @return string[]
+     */
     public function getMissingDependencies(): array {
         $result = [];
         $manager = new ModuleManager();
@@ -101,7 +117,7 @@ class Module {
      */
     public function getMeta(?string $attrib = null): mixed {
         $metadata_file = \App\Helpers\ModuleHelper::buildModuleRessourcePath(
-            $this->name,
+            $this->name ?? '',
             'metadata.json',
             true
         );
@@ -110,7 +126,7 @@ class Module {
             return null;
         }
 
-        $data = file_get_contents($metadata_file);
+        $data = (string)file_get_contents($metadata_file);
         $json = json_decode($data, true);
 
         if ($attrib && ! isset($json[$attrib])) {
@@ -128,7 +144,7 @@ class Module {
             (
                 $this->getMeta('main_class')
             ) &&
-            $this->getMeta($this->name, 'admin_permission');
+            $this->getMeta('admin_permission');
     }
 
     public function isEmbedModule(): bool {
@@ -145,7 +161,7 @@ class Module {
 
     public function disable(): void {
         if (! $this->hasDependentModules()) {
-            $this->enabled = 0;
+            $this->enabled = false;
             $this->save();
         }
     }
@@ -166,6 +182,11 @@ class Module {
         $this->version = $version;
     }
 
+    /**
+     * Get dependent modules
+     *
+     * @return string[]
+     */
     public function getDependentModules(): array {
         $result = [];
         $manager = new ModuleManager();
@@ -208,12 +229,16 @@ class Module {
     }
 
     public function uninstall(): bool {
-        return uninstall_module($this->getName(), 'module');
+        return uninstall_module((string)$this->getName(), 'module');
     }
 
     // returns an instance of the MainClass of a module
     public function getMainController(): ?Controller {
         $controller = null;
+
+        /**
+         * @var string
+         */
         $mainClass = $this->getMeta('main_class');
 
         if ($mainClass) {
