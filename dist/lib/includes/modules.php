@@ -13,6 +13,7 @@ function getModuleMeta($module, $attrib = null) {
         'metadata.json',
         true
     );
+
     if (! is_file($metadata_file)) {
         return null;
     }
@@ -23,6 +24,7 @@ function getModuleMeta($module, $attrib = null) {
     if ($attrib && ! isset($json[$attrib])) {
         return null;
     }
+    
     return $attrib ? $json[$attrib] : $json;
 }
 
@@ -67,11 +69,11 @@ function do_event(
     $modules = $manager->getEnabledModuleNames();
 
     foreach($modules as $module) {
-        $main_class = getModuleMeta($module, 'main_class');
+        $mainClass = getModuleMeta($module, 'main_class');
         $controller = null;
 
-        if ($main_class) {
-            $controller = ControllerRegistry::get($main_class);
+        if ($mainClass) {
+            $controller = ControllerRegistry::get($mainClass);
         }
 
         // Convert snailcase to camelcase method name
@@ -111,17 +113,17 @@ function replaceShortcodesWithModules(
             '[module=' . $module . ']'
         ];
 
-        $main_class = getModuleMeta($module, 'main_class');
-        $controller = $main_class ? ControllerRegistry::get($main_class) : null;
+        $mainClass = getModuleMeta($module, 'main_class');
+        $controller = $mainClass ? ControllerRegistry::get($mainClass) : null;
 
-        $html_output = '';
+        $htmlOutput = '';
 
         if ($controller && method_exists($controller, 'render')) {
-            $html_output = $controller->render();
+            $htmlOutput = $controller->render();
         }
 
         foreach($embedCodeVariants as $embedCodeVariant) {
-            $string = str_replace($embedCodeVariants, $html_output, $string);
+            $string = str_replace($embedCodeVariants, $htmlOutput, $string);
         }
 
         $string = str_replace('[title]', get_title(), $string);
@@ -130,8 +132,8 @@ function replaceShortcodesWithModules(
     $string = replaceOtherShortCodes($string);
     $string = replaceVideoTags($string);
     $string = replaceAudioTags($string);
-
     $string = optimizeHtml($string);
+
     return $string;
 }
 
