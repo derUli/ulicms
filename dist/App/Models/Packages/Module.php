@@ -105,7 +105,6 @@ class Module {
         $controller = ModuleHelper::getMainController($this->name);
         return
             is_file(getModuleAdminFilePath($this->name)) ||
-            is_file(getModuleAdminFilePath2($this->name)) ||
             ($controller && method_exists($controller, 'settings')) ||
             (
                 getModuleMeta($this->name, 'main_class')

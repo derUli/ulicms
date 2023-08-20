@@ -415,15 +415,8 @@ class ApiTest extends \PHPUnit\Framework\TestCase {
 
     public function testGetModuleAdminFilePath(): void {
         $this->assertStringEndsWith(
-            '/content/modules/my_module/my_module_admin.php',
-            getModuleAdminFilePath('my_module')
-        );
-    }
-
-    public function testGetModuleAdminFilePath2(): void {
-        $this->assertStringEndsWith(
             '/content/modules/my_module/admin.php',
-            getModuleAdminFilePath2('my_module')
+            getModuleAdminFilePath('my_module')
         );
     }
 

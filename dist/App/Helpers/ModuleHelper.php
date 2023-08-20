@@ -120,10 +120,10 @@ abstract class ModuleHelper extends Helper {
     // returns an instance of the MainClass of a module
     public static function getMainController(string $module): ?Controller {
         $controller = null;
-        $main_class = getModuleMeta($module, 'main_class');
+        $mainClass = getModuleMeta($module, 'main_class');
 
-        if ($main_class) {
-            $controller = ControllerRegistry::get($main_class);
+        if ($mainClass) {
+            $controller = ControllerRegistry::get($mainClass);
         }
 
         return $controller;

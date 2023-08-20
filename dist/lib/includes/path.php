@@ -48,10 +48,6 @@ function getModulePath($module, $abspath = false): string {
 }
 
 function getModuleAdminFilePath($module): string {
-    return getModulePath($module, true) . $module . '_admin.php';
-}
-
-function getModuleAdminFilePath2($module): string {
     return getModulePath($module, true) . 'admin.php';
 }
 

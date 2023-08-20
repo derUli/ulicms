@@ -7,16 +7,13 @@ use App\Security\Permissions\PermissionChecker;
 $module = basename($_GET['module']);
 
 $admin_file_path = getModuleAdminFilePath($module);
-$admin_file_path2 = getModuleAdminFilePath2($module);
 
-$controller = null;
-$main_class = getModuleMeta($module, 'main_class');
-if ($main_class) {
-    $controller = ControllerRegistry::get($main_class);
-}
+$mainClass = getModuleMeta($module, 'main_class');
+
+$controller = $mainClass ? ControllerRegistry::get($mainClass) : null;
 
 $disabledModules = \App\Storages\Vars::get('disabledModules') ?? [];
-if ((! is_file($admin_file_path) && ! is_file($admin_file_path2) && ! ($controller && method_exists($controller, 'settings')) || in_array($module, $disabledModules))) {
+if ((! is_file($admin_file_path) && ! ($controller && method_exists($controller, 'settings')) || in_array($module, $disabledModules))) {
     ?>
     <div class="alert alert-danger"><?php translate('this_module_has_no_settings'); ?></div>
     <?php
@@ -25,8 +22,6 @@ if ((! is_file($admin_file_path) && ! is_file($admin_file_path2) && ! ($controll
         if (method_exists($controller, 'getSettingsHeadline')) {
             define('MODULE_ADMIN_HEADLINE', $controller->getSettingsHeadline());
         }
-    } elseif (is_file($admin_file_path2)) {
-        require $admin_file_path2;
     } else {
         require $admin_file_path;
     }
