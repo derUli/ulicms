@@ -54,6 +54,11 @@ class Module {
         return false;
     }
 
+    /**
+     * Save module in database
+     *
+     * @return void
+     */
     public function save(): void {
         $sql = 'select name from {prefix}modules where name = ?';
         $args = [
