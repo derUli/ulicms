@@ -73,14 +73,29 @@ class Module {
         }
     }
 
+    /**
+     * Get version number
+     *
+     * @return string|null
+     */
     public function getVersion(): ?string {
         return $this->version;
     }
 
+    /**
+     * Get name
+     *
+     * @return string|null
+     */
     public function getName(): ?string {
         return $this->name;
     }
 
+    /**
+     * Check if module is enabled
+     *
+     * @return bool
+     */
     public function isEnabled(): bool {
         return (bool)$this->enabled;
     }
