@@ -156,6 +156,11 @@ class Module {
         return $attrib ? $json[$attrib] : $json;
     }
 
+    /**
+     * Check if the module has a settings page
+     *
+     * @return bool
+     */
     public function hasAdminPage(): bool {
         $controller = $this->getMainController();
         return
