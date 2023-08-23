@@ -172,6 +172,11 @@ class Module {
             $this->getMeta('admin_permission');
     }
 
+    /**
+     * Check if the module is an embed module
+     *
+     * @param bool
+     */
     public function isEmbedModule(): bool {
         return (bool)$this->getMeta('embed');
     }
