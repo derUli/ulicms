@@ -181,6 +181,9 @@ class Module {
         return (bool)$this->getMeta('embed');
     }
 
+    /**
+     * Check if the module is installed
+     */
     public function isInstalled(): bool {
         return $this->getMeta() !== null;
     }
