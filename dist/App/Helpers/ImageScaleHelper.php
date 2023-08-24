@@ -99,9 +99,15 @@ abstract class ImageScaleHelper extends Helper {
 
             $qualitySettings = static::getQualitySettings($file);
 
-            $imagine->open($file)
-                ->thumbnail($size, $mode)
-                ->save($outputFile ?: $file, $qualitySettings);
+            $image = $imagine->open($file);
+            $imageSize = $image->getSize();
+
+            // Only scale down, don't scale up
+            if($imageSize->getWidth() > $dimensions[0] || $imageSize->getHeight() > $dimensions[1]) {
+                $image = $image->thumbnail($size, $mode);
+            }
+
+            $image->save($outputFile ?: $file, $qualitySettings);
 
             $scaled = true;
         }

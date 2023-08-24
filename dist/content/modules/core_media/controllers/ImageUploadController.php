@@ -69,7 +69,7 @@ class ImageUploadController extends \App\Controllers\Controller {
             $url = "{$baseUrl}/{$targetFilename}";
 
             // Scale image
-            $scaled = ImageScaleHelper::scaleDown($tmpPath, $targetPath);
+            $scaled = ImageScaleHelper::scaleDown($tmpPath, $targetPath, $size);
 
             // If scaling image failed return error
             if(! $scaled) {
