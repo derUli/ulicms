@@ -92,22 +92,6 @@ class Module {
     }
 
     /**
-     * Check if module is enabled
-     *
-     * @return bool
-     */
-    public function isEnabled(): bool {
-        return (bool)$this->enabled;
-    }
-
-    public function enable(): void {
-        if (! $this->isMissingDependencies()) {
-            $this->enabled = true;
-            $this->save();
-        }
-    }
-
-    /**
      * Get missing dependencies
      * @return string[]
      */
@@ -175,7 +159,7 @@ class Module {
     /**
      * Check if the module is an embed module
      *
-     * @param bool
+     * @return bool
      */
     public function isEmbedModule(): bool {
         return (bool)$this->getMeta('embed');
@@ -183,15 +167,48 @@ class Module {
 
     /**
      * Check if the module is installed
+     *
+     * @return bool
      */
     public function isInstalled(): bool {
         return $this->getMeta() !== null;
     }
 
+    /**
+     * Get embed shortcode
+     *
+     * @return ?string
+     */
     public function getShortCode(): ?string {
         return $this->getName() ? "[module={$this->getName()}]" : null;
     }
 
+    /**
+     * Check if module is enabled
+     *
+     * @return bool
+     */
+    public function isEnabled(): bool {
+        return (bool)$this->enabled;
+    }
+
+    /**
+     * Enable module
+     *
+     * @return void
+     */
+    public function enable(): void {
+        if (! $this->isMissingDependencies()) {
+            $this->enabled = true;
+            $this->save();
+        }
+    }
+
+    /**
+     * Disable module
+     *
+     * @return void
+     */
     public function disable(): void {
         if (! $this->hasDependentModules()) {
             $this->enabled = false;
@@ -199,6 +216,11 @@ class Module {
         }
     }
 
+    /**
+     * Toggle module
+     *
+     * @return void
+     */
     public function toggleEnabled(): void {
         if ($this->isEnabled()) {
             $this->disable();
