@@ -69,10 +69,10 @@ class ImageUploadController extends \App\Controllers\Controller {
             $url = "{$baseUrl}/{$targetFilename}";
 
             // Scale image
-            $scaled = ImageScaleHelper::scaleDown($tmpPath, $targetPath, $size);
+            $scaledImage = ImageScaleHelper::scaleDown($tmpPath, $targetPath, $size);
 
             // If scaling image failed return error
-            if(! $scaled) {
+            if(! $scaledImage) {
                 $response = [
                     'error' => [
                         'message' => get_translation('error_scaling_failed')
@@ -82,11 +82,14 @@ class ImageUploadController extends \App\Controllers\Controller {
                 JSONResult($response);
             }
 
+            // Get actual width of resized image
+            $actualWidth = $scaledImage->getSize()->getWidth();
+
             if(! isset($urls['default'])) {
                 $urls['default'] = $url;
             }
 
-            $urls[$width] = $url;
+            $urls[$actualWidth] = $url;
         }
 
         $response = [

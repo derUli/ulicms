@@ -7,6 +7,7 @@ namespace App\Helpers;
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Utils\File;
+use Imagine\Gd\Image;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
 use Settings;
@@ -79,17 +80,17 @@ abstract class ImageScaleHelper extends Helper {
      * @param string|null $outputFile
      * @param array<number>|null $dimensions
      *
-     * @return bool
+     * @return ?Image
      */
     public static function scaleDown(
         string $file,
         ?string $outputFile = null,
         ?array $dimensions = null
 
-    ): bool {
+    ): ?Image {
         $dimensions = $dimensions ?? ImageScaleHelper::getMaxImageDimensions();
 
-        $scaled = false;
+        $image = null;
 
         if ($dimensions) {
             $imagine = ImagineHelper::getImagine();
@@ -107,12 +108,10 @@ abstract class ImageScaleHelper extends Helper {
                 $image = $image->thumbnail($size, $mode);
             }
 
-            $image->save($outputFile ?: $file, $qualitySettings);
-
-            $scaled = true;
+            $image = $image->save($outputFile ?: $file, $qualitySettings);
         }
 
-        return $scaled;
+        return $image;
     }
 
     /**
