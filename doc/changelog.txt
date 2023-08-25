@@ -16,6 +16,7 @@ Entfernte API-Methoden:
 * getModuleAdminFilePath2()
 * getModuleUninstallScriptPath()
 * getModuleUninstallScriptPath2()
+* uninstall_module()
 
 Sonstige Änderungen:
 * max_image_dimensions auf 1920x1080 geändert

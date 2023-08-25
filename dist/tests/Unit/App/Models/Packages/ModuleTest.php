@@ -102,8 +102,18 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($module->isInstalled());
     }
 
-    public function testIsInstalledReturnsFalse(): void {
+    public function testIsInstalledReturnsFalse1(): void {
         $module = new Module('not_existing_module');
+        $this->assertFalse($module->isInstalled());
+    }
+
+    public function testIsInstalledReturnsFalse2(): void {
+        $module = new Module('.');
+        $this->assertFalse($module->isInstalled());
+    }
+
+    public function testIsInstalledReturnsFalse3(): void {
+        $module = new Module('..');
         $this->assertFalse($module->isInstalled());
     }
 

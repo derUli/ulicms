@@ -5,6 +5,8 @@ declare(strict_types=1);
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Controllers\MainClass;
+use App\Models\Packages\Module;
+use App\Models\Packages\Theme;
 use App\Services\Connectors\PackageSourceConnector;
 use Fetcher\Fetcher;
 
@@ -122,8 +124,8 @@ class PackageController extends MainClass {
     }
 
     public function _uninstallModule(string $name): bool {
-        $type = 'module';
-        return (bool)(uninstall_module($name, $type));
+        $module = new Module($name);
+        return $module->uninstall();
     }
 
     public function uninstallTheme(): void {
@@ -142,7 +144,8 @@ class PackageController extends MainClass {
     }
 
     public function _uninstallTheme(string $name): bool {
-        return (bool)(uninstall_module($name, 'theme'));
+        $theme = new Theme($name);
+        return $theme->uninstall();
     }
 
     public function toggleModule(): void {

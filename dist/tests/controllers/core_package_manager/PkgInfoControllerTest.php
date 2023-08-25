@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Packages\Module;
+
 class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase {
     protected function setUp(): void {
         \App\Storages\Vars::delete('allModules');
@@ -23,7 +25,8 @@ class PkgInfoControllerTest extends \PHPUnit\Framework\TestCase {
             unlink($destination);
         }
 
-        uninstall_module('hello_world');
+        $module = new Module('hello_world');
+        $module->uninstall();
     }
 
     public function testInstallPostReturnsTrue(): void {

@@ -38,8 +38,18 @@ class ThemeTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($theme->isInstalled());
     }
 
-    public function testIsInstalledReturnsFalse(): void {
+    public function testIsInstalledReturnsFalse1(): void {
         $theme = new Theme('not_found');
+        $this->assertFalse($theme->isInstalled());
+    }
+
+    public function testIsInstalledReturnsFalse2(): void {
+        $theme = new Theme('.');
+        $this->assertFalse($theme->isInstalled());
+    }
+
+    public function testIsInstalledReturnsFalse3(): void {
+        $theme = new Theme('..');
         $this->assertFalse($theme->isInstalled());
     }
 }
