@@ -229,10 +229,24 @@ class Module {
         }
     }
 
+    /**
+     * Set name
+     *
+     * @param ?string $name
+     *
+     * @return void
+     */
     public function setName(?string $name): void {
         $this->name = $name;
     }
 
+    /**
+     * Set version
+     *
+     * @param ?string $version
+     *
+     * @return void
+     */
     public function setVersion(?string $version): void {
         $this->version = $version;
     }
