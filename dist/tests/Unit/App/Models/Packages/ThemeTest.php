@@ -32,4 +32,14 @@ class ThemeTest extends \PHPUnit\Framework\TestCase {
         $theme = new Theme('gibts_nicht');
         $this->assertFalse($theme->hasScreenshot());
     }
+
+    public function testIsInstalledReturnsTrue(): void {
+        $theme = new Theme('impro17');
+        $this->assertTrue($theme->isInstalled());
+    }
+
+    public function testIsInstalledReturnsFalse(): void {
+        $theme = new Theme('not_found');
+        $this->assertFalse($theme->isInstalled());
+    }
 }

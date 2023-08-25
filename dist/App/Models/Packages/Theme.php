@@ -6,13 +6,15 @@ namespace App\Models\Packages;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+use App\Exceptions\NotImplementedException;
+
 use function getTemplateDirPath;
 use function getThemeMeta;
 
 /**
  * This class represents a installed theme
  */
-class Theme {
+class Theme implements PackageInterface {
     private string $name;
 
     /**
@@ -58,9 +60,25 @@ class Theme {
 
     /**
      * Check if this theme has a screeenshot
+     *
      * @return bool
      */
     public function hasScreenshot(): bool {
         return $this->getScreenshotFile() !== null;
+    }
+
+    /**
+     * Check if the theme is installed
+     *
+     * @return bool
+     */
+    public function isInstalled(): bool {
+        $themes = getAllThemes();
+
+        return in_array($this->name, $themes);
+    }
+
+    public function uninstall(): bool {
+        throw new NotImplementedException();
     }
 }
