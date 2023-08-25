@@ -6,7 +6,7 @@ namespace App\Models\Packages;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use App\Exceptions\NotImplementedException;
+use App\Utils\CacheUtil;
 
 use function getTemplateDirPath;
 use function getThemeMeta;
@@ -78,7 +78,21 @@ class Theme implements PackageInterface {
         return in_array($this->name, $themes);
     }
 
+    /**
+     * Uninstall the module
+     *
+     * @return bool
+     */
     public function uninstall(): bool {
-        throw new NotImplementedException();
+        $success = false;
+
+        if ($this->isInstalled()) {
+            $theme_path = getTemplateDirPath($this->name, true);
+            sureRemoveDir($theme_path, true);
+            CacheUtil::clearCache();
+            $success = ! is_dir($theme_path);
+        }
+
+        return $success;
     }
 }

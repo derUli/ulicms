@@ -8,6 +8,8 @@ use App\Constants\DefaultValues;
 use App\Database\DBMigrator;
 use App\Helpers\StringHelper;
 use App\Helpers\TestHelper;
+use App\Models\Packages\Module;
+use App\Models\Packages\Theme;
 use App\Packages\PackageManager;
 use App\Packages\SinPackageInstaller;
 use App\Services\Connectors\AvailablePackageVersionMatcher;
@@ -347,11 +349,12 @@ class RoboFile extends Tasks {
     public function modulesRemove(array $modules): void {
         $this->initUliCMS();
 
-        foreach ($modules as $module) {
-            if (uninstall_module($module, 'module')) {
-                $this->writeln("Package {$module} removed.");
+        foreach ($modules as $moduleName) {
+            $module = new Module($moduleName);
+            if ($module->uninstall()) {
+                $this->writeln("Package {$moduleName} removed.");
             } else {
-                $this->writeln("Removing {$module} failed.");
+                $this->writeln("Removing {$moduleName} failed.");
             }
         }
     }
@@ -412,11 +415,13 @@ class RoboFile extends Tasks {
     public function themesRemove(array $themes): void {
         $this->initUliCMS();
 
-        foreach ($themes as $theme) {
-            if (uninstall_module($theme, 'theme')) {
-                $this->writeln("Package {$theme} removed.");
+        foreach ($themes as $themeName) {
+            $theme = new Theme($themeName);
+
+            if ($theme->uninstall()) {
+                $this->writeln("Package {$themeName} removed.");
             } else {
-                $this->writeln("Removing {$theme} failed.");
+                $this->writeln("Removing {$themeName} failed.");
             }
         }
     }

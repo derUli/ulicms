@@ -320,6 +320,9 @@ class Module implements PackageInterface {
      * @return bool
      */
     public function uninstall(): bool {
+
+        $success = false;
+
         $moduleDir = getModulePath($this->getName(), true);
 
         // Modul-Ordner entfernen
@@ -332,10 +335,10 @@ class Module implements PackageInterface {
 
             sureRemoveDir($moduleDir, true);
             CacheUtil::clearCache();
-            return ! is_dir($moduleDir);
+            $success = ! is_dir($moduleDir);
         }
 
-        return false;
+        return $success;
     }
 
     /**

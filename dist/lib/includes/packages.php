@@ -5,9 +5,9 @@ declare(strict_types=1);
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
 use App\Models\Packages\Module;
+use App\Models\Packages\Theme;
 use App\Packages\PackageManager;
 use App\Security\Permissions\PermissionChecker;
-use App\Utils\CacheUtil;
 
 /**
  * Get list of all installed modules
@@ -51,13 +51,7 @@ function uninstall_module(string $name, string $type = 'module'): bool {
         return false;
     }
 
-    $name = trim(basename(trim($name)));
-
-    // Verhindern, dass der Modulordner oder gar das ganze
-    // CMS gelöscht werden kann
-    if ($name == '.' || $name == '..' || empty($name)) {
-        return false;
-    }
+    $name = trim(basename($name));
 
     switch ($type) {
         case 'module':
@@ -65,16 +59,8 @@ function uninstall_module(string $name, string $type = 'module'): bool {
             return $module->uninstall();
 
         case 'theme':
-            $cTheme = Settings::get('theme');
-            $allThemes = getAllThemes();
-
-            if (in_array($name, $allThemes) && $cTheme !== $name) {
-                $theme_path = getTemplateDirPath($name, true);
-                sureRemoveDir($theme_path, true);
-                CacheUtil::clearCache();
-                return ! is_dir($theme_path);
-            }
-            break;
+            $theme = new Theme($name);
+            return $theme->uninstall();
     }
 
     return false;
