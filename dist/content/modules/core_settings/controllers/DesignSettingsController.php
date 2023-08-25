@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use App\Packages\Theme;
+use App\Models\Packages\Theme;
 use App\Utils\CacheUtil;
 
 class DesignSettingsController extends \App\Controllers\Controller {

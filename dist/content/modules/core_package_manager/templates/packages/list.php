@@ -3,7 +3,7 @@
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 use App\Constants\RequestMethod;
-use App\Packages\Theme;
+use App\Models\Packages\Theme;
 use App\Security\Permissions\PermissionChecker;
 
 $permissionChecker = new PermissionChecker(get_user_id());
