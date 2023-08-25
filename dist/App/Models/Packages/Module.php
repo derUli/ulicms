@@ -270,10 +270,20 @@ class Module {
         return $result;
     }
 
+    /**
+     * Check if the module has dependent modules
+     *
+     * @return bool
+     */
     public function hasDependentModules(): bool {
         return count($this->getDependentModules()) > 0;
     }
 
+    /**
+     * Check if the module has an uninstall event
+     *
+     * @return bool
+     */
     public function hasUninstallEvent(): bool {
         $name = $this->name;
         // Uninstall Script ausführen, sofern vorhanden
