@@ -321,7 +321,11 @@ class Module {
         return uninstall_module((string)$this->getName(), 'module');
     }
 
-    // returns an instance of the MainClass of a module
+    /**
+     * Get MainController
+     *
+     * @return ?Controller
+     */
     public function getMainController(): ?Controller {
         $controller = null;
 
@@ -337,6 +341,11 @@ class Module {
         return $controller;
     }
 
+    /**
+     * Insert into database
+     *
+     * @return bool
+     */
     protected function insert(): bool {
         $sql = 'INSERT INTO {prefix}modules (name, version, enabled) '
                 . 'values(?, ?, ?)';
@@ -348,6 +357,11 @@ class Module {
         return Database::pQuery($sql, $args, true);
     }
 
+    /**
+     * Update dataset
+     *
+     * @return bool
+     */
     protected function update(): bool {
         $sql = 'update {prefix}modules set version = ?, enabled = ? '
                 . 'where name = ?';
