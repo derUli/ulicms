@@ -291,6 +291,11 @@ class Module {
         return $mainController && method_exists($mainController, 'uninstall');
     }
 
+    /**
+     * Delete module from database
+     *
+     * @return ?bool
+     */
     public function delete(): ?bool {
         $sql = 'select name from {prefix}modules where name = ?';
         $args = [
@@ -307,6 +312,11 @@ class Module {
         return null;
     }
 
+    /**
+     * Uninstall module
+     *
+     * @return bool
+     */
     public function uninstall(): bool {
         return uninstall_module((string)$this->getName(), 'module');
     }
