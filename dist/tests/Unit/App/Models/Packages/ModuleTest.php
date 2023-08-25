@@ -151,6 +151,11 @@ class ModuleTest extends \PHPUnit\Framework\TestCase {
         $this->assertGreaterThanOrEqual(time() - 10, $fortune2_uninstalled_at);
     }
 
+    public function testUninstallReturnsFalse(): void {
+        $module = new Module('not_found');
+        $this->assertFalse($module->uninstall());
+    }
+
     public function testMetaReturnsNull1() {
         $module = new Module('fortune2');
         $this->assertNull($module->getMeta('not_found'));

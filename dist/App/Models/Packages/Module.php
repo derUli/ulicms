@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace App\Models\Packages;
 
 use App\Controllers\Controller;
+use App\Helpers\ModuleHelper;
 use App\Packages\ModuleManager;
+use App\Utils\CacheUtil;
 use ControllerRegistry;
 use Database;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-class Module {
+class Module implements PackageInterface {
     private ?string $name = null;
 
     private ?string $version = null;
@@ -120,7 +122,7 @@ class Module {
      * @return mixed array from Json file or the value of the given $attrib
      */
     public function getMeta(?string $attrib = null): mixed {
-        $metadata_file = \App\Helpers\ModuleHelper::buildModuleRessourcePath(
+        $metadata_file = ModuleHelper::buildModuleRessourcePath(
             $this->name ?? '',
             'metadata.json',
             true
@@ -318,7 +320,22 @@ class Module {
      * @return bool
      */
     public function uninstall(): bool {
-        return uninstall_module((string)$this->getName(), 'module');
+        $moduleDir = getModulePath($this->getName(), true);
+
+        // Modul-Ordner entfernen
+        if ($this->isInstalled()) {
+            // Uninstall Script ausführen, sofern vorhanden
+            if ($this->hasUninstallEvent()) {
+                $mainController = ModuleHelper::getMainController($this->getName());
+                $mainController->uninstall();
+            }
+
+            sureRemoveDir($moduleDir, true);
+            CacheUtil::clearCache();
+            return ! is_dir($moduleDir);
+        }
+
+        return false;
     }
 
     /**

@@ -9,6 +9,7 @@ Neue Features:
 API-Änderungen:
 * CustomData in Namespace App\Model\Content verschoben
 * Ersten Parameter von containsModule() entfernt
+* Theme in Namespace App\Model\Packages verschoben
 
 Entfernte API-Methoden:
 * custom_acl als Event entfernt

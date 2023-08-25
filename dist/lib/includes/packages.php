@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 class_exists('\\Composer\\Autoload\\ClassLoader') || exit('No direct script access allowed');
 
+use App\Models\Packages\Module;
 use App\Packages\PackageManager;
 use App\Security\Permissions\PermissionChecker;
 use App\Utils\CacheUtil;
@@ -57,25 +58,12 @@ function uninstall_module(string $name, string $type = 'module'): bool {
     if ($name == '.' || $name == '..' || empty($name)) {
         return false;
     }
+
     switch ($type) {
         case 'module':
-            $moduleDir = getModulePath($name, true);
+            $module = new Module($name);
+            return $module->uninstall();
 
-            // Modul-Ordner entfernen
-            if (is_dir($moduleDir)) {
-
-                // Uninstall Script ausführen, sofern vorhanden
-                $mainController = \App\Helpers\ModuleHelper::getMainController($name);
-
-                if ($mainController && method_exists($mainController, 'uninstall')) {
-                    $mainController->uninstall();
-                }
-
-                sureRemoveDir($moduleDir, true);
-                CacheUtil::clearCache();
-                return ! is_dir($moduleDir);
-            }
-            break;
         case 'theme':
             $cTheme = Settings::get('theme');
             $allThemes = getAllThemes();
