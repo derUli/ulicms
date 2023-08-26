@@ -92,6 +92,7 @@ class BackendPageRenderer {
             do_event('admin_footer');
             require 'inc/footer.php';
         }
+
         if (Settings::get('minify_html')) {
             $this->outputMinified();
         }

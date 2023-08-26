@@ -13,7 +13,11 @@ class ControllerRegistry {
 
     private static $controller_function_permissions = [];
 
-    // load and initialize all module controllers
+    /**
+     * Load and initialize all controllers of enabled modules;
+     *
+     * @return void
+     */
     public static function loadModuleControllers(): void {
         $controllerRegistry = [];
 
@@ -46,6 +50,7 @@ class ControllerRegistry {
                 }
             }
         }
+
         foreach ($controllerRegistry as $key => $value) {
             include_once $value;
 

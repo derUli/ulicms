@@ -61,8 +61,7 @@ $(() => {
   
             // Headers sent along with the XMLHttpRequest to the upload server.
             headers: {
-              "X-CSRF-TOKEN": $('body').data('csrf-token'),
-              // Authorization: "Bearer <JSON Web Token>"
+              "X-CSRF-TOKEN": $('body').data('csrf-token')
             }
           }
     };
