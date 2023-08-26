@@ -14,9 +14,15 @@ $(() => {
             const id = params.get("delete");
 
             const list_item_id = `dataset-${id}`;
-            const tr = $(`tr#${list_item_id}`);
+            
+            const row = $(`tr#${list_item_id}`);
 
-            $(tr).fadeOut();
+            const table = row.closest('table');
+            const dataTable = table.DataTable();
+
+            $(row).fadeOut(400, () => {
+                dataTable.row(row).remove().draw(false);
+            });
         }
     };
     $("form.delete-form").ajaxForm(ajaxOptions);

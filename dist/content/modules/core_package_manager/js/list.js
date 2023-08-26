@@ -19,11 +19,16 @@ $(() => {
                 // submit the form
                 $(form).ajaxSubmit({
                     success: () => {
+
+                        const row = form.closest('tr');
+                        const table = row.closest('table');
+                        const dataTable = table.DataTable();
+            
                         // hide and remove the table row of the uninstalled
                         // package
-                        $(form).closest("tr").fadeOut(400, () =>
-                            $(form).closest("tr").remove()
-                        );
+                        $(row).fadeOut(400, () => {
+                            dataTable.row(row).remove().draw(false);
+                        });
                     },
                     error: (xhr, status, error) =>
                         bootbox.alert(error)
