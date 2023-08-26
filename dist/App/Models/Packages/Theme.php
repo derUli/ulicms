@@ -32,7 +32,7 @@ class Theme implements PackageInterface {
      * @return string
      */
     public function getVersion(): ?string {
-        return getThemeMeta($this->name, 'version') ? getThemeMeta($this->name, 'version') : null;
+        return is_string(getThemeMeta($this->name, 'version')) ? getThemeMeta($this->name, 'version') : null;
     }
 
     /**

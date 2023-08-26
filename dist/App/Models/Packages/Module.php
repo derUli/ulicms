@@ -110,6 +110,11 @@ class Module implements PackageInterface {
         return $result;
     }
 
+    /**
+     * Check if there are missing dependencies
+     *
+     * @return bool
+     */
     public function isMissingDependencies(): bool {
         return count($this->getMissingDependencies()) > 0;
     }
@@ -329,7 +334,7 @@ class Module implements PackageInterface {
         if ($this->isInstalled()) {
             // Uninstall Script ausführen, sofern vorhanden
             if ($this->hasUninstallEvent()) {
-                $mainController = ModuleHelper::getMainController($this->getName());
+                $mainController = ModuleHelper::getMainController((string)$this->getName());
                 $mainController->uninstall();
             }
 
