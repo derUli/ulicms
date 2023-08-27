@@ -501,9 +501,6 @@ add_translation('PASSWORDS', 'Passwords');
 add_translation('LOCKED', 'Locked');
 add_translation('YOUR_ACCOUNT_IS_LOCKED', 'Your Account is locked. Please contact your system administrator if you think, that this is an error.');
 
-// Passwort anzeigen
-add_translation('VIEW_PASSWORD', 'View Password');
-
 // Letzter Login
 add_translation('LAST_LOGIN', 'Last Login');
 add_translation('NEVER', 'Never');

@@ -71,10 +71,6 @@ if (! empty($_REQUEST['go'])) {
         <td><input type="password" id="password" name="password" value="" autocomplete="current-password"></td>
     </tr>
     <tr>
-        <td><label for="view_password"><?php translate('view_password'); ?></label></td>
-        <td><input type="checkbox" id="view_password" /></td>
-    </tr>
-    <tr>
         <td><strong><?php translate('language'); ?></strong></td>
         <td><select name="system_language">
                 <option value="" selected>[<?php translate('standard'); ?>]</option>

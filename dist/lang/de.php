@@ -500,9 +500,6 @@ add_translation('PASSWORDS', 'Passwörter');
 add_translation('LOCKED', 'Gesperrt');
 add_translation('YOUR_ACCOUNT_IS_LOCKED', 'Ihr Account ist gesperrt. Fragen Sie Ihren Administrator, falls Sie denken, dass das ein Fehler ist.');
 
-// Passwort anzeigen
-add_translation('VIEW_PASSWORD', 'Passwort anzeigen');
-
 // Letzter Login
 add_translation('LAST_LOGIN', 'Letzte Anmeldung');
 add_translation('NEVER', 'Niemals');
