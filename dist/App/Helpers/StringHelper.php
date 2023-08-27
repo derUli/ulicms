@@ -6,8 +6,6 @@ namespace App\Helpers;
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
-use Nette\Utils\Strings;
-
 abstract class StringHelper extends Helper {
     // removes empty lines from a string
     public static function removeEmptyLinesFromString(string $input): string {
@@ -19,13 +17,6 @@ abstract class StringHelper extends Helper {
             ) ?? '',
             "\n"
         );
-    }
-
-    // clean a string to use it in urls
-    public static function cleanString(
-        string $string
-    ): string {
-        return Strings::webalize($string);
     }
 
     /**
