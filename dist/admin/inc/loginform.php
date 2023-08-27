@@ -103,7 +103,7 @@ if ($error) {
     <?php }?>
     
 <div class="btn-group flex-wrap">
-    <button type="submit" class="btn btn-primary">
+    <button type="submit" class="btn btn-primary mb-3">
         <i class="fas fa-sign-in-alt"></i> 
         <?php translate('login'); ?>
     </button>
@@ -113,14 +113,14 @@ if ($error) {
         if (! empty($_REQUEST['go'])) {
             echo 'go=' . _esc($_REQUEST['go']);
         }
-        ?>" class="btn btn-light">
+        ?>" class="btn btn-light mb-3">
             <i class="fas fa-user-plus"></i> 
             <?php translate('register'); ?>
         </a>
     <?php } ?>
 
     <?php if (! Settings::get('disable_password_reset')) { ?>
-        <a href="?reset_password" class="btn btn-light">
+        <a href="?reset_password" class="btn btn-light mb-3">
             <i class="fa fa-lock"></i>
             <?php translate('reset_password'); ?>
         </a>
