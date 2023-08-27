@@ -61,77 +61,75 @@ if (! empty($_REQUEST['go'])) {
            <?php
 }
 ?>
-<table>
-    <tr>
-        <td><strong><?php translate('username'); ?></strong></td>
-        <td><input type="text" name="user" value="" autocomplete="username"></td>
-    </tr>
-    <tr>
-        <td><strong><?php translate('password'); ?></strong></td>
-        <td><input type="password" id="password" name="password" value="" autocomplete="current-password"></td>
-    </tr>
-    <tr>
-        <td><strong><?php translate('language'); ?></strong></td>
-        <td><select name="system_language">
-                <option value="" selected>[<?php translate('standard'); ?>]</option>
-                <?php
-         for ($i = 0; $i < $languagesCount; $i++) {
-             echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
-         }
-?>
-            </select></td>
-    </tr>
-    <?php
-    if ($twofactor_authentication) {
-        ?>
-        <tr>
-            <td><strong><?php translate('confirmation_code'); ?></strong></td>
-            <td><input type="text" name="confirmation_code" value=""
-                       autocomplete="nope"></td>
-        </tr>
-        <?php
-    }
-?>
-    <tr>
-        <td></td>
-        <td class="text-center">
-            <div class="voffset2">
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-sign-in-alt"></i> <?php translate('login'); ?></button>
-            </div>
-        </td>
-    </tr>
-</table>
-<?php echo \App\Helpers\ModuleHelper::endForm(); ?>
 <?php
 if ($error) {
     ?>
-    <div class="alert alert-danger voffset2">
+    <div class="alert alert-danger mb-2">
         <?php esc($error); ?>
     </div>
     <?php
 }
 ?>
-<?php
-if (Settings::get('visitors_can_register') === 'on' || Settings::get('visitors_can_register') === '1') {
-    ?>
-    <a
-        href="?register=register&<?php
+
+
+<div class="form-floating mb-2">
+    <input name="user" id="user" autocomplete="username" type="text" class="form-control" placeholder="<?php translate('username'); ?>">
+    <label for="user"><?php translate('username'); ?></label>
+</div>
+
+
+<div class="form-floating mb-2">
+    <input name="password" id="password" type="password" class="form-control" value=""autocomplete="current-password"  placeholder="<?php translate('password'); ?>">
+    <label for="password"><?php translate('password'); ?></label>
+</div>
+
+<div class="form-floating mb-2">
+    <select name="system_language" id="system_language" placeholder="<?php translate('language');?>" class="form-control no-select2">
+        <option value="" selected>[<?php translate('standard'); ?>]</option>
+        <?php
+        for ($i = 0; $i < $languagesCount; $i++) {
+            echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
+        }
+?>
+    </select>
+    <label for="system_language"><?php translate('language'); ?></label>
+</div>
+
+<?php if ($twofactor_authentication) {?>
+    <div class="form-floating mb-2">
+        <input name="confirmation_code" id="confirmation_code" type="text"  value="" autocomplete="nope" placeholder="<?php translate('confirmation_code'); ?>">
+        <label for="confirmation_code"><?php translate('confirmation_code'); ?></label>
+    </div>
+    <?php }?>
+    
+<div class="btn-group flex-wrap">
+    <button type="submit" class="btn btn-primary">
+        <i class="fas fa-sign-in-alt"></i> 
+        <?php translate('login'); ?>
+    </button>
+
+    <?php if (Settings::get('visitors_can_register') === 'on' || Settings::get('visitors_can_register') === '1') {?>
+        <a href="?register=register&<?php
         if (! empty($_REQUEST['go'])) {
             echo 'go=' . _esc($_REQUEST['go']);
         }
-    ?>"
-        class="btn btn-light voffset2"><i class="fas fa-user-plus"></i> <?php translate('register'); ?></a>
-        <?php
-}
-?>
-    <?php
-if (! Settings::get('disable_password_reset')) {
-    ?>
-    <a href="?reset_password" class="btn btn-light float-end voffset2"><i
-            class="fa fa-lock"></i> <?php translate('reset_password'); ?></a>
-    <?php
-}
+        ?>" class="btn btn-light">
+            <i class="fas fa-user-plus"></i> 
+            <?php translate('register'); ?>
+        </a>
+    <?php } ?>
+
+    <?php if (! Settings::get('disable_password_reset')) { ?>
+        <a href="?reset_password" class="btn btn-light">
+            <i class="fa fa-lock"></i>
+            <?php translate('reset_password'); ?>
+        </a>
+    <?php } ?>
+</div>
+
+<?php echo \App\Helpers\ModuleHelper::endForm(); ?>
+
+<?php
 enqueueScriptFile('scripts/login.js');
 enqueueScriptFile('../node_modules/password-strength-meter/dist/password.min.js');
 combinedScriptHtml();

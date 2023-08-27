@@ -70,7 +70,7 @@ const getSelect2Language = () => {
  */
 const initSelect2 = (container) => {
     // prettier select-boxes
-    $(container).find("select").select2({
+    $(container).find("select:not(.no-select2)").select2({
         width: "100%",
         language: getSelect2Language()
     });
