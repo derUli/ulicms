@@ -63,6 +63,11 @@ class ControllerRegistry {
         }
     }
 
+    /**
+     * Run called controller method
+     *
+     * @return void
+     */
     public static function runMethods(): void {
         if (isset($_REQUEST['sClass'])
                 && ! empty($_REQUEST['sClass'])) {
