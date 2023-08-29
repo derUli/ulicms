@@ -169,7 +169,8 @@ class Module implements PackageInterface {
      * @return bool
      */
     public function isEmbedModule(): bool {
-        return (bool)$this->getMeta('embed');
+        $mainController = $this->getMainController();
+        return $mainController && method_exists($mainController, 'render');
     }
 
     /**
