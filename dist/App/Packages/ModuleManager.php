@@ -13,7 +13,6 @@ use function getModuleMeta;
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 class ModuleManager {
-    
     /**
      * Get all installed modules
      *
@@ -48,6 +47,13 @@ class ModuleManager {
         return $modules;
     }
 
+    /**
+     * Get names of all modules
+     *
+     * @param string|null $source
+     *
+     * @return string[]
+     */
     public function getAllModuleNames(?string $source = null): array {
         $modules = [];
         $sql = 'select name from {prefix}modules';
@@ -113,7 +119,11 @@ class ModuleManager {
         $this->initModulesDefaultSettings();
     }
 
-    // remove modules from database which aren't installed anymore
+    /**
+     * Remove modules from database which were removed from directory tree
+     *
+     * @return void
+     */
     protected function removeDeletedModules(): void {
         $realModules = getAllModules();
 
