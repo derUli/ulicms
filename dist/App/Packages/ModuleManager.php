@@ -13,6 +13,7 @@ use function getModuleMeta;
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
 class ModuleManager {
+    
     /**
      * Get all installed modules
      *
@@ -30,6 +31,11 @@ class ModuleManager {
         return $modules;
     }
 
+    /**
+     * Get names of enabled modules
+     *
+     * @return string[]
+     */
     public function getEnabledModuleNames(): array {
         $modules = [];
         $sql = 'select name from {prefix}modules where enabled = 1';
