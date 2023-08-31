@@ -182,9 +182,14 @@ class ModuleManager {
         }
     }
 
-    // if the installed version of the module is different from the one
-    // stored in the database
-    // update the version number in the database
+    /**
+     * Sync module version in database with filesystem
+     *
+     * @param string|null $version
+     * @param string $realModule
+     *
+     * @return void
+     */
     protected function updateModuleVersion(
         ?string $version,
         string $realModule
