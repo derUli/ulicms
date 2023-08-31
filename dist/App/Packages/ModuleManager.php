@@ -70,6 +70,14 @@ class ModuleManager {
         return $modules;
     }
 
+    /**
+     * Get dependencies of a module
+     *
+     * @param string|null $module
+     * @param string[] $allDeps
+     *
+     * @return string[]
+     */
     public function getDependencies(
         ?string $module,
         array $allDeps = []
@@ -105,13 +113,11 @@ class ModuleManager {
         return $allDeps;
     }
 
-    // Diese Funktion synchronisiert die modules in der Datenbank
-    // mit den modules im Modulordner
-    // - Neue Module werden erfassen
-    // - Versionsupdates erfassen
-    // - Nicht mehr vorhandene Module aus Datenbank löschen
-    // - neue Module sollen erst mal deaktiviert sein
-    // - Diese Funktion aufrufen beim installieren von Modulen, beim leeren des Caches und beim deinstallieren von Modulen
+    /**
+     * Sync modules from filesystem with modules in database
+     *
+     * @return void
+     */
     public function sync(): void {
         $this->removeDeletedModules();
         $this->addNewModules();
@@ -138,7 +144,11 @@ class ModuleManager {
         }
     }
 
-    // add new modules to database
+    /**
+     * Add new modules to database
+     *
+     * @return void
+     */
     protected function addNewModules(): void {
         $realModules = getAllModules();
         $dataBaseModules = $this->getAllModuleNames();

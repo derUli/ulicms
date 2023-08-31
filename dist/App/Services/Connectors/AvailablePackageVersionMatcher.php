@@ -28,8 +28,7 @@ class AvailablePackageVersionMatcher {
         $parsedVersionData = is_string($versionData) ?
                 json_decode($versionData, true) : $versionData;
 
-        $versions = is_array($parsedVersionData['versions']) ?
-                $parsedVersionData['versions'] : [];
+        $versions = $parsedVersionData['versions'] ?? [];
 
         foreach ($versions as $version) {
             if (ArrayHelper::hasMultipleKeys(

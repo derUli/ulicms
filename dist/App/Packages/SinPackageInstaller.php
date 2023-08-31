@@ -23,6 +23,7 @@ class SinPackageInstaller {
 
     /**
      * Constructor
+     *
      * @param string $file
      */
     public function __construct(string $file) {
@@ -33,6 +34,7 @@ class SinPackageInstaller {
 
     /**
      * Load package data
+     *
      * @return array
      */
     public function loadPackage(): array {
@@ -53,6 +55,7 @@ class SinPackageInstaller {
 
     /**
      * Extract archive data
+     *
      * @return string
      */
     public function extractArchive(): string {
@@ -69,7 +72,9 @@ class SinPackageInstaller {
 
     /**
      * Install package
+     *
      * @param bool $clear_cache
+     *
      * @return bool
      */
     public function installPackage(bool $clear_cache = true): bool {
@@ -88,6 +93,7 @@ class SinPackageInstaller {
 
     /**
      * Get size of package data payload
+     *
      * @return int
      */
     public function getSize(): int {
@@ -98,6 +104,7 @@ class SinPackageInstaller {
 
     /**
      * Get json property if is set
+     *
      * @param string $name
      *
      * @return string|bool|null|int|float
@@ -115,6 +122,7 @@ class SinPackageInstaller {
 
     /**
      * Get installation errors
+     *
      * @return array
      */
     public function getErrors(): array {

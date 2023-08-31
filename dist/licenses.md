@@ -2963,7 +2963,7 @@ THE SOFTWARE.
 Symfony polyfill for ctype functions
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2018-2019 Fabien Potencier
+Copyright (c) 2018-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2988,7 +2988,7 @@ THE SOFTWARE.
 Symfony polyfill for intl's grapheme_* functions
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2015-2019 Fabien Potencier
+Copyright (c) 2015-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3013,7 +3013,7 @@ THE SOFTWARE.
 Symfony polyfill for intl's Normalizer class and related functions
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2015-2019 Fabien Potencier
+Copyright (c) 2015-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3038,7 +3038,7 @@ THE SOFTWARE.
 Symfony polyfill for the Mbstring extension
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2015-2019 Fabien Potencier
+Copyright (c) 2015-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3063,7 +3063,7 @@ THE SOFTWARE.
 Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2020 Fabien Potencier
+Copyright (c) 2020-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -3088,7 +3088,7 @@ THE SOFTWARE.
 Symfony polyfill backporting some PHP 8.1+ features to lower PHP versions
 Homepage: https://symfony.com
 Licenses Used: MIT
-Copyright (c) 2021 Fabien Potencier
+Copyright (c) 2021-present Fabien Potencier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
