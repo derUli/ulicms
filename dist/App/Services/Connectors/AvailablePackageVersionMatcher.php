@@ -13,12 +13,20 @@ class AvailablePackageVersionMatcher {
 
     /**
      * Constructor
+     *
      * @param $versionData
      */
     public function __construct($versionData = null) {
         $this->loadData($versionData);
     }
 
+    /**
+     * Load version data
+     *
+     * @param string|null $versionData
+     *
+     * @return void
+     */
     public function loadData($versionData): void {
         $this->versionData = [];
         if ($versionData === null) {
