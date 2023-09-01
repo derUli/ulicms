@@ -12,7 +12,11 @@ use function str_ends_with;
 
 // loads model files of modules
 class ModelRegistry {
-    // TODO: refactor this and split int into multiple method s
+    /**
+     * Load all module models
+     *
+     * @return void
+     */
     public static function loadModuleModels(): void {
         $modelRegistry = [];
 
