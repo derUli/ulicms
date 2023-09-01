@@ -95,6 +95,14 @@ class ModuleManager {
         return $allDeps;
     }
 
+    /**
+     * Get modules depend on a module
+     *
+     * @param string|null $modules
+     * @param string[] $allDeps
+     *
+     * @return string[]
+     */
     public function getDependentModules(
         ?string $module,
         array $allDeps = []
