@@ -95,6 +95,7 @@ class Module implements PackageInterface {
 
     /**
      * Get missing dependencies
+     *
      * @return string[]
      */
     public function getMissingDependencies(): array {

@@ -11,6 +11,14 @@ use App\Utils\Logger;
 class LoggerRegistry {
     private static $loggers = [];
 
+    /**
+     * Register Logger
+     *
+     * @param string $name
+     * @param Logger $logger
+     *
+     * @return void
+     */
     public static function register(string $name, Logger $logger): void {
         self::$loggers[$name] = $logger;
     }
