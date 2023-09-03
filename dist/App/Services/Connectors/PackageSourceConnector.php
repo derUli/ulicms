@@ -16,6 +16,11 @@ class PackageSourceConnector {
 
     private $data = null;
 
+    /**
+     * Constructor
+     *
+     * @param string|null $packageSourceUrl
+     */
     public function __construct(?string $packageSourceUrl = null) {
         if (! $packageSourceUrl) {
             $packageSourceUrl = Settings::get('pkg_src');
