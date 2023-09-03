@@ -36,15 +36,25 @@ class PackageSourceConnector {
         $this->packageSourceUrl = $packageSourceUrl;
     }
 
+    /**
+     * Fetch package source index
+     * 
+     * @param bool $forceUpdate
+     * 
+     * @return bool
+     */
     public function fetch(bool $forceUpdate = false): bool {
         $json = file_get_contents_wrapper(
             $this->packageSourceUrl,
             $forceUpdate
         );
+
         if (! $json) {
             return false;
         }
+
         $this->data = json_decode($json);
+        
         return true;
     }
 
