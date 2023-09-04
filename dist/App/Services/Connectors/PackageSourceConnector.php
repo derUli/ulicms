@@ -38,9 +38,9 @@ class PackageSourceConnector {
 
     /**
      * Fetch package source index
-     * 
+     *
      * @param bool $forceUpdate
-     * 
+     *
      * @return bool
      */
     public function fetch(bool $forceUpdate = false): bool {
@@ -54,10 +54,15 @@ class PackageSourceConnector {
         }
 
         $this->data = json_decode($json);
-        
+
         return true;
     }
 
+    /**
+     * Get package source Url
+     *
+     * @return string|null
+     */
     public function getPackageSourceUrl(): ?string {
         return $this->packageSourceUrl;
     }
