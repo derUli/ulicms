@@ -67,6 +67,11 @@ class PackageSourceConnector {
         return $this->packageSourceUrl;
     }
 
+    /**
+     * Get available packages
+     *
+     * @return array|null
+     */
     public function getAllAvailablePackages(): ?array {
         if (! $this->data) {
             $this->fetch();
@@ -98,6 +103,13 @@ class PackageSourceConnector {
         return null;
     }
 
+    /**
+     * Get license of a package
+     *
+     * @param string $name
+     *
+     * @return string|null
+     */
     public function getLicenseOfPackage(string $name): ?string {
         if (! $this->data) {
             $this->fetch();
