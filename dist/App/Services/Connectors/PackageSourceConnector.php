@@ -79,6 +79,13 @@ class PackageSourceConnector {
         return $this->data;
     }
 
+    /**
+     * Get available version of a package
+     *
+     * @param string $name
+     *
+     * @return string|null
+     */
     public function getVersionOfPackage(string $name): ?string {
         if (! $this->data) {
             $this->fetch();
