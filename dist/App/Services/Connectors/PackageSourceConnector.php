@@ -98,6 +98,13 @@ class PackageSourceConnector {
         return null;
     }
 
+    /**
+     * Get details of a package
+     *
+     * @param string $name
+     *
+     * @return object|null
+     */
     public function getDataOfPackage(string $name): ?object {
         if (! $this->data) {
             $this->fetch();
