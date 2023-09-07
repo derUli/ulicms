@@ -12,8 +12,14 @@ use function cms_version;
 use function file_get_contents_wrapper;
 
 class PackageSourceConnector {
+    /**
+     * @var string|null
+     */
     private $packageSourceUrl = null;
 
+    /**
+     * @var object|null
+     */
     private $data = null;
 
     /**
