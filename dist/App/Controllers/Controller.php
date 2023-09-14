@@ -19,6 +19,7 @@ use Request;
 abstract class Controller {
     /**
      * List of not callable public methods
+     *
      * @var string[]
      */
     protected array $blacklist = [
@@ -52,8 +53,10 @@ abstract class Controller {
      * Controller name and method can be specified as sClass and sMethod
      * Arguments by GET or POST request
      * Example URL: index.php?sClass=MyController&sMethod=helloWorld
+     *
      * @throws AccessDeniedException
      * @throws BadMethodCallException
+     *
      * @return void
      */
     public function runCommand(): void {

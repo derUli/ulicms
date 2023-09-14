@@ -59,6 +59,7 @@ excerpt = ? where id = ?';
 
     /**
      * Get css classes for Font Awesome icon
+     *
      * @return string
      */
     public function getIcon(): string {

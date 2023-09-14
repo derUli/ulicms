@@ -54,6 +54,7 @@ class Video_Page extends Page {
 
     /**
      * Get css classes for Font Awesome icon
+     *
      * @return string
      */
     public function getIcon(): string {

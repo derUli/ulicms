@@ -29,6 +29,7 @@ class DBMigrator {
     /** Run migrations
      *
      * @param string|null $stop last migration to execute, null means execute all
+     *
      * @return void
      */
     public function migrate(?string $stop = null): void {
@@ -46,8 +47,11 @@ class DBMigrator {
 
     /**
      * Execute a Sql file
+     *
      * @param string $file SQL file
+     *
      * @throws SqlException
+     *
      * @return void
      */
     public function executeSqlScript(string $file): void {
@@ -85,8 +89,11 @@ class DBMigrator {
 
     /**
      * Rollback migrations
+     *
      * @param string|null $stop Ston on this migration, null means rollback all
+     *
      * @throws SqlException
+     *
      * @return void
      */
     public function rollback(?string $stop = null): void {
@@ -133,6 +140,7 @@ class DBMigrator {
 
     /**
      * Remove migrations of the component from dbtrack
+     *
      * @return bool
      */
     public function resetDBTrack(): bool {
@@ -144,6 +152,7 @@ class DBMigrator {
 
     /**
      * Truncate dbtrack table
+     *
      * @return void
      */
     public function resetDBTrackAll(): void {

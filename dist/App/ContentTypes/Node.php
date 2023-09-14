@@ -13,6 +13,7 @@ class Node extends Link {
 
     /**
      * Get css classes for Font Awesome icon
+     *
      * @return string
      */
     public function getIcon(): string {

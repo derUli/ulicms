@@ -24,7 +24,9 @@ class BackendPageRenderer {
 
     /**
      * Constructor
+     *
      * @param string $action
+     *
      * @param mixed $model
      */
     public function __construct(string $action, mixed $model = null) {
@@ -35,6 +37,7 @@ class BackendPageRenderer {
 
     /**
      * Gets the action
+     *
      * @return string
      */
     public function getAction(): string {
@@ -43,7 +46,9 @@ class BackendPageRenderer {
 
     /**
      * Sets the action
+     *
      * @param string $action
+     *
      * @return void
      */
     public function setAction(string $action): void {
@@ -52,6 +57,7 @@ class BackendPageRenderer {
 
     /**
      * Gets the model
+     *
      * @return mixed
      */
     public static function getModel(): mixed {
@@ -60,7 +66,9 @@ class BackendPageRenderer {
 
     /**
      * Sets the model
+     *
      * @param mixed $model
+     *
      * @return void`
      */
     public static function setModel(mixed $model): void {
@@ -69,6 +77,7 @@ class BackendPageRenderer {
 
     /**
      * Renders a backend page outputs it and runs cron events
+     *
      * @return void
      */
     public function render(): void {
@@ -103,6 +112,7 @@ class BackendPageRenderer {
 
     /**
      * Outputs minified HTML
+     *
      * @return void
      */
     public function outputMinified(): void {
@@ -133,7 +143,9 @@ class BackendPageRenderer {
     /**
      * This method handles access to the features that are
      * accesible for non authenticated users
+     *
      * @param bool $onlyContent
+     *
      * @return void
      */
     protected function handleNotLoggedIn(bool $onlyContent = false): void {
@@ -170,7 +182,9 @@ class BackendPageRenderer {
 
     /**
      * This method handles all actions by authenticated users
+     *
      * @param bool $onlyContent
+     *
      * @return void
      */
     protected function handleLoggedIn(bool $onlyContent = false): void {

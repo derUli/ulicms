@@ -26,10 +26,12 @@ class Audio_Page extends Page {
     }
 
     public function update() {
+
         $result = null;
         if ($this->id === null) {
             return $this->create();
         }
+
         parent::update();
         $sql = 'update {prefix}content set audio = ?, '
                 . 'text_position = ? where id = ?';
@@ -53,6 +55,7 @@ class Audio_Page extends Page {
 
     /**
      * Get css classes for Font Awesome icon
+     *
      * @return string
      */
     public function getIcon(): string {

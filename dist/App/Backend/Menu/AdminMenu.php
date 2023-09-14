@@ -17,6 +17,7 @@ class AdminMenu {
 
     /**
      * Constructor
+     *
      * @param MenuEntry[] $children
      */
     public function __construct(array $children = []) {
@@ -25,6 +26,7 @@ class AdminMenu {
 
     /**
      * Get children
+     *
      * @return MenuEntry[]
      */
     public function getChildren(): array {
@@ -43,6 +45,7 @@ class AdminMenu {
 
     /**
      * Check if the menu has children
+     *
      * @return bool
      */
     public function hasChildren(): bool {
