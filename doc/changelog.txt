@@ -7,9 +7,10 @@ Neue Features:
 * Installer auf Bootstrap 5 umgestellt
 
 API-Änderungen:
-* CustomData in Namespace App\Model\Content verschoben
+* CustomData in Namespace App\Models\Content verschoben
+* CustomFields in Namespace App\Models\Content\CustomFields verschoben
 * Ersten Parameter von containsModule() entfernt
-* Theme in Namespace App\Model\Packages verschoben
+* Theme in Namespace App\Models\Packages verschoben
 
 Entfernte API-Methoden:
 * custom_acl als Event entfernt

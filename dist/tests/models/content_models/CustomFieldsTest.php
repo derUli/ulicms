@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Content\CustomFields\CustomFields;
+
 class CustomFieldsTest extends \PHPUnit\Framework\TestCase {
     protected function tearDown(): void {
         $id = $this->getFirstPage()->id;

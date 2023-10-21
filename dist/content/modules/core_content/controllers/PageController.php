@@ -11,6 +11,7 @@ use App\CoreContent\PageTableRenderer;
 use App\Exceptions\DatasetNotFoundException;
 use App\Helpers\ModuleHelper;
 use App\HTML\ListItem;
+use App\Models\Content\CustomFields\CustomFields;
 use App\Models\Content\TypeMapper;
 use App\Models\Content\Types\DefaultContentTypes;
 use App\Models\Content\VCS;
