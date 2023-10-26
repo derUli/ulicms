@@ -3,6 +3,9 @@
     "controllers": {
         "IpsumBlocker": "IpsumBlocker"
     },
+    "controller_function_permissions": {
+        "IpsumBlocker::getIps": "ipsum_blocker"
+    },
     "main_class": "IpsumBlocker",
     "version": "1.0",
     "manufacturer_name": "Ulrich Schmidt",

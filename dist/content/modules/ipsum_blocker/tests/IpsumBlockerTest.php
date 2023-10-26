@@ -21,6 +21,21 @@ class IpsumBlockerTest extends TestCase {
         $fetch2 = IpsumBlocker::fetchIpsum();
 
         $this->assertEquals($fetch2, $fetch1);
+
+        $this->assertGreaterThanOrEqual(1000000, strlen($fetch1));
+    }
+
+    public function testCron(): void {
+        $adapter = CacheUtil::getAdapter(true);
+
+        $this->assertFalse($adapter->has('ipsum_blocklist'));
+        $controller = new IpsumBlocker();
+
+        $controller->cron();
+        // $controller->cron();
+
+        $this->assertTrue($adapter->has('ipsum_blocklist'));
+
     }
 
     /**

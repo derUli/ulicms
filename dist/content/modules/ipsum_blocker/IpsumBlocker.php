@@ -8,10 +8,17 @@ use App\Controllers\MainClass;
 use App\Utils\CacheUtil;
 
 class IpsumBlocker extends MainClass {
-    public const LIST_FETCH_URL = 'https://raw.githubusercontent.com/stamparm/ipsum/master/ipsum.txt';
+    protected const MODULE_NAME = 'ipsum_blocker';
 
-    public const LIST_EXPIRY = 60 * 60 * 24;
+    protected const LIST_FETCH_URL = 'https://raw.githubusercontent.com/stamparm/ipsum/master/ipsum.txt';
 
+    protected const LIST_EXPIRY = 60 * 60 * 24;
+
+    /**
+     * Do IP check before init
+     *
+     * @return void
+     */
     public function beforeInit(): void {
         if(get_ip() && static::isBlocked(get_ip())) {
             // TODO:
@@ -19,42 +26,58 @@ class IpsumBlocker extends MainClass {
         }
     }
 
-    public function settings(): void {
-        // TODO: IP List, "refresh" button and cron if better_cron is installed
+    /**
+     * Fetch blocklist on cron
+     *
+     * @return void
+     */
+    public function cron(): void {
+        $adapter = CacheUtil::getAdapter(true);
+
+        if($adapter && ! $adapter->has('ipsum_blocklist')) {
+            static::fetchIpsum();
+        }
     }
 
-    /** public function cron(){
-     * if(class_exists('BetterCron')){
-     * BetterCron::seconds('ipsum_blocker/update_list', 1, function(){
-     * static::fetchIpsum();
-     * });
-     * }
-     * }
+    /**
+     * Check if an IP is blocked
      *
-     **/
+     * @return bool
+     */
     public static function isBlocked(string $ip): bool {
         $blockedIps = static::getBlockedIps();
 
         return in_array($ip, $blockedIps);
     }
 
-    // TODO: Run by better_cron
+    /**
+     * Fetch ipsum blocklist
+     *
+     * @return string
+     */
     public static function fetchIpsum(): ?string {
         $adapter = CacheUtil::getAdapter(true);
 
-        if($adapter->has('ipsum_blocklist')) {
+        if($adapter && $adapter->has('ipsum_blocklist')) {
             return $adapter->get('ipsum_blocklist');
         }
 
-        $list = file_get_contents_wrapper(static::LIST_FETCH_URL);
+        $list = file_get_contents_wrapper(static::LIST_FETCH_URL, true);
 
-        $adapter->set('ipsum_blocklist', $list, static::LIST_EXPIRY);
+        if($adapter) {
+            $adapter->set('ipsum_blocklist', $list, static::LIST_EXPIRY);
+        }
 
         return $list;
     }
 
+    /**
+     * Get blocked ips
+     *
+     * @return string[]
+     */
     public static function getBlockedIps(): array {
-        $list = static::fetchIpsum();
+        $list = (string)static::fetchIpsum();
         $lines = explode("\n", $list);
         $lines = array_map('trim', $lines);
         $lines = array_filter($lines,'strlen');
@@ -69,9 +92,6 @@ class IpsumBlocker extends MainClass {
         foreach($lines as $line) {
             $lineSplit = explode("\t", $line);
             $ip = $lineSplit[0];
-            if(! filter_var($ip, FILTER_VALIDATE_IP)) {
-                continue;
-            }
 
             $ips[] = $ip;
         }
