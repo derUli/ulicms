@@ -1,0 +1,14 @@
+{
+    "source": "extend",
+    "controllers": {
+        "IpsumBlocker": "IpsumBlocker"
+    },
+    "main_class": "IpsumBlocker",
+    "version": "1.0",
+    "manufacturer_name": "Ulrich Schmidt",
+    "manufacturer_url": "https://www.ulicms.de",
+    "admin_permission": "ipsum_blocker",
+    "custom_acl": [
+        "ipsum_blocker"
+    ]
+}
