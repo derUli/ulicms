@@ -13,18 +13,25 @@ class IpsumBlocker extends MainClass {
     public const LIST_EXPIRY = 60 * 60 * 24;
 
     public function beforeInit(): void {
-        // $_SERVER['REMOTE_ADDR'] = '185.181.61.23';
-        if(static::isBlocked(get_ip())) {
+        if(get_ip() && static::isBlocked(get_ip())) {
             // TODO:
             exit('Blocked by Ipsum');
         }
     }
 
-    public function settings(): void{
+    public function settings(): void {
         // TODO: IP List, "refresh" button and cron if better_cron is installed
-
     }
 
+    /** public function cron(){
+     * if(class_exists('BetterCron')){
+     * BetterCron::seconds('ipsum_blocker/update_list', 1, function(){
+     * static::fetchIpsum();
+     * });
+     * }
+     * }
+     *
+     **/
     public static function isBlocked(string $ip): bool {
         $blockedIps = static::getBlockedIps();
 
@@ -61,8 +68,14 @@ class IpsumBlocker extends MainClass {
 
         foreach($lines as $line) {
             $lineSplit = explode("\t", $line);
-            $ips[] = $lineSplit[0];
+            $ip = $lineSplit[0];
+            if(! filter_var($ip, FILTER_VALIDATE_IP)) {
+                continue;
+            }
+
+            $ips[] = $ip;
         }
+
         return $ips;
     }
 }
