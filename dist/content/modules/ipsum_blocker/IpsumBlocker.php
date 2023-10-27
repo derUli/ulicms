@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 defined('ULICMS_ROOT') || exit('No direct script access allowed');
 
+use App\Constants\HttpStatusCode;
 use App\Controllers\MainClass;
 use App\Utils\CacheUtil;
 
@@ -21,7 +22,7 @@ class IpsumBlocker extends MainClass {
      */
     public function beforeInit(): void {
         if(get_ip() && static::isBlocked(get_ip())) {
-            HTMLResult(static::getBlockedMessage(get_ip()));
+            HTMLResult(static::getBlockedMessage(get_ip()), HttpStatusCode::FORBIDDEN);
         }
     }
 
