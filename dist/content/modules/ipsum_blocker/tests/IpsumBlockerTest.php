@@ -50,4 +50,11 @@ class IpsumBlockerTest extends TestCase {
             $this->assertEquals($ip, filter_var($ip, FILTER_VALIDATE_IP));
         }
     }
+
+    public function testGetBlockedMessage(): void {
+        $this->assertStringContainsString(
+            'Access from your ip 38.97.116.244 was blocked because your ip is listed at',
+            IpsumBlocker::getBlockedMessage('38.97.116.244')
+        );
+    }
 }

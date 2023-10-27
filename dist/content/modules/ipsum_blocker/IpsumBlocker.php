@@ -21,9 +21,20 @@ class IpsumBlocker extends MainClass {
      */
     public function beforeInit(): void {
         if(get_ip() && static::isBlocked(get_ip())) {
-            // TODO:
-            exit('Blocked by Ipsum');
+            HTMLResult(static::getBlockedMessage(get_ip()));
         }
+    }
+
+    /**
+     * Get blocked message
+     *
+     * @param string $ip
+     *
+     * @return string
+     *
+     */
+    public static function getBlockedMessage(string $ip): string {
+        return "Access from your ip {$ip} was blocked because your ip is listed at <a href=\"https://github.com/stamparm/ipsum\">IPsum</a>." ;
     }
 
     /**
