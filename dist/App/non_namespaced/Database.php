@@ -87,7 +87,11 @@ class Database {
         return self::$connection;
     }
 
-    // Close the databse connection
+    /**
+     * Close the database connection
+     *
+     * @return void
+     */
     public static function close(): void {
         mysqli_close(self::$connection);
         self::$connection = null;
