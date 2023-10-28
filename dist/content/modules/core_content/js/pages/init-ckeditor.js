@@ -69,9 +69,6 @@ $(() => {
     document.querySelectorAll('textarea.ckeditor').forEach((element, index) => {
         ClassicEditor
         .create( element, ckeditorSettings )
-        .then(editor => {
-            editor.model.document.on('change', () => stickyUpdate('*[data-sticky]'))
-        })
         .catch( error => {
             bootbox.alert(error);
             console.error( error );
