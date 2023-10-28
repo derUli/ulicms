@@ -763,16 +763,19 @@ foreach ($pages as $key => $page) {
     </div>
 </div>
 <?php do_event('page_option'); ?>
-<div class="typedep" id="content-editor">
+<div class="typedep sticky-bottom" id="content-editor">
     <div class="field">
         <?php echo Input::editor('content', '');?>
     </div>
 </div>
 <div class="inPageMessage"></div>
 <input type="hidden" name="add_page" value="add_page">
-<button type="submit" class="btn btn-primary btn-new" id="btn-submit">
-    <i class="far fa-save"></i> <?php translate('save'); ?>
-</button>
+
+<div data-sticky>
+    <button type="submit" class="btn btn-primary btn-new" id="btn-submit">
+        <i class="far fa-save"></i> <?php translate('save'); ?>
+    </button>
+</div>
 <?php
 $translation = new JSTranslation([], 'PageTranslation');
 $translation->addKey('confirm_exit_without_save');

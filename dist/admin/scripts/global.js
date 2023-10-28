@@ -186,6 +186,13 @@ $(() => {
         step: 30
     });
 
+    $(window).on('scroll resize', () => {
+        stickyUpdate('*[data-sticky]');
+    });
+
+    // Sticky scroll for save button
+    stickyUpdate('*[data-sticky]');
+
     // User has to confirm logout
     $("a.backend-menu-item-logout").click((event) => {
         event.preventDefault();

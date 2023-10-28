@@ -47,12 +47,32 @@ const setDefaultCursor = () => {
 
 /**
  * Tooltip drop in replacement for title attributes
- * @param {type} root
- * @returns {undefined}
+ * @param string root
  */
 const bindTooltips = (root) => {
     if (isTouchDevice()) {
         return;
     }
     $(root).find("*[title]").tooltip();
+}
+
+
+/**
+ * Update sticky scroll element
+
+ * @param string selector
+ */
+const stickyUpdate = (selector) => {
+    const element = $(selector);
+    
+    const padding = 10;
+    const scrollY = window.scrollY
+    const viewportHeight = window.innerHeight;
+    const elementHeight = element.height()
+
+    var elementPosition = scrollY + viewportHeight - elementHeight - padding;
+
+    element.css('position', 'absolute');
+    element.css('top', `${elementPosition}px`);
+    element.css('width', '100%');
 }

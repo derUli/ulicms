@@ -17,6 +17,9 @@ $(() => {
             // Refresh CodeMirror
             refreshCodeMirrors();
             $(".accordion-header").click(() => refreshCodeMirrors());
+            
+            // Sticky scroll for save button
+            stickyUpdate('*[data-sticky]');
         }
     });
 

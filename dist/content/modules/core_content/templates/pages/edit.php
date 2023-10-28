@@ -1177,7 +1177,7 @@ while ($row = Database::fetchObject($result)) {
             <div class="inPageMessage">
                 <img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
             </div>
-            <div class="row">
+            <div class="row" data-sticky>
                 <div class="col col-6">
                     <button type="submit" class="btn btn-primary" id="btn-submit">
                         <i class="far fa-save"></i> <?php translate('save_changes'); ?></button>
