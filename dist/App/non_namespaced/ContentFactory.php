@@ -21,6 +21,13 @@ class ContentFactory {
         );
     }
 
+    /**
+     * Get a content by id
+     *
+     * @param int $id
+     *
+     * @return AbstractContent|null
+     */
     public static function getByID(int $id): ?AbstractContent {
         $result = Database::query('SELECT `id`, `type` FROM `' .
                         Database::tableName('content') . '` where id = ' . $id);

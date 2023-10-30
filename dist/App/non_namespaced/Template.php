@@ -32,13 +32,6 @@ class Template {
         echo self::getBodyClasses();
     }
 
-    /**
-     * @deprecated since 2023.4
-     */
-    public static function randomBanner(): void {
-
-    }
-
     public static function outputContentElement(): void {
         $type = get_type();
         $output = '';
