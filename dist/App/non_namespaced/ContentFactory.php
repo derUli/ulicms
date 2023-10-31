@@ -38,6 +38,14 @@ class ContentFactory {
         throw new DatasetNotFoundException("No page with id {$id}");
     }
 
+    /**
+     * Get a content by name and language
+     *
+     * @param string $name
+     * @param string $language
+     *
+     * @return AbstractContent|null
+     */
     public static function getBySlugAndLanguage(
         string $name,
         string $language
