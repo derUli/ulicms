@@ -1,9 +1,9 @@
-<?php 
+<?php
 use App\Helpers\ModuleHelper;
 
 ?>
 <a class="out-of-view"
-	href="<?php esc(ModuleHelper::getBaseUrl("/?trap_me=1"));?>"
+	href="<?php esc(ModuleHelper::getBaseUrl('/?trap_me=1'));?>"
 	rel="nofollow">Don't click this link</a>
 
 <style type="text/css">
