@@ -8,7 +8,7 @@ use App\Helpers\ModuleHelper;
  * If a bad bot follows the link it's IP address is getting blocked
  */
 class BotTrapController extends MainClass {
-    private $moduleName = 'bot_trap';
+    public const MODULE_NAME = 'bot_trap';
 
     /**
      * Render trap link
@@ -16,7 +16,7 @@ class BotTrapController extends MainClass {
      * @return string
      */
     public function beforeEditButton() {
-        return Template::executeModuleTemplate($this->moduleName, 'traplink.php');
+        return Template::executeModuleTemplate(static::MODULE_NAME, 'traplink.php');
     }
 
     /**
@@ -25,7 +25,7 @@ class BotTrapController extends MainClass {
      * @return string
      */
     public function settings() {
-        return Template::executeModuleTemplate($this->moduleName, 'settings.php');
+        return Template::executeModuleTemplate(static::MODULE_NAME, 'settings.php');
     }
 
     /**
@@ -44,7 +44,7 @@ class BotTrapController extends MainClass {
     public function saveSettingsPost() {
         Settings::set('trapped_bots', trim(Request::getVar('trapped_bots')));
         Settings::set('bot_trap_custom_message', trim(Request::getVar('bot_trap_custom_message')));
-        Response::redirect(ModuleHelper::buildAdminURL($this->moduleName, 'save=1'));
+        Response::redirect(ModuleHelper::buildAdminURL(static::MODULE_NAME, 'save=1'));
     }
 
     /**
