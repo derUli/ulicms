@@ -156,7 +156,7 @@ abstract class CacheUtil {
         $driver = 'Devnull';
 
         $drivers = [
-            'Memstatic' => TestHelper::isRunningPHPUnit(),
+            'Memory' => TestHelper::isRunningPHPUnit(),
             // TODO: Prüfen, ob die Performance mit Apcu besser als mit Files ist
             // 'Apcu' => extension_loaded('apcu') && ini_get('apc.enabled'),
             'Files' => true,

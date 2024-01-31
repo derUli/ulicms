@@ -22,10 +22,10 @@ abstract class MemstaticCached extends Cached {
             'defaultTtl' => DateTime::ONE_DAY_IN_SECONDS,
         ];
 
-        // Use a Memstatic adapter, because persistent caching would worse
+        // Use a Memory adapter, because persistent caching would worse
         // performance instead of improving it
         static::$adapter = new Psr16Adapter(
-            'Memstatic',
+            'Memory',
             new ConfigurationOption($cacheConfig)
         );
 
